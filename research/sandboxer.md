@@ -7,8 +7,8 @@ Desk research only: no account, no sandbox, no signup. Nothing committed or push
 `pricing-page` = stated on the pricing page or in the billing doc's price tables. `third-party` = someone other
 than Sandboxer. `inferred` = my reading of named evidence. `not-published` = I looked and found no statement.
 
-**Quote audit.** Every quotation below was checked mechanically against a live fetch of the cited URL: 256 quoted
-spans, 252 matching the cited page verbatim after whitespace and Markdown normalisation, 4 matching the page but
+**Quote audit.** Every quotation below was checked mechanically against a live fetch of the cited URL: 301 quoted
+spans, 295 matching the cited page verbatim after whitespace and Markdown normalisation, 6 matching the page but
 attributed by the parser to a neighbouring link (each verified by hand), and none left unmatched. The script,
 its corpus and every correction are described at the end.
 
@@ -58,22 +58,24 @@ I found no independent review of it.
   entry is dated 2026-10-17. — `docs-confirmed` · [changelog](https://sandboxer.com/changelog)
 - **Legal entity.** "North Bay Opco I, Inc., a Delaware corporation whose mailing address is 777 Brickell Ave,
   Suite 500 PMB 1074, Miami, FL 33131" — `docs-confirmed` · [terms](https://sandboxer.com/terms). *PMB* denotes
-  a private mailbox rather than an office, and no team, founder or registration number is published on the site
-  (`/about` returns 404). — `inferred` from the address form and the missing page; the 404 was observed at
-  <https://sandboxer.com/about>.
-- **Who runs it.** The X profile for the account that announced the launch reads: "Founder of @Shutterstock.
-  Building @transformer_gg and @Sandboxer_" — `third-party` ·
-  [X profile, @jonoringer](https://x.com/jonoringer). The same account posts "Building
-  [sandboxer.com](https://www.sandboxer.com) has been thrilling… adding capacity daily!" — `third-party` ·
-  [X, 2026-10-23](https://x.com/jonoringer/status/2113646185093448101). A third party lists "Sandboxer(by
-  [@jonoringer](https://x.com/jonoringer))" — `third-party` · same thread.
-- **The entity is shared with unrelated products.** The same name and Miami address appear in another product's
+  a private mailbox rather than an office. sandboxer.com itself publishes no team page, founder byline or
+  registration number (`/about` returns 404, observed at <https://sandboxer.com/about>); §17 supplies those from
+  the studio's site and a corporate index. — `inferred`
+- **Who runs it.** The studio that lists Sandboxer as one of its companies names the person: "JO **Jon Oringer**
+  @jonoringer · Shutterstock founder" — `third-party` · [northbayventures.com](https://www.northbayventures.com/).
+  His own X profile reads: "Founder of @Shutterstock. Building @transformer_gg and @Sandboxer_" — `third-party` ·
+  [X profile, @jonoringer](https://x.com/jonoringer). The same profile lists "Miami, FL" and
+  "northbayventures.com", the domain of the studio whose site carries the same Miami address and the same legal
+  entity as Sandboxer's terms — `third-party` · [X profile](https://x.com/jonoringer),
+  [northbayventures.com](https://www.northbayventures.com/). Reading: the studio, its founder and the contracting
+  entity are one operation; no separate CEO, board or team page is published. — `inferred`
+- **The entity is shared with its sibling products.** The same name and Miami address appear in another product's
   terms: "These Terms of Service ("Terms") are an agreement between you and North Bay Opco I, Inc., a Delaware
   corporation whose mailing address is 777 Brickell Ave, Suite 500 PMB 1074, Miami, FL 33131 ("Transformer", "we",
   "us")." — `third-party` · [transformer.gg/terms](https://transformer.gg/terms). They also appear in a third
   product's policy: "**North Bay Opco I, Inc.** **Address:** 777 Brickell Ave, Suite 500 PMB 1074, Miami,
-  Florida, USA" — `third-party` · [microdose.fun/privacy](https://microdose.fun/privacy). Reading: a holding
-  entity used by a serial-product operator, not a company that publishes a team page. — `inferred`
+  Florida, USA" — `third-party` · [microdose.fun/privacy](https://microdose.fun/privacy). Reading: one studio
+  operating several products through one entity, not a single-product company. — `inferred`; see §17.
 
 ## 2. Isolation technology, and what it allows
 
@@ -797,7 +799,7 @@ two companies.
 
 "| `small` | **$0.018** | 2 vCPU | 4 GB | 51 GB |" and "| `default` | **$0.036** | 4 vCPU | 8 GB | 51 GB |" and
 "| `large` | **$0.072** | 8 vCPU | 16 GB | 111 GB |" and "| `xlarge` \* | **$0.200** | 16 vCPU | 32 GB | 251
-GB |" — `third-party` (Boat's docs) · [docs.boat.dev/pricing](https://docs.boat.dev/pricing). Compare Sandboxer's
+GB |" — `third-party` (Boat's docs) · [docs.<|place_holder_mm_span_0442|>/pricing](https://docs.boat.dev/pricing). Compare Sandboxer's
 $0.018 / $0.036 / $0.072 / $0.20 in §5.
 
 **What matches exactly — plan tiers and limits**
@@ -849,9 +851,164 @@ sheet. I could not distinguish these from public evidence. — `inferred`
 
 ---
 
+## 17. The company behind it
+
+**Legal entity and registration.** "North Bay Opco I, Inc., a Delaware corporation whose mailing address is 777
+Brickell Ave, Suite 500 PMB 1074, Miami, FL 33131" — `docs-confirmed` · [terms](https://sandboxer.com/terms). The
+privacy policy repeats the controller: "North Bay Opco I, Inc. is responsible for the personal information
+described in this policy." — `docs-confirmed` · [privacy](https://sandboxer.com/privacy).
+
+A third-party corporate index lists the registration: "NORTH BAY OPCO I, INC. — 7126691 2022-11-09", on a page
+of companies represented by Corporation Service Company — `third-party` ·
+[netstate.co](https://netstate.co/agents/us-de/corporation-service-company/p/14030). That gives a Delaware file
+number (7126691) and an incorporation date (2022-11-09). **I could not confirm either against the registry
+itself:** Delaware's entity search is behind a CAPTCHA and OpenCorporates returned a browser check, so the date
+rests on an aggregator. — `not-published` for a primary confirmation.
+
+**Who runs it.** The entity is a venture studio. Its own site says "A venture studio · Miami" and "We build
+companies from zero to one." — `third-party` · [northbayventures.com](https://www.northbayventures.com/). The
+model is stated plainly: "North Bay Ventures starts new companies and runs them through their earliest days." —
+`third-party` · [northbayventures.com](https://www.northbayventures.com/). Sandboxer appears there under the
+heading "Live", in a card headed "Sandboxer" that reads "The agent swarm platform." — `third-party` ·
+[northbayventures.com](https://www.northbayventures.com/).
+
+The person named is Jon Oringer: the studio's page lists "JO **Jon Oringer** @jonoringer · Shutterstock founder"
+— `third-party` · [northbayventures.com](https://www.northbayventures.com/), and his X profile reads "Founder of
+@Shutterstock. Building @transformer_gg and @Sandboxer_" with "Miami, FL" and "northbayventures.com" beneath it —
+`third-party` · [X profile](https://x.com/jonoringer). No chief executive, board, engineering lead or team page is
+published for Sandboxer itself. — `not-published`. Reading: the studio, its founder and the contracting entity are
+one operation, and Sandboxer is one of its products rather than a standalone company. — `inferred`
+
+**Founding and launch.** Two different dates matter, and they are four years apart. The entity was incorporated
+2022-11-09 (`third-party`, netstate.co, above). The product went public on 2026-10-18: "Sandboxer is live" —
+`third-party` · [X](https://x.com/jonoringer/status/2111826193578070439). The changelog's oldest entry is
+2026-10-17 — `docs-confirmed` · [changelog](https://sandboxer.com/changelog). No product founding date, first
+commit, private beta or "founded in" line is published. — `not-published`. Reading: the entity predates the
+product by almost four years and is shared with sibling products, so 2022 is the company's date, not Sandboxer's.
+— `inferred`
+
+**Funding.** Nothing is published. I found no round, amount, valuation, investor list, accelerator batch or
+announcement for Sandboxer in the company's pages, its terms, the studio's site, or in press and database
+searches. — `not-published`. What is published is the studio's model — "North Bay Ventures starts new companies
+and runs them through their earliest days" (`third-party`,
+[northbayventures.com](https://www.northbayventures.com/)) — which describes self-funded incubation rather than a
+disclosed raise. Sandboxer does not appear in Y Combinator's public company directory in my searches; absence
+there is weak evidence and I did not confirm it with YC. — `inferred`
+
+**Ownership, parents, acquisitions.** No parent company, subsidiary structure, acquisition or ownership change is
+stated anywhere. The contracting entity and the studio are the same legal person: the studio's footer reads
+"© 2026 North Bay Opco I, Inc." at the same Miami address — `third-party` ·
+[northbayventures.com](https://www.northbayventures.com/). The same entity also contracts for a sibling product,
+Transformer — `third-party` · [transformer.gg/terms](https://transformer.gg/terms) — and appears in a third
+product's policy, Microdose — `third-party` · [microdose.fun/privacy](https://microdose.fun/privacy). Customers
+have no say in a change of control: "We may assign them in a merger, acquisition or sale of assets." —
+`docs-confirmed` · [terms](https://sandboxer.com/terms). — `not-published` for any actual change of ownership.
+
+**Headcount.** No number is published. The only description is qualitative, and it describes the studio rather
+than Sandboxer alone: "A small team of builders who write the code, ship the product and run the business
+ourselves, AI-native from day one." — `third-party` · [northbayventures.com](https://www.northbayventures.com/).
+— `not-published` for a headcount figure.
+
+**Status page and uptime.** <https://status.sandboxer.com> exists and is hosted off Sandboxer's own network:
+"Checked every minute from outside our network, plus our own production checks of every service." —
+`third-party` · [status](https://status.sandboxer.com). Recent figures, read 2026-10-28: API "100.00% · 30 days";
+sandboxes "99.45% · 30 days"; website and dashboard "99.79% · 30 days"; and "No incidents in the last 90 days." —
+`third-party` · [status](https://status.sandboxer.com). One oddity: the page reports a 90-day window for a
+product that launched ten days earlier, so the 90-day columns cannot all describe production traffic. —
+`inferred`
+
+**SLA.** There is none. "There's no SLA during early access, and no GPUs." — `docs-confirmed` ·
+[llms.txt](https://sandboxer.com/docs/llms.txt). The terms go further and exclude availability commitments for
+unfinished features: "Features we label as beta, preview or experimental are provided as they are, may change or
+end without notice, and are excluded from any commitment we make about availability." — `docs-confirmed` ·
+[terms](https://sandboxer.com/terms). No plan, including the $2,000 tier, carries a service-level commitment,
+credit scheme or uptime guarantee. — `inferred` from the two statements above; no plan-level SLA text exists to
+quote. — `not-published`
+
+**Support.** Email only, with a dashboard link. "Email **support@sandboxer.com** with your `requestId` or sandbox
+id, or use the **Support** link on the dashboard." — `docs-confirmed` · [FAQ](https://sandboxer.com/docs/faq).
+Other published addresses: `hello@sandboxer.com` for general contact — `docs-confirmed` ·
+[llms.txt](https://sandboxer.com/docs/llms.txt); `security@sandboxer.com` — `docs-confirmed` ·
+[security](https://sandboxer.com/docs/security); `legal@sandboxer.com` and `privacy@sandboxer.com` —
+`docs-confirmed` · [terms](https://sandboxer.com/terms). No phone number, live chat, community forum, Discord,
+Slack or ticketing portal is published, and no support hours or response-time target is stated. — `not-published`
+
+**Security and compliance claims.** No SOC 2, ISO 27001 or HIPAA claim appears on the security page, the terms or
+the pricing page, and there is no trust centre. — `not-published`. What is published is a vulnerability policy
+and a security contact: "Contact: mailto:security@sandboxer.com" — `docs-confirmed` ·
+[security.txt](https://sandboxer.com/.well-known/security.txt). The policy commits to acknowledgement times and
+safe harbour: "Acknowledge your report within 3 business days and keep you updated until it's resolved." —
+`docs-confirmed` · [security](https://sandboxer.com/docs/security). A data processing addendum exists on request:
+"If you need a Data Processing Addendum, write to privacy@sandboxer.com." — `docs-confirmed` ·
+[terms](https://sandboxer.com/terms). International transfers rely on standard clauses: "we use appropriate
+safeguards for transfers of personal information out of the European Economic Area, the United Kingdom or
+Switzerland, such as the European Commission's Standard Contractual Clauses" — `docs-confirmed` ·
+[privacy](https://sandboxer.com/privacy). The isolation design is described in §2; note that a security
+*architecture* is not a security *certification*. — `inferred`
+
+**Terms a buyer should read before signing up.**
+
+- **Price changes need 30 days' notice.** "We may change prices with at least 30 days' notice for plans; a change
+  applies from your next renewal." — `docs-confirmed` · [terms](https://sandboxer.com/terms)
+- **Material reductions are announced, and you can leave.** "If a change materially reduces what a paid plan
+  includes, we will tell you in advance, and you may cancel before it takes effect." — `docs-confirmed` ·
+  [terms](https://sandboxer.com/terms)
+- **Cancelling does not refund the rest of the month.** "If you cancel, the plan runs to the end of the current
+  period and is not refunded for the rest of it." — `docs-confirmed` · [terms](https://sandboxer.com/terms)
+- **Closing the account forfeits credit.** "Closing cancels your plan immediately, and any remaining plan time,
+  credit packs and account credit are forfeited without refund." — `docs-confirmed` ·
+  [terms](https://sandboxer.com/terms)
+- **Your data is deleted after termination, with no export window promised.** "We are not required to keep Your
+  Content after termination and may delete it, so export anything you need first." — `docs-confirmed` ·
+  [terms](https://sandboxer.com/terms)
+- **Non-payment triggers deletion, after email notice.** "We will give notice by email before deleting stored
+  data for non-payment." — `docs-confirmed` · [terms](https://sandboxer.com/terms)
+- **Over-quota storage is deleted only after 30 days' notice.** "We may start deleting unused stopped sandboxes,
+  or what's over the limit, only after giving at least 30 days' notice by email and updating these Terms." —
+  `docs-confirmed` · [terms](https://sandboxer.com/terms)
+- **Refunds are the exception.** "Fees are non-refundable except as required by law." — `docs-confirmed` ·
+  [terms](https://sandboxer.com/terms)
+- **Liability is capped at 12 months of fees or $100.** "Each party's total liability arising from these Terms or
+  the Service is limited to the greater of the fees you paid us in the 12 months before the claim, or US$100." —
+  `docs-confirmed` · [terms](https://sandboxer.com/terms)
+- **Disputes are arbitrated in Miami under Florida law, with a 30-day opt-out.** "These Terms are governed by the
+  laws of the State of Florida" and "You can opt out of arbitration and the class-action waiver by emailing" …
+  "within 30 days of first accepting a version of these Terms that contains this arbitration agreement" —
+  `docs-confirmed` · [terms](https://sandboxer.com/terms)
+- **A change of control can transfer your contract.** "We may assign them in a merger, acquisition or sale of
+  assets." — `docs-confirmed` · [terms](https://sandboxer.com/terms)
+- **Terms can change on 30 days' notice.** "For material changes we will give at least 30 days' notice by email or
+  in the dashboard before they take effect." — `docs-confirmed` · [terms](https://sandboxer.com/terms)
+
+**What is known, and what is not, about Boat.** §16 lays out the comparison; this is the plain restatement.
+
+*Known, with sources.* Sandboxer's hourly rates and plan ladder are identical to Boat's: $0.018 / $0.036 / $0.072
+/ $0.20 and $20 / $100 / $500 / $2,000 with the same concurrency and start limits, per
+[docs.boat.dev/pricing](https://docs.boat.dev/pricing) and [pricing](https://sandboxer.com/pricing). The machines
+are not identical: Boat lists 51/51/111/251 GB of disk, Sandboxer 12/50/125/251
+([docs.boat.dev/pricing](https://docs.boat.dev/pricing), §5). Boat's regions are "EU regions today (Germany,
+Finland, France)" ([boat.dev](https://boat.dev/)); Sandboxer has one US and one EU region. Boat deletes a stopped
+sandbox's disk after 14 days ([docs.boat.dev/pricing](https://docs.boat.dev/pricing)); Sandboxer keeps it until
+deleted ([FAQ](https://sandboxer.com/docs/faq)). The contracting parties differ: Dedale AI, Corp. for Boat
+([boat.dev/terms](https://boat.dev/terms)), North Bay Opco I, Inc. for Sandboxer ([terms](https://sandboxer.com/terms)).
+
+*Known, about the possibility.* Boat's privacy policy acknowledges products built on top of it without naming
+any: "Some companies build their own products on boat. If you use one of these products, the company that runs it
+decides how it uses the data you give it, and its privacy notice applies to that data." — `third-party` ·
+[boat.dev/privacy](https://boat.dev/privacy).
+
+*Not known.* No page on either site states a partnership, resale, white-label, hosting, investor or shared-owner
+relationship. The word *sandboxer* appears zero times in Boat's docs index and compare page, and *boat* appears
+zero times in Sandboxer's 2.4 MB corpus (§16). Neither company has announced anything. — `not-published`.
+
+*What follows.* Identical prices with different disks, regions, retention and legal entities is consistent with a
+reseller arrangement of the kind Boat's privacy policy describes, and equally consistent with an independently
+built product that copied a competitor's price sheet. **Public evidence does not distinguish these, and I am not
+asserting either.** — `inferred`
+
 ## Audit method
 
-Corpus: 58 cited URLs, each fetched live and saved as text, plus the Markdown mirror of every docs page, five
+Corpus: 60 cited URLs, each fetched live and saved as text, plus the Markdown mirror of every docs page, five
 re-fetches through a browser-grade fetcher for pages that render only in JavaScript (`/app` and four guides), and
 Boat's pricing, terms, privacy and compare pages. Normalisation: HTML entity decoding, comment and tag stripping,
 removal of Markdown escapes and emphasis markers, curly-to-straight quotes, dash and ellipsis folding, whitespace
@@ -863,7 +1020,7 @@ fragments that must appear in order, which is how elided quotes were verified. S
 quotations — text sitting between two unrelated quotation marks in a sentence that also cites a source — were
 excluded by a filter on the tag markers and link syntax they contain.
 
-Result on the final text: **256 spans checked, 252 matched the cited page verbatim, 4 matched the page but sat
+Result on the final text: **301 spans checked, 295 matched the cited page verbatim, 6 matched the page but sat
 next to a neighbouring link in the parser's URL window (each verified by hand, listed below), and none were left
 unmatched.**
 
@@ -891,12 +1048,13 @@ What the audit changed:
 - **Every table row now carries its own source and quote.** The size table, the lifecycle list, the interfaces
   list, the pricing table and the same-word list each cite the page and the words they rest on.
 
-The four spans the parser attributed to a neighbouring link, each verified by hand in the cited page: "Storage
+The six spans the parser attributed to a neighbouring link (five distinct quotes, one of them repeated), each verified by hand in the cited page: "Storage
 isn't billed: each plan includes an amount for what you keep"
 ([billing](https://sandboxer.com/docs/billing)); "They have no separate charge."
 ([pricing](https://sandboxer.com/pricing)); "An organization plan is **per seat**: the plan price × seats."
 ([organizations](https://sandboxer.com/docs/organizations)); "`--environment` and `--env` are different things"
-([environments](https://sandboxer.com/docs/environments)).
+([environments](https://sandboxer.com/docs/environments)); "Contact: mailto:security@sandboxer.com"
+([security.txt](https://sandboxer.com/.well-known/security.txt)).
 
 Not verifiable by this method, and therefore tagged rather than quoted: the absence claims (no SSO, no audit log,
 no SOC 2, no static IP, no egress allowlist, no first-party custom domains, no published SLA). Those rest on
