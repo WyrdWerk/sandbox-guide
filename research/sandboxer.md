@@ -799,7 +799,7 @@ two companies.
 
 "| `small` | **$0.018** | 2 vCPU | 4 GB | 51 GB |" and "| `default` | **$0.036** | 4 vCPU | 8 GB | 51 GB |" and
 "| `large` | **$0.072** | 8 vCPU | 16 GB | 111 GB |" and "| `xlarge` \* | **$0.200** | 16 vCPU | 32 GB | 251
-GB |" — `third-party` (Boat's docs) · [docs.<|place_holder_mm_span_0442|>/pricing](https://docs.boat.dev/pricing). Compare Sandboxer's
+GB |" — `third-party` (Boat's docs) · [docs.boat.dev/pricing](https://docs.boat.dev/pricing). Compare Sandboxer's
 $0.018 / $0.036 / $0.072 / $0.20 in §5.
 
 **What matches exactly — plan tiers and limits**
