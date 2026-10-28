@@ -27,7 +27,7 @@ const tagClass: Record<string, string> = {
           {fact.source ? (
             <p class="fact__source">
               <span class="fact__quote">“{plainText(fact.source.quote)}”</span>{" "}
-              <a href={fact.source.url} rel="noreferrer noopener">{cite(fact.source.url)}</a>{" "}
+              <a href={fact.source.url} rel="noreferrer noopener">{cite(fact.source.url)}</a>{fact.source.url.includes("battleships.dev") && <span>, built by the Boat team</span>}{" "}
               <span class={tagClass[fact.source.confidence]}>{fact.source.confidence}</span>
             </p>
           ) : (

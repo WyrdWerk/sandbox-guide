@@ -24,6 +24,7 @@ const tagClass: Record<Confidence, string> = {
   <figcaption class="quote__source">
     <cite class="quote__cite">
       <a href={url} rel="noreferrer noopener">{cite}</a>
+      {url.includes("battleships.dev") && <span> (battleships.dev, built by the Boat team)</span>}
     </cite>
     <span class={tagClass[tag]}>{tag}</span>
   </figcaption>
