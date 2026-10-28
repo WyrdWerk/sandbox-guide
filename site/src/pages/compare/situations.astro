@@ -1,21 +1,28 @@
 ---
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
+import Quote from "../../components/Quote.astro";
 import { features, providerById, situations } from "../../lib/data";
 
 const featureById = new Map(features.map((feature) => [feature.id, feature]));
+const words = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+const count = words[situations.length - 1] ?? String(situations.length);
+const cite = (url: string) => new URL(url).hostname.replace(/^www\./, "");
 ---
 
-<Base title="By situation" description="Four agent jobs, the features that decide each one, and the providers worth a look with their catches.">
+<Base
+  title="By situation"
+  description={`${count} agent jobs, the features that decide each one, and the providers worth a look with their catches.`}
+>
   <PageHeader
     kicker="Compare · situations"
-    title="Four jobs, four different answers"
+    title={`${count} jobs, ${count.toLowerCase()} different answers`}
     standfirst="Start with what the agent has to do. Each situation names the feature pages that decide it, then two or three providers worth a look. Every recommendation carries its catch."
   />
 
   <div class="wrap">
     {
-      situations.map((situation, index) => (
+      situations.map((situation) => (
         <section class="section" id={situation.id} aria-labelledby={`${situation.id}-h`}>
           <div class="section__head">
             <h2 class="section__title" id={`${situation.id}-h`}>{situation.title}</h2>
@@ -56,6 +63,19 @@ const featureById = new Map(features.map((feature) => [feature.id, feature]));
               );
             })}
           </div>
+
+          {situation.sources && situation.sources.length > 0 && (
+            <div class="situation__sources">
+              {situation.sources.map((source) => (
+                <Quote
+                  text={source.quote}
+                  cite={cite(source.url)}
+                  url={source.url}
+                  tag={source.confidence}
+                />
+              ))}
+            </div>
+          )}
         </section>
       ))
     }

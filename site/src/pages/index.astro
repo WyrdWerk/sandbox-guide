@@ -1,19 +1,20 @@
 ---
 import Base from "../layouts/Base.astro";
+import SituationIcon from "../components/SituationIcon.astro";
 import { features, groups, providers, situations } from "../lib/data";
 ---
 
 <Base title="Sandbox guide">
   <div class="wrap">
     <header class="page-header">
-      <p class="kicker">Twelve providers, sixteen features</p>
+      <p class="kicker">{providers.length} providers, {features.length} features</p>
       <h1 class="page-title">What will your agent do?</h1>
       <p class="standfirst">
         A sandbox is a computer you rent for an agent. The right one follows from the job, not from
         the hourly rate. Start with what the agent has to do, then read the features that decide it.
       </p>
       <p class="page-meta">
-        <span class="page-meta__item"><span class="page-meta__dot" aria-hidden="true"></span>12 providers</span>
+        <span class="page-meta__item"><span class="page-meta__dot" aria-hidden="true"></span>{providers.length} providers</span>
         <span class="page-meta__item">Checked 28 October 2026</span>
         <span class="page-meta__item">Sources linked</span>
       </p>
@@ -26,14 +27,9 @@ import { features, groups, providers, situations } from "../lib/data";
       </div>
       <div class="answers">
         {
-          situations.map((situation, index) => (
+          situations.map((situation) => (
             <a class="answer" href={`/compare/situations/#${situation.id}`}>
-              <svg class="answer__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-                {index === 0 && <><rect x="3" y="4" width="18" height="6" rx="2" /><rect x="3" y="14" width="18" height="6" rx="2" /></>}
-                {index === 1 && <><path d="M12 3v18" /><path d="M5 8l7-5 7 5" /><path d="M5 16l7 5 7-5" /></>}
-                {index === 2 && <><circle cx="12" cy="12" r="8" /><path d="M12 8v4l3 2" /></>}
-                {index === 3 && <><path d="M8 4l-4 8 4 8" /><path d="M16 4l4 8-4 8" /><path d="M10 15l4-6" /></>}
-              </svg>
+              <SituationIcon name={situation.icon} />
               <span class="answer__title">{situation.title}</span>
               <span class="answer__hint">{situation.question.replace("What will your agent do? ", "")}</span>
             </a>
@@ -119,11 +115,15 @@ import { features, groups, providers, situations } from "../lib/data";
         </article>
         <article class="pick">
           <h3 class="pick__title"><a href="/compare/situations/">By situation</a></h3>
-          <p class="pick__body">Four jobs, the features each one depends on, and the providers worth a look with their catches.</p>
+          <p class="pick__body">{situations.length} jobs, the features each one depends on, and the providers worth a look with their catches.</p>
         </article>
         <article class="pick">
           <h3 class="pick__title"><a href="/compare/reference-costs/">Reference costs</a></h3>
           <p class="pick__body">Three shared workloads priced from list rates, as illustrations rather than quotes.</p>
+        </article>
+        <article class="pick">
+          <h3 class="pick__title"><a href="/changes/">What changed recently</a></h3>
+          <p class="pick__body">Dated acquisitions, renames and price moves, each with the source and the date it was observed.</p>
         </article>
       </div>
       <p class="section__note">

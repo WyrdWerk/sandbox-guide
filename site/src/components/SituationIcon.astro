@@ -1,0 +1,27 @@
+---
+import type { SituationIcon } from "../data/schema";
+
+interface Props {
+  name: SituationIcon;
+}
+
+const { name } = Astro.props;
+---
+
+<svg
+  class="answer__icon"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.6"
+  aria-hidden="true"
+>
+  {name === "screen" && <><rect x="3" y="4" width="18" height="6" rx="2" /><rect x="3" y="14" width="18" height="6" rx="2" /></>}
+  {name === "layers" && <><path d="M12 3v18" /><path d="M5 8l7-5 7 5" /><path d="M5 16l7 5 7-5" /></>}
+  {name === "clock" && <><circle cx="12" cy="12" r="8" /><path d="M12 8v4l3 2" /></>}
+  {name === "code" && <><path d="M8 4l-4 8 4 8" /><path d="M16 4l4 8-4 8" /><path d="M10 15l4-6" /></>}
+  {name === "browser" && <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18" /><circle cx="6" cy="6.5" r="0.6" /><circle cx="8.5" cy="6.5" r="0.6" /></>}
+  {name === "users" && <><circle cx="9" cy="8" r="3" /><path d="M3 20a6 6 0 0 1 12 0" /><path d="M16 5.5a3 3 0 0 1 0 5.8" /><path d="M17.5 14.5A6 6 0 0 1 21 20" /></>}
+  {name === "chip" && <><rect x="7" y="7" width="10" height="10" rx="1.5" /><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4" /></>}
+  {name === "flag" && <><path d="M5 3v18" /><path d="M5 4h11l-2 4 2 4H5" /></>}
+</svg>
