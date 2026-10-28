@@ -10,7 +10,8 @@
       "paragraphs": [
         "A time-limited trial gives you access for a fixed number of days and then either charges you or stops. A one-off credit is money added to a prepaid balance once, which you spend at the normal rates. A free plan is a permanent tier with hard caps. A recurring allowance is free usage that comes back every month.",
         "The distinction is not academic. A credit is spent, so its value depends on the hourly rate and the size you pick. A trial is spent by the clock, so it ends even if you used none of it. A free plan never ends, but it usually caps size, runtime and machine count. And a recurring allowance can change behaviour on your first payment.",
-        "The most consequential difference is the card. A card at signup makes the offer a trial: forget to cancel and you are billed. A free plan with no card is a different product decision, and it usually comes with the tightest caps."
+        "The card matters, but not in the way the word “trial” suggests. A card at signup tells you that money can be taken; it does not by itself mean a subscription will start. A trial with a card usually converts when its clock runs out. A credit with a card is spent at the normal rates and then simply stops. A free plan or recurring allowance with no card never charges, but caps size and runtime instead.",
+        "Read each offer's ending as three separate questions: is the card charged, does a paid plan start, and does the allowance simply stop? The comparison below answers all three per provider, because the answers do not follow from whether a card was required."
       ]
     },
     {

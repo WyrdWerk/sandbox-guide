@@ -1,6 +1,7 @@
 ---
 import type { FeatureRow } from "../data/schema";
 import { providerById } from "../lib/data";
+import { plainText } from "../lib/plain";
 import Verdict from "./Verdict.astro";
 import SourceRef from "./SourceRef.astro";
 
@@ -39,14 +40,14 @@ const { rows } = Astro.props;
               <td colspan="5" class="muted">Research pending. No claims are shown until the profile is finished.</td>
             ) : (
               <>
-                <td>{offer.kind}</td>
-                <td>{offer.card}</td>
+                <td>{plainText(offer.kind)}</td>
+                <td>{plainText(offer.card)}</td>
                 <td>
-                  {offer.get}
+                  {plainText(offer.get)}
                   <SourceRef source={row.source} />
                 </td>
-                <td>{offer.ends}</td>
-                <td>{offer.traps}</td>
+                <td>{plainText(offer.ends)}</td>
+                <td>{plainText(offer.traps)}</td>
               </>
             )}
           </tr>

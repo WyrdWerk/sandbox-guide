@@ -6,6 +6,25 @@ import type {
   UseCase,
   Verdict,
 } from "../data/schema";
+import { plainText } from "./plain";
+
+/**
+ * Provider documentation uses Markdown emphasis and code fences. The data files
+ * keep the original wording; every string is stripped once at load so all pages
+ * render the same text without literal `backticks` or **asterisks**.
+ */
+function cleanDeep<T>(value: T): T {
+  if (typeof value === "string") return plainText(value) as T;
+  if (Array.isArray(value)) return value.map((item) => cleanDeep(item)) as T;
+  if (value && typeof value === "object") {
+    const out: Record<string, unknown> = {};
+    for (const [key, item] of Object.entries(value as Record<string, unknown>)) {
+      out[key] = cleanDeep(item);
+    }
+    return out as T;
+  }
+  return value;
+}
 
 const providerModules = import.meta.glob<Provider>("../data/providers/*.json", {
   eager: true,
@@ -35,21 +54,25 @@ function fail(message: string): never {
 }
 
 export const providers: Provider[] = Object.values(providerModules)
-  .map((p) => p)
+  .map((p) => cleanDeep(p))
   .sort((a, b) => a.name.localeCompare(b.name));
 
 export const providerById = new Map(providers.map((p) => [p.id, p]));
 
-export const features: Feature[] = Object.values(featureModules).sort(
-  (a, b) => a.order - b.order,
-);
+export const features: Feature[] = Object.values(featureModules)
+  .map((f) => cleanDeep(f))
+  .sort((a, b) => a.order - b.order);
 
-export const terms: Term[] = Object.values(termModules).sort((a, b) =>
-  a.term.localeCompare(b.term),
-);
+export const terms: Term[] = Object.values(termModules)
+  .map((t) => cleanDeep(t))
+  .sort((a, b) => a.term.localeCompare(b.term));
 
-export const glossary: GlossaryEntry[] = Object.values(glossaryModule)[0]?.entries ?? [];
-export const useCases: UseCase[] = Object.values(useCaseModule)[0]?.useCases ?? [];
+export const glossary: GlossaryEntry[] = cleanDeep(
+  Object.values(glossaryModule)[0]?.entries ?? [],
+);
+export const useCases: UseCase[] = cleanDeep(
+  Object.values(useCaseModule)[0]?.useCases ?? [],
+);
 
 export function providerName(id: string): string {
   return providerById.get(id)?.name ?? id;

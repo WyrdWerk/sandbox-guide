@@ -70,3 +70,5 @@ and so on). Replace that file, or the variables in it, without touching content 
 - Contradictions between a provider's own pages are shown as contradictions, with both sides.
 - A cost example shows its arithmetic, names any substituted size, and flags figures that still
   need checking.
+- Data files keep the provider's original wording, including Markdown emphasis. `src/lib/data.ts`
+  strips it once at load, so pages never show literal backticks or asterisks.
