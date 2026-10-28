@@ -18,9 +18,13 @@ Research date: 2026-10-28. Scope: public information, not a product test. No acc
 
 ## 3. Lifecycle, survival and timing
 
-- **docs-confirmed** — [SDK status](https://vercel.com/docs/sandbox/sdk-reference#status): “Returns: `"pending" | "running" | "stopping" | "stopped" | "failed"`.” These are session statuses; snapshot statuses are separate.
+- **docs-confirmed** — [SDK status](https://vercel.com/docs/sandbox/sdk-reference#status): “The `status` accessor reports the lifecycle state of the current session.”
+- **docs-confirmed** — [SDK status](https://vercel.com/docs/sandbox/sdk-reference#status): “Returns: `"pending" | "running" | "stopping" | "stopped" | "failed"`.”
 - **docs-confirmed** — [Concepts](https://vercel.com/docs/sandbox/concepts): “Sandboxes automatically stop after a timeout. The default timeout is 5 minutes”.
-- **pricing-page** — [Runtime limits](https://vercel.com/docs/sandbox/pricing#runtime-limits): “The maximum duration applies to a single session, not to the sandbox itself.” The same page's table gives Hobby 45 minutes; Pro and Enterprise 24 hours per session.
+- **pricing-page** — [Runtime limits](https://vercel.com/docs/sandbox/pricing#runtime-limits): “The maximum duration applies to a single session, not to the sandbox itself.”
+- **pricing-page** — [Runtime limits table](https://vercel.com/docs/sandbox/pricing#runtime-limits), plan and maximum session duration: “Hobby | 45 minutes”.
+- **pricing-page** — [Runtime limits table](https://vercel.com/docs/sandbox/pricing#runtime-limits), plan and maximum session duration: “Pro | 24 hours”.
+- **pricing-page** — [Runtime limits table](https://vercel.com/docs/sandbox/pricing#runtime-limits), plan and maximum session duration: “Enterprise | 24 hours”.
 - **docs-confirmed** — [Persistence](https://vercel.com/docs/sandbox/concepts/persistent-sandboxes): “Persistent sandboxes automatically save their filesystem state when stopped and restore it when resumed.”
 - **docs-confirmed** — [Persistence](https://vercel.com/docs/sandbox/concepts/persistent-sandboxes): “Non-persistent sandboxes discard their filesystem when the session stops and don't accrue Snapshot Storage costs.”
 - **inferred** — In `pending` the VM is starting; `running` is the live session; `stopping` is the transition to shutdown; `stopped` is not a running VM; `failed` is an unsuccessful state. Persistence and snapshot documentation describe filesystem restoration into a *new* session, not preservation of RAM or live processes. Restart background services using the documented `onResume` hook. A separately mounted drive survives independently; its data is not merely a subfolder of the snapshot.
@@ -32,20 +36,29 @@ Research date: 2026-10-28. Scope: public information, not a product test. No acc
 
 - **docs-confirmed** — [Snapshots](https://vercel.com/docs/sandbox/concepts/snapshots): “You can also snapshot a running sandbox at any time by calling `snapshot()`, which captures its current filesystem before stopping the session.”
 - **docs-confirmed** — [Snapshots](https://vercel.com/docs/sandbox/concepts/snapshots): “Snapshots outlive the sandbox they came from.”
-- **docs-confirmed** — [Snapshots](https://vercel.com/docs/sandbox/concepts/snapshots#snapshot-states): “The snapshot is captured and ready to create or resume sandboxes from.” The page names the other snapshot states `deleted` and `failed`.
+- **docs-confirmed** — [Snapshots](https://vercel.com/docs/sandbox/concepts/snapshots#snapshot-states): “created | The snapshot is captured and ready to create or resume sandboxes from.”
+- **docs-confirmed** — [Snapshots](https://vercel.com/docs/sandbox/concepts/snapshots#snapshot-states): “deleted | The snapshot was removed, either because you called `delete()` or because it reached its expiration.”
+- **docs-confirmed** — [Snapshots](https://vercel.com/docs/sandbox/concepts/snapshots#snapshot-states): “failed | The capture didn't complete, so the snapshot can't be used. Take a new snapshot to retry.”
 - **docs-confirmed** — [Fork API](https://vercel.com/docs/sandbox/sdk-reference#sandbox.fork): “If the source has no current snapshot, the fork falls back to a fresh create with the source's `image` plus the copied config.”
 - **inferred** — The [fork API](https://vercel.com/docs/sandbox/sdk-reference#sandbox.fork) uses the current saved snapshot, not an assured copy of the running process or latest unsaved filesystem writes. Manual snapshotting stops the source. Verify this distinction before calling it a live fork.
 - **docs-confirmed** — [Drives](https://vercel.com/docs/sandbox/concepts/drives): “Only one sandbox at a time can mount a given drive as read-write: use snapshots for shared access.”
 - **docs-confirmed** — [Drives](https://vercel.com/docs/sandbox/concepts/drives): “Each snapshot mount reflects the drive as it was at the moment you mounted it, and does not include any writes made to the drive thereafter.”
 - **docs-confirmed** — [Images](https://vercel.com/docs/sandbox/concepts/images): “Vercel Sandbox does not run Docker `ENTRYPOINT` or `CMD` for custom images.”
 - **inferred** — From [images](https://vercel.com/docs/sandbox/concepts/images) and [drives](https://vercel.com/docs/sandbox/concepts/drives), a managed or custom image supplies a starting filesystem; a sandbox snapshot saves a full sandbox filesystem; a drive is a separately retained mounted directory. These are not interchangeable, and a Docker image does not mean the Docker entrypoint runs automatically.
-- **docs-confirmed** — [Snapshots](https://vercel.com/docs/sandbox/concepts/snapshots): “Snapshots can't be moved between regions.” The page describes a failover exception for loading a snapshot into a failover region.
-- **pricing-page** — [Pricing](https://vercel.com/docs/sandbox/pricing#snapshot-expiration): “Snapshots expire 30 days after their last use by default.” Expiration can be changed or removed.
+- **docs-confirmed** — [Snapshots](https://vercel.com/docs/sandbox/concepts/snapshots): “Snapshots can't be moved between regions.”
+- **docs-confirmed** — [Snapshots](https://vercel.com/docs/sandbox/concepts/snapshots#snapshots-and-regions): “When creation falls back to a failover region, Vercel loads the snapshot from the closest region where it's available.”
+- **pricing-page** — [Pricing](https://vercel.com/docs/sandbox/pricing#snapshot-expiration): “Snapshots expire 30 days after their last use by default.”
+- **pricing-page** — [Pricing](https://vercel.com/docs/sandbox/pricing#snapshot-expiration): “You can configure the expiration time to control how long snapshots are retained, including removing the expiration so they are kept indefinitely.”
 
 ## 5. Sizes, GPU, architecture and regions
 
 - **pricing-page** — [Pricing](https://vercel.com/docs/sandbox/pricing#active-cpu): “You can provision 1 or an even number of vCPUs between 2 and 32 depending on your plan.”
-- **pricing-page** — [Resource limits](https://vercel.com/docs/sandbox/pricing#resource-limits): “Each vCPU includes 2 GB of memory.” The plan table lists max 4 vCPUs/8 GB Hobby, 8/16 Pro, 32/64 Enterprise; 15 open ports each; current images get 64 GB ephemeral disk, deprecated runtimes 32 GB.
+- **pricing-page** — [Provisioned memory](https://vercel.com/docs/sandbox/pricing#provisioned-memory): “Each vCPU includes 2 GB of memory.”
+- **pricing-page** — [Resource limits table](https://vercel.com/docs/sandbox/pricing#resource-limits), columns plan, maximum vCPUs, maximum memory, maximum open ports, disk size: “Hobby | 4 | 8GB | 15 | 64 GB”.
+- **pricing-page** — [Resource limits table](https://vercel.com/docs/sandbox/pricing#resource-limits), same columns: “Pro | 8 | 16GB | 15 | 64 GB”.
+- **pricing-page** — [Resource limits table](https://vercel.com/docs/sandbox/pricing#resource-limits), same columns: “Enterprise | 32 | 64GB | 15 | 64 GB”.
+- **pricing-page** — [Resource limits](https://vercel.com/docs/sandbox/pricing#resource-limits): “Each sandbox created with Sandbox SDK 3.0.0 or above, or from a custom image, is automatically provisioned 64 GB of ephemeral NVMe storage.”
+- **pricing-page** — [Resource limits](https://vercel.com/docs/sandbox/pricing#resource-limits): “Sandboxes created with runtimes (deprecated) receive 32 GB.”
 - **pricing-page** — [Regions](https://vercel.com/docs/sandbox/pricing#regions): “Vercel Sandbox is available in 19 regions. The default region is `iad1`.”
 - **not-published** — A Sandbox GPU offering, ARM64 availability, and a complete CPU architecture guarantee were not established in the provider pages reviewed. Do not infer a negative solely from absence.
 
@@ -55,7 +68,8 @@ Research date: 2026-10-28. Scope: public information, not a product test. No acc
 - **docs-confirmed** — [Firewall](https://vercel.com/docs/sandbox/concepts/firewall#credentials-brokering): “Credentials brokering injects credentials into egressing traffic. The secrets never enter the sandbox, so code running inside it cannot exfiltrate them.”
 - **docs-confirmed** — [Firewall](https://vercel.com/docs/sandbox/concepts/firewall): “Matchers select requests for transformation. They never block a request.”
 - **inferred** — These firewall sources distinguish proxy-injected credentials from ordinary environment variables visible to guest code. Matchers alone are not an egress deny rule; permitted destinations and permissions still matter.
-- **docs-confirmed** — [Secure Compute](https://vercel.com/docs/sandbox/concepts/secure-compute#pricing): “Traffic sent over VPC peering with your AWS environment does not incur data transfer charges.” The same page describes separately billed internet traffic through the private network.
+- **docs-confirmed** — [Secure Compute](https://vercel.com/docs/sandbox/concepts/secure-compute#pricing): “Traffic sent over VPC peering with your AWS environment does not incur data transfer charges.”
+- **docs-confirmed** — [Secure Compute](https://vercel.com/docs/sandbox/concepts/secure-compute#pricing): “When a sandbox is attached to Secure Compute, traffic that leaves the private network via the public internet is billed as Private Data Transfer.”
 - **pricing-page** — [Networking](https://vercel.com/docs/sandbox/pricing#network): “Data your sandbox sends to the internet, plus all traffic to and from exposed ports, is billable and measured in GB.”
 - **not-published** — A general raw inbound TCP, personal SSH, or direct public IPv4 interface was not confirmed here. Exposed web ports do not by themselves establish any of those interfaces.
 
@@ -92,11 +106,18 @@ Research date: 2026-10-28. Scope: public information, not a product test. No acc
 - **pricing-page** — [Pricing table](https://vercel.com/docs/sandbox/pricing#pricing): “Drive Reads | 30 GB/month | $0.0015/GB | $0.0015/GB”.
 - **pricing-page** — [Pricing table](https://vercel.com/docs/sandbox/pricing#pricing): “Drive Writes | 30 GB/month | $0.004/GB | $0.004/GB”.
 - **pricing-page** — [Drive storage](https://vercel.com/docs/sandbox/pricing#drive-storage): “Storage is measured hourly on the logical used size of each drive, not the size you provisioned, and billed for the hours the data is stored.”
-- **pricing-page** — [Hobby](https://vercel.com/docs/sandbox/pricing#hobby): “Once you exceed the quotas, sandbox creation is paused until 30 days have passed since you first used the feature.” The introductory text instead says until the next billing cycle; exact reset timing needs clarification.
+- **pricing-page** — [Hobby](https://vercel.com/docs/sandbox/pricing#hobby): “Once you exceed the quotas, sandbox creation is paused until 30 days have passed since you first used the feature.”
+- **pricing-page** — [Pricing introduction](https://vercel.com/docs/sandbox/pricing#pricing): “Once you exceed your included limit on Hobby, sandbox creation is paused until the next billing cycle.”
 - **pricing-page** — [Pro](https://vercel.com/docs/sandbox/pricing#pro): “All Sandbox usage on Pro plans is charged against your $20/month credit. After the credit is exhausted, usage is billed at the rates shown above.”
-- **docs-confirmed** — [Pro fee](https://vercel.com/docs/plans/pro-plan#platform-fee): “$20/month Pro platform fee”. The same page says one deploying seat and $20/month usage credit are included; the credit is shared with other infrastructure and expires.
-- **pricing-page** — [Enterprise](https://vercel.com/docs/sandbox/pricing#enterprise): “Enterprise plans have custom pricing and quotas.” Treat the public rate table as indicative and the signed contract as controlling.
-- **pricing-page** — [Regional pricing](https://vercel.com/docs/sandbox/pricing#regional-pricing): “Rates for Active CPU, Provisioned Memory, Sandbox Data Transfer, Drive Storage, Drive Reads, and Drive Writes vary by region.” Creations and snapshot storage are stated to have a common rate.
+- **docs-confirmed** — [Pro fee](https://vercel.com/docs/plans/pro-plan#platform-fee): “$20/month Pro platform fee”.
+- **docs-confirmed** — [Pro fee](https://vercel.com/docs/plans/pro-plan#platform-fee): “1 deploying team seat included”.
+- **docs-confirmed** — [Pro fee](https://vercel.com/docs/plans/pro-plan#platform-fee): “$20/month in usage credit”.
+- **docs-confirmed** — [Pro credit](https://vercel.com/docs/plans/pro-plan#monthly-credit): “You can use your monthly credit across all infrastructure resources.”
+- **docs-confirmed** — [Pro credit expiration](https://vercel.com/docs/plans/pro-plan#credit-expiration): “Your credit expires at the end of the month if you don't use it, and resets at the beginning of the following month.”
+- **pricing-page** — [Enterprise](https://vercel.com/docs/sandbox/pricing#enterprise): “Enterprise plans have custom pricing and quotas.”
+- **inferred** — Given the [Enterprise pricing statement](https://vercel.com/docs/sandbox/pricing#enterprise), confirm actual rates and quotas in the proposed contract rather than treating the public table as a guaranteed quote.
+- **pricing-page** — [Regional pricing](https://vercel.com/docs/sandbox/pricing#regional-pricing): “Rates for Active CPU, Provisioned Memory, Sandbox Data Transfer, Drive Storage, Drive Reads, and Drive Writes vary by region.”
+- **pricing-page** — [Regional pricing](https://vercel.com/docs/sandbox/pricing#regional-pricing): “Sandbox Creations and Snapshot Storage are billed at the same rate in all regions where Sandbox is available.”
 - **inferred** — The pricing page renders the selected `iad1` values in the retrieved live text, but other regions require interaction with its selector. The Battleships regional table is a useful secondary cross-check, not independently verified provider prices. Do not silently apply iad1 rates globally.
 - **docs-confirmed** — [Overview](https://vercel.com/docs/sandbox): “Stop a sandbox when work is done to end CPU and memory charges.”
 - **not-published** — CPU metering granularity, a universal CPU minimum, exact startup/shutdown billing boundaries, and every non-default regional rate were not verified. Snapshot and drive charges can continue while compute is stopped, and delete does not imply snapshot deletion.
@@ -158,4 +179,4 @@ Research date: 2026-10-28. Scope: public information, not a product test. No acc
 ## Research and verification limitations
 
 - **inferred** — Context.dev live search and fresh scrapes, TinyFish Fetch through Composio, and Parallel Search through Composio succeeded. No native Amp web fallback was used. Battleships JSON and Markdown were read as secondary references. The changing regional selector, signup flow, and the exact trial exit were not exercised; no paid Sandbox was started.
-- **inferred** — Quote audit: 61 evidence quotations were rechecked against freshly fetched live sources; 60 matched the provider's Markdown or third-party source after removing Markdown formatting, and the remaining trial quote matched the freshly rendered Hobby page via Context.dev, for 61 of 61 matches. This checks quotation text, not every compound claim or product behavior.
+- **inferred** — Quote audit after the claim-level revision: 81 evidence quotations were rechecked against freshly fetched live sources; 80 matched the provider's Markdown or third-party source after removing Markdown formatting, and the remaining trial quote matched the freshly rendered Hobby page via Context.dev, for 81 of 81 matches. This checks quotation text, not product behavior.
