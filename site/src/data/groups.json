@@ -1,0 +1,39 @@
+{
+  "groups": [
+    {
+      "id": "machine",
+      "title": "The machine",
+      "intro": "What you are actually renting, and how much of it you can choose."
+    },
+    {
+      "id": "state",
+      "title": "State and storage",
+      "intro": "What survives when the machine is not running, and where it lives."
+    },
+    {
+      "id": "staying-on",
+      "title": "Staying on",
+      "intro": "The timers between an agent that answers and one that has quietly stopped."
+    },
+    {
+      "id": "access",
+      "title": "Access and network",
+      "intro": "How you and your agent reach each other, and who else can."
+    },
+    {
+      "id": "running",
+      "title": "Running it",
+      "intro": "The surfaces you drive it with, the agents already inside, and the controls a team needs."
+    },
+    {
+      "id": "money",
+      "title": "Money",
+      "intro": "What the meter measures, and what it takes to try before you pay."
+    },
+    {
+      "id": "company",
+      "title": "The company",
+      "intro": "Who is behind the machine, and what happens when it breaks."
+    }
+  ]
+}

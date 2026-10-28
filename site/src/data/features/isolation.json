@@ -1,0 +1,158 @@
+{
+  "id": "isolation",
+  "group": "machine",
+  "order": 1,
+  "title": "Isolation: what kind of computer you get",
+  "navTitle": "Isolation",
+  "standfirst": "Every provider says “sandbox”. Underneath, it is a container, a gVisor container, a microVM or a full virtual machine, and that decides what your agent can install, run and break.",
+  "idea": [
+    "A sandbox is a boundary before it is a computer. The boundary is drawn by the host: a container shares the host's kernel, a virtual machine has its own. The stronger the boundary, the more the inside behaves like a real server, and the more it costs to start.",
+    "Four kinds show up in this market. A container shares the host kernel and is the weakest boundary. gVisor intercepts system calls in user space, which is stronger than a container but still not a kernel of its own. A microVM, usually Firecracker or Cloud Hypervisor, has its own kernel and starts in milliseconds. A full VM is the same idea with a conventional machine model, and it is the only kind where nested virtualisation is routinely expected.",
+    "The boundary and the capability list are different things. A microVM can still refuse kernel modules, omit systemd, or ship without Docker. So the useful question is not “is it a VM?” but “what can I run inside it, and what happens when the agent breaks it?”"
+  ],
+  "splits": [
+    {
+      "heading": "The default type is often the weaker one",
+      "body": [
+        "Agent 37's default instance is a gVisor container. Docker does not work there; you choose the vm type, at 2.5× the compute rate, to get a real kernel. Its own docs describe the vm type as being for Docker, Kubernetes, databases and Android emulators.",
+        "Most of the others make the microVM the default: E2B, Vercel, Sandboxer, InstaBox, Lizard, Runtime and Sprites all describe a per-sandbox kernel. Morph goes further and sells full VMs with Docker-in-Docker and systemd as the normal case."
+      ]
+    },
+    {
+      "heading": "A real kernel does not guarantee a normal server",
+      "body": [
+        "Sprites is a hardware-isolated microVM, but it does not run systemd; its own service manager starts services on wake. Blaxel's default kernel refuses module loading and kernel tracing to every process, including root, and iptables has to be enabled at creation. Lizard documents root but not whether a Docker daemon runs inside.",
+        "E2B is the opposite asymmetry: the boundary is strong, but the default template user is an ordinary user, not root. Root is a template choice, not the default."
+      ]
+    }
+  ],
+  "watchFor": [
+    "Docker on the default type: at Agent 37 it needs the vm type at 2.5× the rate.",
+    "systemd: Sprites does not run it, and several providers do not document it either way.",
+    "Kernel modules: Blaxel refuses them by default; E2B's kernel is missing at least one module.",
+    "Nested virtualisation: Runtime exposes /dev/kvm; Sandboxer and Morph document it, Morph as experimental.",
+    "Root inside the guest is not root on the host, whatever the provider's marketing implies."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "partly",
+      "note": "A gVisor container by default, with no Docker; the vm type gives a real kernel at 2.5× compute, and performance gives dedicated cores at 4×.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/instances/create",
+        "quote": "`vm` is a whole virtual machine with its own kernel, for Docker, Kubernetes, databases, and Android emulators, at 2.5x the default compute rate",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "partly",
+      "note": "A microVM boundary, root by default, but the default kernel refuses module loading and kernel tracing, and iptables needs enabling at creation.",
+      "source": {
+        "url": "https://docs.blaxel.ai/Sandboxes/Non-root-user.md",
+        "quote": "the microVM boundary remains the isolation guarantee between your sandbox and everything else.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "yes",
+      "note": "A full Ubuntu VM with its own kernel, Docker, SSH and root. The closest thing here to an ordinary server.",
+      "source": {
+        "url": "https://docs.boat.dev/quickstart",
+        "quote": "boat gives you full Ubuntu virtual machines (sandboxes) for AI agents and code, billed per second.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "yes",
+      "note": "A KVM microVM with its own kernel, network stack and disk. Docker, systemd, kernel modules and breaking the OS all stay inside the machine.",
+      "source": {
+        "url": "https://docs.boxd.sh/use-cases/sandboxes",
+        "quote": "Every boxd machine is a KVM microVM with its own kernel, network stack, and disk.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "yes",
+      "note": "A Firecracker microVM with its own kernel. Docker is documented, but the default template user is `user`, not root, and some kernel modules are missing.",
+      "source": {
+        "url": "https://docs.e2b.dev/security",
+        "quote": "not a container. Each one boots its own kernel",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "yes",
+      "note": "A Firecracker microVM running Debian 13 with its own kernel, root, passwordless sudo and Docker.",
+      "source": {
+        "url": "https://instabox.sh/",
+        "quote": "A whole machine, with its own kernel.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "A Firecracker microVM with its own kernel and root by default, but Docker inside a sandbox is not documented either way.",
+      "source": {
+        "url": "https://lizard.build/docs/sandboxes",
+        "quote": "Sandboxes run as Firecracker microVMs, each with its own kernel.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "yes",
+      "note": "Full VMs with Docker-in-Docker, systemd, root and FUSE. Nested virtualisation and other guest operating systems are experimental.",
+      "source": {
+        "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+        "quote": "Full virtual machines capable of running any configuration of containers: docker‑in‑docker, a local Kubernetes cluster, self‑hosted Supabase, etc.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "A Firecracker microVM with its own kernel, and new sandboxes expose /dev/kvm, so nested virtualisation works.",
+      "source": {
+        "url": "https://withruntime.com/llms.txt",
+        "quote": "Runtime Cloud is a cloud for AI agents' code: Linux sandboxes, each a Firecracker microVM",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "yes",
+      "note": "A Cloud Hypervisor microVM with its own kernel, systemd, Docker with BuildKit and Compose, and /dev/kvm.",
+      "source": {
+        "url": "https://sandboxer.com/docs/security",
+        "quote": "Each sandbox is a separate Cloud Hypervisor microVM with its own kernel.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "partly",
+      "note": "A hardware-isolated microVM with root and Docker reported, but it does not run systemd: a built-in service manager starts services on wake.",
+      "source": {
+        "url": "https://docs.fly.io/sprites/concepts/services",
+        "quote": "Sprites don't run systemd; the log files and the create/start streams are how you see service output.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "partly",
+      "note": "A Firecracker microVM with a dedicated kernel, root, Docker and FUSE. systemd and nested virtualisation are not published.",
+      "source": {
+        "url": "https://vercel.com/docs/sandbox/concepts",
+        "quote": "each sandbox runs in its own Firecracker microVM with a dedicated kernel.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ]
+}

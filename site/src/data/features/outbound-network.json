@@ -1,0 +1,160 @@
+{
+  "id": "outbound-network",
+  "group": "access",
+  "order": 9,
+  "title": "Outbound network: egress, allowlists and static IP",
+  "navTitle": "Outbound network",
+  "standfirst": "What the agent can reach, what can be blocked, and whether the outside world sees a stable address. This is where an agent that browses meets a firewall that was designed for a web app.",
+  "idea": [
+    "Outbound access is usually open by default, because an agent that cannot reach a package registry is not much use. The interesting parts are the controls: can you deny everything, allow a list of hosts, and enforce it outside the machine so root inside cannot loosen it?",
+    "A static egress IP is a separate product. It matters when a third-party API allowlists your address, or when a rate limit is shared with every other sandbox on the host. Most providers here do not offer one; Runtime sells it for $5 a month, and E2B explicitly does not offer it on any plan.",
+    "The last question is billing. Egress is free at some providers, metered at others, and unpublished at a few. A generous free allowance can be the difference between a cheap agent and an expensive one."
+  ],
+  "splits": [
+    {
+      "heading": "Open by default, closed on request",
+      "body": [
+        "Runtime starts closed and makes you open a door; a sandbox can also be set to `internet: false` or an allowlist. Agent 37 offers allow-all, deny-all and an IPv4 allowlist, changeable live, and DNS counts as a connection. boxd's allowlist is enforced outside the machine, so root cannot loosen it.",
+        "Sandboxer, Lizard, InstaBox and Boat are open by default with no published allowlist. Boat has no API setting for network rules at all; its firewall is ufw inside the sandbox, and rules do not survive a snapshot."
+      ]
+    },
+    {
+      "heading": "A stable address is rare",
+      "body": [
+        "Runtime sells a dedicated outbound address per account for $5 a month. Vercel's Secure Compute gives a private path to AWS, but the public path is billed as data transfer. Most others share an address: Sandboxer says outbound traffic shares the node's IP, and InstaBox's machines share one NAT address according to a third party.",
+        "E2B is explicit that there are no dedicated or static egress IPs on any plan, including Enterprise. A customer-operated proxy is the documented workaround."
+      ]
+    },
+    {
+      "heading": "Filtering is not the same as blocking",
+      "body": [
+        "Blaxel's proxy can filter domains, but traffic from tools that ignore proxy environment variables is not filtered unless domain filter enforcement is enabled. Vercel's firewall matchers select requests for transformation and never block a request by themselves.",
+        "That distinction matters for an agent that runs arbitrary binaries: a proxy that only sees well-behaved HTTP clients is not a network boundary."
+      ]
+    }
+  ],
+  "watchFor": [
+    "Whether the default is open or closed, and whether a deny-all rule also blocks DNS.",
+    "Whether the allowlist is enforced outside the machine, or by a proxy the agent can bypass.",
+    "Whether there is a static egress IP, and what it costs.",
+    "Whether egress is free, metered, or unpublished.",
+    "Whether sandboxes can reach each other over a private network."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "yes",
+      "note": "Allow-all, deny-all or an IPv4 allowlist of up to 100 entries, changeable live. DNS counts as a connection, and private ranges stay blocked. No static egress IP or published egress price.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/instance-network",
+        "quote": "**DNS counts as a connection.** Under `deny-all` or a list, names do not resolve unless a resolver is on the list.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "partly",
+      "note": "A proxy can filter domains, but tools that ignore proxy environment variables are not filtered unless domain filter enforcement is enabled. Egress is included in the plan.",
+      "source": {
+        "url": "https://docs.blaxel.ai/Sandboxes/Proxy-domains.md",
+        "quote": "Traffic from tools that ignore proxy environment variables will not be filtered unless",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "Outbound is open by default with no API for network rules; ufw inside the sandbox is the control, and firewall rules do not survive a snapshot. Egress is not billed.",
+      "source": {
+        "url": "https://docs.boat.dev/hosting/firewall",
+        "quote": "boat has no API setting for network rules.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "yes",
+      "note": "A per-machine allowlist enforced outside the machine, so root inside cannot loosen it. Forks inherit it; a machine from a snapshot starts unrestricted.",
+      "source": {
+        "url": "https://docs.boxd.sh/guides/egress",
+        "quote": "An allowlist of just `none` cuts the machine off from the internet entirely.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "yes",
+      "note": "Outbound is open by default with documented domain and IP allow and deny rules. No dedicated or static egress IP on any plan, including Enterprise.",
+      "source": {
+        "url": "https://docs.e2b.dev/faq/egress-ip-ranges",
+        "quote": "there are no dedicated or static egress IP addresses on any plan (including Enterprise).",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "partly",
+      "note": "No general egress allowlist is published; host scoping applies to Secrets, not all sandbox traffic. Egress is metered at $0.02 per GiB, and machines share a NAT address.",
+      "source": {
+        "url": "https://api.instabox.sh/v1/openapi.json",
+        "quote": "This scopes credential use, not all sandbox network access.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "Outbound is open with no documented allowlist. Sandbox egress has no per-GB charge, with 2 TB per account over a rolling 30 days included.",
+      "source": {
+        "url": "https://lizard.build/docs/platform/limits",
+        "quote": "Sandbox egress has no separate per-GB charge. The included allowance is 2 TB per account over a rolling 30 days",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "not-published",
+      "note": "Egress pricing, destination filtering and static IPs are not established in the documentation. A secret manager is documented; a network allowlist is not."
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "`internet: false` refuses everything, an allow list is allow-list only, and deny always wins. A dedicated outbound address costs $5 a month, and sandboxes reach each other over a private name.",
+      "source": {
+        "url": "https://withruntime.com/docs/sandbox-environment",
+        "quote": "`internet: false` refuses every outbound connection. With an `allow` list, it is allow-list only.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "partly",
+      "note": "Outbound is open by default with no allowlist product. Traffic shares the node's IPv4 and IPv6 with other sandboxes, so external rate limits are shared.",
+      "source": {
+        "url": "https://sandboxer.com/docs/security",
+        "quote": "outbound internet is open by default",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "yes",
+      "note": "Outbound is unrestricted by default, with an opt-in DNS allowlist applied from outside the Sprite. Bandwidth is not metered.",
+      "source": {
+        "url": "https://docs.fly.io/sprites/concepts/networking",
+        "quote": "Applying one is opt-in and done from outside the Sprite.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "yes",
+      "note": "Firewall rules default to allow-all and can be set per sandbox. Matchers transform requests but never block them, so an allowlist needs an explicit rule.",
+      "source": {
+        "url": "https://vercel.com/docs/sandbox/sdk-reference#sandbox.create",
+        "quote": "Firewall rules for sandbox egress traffic. Defaults to `\"allow-all\"`.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ]
+}

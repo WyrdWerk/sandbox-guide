@@ -1,0 +1,165 @@
+{
+  "id": "storage",
+  "group": "state",
+  "order": 5,
+  "title": "Storage: disk, volumes and what persists",
+  "navTitle": "Storage",
+  "standfirst": "“Persistent” can mean the whole disk, one mounted folder, or fourteen days. It can also mean a separate volume that outlives the machine, which is a different product from the disk the machine boots with.",
+  "idea": [
+    "There are three storage objects in this market. The root disk is part of the machine and disappears or is parked with it. A volume is a separate disk you attach, which can outlive the machine and sometimes attach to another. Object storage is a bucket reached over the network, not a filesystem.",
+    "What persists is the second question. Some providers keep the whole filesystem, including packages installed outside the home directory. Others keep one folder, usually /workspace or /data, and reset the rest from the template. The difference shows up the first time you install a database in /var/lib.",
+    "Retention is the third. A stopped machine's disk may be kept indefinitely, kept free for a fixed period, or deleted with the machine. A volume may be node-local and lost with the host. Read the retention line before treating a sandbox as storage."
+  ],
+  "splits": [
+    {
+      "heading": "The whole disk, or one folder",
+      "body": [
+        "Agent 37, boxd, Boat and Sprites persist the whole disk. Lizard persists only /workspace unless you pause rather than stop, and InstaBox gives you one disk at /data with the root disk owned by the template. E2B's snapshots cover the filesystem, but its separate volumes are the object that outlives a sandbox.",
+        "The narrow case is easy to miss because the marketing says “persistent”. At Lizard, a stop deletes everything outside /workspace; only a pause keeps the installed packages."
+      ]
+    },
+    {
+      "heading": "Volumes are a separate product",
+      "body": [
+        "Runtime attaches up to four volumes per sandbox, and a volume can also be mounted read-only as a snapshot. Blaxel allows one volume per sandbox, attached to one sandbox at a time, and sells Agent Drive for shared access. Vercel's drives allow one read-write mount at a time. Morph's volumes are S3-compatible object storage, not an attached block disk.",
+        "Several providers have no volume product at all: Agent 37, Boat, Sandboxer and InstaBox. E2B's volumes exist but are in private beta."
+      ]
+    },
+    {
+      "heading": "Retention is where “persistent” ends",
+      "body": [
+        "Boat keeps a stopped sandbox's disk for 14 days, then deletes it. Lizard's volumes are node-local, and there is no trash: deleting a sandbox or a project removes its data at once. Vercel's snapshots expire after 30 days by default unless you remove the expiry.",
+        "Agent 37 keeps the disk until you delete the instance, and charges $0.09 per GB-month for it. Sprites caps storage at 100 GB per Sprite and bills the bytes you write."
+      ]
+    }
+  ],
+  "watchFor": [
+    "Whether the whole filesystem survives or only one mounted folder.",
+    "Whether a volume can attach to more than one machine, and whether sharing is read-only.",
+    "How long a stopped machine's disk is kept before deletion.",
+    "Whether storage bills on provisioned size or written bytes.",
+    "Whether snapshots include credentials and installed packages outside the home folder."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "partly",
+      "note": "The whole disk persists and bills at $0.09 per GB-month until you delete the instance. No volumes. Backups cover only /home/node, so a database in /var/lib is not in them.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/instance-lifecycle",
+        "quote": "The whole disk persists, like a VM.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "yes",
+      "note": "A volume survives sandbox deletion, but only one volume attaches to a sandbox and a volume attaches to one sandbox at a time. Agent Drive is the shared filesystem, priced separately.",
+      "source": {
+        "url": "https://docs.blaxel.ai/Sandboxes/Volumes.md",
+        "quote": "you can only attach one volume to a sandbox. A volume can also only be attached to one sandbox at a time.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "The whole disk persists, with 51 GB on the smaller sizes and no volume product. A stopped sandbox's disk is kept free for 14 days, then deleted.",
+      "source": {
+        "url": "https://docs.boat.dev/faq",
+        "quote": "boat keeps the disk for 14 days after the stop",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "partly",
+      "note": "Every machine has a fixed 100 GB disk, and disk bills on bytes written in every state. Detachable disks exist in the SDK but have no guide, size list or published price.",
+      "source": {
+        "url": "https://boxd.sh/pricing",
+        "quote": "Disk bills on the disk you have written to, in every state",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "partly",
+      "note": "Snapshots keep the filesystem, and separate volumes persist across sandboxes, but volumes are in private beta and cannot be snapshotted. Included disk is 10 GiB on Hobby and 20 GiB on Pro.",
+      "source": {
+        "url": "https://docs.e2b.dev/volumes",
+        "quote": "Volumes are currently in private beta.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "partly",
+      "note": "One disk at /data, 20 GiB by default and growable, with the root disk owned by the template. No volumes and no second disk; the free plan's disk is fixed.",
+      "source": {
+        "url": "https://instabox.sh/docs/limits",
+        "quote": "A machine has one disk, `/data` (home is `/data/home`)",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "The local disk is lost on stop; only /workspace persists, through a named volume of 1–50 GB attached to one sandbox at a time and stored on one node. There is no trash.",
+      "source": {
+        "url": "https://lizard.build/docs/sandboxes/volumes",
+        "quote": "Each volume mounts at **`/workspace`** and attaches to **one sandbox at a time**.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "partly",
+      "note": "The instance disk holds the machine, and Morph Volumes is separate S3-compatible object storage reached through a gateway and CLI, not an attached block disk. EFS is a third option.",
+      "source": {
+        "url": "https://cloud.morph.so/docs/volumes/getting-started",
+        "quote": "Morph Volumes are persistent S3-compatible storage for build caches, release artifacts, checkpoints, and shared datasets.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "Up to four volumes per sandbox, each mounted at a path, with a read-only snapshot mode for sharing. Buckets from S3, R2 or GCS can appear as a directory without the key entering the sandbox.",
+      "source": {
+        "url": "https://withruntime.com/docs/storage",
+        "quote": "A create attaches up to four volumes, each at a path such as `/data`",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "partly",
+      "note": "The whole disk persists while stopped, free within a storage quota, and there is no separate volume or image registry. Going over quota blocks new sandboxes rather than charging.",
+      "source": {
+        "url": "https://sandboxer.com/docs/machines",
+        "quote": "is space for your files, added on top of the OS image",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "yes",
+      "note": "The whole filesystem persists on durable local storage, capped at 100 GB, and checkpoints keep filesystem blocks that bill while retained. No attachable or shared volumes are documented.",
+      "source": {
+        "url": "https://docs.fly.io/sprites/quickstart",
+        "quote": "Sprites remember your entire filesystem between sessions.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "partly",
+      "note": "64 GB of ephemeral NVMe per sandbox, plus drives billed on logical used size. Only one sandbox at a time can mount a drive read-write; snapshots are the sharing mechanism.",
+      "source": {
+        "url": "https://vercel.com/docs/sandbox/concepts/drives",
+        "quote": "Only one sandbox at a time can mount a given drive as read-write: use snapshots for shared access.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ]
+}

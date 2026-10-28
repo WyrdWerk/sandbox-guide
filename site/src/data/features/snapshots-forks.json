@@ -1,0 +1,165 @@
+{
+  "id": "snapshots-forks",
+  "group": "state",
+  "order": 4,
+  "title": "Snapshots, forks and templates",
+  "navTitle": "Snapshots and forks",
+  "standfirst": "Four jobs hide under “snapshot”: a restore point on one machine, a reusable image for new machines, a copy of a running machine, and a backup that survives losing the host. Ask which one you are getting.",
+  "idea": [
+    "A restore point lets you rewind one machine after a bad change. A reusable image lets you start many identical machines from a known-good setup. A fork copies a machine, ideally while it is running, so you can try something without risking the original. A backup survives losing the host or the account.",
+    "Memory is the dividing line. A snapshot with memory can resume a half-finished agent turn; a disk-only snapshot cannot. Fork is the same split: a disk fork boots cold, a memory fork resumes mid-task. A “live” fork may still pause the source for a moment, and several providers do exactly that.",
+    "Templates are the third axis. They can be a Docker image, a named snapshot, or a fixed catalogue entry. That decides whether you can carry your own setup forward or are choosing from what the provider built."
+  ],
+  "splits": [
+    {
+      "heading": "A snapshot with memory is not a backup",
+      "body": [
+        "E2B, Morph, Lizard, boxd, Blaxel and Runtime all capture memory and processes in at least one snapshot mode. That makes them useful for cloning a working agent. It does not make them disaster recovery: a copy on the same host or cluster can disappear with it.",
+        "Boat's snapshots are automatic, disk-only and taken every minute, but only the newest is usable. Agent 37 has no snapshot product at all: a sleep checkpoint that cannot be cloned, a folder backup, and Dockerfile templates."
+      ]
+    },
+    {
+      "heading": "Fork is not always live",
+      "body": [
+        "boxd forks memory and disk in 100–200 ms while the source pauses for a fraction of a second. Lizard forks 1–100 copies and pauses the source briefly. E2B pauses the source, captures it, and drops its active connections. Runtime freezes the source while memory is written.",
+        "Others fork the disk only. Sandboxer's fork gets a new identity and boots fresh. Agent 37's fork copies the disk while the source keeps running. InstaBox's fork is snapshot-save plus create, which is not instant despite the homepage."
+      ]
+    },
+    {
+      "heading": "Templates decide what you can carry forward",
+      "body": [
+        "E2B and Blaxel build templates from Dockerfiles; Agent 37 pins Dockerfile-built images by digest. Sandboxer, Boat, boxd, Lizard and InstaBox use snapshots as their image mechanism. Morph has devbox templates that integrate a secrets manager.",
+        "A fixed catalogue is the narrowest case: Lizard's templates are platform images, and a custom upload flow is not documented."
+      ]
+    }
+  ],
+  "watchFor": [
+    "Whether memory and processes are in the snapshot, and whether the source keeps running.",
+    "Whether a restore is in place and destructive, or creates a separate machine.",
+    "Whether you can choose an older snapshot; Boat cannot.",
+    "Whether snapshots contain credentials; InstaBox's include saved logins.",
+    "Whether a fork inherits the source's TTL; Boat's and Sandboxer's do not."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "partly",
+      "note": "No snapshot product. Free nightly backups of /home/node with seven restore points, restored in place only; a live fork copies the disk but not memory; templates are Dockerfile-built images.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/instance-backups",
+        "quote": "Every instance's data (`/home/node`) is backed up nightly into seven rotating slots",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "partly",
+      "note": "A snapshot captures filesystem, running processes and memory, and outlives the sandbox, but it is in private preview and not recommended for production. Fork runs from the snapshot.",
+      "source": {
+        "url": "https://docs.blaxel.ai/Sandboxes/Fork.md",
+        "quote": "A snapshot captures the state of a sandbox at a point in time: its filesystem, its running processes, and its memory.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "Snapshots are automatic, disk-only and taken every minute, but only the newest is usable: there is no point-in-time restore. Saved snapshots are named and never expire.",
+      "source": {
+        "url": "https://docs.boat.dev/snapshots/resume-and-fork",
+        "quote": "Resume and fork always use the newest snapshot. You cannot go back to an older one.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "yes",
+      "note": "A snapshot keeps memory and disk, is named and versioned, and boots machines already running; a checkpoint is an in-place undo point; backups are disk-only and off-cluster; a fork copies memory and disk in 100–200 ms.",
+      "source": {
+        "url": "https://docs.boxd.sh/guides/snapshots",
+        "quote": "A snapshot is a saved copy of a specific machine. It captures the disk and the memory",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "yes",
+      "note": "Snapshots capture filesystem and memory while the source keeps running, and filesystem-only snapshots are available. Up to 20 forks from a running VM, with a brief pause and dropped connections.",
+      "source": {
+        "url": "https://docs.e2b.dev/sandbox/snapshots",
+        "quote": "Snapshots let you create a persistent point-in-time capture of a running sandbox, including both its filesystem and memory state.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "partly",
+      "note": "Snapshots are disk-only and may stop the machine to take them; a fork is snapshot-save plus create, not an instant clone; snapshots survive deleting the machine and include saved logins.",
+      "source": {
+        "url": "https://instabox.sh/docs/snapshots",
+        "quote": "It is snapshot save plus create, so it takes about as long as those two.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "yes",
+      "note": "A snapshot captures memory, processes and the whole disk and restores into a new sandbox at the source's size; a fork copies a running sandbox 1–100 times with memory, pausing the source briefly.",
+      "source": {
+        "url": "https://lizard.build/docs/sandboxes/quickstart",
+        "quote": "A snapshot saves a running sandbox's memory, running processes and every file on its disk.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "yes",
+      "note": "Snapshots are immutable copies of memory and disk; a branch creates several running instances from one snapshot. Starting a snapshot restores memory, while booting it is a cold boot.",
+      "source": {
+        "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
+        "quote": "Snapshots are immutable point-in-time copies of both memory and disk state.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "Snapshots default to memory plus disk, with disk-only opt-in; forks copy files, memory and processes but freeze the source while capturing; a sandbox with a volume cannot be snapshotted.",
+      "source": {
+        "url": "https://withruntime.com/docs/javascript",
+        "quote": "Snapshots default to `mode: \"memory\"`. That mode keeps files, memory and running processes.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "yes",
+      "note": "Three snapshot kinds: a stop snapshot with disk and memory, continuous disk snapshots every ten minutes, and named disk snapshots used as templates with share codes. Forks are disk-only.",
+      "source": {
+        "url": "https://sandboxer.com/docs/snapshots",
+        "quote": "Every 10 minutes while a sandbox runs, and at every stop",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "partly",
+      "note": "Checkpoints snapshot the writable filesystem, copy-on-write and without interrupting work; they restore in place and overwrite current files. A live fork or create-from-checkpoint is not documented.",
+      "source": {
+        "url": "https://docs.fly.io/sprites/concepts/checkpoints",
+        "quote": "A checkpoint snapshots the writable filesystem overlay: everything you've added on top of the base image.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "partly",
+      "note": "Snapshots capture the filesystem and outlive the sandbox; taking one manually stops the session. Fork uses the current snapshot or falls back to a fresh create from the image.",
+      "source": {
+        "url": "https://vercel.com/docs/sandbox/concepts/snapshots",
+        "quote": "You can also snapshot a running sandbox at any time by calling `snapshot()`, which captures its current filesystem before stopping the session.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ]
+}

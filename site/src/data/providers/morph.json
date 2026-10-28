@@ -1,0 +1,116 @@
+{
+  "id": "morph",
+  "name": "Morph",
+  "url": "https://cloud.morph.so",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "Full VMs with memory-and-disk snapshots, branched into parallel copies, billed in MCUs.",
+  "whatItIs": [
+    "Morph Cloud sells devboxes and lower-level instances: full virtual machines that can run Docker-in-Docker, a local Kubernetes cluster or a self-hosted database.",
+    "Its distinctive primitive is the snapshot: an immutable copy of memory and disk that can boot a new instance with running processes, or branch into many copies for fan-out."
+  ],
+  "whoFor": "Teams running parallel agent environments, RL rollouts or test fan-out, and developers who want a cloud devbox with a dashboard.",
+  "isolation": "Full virtual machine, with Docker-in-Docker, systemd and root documented. FUSE is available; nested virtualisation and other guest operating systems are experimental.",
+  "sizes": "Resources are chosen at creation: vCPU, memory and disk size. No complete size catalogue, GPU statement, region list or data-residency commitment is published.",
+  "billing": {
+    "model": "Prepaid MCUs with optional monthly plans that include an allocation.",
+    "meter": "One MCU covers 1 vCPU-hour, 4 GB RAM-hours, 16 GB disk-hours or 5 TB snapshot-hours. The rate is the maximum of those dimensions, at $0.05 per MCU-hour.",
+    "stopped": "A paused instance bills only for the snapshot taken. A stopped instance is deleted, so its own disk is not a cheap parked state.",
+    "planFee": "Developer $0, Team $40 and Scale $250 a month, including 0, 1,000 and 7,500 MCUs.",
+    "minimum": "No published minimum duration. The signup docs promise 300 free compute hours a month; the pricing page shows 0 MCUs and asks you to buy."
+  },
+  "cost": {
+    "A": {
+      "headline": "$16.67",
+      "shape": "2 vCPU / 4 GiB, disk under 32 GiB, deleted after each task",
+      "lines": [
+        { "label": "MCUs", "arithmetic": "166.67 h × max(2, 4/4, disk/16) = 333.33 MCU", "amount": "333.33" },
+        { "label": "Cost", "arithmetic": "333.33 × $0.05", "amount": "$16.67" }
+      ],
+      "total": "$16.67",
+      "notes": [
+        "Retained snapshots are excluded; a larger disk raises the MCU count.",
+        "The requested shape can be provisioned exactly."
+      ]
+    },
+    "B": {
+      "headline": "$146.00",
+      "shape": "4 vCPU / 8 GiB / 50 GiB, 730 h",
+      "lines": [
+        { "label": "MCUs", "arithmetic": "730 h × max(4, 8/4, 50/16) = 2,920 MCU", "amount": "2,920" },
+        { "label": "Cost", "arithmetic": "2,920 × $0.05", "amount": "$146.00" }
+      ],
+      "total": "$146.00",
+      "notes": [
+        "The disk dimension sets the rate at 4 MCU/hour.",
+        "A plan allocation would discount this, but list-rate usage is shown."
+      ]
+    },
+    "C": {
+      "headline": "$9.15",
+      "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running hours, 630 paused",
+      "lines": [
+        { "label": "Running", "arithmetic": "90 × 2 MCU × $0.05", "amount": "$9.00" },
+        { "label": "Paused snapshot", "arithmetic": "24 GB × 630 h × $0.00001", "amount": "$0.15" }
+      ],
+      "total": "$9.15",
+      "notes": [
+        "Paused billing is charged on the snapshot, not on the instance.",
+        "The snapshot's billable size is an assumption; actual counting is not published."
+      ]
+    }
+  },
+  "usability": {
+    "dashboard": "A devbox dashboard can create a machine from a template or snapshot and open it in VS Code.",
+    "withoutCode": "A devbox can be created without API code, but setup asks for an SDK or CLI and an API key.",
+    "signup": "An invite is mentioned in the signup docs; card requirement and waitlist status are not published.",
+    "docs": "Documentation covers devboxes, instances, snapshots, volumes and agent tokens. No independent status page was verified.",
+    "tripsUp": [
+      "Stop deletes the instance; pause is the state-preserving action.",
+      "Booting a snapshot is a cold boot; starting it restores memory.",
+      "Volumes are S3-compatible object storage, not an attached block disk.",
+      "The free-credit promise contradicts the pricing page."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "Free credit is described two ways",
+      "detail": "Signup docs promise 300 free compute hours a month on the $0 Developer plan; the pricing page lists 0 MCUs and says to purchase MCUs to use compute.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "Stop deletes the instance",
+      "detail": "The stop API releases the instance and its resources; only a separately retained snapshot survives.",
+      "status": "open"
+    },
+    {
+      "issue": "Snapshot billing basis is unpublished",
+      "detail": "Whether snapshots bill allocated or stored bytes, and how compression and deduplication count, is not stated.",
+      "status": "open"
+    },
+    {
+      "issue": "Volumes are object storage",
+      "detail": "Morph Volumes is an S3-compatible product accessed through a gateway and CLI, distinct from an attached disk or EFS mount.",
+      "status": "open"
+    },
+    {
+      "issue": "No published region, GPU or architecture list",
+      "detail": "Host locations, data residency and GPU availability were not confirmed in primary material.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "Snapshots capture memory, processes and disk, and are immutable.",
+    "Branch one snapshot into many running instances.",
+    "Pause bills only the snapshot.",
+    "Full VMs with Docker-in-Docker and systemd.",
+    "A devbox dashboard for creating and opening environments."
+  ],
+  "sources": [
+    { "label": "Devboxes", "url": "https://cloud.morph.so/docs/devboxes/getting-started" },
+    { "label": "Pause and resume", "url": "https://cloud.morph.so/docs/documentation/instances/pause-resume" },
+    { "label": "Snapshots", "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot" },
+    { "label": "Branch", "url": "https://cloud.morph.so/docs/documentation/instances/branch" },
+    { "label": "Pricing", "url": "https://cloud.morph.so/web/subscribe" }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "id": "built-in-agents",
+  "group": "running",
+  "order": 12,
+  "title": "Built-in agents",
+  "navTitle": "Built-in agents",
+  "standfirst": "Some providers ship the machine with coding agents already installed and a way to prompt them. Others ship a computer and expect you to bring the agent.",
+  "idea": [
+    "A preinstalled agent is not a hosted agent. Preinstalled means the binary is on the disk and a login may be configured; the agent loop still runs inside your sandbox and you still pay the model provider, or sign in with your own subscription. Hosted means the provider runs the loop and bills you for it.",
+    "The useful distinction is threefold: is an agent installed, can you prompt it through the provider's API rather than a terminal, and does the provider manage the model credentials? Very few do all three.",
+    "Preinstalled agents also change the setup story. A machine with Claude Code and Codex already on it is a working environment for a non-engineer who can type a request, even if nothing else is click-driven."
+  ],
+  "splits": [
+    {
+      "heading": "Installed and promptable",
+      "body": [
+        "Boat installs seven harnesses and exposes a prompt endpoint with steering, interrupts and multiple conversations. Sandboxer installs six and has a prompt API with an event stream. Agent 37 has six agent templates plus a separate managed-hosting product where the agent is the product.",
+        "Lizard installs five and prompts them from the CLI only; the SDK has no prompt method. boxd installs three and relies on the in-VM CLI."
+      ]
+    },
+    {
+      "heading": "Installed, not managed",
+      "body": [
+        "InstaBox and Vercel put coding agents in their default images but publish no agent-run API: you open a terminal and use them. E2B documents how to run Claude Code, Codex and Amp, but does not claim to preinstall them.",
+        "That is enough for a technical user and not enough for a product that wants to start an agent on demand."
+      ]
+    },
+    {
+      "heading": "Bring your own",
+      "body": [
+        "Runtime does not preinstall agents, and its own docs say no bridge harness has run on it yet. Sprites offers plugins and SDK integrations rather than a hosted agent. Morph exposes a tmux API so an agent can be driven programmatically, but the agent is yours.",
+        "At these providers the sandbox is the product and the agent is an application you install."
+      ]
+    }
+  ],
+  "watchFor": [
+    "Whether the agent is preinstalled, promptable through an API, or both.",
+    "Who pays for the model: the provider, your API key, or your subscription login.",
+    "Whether the provider manages model credentials or expects them in the environment.",
+    "Whether the agent runs as a hosted service or inside your sandbox.",
+    "Whether a non-engineer can start it without a terminal."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "yes",
+      "note": "Six agent templates (Hermes, OpenClaw, Claude Code, Codex, Grok, OpenCode) plus Pi and n8n, and a separate managed-hosting product where the agent is the product. Claude Code and Codex use your own account.",
+      "source": {
+        "url": "https://www.agent37.com/personal",
+        "quote": "Run OpenClaw, Hermes, Claude Code, Codex, OpenCode, or Grok around the clock. Yours is live in one click.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "partly",
+      "note": "Every sandbox exposes an MCP server that agents use to operate it, and agent hosting is a separate product line, but Agent Runtime is labelled coming soon.",
+      "source": {
+        "url": "https://docs.blaxel.ai/llms.txt",
+        "quote": "Every Blaxel sandbox exposes a built-in MCP server so agents can operate the sandbox using tool calls for files, processes, ports, and previews.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "yes",
+      "note": "Seven coding-agent harnesses preinstalled on every machine, promptable through one API call with steering, interrupts and parallel conversations.",
+      "source": {
+        "url": "https://docs.boat.dev/integrated-agents",
+        "quote": "Every sandbox has seven coding-agent harnesses, installed and ready",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "yes",
+      "note": "Claude Code, Codex and OpenCode are preinstalled, and an in-VM boxd CLI is pre-authenticated so an agent can create sibling machines. Claude logins are account-level and injected at boot.",
+      "source": {
+        "url": "https://docs.boxd.sh/use-cases/coding-agents",
+        "quote": "Every boxd machine ships with three coding agents",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "partly",
+      "note": "Guides show Claude Code, Codex and Amp running in a sandbox, but preinstallation is not claimed and there is no hosted agent-run API.",
+      "source": {
+        "url": "https://docs.e2b.dev/use-cases/coding-agents",
+        "quote": "Run AI coding agents like Claude Code, Codex, and Amp in secure E2B sandboxes",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "yes",
+      "note": "Claude Code and Codex are in the default and agent templates, and sign-ins persist because home is /data/home. There is no hosted agent-run API.",
+      "source": {
+        "url": "https://instabox.sh/docs/limits",
+        "quote": "Claude Code, Codex",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "yes",
+      "note": "Five agent templates plus a base image and desktop variants. Agents are prompted from the CLI with streaming and interrupts; the SDK has no prompt method.",
+      "source": {
+        "url": "https://lizard.build/docs/sandboxes",
+        "quote": "`base`, `interpreter`, `codex`, `claude`, `opencode`, `pi`, `prime`, `desktop`, `desktop-camoufox`",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "partly",
+      "note": "A full tmux API lets you drive Claude Code or Codex programmatically, but no agent is preinstalled and no agent-run API exists.",
+      "source": {
+        "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+        "quote": "Devboxes expose a full tmux API, which lets you programmatically manage coding agents like OpenAI Codex or Claude Code.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "no",
+      "note": "No preinstalled coding agents: the default image ships Python, Node, Bun, git, compilers and sudo, and agents are installed by you. The vendor says no bridge harness has run on Runtime yet.",
+      "source": {
+        "url": "https://withruntime.com/docs/vercel-ai-sdk",
+        "quote": "No bridge harness (Claude Code, Codex) has run on Runtime yet.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "yes",
+      "note": "Six harnesses installed in every sandbox, a prompt API that returns a prompt id, steering for Claude Code, Codex and Pi, and a live model catalogue.",
+      "source": {
+        "url": "https://sandboxer.com/docs/agents",
+        "quote": "Claude Code, Codex, OpenCode, Pi, Kimi Code and Mistral Vibe are installed in every sandbox",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "no",
+      "note": "Plugins for coding agents and SDK integrations, but no preinstalled agent or provider-managed agent API is documented.",
+      "source": {
+        "url": "https://fly.io/sprites/",
+        "quote": "Official plugins for every serious coding agent, plus SDKs and native integrations.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "partly",
+      "note": "The default universal image includes coding agents and common utilities, but there is no agent-run API; you drive them yourself.",
+      "source": {
+        "url": "https://vercel.com/docs/sandbox",
+        "quote": "The default image is `vercel/sandbox/universal`, which includes the current Node.js LTS, Python 3.14, coding agents, and common utilities.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ]
+}

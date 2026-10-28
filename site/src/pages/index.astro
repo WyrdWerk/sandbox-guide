@@ -1,140 +1,144 @@
 ---
 import Base from "../layouts/Base.astro";
-import site from "../data/site.json";
-import { features, providers, useCases } from "../lib/data";
+import { features, groups, providers, situations } from "../lib/data";
 ---
 
-<Base title={site.title}>
-  <header class="page-header">
-    <p class="kicker">A guide for non-engineers</p>
-    <h1>{site.title}</h1>
-    <p class="lede">
-      Seven providers rent out computers for AI agents. They look alike on a pricing page and
-      behave very differently once your agent is running. This site explains each feature in plain
-      language, shows what each provider actually offers, and says who to pick for which situation.
-    </p>
-  </header>
-
-  <section class="measure">
-    <h2>What a sandbox is</h2>
-    <p>
-      A sandbox is a computer in a data centre that you rent by the hour, or by the second, and can
-      throw away when you are done. It has its own disk, its own network address, and usually its own
-      copy of Linux. You do not buy hardware, wait for a delivery, or patch a machine in a spare room.
-    </p>
-    <p>
-      People need one for an AI agent because an agent does things: it runs commands, installs
-      packages, edits files, opens a browser. Letting it do that on your laptop means it can break
-      your laptop, and it stops working the moment you close the lid. A sandbox gives the agent a
-      separate computer that stays awake, keeps its files, and can be rebuilt if it goes wrong.
-    </p>
-    <p>
-      The word is also used loosely. Some providers mean a container, which is a process isolated by
-      the host's shared kernel. Some mean a virtual machine, which is a whole computer with its own
-      kernel. The difference matters when the agent runs untrusted code, and it is one of the things
-      the <a href="/features/">feature pages</a> make explicit.
-    </p>
-  </section>
-
-  <section>
-    <h2>How to use this site</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>1. Start with your situation</h3>
-        <p>
-          A personal agent, an AI-built app, team workspaces and browser automation each need
-          different things. The <a href="/use-cases/">use cases</a> page names the picks for each.
-        </p>
-      </div>
-      <div class="card">
-        <h3>2. Check the feature that worries you</h3>
-        <p>
-          Each <a href="/features/">feature page</a> explains the concept, compares all seven
-          providers, lists the questions to ask, and gives situational picks.
-        </p>
-      </div>
-      <div class="card">
-        <h3>3. Read the provider page</h3>
-        <p>
-          Every <a href="/providers/">provider page</a> collects the details in one place: sizes,
-          billing, usability, caveats and sources.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Features, in the order they bite</h2>
-    <ul class="index-list">
-      {
-        features.map((feature) => (
-          <li>
-            <a href={`/features/${feature.id}/`}>{feature.title}</a>
-            <p>{feature.standfirst}</p>
-          </li>
-        ))
-      }
-    </ul>
-    <p class="note">
-      Words that mean different things at different providers — pause, stop, snapshot, fork, credits —
-      have their own page: <a href="/same-word-different-meaning/">same word, different meaning</a>.
-    </p>
-    <div class="callout callout-quiet">
-      <p class="callout-title">Before you commit</p>
-      <p>
-        A trial, a credit, a free plan and a monthly allowance are four different offers, and only one
-        of the seven converts itself into a subscription.
-        <a href="/features/trying-it-before-you-pay/">See what each provider actually gives you before you pay</a>.
+<Base title="Sandbox guide">
+  <div class="wrap">
+    <header class="page-header">
+      <p class="kicker">Twelve providers, sixteen features</p>
+      <h1 class="page-title">What will your agent do?</h1>
+      <p class="standfirst">
+        A sandbox is a computer you rent for an agent. The right one follows from the job, not from
+        the hourly rate. Start with what the agent has to do, then read the features that decide it.
       </p>
-    </div>
-  </section>
+      <p class="page-meta">
+        <span class="page-meta__item"><span class="page-meta__dot" aria-hidden="true"></span>12 providers</span>
+        <span class="page-meta__item">Checked 28 October 2026</span>
+        <span class="page-meta__item">Sources linked</span>
+      </p>
+    </header>
 
-  <section>
-    <h2>Use cases</h2>
-    <div class="grid">
-      {
-        useCases.map((useCase) => (
-          <div class="card">
-            <h3>
-              <a href={`/use-cases/#${useCase.id}`}>{useCase.title}</a>
-            </h3>
-            <p>{useCase.standfirst}</p>
-            <p class="meta">
-              Picks: {useCase.picks.map((p) => p.provider).join(", ")}
-            </p>
-          </div>
-        ))
-      }
-    </div>
-  </section>
+    <section class="section section--flush" aria-labelledby="situations-h">
+      <div class="section__head">
+        <h2 class="section__title" id="situations-h">Pick the situation that sounds like yours</h2>
+        <p class="section__note">Each answer names the features that matter and the providers worth a look</p>
+      </div>
+      <div class="answers">
+        {
+          situations.map((situation, index) => (
+            <a class="answer" href={`/compare/situations/#${situation.id}`}>
+              <svg class="answer__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                {index === 0 && <><rect x="3" y="4" width="18" height="6" rx="2" /><rect x="3" y="14" width="18" height="6" rx="2" /></>}
+                {index === 1 && <><path d="M12 3v18" /><path d="M5 8l7-5 7 5" /><path d="M5 16l7 5 7-5" /></>}
+                {index === 2 && <><circle cx="12" cy="12" r="8" /><path d="M12 8v4l3 2" /></>}
+                {index === 3 && <><path d="M8 4l-4 8 4 8" /><path d="M16 4l4 8-4 8" /><path d="M10 15l4-6" /></>}
+              </svg>
+              <span class="answer__title">{situation.title}</span>
+              <span class="answer__hint">{situation.question.replace("What will your agent do? ", "")}</span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
 
-  <section>
-    <h2>The seven providers</h2>
-    <div class="grid">
-      {
-        providers.map((provider) => (
-          <div class="card">
-            <h3>
-              <a href={`/providers/${provider.id}/`}>{provider.name}</a>
-            </h3>
-            <p>{provider.oneLiner}</p>
-            <p class="meta">
-              {provider.status === "researched" ? `Checked ${provider.checkedOn}` : "Research pending"}
-            </p>
-          </div>
-        ))
-      }
-    </div>
-  </section>
+    <section class="section" aria-labelledby="states-h">
+      <div class="section__head">
+        <h2 class="section__title" id="states-h">Running, paused, stopped</h2>
+        <p class="section__note">Three states, and a different part of the machine kept in each</p>
+      </div>
+      <div class="states">
+        <div class="state">
+          <span class="state__from">Running</span>
+          <span class="state__verb">pause →</span>
+          <span class="state__to">
+            <span class="state__label">Paused</span>
+            <span class="badge badge--yes"><span class="badge__mark" aria-hidden="true"></span>memory if the provider saves RAM</span>
+            <span class="badge badge--partly"><span class="badge__mark" aria-hidden="true"></span>still billed</span>
+          </span>
+        </div>
+        <div class="state">
+          <span class="state__from">Paused</span>
+          <span class="state__verb">stop →</span>
+          <span class="state__to">
+            <span class="state__label">Stopped</span>
+            <span class="badge badge--yes"><span class="badge__mark" aria-hidden="true"></span>files kept</span>
+            <span class="badge badge--no"><span class="badge__mark" aria-hidden="true"></span>memory lost</span>
+          </span>
+        </div>
+        <div class="state">
+          <span class="state__from">Stopped</span>
+          <span class="state__verb">delete →</span>
+          <span class="state__to">
+            <span class="state__label">Deleted</span>
+            <span class="badge badge--no"><span class="badge__mark" aria-hidden="true"></span>disk gone</span>
+            <span class="badge badge--unknown"><span class="badge__mark" aria-hidden="true"></span>snapshots may remain</span>
+          </span>
+        </div>
+      </div>
+      <p class="section__note">
+        Providers disagree about which state is called pause, and two delete the disk on stop.
+        The <a href="/features/lifecycle/">lifecycle page</a> has the per-provider detail.
+      </p>
+    </section>
 
-  <div class="callout">
-    <p class="callout-title">What this site is not</p>
-    <p>
-      It is documentation research, not testing. No account was created and no sandbox was started,
-      so every claim about behaviour is something a provider wrote down, not something we measured.
-      Prices are list prices on {site.checkedOn} and several changed during October 2026. Where a
-      provider publishes nothing, the site says “not published” rather than estimating.
-      <a href="/how-we-checked/">How we checked</a> explains the tags and the sources.
+    {
+      groups.map((group) => {
+        const groupFeatures = features.filter((feature) => feature.group === group.id);
+        return (
+          <section class="section" aria-labelledby={`group-${group.id}`}>
+            <div class="section__head">
+              <h2 class="section__title" id={`group-${group.id}`}>{group.title}</h2>
+              <p class="section__note">{group.intro}</p>
+            </div>
+            <div class="picks">
+              {groupFeatures.map((feature) => (
+                <article class="pick">
+                  <span class="pick__label">{group.title}</span>
+                  <h3 class="pick__title"><a href={`/features/${feature.id}/`}>{feature.title}</a></h3>
+                  <p class="pick__body">{feature.standfirst}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        );
+      })
+    }
+
+    <section class="section" aria-labelledby="compare-h">
+      <div class="section__head">
+        <h2 class="section__title" id="compare-h">Compare behaviour, not prices</h2>
+        <p class="section__note">
+          Put two or three providers beside each other across all sixteen features, or read the
+          list-price illustrations for the three shared workloads.
+        </p>
+      </div>
+      <div class="picks">
+        <article class="pick">
+          <span class="pick__label">Compare</span>
+          <h3 class="pick__title"><a href="/compare/side-by-side/">Side by side</a></h3>
+          <p class="pick__body">Choose two or three providers and read them across the features that decide your case.</p>
+        </article>
+        <article class="pick">
+          <span class="pick__label">Compare</span>
+          <h3 class="pick__title"><a href="/compare/situations/">By situation</a></h3>
+          <p class="pick__body">Four jobs, the features each one depends on, and the providers worth a look with their catches.</p>
+        </article>
+        <article class="pick">
+          <span class="pick__label">Compare</span>
+          <h3 class="pick__title"><a href="/compare/reference-costs/">Reference costs</a></h3>
+          <p class="pick__body">Three shared workloads priced from list rates, as illustrations rather than quotes.</p>
+        </article>
+      </div>
+      <p class="section__note">
+        For your own workload, use <a href="https://battleships.dev" rel="noreferrer noopener">battleships.dev</a>.
+        This site explains behaviour; that one prices it.
+      </p>
+    </section>
+
+    <p class="section__note">
+      {providers.length} providers documented. Read <a href="/how-we-checked/">how we checked</a>,
+      or go straight to the <a href="/providers/">provider pages</a>.
     </p>
   </div>
 </Base>

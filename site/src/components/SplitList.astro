@@ -1,0 +1,31 @@
+---
+import type { Split } from "../data/schema";
+import Quote from "./Quote.astro";
+
+interface Props {
+  splits: Split[];
+}
+
+const { splits } = Astro.props;
+---
+
+<div class="split">
+  {
+    splits.map((split) => (
+      <article class="split__item">
+        {split.heading && <h3 class="split__title">{split.heading}</h3>}
+        {split.body.map((paragraph) => (
+          <p class="split__body">{paragraph}</p>
+        ))}
+        {split.quote && (
+          <Quote
+            text={split.quote.text}
+            cite={split.quote.cite}
+            url={split.quote.url}
+            tag={split.quote.tag}
+          />
+        )}
+      </article>
+    ))
+  }
+</div>

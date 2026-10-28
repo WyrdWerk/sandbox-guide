@@ -1,0 +1,49 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+---
+
+<Base title="Compare" description="Compare behaviour across twelve providers: side by side, by situation, or against list-price illustrations.">
+  <PageHeader
+    kicker="Compare"
+    title="Three ways to compare behaviour"
+    standfirst="This is not a price ranking. The tables compare what each provider does across the sixteen features, and the situations put that in the context of a job."
+  />
+
+  <div class="wrap">
+    <section class="section section--flush">
+      <div class="picks">
+        <article class="pick">
+          <span class="pick__label">01</span>
+          <h3 class="pick__title"><a href="/compare/side-by-side/">Side by side</a></h3>
+          <p class="pick__body">
+            Pick two or three providers and read them across all sixteen features. Behaviour, not a
+            score.
+          </p>
+          <p class="pick__catch">Three is the maximum; more columns stop being scannable.</p>
+        </article>
+        <article class="pick">
+          <span class="pick__label">02</span>
+          <h3 class="pick__title"><a href="/compare/situations/">By situation</a></h3>
+          <p class="pick__body">
+            Four jobs, the features each one depends on, and two or three providers worth a look
+            with their catches.
+          </p>
+          <p class="pick__catch">A provider that fits one situation can be wrong for the next.</p>
+        </article>
+        <article class="pick">
+          <span class="pick__label">03</span>
+          <h3 class="pick__title"><a href="/compare/reference-costs/">Reference costs</a></h3>
+          <p class="pick__body">
+            The same three workloads priced at list rates, with the arithmetic shown and every
+            substitution named.
+          </p>
+          <p class="pick__catch">
+            Illustrations, not quotes. For your own numbers, use
+            <a href="https://battleships.dev" rel="noreferrer noopener">battleships.dev</a>.
+          </p>
+        </article>
+      </div>
+    </section>
+  </div>
+</Base>

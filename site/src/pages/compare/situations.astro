@@ -1,0 +1,68 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { features, providerById, situations } from "../../lib/data";
+
+const featureById = new Map(features.map((feature) => [feature.id, feature]));
+---
+
+<Base title="By situation" description="Four agent jobs, the features that decide each one, and the providers worth a look with their catches.">
+  <PageHeader
+    kicker="Compare · situations"
+    title="Four jobs, four different answers"
+    standfirst="Start with what the agent has to do. Each situation names the feature pages that decide it, then two or three providers worth a look. Every recommendation carries its catch."
+  />
+
+  <div class="wrap">
+    {
+      situations.map((situation, index) => (
+        <section class="section" id={situation.id} aria-labelledby={`${situation.id}-h`}>
+          <div class="section__head">
+            <h2 class="section__title" id={`${situation.id}-h`}>{situation.title}</h2>
+            <p class="section__note">{situation.question}</p>
+          </div>
+          <div class="prose">
+            <p>{situation.answer}</p>
+          </div>
+
+          <h3 class="split__title">The features that decide it</h3>
+          <ol class="watch">
+            {situation.features.map((id, featureIndex) => {
+              const feature = featureById.get(id);
+              return (
+                <li class="watch__item">
+                  <span class="watch__index">{String(featureIndex + 1).padStart(2, "0")}</span>
+                  <p class="watch__body">
+                    <a href={`/features/${id}/`}>{feature?.title ?? id}</a> — {feature?.standfirst}
+                  </p>
+                </li>
+              );
+            })}
+          </ol>
+
+          <h3 class="split__title">Providers worth a look</h3>
+          <div class="picks">
+            {situation.providers.map((pick) => {
+              const provider = providerById.get(pick.provider);
+              return (
+                <article class="pick">
+                  <span class="pick__label">If this is your job</span>
+                  <h3 class="pick__title">
+                    <a href={`/providers/${pick.provider}/`}>{provider?.name ?? pick.provider}</a>
+                  </h3>
+                  <p class="pick__body">{pick.why}</p>
+                  <p class="pick__catch"><strong>Catch:</strong> {pick.watch}</p>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ))
+    }
+
+    <p class="section__note">
+      The reasoning behind each pick is on the feature pages, with a source for every claim.
+      Prices are list prices checked on 28 October 2026.
+    </p>
+  </div>
+</Base>

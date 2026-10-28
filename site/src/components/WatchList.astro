@@ -1,0 +1,18 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol class="watch">
+  {
+    items.map((item, index) => (
+      <li class="watch__item">
+        <span class="watch__index">{String(index + 1).padStart(2, "0")}</span>
+        <p class="watch__body">{item}</p>
+      </li>
+    ))
+  }
+</ol>

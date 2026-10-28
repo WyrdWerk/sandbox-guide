@@ -1,0 +1,32 @@
+---
+import type { CostCase } from "../data/schema";
+
+interface Props {
+  label: string;
+  title: string;
+  cost: CostCase;
+}
+
+const { label, title, cost } = Astro.props;
+---
+
+<article class="cost">
+  <p class="cost__label">{label} · {title}</p>
+  <p class="cost__headline">{cost.headline}</p>
+  <p class="cost__shape">{cost.shape}</p>
+  <ul class="cost__lines">
+    {cost.lines.map((line) => (
+      <li>
+        <span class="cost__line-label">{line.label}</span>
+        <span class="cost__line-arith">{line.arithmetic}</span>
+        <span class="cost__line-amount">{line.amount}</span>
+      </li>
+    ))}
+  </ul>
+  {cost.notes.length > 0 && (
+    <ul class="cost__notes">
+      {cost.notes.map((note) => <li>{note}</li>)}
+    </ul>
+  )}
+  {cost.flag && <p class="cost__flag">{cost.flag}</p>}
+</article>

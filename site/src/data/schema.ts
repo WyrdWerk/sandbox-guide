@@ -10,18 +10,19 @@ export type Confidence =
 
 export type Verdict = "yes" | "partly" | "no" | "not-published" | "pending";
 
+export type FeatureGroup =
+  | "machine"
+  | "state"
+  | "staying-on"
+  | "access"
+  | "running"
+  | "money"
+  | "company";
+
 export interface Source {
   url: string;
   quote: string;
   confidence: Confidence;
-}
-
-export interface Offer {
-  kind: string;
-  card: string;
-  get: string;
-  ends: string;
-  traps: string;
 }
 
 export interface FeatureRow {
@@ -29,7 +30,6 @@ export interface FeatureRow {
   verdict: Verdict;
   note: string;
   source?: Source;
-  offer?: Offer;
 }
 
 export interface CostLine {
@@ -85,56 +85,41 @@ export interface Provider {
   sources: { label: string; url: string }[];
 }
 
-export interface ConceptBlock {
+export interface Split {
   heading?: string;
-  paragraphs: string[];
-  bullets?: string[];
-}
-
-export interface Pick {
-  situation: string;
-  providers: string[];
-  why: string;
+  body: string[];
+  quote?: { text: string; cite: string; url: string; tag: Confidence };
 }
 
 export interface Feature {
   id: string;
+  group: FeatureGroup;
   order: number;
   title: string;
   navTitle: string;
   standfirst: string;
-  concept: ConceptBlock[];
-  comparisonIntro: string;
+  idea: string[];
+  splits: Split[];
+  watchFor: string[];
   rows: FeatureRow[];
-  questions: string[];
-  picks: Pick[];
-  gotchas: string[];
 }
 
-export interface TermMeaning {
-  provider: string;
-  meaning: string;
+export interface Group {
+  id: FeatureGroup;
+  title: string;
+  intro: string;
 }
 
-export interface Term {
-  term: string;
-  short: string;
-  whyItMatters: string;
-  meanings: TermMeaning[];
-  checkFor: string;
-}
-
-export interface UseCase {
+export interface Situation {
   id: string;
   title: string;
-  standfirst: string;
-  needs: string[];
-  picks: { provider: string; why: string; watch: string }[];
-  avoid: string;
+  question: string;
+  answer: string;
+  features: string[];
+  providers: { provider: string; why: string; watch: string }[];
 }
 
 export interface GlossaryEntry {
   term: string;
   definition: string;
-  seeAlso?: string;
 }

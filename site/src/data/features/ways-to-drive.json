@@ -1,0 +1,164 @@
+{
+  "id": "ways-to-drive",
+  "group": "running",
+  "order": 11,
+  "title": "Ways to drive it",
+  "navTitle": "Ways to drive it",
+  "standfirst": "Dashboard, API, SDK, CLI, MCP, SSH, desktop. A provider can have all seven and still be unusable without a terminal, or have three and be genuinely click-driven.",
+  "idea": [
+    "The surfaces fall into two groups. A control plane creates, stops and configures machines: dashboard, REST or gRPC API, SDKs, CLI, and increasingly an MCP server an AI assistant can call. An execution plane gets inside: SSH, a web terminal, a desktop, a file API.",
+    "A dashboard that can create a sandbox is not the same as a product that gives you an agent. Several providers can create a machine with a button and still expect a command to do anything useful with it. Others document a prompt to paste into Claude Code or Cursor as the intended no-code path.",
+    "MCP is the newest surface and the easiest to misread. A hosted MCP server that manages sandboxes is a control plane. An MCP server running inside the sandbox is a tool surface for the agent. They are different products with the same name."
+  ],
+  "splits": [
+    {
+      "heading": "Dashboard-first and CLI-first",
+      "body": [
+        "InstaBox, Lizard, Runtime, Blaxel and Morph document creating a machine from a dashboard. boxd and Boat are CLI-first: every guide starts with an install command, and the dashboard is a viewer for machines you already made. E2B and Vercel are SDK-first.",
+        "The practical test is whether the first machine can be created without a terminal. At InstaBox and Lizard it can. At boxd and Boat it cannot."
+      ]
+    },
+    {
+      "heading": "SSH is not universal",
+      "body": [
+        "boxd, Boat and Sandboxer expose real SSH. Agent 37 tunnels SSH over a WebSocket, E2B proxies it, InstaBox routes it through a gateway, and Runtime carries it over its API. Lizard has no SSH protocol at all: its shell is over the provider's transport, so scp and port forwarding do not work. Vercel does not publish an SSH endpoint."
+      ]
+    },
+    {
+      "heading": "Two kinds of MCP",
+      "body": [
+        "Sandboxer, Runtime, Lizard and Blaxel document a hosted MCP server that can create and drive sandboxes from Claude or ChatGPT. E2B has an MCP gateway inside the sandbox and a docs MCP, but a sandbox-management MCP is not established. Agent 37, InstaBox and boxd publish no control-plane MCP; Boat publishes a docs MCP only.",
+        "That distinction decides whether an assistant can start a machine for you or only read the manual."
+      ]
+    }
+  ],
+  "watchFor": [
+    "Whether the first machine can be created without a terminal.",
+    "Whether the API is REST or gRPC, and whether an SDK exists for your language.",
+    "Whether SSH is a real port, a tunnel, a gateway, or absent.",
+    "Whether the MCP server manages sandboxes or runs inside one.",
+    "Whether there is a desktop you can watch and take over."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "yes",
+      "note": "REST on two planes, a Python SDK, the `npx agent37` CLI, tunnelled SSH, a web terminal on port 7681 and a desktop in some templates. No control-plane MCP.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/urls",
+        "quote": "A shell in the container (browser)",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "yes",
+      "note": "Python, TypeScript and Go SDKs, an HTTP API, a per-sandbox MCP server, a console terminal and a CLI.",
+      "source": {
+        "url": "https://blaxel.ai/pricing",
+        "quote": "Python, TypeScript, and Go SDKs for Blaxel",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "yes",
+      "note": "REST, Python and TypeScript SDKs, a CLI, SSH and SCP, a 60 fps desktop and a dashboard. The MCP server is for documentation, not for managing sandboxes.",
+      "source": {
+        "url": "https://docs.boat.dev/quickstart",
+        "quote": "`boat new`, then `boat prompt bx_23456789 \"add tests\"`",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "partly",
+      "note": "gRPC is the only wire API; there is no REST. TypeScript and Python SDKs, a CLI, real SSH on a dedicated port, a console terminal and a browser desktop.",
+      "source": {
+        "url": "https://docs.boxd.sh/reference/grpc-api",
+        "quote": "Service. `boxd.api.v1.BoxdApi`.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "yes",
+      "note": "Python and JavaScript SDKs, a CLI, SSH through a WebSocket proxy, a desktop SDK, an MCP gateway inside the sandbox and lifecycle webhooks.",
+      "source": {
+        "url": "https://docs.e2b.dev/sandbox/ssh-access",
+        "quote": "Connect to your sandbox via SSH using a WebSocket proxy",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "partly",
+      "note": "REST, a TypeScript SDK, a CLI, SSH and mosh through a gateway, a web terminal and a VNC desktop. No control-plane MCP is published.",
+      "source": {
+        "url": "https://instabox.sh/docs/start",
+        "quote": "In the dashboard, **Create machine** on the **Machines** page does what `instabox create` does.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "REST, TypeScript and Python SDKs, a CLI, a hosted MCP server and a dashboard terminal. There is no SSH protocol and no public VNC port.",
+      "source": {
+        "url": "https://lizard.build/docs/sandboxes/sdk-reference",
+        "quote": "SSH protocol access is not available; `lizard sandbox ssh` opens an interactive shell with your CLI credentials.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "partly",
+      "note": "SDKs and a CLI, SSH, a devbox API, a configurable remote desktop, and a tmux API for agents. No first-party MCP server or webhooks are documented.",
+      "source": {
+        "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+        "quote": "Devboxes expose a full tmux API, which lets you programmatically manage coding agents like OpenAI Codex or Claude Code.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "REST, JavaScript, Python, Go, Ruby and Java SDKs, a CLI, a hosted MCP server, SSH over the API, a desktop, webhooks and OpenTelemetry.",
+      "source": {
+        "url": "https://withruntime.com/docs/mcp",
+        "quote": "The endpoint is `https://api.withruntime.com/mcp`, over MCP Streamable HTTP.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "yes",
+      "note": "REST, TypeScript and Python SDKs, a static CLI binary, a hosted MCP server, SSH and SCP, a VNC desktop and a browser terminal.",
+      "source": {
+        "url": "https://sandboxer.com/docs/cli",
+        "quote": "`sbx` is one static binary for Linux, macOS and Windows",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "partly",
+      "note": "A CLI and interactive console, SDKs and agent integrations, and SSH only after installing a server and proxying it. No managed desktop or browser-control product.",
+      "source": {
+        "url": "https://docs.fly.io/sprites/quickstart",
+        "quote": "Open an interactive shell",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "partly",
+      "note": "CLI, JavaScript and Python SDKs, and a dashboard that can stop or delete a sandbox and shows a lifecycle activity log. No SSH or desktop is published.",
+      "source": {
+        "url": "https://vercel.com/docs/sandbox",
+        "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ]
+}

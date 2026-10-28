@@ -1,0 +1,61 @@
+---
+import type { FeatureRow } from "../data/schema";
+import { providerById } from "../lib/data";
+import Badge from "./Badge.astro";
+import Quote from "./Quote.astro";
+
+interface Props {
+  rows: FeatureRow[];
+  caption: string;
+}
+
+const { rows, caption } = Astro.props;
+---
+
+<table class="compare">
+  <caption>{caption}</caption>
+  <thead>
+    <tr>
+      <th scope="col">Provider</th>
+      <th scope="col">Does it?</th>
+      <th scope="col">What that means</th>
+    </tr>
+  </thead>
+  {
+    rows.map((row) => {
+      const provider = providerById.get(row.provider);
+      const pending = !provider || provider.status === "pending";
+      return (
+        <tbody>
+          <tr>
+            <th scope="row" class="compare__provider">
+              {provider ? <a href={`/providers/${provider.id}/`}>{provider.name}</a> : row.provider}
+            </th>
+            <td data-label="Does it?">
+              <Badge verdict={pending ? "pending" : row.verdict} />
+            </td>
+            <td data-label="What that means">
+              <span class="compare__note">
+                {pending
+                  ? "Research pending. No claims are shown until the profile is finished."
+                  : row.note}
+              </span>
+            </td>
+          </tr>
+          {!pending && row.source && (
+            <tr class="compare__evidence">
+              <td colspan="3">
+                <Quote
+                  text={row.source.quote}
+                  cite={provider?.name ?? row.provider}
+                  url={row.source.url}
+                  tag={row.source.confidence}
+                />
+              </td>
+            </tr>
+          )}
+        </tbody>
+      );
+    })
+  }
+</table>

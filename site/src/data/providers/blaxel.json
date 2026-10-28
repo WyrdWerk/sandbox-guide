@@ -1,0 +1,116 @@
+{
+  "id": "blaxel",
+  "name": "Blaxel",
+  "url": "https://blaxel.ai",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "MicroVM sandboxes billed by allocated RAM, now part of Baseten.",
+  "whatItIs": [
+    "Blaxel runs sandboxes as microVMs for agent workloads, alongside agent hosting, MCP servers, batch jobs and a model gateway.",
+    "Baseten acquired Blaxel on 10 September 2026. The announcement says the product continues and features keep shipping, and Baseten sign-in now connects to a Blaxel workspace."
+  ],
+  "whoFor": "Teams building agent platforms that want instant sandboxes, a built-in MCP surface and optional agent hosting.",
+  "isolation": "MicroVM boundary per sandbox, root by default with an optional unprivileged user. The default kernel refuses module loading and kernel tracing to every process, including root; iptables requires enabling at creation.",
+  "sizes": "Memory drives CPU: 8 GB gets 4 cores and 16 GB gets 6. Custom deployments advertise up to 256 GB of RAM. Regions: Oregon, North Virginia, London and Frankfurt.",
+  "billing": {
+    "model": "Pay-as-you-go against a wallet, with quota tiers set by top-up.",
+    "meter": "$0.0000115 per GB of allocated RAM per second while active; CPU is included in that rate. Snapshot storage $0.20 per GB-month and volumes $0.12 per GB-month.",
+    "stopped": "Standby stops memory charges but keeps billing snapshot and volume storage.",
+    "planFee": "No subscription: tiers are wallet top-ups ($0, $20, $50) that raise quotas.",
+    "minimum": "No published minimum billed duration. Up to $200 in promotional credits is advertised; the actual grant is not published."
+  },
+  "cost": {
+    "A": {
+      "headline": "$27.60",
+      "shape": "2 vCPU / 4 GiB, deleted after each task",
+      "lines": [
+        { "label": "Active compute", "arithmetic": "4 GB × 600,000 s × $0.0000115", "amount": "$27.60" }
+      ],
+      "total": "$27.60",
+      "notes": [
+        "Assumes immediate deletion, so no snapshot or volume storage.",
+        "The 4 GB / 2 vCPU mapping is from a secondary source; CPU scales with memory."
+      ]
+    },
+    "B": {
+      "headline": "$247.78",
+      "shape": "4 vCPU / 8 GiB, 50 GB volume, 730 h",
+      "lines": [
+        { "label": "Active compute", "arithmetic": "8 GB × 2,628,000 s × $0.0000115", "amount": "$241.78" },
+        { "label": "Volume", "arithmetic": "50 GB × $0.12", "amount": "$6.00" }
+      ],
+      "total": "$247.78",
+      "notes": [
+        "A 50 GB volume is assumed because the local writable filesystem uses RAM.",
+        "Images and retained snapshots are extra."
+      ]
+    },
+    "C": {
+      "headline": "$17.30 plus snapshot storage",
+      "shape": "4 vCPU / 8 GiB, 20 GB volume, 90 active hours, 630 standby",
+      "lines": [
+        { "label": "Active compute", "arithmetic": "4 GB × 324,000 s × $0.0000115", "amount": "$14.90" },
+        { "label": "Volume", "arithmetic": "20 GB × $0.12", "amount": "$2.40" }
+      ],
+      "total": "$17.30 plus snapshot",
+      "notes": [
+        "Standby snapshot storage adds S × $0.20 × 630/730, where S is billable GB and is not published.",
+        "Retaining a sandbox for the month needs a tier above free, which enforces a TTL."
+      ]
+    }
+  },
+  "usability": {
+    "dashboard": "A console creates a sandbox by choosing an image, resources, TTL and region, with a browser terminal.",
+    "withoutCode": "The console can create and inspect a sandbox, but useful work still needs commands or a developer.",
+    "signup": "Baseten or Blaxel sign-in. Card requirement and credit expiry are not published.",
+    "docs": "Documentation covers sandboxes, snapshots, volumes, MCP and SSO. A status page is linked from the site. Support is Discord community plus paid tiers.",
+    "tripsUp": [
+      "Standby keeps memory but drops external connections.",
+      "Free and low tiers enforce expiration dates on sandboxes.",
+      "Snapshots are in private preview.",
+      "A volume attaches to one sandbox at a time; Agent Drive is the shared option."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "Idle timing is stated two ways",
+      "detail": "The docs say a sandbox goes to standby after 15 minutes of idle WebSocket/TCP activity; the pricing FAQ says it scales to zero after about 5 seconds.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "Snapshots and archive are private previews",
+      "detail": "The snapshot docs say the feature is in private preview and not recommended for production; archive is also preview.",
+      "status": "open"
+    },
+    {
+      "issue": "Ownership changed in September 2026",
+      "detail": "Baseten acquired Blaxel on 10 September 2026. The product continues, but a permanent standalone guarantee is not published.",
+      "status": "open"
+    },
+    {
+      "issue": "Low tiers delete sandboxes on a timer",
+      "detail": "Tier 0 and Tier 1 enforce expiration dates of up to 7 and 30 days; activity is counted at resume or suspend, not in between.",
+      "status": "open"
+    },
+    {
+      "issue": "Volume and shared-filesystem semantics differ",
+      "detail": "A volume attaches to one sandbox at a time; Agent Drive is the multi-mount shared filesystem, and the two are separate products.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "Standby preserves memory and processes, with a sub-25 ms resume claim.",
+    "Every sandbox exposes an MCP server for files, processes, ports and previews.",
+    "A secret proxy injects credentials into outbound HTTPS requests.",
+    "Agent Drive offers a shared filesystem across sandboxes.",
+    "Snapshots can outlive the sandbox and be forked."
+  ],
+  "sources": [
+    { "label": "Sandbox overview", "url": "https://docs.blaxel.ai/Sandboxes/Overview.md" },
+    { "label": "Snapshots and fork", "url": "https://docs.blaxel.ai/Sandboxes/Fork.md" },
+    { "label": "Volumes", "url": "https://docs.blaxel.ai/Sandboxes/Volumes.md" },
+    { "label": "Proxy secrets", "url": "https://docs.blaxel.ai/Sandboxes/Proxy-secrets-injection.md" },
+    { "label": "Pricing", "url": "https://blaxel.ai/pricing" },
+    { "label": "Baseten acquisition", "url": "https://www.baseten.co/blog/blaxel-is-joining-baseten-to-build-the-future-of-agentic-cloud/" }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "situations": [
+    {
+      "id": "stay-available",
+      "title": "Stay available all day",
+      "question": "What will your agent do? It should answer whenever I message it.",
+      "answer": "This is the hardest case, because most providers assume a machine that is used in bursts. You need a machine that does not hit a lifetime deadline, does not sleep when nobody is typing, and wakes if it does sleep. Then you need the idle hour to be cheap enough to leave running.",
+      "features": ["idle-timers", "lifecycle", "reaching-it", "billing-models"],
+      "providers": [
+        {
+          "provider": "agent37",
+          "why": "Auto-sleep is off by default and there is no lifetime cap. Its managed-hosting line is a one-click personal agent with a task board, and the Cloud 4 vCPU / 8 GiB shape is about $10.60 a month with 20 GB of disk.",
+          "watch": "The Cloud product needs a terminal or API call, stop loses memory, and disk bills until you delete the instance."
+        },
+        {
+          "provider": "instabox",
+          "why": "Pause keeps the agent's session and bills storage only, and the dashboard creates the machine and opens a clickable desktop.",
+          "watch": "The free plan caps continuous runtime at 8 hours and pauses after 30 idle minutes; public URLs have no password."
+        },
+        {
+          "provider": "runtime",
+          "why": "`persistent: true` disables the idle pause, and measured CPU with a 50-millicore floor makes a waiting agent cost about $0.03 an hour in CPU.",
+          "watch": "A stopped box still bills storage, there is one US region, and there is no preinstalled agent."
+        }
+      ]
+    },
+    {
+      "id": "long-jobs",
+      "title": "Run long jobs",
+      "question": "What will your agent do? It runs builds, training runs or multi-hour tasks.",
+      "answer": "Long jobs fail on timers, not on compute. Look for a hard deadline you can turn off, an idle timer that watches the network rather than the CPU, and a machine that does not lose its work when a connection drops.",
+      "features": ["idle-timers", "lifecycle", "isolation", "sizes-regions"],
+      "providers": [
+        {
+          "provider": "boat",
+          "why": "A full Ubuntu VM with Docker and 51 GB of disk for $26.28 a month, and no idle detection at all.",
+          "watch": "Auto-stop counts from creation and defaults to one hour; turn it off. The disk is deleted 14 days after a stop."
+        },
+        {
+          "provider": "boxd",
+          "why": "Auto-suspend is off by default and the idle timer counts TCP/UDP traffic in either direction, so a build that polls an API stays awake. Docker, systemd and kernel modules work.",
+          "watch": "A purely local compile makes no traffic and hibernates at four hours; set the timer to 0. RAM bills on resident memory."
+        },
+        {
+          "provider": "e2b",
+          "why": "A Firecracker microVM with a 24-hour continuous limit on Pro and snapshots that keep memory.",
+          "watch": "The default timeout is five minutes and kills the sandbox; commands do not reset it. Hobby caps continuous runtime at one hour."
+        }
+      ]
+    },
+    {
+      "id": "answer-when-asked",
+      "title": "Answer when I ask",
+      "question": "What will your agent do? It sits idle most of the day and answers a few requests.",
+      "answer": "Here the bill is decided by the idle state, not the busy hour. You want a provider whose sleeping machine is nearly free, and a wake path that does not need a person.",
+      "features": ["idle-timers", "billing-models", "trials-free-tiers", "reaching-it"],
+      "providers": [
+        {
+          "provider": "runtime",
+          "why": "CPU is measured with a 50-millicore floor, so an idle-but-running box costs about $0.03 an hour, and a paused box costs storage only.",
+          "watch": "An open terminal or SSH session counts as activity and keeps billing; a stopped box still bills storage."
+        },
+        {
+          "provider": "sandboxer",
+          "why": "Stopped time is free and a resume can restore the running processes, so a request can find the session as it was.",
+          "watch": "The default TTL is one hour and the trial converts to $20 a month; memory restore needs a matching machine within two minutes."
+        },
+        {
+          "provider": "agent37",
+          "why": "An idle instance bills disk only at $0.09 per GB-month, and a sleep checkpoint keeps memory at no extra charge.",
+          "watch": "Any request to any URL wakes a sleeping instance, and a stop discards the checkpoint."
+        }
+      ]
+    },
+    {
+      "id": "build-and-test",
+      "title": "Build and test code",
+      "question": "What will your agent do? It writes code, runs tests and needs a clean environment each time.",
+      "answer": "This case rewards fast copies and a real Linux machine: Docker, system tools, and a way to snapshot a working environment and start ten more from it. Session limits matter less because each job is short.",
+      "features": ["isolation", "snapshots-forks", "sizes-regions", "built-in-agents"],
+      "providers": [
+        {
+          "provider": "boxd",
+          "why": "A live fork copies memory and disk in 100–200 ms, snapshots boot machines already running, and Docker is preinstalled.",
+          "watch": "The 4 vCPU size comes with 16 GiB and RAM bills on resident memory, so the bill depends on what the build holds."
+        },
+        {
+          "provider": "morph",
+          "why": "Snapshots capture memory and disk and can branch into many running instances, which is built for parallel test fan-out.",
+          "watch": "Stop deletes the instance; volumes are S3-compatible object storage, not an attached disk."
+        },
+        {
+          "provider": "e2b",
+          "why": "Templates can start from any Docker image, and up to 20 forks can be created from a running sandbox.",
+          "watch": "Forking pauses the source and drops its connections; the default timeout kills a sandbox after five minutes."
+        }
+      ]
+    }
+  ]
+}

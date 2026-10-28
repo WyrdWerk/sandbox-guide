@@ -1,0 +1,165 @@
+{
+  "id": "trials-free-tiers",
+  "group": "money",
+  "order": 15,
+  "title": "Trials and free tiers",
+  "navTitle": "Trials and free tiers",
+  "standfirst": "“Free trial” covers four different offers: a time-limited trial that converts, a one-off credit, a free plan that never charges, and a recurring allowance. They differ in what you get and what happens on day eight.",
+  "idea": [
+    "A time-limited trial gives access for a fixed number of days and then either charges you or stops. A one-off credit is money added to a prepaid balance once, spent at normal rates. A free plan is a permanent tier with hard caps. A recurring allowance is free usage that returns every month.",
+    "The card is not the dividing line. A trial with a card usually converts when its clock runs out. A credit with a card is spent and then stops. A free plan or allowance with no card never charges, but caps size and runtime instead. Read the ending as three questions: is the card charged, does a paid plan start, and does the allowance stop?",
+    "The unit matters too. Five dollars is about 100 hours of Agent 37's entry shape, and less than an hour of boxd's largest machine. Twenty-five hours at Boat is capped by a mandatory two-hour auto-stop, so it cannot test an always-on agent."
+  ],
+  "splits": [
+    {
+      "heading": "The one that converts itself",
+      "body": [
+        "Sandboxer's seven-day trial becomes $20 a month on day eight. Boat's trial ends by charging the plan chosen at checkout. Lizard's trial ends and you either subscribe to Pro at $19 or stop creating things. Those are the three that end at a paid plan.",
+        "Everything else is spent, not converted: E2B's $100 credit, boxd's $30, Agent 37's $5, Blaxel's credits, Sprites' $30, Morph's disputed 300 hours, Runtime's allowance and InstaBox's free plan."
+      ]
+    },
+    {
+      "heading": "The free plans have hard caps",
+      "body": [
+        "InstaBox's free plan gives one 4 vCPU / 8 GiB machine, two templates, a fixed 30-minute idle pause and an 8-hour maximum continuous run. Runtime's free usage caps at 2 vCPU / 4 GiB / 10 GiB, four sandboxes at once and 50 created a day. Vercel's Hobby plan is non-commercial and pauses sandbox creation when its quotas run out.",
+        "Those caps are the product decision. A free plan that cannot stay up is not a substitute for a cheap paid one."
+      ]
+    },
+    {
+      "heading": "Credits run out silently",
+      "body": [
+        "A credit is spent at the same rates as paid usage, so its value depends on the shape and the provider. When E2B's credit runs out without a payment method, every project in the workspace is blocked shortly afterwards. boxd's credit is drawn from a prepaid balance; there is no plan to fall back on.",
+        "A credit is not a trial: it does not expire on a date, it expires when the money does."
+      ]
+    }
+  ],
+  "watchFor": [
+    "Whether a card is required, and whether a paid plan starts automatically.",
+    "Whether the allowance is money, hours or a machine, and at which size.",
+    "Whether the free tier can stay up, or is capped by idle pause and session limits.",
+    "Whether a second trial is available on the same account or card.",
+    "What happens when a credit runs out: block, stop, or charge."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "partly",
+      "note": "A one-off $5 Cloud credit after adding a card, and a managed-hosting free plan with no card. The credit is not granted to workspaces created through the signup API.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "Add a card from the billing page (nothing is charged) and your workspace gets a one-time $5 credit",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "partly",
+      "note": "Up to $200 in promotional credits advertised on pay-as-you-go. The actual grant, expiry and card requirement are not published. Quota tiers are wallet top-ups, not fees.",
+      "source": {
+        "url": "https://blaxel.ai/pricing",
+        "quote": "Up to $200 in free credits",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "A seven-day trial with a card and no free tier: 25 hours in total, two sandboxes at once, small and default sizes, a mandatory two-hour auto-stop and no new saved snapshots.",
+      "source": {
+        "url": "https://docs.boat.dev/faq",
+        "quote": "There is no free tier. Your first plan starts with a free 7-day trial, and checkout asks for a card.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "partly",
+      "note": "A one-off €30/$30 credit after adding a payment method. No free plan; an organisation without a payment method is capped at two machines, with no published allowance.",
+      "source": {
+        "url": "https://boxd.sh/pricing",
+        "quote": "€30 of credits when you add a payment method. Nothing is charged when you add the card",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "yes",
+      "note": "A one-time $100 usage credit on Hobby, with no card to start. When it runs out without a payment method, every project in the workspace is blocked shortly afterwards.",
+      "source": {
+        "url": "https://e2b.dev/pricing.md",
+        "quote": "One-time $100 in usage credits.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "yes",
+      "note": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB fixed disk, five snapshots, 100 GiB egress, an 8-hour run cap and two templates. It never converts.",
+      "source": {
+        "url": "https://instabox.sh/pricing",
+        "quote": "1 machine, 4 vCPU / 8 GiB",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "A seven-day trial with $5 of usage, a card required, Small machines only, US regions only and up to five at once. One trial per account and per card.",
+      "source": {
+        "url": "https://lizard.build/docs/platform/billing",
+        "quote": "Pro starts with a 7-day trial that includes $5 of usage. You add a card to start it; Apple Pay works too. Nothing is charged when the trial starts.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "partly",
+      "note": "Signup docs promise 300 free compute hours a month on the $0 Developer plan; the pricing page lists 0 MCUs and says to purchase MCUs. An invite is mentioned.",
+      "source": {
+        "url": "https://cloud.morph.so/docs/documentation/setup/signing-up",
+        "quote": "Once you have your invite, our $0/month Developer Plan provides 300 free compute hours per month",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "Recurring free usage with no card: 100 hours of a 1 GB machine, memory and CPU allowances, and hard caps on size and concurrency. Accounts that never pay get it once across 30 days.",
+      "source": {
+        "url": "https://withruntime.com/docs/pricing",
+        "quote": "An account that has never paid gets the machine time once, across its first 30 days.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "partly",
+      "note": "A seven-day trial with 25 hours of machine time, two sandboxes, small and default sizes, and a card up front. It becomes $20 a month on day eight.",
+      "source": {
+        "url": "https://sandboxer.com/pricing",
+        "quote": "7 days, 25 hours of machine time, up to 2 sandboxes at once on the small and default sizes",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "partly",
+      "note": "A one-time $30 trial credit per user and per organisation. Credits cannot pay a subscription fee. Card requirement and expiry are not published.",
+      "source": {
+        "url": "https://fly.io/sprites/",
+        "quote": "Each user can grant one $30 trial credit, and each org can receive at most one.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "partly",
+      "note": "Hobby has included quotas but is restricted to non-commercial use, and pauses sandbox creation when quotas run out. Pro has a 14-day trial with $20 in credits.",
+      "source": {
+        "url": "https://vercel.com/docs/plans/hobby",
+        "quote": "Unlock the full potential of Vercel Pro during your 14-day trial with $20 in credits.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ]
+}

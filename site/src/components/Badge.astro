@@ -1,0 +1,27 @@
+---
+import type { Verdict } from "../data/schema";
+
+interface Props {
+  verdict: Verdict;
+}
+
+const { verdict } = Astro.props;
+const labels: Record<Verdict, string> = {
+  yes: "Yes",
+  partly: "Partly",
+  no: "No",
+  "not-published": "Not published",
+  pending: "Pending",
+};
+const classes: Record<Verdict, string> = {
+  yes: "badge badge--yes",
+  partly: "badge badge--partly",
+  no: "badge badge--no",
+  "not-published": "badge badge--unknown",
+  pending: "badge badge--unknown",
+};
+---
+
+<span class={classes[verdict]}>
+  <span class="badge__mark" aria-hidden="true"></span>{labels[verdict]}
+</span>

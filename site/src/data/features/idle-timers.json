@@ -1,0 +1,165 @@
+{
+  "id": "idle-timers",
+  "group": "staying-on",
+  "order": 6,
+  "title": "Idle timers, waking and session limits",
+  "navTitle": "Idle and waking",
+  "standfirst": "An always-available agent depends on three separate settings: a lifetime deadline, an idle timer, and a wake path. Providers bundle them differently, and the difference is most of your bill.",
+  "idea": [
+    "A lifetime limit is a hard deadline counted from creation or last resume. It ends the machine even if it is busy. An idle timer parks the machine when nothing is happening. A wake path decides whether the next request brings it back, or whether someone has to start it.",
+    "A provider can pass two of the three and fail the use case. Boat has no idle timer and still stops your box after an hour, because its deadline counts from creation. Lizard never sleeps for idleness and deletes the sandbox five minutes after creation if you used the SDK. Agent 37 never stops on its own, but it also never wakes itself if you stopped it.",
+    "What counts as activity is the quiet variable. Runtime counts an open terminal or SSH session. Sprites counts an in-flight request, output to a session, an open TCP connection or an active task. boxd counts TCP/UDP traffic in either direction, so polling an API keeps a machine awake while a local compile does not."
+  ],
+  "splits": [
+    {
+      "heading": "The timer counts from creation, not from use",
+      "body": [
+        "Boat's auto-stop counts from creation or the last resume and defaults to one hour. A running agent prompt pushes the deadline out by one TTL, but ordinary work does not. E2B's timeout is also a countdown: running commands and requests to the sandbox URL do not reset it, and the default action is to kill the sandbox.",
+        "Vercel has no published idle timer at all, only a session timeout: 45 minutes on Hobby and 24 hours on Pro. A long-idle sandbox is not stopped for being idle; it is stopped when the session limit arrives."
+      ]
+    },
+    {
+      "heading": "Sleep can be automatic and invisible",
+      "body": [
+        "Sprites pauses after about 30 seconds without activity, then stops the VM and drops memory after a longer idle period that is not published. Blaxel's docs say standby after 15 minutes of idle connection; its pricing page says scale-to-zero after about five seconds. Morph's devboxes sleep after inactivity, and Runtime pauses after five minutes by default.",
+        "The wake path matters as much as the timer. Sprites wakes on a request to its URL, Runtime on the next command or request, InstaBox on a public-port visit, and Agent 37 on any request to any URL. Boat cannot wake on a URL at all, because a stop destroyed the machine."
+      ]
+    },
+    {
+      "heading": "The idle hour is where the bill lives",
+      "body": [
+        "An idle hour can cost full compute, memory only, storage only, or nothing. boxd's standby bills RAM. Runtime bills memory and disk blocks. Agent 37, InstaBox and Lizard bill storage only. Boat charges nothing while stopped and keeps the disk for 14 days.",
+        "That is why two providers with similar hourly rates differ by a factor of ten on an always-on box. A 4 vCPU / 8 GiB machine costs about $10.60 a month at Agent 37, $26.28 at Boat, $28.84 at InstaBox and about $222 at boxd once memory is billed on a 4 vCPU machine."
+      ]
+    }
+  ],
+  "watchFor": [
+    "Whether the deadline counts from creation, from last activity, or from network traffic.",
+    "What counts as activity: data flow, an open connection, a terminal, or a running command.",
+    "Whether a sleeping machine wakes on a request, and how long the wake takes.",
+    "Whether an idle hour bills compute, memory, storage, or nothing.",
+    "Whether the timer can be turned off or only raised."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "yes",
+      "note": "No lifetime cap, and auto-sleep is off by default, so a box stays up and bills compute by the minute until you stop or delete it. Any request to any URL wakes a sleeping instance.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/instance-auto-sleep",
+        "quote": "Instances default to `auto_sleep: false` and never sleep on their own unless you opt them in.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "partly",
+      "note": "Standby after 15 minutes of idle WebSocket or TCP activity according to the docs, or about 5 seconds according to the pricing page. Resume from standby is claimed under 25 ms.",
+      "source": {
+        "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+        "quote": "if the WebSocket/TCP connection remains idle for 15 minutes with no activity, the sandbox will automatically transition to standby mode.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "No idle detection, but a hard auto-stop counts from create or resume: one hour by default, 30 days maximum, and off is allowed. A stop destroys the machine, so a URL cannot wake it.",
+      "source": {
+        "url": "https://docs.boat.dev/long-running-tasks/auto-stop",
+        "quote": "The timer counts from creation or from the last resume, not from your last activity.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "yes",
+      "note": "Runtime is unlimited and auto-suspend is off by default. Auto-hibernate is on by default after four hours without TCP/UDP traffic in either direction, so outbound polling keeps a box awake but a local compile does not.",
+      "source": {
+        "url": "https://docs.boxd.sh/guides/suspend-resume",
+        "quote": "**On by default, set to 4 hours.** After 4 hours without TCP/UDP traffic in either direction, boxd hibernates the machine",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "partly",
+      "note": "A timeout defaults to five minutes and kills the sandbox; pausing instead is opt-in. Commands and URL requests do not reset it. Continuous runtime is capped at one hour on Hobby and 24 hours on Pro.",
+      "source": {
+        "url": "https://docs.e2b.dev/faq/sandbox-lifetime",
+        "quote": "Every sandbox has a timeout, and it defaults to **5 minutes** if you do not set one.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "partly",
+      "note": "Paid machines have no lifetime timeout, but idle auto-pause defaults to 30 minutes; paid plans can choose 5–30 minutes or off. Free machines are capped at 8 hours of continuous runtime.",
+      "source": {
+        "url": "https://api.instabox.sh/v1/openapi.json",
+        "quote": "Sandboxes have no lifetime timeout: they pause when idle",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "There is no idle timer at all, but every sandbox has a hard lifetime deadline: five minutes by default from the SDK and CLI, and never by default from the dashboard and raw API.",
+      "source": {
+        "url": "https://lizard.build/docs/sandboxes",
+        "quote": "Five minutes by default from the SDK and CLI; no expiration by default from the raw API and dashboard",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "partly",
+      "note": "Devboxes scale to zero after inactivity, preserving memory and application state, and wake on an HTTP or SSH request. Instance TTL is a duration after which an instance stops or pauses.",
+      "source": {
+        "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+        "quote": "Devboxes can branch to hundreds of parallel replicas or scale to zero after a period of inactivity, preserving all application and memory state.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "No clock unless you set one, and `persistent: true` disables the idle pause. Otherwise it pauses after five idle minutes and wakes on the next request, usually within a second.",
+      "source": {
+        "url": "https://withruntime.com/docs/pricing",
+        "quote": "`persistent: true` keeps a sandbox running until you stop it, with no idle pause.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "partly",
+      "note": "No maximum lifetime, but a hard auto-stop defaults to one hour and idle pause to 15–120 minutes by plan. An always-on box needs `ttlSeconds: null` and `idleStopMinutes: 0`.",
+      "source": {
+        "url": "https://sandboxer.com/docs/limits",
+        "quote": "`ttlSeconds` | 1 s – 30 days, or `null`",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "yes",
+      "note": "A warm pause after about 30 seconds idle, a cold stop after a longer unpublished period, and wake on request. Four things reset the timer, including an open TCP connection.",
+      "source": {
+        "url": "https://docs.fly.io/sprites/concepts/lifecycle",
+        "quote": "When the activity stops, a short idle window passes (about 30 seconds today) and the Sprite pauses.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "partly",
+      "note": "A session timeout of five minutes by default, with a maximum session of 45 minutes on Hobby and 24 hours on Pro. No idle-activity timer is published.",
+      "source": {
+        "url": "https://vercel.com/docs/sandbox/concepts",
+        "quote": "Sandboxes automatically stop after a timeout. The default timeout is 5 minutes",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ]
+}

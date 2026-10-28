@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import CostCard from "../../components/CostCard.astro";
+import { providers } from "../../lib/data";
+
+const researched = providers.filter((provider) => provider.status === "researched");
+---
+
+<Base title="Reference costs" description="Three shared workloads priced from list rates, as illustrations rather than quotes.">
+  <PageHeader
+    kicker="Compare · reference costs"
+    title="Three workloads, priced at list rates"
+    standfirst="A reference point, not a quote. The arithmetic is shown so you can redo it when prices change, and every substituted size is named. For your own workload, use battleships.dev."
+    meta={["12 providers", "List prices checked 28 October 2026", "Illustrations, not quotes"]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush">
+      <div class="section__head">
+        <h2 class="section__title">The three shared workloads</h2>
+        <p class="section__note">
+          A — 1,000 ten-minute tasks a month, 2 vCPU / 4 GiB, deleted after each.<br />
+          B — one always-on 4 vCPU / 8 GiB / 50 GiB box for a month.<br />
+          C — one 2 vCPU / 4 GiB / 20 GiB box, three hours a day, stopped otherwise.
+        </p>
+      </div>
+      <p class="prose">
+        Where a provider does not sell the exact shape, the nearest one is used and named in the card.
+        Model tokens, taxes and anything the provider does not price are excluded. A range means the
+        provider bills a dimension it does not publish, such as measured CPU or resident memory.
+      </p>
+      <p class="section__note">
+        These are illustrations from published list rates, not invoices. For a price for your own
+        workload, use <a href="https://battleships.dev" rel="noreferrer noopener">battleships.dev</a>,
+        the comparison dataset built by the Boat team.
+      </p>
+    </section>
+
+    {
+      researched.map((provider) => (
+        <section class="section" aria-labelledby={`cost-${provider.id}`}>
+          <div class="section__head">
+            <h2 class="section__title" id={`cost-${provider.id}`}>
+              <a href={`/providers/${provider.id}/`}>{provider.name}</a>
+            </h2>
+            <p class="section__note">{provider.billing.model}</p>
+          </div>
+          {provider.cost && (
+            <div class="cost-grid">
+              <CostCard label="A" title="1,000 short tasks" cost={provider.cost.A} />
+              <CostCard label="B" title="One always-on box" cost={provider.cost.B} />
+              <CostCard label="C" title="Three hours a day" cost={provider.cost.C} />
+            </div>
+          )}
+        </section>
+      ))
+    }
+  </div>
+</Base>

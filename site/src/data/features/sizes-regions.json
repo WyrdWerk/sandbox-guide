@@ -1,0 +1,165 @@
+{
+  "id": "sizes-regions",
+  "group": "machine",
+  "order": 2,
+  "title": "Sizes, regions and hardware",
+  "navTitle": "Sizes and regions",
+  "standfirst": "A size is a bundle of CPU, memory and disk, and the bundle decides what you can run. A region decides how far away it is and whose laws it sits under. Neither is as flexible as the word “cloud” suggests.",
+  "idea": [
+    "There are two ways to buy a machine. A fixed menu gives you four or five shapes and nothing else; a configurable machine lets you pick vCPU, memory and disk within bounds. A fixed menu is easier to price and compare. A configurable one lets you match the workload, and makes it harder to know what you are paying for.",
+    "The second variable is what the size includes. Disk is sometimes a fixed part of the shape, sometimes an allowance you can exceed, and sometimes ephemeral storage that disappears with the session. CPU is sometimes shared, sometimes reserved. Memory is sometimes the billing dimension and sometimes just a ceiling.",
+    "Regions are the least negotiable part. A provider with one region is not a global product, and a provider that offers a region may still store backups or control-plane data somewhere else."
+  ],
+  "splits": [
+    {
+      "heading": "Fixed menus versus configurable machines",
+      "body": [
+        "Boat, Sandboxer, Lizard and boxd sell four or three fixed shapes. Sprites sells one: 8 vCPU and 100 GB, with memory assigned automatically. E2B, Vercel, Runtime and Morph let you choose resources within bounds; Blaxel sizes CPU from memory, and InstaBox sells fixed vCPU/RAM pairs by plan.",
+        "The difference matters most when your workload is lopsided. A browser agent needs memory more than cores; a compiler needs the reverse. On a fixed menu you buy the nearest shape and pay for what you do not use."
+      ]
+    },
+    {
+      "heading": "Disk is part of the shape, or it is not",
+      "body": [
+        "Boat attaches 51 GB to its smallest three sizes and 111 or 251 GB to the larger ones. boxd gives every machine 100 GB and does not let you choose. Vercel gives 64 GB of ephemeral NVMe. E2B includes 10 GiB on Hobby and 20 GiB on Pro, and asks you to contact support beyond that.",
+        "Where disk is a separate meter, the capacity you see is not the storage you pay for: Vercel's drives bill on logical used size, and boxd's disk bills on bytes written."
+      ]
+    },
+    {
+      "heading": "Regions and hardware",
+      "body": [
+        "Vercel is the outlier with 19 regions. E2B and Blaxel list four, Sandboxer and Lizard two, Agent 37 three, and Runtime one. Boat and boxd are EU-only; InstaBox publishes no region selector and its terms say the United States.",
+        "No provider in this set publishes a GPU for sandboxes. Several say so explicitly: E2B, Boat and Lizard. ARM is not offered either, and only Runtime, Sandboxer, Morph and Vercel document nested virtualisation or /dev/kvm."
+      ]
+    }
+  ],
+  "watchFor": [
+    "The vCPU ceiling: Agent 37's default type stops at 4, E2B at 8, Vercel at 32 on Enterprise.",
+    "Whether disk is included, capped or ephemeral, and whether it bills on capacity or on written bytes.",
+    "Shared versus reserved CPU: a shared 4 vCPU is not four cores.",
+    "Region choice versus data residency: backups and control-plane data may sit elsewhere.",
+    "GPU is not available anywhere here, whatever a workload page implies."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "partly",
+      "note": "Four shapes with a 4 vCPU ceiling on the default type, 2–80 GB of disk by shape, and three regions. EU and India require the 2.5× vm type.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/instance-sizing",
+        "quote": "4 vCPU is the ceiling on every instance type.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "partly",
+      "note": "Memory drives CPU: 8 GB gets 4 cores and 16 GB gets 6. Custom deployments go to 256 GB. Four regions, no published GPU.",
+      "source": {
+        "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+        "quote": "a sandbox with 8 GB memory is allocated 4 CPU cores, while one with 16 GB memory is allocated 6 CPU cores.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "Four fixed sizes from 2 vCPU / 4 GB / 51 GB to 16 vCPU / 32 GB / 251 GB. No custom size, no extra disk, EU-only, no region choice.",
+      "source": {
+        "url": "https://docs.boat.dev/machines",
+        "quote": "These four sizes are the only sizes. boat has no custom size and no size above `xlarge`.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "partly",
+      "note": "Four sizes from 1 vCPU / 4 GiB to 8 / 32, all with a fixed 100 GB disk. One EU region, no GPU, no ARM.",
+      "source": {
+        "url": "https://docs.boxd.sh/guides/resources",
+        "quote": "Disk | 100 GB, fixed (copy-on-write)",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "partly",
+      "note": "Up to 8 vCPU and 8 GiB, with 10 GiB of disk on Hobby and 20 GiB on Pro. Four regions, no GPU on any plan.",
+      "source": {
+        "url": "https://docs.e2b.dev/faq",
+        "quote": "E2B sandboxes are CPU-only, sized by vCPU and RAM only, with no GPU option",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "partly",
+      "note": "Fixed vCPU/RAM pairs by plan, from 2/4 to 32/64, one 20 GiB disk that grows live. No published region selector; the terms say the United States.",
+      "source": {
+        "url": "https://instabox.sh/docs/limits",
+        "quote": "4 vCPUs and 8 GiB of memory by default, the only size on the free plan",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "Three fixed sizes: Small 2/4/5 GB, Medium 4/8/20 GB, Large 8/16/50 GB. Two regions, no GPU, no live resize.",
+      "source": {
+        "url": "https://lizard.build/docs/platform/limits",
+        "quote": "Small | 2 vCPU / 4 GB | 5 GB | $0.0162 per hour",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "partly",
+      "note": "vCPU, memory and disk are chosen at creation, with no fixed catalogue. No published region list, GPU statement or architecture guarantee.",
+      "source": {
+        "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
+        "quote": "To create a new snapshot, specify the resource specifications like",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "partly",
+      "note": "Any vCPU, memory and disk combination inside 16 vCPU, 64 GiB and 400 GiB. One region in Virginia; shared CPU by default, reserved on request.",
+      "source": {
+        "url": "https://withruntime.com/docs/api",
+        "quote": "At most 16 on a paid sandbox, 2 without credit",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "partly",
+      "note": "Four fixed sizes from 2/4/12 GB to 16/32/251 GB, shared vCPU with reserved RAM. Two regions, no GPU, no ARM.",
+      "source": {
+        "url": "https://sandboxer.com/pricing",
+        "quote": "vCPUs are shared; RAM is reserved for the sandbox.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "partly",
+      "note": "One shape: 8 vCPUs and 100 GB of storage, with memory assigned and autoscaled. No published region choice, GPU or architecture.",
+      "source": {
+        "url": "https://docs.fly.io/sprites/concepts/lifecycle",
+        "quote": "The vCPU count and the storage ceiling are fixed; memory is handled automatically.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "yes",
+      "note": "1 or even numbers of vCPUs from 2 to 32 by plan, 2 GB of memory per vCPU, 64 GB of ephemeral NVMe, and 19 regions. No GPU published.",
+      "source": {
+        "url": "https://vercel.com/docs/sandbox/pricing#regions",
+        "quote": "Vercel Sandbox is available in 19 regions. The default region is `iad1`.",
+        "confidence": "pricing-page"
+      }
+    }
+  ]
+}

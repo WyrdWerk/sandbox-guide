@@ -1,0 +1,165 @@
+{
+  "id": "teams-accounts",
+  "group": "running",
+  "order": 13,
+  "title": "Teams and accounts",
+  "navTitle": "Teams and accounts",
+  "standfirst": "Organisations, key scopes, spend limits, SSO, audit and residency. The features a team needs are rarely the ones a solo builder notices, and several providers only sell them on an enterprise tier.",
+  "idea": [
+    "A sandbox account is a billing boundary, a permission boundary and sometimes a data boundary. The first question is what the account owns: keys, wallet, machines, snapshots. The second is who can see and spend what.",
+    "Spend controls come in three strengths. A hard cap stops machines when reached. A per-key or per-project limit blocks one credential. An alert tells you after the fact. Providers differ on which they offer, and several offer none.",
+    "Audit and residency are the enterprise questions. A lifecycle activity log is not a compliance audit log. A compute region is not a data-residency guarantee if backups and control-plane records sit elsewhere."
+  ],
+  "splits": [
+    {
+      "heading": "Organisations are usually shared wallets",
+      "body": [
+        "Sandboxer's organisation is a shared wallet with per-seat pricing; boxd's account is an organisation with owner, admin and member roles; Boat and Agent 37 have workspaces that own keys, wallet and machines. E2B separates a workspace, which shares payment and credits, from projects, which have their own plans and spending limits.",
+        "The consequence is that a per-seat plan multiplies. A five-person team on Sandboxer's $20 plan pays $100 a month before usage."
+      ]
+    },
+    {
+      "heading": "Hard caps are rarer than alerts",
+      "body": [
+        "Runtime caps spend per key per day and per sandbox over its life. InstaBox has a monthly cap that stops machines. Agent 37 has per-instance budget ceilings, which are not money. Vercel offers spend management that can pause projects.",
+        "Lizard says plainly that there is no spending cap, and boxd publishes no budget or alert feature at all. Boat has no dollar cap on a personal account."
+      ]
+    },
+    {
+      "heading": "SSO, audit and residency",
+      "body": [
+        "Runtime includes SSO, SCIM and a 400-day audit log free. InstaBox and Lizard put SSO and audit on Enterprise. Vercel sells SAML at $300 a month. Agent 37, Boat, boxd, Sandboxer and Sprites publish no SSO or audit log on the tiers described here.",
+        "Residency is separate. Boat and boxd are EU-only. Agent 37 keeps compute in the chosen region but stores backups in the US. InstaBox and Runtime are US-only."
+      ]
+    }
+  ],
+  "watchFor": [
+    "Whether the plan price multiplies per seat.",
+    "Whether there is a hard spend cap, a per-key limit, or only an alert.",
+    "Whether SSO and audit logs are included, enterprise-only, or absent.",
+    "Whether backups and control-plane data sit in the same region as compute.",
+    "Whether an API key can be scoped to one sandbox or one project."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "partly",
+      "note": "Workspaces own keys, wallet and instances; teams have admin and user roles; each instance has a budget ceiling. No audit log or SSO is published, and backups are stored in the US.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/concepts",
+        "quote": "A workspace is the account: it owns the API keys, the wallet, and every instance.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "partly",
+      "note": "Workspace roles are admin, member and viewer; service accounts have scoped tokens; SAML and directory sync require a feature flag. No hard spend cap or full audit coverage is published.",
+      "source": {
+        "url": "https://docs.blaxel.ai/Security/Workspace-access-control.md",
+        "quote": "There are three roles that a user or service account can have in a workspace",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "Organisations with owner, admin and member roles, scoped keys and per-member caps. No audit log or SSO is published, and start budgets are pooled across the organisation.",
+      "source": {
+        "url": "https://docs.boat.dev/organizations/seats-and-limits",
+        "quote": "The included time, start-rate and concurrency numbers of the plan are **one shared pool for the whole organization**.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "partly",
+      "note": "Every account is an organisation with owner, admin and member roles, and keys are fenced to one org. No self-serve audit log, SSO or spend cap is published; machines are EU-only.",
+      "source": {
+        "url": "https://boxd.sh/pricing",
+        "quote": "Every account is an organization.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "partly",
+      "note": "A workspace shares payment, credits and invoice; each project has its own plan and spending limit. SOC 2 Type II and a HIPAA BAA path. SSO and audit coverage are not published.",
+      "source": {
+        "url": "https://docs.e2b.dev/workspaces",
+        "quote": "When a project reaches its spending limit, only that project is blocked.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "partly",
+      "note": "Organisations and workspaces with roles, scoped keys and a monthly spend cap that stops machines. SSO, SCIM and audit logs are Enterprise only.",
+      "source": {
+        "url": "https://api.instabox.sh/v1/openapi.json",
+        "quote": "caps this month's usage beyond the org's allowance",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "Workspaces, projects and scoped keys, with caps on sandboxes, CPU, memory and disk. No spending cap at all; SSO and audit logs are Enterprise only.",
+      "source": {
+        "url": "https://lizard.build/docs/cli/keys",
+        "quote": "A scoped key works only inside its projects or workspaces.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "partly",
+      "note": "Devboxes are shareable to anyone in the organisation, and an SSH-key audit endpoint exists. SSO, hard spend caps and comprehensive audit coverage are not published.",
+      "source": {
+        "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+        "quote": "devboxes are shareable live via URL to anyone in your Morph Cloud organization",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "Roles, compartments that wall off key groups, per-key daily spend limits and a per-sandbox lifetime cap. SSO, SCIM and a 400-day audit log are free.",
+      "source": {
+        "url": "https://withruntime.com/docs/pricing",
+        "quote": "read-only keys, a daily spending limit per key, and compartments",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "partly",
+      "note": "An organisation is a shared wallet with owner and member roles, scoped keys and per-member usage caps. Plans are per seat, and no audit log or SSO is published.",
+      "source": {
+        "url": "https://sandboxer.com/docs/organizations",
+        "quote": "An **organization** is a shared wallet: one plan, one balance, and the members who run sandboxes on it.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "partly",
+      "note": "Fly.io organisations and connector management in a dashboard. SSO is claimed by a third party; spend caps, key scopes, audit retention and residency are not published.",
+      "source": {
+        "url": "https://docs.fly.io/sprites/quickstart",
+        "quote": "Sprites uses your Fly.io account for authentication",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "partly",
+      "note": "Team seats, spend management that can pause projects, and a lifecycle activity log. SAML costs $300 a month; fine-grained Sandbox key scopes and contractual residency are not published.",
+      "source": {
+        "url": "https://vercel.com/docs/plans/pro-plan#paid-add-ons",
+        "quote": "SAML Single Sign-On: $300/month",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "id": "e2b",
+  "name": "E2B",
+  "url": "https://e2b.dev",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "Firecracker microVMs and templates for agent code, sold per running second.",
+  "whatItIs": [
+    "E2B sells isolated sandboxes for agents: a Linux VM created on demand from a template, driven through Python and JavaScript SDKs. It is infrastructure for a product rather than a finished assistant.",
+    "Templates define what a sandbox starts with, including images built from Docker images, and the code-interpreter and desktop products run inside the sandbox."
+  ],
+  "whoFor": "Developers integrating code execution, data analysis or computer use into an agent product.",
+  "isolation": "Firecracker microVM with its own kernel, not a container. The default template user is `user`, not root; root can be set in a template. Docker is documented, but kernel features are not unlimited: the sandbox kernel does not ship `xt_owner`.",
+  "sizes": "Sized by vCPU and RAM: up to 8 vCPU, 8 GiB memory on Hobby and Pro, and 10 or 20 GiB of included disk. No GPU on any plan. Regions: US (GCP), US West (AWS), EU and APAC.",
+  "billing": {
+    "model": "Per-second usage against a credit balance; Pro adds a monthly plan fee.",
+    "meter": "$0.000014 per vCPU-second and $0.0000045 per GiB-second of allocated resources while running. Paused and killed sandboxes are not billed.",
+    "stopped": "Nothing for compute. Volumes and snapshots are separate objects with their own storage.",
+    "planFee": "Hobby has no fee; Pro is $150 a month plus usage; Enterprise has a $3,000 monthly minimum.",
+    "minimum": "No published per-sandbox minimum. Hobby starts with a one-time $100 credit and no card."
+  },
+  "cost": {
+    "A": {
+      "headline": "$27.60, or nothing against the Hobby credit",
+      "shape": "2 vCPU / 4 GiB, deleted after each task",
+      "lines": [
+        { "label": "Compute", "arithmetic": "166.67 h × (2 × $0.0504 + 4 × $0.0162)", "amount": "$27.60" }
+      ],
+      "total": "$27.60",
+      "notes": [
+        "Against an unused $100 Hobby credit the cash due is $0, leaving $72.40 of credit.",
+        "On Pro the same usage is $150 of plan fee plus $27.60."
+      ]
+    },
+    "B": {
+      "headline": "$241.78 of compute, not a feasible all-in quote",
+      "shape": "4 vCPU / 8 GiB / 50 GiB, 730 h",
+      "lines": [
+        { "label": "Compute", "arithmetic": "730 × (4 × $0.0504 + 8 × $0.0162)", "amount": "$241.78" }
+      ],
+      "total": "$241.78 compute only",
+      "notes": [
+        "Pro's continuous-runtime limit is 24 hours, so an uninterrupted 730-hour session is not possible.",
+        "50 GiB exceeds the 20 GiB of included Pro disk, so a custom quote is needed."
+      ],
+      "flag": "This workload cannot be bought as specified: it breaks both the session limit and the disk allowance."
+    },
+    "C": {
+      "headline": "$164.90 including the Pro plan fee",
+      "shape": "2 vCPU / 4 GiB, 90 running hours, 630 paused hours",
+      "lines": [
+        { "label": "Compute", "arithmetic": "90 × (2 × $0.0504 + 4 × $0.0162)", "amount": "$14.90" },
+        { "label": "Pro plan fee", "arithmetic": "monthly", "amount": "$150.00" }
+      ],
+      "total": "$164.90",
+      "notes": [
+        "Paused time has no compute charge, and pause/resume resets the continuous-runtime clock.",
+        "Assumes each daily session is explicitly paused rather than left running."
+      ]
+    }
+  },
+  "usability": {
+    "dashboard": "A console exists for support and API keys, but the documented path is SDKs, a CLI and API keys.",
+    "withoutCode": "No documented no-code path. Examples are SDK calls, terminals and templates; the desktop SDK still needs code to drive it.",
+    "signup": "No credit card to start, and a one-time $100 credit. When a workspace without a payment method runs out, every project in it is blocked shortly afterwards.",
+    "docs": "Extensive docs with per-page Markdown. Support is through the console. SOC 2 Type II is reported, and a HIPAA BAA can be requested.",
+    "tripsUp": [
+      "The default timeout is 5 minutes and the default action is to kill the sandbox.",
+      "Public URLs are reachable by anyone who knows them.",
+      "The pricing page and billing docs disagree on the default sandbox size.",
+      "Volumes are in private beta and cannot be snapshotted."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "The default timeout destroys the sandbox",
+      "detail": "Every sandbox has a timeout defaulting to five minutes, and `onTimeout: 'kill'` is the default. Pausing instead is opt-in.",
+      "status": "open"
+    },
+    {
+      "issue": "The default sandbox size is stated two ways",
+      "detail": "The pricing page says the default is 2 vCPU / 4 GiB; the billing docs say 2 vCPU / 512 MiB. Both are current provider statements.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "Volumes are in private beta",
+      "detail": "Volumes persist across sandboxes but file locking can hang, metadata caching is disabled and snapshots are not supported.",
+      "status": "open"
+    },
+    {
+      "issue": "No static egress IP on any plan",
+      "detail": "There are no dedicated or static egress addresses, including Enterprise; a customer-operated proxy is the documented workaround.",
+      "status": "open"
+    },
+    {
+      "issue": "Public URLs have no authentication by default",
+      "detail": "A sandbox's public URLs are reachable by anyone who knows them.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "Snapshots capture memory and filesystem, and the source keeps running.",
+    "Fork up to 20 sandboxes from a running VM, with a documented pause.",
+    "Templates can start from any Docker image.",
+    "Secrets can be injected outside the VM by an egress proxy.",
+    "SOC 2 Type II and a HIPAA BAA path."
+  ],
+  "sources": [
+    { "label": "Docs", "url": "https://docs.e2b.dev/" },
+    { "label": "Persistence", "url": "https://docs.e2b.dev/sandbox/persistence" },
+    { "label": "Snapshots", "url": "https://docs.e2b.dev/sandbox/snapshots" },
+    { "label": "Fork", "url": "https://docs.e2b.dev/sandbox/fork" },
+    { "label": "Pricing", "url": "https://e2b.dev/pricing" },
+    { "label": "Security", "url": "https://docs.e2b.dev/security" }
+  ]
+}

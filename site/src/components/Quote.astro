@@ -1,0 +1,30 @@
+---
+import type { Confidence } from "../data/schema";
+import { plainText } from "../lib/plain";
+
+interface Props {
+  text: string;
+  cite: string;
+  url: string;
+  tag: Confidence;
+}
+
+const { text, cite, url, tag } = Astro.props;
+const tagClass: Record<Confidence, string> = {
+  "docs-confirmed": "tag tag--docs",
+  "pricing-page": "tag tag--pricing",
+  "third-party": "tag tag--third-party",
+  inferred: "tag tag--inferred",
+  "not-published": "tag tag--not-published",
+};
+---
+
+<figure class="quote">
+  <blockquote class="quote__text">“{plainText(text)}”</blockquote>
+  <figcaption class="quote__source">
+    <cite class="quote__cite">
+      <a href={url} rel="noreferrer noopener">{cite}</a>
+    </cite>
+    <span class={tagClass[tag]}>{tag}</span>
+  </figcaption>
+</figure>

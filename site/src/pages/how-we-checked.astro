@@ -1,98 +1,99 @@
 ---
 import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
 import site from "../data/site.json";
-import { providers } from "../lib/data";
+import { features, providers } from "../lib/data";
 ---
 
 <Base title="How we checked" description="Sources, confidence tags, dates, and the limits of this research.">
-  <header class="page-header">
-    <p class="kicker">Method</p>
-    <h1>How we checked</h1>
-    <p class="lede">
-      Every claim on this site comes from a provider's own documentation, pricing page, or a named
-      third party. Each one carries a confidence tag, a quote and a link. Nothing is inferred into a
-      fact, and nothing unpublished is estimated.
-    </p>
-  </header>
+  <PageHeader
+    kicker="Method"
+    title="How we checked"
+    standfirst="Every claim comes from a provider's own documentation, pricing page, or a named third party. Each carries a confidence tag, an exact quote and a link. Nothing is inferred into a fact, and nothing unpublished is estimated."
+    meta={["12 providers", "16 features", `Checked ${site.checkedOn}`, "No sandbox run"]}
+  />
 
-  <article class="measure">
-    <h2>What was done</h2>
-    <p>
-      For each provider, a researcher read the documentation, the pricing page, the FAQ, the terms
-      and, where it existed, the machine-readable OpenAPI or documentation bundle. Each profile
-      records the exact quote, its URL, and a tag. The profiles are kept in the repository under
-      <span class="mono">experiments/sandbox-comparison/research/</span>.
-    </p>
-    <p>
-      No account was created, no sandbox was started, and nothing was billed. That means every
-      statement about behaviour is a documentation claim, not a measurement. Where a provider's
-      documentation contradicts itself, both statements are shown and the row is marked as a
-      contradiction.
-    </p>
+  <div class="wrap">
+    <section class="section section--flush">
+      <div class="prose">
+        <h2>What was done</h2>
+        <p>
+          For each provider, a researcher read the documentation, the pricing page, the FAQ, the
+          terms and, where it existed, the machine-readable OpenAPI or documentation bundle. Each
+          profile records the exact quote, its URL and a tag. The profiles live beside the site in
+          <code>research/</code>.
+        </p>
+        <p>
+          No account was created, no sandbox was started and nothing was billed. Every statement
+          about behaviour is a documentation claim, not a measurement. Where a provider's pages
+          contradict each other, both statements are shown and the row is marked as a contradiction.
+        </p>
 
-    <h2>Confidence tags</h2>
-    <div class="table-scroll">
-      <table>
+        <h2>Confidence tags</h2>
+      </div>
+      <table class="data-table">
         <thead>
           <tr><th scope="col">Tag</th><th scope="col">What it means</th></tr>
         </thead>
         <tbody>
           {site.confidenceTags.map((tag) => (
-            <tr>
-              <td><span class="confidence">{tag.tag}</span></td>
-              <td>{tag.meaning}</td>
-            </tr>
+            <tr><td><span class="tag tag--docs">{tag.tag}</span></td><td>{tag.meaning}</td></tr>
           ))}
         </tbody>
       </table>
-    </div>
 
-    <h2>Dates</h2>
-    <p>
-      All seven profiles were checked on {site.checkedOn}. Prices changed during October 2026 at
-      several providers — boxd cut its rates by about 20% between 9 and 28 October, and Boat moved
-      from credit packs to a dollar wallet — so treat any number here as a dated observation, not a
-      standing fact. Boat's documentation is served through a cache that can return an older revision,
-      so its figures were re-fetched with cache-busting URLs and come from the live pages, not the
-      cached copies.
-    </p>
+      <div class="prose">
+        <h2>Dates</h2>
+        <p>
+          All twelve profiles were checked on {site.checkedOn}. Prices changed during October 2026
+          at several providers — boxd cut its rates by about 20% between 9 and 28 October, and Boat
+          moved from credit packs to a dollar wallet — so treat any number as a dated observation,
+          not a standing fact. Boat's documentation is served through a cache that can return an
+          older revision, so its figures were re-fetched with cache-busting URLs.
+        </p>
 
-    <h2>Limits worth stating plainly</h2>
-    <ul>
-      {site.limits.map((limit) => <li>{limit}</li>)}
-    </ul>
+        <h2>Limits worth stating plainly</h2>
+        <ul>
+          {site.limits.map((limit) => <li>{limit}</li>)}
+        </ul>
 
-    <h2>About battleships.dev</h2>
-    <p>
-      battleships.dev is a comparison dataset built by the Boat (boat.dev) team. We used it as a
-      cross-check and never as a primary source. It disagreed with live provider pages often enough
-      that its numbers are not repeated here as fact: it described InstaBox's pricing and sizes as
-      they were before 20 October, boxd's rates as they were on 14 October, and Runtime's idle
-      default as it was before 18 October. Its own Boat record is dated 30 September and disagrees
-      with Boat's current docs on disk sizes and snapshot retention.
-    </p>
-    <p>
-      That does not make it useless. It is a fast way to find out which questions to ask. It is a bad
-      way to settle a price.
-    </p>
+        <h2>About battleships.dev</h2>
+        <p>
+          battleships.dev is a comparison dataset built by the Boat team. We used it as a
+          cross-check and never as a primary source. It disagreed with live provider pages often
+          enough that its numbers are not repeated here as fact: it described InstaBox's pricing and
+          sizes as they were before 20 October, boxd's rates as they were on 14 October, and
+          Runtime's idle default as it was before 18 October. Its own Boat record is dated
+          30 September and disagrees with Boat's current docs on disk sizes and snapshot retention.
+        </p>
+        <p>
+          That does not make it useless. It is a fast way to find which questions to ask, and the
+          right place to price your own workload. It is a bad way to settle a claim about behaviour.
+        </p>
 
-    <h2>Open questions we could not settle</h2>
-    <ul>
-      <li>Why Sandboxer's sizes, hourly rates and plan tiers match Boat's exactly while its disk sizes, regions, stopped-disk retention and legal entity differ. No public source explains the relationship.</li>
-      <li>Whether Agent 37's Cloud dashboard can create a sandbox by clicking. No documented path exists, but the absence may be a documentation gap.</li>
-      <li>Whether InstaBox's free plan requires a card. The pricing page says no; the API has a state that says yes.</li>
-      <li>What a stored snapshot costs at Lizard, and what backup storage costs at boxd. Neither is published.</li>
-      <li>Whether egress is free at Agent 37, boxd and Boat. None publishes a rate or a cap.</li>
-    </ul>
+        <h2>Open questions we could not settle</h2>
+        <ul>
+          <li>Why Sandboxer's sizes, hourly rates and plan tiers match Boat's exactly while its disk sizes, regions, stopped-disk retention and legal entity differ. No public source explains the relationship.</li>
+          <li>Whether Agent 37's Cloud dashboard can create a sandbox by clicking. No documented path exists, but the absence may be a documentation gap.</li>
+          <li>Whether InstaBox's free plan requires a card. The pricing page says no; the API has a state that says yes.</li>
+          <li>What a stored snapshot costs at Lizard, and what backup storage costs at boxd. Neither is published.</li>
+          <li>Whether egress is free at Agent 37, boxd and Boat. None publishes a rate or a cap.</li>
+          <li>Where Morph's company, regions and GPU availability are documented. The research found no statement either way.</li>
+        </ul>
 
-    <h2>Per-provider sources</h2>
-    <ul>
-      {providers.map((provider) => (
-        <li>
-          <a href={`/providers/${provider.id}/`}>{provider.name}</a> — checked {provider.checkedOn},{" "}
-          {provider.caveats.length} recorded caveats
-        </li>
-      ))}
-    </ul>
-  </article>
+        <h2>Fonts and licence</h2>
+        <p>
+          The site is set in Manrope, Geist and IBM Plex Mono, self-hosted from
+          <code>/fonts/</code>. All three are licensed under the SIL Open Font License 1.1; the
+          notices and licence text are in <a href="/fonts-OFL.md">fonts-OFL.md</a>.
+        </p>
+
+        <h2>Coverage</h2>
+        <p>
+          {providers.length} providers and {features.length} features. Every feature page carries a
+          row for every provider, including “not published” where the provider is silent.
+        </p>
+      </div>
+    </section>
+  </div>
 </Base>

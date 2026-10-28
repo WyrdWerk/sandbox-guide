@@ -1,9 +1,8 @@
 import type {
   Feature,
-  GlossaryEntry,
+  Group,
   Provider,
-  Term,
-  UseCase,
+  Situation,
   Verdict,
 } from "../data/schema";
 import { plainText } from "./plain";
@@ -34,16 +33,12 @@ const featureModules = import.meta.glob<Feature>("../data/features/*.json", {
   eager: true,
   import: "default",
 });
-const termModules = import.meta.glob<Term>("../data/terminology/*.json", {
-  eager: true,
-  import: "default",
-});
-const glossaryModule = import.meta.glob<{ entries: GlossaryEntry[] }>(
-  "../data/glossary.json",
+const groupModule = import.meta.glob<{ groups: Group[] }>(
+  "../data/groups.json",
   { eager: true, import: "default" },
 );
-const useCaseModule = import.meta.glob<{ useCases: UseCase[] }>(
-  "../data/use-cases.json",
+const situationModule = import.meta.glob<{ situations: Situation[] }>(
+  "../data/situations.json",
   { eager: true, import: "default" },
 );
 
@@ -63,15 +58,16 @@ export const features: Feature[] = Object.values(featureModules)
   .map((f) => cleanDeep(f))
   .sort((a, b) => a.order - b.order);
 
-export const terms: Term[] = Object.values(termModules)
-  .map((t) => cleanDeep(t))
-  .sort((a, b) => a.term.localeCompare(b.term));
-
-export const glossary: GlossaryEntry[] = cleanDeep(
-  Object.values(glossaryModule)[0]?.entries ?? [],
+export const groups: Group[] = cleanDeep(
+  Object.values(groupModule)[0]?.groups ?? [],
+).sort(
+  (a, b) =>
+    features.findIndex((f) => f.group === a.id) -
+    features.findIndex((f) => f.group === b.id),
 );
-export const useCases: UseCase[] = cleanDeep(
-  Object.values(useCaseModule)[0]?.useCases ?? [],
+
+export const situations: Situation[] = cleanDeep(
+  Object.values(situationModule)[0]?.situations ?? [],
 );
 
 export function providerName(id: string): string {
@@ -92,6 +88,9 @@ export function validateContent(): void {
 
   for (const f of features) {
     if (!f.id || !f.title) fail(`feature is missing id or title: ${JSON.stringify(f)}`);
+    if (!groups.some((g) => g.id === f.group)) {
+      fail(`feature ${f.id} has unknown group "${f.group}"`);
+    }
     for (const row of f.rows) {
       if (!providerById.has(row.provider)) {
         fail(`feature ${f.id} refers to unknown provider "${row.provider}"`);
@@ -104,11 +103,17 @@ export function validateContent(): void {
     for (const p of providers) {
       if (!covered.has(p.id)) fail(`feature ${f.id} has no row for provider ${p.id}`);
     }
-    for (const pick of f.picks) {
-      for (const id of pick.providers) {
-        if (!providerById.has(id)) {
-          fail(`feature ${f.id} pick refers to unknown provider "${id}"`);
-        }
+  }
+
+  for (const s of situations) {
+    for (const id of s.features) {
+      if (!features.some((f) => f.id === id)) {
+        fail(`situation ${s.id} refers to unknown feature "${id}"`);
+      }
+    }
+    for (const pick of s.providers) {
+      if (!providerById.has(pick.provider)) {
+        fail(`situation ${s.id} refers to unknown provider "${pick.provider}"`);
       }
     }
   }

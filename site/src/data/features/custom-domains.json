@@ -1,0 +1,154 @@
+{
+  "id": "custom-domains",
+  "group": "access",
+  "order": 8,
+  "title": "Custom domains",
+  "navTitle": "Custom domains",
+  "standfirst": "Putting an agent behind your own hostname is a feature some providers sell, some leave to a proxy you run, and several do not offer at all.",
+  "idea": [
+    "A custom domain is an HTTPS hostname you control, pointed at a port inside the sandbox. It matters when the URL is the product: a client-facing demo, a webhook receiver, or an agent whose address should not be a provider subdomain that changes.",
+    "There are three levels. Native: the provider issues a certificate for your hostname and routes it. Do-it-yourself: the provider gives you a stable hostname and you put your own proxy in front. Absent: no documented path, and the preview URL is what you have.",
+    "The differences are in the details: whether you can delegate a subdomain or must move a whole domain's nameservers, whether certificates are automatic, and whether the domain survives a resume."
+  ],
+  "splits": [
+    {
+      "heading": "Native, self-serve domains",
+      "body": [
+        "Runtime routes a sandbox's web port at your hostname with HTTPS. boxd lets you point one domain at a machine or delegate a wildcard subdomain to the whole organisation, and issues certificates automatically. Blaxel's preview URLs support optional auth and custom domains."
+      ],
+      "quote": {
+        "text": "boxd verifies your DNS and issues TLS certificates automatically.",
+        "cite": "boxd, guides/custom-domains",
+        "url": "https://docs.boxd.sh/guides/custom-domains",
+        "tag": "docs-confirmed"
+      }
+    },
+    {
+      "heading": "Do it yourself, or not at all",
+      "body": [
+        "Sandboxer calls first-class custom domains a roadmap item and documents a CNAME plus your own TLS termination. E2B's guide sets up a customer-operated GCP VM running Caddy and Cloudflare DNS to proxy requests to the sandbox. Boat explicitly does not support custom domains."
+      ],
+      "quote": {
+        "text": "We will set up a GCP VM running Caddy server with Docker and Cloudflare DNS to proxy the requests to the Sandboxes.",
+        "cite": "E2B, network/custom-domain",
+        "url": "https://docs.e2b.dev/network/custom-domain",
+        "tag": "docs-confirmed"
+      }
+    },
+    {
+      "heading": "Not published is not the same as no",
+      "body": [
+        "InstaBox, Morph, Sprites and Vercel Sandbox publish no sandbox custom-domain feature. Vercel has domains for deployments, which is a different product; Sprites has organisation-private URLs; InstaBox has public ports only. For these, the honest answer is that the research found nothing either way."
+      ]
+    }
+  ],
+  "watchFor": [
+    "Whether you must move a whole domain's nameservers or can delegate one subdomain.",
+    "Whether the certificate is issued automatically.",
+    "Whether the domain survives a stop and resume, or must be re-pointed.",
+    "Whether the feature is native or a proxy you operate.",
+    "Whether the domain is for sandboxes or only for deployed apps."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "yes",
+      "note": "Custom domains are supported, but only by delegating a whole dedicated domain's nameservers; a subdomain of an existing domain cannot be registered.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/urls",
+        "quote": "Custom domain | `https://{label}.yourdomain.com` mirrors all of the above",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "yes",
+      "note": "Preview URLs back a running sandbox with optional auth and custom domains.",
+      "source": {
+        "url": "https://docs.blaxel.ai/llms.txt",
+        "quote": "Render an application in real-time through a direct preview URL backed by a running Blaxel sandbox, with optional auth and custom domains.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "no",
+      "note": "Custom domains are explicitly unsupported. A CNAME to an on.boat.dev name does not work, and certificates are issued only for on.boat.dev names.",
+      "source": {
+        "url": "https://docs.boat.dev/hosting",
+        "quote": "boat does not support custom domains.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "yes",
+      "note": "Point one domain at a machine or delegate a wildcard subdomain to the organisation; boxd verifies DNS and issues TLS certificates automatically.",
+      "source": {
+        "url": "https://docs.boxd.sh/guides/custom-domains",
+        "quote": "boxd verifies your DNS and issues TLS certificates automatically.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "partly",
+      "note": "No native custom domain. The documented path is a customer-operated GCP VM running Caddy and Cloudflare DNS in front of the sandbox.",
+      "source": {
+        "url": "https://docs.e2b.dev/network/custom-domain",
+        "quote": "We will set up a GCP VM running Caddy server with Docker and Cloudflare DNS to proxy the requests to the Sandboxes.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "not-published",
+      "note": "No custom-domain feature appears in the docs or the API. Public ports on the provider's hostname are the only inbound path."
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "Custom domains are documented for deployed app services, not for sandbox preview URLs. A sandbox preview stays on the provider's hostname.",
+      "source": {
+        "url": "https://lizard.build/docs/sandboxes/preview-urls",
+        "quote": "You get `https://<sandbox-id>-3000.sandbox.<region>.onlizard.com/?lizard_token=…`",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "not-published",
+      "note": "No custom-domain feature is documented for instances or devboxes. An HTTP service can be exposed, but the hostname is the provider's."
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "A sandbox's web port can run at your own hostname with HTTPS, verified by DNS records and a certificate from Let's Encrypt.",
+      "source": {
+        "url": "https://withruntime.com/docs/networking",
+        "quote": "**Custom domain:** a sandbox's web port at your own hostname, with HTTPS.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "partly",
+      "note": "First-class custom domains are on the roadmap; the documented workaround is a CNAME to the hosted hostname with your own TLS termination.",
+      "source": {
+        "url": "https://sandboxer.com/docs/hosting",
+        "quote": "First-class custom domains are on the roadmap.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "not-published",
+      "note": "A Sprite URL is private to the organisation; no custom-domain feature is documented."
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "not-published",
+      "note": "No sandbox custom-domain feature is documented. Vercel domains apply to deployments, which are a different product."
+    }
+  ]
+}

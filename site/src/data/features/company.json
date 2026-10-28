@@ -1,0 +1,160 @@
+{
+  "id": "company",
+  "group": "company",
+  "order": 16,
+  "title": "Who is behind it",
+  "navTitle": "The company",
+  "standfirst": "Age, ownership and what happens when the service breaks. This is the part of a sandbox that no amount of documentation testing can tell you.",
+  "idea": [
+    "A sandbox is a dependency. Your agent's files, its logins and sometimes its only copy of a working environment live on someone else's machine. The company behind it decides how long that machine is likely to exist, who owns it after an acquisition, and whether anyone answers when it fails.",
+    "Three signals are public and useful: how old the product is, whether it has changed hands, and whether there is a status page with a history. A status page that shows a real incident is more reassuring than one that is permanently green.",
+    "An SLA is a promise with a remedy. Several providers here publish none, and one publishes a promise its status page was not meeting during research. That is not a reason to avoid it; it is a reason to know it."
+  ],
+  "splits": [
+    {
+      "heading": "Age and ownership",
+      "body": [
+        "Boat, Agent 37 and Sandboxer are weeks or months old. Runtime's public repository was created in late September 2026. boxd raised a €2M pre-seed in September 2026. InstaBox is part of InsForge, a YC P26 company.",
+        "Blaxel is the only acquisition in the set: Baseten acquired it on 10 September 2026 and says the product continues. Lizard's funding and headcount are not published. Morph's company details are not published at all."
+      ]
+    },
+    {
+      "heading": "Status pages and SLAs",
+      "body": [
+        "Agent 37, Boat, Lizard, Runtime, Sandboxer and Vercel publish status pages. boxd and InstaBox do not have a working one. Morph and Sprites have no Sprite-specific status page established.",
+        "Only some publish an SLA. Boat claims 99.95% measured sandbox uptime; Runtime promises 99% monthly and its status page showed 96.37% over seven days at the time of research. InstaBox puts a 99.9% SLA on Enterprise."
+      ]
+    },
+    {
+      "heading": "What an acquisition changes",
+      "body": [
+        "Blaxel's terms page predates the acquisition, and its Baseten-managed workspaces have a documented offboarding gap: removing a user from Baseten does not delete their Blaxel identity. Those are ordinary integration seams, not signs of closure, but they are the details a buyer should know.",
+        "For the rest, the honest answer is that the research records what is published and nothing more. A missing company page is not evidence of instability, and a funding round is not evidence of permanence."
+      ]
+    }
+  ],
+  "watchFor": [
+    "How old the product is, and whether the company page exists at all.",
+    "Whether it has been acquired, and whether the product is still shipping.",
+    "Whether there is a status page with incident history.",
+    "Whether an SLA exists, and what remedy it offers.",
+    "Whether the contracting entity and terms match the brand."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "partly",
+      "note": "Early-stage, Y Combinator Fall 2026. A public status page with a real incident history, SOC 2 Type I, and a founder-led support address.",
+      "source": {
+        "url": "https://battleships.dev/data/providers/agent-37.md",
+        "quote": "Y Combinator Fall 2026",
+        "confidence": "third-party"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "partly",
+      "note": "Acquired by Baseten on 10 September 2026. Baseten says the product continues and features keep shipping; the terms page predates the deal.",
+      "source": {
+        "url": "https://www.baseten.co/blog/blaxel-is-joining-baseten-to-build-the-future-of-agentic-cloud/",
+        "quote": "Baseten has acquired Blaxel.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "Operated by Dedale AI, a Delaware company; Y Combinator Fall 2026, three people, Paris. A status page and a 99.95% measured uptime claim.",
+      "source": {
+        "url": "https://battleships.dev/data/providers/boat.json",
+        "quote": "Boat Founded: 2024 Batch: Fall 2026 Team Size: 3 Status: Active Location: Paris, France",
+        "confidence": "third-party"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "partly",
+      "note": "Operated by Azin Tech Holding in Amsterdam, with a €2M pre-seed in September 2026. No status page: status.boxd.sh does not resolve and /status is a 404.",
+      "source": {
+        "url": "https://battleships.dev/data/providers/boxd.md",
+        "quote": "boxd.sh is operated by Azin Tech Holding",
+        "confidence": "third-party"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "partly",
+      "note": "SOC 2 Type II and a HIPAA BAA path. Company age, funding, status page and SLA were not established in the sources inspected.",
+      "source": {
+        "url": "https://docs.e2b.dev/security",
+        "quote": "E2B has a SOC 2 Type II report",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "partly",
+      "note": "Operated by InsForge AI, a Delaware company; YC P26, San Francisco. No public status page was found, and the SLA is Enterprise-only.",
+      "source": {
+        "url": "https://instabox.sh/terms",
+        "quote": "InsForge AI, Inc., a Delaware corporation",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "Independent, with no funding, investor or accelerator announcement found. A public status page reports platform incidents, but sandbox capacity is not one of its components.",
+      "source": {
+        "url": "https://battleships.dev/data/providers/lizard.md",
+        "quote": "No funding, investor, or accelerator announcements were found",
+        "confidence": "third-party"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "not-published",
+      "note": "No company, funding, status-page or SLA information was found in the sources inspected."
+    },
+    {
+      "provider": "runtime",
+      "verdict": "partly",
+      "note": "Very young: a public repository created in late September 2026 and near-zero community discussion. A public status page shows uptime below its 99% promise during research.",
+      "source": {
+        "url": "https://withruntime.com/status",
+        "quote": "96.37%",
+        "confidence": "third-party"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "partly",
+      "note": "Launched on 18 October 2026. The contracting entity is a Delaware company at a Miami private mailbox, shared with unrelated products. A public status page exists.",
+      "source": {
+        "url": "https://sandboxer.com/terms",
+        "quote": "North Bay Opco I, Inc., a Delaware corporation",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "partly",
+      "note": "A Fly.io product, using the Fly.io account for authentication. No Sprite-specific status page, SLA or company disclosure was established.",
+      "source": {
+        "url": "https://docs.fly.io/sprites/quickstart",
+        "quote": "Sprites uses your Fly.io account for authentication",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "yes",
+      "note": "Part of Vercel's platform, on the same plans and billing, with a public status page and a mature support structure. Sandbox-specific SLAs are not published.",
+      "source": {
+        "url": "https://vercel.com/docs/plans/pro-plan#platform-fee",
+        "quote": "$20/month Pro platform fee",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ]
+}

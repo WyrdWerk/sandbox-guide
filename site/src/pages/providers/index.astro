@@ -1,43 +1,32 @@
 ---
 import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
 import { providers } from "../../lib/data";
 ---
 
 <Base title="Providers" description="One page per provider: what it is, sizes, billing, usability, caveats and sources.">
-  <header class="page-header">
-    <p class="kicker">Providers</p>
-    <h1>The seven providers</h1>
-    <p class="lede">
-      These pages are secondary: the feature pages are where the comparison happens. Use these for
-      the detail behind a verdict — sizes, the billing meter, how far a non-technical user gets, and
-      every contradiction the research found.
-    </p>
-  </header>
+  <PageHeader
+    kicker="Providers"
+    title="The twelve providers"
+    standfirst="These pages are secondary: the feature pages carry the comparison. Use these for the detail behind a verdict — sizes, the meter, how far a non-technical user gets, and every contradiction the research found."
+  />
 
-  <ul class="index-list">
-    {
-      providers.map((provider) => (
-        <li>
-          <a href={`/providers/${provider.id}/`}>{provider.name}</a>
-          <p>{provider.oneLiner}</p>
-          <p class="note">
-            {provider.status === "researched"
-              ? `Checked ${provider.checkedOn} · ${provider.caveats.length} open caveats`
-              : "Research pending"}
-          </p>
-        </li>
-      ))
-    }
-  </ul>
-
-  <div class="callout">
-    <p class="callout-title">Two companies, identical prices</p>
-    <p>
-      Sandboxer's four sizes and four plan tiers match Boat's exactly: $0.018 / $0.036 / $0.072 /
-      $0.20 an hour, and $20 / $100 / $500 / $2,000 a month. Almost everything else differs — disk
-      sizes, regions, how long a stopped machine's disk is kept, and the legal entity. No public
-      source explains the relationship, so it is recorded here as an open question, not as evidence
-      that one resells or copies the other.
-    </p>
+  <div class="wrap">
+    <section class="section section--flush">
+      <div class="picks">
+        {
+          providers.map((provider) => (
+            <article class="pick">
+              <span class="pick__label">{provider.checkedOn ? `Checked ${provider.checkedOn}` : "Research pending"}</span>
+              <h3 class="pick__title"><a href={`/providers/${provider.id}/`}>{provider.name}</a></h3>
+              <p class="pick__body">{provider.oneLiner}</p>
+              <p class="pick__catch">
+                {provider.caveats.length} recorded {provider.caveats.length === 1 ? "caveat" : "caveats"}.
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
   </div>
 </Base>

@@ -1,0 +1,165 @@
+{
+  "id": "reaching-it",
+  "group": "access",
+  "order": 7,
+  "title": "Reaching it: links, ports and who can open them",
+  "navTitle": "Reaching it",
+  "standfirst": "A machine nobody can reach is not an agent. There are four doors in — an HTTPS link, a raw TCP port, SSH, and the provider's API — and the important difference is who can open each one.",
+  "idea": [
+    "Every provider gives you an HTTPS address for a port inside the machine. What differs is the lock. A provider-key link needs an API key or a signed token on every request. A token-in-the-URL link is a password you can paste: convenient, and exactly as safe as the place you pasted it. An open link has no lock at all.",
+    "The open case is more common than buyers expect. boxd's name.boxd.sh is public to the internet with no authentication in front of it. InstaBox's public ports are unauthenticated by design. Agent 37's public port is deliberately credential-free and keeps working until you delete it. In each case the URL is the only secret.",
+    "The other doors are less visible. SSH is sometimes a real port, sometimes a WebSocket tunnel, sometimes a shell over the provider's own transport. Raw TCP exists at a few providers and is missing at most. The provider's API is always a door, and sometimes the only one."
+  ],
+  "splits": [
+    {
+      "heading": "Token in the URL, or no token at all",
+      "body": [
+        "Sandboxer puts a token in the preview URL by default and strips it before the request reaches your app. Lizard uses one token per sandbox, so a link to one port opens every exposed port on that machine. Sprites makes the URL private to the organisation, reachable with an org token.",
+        "At boxd and InstaBox the URL is the only credential. Agent 37 goes further and sells an explicitly public port that anyone can reach with no credential at all."
+      ]
+    },
+    {
+      "heading": "Raw TCP and SSH are a separate capability",
+      "body": [
+        "Runtime, boxd and Boat support a raw TCP path; Boat's depends on IPv4, which is not guaranteed. Sandboxer and InstaBox route SSH through a gateway. Lizard has no SSH protocol at all: its ssh command is an interactive shell over the provider's transport, so scp, rsync and port forwarding do not work.",
+        "Vercel exposes web ports and bills traffic to them, but a general raw TCP inbound or a personal SSH endpoint is not published."
+      ]
+    },
+    {
+      "heading": "A sleeping machine changes the answer",
+      "body": [
+        "A URL that wakes a machine is a different product from a URL that returns an error. Sprites, Runtime and InstaBox document wake on request. boxd's bot protection gates the wake: a webhook, API client or uptime monitor gets a 503 check page and the machine does not wake.",
+        "Boat cannot wake on a URL at all, because a stop removed the machine."
+      ]
+    }
+  ],
+  "watchFor": [
+    "Who can open the link: only you, anyone you send it to, or anyone who guesses it.",
+    "Whether the token is per port or per machine.",
+    "Whether a request to a sleeping machine wakes it or returns an error.",
+    "Whether raw TCP and SSH exist, and whether SSH is a real port or a tunnel.",
+    "Whether the URL survives a stop and resume."
+  ],
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "yes",
+      "note": "Every port gets an HTTPS URL; instance and preview URLs require an API key or a time-boxed signed URL. A public port is deliberately unauthenticated and permanent. SSH is tunnelled; no raw TCP.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/concepts",
+        "quote": "**Instance URLs require auth on every request**",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "blaxel",
+      "verdict": "partly",
+      "note": "Specific ports can be exposed, and preview URLs back a running sandbox with optional auth and custom domains. Default ingress authentication is not published.",
+      "source": {
+        "url": "https://docs.blaxel.ai/llms.txt",
+        "quote": "Render an application in real-time through a direct preview URL backed by a running Blaxel sandbox, with optional auth and custom domains.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "An HTTPS route per port, token-gated by default and --public to remove it; SSH on port 22; raw TCP by opening the sandbox firewall, but only IPv6 is guaranteed.",
+      "source": {
+        "url": "https://docs.boat.dev/hosting",
+        "quote": "boat does not support custom domains.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "yes",
+      "note": "Every machine is on name.boxd.sh with no authentication in front of it; subdomain proxies add ports, up to three raw TCP forwards, and SSH on a dedicated port. Bot protection only gates wake-ups.",
+      "source": {
+        "url": "https://docs.boxd.sh/guides/bot-protection",
+        "quote": "When a request would wake a sleeping machine, boxd first asks the visitor to pass a quick browser check.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "e2b",
+      "verdict": "partly",
+      "note": "Public URLs are reachable by anyone who knows them, with no authentication by default. SSH runs through a WebSocket proxy rather than a native port.",
+      "source": {
+        "url": "https://docs.e2b.dev/network/public-url",
+        "quote": "By default, a sandbox's public URLs are reachable by anyone who knows them.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "partly",
+      "note": "An HTTPS URL per port, up to 16, with no authentication: the URL is the only secret. SSH and mosh go through a gateway; no raw TCP inbound and no custom domain.",
+      "source": {
+        "url": "https://instabox.sh/docs/ports",
+        "quote": "It is not a secret: once published, anyone can reach the whole service until you unpublish it.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "A preview URL per exposed port, gated by one token per sandbox that opens every port on it. WebSockets pass through. No raw TCP, no SSH protocol, no custom domains for sandboxes.",
+      "source": {
+        "url": "https://lizard.build/docs/sandboxes/preview-urls",
+        "quote": "The token belongs to the sandbox, not to a port: it opens every port you expose on that sandbox",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "morph",
+      "verdict": "partly",
+      "note": "An instance can expose an HTTP service through the API. Default authentication and raw TCP support are not published.",
+      "source": {
+        "url": "https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post",
+        "quote": "Expose Http Service",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "Nothing is reachable until you open a door: token-gated previews, custom domains, raw TCP ports, a WireGuard or Tailscale private network, or SSH over the API.",
+      "source": {
+        "url": "https://withruntime.com/docs/sandbox-environment",
+        "quote": "Nothing on the internet can connect in to a sandbox. These are the ways in. You open each one yourself",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "yes",
+      "note": "A stable HTTPS address per port, private by default with a token in the URL; --public removes it. A public IPv6 with the firewall closed except SSH. No raw-TCP endpoint.",
+      "source": {
+        "url": "https://sandboxer.com/docs/hosting",
+        "quote": "Private (default) | `https://…-3000.box.sandboxer.com?_token=…` | Anyone with the full URL.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sprites",
+      "verdict": "partly",
+      "note": "Every Sprite has an HTTPS URL that is private to the organisation by default, reachable with an org token. SSH requires installing a server and proxying it.",
+      "source": {
+        "url": "https://docs.fly.io/sprites/concepts/networking",
+        "quote": "A Sprite URL is private by default. It's reachable only by members of your org, through the browser or with an org token",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "vercel-sandbox",
+      "verdict": "partly",
+      "note": "Web ports can be exposed, up to 15 per sandbox, and traffic to them is billable. A general raw TCP inbound, personal SSH or public IPv4 is not published.",
+      "source": {
+        "url": "https://vercel.com/docs/sandbox/pricing#network",
+        "quote": "Data your sandbox sends to the internet, plus all traffic to and from exposed ports, is billable and measured in GB.",
+        "confidence": "pricing-page"
+      }
+    }
+  ]
+}

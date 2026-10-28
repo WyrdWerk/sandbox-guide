@@ -1,0 +1,119 @@
+{
+  "id": "sprites",
+  "name": "Sprites",
+  "url": "https://fly.io/sprites",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "Persistent Fly.io microVMs that suspend after about 30 seconds idle and bill measured CPU and memory.",
+  "whatItIs": [
+    "Sprites are persistent Linux environments on Fly.io for agents, development and user-submitted code. Each is a dedicated microVM with a whole filesystem that survives between sessions.",
+    "The design assumes a computer that sleeps: a short idle window suspends it with memory frozen, and a longer idle period stops it and drops memory, keeping the disk."
+  ],
+  "whoFor": "Developers who want a long-lived Linux computer for an agent, with automatic sleep and usage-based billing rather than a reserved size.",
+  "isolation": "Dedicated microVM with hardware-level isolation. Root is available and Docker is reported to work, but Sprites do not run systemd: a built-in service manager starts services on wake.",
+  "sizes": "One fixed shape: 8 vCPUs and 100 GB of storage, with memory assigned and autoscaled per Sprite. No published region selection, GPU or ARM option.",
+  "billing": {
+    "model": "Measured usage, with optional monthly plans that bundle allowances.",
+    "meter": "Actual CPU at $0.0385 per CPU-hour and actual memory at $0.021875 per GB-hour while awake; hot storage at $0.000683 per GB-hour and cold storage at $0.000027 per GB-hour.",
+    "stopped": "No compute charge in warm or cold state, but cold storage is billed for as long as data is kept.",
+    "planFee": "The pricing page says there are no plans; the product FAQ describes plans including Hero at $100 a month. Both are current.",
+    "minimum": "No published minimum. A one-time $30 trial credit per user and per organisation, which cannot pay a subscription fee."
+  },
+  "cost": {
+    "A": {
+      "headline": "$14.58 to $65.92",
+      "shape": "8-vCPU Sprite, 4 GB average memory, no retained disk, deleted after each task",
+      "lines": [
+        { "label": "Memory", "arithmetic": "166.67 h × 4 GB × $0.021875", "amount": "$14.58" },
+        { "label": "CPU at zero to full use", "arithmetic": "166.67 h × 0–8 × $0.0385", "amount": "$0–$51.33" }
+      ],
+      "total": "$14.58–$65.92",
+      "notes": [
+        "The requested 2 vCPU / 4 GiB shape cannot be reserved; CPU is measured up to the 8-vCPU ceiling.",
+        "Actual storage writes and task time are excluded."
+      ]
+    },
+    "B": {
+      "headline": "$153.67 to $378.51",
+      "shape": "8-vCPU Sprite, 8 GB average memory, 50 GB retained, 730 h",
+      "lines": [
+        { "label": "Memory", "arithmetic": "730 × 8 × $0.021875", "amount": "$127.75" },
+        { "label": "CPU at zero to full use", "arithmetic": "730 × 0–8 × $0.0385", "amount": "$0–$224.84" },
+        { "label": "Storage, hot plus cold", "arithmetic": "730 × 50 × ($0.000683 + $0.000027)", "amount": "$25.92" }
+      ],
+      "total": "$153.67–$378.51",
+      "notes": [
+        "An always-on workload must actively prevent idle sleep.",
+        "Whether hot and cold storage apply to the same bytes is not unambiguous in the provider's wording."
+      ]
+    },
+    "C": {
+      "headline": "$9.49 to $37.21",
+      "shape": "8-vCPU Sprite, 4 GB average memory, 20 GB retained, 90 active hours",
+      "lines": [
+        { "label": "Memory", "arithmetic": "90 × 4 × $0.021875", "amount": "$7.88" },
+        { "label": "CPU at zero to full use", "arithmetic": "90 × 0–8 × $0.0385", "amount": "$0–$27.72" },
+        { "label": "Storage, hot plus cold", "arithmetic": "90 × 20 × $0.000683 + 720 × 20 × $0.000027", "amount": "$1.62" }
+      ],
+      "total": "$9.49–$37.21",
+      "notes": [
+        "Idle time is compute-free, but the disk keeps billing while it exists.",
+        "Warm suspension keeps memory frozen; a longer idle period drops it and the next wake starts processes fresh."
+      ]
+    }
+  },
+  "usability": {
+    "dashboard": "A dashboard exists for connector setup and a Gateway Playground that can fire a request without code.",
+    "withoutCode": "Limited. The documented start path installs a CLI and opens a console; the no-code surface is connector testing, not running an agent.",
+    "signup": "Uses a Fly.io account. Card requirement, waitlist and trial duration are not published.",
+    "docs": "Fly documentation covers lifecycle, checkpoints, networking and connectors. Support is community on lower plans and varies by plan.",
+    "tripsUp": [
+      "Warm and cold are different states, and the transition is not user-selected.",
+      "Open TCP connections do not survive a pause, warm or cold.",
+      "Checkpoints are filesystem snapshots, not memory snapshots.",
+      "Cold storage bills while the Sprite is kept."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "The pricing page and product FAQ disagree on plans",
+      "detail": "Pricing says there are no plans and nothing charged per Sprite; the FAQ describes plans including Hero at $100 a month with CPU, RAM and storage allowances.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "Warm-to-cold timing is not published",
+      "detail": "The idle window before warm suspension is about 30 seconds; how long before a Sprite drops to cold is not stated.",
+      "status": "open"
+    },
+    {
+      "issue": "Storage charges while idle are ambiguous",
+      "detail": "The FAQ says warm and cold are not billed, while the pricing page bills cold storage for as long as data is kept.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "No fork or create-from-checkpoint is documented",
+      "detail": "Checkpoints restore in place and overwrite current files; a live fork or clone is not established.",
+      "status": "open"
+    },
+    {
+      "issue": "Region selection and architecture are unpublished",
+      "detail": "No provider-confirmed region list, GPU option or CPU architecture statement was found.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "The whole filesystem persists between sessions, not one mounted folder.",
+    "Warm suspension keeps processes and resumes in 100–500 ms.",
+    "Wake on request is explicit.",
+    "Copy-on-write checkpoints that do not interrupt work.",
+    "Connectors keep credentials in the gateway, not the guest."
+  ],
+  "sources": [
+    { "label": "Overview", "url": "https://docs.fly.io/sprites/index" },
+    { "label": "Lifecycle", "url": "https://docs.fly.io/sprites/concepts/lifecycle" },
+    { "label": "Checkpoints", "url": "https://docs.fly.io/sprites/concepts/checkpoints" },
+    { "label": "Networking", "url": "https://docs.fly.io/sprites/concepts/networking" },
+    { "label": "Connectors", "url": "https://docs.fly.io/sprites/concepts/connectors" },
+    { "label": "Pricing", "url": "https://fly.io/pricing/" }
+  ]
+}

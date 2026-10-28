@@ -1,0 +1,117 @@
+{
+  "id": "vercel-sandbox",
+  "name": "Vercel Sandbox",
+  "url": "https://vercel.com/docs/sandbox",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "Firecracker microVMs inside Vercel, billed on active CPU and provisioned memory.",
+  "whatItIs": [
+    "Vercel Sandbox runs untrusted or agent-generated code in Firecracker microVMs, managed through a CLI, JavaScript SDK or Python SDK.",
+    "It is part of the Vercel platform rather than a separate product: usage sits on the Vercel plan, and the Hobby plan is restricted to non-commercial use."
+  ],
+  "whoFor": "Teams already on Vercel who want agent code execution with many regions and familiar account controls.",
+  "isolation": "Firecracker microVM with a dedicated kernel. Root access, Docker and FUSE are documented; systemd and nested virtualisation are not.",
+  "sizes": "1 or even numbers of vCPUs from 2 to 32 depending on plan, 2 GB of memory per vCPU, and 64 GB of ephemeral NVMe. Hobby caps at 4 vCPU / 8 GB, Pro at 8 / 16, Enterprise at 32 / 64. Nineteen regions; no GPU published.",
+  "billing": {
+    "model": "Metered usage against the Vercel plan, with a monthly credit on Pro.",
+    "meter": "Active CPU at $0.128 per CPU-hour, excluding time waiting on I/O; provisioned memory at $0.0212 per GB-hour with a one-minute minimum; creations, data transfer, snapshots and drives separately.",
+    "stopped": "No CPU or memory charge, but snapshots and drives keep billing. Persistent sandboxes create a billable snapshot when they stop.",
+    "planFee": "Vercel Pro is $20 a month and includes $20 of usage credit, which expires monthly.",
+    "minimum": "Memory bills in one-minute increments. Hobby has included quotas and pauses creation when they are exhausted."
+  },
+  "cost": {
+    "A": {
+      "headline": "$18.40 before credit",
+      "shape": "2 vCPU / 4 GB, 10% average CPU, deleted after each task",
+      "lines": [
+        { "label": "Memory", "arithmetic": "4 × 166.67 h × $0.0212", "amount": "$14.13" },
+        { "label": "Active CPU at 10%", "arithmetic": "2 × 166.67 h × 0.10 × $0.128", "amount": "$4.27" }
+      ],
+      "total": "$18.40",
+      "notes": [
+        "An otherwise unused $20 Pro credit covers this, but the $20 platform fee remains.",
+        "Opt out of persistence, or deleting a sandbox leaves billable snapshots."
+      ]
+    },
+    "B": {
+      "headline": "$161.18 before credit, and not a continuous session",
+      "shape": "4 vCPU / 8 GB, 10% average CPU, 730 running-equivalent hours",
+      "lines": [
+        { "label": "Memory", "arithmetic": "8 × 730 × $0.0212", "amount": "$123.81" },
+        { "label": "Active CPU at 10%", "arithmetic": "4 × 730 × 0.10 × $0.128", "amount": "$37.38" }
+      ],
+      "total": "$161.18",
+      "notes": [
+        "A single session cannot exceed 24 hours on Pro, so 730 hours needs restarts and snapshots.",
+        "50 GiB is not a configurable disk: the standard filesystem is 64 GB, and drives are billed on used data."
+      ],
+      "flag": "The always-on workload breaks the 24-hour per-session limit, so this is a running-equivalent estimate rather than a feasible single sandbox."
+    },
+    "C": {
+      "headline": "$9.94 before credit",
+      "shape": "2 vCPU / 4 GB, 10% average CPU, 90 running hours, stopped otherwise",
+      "lines": [
+        { "label": "Memory", "arithmetic": "4 × 90 × $0.0212", "amount": "$7.63" },
+        { "label": "Active CPU at 10%", "arithmetic": "2 × 90 × 0.10 × $0.128", "amount": "$2.30" }
+      ],
+      "total": "$9.94",
+      "notes": [
+        "A 20 GB drive holding 20 GB of data for the month adds about $1.00 plus reads and writes.",
+        "Retaining the filesystem as snapshots adds storage; 30 stops can create 30 snapshots."
+      ]
+    }
+  },
+  "usability": {
+    "dashboard": "The Vercel dashboard can stop or delete a sandbox and shows a lifecycle activity log.",
+    "withoutCode": "No documented no-code path; the workflows are CLI and SDK.",
+    "signup": "A Vercel account. Card requirement depends on the plan and trial path; Hobby is non-commercial only.",
+    "docs": "Vercel's docs cover sandbox concepts, SDK, pricing and limits. Support follows the Vercel plan.",
+    "tripsUp": [
+      "The default timeout is 5 minutes, and the maximum session is 45 minutes on Hobby, 24 hours on Pro.",
+      "Persistent sandboxes bill snapshot storage automatically.",
+      "Active CPU excludes I/O wait, so the meter is not wall-clock time.",
+      "Hobby pauses sandbox creation when quotas run out."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "Persistence is billed by default",
+      "detail": "Persistent sandboxes save their filesystem when stopped, and each automatic snapshot consumes snapshot storage billed separately from compute.",
+      "status": "open"
+    },
+    {
+      "issue": "The session limit is not a lifetime limit",
+      "detail": "The maximum duration applies to a single session: 45 minutes on Hobby, 24 hours on Pro and Enterprise. Persistent sandboxes can be resumed into a new session.",
+      "status": "open"
+    },
+    {
+      "issue": "Hobby is non-commercial",
+      "detail": "The Hobby plan restricts users to non-commercial, personal use only.",
+      "status": "open"
+    },
+    {
+      "issue": "Hobby quota reset wording differs",
+      "detail": "One page says creation pauses until 30 days after first use; another says until the next billing cycle.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "Fork is not a live memory copy",
+      "detail": "Fork uses the current saved snapshot or falls back to a fresh create from the image; manual snapshotting stops the source.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "Firecracker isolation with root and Docker inside.",
+    "Nineteen regions.",
+    "Credential brokering keeps secrets out of the guest.",
+    "Drives are billed on used data, not provisioned size.",
+    "Snapshots expire after 30 days by default and can be kept indefinitely."
+  ],
+  "sources": [
+    { "label": "Overview", "url": "https://vercel.com/docs/sandbox" },
+    { "label": "Concepts", "url": "https://vercel.com/docs/sandbox/concepts" },
+    { "label": "Persistence", "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes" },
+    { "label": "Snapshots", "url": "https://vercel.com/docs/sandbox/concepts/snapshots" },
+    { "label": "Pricing", "url": "https://vercel.com/docs/sandbox/pricing" }
+  ]
+}

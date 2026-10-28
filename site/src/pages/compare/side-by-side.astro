@@ -1,0 +1,191 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { features, providers } from "../../lib/data";
+
+const kinds: Record<string, string> = {
+  agent37: "Container or VM",
+  blaxel: "MicroVM",
+  boat: "Full VM",
+  boxd: "KVM machine",
+  e2b: "Firecracker microVM",
+  instabox: "Firecracker microVM",
+  lizard: "Firecracker microVM",
+  morph: "Full VM",
+  runtime: "Firecracker microVM",
+  sandboxer: "Cloud Hypervisor microVM",
+  sprites: "MicroVM",
+  "vercel-sandbox": "Firecracker microVM",
+};
+
+const defaults = ["agent37", "boxd", "runtime"];
+const payload = {
+  providers: providers.map((provider) => ({
+    id: provider.id,
+    name: provider.name,
+    kind: kinds[provider.id] ?? "Sandbox",
+  })),
+  features: features.map((feature) => ({
+    id: feature.id,
+    title: feature.title,
+    rows: feature.rows.map((row) => ({
+      provider: row.provider,
+      verdict: row.verdict,
+      note: row.note,
+    })),
+  })),
+  defaults,
+};
+---
+
+<Base title="Side by side" description="Pick two or three providers and compare their behaviour across sixteen features.">
+  <PageHeader
+    kicker="Compare · side by side"
+    title="Two or three providers, sixteen features"
+    standfirst="Choose the providers you are deciding between. The table compares what they do, not which is cheaper; the note under each badge is the short version, and every feature page carries the source."
+    meta={["12 providers", "16 features", "Behaviour, not a ranking"]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush" aria-labelledby="picker-h">
+      <div class="section__head">
+        <h2 class="section__title" id="picker-h">Choose providers</h2>
+        <p class="section__note">Up to three. The first three are selected by default.</p>
+      </div>
+      <div class="picker" id="picker">
+        {
+          providers.map((provider) => (
+            <label>
+              <input
+                type="checkbox"
+                name="provider"
+                value={provider.id}
+                checked={defaults.includes(provider.id)}
+              />
+              {provider.name}
+            </label>
+          ))
+        }
+      </div>
+      <p class="picker__hint" id="picker-hint" aria-live="polite"></p>
+
+      <noscript>
+        <p class="section__note">
+          This comparison needs JavaScript to change the selection. Every feature page has the same
+          comparison for all twelve providers; start with
+          <a href="/features/isolation/">Isolation</a>.
+        </p>
+      </noscript>
+
+      <div id="matrix"></div>
+    </section>
+  </div>
+
+  <script type="application/json" id="compare-data" set:html={JSON.stringify(payload)}></script>
+  <script>
+    const data = JSON.parse(document.getElementById("compare-data").textContent);
+    const boxes = Array.from(document.querySelectorAll("#picker input"));
+    const target = document.getElementById("matrix");
+    const hint = document.getElementById("picker-hint");
+    const order = data.defaults.slice();
+
+    const labels = {
+      yes: ["badge badge--yes", "Yes"],
+      partly: ["badge badge--partly", "Partly"],
+      no: ["badge badge--no", "No"],
+      "not-published": ["badge badge--unknown", "Not published"],
+      pending: ["badge badge--unknown", "Pending"],
+    };
+
+    function badge(verdict) {
+      const span = document.createElement("span");
+      const [className, label] = labels[verdict] ?? labels["not-published"];
+      span.className = className;
+      const mark = document.createElement("span");
+      mark.className = "badge__mark";
+      mark.setAttribute("aria-hidden", "true");
+      span.append(mark, document.createTextNode(label));
+      return span;
+    }
+
+    function render() {
+      const selected = order.filter((id) => boxes.find((box) => box.value === id)?.checked);
+      const chosen = data.providers.filter((provider) => selected.includes(provider.id));
+      target.replaceChildren();
+
+      const table = document.createElement("table");
+      table.className = "compare-columns";
+
+      const caption = document.createElement("caption");
+      caption.textContent = "Behaviour across sixteen features. Read from provider documentation on 28 October 2026.";
+      table.append(caption);
+
+      const thead = document.createElement("thead");
+      const headRow = document.createElement("tr");
+      const blank = document.createElement("th");
+      blank.scope = "col";
+      blank.innerHTML = '<span class="visually-hidden">Feature</span>';
+      headRow.append(blank);
+      for (const provider of chosen) {
+        const th = document.createElement("th");
+        th.scope = "col";
+        const title = document.createElement("span");
+        title.className = "col-title";
+        title.textContent = provider.name;
+        const sub = document.createElement("span");
+        sub.className = "col-sub";
+        sub.textContent = provider.kind;
+        th.append(title, sub);
+        headRow.append(th);
+      }
+      thead.append(headRow);
+      table.append(thead);
+
+      const tbody = document.createElement("tbody");
+      for (const feature of data.features) {
+        const row = document.createElement("tr");
+        const th = document.createElement("th");
+        th.scope = "row";
+        const link = document.createElement("a");
+        link.href = `/features/${feature.id}/`;
+        link.textContent = feature.title;
+        th.append(link);
+        row.append(th);
+
+        for (const provider of chosen) {
+          const cell = document.createElement("td");
+          const cellProv = document.createElement("span");
+          cellProv.className = "cell-prov";
+          cellProv.textContent = provider.name;
+          const value = feature.rows.find((item) => item.provider === provider.id);
+          cell.append(cellProv, badge(value?.verdict ?? "not-published"));
+          if (value?.note) cell.append(document.createTextNode(" " + value.note));
+          row.append(cell);
+        }
+        tbody.append(row);
+      }
+      table.append(tbody);
+      target.append(table);
+
+      hint.textContent =
+        chosen.length < 2
+          ? "Select at least two providers to compare."
+          : `Comparing ${chosen.map((provider) => provider.name).join(", ")}.`;
+    }
+
+    for (const box of boxes) {
+      box.addEventListener("change", () => {
+        const checked = boxes.filter((item) => item.checked);
+        if (checked.length > 3) {
+          const keep = checked.slice(-3).map((item) => item.value);
+          for (const item of boxes) item.checked = keep.includes(item.value);
+        }
+        order.length = 0;
+        for (const item of boxes) if (item.checked) order.push(item.value);
+        render();
+      });
+    }
+
+    render();
+  </script>
+</Base>
