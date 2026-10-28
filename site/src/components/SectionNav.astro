@@ -19,3 +19,34 @@ const { items } = Astro.props;
     </ul>
   </div>
 </nav>
+<script is:inline>
+  // Marks the section currently under the sticky nav, instead of always the first.
+  document.addEventListener("DOMContentLoaded", function () {
+    var links = [].slice.call(document.querySelectorAll(".section-nav__link"));
+    var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+    var nav = document.querySelector(".section-nav");
+    var list = nav.querySelector(".section-nav__list");
+    var shown = -1;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      // Sections land 5rem from the top after an anchor jump (html scroll-padding-top); count them as reached a little before that.
+      var line = nav.getBoundingClientRect().bottom + 64;
+      var current = 0;
+      targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top <= line) current = i; });
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) current = links.length - 1;
+      if (current === shown) return;
+      shown = current;
+      links.forEach(function (a, i) {
+        if (i === current) a.setAttribute("aria-current", "true");
+        else a.removeAttribute("aria-current");
+      });
+      // On narrow screens keep the current item visible in the scrolling strip.
+      if (list.scrollWidth > list.clientWidth) {
+        list.scrollLeft += links[current].getBoundingClientRect().left - list.getBoundingClientRect().left - 16;
+      }
+    }
+    addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  });
+</script>

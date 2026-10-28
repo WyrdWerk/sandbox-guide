@@ -330,7 +330,8 @@ code {
 .prose h3 { color: var(--color-text); }
 .prose h3 { font-size: var(--text-xl); margin-top: var(--space-7); }
 .prose strong { color: var(--color-text); font-weight: var(--weight-semibold); }
-.prose ul, .prose ol { padding-left: 1.2em; }
+.prose ul, .prose ol,
+ul.prose, ol.prose { padding-left: 1.2em; }
 .prose li + li { margin-top: 0.35em; }
 
 /* ---------- where providers split ----------------------------------------- */
@@ -937,7 +938,10 @@ code {
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
+    /* Same fade as the section nav, so the cut-off strip reads as scrollable. */
+    mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 2rem), transparent 100%);
   }
+  .site-nav:focus-within { mask-image: none; }
   .site-nav::-webkit-scrollbar { display: none; }
   .site-nav__link { white-space: nowrap; }
   .page-title { max-width: none; }
@@ -1077,9 +1081,6 @@ code {
 }
 .picker input { accent-color: var(--color-accent); }
 .picker__hint { font-size: var(--text-sm); color: var(--color-text-muted); }
-
-/* anchor targets clear the sticky section nav */
-.section[id] { scroll-margin-top: 5.5rem; }
 
 /* Stand-alone section titles (provider pages) need room above them. */
 .section > .section__title { margin: var(--space-9) 0 var(--space-3); }
