@@ -15,11 +15,12 @@ const { picks } = Astro.props;
       <li>
         <p class="situation">{pick.situation}</p>
         <p class="why">
-          <strong>
-            {pick.providers
-              .map((id) => providerById.get(id)?.name ?? id)
-              .join(", ")}
-          </strong>
+          {pick.providers.map((id, index) => (
+            <>
+              {index > 0 ? ", " : ""}
+              <a href={`/providers/${id}/`}><strong>{providerById.get(id)?.name ?? id}</strong></a>
+            </>
+          ))}
           {" — "}
           {pick.why}
         </p>

@@ -3,6 +3,9 @@
 A static Astro site that explains cloud sandbox providers for AI agents to non-engineers. No
 backend, no client-side JavaScript, no framework components: HTML and one stylesheet.
 
+In the public repository (github.com/WyrdWerk/sandbox-guide) the `research/` and `site/` folders sit
+at the repo root; the paths below are the workspace layout, which is the same tree one level down.
+
 ## Run it
 
 ```bash

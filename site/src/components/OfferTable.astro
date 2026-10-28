@@ -34,7 +34,6 @@ const { rows } = Astro.props;
               {provider ? <a href={`/providers/${provider.id}/`}>{provider.name}</a> : row.provider}
               <br />
               <Verdict verdict={pending ? "pending" : row.verdict} />
-              <SourceRef source={row.source} />
             </th>
             {pending || !offer ? (
               <td colspan="5" class="muted">Research pending. No claims are shown until the profile is finished.</td>
@@ -42,7 +41,10 @@ const { rows } = Astro.props;
               <>
                 <td>{offer.kind}</td>
                 <td>{offer.card}</td>
-                <td>{offer.get}</td>
+                <td>
+                  {offer.get}
+                  <SourceRef source={row.source} />
+                </td>
                 <td>{offer.ends}</td>
                 <td>{offer.traps}</td>
               </>
