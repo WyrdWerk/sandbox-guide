@@ -4,57 +4,102 @@
   "order": 16,
   "title": "Who is behind it",
   "navTitle": "The company",
-  "standfirst": "Age, ownership and what happens when the service breaks. This is the part of a sandbox that no amount of documentation testing can tell you.",
+  "standfirst": "Entity, age, funding, status page, SLA, compliance and the terms that decide whether you can leave. This is the part of a sandbox that documentation testing cannot tell you.",
   "idea": [
-    "A sandbox is a dependency. Your agent's files, its logins and sometimes its only copy of a working environment live on someone else's machine. The company behind it decides how long that machine is likely to exist, who owns it after an acquisition, and whether anyone answers when it fails.",
-    "Three signals are public and useful: how old the product is, whether it has changed hands, and whether there is a status page with a history. A status page that shows a real incident is more reassuring than one that is permanently green.",
-    "An SLA is a promise with a remedy. Several providers here publish none, and one publishes a promise its status page was not meeting during research. That is not a reason to avoid it; it is a reason to know it."
+    "A sandbox is a dependency. Your agent's files, its logins and sometimes its only working environment live on someone else's machine. The company decides how long that machine is likely to exist, who owns it after an acquisition, and whether anyone answers when it fails.",
+    "Four facts are worth establishing before you build. Who is the contracting entity, and in which jurisdiction? How old is the product, and has it changed hands? What does the status page actually measure? And what do the terms say about price changes and deleting your data after you cancel?",
+    "An SLA is a promise with a remedy, not a status page. Several providers publish none, and several publish a number that covers a platform rather than the sandbox product. Compliance works the same way: a SOC 2 report has an entity and a scope, and neither is implied by a badge."
   ],
   "splits": [
     {
-      "heading": "Age and ownership",
+      "heading": "Independent, acquired, or one product of a studio",
       "body": [
-        "Boat, Agent 37 and Sandboxer are weeks or months old. Runtime's public repository was created in late September 2026. boxd raised a €2M pre-seed in September 2026. InstaBox is part of InsForge, a YC P26 company.",
-        "Blaxel is the only acquisition in the set: Baseten acquired it on 10 September 2026 and says the product continues. Lizard's funding and headcount are not published. Morph's company details are not published at all."
-      ]
+        "Blaxel is the only acquisition here: Baseten acquired it on 10 September 2026, and the linked standard terms still name Blaxel, Inc. and predate the deal. InstaBox is a second product line of InsForge AI, launched in October 2026, not a separate company. Sandboxer is one product of North Bay Ventures, Jon Oringer's studio, and its contracting entity was incorporated in 2022, four years before the product launched.",
+        "The practical question is not who owns the brand but who signs the contract and what happens to your data if the product is folded into another platform."
+      ],
+      "quote": {
+        "text": "Baseten has acquired Blaxel.",
+        "cite": "Baseten, acquisition announcement",
+        "url": "https://www.baseten.co/blog/blaxel-is-joining-baseten-to-build-the-future-of-agentic-cloud/",
+        "tag": "docs-confirmed"
+      }
     },
     {
-      "heading": "Status pages and SLAs",
+      "heading": "What the status number measures",
       "body": [
-        "Agent 37, Boat, Lizard, Runtime, Sandboxer and Vercel publish status pages. boxd and InstaBox do not have a working one. Morph and Sprites have no Sprite-specific status page established.",
-        "Only some publish an SLA. Boat claims 99.95% measured sandbox uptime; Runtime promises 99% monthly and its status page showed 96.37% over seven days at the time of research. InstaBox puts a 99.9% SLA on Enterprise."
-      ]
+        "Boat's status page has seven customer-facing components. Over 90 days they range from 98.83% (Sandbox Fork) to 100%, and pooled across the seven the figure is 99.74%. One further component is an internal edge-case test suite, not customer uptime, and Stop + Resume covers only about a third of the window.",
+        "Runtime checks the API every two minutes and starts a real sandbox every ten; its API passed 96.37% of checks over seven days and 98.87% over 30. Lizard's status page reports a platform figure but has no sandbox component. Vercel lists Sandbox as operational without a Sandbox-specific percentage, and Sprites has a component on Fly's page but no numeric figure."
+      ],
+      "quote": {
+        "text": "Sandboxes have an uptime of 99.95%. boat measures this over the history of all sandboxes.",
+        "cite": "Boat, FAQ",
+        "url": "https://docs.boat.dev/faq",
+        "tag": "docs-confirmed"
+      }
     },
     {
-      "heading": "What an acquisition changes",
+      "heading": "The SLA is narrower than the promise",
       "body": [
-        "Blaxel's terms page predates the acquisition, and its Baseten-managed workspaces have a documented offboarding gap: removing a user from Baseten does not delete their Blaxel identity. Those are ordinary integration seams, not signs of closure, but they are the details a buyer should know.",
-        "For the rest, the honest answer is that the research records what is published and nothing more. A missing company page is not evidence of instability, and a funding round is not evidence of permanence."
-      ]
+        "Runtime's 99% API promise is credit-based and tied to having paid, not to a plan: every paid account gets service credit equal to 10% of that month's charges if the API misses the target. Vercel's 99.99% Enterprise SLA covers the platform and does not name Sandbox. Fly's 99.9% SLA is Enterprise-only and credits must be claimed, and Sprites coverage under it is not confirmed.",
+        "Several providers publish no SLA at all: Boat disclaims uptime, Agent 37 promises none unless agreed in writing, and Sandboxer says there is no SLA during early access."
+      ],
+      "quote": {
+        "text": "It covers every account that has bought credit and has not had all of it refunded or charged back",
+        "cite": "Runtime, SLA",
+        "url": "https://withruntime.com/legal/sla",
+        "tag": "docs-confirmed"
+      }
+    },
+    {
+      "heading": "Compliance has a scope",
+      "body": [
+        "Runtime's certification table attaches each certificate to a supplier, not to Runtime: the SOC 1, SOC 2, SOC 3 and ISO 27001 entry is for its data centre in Virginia. E2B reports a SOC 2 Type II report for FoundryLabs, Inc. and a HIPAA BAA path. Vercel holds SOC 2 Type 2 and ISO 27001 at platform level, without establishing that Sandbox is in scope.",
+        "Morph has no verified SOC 2 for Morph Labs, Inc. A Delve trust portal sometimes cited for it belongs to AutoInfra, a different company. InstaBox's Trust Center shows a HIPAA badge only, and its YC badge is on insforge.dev, not instabox.sh."
+      ],
+      "quote": {
+        "text": "Sandboxes, their disks and memory — Data center, Virginia — SOC 1, SOC 2 and SOC 3 Type 2; ISO 27001",
+        "cite": "Runtime, trust page",
+        "url": "https://withruntime.com/docs/trust",
+        "tag": "docs-confirmed"
+      }
+    },
+    {
+      "heading": "Leaving is a term, not a button",
+      "body": [
+        "boxd may adjust published rates at any time for usage from the date of the change, with no notice period, and may delete customer content after a 30-day retention period. Boat's terms cancel immediately when you close the account and forfeit prepaid value. Blaxel may delete customer data at its discretion, with a 90-day maximum retention.",
+        "Others are more specific: Lizard deletes within a commercially reasonable timeframe, and immediately on request including backups. Fly deletes customer data within 30 days, with residual encrypted backups up to 90. Agent 37 keeps a deleted Cloud instance's recovery copy for seven days, but dashboard hosting is kept until you ask."
+      ],
+      "quote": {
+        "text": "Boxd may adjust its published rates at any time, effective for usage from the date of the change onward",
+        "cite": "boxd, Terms §5.5",
+        "url": "https://boxd.sh/terms/",
+        "tag": "docs-confirmed"
+      }
     }
   ],
   "watchFor": [
-    "How old the product is, and whether the company page exists at all.",
-    "Whether it has been acquired, and whether the product is still shipping.",
-    "Whether there is a status page with incident history.",
-    "Whether an SLA exists, and what remedy it offers.",
-    "Whether the contracting entity and terms match the brand."
+    "The contracting entity and its jurisdiction, not the brand on the homepage.",
+    "What the uptime percentage covers: a component, an API, a platform, or a real sandbox.",
+    "Whether an SLA exists at all, which plans it covers, and whether the remedy is credit or cash.",
+    "Whether a compliance report names the entity and the product you are buying.",
+    "The notice period before a price change, and what happens to prepaid value on cancellation.",
+    "The deletion window after termination, including backups, and whether you get an export."
   ],
   "rows": [
     {
       "provider": "agent37",
       "verdict": "partly",
-      "note": "Early-stage, Y Combinator Fall 2026. A public status page with a real incident history, SOC 2 Type I, and a founder-led support address.",
+      "note": "Agent 37 Inc., New York law; state of incorporation not published. Founded 2026 by Vishnu Krishnaprasad, YC Fall 2026; funding amount not published. Status components report 100% over 30/60/90 days, provider-reported. No SLA unless agreed in writing. SOC 2 Type I on request, Type II in progress; ISO and HIPAA not published. Deleted Cloud instances keep a recovery copy 7 days; dashboard hosting is kept until you ask; account data goes within 30 days.",
       "source": {
-        "url": "https://battleships.dev/data/providers/agent-37.md",
-        "quote": "Y Combinator Fall 2026",
-        "confidence": "third-party"
+        "url": "https://www.agent37.com/terms",
+        "quote": "we do not promise a specific uptime level unless we have agreed to one with you in writing.",
+        "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "blaxel",
       "verdict": "partly",
-      "note": "Acquired by Baseten on 10 September 2026. Baseten says the product continues and features keep shipping; the terms page predates the deal.",
+      "note": "Blaxel, Inc. (formerly Beamlit), Delaware, acquired by Baseten on 10 September 2026; the linked terms still name Blaxel and predate the deal. Six founders including CEO Paul Sinaï and CTO Christophe Ploujoux; founded 2024; $7.3M seed. Status reports Sandboxes 99.33% and Platform 99.30% for Jul–Oct 2026, provider-reported. No standard numeric SLA; Custom lists custom SLAs. Claims SOC 2, HIPAA and ISO 27001; HIPAA add-on $250/month. On termination it may delete data at its discretion, with a 90-day maximum retention.",
       "source": {
         "url": "https://www.baseten.co/blog/blaxel-is-joining-baseten-to-build-the-future-of-agentic-cloud/",
         "quote": "Baseten has acquired Blaxel.",
@@ -64,37 +109,37 @@
     {
       "provider": "boat",
       "verdict": "partly",
-      "note": "Operated by Dedale AI, a Delaware company; Y Combinator Fall 2026, three people, Paris. A status page and a 99.95% measured uptime claim.",
+      "note": "Dedale AI, Corp., Delaware, Dover address. Founded 2026 by Anicet Nougaret (CEO) and Kirill Makarov (CTO), YC Fall 2026; no priced round published. Seven customer-facing status components range 98.83%–100% over 90 days, pooled 99.74%; Sandbox Fork is lowest and Stop + Resume covers about a third of the window. No SLA; the terms disclaim uptime, and 99.95% is a measured claim. SOC 2 in progress; no ISO, HIPAA or SSO. No price-change notice; closing the account cancels immediately and forfeits prepaid value.",
       "source": {
-        "url": "https://battleships.dev/data/providers/boat.json",
-        "quote": "Boat Founded: 2024 Batch: Fall 2026 Team Size: 3 Status: Active Location: Paris, France",
-        "confidence": "third-party"
+        "url": "https://docs.boat.dev/faq",
+        "quote": "Sandboxes have an uptime of 99.95%. boat measures this over the history of all sandboxes.",
+        "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "boxd",
       "verdict": "partly",
-      "note": "Operated by Azin Tech Holding in Amsterdam, with a €2M pre-seed in September 2026. No status page: status.boxd.sh does not resolve and /status is a 404.",
+      "note": "Azin Tech Operating Company B.V., KvK 99718340, Amsterdam; a near-identically named holding company sits above it, which is inferred rather than stated. Founders and headcount not published; €2M pre-seed September 2026. No status page and no uptime figure. No SLA. No SOC 2, ISO 27001, HIPAA or trust centre claimed. Residency contradicts itself: the FAQ says no US cloud dependency, while the privacy notice names US clusters and Latitude.sh LLC as infrastructure. Price changes apply immediately for new usage; data may be deleted after 30 days.",
       "source": {
-        "url": "https://battleships.dev/data/providers/boxd.md",
-        "quote": "boxd.sh is operated by Azin Tech Holding",
-        "confidence": "third-party"
+        "url": "https://boxd.sh/privacy/",
+        "quote": "Latitude.sh LLC (Delaware, United States): bare-metal server infrastructure for our European Union and United States clusters.",
+        "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "e2b",
       "verdict": "partly",
-      "note": "SOC 2 Type II and a HIPAA BAA path. Company age, funding, status page and SLA were not established in the sources inspected.",
+      "note": "FoundryLabs, Inc., Delaware. Founded 2023 by Vasek Mlejnsky (CEO) and Tomas Valenta (CTO); $21M Series A in July 2025, $32M total. Status page shows 99.78% for US-West-1 over Jul–Oct 2026, a regional aggregate rather than an SLA. Enterprise terms set uptime and support in the agreement; no public numeric SLA for Hobby or Pro. SOC 2 Type II report on request and a HIPAA BAA path. Fees can change with 30 days' notice, but general terms changes take effect immediately; deletion after cancellation has no published deadline.",
       "source": {
-        "url": "https://docs.e2b.dev/security",
-        "quote": "E2B has a SOC 2 Type II report",
+        "url": "https://e2b.dev/about.md",
+        "quote": "E2B was founded in 2023 by Vasek Mlejnsky and Tomas Valenta.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "instabox",
       "verdict": "partly",
-      "note": "Operated by InsForge AI, a Delaware company; YC P26, San Francisco. No public status page was found, and the SLA is Enterprise-only.",
+      "note": "InsForge AI, Inc., Delaware; InstaBox is its second product, launched 14 October 2026 and priced 19 October. Founded 2025 by Hang Huang (CEO) and Tony Chang (CTO), YC Spring 2026, six people, $8M seed in September 2026. The YC badge is on insforge.dev, not instabox.sh. No public status page; per-machine metrics only. 99.9% SLA on Enterprise only, with no credits or measurement published. HIPAA badge only; no SOC 2 report, ISO or public DPA. Fees non-refundable; terminate through support.",
       "source": {
         "url": "https://instabox.sh/terms",
         "quote": "InsForge AI, Inc., a Delaware corporation",
@@ -104,32 +149,37 @@
     {
       "provider": "lizard",
       "verdict": "partly",
-      "note": "Independent, with no funding, investor or accelerator announcement found. A public status page reports platform incidents, but sandbox capacity is not one of its components.",
+      "note": "Dragon Labs LLC, Portland address, Delaware law. Founded 2026 by Yura Dubinin (co-founder and president) and Mikhail Erin; no funding announced. Infrastructure on OVHcloud in Germany and the US. Status page reports Platform 99.95% and both regions 99.85%, but has no sandbox component and covers only widespread incidents. No published SLA; Enterprise lists SLAs. SOC 2 coming soon, no BAA. Price rises get dashboard or email notice and apply from the next calendar month; deletion after termination is within a commercially reasonable timeframe, immediate on request including backups.",
       "source": {
-        "url": "https://battleships.dev/data/providers/lizard.md",
-        "quote": "No funding, investor, or accelerator announcements were found",
-        "confidence": "third-party"
+        "url": "https://lizard.build/terms",
+        "quote": "We are Dragon Labs LLC, doing business as Lizard",
+        "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "morph",
-      "verdict": "not-published",
-      "note": "No company, funding, status-page or SLA information was found in the sources inspected."
+      "verdict": "partly",
+      "note": "Morph Labs, Inc., San Francisco; founded 2023 by Jesse Han. Funding is contradictory: one third-party source reports a $5.75M Khosla-led seed, another says no funding was raised. Status page reports 100% for Morph Cloud API over 90 days, provider-reported. No numeric SLA; a separate order SLA would control. No verified SOC 2 for Morph Labs; the Delve portal belongs to AutoInfra, a different company. Prices change with 30 days' notice, or 60 days if cumulative increases exceed 15% in 12 months; month-to-month termination is effective next billing cycle; deletion after cancellation not published.",
+      "source": {
+        "url": "https://cloud.morph.so/web/legal/terms-of-service",
+        "quote": "We may update prices with 30 days’ notice by email to Admin Contacts and a dashboard banner.",
+        "confidence": "docs-confirmed"
+      }
     },
     {
       "provider": "runtime",
       "verdict": "partly",
-      "note": "Very young: a public repository created in late September 2026 and near-zero community discussion. A public status page shows uptime below its 99% promise during research.",
+      "note": "Runtime LLC, Denver; state of formation not published. No founder or executive named; launched September 2026; funding not published. Status checks the API every 2 minutes and a real sandbox every 10; the API passed 96.37% over 7 days and 98.87% over 30. The 99% promise is credit-based: 10% of the month's charges for any account that has bought credit, not tied to a plan. SOC 2 and ISO certificates belong to its data centre in Virginia, not Runtime. New usage can be repriced as soon as posted; cancellation deletes content without a notice promise.",
       "source": {
-        "url": "https://withruntime.com/status",
-        "quote": "96.37%",
-        "confidence": "third-party"
+        "url": "https://withruntime.com/legal/sla",
+        "quote": "It covers every account that has bought credit and has not had all of it refunded or charged back",
+        "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "sandboxer",
       "verdict": "partly",
-      "note": "Launched on 18 October 2026. The contracting entity is a Delaware company at a Miami private mailbox, shared with unrelated products. A public status page exists.",
+      "note": "North Bay Opco I, Inc., Delaware, Miami mailbox; part of North Bay Ventures, Jon Oringer's studio. Entity incorporated November 2022; product launched 18 October 2026; funding not published. Status reports API 100%, sandboxes 99.45% and website 99.79% over 30 days, but the product is ten days old, so the 90-day columns cannot all be production traffic. No SLA during early access. No SOC 2, ISO or HIPAA. Price changes need 30 days' notice; cancellation runs to month end; closing forfeits remaining credit; data is deleted after termination with no export window.",
       "source": {
         "url": "https://sandboxer.com/terms",
         "quote": "North Bay Opco I, Inc., a Delaware corporation",
@@ -139,20 +189,20 @@
     {
       "provider": "sprites",
       "verdict": "partly",
-      "note": "A Fly.io product, using the Fly.io account for authentication. No Sprite-specific status page, SLA or company disclosure was established.",
+      "note": "Fly.io, Inc., Delaware; CEO Scott Johnston, founder Kurt Mackey advisory; platform since 2017, Sprites launched January 2026; $25M Series D in July 2026. Status page lists Sprites as a component but shows no numeric uptime; it covers global incidents only and recorded a certificate outage on 11–12 October. The 99.9% SLA is Enterprise-only and credits must be claimed; Sprites coverage is not confirmed. SOC 2 is platform-level and does not name Sprites; the BAA is a $99/month add-on. The customer is responsible for backups; data deleted within 30 days, backups within 90.",
       "source": {
-        "url": "https://docs.fly.io/sprites/quickstart",
-        "quote": "Sprites uses your Fly.io account for authentication",
+        "url": "https://fly.io/legal/security-questionnaire/",
+        "quote": "The contracting party for all Fly.io services is Fly.io, Inc.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "vercel-sandbox",
       "verdict": "yes",
-      "note": "Part of Vercel's platform, on the same plans and billing, with a public status page and a mature support structure. Sandbox-specific SLAs are not published.",
+      "note": "Vercel Inc., Delaware; founded 2015 by Guillermo Rauch. Sandbox announced June 2025, generally available January 2026; $300M Series F at a $9.3B valuation in September 2025. Status page shows Sandbox Operational but no Sandbox-specific uptime figure. The 99.99% Enterprise SLA covers the platform and does not name Sandbox; Pro and Hobby have no SLA. SOC 2 Type 2 and ISO 27001 are platform-level; Sandbox scope is not established. Fee changes need written notice and apply from the next payment period; content may be deleted on termination.",
       "source": {
-        "url": "https://vercel.com/docs/plans/pro-plan#platform-fee",
-        "quote": "$20/month Pro platform fee",
+        "url": "https://vercel.com/legal/dpa",
+        "quote": "Vercel Inc., a Delaware corporation",
         "confidence": "docs-confirmed"
       }
     }

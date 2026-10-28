@@ -28,8 +28,8 @@
     {
       "heading": "Regions and hardware",
       "body": [
-        "Vercel is the outlier with 19 regions. E2B and Blaxel list four, Sandboxer and Lizard two, Agent 37 three, and Runtime one. Boat and boxd are EU-only; InstaBox publishes no region selector and its terms say the United States.",
-        "No provider in this set publishes a GPU for sandboxes. Several say so explicitly: E2B, Boat and Lizard. ARM is not offered either, and only Runtime, Sandboxer, Morph and Vercel document nested virtualisation or /dev/kvm."
+        "Vercel is the outlier with 19 regions. E2B and Blaxel list four, Sandboxer and Lizard two, Agent 37 three, and Runtime one. Boat and boxd are EU-only; InstaBox publishes no region selector and its terms say the United States. Sprites does not let you choose a region: placement is automatic near you, according to a community answer.",
+        "No provider in this set publishes a GPU for sandboxes. Several say so explicitly: E2B, Boat, Lizard and Sprites. ARM is not offered either, and only Runtime, Sandboxer, Morph and Vercel document nested virtualisation or /dev/kvm. Morph publishes no region or GPU statement at all."
       ]
     }
   ],
@@ -114,7 +114,7 @@
     {
       "provider": "morph",
       "verdict": "partly",
-      "note": "vCPU, memory and disk are chosen at creation, with no fixed catalogue. No published region list, GPU statement or architecture guarantee.",
+      "note": "vCPU, memory and disk are chosen at creation, with no fixed catalogue. Maximum CPU, RAM and disk per VM, GPU availability, architecture, host locations and selectable regions are not published.",
       "source": {
         "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
         "quote": "To create a new snapshot, specify the resource specifications like",
@@ -144,10 +144,10 @@
     {
       "provider": "sprites",
       "verdict": "partly",
-      "note": "One shape: 8 vCPUs and 100 GB of storage, with memory assigned and autoscaled. No published region choice, GPU or architecture.",
+      "note": "One shape: 8 vCPUs and 100 GB of storage, with memory assigned and autoscaled. GPU is explicitly not offered; region selection is unavailable and placement is automatic; CPU architecture is not published.",
       "source": {
-        "url": "https://docs.fly.io/sprites/concepts/lifecycle",
-        "quote": "The vCPU count and the storage ceiling are fixed; memory is handled automatically.",
+        "url": "https://fly.io/learn/fly-vs-modal/",
+        "quote": "Sprites are not a GPU environment. Fly.io sells GPU Machines separately",
         "confidence": "docs-confirmed"
       }
     },

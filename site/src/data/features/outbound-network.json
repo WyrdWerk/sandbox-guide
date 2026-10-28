@@ -22,7 +22,7 @@
       "heading": "A stable address is rare",
       "body": [
         "Runtime sells a dedicated outbound address per account for $5 a month. Vercel's Secure Compute gives a private path to AWS, but the public path is billed as data transfer. Most others share an address: Sandboxer says outbound traffic shares the node's IP, and InstaBox's machines share one NAT address according to a third party.",
-        "E2B is explicit that there are no dedicated or static egress IPs on any plan, including Enterprise. A customer-operated proxy is the documented workaround."
+        "E2B is explicit that there are no dedicated or static egress IPs on any plan, including Enterprise. A customer-operated proxy is the documented workaround. Morph charges egress as a billing component but publishes no rate, allowlist or static address."
       ]
     },
     {
@@ -114,7 +114,12 @@
     {
       "provider": "morph",
       "verdict": "not-published",
-      "note": "Egress pricing, destination filtering and static IPs are not established in the documentation. A secret manager is documented; a network allowlist is not."
+      "note": "Egress is a chargeable component in the terms, but no per-GB rate, allowlist, static IP or filtering is published. Do not assume egress is free.",
+      "source": {
+        "url": "https://cloud.morph.so/web/legal/terms-of-service",
+        "quote": "Typical components may include but are not limited to compute, snapshot storage, and egress.",
+        "confidence": "docs-confirmed"
+      }
     },
     {
       "provider": "runtime",

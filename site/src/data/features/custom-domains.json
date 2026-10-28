@@ -38,7 +38,7 @@
     {
       "heading": "Not published is not the same as no",
       "body": [
-        "InstaBox, Morph, Sprites and Vercel Sandbox publish no sandbox custom-domain feature. Vercel has domains for deployments, which is a different product; Sprites has organisation-private URLs; InstaBox has public ports only. For these, the honest answer is that the research found nothing either way."
+        "InstaBox, Morph, Sprites and Vercel Sandbox publish no sandbox custom-domain feature. InstaBox's API has no customDomain or cname field and its URL is a fixed vendor subdomain; a community report says Sprites lack custom domains the way regular Fly VMs have them; Vercel's domains apply to deployments, not Sandbox ports. For these, the honest answer is that no native path is published."
       ]
     }
   ],
@@ -103,7 +103,12 @@
     {
       "provider": "instabox",
       "verdict": "not-published",
-      "note": "No custom-domain feature appears in the docs or the API. Public ports on the provider's hostname are the only inbound path."
+      "note": "No custom-domain support is published. The public-port URL is a fixed vendor subdomain, and the OpenAPI PublicPort object has only port, name, url and machineId, with no customDomain or cname field. No roadmap entry exists.",
+      "source": {
+        "url": "https://instabox.sh/docs/ports",
+        "quote": "The URL is `https://<port>-<machine id without m_>.<domain>/`.",
+        "confidence": "docs-confirmed"
+      }
     },
     {
       "provider": "lizard",
@@ -118,7 +123,12 @@
     {
       "provider": "morph",
       "verdict": "not-published",
-      "note": "No custom-domain feature is documented for instances or devboxes. An HTTP service can be exposed, but the hostname is the provider's."
+      "note": "No custom-domain feature appears in the documentation, API or terms. An HTTP service can be exposed, but it is served on a provider hostname.",
+      "source": {
+        "url": "https://cloud.morph.so/docs/documentation/instances/http-services",
+        "quote": "Expose Http Service",
+        "confidence": "docs-confirmed"
+      }
     },
     {
       "provider": "runtime",
@@ -143,12 +153,22 @@
     {
       "provider": "sprites",
       "verdict": "not-published",
-      "note": "A Sprite URL is private to the organisation; no custom-domain feature is documented."
+      "note": "No native custom-domain support is documented. A community report from April 2026 says Sprites lack custom domains and certificates the way regular Fly VMs do; current support was not confirmed, so treat a proxy as the only known path.",
+      "source": {
+        "url": "https://community.fly.io/t/cloudflare-to-sprite-ssl-tls-is-broken-preventing-custom-domains-therefore-prod-use-cases/27512",
+        "quote": "Sprites don’t have custom domains and certs the way regular Fly VMs do.",
+        "confidence": "third-party"
+      }
     },
     {
       "provider": "vercel-sandbox",
       "verdict": "not-published",
-      "note": "No sandbox custom-domain feature is documented. Vercel domains apply to deployments, which are a different product."
+      "note": "Attaching a customer's own domain to a Sandbox port was not confirmed. Vercel domains apply to deployments, a different product; ask whether a separately managed proxy is supported.",
+      "source": {
+        "url": "https://vercel.com/docs/sandbox",
+        "quote": "Run untrusted or agent-generated code in isolated Linux microVMs.",
+        "confidence": "docs-confirmed"
+      }
     }
   ]
 }
