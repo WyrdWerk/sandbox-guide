@@ -5,7 +5,9 @@ import SectionNav from "../../components/SectionNav.astro";
 import SplitList from "../../components/SplitList.astro";
 import WatchList from "../../components/WatchList.astro";
 import CompareTable from "../../components/CompareTable.astro";
-import { features, groups } from "../../lib/data";
+import Scenario from "../../components/Scenario.astro";
+import QuestionList from "../../components/QuestionList.astro";
+import { features, groups, providers } from "../../lib/data";
 
 export function getStaticPaths() {
   return features.map((feature) => ({ params: { id: feature.id }, props: { feature } }));
@@ -16,8 +18,10 @@ const group = groups.find((item) => item.id === feature.group);
 const nav = [
   { href: "#idea", label: "The idea" },
   { href: "#split", label: "Where providers split" },
+  { href: "#scenario", label: "One worked case" },
   { href: "#watch", label: "What to watch for" },
-  { href: "#compare", label: "Compare all twelve" },
+  { href: "#compare", label: "Compare all" },
+  { href: "#questions", label: "Questions to ask" },
 ];
 ---
 
@@ -48,6 +52,14 @@ const nav = [
       <SplitList splits={feature.splits} />
     </section>
 
+    <section class="section" id="scenario" aria-labelledby="scenario-h">
+      <div class="section__head">
+        <h2 class="section__title" id="scenario-h">One worked case</h2>
+        <p class="section__note">The same job at every provider, from the documented defaults</p>
+      </div>
+      <Scenario scenario={feature.scenario} rows={feature.rows} />
+    </section>
+
     <section class="section" id="watch" aria-labelledby="watch-h">
       <div class="section__head">
         <h2 class="section__title" id="watch-h">What to watch for</h2>
@@ -58,10 +70,22 @@ const nav = [
 
     <section class="section" id="compare" aria-labelledby="compare-h">
       <div class="section__head">
-        <h2 class="section__title" id="compare-h">Compare all twelve</h2>
+        <h2 class="section__title" id="compare-h">Compare all {providers.length}</h2>
         <p class="section__note">Docs read 28 October 2026</p>
       </div>
-      <CompareTable rows={feature.rows} caption={feature.standfirst} />
+      <CompareTable
+        rows={feature.rows}
+        caption={feature.standfirst}
+        figureLabel={feature.figureLabel}
+      />
+    </section>
+
+    <section class="section" id="questions" aria-labelledby="questions-h">
+      <div class="section__head">
+        <h2 class="section__title" id="questions-h">Questions to ask before you sign</h2>
+        <p class="section__note">Each one targets something the documentation does not answer</p>
+      </div>
+      <QuestionList questions={feature.questions} />
     </section>
 
     <p class="section__note">

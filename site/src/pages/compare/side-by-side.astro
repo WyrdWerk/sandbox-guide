@@ -31,6 +31,7 @@ const payload = {
     rows: feature.rows.map((row) => ({
       provider: row.provider,
       verdict: row.verdict,
+      figure: row.figure,
       note: row.note,
     })),
   })),
@@ -159,6 +160,12 @@ const payload = {
           cellProv.textContent = provider.name;
           const value = feature.rows.find((item) => item.provider === provider.id);
           cell.append(cellProv, badge(value?.verdict ?? "not-published"));
+          if (value?.figure) {
+            const figure = document.createElement("span");
+            figure.className = "cell-figure";
+            figure.textContent = value.figure;
+            cell.append(figure);
+          }
           if (value?.note) cell.append(document.createTextNode(" " + value.note));
           row.append(cell);
         }

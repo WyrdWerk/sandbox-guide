@@ -44,6 +44,8 @@
     {
       "provider": "agent37",
       "verdict": "yes",
+      "figure": "Not published",
+      "scenario": "The agent's package downloads go out through the allowlist, and no egress rate or cap is published to price them.",
       "note": "Allow-all, deny-all or an IPv4 allowlist of up to 100 entries, changeable live. DNS counts as a connection, and private ranges stay blocked. No static egress IP or published egress price.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/instance-network",
@@ -54,6 +56,8 @@
     {
       "provider": "blaxel",
       "verdict": "partly",
+      "figure": "Included in plan",
+      "scenario": "Egress is included, and the proxy can filter domains, but tools that ignore proxy variables are not filtered unless enforcement is on.",
       "note": "A proxy can filter domains, but tools that ignore proxy environment variables are not filtered unless domain filter enforcement is enabled. Egress is included in the plan.",
       "source": {
         "url": "https://docs.blaxel.ai/Sandboxes/Proxy-domains.md",
@@ -64,16 +68,20 @@
     {
       "provider": "boat",
       "verdict": "partly",
+      "figure": "$0, no cap stated",
+      "scenario": "Nothing is billed for traffic, and there is no API for network rules; ufw inside the sandbox is the control.",
       "note": "Outbound is open by default with no API for network rules; ufw inside the sandbox is the control, and firewall rules do not survive a snapshot. Egress is not billed.",
       "source": {
-        "url": "https://docs.boat.dev/hosting/firewall",
-        "quote": "boat has no API setting for network rules.",
-        "confidence": "docs-confirmed"
+        "url": "https://docs.boat.dev/pricing",
+        "quote": "Network traffic. boat does not bill egress.",
+        "confidence": "pricing-page"
       }
     },
     {
       "provider": "boxd",
       "verdict": "yes",
+      "figure": "Not published",
+      "scenario": "The allowlist is enforced outside the machine, so root inside cannot loosen it, and no egress price is published.",
       "note": "A per-machine allowlist enforced outside the machine, so root inside cannot loosen it. Forks inherit it; a machine from a snapshot starts unrestricted.",
       "source": {
         "url": "https://docs.boxd.sh/guides/egress",
@@ -84,6 +92,8 @@
     {
       "provider": "e2b",
       "verdict": "yes",
+      "figure": "No rate; no static IP",
+      "scenario": "Domain and IP allow and deny rules are documented, but there is no dedicated egress address on any plan.",
       "note": "Outbound is open by default with documented domain and IP allow and deny rules. No dedicated or static egress IP on any plan, including Enterprise.",
       "source": {
         "url": "https://docs.e2b.dev/faq/egress-ip-ranges",
@@ -94,16 +104,20 @@
     {
       "provider": "instabox",
       "verdict": "partly",
+      "figure": "$0.02000/GiB",
+      "scenario": "Egress is metered at $0.02 per GiB and machines share a NAT address, so an external rate limit is shared too.",
       "note": "No general egress allowlist is published; host scoping applies to Secrets, not all sandbox traffic. Egress is metered at $0.02 per GiB, and machines share a NAT address.",
       "source": {
-        "url": "https://api.instabox.sh/v1/openapi.json",
-        "quote": "This scopes credential use, not all sandbox network access.",
-        "confidence": "docs-confirmed"
+        "url": "https://instabox.sh/pricing",
+        "quote": "$0.02000",
+        "confidence": "pricing-page"
       }
     },
     {
       "provider": "lizard",
       "verdict": "partly",
+      "figure": "2 TB per 30 days",
+      "scenario": "No per-GB charge inside 2 TB per account over a rolling 30 days, with no documented allowlist.",
       "note": "Outbound is open with no documented allowlist. Sandbox egress has no per-GB charge, with 2 TB per account over a rolling 30 days included.",
       "source": {
         "url": "https://lizard.build/docs/platform/limits",
@@ -114,6 +128,8 @@
     {
       "provider": "morph",
       "verdict": "not-published",
+      "figure": "Charged, no rate",
+      "scenario": "Egress is a chargeable component in the terms, with no published rate, allowlist or static address.",
       "note": "Egress is a chargeable component in the terms, but no per-GB rate, allowlist, static IP or filtering is published. Do not assume egress is free.",
       "source": {
         "url": "https://cloud.morph.so/web/legal/terms-of-service",
@@ -124,16 +140,20 @@
     {
       "provider": "runtime",
       "verdict": "yes",
+      "figure": "$5/mo static IP",
+      "scenario": "A dedicated outbound address costs $5 a month; without it the sandbox can be set to refuse everything or to an allowlist.",
       "note": "`internet: false` refuses everything, an allow list is allow-list only, and deny always wins. A dedicated outbound address costs $5 a month, and sandboxes reach each other over a private name.",
       "source": {
-        "url": "https://withruntime.com/docs/sandbox-environment",
-        "quote": "`internet: false` refuses every outbound connection. With an `allow` list, it is allow-list only.",
-        "confidence": "docs-confirmed"
+        "url": "https://withruntime.com/pricing",
+        "quote": "Dedicated IPv4 | $5 | per 30-day month",
+        "confidence": "pricing-page"
       }
     },
     {
       "provider": "sandboxer",
       "verdict": "partly",
+      "figure": "Not billed",
+      "scenario": "Outbound is open with no allowlist, and traffic shares the node's IPv4 with other sandboxes.",
       "note": "Outbound is open by default with no allowlist product. Traffic shares the node's IPv4 and IPv6 with other sandboxes, so external rate limits are shared.",
       "source": {
         "url": "https://sandboxer.com/docs/security",
@@ -144,6 +164,8 @@
     {
       "provider": "sprites",
       "verdict": "yes",
+      "figure": "Not metered",
+      "scenario": "Outbound is unrestricted, bandwidth is not metered, and a DNS allowlist is opt-in and applied from outside.",
       "note": "Outbound is unrestricted by default, with an opt-in DNS allowlist applied from outside the Sprite. Bandwidth is not metered.",
       "source": {
         "url": "https://docs.fly.io/sprites/concepts/networking",
@@ -154,12 +176,41 @@
     {
       "provider": "vercel-sandbox",
       "verdict": "yes",
+      "figure": "$0.15/GB",
+      "scenario": "Firewall rules default to allow-all, and traffic beyond the included 20 GB a month bills at $0.15 per GB.",
       "note": "Firewall rules default to allow-all and can be set per sandbox. Matchers transform requests but never block them, so an allowlist needs an explicit rule.",
       "source": {
-        "url": "https://vercel.com/docs/sandbox/sdk-reference#sandbox.create",
-        "quote": "Firewall rules for sandbox egress traffic. Defaults to `\"allow-all\"`.",
-        "confidence": "docs-confirmed"
+        "url": "https://vercel.com/docs/sandbox/pricing#pricing",
+        "quote": "Sandbox Data Transfer | 20 GB/month | Included in Flat Rate CDN | $0.15/GB",
+        "confidence": "pricing-page"
       }
     }
+  ],
+  "figureLabel": "Egress price",
+  "scenario": {
+    "title": "The agent downloads 400 GB of dependencies",
+    "setup": "A build agent pulls container images and model weights all day. The job works everywhere; the bill and the controls do not.",
+    "beats": [
+      {
+        "at": "Allow",
+        "what": "Outbound is open by default at most providers, so the download starts without configuration."
+      },
+      {
+        "at": "Meter",
+        "what": "The provider either bills per GB, includes an allowance, or publishes nothing at all."
+      },
+      {
+        "at": "Restrict",
+        "what": "You try to narrow the agent to a package registry and find out whether the rule is enforced outside the machine."
+      }
+    ],
+    "turn": "At $0.02 or $0.15 a gigabyte, 400 GB is a line item; at Boat, Sandboxer and Sprites it is free. The second half is control: a proxy the agent can bypass is not a network boundary."
+  },
+  "questions": [
+    "Is the default open or closed, and does a deny-all rule also block DNS?",
+    "Is the allowlist enforced outside the machine, or by a proxy the agent can bypass with a raw socket?",
+    "Is there a static egress IP, what does it cost, and is it per sandbox or per account?",
+    "Is egress free, metered, or unpublished — and what is the allowance before overage?",
+    "Can sandboxes reach each other over a private network, or does everything go out to the internet?"
   ]
 }

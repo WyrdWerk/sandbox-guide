@@ -44,16 +44,20 @@
     {
       "provider": "agent37",
       "verdict": "yes",
+      "figure": "$0.80/vCPU-month",
+      "scenario": "Priced from the reserved shape — $0.80 per vCPU-month and $0.70 per GB-month — so waiting costs the same as working.",
       "note": "Prepaid wallet, per minute, priced from the reserved shape: $0.80 per vCPU-month, $0.70 per GB-month, $0.09 per GB-month of disk. No plan fee, no minimum, stopped time is disk only.",
       "source": {
-        "url": "https://www.agent37.com/cloud",
-        "quote": "You top up a prepaid balance and each sandbox spends it down per minute while it runs. No subscription, no plan fee, no minimum",
-        "confidence": "pricing-page"
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "vCPU | $0.80 per vCPU per month",
+        "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "blaxel",
       "verdict": "partly",
+      "figure": "$0.0000115/GB-second",
+      "scenario": "Billed on allocated RAM per second with CPU included, so a waiting box pays for its whole memory allocation.",
       "note": "Active compute is billed on allocated RAM per second at $0.0000115 per GB-second, with CPU included. Snapshots and volumes bill separately; tiers are wallet top-ups, not subscriptions.",
       "source": {
         "url": "https://blaxel.ai/pricing",
@@ -64,16 +68,20 @@
     {
       "provider": "boat",
       "verdict": "partly",
+      "figure": "$0.036/h default",
+      "scenario": "A flat hourly rate per size, $0.036 for the default 4 vCPU / 8 GB, whether it waits or works.",
       "note": "A monthly plan that is prepaid machine time plus limits, with a separate dollar wallet for overage. Per second while running; stopped is zero machine time and the disk is kept 14 days.",
       "source": {
         "url": "https://docs.boat.dev/pricing",
-        "quote": "A plan is a monthly price that your card pays. **It is not a fee.** Every dollar comes back as VM time at the rates above.",
+        "quote": "VM time past the included time | $0.036 per hour of `default`",
         "confidence": "pricing-page"
       }
     },
     {
       "provider": "boxd",
       "verdict": "partly",
+      "figure": "Three meters",
+      "scenario": "vCPU on the size while running, RAM on resident memory, disk on bytes written, so a waiting box pays for what it holds.",
       "note": "Prepaid credits and three meters: vCPU on the size while running, RAM on resident memory (also in standby), disk on bytes written in every state. No plan fee; storage prices are unpublished.",
       "source": {
         "url": "https://boxd.sh/pricing",
@@ -84,26 +92,32 @@
     {
       "provider": "e2b",
       "verdict": "partly",
+      "figure": "$0.000014/vCPU-s",
+      "scenario": "Per second of allocated vCPU and RAM while running, so the reserved shape sets the bill even when the agent waits.",
       "note": "Per second of allocated vCPU and RAM while running, against a credit balance. Paused and killed sandboxes are not billed. Pro adds a $150 monthly fee; Hobby has a one-time $100 credit.",
       "source": {
-        "url": "https://e2b.dev/pricing",
-        "quote": "We charge per second of a running sandbox.",
+        "url": "https://e2b.dev/pricing.md",
+        "quote": "$0.000014 per vCPU-second",
         "confidence": "pricing-page"
       }
     },
     {
       "provider": "instabox",
       "verdict": "yes",
+      "figure": "$20 plan, then usage",
+      "scenario": "A plan that is also credit, then per-second vCPU and RAM; a light month still costs the plan.",
       "note": "A subscription that is also credit: $20, $100 or $500 a month, then per-second vCPU and RAM, GiB-hour storage and $0.02 per GiB of egress. Paused and stopped machines pay storage only.",
       "source": {
         "url": "https://instabox.sh/pricing",
-        "quote": "Usage comes out of your included credits first, then you pay as you go. Credits reset every month.",
+        "quote": "$20 / month free credits",
         "confidence": "pricing-page"
       }
     },
     {
       "provider": "lizard",
       "verdict": "partly",
+      "figure": "$19 plan; flat per size",
+      "scenario": "A flat hourly price per size, billed per second including idle, inside a $19 plan that includes $19 of usage.",
       "note": "One $19 plan including $19 of usage; sandboxes are a flat hourly price per size, billed per second including idle, and volumes bill on used space. Snapshot storage has no published price.",
       "source": {
         "url": "https://lizard.build/pricing",
@@ -114,52 +128,89 @@
     {
       "provider": "morph",
       "verdict": "partly",
+      "figure": "$0.05/MCU-hour",
+      "scenario": "MCUs where the rate is the largest resource dimension, so a memory-heavy idle box pays on memory.",
       "note": "MCUs where the rate is the largest resource dimension: 1 vCPU-hour, 4 GB RAM-hours, 16 GB disk-hours or 5 TB snapshot-hours, at $0.05 per MCU-hour. Plans include MCU allocations.",
       "source": {
         "url": "https://cloud.morph.so/web/subscribe",
-        "quote": "MCUs = max(vCPUs, ceil(RAM/4GiB), ceil(disk/16GiB))",
+        "quote": "standard MCU rate of $0.05",
         "confidence": "pricing-page"
       }
     },
     {
       "provider": "runtime",
       "verdict": "partly",
+      "figure": "50-millicore CPU floor",
+      "scenario": "Measured active CPU above a 50-millicore floor plus reserved memory, so waiting costs about $0.03 an hour.",
       "note": "Prepaid credit, per second: measured active CPU above a 50-millicore floor, plus reserved memory, plus storage while paused or stopped. No plan fee; plans are in a private beta.",
       "source": {
-        "url": "https://withruntime.com/pricing",
-        "quote": "Compute has no one-minute minimum, and memory is billed while compute runs.",
-        "confidence": "pricing-page"
+        "url": "https://withruntime.com/docs/pricing",
+        "quote": "Measured CPU use above a 50-millicore floor",
+        "confidence": "inferred"
       }
     },
     {
       "provider": "sandboxer",
       "verdict": "partly",
+      "figure": "$0.036/h default",
+      "scenario": "A monthly plan whose dollars return as machine time at a fixed multiplier per size; stopped time is free.",
       "note": "A monthly plan whose dollars return as machine time, metered per second at a fixed multiplier per size. Stopped time is free, but the $20 plan is a floor and plan time expires monthly.",
       "source": {
-        "url": "https://sandboxer.com/docs/billing",
-        "quote": "Metering is per second, from the moment a sandbox is up until it is stopped.",
-        "confidence": "docs-confirmed"
+        "url": "https://sandboxer.com/pricing",
+        "quote": "| `default` | 4 | 8 GB | 50 GB | 1× | $0.036 | $26.28 |",
+        "confidence": "pricing-page"
       }
     },
     {
       "provider": "sprites",
       "verdict": "partly",
+      "figure": "$0.0385/CPU-hour",
+      "scenario": "Actual CPU at $0.0385 per CPU-hour and actual memory at $0.021875 per GB-hour, so a waiting Sprite is cheap but not free.",
       "note": "Actual CPU at $0.0385 per CPU-hour and actual memory at $0.021875 per GB-hour, plus hot and cold storage. The pricing page says there are no plans; the product FAQ describes plans.",
       "source": {
         "url": "https://fly.io/pricing/",
-        "quote": "Cumulative CPU usage measured by cpu.stat",
+        "quote": "$0.0385 / CPU-hour",
         "confidence": "pricing-page"
       }
     },
     {
       "provider": "vercel-sandbox",
       "verdict": "partly",
+      "figure": "$0.128/CPU-hour",
+      "scenario": "Active CPU excluding I/O wait plus provisioned memory, so memory is paid for while the CPU waits.",
       "note": "Active CPU at $0.128 per CPU-hour excluding I/O wait, provisioned memory at $0.0212 per GB-hour with a one-minute minimum, plus creations, transfer, snapshots and drives.",
       "source": {
-        "url": "https://vercel.com/docs/sandbox/pricing#active-cpu",
-        "quote": "Time spent waiting for I/O (such as network requests, database queries, or AI model calls) does not count toward Active CPU.",
+        "url": "https://vercel.com/docs/sandbox/pricing#pricing",
+        "quote": "Sandbox Active CPU | 5 hours/month | $0.128/hour | $0.128/hour",
         "confidence": "pricing-page"
       }
     }
+  ],
+  "figureLabel": "The meter",
+  "scenario": {
+    "title": "One month of a box that mostly waits",
+    "setup": "A 2 vCPU / 4 GB sandbox runs for 730 hours. The agent is busy for about 5% of that time and waits on a model for the rest. Nothing else changes.",
+    "beats": [
+      {
+        "at": "Hour 1",
+        "what": "The machine is created and the agent starts. The meter is either the shape you reserved or the resources it uses."
+      },
+      {
+        "at": "Hour 100",
+        "what": "The agent has been idle for most of it. On a reserved meter the bill is already fixed; on a measured meter it is nearly zero."
+      },
+      {
+        "at": "Hour 730",
+        "what": "The invoice arrives, and the plan floor decides whether a cheap month is cheap."
+      }
+    ],
+    "turn": "Two providers can quote the same hourly number for different amounts of memory. What separates them is whether the meter follows the reserved shape, the measured CPU, or the resident memory — and what the plan floor does to a light month."
+  },
+  "questions": [
+    "Does the meter measure the shape I reserved, or what the machine actually used?",
+    "Does the monthly fee return as usage, and what expires at the end of the month?",
+    "What is charged while stopped: compute, memory, storage, or nothing?",
+    "Which costs are missing from the pricing page — egress, snapshots, static IPs?",
+    "Is there a minimum billed duration or a one-minute increment, and how does it round?"
   ]
 }

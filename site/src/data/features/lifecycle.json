@@ -71,6 +71,8 @@
     {
       "provider": "agent37",
       "verdict": "partly",
+      "figure": "Sleep: RAM + disk",
+      "scenario": "Sleep keeps memory and processes as a checkpoint and bills disk only; stop keeps the disk and loses the process tree.",
       "note": "Sleep keeps memory and processes as a checkpoint and bills disk only; stop keeps the disk and loses memory. A wake that has to rebuild boots fresh, and stopping a sleeper discards its checkpoint.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/instances/sleep",
@@ -81,6 +83,8 @@
     {
       "provider": "blaxel",
       "verdict": "yes",
+      "figure": "Standby: RAM, no sockets",
+      "scenario": "Standby keeps process and filesystem state and stops memory charges, but the dev server's connections are gone.",
       "note": "Standby preserves process and filesystem state and stops memory charges, but external network connections do not survive. Archive exports filesystem changes only and restarts processes with new IDs.",
       "source": {
         "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
@@ -91,6 +95,8 @@
     {
       "provider": "boat",
       "verdict": "no",
+      "figure": "No pause; disk only",
+      "scenario": "Stop saves the disk and destroys the machine, so tomorrow is a reboot with a new IP and no running process.",
       "note": "There is no pause. Stop saves the disk, removes the machine and loses memory and hand-started processes; resume boots a new machine from the disk with a new IP.",
       "source": {
         "url": "https://docs.boat.dev/snapshots/stop",
@@ -101,16 +107,20 @@
     {
       "provider": "boxd",
       "verdict": "yes",
+      "figure": "RAM frozen; 85 ms wake",
+      "scenario": "Standby keeps RAM frozen and bills it; hibernate writes memory to disk and wakes in about 85 ms.",
       "note": "Four distinct states: standby keeps RAM frozen and bills it, hibernate writes memory to disk with an ~85 ms wake, stop keeps the disk only, destroy removes everything.",
       "source": {
-        "url": "https://docs.boxd.sh/cli/commands",
-        "quote": "They freeze the VMM process and keep memory, running processes, and open sockets intact.",
+        "url": "https://docs.boxd.sh/guides/suspend-resume",
+        "quote": "Waking from hibernation takes **about 85ms** and loads the memory image back into RAM.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "e2b",
       "verdict": "partly",
+      "figure": "RAM + disk",
+      "scenario": "Pause saves the filesystem and RAM, so the process tree resumes; the default timeout would have killed it instead.",
       "note": "Pause saves the filesystem and RAM, so processes resume; a filesystem-only pause is opt-in. Kill is terminal, and the default timeout kills the sandbox after five minutes.",
       "source": {
         "url": "https://docs.e2b.dev/sandbox/persistence",
@@ -121,16 +131,20 @@
     {
       "provider": "instabox",
       "verdict": "partly",
+      "figure": "RAM; 1 s resume",
+      "scenario": "Pause keeps memory and running programs and resumes in about a second; stop loses them, and a paused machine cannot be stopped at all.",
       "note": "Pause keeps memory and running programs and resumes in about a second; stop loses them, and a paused machine cannot be stopped at all. A resume can cold-boot and report processesPreserved false.",
       "source": {
-        "url": "https://instabox.sh/docs/api/lifecycle",
-        "quote": "Pauses a running machine, keeping its memory and running programs.",
+        "url": "https://instabox.sh/docs/integrate",
+        "quote": "carries on where it left off, usually in about a second",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "lizard",
       "verdict": "partly",
+      "figure": "Pause: RAM; fast pause: files",
+      "scenario": "Ordinary pause keeps the whole disk, memory and processes; fast pause keeps files only and boots fresh, under the same name.",
       "note": "Pause keeps the whole disk, memory and processes; a fast pause keeps files only and resumes like a restart; stop or expiry deletes the sandbox disk, leaving only /workspace and snapshots.",
       "source": {
         "url": "https://lizard.build/docs/sandboxes",
@@ -141,6 +155,8 @@
     {
       "provider": "morph",
       "verdict": "partly",
+      "figure": "Pause: RAM + disk",
+      "scenario": "Pause snapshots memory and disk and suspends the VM; starting the snapshot restores memory, booting it is a cold boot.",
       "note": "Pause snapshots memory and disk and suspends the VM; stop releases the instance and deletes it. Booting a snapshot is a cold boot, while starting one restores memory.",
       "source": {
         "url": "https://cloud.morph.so/docs/documentation/instances/pause-resume",
@@ -151,6 +167,8 @@
     {
       "provider": "runtime",
       "verdict": "yes",
+      "figure": "Pause: RAM frozen",
+      "scenario": "Pause freezes the VM with memory and programs intact; stop keeps files and drops memory, and both keep billing storage.",
       "note": "Pause freezes the VM with memory and programs intact; stop keeps files and drops memory. Both keep billing storage, and only delete ends the charge.",
       "source": {
         "url": "https://withruntime.com/docs/sandbox-environment",
@@ -161,16 +179,20 @@
     {
       "provider": "sandboxer",
       "verdict": "partly",
+      "figure": "RAM to disk; 2 min window",
+      "scenario": "Stop writes memory and device state to disk; the resume restores processes only on a matching CPU within two minutes.",
       "note": "A stop writes memory and device state to disk, so a resume can restore running processes — but only on a machine of the same CPU type within two minutes, otherwise it cold-boots.",
       "source": {
         "url": "https://sandboxer.com/docs/snapshots",
-        "quote": "Memory is restored on a machine with the same CPU type as the one the sandbox stopped on.",
+        "quote": "If a machine with that CPU type is online but busy, the resume waits up to 2 minutes for it",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "sprites",
       "verdict": "yes",
+      "figure": "Warm pause; 100–500 ms",
+      "scenario": "A warm pause freezes memory and processes and resumes in 100–500 ms; a longer stop drops memory and starts processes fresh.",
       "note": "A warm pause freezes memory and processes and resumes in 100–500 ms; a longer idle period stops the VM, drops memory and starts processes fresh. Open TCP connections do not survive either.",
       "source": {
         "url": "https://docs.fly.io/sprites/concepts/lifecycle",
@@ -181,6 +203,8 @@
     {
       "provider": "vercel-sandbox",
       "verdict": "partly",
+      "figure": "Filesystem only",
+      "scenario": "Stopping ends the session; the filesystem is restored into a new session and background services restart through the onResume hook.",
       "note": "Stopping ends the session. Persistent sandboxes save their filesystem and restore it into a new session, not RAM; restart background services with the onResume hook.",
       "source": {
         "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes",
@@ -188,5 +212,32 @@
         "confidence": "docs-confirmed"
       }
     }
+  ],
+  "figureLabel": "What a pause keeps",
+  "scenario": {
+    "title": "Stop at 18:00, resume at 09:00",
+    "setup": "The agent has a REPL with loaded data, a dev server on port 3000, a half-written file, and a cron job it installed. You stop the machine for the night and come back the next morning.",
+    "beats": [
+      {
+        "at": "18:00",
+        "what": "You stop the sandbox. What happens next is the provider's definition of stop, not yours."
+      },
+      {
+        "at": "09:00",
+        "what": "You resume and ask the agent to continue. The question is whether the REPL still holds its data."
+      },
+      {
+        "at": "09:01",
+        "what": "You check the dev server, the cron job and the IP address the agent had written down."
+      }
+    ],
+    "turn": "Ten of the twelve can restore memory in at least one mode, but not all make it the default. Boat keeps nothing, and Lizard's stop deletes the disk."
+  },
+  "questions": [
+    "Does your pause keep RAM, keep only files, or destroy the machine — and what does your documentation call each state?",
+    "Is the memory restore guaranteed, or a best-effort that silently cold-boots when no matching host is free?",
+    "What changes on resume: IP address, open sockets, cron timers, systemd units, Docker containers?",
+    "Can a paused machine be stopped, and does stop delete the disk or only the machine?",
+    "How long is a stopped disk kept before deletion, and is that in the docs or only in the terms?"
   ]
 }

@@ -44,6 +44,8 @@
     {
       "provider": "agent37",
       "verdict": "yes",
+      "figure": "Six templates; hosted",
+      "scenario": "Six agent templates plus a separate managed-hosting product where the agent is the product; the templates are prompted through the API.",
       "note": "Six agent templates (Hermes, OpenClaw, Claude Code, Codex, Grok, OpenCode) plus Pi and n8n, and a separate managed-hosting product where the agent is the product. Claude Code and Codex use your own account.",
       "source": {
         "url": "https://www.agent37.com/personal",
@@ -54,6 +56,8 @@
     {
       "provider": "blaxel",
       "verdict": "partly",
+      "figure": "MCP server; runtime soon",
+      "scenario": "Every sandbox exposes an MCP server agents use to operate it, but Agent Runtime is labelled coming soon.",
       "note": "Every sandbox exposes an MCP server that agents use to operate it, and agent hosting is a separate product line, but Agent Runtime is labelled coming soon.",
       "source": {
         "url": "https://docs.blaxel.ai/llms.txt",
@@ -64,6 +68,8 @@
     {
       "provider": "boat",
       "verdict": "yes",
+      "figure": "Seven harnesses; prompt API",
+      "scenario": "Seven harnesses preinstalled and promptable through one API call with steering, interrupts and parallel conversations.",
       "note": "Seven coding-agent harnesses preinstalled on every machine, promptable through one API call with steering, interrupts and parallel conversations.",
       "source": {
         "url": "https://docs.boat.dev/integrated-agents",
@@ -74,6 +80,8 @@
     {
       "provider": "boxd",
       "verdict": "yes",
+      "figure": "Three preinstalled; no API",
+      "scenario": "Claude Code, Codex and OpenCode are preinstalled and the in-VM CLI is authenticated, but there is no prompt API.",
       "note": "Claude Code, Codex and OpenCode are preinstalled, and an in-VM boxd CLI is pre-authenticated so an agent can create sibling machines. Claude logins are account-level and injected at boot.",
       "source": {
         "url": "https://docs.boxd.sh/use-cases/coding-agents",
@@ -84,6 +92,8 @@
     {
       "provider": "e2b",
       "verdict": "partly",
+      "figure": "None preinstalled; guides",
+      "scenario": "Guides show Claude Code, Codex and Amp running, but preinstallation is not claimed and there is no agent-run API.",
       "note": "Guides show Claude Code, Codex and Amp running in a sandbox, but preinstallation is not claimed and there is no hosted agent-run API.",
       "source": {
         "url": "https://docs.e2b.dev/use-cases/coding-agents",
@@ -94,6 +104,8 @@
     {
       "provider": "instabox",
       "verdict": "yes",
+      "figure": "Claude Code + Codex",
+      "scenario": "Claude Code and Codex are in the default and agent templates, and logins persist because home is /data/home; no agent-run API.",
       "note": "Claude Code and Codex are in the default and agent templates, and sign-ins persist because home is /data/home. There is no hosted agent-run API.",
       "source": {
         "url": "https://instabox.sh/docs/limits",
@@ -104,6 +116,8 @@
     {
       "provider": "lizard",
       "verdict": "yes",
+      "figure": "Templates; CLI prompt",
+      "scenario": "Five agent templates, prompted from the CLI with streaming and interrupts; the SDK has no prompt method.",
       "note": "Five agent templates plus a base image and desktop variants. Agents are prompted from the CLI with streaming and interrupts; the SDK has no prompt method.",
       "source": {
         "url": "https://lizard.build/docs/sandboxes",
@@ -114,6 +128,8 @@
     {
       "provider": "morph",
       "verdict": "partly",
+      "figure": "None; tmux API",
+      "scenario": "A tmux API lets you drive Claude Code or Codex programmatically, but nothing is preinstalled.",
       "note": "A full tmux API lets you drive Claude Code or Codex programmatically, but no agent is preinstalled and no agent-run API exists.",
       "source": {
         "url": "https://cloud.morph.so/docs/devboxes/getting-started",
@@ -124,6 +140,8 @@
     {
       "provider": "runtime",
       "verdict": "no",
+      "figure": "None preinstalled",
+      "scenario": "No coding agents in the default image, and the vendor says no bridge harness has run on Runtime yet.",
       "note": "No preinstalled coding agents: the default image ships Python, Node, Bun, git, compilers and sudo, and agents are installed by you. The vendor says no bridge harness has run on Runtime yet.",
       "source": {
         "url": "https://withruntime.com/docs/vercel-ai-sdk",
@@ -134,6 +152,8 @@
     {
       "provider": "sandboxer",
       "verdict": "yes",
+      "figure": "Six harnesses; prompt API",
+      "scenario": "Six harnesses in every sandbox, a prompt API that returns a prompt id, and steering for three of them.",
       "note": "Six harnesses installed in every sandbox, a prompt API that returns a prompt id, steering for Claude Code, Codex and Pi, and a live model catalogue.",
       "source": {
         "url": "https://sandboxer.com/docs/agents",
@@ -144,6 +164,8 @@
     {
       "provider": "sprites",
       "verdict": "no",
+      "figure": "None; plugins only",
+      "scenario": "Plugins and SDK integrations, but no preinstalled agent and no managed agent API.",
       "note": "Plugins for coding agents and SDK integrations, but no preinstalled agent or provider-managed agent API is documented.",
       "source": {
         "url": "https://fly.io/sprites/",
@@ -154,6 +176,8 @@
     {
       "provider": "vercel-sandbox",
       "verdict": "partly",
+      "figure": "Agents in image; no API",
+      "scenario": "Coding agents are in the universal image, but you drive them yourself through a terminal.",
       "note": "The default universal image includes coding agents and common utilities, but there is no agent-run API; you drive them yourself.",
       "source": {
         "url": "https://vercel.com/docs/sandbox",
@@ -161,5 +185,32 @@
         "confidence": "docs-confirmed"
       }
     }
+  ],
+  "figureLabel": "Agents installed, and promptable?",
+  "scenario": {
+    "title": "Send a task and read the stream back",
+    "setup": "You want to post a prompt to a sandbox and receive the agent's output as a stream, without opening a terminal or holding a model key inside the machine.",
+    "beats": [
+      {
+        "at": "Install",
+        "what": "The agent binary is either on the disk already or something your setup script installs."
+      },
+      {
+        "at": "Prompt",
+        "what": "One API call with a prompt, or a shell command typed by a person."
+      },
+      {
+        "at": "Pay",
+        "what": "The model bill goes to the provider, to your API key, or to your subscription login."
+      }
+    ],
+    "turn": "Only a few providers do all three: installed, promptable through their API, and managing the model credentials. Everywhere else the sandbox is the product and the agent is an application you bring."
+  },
+  "questions": [
+    "Is the agent preinstalled, promptable through your API, or both?",
+    "Who pays for the model — you, my API key, or my subscription login?",
+    "Does the provider manage model credentials, or expect them in the environment?",
+    "Does the agent loop run inside my sandbox or as a hosted service, and what does that change about billing?",
+    "Can a non-engineer start it without a terminal, and what is the first screen they see?"
   ]
 }

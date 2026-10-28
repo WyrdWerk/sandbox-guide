@@ -1,0 +1,46 @@
+---
+import type { FeatureRow, Scenario } from "../data/schema";
+import { providerById } from "../lib/data";
+
+interface Props {
+  scenario: Scenario;
+  rows: FeatureRow[];
+}
+
+const { scenario, rows } = Astro.props;
+---
+
+<div class="scenario">
+  <h3 class="scenario__title">{scenario.title}</h3>
+  <p class="scenario__setup">{scenario.setup}</p>
+
+  <ol class="scenario__beats">
+    {
+      scenario.beats.map((beat) => (
+        <li class="scenario__beat">
+          <span class="scenario__clock">{beat.at}</span>
+          <p class="scenario__what">{beat.what}</p>
+        </li>
+      ))
+    }
+  </ol>
+
+  <p class="scenario__turn">{scenario.turn}</p>
+
+  <h3 class="scenario__subtitle">What each provider does</h3>
+  <dl class="scenario__outcomes">
+    {
+      rows.map((row) => {
+        const provider = providerById.get(row.provider);
+        return (
+          <div class="scenario__outcome">
+            <dt>
+              <a href={`/providers/${row.provider}/`}>{provider?.name ?? row.provider}</a>
+            </dt>
+            <dd>{row.scenario}</dd>
+          </div>
+        );
+      })
+    }
+  </dl>
+</div>

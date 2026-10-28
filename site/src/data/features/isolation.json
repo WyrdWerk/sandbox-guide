@@ -37,6 +37,8 @@
     {
       "provider": "agent37",
       "verdict": "partly",
+      "figure": "gVisor; VM at 2.5×",
+      "scenario": "docker build fails on the default gVisor type; recreating on the vm type works and costs 2.5× the compute rate.",
       "note": "A gVisor container by default, with no Docker; the vm type gives a real kernel at 2.5× compute, and performance gives dedicated cores at 4×.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/instances/create",
@@ -47,6 +49,8 @@
     {
       "provider": "blaxel",
       "verdict": "partly",
+      "figure": "microVM; no modules",
+      "scenario": "Docker runs, then modprobe is refused for every process, root included.",
       "note": "A microVM boundary, root by default, but the default kernel refuses module loading and kernel tracing, and iptables needs enabling at creation.",
       "source": {
         "url": "https://docs.blaxel.ai/Sandboxes/Non-root-user.md",
@@ -57,6 +61,8 @@
     {
       "provider": "boat",
       "verdict": "yes",
+      "figure": "Full VM; Docker, root",
+      "scenario": "Clone, build and load the module without a workaround: own kernel, Docker, root, SSH.",
       "note": "A full Ubuntu VM with its own kernel, Docker, SSH and root. The closest thing here to an ordinary server.",
       "source": {
         "url": "https://docs.boat.dev/quickstart",
@@ -67,6 +73,8 @@
     {
       "provider": "boxd",
       "verdict": "yes",
+      "figure": "KVM microVM; root",
+      "scenario": "Everything works, and breaking the OS stays inside the machine rather than reaching a neighbour.",
       "note": "A KVM microVM with its own kernel, network stack and disk. Docker, systemd, kernel modules and breaking the OS all stay inside the machine.",
       "source": {
         "url": "https://docs.boxd.sh/use-cases/sandboxes",
@@ -77,6 +85,8 @@
     {
       "provider": "e2b",
       "verdict": "yes",
+      "figure": "Firecracker; non-root user",
+      "scenario": "Docker is documented, but the default template runs as user rather than root and at least one kernel module is missing.",
       "note": "A Firecracker microVM with its own kernel. Docker is documented, but the default template user is `user`, not root, and some kernel modules are missing.",
       "source": {
         "url": "https://docs.e2b.dev/security",
@@ -87,6 +97,8 @@
     {
       "provider": "instabox",
       "verdict": "yes",
+      "figure": "Firecracker; root + Docker",
+      "scenario": "Root, passwordless sudo and Docker are in the default image, so both steps work unchanged.",
       "note": "A Firecracker microVM running Debian 13 with its own kernel, root, passwordless sudo and Docker.",
       "source": {
         "url": "https://instabox.sh/",
@@ -97,6 +109,8 @@
     {
       "provider": "lizard",
       "verdict": "partly",
+      "figure": "Firecracker; root",
+      "scenario": "Root is the default, but whether a Docker daemon runs inside a sandbox is not documented either way.",
       "note": "A Firecracker microVM with its own kernel and root by default, but Docker inside a sandbox is not documented either way.",
       "source": {
         "url": "https://lizard.build/docs/sandboxes",
@@ -107,6 +121,8 @@
     {
       "provider": "morph",
       "verdict": "yes",
+      "figure": "Full VM; Docker-in-Docker",
+      "scenario": "A full VM with Docker-in-Docker, systemd and root; nested virtualisation is documented as experimental.",
       "note": "Full VMs with Docker-in-Docker, systemd, root and FUSE. Nested virtualisation and other guest operating systems are experimental.",
       "source": {
         "url": "https://cloud.morph.so/docs/devboxes/getting-started",
@@ -117,6 +133,8 @@
     {
       "provider": "runtime",
       "verdict": "yes",
+      "figure": "Firecracker; /dev/kvm",
+      "scenario": "New sandboxes expose /dev/kvm, so the build can start its own nested VM.",
       "note": "A Firecracker microVM with its own kernel, and new sandboxes expose /dev/kvm, so nested virtualisation works.",
       "source": {
         "url": "https://withruntime.com/llms.txt",
@@ -127,6 +145,8 @@
     {
       "provider": "sandboxer",
       "verdict": "yes",
+      "figure": "Cloud Hypervisor; /dev/kvm",
+      "scenario": "Docker with BuildKit and Compose, systemd and /dev/kvm all work as on a normal host.",
       "note": "A Cloud Hypervisor microVM with its own kernel, systemd, Docker with BuildKit and Compose, and /dev/kvm.",
       "source": {
         "url": "https://sandboxer.com/docs/security",
@@ -137,6 +157,8 @@
     {
       "provider": "sprites",
       "verdict": "partly",
+      "figure": "microVM; no systemd",
+      "scenario": "Docker is reported to work, but systemd does not run; services start through the built-in manager when the Sprite wakes.",
       "note": "A hardware-isolated microVM with root and Docker reported, but it does not run systemd: a built-in service manager starts services on wake.",
       "source": {
         "url": "https://docs.fly.io/sprites/concepts/services",
@@ -147,6 +169,8 @@
     {
       "provider": "vercel-sandbox",
       "verdict": "partly",
+      "figure": "Firecracker; root + Docker",
+      "scenario": "Docker and FUSE work as root; systemd and nested virtualisation are not published, so a systemd unit is a guess.",
       "note": "A Firecracker microVM with a dedicated kernel, root, Docker and FUSE. systemd and nested virtualisation are not published.",
       "source": {
         "url": "https://vercel.com/docs/sandbox/concepts",
@@ -154,5 +178,32 @@
         "confidence": "docs-confirmed"
       }
     }
+  ],
+  "figureLabel": "Boundary, and what it allows",
+  "scenario": {
+    "title": "The build needs Docker and a kernel module",
+    "setup": "Your agent clones a repository, runs a Docker build, then loads a kernel module for a database test. Three steps, and the boundary decides which of them can finish.",
+    "beats": [
+      {
+        "at": "Step 1",
+        "what": "git clone and a test run. Every provider in this set can do this."
+      },
+      {
+        "at": "Step 2",
+        "what": "docker build. A container boundary without a Docker daemon fails here, and a gVisor default may fail even with one."
+      },
+      {
+        "at": "Step 3",
+        "what": "modprobe. This needs a real kernel with module loading enabled, which is a different promise from \"has its own kernel\"."
+      }
+    ],
+    "turn": "The marketing word is the same — sandbox, microVM, VM — but the third step is where a per-sandbox kernel stops being enough. Check the capability list, not the boundary name."
+  },
+  "questions": [
+    "What boundary does the default instance get, and what does the stronger one cost? Agent 37 charges 2.5× for a real kernel.",
+    "Does Docker work on the default type without changing image, size or instance type?",
+    "Does the guest run systemd, and if not, what starts services when the machine wakes?",
+    "Can the agent load kernel modules or open /dev/kvm, and is either documented as experimental?",
+    "Which user does the default template run as, and is root a documented option or a custom image?"
   ]
 }

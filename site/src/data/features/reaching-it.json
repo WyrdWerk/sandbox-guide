@@ -44,6 +44,8 @@
     {
       "provider": "agent37",
       "verdict": "yes",
+      "figure": "API key, or public",
+      "scenario": "Instance and preview URLs need an API key or a signed URL; the public port is deliberately open to anyone and keeps working.",
       "note": "Every port gets an HTTPS URL; instance and preview URLs require an API key or a time-boxed signed URL. A public port is deliberately unauthenticated and permanent. SSH is tunnelled; no raw TCP.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/concepts",
@@ -54,6 +56,8 @@
     {
       "provider": "blaxel",
       "verdict": "partly",
+      "figure": "Optional auth",
+      "scenario": "Preview URLs back a running sandbox with optional auth; whether auth is on by default is not published.",
       "note": "Specific ports can be exposed, and preview URLs back a running sandbox with optional auth and custom domains. Default ingress authentication is not published.",
       "source": {
         "url": "https://docs.blaxel.ai/llms.txt",
@@ -64,6 +68,8 @@
     {
       "provider": "boat",
       "verdict": "partly",
+      "figure": "Token by default",
+      "scenario": "The HTTPS route is token-gated unless you pass --public, and SSH is a real port.",
       "note": "An HTTPS route per port, token-gated by default and --public to remove it; SSH on port 22; raw TCP by opening the sandbox firewall, but only IPv6 is guaranteed.",
       "source": {
         "url": "https://docs.boat.dev/hosting",
@@ -74,6 +80,8 @@
     {
       "provider": "boxd",
       "verdict": "yes",
+      "figure": "No auth",
+      "scenario": "Every machine answers on name.boxd.sh with no authentication; bot protection only gates the wake, so a sleeping machine returns a check page.",
       "note": "Every machine is on name.boxd.sh with no authentication in front of it; subdomain proxies add ports, up to three raw TCP forwards, and SSH on a dedicated port. Bot protection only gates wake-ups.",
       "source": {
         "url": "https://docs.boxd.sh/guides/bot-protection",
@@ -84,6 +92,8 @@
     {
       "provider": "e2b",
       "verdict": "partly",
+      "figure": "No auth",
+      "scenario": "Anyone who has the URL gets in; there is no authentication by default.",
       "note": "Public URLs are reachable by anyone who knows them, with no authentication by default. SSH runs through a WebSocket proxy rather than a native port.",
       "source": {
         "url": "https://docs.e2b.dev/network/public-url",
@@ -94,6 +104,8 @@
     {
       "provider": "instabox",
       "verdict": "partly",
+      "figure": "No auth; URL is secret",
+      "scenario": "The URL is the only secret, and public ports cannot be authenticated.",
       "note": "An HTTPS URL per port, up to 16, with no authentication: the URL is the only secret. SSH and mosh go through a gateway; no raw TCP inbound and no custom domain.",
       "source": {
         "url": "https://instabox.sh/docs/ports",
@@ -104,6 +116,8 @@
     {
       "provider": "lizard",
       "verdict": "partly",
+      "figure": "One token per sandbox",
+      "scenario": "One token per sandbox opens every exposed port on it, so a link to the demo also opens the rest.",
       "note": "A preview URL per exposed port, gated by one token per sandbox that opens every port on it. WebSockets pass through. No raw TCP, no SSH protocol, no custom domains for sandboxes.",
       "source": {
         "url": "https://lizard.build/docs/sandboxes/preview-urls",
@@ -114,6 +128,8 @@
     {
       "provider": "morph",
       "verdict": "partly",
+      "figure": "Not published",
+      "scenario": "An HTTP service can be exposed through the API, but default authentication is not published.",
       "note": "An instance can expose an HTTP service through the API. Default authentication and raw TCP support are not published.",
       "source": {
         "url": "https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post",
@@ -124,6 +140,8 @@
     {
       "provider": "runtime",
       "verdict": "yes",
+      "figure": "Closed until opened",
+      "scenario": "Nothing is reachable until you open a door; a token-gated preview is one of the options.",
       "note": "Nothing is reachable until you open a door: token-gated previews, custom domains, raw TCP ports, a WireGuard or Tailscale private network, or SSH over the API.",
       "source": {
         "url": "https://withruntime.com/docs/sandbox-environment",
@@ -134,6 +152,8 @@
     {
       "provider": "sandboxer",
       "verdict": "yes",
+      "figure": "Token in URL",
+      "scenario": "A token sits in the preview URL by default and is stripped before the request reaches the app.",
       "note": "A stable HTTPS address per port, private by default with a token in the URL; --public removes it. A public IPv6 with the firewall closed except SSH. No raw-TCP endpoint.",
       "source": {
         "url": "https://sandboxer.com/docs/hosting",
@@ -144,6 +164,8 @@
     {
       "provider": "sprites",
       "verdict": "partly",
+      "figure": "Org token",
+      "scenario": "The URL is private to the organisation and needs an org token, so a client outside it cannot open the link.",
       "note": "Every Sprite has an HTTPS URL that is private to the organisation by default, reachable with an org token. SSH requires installing a server and proxying it.",
       "source": {
         "url": "https://docs.fly.io/sprites/concepts/networking",
@@ -154,6 +176,8 @@
     {
       "provider": "vercel-sandbox",
       "verdict": "partly",
+      "figure": "Web ports only",
+      "scenario": "Web ports can be exposed, up to 15, and traffic to them is billable; no general inbound TCP is published.",
       "note": "Web ports can be exposed, up to 15 per sandbox, and traffic to them is billable. A general raw TCP inbound, personal SSH or public IPv4 is not published.",
       "source": {
         "url": "https://vercel.com/docs/sandbox/pricing#network",
@@ -161,5 +185,32 @@
         "confidence": "pricing-page"
       }
     }
+  ],
+  "figureLabel": "Who can open the link",
+  "scenario": {
+    "title": "Paste the preview URL into a client channel",
+    "setup": "The agent builds a demo on port 3000. You copy the HTTPS address and paste it into a shared channel for a client, who opens it the next morning from a different country.",
+    "beats": [
+      {
+        "at": "17:00",
+        "what": "You copy the URL. Whether it carries a token, and whether that token covers one port or the whole machine, is already decided."
+      },
+      {
+        "at": "23:00",
+        "what": "The machine goes idle or stops. The link either wakes it, returns an error, or points at a machine that no longer exists."
+      },
+      {
+        "at": "09:00",
+        "what": "The client opens the link. Anyone with the URL, or only someone holding a key, gets through."
+      }
+    ],
+    "turn": "Four providers here put no authentication in front of the port at all, and one makes the token per machine rather than per port. A URL that wakes a sleeping machine is a different product from one that returns an error."
+  },
+  "questions": [
+    "Is there authentication in front of a preview URL by default, or is the URL the only secret?",
+    "Is the token per port or per machine, and can it be revoked without recreating the sandbox?",
+    "Does a request to a sleeping machine wake it, or return an error page?",
+    "Does the URL survive a stop and resume, and does it change when the machine is recreated?",
+    "Is SSH a real port or a tunnel, and is raw TCP inbound available at all?"
   ]
 }

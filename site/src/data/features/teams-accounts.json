@@ -44,6 +44,8 @@
     {
       "provider": "agent37",
       "verdict": "partly",
+      "figure": "Per-instance budget",
+      "scenario": "Per-instance budget ceilings stop a runaway instance, but they are not a money cap; no audit log or SSO is published.",
       "note": "Workspaces own keys, wallet and instances; teams have admin and user roles; each instance has a budget ceiling. No audit log or SSO is published, and backups are stored in the US.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/concepts",
@@ -54,6 +56,8 @@
     {
       "provider": "blaxel",
       "verdict": "partly",
+      "figure": "No hard cap",
+      "scenario": "Admin, member and viewer roles with scoped service accounts; no hard spend cap is published and SAML needs a feature flag.",
       "note": "Workspace roles are admin, member and viewer; service accounts have scoped tokens; SAML and directory sync require a feature flag. No hard spend cap or full audit coverage is published.",
       "source": {
         "url": "https://docs.blaxel.ai/Security/Workspace-access-control.md",
@@ -64,6 +68,8 @@
     {
       "provider": "boat",
       "verdict": "partly",
+      "figure": "No dollar cap",
+      "scenario": "Owner, admin and member roles and per-member caps, but start budgets are pooled and there is no audit log or SSO.",
       "note": "Organisations with owner, admin and member roles, scoped keys and per-member caps. No audit log or SSO is published, and start budgets are pooled across the organisation.",
       "source": {
         "url": "https://docs.boat.dev/organizations/seats-and-limits",
@@ -74,6 +80,8 @@
     {
       "provider": "boxd",
       "verdict": "partly",
+      "figure": "Not published",
+      "scenario": "Owner, admin and member roles with keys fenced to one org; no self-serve audit log, SSO or spend cap is published.",
       "note": "Every account is an organisation with owner, admin and member roles, and keys are fenced to one org. No self-serve audit log, SSO or spend cap is published; machines are EU-only.",
       "source": {
         "url": "https://boxd.sh/pricing",
@@ -84,6 +92,8 @@
     {
       "provider": "e2b",
       "verdict": "partly",
+      "figure": "Per-project limit",
+      "scenario": "The workspace shares payment and credits while each project has its own spending limit; SSO and audit coverage are not published.",
       "note": "A workspace shares payment, credits and invoice; each project has its own plan and spending limit. SOC 2 Type II and a HIPAA BAA path. SSO and audit coverage are not published.",
       "source": {
         "url": "https://docs.e2b.dev/workspaces",
@@ -94,6 +104,8 @@
     {
       "provider": "instabox",
       "verdict": "partly",
+      "figure": "Monthly cap stops machines",
+      "scenario": "A monthly spend cap stops machines; SSO, SCIM and audit logs are Enterprise only.",
       "note": "Organisations and workspaces with roles, scoped keys and a monthly spend cap that stops machines. SSO, SCIM and audit logs are Enterprise only.",
       "source": {
         "url": "https://api.instabox.sh/v1/openapi.json",
@@ -104,6 +116,8 @@
     {
       "provider": "lizard",
       "verdict": "partly",
+      "figure": "No cap at all",
+      "scenario": "Caps on sandboxes, CPU, memory and disk, but no spending cap at all; SSO and audit are Enterprise.",
       "note": "Workspaces, projects and scoped keys, with caps on sandboxes, CPU, memory and disk. No spending cap at all; SSO and audit logs are Enterprise only.",
       "source": {
         "url": "https://lizard.build/docs/cli/keys",
@@ -114,6 +128,8 @@
     {
       "provider": "morph",
       "verdict": "partly",
+      "figure": "Not published",
+      "scenario": "Devboxes are shareable inside the organisation and an SSH-key audit endpoint exists; SSO and hard caps are not published.",
       "note": "Devboxes are shareable to anyone in the organisation, and an SSH-key audit endpoint exists. SSO, hard spend caps and comprehensive audit coverage are not published.",
       "source": {
         "url": "https://cloud.morph.so/docs/devboxes/getting-started",
@@ -124,6 +140,8 @@
     {
       "provider": "runtime",
       "verdict": "yes",
+      "figure": "Per-key daily + lifetime",
+      "scenario": "Per-key daily spend limits and a per-sandbox lifetime cap, with SSO, SCIM and a 400-day audit log free.",
       "note": "Roles, compartments that wall off key groups, per-key daily spend limits and a per-sandbox lifetime cap. SSO, SCIM and a 400-day audit log are free.",
       "source": {
         "url": "https://withruntime.com/docs/pricing",
@@ -134,6 +152,8 @@
     {
       "provider": "sandboxer",
       "verdict": "partly",
+      "figure": "Per-member caps",
+      "scenario": "A shared wallet with per-member usage caps; plans are per seat and no audit log or SSO is published.",
       "note": "An organisation is a shared wallet with owner and member roles, scoped keys and per-member usage caps. Plans are per seat, and no audit log or SSO is published.",
       "source": {
         "url": "https://sandboxer.com/docs/organizations",
@@ -144,6 +164,8 @@
     {
       "provider": "sprites",
       "verdict": "partly",
+      "figure": "Not published",
+      "scenario": "Fly organisations and connector management; spend caps, key scopes and audit retention are not published.",
       "note": "Fly.io organisations and connector management in a dashboard. SSO is claimed by a third party; spend caps, key scopes, audit retention and residency are not published.",
       "source": {
         "url": "https://docs.fly.io/sprites/quickstart",
@@ -154,6 +176,8 @@
     {
       "provider": "vercel-sandbox",
       "verdict": "partly",
+      "figure": "Spend management",
+      "scenario": "Spend management can pause projects and SAML costs $300 a month; fine-grained Sandbox key scopes are not published.",
       "note": "Team seats, spend management that can pause projects, and a lifecycle activity log. SAML costs $300 a month; fine-grained Sandbox key scopes and contractual residency are not published.",
       "source": {
         "url": "https://vercel.com/docs/plans/pro-plan#paid-add-ons",
@@ -161,5 +185,32 @@
         "confidence": "docs-confirmed"
       }
     }
+  ],
+  "figureLabel": "Hard spend cap?",
+  "scenario": {
+    "title": "Five people, one runaway agent, one procurement form",
+    "setup": "A five-person team shares an account. On Tuesday night an agent loops and burns $400 of compute. The same week, procurement asks for SSO and an audit log.",
+    "beats": [
+      {
+        "at": "22:00",
+        "what": "The loop starts. A hard cap stops the machine; an alert tells you at 08:00."
+      },
+      {
+        "at": "08:00",
+        "what": "You read the bill. Whether the plan multiplies per seat decides what the other four people cost."
+      },
+      {
+        "at": "10:00",
+        "what": "Procurement asks who signed in, what they did, and whether the account supports SAML."
+      }
+    ],
+    "turn": "Hard caps are rarer than alerts, and audit logs are rarer than SSO. Runtime is the outlier that includes both free; several providers publish neither on the tiers described here."
+  },
+  "questions": [
+    "Does the plan price multiply per seat, and what does a five-person team pay before usage?",
+    "Is there a hard spend cap that stops machines, a per-key limit, or only an alert?",
+    "Are SSO and audit logs included, enterprise-only, or absent — and how long is the audit log retained?",
+    "Do backups and control-plane data sit in the same region as compute?",
+    "Can an API key be scoped to one sandbox or one project, and who can see the wallet?"
   ]
 }

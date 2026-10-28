@@ -28,8 +28,26 @@ export interface Source {
 export interface FeatureRow {
   provider: string;
   verdict: Verdict;
+  /** The number that decides this feature for this provider: a timer, a price, a size. */
+  figure: string;
+  /** One line for the worked scenario: what this provider does in it. */
+  scenario: string;
   note: string;
   source?: Source;
+}
+
+export interface ScenarioBeat {
+  /** Clock label, e.g. "00:20". */
+  at: string;
+  what: string;
+}
+
+export interface Scenario {
+  title: string;
+  setup: string;
+  beats: ScenarioBeat[];
+  /** The moment in the walkthrough where the providers diverge. */
+  turn: string;
 }
 
 export interface CostLine {
@@ -52,6 +70,15 @@ export interface Caveat {
   issue: string;
   detail: string;
   status: "open" | "rechecking" | "contradiction";
+  /** The two statements that disagree, for a contradiction. */
+  evidence?: Source[];
+}
+
+export interface CompanyFact {
+  label: string;
+  value: string;
+  /** Omitted when the research found nothing; the value then says so. */
+  source?: Source;
 }
 
 export interface Provider {
@@ -73,6 +100,14 @@ export interface Provider {
     minimum: string;
   };
   cost?: { A: CostCase; B: CostCase; C: CostCase };
+  /** Section 17 of the profile: who the company is, and what a buyer can check. */
+  company: {
+    facts: CompanyFact[];
+  };
+  fits: {
+    well: string[];
+    badly: string[];
+  };
   usability: {
     dashboard: string;
     withoutCode: string;
@@ -101,6 +136,11 @@ export interface Feature {
   idea: string[];
   splits: Split[];
   watchFor: string[];
+  /** Column header for the key-figure column in the comparison table. */
+  figureLabel: string;
+  scenario: Scenario;
+  /** Questions to ask a provider before signing, drawn from the research gaps. */
+  questions: string[];
   rows: FeatureRow[];
 }
 
@@ -113,10 +153,32 @@ export interface Group {
 export interface Situation {
   id: string;
   title: string;
+  icon: SituationIcon;
   question: string;
   answer: string;
   features: string[];
   providers: { provider: string; why: string; watch: string }[];
+  /** The evidence behind the situation's central claim. */
+  sources?: Source[];
+}
+
+export type SituationIcon =
+  | "screen"
+  | "layers"
+  | "clock"
+  | "code"
+  | "browser"
+  | "users"
+  | "chip"
+  | "flag";
+
+export interface Change {
+  /** ISO date of the change, as reported by the source. */
+  date: string;
+  title: string;
+  provider?: string;
+  what: string;
+  sources: Source[];
 }
 
 export interface GlossaryEntry {

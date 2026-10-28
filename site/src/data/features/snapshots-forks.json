@@ -44,6 +44,8 @@
     {
       "provider": "agent37",
       "verdict": "partly",
+      "figure": "No snapshots; 7 backups",
+      "scenario": "Nothing to rewind to: the nightly backup covers only /home/node and restores in place, and a fork copies the disk but not memory.",
       "note": "No snapshot product. Free nightly backups of /home/node with seven restore points, restored in place only; a live fork copies the disk but not memory; templates are Dockerfile-built images.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/instance-backups",
@@ -54,6 +56,8 @@
     {
       "provider": "blaxel",
       "verdict": "partly",
+      "figure": "RAM + disk; preview",
+      "scenario": "A snapshot captures filesystem, processes and memory, but it is in private preview and not recommended for production.",
       "note": "A snapshot captures filesystem, running processes and memory, and outlives the sandbox, but it is in private preview and not recommended for production. Fork runs from the snapshot.",
       "source": {
         "url": "https://docs.blaxel.ai/Sandboxes/Fork.md",
@@ -64,6 +68,8 @@
     {
       "provider": "boat",
       "verdict": "partly",
+      "figure": "Disk only; newest only",
+      "scenario": "Snapshots are automatic and disk-only every minute, and only the newest is usable, so there is no older point to rewind to.",
       "note": "Snapshots are automatic, disk-only and taken every minute, but only the newest is usable: there is no point-in-time restore. Saved snapshots are named and never expire.",
       "source": {
         "url": "https://docs.boat.dev/snapshots/resume-and-fork",
@@ -74,26 +80,32 @@
     {
       "provider": "boxd",
       "verdict": "yes",
+      "figure": "RAM + disk; under 200 ms",
+      "scenario": "A snapshot keeps memory and disk and boots already running; a live fork copies both in 100–200 ms.",
       "note": "A snapshot keeps memory and disk, is named and versioned, and boots machines already running; a checkpoint is an in-place undo point; backups are disk-only and off-cluster; a fork copies memory and disk in 100–200 ms.",
       "source": {
-        "url": "https://docs.boxd.sh/guides/snapshots",
-        "quote": "A snapshot is a saved copy of a specific machine. It captures the disk and the memory",
+        "url": "https://docs.boxd.sh/guides/fork",
+        "quote": "up in under 200ms",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "e2b",
       "verdict": "yes",
+      "figure": "RAM + disk; 20 forks",
+      "scenario": "A snapshot keeps filesystem and memory while the source keeps running; up to 20 forks, with the source paused and its connections dropped.",
       "note": "Snapshots capture filesystem and memory while the source keeps running, and filesystem-only snapshots are available. Up to 20 forks from a running VM, with a brief pause and dropped connections.",
       "source": {
-        "url": "https://docs.e2b.dev/sandbox/snapshots",
-        "quote": "Snapshots let you create a persistent point-in-time capture of a running sandbox, including both its filesystem and memory state.",
+        "url": "https://docs.e2b.dev/sandbox/fork.md",
+        "quote": "With the SDKs and the CLI you can request up to 20 forks at once.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "instabox",
       "verdict": "partly",
+      "figure": "Disk only; may stop source",
+      "scenario": "Snapshots are disk-only and may stop the machine to take them; a fork is snapshot-save plus create, not an instant clone.",
       "note": "Snapshots are disk-only and may stop the machine to take them; a fork is snapshot-save plus create, not an instant clone; snapshots survive deleting the machine and include saved logins.",
       "source": {
         "url": "https://instabox.sh/docs/snapshots",
@@ -104,16 +116,20 @@
     {
       "provider": "lizard",
       "verdict": "yes",
+      "figure": "RAM + disk; 1–100 forks",
+      "scenario": "A snapshot keeps memory, processes and the whole disk; a fork makes 1–100 copies and pauses the source briefly.",
       "note": "A snapshot captures memory, processes and the whole disk and restores into a new sandbox at the source's size; a fork copies a running sandbox 1–100 times with memory, pausing the source briefly.",
       "source": {
-        "url": "https://lizard.build/docs/sandboxes/quickstart",
-        "quote": "A snapshot saves a running sandbox's memory, running processes and every file on its disk.",
+        "url": "https://lizard.build/docs/sandboxes/sdk-reference.md",
+        "quote": "Copy a running sandbox 1 to 100 times, memory and processes included",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "morph",
       "verdict": "yes",
+      "figure": "RAM + disk; branches",
+      "scenario": "Snapshots are immutable copies of memory and disk; a branch starts several running instances from one snapshot.",
       "note": "Snapshots are immutable copies of memory and disk; a branch creates several running instances from one snapshot. Starting a snapshot restores memory, while booting it is a cold boot.",
       "source": {
         "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
@@ -124,6 +140,8 @@
     {
       "provider": "runtime",
       "verdict": "yes",
+      "figure": "RAM + disk",
+      "scenario": "A snapshot defaults to memory plus disk; a fork freezes the source while it captures, and a sandbox with a volume cannot be snapshotted.",
       "note": "Snapshots default to memory plus disk, with disk-only opt-in; forks copy files, memory and processes but freeze the source while capturing; a sandbox with a volume cannot be snapshotted.",
       "source": {
         "url": "https://withruntime.com/docs/javascript",
@@ -134,6 +152,8 @@
     {
       "provider": "sandboxer",
       "verdict": "yes",
+      "figure": "Disk + RAM on stop",
+      "scenario": "Three snapshot kinds, including a stop snapshot with disk and memory; forks are disk-only and boot fresh.",
       "note": "Three snapshot kinds: a stop snapshot with disk and memory, continuous disk snapshots every ten minutes, and named disk snapshots used as templates with share codes. Forks are disk-only.",
       "source": {
         "url": "https://sandboxer.com/docs/snapshots",
@@ -144,6 +164,8 @@
     {
       "provider": "sprites",
       "verdict": "partly",
+      "figure": "Filesystem only",
+      "scenario": "Checkpoints snapshot the writable filesystem copy-on-write and restore in place, overwriting current files; there is no live fork.",
       "note": "Checkpoints snapshot the writable filesystem, copy-on-write and without interrupting work; they restore in place and overwrite current files. A live fork or create-from-checkpoint is not documented.",
       "source": {
         "url": "https://docs.fly.io/sprites/concepts/checkpoints",
@@ -154,6 +176,8 @@
     {
       "provider": "vercel-sandbox",
       "verdict": "partly",
+      "figure": "Filesystem only",
+      "scenario": "Snapshots capture the filesystem and outlive the sandbox, but taking one manually stops the session.",
       "note": "Snapshots capture the filesystem and outlive the sandbox; taking one manually stops the session. Fork uses the current snapshot or falls back to a fresh create from the image.",
       "source": {
         "url": "https://vercel.com/docs/sandbox/concepts/snapshots",
@@ -161,5 +185,32 @@
         "confidence": "docs-confirmed"
       }
     }
+  ],
+  "figureLabel": "What a snapshot keeps",
+  "scenario": {
+    "title": "Rewind a bad change, then fan out ten copies",
+    "setup": "The agent edits a config file, breaks the build, and you want the machine as it was five minutes ago. Then you want ten copies of the working setup to run a test matrix in parallel.",
+    "beats": [
+      {
+        "at": "00:00",
+        "what": "A known-good state exists: a snapshot taken before the edit, or only an automatic one the provider took for you."
+      },
+      {
+        "at": "00:05",
+        "what": "The agent breaks the build. You look for a restore point and find out whether older ones exist."
+      },
+      {
+        "at": "00:10",
+        "what": "You fork ten copies. Each one either resumes mid-process or boots cold from a disk."
+      }
+    ],
+    "turn": "The dividing line is memory. A disk-only restore gives back files and a cold boot; a memory snapshot gives back the process tree. Only some providers let you choose an older point, and several pause the source while forking."
+  },
+  "questions": [
+    "Does a snapshot include memory and running processes, and does the source keep running while it is taken?",
+    "Can I restore an older snapshot, or only the newest one?",
+    "Does a restore happen in place and overwrite the current machine, or create a separate one?",
+    "Do snapshots and forks carry credentials, saved logins and packages installed outside the home folder?",
+    "Does a fork inherit the source's TTL and network rules, and does it resume memory or boot cold?"
   ]
 }

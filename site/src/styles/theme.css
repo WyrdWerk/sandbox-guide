@@ -1092,3 +1092,279 @@ h1 a, h2 a, h3 a {
   transition: color var(--duration-fast) var(--ease-out);
 }
 h1 a:hover, h2 a:hover, h3 a:hover { color: var(--color-accent); }
+
+/* ---------- guide additions: key figures, scenarios, questions, facts ----- */
+
+/* The number that decides a row, kept in mono so columns of figures line up. */
+.compare__figure {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--color-text);
+  max-width: 17ch;
+}
+/* A compound figure ("16 vCPU / 32 GB; EU only") breaks at the semicolon, not mid-unit. */
+.compare__figure-part { display: block; }
+
+/* ---------- one worked case ---------------------------------------------- */
+
+.scenario {
+  border-top: 1px solid var(--color-border-strong);
+  padding-top: var(--space-5);
+}
+.scenario__title {
+  font-size: var(--text-xl);
+  margin: 0 0 var(--space-3);
+}
+.scenario__setup {
+  max-width: 62ch;
+  font-size: var(--text-prose);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+}
+.scenario__beats {
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  display: grid;
+  gap: 0;
+  max-width: 74ch;
+}
+.scenario__beat {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border);
+}
+.scenario__clock {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  padding-top: 3px;
+}
+.scenario__what {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
+}
+.scenario__turn {
+  max-width: 62ch;
+  margin-top: var(--space-5);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-accent);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+}
+.scenario__subtitle {
+  margin: var(--space-8) 0 var(--space-3);
+  font-family: var(--font-ui);
+  font-size: 0.65625rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.scenario__outcomes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--space-9);
+  margin: 0;
+}
+.scenario__outcome {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border);
+  align-items: baseline;
+}
+.scenario__outcome dt {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  line-height: 1.3;
+}
+.scenario__outcome dt a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+.scenario__outcome dt a:hover { color: var(--color-accent); }
+.scenario__outcome dd {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+/* ---------- questions to ask before signing ------------------------------ */
+
+.questions {
+  list-style: none;
+  counter-reset: question;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--space-9);
+}
+.questions li {
+  counter-increment: question;
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-prose);
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
+}
+.questions li::before {
+  content: counter(question, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  padding-top: 4px;
+}
+
+/* ---------- company facts ------------------------------------------------ */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--space-9);
+  margin: var(--space-5) 0 0;
+}
+.fact {
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--color-border);
+}
+.fact__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+.fact__body { margin: 0; }
+.fact__value {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+}
+.fact__source {
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+.fact__quote { font-family: var(--font-display); }
+.fact__source a { color: var(--color-text-muted); }
+.fact__source a:hover { color: var(--color-accent); }
+.fact__source .tag { margin-left: 2px; }
+
+/* ---------- fits well / fits badly --------------------------------------- */
+
+.fits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--space-9);
+  margin-top: var(--space-4);
+}
+.fits__side { padding-top: var(--space-4); border-top: 1px solid var(--color-border); }
+.fits__title {
+  font-family: var(--font-ui);
+  font-size: 0.65625rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+.fits__side--well .fits__title { color: var(--color-yes); }
+.fits__side--badly .fits__title { color: var(--color-no); }
+.fits__list {
+  list-style: none;
+  display: grid;
+  gap: var(--space-2);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
+}
+.fits__list li { padding-left: var(--space-4); position: relative; }
+.fits__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 1px;
+  background: var(--color-border-strong);
+}
+
+/* Contradiction evidence: the two statements that disagree. */
+.evidence { margin-top: var(--space-3); }
+.evidence .quote { margin-top: var(--space-2); }
+.evidence .quote__text { font-size: 0.9375rem; }
+
+/* ---------- what changed recently ---------------------------------------- */
+
+.changes { display: grid; }
+.change {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: var(--space-3) var(--space-7);
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--color-border);
+}
+.change__date {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  padding-top: 5px;
+}
+.change__body { max-width: 68ch; }
+.change__title { font-size: 1.25rem; margin: 0 0 var(--space-2); }
+.change__provider {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+.change__what {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+}
+.change .quote { margin-top: var(--space-3); }
+
+@media (max-width: 900px) {
+  .scenario__outcomes,
+  .questions,
+  .facts,
+  .fits { grid-template-columns: 1fr; }
+  .change { grid-template-columns: 1fr; gap: var(--space-2); }
+  .change__date { padding-top: 0; }
+  .compare__figure { max-width: none; }
+}
+
+/* Sources under a situation, set apart from the picks above. */
+.situation__sources {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+.situation__sources .quote { margin-top: var(--space-3); }
+
+/* Sub-headings inside a situation section need air above them. */
+.section > .split__title {
+  margin: var(--space-8) 0 var(--space-4);
+}
+
+/* The key figure inside a side-by-side cell, above the prose note. */
+.compare-columns .cell-figure {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--color-text);
+  margin: var(--space-2) 0 var(--space-1);
+}

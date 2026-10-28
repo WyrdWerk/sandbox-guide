@@ -43,6 +43,8 @@
     {
       "provider": "agent37",
       "verdict": "yes",
+      "figure": "Not published",
+      "scenario": "The dashboard lists instances, but whether it can create one by clicking is not published; the CLI and the API can.",
       "note": "REST on two planes, a Python SDK, the `npx agent37` CLI, tunnelled SSH, a web terminal on port 7681 and a desktop in some templates. No control-plane MCP.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/urls",
@@ -53,6 +55,8 @@
     {
       "provider": "blaxel",
       "verdict": "yes",
+      "figure": "Yes, console",
+      "scenario": "A console terminal and a CLI sit alongside the SDKs and a per-sandbox MCP server.",
       "note": "Python, TypeScript and Go SDKs, an HTTP API, a per-sandbox MCP server, a console terminal and a CLI.",
       "source": {
         "url": "https://blaxel.ai/pricing",
@@ -63,6 +67,8 @@
     {
       "provider": "boat",
       "verdict": "yes",
+      "figure": "No; installer",
+      "scenario": "The first step is a shell command: boat new, then boat prompt. The dashboard is a viewer for machines you already made.",
       "note": "REST, Python and TypeScript SDKs, a CLI, SSH and SCP, a 60 fps desktop and a dashboard. The MCP server is for documentation, not for managing sandboxes.",
       "source": {
         "url": "https://docs.boat.dev/quickstart",
@@ -73,6 +79,8 @@
     {
       "provider": "boxd",
       "verdict": "partly",
+      "figure": "No; CLI",
+      "scenario": "CLI-first: every guide starts with an install command, and the wire API is gRPC with no REST.",
       "note": "gRPC is the only wire API; there is no REST. TypeScript and Python SDKs, a CLI, real SSH on a dedicated port, a console terminal and a browser desktop.",
       "source": {
         "url": "https://docs.boxd.sh/reference/grpc-api",
@@ -83,6 +91,8 @@
     {
       "provider": "e2b",
       "verdict": "yes",
+      "figure": "No; SDK",
+      "scenario": "SDK-first: Python and JavaScript SDKs, a CLI, and SSH through a WebSocket proxy.",
       "note": "Python and JavaScript SDKs, a CLI, SSH through a WebSocket proxy, a desktop SDK, an MCP gateway inside the sandbox and lifecycle webhooks.",
       "source": {
         "url": "https://docs.e2b.dev/sandbox/ssh-access",
@@ -93,6 +103,8 @@
     {
       "provider": "instabox",
       "verdict": "partly",
+      "figure": "Yes, dashboard",
+      "scenario": "A dashboard creates the machine and opens a clickable VNC desktop, with a web terminal as backup.",
       "note": "REST, a TypeScript SDK, a CLI, SSH and mosh through a gateway, a web terminal and a VNC desktop. No control-plane MCP is published.",
       "source": {
         "url": "https://instabox.sh/docs/start",
@@ -103,6 +115,8 @@
     {
       "provider": "lizard",
       "verdict": "partly",
+      "figure": "Yes, dashboard",
+      "scenario": "The dashboard creates a machine and opens a terminal; there is no SSH protocol at all.",
       "note": "REST, TypeScript and Python SDKs, a CLI, a hosted MCP server and a dashboard terminal. There is no SSH protocol and no public VNC port.",
       "source": {
         "url": "https://lizard.build/docs/sandboxes/sdk-reference",
@@ -113,6 +127,8 @@
     {
       "provider": "morph",
       "verdict": "partly",
+      "figure": "Yes, dashboard",
+      "scenario": "A devbox API and a configurable remote desktop, plus SDKs, a CLI and a tmux API for agents.",
       "note": "SDKs and a CLI, SSH, a devbox API, a configurable remote desktop, and a tmux API for agents. No first-party MCP server or webhooks are documented.",
       "source": {
         "url": "https://cloud.morph.so/docs/devboxes/getting-started",
@@ -123,6 +139,8 @@
     {
       "provider": "runtime",
       "verdict": "yes",
+      "figure": "Yes, dashboard",
+      "scenario": "A dashboard creates a sandbox, with a desktop, SSH over the API and a hosted MCP server.",
       "note": "REST, JavaScript, Python, Go, Ruby and Java SDKs, a CLI, a hosted MCP server, SSH over the API, a desktop, webhooks and OpenTelemetry.",
       "source": {
         "url": "https://withruntime.com/docs/mcp",
@@ -133,6 +151,8 @@
     {
       "provider": "sandboxer",
       "verdict": "yes",
+      "figure": "Yes, dashboard",
+      "scenario": "A dashboard, a static CLI, a VNC desktop and a browser terminal, with SSH and SCP as real ports.",
       "note": "REST, TypeScript and Python SDKs, a static CLI binary, a hosted MCP server, SSH and SCP, a VNC desktop and a browser terminal.",
       "source": {
         "url": "https://sandboxer.com/docs/cli",
@@ -143,6 +163,8 @@
     {
       "provider": "sprites",
       "verdict": "partly",
+      "figure": "No; CLI",
+      "scenario": "A CLI and an interactive console; SSH needs a server installed inside and proxied.",
       "note": "A CLI and interactive console, SDKs and agent integrations, and SSH only after installing a server and proxying it. No managed desktop or browser-control product.",
       "source": {
         "url": "https://docs.fly.io/sprites/quickstart",
@@ -153,6 +175,8 @@
     {
       "provider": "vercel-sandbox",
       "verdict": "partly",
+      "figure": "No; CLI or SDK",
+      "scenario": "A CLI, JavaScript and Python SDKs, and a dashboard that can stop or delete a sandbox but not drive it.",
       "note": "CLI, JavaScript and Python SDKs, and a dashboard that can stop or delete a sandbox and shows a lifecycle activity log. No SSH or desktop is published.",
       "source": {
         "url": "https://vercel.com/docs/sandbox",
@@ -160,5 +184,32 @@
         "confidence": "docs-confirmed"
       }
     }
+  ],
+  "figureLabel": "First machine without a terminal?",
+  "scenario": {
+    "title": "A designer wants the first machine without a terminal",
+    "setup": "Someone who does not use a shell needs to create a machine, open a desktop, and start a coding agent. Nothing about the hourly rate matters until that works.",
+    "beats": [
+      {
+        "at": "Create",
+        "what": "A dashboard button, or an install command and a CLI call."
+      },
+      {
+        "at": "Enter",
+        "what": "A browser desktop, a web terminal, or SSH from a laptop."
+      },
+      {
+        "at": "Prompt",
+        "what": "An agent API call, a CLI prompt, or a terminal where they type the command themselves."
+      }
+    ],
+    "turn": "Five providers document creating a machine from a dashboard, and three of those also open a desktop. At the CLI-first providers the dashboard is a viewer, so the first step is a terminal whatever the marketing page shows."
+  },
+  "questions": [
+    "Can I create and open the first machine without a terminal, and what exactly can the dashboard do?",
+    "Is the API REST or gRPC, and is there an SDK for my language?",
+    "Is SSH a real port, a tunnel or a gateway — and do scp and port forwarding work?",
+    "Is the MCP server a control plane that creates sandboxes, or a tool surface inside one?",
+    "Is there a desktop I can watch and take over, and does it survive a resume?"
   ]
 }

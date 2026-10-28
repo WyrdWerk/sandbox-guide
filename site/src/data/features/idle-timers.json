@@ -44,6 +44,8 @@
     {
       "provider": "agent37",
       "verdict": "yes",
+      "figure": "No cap; sleep off",
+      "scenario": "Still running and still billing: nothing pauses it unless you opt in to auto-sleep.",
       "note": "No lifetime cap, and auto-sleep is off by default, so a box stays up and bills compute by the minute until you stop or delete it. Any request to any URL wakes a sleeping instance.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/instance-auto-sleep",
@@ -54,6 +56,8 @@
     {
       "provider": "blaxel",
       "verdict": "partly",
+      "figure": "15 min idle (docs); 5 s (pricing)",
+      "scenario": "Asleep after 15 minutes of idle connection, or about five seconds if the pricing page is right; the next request resumes it.",
       "note": "Standby after 15 minutes of idle WebSocket or TCP activity according to the docs, or about 5 seconds according to the pricing page. Resume from standby is claimed under 25 ms.",
       "source": {
         "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
@@ -64,16 +68,20 @@
     {
       "provider": "boat",
       "verdict": "partly",
+      "figure": "1 h from create",
+      "scenario": "Awake at 00:20, because the clock counts from creation, not activity; it stops at the one-hour mark whether or not the work is finished.",
       "note": "No idle detection, but a hard auto-stop counts from create or resume: one hour by default, 30 days maximum, and off is allowed. A stop destroys the machine, so a URL cannot wake it.",
       "source": {
         "url": "https://docs.boat.dev/long-running-tasks/auto-stop",
-        "quote": "The timer counts from creation or from the last resume, not from your last activity.",
+        "quote": "The default is 1 hour.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "boxd",
       "verdict": "yes",
+      "figure": "4 h without traffic",
+      "scenario": "Awake: hibernation needs four hours without TCP or UDP traffic, and a stalled model call makes none.",
       "note": "Runtime is unlimited and auto-suspend is off by default. Auto-hibernate is on by default after four hours without TCP/UDP traffic in either direction, so outbound polling keeps a box awake but a local compile does not.",
       "source": {
         "url": "https://docs.boxd.sh/guides/suspend-resume",
@@ -84,6 +92,8 @@
     {
       "provider": "e2b",
       "verdict": "partly",
+      "figure": "5 min, then killed",
+      "scenario": "Killed at the five-minute timeout, losing the queued test run; a pause would have kept memory, but pausing is opt-in.",
       "note": "A timeout defaults to five minutes and kills the sandbox; pausing instead is opt-in. Commands and URL requests do not reset it. Continuous runtime is capped at one hour on Hobby and 24 hours on Pro.",
       "source": {
         "url": "https://docs.e2b.dev/faq/sandbox-lifetime",
@@ -94,16 +104,20 @@
     {
       "provider": "instabox",
       "verdict": "partly",
+      "figure": "30 min idle",
+      "scenario": "Still running at 00:20, paused at 00:30, and woken by the command at 01:00 with the process intact.",
       "note": "Paid machines have no lifetime timeout, but idle auto-pause defaults to 30 minutes; paid plans can choose 5–30 minutes or off. Free machines are capped at 8 hours of continuous runtime.",
       "source": {
-        "url": "https://api.instabox.sh/v1/openapi.json",
-        "quote": "Sandboxes have no lifetime timeout: they pause when idle",
+        "url": "https://instabox.sh/docs/concepts",
+        "quote": "A new machine pauses once it has been idle for 30 minutes.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "lizard",
       "verdict": "partly",
+      "figure": "5 min lifetime (SDK)",
+      "scenario": "Already gone: there is no idle timer, and a sandbox made through the SDK expires five minutes after creation.",
       "note": "There is no idle timer at all, but every sandbox has a hard lifetime deadline: five minutes by default from the SDK and CLI, and never by default from the dashboard and raw API.",
       "source": {
         "url": "https://lizard.build/docs/sandboxes",
@@ -114,6 +128,8 @@
     {
       "provider": "morph",
       "verdict": "partly",
+      "figure": "Not published",
+      "scenario": "Scaled to zero after an unpublished period of inactivity, with memory preserved; the 01:00 request wakes it.",
       "note": "Devboxes scale to zero after inactivity, preserving memory and application state, and wake on an HTTP or SSH request. Instance TTL is a duration after which an instance stops or pauses.",
       "source": {
         "url": "https://cloud.morph.so/docs/devboxes/getting-started",
@@ -124,16 +140,20 @@
     {
       "provider": "runtime",
       "verdict": "yes",
+      "figure": "300 s idle",
+      "scenario": "Paused at five minutes, woken by the 01:00 command in about a second, process and memory intact.",
       "note": "No clock unless you set one, and `persistent: true` disables the idle pause. Otherwise it pauses after five idle minutes and wakes on the next request, usually within a second.",
       "source": {
         "url": "https://withruntime.com/docs/pricing",
-        "quote": "`persistent: true` keeps a sandbox running until you stop it, with no idle pause.",
+        "quote": "A sandbox pauses itself after 300 seconds with nothing happening in it: no request, no command still running, no open connection, no network traffic and no CPU use.",
         "confidence": "pricing-page"
       }
     },
     {
       "provider": "sandboxer",
       "verdict": "partly",
+      "figure": "1 s – 30 days, or off",
+      "scenario": "Paused at 15 minutes on the lowest plan and later on higher ones; the one-hour auto-stop then stops it with memory and disk kept.",
       "note": "No maximum lifetime, but a hard auto-stop defaults to one hour and idle pause to 15–120 minutes by plan. An always-on box needs `ttlSeconds: null` and `idleStopMinutes: 0`.",
       "source": {
         "url": "https://sandboxer.com/docs/limits",
@@ -144,6 +164,8 @@
     {
       "provider": "sprites",
       "verdict": "yes",
+      "figure": "30 s warm pause",
+      "scenario": "Paused after about 30 seconds; the 01:00 command resumes warm memory in 100–500 ms.",
       "note": "A warm pause after about 30 seconds idle, a cold stop after a longer unpublished period, and wake on request. Four things reset the timer, including an open TCP connection.",
       "source": {
         "url": "https://docs.fly.io/sprites/concepts/lifecycle",
@@ -154,6 +176,8 @@
     {
       "provider": "vercel-sandbox",
       "verdict": "partly",
+      "figure": "5 min session",
+      "scenario": "Stopped at the five-minute session timeout; the next command starts a new session from the saved filesystem, not from memory.",
       "note": "A session timeout of five minutes by default, with a maximum session of 45 minutes on Hobby and 24 hours on Pro. No idle-activity timer is published.",
       "source": {
         "url": "https://vercel.com/docs/sandbox/concepts",
@@ -161,5 +185,32 @@
         "confidence": "docs-confirmed"
       }
     }
+  ],
+  "figureLabel": "Idle or lifetime limit",
+  "scenario": {
+    "title": "Mid-refactor, 20 minutes of silence",
+    "setup": "Your agent is 40 minutes into a refactor on a 4 vCPU / 8 GB box. It has written six files, a test run is queued in memory, and the model call stalls. Nothing touches the machine for 20 minutes.",
+    "beats": [
+      {
+        "at": "00:00",
+        "what": "The last command returns. The agent waits on the model, so no request, command or CPU use reaches the sandbox."
+      },
+      {
+        "at": "00:20",
+        "what": "Still silent. Whether the machine is running, frozen or already gone depends entirely on the provider's default, not on anything you set."
+      },
+      {
+        "at": "01:00",
+        "what": "The model answers and the agent sends its next command."
+      }
+    ],
+    "turn": "At 00:20 the provider keeps the machine, freezes it, or has ended it. At 01:00 the bill and the work diverge: a frozen machine resumes in place, a stopped one has lost the queued process, and a killed one returns an error."
+  },
+  "questions": [
+    "When the timer fires, does the machine pause with memory, stop and keep the disk, or get deleted — and which of those does the provider call stop?",
+    "Does the clock count from creation, from the last command, or from any network traffic, and does an open SSH session reset it?",
+    "Can the idle timer be turned off, or only raised to a maximum — and what is that maximum?",
+    "What does an idle hour cost in each state, and does a paused machine keep billing memory?",
+    "After a pause, how long does the first request wait, and do open connections and running processes survive?"
   ]
 }

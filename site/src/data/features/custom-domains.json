@@ -53,6 +53,8 @@
     {
       "provider": "agent37",
       "verdict": "yes",
+      "figure": "Whole domain only",
+      "scenario": "Possible only by delegating a whole dedicated domain's nameservers; a subdomain of your existing domain cannot be registered.",
       "note": "Custom domains are supported, but only by delegating a whole dedicated domain's nameservers; a subdomain of an existing domain cannot be registered.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/urls",
@@ -63,6 +65,8 @@
     {
       "provider": "blaxel",
       "verdict": "yes",
+      "figure": "Native, optional auth",
+      "scenario": "Preview URLs support custom domains, with optional auth.",
       "note": "Preview URLs back a running sandbox with optional auth and custom domains.",
       "source": {
         "url": "https://docs.blaxel.ai/llms.txt",
@@ -73,6 +77,8 @@
     {
       "provider": "boat",
       "verdict": "no",
+      "figure": "Not supported",
+      "scenario": "Explicitly unsupported: a CNAME to on.boat.dev does not work, and certificates are issued only for on.boat.dev names.",
       "note": "Custom domains are explicitly unsupported. A CNAME to an on.boat.dev name does not work, and certificates are issued only for on.boat.dev names.",
       "source": {
         "url": "https://docs.boat.dev/hosting",
@@ -83,6 +89,8 @@
     {
       "provider": "boxd",
       "verdict": "yes",
+      "figure": "Native, automatic TLS",
+      "scenario": "Point one domain at the machine or delegate a wildcard subdomain to the organisation; DNS is verified and TLS issued automatically.",
       "note": "Point one domain at a machine or delegate a wildcard subdomain to the organisation; boxd verifies DNS and issues TLS certificates automatically.",
       "source": {
         "url": "https://docs.boxd.sh/guides/custom-domains",
@@ -93,6 +101,8 @@
     {
       "provider": "e2b",
       "verdict": "partly",
+      "figure": "Own proxy in front",
+      "scenario": "No native feature: the documented path is a customer-operated GCP VM running Caddy and Cloudflare DNS in front of the sandbox.",
       "note": "No native custom domain. The documented path is a customer-operated GCP VM running Caddy and Cloudflare DNS in front of the sandbox.",
       "source": {
         "url": "https://docs.e2b.dev/network/custom-domain",
@@ -103,6 +113,8 @@
     {
       "provider": "instabox",
       "verdict": "not-published",
+      "figure": "Not published",
+      "scenario": "No custom-domain support is published, and the public-port URL is a fixed vendor subdomain.",
       "note": "No custom-domain support is published. The public-port URL is a fixed vendor subdomain, and the OpenAPI PublicPort object has only port, name, url and machineId, with no customDomain or cname field. No roadmap entry exists.",
       "source": {
         "url": "https://instabox.sh/docs/ports",
@@ -113,6 +125,8 @@
     {
       "provider": "lizard",
       "verdict": "partly",
+      "figure": "App services only",
+      "scenario": "Documented for deployed app services, not for sandbox preview URLs; a preview stays on the provider hostname.",
       "note": "Custom domains are documented for deployed app services, not for sandbox preview URLs. A sandbox preview stays on the provider's hostname.",
       "source": {
         "url": "https://lizard.build/docs/sandboxes/preview-urls",
@@ -123,6 +137,8 @@
     {
       "provider": "morph",
       "verdict": "not-published",
+      "figure": "Not published",
+      "scenario": "No custom-domain feature appears in the documentation, API or terms; an HTTP service is served on a provider hostname.",
       "note": "No custom-domain feature appears in the documentation, API or terms. An HTTP service can be exposed, but it is served on a provider hostname.",
       "source": {
         "url": "https://cloud.morph.so/docs/documentation/instances/http-services",
@@ -133,6 +149,8 @@
     {
       "provider": "runtime",
       "verdict": "yes",
+      "figure": "Native, Let's Encrypt",
+      "scenario": "The web port can run at your hostname with HTTPS, verified by DNS records and a Let's Encrypt certificate.",
       "note": "A sandbox's web port can run at your own hostname with HTTPS, verified by DNS records and a certificate from Let's Encrypt.",
       "source": {
         "url": "https://withruntime.com/docs/networking",
@@ -143,6 +161,8 @@
     {
       "provider": "sandboxer",
       "verdict": "partly",
+      "figure": "CNAME plus your TLS",
+      "scenario": "A roadmap item: the documented workaround is a CNAME to the hosted hostname with your own TLS termination.",
       "note": "First-class custom domains are on the roadmap; the documented workaround is a CNAME to the hosted hostname with your own TLS termination.",
       "source": {
         "url": "https://sandboxer.com/docs/hosting",
@@ -153,6 +173,8 @@
     {
       "provider": "sprites",
       "verdict": "not-published",
+      "figure": "Not published",
+      "scenario": "No native support documented; a community report from April 2026 says Sprites lack custom domains the way regular Fly VMs have them.",
       "note": "No native custom-domain support is documented. A community report from April 2026 says Sprites lack custom domains and certificates the way regular Fly VMs do; current support was not confirmed, so treat a proxy as the only known path.",
       "source": {
         "url": "https://community.fly.io/t/cloudflare-to-sprite-ssl-tls-is-broken-preventing-custom-domains-therefore-prod-use-cases/27512",
@@ -163,6 +185,8 @@
     {
       "provider": "vercel-sandbox",
       "verdict": "not-published",
+      "figure": "Not published",
+      "scenario": "Attaching your own domain to a Sandbox port was not confirmed; Vercel domains apply to deployments, a different product.",
       "note": "Attaching a customer's own domain to a Sandbox port was not confirmed. Vercel domains apply to deployments, a different product; ask whether a separately managed proxy is supported.",
       "source": {
         "url": "https://vercel.com/docs/sandbox",
@@ -170,5 +194,32 @@
         "confidence": "docs-confirmed"
       }
     }
+  ],
+  "figureLabel": "Path to your domain",
+  "scenario": {
+    "title": "Point demo.acme.com at the agent's port",
+    "setup": "You own acme.com and want demo.acme.com to reach port 3000 inside the sandbox, with a valid certificate and no proxy for you to run.",
+    "beats": [
+      {
+        "at": "DNS",
+        "what": "Either you add a CNAME for one subdomain, or the provider asks you to move the whole domain's nameservers."
+      },
+      {
+        "at": "TLS",
+        "what": "The provider issues a certificate, or you terminate TLS yourself in front of the sandbox."
+      },
+      {
+        "at": "Resume",
+        "what": "The machine stops overnight. In the morning the hostname either still points at it or has to be re-pointed."
+      }
+    ],
+    "turn": "Only a handful of providers make this a native, self-serve feature with automatic certificates. For the rest the honest answer is a proxy you operate, a whole-domain delegation, or nothing published."
+  },
+  "questions": [
+    "Can I delegate one subdomain with a CNAME, or do I have to move the whole domain's nameservers?",
+    "Who issues and renews the certificate, and how long does that take?",
+    "Does the hostname survive a stop and resume, or must it be re-pointed?",
+    "Is the domain for sandboxes or only for deployed apps?",
+    "If it is not native, what exactly do I have to run in front, and who pays for it?"
   ]
 }

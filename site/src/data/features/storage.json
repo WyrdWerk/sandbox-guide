@@ -44,16 +44,20 @@
     {
       "provider": "agent37",
       "verdict": "partly",
+      "figure": "Whole disk; $0.09/GB-mo",
+      "scenario": "The whole disk persists and bills until you delete the instance, but the nightly backup covers only /home/node, so the database is not in it.",
       "note": "The whole disk persists and bills at $0.09 per GB-month until you delete the instance. No volumes. Backups cover only /home/node, so a database in /var/lib is not in them.",
       "source": {
-        "url": "https://www.agent37.com/docs/agents-api/instance-lifecycle",
-        "quote": "The whole disk persists, like a VM.",
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "Disk | $0.09 per GB per month",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "blaxel",
       "verdict": "yes",
+      "figure": "1 volume; survives delete",
+      "scenario": "The sandbox disk goes with the sandbox; only a volume survives deletion, and one volume attaches at a time.",
       "note": "A volume survives sandbox deletion, but only one volume attaches to a sandbox and a volume attaches to one sandbox at a time. Agent Drive is the shared filesystem, priced separately.",
       "source": {
         "url": "https://docs.blaxel.ai/Sandboxes/Volumes.md",
@@ -64,6 +68,8 @@
     {
       "provider": "boat",
       "verdict": "partly",
+      "figure": "14 days after stop",
+      "scenario": "The whole disk persists, including /var/lib, and is kept free for 14 days after a stop.",
       "note": "The whole disk persists, with 51 GB on the smaller sizes and no volume product. A stopped sandbox's disk is kept free for 14 days, then deleted.",
       "source": {
         "url": "https://docs.boat.dev/faq",
@@ -74,46 +80,56 @@
     {
       "provider": "boxd",
       "verdict": "partly",
+      "figure": "100 GB; billed on write",
+      "scenario": "The fixed 100 GB disk persists in every state and bills on bytes written, not provisioned size.",
       "note": "Every machine has a fixed 100 GB disk, and disk bills on bytes written in every state. Detachable disks exist in the SDK but have no guide, size list or published price.",
       "source": {
-        "url": "https://boxd.sh/pricing",
-        "quote": "Disk bills on the disk you have written to, in every state",
-        "confidence": "pricing-page"
+        "url": "https://docs.boxd.sh/guides/resources",
+        "quote": "Disk | 100 GB, fixed (copy-on-write)",
+        "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "e2b",
       "verdict": "partly",
+      "figure": "10–20 GiB; volumes in beta",
+      "scenario": "Snapshots keep the filesystem, but the sandbox disk does not outlive the sandbox; separate volumes are in private beta.",
       "note": "Snapshots keep the filesystem, and separate volumes persist across sandboxes, but volumes are in private beta and cannot be snapshotted. Included disk is 10 GiB on Hobby and 20 GiB on Pro.",
       "source": {
-        "url": "https://docs.e2b.dev/volumes",
-        "quote": "Volumes are currently in private beta.",
+        "url": "https://docs.e2b.dev/faq/calculate-sandbox-price.md",
+        "quote": "Disk | Included (10 GiB Hobby / 20 GiB Pro)",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "instabox",
       "verdict": "partly",
+      "figure": "20 GiB at /data",
+      "scenario": "One disk at /data persists and grows live; the root disk is owned by the template, so a package install outside /data is at risk.",
       "note": "One disk at /data, 20 GiB by default and growable, with the root disk owned by the template. No volumes and no second disk; the free plan's disk is fixed.",
       "source": {
         "url": "https://instabox.sh/docs/limits",
-        "quote": "A machine has one disk, `/data` (home is `/data/home`)",
+        "quote": "a 20 GiB persistent ext4 disk at `/data`",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "lizard",
       "verdict": "partly",
+      "figure": "/workspace only; 1–50 GB",
+      "scenario": "Only /workspace persists; a stop deletes everything else, including the database in /var/lib.",
       "note": "The local disk is lost on stop; only /workspace persists, through a named volume of 1–50 GB attached to one sandbox at a time and stored on one node. There is no trash.",
       "source": {
-        "url": "https://lizard.build/docs/sandboxes/volumes",
-        "quote": "Each volume mounts at **`/workspace`** and attaches to **one sandbox at a time**.",
+        "url": "https://lizard.build/docs/sandboxes/volumes.md",
+        "quote": "New volumes allow **1 to 50 GB**, in whole GB, with **5 GB** as the default.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "morph",
       "verdict": "partly",
+      "figure": "S3 volumes, not a disk",
+      "scenario": "The instance disk holds the machine; Morph Volumes is S3-compatible object storage reached through a gateway, not an attached block disk.",
       "note": "The instance disk holds the machine, and Morph Volumes is separate S3-compatible object storage reached through a gateway and CLI, not an attached block disk. EFS is a third option.",
       "source": {
         "url": "https://cloud.morph.so/docs/volumes/getting-started",
@@ -124,6 +140,8 @@
     {
       "provider": "runtime",
       "verdict": "yes",
+      "figure": "Up to 4 volumes",
+      "scenario": "Up to four volumes mount at chosen paths, so the database belongs on a volume rather than the root disk.",
       "note": "Up to four volumes per sandbox, each mounted at a path, with a read-only snapshot mode for sharing. Buckets from S3, R2 or GCS can appear as a directory without the key entering the sandbox.",
       "source": {
         "url": "https://withruntime.com/docs/storage",
@@ -134,6 +152,8 @@
     {
       "provider": "sandboxer",
       "verdict": "partly",
+      "figure": "Whole disk; quota, not bill",
+      "scenario": "The whole disk persists while stopped, free within a storage quota; going over blocks new sandboxes rather than charging.",
       "note": "The whole disk persists while stopped, free within a storage quota, and there is no separate volume or image registry. Going over quota blocks new sandboxes rather than charging.",
       "source": {
         "url": "https://sandboxer.com/docs/machines",
@@ -144,22 +164,53 @@
     {
       "provider": "sprites",
       "verdict": "yes",
+      "figure": "100 GB cap; bytes written",
+      "scenario": "The whole filesystem persists on durable local storage, capped at 100 GB, and bills the bytes written.",
       "note": "The whole filesystem persists on durable local storage, capped at 100 GB, and checkpoints keep filesystem blocks that bill while retained. No attachable or shared volumes are documented.",
       "source": {
-        "url": "https://docs.fly.io/sprites/quickstart",
-        "quote": "Sprites remember your entire filesystem between sessions.",
+        "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+        "quote": "you pay for the bytes you actually write, not the full 100 GB",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "vercel-sandbox",
       "verdict": "partly",
+      "figure": "64 GB ephemeral; drives",
+      "scenario": "64 GB of ephemeral NVMe per sandbox; a drive bills on logical used size and only one sandbox can mount it read-write.",
       "note": "64 GB of ephemeral NVMe per sandbox, plus drives billed on logical used size. Only one sandbox at a time can mount a drive read-write; snapshots are the sharing mechanism.",
       "source": {
-        "url": "https://vercel.com/docs/sandbox/concepts/drives",
-        "quote": "Only one sandbox at a time can mount a given drive as read-write: use snapshots for shared access.",
-        "confidence": "docs-confirmed"
+        "url": "https://vercel.com/docs/sandbox/pricing#resource-limits",
+        "quote": "Enterprise | 32 | 64GB | 15 | 64 GB",
+        "confidence": "pricing-page"
       }
     }
+  ],
+  "figureLabel": "Disk, and how long it is kept",
+  "scenario": {
+    "title": "Install Postgres in /var/lib, stop overnight",
+    "setup": "The agent installs Postgres with apt, initialises a database in /var/lib/postgresql, and writes a week of test data. You stop the machine at 22:00 and resume at 08:00.",
+    "beats": [
+      {
+        "at": "21:00",
+        "what": "apt install writes outside the home folder, which is where the whole-disk and one-folder designs diverge."
+      },
+      {
+        "at": "22:00",
+        "what": "Stop. The disk is either kept with the machine, parked for a fixed period, or deleted."
+      },
+      {
+        "at": "08:00",
+        "what": "Resume and start Postgres. If the disk was reset to the template, the database is gone and the install has to run again."
+      }
+    ],
+    "turn": "A provider that persists the whole disk keeps the database; one that persists only /workspace, or a single /data disk, does not. Retention is the second half: a 14-day window turns a long weekend into data loss."
+  },
+  "questions": [
+    "Does the whole filesystem survive a stop, or only /workspace or /data, and what resets from the template?",
+    "How long is a stopped machine's disk kept before deletion, and is that in the docs or only in the terms?",
+    "Does storage bill on provisioned capacity, written bytes or used bytes, and does a paused machine still pay for it?",
+    "Can a volume attach to more than one machine, and is sharing read-only?",
+    "Do snapshots include packages installed outside the home folder, and do they carry saved credentials?"
   ]
 }
