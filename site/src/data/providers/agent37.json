@@ -25,8 +25,16 @@
       "headline": "≈ $1.09 a month",
       "shape": "2 vCPU / 4 GiB, 4 GB disk (the entry shape), deleted after each task",
       "lines": [
-        { "label": "Compute", "arithmetic": "1,000 × 10 min × (2 × $0.00001826 + 4 × $0.00001598)", "amount": "$1.00" },
-        { "label": "Disk", "arithmetic": "1,000 × 10 min × 4 GB × $0.00000205", "amount": "$0.08" }
+        {
+          "label": "Compute",
+          "arithmetic": "1,000 × 10 min × (2 × $0.00001826 + 4 × $0.00001598)",
+          "amount": "$1.00"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "1,000 × 10 min × 4 GB × $0.00000205",
+          "amount": "$0.08"
+        }
       ],
       "total": "$1.09",
       "notes": [
@@ -39,8 +47,16 @@
       "headline": "≈ $10.60 or $30.10 a month",
       "shape": "The requested 4 vCPU / 8 GiB / 50 GB box does not exist as a single shape.",
       "lines": [
-        { "label": "4 vCPU / 8 GB, 20 GB disk (the disk cap on this shape)", "arithmetic": "730 h × (4 × $0.0011 + 8 × $0.00096) + 20 × $0.09", "amount": "$10.60" },
-        { "label": "4 vCPU / 32 GB, 50 GB disk (the nearest shape that allows 50 GB)", "arithmetic": "730 h × (4 × $0.0011 + 32 × $0.00096) + 50 × $0.09", "amount": "$30.10" }
+        {
+          "label": "4 vCPU / 8 GB, 20 GB disk (the disk cap on this shape)",
+          "arithmetic": "730 h × (4 × $0.0011 + 8 × $0.00096) + 20 × $0.09",
+          "amount": "$10.60"
+        },
+        {
+          "label": "4 vCPU / 32 GB, 50 GB disk (the nearest shape that allows 50 GB)",
+          "arithmetic": "730 h × (4 × $0.0011 + 32 × $0.00096) + 50 × $0.09",
+          "amount": "$30.10"
+        }
       ],
       "total": "$10.60 or $30.10",
       "notes": [
@@ -53,8 +69,16 @@
       "headline": "≈ $1.61 or $2.86 a month",
       "shape": "The requested 2 vCPU / 4 GiB / 20 GB box does not exist: that shape caps disk at 12 GB.",
       "lines": [
-        { "label": "2 vCPU / 4 GB, 12 GB disk", "arithmetic": "90 h × $0.00604 + 12 × $0.09 × (720/730)", "amount": "$1.61" },
-        { "label": "4 vCPU / 8 GB, 20 GB disk", "arithmetic": "90 h × $0.01208 + 20 × $0.09 × (720/730)", "amount": "$2.86" }
+        {
+          "label": "2 vCPU / 4 GB, 12 GB disk",
+          "arithmetic": "90 h × $0.00604 + 12 × $0.09 × (720/730)",
+          "amount": "$1.61"
+        },
+        {
+          "label": "4 vCPU / 8 GB, 20 GB disk",
+          "arithmetic": "90 h × $0.01208 + 20 × $0.09 × (720/730)",
+          "amount": "$2.86"
+        }
       ],
       "total": "$1.61 or $2.86",
       "notes": [
@@ -64,6 +88,71 @@
       ],
       "flag": "20 GB is not orderable with 2 vCPU. The second line buys more CPU and RAM than asked to get the disk."
     }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Agent 37 Inc., under New York law; the state of incorporation is not published.",
+        "source": {
+          "url": "https://www.agent37.com/terms",
+          "quote": "These Terms of Service (the \"Terms\") are an agreement between you and Agent 37 Inc. (\"Agent 37\", \"we\", \"us\").",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded",
+        "value": "2026, by Vishnu Krishnaprasad; Y Combinator Fall 2026.",
+        "source": {
+          "url": "https://trust.agent37.com",
+          "quote": "Founded in 2026",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "Y Combinator Fall 2026. The amount, round and other investors are not published.",
+        "source": {
+          "url": "https://www.ycombinator.com/companies/agent-37",
+          "quote": "Batch:Fall 2026",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Headcount",
+        "value": "Not published. The sole named founder is also the sales and escalation contact."
+      },
+      {
+        "label": "Status and SLA",
+        "value": "Status components reported 100% over 30, 60 and 90 days at check. No SLA unless agreed in writing.",
+        "source": {
+          "url": "https://www.agent37.com/terms",
+          "quote": "we do not promise a specific uptime level unless we have agreed to one with you in writing.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "SOC 2 Type I on request under NDA; Type II in progress. No ISO 27001 or HIPAA claim.",
+        "source": {
+          "url": "https://www.agent37.com/privacy",
+          "quote": "Our SOC 2 Type I report and our SOC 2 readiness report are available to prospective and current business customers on request under NDA. Our SOC 2 Type II is in progress",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "An always-on agent that must not sleep: auto-sleep is off by default and there is no lifetime cap.",
+      "A small budget with no plan floor: per-minute billing, no minimum, and stopped time is disk only.",
+      "A machine you want to reach from a browser: desktop templates, a web terminal and tunnelled SSH."
+    ],
+    "badly": [
+      "Docker on the default type, which is a gVisor container; the vm type costs 2.5× the compute rate.",
+      "A procurement review that needs SSO, an audit log or a finished compliance report today.",
+      "Any workload that needs a static egress IP or a published egress rate."
+    ]
   },
   "usability": {
     "dashboard": "Yes, two of them: agent37.com/dashboard/cloud for keys, billing, team and metrics, and a separate dashboard for the personal-agent product. The docs never describe creating a Cloud sandbox by clicking, so the documented path is an API call or the CLI.",
@@ -83,7 +172,19 @@
     {
       "issue": "The vCPU ceiling contradicts itself",
       "detail": "The sizing page says 4 vCPU is the ceiling on every instance type and that a request for 16 vCPU comes back as 4. The VM page prices 8 vCPU / 16 GB and 16 vCPU / 32 GB. Both pages are current.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.agent37.com/docs/agents-api/instance-sizing",
+          "quote": "4 vCPU is the ceiling on every instance type. A create that asks for more cores keeps the memory it asked for and comes back with 4 vCPU",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.agent37.com/docs/agents-api/vm-instances#sizing-and-price",
+          "quote": "8 | 16 GB | 2-40 GB | 12 GB | $45.08",
+          "confidence": "docs-confirmed"
+        }
+      ]
     },
     {
       "issue": "battleships.dev models Agent 37 as having memory snapshots",
@@ -119,13 +220,37 @@
     "Cheapest always-on 4 vCPU box of the seven at about $10.60 a month."
   ],
   "sources": [
-    { "label": "Docs: overview", "url": "https://www.agent37.com/docs" },
-    { "label": "Docs: lifecycle", "url": "https://www.agent37.com/docs/agents-api/instance-lifecycle" },
-    { "label": "Docs: billing", "url": "https://www.agent37.com/docs/agents-api/billing" },
-    { "label": "Docs: URLs and auth", "url": "https://www.agent37.com/docs/agents-api/urls" },
-    { "label": "Docs: backups", "url": "https://www.agent37.com/docs/agents-api/instance-backups" },
-    { "label": "Docs: fork", "url": "https://www.agent37.com/docs/agents-api/instances/fork" },
-    { "label": "Pricing", "url": "https://www.agent37.com/pricing" },
-    { "label": "Personal agent plans", "url": "https://www.agent37.com/personal" }
+    {
+      "label": "Docs: overview",
+      "url": "https://www.agent37.com/docs"
+    },
+    {
+      "label": "Docs: lifecycle",
+      "url": "https://www.agent37.com/docs/agents-api/instance-lifecycle"
+    },
+    {
+      "label": "Docs: billing",
+      "url": "https://www.agent37.com/docs/agents-api/billing"
+    },
+    {
+      "label": "Docs: URLs and auth",
+      "url": "https://www.agent37.com/docs/agents-api/urls"
+    },
+    {
+      "label": "Docs: backups",
+      "url": "https://www.agent37.com/docs/agents-api/instance-backups"
+    },
+    {
+      "label": "Docs: fork",
+      "url": "https://www.agent37.com/docs/agents-api/instances/fork"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://www.agent37.com/pricing"
+    },
+    {
+      "label": "Personal agent plans",
+      "url": "https://www.agent37.com/personal"
+    }
   ]
 }

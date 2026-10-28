@@ -2,6 +2,8 @@
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import CostCard from "../../components/CostCard.astro";
+import CompanyFacts from "../../components/CompanyFacts.astro";
+import Quote from "../../components/Quote.astro";
 import { providers } from "../../lib/data";
 
 export function getStaticPaths() {
@@ -21,7 +23,7 @@ const statusLabel = {
     kicker={`Provider · checked ${provider.checkedOn ?? "pending"}`}
     title={provider.name}
     standfirst={provider.oneLiner}
-    meta={[provider.url.replace("https://", ""), "12 providers", "Sources linked"]}
+    meta={[provider.url.replace("https://", ""), `${providers.length} providers`, "Sources linked"]}
   />
 
   <div class="wrap">
@@ -38,6 +40,25 @@ const statusLabel = {
           <tr><th scope="row">Sizes</th><td>{provider.sizes}</td></tr>
         </tbody>
       </table>
+
+      <h2 class="section__title">Fits well, fits badly</h2>
+      <p class="section__note">
+        Our reading of the sourced material on this page, not a provider claim.
+      </p>
+      <div class="fits">
+        <div class="fits__side fits__side--well">
+          <h3 class="fits__title">Fits well</h3>
+          <ul class="fits__list">
+            {provider.fits.well.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="fits__side fits__side--badly">
+          <h3 class="fits__title">Fits badly</h3>
+          <ul class="fits__list">
+            {provider.fits.badly.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
 
       <h2 class="section__title">How it bills</h2>
       <table class="data-table">
@@ -69,6 +90,13 @@ const statusLabel = {
         </tbody>
       </table>
 
+      <h2 class="section__title">The company</h2>
+      <p class="section__note">
+        From the profile's company section: the legal entity, who funds it, and what a buyer can
+        check before signing.
+      </p>
+      <CompanyFacts facts={provider.company.facts} />
+
       <h2 class="section__title">Caveats and contradictions</h2>
       <p class="section__note">
         Shown as the research found them. A contradiction means the provider's own pages disagree;
@@ -82,6 +110,18 @@ const statusLabel = {
               {caveat.issue} <span class="tag tag--not-published">{statusLabel[caveat.status]}</span>
             </h3>
             <p class="watch__body">{caveat.detail}</p>
+            {caveat.evidence && (
+              <div class="evidence">
+                {caveat.evidence.map((source) => (
+                  <Quote
+                    text={source.quote}
+                    cite={provider.name}
+                    url={source.url}
+                    tag={source.confidence}
+                  />
+                ))}
+              </div>
+            )}
           </li>
         ))}
       </ol>

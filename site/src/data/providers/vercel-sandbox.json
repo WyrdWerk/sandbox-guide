@@ -24,8 +24,16 @@
       "headline": "$18.40 before credit",
       "shape": "2 vCPU / 4 GB, 10% average CPU, deleted after each task",
       "lines": [
-        { "label": "Memory", "arithmetic": "4 × 166.67 h × $0.0212", "amount": "$14.13" },
-        { "label": "Active CPU at 10%", "arithmetic": "2 × 166.67 h × 0.10 × $0.128", "amount": "$4.27" }
+        {
+          "label": "Memory",
+          "arithmetic": "4 × 166.67 h × $0.0212",
+          "amount": "$14.13"
+        },
+        {
+          "label": "Active CPU at 10%",
+          "arithmetic": "2 × 166.67 h × 0.10 × $0.128",
+          "amount": "$4.27"
+        }
       ],
       "total": "$18.40",
       "notes": [
@@ -37,8 +45,16 @@
       "headline": "$161.18 before credit, and not a continuous session",
       "shape": "4 vCPU / 8 GB, 10% average CPU, 730 running-equivalent hours",
       "lines": [
-        { "label": "Memory", "arithmetic": "8 × 730 × $0.0212", "amount": "$123.81" },
-        { "label": "Active CPU at 10%", "arithmetic": "4 × 730 × 0.10 × $0.128", "amount": "$37.38" }
+        {
+          "label": "Memory",
+          "arithmetic": "8 × 730 × $0.0212",
+          "amount": "$123.81"
+        },
+        {
+          "label": "Active CPU at 10%",
+          "arithmetic": "4 × 730 × 0.10 × $0.128",
+          "amount": "$37.38"
+        }
       ],
       "total": "$161.18",
       "notes": [
@@ -51,8 +67,16 @@
       "headline": "$9.94 before credit",
       "shape": "2 vCPU / 4 GB, 10% average CPU, 90 running hours, stopped otherwise",
       "lines": [
-        { "label": "Memory", "arithmetic": "4 × 90 × $0.0212", "amount": "$7.63" },
-        { "label": "Active CPU at 10%", "arithmetic": "2 × 90 × 0.10 × $0.128", "amount": "$2.30" }
+        {
+          "label": "Memory",
+          "arithmetic": "4 × 90 × $0.0212",
+          "amount": "$7.63"
+        },
+        {
+          "label": "Active CPU at 10%",
+          "arithmetic": "2 × 90 × 0.10 × $0.128",
+          "amount": "$2.30"
+        }
       ],
       "total": "$9.94",
       "notes": [
@@ -60,6 +84,76 @@
         "Retaining the filesystem as snapshots adds storage; 30 stops can create 30 snapshots."
       ]
     }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Vercel Inc., a Delaware corporation.",
+        "source": {
+          "url": "https://vercel.com/legal/dpa",
+          "quote": "Vercel Inc., a Delaware corporation",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded",
+        "value": "2015, by Guillermo Rauch, who is CEO. Sandbox was announced in June 2025 and went GA in January 2026.",
+        "source": {
+          "url": "https://vercel.com/blog/series-f",
+          "quote": "Our founding insight back in 2015 was simple",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "$300M Series F at a $9.3B valuation in September 2025, co-led by Accel and GIC.",
+        "source": {
+          "url": "https://vercel.com/blog/series-f",
+          "quote": "Today, Vercel announced an important milestone: a Series F funding round valuing our company at $9.3 billion.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Headcount",
+        "value": "600, per Forbes in September 2025. No current company-confirmed figure.",
+        "source": {
+          "url": "https://www.forbes.com/companies/vercel/",
+          "quote": "Employees 600",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Status and SLA",
+        "value": "Sandbox is listed as operational with no Sandbox-specific percentage. The 99.99% Enterprise SLA does not name Sandbox.",
+        "source": {
+          "url": "https://vercel.com/legal/sla#services-availability",
+          "quote": "available 99.99% of the time, excluding any Excused Downtime events",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "SOC 2 Type 2 and ISO 27001:2022 at platform level; Sandbox's place in that scope is not published.",
+        "source": {
+          "url": "https://vercel.com/docs/security/compliance#soc-2-type-2",
+          "quote": "Vercel has a SOC 2 Type 2 attestation for Security, Confidentiality, and Availability.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "A Firecracker microVM with root, Docker and FUSE, up to 32 vCPU and 64 GB of NVMe.",
+      "A workload that needs to run close to users: 19 regions, and the most of any provider here.",
+      "A Vercel-hosted app that wants a sandbox next to its deployments, with credentials brokered out of the machine."
+    ],
+    "badly": [
+      "An always-on agent: the default session timeout is five minutes and the Hobby cap is 45 minutes.",
+      "A confidential Hobby workload: Hobby content may be used for model training, and the plan is non-commercial.",
+      "Anything needing SSH, a desktop or a raw TCP inbound port."
+    ]
   },
   "usability": {
     "dashboard": "The Vercel dashboard can stop or delete a sandbox and shows a lifecycle activity log.",
@@ -92,7 +186,19 @@
     {
       "issue": "Hobby quota reset wording differs",
       "detail": "One page says creation pauses until 30 days after first use; another says until the next billing cycle.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing#hobby",
+          "quote": "Once you exceed the quotas, sandbox creation is paused until 30 days have passed since you first used the feature.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing#pricing",
+          "quote": "Once you exceed your included limit on Hobby, sandbox creation is paused until the next billing cycle.",
+          "confidence": "pricing-page"
+        }
+      ]
     },
     {
       "issue": "Fork is not a live memory copy",
@@ -108,10 +214,25 @@
     "Snapshots expire after 30 days by default and can be kept indefinitely."
   ],
   "sources": [
-    { "label": "Overview", "url": "https://vercel.com/docs/sandbox" },
-    { "label": "Concepts", "url": "https://vercel.com/docs/sandbox/concepts" },
-    { "label": "Persistence", "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes" },
-    { "label": "Snapshots", "url": "https://vercel.com/docs/sandbox/concepts/snapshots" },
-    { "label": "Pricing", "url": "https://vercel.com/docs/sandbox/pricing" }
+    {
+      "label": "Overview",
+      "url": "https://vercel.com/docs/sandbox"
+    },
+    {
+      "label": "Concepts",
+      "url": "https://vercel.com/docs/sandbox/concepts"
+    },
+    {
+      "label": "Persistence",
+      "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes"
+    },
+    {
+      "label": "Snapshots",
+      "url": "https://vercel.com/docs/sandbox/concepts/snapshots"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://vercel.com/docs/sandbox/pricing"
+    }
   ]
 }

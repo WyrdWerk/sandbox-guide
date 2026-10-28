@@ -24,7 +24,11 @@
       "headline": "$27.60, or nothing against the Hobby credit",
       "shape": "2 vCPU / 4 GiB, deleted after each task",
       "lines": [
-        { "label": "Compute", "arithmetic": "166.67 h × (2 × $0.0504 + 4 × $0.0162)", "amount": "$27.60" }
+        {
+          "label": "Compute",
+          "arithmetic": "166.67 h × (2 × $0.0504 + 4 × $0.0162)",
+          "amount": "$27.60"
+        }
       ],
       "total": "$27.60",
       "notes": [
@@ -36,7 +40,11 @@
       "headline": "$241.78 of compute, not a feasible all-in quote",
       "shape": "4 vCPU / 8 GiB / 50 GiB, 730 h",
       "lines": [
-        { "label": "Compute", "arithmetic": "730 × (4 × $0.0504 + 8 × $0.0162)", "amount": "$241.78" }
+        {
+          "label": "Compute",
+          "arithmetic": "730 × (4 × $0.0504 + 8 × $0.0162)",
+          "amount": "$241.78"
+        }
       ],
       "total": "$241.78 compute only",
       "notes": [
@@ -49,8 +57,16 @@
       "headline": "$164.90 including the Pro plan fee",
       "shape": "2 vCPU / 4 GiB, 90 running hours, 630 paused hours",
       "lines": [
-        { "label": "Compute", "arithmetic": "90 × (2 × $0.0504 + 4 × $0.0162)", "amount": "$14.90" },
-        { "label": "Pro plan fee", "arithmetic": "monthly", "amount": "$150.00" }
+        {
+          "label": "Compute",
+          "arithmetic": "90 × (2 × $0.0504 + 4 × $0.0162)",
+          "amount": "$14.90"
+        },
+        {
+          "label": "Pro plan fee",
+          "arithmetic": "monthly",
+          "amount": "$150.00"
+        }
       ],
       "total": "$164.90",
       "notes": [
@@ -58,6 +74,76 @@
         "Assumes each daily session is explicitly paused rather than left running."
       ]
     }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "FoundryLabs, Inc., a Delaware corporation.",
+        "source": {
+          "url": "https://docs.e2b.dev/security.md",
+          "quote": "E2B's contracting entity is FoundryLabs, Inc., a Delaware corporation.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded",
+        "value": "2023, by Vasek Mlejnsky (CEO) and Tomas Valenta (CTO).",
+        "source": {
+          "url": "https://e2b.dev/about.md",
+          "quote": "E2B was founded in 2023 by Vasek Mlejnsky and Tomas Valenta.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "$21M Series A in July 2025, led by Insight Partners; $32M total at that announcement.",
+        "source": {
+          "url": "https://e2b.dev/resources/series-a.md",
+          "quote": "This Brings Our Total Funding to $32M",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Headcount",
+        "value": "About 25, a third-party estimate from June 2026. No company-confirmed figure is published.",
+        "source": {
+          "url": "https://rywalker.com/research/e2b",
+          "quote": "Employees | ~25",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Status and SLA",
+        "value": "99.78% for US-West-1 over July–October 2026. Uptime and support terms are set in the enterprise agreement.",
+        "source": {
+          "url": "https://status.e2b.dev/",
+          "quote": "99.78% uptime",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "SOC 2 Type II report and a HIPAA BAA path, both by request through the Trust Center.",
+        "source": {
+          "url": "https://docs.e2b.dev/security.md",
+          "quote": "E2B has a **SOC 2 Type II** report.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "A microVM with its own kernel, Docker, snapshots that keep memory, and up to 20 forks from a running sandbox.",
+      "An agent that needs a real API and SDKs, plus templates built from any Docker image.",
+      "A team that needs a SOC 2 report and a HIPAA path without an enterprise contract."
+    ],
+    "badly": [
+      "A long-running agent: the default timeout kills the sandbox after five minutes and commands do not reset it.",
+      "Memory above 8 GiB, or any GPU workload.",
+      "A client-facing link that must be private: public URLs have no authentication by default."
+    ]
   },
   "usability": {
     "dashboard": "A console exists for support and API keys, but the documented path is SDKs, a CLI and API keys.",
@@ -80,7 +166,19 @@
     {
       "issue": "The default sandbox size is stated two ways",
       "detail": "The pricing page says the default is 2 vCPU / 4 GiB; the billing docs say 2 vCPU / 512 MiB. Both are current provider statements.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://e2b.dev/pricing.md",
+          "quote": "The default sandbox has 2 vCPUs and 4 GiB of RAM.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://docs.e2b.dev/billing.md",
+          "quote": "Start with default resources (2 vCPU, 512 MiB RAM)",
+          "confidence": "docs-confirmed"
+        }
+      ]
     },
     {
       "issue": "Volumes are in private beta",
@@ -106,11 +204,29 @@
     "SOC 2 Type II and a HIPAA BAA path."
   ],
   "sources": [
-    { "label": "Docs", "url": "https://docs.e2b.dev/" },
-    { "label": "Persistence", "url": "https://docs.e2b.dev/sandbox/persistence" },
-    { "label": "Snapshots", "url": "https://docs.e2b.dev/sandbox/snapshots" },
-    { "label": "Fork", "url": "https://docs.e2b.dev/sandbox/fork" },
-    { "label": "Pricing", "url": "https://e2b.dev/pricing" },
-    { "label": "Security", "url": "https://docs.e2b.dev/security" }
+    {
+      "label": "Docs",
+      "url": "https://docs.e2b.dev/"
+    },
+    {
+      "label": "Persistence",
+      "url": "https://docs.e2b.dev/sandbox/persistence"
+    },
+    {
+      "label": "Snapshots",
+      "url": "https://docs.e2b.dev/sandbox/snapshots"
+    },
+    {
+      "label": "Fork",
+      "url": "https://docs.e2b.dev/sandbox/fork"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://e2b.dev/pricing"
+    },
+    {
+      "label": "Security",
+      "url": "https://docs.e2b.dev/security"
+    }
   ]
 }

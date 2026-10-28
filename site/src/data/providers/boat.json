@@ -25,8 +25,16 @@
       "headline": "$20 a month (the plan floor)",
       "shape": "small (2 vCPU / 4 GB / 51 GB), deleted after each task",
       "lines": [
-        { "label": "Compute", "arithmetic": "1,000 × 600 s × $0.018/h ÷ 3,600", "amount": "$3.00" },
-        { "label": "Bill", "arithmetic": "$20 plan; included time absorbs it", "amount": "$20.00" }
+        {
+          "label": "Compute",
+          "arithmetic": "1,000 × 600 s × $0.018/h ÷ 3,600",
+          "amount": "$3.00"
+        },
+        {
+          "label": "Bill",
+          "arithmetic": "$20 plan; included time absorbs it",
+          "amount": "$20.00"
+        }
       ],
       "total": "$20.00",
       "notes": [
@@ -39,8 +47,16 @@
       "headline": "$26.28 a month",
       "shape": "default (4 vCPU / 8 GB / 51 GB), 730 h",
       "lines": [
-        { "label": "Compute", "arithmetic": "730 × $0.036", "amount": "$26.28" },
-        { "label": "Plan plus wallet", "arithmetic": "$20 plan + $6.28 overage", "amount": "$26.28" }
+        {
+          "label": "Compute",
+          "arithmetic": "730 × $0.036",
+          "amount": "$26.28"
+        },
+        {
+          "label": "Plan plus wallet",
+          "arithmetic": "$20 plan + $6.28 overage",
+          "amount": "$26.28"
+        }
       ],
       "total": "$26.28",
       "notes": [
@@ -52,8 +68,16 @@
       "headline": "$1.62 of usage, billed at $20",
       "shape": "small (2 vCPU / 4 GB / 51 GB), 90 running hours",
       "lines": [
-        { "label": "Compute", "arithmetic": "90 × $0.018", "amount": "$1.62" },
-        { "label": "Stopped time", "arithmetic": "630 h at $0", "amount": "$0.00" }
+        {
+          "label": "Compute",
+          "arithmetic": "90 × $0.018",
+          "amount": "$1.62"
+        },
+        {
+          "label": "Stopped time",
+          "arithmetic": "630 h at $0",
+          "amount": "$0.00"
+        }
       ],
       "total": "$1.62 of usage",
       "notes": [
@@ -61,6 +85,76 @@
         "The disk is kept free for 14 days after a stop; a longer gap needs a saved snapshot."
       ]
     }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Dedale AI, Corp., a Delaware corporation with a Dover mailing address. Card statements show DEDALE AI.",
+        "source": {
+          "url": "https://boat.dev/terms",
+          "quote": "boat is provided by Dedale AI, Corp., a Delaware corporation.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founders",
+        "value": "Anicet Nougaret (CEO) and Kirill Makarov (CTO); Y Combinator Fall 2026.",
+        "source": {
+          "url": "https://www.everydev.ai/developers/ascii-dev",
+          "quote": "Kirill Makarov Co-founder and CTO",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "A reported $500k pre-seed from Entrepreneur First and Founders, Inc. No priced round is published.",
+        "source": {
+          "url": "https://nordic9.com/news/ascii-raised-500k-in-pre-seed-funding-from-entrepreneurs-first-ef-and-founders-inc/",
+          "quote": "Ascii raised $500k in pre-seed funding from Entrepreneurs First (EF) and Founders, Inc.",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "History",
+        "value": "Launched as box in July 2026 and renamed boat on 15 September 2026; box surfaces still answer.",
+        "source": {
+          "url": "https://docs.boat.dev/migrating-from-box",
+          "quote": "Box became **boat** on September 15, 2026.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Status and SLA",
+        "value": "No SLA on any plan, and the terms disclaim uptime and availability.",
+        "source": {
+          "url": "https://boat.dev/terms",
+          "quote": "We do not guarantee that sandbox will be uninterrupted",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "SOC 2 in progress. No published report, ISO 27001 or HIPAA claim.",
+        "source": {
+          "url": "https://docs.boat.dev/security",
+          "quote": "SOC 2 in progress.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "An ordinary Ubuntu server per agent: own kernel, Docker, SSH, root and a desktop for $26.28 a month always on.",
+      "A coding agent out of the box: seven harnesses preinstalled and promptable through one API call.",
+      "EU hosting with no egress bill and free automatic disk snapshots."
+    ],
+    "badly": [
+      "A workload that needs to resume mid-process: there is no pause, and every resume is a reboot with a new IP.",
+      "Point-in-time recovery: snapshots are newest-only and disk-only.",
+      "Anything that needs a custom domain, a region choice, a GPU or an ARM machine."
+    ]
   },
   "usability": {
     "dashboard": "Yes: sandboxes with type, monthly cost and a desktop button, snapshots you can browse and download, environment settings, AI sign-ins, organisation, billing and account.",
@@ -90,12 +184,36 @@
     {
       "issue": "The disk expires 14 days after a stop",
       "detail": "Docs and FAQ say 14 days; the Terms say up to about 30 days. A box untouched for two weeks returns `409 snapshot_data_expired`.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://docs.boat.dev/faq",
+          "quote": "boat keeps the disk for 14 days after the stop",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://boat.dev/terms",
+          "quote": "generally retained for a limited period, currently up to approximately 30 days",
+          "confidence": "docs-confirmed"
+        }
+      ]
     },
     {
       "issue": "Its docs and marketing disagree on stop and on the number of sizes",
       "detail": "The homepage still says three sizes and pause billing; the docs list four sizes and state there is no pause.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://boat.dev/",
+          "quote": "sandboxes come in three sizes",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.boat.dev/machines",
+          "quote": "These four sizes are the only sizes.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     },
     {
       "issue": "battleships.dev's Boat record has drifted",
@@ -111,12 +229,33 @@
     "A 60 fps desktop, SSH and Docker on a normal Ubuntu VM."
   ],
   "sources": [
-    { "label": "Docs: quickstart", "url": "https://docs.boat.dev/quickstart" },
-    { "label": "Docs: concepts and states", "url": "https://docs.boat.dev/concepts" },
-    { "label": "Docs: stop and snapshots", "url": "https://docs.boat.dev/snapshots/stop" },
-    { "label": "Docs: auto-stop", "url": "https://docs.boat.dev/long-running-tasks/auto-stop" },
-    { "label": "Docs: hosting", "url": "https://docs.boat.dev/hosting" },
-    { "label": "Docs: AI credentials", "url": "https://docs.boat.dev/ai-credentials" },
-    { "label": "Pricing", "url": "https://docs.boat.dev/pricing" }
+    {
+      "label": "Docs: quickstart",
+      "url": "https://docs.boat.dev/quickstart"
+    },
+    {
+      "label": "Docs: concepts and states",
+      "url": "https://docs.boat.dev/concepts"
+    },
+    {
+      "label": "Docs: stop and snapshots",
+      "url": "https://docs.boat.dev/snapshots/stop"
+    },
+    {
+      "label": "Docs: auto-stop",
+      "url": "https://docs.boat.dev/long-running-tasks/auto-stop"
+    },
+    {
+      "label": "Docs: hosting",
+      "url": "https://docs.boat.dev/hosting"
+    },
+    {
+      "label": "Docs: AI credentials",
+      "url": "https://docs.boat.dev/ai-credentials"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://docs.boat.dev/pricing"
+    }
   ]
 }

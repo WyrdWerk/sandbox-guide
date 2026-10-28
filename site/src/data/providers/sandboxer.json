@@ -25,8 +25,16 @@
       "headline": "$20 a month (the plan floor)",
       "shape": "small (2 vCPU / 4 GB / 12 GB), deleted after each task",
       "lines": [
-        { "label": "Usage", "arithmetic": "1,000 × 600 s × $0.018/h ÷ 3,600", "amount": "$3.00" },
-        { "label": "Bill", "arithmetic": "$20 plan; $3 of included time used", "amount": "$20.00" }
+        {
+          "label": "Usage",
+          "arithmetic": "1,000 × 600 s × $0.018/h ÷ 3,600",
+          "amount": "$3.00"
+        },
+        {
+          "label": "Bill",
+          "arithmetic": "$20 plan; $3 of included time used",
+          "amount": "$20.00"
+        }
       ],
       "total": "$20.00",
       "notes": [
@@ -38,8 +46,16 @@
       "headline": "$40 cash, of which $26.28 is used",
       "shape": "default (4 vCPU / 8 GB / 50 GB), 730 h",
       "lines": [
-        { "label": "Usage", "arithmetic": "730 × $0.036", "amount": "$26.28" },
-        { "label": "Cash", "arithmetic": "$20 plan + one $20 pack", "amount": "$40.00" }
+        {
+          "label": "Usage",
+          "arithmetic": "730 × $0.036",
+          "amount": "$26.28"
+        },
+        {
+          "label": "Cash",
+          "arithmetic": "$20 plan + one $20 pack",
+          "amount": "$40.00"
+        }
       ],
       "total": "$40.00 up front",
       "notes": [
@@ -51,8 +67,16 @@
       "headline": "$20 a month (the plan floor)",
       "shape": "small (2 vCPU / 4 GB / 12 GB), 90 running hours",
       "lines": [
-        { "label": "Usage", "arithmetic": "90 × $0.018", "amount": "$1.62" },
-        { "label": "Bill", "arithmetic": "absorbed by the $20 plan", "amount": "$20.00" }
+        {
+          "label": "Usage",
+          "arithmetic": "90 × $0.018",
+          "amount": "$1.62"
+        },
+        {
+          "label": "Bill",
+          "arithmetic": "absorbed by the $20 plan",
+          "amount": "$20.00"
+        }
       ],
       "total": "$20.00",
       "notes": [
@@ -61,6 +85,75 @@
       ],
       "flag": "No 20 GB size exists: disk is fixed per size at 12 GB or 50 GB."
     }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "North Bay Opco I, Inc., a Delaware corporation with a Miami mailing address.",
+        "source": {
+          "url": "https://sandboxer.com/terms",
+          "quote": "North Bay Opco I, Inc., a Delaware corporation whose mailing address is 777 Brickell Ave, Suite 500 PMB 1074, Miami, FL 33131",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Ownership",
+        "value": "One product of North Bay Ventures, Jon Oringer's venture studio. The same entity contracts for sibling products.",
+        "source": {
+          "url": "https://www.northbayventures.com/",
+          "quote": "North Bay Ventures starts new companies and runs them through their earliest days.",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "History",
+        "value": "The product went live on 18 October 2026.",
+        "source": {
+          "url": "https://x.com/jonoringer/status/2111826193578070439",
+          "quote": "Sandboxer is live",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Incorporated",
+        "value": "The contracting entity was incorporated on 9 November 2022, almost four years before the product launched.",
+        "source": {
+          "url": "https://netstate.co/agents/us-de/corporation-service-company/p/14030",
+          "quote": "NORTH BAY OPCO I, INC. — 7126691 2022-11-09",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "Not published. No round, investor, valuation or accelerator appears anywhere."
+      },
+      {
+        "label": "Status and SLA",
+        "value": "API 100% and sandboxes 99.45% over 30 days. No SLA during early access, on any plan.",
+        "source": {
+          "url": "https://sandboxer.com/docs/llms.txt",
+          "quote": "There's no SLA during early access, and no GPUs.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "No SOC 2, ISO 27001 or HIPAA claim and no trust centre. A vulnerability policy with a three-day acknowledgement."
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "A microVM with systemd, Docker with BuildKit and Compose, and /dev/kvm.",
+      "Six agent harnesses in every sandbox and a prompt API that returns an id.",
+      "Stopped time that is free, with the whole disk kept while the sandbox is stopped."
+    ],
+    "badly": [
+      "A procurement review: no SLA, no SSO, no audit log and no certification.",
+      "A heavy network workload with a third party that rate-limits by IP: outbound shares the node's address.",
+      "A team that wants per-seat pricing to stay flat: plans are per seat."
+    ]
   },
   "usability": {
     "dashboard": "Yes, at sandboxer.com/app: a sandbox list with a stop countdown and an Extend button, an Open desktop button, a browser terminal, billing, environments, agents, API keys, webhooks and alerts.",
@@ -100,7 +193,19 @@
     {
       "issue": "Two regions disagree on where us-east is",
       "detail": "The regions page says Ashburn, Virginia; a performance note on the machines page says Leesburg, VA. Same metro, different answer.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://sandboxer.com/docs/regions",
+          "quote": "`us-east` | US East: Ashburn, Virginia",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://sandboxer.com/docs/machines",
+          "quote": "From US-East (Leesburg, VA) through `https://sandboxer.com`, 20 sequential creates of the `default` size took a median of **0.69 s**",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [
@@ -111,12 +216,33 @@
     "Free stopped storage within a generous quota, and no egress bill."
   ],
   "sources": [
-    { "label": "Docs", "url": "https://sandboxer.com/docs" },
-    { "label": "Snapshots", "url": "https://sandboxer.com/docs/snapshots" },
-    { "label": "Machines and sizes", "url": "https://sandboxer.com/docs/machines" },
-    { "label": "Billing", "url": "https://sandboxer.com/docs/billing" },
-    { "label": "Hosting and preview URLs", "url": "https://sandboxer.com/docs/hosting" },
-    { "label": "Pricing", "url": "https://sandboxer.com/pricing" },
-    { "label": "Security", "url": "https://sandboxer.com/docs/security" }
+    {
+      "label": "Docs",
+      "url": "https://sandboxer.com/docs"
+    },
+    {
+      "label": "Snapshots",
+      "url": "https://sandboxer.com/docs/snapshots"
+    },
+    {
+      "label": "Machines and sizes",
+      "url": "https://sandboxer.com/docs/machines"
+    },
+    {
+      "label": "Billing",
+      "url": "https://sandboxer.com/docs/billing"
+    },
+    {
+      "label": "Hosting and preview URLs",
+      "url": "https://sandboxer.com/docs/hosting"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://sandboxer.com/pricing"
+    },
+    {
+      "label": "Security",
+      "url": "https://sandboxer.com/docs/security"
+    }
   ]
 }

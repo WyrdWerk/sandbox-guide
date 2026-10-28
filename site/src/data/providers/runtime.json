@@ -25,9 +25,21 @@
       "headline": "$5.21 to $13.33 a month",
       "shape": "2 vCPU / 4 GiB / 4 GiB disk, deleted after each task",
       "lines": [
-        { "label": "Memory", "arithmetic": "166.67 h × 4 GiB × $0.0075", "amount": "$5.00" },
-        { "label": "CPU at the 50-millicore floor", "arithmetic": "0.05 × 166.67 h × $0.025", "amount": "$0.21" },
-        { "label": "CPU fully busy", "arithmetic": "2 × 166.67 h × $0.025", "amount": "$8.33" }
+        {
+          "label": "Memory",
+          "arithmetic": "166.67 h × 4 GiB × $0.0075",
+          "amount": "$5.00"
+        },
+        {
+          "label": "CPU at the 50-millicore floor",
+          "arithmetic": "0.05 × 166.67 h × $0.025",
+          "amount": "$0.21"
+        },
+        {
+          "label": "CPU fully busy",
+          "arithmetic": "2 × 166.67 h × $0.025",
+          "amount": "$8.33"
+        }
       ],
       "total": "$5.21 to $13.33",
       "notes": [
@@ -39,10 +51,26 @@
       "headline": "$48.15 to $120.24 a month",
       "shape": "4 vCPU / 8 GiB / 50 GiB, 730 h, always on",
       "lines": [
-        { "label": "Memory", "arithmetic": "8 × 730 × $0.0075", "amount": "$43.80" },
-        { "label": "CPU at the floor", "arithmetic": "0.05 × 730 × $0.025", "amount": "$0.91" },
-        { "label": "CPU fully busy", "arithmetic": "4 × 730 × $0.025", "amount": "$73.00" },
-        { "label": "Disk past the included 10 GiB", "arithmetic": "(53.7 − 10.7) GB × $0.08", "amount": "$3.44" }
+        {
+          "label": "Memory",
+          "arithmetic": "8 × 730 × $0.0075",
+          "amount": "$43.80"
+        },
+        {
+          "label": "CPU at the floor",
+          "arithmetic": "0.05 × 730 × $0.025",
+          "amount": "$0.91"
+        },
+        {
+          "label": "CPU fully busy",
+          "arithmetic": "4 × 730 × $0.025",
+          "amount": "$73.00"
+        },
+        {
+          "label": "Disk past the included 10 GiB",
+          "arithmetic": "(53.7 − 10.7) GB × $0.08",
+          "amount": "$3.44"
+        }
       ],
       "total": "$48.15 to $120.24",
       "notes": [
@@ -54,9 +82,21 @@
       "headline": "$4.42 to $8.81 a month",
       "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running hours in a 720-hour month, stopped otherwise",
       "lines": [
-        { "label": "Running, at the floor", "arithmetic": "0.05 × 90 × $0.025 + 4 × 90 × $0.0075", "amount": "$2.81" },
-        { "label": "Running, fully busy", "arithmetic": "2 × 90 × $0.025 + 4 × 90 × $0.0075", "amount": "$7.20" },
-        { "label": "Stopped disk", "arithmetic": "21.5 GB × $0.08 × 630/720", "amount": "$1.50" }
+        {
+          "label": "Running, at the floor",
+          "arithmetic": "0.05 × 90 × $0.025 + 4 × 90 × $0.0075",
+          "amount": "$2.81"
+        },
+        {
+          "label": "Running, fully busy",
+          "arithmetic": "2 × 90 × $0.025 + 4 × 90 × $0.0075",
+          "amount": "$7.20"
+        },
+        {
+          "label": "Stopped disk",
+          "arithmetic": "21.5 GB × $0.08 × 630/720",
+          "amount": "$1.50"
+        }
       ],
       "total": "$4.42 to $8.81",
       "notes": [
@@ -64,6 +104,66 @@
         "Pausing instead keeps memory and costs about $4.72 to $9.11."
       ]
     }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Runtime LLC, at a Denver, Colorado address. The state of formation is not published.",
+        "source": {
+          "url": "https://withruntime.com/legal/terms",
+          "quote": "These terms are a contract between you and Runtime LLC",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Leadership",
+        "value": "No founder, executive or board member is named anywhere Runtime publishes."
+      },
+      {
+        "label": "History",
+        "value": "Public since 18 September 2026, the first changelog entry. Nothing earlier than September 2026 is published.",
+        "source": {
+          "url": "https://withruntime.com/docs/changelog",
+          "quote": "18 September 2026",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "Not published. No round, investor, accelerator or valuation appears on the site."
+      },
+      {
+        "label": "Status and SLA",
+        "value": "API checks passed 96.37% over 7 days and 98.87% over 30, against a 99% monthly promise with a 10% credit for paid accounts.",
+        "source": {
+          "url": "https://withruntime.com/status.json",
+          "quote": "Last 7 days 96.37%",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "The certificates on its trust page belong to suppliers, including its Virginia data centre. No Runtime-owned SOC 2 is claimed.",
+        "source": {
+          "url": "https://withruntime.com/docs/trust",
+          "quote": "Sandboxes, their disks and memory — Data center, Virginia — SOC 1, SOC 2 and SOC 3 Type 2; ISO 27001",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "An agent that mostly waits: measured CPU with a 50-millicore floor makes an idle hour about $0.03.",
+      "A small team that needs SSO, SCIM, a 400-day audit log and per-key spend limits without an enterprise plan.",
+      "Secrets that must not enter the machine, plus OIDC tokens for AWS or GCP."
+    ],
+    "badly": [
+      "A buyer who needs a named founder, a funding history or a company older than a few months.",
+      "Multi-region or EU data residency: there is one region, in Virginia.",
+      "A workload that needs a Runtime-owned SOC 2 report."
+    ]
   },
   "usability": {
     "dashboard": "Yes, a detailed console: a Home report with a Needs you section, sandboxes with Overview, Terminal, Files, Activity and Settings tabs, a limits page, and usage and billing with daily spend by product.",
@@ -93,7 +193,19 @@
     {
       "issue": "Free hours: every month or once?",
       "detail": "The start page says 100 free hours every month; the pricing and included-usage pages say an account that has never paid gets them once, across its first 30 days.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://withruntime.com/docs/start",
+          "quote": "New accounts get 100 free hours of a 1 GB machine every month, no card",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://withruntime.com/docs/pricing",
+          "quote": "An account that has never paid gets the machine time once, across its first 30 days.",
+          "confidence": "pricing-page"
+        }
+      ]
     },
     {
       "issue": "The canonical state list is not published",
@@ -119,11 +231,29 @@
     "Billed on measured CPU, so a box waiting on a model costs the floor, about $0.03 an hour."
   ],
   "sources": [
-    { "label": "Docs: sandbox environment", "url": "https://withruntime.com/docs/sandbox-environment" },
-    { "label": "Docs: pricing", "url": "https://withruntime.com/docs/pricing" },
-    { "label": "Docs: security and secrets", "url": "https://withruntime.com/docs/security" },
-    { "label": "Docs: networking", "url": "https://withruntime.com/docs/networking" },
-    { "label": "Docs: API", "url": "https://withruntime.com/docs/api" },
-    { "label": "Pricing", "url": "https://withruntime.com/pricing" }
+    {
+      "label": "Docs: sandbox environment",
+      "url": "https://withruntime.com/docs/sandbox-environment"
+    },
+    {
+      "label": "Docs: pricing",
+      "url": "https://withruntime.com/docs/pricing"
+    },
+    {
+      "label": "Docs: security and secrets",
+      "url": "https://withruntime.com/docs/security"
+    },
+    {
+      "label": "Docs: networking",
+      "url": "https://withruntime.com/docs/networking"
+    },
+    {
+      "label": "Docs: API",
+      "url": "https://withruntime.com/docs/api"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://withruntime.com/pricing"
+    }
   ]
 }

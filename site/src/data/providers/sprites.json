@@ -24,8 +24,16 @@
       "headline": "$14.58 to $65.92",
       "shape": "8-vCPU Sprite, 4 GB average memory, no retained disk, deleted after each task",
       "lines": [
-        { "label": "Memory", "arithmetic": "166.67 h × 4 GB × $0.021875", "amount": "$14.58" },
-        { "label": "CPU at zero to full use", "arithmetic": "166.67 h × 0–8 × $0.0385", "amount": "$0–$51.33" }
+        {
+          "label": "Memory",
+          "arithmetic": "166.67 h × 4 GB × $0.021875",
+          "amount": "$14.58"
+        },
+        {
+          "label": "CPU at zero to full use",
+          "arithmetic": "166.67 h × 0–8 × $0.0385",
+          "amount": "$0–$51.33"
+        }
       ],
       "total": "$14.58–$65.92",
       "notes": [
@@ -37,9 +45,21 @@
       "headline": "$153.67 to $378.51",
       "shape": "8-vCPU Sprite, 8 GB average memory, 50 GB retained, 730 h",
       "lines": [
-        { "label": "Memory", "arithmetic": "730 × 8 × $0.021875", "amount": "$127.75" },
-        { "label": "CPU at zero to full use", "arithmetic": "730 × 0–8 × $0.0385", "amount": "$0–$224.84" },
-        { "label": "Storage, hot plus cold", "arithmetic": "730 × 50 × ($0.000683 + $0.000027)", "amount": "$25.92" }
+        {
+          "label": "Memory",
+          "arithmetic": "730 × 8 × $0.021875",
+          "amount": "$127.75"
+        },
+        {
+          "label": "CPU at zero to full use",
+          "arithmetic": "730 × 0–8 × $0.0385",
+          "amount": "$0–$224.84"
+        },
+        {
+          "label": "Storage, hot plus cold",
+          "arithmetic": "730 × 50 × ($0.000683 + $0.000027)",
+          "amount": "$25.92"
+        }
       ],
       "total": "$153.67–$378.51",
       "notes": [
@@ -51,9 +71,21 @@
       "headline": "$9.49 to $37.21",
       "shape": "8-vCPU Sprite, 4 GB average memory, 20 GB retained, 90 active hours",
       "lines": [
-        { "label": "Memory", "arithmetic": "90 × 4 × $0.021875", "amount": "$7.88" },
-        { "label": "CPU at zero to full use", "arithmetic": "90 × 0–8 × $0.0385", "amount": "$0–$27.72" },
-        { "label": "Storage, hot plus cold", "arithmetic": "90 × 20 × $0.000683 + 720 × 20 × $0.000027", "amount": "$1.62" }
+        {
+          "label": "Memory",
+          "arithmetic": "90 × 4 × $0.021875",
+          "amount": "$7.88"
+        },
+        {
+          "label": "CPU at zero to full use",
+          "arithmetic": "90 × 0–8 × $0.0385",
+          "amount": "$0–$27.72"
+        },
+        {
+          "label": "Storage, hot plus cold",
+          "arithmetic": "90 × 20 × $0.000683 + 720 × 20 × $0.000027",
+          "amount": "$1.62"
+        }
       ],
       "total": "$9.49–$37.21",
       "notes": [
@@ -61,6 +93,71 @@
         "Warm suspension keeps memory frozen; a longer idle period drops it and the next wake starts processes fresh."
       ]
     }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Fly.io, Inc., a Delaware corporation. Sprites is a product on Fly's platform, not a separate company.",
+        "source": {
+          "url": "https://fly.io/legal/security-questionnaire/",
+          "quote": "The contracting party for all Fly.io services is Fly.io, Inc.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Leadership",
+        "value": "Scott Johnston is CEO; founder Kurt Mackey moved to an advisory role and remains on the board.",
+        "source": {
+          "url": "https://fly.io/news/fly-io-launches-computers-for-agents/",
+          "quote": "Fly.io also announced that Scott Johnston has joined as CEO and a member of the board.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "History and funding",
+        "value": "Fly has run the platform since 2017 and launched Sprites on 9 January 2026. A $25M Series D in July 2026, co-led by Dell Technologies Capital and Intel Capital.",
+        "source": {
+          "url": "https://fly.io/news/fly-io-launches-computers-for-agents/",
+          "quote": "$25 million in Series D funding co-led by Dell Technologies Capital and Intel Capital, with participation from Andreessen Horowitz, EQT, Geodesic, and YC.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Status and SLA",
+        "value": "Sprites is a component on Fly's status page with no numeric uptime figure. Fly's 99.9% SLA is Enterprise-only and credits must be claimed.",
+        "source": {
+          "url": "https://fly.io/legal/sla-uptime/",
+          "quote": "will apply to the Services for Customers with an Enterprise plan during the applicable Subscription Term",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "SOC 2 Type 2 covers the Fly platform and does not name Sprites; the report and BAA sit behind a $99-a-month compliance package.",
+        "source": {
+          "url": "https://fly.io/legal/security-questionnaire/",
+          "quote": "The report describes the Fly.io platform; it does not name individual products such as Sprites, which run on the platform it covers",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Headcount",
+        "value": "Not published. Fly lists team members but no headcount figure."
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "An agent that pauses constantly: a warm pause after about 30 seconds resumes in 100–500 ms.",
+      "A long-lived filesystem with no volume to manage, capped at 100 GB and billed on bytes written.",
+      "Secrets that never reach the Sprite, through connectors and a gateway."
+    ],
+    "badly": [
+      "systemd: Sprites do not run it, and services start through a built-in manager on wake.",
+      "A live fork or create-from-checkpoint: neither is documented.",
+      "A client-facing link: the URL is private to the organisation and needs an org token."
+    ]
   },
   "usability": {
     "dashboard": "A dashboard exists for connector setup and a Gateway Playground that can fire a request without code.",
@@ -78,7 +175,19 @@
     {
       "issue": "The pricing page and product FAQ disagree on plans",
       "detail": "Pricing says there are no plans and nothing charged per Sprite; the FAQ describes plans including Hero at $100 a month with CPU, RAM and storage allowances.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://fly.io/pricing/",
+          "quote": "No plans and no tiers, and nothing charged per Sprite.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://fly.io/sprites/",
+          "quote": "Plans bundle an allowance of CPU-hours, RAM GB-hours, and storage GB, not unlimited usage.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     },
     {
       "issue": "Warm-to-cold timing is not published",
@@ -88,7 +197,19 @@
     {
       "issue": "Storage charges while idle are ambiguous",
       "detail": "The FAQ says warm and cold are not billed, while the pricing page bills cold storage for as long as data is kept.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://fly.io/sprites/",
+          "quote": "Sprites have three states: running (billed), warm (not billed), and cold (not billed).",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://fly.io/pricing/",
+          "quote": "Cold Bills for as long as you keep it",
+          "confidence": "pricing-page"
+        }
+      ]
     },
     {
       "issue": "No fork or create-from-checkpoint is documented",
@@ -109,11 +230,29 @@
     "Connectors keep credentials in the gateway, not the guest."
   ],
   "sources": [
-    { "label": "Overview", "url": "https://docs.fly.io/sprites/index" },
-    { "label": "Lifecycle", "url": "https://docs.fly.io/sprites/concepts/lifecycle" },
-    { "label": "Checkpoints", "url": "https://docs.fly.io/sprites/concepts/checkpoints" },
-    { "label": "Networking", "url": "https://docs.fly.io/sprites/concepts/networking" },
-    { "label": "Connectors", "url": "https://docs.fly.io/sprites/concepts/connectors" },
-    { "label": "Pricing", "url": "https://fly.io/pricing/" }
+    {
+      "label": "Overview",
+      "url": "https://docs.fly.io/sprites/index"
+    },
+    {
+      "label": "Lifecycle",
+      "url": "https://docs.fly.io/sprites/concepts/lifecycle"
+    },
+    {
+      "label": "Checkpoints",
+      "url": "https://docs.fly.io/sprites/concepts/checkpoints"
+    },
+    {
+      "label": "Networking",
+      "url": "https://docs.fly.io/sprites/concepts/networking"
+    },
+    {
+      "label": "Connectors",
+      "url": "https://docs.fly.io/sprites/concepts/connectors"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://fly.io/pricing/"
+    }
   ]
 }

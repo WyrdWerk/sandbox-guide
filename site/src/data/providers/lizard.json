@@ -25,8 +25,16 @@
       "headline": "$19 a month (the plan floor)",
       "shape": "Small (2 vCPU / 4 GB / 5 GB), deleted after each task",
       "lines": [
-        { "label": "Compute", "arithmetic": "1,000 × (10/60) h × $0.0162", "amount": "$2.70" },
-        { "label": "Bill", "arithmetic": "$19 plan; included usage absorbs it", "amount": "$19.00" }
+        {
+          "label": "Compute",
+          "arithmetic": "1,000 × (10/60) h × $0.0162",
+          "amount": "$2.70"
+        },
+        {
+          "label": "Bill",
+          "arithmetic": "$19 plan; included usage absorbs it",
+          "amount": "$19.00"
+        }
       ],
       "total": "$19.00",
       "notes": [
@@ -38,8 +46,16 @@
       "headline": "$27.85 or $47.30 a month",
       "shape": "No size is 4 vCPU / 8 GB / 50 GB: Medium has 20 GB of disk, Large has 50 GB but 8 vCPU.",
       "lines": [
-        { "label": "Medium + a 30 GB volume", "arithmetic": "0.0324 × 730 + 0.14 × 30", "amount": "$27.85" },
-        { "label": "Large, no volume", "arithmetic": "0.0648 × 730", "amount": "$47.30" }
+        {
+          "label": "Medium + a 30 GB volume",
+          "arithmetic": "0.0324 × 730 + 0.14 × 30",
+          "amount": "$27.85"
+        },
+        {
+          "label": "Large, no volume",
+          "arithmetic": "0.0648 × 730",
+          "amount": "$47.30"
+        }
       ],
       "total": "$27.85 or $47.30",
       "notes": [
@@ -52,8 +68,16 @@
       "headline": "$19 a month either way",
       "shape": "No size is 2 vCPU with 20 GB of disk.",
       "lines": [
-        { "label": "Small + a 15 GB volume", "arithmetic": "0.0162 × 90 + 0.14 × 15", "amount": "$3.56" },
-        { "label": "Medium, no volume", "arithmetic": "0.0324 × 90", "amount": "$2.92" }
+        {
+          "label": "Small + a 15 GB volume",
+          "arithmetic": "0.0162 × 90 + 0.14 × 15",
+          "amount": "$3.56"
+        },
+        {
+          "label": "Medium, no volume",
+          "arithmetic": "0.0324 × 90",
+          "amount": "$2.92"
+        }
       ],
       "total": "$19.00",
       "notes": [
@@ -63,6 +87,66 @@
       ],
       "flag": "Pausing instead of stopping keeps the whole disk and memory, at no published storage charge."
     }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Dragon Labs LLC, doing business as Lizard. Delaware law, with a Portland, Oregon mailing address.",
+        "source": {
+          "url": "https://lizard.build/terms",
+          "quote": "We are Dragon Labs LLC, doing business as Lizard",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "History",
+        "value": "First public SDK release 24 June 2026 and first blog post 31 July 2026. No founding date is published.",
+        "source": {
+          "url": "https://registry.npmjs.org/@lizard-build/sdk",
+          "quote": "\"created\":\"2026-06-24T11:27:01.839Z\"",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "No announced round, amount or investor list. A directory labels the stage Seed."
+      },
+      {
+        "label": "Headcount",
+        "value": "Two, per LinkedIn. Yura Dubinin is named as co-founder and president; Mikhail Erin co-authors the blog.",
+        "source": {
+          "url": "https://www.linkedin.com/company/lizard-build",
+          "quote": "Discover all 2 employees",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Status and SLA",
+        "value": "99.95% platform uptime. No sandbox component is monitored, and no SLA exists outside Enterprise.",
+        "source": {
+          "url": "https://status.lizard.build/",
+          "quote": "Platform 99.95% uptime",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "No SOC 2 report yet; no ISO 27001 or HIPAA claim is published."
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "A flat hourly price per size with a $19 plan, billed per second including idle time.",
+      "Snapshots that keep memory and processes, and forks of 1–100 copies.",
+      "A dashboard-first first machine with a hosted MCP server for assistants."
+    ],
+    "badly": [
+      "A long job from the SDK or CLI: the default lifetime is five minutes and there is no idle timer.",
+      "Anything outside /workspace that must survive a stop, which deletes the rest of the disk.",
+      "SSH-dependent tooling: there is no SSH protocol, so scp and port forwarding do not work."
+    ]
   },
   "usability": {
     "dashboard": "Yes, and it creates sandboxes without code: pick a template, region, size and lifetime, then pause, resume, open a terminal or browse volumes.",
@@ -92,7 +176,19 @@
     {
       "issue": "Two default lifetimes that contradict each other",
       "detail": "Five minutes from the SDK and CLI, no expiry from the raw API and dashboard. A beginner following the CLI docs can lose work without warning.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://lizard.build/docs/sandboxes.md",
+          "quote": "Five minutes by default from the SDK and CLI; no expiration by default from the raw API and dashboard",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://lizard.build/docs/sandboxes/dashboard.md",
+          "quote": "Pick a lifetime under Delete after: 15 minutes, 1 hour, 4 hours, 1 day, 7 days, or Never (the default).",
+          "confidence": "docs-confirmed"
+        }
+      ]
     },
     {
       "issue": "Docker inside a sandbox is not documented",
@@ -118,11 +214,29 @@
     "2 TB of sandbox egress a month included, with no per-GB charge."
   ],
   "sources": [
-    { "label": "Docs: sandboxes", "url": "https://lizard.build/docs/sandboxes" },
-    { "label": "Docs: quickstart", "url": "https://lizard.build/docs/sandboxes/quickstart" },
-    { "label": "Docs: limits and sizes", "url": "https://lizard.build/docs/platform/limits" },
-    { "label": "Docs: billing", "url": "https://lizard.build/docs/platform/billing" },
-    { "label": "Docs: dashboard", "url": "https://lizard.build/docs/sandboxes/dashboard" },
-    { "label": "Pricing", "url": "https://lizard.build/pricing" }
+    {
+      "label": "Docs: sandboxes",
+      "url": "https://lizard.build/docs/sandboxes"
+    },
+    {
+      "label": "Docs: quickstart",
+      "url": "https://lizard.build/docs/sandboxes/quickstart"
+    },
+    {
+      "label": "Docs: limits and sizes",
+      "url": "https://lizard.build/docs/platform/limits"
+    },
+    {
+      "label": "Docs: billing",
+      "url": "https://lizard.build/docs/platform/billing"
+    },
+    {
+      "label": "Docs: dashboard",
+      "url": "https://lizard.build/docs/sandboxes/dashboard"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://lizard.build/pricing"
+    }
   ]
 }

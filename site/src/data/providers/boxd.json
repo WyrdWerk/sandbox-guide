@@ -25,9 +25,21 @@
       "headline": "≈ $25.03 or $34.37 a month",
       "shape": "2 vCPU / 8 GiB (the nearest size), 4 GiB resident, 2 GiB written, deleted after each task",
       "lines": [
-        { "label": "vCPU", "arithmetic": "2 × $0.047 × 166.67 h", "amount": "$15.67" },
-        { "label": "RAM at 4 GiB resident", "arithmetic": "4 × $0.014 × 166.67 h", "amount": "$9.33" },
-        { "label": "Disk", "arithmetic": "2 × $0.000096 × 166.67 h", "amount": "$0.03" }
+        {
+          "label": "vCPU",
+          "arithmetic": "2 × $0.047 × 166.67 h",
+          "amount": "$15.67"
+        },
+        {
+          "label": "RAM at 4 GiB resident",
+          "arithmetic": "4 × $0.014 × 166.67 h",
+          "amount": "$9.33"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "2 × $0.000096 × 166.67 h",
+          "amount": "$0.03"
+        }
       ],
       "total": "$25.03 at 4 GiB, $34.37 at 8 GiB",
       "notes": [
@@ -39,10 +51,26 @@
       "headline": "≈ $222.50 or $304.26 a month",
       "shape": "4 vCPU / 16 GiB (the only 4 vCPU size), 8 GiB or 16 GiB resident, 50 GiB written",
       "lines": [
-        { "label": "vCPU", "arithmetic": "4 × $0.047 × 730", "amount": "$137.24" },
-        { "label": "RAM at 8 GiB resident", "arithmetic": "8 × $0.014 × 730", "amount": "$81.76" },
-        { "label": "RAM at 16 GiB resident", "arithmetic": "16 × $0.014 × 730", "amount": "$163.52" },
-        { "label": "Disk", "arithmetic": "50 × $0.000096 × 730", "amount": "$3.50" }
+        {
+          "label": "vCPU",
+          "arithmetic": "4 × $0.047 × 730",
+          "amount": "$137.24"
+        },
+        {
+          "label": "RAM at 8 GiB resident",
+          "arithmetic": "8 × $0.014 × 730",
+          "amount": "$81.76"
+        },
+        {
+          "label": "RAM at 16 GiB resident",
+          "arithmetic": "16 × $0.014 × 730",
+          "amount": "$163.52"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "50 × $0.000096 × 730",
+          "amount": "$3.50"
+        }
       ],
       "total": "$222.50 at 8 GiB, $304.26 at 16 GiB",
       "notes": [
@@ -54,9 +82,21 @@
       "headline": "≈ $14.88 or $19.92 a month",
       "shape": "2 vCPU / 8 GiB, 4 GiB or 8 GiB resident, 20 GiB written, 90 running hours in a 720-hour month",
       "lines": [
-        { "label": "Running, 90 h at 4 GiB", "arithmetic": "90 × (2 × $0.047 + 4 × $0.014 + 20 × $0.000096)", "amount": "$13.67" },
-        { "label": "Running, 90 h at 8 GiB", "arithmetic": "90 × (2 × $0.047 + 8 × $0.014 + 20 × $0.000096)", "amount": "$18.71" },
-        { "label": "Stopped, 630 h", "arithmetic": "630 × 20 × $0.000096", "amount": "$1.21" }
+        {
+          "label": "Running, 90 h at 4 GiB",
+          "arithmetic": "90 × (2 × $0.047 + 4 × $0.014 + 20 × $0.000096)",
+          "amount": "$13.67"
+        },
+        {
+          "label": "Running, 90 h at 8 GiB",
+          "arithmetic": "90 × (2 × $0.047 + 8 × $0.014 + 20 × $0.000096)",
+          "amount": "$18.71"
+        },
+        {
+          "label": "Stopped, 630 h",
+          "arithmetic": "630 × 20 × $0.000096",
+          "amount": "$1.21"
+        }
       ],
       "total": "$14.88 at 4 GiB, $19.92 at 8 GiB",
       "notes": [
@@ -65,6 +105,70 @@
         "Relying on the 4-hour idle hibernate instead of stopping: about $32.88."
       ]
     }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Azin Tech Operating Company B.V., KvK 99718340, registered in Amsterdam. Boxd is a trading name.",
+        "source": {
+          "url": "https://boxd.sh/terms/",
+          "quote": "“Boxd”, “we”, “us” or “our” means Azin Tech Operating Company B.V. (KvK 99718340, RSIN 869104743, VAT NL869104743B01), with its corporate seat in Amsterdam",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded",
+        "value": "Registered 5 February 2026; the first public blog post is 14 August 2026. No founding date is published.",
+        "source": {
+          "url": "https://drimble.nl/bedrijf/amsterdam/000057849749/melchior-holding-bv.html",
+          "quote": "Oprichtingsdatum: 05-02-2026KvK nr: 99718340",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "€2M pre-seed led by BlueYard Capital, announced 16 September 2026. No later round is published.",
+        "source": {
+          "url": "https://boxd.sh/blog/we-raised-2m-to-kill-localhost/",
+          "quote": "boxd has raised €2 million in pre-seed funding led by BlueYard Capital, with participation from Antler, OVNI, s20, Script Capital and a group of angels who have built developer infrastructure before.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Headcount",
+        "value": "Not published. The blog counts three authors, which is a floor rather than a headcount."
+      },
+      {
+        "label": "Status and SLA",
+        "value": "No status page, no published uptime figure and no SLA. Support is a founder-led 25-minute onboarding call."
+      },
+      {
+        "label": "Certification",
+        "value": "No SOC 2, ISO 27001, HIPAA or PCI claim on the site, the terms or the privacy notice."
+      },
+      {
+        "label": "Data residency",
+        "value": "Marketed as EU-only with no US cloud dependency, but the privacy notice describes EU and US clusters on a Delaware infrastructure vendor.",
+        "source": {
+          "url": "https://boxd.sh/privacy/",
+          "quote": "Latitude.sh LLC (Delaware, United States): bare-metal server infrastructure for our European Union and United States clusters.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "A build-and-test workload that needs a fork of memory and disk in 100–200 ms.",
+      "A team that wants a KVM machine with its own kernel, Docker, systemd and kernel modules.",
+      "EU hosting on German bare metal, with an allowlist enforced outside the machine."
+    ],
+    "badly": [
+      "Procurement that needs an SLA, a status page or a certification before signing.",
+      "A workload whose cost depends on RAM: memory bills on resident use, also in standby.",
+      "Anything needing a REST API, a US region today, or a published egress price."
+    ]
   },
   "usability": {
     "dashboard": "Yes, at boxd.sh/app, with Machines, Backups, Domains, Integrations, Organizations and Billing pages plus a desktop viewer. It is secondary: every guide's first instruction is a CLI command, and the sign-in page leads with Download the CLI.",
@@ -94,12 +198,53 @@
     {
       "issue": "The machine quota is stated as both 50 and 100",
       "detail": "Docs and FAQ say 50 machines per organisation; the pricing page says 100 included, raiseable on request.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://docs.boxd.sh/guides/resources",
+          "quote": "Machines | 50 per organization (your default org included)",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://boxd.sh/pricing",
+          "quote": "100 machines included, raiseable on request",
+          "confidence": "pricing-page"
+        }
+      ]
     },
     {
       "issue": "Inbound public IPv4 is contradictory",
       "detail": "The docs say every machine's domain points at the proxy's shared public IP, and SSH runs on a dedicated port on that shared proxy IP. The FAQ says machines come with a public IPv4. No price for an inbound IPv4 is published. Both statements are current, so the answer is unresolved.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://boxd.sh/faq/",
+          "quote": "persistent, forkable Linux VMs with their own kernel, a public IPv4, and an automatic HTTPS domain",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.boxd.sh/guides/https",
+          "quote": "Every machine's domain points at the proxy's shared public IP.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "EU-only, except for the US cluster in its own privacy notice",
+      "detail": "The FAQ says managed boxd runs on EU hardware with no US cloud dependency. The privacy notice names a Delaware infrastructure vendor and two clusters, and says choosing the US cluster transfers data to the United States. The residency answer depends on which page you read.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://boxd.sh/faq/",
+          "quote": "Managed boxd runs on EU hardware with no US cloud dependency, GDPR / DSGVO by default, and no exposure to US subpoenas.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://boxd.sh/privacy/",
+          "quote": "If you choose our United States Cluster… your data may be transferred to and processed in the United States.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     },
     {
       "issue": "Static egress IP is unconfirmed",
@@ -130,12 +275,33 @@
     "Four state tools with distinct jobs: snapshot, checkpoint, backup, fork."
   ],
   "sources": [
-    { "label": "Docs", "url": "https://docs.boxd.sh/" },
-    { "label": "Lifecycle and resources", "url": "https://docs.boxd.sh/guides/resources" },
-    { "label": "Snapshots", "url": "https://docs.boxd.sh/guides/snapshots" },
-    { "label": "Fork", "url": "https://docs.boxd.sh/guides/fork" },
-    { "label": "Egress and host-bound secrets", "url": "https://docs.boxd.sh/guides/egress" },
-    { "label": "Pricing", "url": "https://boxd.sh/pricing" },
-    { "label": "FAQ", "url": "https://boxd.sh/faq/" }
+    {
+      "label": "Docs",
+      "url": "https://docs.boxd.sh/"
+    },
+    {
+      "label": "Lifecycle and resources",
+      "url": "https://docs.boxd.sh/guides/resources"
+    },
+    {
+      "label": "Snapshots",
+      "url": "https://docs.boxd.sh/guides/snapshots"
+    },
+    {
+      "label": "Fork",
+      "url": "https://docs.boxd.sh/guides/fork"
+    },
+    {
+      "label": "Egress and host-bound secrets",
+      "url": "https://docs.boxd.sh/guides/egress"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://boxd.sh/pricing"
+    },
+    {
+      "label": "FAQ",
+      "url": "https://boxd.sh/faq/"
+    }
   ]
 }

@@ -24,7 +24,11 @@
       "headline": "$27.60",
       "shape": "2 vCPU / 4 GiB, deleted after each task",
       "lines": [
-        { "label": "Active compute", "arithmetic": "4 GB × 600,000 s × $0.0000115", "amount": "$27.60" }
+        {
+          "label": "Active compute",
+          "arithmetic": "4 GB × 600,000 s × $0.0000115",
+          "amount": "$27.60"
+        }
       ],
       "total": "$27.60",
       "notes": [
@@ -36,8 +40,16 @@
       "headline": "$247.78",
       "shape": "4 vCPU / 8 GiB, 50 GB volume, 730 h",
       "lines": [
-        { "label": "Active compute", "arithmetic": "8 GB × 2,628,000 s × $0.0000115", "amount": "$241.78" },
-        { "label": "Volume", "arithmetic": "50 GB × $0.12", "amount": "$6.00" }
+        {
+          "label": "Active compute",
+          "arithmetic": "8 GB × 2,628,000 s × $0.0000115",
+          "amount": "$241.78"
+        },
+        {
+          "label": "Volume",
+          "arithmetic": "50 GB × $0.12",
+          "amount": "$6.00"
+        }
       ],
       "total": "$247.78",
       "notes": [
@@ -49,8 +61,16 @@
       "headline": "$17.30 plus snapshot storage",
       "shape": "4 vCPU / 8 GiB, 20 GB volume, 90 active hours, 630 standby",
       "lines": [
-        { "label": "Active compute", "arithmetic": "4 GB × 324,000 s × $0.0000115", "amount": "$14.90" },
-        { "label": "Volume", "arithmetic": "20 GB × $0.12", "amount": "$2.40" }
+        {
+          "label": "Active compute",
+          "arithmetic": "4 GB × 324,000 s × $0.0000115",
+          "amount": "$14.90"
+        },
+        {
+          "label": "Volume",
+          "arithmetic": "20 GB × $0.12",
+          "amount": "$2.40"
+        }
       ],
       "total": "$17.30 plus snapshot",
       "notes": [
@@ -58,6 +78,76 @@
         "Retaining a sandbox for the month needs a tier above free, which enforces a TTL."
       ]
     }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Blaxel, Inc. (formerly Beamlit, Inc.), a Delaware corporation.",
+        "source": {
+          "url": "https://blaxel.ai/legal/terms/2025-12-10-blaxel-terms-and-conditions.pdf",
+          "quote": "Blaxel, Inc (formerly known as Beamlit, Inc.), a Delaware corporation, d/b/a Blaxel",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Ownership",
+        "value": "Acquired by Baseten on 10 September 2026. The linked terms predate the deal and still name Blaxel.",
+        "source": {
+          "url": "https://www.baseten.co/blog/blaxel-is-joining-baseten-to-build-the-future-of-agentic-cloud/",
+          "quote": "Baseten has acquired Blaxel.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded and funded",
+        "value": "2024, by six founders including CEO Paul Sinaï. A $7.3M seed led by First Round.",
+        "source": {
+          "url": "https://blaxel.ai/company/about",
+          "quote": "Blaxel raised a $7.3M seed round led by First Round.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Headcount",
+        "value": "12, per Y Combinator's directory. The figure is undated and not a post-acquisition count.",
+        "source": {
+          "url": "https://www.ycombinator.com/companies/blaxel",
+          "quote": "Team Size:12",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Status and SLA",
+        "value": "Sandboxes 99.33% over July–October 2026. Custom SLAs only; no standard uptime commitment published.",
+        "source": {
+          "url": "https://status.blaxel.ai/",
+          "quote": "99.33% uptime",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "SOC 2, HIPAA and ISO 27001 claimed; the full SOC 2 report is on request through its compliance portal.",
+        "source": {
+          "url": "https://blaxel.ai/company/security",
+          "quote": "SOC 2, HIPAA, ISO 27001",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "A sandbox that must resume in milliseconds: standby preserves process state and resume is claimed under 25 ms.",
+      "Secrets that should never sit in the machine: the proxy injects headers, body fields and secrets server-side.",
+      "A team that wants SDKs in three languages, a console and a per-sandbox MCP server."
+    ],
+    "badly": [
+      "A buyer who needs the contracting entity settled now: the terms still name Blaxel, not Baseten.",
+      "A workload that needs kernel modules or iptables without opting in at creation.",
+      "Production dependence on snapshots, which are in private preview."
+    ]
   },
   "usability": {
     "dashboard": "A console creates a sandbox by choosing an image, resources, TTL and region, with a browser terminal.",
@@ -75,7 +165,19 @@
     {
       "issue": "Idle timing is stated two ways",
       "detail": "The docs say a sandbox goes to standby after 15 minutes of idle WebSocket/TCP activity; the pricing FAQ says it scales to zero after about 5 seconds.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+          "quote": "if the WebSocket/TCP connection remains idle for 15 minutes with no activity, the sandbox will automatically transition to standby mode.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://blaxel.ai/pricing",
+          "quote": "Sandboxes scale to zero after about 5 seconds of inactivity and resume from standby in roughly 25ms",
+          "confidence": "pricing-page"
+        }
+      ]
     },
     {
       "issue": "Snapshots and archive are private previews",
@@ -106,11 +208,29 @@
     "Snapshots can outlive the sandbox and be forked."
   ],
   "sources": [
-    { "label": "Sandbox overview", "url": "https://docs.blaxel.ai/Sandboxes/Overview.md" },
-    { "label": "Snapshots and fork", "url": "https://docs.blaxel.ai/Sandboxes/Fork.md" },
-    { "label": "Volumes", "url": "https://docs.blaxel.ai/Sandboxes/Volumes.md" },
-    { "label": "Proxy secrets", "url": "https://docs.blaxel.ai/Sandboxes/Proxy-secrets-injection.md" },
-    { "label": "Pricing", "url": "https://blaxel.ai/pricing" },
-    { "label": "Baseten acquisition", "url": "https://www.baseten.co/blog/blaxel-is-joining-baseten-to-build-the-future-of-agentic-cloud/" }
+    {
+      "label": "Sandbox overview",
+      "url": "https://docs.blaxel.ai/Sandboxes/Overview.md"
+    },
+    {
+      "label": "Snapshots and fork",
+      "url": "https://docs.blaxel.ai/Sandboxes/Fork.md"
+    },
+    {
+      "label": "Volumes",
+      "url": "https://docs.blaxel.ai/Sandboxes/Volumes.md"
+    },
+    {
+      "label": "Proxy secrets",
+      "url": "https://docs.blaxel.ai/Sandboxes/Proxy-secrets-injection.md"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://blaxel.ai/pricing"
+    },
+    {
+      "label": "Baseten acquisition",
+      "url": "https://www.baseten.co/blog/blaxel-is-joining-baseten-to-build-the-future-of-agentic-cloud/"
+    }
   ]
 }

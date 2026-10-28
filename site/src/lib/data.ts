@@ -1,4 +1,5 @@
 import type {
+  Change,
   Feature,
   Group,
   Provider,
@@ -41,6 +42,10 @@ const situationModule = import.meta.glob<{ situations: Situation[] }>(
   "../data/situations.json",
   { eager: true, import: "default" },
 );
+const changeModule = import.meta.glob<{ changes: Change[] }>(
+  "../data/changes.json",
+  { eager: true, import: "default" },
+);
 
 const VERDICTS: Verdict[] = ["yes", "partly", "no", "not-published", "pending"];
 
@@ -70,6 +75,10 @@ export const situations: Situation[] = cleanDeep(
   Object.values(situationModule)[0]?.situations ?? [],
 );
 
+export const changes: Change[] = cleanDeep(
+  Object.values(changeModule)[0]?.changes ?? [],
+).sort((a, b) => b.date.localeCompare(a.date));
+
 export function providerName(id: string): string {
   return providerById.get(id)?.name ?? id;
 }
@@ -84,12 +93,25 @@ export function validateContent(): void {
     if (p.status === "researched" && !p.cost) {
       fail(`provider ${p.id} is researched but has no cost examples`);
     }
+    if (p.status === "researched" && !p.company?.facts?.length) {
+      fail(`provider ${p.id} has no company facts`);
+    }
+    if (p.status === "researched" && (!p.fits?.well?.length || !p.fits?.badly?.length)) {
+      fail(`provider ${p.id} has no fits well / fits badly pair`);
+    }
   }
 
   for (const f of features) {
     if (!f.id || !f.title) fail(`feature is missing id or title: ${JSON.stringify(f)}`);
     if (!groups.some((g) => g.id === f.group)) {
       fail(`feature ${f.id} has unknown group "${f.group}"`);
+    }
+    if (!f.figureLabel) fail(`feature ${f.id} has no figureLabel`);
+    if (!f.scenario?.title || !f.scenario?.beats?.length) {
+      fail(`feature ${f.id} has no worked scenario`);
+    }
+    if (!Array.isArray(f.questions) || f.questions.length < 3 || f.questions.length > 5) {
+      fail(`feature ${f.id} needs 3 to 5 questions, has ${f.questions?.length ?? 0}`);
     }
     for (const row of f.rows) {
       if (!providerById.has(row.provider)) {
@@ -98,6 +120,8 @@ export function validateContent(): void {
       if (!VERDICTS.includes(row.verdict)) {
         fail(`feature ${f.id}/${row.provider} has verdict "${row.verdict}"`);
       }
+      if (!row.figure) fail(`feature ${f.id}/${row.provider} has no key figure`);
+      if (!row.scenario) fail(`feature ${f.id}/${row.provider} has no scenario line`);
     }
     const covered = new Set(f.rows.map((r) => r.provider));
     for (const p of providers) {

@@ -25,9 +25,21 @@
       "headline": "$3.20 of usage, billed at $20 on Pro",
       "shape": "2 vCPU / 4 GiB / 20 GiB disk, deleted after each task (Pro or above)",
       "lines": [
-        { "label": "vCPU", "arithmetic": "2 × $0.004 × 166.67 h", "amount": "$1.33" },
-        { "label": "Memory", "arithmetic": "4 × $0.00225 × 166.67 h", "amount": "$1.50" },
-        { "label": "Storage", "arithmetic": "20 × $0.00011 × 166.67 h", "amount": "$0.37" }
+        {
+          "label": "vCPU",
+          "arithmetic": "2 × $0.004 × 166.67 h",
+          "amount": "$1.33"
+        },
+        {
+          "label": "Memory",
+          "arithmetic": "4 × $0.00225 × 166.67 h",
+          "amount": "$1.50"
+        },
+        {
+          "label": "Storage",
+          "arithmetic": "20 × $0.00011 × 166.67 h",
+          "amount": "$0.37"
+        }
       ],
       "total": "$3.20 of usage",
       "notes": [
@@ -40,9 +52,21 @@
       "headline": "$28.84 a month",
       "shape": "4 vCPU / 8 GiB / 50 GiB, 730 h",
       "lines": [
-        { "label": "vCPU", "arithmetic": "4 × $0.004 × 730", "amount": "$11.68" },
-        { "label": "Memory", "arithmetic": "8 × $0.00225 × 730", "amount": "$13.14" },
-        { "label": "Storage", "arithmetic": "50 × $0.00011 × 730", "amount": "$4.02" }
+        {
+          "label": "vCPU",
+          "arithmetic": "4 × $0.004 × 730",
+          "amount": "$11.68"
+        },
+        {
+          "label": "Memory",
+          "arithmetic": "8 × $0.00225 × 730",
+          "amount": "$13.14"
+        },
+        {
+          "label": "Storage",
+          "arithmetic": "50 × $0.00011 × 730",
+          "amount": "$4.02"
+        }
       ],
       "total": "$28.84",
       "notes": [
@@ -54,9 +78,21 @@
       "headline": "$3.14 of usage, billed at $20 on Pro",
       "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running hours",
       "lines": [
-        { "label": "vCPU", "arithmetic": "2 × $0.004 × 90", "amount": "$0.72" },
-        { "label": "Memory", "arithmetic": "4 × $0.00225 × 90", "amount": "$0.81" },
-        { "label": "Storage, all month", "arithmetic": "20 × $0.00011 × 730", "amount": "$1.61" }
+        {
+          "label": "vCPU",
+          "arithmetic": "2 × $0.004 × 90",
+          "amount": "$0.72"
+        },
+        {
+          "label": "Memory",
+          "arithmetic": "4 × $0.00225 × 90",
+          "amount": "$0.81"
+        },
+        {
+          "label": "Storage, all month",
+          "arithmetic": "20 × $0.00011 × 730",
+          "amount": "$1.61"
+        }
       ],
       "total": "$3.14 of usage",
       "notes": [
@@ -64,6 +100,85 @@
         "A free machine pauses itself after 30 idle minutes and cannot run more than 8 hours continuously."
       ]
     }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "InsForge AI, Inc., a Delaware corporation. InstaBox is a product line, not a separate company.",
+        "source": {
+          "url": "https://instabox.sh/terms",
+          "quote": "InsForge AI, Inc., a Delaware corporation (\"InsForge,\" \"we,\" or \"us\"), which operates InstaBox",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "History",
+        "value": "Public launch 14 October 2026; pricing went live 19 October 2026. The company was founded in 2025.",
+        "source": {
+          "url": "https://instabox.sh/blog/instabox-pricing",
+          "quote": "Since we launched on Oct 14, beta users have been using InstaBox for free.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "$8M seed announced 29 September 2026; investors and valuation were not disclosed.",
+        "source": {
+          "url": "https://dealroom.co/news/158042-insforge-raises-8m-seed-to-build-cloud-infrastructure-for-ai-agents/",
+          "quote": "InsForge raises $8M seed",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Headcount",
+        "value": "6, per Y Combinator's directory and Dealroom. Founders are Hang Huang (CEO) and Tony Chang (CTO).",
+        "source": {
+          "url": "https://www.ycombinator.com/companies/insforge-instacloud",
+          "quote": "Team Size: 6",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Status and SLA",
+        "value": "No status page. A 99.9% SLA is listed on Enterprise only, with no credits or measurement published.",
+        "source": {
+          "url": "https://instabox.sh/pricing",
+          "quote": "99.9% SLA",
+          "confidence": "pricing-page"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "The Trust Center lists HIPAA only and describes InsForge, not InstaBox. No SOC 2 badge.",
+        "source": {
+          "url": "https://app.vanta.com/insforge.dev/trust/9dxtxcntvvv5ow2tx7e4dm",
+          "quote": "InsForge is an AI‑native Backend‑as‑a‑Service platform that provides pre‑built backend components like databases, authentication, storage, serverless functions, and AI integrations.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "YC badge",
+        "value": "Displayed on insforge.dev, not on instabox.sh.",
+        "source": {
+          "url": "https://insforge.dev/",
+          "quote": "Backed by Y Combinator",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "A real free plan: one 4 vCPU / 8 GiB machine that never converts and needs no card.",
+      "A browser desktop and a dashboard that creates the machine without a terminal.",
+      "Claude Code and Codex in the default image, with logins that persist in /data/home."
+    ],
+    "badly": [
+      "An always-on agent: the free plan pauses at 30 idle minutes and caps a run at 8 hours.",
+      "A client-facing service: public ports have no authentication, and there is no custom domain.",
+      "A US-only data-residency requirement with a published region selector or status page."
+    ]
   },
   "usability": {
     "dashboard": "Yes, a full console: create a machine from a template with a button, start/stop/pause, open the Computer tab to click the Linux desktop, publish ports, save snapshots from the Playground, read metrics and billing.",
@@ -83,7 +198,19 @@
     {
       "issue": "The homepage says a fork copies running processes; the docs say otherwise",
       "detail": "Marketing says fork a machine mid-run and copy a running machine in seconds, listing Running Processes. The docs say fork is snapshot save plus create, and a snapshot does not hold memory or running processes.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://instabox.sh/",
+          "quote": "Fork a machine, mid-run",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://instabox.sh/docs/snapshots",
+          "quote": "It is snapshot save plus create, so it takes about as long as those two.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     },
     {
       "issue": "The free plan's 8-hour continuous runtime cap is only in the API schema",
@@ -93,7 +220,19 @@
     {
       "issue": "Docs and API disagree on whether a preview visit wakes a paused machine",
       "detail": "The ports page says a visit wakes an idle-paused machine; the OpenAPI says preview links remain offline until resumed.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://instabox.sh/docs/ports",
+          "quote": "A visit wakes a machine that paused itself for being idle (the 30-minute idle pause): the request waits for it to resume",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://api.instabox.sh/v1/openapi.json",
+          "quote": "Preview links remain offline until resumed.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     },
     {
       "issue": "Whether the free plan needs a card",
@@ -119,12 +258,33 @@
     "Computer-use MCP and human takeover of the desktop, with control handed back."
   ],
   "sources": [
-    { "label": "Docs", "url": "https://instabox.sh/docs" },
-    { "label": "Lifecycle", "url": "https://instabox.sh/docs/api/lifecycle" },
-    { "label": "Machines", "url": "https://instabox.sh/docs/machines" },
-    { "label": "Snapshots", "url": "https://instabox.sh/docs/snapshots" },
-    { "label": "Secrets", "url": "https://instabox.sh/docs/secrets" },
-    { "label": "Pricing", "url": "https://instabox.sh/pricing" },
-    { "label": "OpenAPI document", "url": "https://api.instabox.sh/v1/openapi.json" }
+    {
+      "label": "Docs",
+      "url": "https://instabox.sh/docs"
+    },
+    {
+      "label": "Lifecycle",
+      "url": "https://instabox.sh/docs/api/lifecycle"
+    },
+    {
+      "label": "Machines",
+      "url": "https://instabox.sh/docs/machines"
+    },
+    {
+      "label": "Snapshots",
+      "url": "https://instabox.sh/docs/snapshots"
+    },
+    {
+      "label": "Secrets",
+      "url": "https://instabox.sh/docs/secrets"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://instabox.sh/pricing"
+    },
+    {
+      "label": "OpenAPI document",
+      "url": "https://api.instabox.sh/v1/openapi.json"
+    }
   ]
 }

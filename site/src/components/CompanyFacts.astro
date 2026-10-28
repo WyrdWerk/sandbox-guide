@@ -1,0 +1,42 @@
+---
+import type { CompanyFact } from "../data/schema";
+import { plainText } from "../lib/plain";
+
+interface Props {
+  facts: CompanyFact[];
+}
+
+const { facts } = Astro.props;
+const cite = (url: string) => new URL(url).hostname.replace(/^www\./, "");
+const tagClass: Record<string, string> = {
+  "docs-confirmed": "tag tag--docs",
+  "pricing-page": "tag tag--pricing",
+  "third-party": "tag tag--third-party",
+  inferred: "tag tag--inferred",
+  "not-published": "tag tag--not-published",
+};
+---
+
+<dl class="facts">
+  {
+    facts.map((fact) => (
+      <div class="fact">
+        <dt class="fact__label">{fact.label}</dt>
+        <dd class="fact__body">
+          <p class="fact__value">{fact.value}</p>
+          {fact.source ? (
+            <p class="fact__source">
+              <span class="fact__quote">“{plainText(fact.source.quote)}”</span>{" "}
+              <a href={fact.source.url} rel="noreferrer noopener">{cite(fact.source.url)}</a>{" "}
+              <span class={tagClass[fact.source.confidence]}>{fact.source.confidence}</span>
+            </p>
+          ) : (
+            <p class="fact__source">
+              <span class={tagClass["not-published"]}>not-published</span>
+            </p>
+          )}
+        </dd>
+      </div>
+    ))
+  }
+</dl>

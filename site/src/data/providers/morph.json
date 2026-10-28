@@ -24,8 +24,16 @@
       "headline": "$16.67",
       "shape": "2 vCPU / 4 GiB, disk under 32 GiB, deleted after each task",
       "lines": [
-        { "label": "MCUs", "arithmetic": "166.67 h × max(2, 4/4, disk/16) = 333.33 MCU", "amount": "333.33" },
-        { "label": "Cost", "arithmetic": "333.33 × $0.05", "amount": "$16.67" }
+        {
+          "label": "MCUs",
+          "arithmetic": "166.67 h × max(2, 4/4, disk/16) = 333.33 MCU",
+          "amount": "333.33"
+        },
+        {
+          "label": "Cost",
+          "arithmetic": "333.33 × $0.05",
+          "amount": "$16.67"
+        }
       ],
       "total": "$16.67",
       "notes": [
@@ -37,8 +45,16 @@
       "headline": "$146.00",
       "shape": "4 vCPU / 8 GiB / 50 GiB, 730 h",
       "lines": [
-        { "label": "MCUs", "arithmetic": "730 h × max(4, 8/4, 50/16) = 2,920 MCU", "amount": "2,920" },
-        { "label": "Cost", "arithmetic": "2,920 × $0.05", "amount": "$146.00" }
+        {
+          "label": "MCUs",
+          "arithmetic": "730 h × max(4, 8/4, 50/16) = 2,920 MCU",
+          "amount": "2,920"
+        },
+        {
+          "label": "Cost",
+          "arithmetic": "2,920 × $0.05",
+          "amount": "$146.00"
+        }
       ],
       "total": "$146.00",
       "notes": [
@@ -50,8 +66,16 @@
       "headline": "$9.15",
       "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running hours, 630 paused",
       "lines": [
-        { "label": "Running", "arithmetic": "90 × 2 MCU × $0.05", "amount": "$9.00" },
-        { "label": "Paused snapshot", "arithmetic": "24 GB × 630 h × $0.00001", "amount": "$0.15" }
+        {
+          "label": "Running",
+          "arithmetic": "90 × 2 MCU × $0.05",
+          "amount": "$9.00"
+        },
+        {
+          "label": "Paused snapshot",
+          "arithmetic": "24 GB × 630 h × $0.00001",
+          "amount": "$0.15"
+        }
       ],
       "total": "$9.15",
       "notes": [
@@ -59,6 +83,76 @@
         "The snapshot's billable size is an assumption; actual counting is not published."
       ]
     }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Morph Labs, Inc., at a San Francisco address. The state of incorporation is not published.",
+        "source": {
+          "url": "https://cloud.morph.so/web/legal/terms-of-service",
+          "quote": "2565 3rd Street, San Francisco, CA 94107, USA",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded",
+        "value": "2023, by Jesse Han, per Tracxn. Christian Szegedy is reported as chief scientist and a seed investor.",
+        "source": {
+          "url": "https://tracxn.com/d/companies/morph-labs/__8ZZWlPNWnRct4CJf-JJjU940HzzVxh1CEZxBQBG6tXg",
+          "quote": "founded in 2023 by Jesse Han",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "Disputed: one source reports a $5.75M Khosla-led seed, another says no funding has been raised.",
+        "source": {
+          "url": "https://tracxn.com/d/companies/morph-labs/__8ZZWlPNWnRct4CJf-JJjU940HzzVxh1CEZxBQBG6tXg",
+          "quote": "Morph Labs has not raised any funding yet.",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Headcount",
+        "value": "About 9–11, an aggregator estimate for 2026. No company-confirmed figure.",
+        "source": {
+          "url": "https://www.rl-list.com/vendors/morph",
+          "quote": "~9-11 employees (as of 2026)",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Status and SLA",
+        "value": "Status page reports 100% for the Cloud API over its 90-day chart. No numeric SLA is published.",
+        "source": {
+          "url": "https://status.cloud.morph.so/",
+          "quote": "100% uptime",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "No verified SOC 2 for Morph Labs, Inc. The Delve trust portal sometimes cited for it belongs to AutoInfra.",
+        "source": {
+          "url": "https://trust.delve.co/morph",
+          "quote": "AutoInfra, Inc. SOC 2 Type 2 Report 2025",
+          "confidence": "third-party"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "Full VMs with Docker-in-Docker, systemd, root and FUSE, for a workload that needs a normal server.",
+      "Snapshots of memory and disk that branch into several running instances.",
+      "A configurable machine: vCPU, memory and disk are chosen at creation rather than picked from a menu."
+    ],
+    "badly": [
+      "A buyer who needs published regions, GPU options, maximum sizes or an SLA.",
+      "An attached block volume: Morph Volumes is S3-compatible object storage behind a gateway.",
+      "A compliance review that expects a SOC 2 naming Morph Labs, Inc."
+    ]
   },
   "usability": {
     "dashboard": "A devbox dashboard can create a machine from a template or snapshot and open it in VS Code.",
@@ -76,7 +170,19 @@
     {
       "issue": "Free credit is described two ways",
       "detail": "Signup docs promise 300 free compute hours a month on the $0 Developer plan; the pricing page lists 0 MCUs and says to purchase MCUs to use compute.",
-      "status": "contradiction"
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://cloud.morph.so/docs/documentation/setup/signing-up",
+          "quote": "Once you have your invite, our $0/month Developer Plan provides 300 free compute hours per month",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://cloud.morph.so/web/subscribe",
+          "quote": "Purchase MCUs to use compute",
+          "confidence": "pricing-page"
+        }
+      ]
     },
     {
       "issue": "Stop deletes the instance",
@@ -107,10 +213,25 @@
     "A devbox dashboard for creating and opening environments."
   ],
   "sources": [
-    { "label": "Devboxes", "url": "https://cloud.morph.so/docs/devboxes/getting-started" },
-    { "label": "Pause and resume", "url": "https://cloud.morph.so/docs/documentation/instances/pause-resume" },
-    { "label": "Snapshots", "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot" },
-    { "label": "Branch", "url": "https://cloud.morph.so/docs/documentation/instances/branch" },
-    { "label": "Pricing", "url": "https://cloud.morph.so/web/subscribe" }
+    {
+      "label": "Devboxes",
+      "url": "https://cloud.morph.so/docs/devboxes/getting-started"
+    },
+    {
+      "label": "Pause and resume",
+      "url": "https://cloud.morph.so/docs/documentation/instances/pause-resume"
+    },
+    {
+      "label": "Snapshots",
+      "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot"
+    },
+    {
+      "label": "Branch",
+      "url": "https://cloud.morph.so/docs/documentation/instances/branch"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://cloud.morph.so/web/subscribe"
+    }
   ]
 }
