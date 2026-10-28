@@ -1,0 +1,75 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Quote from "../components/Quote.astro";
+import { changes, providerById } from "../lib/data";
+
+const formatter = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
+const shown = changes.map((change) => ({
+  ...change,
+  display: formatter.format(new Date(`${change.date}T00:00:00Z`)),
+}));
+---
+
+<Base
+  title="What changed recently"
+  description="Dated changes at the twelve providers: acquisitions, renames, runtime and billing switches, and price moves, each with its source."
+>
+  <PageHeader
+    kicker="Record"
+    title="What changed recently"
+    standfirst="A sandbox you picked last quarter may not be the same product today. These are the dated changes the research found, newest first, with the source for each. Where a provider announced nothing and the change is only visible in an archive, the entry says so."
+    meta={[`${changes.length} entries`, "Dated and sourced", "Checked 28 October 2026"]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush">
+      <div class="section__head">
+        <h2 class="section__title" id="changes-h">The record</h2>
+        <p class="section__note">An entry dated by observation says the change date is not published</p>
+      </div>
+      <div class="changes">
+        {
+          shown.map((change) => {
+            const provider = change.provider ? providerById.get(change.provider) : undefined;
+            return (
+              <article class="change">
+                <p class="change__date">
+                  <time datetime={change.date}>{change.display}</time>
+                </p>
+                <div class="change__body">
+                  {provider && (
+                    <p class="change__provider">
+                      <a href={`/providers/${provider.id}/`}>{provider.name}</a>
+                    </p>
+                  )}
+                  <h3 class="change__title">{change.title}</h3>
+                  <p class="change__what">{change.what}</p>
+                  {change.sources.map((source) => (
+                    <Quote
+                      text={source.quote}
+                      cite={provider?.name ?? "Source"}
+                      url={source.url}
+                      tag={source.confidence}
+                    />
+                  ))}
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+
+      <p class="section__note">
+        Price and product facts elsewhere on this site are dated 28 October 2026. For a live price
+        comparison, use <a href="https://battleships.dev" rel="noreferrer noopener">battleships.dev</a>,
+        which is built by the Boat team.
+      </p>
+    </section>
+  </div>
+</Base>

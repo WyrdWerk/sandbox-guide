@@ -1,0 +1,128 @@
+{
+  "changes": [
+    {
+      "date": "2026-10-28",
+      "title": "Sprites' rates are roughly half the figures still in circulation",
+      "provider": "sprites",
+      "what": "Fly's current list is $0.0385 per CPU-hour and $0.021875 per GB-hour, both measured on actual use. A widely copied comparison still narrates $0.07 and $0.04375. Fly publishes no change date, so this entry is dated by observation, not by an announcement. The same pricing page says there are no plans, while the Sprites FAQ describes a plan ladder up to Mythic at $100 a month.",
+      "sources": [
+        {
+          "url": "https://fly.io/pricing/",
+          "quote": "$0.0385 / CPU-hour",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://battleships.dev/data/providers/sprites.md",
+          "quote": "CPU on cumulative CPU time (`cpu.stat`), $0.07/CPU-hour,",
+          "confidence": "third-party"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "title": "boxd cut its rates by about a fifth and doubled the machine quota in 19 days",
+      "provider": "boxd",
+      "what": "The 9 October capture of boxd's pricing page lists €0.049 per vCPU-hour, €0.015 per GiB-hour of RAM, €0.0001 per GiB-hour of disk and 50 machines. The live page lists €0.039, €0.012, €0.00008 and 100 machines. boxd publishes no price-change notice, and its terms let it adjust rates at any time for usage from the date of the change.",
+      "sources": [
+        {
+          "url": "http://web.archive.org/web/20261009152053/https://boxd.sh/pricing",
+          "quote": "€0.049 / vCPU-hour",
+          "confidence": "third-party"
+        },
+        {
+          "url": "https://boxd.sh/pricing",
+          "quote": "100 machines included, raiseable on request",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-19",
+      "title": "InstaBox put a price on a product that was two weeks old",
+      "provider": "instabox",
+      "what": "InstaBox launched on 14 October 2026 and published pricing five days later: $20, $100 and $500 plans that double as credit, plus a free plan with one 4 vCPU / 8 GiB machine. It is the second product from InsForge AI, whose first product is a backend platform.",
+      "sources": [
+        {
+          "url": "https://instabox.sh/blog/instabox-pricing",
+          "quote": "Today we're releasing InstaBox pricing.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "title": "Runtime changed its idle pause from one minute to five",
+      "provider": "runtime",
+      "what": "A sandbox now pauses after 300 seconds with no request, command, connection, traffic or CPU use, where the default was 60 seconds. The changelog is the only announcement; the pricing page carries the current number.",
+      "sources": [
+        {
+          "url": "https://withruntime.com/docs/changelog",
+          "quote": "Idle sandboxes now pause after 5 minutes.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "title": "Lizard's sandboxes became Firecracker microVMs, and the meter became a flat price per size",
+      "provider": "lizard",
+      "what": "On 30 September 2026 Lizard's own limits page said sandboxes ran in Kubernetes pods on a shared kernel at a fixed 4 vCPU / 4096 MiB, billed on measured CPU, memory, storage and egress. By 13 October the pricing page listed three sizes at a flat hourly rate. Neither page announced the change and there is no migration note. The billing model changed; no published figure shows that any bill went up.",
+      "sources": [
+        {
+          "url": "https://web.archive.org/web/20260930084615/https://lizard.build/docs/platform/limits.md",
+          "quote": "Sandboxes run short-lived commands and agent tasks in Kubernetes pods with the runc runtime. They share the host kernel; they are not Firecracker virtual machines.",
+          "confidence": "third-party"
+        },
+        {
+          "url": "https://web.archive.org/web/20261013193324/https://lizard.build/pricing",
+          "quote": "Small 2 vCPU · 4 GB RAM · 5 GB disk",
+          "confidence": "third-party"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "title": "InstaBox launched as a second product from InsForge",
+      "provider": "instabox",
+      "what": "The sandbox product went public on 14 October 2026, about a year after the company was founded and seven months after its Y Combinator batch. The YC badge sits on insforge.dev, not on instabox.sh.",
+      "sources": [
+        {
+          "url": "https://instabox.sh/blog/instabox-pricing",
+          "quote": "Since we launched on Oct 14, beta users have been using InstaBox for free.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "title": "Box became Boat",
+      "provider": "boat",
+      "what": "The product launched as box in July 2026 and was renamed boat on 15 September 2026. Box endpoints still answer, with Deprecation and Sunset headers; the Sunset date is a warning, not a shutdown. The legal entity, Dedale AI, Corp., did not change.",
+      "sources": [
+        {
+          "url": "https://docs.boat.dev/migrating-from-box",
+          "quote": "Box became **boat** on September 15, 2026.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-10",
+      "title": "Baseten acquired Blaxel",
+      "provider": "blaxel",
+      "what": "Baseten announced the acquisition on 10 September 2026 and said the product continues unchanged, with new Baseten products to follow. Each Baseten organisation now maps to one Blaxel workspace. The standard terms linked from Blaxel's site are dated 10 December 2025 and still name Blaxel, Inc., so the contracting entity after the deal is worth confirming in writing.",
+      "sources": [
+        {
+          "url": "https://www.baseten.co/blog/blaxel-is-joining-baseten-to-build-the-future-of-agentic-cloud/",
+          "quote": "Baseten has acquired Blaxel.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.blaxel.ai/Security/Baseten-managed-workspaces.md",
+          "quote": "Each Baseten organization maps to one dedicated Blaxel workspace and one dedicated Blaxel account.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    }
+  ]
+}
