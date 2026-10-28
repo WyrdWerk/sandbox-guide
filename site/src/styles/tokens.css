@@ -1,44 +1,43 @@
 /* ==========================================================================
    Sandbox guide — design tokens
-   Editorial look borrowed from WyrdWerk/resource-library: a near-black page
-   (with a light alternative), Georgia headings, system sans for reading,
-   monospace only for small labels and figures, one mint accent, hairlines
-   instead of boxes. All fonts are system fonts; nothing is downloaded.
+   Editorial look borrowed from WyrdWerk/resource-library: a light page by
+   default with a near-black alternative ([data-theme="dark"]), Georgia
+   headings, system sans for reading, monospace only for small labels and
+   figures, one green accent, hairlines instead of boxes. All fonts are
+   system fonts; nothing is downloaded.
    ========================================================================== */
 
 :root {
-  color-scheme: dark;
+  /* ---- Colour (light, the default) ---------------------------------- */
+  color-scheme: light;
 
-  /* ---- Colour (dark, the default) ------------------------------------- */
-  --color-bg: #0a0c0b;
-  --color-surface: #121514;
-  --color-surface-muted: #181c1a;
-  --color-surface-inverse: #ece9e0;
+  --color-bg: #f4f6f1;
+  --color-surface: #fbfcf8;
+  --color-surface-muted: #eaeee6;
+  --color-surface-inverse: #16231f;
 
-  --color-text: #ece9e0;
-  --color-text-secondary: #c4c8bf;
-  --color-text-muted: #9aa39b;
+  --color-text: #16231f;
+  --color-text-secondary: #34433e;
+  --color-text-muted: #52615c;
 
-  --color-border: #232926;
-  --color-border-strong: #34403a;
+  --color-border: #dde3d9;
+  --color-border-strong: #c3ccc0;
 
-  --color-accent: #7ed7b6;
-  --color-accent-strong: #a8e8d0;
-  --color-accent-soft: rgba(126, 215, 182, 0.12);
-  --color-on-accent: #0a0c0b;
+  --color-accent: #006a55;
+  --color-accent-strong: #004d3d;
+  --color-accent-soft: #dcebe3;
+  --color-on-accent: #ffffff;
 
-  /* Badge states. Every badge also carries a word and a glyph, so colour is
-     never the only carrier of meaning. */
-  --color-yes: #7ed7b6;
-  --color-yes-bg: rgba(126, 215, 182, 0.12);
-  --color-partly: #e3b341;
-  --color-partly-bg: rgba(227, 179, 65, 0.13);
-  --color-no: #e8a37f;
-  --color-no-bg: rgba(217, 154, 108, 0.14);
-  --color-unknown: #9aa39b;
+  --color-yes: #006a55;
+  --color-yes-bg: #dcebe3;
+  --color-partly: #7a4f00;
+  --color-partly-bg: #f3e9cd;
+  --color-no: #9b482a;
+  --color-no-bg: #f6e4da;
+  --color-unknown: #52615c;
   --color-unknown-bg: transparent;
 
-  --color-focus: #7ed7b6;
+  --color-focus: #006a55;
 
   /* ---- Type ------------------------------------------------------------- */
   --font-display: Georgia, "Times New Roman", serif;
@@ -108,34 +107,37 @@
   --ease-out: ease;
 }
 
-/* ---- Light theme -------------------------------------------------------- */
-[data-theme="light"] {
-  color-scheme: light;
+/* ---- Dark theme --------------------------------------------------------- */
+[data-theme="dark"] {
+  color-scheme: dark;
 
-  --color-bg: #f4f6f1;
-  --color-surface: #fbfcf8;
-  --color-surface-muted: #eaeee6;
-  --color-surface-inverse: #16231f;
+  --color-bg: #0a0c0b;
+  --color-surface: #121514;
+  --color-surface-muted: #181c1a;
+  --color-surface-inverse: #ece9e0;
 
-  --color-text: #16231f;
-  --color-text-secondary: #34433e;
-  --color-text-muted: #52615c;
+  --color-text: #ece9e0;
+  --color-text-secondary: #c4c8bf;
+  --color-text-muted: #9aa39b;
 
-  --color-border: #dde3d9;
-  --color-border-strong: #c3ccc0;
+  --color-border: #232926;
+  --color-border-strong: #34403a;
 
-  --color-accent: #006a55;
-  --color-accent-strong: #004d3d;
-  --color-accent-soft: #dcebe3;
-  --color-on-accent: #ffffff;
+  --color-accent: #7ed7b6;
+  --color-accent-strong: #a8e8d0;
+  --color-accent-soft: rgba(126, 215, 182, 0.12);
+  --color-on-accent: #0a0c0b;
 
-  --color-yes: #006a55;
-  --color-yes-bg: #dcebe3;
-  --color-partly: #7a4f00;
-  --color-partly-bg: #f3e9cd;
-  --color-no: #9b482a;
-  --color-no-bg: #f6e4da;
-  --color-unknown: #52615c;
+  /* Badge states. Every badge also carries a word and a glyph, so colour is
+     never the only carrier of meaning. */
+  --color-yes: #7ed7b6;
+  --color-yes-bg: rgba(126, 215, 182, 0.12);
+  --color-partly: #e3b341;
+  --color-partly-bg: rgba(227, 179, 65, 0.13);
+  --color-no: #e8a37f;
+  --color-no-bg: rgba(217, 154, 108, 0.14);
+  --color-unknown: #9aa39b;
+  --color-unknown-bg: transparent;
 
-  --color-focus: #006a55;
+  --color-focus: #7ed7b6;
 }

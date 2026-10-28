@@ -67,7 +67,7 @@ src/
 
 ## Design layer
 
-The look follows WyrdWerk/resource-library: a dark page by default with a light theme (the header
+The look follows WyrdWerk/resource-library: a light page by default with a dark theme (the header
 button stores the choice in `localStorage`), Georgia headings, system sans for reading, monospace
 for small labels and figures, one mint accent, and hairlines instead of boxes. All fonts are system
 fonts. Keep visual rules in `tokens.css` and `theme.css` in `src/styles/`. Components
