@@ -21,6 +21,11 @@ than inferring a number.
 - Pricing: <https://www.agent37.com/pricing>
 - Consumer/managed hosting: <https://www.agent37.com/personal>
 - Cloud product page: <https://www.agent37.com/cloud>
+- Terms: <https://www.agent37.com/terms>
+- Privacy policy: <https://www.agent37.com/privacy>
+- Trust Center: <https://trust.agent37.com> and <https://trust.agent37.com/compliance>
+- Status page: <https://status.agent37.com>
+- Company listing: <https://www.ycombinator.com/companies/agent-37>
 - Secondary: <https://battleships.dev/data/providers/agent-37.json> and `.md`
 
 ---
@@ -1218,7 +1223,8 @@ No waitlist and no invite requirement appears anywhere in the docs or on the pro
   "Priority Support" (Max) — <https://www.agent37.com/personal> `pricing-page`.
 - **Status page:** `status.agent37.com`, public, component-level, with three region components.
   > "All services are online"
-  > "Website and dashboard" · "API" · "Sandbox creation" · "Sandbox URLs" · "US" · "Europe" · "India" — each followed by "100% uptime"
+  The components are listed as "Website and dashboard", "API", "Sandbox creation", "Sandbox URLs", "US",
+"Europe" and "India", each followed by "100% uptime".
   > — <https://status.agent37.com> `docs-confirmed` (provider-owned status page, read 2026-10-28)
   It also shows a real incident — the headline "Temporary interruption to US sandboxes" and "Degraded for 21 minutes", dated Oct 20, 2026 — which is a good sign of honest reporting rather than a permanently green board (<https://status.agent37.com> `docs-confirmed`).
 - **Trust center:** `trust.agent37.com`, linked from <https://www.agent37.com/cloud>. `pricing-page`
@@ -1259,7 +1265,7 @@ a running sandbox goes through an API call or a terminal. A non-engineer should 
 
 ---
 
-## Research method and tool record
+## 16. Research method and tool record
 
 | Tool | Route | Result |
 |---|---|---|
@@ -1281,9 +1287,9 @@ quote punctuation on both sides.
 
 | Result | Count |
 |---|---|
-| Quotations checked | **237** |
-| Matched the cited page verbatim | **237** |
-| Data rows in provider-claims tables carrying their own URL + quote (or an explicit `not-published`) | **158** |
+| Quotations checked | **291** |
+| Matched the cited page verbatim | **291** |
+| Data rows in provider-claims tables carrying their own URL + quote (or an explicit `not-published`) | **183** |
 | Data rows still without one | **0** |
 | Corrected before publication | **18** (7 misattributed, 5 altered, 6 de-quoted) |
 | Removed | 0 |
@@ -1360,3 +1366,402 @@ Workload C was corrected: a 30-day month is **720 h**, not 730, so its retained-
 5. **How reliable is the memory-preserving sleep in practice?** The docs hedge ("usually survives … not
    guaranteed") and fall back to a fresh boot on host moves. The practical wake rate for a multi-tenant
    fleet is the key number for anyone building "one sandbox per user" on this.
+
+---
+
+## 17. The company behind it
+
+**At a glance**
+
+| Question | Answer | Evidence — URL and verbatim quote |
+|---|---|---|
+| Legal entity | **Agent 37 Inc.** (also written Agent37.com Inc once) | <https://www.agent37.com/terms> `docs-confirmed` — "an agreement between you and Agent 37 Inc." |
+| Where registered | **`not-published`** — New York law governs; state of incorporation unstated | No registry, company number or address anywhere on the site (`not-published`) |
+| Founder / CEO | **Vishnu Krishnaprasad**, sole listed founder | <https://www.ycombinator.com/companies/agent-37> `third-party` — "Founder at Agent 37. Previously Senior Software Engineer at Amazon and Engineering Manager at Quantcast." |
+| Founded | **2026** | <https://trust.agent37.com> `docs-confirmed` — "Founded in 2026" · <https://www.ycombinator.com/companies/agent-37> `third-party` — "Founded:2026" |
+| Public launch | Launch HN post, roughly mid-October 2026 | <https://news.ycombinator.com/item?id=50059096> `third-party` — "Launch HN: Agent37 (YC F26) – Low-cost agent sandboxes for running agents" |
+| Funding | **Y Combinator Fall 2026**; amount, round and other investors `not-published` | <https://www.ycombinator.com/companies/agent-37> `third-party` — "Batch:Fall 2026" |
+| Parent / acquisitions | **None disclosed**; listed as Active and independent | <https://battleships.dev/data/providers/agent-37.json> `third-party` — "Ownership: independent" · <https://www.ycombinator.com/companies/agent-37> `third-party` — "Status:Active" |
+| Headcount | **`not-published`** (YC's "0 employees" is an unfilled field) | <https://www.ycombinator.com/companies/agent-37> `third-party` — "Agent 37 has 0 employees based in New York City." |
+| Status page | **Yes**, `status.agent37.com`; every component "100% uptime" over 30/60/90 days at check | <https://status.agent37.com> `docs-confirmed` — "All services are online" |
+| SLA | **None.** No uptime commitment unless agreed in writing | <https://www.agent37.com/terms> `docs-confirmed` — "we do not promise a specific uptime level unless we have agreed to one with you in writing." |
+| SOC 2 | **Type I on request under NDA; Type II in progress** — Trust Center lists SOC 2 as in progress | <https://www.agent37.com/privacy> `docs-confirmed` — "Our SOC 2 Type I report and our SOC 2 readiness report are available to prospective and current business customers on request under NDA. Our SOC 2 Type II is in progress" |
+| ISO 27001 | **`not-published`** — appears nowhere on the site or Trust Center | Absent from terms, privacy, Trust Center, Cloud page and pricing page (`not-published`) |
+| HIPAA | **`not-published`** — no BAA, no HIPAA page | Absent from all provider pages (`not-published`); battleships.dev records `"hipaa": false` (<https://battleships.dev/data/providers/agent-37.json> `third-party`) |
+| Data deleted on cancellation | Cloud instances **7 days**; dashboard hosting **kept until you ask**; account **30 days** | <https://www.agent37.com/privacy> `docs-confirmed` — "Deleting an Agent 37 Cloud instance keeps a recovery copy for 7 days and then purges it permanently." |
+
+### 17.1 Legal entity and registration
+
+The contracting entity is a corporation named **Agent 37 Inc.**, and the contract is governed by New
+York law.
+
+> "These Terms of Service (the "Terms") are an agreement between you and Agent 37 Inc. ("Agent 37", "we", "us")."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+> "These Terms are governed by the laws of the State of New York, without regard to its conflict of law rules. Disputes will be resolved in the state or federal courts located in New York, and both sides consent to their jurisdiction."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+> "At Agent 37 Inc. ("Agent 37", "we", "our", or "us"), privacy is foundational to how we built our service."
+> — <https://www.agent37.com/privacy> `docs-confirmed`
+
+**Where it is registered is not published.** New York is the governing-law jurisdiction and the courts,
+not necessarily the state of incorporation; nothing on the site, in the terms, in the privacy policy or
+on the Trust Center states a state of incorporation, a company number, or a registered address. No
+Delaware or New York registry record for "Agent 37 Inc." was retrievable from the open web
+(`not-published`). A buyer who needs an entity number for procurement should ask for the certificate of
+incorporation rather than inferring one from "Inc." or from New York law.
+
+**The entity name is inconsistent inside the privacy policy.** Two forms appear:
+
+> "Agent 37 (Agent37.com Inc) has appointed Data Protection Representative Limited (trading as DataRep) as its data protection representative in the EU/EEA, the United Kingdom, and Switzerland"
+> — <https://www.agent37.com/privacy> `docs-confirmed`
+
+The terms (§1) and the privacy policy (§1) both say "Agent 37 Inc.", while privacy §14 says
+"Agent37.com Inc". Both cannot be the registered name. `inferred`: this is a drafting slip, most likely in the newer section, but it is the kind of slip
+that stalls a vendor-onboarding review, so expect to have to resolve it with them.
+
+**EU/UK representation exists**, which matters for GDPR buyers:
+
+> "you can raise any data protection matter with us through DataRep at www.datarep.com/data-request, by email to datarequest@datarep.com (mentioning Agent37.com Inc in your message), or by post to DataRep, 77 Camden Street Lower, Dublin, D02 XE80, Ireland."
+> — <https://www.agent37.com/privacy> `docs-confirmed`
+
+Both legal documents are recent and dated:
+
+> "Last updated: August 4, 2026"
+> — <https://www.agent37.com/terms> `docs-confirmed`
+> "Last updated: September 1, 2026"
+> — <https://www.agent37.com/privacy> `docs-confirmed`
+
+### 17.2 Founders and leadership
+
+One founder is public: **Vishnu Krishnaprasad**, listed as Founder/CEO. No other executives, board or
+advisers are published.
+
+> "VISHNU KRISHNAPRASAD" / "Founder/CEO"
+> — <https://www.ycombinator.com/companies/agent-37> `third-party`
+
+> "Founder at Agent 37. Previously Senior Software Engineer at Amazon and Engineering Manager at Quantcast. Founded Real Voxel and Dota2Connect. Began career at ThoughtWorks, progressing from Application Developer to Senior Consultant. Master's in Information Science Management from Carnegie Mellon University."
+> — <https://www.ycombinator.com/companies/agent-37> `third-party`
+
+The founder is also the support escalation path and the sales contact, which tells you something about
+the company's size (see §17.9):
+
+> "Need more than 200? Email vishnu@agent37.com or use the chat bubble in the dashboard."
+> — <https://www.agent37.com/docs/agents-api/billing> `docs-confirmed`
+
+> "Talk to the founder"
+> — booking link `cal.com/vishnukool/30min`, <https://www.agent37.com/cloud> `pricing-page`
+> — <https://www.agent37.com/cloud> `pricing-page`
+
+`inferred`: a single named founder who is simultaneously CEO, the enterprise contact and the person
+answering capacity requests is consistent with a very small team, and it is the main concentration risk
+in this profile. There is no published second line of support.
+
+### 17.3 Founding and launch
+
+> "Founded in 2026"
+> — <https://trust.agent37.com> `docs-confirmed`
+
+> "Founded:2026" / "Batch:Fall 2026" / "Status:Active" / "Location:New York City, NY"
+> — <https://www.ycombinator.com/companies/agent-37> `third-party`
+
+The public launch was a Hacker News "Launch HN" post:
+
+> "Launch HN: Agent37 (YC F26) – Low-cost agent sandboxes for running agents"
+> — <https://news.ycombinator.com/item?id=50059096> `third-party`
+
+HN displayed that post as "15 days ago" when checked on 2026-10-28, putting the launch in roughly
+mid-October 2026 (`third-party`). **No exact incorporation date is published** (`not-published`); "2026"
+is the finest granularity available, and the product is therefore only months old. That is the single
+most important fact for a buyer weighing durability: every uptime and compliance claim in this profile
+covers a very short operating history.
+
+### 17.4 Funding and accelerators
+
+**Accelerator: Y Combinator, Fall 2026 batch.** YC lists a primary partner.
+
+> "Primary Partner:Andrew Miklas"
+> — <https://www.ycombinator.com/companies/agent-37> `third-party`
+
+**Amount raised, round type, valuation and any investors beyond YC are not published.** No funding
+announcement, press release, SEC filing or Crunchbase figure was found. The only money publicly
+associated with the company is YC's programme terms, which apply to every accepted company and are
+**not** a disclosure of what Agent 37 raised:
+
+> "We have a standard deal for every company that is accepted to Y Combinator. We invest $500,000, and our investment gives YC 7% of your company plus an incremental equity amount"
+> — <https://www.ycombinator.com/deal> `third-party` (YC's standard programme terms, not Agent 37's round)
+
+`inferred`: by accepting a standard YC deal the company has at least that programme investment, but the
+actual cap table — including whether a priced round happened — is unknown. Do not quote "$500k raised"
+as an Agent 37 fact; it is a programme default, not a disclosure.
+
+Battleships.dev classifies the stage as pre-seed with low confidence, and says so explicitly:
+
+> "Company is an active (current-batch) Y Combinator Fall 2026 company; YC provides a standard pre-seed deal to accepted startups, but no specific round amount, investors, or priced round was found publicly."
+> — <https://battleships.dev/data/providers/agent-37.json> `third-party`
+
+That matches what I found independently, and it is the correct way to read it: **pre-seed by inference,
+not by disclosure** (`inferred`).
+
+### 17.5 Ownership, acquisitions and parent companies
+
+**Nothing published.** There is no mention of a parent company, subsidiary, merger, acquisition or
+ownership change in the terms, the privacy policy, the Trust Center or the YC listing. YC lists the
+company as Active and independent.
+
+> "Status:Active"
+> — <https://www.ycombinator.com/companies/agent-37> `third-party`
+
+battleships.dev records the ownership as independent, sourced to the same YC page:
+
+> "Ownership: independent"
+> — <https://battleships.dev/data/providers/agent-37.md> `third-party`
+
+`not-published`: no cap table, no parent, no acquisition history. For a company this young that is
+expected rather than suspicious, but it means there is no published change-of-control clause to review
+either — the terms contain none (`not-published`).
+
+### 17.6 Headcount
+
+**Not published.** YC's page carries a machine-generated line that says zero employees:
+
+> "Cloud Sandbox for Agents. Founded in 2026 by VISHNU KRISHNAPRASAD, Agent 37 has 0 employees based in New York City."
+> — <https://www.ycombinator.com/companies/agent-37> `third-party`
+
+That is almost certainly an unfilled YC profile field rather than a literal headcount — the company
+clearly has at least its founder, and the site claims named customers and case studies. `inferred`: the
+true number is small (single digits), but **no reliable headcount figure is published** (`not-published`).
+
+### 17.7 Status page and recent uptime
+
+There is a public, component-level status page at `status.agent37.com`, with separate components for the
+website/dashboard, the API, sandbox creation, sandbox URLs, and three regions.
+
+> "All services are online"
+> — <https://status.agent37.com> `docs-confirmed` (provider-owned, checked 2026-10-28)
+
+The components are listed as "Website and dashboard", "API", "Sandbox creation", "Sandbox URLs", "US",
+"Europe" and "India", each followed by "100% uptime"
+> — <https://status.agent37.com> `docs-confirmed`
+
+So the **recent uptime figure is 100%** across every component over the 30-, 60- and 90-day windows
+displayed at the time of checking. That is a real figure, but it covers a company founded in 2026 — the
+window is short, and a 90-day 100% record on a few months of operation carries much less weight than the
+same number on a multi-year service.
+
+One incident is visible, and it is worth noting that the US component shows both "100% uptime" and a
+degraded period, which is internally inconsistent:
+
+> "Temporary interruption to US sandboxes" / "Degraded for 21 minutes" / "Oct 20, 2026"
+> — <https://status.agent37.com> `docs-confirmed`
+
+`inferred`: the "100%" appears to be a rounded or since-reset figure rather than a strict 90-day
+calculation, because a 21-minute degradation in a 90-day window is about 99.98%, not 100%. Treat the
+status page as directional evidence of intent to be transparent, not as an audited uptime record.
+
+### 17.8 SLA
+
+**There is no SLA.** The terms disclaim any uptime commitment unless one is separately negotiated.
+
+> "We work hard to keep the Service up, but we do not promise a specific uptime level unless we have agreed to one with you in writing."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+> "The Service is provided "as is" and "as available". To the fullest extent permitted by law, we disclaim all warranties, express or implied, including merchantability, fitness for a particular purpose, and non-infringement."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+No service-credit schedule, no uptime target, and no remedy for downtime is published on any plan —
+Cloud or managed hosting (`not-published`). Liability is capped, which compounds the absence of an SLA:
+
+> "Our total liability for all claims arising out of the Service is limited to the amounts you paid us in the twelve months before the event giving rise to the claim, or one hundred US dollars if you have paid us nothing."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+`inferred`: for a buyer whose product depends on this, the practical ceiling on what you can recover is
+one year of fees, and the contract does not promise the service will be up. If you need an SLA you have
+to negotiate one in writing, and the terms explicitly leave that door open.
+
+### 17.9 Support channels
+
+| Channel | Detail | Source — verbatim quote |
+|---|---|---|
+| General email | `info@agent37.com` — terms contact, security reports, account deletion, publicity opt-out | <https://www.agent37.com/terms> `docs-confirmed` — "Questions about these Terms? Email info@agent37.com." |
+| Founder email | `vishnu@agent37.com` — capacity, compliance/residency questions, Performance accounts | <https://www.agent37.com/docs/agents-api/billing> `docs-confirmed` — "Need more than 200? Email vishnu@agent37.com or use the chat bubble in the dashboard." |
+| In-dashboard chat | Chat bubble in the dashboard | <https://www.agent37.com/docs/agents-api/billing> `docs-confirmed` — "use the chat bubble in the dashboard" |
+| Booking link | 30-minute call with the founder | <https://www.agent37.com/cloud> `pricing-page` — "Talk to the founder" |
+| Status page | Public incident history | <https://status.agent37.com> `docs-confirmed` — "All services are online" |
+| Trust Center | Compliance documents behind an access request | <https://www.agent37.com/privacy> `docs-confirmed` — "To request either report, email info@agent37.com or see our Trust Center." |
+
+**Paid support tiers exist only on the consumer line**, not on the Cloud API:
+
+> "Community support"
+> "Email/Chat support"
+> "Priority Support"
+> — Basic, Pro and Max respectively, <https://www.agent37.com/personal> `pricing-page`
+
+`not-published`: no support SLA, no response-time targets, no phone line, no ticketing portal, no
+published support hours (`not-published`). `inferred`: support on the Cloud API is effectively
+best-effort email and a founder's inbox, which is workable at this stage and a real risk if you build
+a product with paying end users on it.
+
+### 17.10 Security and compliance claims
+
+**SOC 2 is claimed, but the two sources disagree on its status.** The privacy policy says Type I is
+available now and Type II is in progress:
+
+> "Our SOC 2 Type I report and our SOC 2 readiness report are available to prospective and current business customers on request under NDA. Our SOC 2 Type II is in progress, and our controls are monitored continuously."
+> — <https://www.agent37.com/privacy> `docs-confirmed`
+
+The Trust Center lists SOC 2 as merely "In progress":
+
+> "SOC 2" / "In progress"
+> — <https://trust.agent37.com/compliance> `docs-confirmed`
+
+And the marketing page states it as achieved:
+
+> "SOC 2 Type I and readiness reports on request. CONTROLS MONITORED TYPE II IN PROGRESS SOC 2 TYPE I"
+> — <https://www.agent37.com/cloud> `pricing-page`
+
+`inferred`: the most consistent reading is that **SOC 2 Type I is complete and Type II is not**, and the
+Trust Center's single "In progress" row is a coarse status covering the Type II work. A buyer who needs
+the report should request it under NDA rather than rely on any of the three public statements, and
+should ask specifically which period the Type II covers, if any.
+
+**GDPR is also listed as in progress**, alongside SOC 2, and those are the only two frameworks on the
+Trust Center:
+
+> "Compliances (2)" / "GDPR" / "In progress"
+> — <https://trust.agent37.com/compliance> `docs-confirmed`
+
+**ISO 27001 is not claimed anywhere.** It does not appear in the terms, the privacy policy, the Trust
+Center, the Cloud page or the pricing page (`not-published`).
+
+**HIPAA is not claimed anywhere.** There is no BAA, no HIPAA page and no mention of protected health
+information (`not-published`). battleships.dev independently records `hipaa: false`:
+
+> "hipaa": false
+> — <https://battleships.dev/data/providers/agent-37.json> `third-party`
+
+**No DPA is published.** Neither the terms nor the privacy policy offers or links a data processing
+agreement (`not-published`). An independent third-party review reached the same conclusion:
+
+> "Agent 37 Inc.; New York law; an EU representative (DataRep, Dublin) privacy policy of 1 Sep 2026; no DPA; SOC 2 Type I; a third-party list, not a sub-processor list"
+> — <https://aplite.ai/blog/openclaw-hosting-eu-gdpr> `third-party`
+
+That third-party line also corroborates the DataRep appointment, the New York governing law and the
+1 September 2026 privacy policy date, which I verified independently from the primary documents.
+
+**Encryption and isolation claims:**
+
+> "Your data is encrypted in transit (TLS 1.2 or better). Backups and account data are encrypted at rest (AES-256), and Agent 37 Cloud instance storage runs with volume-level encryption on infrastructure we operate."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+> "Every sandbox is enforced by gVisor, with its own filesystem and a hard disk quota. Tenants can never see each other."
+> — <https://www.agent37.com/cloud> `pricing-page`
+
+**Notable supply-chain detail:** the privacy policy names its subprocessors, and one of them is a
+competitor in this comparison:
+
+> "Daytona. Throwaway sandboxes that run cloud template builds and image imports."
+> — <https://www.agent37.com/privacy> `docs-confirmed`
+
+`inferred`: template builds and image imports run on Daytona, not on Agent 37's own infrastructure. That
+is worth knowing if you care about where build-time code executes, and it means a Daytona outage could
+affect image builds even while your instances stay up.
+
+The full subprocessor list on the same page names Firebase, Stripe, Cloudflare, Vercel, GitHub, Resend
+and Google Workspace, PostHog, Composio, LLM and search providers (OpenRouter, Brave), Daytona, Grafana
+Cloud, and unnamed "Cloud infrastructure providers" (`docs-confirmed`).
+
+### 17.11 Terms that matter to a buyer
+
+**Data deletion — three different clocks, and one that never starts on its own.**
+
+| What you delete | What happens | Source — verbatim quote |
+|---|---|---|
+| An Agent 37 Cloud instance | Recovery copy kept **7 days**, then purged | <https://www.agent37.com/privacy> `docs-confirmed` — "Deleting an Agent 37 Cloud instance keeps a recovery copy for 7 days and then purges it permanently." |
+| A dashboard-hosting instance | **Kept indefinitely** so support can restore it; you must email to remove it sooner | <https://www.agent37.com/privacy> `docs-confirmed` — "Deleting a dashboard hosting instance keeps its data so support can restore it; email us to have it removed sooner." |
+| Your whole account | Deleted within **30 days** | <https://www.agent37.com/privacy> `docs-confirmed` — "Upon account deletion request, all associated data, including your instances and any stored configuration, is permanently deleted within 30 days, except records we are required to keep for legal, tax, or accounting purposes." |
+| Billing records | Kept **~7 years** | <https://www.agent37.com/privacy> `docs-confirmed` — "Billing records. Kept for as long as legal, tax, and accounting rules require, typically seven years." |
+| Request/operational logs | Rolling **30 days** | <https://www.agent37.com/privacy> `docs-confirmed` — "Request and operational logs. Kept on a rolling window, currently up to 30 days, then deleted automatically." |
+
+⚠️ **The dashboard-hosting row is a real gotcha.** On the consumer product, deleting an agent does not
+delete its data — it is retained so support can restore it, and removal requires an email. Anyone
+deleting an agent because it holds sensitive material needs to know that. The Cloud API behaves the way
+you would expect (7-day recovery, then purge).
+
+**Price changes: notice promised, period not specified.**
+
+> "Prices may change; we will give notice before a change affects what you already pay."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+`not-published`: no notice period (30 days, 60 days, etc.) is stated, and no cap on increases. `inferred`:
+"notice before a change affects what you already pay" is a commitment to warn you, not a commitment to
+any particular length of warning, so a short notice period would satisfy the letter of the clause.
+
+**Terms changes: same pattern.**
+
+> "We may update these Terms from time to time. If a change is material, we will give you notice, such as by email or in the dashboard, before it takes effect."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+**Cancellation and refunds.** Subscriptions cancel at period end; the first month is refundable.
+
+> "Cancellation takes effect at the end of the current billing period."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+> "If you are not satisfied during your first month on a subscription, contact us before your second billing cycle and we will refund it in full, no questions asked."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+> "Otherwise, and except where the law requires more, fees and prepaid top-ups are non-refundable."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+**Prepaid balance is not refundable**, which is worth flagging separately because the Cloud API is
+prepaid: unused wallet credit is money you have already committed. `inferred`: the first-month refund
+applies to "a subscription", i.e. the managed-hosting plans, not to Cloud top-ups.
+
+**Termination and what survives it.**
+
+> "After termination, we delete your data as described in our Privacy Policy."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+**Publicity rights are opt-out, not opt-in.** By default the provider may use your name and logo:
+
+> "You grant us the right to use your name and logo to identify you as a customer on our website and in our marketing materials. You can opt out at any time by emailing info@agent37.com, and we will stop within a reasonable period."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+`inferred`: if you are building a white-label product, check this before you launch — your customers
+could appear in Agent 37's marketing, and the opt-out is a manual email rather than a dashboard toggle.
+
+**Acceptable-use restrictions that can bite agent builders:**
+
+> "mine cryptocurrency;"
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+> "resell bare access to the Service as if it were your own hosting platform, without a written agreement with us. Building the Service into your own product, as described in section 6, is expected and welcome."
+> — <https://www.agent37.com/terms> `docs-confirmed`
+
+`inferred`: reselling raw sandboxes is prohibited without a written agreement, while building a product
+on top is explicitly allowed. If your business model is cheaper rebranded sandboxes, this clause is the one that decides whether you
+are a customer or a breach.
+
+**No data-residency guarantee in the contract.** The docs say EU and India instances keep compute and
+disk local but store backups and control-plane records in the US (§9), and the terms contain no
+residency commitment at all (`not-published`). For a GDPR-driven buyer, that plus the absence of a DPA
+is the main gap.
+
+### 17.12 What stays not-published
+
+Everything below could not be established from primary sources, and is left open rather than guessed:
+
+- **State of incorporation, company number, registered address.** "Agent 37 Inc." is named; the jurisdiction is not. No Delaware or New York registry record was retrievable.
+- **Exact incorporation date.** Only "2026" is published.
+- **Funding amount, round type, valuation, lead investor.** Only the YC batch is public; YC's $500k standard deal is programme terms, not this company's round.
+- **Cap table and any investors beyond YC.**
+- **Ownership changes, acquisitions, parent company, change-of-control terms.** None disclosed; the terms contain no change-of-control clause.
+- **Headcount.** YC's "0 employees" is an unfilled field, not a real number.
+- **SLA, uptime commitment, service credits.** Explicitly disclaimed unless negotiated in writing.
+- **Support response times, support hours, ticketing system.**
+- **ISO 27001.** Not claimed.
+- **HIPAA / BAA.** Not claimed.
+- **A published DPA.** None offered on the site.
+- **Price-change notice period.** A notice is promised; its length is not stated.
+- **Data residency commitment in the contract.** Stated in docs, absent from the terms.
+
