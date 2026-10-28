@@ -19,7 +19,12 @@ Research date: 2026-10-28. Desk research only; no account, sandbox, purchase, or
 
 ## 3. Lifecycle
 
-- **docs-confirmed** — Published principal states: “**Running**: The sandbox is actively running and can execute code.”; “**Paused**: The sandbox execution is suspended but its state is preserved.”; “**Snapshotting**: The sandbox is briefly paused while a persistent snapshot is being created.”; “**Killed**: The sandbox is terminated and all resources are released.” [Persistence](https://docs.e2b.dev/sandbox/persistence.md).
+- **docs-confirmed** — The public get-sandbox and list-v2 API schema enumerates exactly two `SandboxState` values: “enum:
+        - running
+        - paused” [Get sandbox](https://docs.e2b.dev/api-reference/sandboxes/get-sandbox.md). These are API field values, not a complete inventory of all lifecycle transitions.
+- **docs-confirmed** — The lifecycle guide also describes: “**Running**: The sandbox is actively running and can execute code.”; “**Paused**: The sandbox execution is suspended but its state is preserved.”; “**Snapshotting**: The sandbox is briefly paused while a persistent snapshot is being created.”; “**Killed**: The sandbox is terminated and all resources are released.” [Persistence](https://docs.e2b.dev/sandbox/persistence.md). Running retains the active filesystem and memory; paused retains the snapshot selected below. Snapshotting captures state and returns the source to running; killed is terminal. Independent volumes and previously created snapshots have their own lifecycles.
+- **docs-confirmed** — A pause can also be in progress: “and omitted while it is still pausing.” [Get sandbox](https://docs.e2b.dev/api-reference/sandboxes/get-sandbox.md). The documented field describes pause mode, not a third `SandboxState` enum value.
+- **not-published** — The public schema does not enumerate every internal starting, stopping, failing, or transition state, or guarantee what survives each interrupted transition. Do not present the two API values or four guide states as a complete internal state machine.
 - **docs-confirmed** — Full pause saves the whole sandbox filesystem and RAM: “When you pause a sandbox, both the sandbox's filesystem and memory state will be saved.” and “all the running processes, loaded variables, data, etc. will be restored.” [Persistence](https://docs.e2b.dev/sandbox/persistence.md).
 - **docs-confirmed** — Optional disk-only pause instead: “disk survive, but RAM and running processes do not.” [Filesystem-only snapshots](https://docs.e2b.dev/sandbox/filesystem-only-snapshots.md). Existing external connections drop in either case: “Network connections to clients **outside** the sandbox drop when it pauses” [same page](https://docs.e2b.dev/sandbox/filesystem-only-snapshots.md).
 - **docs-confirmed** — “A killed sandbox cannot be resumed, and its state is gone.” [Lifetime](https://docs.e2b.dev/faq/sandbox-lifetime.md). Volumes and separately created snapshots are separate objects, not proof the killed VM is resumable; see sections 4 and 12.
@@ -29,7 +34,7 @@ Research date: 2026-10-28. Desk research only; no account, sandbox, purchase, or
 - **docs-confirmed** — After request wake-up, “a paused sandbox wakes up when activity arrives” and “a **5-minute minimum timeout**” applies. [Auto-resume](https://docs.e2b.dev/sandbox/auto-resume.md). Filesystem-only auto-pause “can't be combined with auto-resume.” [same page](https://docs.e2b.dev/sandbox/auto-resume.md).
 - **docs-confirmed** — Resume timing is approximate, not an SLA: “a memory restore takes about a
 second, while a reboot costs roughly a fresh boot.” [Reboot on resume](https://docs.e2b.dev/sandbox/resume-without-memory.md).
-- **not-published** — A contractual start-time or resume-time guarantee, a complete internal transition-state inventory, and pause-transition billing were not established. Measure the actual workload and region.
+- **not-published** — A contractual start-time or resume-time guarantee and pause-transition billing were not established. Measure the actual workload and region.
 
 ## 4. Snapshots, forks, templates and volumes
 
