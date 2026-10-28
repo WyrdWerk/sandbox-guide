@@ -94,7 +94,6 @@ import { features, groups, providers, situations } from "../lib/data";
             <div class="picks">
               {groupFeatures.map((feature) => (
                 <article class="pick">
-                  <span class="pick__label">{group.title}</span>
                   <h3 class="pick__title"><a href={`/features/${feature.id}/`}>{feature.title}</a></h3>
                   <p class="pick__body">{feature.standfirst}</p>
                 </article>
@@ -115,17 +114,14 @@ import { features, groups, providers, situations } from "../lib/data";
       </div>
       <div class="picks">
         <article class="pick">
-          <span class="pick__label">Compare</span>
           <h3 class="pick__title"><a href="/compare/side-by-side/">Side by side</a></h3>
           <p class="pick__body">Choose two or three providers and read them across the features that decide your case.</p>
         </article>
         <article class="pick">
-          <span class="pick__label">Compare</span>
           <h3 class="pick__title"><a href="/compare/situations/">By situation</a></h3>
           <p class="pick__body">Four jobs, the features each one depends on, and the providers worth a look with their catches.</p>
         </article>
         <article class="pick">
-          <span class="pick__label">Compare</span>
           <h3 class="pick__title"><a href="/compare/reference-costs/">Reference costs</a></h3>
           <p class="pick__body">Three shared workloads priced from list rates, as illustrations rather than quotes.</p>
         </article>

@@ -42,11 +42,8 @@ src/
   layouts/Base.astro        page shell: skip link, header, nav, footer
   components/               badge, quote, page header, section nav, split, watch, compare table, cost card
   pages/                    home, features, compare, providers, how-we-checked
-  styles/tokens.css         fonts and design tokens (direction C)
+  styles/tokens.css         design tokens: dark and light palettes, type, space
   styles/theme.css          the single stylesheet; imports tokens.css
-public/
-  fonts/                    Manrope, Geist and IBM Plex Mono, self-hosted
-  fonts-OFL.md              licence notices
 ```
 
 ## Adding a provider
@@ -70,13 +67,13 @@ public/
 
 ## Design layer
 
-The design studio supplied direction C: `tokens.css` and `theme.css` in `src/styles/`, plus
-`DESIGN.md` in the workspace for component patterns. Keep visual rules in those two files. Components
+The look follows WyrdWerk/resource-library: a dark page by default with a light theme (the header
+button stores the choice in `localStorage`), Georgia headings, system sans for reading, monospace
+for small labels and figures, one mint accent, and hairlines instead of boxes. All fonts are system
+fonts. Keep visual rules in `tokens.css` and `theme.css` in `src/styles/`. Components
 use the documented classes (`badge`, `quote`, `split`, `watch`, `compare`, `compare-columns`,
 `picks`, `answers`, `states`) and a small set of additions at the end of `theme.css` for cost cards,
 data tables and the compare picker.
-
-IBM Plex Mono ships in Regular only. Do not set a heavier weight on mono text; use size and colour.
 
 ## Content rules
 

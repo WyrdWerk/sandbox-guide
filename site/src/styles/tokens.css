@@ -1,99 +1,64 @@
 /* ==========================================================================
    Sandbox guide — design tokens
-   Direction C, "Chooser". One light canvas, one green accent, three typefaces.
-
-   Fonts are self-hosted. The three families below are licensed under the SIL
-   Open Font License 1.1; the full notices and licence text ship in
-   ../fonts-OFL.md and beside each font in resources/fonts/<family>/OFL.txt.
-
-     Manrope        Copyright 2018 The Manrope Project Authors
-     Geist          Copyright 2024 The Geist Project Authors
-     IBM Plex Mono  Copyright (c) 2017 IBM Corp. Reserved Font Name "Plex"
-
-   Paths here are relative to this file and point at the studio's verified
-   font directory. In Astro, copy resources/fonts/{manrope,geist,ibmplexmono}
-   into public/fonts/ and replace "../../resources/fonts/" with "/fonts/".
-   Nothing else in this file needs to change.
+   Editorial look borrowed from WyrdWerk/resource-library: a near-black page
+   (with a light alternative), Georgia headings, system sans for reading,
+   monospace only for small labels and figures, one mint accent, hairlines
+   instead of boxes. All fonts are system fonts; nothing is downloaded.
    ========================================================================== */
 
-@font-face {
-  font-family: "Manrope";
-  src: url("/fonts/Manrope-wght.ttf") format("truetype-variations");
-  font-weight: 200 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Geist";
-  src: url("/fonts/Geist-wght.ttf") format("truetype-variations");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "IBM Plex Mono";
-  src: url("/fonts/IBMPlexMono-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
-  /* ---- Colour ------------------------------------------------------------
-     One hue family for every neutral: a green-tinted warm grey. The accent is
-     the only saturated colour and appears on links, the selected answer and
-     badge text, never as a large fill. */
-  --color-bg: #f4f6f1;
-  --color-surface: #ffffff;
-  --color-surface-muted: #e9eee6;
-  --color-surface-inverse: #14201a;
+  color-scheme: dark;
 
-  --color-text: #14201a;
-  --color-text-secondary: #3b4a42;
-  --color-text-muted: #55635b;
+  /* ---- Colour (dark, the default) ------------------------------------- */
+  --color-bg: #0a0c0b;
+  --color-surface: #121514;
+  --color-surface-muted: #181c1a;
+  --color-surface-inverse: #ece9e0;
 
-  --color-border: #dde4da;
-  --color-border-strong: #c6d2c8;
+  --color-text: #ece9e0;
+  --color-text-secondary: #c4c8bf;
+  --color-text-muted: #9aa39b;
 
-  --color-accent: #14624a;
-  --color-accent-strong: #0e4b39;
-  --color-accent-soft: #e3efe8;
-  --color-on-accent: #ffffff;
+  --color-border: #232926;
+  --color-border-strong: #34403a;
+
+  --color-accent: #7ed7b6;
+  --color-accent-strong: #a8e8d0;
+  --color-accent-soft: rgba(126, 215, 182, 0.12);
+  --color-on-accent: #0a0c0b;
 
   /* Badge states. Every badge also carries a word and a glyph, so colour is
      never the only carrier of meaning. */
-  --color-yes: #14624a;
-  --color-yes-bg: #e3efe8;
-  --color-partly: #7a4b00;
-  --color-partly-bg: #faf0d8;
-  --color-no: #8a3b12;
-  --color-no-bg: #fbede3;
-  --color-unknown: #55635b;
+  --color-yes: #7ed7b6;
+  --color-yes-bg: rgba(126, 215, 182, 0.12);
+  --color-partly: #e3b341;
+  --color-partly-bg: rgba(227, 179, 65, 0.13);
+  --color-no: #e8a37f;
+  --color-no-bg: rgba(217, 154, 108, 0.14);
+  --color-unknown: #9aa39b;
   --color-unknown-bg: transparent;
 
-  --color-focus: #14624a;
+  --color-focus: #7ed7b6;
 
-  /* ---- Type -------------------------------------------------------------
-     Manrope carries headings; Geist carries reading text and UI; IBM Plex
-     Mono carries dates, source tags and figures. */
-  --font-display: "Manrope", "Geist", system-ui, sans-serif;
-  --font-ui: "Geist", system-ui, -apple-system, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  /* ---- Type ------------------------------------------------------------- */
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-ui: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
-  --text-xs: 0.75rem;      /* 12 — mono labels, badges */
-  --text-sm: 0.8125rem;    /* 13 — captions, table notes */
-  --text-base: 1rem;       /* 16 — UI text */
-  --text-prose: 1.0625rem; /* 17 — reading text */
-  --text-lg: 1.1875rem;    /* 19 — standfirst */
-  --text-xl: 1.5rem;       /* 24 — h3 */
+  --text-xs: 0.6875rem;    /* 11 — mono labels, eyebrows */
+  --text-sm: 0.8125rem;    /* 13 — captions, notes */
+  --text-base: 0.9375rem;  /* 15 — UI text */
+  --text-prose: 1rem;      /* 16 — reading text */
+  --text-lg: 1.0625rem;    /* 17 — standfirst */
+  --text-xl: 1.4375rem;    /* 23 — h3 */
   --text-2xl: 1.875rem;    /* 30 — h2 */
-  --text-3xl: clamp(2rem, 1.7rem + 1.3vw, 2.75rem);      /* 32 → 44 — h1 on inner pages */
-  --text-display: clamp(2.25rem, 1.7rem + 2.4vw, 3.5rem); /* 36 → 56 — page title */
+  --text-3xl: clamp(2rem, 1.6rem + 1.6vw, 2.875rem);
+  --text-display: clamp(2.625rem, 1.6rem + 4vw, 4.75rem); /* 42 → 76 */
 
-  --leading-tight: 1.05;
-  --leading-snug: 1.2;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.65;
+  --leading-tight: 1.04;
+  --leading-snug: 1.22;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.7;
 
   --weight-regular: 400;
   --weight-medium: 500;
@@ -101,48 +66,76 @@
   --weight-bold: 700;
 
   --tracking-tight: -0.03em;
-  --tracking-snug: -0.02em;
+  --tracking-snug: -0.012em;
   --tracking-normal: 0;
-  --tracking-label: 0.02em;
+  --tracking-label: 0.16em;
 
-  /* ---- Space ------------------------------------------------------------
-     4px base. Section rhythm uses the larger steps only. */
-  --space-1: 0.25rem;  /*  4 */
-  --space-2: 0.5rem;   /*  8 */
-  --space-3: 0.75rem;  /* 12 */
-  --space-4: 1rem;     /* 16 */
-  --space-5: 1.25rem;  /* 20 */
-  --space-6: 1.5rem;   /* 24 */
-  --space-7: 2rem;     /* 32 */
-  --space-8: 2.5rem;   /* 40 */
-  --space-9: 3rem;     /* 48 */
-  --space-10: 4rem;    /* 64 */
-  --space-11: 5rem;    /* 80 */
-  --space-12: 6rem;    /* 96 */
+  /* ---- Space (4px base) ------------------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 2rem;
+  --space-8: 2.5rem;
+  --space-9: 3rem;
+  --space-10: 4rem;
+  --space-11: 5rem;
+  --space-12: 6rem;
 
-  /* ---- Radius -----------------------------------------------------------
-     Controls sit at 10px, cards at 14–18px, pills at full round. Nothing is
-     square and nothing is a bubble. */
-  --radius-xs: 6px;
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
+  /* ---- Radius: small and quiet ------------------------------------------ */
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
   --radius-pill: 999px;
 
-  /* ---- Shadow -----------------------------------------------------------
-     Hairline borders do the work; shadows only lift a surface off the page. */
-  --shadow-xs: 0 1px 2px rgba(20, 32, 26, 0.05);
-  --shadow-sm: 0 1px 2px rgba(20, 32, 26, 0.05), 0 8px 20px -14px rgba(20, 32, 26, 0.22);
-  --shadow-md: 0 2px 4px rgba(20, 32, 26, 0.05), 0 16px 32px -20px rgba(20, 32, 26, 0.25);
+  /* ---- Shadow: none; hairlines do the work ------------------------------ */
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
 
   /* ---- Layout ----------------------------------------------------------- */
-  --layout-content: 1180px;
-  --layout-measure: 66ch;
-  --layout-gutter: clamp(1.125rem, 4vw, 3.5rem);
-  --layout-header-height: 4rem;
+  --layout-content: 1080px;
+  --layout-measure: 64ch;
+  --layout-gutter: clamp(1.125rem, 4vw, 2rem);
+  --layout-header-height: 4.5rem;
 
-  --duration-fast: 120ms;
-  --duration-base: 180ms;
-  --ease-out: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --ease-out: ease;
+}
+
+/* ---- Light theme -------------------------------------------------------- */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: #f4f6f1;
+  --color-surface: #fbfcf8;
+  --color-surface-muted: #eaeee6;
+  --color-surface-inverse: #16231f;
+
+  --color-text: #16231f;
+  --color-text-secondary: #34433e;
+  --color-text-muted: #52615c;
+
+  --color-border: #dde3d9;
+  --color-border-strong: #c3ccc0;
+
+  --color-accent: #006a55;
+  --color-accent-strong: #004d3d;
+  --color-accent-soft: #dcebe3;
+  --color-on-accent: #ffffff;
+
+  --color-yes: #006a55;
+  --color-yes-bg: #dcebe3;
+  --color-partly: #7a4f00;
+  --color-partly-bg: #f3e9cd;
+  --color-no: #9b482a;
+  --color-no-bg: #f6e4da;
+  --color-unknown: #52615c;
+
+  --color-focus: #006a55;
 }
