@@ -300,7 +300,7 @@ code {
 }
 .section__head {
   padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--color-text);
+  border-bottom: 1px solid var(--color-border-strong);
 }
 .section__title { font-size: var(--text-2xl); letter-spacing: -0.015em; }
 .section__note {
@@ -509,6 +509,14 @@ ul.prose, ol.prose { padding-left: 1.2em; }
   vertical-align: bottom;
   white-space: nowrap;
 }
+/* Column headings stay in view under the sticky section nav while the 15 rows scroll. */
+.compare thead th {
+  position: sticky;
+  top: var(--section-nav-height);
+  z-index: 5;
+  padding-top: var(--space-3);
+  background: var(--color-bg);
+}
 .compare td {
   padding: var(--space-4) var(--space-4) var(--space-4) 0;
   vertical-align: top;
@@ -553,24 +561,50 @@ ul.prose, ol.prose { padding-left: 1.2em; }
   margin-top: 2px;
 }
 
-/* The evidence row under each provider: quote, source, tag. */
-.compare .compare__evidence td {
-  border-top: 0;
-  padding-top: 0;
-  padding-bottom: var(--space-5);
-}
-.compare__evidence .quote {
-  margin: 0;
+.compare__source { margin-top: var(--space-2); }
+.compare__source .quote {
+  margin: var(--space-2) 0 0;
   padding: 0 0 0 var(--space-4);
 }
-.compare__evidence .quote__text { font-size: 0.9375rem; margin-bottom: var(--space-2); }
-.compare__evidence .quote__source { font-size: 0.6875rem; }
+.compare__source .quote__text {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+}
+.compare__source .quote__source { font-size: 0.6875rem; }
 
+/* The provider's quote, folded behind a one-line summary that keeps its provenance tag visible. */
+.compare__source summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 1.75rem;
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+.compare__source summary::-webkit-details-marker { display: none; }
+.compare__source summary::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.compare__source[open] summary::before { transform: rotate(45deg); }
+.compare__source summary:hover { color: var(--color-accent); }
+.compare__source-label { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.compare__source[open] .compare__source-tag { display: none; }
+
+/* The plain-language reading is the main text of a row; the quote under it is supporting evidence. */
 .compare__note {
   display: block;
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  margin-top: 2px;
+  font-size: 0.90625rem;
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
 }
 
 /* ---------- side-by-side compare columns ---------------------------------- */
@@ -877,7 +911,17 @@ ul.prose, ol.prose { padding-left: 1.2em; }
   }
   .compare tbody td,
   .compare tbody th { border-top: 0; padding: 0 0 var(--space-3); }
-  .compare__provider { font-size: 1.0625rem; padding-bottom: var(--space-3) !important; }
+  /* Provider name and verdict share the card's first line. */
+  .compare tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: var(--space-3);
+  }
+  .compare tbody tr > * { width: auto; }
+  .compare__provider { grid-column: 1; grid-row: 1; font-size: 1.0625rem; white-space: normal !important; }
+  .compare__verdict { grid-column: 2; grid-row: 1; }
+  .compare__figure,
+  .compare tbody tr > td:last-child { grid-column: 1 / -1; padding-bottom: 0; }
   .compare td[data-label]::before {
     content: attr(data-label);
     display: block;
@@ -886,8 +930,6 @@ ul.prose, ol.prose { padding-left: 1.2em; }
     color: var(--color-text-muted);
     margin-bottom: 2px;
   }
-  .compare__evidence td { padding-bottom: 0; }
-  .compare__evidence .quote { margin-top: var(--space-1); }
 
   /* Side-by-side columns become one block per feature with a provider label. */
   .compare-columns,
@@ -938,10 +980,7 @@ ul.prose, ol.prose { padding-left: 1.2em; }
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
-    /* Same fade as the section nav, so the cut-off strip reads as scrollable. */
-    mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 2rem), transparent 100%);
   }
-  .site-nav:focus-within { mask-image: none; }
   .site-nav::-webkit-scrollbar { display: none; }
   .site-nav__link { white-space: nowrap; }
   .page-title { max-width: none; }
@@ -1373,4 +1412,85 @@ h1 a:hover, h2 a:hover, h3 a:hover { color: var(--color-accent); }
 /* A situation with four picks reads as a 2×2 block rather than 3 + 1. */
 @media (min-width: 1025px) {
   .picks--four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- wayfinding: parent link, pager, back to top ------------------ */
+
+.kicker__parent { color: inherit; text-decoration: none; }
+.kicker__parent:hover { color: var(--color-accent-strong); text-decoration: underline; }
+.kicker__sep { color: var(--color-text-muted); font-weight: var(--weight-regular); }
+
+/* Previous / next feature, at the end of a feature page. */
+.pager {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  padding-top: var(--space-7);
+  border-top: 1px solid var(--color-border);
+}
+.pager__link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  text-decoration: none;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+.pager__link:hover { border-color: var(--color-accent); }
+.pager__link--next { grid-column: 2; text-align: right; }
+.pager__dir {
+  font-size: 0.65625rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.pager__link--prev .pager__dir::before { content: "← "; }
+.pager__link--next .pager__dir::after { content: " →"; }
+.pager__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+.pager__link:hover .pager__title { color: var(--color-accent); }
+
+.to-top { margin-bottom: var(--space-6); font-size: var(--text-sm); }
+.to-top a::before { content: "↑ "; }
+
+.site-nav__short { display: none; }
+
+@media (max-width: 640px) {
+  /* Five links fit a 390px screen with the two longest labels shortened. */
+  .site-nav { gap: var(--space-1) var(--space-4); }
+  .site-nav__full { display: none; }
+  .site-nav__short { display: inline; }
+}
+
+/* Below 381px even the short labels overflow; fade the cut-off end, as the section nav does. */
+@media (max-width: 380px) {
+  .site-nav { mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 2rem), transparent 100%); }
+  .site-nav:focus-within { mask-image: none; }
+}
+
+@media (max-width: 640px) {
+
+  .pager { grid-template-columns: 1fr; }
+  .pager__link--next { grid-column: 1; }
+
+  /* Page meta reads as a short list rather than a ragged wrap. */
+  .page-meta { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+
+  /* Side by side: compact chips so results start sooner. */
+  .picker { gap: var(--space-2) 6px; margin-bottom: var(--space-4); }
+  .picker label {
+    min-height: 2.25rem;
+    padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+    gap: 6px;
+    font-size: 0.8125rem;
+    border-radius: 999px;
+  }
 }

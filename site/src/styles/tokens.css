@@ -101,6 +101,7 @@
   --layout-measure: 64ch;
   --layout-gutter: clamp(1.125rem, 4vw, 2rem);
   --layout-header-height: 4.5rem;
+  --section-nav-height: 3.05rem; /* sticky in-page nav: 2.75rem link + 2px underline + 1px rule */
 
   --duration-fast: 150ms;
   --duration-base: 200ms;

@@ -17,8 +17,8 @@ const nav = [
   { href: "/features/", label: "Features" },
   { href: "/compare/", label: "Compare" },
   { href: "/providers/", label: "Providers" },
-  { href: "/changes/", label: "What changed" },
-  { href: "/how-we-checked/", label: "How we checked" },
+  { href: "/changes/", label: "What changed", short: "Changes" },
+  { href: "/how-we-checked/", label: "How we checked", short: "Method" },
 ];
 ---
 
@@ -38,7 +38,7 @@ const nav = [
       }
     </script>
   </head>
-  <body>
+  <body id="top">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -53,7 +53,14 @@ const nav = [
         <nav class="site-nav" aria-label="Main">
           {nav.map((item) => (
             <a class="site-nav__link" href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined}>
-              {item.label}
+              {item.short ? (
+                <>
+                  <span class="site-nav__full">{item.label}</span>
+                  <span class="site-nav__short">{item.short}</span>
+                </>
+              ) : (
+                item.label
+              )}
             </a>
           ))}
         </nav>
@@ -75,6 +82,7 @@ const nav = [
 
     <footer class="sources">
       <div class="wrap">
+        <p class="to-top"><a href="#top">Back to top</a></p>
         <p class="sources__title">About this guide</p>
         <p class="sources__note">
           Checked {site.checkedOn}. Documentation and published prices only; no sandbox was started

@@ -1,5 +1,6 @@
 import type {
   Change,
+  Confidence,
   Feature,
   Group,
   Provider,
@@ -46,6 +47,15 @@ const changeModule = import.meta.glob<{ changes: Change[] }>(
   "../data/changes.json",
   { eager: true, import: "default" },
 );
+
+/** Provenance tag classes, shared by quotes and the folded sources in compare tables. */
+export const tagClass: Record<Confidence, string> = {
+  "docs-confirmed": "tag tag--docs",
+  "pricing-page": "tag tag--pricing",
+  "third-party": "tag tag--third-party",
+  inferred: "tag tag--inferred",
+  "not-published": "tag tag--not-published",
+};
 
 const VERDICTS: Verdict[] = ["yes", "partly", "no", "not-published", "pending"];
 

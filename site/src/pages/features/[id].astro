@@ -15,6 +15,9 @@ export function getStaticPaths() {
 
 const { feature } = Astro.props;
 const group = groups.find((item) => item.id === feature.group);
+const position = features.indexOf(feature);
+const previous = features[position - 1];
+const next = features[position + 1];
 const nav = [
   { href: "#idea", label: "The idea" },
   { href: "#split", label: "Where providers split" },
@@ -27,6 +30,7 @@ const nav = [
 
 <Base title={feature.title} description={feature.standfirst}>
   <PageHeader
+    parent={{ href: "/features/", label: "Features" }}
     kicker={group?.title ?? "Feature"}
     title={feature.title}
     standfirst={feature.standfirst}
@@ -87,6 +91,21 @@ const nav = [
       </div>
       <QuestionList questions={feature.questions} />
     </section>
+
+    <nav class="pager" aria-label="Previous and next feature">
+      {previous && (
+        <a class="pager__link pager__link--prev" href={`/features/${previous.id}/`} rel="prev">
+          <span class="pager__dir">Previous feature</span>
+          <span class="pager__title">{previous.title}</span>
+        </a>
+      )}
+      {next && (
+        <a class="pager__link pager__link--next" href={`/features/${next.id}/`} rel="next">
+          <span class="pager__dir">Next feature</span>
+          <span class="pager__title">{next.title}</span>
+        </a>
+      )}
+    </nav>
 
     <p class="section__note">
       Part of <a href="/features/">{group?.title ?? "Features"}</a>. Next:{" "}

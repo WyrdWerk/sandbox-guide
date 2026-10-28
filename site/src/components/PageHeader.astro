@@ -7,9 +7,11 @@ interface Props {
   title: string;
   standfirst: string;
   meta?: string[];
+  /** The section this page sits in, shown as a link at the start of the kicker. */
+  parent?: { href: string; label: string };
 }
 
-const { kicker, title, standfirst, meta = [] } = Astro.props;
+const { kicker, title, standfirst, meta = [], parent } = Astro.props;
 const defaultMeta = [
   `${providers.length} providers`,
   `Every claim dated ${site.checkedOn}`,
@@ -20,7 +22,15 @@ const items = meta.length > 0 ? meta : defaultMeta;
 
 <div class="wrap">
   <header class="page-header">
-    <p class="kicker">{kicker}</p>
+    <p class="kicker">
+      {parent && (
+        <>
+          <a class="kicker__parent" href={parent.href}>{parent.label}</a>
+          <span class="kicker__sep" aria-hidden="true">/</span>
+        </>
+      )}
+      {kicker}
+    </p>
     <h1 class="page-title">{title}</h1>
     <p class="standfirst">{standfirst}</p>
     <p class="page-meta">

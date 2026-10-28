@@ -1,6 +1,7 @@
 ---
 import type { Confidence } from "../data/schema";
 import { plainText } from "../lib/plain";
+import { tagClass } from "../lib/data";
 
 interface Props {
   text: string;
@@ -10,13 +11,6 @@ interface Props {
 }
 
 const { text, cite, url, tag } = Astro.props;
-const tagClass: Record<Confidence, string> = {
-  "docs-confirmed": "tag tag--docs",
-  "pricing-page": "tag tag--pricing",
-  "third-party": "tag tag--third-party",
-  inferred: "tag tag--inferred",
-  "not-published": "tag tag--not-published",
-};
 ---
 
 <figure class="quote">

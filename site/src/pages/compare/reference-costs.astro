@@ -2,21 +2,29 @@
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import CostCard from "../../components/CostCard.astro";
+import SectionNav from "../../components/SectionNav.astro";
 import { providers } from "../../lib/data";
 
 const researched = providers.filter((provider) => provider.status === "researched");
+const nav = [
+  { href: "#workloads", label: "The workloads" },
+  ...researched.map((provider) => ({ href: `#cost-${provider.id}`, label: provider.name })),
+];
 ---
 
 <Base title="Reference costs" description="Three shared workloads priced from list rates, as illustrations rather than quotes.">
   <PageHeader
-    kicker="Compare · reference costs"
+    parent={{ href: "/compare/", label: "Compare" }}
+    kicker="Reference costs"
     title="Three workloads, priced at list rates"
     standfirst="A reference point, not a quote. The arithmetic is shown so you can redo it when prices change, and every substituted size is named. For your own workload, use battleships.dev."
     meta={[`${researched.length} providers`, "List prices checked 28 October 2026", "Illustrations, not quotes"]}
   />
 
+  <SectionNav items={nav} />
+
   <div class="wrap">
-    <section class="section section--flush">
+    <section class="section section--flush" id="workloads">
       <div class="section__head">
         <h2 class="section__title">The three shared workloads</h2>
         <p class="section__note">

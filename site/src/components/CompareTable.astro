@@ -1,6 +1,6 @@
 ---
 import type { FeatureRow } from "../data/schema";
-import { providerById } from "../lib/data";
+import { providerById, tagClass } from "../lib/data";
 import Badge from "./Badge.astro";
 import Quote from "./Quote.astro";
 
@@ -11,6 +11,8 @@ interface Props {
 }
 
 const { rows, caption, figureLabel } = Astro.props;
+// Each provider's quote sits in its row behind a one-line summary. It stays in the HTML
+// (and in find-in-page); only its display is folded.
 ---
 
 <table class="compare">
@@ -38,7 +40,7 @@ const { rows, caption, figureLabel } = Astro.props;
                 ? "—"
                 : row.figure.split("; ").map((part) => <span class="compare__figure-part">{part}</span>)}
             </td>
-            <td data-label="Does it?">
+            <td class="compare__verdict">
               <Badge verdict={pending ? "pending" : row.verdict} />
             </td>
             <td data-label="What that means">
@@ -47,20 +49,24 @@ const { rows, caption, figureLabel } = Astro.props;
                   ? "Research pending. No claims are shown until the profile is finished."
                   : row.note}
               </span>
+              {!pending && row.source && (
+                <details class="compare__source">
+                  <summary>
+                    <span class="compare__source-label">
+                      {provider?.name ?? row.provider}'s own words
+                    </span>
+                    <span class={`${tagClass[row.source.confidence]} compare__source-tag`}>{row.source.confidence}</span>
+                  </summary>
+                  <Quote
+                    text={row.source.quote}
+                    cite={provider?.name ?? row.provider}
+                    url={row.source.url}
+                    tag={row.source.confidence}
+                  />
+                </details>
+              )}
             </td>
           </tr>
-          {!pending && row.source && (
-            <tr class="compare__evidence">
-              <td colspan="4">
-                <Quote
-                  text={row.source.quote}
-                  cite={provider?.name ?? row.provider}
-                  url={row.source.url}
-                  tag={row.source.confidence}
-                />
-              </td>
-            </tr>
-          )}
         </tbody>
       );
     })

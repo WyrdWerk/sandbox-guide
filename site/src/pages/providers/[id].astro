@@ -4,6 +4,7 @@ import PageHeader from "../../components/PageHeader.astro";
 import CostCard from "../../components/CostCard.astro";
 import CompanyFacts from "../../components/CompanyFacts.astro";
 import Quote from "../../components/Quote.astro";
+import SectionNav from "../../components/SectionNav.astro";
 import { providers } from "../../lib/data";
 
 export function getStaticPaths() {
@@ -11,6 +12,18 @@ export function getStaticPaths() {
 }
 
 const { provider } = Astro.props;
+const nav = [
+  { href: "#about", label: "What it is" },
+  { href: "#glance", label: "At a glance" },
+  { href: "#fits", label: "Fits" },
+  { href: "#billing", label: "Billing" },
+  { href: "#strengths", label: "Strengths" },
+  { href: "#without-code", label: "Without code" },
+  { href: "#company", label: "Company" },
+  { href: "#caveats", label: "Caveats" },
+  { href: "#sources", label: "Sources" },
+  ...(provider.cost ? [{ href: "#costs", label: "Costs" }] : []),
+];
 const statusLabel = {
   open: "Open question",
   rechecking: "Needs re-checking",
@@ -20,19 +33,22 @@ const statusLabel = {
 
 <Base title={provider.name} description={provider.oneLiner}>
   <PageHeader
-    kicker={`Provider · checked ${provider.checkedOn ?? "pending"}`}
+    parent={{ href: "/providers/", label: "Providers" }}
+    kicker={`Checked ${provider.checkedOn ?? "pending"}`}
     title={provider.name}
     standfirst={provider.oneLiner}
     meta={[provider.url.replace("https://", ""), `${providers.length} providers`, "Sources linked"]}
   />
 
+  <SectionNav items={nav} />
+
   <div class="wrap">
-    <section class="section section--flush">
+    <section class="section section--flush" id="about">
       <div class="prose">
         {provider.whatItIs.map((paragraph) => <p>{paragraph}</p>)}
       </div>
 
-      <h2 class="section__title">At a glance</h2>
+      <h2 class="section__title" id="glance">At a glance</h2>
       <table class="data-table">
         <tbody>
           <tr><th scope="row">Who it is for</th><td>{provider.whoFor}</td></tr>
@@ -41,7 +57,7 @@ const statusLabel = {
         </tbody>
       </table>
 
-      <h2 class="section__title">Fits well, fits badly</h2>
+      <h2 class="section__title" id="fits">Fits well, fits badly</h2>
       <p class="section__note">
         Our reading of the sourced material on this page, not a provider claim.
       </p>
@@ -60,7 +76,7 @@ const statusLabel = {
         </div>
       </div>
 
-      <h2 class="section__title">How it bills</h2>
+      <h2 class="section__title" id="billing">How it bills</h2>
       <table class="data-table">
         <tbody>
           <tr><th scope="row">Model</th><td>{provider.billing.model}</td></tr>
@@ -75,12 +91,12 @@ const statusLabel = {
         <a href="/features/trials-free-tiers/">Trials and free tiers</a>.
       </p>
 
-      <h2 class="section__title">Where it stands out</h2>
+      <h2 class="section__title" id="strengths">Where it stands out</h2>
       <ul class="prose">
         {provider.strengths.map((strength) => <li>{strength}</li>)}
       </ul>
 
-      <h2 class="section__title">Using it without writing code</h2>
+      <h2 class="section__title" id="without-code">Using it without writing code</h2>
       <table class="data-table">
         <tbody>
           <tr><th scope="row">Dashboard</th><td>{provider.usability.dashboard}</td></tr>
@@ -90,14 +106,14 @@ const statusLabel = {
         </tbody>
       </table>
 
-      <h2 class="section__title">The company</h2>
+      <h2 class="section__title" id="company">The company</h2>
       <p class="section__note">
         From the profile's company section: the legal entity, who funds it, and what a buyer can
         check before signing.
       </p>
       <CompanyFacts facts={provider.company.facts} />
 
-      <h2 class="section__title">Caveats and contradictions</h2>
+      <h2 class="section__title" id="caveats">Caveats and contradictions</h2>
       <p class="section__note">
         Shown as the research found them. A contradiction means the provider's own pages disagree;
         an open question means the answer is not published.
@@ -126,7 +142,7 @@ const statusLabel = {
         ))}
       </ol>
 
-      <h2 class="section__title">Sources</h2>
+      <h2 class="section__title" id="sources">Sources</h2>
       <ul class="sources__list">
         {provider.sources.map((source) => (
           <li><a href={source.url} rel="noreferrer noopener">{source.label}</a></li>
@@ -136,7 +152,7 @@ const statusLabel = {
 
     {
       provider.cost && (
-        <section class="section" aria-labelledby="costs-h">
+        <section class="section" id="costs" aria-labelledby="costs-h">
           <div class="section__head">
             <h2 class="section__title" id="costs-h">The three shared workloads</h2>
             <p class="section__note">List-price illustrations, not quotes</p>
