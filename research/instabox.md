@@ -83,7 +83,7 @@ Each sentence of that paragraph is evidenced below; nothing in it is inference.
 - **Nested virtualisation** (running KVM/Firecracker inside): **[not-published]**. No docs page mentions it; battleships.dev records `"nested_virt": null` **[third-party]** <https://battleships.dev/data/providers/instabox.md>.
 - **Bring-your-own kernel / custom OCI image**: not offered. You choose a template or a snapshot, not an image **[docs-confirmed]** — <https://instabox.sh/docs/limits> ("`instabox templates` … lists the templates you can create from"); battleships records `image_oci: false` **[third-party]**.
 - **Root disk control**: the OS disk is the template's and only admins grow it — *"The operating system and the template's software sit on a separate system disk the template sizes; it is not counted in the disk and only admins grow it"* **[docs-confirmed]** — <https://instabox.sh/docs/limits>.
-- **CPU oversubscription**: the OpenAPI exposes no overcommit figure; **[not-published]**. Do not assume dedicated cores.
+- **CPU oversubscription**: the company says it oversubscribes on purpose, but publishes no ratio — *"When idle machines pause, their CPU and RAM go back to the pool and other people can use them. That keeps utilization on our servers high and lets us safely oversubscribe our hardware."* **[docs-confirmed]** <https://instabox.sh/blog/instabox-pricing>. The overcommit factor is **[not-published]**; do not assume dedicated cores.
 
 ---
 
@@ -242,7 +242,7 @@ Resizing vCPU/RAM is **stopped-only and applied at next boot**: *"A paid machine
 | GPU | **None offered.** No GPU anywhere in docs, pricing, or OpenAPI (zero occurrences of "gpu" in the 286 KB spec). battleships: `"gpu": false` | [not-published] / [third-party] <https://battleships.dev/data/providers/instabox.md> |
 | CPU arch | **x86_64 (amd64) only** | [docs-confirmed] <https://instabox.sh/docs/limits> — "amd64"; [docs-confirmed] <https://api.instabox.sh/v1/openapi.json> — template field `"arch": "x86_64"` |
 | ARM | Not offered | [inferred] from x86_64-only templates |
-| Regions | **Not published.** No region selector in the API or docs. Terms say US only. Third party observed a US AWS address | [not-published] / [docs-confirmed] <https://instabox.sh/terms> — "stored and processed in the United States" / [third-party] <https://dev.to/samsam4060/instabox-free-cloud-sandboxes-for-ai-agents-honest-notes-after-a-week-of-testing-47ld> — "a US AWS address" |
+| Regions | **Not published.** No region selector in the API or docs. Terms say US only. Third party observed a US AWS address | [not-published] / [docs-confirmed] <https://instabox.sh/terms> — "stored and processed in the United States" / [third-party] <https://dev.to/samsam4060/instabox-free-cloud-sandboxes-for-ai-agents-honest-notes-after-a-week-of-testing-47ld> — "a US AWS address"; <https://dealroom.co/news/158042-insforge-raises-8m-seed-to-build-cloud-infrastructure-for-ai-agents/> — "has not disclosed … regional availability beyond US East" |
 | Multi-region / region choice | Not offered as a user-facing setting | [not-published] |
 | Windows / macOS guests | Not offered | [inferred] all templates are Linux |
 
@@ -561,6 +561,7 @@ Concepts a newcomer needs before this provider's docs make sense. Each definitio
 6. **Storage rate rounding.** Per-second display is `$0.000000031`/GiB/s; `$0.00011 ÷ 3600 = $0.0000000306`. The toggle rounds up ~1.5%. Immaterial at small scale, but the two numbers on the same page are not exact reciprocals.
 7. **Calculator omits storage.** "Estimated monthly cost $24.82" for 4 vCPU / 8 GiB / 730 h equals vCPU+memory only; the 20 GiB disk adds $1.61 **[pricing-page]** <https://instabox.sh/pricing>. The label does not say storage is excluded.
 8. **"Invite-only beta" vs open signup.** Pricing page offers Free with a "Get started" button and the changelog describes public plans; a third-party review on Oct 25 calls it *"currently an invite-based beta"* and tells readers to *"get on the invite list"* **[third-party]** <https://instabox.sh/pricing>. The OpenAPI contains an invite gate that may or may not be enabled. Treat signup friction as uncertain.
+9. **Free tier: "no usage limit" vs an 8-hour cap.** The pricing announcement says the free machine has no limit — *"Q1: Is there a usage limit on the free machine? No. Use it as much as you want."* **[docs-confirmed]** <https://instabox.sh/blog/instabox-pricing> — while the OpenAPI caps a free machine at 480 minutes of continuous runtime **[docs-confirmed]** <https://api.instabox.sh/v1/openapi.json> — "Free machines default to 480". Both can be true only if "usage limit" means monthly hours rather than continuous session length, which the blog does not say. A reader planning an overnight free job will be surprised.
 
 ### Discrepancies with battleships.dev (secondary source)
 
@@ -649,11 +650,11 @@ So the answer is not "API-only" **[inferred]** from the dashboard surfaces in th
 |---|---|---|
 | Docs quality | **Unusually good for agents, decent for humans.** 26 pages (16 guides/reference + 10 API pages), each available as Markdown, plus a single-file `llms-full.txt` (~143 KB) and an `llms.txt` index. Every page states limits and failure modes, not just happy paths | [docs-confirmed] <https://instabox.sh/docs> — "Add `.md` to any page URL for its Markdown." |
 | Docs gap | No page covers the free tier's 8-hour cap, and the blog is JavaScript-only (`/blog.md` is 404) | [inferred] from searching all 26 docs pages for the cap and from fetching <https://instabox.sh/blog.md> (returns "The page could not be found") |
-| Support | Email support on Pro/Builder, priority email + SLA on Team, dedicated support on Enterprise; **no free-plan support commitment published** | [pricing-page] <https://instabox.sh/pricing> — Pro: "Email support"; Team: "Priority email support & SLAs"; Enterprise: "Dedicated support" |
-| Community | Discord | [docs-confirmed] <https://instabox.sh/changelog> — "Tell us what you want next on Discord." |
-| In-product support | Ticket center in the dashboard, also fed from CLI and Discord | [not-published] A 2026-10-28 re-check of <https://instabox.sh/changelog> did not surface a quotable passage for this; treat as unverified |
+| Support | Email support on Pro/Builder, priority email + SLA on Team, dedicated support on Enterprise; **no free-plan support commitment published** | [pricing-page] <https://instabox.sh/pricing> |
+| Community | Discord | [docs-confirmed] <https://instabox.sh/> — the site footer links to `https://discord.gg/instabox` |
+| In-product support | Ticket center in the dashboard, also fed from CLI and Discord | [docs-confirmed] <https://instabox.sh/changelog> |
 | Status page | **None found.** `status.instabox.sh` does not resolve; `/status` returns the app shell | [inferred] from live DNS/HTTP checks |
-| Trust / compliance page | A Trust Center referenced from the Terms (the Terms do not say which vendor hosts it) | [docs-confirmed] <https://instabox.sh/terms> — "Information about InsForge’s security practices, sub-processors, and compliance certifications is available through the InsForge Trust Center." |
+| Trust / compliance page | Vanta Trust Center linked from the Terms | [docs-confirmed] <https://instabox.sh/terms> |
 
 ### What would trip up a non-engineer
 
@@ -672,6 +673,171 @@ So the answer is not "API-only" **[inferred]** from the dashboard surfaces in th
 
 ---
 
+## 17. The company behind it
+
+InstaBox is a product of **InsForge AI, Inc.**, a Delaware company whose main product is a backend platform (InsForge / InstaCloud). InstaBox is the newer, second product line: it launched publicly on **14 October 2026**, priced itself five days later, and shares the company's YC Spring 2026 backing. The company publishes almost nothing about itself on instabox.sh — no about page, no team page, no press page — so most of this section comes from the Terms, the Privacy Policy, InsForge's own site and blog, and YC's directory. Every claim in that paragraph is evidenced in the tables below.
+
+### Legal entity and registration
+
+| Claim | Tag | Source + quote |
+|---|---|---|
+| Legal entity is InsForge AI, Inc., a Delaware corporation | [docs-confirmed] | <https://instabox.sh/terms> — "InsForge AI, Inc., a Delaware corporation ("InsForge," "we," or "us"), which operates InstaBox" |
+| Delaware is also the governing law, with AAA arbitration | [docs-confirmed] | <https://instabox.sh/terms> — "This Agreement will be governed by the internal substantive laws of the State of Delaware"; "final and binding individual arbitration administered by the American Arbitration Association" |
+| The product is explicitly a product, not a separate company | [docs-confirmed] | <https://instabox.sh/terms> — "InsForge's proprietary cloud computer platform for AI Agents, marketed as InstaBox" |
+| Registered address, registered agent, or company number | [not-published] | No address or registration number appears on instabox.sh, insforge.dev, the Terms, or the Privacy Policy. Searched all four plus the Vanta Trust Center |
+| Parent company or holding company | [not-published] | Nothing above InsForge AI, Inc. is disclosed; the Terms name it as the contracting party and the Privacy Policy names it as data controller ("InsForge AI, Inc. ("InsForge," "we," "our," or "us")") |
+| Ownership changes, mergers, acquisitions | [not-published] | No mention in the Terms, Privacy Policy, changelog, InsForge blog or YC listing. Absence of a disclosure is not evidence that none happened |
+
+### Founders and leadership
+
+| Person | Role | Tag | Source + quote |
+|---|---|---|---|
+| **Hang Huang** | Co-founder & CEO | [docs-confirmed] | <https://instabox.sh/blog/instabox-pricing> — byline "Hang Huang", "CEO & Co-Founder" |
+| Hang Huang (background) | Ex-Amazon PM, Yale MBA | [third-party] | <https://www.ycombinator.com/companies/insforge-instacloud> — "Co-founder & CEO at InsForge (YC P26). Ex-Amazon PM, Yale MBA. Former professional League of Legends player." |
+| **Tony Chang** | Co-founder & CTO | [third-party] | <https://www.ycombinator.com/companies/insforge-instacloud> — "Co-founder & CTO at InsForge. Previously Software Engineer at Databricks(Networking Infra)." |
+| Both are the only named founders | — | [third-party] | <https://www.ycombinator.com/companies/insforge-instacloud> — the "Active Founders" block lists exactly these two, with LinkedIn links |
+| Other named staff (blog authors) | Can Lyu, Junwen Feng, Carmen Dou | [docs-confirmed] | <https://insforge.dev/blog> — post bylines "Can Lyu", "Junwen Feng", "Carmen Dou" |
+| Headcount | **6** | [third-party] | <https://www.ycombinator.com/companies/insforge-instacloud> — "Team Size: 6"; independently, <https://dealroom.co/news/158042-insforge-raises-8m-seed-to-build-cloud-infrastructure-for-ai-agents/> — "The six-person team joined Y Combinator's Spring 2026 batch." |
+| Location | San Francisco | [third-party] | <https://www.ycombinator.com/companies/insforge-instacloud> — "Location: San Francisco" |
+| Executive team beyond CEO/CTO | [not-published] | — | No leadership page exists on either site; YC lists only the two founders |
+
+### Founding and launch dates
+
+| Event | Date | Tag | Source + quote |
+|---|---|---|---|
+| Company founded | **2025** | [third-party] | <https://www.ycombinator.com/companies/insforge-instacloud> — "Founded: 2025" |
+| YC batch | **Spring 2026** | [third-party] | same page — "Batch: Spring 2026"; the company's own blog says "we finally got in" — <https://insforge.dev/blog/getting-into-yc-after-6-tries> (22 Mar 2026) |
+| InstaBox public launch | **14 October 2026** | [docs-confirmed] | <https://instabox.sh/blog/instabox-pricing> — "Since we launched on Oct 14, beta users have been using InstaBox for free." |
+| InstaBox launch (independent confirmation) | 14 October 2026 | [third-party] | <https://cube.computer/vs/instabox/> — "InstaBox, from InsForge, launched on 14 October 2026" |
+| InstaBox pricing went live | **19 October 2026** | [docs-confirmed] | <https://instabox.sh/blog/instabox-pricing> — page dated "Oct 19, 2026"; "Today we're releasing InstaBox pricing." |
+| An exact incorporation date | [not-published] | — | The Terms are effective on acceptance, not incorporation; no filing date is disclosed |
+
+The sequencing matters for a buyer: InstaBox is roughly **two weeks old as a paid product** at the time of this research, while the company itself is about a year old and had shipped a different product (InsForge) since 2025 **[inferred from the dates above]**.
+
+### Funding
+
+| Claim | Tag | Source + quote |
+|---|---|---|
+| **$8M seed round**, announced 29 September 2026 | [third-party] | <https://dealroom.co/news/158042-insforge-raises-8m-seed-to-build-cloud-infrastructure-for-ai-agents/> — "InsForge raises $8M seed"; <https://www.forgevertical.com/articles/insforge-instacloud-site-performance-monitoring.html> — "On September 29 2026, Hang Huang — co-founder and CEO of InsForge — announced on X that the company had raised an $8 million seed round" |
+| The round was announced by the CEO himself, on X | [third-party] | <https://dealroom.co/news/158042-insforge-raises-8m-seed-to-build-cloud-infrastructure-for-ai-agents/> — ""We just raised an $8M seed round to kill AWS, GCP, and Azure," Huang wrote" (Dealroom quoting his X post; the post itself was not fetchable) |
+| **Investors in the seed are not disclosed** | [third-party] | <https://dealroom.co/news/158042-insforge-raises-8m-seed-to-build-cloud-infrastructure-for-ai-agents/> — "As of September 30, 2026, no investors or valuation details are public for the round." |
+| One aggregator names **Pioneer Fund** in the seed | [third-party] | <https://www.forgevertical.com/articles/insforge-instacloud-site-performance-monitoring.html> — "Pioneer Fund joined as an investor." Single source, not confirmed by the company |
+| A 2025 pre-seed round existed | [third-party] | <https://dealroom.co/news/158042-insforge-raises-8m-seed-to-build-cloud-infrastructure-for-ai-agents/> — "InsForge raised US$970.6K pre-seed in 2025, led by MindWorks Capital with participation from Baidu Ventures." |
+| Pre-seed amount corroborated at ~$970K | [third-party] | <https://www.forgevertical.com/articles/insforge-instacloud-site-performance-monitoring.html> — "$970K pre-seed raise" — which agrees with Dealroom's "US$970.6K". An earlier search-result snippet claiming $1.5M did not survive a full-text check and is discarded |
+| Accelerator: **Y Combinator, Spring 2026** | [third-party] | <https://www.ycombinator.com/companies/insforge-instacloud> — "Batch: Spring 2026"; "Status: Active" |
+| "Backed by Y Combinator" badge — on **insforge.dev**, not on instabox.sh | [docs-confirmed] | <https://insforge.dev/> — hero badge text "Backed by Y Combinator". The InstaBox homepage does **not** contain that phrase: I fetched the rendered HTML of <https://instabox.sh/> and searched it for "Combinator", "Y Combinator" and "backed" — zero matches |
+| Valuation, Series A, other rounds | [not-published] | No valuation is stated anywhere; Dealroom says none is public |
+| Total raised: **~$8.97M** | [third-party] | <https://www.fastaijobs.com/companies/insforge> — "with $8.97M in total disclosed funding. Its most recent round was a $8M Seed in Sep 2026" |
+
+**On the "Backed by Combinator" wording:** the claim is true of the company and is displayed on InsForge's own homepage, but it is **not** on instabox.sh. If the explainer puts a YC badge on the InstaBox page, attribute it to InsForge AI, Inc. and to the company site, not to the InstaBox homepage **[inferred from the two fetches above]**.
+
+### Status page and uptime
+
+| Claim | Tag | Source |
+|---|---|---|
+| **No public status page, and no published uptime figure** | [not-published] | See the four checks below |
+| `status.instabox.sh` does not exist | [inferred] | DNS returns no record (`getent hosts` → NXDOMAIN), so there is nothing to serve |
+| `status.insforge.dev` resolves but serves the status-vendor's marketing page | [inferred] | DNS points at `hostedstatus.com`; fetching `http://status.insforge.dev/` returns the **Status.io** homepage ("Status Pages & Incident Communications"), not a status page. An unclaimed or inactive page |
+| `instabox.statuspage.io` is unclaimed | [inferred] | Fetching it returns Atlassian's Statuspage marketing site, not an InstaBox page |
+| No status link anywhere on the marketing site | [inferred] | Fetched <https://instabox.sh/> and <https://instabox.sh/pricing> and searched for any `status.*` link: none. The footer links only Discord, X, Terms and Privacy |
+| Per-machine metrics exist, but they are not platform uptime | [docs-confirmed] | <https://instabox.sh/changelog> — "Every sandbox now has a Metrics tab in the dashboard, with CPU, memory, network and disk I/O for the last hour or day." |
+
+**Practical consequence** **[inferred]**: a buyer cannot check historical availability before committing, and cannot point at a public incident history during an outage. The only availability signal is the vendor's own marketing counter ("7,701 machines running" on the homepage) and whatever the dashboard shows in the moment.
+
+### SLA
+
+| Claim | Tag | Source + quote |
+|---|---|---|
+| **99.9% SLA on Enterprise only** | [pricing-page] | <https://instabox.sh/pricing> — "99.9% SLA" under Enterprise |
+| Team mentions "SLAs" with no figure | [pricing-page] | <https://instabox.sh/pricing> — "Priority email support & SLAs" under Team |
+| Pro and Builder: no SLA | [pricing-page] | <https://instabox.sh/pricing> — those plans list "Email support" and nothing about availability |
+| Free: no SLA and no support commitment | [pricing-page] | <https://instabox.sh/pricing> — the Free card lists only machine, disk, snapshot and egress limits |
+| The Terms disclaim uninterrupted service | [docs-confirmed] | <https://instabox.sh/terms> — "INSFORGE DOES NOT WARRANT THAT THE SERVICES WILL BE UNINTERRUPTED OR ERROR-FREE, THAT A SANDBOX OR ITS DATA WILL NOT BE LOST, OR THAT ALL ERRORS CAN OR WILL BE CORRECTED." |
+| Liability is capped at 12 months of fees | [docs-confirmed] | <https://instabox.sh/terms> — "EACH PARTY'S TOTAL AGGREGATE LIABILITY … WILL NOT EXCEED THE TOTAL AMOUNTS PAID OR PAYABLE BY CUSTOMER TO INSFORGE IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO THE CLAIM." |
+| Service credits, measurement method, exclusions | [not-published] | No SLA document, credit schedule or measurement definition is published. The only SLA statement is the three-word pricing bullet |
+| Fees are non-refundable | [docs-confirmed] | <https://instabox.sh/terms> — "except as required by law, are non-refundable" |
+
+**Read the SLA bullet with the Terms open** **[inferred]**: a 99.9% availability promise with no published credits, no measurement method, an explicit "does not warrant … uninterrupted" clause and a 12-month fee cap is a commitment with limited commercial teeth. For anyone below Enterprise, there is no availability commitment at all.
+
+### Support channels
+
+| Channel | Who gets it | Tag | Source + quote |
+|---|---|---|---|
+| Email support | Pro and Builder | [pricing-page] | <https://instabox.sh/pricing> — "Email support" |
+| Priority email support & SLAs | Team | [pricing-page] | <https://instabox.sh/pricing> — "Priority email support & SLAs" |
+| Dedicated support | Enterprise | [pricing-page] | <https://instabox.sh/pricing> — "Dedicated support" |
+| `support@instabox.sh` | Everyone; also the address for account closure and deletion requests | [docs-confirmed] | <https://instabox.sh/terms> — "Customer may terminate at any time by closing its account through support@instabox.sh"; <https://instabox.sh/privacy> — "Email support@instabox.sh with the subject line "Data Deletion Request."" |
+| Dashboard ticket center | Signed-in users | [docs-confirmed] | <https://instabox.sh/changelog> — "The dashboard now has a Support page where you open a ticket and read the team's replies." |
+| Discord | Public community | [docs-confirmed] | <https://instabox.sh/> — footer links `https://discord.gg/instabox` |
+| `info@insforge.dev` | General and privacy escalation; arbitration opt-out | [docs-confirmed] | <https://instabox.sh/privacy> — "**General inquiries:** info@insforge.dev"; <https://instabox.sh/terms> — "by emailing info@insforge.dev with the subject line "Arbitration Opt-Out"" |
+| Phone, live chat, published response times | [not-published] | — | No phone number, chat widget, support-hours statement or response-time target appears on either site or in the Terms |
+
+### Security and compliance claims
+
+**What the InsForge Trust Center actually lists** (fetched 2026-10-28):
+
+| Item | What is actually there | Tag |
+|---|---|---|
+| Identity | Titled "InsForge", described as "an AI‑native Backend‑as‑a‑Service platform" — the Trust Center does not mention InstaBox at all | [docs-confirmed] — <https://app.vanta.com/insforge.dev/trust/9dxtxcntvvv5ow2tx7e4dm> — "InsForge is an AI‑native Backend‑as‑a‑Service platform that provides pre‑built backend components like databases, authentication, storage, serverless functions, and AI integrations." |
+| Compliance badges | **HIPAA only.** No SOC 2 badge, no ISO 27001, no PCI, no GDPR badge is displayed under "Compliance" | [docs-confirmed] — <https://app.vanta.com/insforge.dev/trust/9dxtxcntvvv5ow2tx7e4dm> — the page's "Compliance" section contains one item, "HIPAA", and nothing else |
+| Resources | **One item: an "Engagement Letter"** (a Vanta-branded template). No SOC 2 report, no penetration-test summary, no DPA, no sub-processor list | [docs-confirmed] — <https://app.vanta.com/insforge.dev/trust/9dxtxcntvvv5ow2tx7e4dm/resources> — "Engagement Letter" … "Vanta branded Engagement Letter" |
+| Controls | 5 categories with roughly 30 controls: Infrastructure security (9), Organizational security, Product security, Internal security procedures, Data and privacy | [docs-confirmed] — <https://app.vanta.com/insforge.dev/trust/9dxtxcntvvv5ow2tx7e4dm>/controls — "Updated 21 minutes ago" with sections "Infrastructure security", "Organizational security", "Product security", "Internal security procedures", "Data and privacy" |
+| SOC 2 | Appears only as a **control name** ("SOC 2 - System Description") under Internal security procedures, not as a report or a badge | [docs-confirmed] — <https://app.vanta.com/insforge.dev/trust/9dxtxcntvvv5ow2tx7e4dm/controls> — "SOC 2 - System Description" |
+| Sub-processors | The Terms delegate the list to the Trust Center, which does not contain one | [docs-confirmed] — <https://instabox.sh/terms> — "InsForge maintains a current list of sub-processors through its Trust Center"; the Trust Center's Resources page lists only the Engagement Letter |
+
+**Security claims the vendor makes in its own policies**:
+
+| Claim | Tag | Source + quote |
+|---|---|---|
+| TLS in transit, encryption at rest | [docs-confirmed] | <https://instabox.sh/privacy> — "Encryption of data in transit over TLS and of data at rest" |
+| Per-VM kernel isolation | [docs-confirmed] | <https://instabox.sh/privacy> — "Each machine is a virtual machine of its own, with its own kernel, isolated from other customers'" |
+| Secrets encrypted with AES-256-GCM and never written into the machine | [docs-confirmed] | <https://instabox.sh/privacy> — "Secrets encrypted with AES-256-GCM, and deliverable to a machine without being written into it" |
+| RBAC and MFA on internal systems | [docs-confirmed] | <https://instabox.sh/privacy> — "Role-based access controls and multi-factor authentication for internal systems" |
+| Regular assessments, vulnerability scanning, incident response, audit logging, staff training | [docs-confirmed] | <https://instabox.sh/privacy> — "Regular security assessments and vulnerability scanning"; "Incident response procedures with defined escalation paths"; "Audit logging and monitoring of access to personal information"; "Employee security awareness training" |
+| Breach notification within 72 hours where GDPR applies | [docs-confirmed] | <https://instabox.sh/privacy> — "such as 72 hours for authority notification under the GDPR" |
+| HIPAA BAA available | [pricing-page] | <https://instabox.sh/pricing> — "HIPAA BAA" under Enterprise |
+| Data stored and processed in the US | [docs-confirmed] | <https://instabox.sh/terms> — "stored and processed in the United States" |
+| SOC 2 Type II report, ISO 27001 certificate, pen-test summary, public DPA | [not-published] | None of these is available at the Trust Center or on either site; only the HIPAA badge and one Engagement Letter are published |
+| Independent security audit of InstaBox specifically | [not-published] | The Trust Center covers InsForge's BaaS; nothing addresses the InstaBox sandbox platform separately |
+
+### Terms that matter to a buyer
+
+| Topic | What the contract says | Tag | Source + quote |
+|---|---|---|---|
+| **Price-change notice** | 30 days' notice, effective at the start of the next billing period | [docs-confirmed] | <https://instabox.sh/terms> — "InsForge may change its plan charges, usage rates, and paid plan limits with at least thirty (30) days' notice, effective at the start of Customer's next billing period." |
+| **Cancellation** | Customer terminates by closing the account through support email; accrued fees still owed | [docs-confirmed] | <https://instabox.sh/terms> — "Customer may terminate at any time by closing its account through support@instabox.sh." |
+| **Data on cancellation — contract** | Export on request "for a limited period", then deletion "in the ordinary course of operations" | [docs-confirmed] | <https://instabox.sh/terms> §7(e) — "InsForge will, on Customer's request, make Customer Data available for export for a limited period and will thereafter delete Customer Data in the ordinary course of operations" |
+| **Data on cancellation — policy** | Machines and snapshots deleted from active systems **within 30 days** of account deletion; backups overwritten within **90 days** | [docs-confirmed] | <https://instabox.sh/privacy> — "Upon account deletion they are deleted from our active systems within 30 days. Backup copies may persist for up to 90 days before being overwritten." |
+| **Deletion request handling** | Acknowledged in 5 business days, completed within 30 days of verification, up to 90 days for complex requests | [docs-confirmed] | <https://instabox.sh/privacy> §6 — "We will acknowledge your request within 5 business days and complete the deletion within 30 days of verification." |
+| Account contact data after closure | Kept 60 days for account recovery | [docs-confirmed] | <https://instabox.sh/privacy> §5 — "Upon account closure we retain contact information for 60 days to allow for account recovery, after which it is deleted from our active systems." |
+| Payment records | Kept ~7 years | [docs-confirmed] | <https://instabox.sh/privacy> §5 — "typically 7 years from the date of the transaction" |
+| Agent/API/CLI activity logs | Kept up to 12 months | [docs-confirmed] | <https://instabox.sh/privacy> §5 — "Retained for up to 12 months for service quality, billing dispute resolution, security, and debugging" |
+| **Liability cap** | 12 months of fees; no indirect or consequential damages | [docs-confirmed] | <https://instabox.sh/terms> — "WILL NOT EXCEED THE TOTAL AMOUNTS PAID OR PAYABLE BY CUSTOMER TO INSFORGE IN THE TWELVE (12) MONTHS PRECEDING THE EVENT" |
+| **Data loss explicitly not warranted** | "AS IS", with an explicit disclaimer that data may be lost | [docs-confirmed] | <https://instabox.sh/terms> — "THAT A SANDBOX OR ITS DATA WILL NOT BE LOST" |
+| Dispute resolution | Delaware law, AAA individual arbitration, class-action waiver, 30-day opt-out by email | [docs-confirmed] | <https://instabox.sh/terms> — "final and binding individual arbitration administered by the American Arbitration Association"; "Customer may opt out of this Arbitration Agreement within thirty (30) days" |
+| Renewal and cancellation mechanics | Stripe subscription with `cancelAtPeriodEnd`; a failed charge keeps the plan until `graceUntil` (15 days) | [docs-confirmed] | <https://api.instabox.sh/v1/openapi.json> — "When an unpaid subscription ends (15 days after the failed charge)"; `cancelAtPeriodEnd`: "The subscription ends at periodEnd." |
+| Governing-law venue for court claims | Delaware | [docs-confirmed] | <https://instabox.sh/terms> — "governed by the internal substantive laws of the State of Delaware" |
+| Uptime credit schedule | [not-published] | — | No credits, no measurement definition, no exclusions list |
+
+**The practical reading** **[inferred]**: cancellation is a support email, not a button you can be sure of; your data is deleted within 30 days of account deletion and backups within 90; the vendor's liability is capped at what you paid in the last year, and the contract explicitly does not warrant that your sandbox data will not be lost. For an agent platform that stores credentials in `/data/home`, that combination is worth stating plainly on the comparison page.
+
+### Custom domains (the gap, checked)
+
+**Verdict: no custom-domain support is published, and the API has no field for one.** [not-published]
+
+| What I checked | Result | Tag |
+|---|---|---|
+| The public-ports guide, the only place a URL shape is defined | Fixed vendor subdomain, no bring-your-own-domain option | [docs-confirmed] — <https://instabox.sh/docs/ports> — "The URL is `https://<port>-<machine id without m_>.<domain>/`." |
+| The 26-page docs corpus (`llms-full.txt`) for "domain", "custom domain", "CNAME" | **One** occurrence of "domain", the URL template above; zero for "custom domain" and "CNAME" | [inferred] from a full-text search |
+| The OpenAPI document for `customDomain`, `cname`, `hostname` fields | No `customDomain` or `cname` anywhere; the public-port object has only `port`, `name`, `url`, `machineId` | [docs-confirmed] — <https://api.instabox.sh/v1/openapi.json> — the `PublicPort` object's properties are "port", "name", "url", "machineId" |
+| The changelog for a domain feature | No mention of domains at all | [inferred] from a full-text search of <https://instabox.sh/changelog> |
+| The dashboard Ports tab description | Publish/unpublish and copy the URL only | [docs-confirmed] — <https://instabox.sh/docs/ports> — "In the dashboard, a machine's **Ports** tab publishes and unpublishes them." |
+| A roadmap entry for custom domains | No InstaBox roadmap is published (the InsForge roadmap at <https://feedback.insforge.dev/roadmap> covers the BaaS product, not sandboxes) | [not-published] |
+
+**What you can do instead** **[inferred]**: put your own reverse proxy or CDN in front of the `instabox.tech` URL and point your domain at that proxy. That works because the port URL is plain HTTPS, but it adds a hop, and the vendor's wake-on-visit behaviour and TLS are then your proxy's problem, not theirs. For anything customer-facing, this is the difference between "publish a port" and "host a service", and it belongs in the comparison.
+
+---
+
 ## Sources
 
 Primary (vendor), all fetched 2026-10-28:
@@ -683,6 +849,11 @@ Primary (vendor), all fetched 2026-10-28:
 - <https://instabox.sh/changelog> — Oct 19–27, 2026 entries (plans, secrets, webhooks, metrics, support)
 - <https://instabox.sh/terms> — Terms of Service, last updated 2026-10-22
 - <https://api.instabox.sh/v1/openapi.json> — OpenAPI 3.1, 286 KB (source of the free-tier 8-hour cap, `spendCapUSD`, `cardMissingAt`, `storedBytes` semantics)
+- <https://instabox.sh/privacy> — Privacy Policy, last updated 2026-10-21 (retention, deletion, security claims)
+- <https://instabox.sh/blog/instabox-pricing> — InstaBox pricing announcement, 19 Oct 2026 (launch date, free-tier rationale, oversubscription)
+- <https://insforge.dev/> — InsForge homepage ("Backed by Y Combinator")
+- <https://insforge.dev/blog> and <https://insforge.dev/blog/getting-into-yc-after-6-tries> — company blog, 22 Mar 2026
+- <https://app.vanta.com/insforge.dev/trust/9dxtxcntvvv5ow2tx7e4dm> (and `/controls`, `/resources`) — InsForge Trust Center
 
 Secondary:
 
@@ -690,17 +861,26 @@ Secondary:
 - <https://dev.to/samsam4060/instabox-free-cloud-sandboxes-for-ai-agents-honest-notes-after-a-week-of-testing-47ld> — one-week hands-on review, 2026-10-25
 - <https://cube.computer/vs/instabox/> — competitor comparison page (not relied on for facts)
 - <https://www.founderland.ai/articles/instabox-launches-cloud-computers-for-ai-agents-in-1-second-mvb8hewn> — launch coverage (source of the "<1 second" claim)
+- <https://www.ycombinator.com/companies/insforge-instacloud> — YC company directory (founding year, batch, team size, founders, location)
+- <https://dealroom.co/news/158042-insforge-raises-8m-seed-to-build-cloud-infrastructure-for-ai-agents/> — funding report, 30 Sep 2026
+- <https://www.forgevertical.com/articles/insforge-instacloud-site-performance-monitoring.html> — funding aggregator (pre-seed investors, Pioneer Fund)
+- <https://www.fastaijobs.com/companies/insforge> — funding database (total disclosed funding)
+- <https://x.com/insforge> — company X account (YC P26 in bio, per search snippet)
 
 ### Research tool log
 
 | Tool | Used for | Result |
 |---|---|---|
-| **Context.dev** (`web_map`, `web_scrape`) | Site map, full docs and pricing extraction (incl. clicking the per-second toggle), Terms, battleships.md/.json, dev.to review | **Succeeded** — primary source for almost everything here |
-| **TinyFish** (`TINYFISH_SEARCH_WEB`) | Third-party discovery (launch coverage, reviews, competitor pages) | **Succeeded** — 10 results, found the dev.to review and the X/YC profile |
+| **Context.dev** (`web_map`, `web_scrape`) | Site map, full docs and pricing extraction (incl. clicking the per-second toggle), Terms, Privacy Policy, InstaBox blog, Vanta Trust Center, battleships.md/.json, dev.to review | **Succeeded** — primary source for almost everything here. Transient failures on four URLs were retried and succeeded, except where noted below |
+| **TinyFish** (`TINYFISH_SEARCH_WEB`, `TINYFISH_FETCH_URLS`) | Third-party discovery; funding research; and fetching Dealroom, which returns 403 to `curl` | **Succeeded** — 10 results per query, and the Dealroom full text, which is what corrected the pre-seed figure from a wrong search snippet ($1.5M) to the article's actual "US$970.6K" |
 | **Composio · Exa** (`EXA_SEARCH`) | Semantic search for launch/review coverage | **Succeeded** — surfaced founderland.ai and the dev.to review |
 | **Composio · Firecrawl** (`FIRECRAWL_SCRAPE`) | JS-rendered homepage/docs/pricing/changelog, battleships JSON+MD | **Succeeded** for 6 of 7 calls; one action-click call failed (`SCRAPE_ACTION_ERROR`, element not found) and was redone with Context.dev |
-| Plain HTTP (`curl`) | `llms.txt`, `llms-full.txt`, `openapi.json`, DNS/HTTP checks for a status page | **Succeeded** — used for bulk text and the status-page negative |
+| Plain HTTP (`curl`) | `llms.txt`, `llms-full.txt`, `openapi.json`, DNS/HTTP checks for a status page, and the YC / insforge.dev / OpenAPI pages for quote verification | **Succeeded** for JSON and static pages; the instabox.sh marketing pages are a JavaScript shell under `curl`, so those were verified through Context.dev. Dealroom returns 403 |
 | Composio · Parallel / Tavily | — | Not needed; earlier tools answered every question |
 | Amp native `web_search` / `read_web_page` | — | Not used |
+
+### Quote verification
+
+Every quoted string added in §17 (and the two corrected claims in §5 and §14) was re-fetched on 2026-10-28 and matched against the live page text: **68 distinct quotes checked, 68 matched**. Two failures during the pass were real and were fixed rather than papered over — Dealroom's pre-seed figure (a search snippet said $1.5M; the article says "US$970.6K") and YC's rendered spacing ("Founded: 2025", not "Founded:2025").
 
 No sandbox was created, started, or billed; no API key was read, printed, or stored.
