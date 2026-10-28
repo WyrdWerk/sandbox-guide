@@ -473,9 +473,177 @@ These are `inferred` observations from the sources above, not claims Lizard make
 
 ---
 
+## 17. The company behind it
+
+Lizard is the trading name of **Dragon Labs LLC**, a small US company that publishes a Portland, Oregon mailing address and chooses Delaware law for its contracts. Two people are named in public — Yura Dubinin, described by a startup directory as "co-founder and president", and Mikhail Erin, who co-authors the company blog. The product has been public since roughly mid-2026; there is no announced funding round, no published team page, no SLA outside Enterprise, and no SOC 2 report yet. Infrastructure runs on OVHcloud in Germany and the United States, with a French test environment.
+
+### 17.1 Legal entity and registration
+
+| Claim | Tag | Source | Quote |
+|---|---|---|---|
+| Legal entity is Dragon Labs LLC, trading as Lizard | docs-confirmed | https://lizard.build/terms | "We are Dragon Labs LLC, doing business as Lizard" |
+| Postal address on the contract | docs-confirmed | https://lizard.build/terms | "or by mail to 1336 NW Flanders St #312, Portland, OR 97209, United States." |
+| Governing law is Delaware, not the address state | docs-confirmed | https://lizard.build/terms | "governed by and construed in accordance with the laws of the State of Delaware" |
+| The DPA is signed by the same entity | docs-confirmed | https://lizard.build/dpa | "entered into between Dragon Labs LLC, doing business as Lizard" |
+| The privacy notice names the same entity | docs-confirmed | https://lizard.build/privacy | "This Privacy Notice for Dragon Labs LLC (doing business as Lizard)" |
+| Terms version in force | docs-confirmed | https://lizard.build/terms | "Last updated October 19, 2026" |
+| Directories place it in Delaware | third-party | https://f4.fund/startups/lizard-build (rendered) | "Delaware, Delaware, United States" |
+| The same on LinkedIn | third-party | https://www.linkedin.com/company/lizard-build | "Delaware, Delaware 2 followers" |
+| State of incorporation | not-published | — | No page cites a company-registry number or filing. Delaware governing law plus a Portland mailing address does not establish where the LLC is registered; I did not find a registry record I could tie to this company with confidence. |
+
+### 17.2 Founders and leadership
+
+| Claim | Tag | Source | Quote |
+|---|---|---|---|
+| Yura Dubinin is named publicly and writes the engineering blog | docs-confirmed | https://lizard.build/blog/welcome-to-the-lizard-blog | "Mikhail Erin and Yura Dubinin" (byline, "July 31, 2026") |
+| Dubinin's title is "co-founder and president" | third-party | https://f4.fund/startups/lizard-build (rendered) | "Yura Dubinin" … "co-founder and president" |
+| A second person, Mikhail Erin, is named on the same byline | docs-confirmed | https://lizard.build/blog/welcome-to-the-lizard-blog | "Mikhail Erin and Yura Dubinin" |
+| Erin's title, and whether he is the second co-founder | not-published | — | The byline carries no titles. Co-founder implies at least one other founder, but Lizard never names one. `inferred`, not established. |
+| Other leadership (CTO, board, advisors) | not-published | — | No team, about, or leadership page exists on the site (checked by mapping the domain). |
+| Two npm accounts publish the SDK | third-party | https://registry.npmjs.org/@lizard-build/sdk | "\"maintainers\":[\"onlizard\",\"yuraoak\"]" |
+| Named press coverage of the founders | not-published | — | No interviews, funding stories, or profiles found; Hacker News returns zero stories for the domain. |
+
+### 17.3 Founding and launch dates
+
+| Claim | Tag | Source | Quote |
+|---|---|---|---|
+| Company founded 2026 | third-party | https://f4.fund/startups/lizard-build (rendered) | Quick Reference row "Founded", value "2026" |
+| Crunchbase hides the founding date | third-party | https://www.crunchbase.com/organization/lizard-lizard-build (rendered) | Label "Founded", value "obfuscated" |
+| GitHub organisation created 30 October 2024 | third-party | https://api.github.com/orgs/lizard-build | "\"created_at\": \"2024-10-30T13:17:25Z\"" |
+| First public SDK release 24 June 2026 | third-party | https://registry.npmjs.org/@lizard-build/sdk | "\"created\":\"2026-06-24T11:27:01.839Z\"" |
+| First blog post 31 July 2026 | docs-confirmed | https://lizard.build/blog/welcome-to-the-lizard-blog | "July 31, 2026" |
+| Official founding date | not-published | — | Lizard states none. The 2024 GitHub date and the 2026 founded date disagree by about 20 months, which usually means a renamed or repurposed org; that is `inferred`. |
+
+### 17.4 Funding, investors, accelerators
+
+| Claim | Tag | Source | Quote |
+|---|---|---|---|
+| No announced round, amount, or investor list | not-published | — | Nothing on the site, blog, or in search results. Battleships, cross-check only: "No funding, investor, or accelerator announcements were found" (https://battleships.dev/data/providers/lizard.json) |
+| A directory labels the stage "Seed" | third-party | https://f4.fund/startups/lizard-build (rendered) | "Stage" … "Seed" |
+| F4 is not an investor on the evidence available | inferred | https://f4.fund/portfolio (rendered) | Lizard is absent from F4's portfolio list, and its profile carries "Is this your company? Claim your profile" — the page is a research directory entry, not a portfolio page. |
+| Accelerators | not-published | — | No accelerator is named anywhere. Battleships, cross-check only: "Accelerators: none found" (https://battleships.dev/data/providers/lizard.md) |
+| Crunchbase funding detail | not-published | https://www.crunchbase.com/organization/lizard-lizard-build (rendered) | "Unlock best-in-class private company insights with Crunchbase Pro" — the figures are behind a login. |
+| Revenue or valuation | not-published | — | Not disclosed anywhere. |
+
+### 17.5 Ownership and parent companies
+
+| Claim | Tag | Source | Quote |
+|---|---|---|---|
+| Parent company | not-published | — | The Terms name one contracting entity and no parent, subsidiary, or affiliate as counterparty. |
+| Ownership changes, mergers, acquisitions | not-published | — | None found. |
+| Independent company | third-party | https://battleships.dev/data/providers/lizard.json | "\"ownership\": {\"value\": \"independent\", \"parent\": null}" |
+
+### 17.6 Headcount
+
+| Claim | Tag | Source | Quote |
+|---|---|---|---|
+| LinkedIn lists two employees | third-party | https://www.linkedin.com/company/lizard-build | "Discover all 2 employees" |
+| Crunchbase band is 1–10 | third-party | https://www.crunchbase.com/organization/lizard-lizard-build (rendered) | "Private[1-10]" |
+| F4 band is 1–10 | third-party | https://f4.fund/startups/lizard-build (rendered) | "1-10 employees" |
+| Headcount published by Lizard | not-published | — | No team page. Every figure above is a directory estimate. |
+
+### 17.7 Status page and recent uptime
+
+| Claim | Tag | Source | Quote |
+|---|---|---|---|
+| Status page exists and is currently green | third-party | https://status.lizard.build/ (rendered) | "All systems operational" |
+| Platform uptime at time of check | third-party | https://status.lizard.build/ (rendered) | "Platform 99.95% uptime" |
+| Both regions at 99.85% | third-party | https://status.lizard.build/ (rendered) | "EU West · Limburg 99.85% uptime" / "US East · Virginia 99.85% uptime" |
+| Control plane and installer figures | third-party | https://status.lizard.build/ (rendered) | "Dashboard & API— control plane 99.95% uptime" / "CLI installer— install.sh 99.96% uptime" |
+| Scope is deliberately narrow | third-party | https://status.lizard.build/ (rendered) | "This page reports platform-wide incidents with significant, widespread user impact. Smaller or isolated issues won't show up here." |
+| No sandbox component is monitored | inferred | https://status.lizard.build/ (rendered) | The listed components are Website, Dashboard & API, CLI installer, Deployments & builds, App hosting, and S3 storage per region. Sandbox creation and capacity appear nowhere, so the 99.95% figure says nothing about sandbox availability. |
+| Recent incident history | third-party | https://status.lizard.build/ (rendered) | "No incidents reported." for each of 22–28 October 2026 |
+
+### 17.8 SLA
+
+| Claim | Tag | Source | Quote |
+|---|---|---|---|
+| No published SLA document | not-published | — | No SLA or service-level page exists, and the word "SLA" does not appear in the Terms of Service. |
+| An SLA is an Enterprise contract item | pricing-page | https://lizard.build/pricing | "Dedicated, hands-on support with SLAs" (Enterprise column) |
+| Pro gets no SLA, only "Basic support" | pricing-page | https://lizard.build/pricing | Pro column: "Basic support" |
+| Uptime target or service credits for Pro | not-published | — | The status page reports history; it promises nothing, and no credit scheme is documented. |
+| Remedies for downtime | not-published | — | Nothing beyond the general liability cap in §17.11. |
+
+### 17.9 Support channels
+
+| Claim | Tag | Source | Quote |
+|---|---|---|---|
+| Email | docs-confirmed | https://lizard.build/support | "For account issues, billing questions, or anything else, email team@lizard.build." |
+| Discord | pricing-page | https://lizard.build/support | "Join the Lizard Discord for community help and to talk with the team directly." |
+| Docs | docs-confirmed | https://lizard.build/support | "Guides, CLI reference, and platform docs live at lizard.build/docs." |
+| GitHub issues for the open-source tools | pricing-page | https://lizard.build/support | "Found a bug in a Lizard open-source tool (CLI, MCP server)? File it on github.com/lizard-build" |
+| Phone, live chat, or a ticket portal | not-published | — | The support page lists only email, Discord, docs, and GitHub. That there is no other channel is `inferred` from that list. |
+| Response-time commitment or support hours | not-published | — | No target is stated for either plan. |
+| Named support contacts or escalation path | not-published | — | None published. |
+
+### 17.10 Security and compliance claims
+
+| Claim | Tag | Source | Quote |
+|---|---|---|---|
+| SOC 2 is not available yet | pricing-page | https://lizard.build/pricing | "SOC 2 report (coming soon)" |
+| HIPAA is out of scope and no BAA is signed | docs-confirmed | https://lizard.build/terms | "We do not sign Business Associate Agreements (BAAs)." |
+| Not a payment processor, so PCI DSS is the customer's problem | docs-confirmed | https://lizard.build/terms | "We are not a payment card processor." |
+| A signable DPA is offered | docs-confirmed | https://lizard.build/privacy | "If you need a signed Data Processing Addendum, download it at lizard.build/dpa and email the signed copy to team@lizard.build." |
+| SCCs apply, with Irish governing law | docs-confirmed | https://lizard.build/dpa | "in Clause 17, Option 1 applies, and the governing law is the law of Ireland" |
+| Sub-processors are published with advance notice | docs-confirmed | https://lizard.build/subprocessors | "We add a new sub-processor to this page at least five days before it starts processing Customer Personal Data" |
+| Infrastructure is OVHcloud in Germany, France and the US | docs-confirmed | https://lizard.build/terms | "The Services use OVHcloud infrastructure in Germany (Limburg an der Lahn), France (test infrastructure), and the United States." |
+| The EU region's host is OVH GmbH | docs-confirmed | https://lizard.build/subprocessors | "OVH GmbH" … "Infrastructure for `eu-west-lim-a` and the copy of the control plane database" … "Germany" |
+| Customer may audit once a year | docs-confirmed | https://lizard.build/dpa | "Customer may audit Lizard's compliance with this DPA no more than once per calendar year" |
+| One security questionnaire per year is answered | docs-confirmed | https://lizard.build/dpa | "Lizard will answer one written security and privacy questionnaire from Customer per calendar year." |
+| Breach notification is "without undue delay", with no hour count | docs-confirmed | https://lizard.build/dpa | "Lizard will notify Customer without undue delay after becoming aware of a Personal Data Breach." |
+| SSO, RBAC and audit logs are Enterprise-only | pricing-page | https://lizard.build/pricing | Pro cells for "SSO / SAML" and "RBAC & audit log": "Not included" |
+| No warranty against data loss | docs-confirmed | https://lizard.build/terms | "WE DO NOT WARRANT THAT CUSTOMER DATA WILL NOT BE LOST, CORRUPTED, OR DESTROYED." |
+| Only databases are backed up, and only the latest copy | docs-confirmed | https://lizard.build/terms | "We back up each Managed Postgres and Managed Redis database once a day and keep only the latest backup." |
+| Sandbox and volume data is explicitly not backed up | docs-confirmed | https://lizard.build/terms | "We do not back up Managed Object Storage or Persistent Volumes." |
+| Zero-data-retention or a security certification beyond SOC 2 | not-published | — | Neither is offered or mentioned. |
+| Penetration-test report or bug bounty | not-published | — | None published; the Terms require written consent before a customer may test. |
+
+### 17.11 Contract terms that matter to a buyer
+
+| Term | What it says | Tag | Source | Quote |
+|---|---|---|---|---|
+| Cancellation | Access runs to the end of the paid month, then workloads pause | docs-confirmed | https://lizard.build/terms | "Your access continues until the end of the paid month or the trial." |
+| Closing the account | By email, from the account address | docs-confirmed | https://lizard.build/terms | "You may close your account at any time by emailing team@lizard.build from the email address on your account." |
+| Data deletion on termination | "Commercially reasonable timeframe" — no number of days | docs-confirmed | https://lizard.build/terms | "Following termination of your account, we will delete your Customer Data within a commercially reasonable timeframe" |
+| Deletion on request | Immediate on request, including backups | docs-confirmed | https://lizard.build/terms | "We then delete all of the data concerned, including archived projects, logs, crash log excerpts and backups." |
+| Pause never deletes | A paused account keeps its data | docs-confirmed | https://lizard.build/terms | "A pause stops your workloads but keeps your data. We do not delete data because of a pause." |
+| Price-change notice | Notice first, then the increase applies from the next calendar month | docs-confirmed | https://lizard.build/terms | "Before an increase that affects Services you use, we will post a notice in your dashboard or email you, and the increase will not take effect for you until the first day of the next calendar month after that notice." |
+| Terms-change notice | Material changes by email or notice; effective when posted | docs-confirmed | https://lizard.build/terms | "Changes take effect when we post them, unless we state a later date." |
+| Spending cap | None | docs-confirmed | https://lizard.build/terms | "We do not cap your spending, so you pay for all the usage you run." |
+| Refunds | At Lizard's discretion | docs-confirmed | https://lizard.build/terms | "We grant refunds at our discretion, except where the law requires a refund." |
+| EU/EEA/UK consumer withdrawal | 14 days | docs-confirmed | https://lizard.build/terms | "you can withdraw from your subscription within 14 days after you start it" |
+| Tax | Displayed prices include tax | docs-confirmed | https://lizard.build/terms | "Our prices and rates include the taxes we must collect, such as sales tax or VAT." |
+| Suspension | Notice on commercially reasonable efforts, not guaranteed | docs-confirmed | https://lizard.build/terms | "We will use commercially reasonable efforts to provide notice before suspension" |
+| Liability cap | Greater of $100 or 6 months of fees | docs-confirmed | https://lizard.build/terms | "WILL NOT EXCEED THE GREATER OF ONE HUNDRED US DOLLARS ($100) AND THE AMOUNTS PAID BY YOU TO US IN THE SIX (6) MONTHS BEFORE THE EVENT THAT GAVE RISE TO THE LIABILITY." |
+| Dispute route | AAA arbitration under Delaware law | docs-confirmed | https://lizard.build/terms | "The American Arbitration Association" … "will administer the arbitration" |
+| Prepaid credits | Retired from 1 November 2026 | docs-confirmed | https://lizard.build/terms | "From November 1, 2026, you need Pro to create resources" |
+| Beta features | No notice, no warranty, may vanish | docs-confirmed | https://lizard.build/terms | "We may change, discontinue, or terminate Beta Services at any time without notice." |
+
+### 17.12 The unannounced pods-to-Firecracker price change
+
+Lizard's own Terms promise notice before a price increase. In the six weeks before this research, the sandbox price doubled and the isolation story changed, with no public announcement I can find.
+
+| Claim | Tag | Source | Quote |
+|---|---|---|---|
+| September 2026: Small was $0.009/hour on a shared kernel | third-party | https://lizard.build/docs/platform/limits/ | "Sandboxes run short-lived commands and agent tasks in Kubernetes pods with the runc runtime. They share the host kernel; they are not Firecracker virtual machines." with "Small … $0.009 per hour". Cannot be re-verified: the live page no longer contains it. |
+| October 2026: Small is $0.0162/hour on Firecracker | docs-confirmed | https://lizard.build/docs/platform/limits.md | "Sandboxes run commands and agent tasks in Firecracker microVMs" and "Small \| 2 vCPU / 4 GB \| 5 GB \| $0.0162 per hour" |
+| That is a 1.8× increase for the entry size | inferred | arithmetic on the two prices above | 0.0162 / 0.009 = 1.8 |
+| No public changelog entry exists | docs-confirmed | https://lizard.build/changelog | "Nothing here yet." / "The first entry lands with the next release." |
+| No blog post announces the migration or the price | docs-confirmed | https://lizard.build/blog | 37 posts listed, none titled or dated as a sandbox migration or price announcement (checked titles and dates, 31 July to 28 October 2026). |
+| The Terms require notice before an increase | docs-confirmed | https://lizard.build/terms | "Before an increase that affects Services you use, we will post a notice in your dashboard or email you" |
+| Whether the change triggered that clause is unclear | inferred | — | Existing sandboxes were grandfathered: "Older sandboxes without a size keep their original usage-based billing." (https://lizard.build/sandboxes). If the Firecracker sizes are treated as a new SKU rather than an increase, the notice clause may not apply. I cannot tell which reading Lizard took, and no customer notice is public. |
+
+**Practical reading** (`inferred`): the price did not change for anyone already running a sandbox, so nobody was billed more without warning. What is missing is the forward-looking signal — a changelog that is empty by design and a blog that never mentioned the migration. A buyer comparing this month's page to a cached copy from last month sees a doubled price and a different isolation model with no explanation on the site.
+
+### 17.13 What stays unpublished
+
+Legal registration state and filing number; the official founding date; the identity and title of any second co-founder; funding stage, amount and investors (a directory's "Seed" label is not a round); accelerators; headcount from the company itself; a Pro SLA, uptime target, or service credits; support hours and response targets; security certifications beyond the promised SOC 2; penetration-test results; and any notice Lizard may have sent customers about the sandbox price change.
+
 ## Sources consulted
 
 Lizard docs (raw markdown, each page carries an `updated` date): `/docs/index.md`, `/docs/sandboxes.md`, `/docs/sandboxes/quickstart.md`, `/docs/sandboxes/sdk-reference.md`, `/docs/sandboxes/volumes.md`, `/docs/sandboxes/preview-urls.md`, `/docs/sandboxes/code-interpreter.md`, `/docs/sandboxes/dashboard.md`, `/docs/sandboxes/guides/claude-code.md`, `/docs/platform/limits.md`, `/docs/platform/billing.md`, `/docs/platform/storage-and-recovery.md`, `/docs/platform/known-issues.md`, `/docs/concepts/architecture.md`, `/docs/networking.md`, `/docs/deploy/regions.md`, `/docs/agents.md`, `/docs/cli/sandbox.md`, `/docs/cli/agents.md`, `/docs/cli/keys.md`, `/docs/observability/events.md`.
 Lizard marketing/pricing: `/`, `/sandboxes`, `/pricing`, `/support`, `/login`, `status.lizard.build`.
-Lizard blog: `/blog/ai-sandbox`, `/blog/claude-code-sandbox`.
+Lizard blog: `/blog/ai-sandbox`, `/blog/claude-code-sandbox`, `/blog/welcome-to-the-lizard-blog`.
+Company and legal (section 17): `/terms`, `/privacy`, `/dpa`, `/subprocessors`, `/changelog`, `/blog`, `status.lizard.build`.
+Registries and directories (section 17, all third-party): `api.github.com/orgs/lizard-build`, `registry.npmjs.org/@lizard-build/sdk`, `f4.fund/startups/lizard-build`, `f4.fund/portfolio`, `linkedin.com/company/lizard-build`, `crunchbase.com/organization/lizard-lizard-build`, `hn.algolia.com` (zero results for the domain).
 Third party: `https://battleships.dev/data/providers/lizard.json`, `https://battleships.dev/data/providers/lizard.md`, `https://www.crunchbase.com/organization/lizard-lizard-build` (profile text mirrors Lizard's own copy; no funding data).
