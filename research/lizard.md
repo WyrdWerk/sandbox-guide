@@ -48,15 +48,15 @@ Lizard's sandboxes are Firecracker microVMs with a guest kernel. Its *apps* are 
 
 **What this practically means** (`inferred`). A dedicated guest kernel plus root inside the guest is the strongest isolation tier in this market: a kernel exploit inside the sandbox has to escape KVM/Firecracker, not just a namespace. That is the claim that makes running untrusted model output defensible. Because the sandbox is a whole machine rather than a container, anything that needs its own kernel objects (mounts, cgroups, iptables) should work *in principle* — but Lizard does not document Docker-in-sandbox, systemd, or nested virt, so treat those as unverified until tested. Root inside the guest is not a security property; it is just the default user.
 
-**Historical wrinkle worth knowing.** A search-indexed copy of Lizard's Limits page dated 2026-09-07 says the opposite of today's docs, at half the price:
+**Historical wrinkle worth knowing.** Dated Wayback captures of Lizard's own docs, from 30 September 2026, say the opposite of today's page about how sandboxes are isolated:
 
 | Claim | Tag | Source | Quote |
 |---|---|---|---|
-| Older docs described sandboxes as pods on a shared kernel, at $0.009/$0.018/$0.036 per hour | third-party | https://lizard.build/docs/platform/limits/ — search-index excerpt dated 2026-09-07, returned by Parallel search under the title "Limits – Lizard Docs" | "Sandboxes run short-lived commands and agent tasks in Kubernetes pods with the runc runtime. They share the host kernel; they are not Firecracker virtual machines." / "Small … $0.009 per hour" |
+| On 30 September 2026 the docs described sandboxes as pods on a shared kernel, at a fixed 4 vCPU / 4096 MiB, billed on measured usage | third-party | https://web.archive.org/web/20260930084615/https://lizard.build/docs/platform/limits.md and https://web.archive.org/web/20260930084612/https://lizard.build/docs/sandboxes.md | Wayback capture of Lizard's own docs: "Sandboxes run short-lived commands and agent tasks in Kubernetes pods with the runc runtime. They share the host kernel; they are not Firecracker virtual machines." (limits.md) and "Current sandboxes use fixed limits of 4 vCPU and 4096 MiB RAM." (sandboxes.md), both captured 2026-09-30 |
 | The live Limits page no longer contains that text and now states Firecracker microVMs at $0.0162/hour | docs-confirmed | https://lizard.build/docs/platform/limits.md (updated 2026-10-24) | Sizes table: "Small \| 2 vCPU / 4 GB \| 5 GB \| $0.0162 per hour" |
 | A legacy generation of sandboxes with different billing still exists | docs-confirmed | https://lizard.build/sandboxes | "Older sandboxes without a size keep their original usage-based billing." |
 
-So: **new** sandboxes are microVMs; **older** sandboxes were pods with usage-based billing and may still exist. If the question is whether it is Firecracker, the answer is yes for anything created today, and the pricing roughly doubled when that changed.
+So: **new** sandboxes are microVMs; **older** sandboxes were pods with usage-based billing and may still exist. If the question is whether it is Firecracker, the answer is yes for anything created today, and the billing model changed from metered to flat per size when that happened (`inferred` from the two dated pages below).
 
 ---
 
@@ -399,12 +399,12 @@ Each gotcha is `inferred` from the quoted behaviour above; the sources are in §
 
 | Issue | Evidence | Sources |
 |---|---|---|
-| The runtime changed from pods/runc to Firecracker, and the price roughly doubled, within about six weeks | A search-index excerpt of the Limits page dated 2026-09-07 reads "Sandboxes run short-lived commands and agent tasks in Kubernetes pods with the runc runtime. They share the host kernel; they are not Firecracker virtual machines." with "Small … $0.009 per hour". This text cannot be re-verified: the live page no longer contains it. The live page (updated 2026-10-24) reads "Sandboxes run commands and agent tasks in Firecracker microVMs" and prices Small at $0.0162 per hour. The live page carries no migration note. | https://lizard.build/docs/platform/limits.md (live) and the same URL as indexed 2026-09-07, surfaced by Parallel search |
+| The runtime changed from pods/runc to Firecracker, and the billing model changed from metered to flat per size, between 30 September and 13 October 2026 | The 30 September capture of the Limits page reads "Sandboxes run short-lived commands and agent tasks in Kubernetes pods with the runc runtime. They share the host kernel; they are not Firecracker virtual machines." and "Billing uses measured CPU, memory, storage, and egress." The 13 October capture of the pricing page already lists "Small 2 vCPU · 4 GB RAM · 5 GB disk" at "$0.0162 per hour". Neither page announces the change, and the live docs carry no migration note. | https://web.archive.org/web/20260930084615/https://lizard.build/docs/platform/limits.md · https://web.archive.org/web/20260930084612/https://lizard.build/docs/sandboxes.md · https://web.archive.org/web/20261013193324/https://lizard.build/pricing · https://lizard.build/docs/platform/limits.md |
 | Fork copy count changed from 10 to 100 | Battleships, checked 2026-10-14: "Copy a running sandbox 1 to 10 times". Live SDK reference: "Copy a running sandbox 1 to 100 times". Live CLI: "Copies to start, from 1 to 100 (default `1`)". | https://battleships.dev/data/providers/lizard.json · https://lizard.build/docs/sandboxes/sdk-reference.md · https://lizard.build/docs/cli/sandbox.md |
 | A "pod sandbox" fork error (501) has disappeared from the docs | Battleships quotes "501 for a sandbox that runs as a pod" from `docs/sandboxes.md`. The live page (updated 2026-10-27) contains neither "501" nor "pod" — checked by search, not by eye. | https://battleships.dev/data/providers/lizard.json · https://lizard.build/docs/sandboxes.md |
 | "Live fork (no pause)" vs a documented brief pause | Battleships lists "live fork (no pause)". Lizard's CLI docs say "Lizard pauses the sandbox for a moment, captures its memory, processes, and files once". | https://battleships.dev/data/providers/lizard.md · https://lizard.build/docs/cli/sandbox.md |
-| "Credits" vs "included usage" | A search-index excerpt of the Billing page dated 2026-09-15 reads "Monthly credits \| $19". The live page reads "Included usage \| $19 a month, across the platform". | https://lizard.build/docs/platform/billing.md (live) and the same URL as indexed 2026-09-15 |
-| The Pro/trial compare table has two values per cell, so text extraction concatenates them | Extracted text reads "1005 during the trial", "Up to 204 vCPU × 5 replicas" and "51 during the trial". On the page these are two columns (Pro, then trial). Read the plan bullets, not that table. | https://lizard.build/pricing (observation of the extracted text) |
+| "Credits" vs "included usage" | The live Terms still say "monthly credits"; the live billing docs say "included usage" for the same $19. | https://lizard.build/terms · https://lizard.build/docs/platform/billing.md |
+| The Pro/trial compare table puts two values in each cell, so text extraction concatenates them | Extracted text runs the two values together, so 100 and 5 appear as 1005, and 5 and 1 appear as 51. Read the plan bullets, not that table. This is an observation of the extracted text, not a quotation of the page. | https://lizard.build/pricing (observation of the extracted text) |
 
 ### Discrepancies with battleships.dev
 
@@ -619,21 +619,25 @@ Lizard is the trading name of **Dragon Labs LLC**, a small US company that publi
 | Prepaid credits | Retired from 1 November 2026 | docs-confirmed | https://lizard.build/terms | "From November 1, 2026, you need Pro to create resources" |
 | Beta features | No notice, no warranty, may vanish | docs-confirmed | https://lizard.build/terms | "We may change, discontinue, or terminate Beta Services at any time without notice." |
 
-### 17.12 The unannounced pods-to-Firecracker price change
+### 17.12 The undocumented pods-to-Firecracker switch
 
-Lizard's own Terms promise notice before a price increase. In the six weeks before this research, the sandbox price doubled and the isolation story changed, with no public announcement I can find.
+Lizard's Terms promise notice before a price increase. Between 30 September and 13 October 2026 the sandbox runtime and the billing model both changed, and I can find no announcement of either. What I **cannot** show is that anyone's bill went up: the old model was metered, so there was no per-size price to compare against the new one.
 
 | Claim | Tag | Source | Quote |
 |---|---|---|---|
-| September 2026: Small was $0.009/hour on a shared kernel | third-party | https://lizard.build/docs/platform/limits/ | "Sandboxes run short-lived commands and agent tasks in Kubernetes pods with the runc runtime. They share the host kernel; they are not Firecracker virtual machines." with "Small … $0.009 per hour". Cannot be re-verified: the live page no longer contains it. |
-| October 2026: Small is $0.0162/hour on Firecracker | docs-confirmed | https://lizard.build/docs/platform/limits.md | "Sandboxes run commands and agent tasks in Firecracker microVMs" and "Small \| 2 vCPU / 4 GB \| 5 GB \| $0.0162 per hour" |
-| That is a 1.8× increase for the entry size | inferred | arithmetic on the two prices above | 0.0162 / 0.009 = 1.8 |
-| No public changelog entry exists | docs-confirmed | https://lizard.build/changelog | "Nothing here yet." / "The first entry lands with the next release." |
-| No blog post announces the migration or the price | docs-confirmed | https://lizard.build/blog | 37 posts listed, none titled or dated as a sandbox migration or price announcement (checked titles and dates, 31 July to 28 October 2026). |
+| 30 September 2026: sandboxes were pods on a shared kernel | third-party | https://web.archive.org/web/20260930084615/https://lizard.build/docs/platform/limits.md | "Sandboxes run short-lived commands and agent tasks in Kubernetes pods with the runc runtime. They share the host kernel; they are not Firecracker virtual machines." |
+| 30 September 2026: one fixed size, not three | third-party | https://web.archive.org/web/20260930084612/https://lizard.build/docs/sandboxes.md | Wayback capture: "Current sandboxes use fixed limits of 4 vCPU and 4096 MiB RAM." |
+| 30 September 2026: billing was metered, not per size | third-party | https://web.archive.org/web/20260930084612/https://lizard.build/docs/sandboxes.md | Wayback capture: "Billing uses measured CPU, memory, storage, and egress." |
+| 30 September 2026: pause, snapshot, fork and restore did not work | third-party | https://web.archive.org/web/20260930084612/https://lizard.build/docs/sandboxes.md | Wayback capture: "Pause, resume, fork, snapshot, restore, and file watching currently return HTTP 501." |
+| 13 October 2026: three sizes with flat hourly prices were live | third-party | https://web.archive.org/web/20261013193324/https://lizard.build/pricing | Wayback capture, row "Sandboxes": "Small 2 vCPU · 4 GB RAM · 5 GB disk" … "$0.0162 per hour" |
+| Today: the runtime is Firecracker microVMs | docs-confirmed | https://lizard.build/docs/platform/limits.md | "Sandboxes run commands and agent tasks in Firecracker microVMs" |
+| No changelog entry covers it | docs-confirmed | https://lizard.build/changelog | "Nothing here yet." / "The first entry lands with the next release." |
+| No blog post covers it | docs-confirmed | https://lizard.build/blog | 37 posts listed between 31 July and 28 October 2026; none announces a runtime migration or a sandbox pricing change. |
 | The Terms require notice before an increase | docs-confirmed | https://lizard.build/terms | "Before an increase that affects Services you use, we will post a notice in your dashboard or email you" |
-| Whether the change triggered that clause is unclear | inferred | — | Existing sandboxes were grandfathered: "Older sandboxes without a size keep their original usage-based billing." (https://lizard.build/sandboxes). If the Firecracker sizes are treated as a new SKU rather than an increase, the notice clause may not apply. I cannot tell which reading Lizard took, and no customer notice is public. |
+| Whether that clause was triggered | inferred | — | The old model had no per-size price, so there is no like-for-like figure to call an increase. Existing sandboxes were grandfathered: "Older sandboxes without a size keep their original usage-based billing." (https://lizard.build/sandboxes) |
+| Size of the price change for a typical customer | not-published | — | Metered billing depended on utilisation, which was never published per customer. Any percentage figure would be invented, so I give none. |
 
-**Practical reading** (`inferred`): the price did not change for anyone already running a sandbox, so nobody was billed more without warning. What is missing is the forward-looking signal — a changelog that is empty by design and a blog that never mentioned the migration. A buyer comparing this month's page to a cached copy from last month sees a doubled price and a different isolation model with no explanation on the site.
+**Practical reading** (`inferred`). The migration is documented only by dated third-party archives of Lizard's own pages; Lizard never announced it, and its changelog is empty by design. A buyer comparing a cached September page with today's site sees a different isolation model and a completely different price structure, with nothing on the site explaining the switch. What I can state is the change in *model* — pods to microVMs, metered to flat per size — and the two-week window it happened in. I cannot state that prices rose.
 
 ### 17.13 What stays unpublished
 
@@ -645,5 +649,6 @@ Lizard docs (raw markdown, each page carries an `updated` date): `/docs/index.md
 Lizard marketing/pricing: `/`, `/sandboxes`, `/pricing`, `/support`, `/login`, `status.lizard.build`.
 Lizard blog: `/blog/ai-sandbox`, `/blog/claude-code-sandbox`, `/blog/welcome-to-the-lizard-blog`.
 Company and legal (section 17): `/terms`, `/privacy`, `/dpa`, `/subprocessors`, `/changelog`, `/blog`, `status.lizard.build`.
+Dated archives used for the September-to-October comparison (section 17.12), all Wayback captures of Lizard's own pages: `web.archive.org/web/20260930084615/https://lizard.build/docs/platform/limits.md`, `web.archive.org/web/20260930084612/https://lizard.build/docs/sandboxes.md`, `web.archive.org/web/20261013193324/https://lizard.build/pricing`.
 Registries and directories (section 17, all third-party): `api.github.com/orgs/lizard-build`, `registry.npmjs.org/@lizard-build/sdk`, `f4.fund/startups/lizard-build`, `f4.fund/portfolio`, `linkedin.com/company/lizard-build`, `crunchbase.com/organization/lizard-lizard-build`, `hn.algolia.com` (zero results for the domain).
 Third party: `https://battleships.dev/data/providers/lizard.json`, `https://battleships.dev/data/providers/lizard.md`, `https://www.crunchbase.com/organization/lizard-lizard-build` (profile text mirrors Lizard's own copy; no funding data).

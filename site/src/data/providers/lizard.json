@@ -105,8 +105,8 @@
       "status": "open"
     },
     {
-      "issue": "The runtime and price changed within six weeks",
-      "detail": "A September copy of the limits page described shared-kernel Kubernetes pods at $0.009 an hour; the October page describes Firecracker microVMs at $0.0162. Older sandboxes keep the old billing.",
+      "issue": "The runtime and billing model changed without notice",
+      "detail": "On 30 September the docs described one fixed 4 vCPU / 4096 MiB sandbox in shared-kernel Kubernetes pods, billed on measured usage. By 13 October the pricing page listed Firecracker microVMs at flat per-size rates, from $0.0162 an hour. The changelog and blog do not mention the switch. Whether anyone's bill rose cannot be told, because the old usage rates were never published. Older sandboxes keep usage-based billing.",
       "status": "open"
     }
   ],
