@@ -1181,13 +1181,36 @@ Dashboard. `inferred` from rendering the page on 2026-10-28; the JSON behind it 
 and "Ascii" names.
 
 **Recent figure.** Over the page's default window (Oct 15–28, 2026), it displayed 100.00% uptime for
-seven components and 99.89% for the dashboard. `inferred`: the percentage is computed in the browser
-from `history.json`, and I read it from the rendered page rather than from a server-rendered number.
+seven components — the internal test suite included — and 99.89% for the dashboard. `inferred`: the
+percentage is computed in the browser from `history.json`, and I read it from the rendered page rather
+than from a server-rendered number.
 
-**Longer window.** The same page's 90-day history, computed with its own formula (only "red" blocks count
-as downtime, degraded hours do not), gives 99.66%–100% per component and 99.39% pooled across all
-components. `inferred` from `history.json`; the lowest component is the extreme-edge-cases suite at
-97.11%, then Sandbox Fork at 98.84%.
+**Longer window.** The same page's 90-day history (`history.json`, one-hour blocks), recomputed with its
+own formula — only "red" blocks count as downtime, degraded hours do not — gives the figures below.
+`inferred`, computed on 2026-10-28 12:44 UTC; the window rolls, so the numbers move.
+
+| Component (as rendered) | Kind | Observed hours | 90-day uptime |
+|---|---|---|---|
+| Boat API | customer-facing | 2,149 | 99.86% |
+| Sandbox Creation | customer-facing | 2,149 | 99.88% |
+| Sandbox SSH | customer-facing | 2,146 | 100.00% |
+| Sandbox Desktop Streaming | customer-facing | 2,146 | 99.98% |
+| Sandbox Stop + Resume | customer-facing | 746 | 99.66% |
+| Sandbox Fork | customer-facing | 2,149 | 98.84% |
+| Boat Dashboard | customer-facing | 2,149 | 99.97% |
+| Sandbox Stop + Resume (extreme edge cases suite) | internal test suite | 2,149 | 97.11% |
+
+**True range: 97.11%–100.00% across all eight components, and 98.84%–100.00% across the seven
+customer-facing ones.** `inferred`
+
+The pooled figure is consistent with those rows: 96.25 bad hours over 15,783 observed hours is 99.39%
+across all eight. Excluding the internal test suite, it is 34.25 bad hours over 13,634 observed hours,
+or 99.75%. `inferred`
+
+Two cautions for anyone quoting these. The extreme-edge-cases suite is an internal test harness, not a
+customer-facing component, so its 97.11% should not be presented as platform uptime. And "Sandbox Stop +
+Resume" has only 746 observed hours against 2,149 for the others, so its figure covers roughly a third
+of the window. `inferred`
 
 Boat's docs make a different, broader claim. `docs-confirmed`
 
