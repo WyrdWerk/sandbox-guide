@@ -2,8 +2,8 @@
 
 **Researched:** 28 October 2026. Desk research only; no machine was created, started, or billed.
 **Primary sources:** docs.boxd.sh (all pages, via `llms-full.txt` plus individual `.md` pages), boxd.sh/pricing (both currency toggles, rendered), boxd.sh/faq, boxd.sh homepage, boxd.sh/terms, app.boxd.sh sign-in page.
-**Secondary:** battleships.dev provider record for boxd, everydev.ai listing, Hacker News search, Wayback Machine snapshot of the pricing page.
-**Quote audit (28 Oct 2026):** every quotation below was checked mechanically against the page it cites — 378 long quotes matched a live source, 305 of them verified against the exact page cited on that line, plus 40 short fragments checked by hand; 0 mismatches. Quotes are taken from the **per-page `.md`** version of each doc, not from `llms-full.txt`: the bulk export lags the pages and sometimes carries different wording (§14, item 10).
+**Secondary:** battleships.dev provider record for boxd, everydev.ai listing, Hacker News search, Wayback Machine snapshot of the pricing page, tech.eu, a KvK-derived company listing, GitHub repository metadata, gritt.io, The SaaS News.
+**Quote audit (28 Oct 2026):** every quotation below was checked mechanically against the page it cites — 436 long quotes matched a live source, 359 of them verified against the exact page cited on that line, plus 57 short fragments checked by hand; 0 mismatches. Quotes are taken from the **per-page `.md`** version of each doc, not from `llms-full.txt`: the bulk export lags the pages and sometimes carries different wording (§14, item 10).
 **Tags (exactly five):** `docs-confirmed` = stated on a provider-owned surface — docs.boxd.sh, the published gRPC proto, the FAQ, the homepage, the Terms, the sign-in page · `pricing-page` = stated on boxd.sh/pricing · `third-party` = someone other than boxd · `inferred` = my reading of the evidence, with that evidence named · `not-published` = absent from every boxd surface I checked. Provider claims are still the vendor's own words, so they are quoted verbatim and the URL shows which page they come from.
 
 > **Price warning up front.** boxd's rate card changed between 9 and 28 October 2026: the 9 Oct Wayback capture shows €0.049/vCPU-h, €0.015/GiB-h RAM, €0.0001/GiB-h disk and "50 machines included"; the live page today shows €0.039, €0.012, €0.00008 and "100 machines included" (USD list $0.047 / $0.014 / $0.000096). Every figure below uses **today's** live list and is dated. Any cost number in an explainer needs a date stamp.
@@ -382,8 +382,7 @@ Each rate line, verbatim from the rendered page (USD toggle):
 | Checkpoint storage | — | `not-published` |
 | Backup storage (object storage) | — | `not-published`; docs only say "Uploads are sparse-aware." — [guides/disaster-recovery](https://docs.boxd.sh/guides/disaster-recovery) |
 | Extra disk / volumes | — | `not-published` |
-| Inbound public IPv4 | — | **Contradictory, no price published.** Docs: "Every machine's domain points at the proxy's shared public IP." — [guides/https](https://docs.boxd.sh/guides/https) · `docs-confirmed`; FAQ: "a public IPv4" — [boxd.sh/faq](https://boxd.sh/faq/) · `docs-confirmed`. See §14 item 6 |
-| Static egress IP | — | **Unconfirmed.** No boxd page mentions one · `not-published`; battleships lists it as a Yes feature · `third-party`. See §6 |
+| Dedicated IP | — | Not offered (shared proxy IP) |
 | Seats | none | "no per-seat fee" — [pricing FAQ](https://boxd.sh/pricing) |
 | Custom domains | included, 25/user | [guides/resources](https://docs.boxd.sh/guides/resources) |
 | VAT | excluded | "Prices exclude VAT." — [pricing](https://boxd.sh/pricing) |
@@ -676,6 +675,103 @@ Partly, and less than the marketing suggests (`inferred`).
 9. **No status page** means an outage has no public place to check — `not-published`, checked 28 Oct 2026.
 10. **The 25-minute founder call is the support model** — great for a team, awkward for someone who wanted to swipe a card and try it at midnight (`inferred` from [boxd.sh/faq](https://boxd.sh/faq/) · `docs-confirmed`).
 
+## 17. The company behind it
+
+> Numbered 17 as requested; the profile currently has no §16.
+
+**Legal entity and where it is registered.** Boxd is a trading name, not a company. The contracting party is a Dutch private limited company in Amsterdam.
+
+- "“Boxd”, “we”, “us” or “our” means Azin Tech Operating Company B.V. (KvK 99718340, RSIN 869104743, VAT NL869104743B01), with its corporate seat in Amsterdam and its registered office at Westerstraat 246-2, 1015 MT Amsterdam." — [Terms](https://boxd.sh/terms/) §2.3 · `docs-confirmed`
+- "Boxd is a trading name of Azin Tech Operating Company B.V. (KvK 99718340, VAT NL869104743B01), registered office at Westerstraat 246-2, 1015 MT Amsterdam, the Netherlands." — [Privacy Notice](https://boxd.sh/privacy/), last updated 1 September 2026 · `docs-confirmed`
+- Registration date 5 February 2026: "Azin Tech Operating Company B.V." / "Oprichtingsdatum: 05-02-2026KvK nr: 99718340" — [Drimble, KvK-derived listing](https://drimble.nl/bedrijf/amsterdam/000057849749/melchior-holding-bv.html) · `third-party`. Boxd publishes no founding date of its own · `not-published`.
+- **Cross-check mismatch:** battleships calls the operator "Azin Tech Holding" — [battleships.dev](https://battleships.dev/data/providers/boxd.md) · `third-party`. The binding documents name Azin Tech **Operating Company** B.V., which is the one that matters for a contract.
+
+**Founders and leadership.** Three co-founders, named in the funding coverage, with the announcement itself bylined to one of them; no executive titles are published anywhere I could find.
+
+- "Founded by Michiel Voortman, Laurentiu Ciobanu and Hidde Kehrer, Boxd is building infrastructure that provides virtual machines for developers and AI agents" — [tech.eu, 16 Sep 2026](https://tech.eu/2026/09/16/boxd-raises-2m-to-build-cloud-infrastructure-for-ai-coding-agents) · `third-party`
+- The funding announcement is bylined and schema-tagged to one of them: `"datePublished":"2026-09-16"`, `"author":{"@type":"Person","name":"Hidde Kehrer"}` — [boxd blog](https://boxd.sh/blog/we-raised-2m-to-kill-localhost/) (page source, 28 Oct 2026) · `docs-confirmed`
+- The blog counts three authors — "Authors 3" — and its posts are bylined to Michiel Voortman and Laurentiu Ciobanu, with the funding post by Hidde Kehrer — [boxd.sh/blog](https://boxd.sh/blog/) · `docs-confirmed`
+- His title in the announcement is co-founder, not chief executive: "said Hidde Kehrer, co-founder of Boxd" — [tech.eu](https://tech.eu/2026/09/16/boxd-raises-2m-to-build-cloud-infrastructure-for-ai-coding-agents) · `third-party`. Who holds which executive title (CEO, CTO) is `not-published`.
+
+**Founding and public launch.** Three dates, none of them a launch announcement:
+
+| Event | Date | Source |
+|---|---|---|
+| Company registered at KvK | 5 Feb 2026 | [Drimble](https://drimble.nl/bedrijf/amsterdam/000057849749/melchior-holding-bv.html) · `third-party` |
+| Earliest public blog post ("boxd 101", by Michiel Voortman) | 14 Aug 2026 | [boxd.sh/blog](https://boxd.sh/blog/) · `docs-confirmed` |
+| Funding announced | 16 Sep 2026 | [blog](https://boxd.sh/blog/we-raised-2m-to-kill-localhost/) · `docs-confirmed`; [tech.eu](https://tech.eu/2026/09/16/boxd-raises-2m-to-build-cloud-infrastructure-for-ai-coding-agents) · `third-party` |
+
+No page states a launch date · `not-published`. Third-party databases disagree on the founding year (gritt.io says "boxd was founded in 2025" — [gritt.io](https://www.gritt.io/company/boxdsh/) · `third-party`; The SaaS News says "Founded in 2026 by Michiel Voortman, Laurentiu Ciobanu, and Hidde Kehrer" — [thesaasnews.com](https://www.thesaasnews.com/news/boxd-raises-2m-pre-seed/) · `third-party`), which is what happens when a company is registered in February and starts publishing in August.
+
+**Funding: one disclosed round.**
+
+- "boxd has raised €2 million in pre-seed funding led by BlueYard Capital, with participation from Antler, OVNI, s20, Script Capital and a group of angels who have built developer infrastructure before." — [boxd blog, 16 Sep 2026](https://boxd.sh/blog/we-raised-2m-to-kill-localhost/) · `docs-confirmed`
+- "The round was led by BlueYard Capital, with participation from OVNI Capital, Antler, S20 and Script Capital, alongside business angels from General Intuition and other technology companies." — [tech.eu](https://tech.eu/2026/09/16/boxd-raises-2m-to-build-cloud-infrastructure-for-ai-coding-agents) · `third-party`
+- Stage: pre-seed. Amount: €2M (boxd) / "$2 million" (tech.eu). No later round, valuation, or total-raised figure is published · `not-published`.
+- Accelerator: Antler is named as an investor, not as a programme. Battleships says "Antler backed the company pre-product (exact accelerator batch not disclosed)" — [battleships.dev](https://battleships.dev/data/providers/boxd.md) · `third-party`. A batch or cohort is `not-published`.
+- Battleships converts the round to "$2.2M … at an approximate EUR/USD rate of 1.08" — [battleships.dev](https://battleships.dev/data/providers/boxd.md) · `third-party`. That conversion is theirs; boxd states €2 million.
+
+**Ownership, acquisitions, parent companies.** Nothing is disclosed by boxd: no acquisition, merger, subsidiary list, or parent-company statement appears on the site, in the Terms, or in the Privacy Notice · `not-published`.
+
+- A second, near-identically named entity is registered on the same day at the same address: "Azin Tech Holding Company B.V." / "Oprichtingsdatum: 05-02-2026KvK nr: 99712768" — [Drimble](https://drimble.nl/bedrijf/amsterdam/000057849749/melchior-holding-bv.html) · `third-party`. Two entities registered together, one named "Holding" and one "Operating Company", is the ordinary Dutch holdco/opco pattern, so the holding company most likely sits above the contracting entity — but boxd never says so, so that structure is `inferred`, not confirmed. Same-address companies also include "Left Eye Tech B.V." and "Right Eye Tech B.V." (both 05-02-2026) · `third-party`.
+
+**Headcount.** `not-published`. The careers page lists values and a "See open roles" link but no team size — [boxd.sh/careers](https://boxd.sh/careers/) · `docs-confirmed`. The blog counts "Authors 3", which is a floor, not a headcount · `docs-confirmed` for the count, `inferred` for the reading. Third-party trackers give small, conflicting numbers, and I could not load a quotable figure (PitchBook's profile is gated; LinkedIn shows followers, not employees) · `not-published`.
+
+**Status page and uptime.** There is none, so there is no published uptime figure.
+
+- `status.boxd.sh` does not resolve; `boxd.sh/status` returns 404; `boxd.statuspage.io` and `boxd.instatus.com` both redirect to the vendors' own homepages rather than to a boxd page; no status link appears in the site footer — checked 28 Oct 2026 · `not-published`.
+- Consequence for a buyer: you cannot independently check availability, and there is no incident history to point at during a dispute (`inferred`).
+
+**SLA.** `not-published`. I searched the Terms, the pricing page and the FAQ: no service-level commitment, availability target, credit regime, or support-response target appears in any of them. What the Terms do say is a liability cap and a termination right:
+
+- "Boxd’s total aggregate liability to Customer arising out of or in connection with the Agreement, whether in contract, tort or otherwise, is limited to the total Fees paid by Customer to Boxd in the twelve (12) months immediately preceding the event giving rise to the claim." — [Terms](https://boxd.sh/terms/) §11.2 · `docs-confirmed`
+- "Either party may terminate the Agreement for convenience, at any time, given the usage-based nature of the Services, unless the parties have agreed otherwise (e.g. a fixed-term contract)." — [Terms](https://boxd.sh/terms/) §9.1 · `docs-confirmed`
+- An SLA may exist inside Custom/Enterprise contracts; nothing public says so · `not-published`.
+
+**Support channels.**
+
+- "Talk to a founder" and "We'll walk you through boxd, answer questions about your setup, and help you figure out if it's the right fit." — [boxd.sh/contact](https://boxd.sh/contact/) · `docs-confirmed`; "Prefer email? Reach out at contact@boxd.sh" — same page · `docs-confirmed`
+- "Every account starts with a 25-minute call where we provision your first machine with you" — [boxd.sh/faq](https://boxd.sh/faq/) · `docs-confirmed`
+- "post them in the Slack channel you share with the boxd team" — [guides/tailscale](https://docs.boxd.sh/guides/tailscale) · `docs-confirmed`
+- Privacy requests: "If you have questions, contact us at privacy@boxd.sh." — [Privacy Notice](https://boxd.sh/privacy/) · `docs-confirmed`
+- No ticket portal, phone number, community forum, or published support hours · `not-published`. The FAQ's own framing is "There is no ticket queue and nobody working from a first-line script." — [boxd.sh/faq](https://boxd.sh/faq/) · `docs-confirmed`
+
+**Security and compliance claims.**
+
+- Isolation: "Every machine is a KVM virtual machine with its own Linux kernel — not container namespaces, not gVisor, not a shared host kernel. A CVE on one VM's kernel doesn't breach the host or its neighbours." — [boxd.sh/faq](https://boxd.sh/faq/) · `docs-confirmed`
+- Transport: "Traffic to your machine goes over SSH or HTTPS (TLS terminated at the boxd proxy, with automatic HTTP→HTTPS redirect and HSTS)." — same page · `docs-confirmed`
+- Residency: "Managed boxd runs on EU hardware with no US cloud dependency, GDPR / DSGVO by default, and no exposure to US subpoenas." — same page · `docs-confirmed` — **but see the contradiction below.**
+- DPA: referenced but not published — "that processing is governed by our Data Processing Agreement, not this notice" — [Privacy Notice](https://boxd.sh/privacy/) · `docs-confirmed`; `boxd.sh/dpa` returns 404 (checked 28 Oct 2026) · `not-published`.
+- **No SOC 2, ISO 27001, HIPAA, PCI, or trust centre is claimed anywhere** on boxd.sh, docs.boxd.sh, the FAQ, the Terms or the Privacy Notice; `boxd.sh/security` and `trust.boxd.sh` do not exist — checked 28 Oct 2026 · `not-published`. Battleships lists SOC 2 and HIPAA as "No" · `third-party`.
+- SSO exists only on the top tier: "SAML SSO is available on Enterprise — talk to us." — [boxd.sh/faq](https://boxd.sh/faq/) · `docs-confirmed`
+- **Two vendor pages contradict each other on hosting and regions.** The FAQ says "no US cloud dependency… no exposure to US subpoenas", while the Privacy Notice describes two clusters and a US infrastructure vendor: "Latitude.sh LLC (Delaware, United States): bare-metal server infrastructure for our European Union and United States clusters." and "If you choose our United States Cluster… your data may be transferred to and processed in the United States." — [Privacy Notice](https://boxd.sh/privacy/) · `docs-confirmed`. The FAQ also still credits a different host: "All inter-node control traffic runs over a private OVH vRack" — [boxd.sh/faq](https://boxd.sh/faq/) · `docs-confirmed`. For a buyer this matters more than any badge: the residency answer depends on which page you read (`inferred`).
+
+**Terms that matter to a buyer.**
+
+| Question | What the contract says | Source |
+|---|---|---|
+| What happens to my data when I cancel? | "Boxd may delete Customer Content after a reasonable retention period of thirty (30) days" | [Terms](https://boxd.sh/terms/) §9.4 · `docs-confirmed` |
+| Notice before a price change? | None: "Boxd may adjust its published rates at any time, effective for usage from the date of the change onward", with a consumer carve-out — "Where Customer is a Consumer, Boxd will not increase its rates within the first three months after the Effective Date without giving Customer the right to terminate" | [Terms](https://boxd.sh/terms/) §5.5 · `docs-confirmed` |
+| Notice before the Terms themselves change? | "at least thirty (30) days prior notice of any material change" | [Terms](https://boxd.sh/terms/) §15.2 · `docs-confirmed` |
+| Refunds? | "Fees already incurred for Services already provided are not refundable, except as required by mandatory law." | [Terms](https://boxd.sh/terms/) §5.6 · `docs-confirmed` |
+| Liability ceiling? | Fees paid in the previous 12 months | [Terms](https://boxd.sh/terms/) §11.2 · `docs-confirmed` |
+| Which law and courts? | "The Agreement is governed by the laws of the Netherlands" and "the competent court in Amsterdam" | [Terms](https://boxd.sh/terms/) §18.1–18.2 · `docs-confirmed` |
+| Can they suspend me without notice? | Yes, where "Boxd reasonably believes this is necessary to: (a) prevent harm to Boxd, other customers, or third parties" | [Terms](https://boxd.sh/terms/) §9.3 · `docs-confirmed` |
+
+The practical reading: cancellation gives you 30 days before deletion, price changes take effect immediately for new usage with no notice period, and the only notice commitment is the 30 days on changes to the Terms themselves (`inferred` from the clauses above).
+
+**The Ignition / lttle-cloud relationship.** boxd's own docs credit an outside open-source project as the foundation of the platform, and that is as far as the published record goes.
+
+- "boxd is built on Ignition, an open-source microVM orchestrator that laid the foundation for what boxd is now." — [guides/suspend-resume](https://docs.boxd.sh/guides/suspend-resume) · `docs-confirmed`
+- "Ignition is open source. Read the code and architecture:" — same page · `docs-confirmed`
+- The repository is `lttle-cloud/ignition`, described as "tiny clouds inc.", licensed AGPL-3.0, created 25 Dec 2024, last pushed 2 Nov 2025, homepage `lttle.cloud` — GitHub API metadata: `"full_name":"lttle-cloud/ignition"`, `"description":"tiny clouds inc."`, `"spdx_id":"AGPL-3.0"`, `"created_at":"2024-12-25T20:24:34Z"`, `"pushed_at":"2025-11-02T13:16:27Z"` — [api.github.com/repos/lttle-cloud/ignition](https://api.github.com/repos/lttle-cloud/ignition) · `third-party` (GitHub is not boxd).
+- The README introduces itself as "lttle.cloud | Ignition" and describes the project without mentioning boxd: "Ignition is an all-in-one solution for this problem: an orchestrator, a microVM manager built on KVM, and a TCP/TLS proxy" — [github.com/lttle-cloud/ignition](https://github.com/lttle-cloud/ignition) · `third-party`
+- `lttle.cloud` itself did not respond when checked on 28 Oct 2026 · `not-published`.
+- What is **not** published: any statement that lttle-cloud is a boxd subsidiary, that boxd employs its maintainers, or that boxd owns the Ignition code. The docs' phrasing — "laid the foundation for what boxd is now" — reads as lineage rather than current ownership, and the repository's last push (Nov 2025) predates the company's registration (Feb 2026) (`inferred` from the two dates).
+- Why a buyer should care: Ignition is AGPL-3.0. That licence governs the upstream project, not boxd's hosted service, but anyone taking up boxd's self-host offer should establish with boxd what they are licensing, because no page says whether the self-hosted binary is the AGPL project or a separate proprietary build (`inferred`; the self-host page says only "a single Rust binary you run in your own VPC" — [pricing](https://boxd.sh/pricing) · `pricing-page`).
+
+**The company in one line.** A Dutch BV registered in February 2026, founded by three engineers, with one €2M pre-seed round and a founder-led support model — credible and fast-moving, but with no SLA, no status page, no independent security certification, and two of its own pages disagreeing about where your data is hosted (`inferred`, from the quotes above).
+
 ## Appendix: sources and how they were retrieved
 
 | Source | URL | Retrieved | Note |
@@ -687,7 +783,15 @@ Partly, and less than the marketing suggests (`inferred`).
 | Vendor FAQ | https://boxd.sh/faq/ | 28 Oct 2026 | Public IPv4, regions, SSO, support model |
 | Homepage | https://boxd.sh/ | 28 Oct 2026 | Positioning, size availability, region |
 | US waitlist | https://boxd.sh/us-waitlist/ | 28 Oct 2026 | Region roadmap |
-| Terms | https://boxd.sh/terms | 28 Oct 2026 | §5.6 refunds |
+| Terms | https://boxd.sh/terms | 28 Oct 2026 | Entity, price-change, deletion, liability, governing-law clauses (§17) |
+| Privacy Notice | https://boxd.sh/privacy/ | 28 Oct 2026 | Entity, KvK/VAT, clusters, sub-processors, DPA reference (§17) |
+| Careers and contact | https://boxd.sh/careers/, https://boxd.sh/contact/ | 28 Oct 2026 | No headcount; founder-led support (§17) |
+| Funding announcement | https://boxd.sh/blog/we-raised-2m-to-kill-localhost/ (page source for `datePublished` and author) | 28 Oct 2026 | Round, investors, byline (§17) |
+| tech.eu | https://tech.eu/2026/09/16/boxd-raises-2m-to-build-cloud-infrastructure-for-ai-coding-agents | 28 Oct 2026 | Independent funding write-up and founder names (§17) |
+| KvK-derived listing | https://drimble.nl/bedrijf/amsterdam/000057849749/melchior-holding-bv.html | 28 Oct 2026 | Registration dates and the same-address entities (§17); third-party aggregation of KvK data |
+| GitHub repo metadata | https://api.github.com/repos/lttle-cloud/ignition | 28 Oct 2026 | Licence, owner, created/pushed dates (§17) |
+| Ignition README | https://github.com/lttle-cloud/ignition | 28 Oct 2026 | Project description; no mention of boxd (§17) |
+| gritt.io, The SaaS News | https://www.gritt.io/company/boxdsh/, https://www.thesaasnews.com/news/boxd-raises-2m-pre-seed/ | 28 Oct 2026 | Conflicting founding years (§17) |
 | Sign-in page | https://app.boxd.sh | 28 Oct 2026 | GitHub/Google, CLI-first onboarding |
 | Pricing, 9 Oct 2026 | http://web.archive.org/web/20261009152053/https://boxd.sh/pricing | 28 Oct 2026 | Prior rate card and 50-machine quota |
 | battleships.dev record | https://battleships.dev/data/providers/boxd.md and `.json` | 28 Oct 2026 | Secondary; price stale, two unconfirmed claims |
