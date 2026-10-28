@@ -90,6 +90,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "partly",
+      "figure": "No public port",
+      "scenario": "There is no URL to paste: the client reaches the page through your Worker, and any authentication is code you write.",
+      "note": "HTTP from the internet reaches the instance only through your Worker. No built-in preview auth, token or IP allowlist. SSH exists only through Wrangler, does not start a stopped container and does not keep one alive.",
+      "source": {
+        "url": "https://developers.cloudflare.com/sandbox/previews/",
+        "quote": "The server has no public port, so your Worker forwards requests to it.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "partly",
+      "figure": "Token, or signed URL",
+      "scenario": "The preview URL needs authentication unless the sandbox is public; the standard token opens the whole sandbox and cannot be revoked.",
+      "note": "Preview links are authenticated unless `public` is true. The standard token is sandbox-wide, opens the terminal and toolbox, and cannot be revoked; signed URLs are per port, 60 seconds by default and 24 hours maximum.",
+      "source": {
+        "url": "https://www.daytona.io/docs/en/preview.md",
+        "quote": "If a sandbox has its `public` property set to `true`, preview links are publicly accessible without authentication. Otherwise, authentication is required.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "partly",
       "figure": "No auth",
@@ -122,6 +146,18 @@
       "source": {
         "url": "https://lizard.build/docs/sandboxes/preview-urls",
         "quote": "The token belongs to the sandbox, not to a port: it opens every port you expose on that sandbox",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "yes",
+      "figure": "Connect token",
+      "scenario": "Nothing is reachable until a port is exposed; the client needs a connect token, and the container sees a verified header.",
+      "note": "No inbound by default. Expose encrypted, h2 or unencrypted ports; connect tokens are the recommended path for HTTP and WebSockets, and raw TCP is possible. `inbound_cidr_allowlist` is not enforced on unencrypted tunnels.",
+      "source": {
+        "url": "https://modal.com/docs/guide/sandbox-networking",
+        "quote": "You can make authenticated HTTP and WebSocket requests to a Sandbox by generating Sandbox Connect Tokens.",
         "confidence": "docs-confirmed"
       }
     },

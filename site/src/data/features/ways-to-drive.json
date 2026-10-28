@@ -89,6 +89,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "partly",
+      "figure": "No; Worker code",
+      "scenario": "The first sandbox needs a Worker, a Durable Object and a Docker build; the dashboard only shows what already exists.",
+      "note": "TypeScript in a Worker is the only first-class surface, with a Durable Object container API and the Wrangler CLI. No hosted REST API, no Python or Go SDK, no control-plane MCP and no webhooks.",
+      "source": {
+        "url": "https://developers.cloudflare.com/sandbox/previews/",
+        "quote": "A Worker with a Durable Object that starts a container with the Durable Object scheduling policy.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "yes",
+      "figure": "Yes, playground",
+      "scenario": "A non-coder creates a sandbox in the browser Playground, opens the terminal or VNC tab, and never installs the CLI.",
+      "note": "A dashboard Playground, web terminal, VNC desktop, five SDKs, a REST API, a CLI, a first-party MCP server, and webhooks that need support to enable.",
+      "source": {
+        "url": "https://www.daytona.io/docs/en/playground.md",
+        "quote": "Daytona provides an interactive environment (\"Playground\") for creating sandboxes, running SDK operations, and exploring Daytona features directly from your browser",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "yes",
       "figure": "No; SDK",
@@ -121,6 +145,18 @@
       "source": {
         "url": "https://lizard.build/docs/sandboxes/sdk-reference",
         "quote": "SSH protocol access is not available; `lizard sandbox ssh` opens an interactive shell with your CLI credentials.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "partly",
+      "figure": "No; SDK",
+      "scenario": "The first machine is a `Sandbox.create` call; the dashboard shows metrics and `modal shell` attaches to something that already exists.",
+      "note": "Python, JavaScript and Go SDKs, a CLI, `modal shell` and a dashboard with per-App metrics. No REST API separate from the SDK surface, no SSH daemon and no control-plane MCP server.",
+      "source": {
+        "url": "https://modal.com/docs/guide/sandboxes",
+        "quote": "Sandboxes can be created using the Sandbox.create constructor",
         "confidence": "docs-confirmed"
       }
     },
@@ -203,7 +239,7 @@
         "what": "An agent API call, a CLI prompt, or a terminal where they type the command themselves."
       }
     ],
-    "turn": "Five providers document creating a machine from a dashboard, and three of those also open a desktop. At the CLI-first providers the dashboard is a viewer, so the first step is a terminal whatever the marketing page shows."
+    "turn": "Six providers document creating a machine from a dashboard, and four of those also open a desktop. At the CLI-first providers the dashboard is a viewer, so the first step is a terminal whatever the marketing page shows."
   },
   "questions": [
     "Can I create and open the first machine without a terminal, and what exactly can the dashboard do?",

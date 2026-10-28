@@ -90,6 +90,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "partly",
+      "figure": "Filesystem only; 30 days",
+      "scenario": "The snapshot saves the root filesystem only: files come back in a new instance, processes do not, and there is no fork.",
+      "note": "`snapshotContainer()` saves the writable root filesystem of a running instance, 20 GB maximum, and expires 30 days after creation or last restore. No memory and no fork. Directory backups to R2 have no expiry.",
+      "source": {
+        "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+        "quote": "A snapshot expires 30 days after it is created or last restored.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "partly",
+      "figure": "Hot: RAM (VM); cold: disk",
+      "scenario": "A hot snapshot on the VM class keeps memory; on a container only a cold filesystem snapshot exists, and fork is VM-only.",
+      "note": "Cold snapshots capture the filesystem from a stopped sandbox; hot snapshots capture filesystem and memory from a started VM. Containers support cold only. Fork duplicates a Linux VM's filesystem and memory. Snapshots go inactive after 14 days unused.",
+      "source": {
+        "url": "https://www.daytona.io/docs/en/sandboxes.md",
+        "quote": "Forking creates a duplicate of a Linux VM sandbox's filesystem and memory state in a new sandbox.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "yes",
       "figure": "RAM + disk; 20 forks",
@@ -122,6 +146,18 @@
       "source": {
         "url": "https://lizard.build/docs/sandboxes/sdk-reference.md",
         "quote": "Copy a running sandbox 1 to 100 times, memory and processes included",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "partly",
+      "figure": "Filesystem 30 d; memory 7 d",
+      "scenario": "A filesystem snapshot gives back the files in a new sandbox; the memory snapshot that would keep the process tree kills the source and expires in seven days.",
+      "note": "Filesystem, directory and memory snapshots, plus automatic exit snapshots. Filesystem and exit snapshots last 30 days by default; memory snapshots 7 days and cannot be extended. Fork means several sandboxes from one filesystem image, not a live clone.",
+      "source": {
+        "url": "https://modal.com/docs/guide/sandbox-snapshots",
+        "quote": "Memory Snapshots expire 7 days after creation and cannot currently be extended.",
         "confidence": "docs-confirmed"
       }
     },

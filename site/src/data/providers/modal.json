@@ -1,0 +1,267 @@
+{
+  "id": "modal",
+  "name": "Modal",
+  "url": "https://modal.com",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "gVisor containers by default with a five-minute lifetime, no pause at all, and a CPU unit that may be one or two vCPUs depending on which reading you trust.",
+  "whatItIs": [
+    "Modal Sandboxes are short-lived Linux containers for running untrusted code inside Modal's serverless platform. You create one from Python, JavaScript or Go, run commands over an API, and either let it expire or terminate it.",
+    "There is no paused or stopped state. A sandbox runs, then it is finished; local state survives only through a filesystem snapshot, a memory snapshot or a Volume, and every restore produces a new sandbox.",
+    "It sits beside Modal's Functions, Inference and Training products on one workspace and one bill."
+  ],
+  "whoFor": "Teams already on Modal, or building high-volume code execution and RL rollouts, who want sandboxes next to their Functions and GPUs.",
+  "isolation": "gVisor by default, with a KVM-backed VM runtime opt-in for Docker, FUSE or nested cgroups. Every container runs as root. GPU sandboxes are gVisor only. Up to 250 sidecar containers per sandbox give a second boundary for credentials or a proxy.",
+  "sizes": "No fixed sizes: fractional physical cores (1 core = 2 vCPUs, as documented) and MiB of memory, with a default of 0.125 core and 128 MiB. Sandboxes can burst above the request and are billed on the higher of request and actual use. Disk is a fixed 512 GiB quota, not resizable. The maximum shape is not published. Container regions are selectable at 1.15× (broad) or 1.75× (narrow); GPU sandboxes are preemptible.",
+  "billing": {
+    "model": "Per-second usage on one workspace bill, with no Sandbox-specific plan or fee.",
+    "meter": "CPU $0.141912 per core-hour and memory $0.024012 per GiB-hour, billed on the higher of request and actual use. Sandboxes pay the non-preemptible rate, 3× list. Disk is billed as memory at a 20:1 ratio.",
+    "stopped": "Nothing, because there is no stopped state. A running sandbox bills its request even when idle; a terminated one bills nothing.",
+    "planFee": "Starter is $0 plus compute with $30 a month of credits; Team is $250 plus compute with $100 of credits; Enterprise is custom.",
+    "minimum": "A payment method is required to use Modal. Minimum request is 0.125 core and 128 MiB."
+  },
+  "cost": {
+    "A": {
+      "headline": "$39.66, or $63.31 on the measured core",
+      "shape": "2 vCPU (1 documented core) / 4 GiB, deleted after each task",
+      "lines": [
+        { "label": "CPU", "arithmetic": "166.67 h × 1 core × $0.141912", "amount": "$23.65" },
+        { "label": "Memory", "arithmetic": "166.67 h × 4 GiB × $0.024012", "amount": "$16.01" }
+      ],
+      "total": "$39.66",
+      "notes": [
+        "If a `cpu` unit is one guest CPU rather than two vCPUs, the same shape needs 2 cores and costs $63.31 — the 1.6× swing.",
+        "On Starter the $30 monthly credit leaves $9.66 of cash."
+      ],
+      "flag": "The CPU unit is disputed: Modal documents 1 core = 2 vCPUs, a third-party benchmark measures one guest CPU per unit. Both figures are shown."
+    },
+    "B": {
+      "headline": "$347.42, or $554.61 on the measured core",
+      "shape": "4 vCPU (2 documented cores) / 8 GiB, 730 h",
+      "lines": [
+        { "label": "CPU", "arithmetic": "730 h × 2 cores × $0.141912", "amount": "$207.19" },
+        { "label": "Memory", "arithmetic": "730 h × 8 GiB × $0.024012", "amount": "$140.23" }
+      ],
+      "total": "$347.42",
+      "notes": [
+        "The measured reading of the CPU unit gives $554.61.",
+        "The maximum lifetime is 24 hours, so an always-on box is at least 31 sandboxes; the hourly price is the same.",
+        "50 GiB of disk is below the 160 GiB that would raise the memory request."
+      ]
+    },
+    "C": {
+      "headline": "$21.42, or $34.19 on the measured core",
+      "shape": "2 vCPU (1 documented core) / 4 GiB, 90 running hours, terminated between sessions",
+      "lines": [
+        { "label": "CPU", "arithmetic": "90 h × 1 core × $0.141912", "amount": "$12.77" },
+        { "label": "Memory", "arithmetic": "90 h × 4 GiB × $0.024012", "amount": "$8.64" }
+      ],
+      "total": "$21.42",
+      "notes": [
+        "There is no stopped state, so the 630 idle hours are free only if you terminate and recreate.",
+        "Left running around the clock, the same sandbox bills $171.33."
+      ]
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Modal Labs, Inc., a Delaware corporation.",
+        "source": {
+          "url": "https://modal.com/legal/terms",
+          "quote": "Modal Labs, Inc., a Delaware corporation",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded and leadership",
+        "value": "2021, by Erik Bernhardsson (CEO) and Akshat Bubna (CTO).",
+        "source": {
+          "url": "https://modal.com/blog/1-billion-annualized-run-rate-series-d",
+          "quote": "When we started Modal five years ago",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "$750M Series D at a $15.75B post-money valuation in October 2026, led by Accel; over $1.2B raised in total.",
+        "source": {
+          "url": "https://modal.com/blog/1-billion-annualized-run-rate-series-d",
+          "quote": "we've raised a $750M Series D at a $15.75B post-money valuation. Accel led the round.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Headcount",
+        "value": "200+, company-stated in October 2026. TechCrunch estimated about 150 three weeks earlier.",
+        "source": {
+          "url": "https://modal.com/blog/1-billion-annualized-run-rate-series-d",
+          "quote": "Our team of 200+",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Status and SLA",
+        "value": "Sandboxes showed 100% over 30 days, 99.983% over 60 and 99.989% over 90. No public SLA document; the SLA is attached to a Service Order.",
+        "source": {
+          "url": "https://modal.com/legal/terms",
+          "quote": "If Customer has purchased a subscription plan that includes Modal's uptime and support SLAs, Modal's Service Level Agreement will be attached to the Service Order.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "SOC 2 Type II, with the current report covering September–December 2025. HIPAA is Enterprise only.",
+        "source": {
+          "url": "https://modal.com/legal/terms",
+          "quote": "Modal has completed its SOC2 Type II certification, and engages a third-party to perform penetration tests on a regular basis.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Price changes",
+        "value": "No rate-change clause and no published notice period for list prices.",
+        "source": {
+          "url": "https://modal.com/legal/terms",
+          "quote": "Customer shall pay to Modal the fees as set forth in each applicable Service Order(s)",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "High-volume, short-lived code execution: Sandboxes start in about a second and the platform claims over 10,000 creates a second.",
+      "A GPU sandbox for inference or training-adjacent work: up to 8 GPUs per container, priced per GPU-second.",
+      "A team already on Modal: sandboxes share the workspace, Images, Volumes and billing with Functions.",
+      "Splitting trust with sidecars: up to 250 extra containers per sandbox for a proxy or credentials."
+    ],
+    "badly": [
+      "An agent that needs to pause and resume: there is no paused state, and a memory snapshot terminates the source.",
+      "An always-on box: the lifetime cap is 24 hours and a running idle sandbox bills its full request.",
+      "A cheap always-on dev box: $347 a month documented, $555 on the measured CPU reading.",
+      "A client-facing URL: inbound is closed by default and there is no built-in desktop or browser."
+    ]
+  },
+  "usability": {
+    "dashboard": "An operator console: a Sandboxes tab per App with CPU, memory, pressure and exit-reason charts, plus billing and invoices.",
+    "withoutCode": "No. Every creation path is SDK code; `modal shell` attaches to a sandbox that already exists.",
+    "signup": "A payment method is required to use Modal. Starter is $0 plus compute with 3 seats and $30 a month of credits.",
+    "docs": "Extensive docs with `llms.txt`, Python, JavaScript and Go SDKs, and a CLI. Support is community Slack on all plans, a private Slack and embedded engineers on Enterprise; no response times published.",
+    "tripsUp": [
+      "The default lifetime is five minutes.",
+      "An idle sandbox is not free: it bills max(request, actual).",
+      "Snapshot means three different things; only the memory one keeps processes, and it kills the source.",
+      "Disk is billed as memory at 20:1.",
+      "Region pinning adds 15–75%."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "The pricing page says you never pay for idle, and the sandbox meter says you do",
+      "detail": "The headline describes scale-to-zero Functions. A sandbox with no active command bills its full request until it is terminated.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "You never pay for idle resources — just actual compute time, by the CPU cycle.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "Sandboxes bill max(request, actual) by the second.",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "issue": "Sandbox disk cannot be increased, except where a 3 TiB maximum is published",
+      "detail": "The sandbox resources page says disk cannot be increased; the resources guide documents an `ephemeral_disk` parameter with a 3.0 TiB maximum. The most likely reading is that the parameter belongs to Functions, so 512 GiB is the sandbox ceiling.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://modal.com/docs/guide/sandbox-resources",
+          "quote": "Sandboxes have the same disk limits as other Modal containers, and their disk size cannot be increased.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://modal.com/docs/guide/resources",
+          "quote": "The maximum disk size is 3.0 TiB",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "An EU region does not keep snapshots in the EU",
+      "detail": "Sandboxes can be pinned to `eu` at 1.15×, but application logs and snapshots you create are stored in the United States whatever region the container runs in.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://modal.com/docs/guide/region-selection",
+          "quote": "Sandboxes accept the same region= argument on Sandbox.create",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://modal.com/docs/guide/data-residency",
+          "quote": "Snapshots you explicitly create",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "One core is two vCPUs in the docs and one guest CPU in a third-party measurement",
+      "detail": "Modal prices CPU per physical core and equates a core to two vCPUs. A third-party benchmark reports that `cpu=N` gives a guest that sees N CPUs. The two readings differ by 1.6× on every cost estimate.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://modal.com/docs/guide/sandbox-resources",
+          "quote": "The cpu parameter specifies physical CPU cores (1 core = 2 vCPUs), and memory specifies MiB",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://battleships.dev/data/providers/modal.md",
+          "quote": "1 Modal core = 1 vCPU",
+          "confidence": "third-party"
+        }
+      ]
+    },
+    {
+      "issue": "There is no pause",
+      "detail": "A sandbox runs or it is finished. The nearest equivalent is a memory snapshot, which terminates the source, restores into a new sandbox and expires after seven days.",
+      "status": "open"
+    },
+    {
+      "issue": "Memory snapshots are alpha and picky",
+      "detail": "They cannot run with GPUs, restore only on the same instance type, cannot be taken while a command runs, and cannot have their seven-day expiry extended.",
+      "status": "open"
+    },
+    {
+      "issue": "Snapshot storage has no published price",
+      "detail": "Filesystem, directory, memory and exit snapshots all bill as storage, and none of the pricing page, the snapshots guide or the billing guide gives a rate.",
+      "status": "open"
+    },
+    {
+      "issue": "No SSH and no control-plane MCP server",
+      "detail": "`modal shell` is a CLI session, not an SSH daemon, and the only MCP material in the docs is an example of running an MCP server inside a sandbox.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "About one-second starts, with over 10,000 creates a second claimed.",
+    "GPU sandboxes up to 8 GPUs, priced per GPU-second.",
+    "Three snapshot kinds, including memory, plus automatic exit snapshots.",
+    "Sidecars give a second isolation boundary inside one sandbox.",
+    "Shares Images, Volumes, secrets and billing with Modal Functions."
+  ],
+  "sources": [
+    { "label": "Sandboxes guide", "url": "https://modal.com/docs/guide/sandboxes" },
+    { "label": "Sandbox resources", "url": "https://modal.com/docs/guide/sandbox-resources" },
+    { "label": "Snapshots", "url": "https://modal.com/docs/guide/sandbox-snapshots" },
+    { "label": "Sandbox networking", "url": "https://modal.com/docs/guide/sandbox-networking" },
+    { "label": "Pricing", "url": "https://modal.com/pricing" },
+    { "label": "Billing", "url": "https://modal.com/docs/guide/billing" },
+    { "label": "Data residency", "url": "https://modal.com/docs/guide/data-residency" },
+    { "label": "Terms", "url": "https://modal.com/legal/terms" }
+  ]
+}

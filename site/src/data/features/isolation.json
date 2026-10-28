@@ -83,6 +83,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "yes",
+      "figure": "Firecracker; all root",
+      "scenario": "The build runs in the microVM's own kernel with Docker-in-Docker, but every process is root and nothing separates two users inside it.",
+      "note": "One Firecracker microVM per container with its own kernel and network; the image runs as a Linux container inside it. Every process has root capabilities, so there is no privilege boundary between users. No memory snapshot, pause or fork.",
+      "source": {
+        "url": "https://developers.cloudflare.com/containers/concepts/architecture/",
+        "quote": "Each container instance runs in a Firecracker microVM with its own kernel and network.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "partly",
+      "figure": "Containers; VM on request",
+      "scenario": "Docker runs on the default container through Docker-in-Docker, but loading a kernel module needs the Linux VM class.",
+      "note": "Linux containers by default: dedicated namespaces, enforced resource limits and root inside, sharing the runner's kernel. Linux VM and Windows classes have their own kernel. Docker-in-Docker is documented; nested virtualisation is Linux-VM only and must be enabled.",
+      "source": {
+        "url": "https://www.daytona.io/docs/en/isolation.md",
+        "quote": "Full virtual machine with its own kernel.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "yes",
       "figure": "Firecracker; non-root user",
@@ -115,6 +139,18 @@
       "source": {
         "url": "https://lizard.build/docs/sandboxes",
         "quote": "Sandboxes run as Firecracker microVMs, each with its own kernel.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "partly",
+      "figure": "gVisor; VM on request",
+      "scenario": "The default gVisor container runs the build; mounting FUSE or running Docker needs `runtime=\"vm\"`.",
+      "note": "gVisor by default, with a KVM VM runtime opt-in for Docker, FUSE or nested cgroups. Every container runs as root, and GPU sandboxes are gVisor only. Up to 250 sidecars per sandbox give a second boundary.",
+      "source": {
+        "url": "https://modal.com/docs/guide/sandboxes",
+        "quote": "VMs run the Sandbox in a virtual machine with its own Linux kernel.",
         "confidence": "docs-confirmed"
       }
     },

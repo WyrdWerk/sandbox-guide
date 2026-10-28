@@ -8,9 +8,12 @@ const kinds: Record<string, string> = {
   blaxel: "MicroVM",
   boat: "Full VM",
   boxd: "KVM machine",
+  "cloudflare-sandbox": "Firecracker microVM",
+  daytona: "Container or VM",
   e2b: "Firecracker microVM",
   instabox: "Firecracker microVM",
   lizard: "Firecracker microVM",
+  modal: "gVisor or VM",
   morph: "Full VM",
   runtime: "Firecracker microVM",
   sandboxer: "Cloud Hypervisor microVM",
@@ -44,7 +47,7 @@ const payload = {
     kicker="Compare · side by side"
     title="Two or three providers, sixteen features"
     standfirst="Choose the providers you are deciding between. The table compares what they do, not which is cheaper; the note under each badge is the short version, and every feature page carries the source."
-    meta={["12 providers", "16 features", "Behaviour, not a ranking"]}
+    meta={[`${providers.length} providers`, "16 features", "Behaviour, not a ranking"]}
   />
 
   <div class="wrap">
@@ -73,7 +76,7 @@ const payload = {
       <noscript>
         <p class="section__note">
           This comparison needs JavaScript to change the selection. Every feature page has the same
-          comparison for all twelve providers; start with
+          comparison for all fifteen providers; start with
           <a href="/features/isolation/">Isolation</a>.
         </p>
       </noscript>

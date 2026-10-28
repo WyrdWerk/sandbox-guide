@@ -1,0 +1,315 @@
+{
+  "id": "daytona",
+  "name": "Daytona",
+  "url": "https://www.daytona.io",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "Linux containers by default and real VMs on request, with a 15-minute idle stop, a 10 GiB disk cap and two regions.",
+  "whatItIs": [
+    "Daytona sells sandboxes for AI-generated code: a Linux container by default, or a Linux VM, Windows, GPU or macOS sandbox when the workload needs one. The unit is created and driven through five SDKs, a CLI, a REST API and an MCP server.",
+    "The classes are not interchangeable. Pause, resume, fork and memory snapshots exist only on the VM classes; archive exists only on containers; GPU sandboxes run in containers and vanish on stop.",
+    "It began as an open-source development-environment company. That repository is archived, and the managed platform is closed source."
+  ],
+  "whoFor": "Teams building an agent product who want a fast container by default and a full VM when Docker, Windows or a real kernel is needed.",
+  "isolation": "Linux containers by default: dedicated namespaces, enforced resource limits and root inside, sharing the runner's kernel. Linux VM and Windows sandboxes have their own kernel. Docker-in-Docker is documented; nested virtualisation is Linux-VM only and must be enabled for the organisation. GPU sandboxes are containers with exclusive GPU allocation.",
+  "sizes": "Default 1 vCPU / 1 GB / 3 GiB; the organisation ceiling is 4 vCPU / 8 GB / 10 GiB of disk. Named presets include `daytona-medium` 2/4/8 and `daytona-large` 4/8/10; Windows presets go to 4/16/50. GPU sandboxes attach up to 8 GPUs, each adding up to 16 vCPU / 192 GB / 512 GB. Two shared regions, `us` and `eu`.",
+  "billing": {
+    "model": "Per-second billing on reserved resources, with no plan fee. Tiers are prepaid top-ups that set an organisation-wide pool.",
+    "meter": "vCPU $0.0504/hour, memory $0.0162/GiB-hour and disk $0.000108/GiB-hour after the first 5 GiB. Windows adds $0.0858/vCPU-hour, which reads either as a replacement rate or a surcharge.",
+    "stopped": "Stopped and paused sandboxes bill reserved disk only; memory is not billed. Archived and deleted sandboxes bill nothing.",
+    "planFee": "No plan fee. Tier 1 needs only a verified email; Tier 2 is a $25 top-up, Tier 3 $500, and Tier 4 $2,000 every 30 days.",
+    "minimum": "$200 of free compute with no card, but it cannot be spent on GPU sandboxes."
+  },
+  "cost": {
+    "A": {
+      "headline": "$27.74 a month",
+      "shape": "daytona-medium (2 vCPU / 4 GiB / 8 GiB disk), deleted after each task",
+      "lines": [
+        {
+          "label": "Compute",
+          "arithmetic": "166.67 h × (2 × $0.0504 + 4 × $0.0162)",
+          "amount": "$27.60"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "8 GiB × 166.67 h × $0.000108",
+          "amount": "$0.14"
+        }
+      ],
+      "total": "$27.74",
+      "notes": [
+        "The shape exists exactly as `daytona-medium`, so no substitution is needed.",
+        "The $200 free credit covers this workload, leaving about $172.",
+        "Tier 1's restricted network may block package installs the allowlist does not cover."
+      ]
+    },
+    "B": {
+      "headline": "$443.69, after substituting Windows",
+      "shape": "windows-large (4 vCPU / 16 GiB / 50 GiB), 730 h",
+      "lines": [
+        {
+          "label": "Compute",
+          "arithmetic": "730 × (4 × $0.0858 + 16 × $0.0162)",
+          "amount": "$439.75"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "50 GiB × 730 h × $0.000108",
+          "amount": "$3.94"
+        }
+      ],
+      "total": "$443.69",
+      "notes": [
+        "If the Windows rate is a surcharge on top of the Linux rate rather than a replacement, the month is $590.86.",
+        "50 GiB also exceeds Tier 1's 30 GiB storage pool, so Tier 2 is the minimum."
+      ],
+      "flag": "This workload cannot be bought as specified: 50 GiB exceeds the 10 GiB per-sandbox disk cap. The nearest published shape is a Windows VM, which is the profile's judgement call, not a Linux option."
+    },
+    "C": {
+      "headline": "$15.53 a month",
+      "shape": "daytona-medium (2 vCPU / 4 GiB / 8 GiB), 90 running hours, stopped otherwise",
+      "lines": [
+        {
+          "label": "Compute",
+          "arithmetic": "90 × (2 × $0.0504 + 4 × $0.0162)",
+          "amount": "$14.90"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "8 GiB × 720 h × $0.000108",
+          "amount": "$0.62"
+        }
+      ],
+      "total": "$15.53",
+      "notes": [
+        "The 20 GiB brief is not available on this class; 8 GiB is the published 2 vCPU shape.",
+        "Disk bills in both running and stopped hours. Containers cannot pause, so stop is disk-only."
+      ]
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Daytona Platforms Inc., at a New York address. Delaware incorporation is unconfirmed by the company; its terms name Delaware law.",
+        "source": {
+          "url": "https://www.daytona.io/terms-of-service",
+          "quote": "These Terms of Service (\"Terms\") are a binding contract between you (\"you\" or \"Customer\") and Daytona Platforms Inc.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded and leadership",
+        "value": "2023, by Ivan Burazin (CEO), Vedran Jukić (CTO) and Goran Draganić (Chief Architect).",
+        "source": {
+          "url": "https://www.daytona.io/about",
+          "quote": "Daytona was founded in 2023 and evolved from our deep experience with developer workflows and infrastructure challenges.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "$91M total after a $60M Series B at a $1B valuation in October 2026, led by FirstMark Growth.",
+        "source": {
+          "url": "https://www.daytona.io/dotfiles/daytona-raises-60m-series-b-to-build-the-agent-cloud",
+          "quote": "a $60M Series B at a $1B valuation, led by FirstMark Growth, bringing our total funding to $91M",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Headcount",
+        "value": "Twelve people are named on the about page; no total is published."
+      },
+      {
+        "label": "Status and SLA",
+        "value": "Status page components showed 99.768% at the lowest. The SLA promises 99.95%, but credits go only to Tier 4 and above.",
+        "source": {
+          "url": "https://www.daytona.io/sla",
+          "quote": "Daytona will use commercially reasonable efforts to make the Services available 99.95% of the time in any given calendar month",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "SOC 2 Type 2 is a management bridge letter, not an attestation report. ISO 27001 is marked in progress while the badge is displayed.",
+        "source": {
+          "url": "https://trust.daytona.io/",
+          "quote": "This letter is a representation of Daytona management",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Price changes",
+        "value": "No notice period: fees may change by posting the change on the service.",
+        "source": {
+          "url": "https://www.daytona.io/terms-of-service",
+          "quote": "We reserve the right to modify fees and may do so by posting such modification on the Services or informing you through other reasonable methods.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "A Docker or Windows workload: the VM and Windows classes have their own kernel, and Docker-in-Docker is documented.",
+      "A fast container for untrusted code, priced per reserved vCPU and second, with $200 of free compute and no card.",
+      "A GPU sandbox alongside the CPU ones: up to 8 GPUs per sandbox, though on shared capacity and preemptible.",
+      "Browser or desktop agents: a VNC desktop and a computer-use API are first-class."
+    ],
+    "badly": [
+      "A workload that needs more than 10 GiB of disk on a Linux sandbox; the 50 GiB presets are Windows only.",
+      "An agent that runs long jobs with no inbound traffic: a container stops after 15 idle minutes even mid-build.",
+      "Full internet on a small account: Tier 1 and 2 are network-restricted and cannot be overridden per sandbox.",
+      "A strict per-tenant boundary: any organisation member or API key can exec in any running sandbox."
+    ]
+  },
+  "usability": {
+    "dashboard": "Yes: a dashboard with a browser Playground for creating sandboxes and running SDK operations, plus Terminal and VNC tabs.",
+    "withoutCode": "Partly. The Playground creates a sandbox and generates SDK snippets; operating one from the browser works, but building one is still a form of code.",
+    "signup": "Google or GitHub login, no card, $200 of free compute. Tier 1 needs only a verified email; GPU sandboxes cannot use the free credit.",
+    "docs": "Agent-readable docs with `llms.txt` and a 3.3 MB `llms-full.txt`, five SDKs, a CLI and a first-party MCP server. Support is email, Slack, chat, video and forums with no response-time commitment.",
+    "tripsUp": [
+      "The 15-minute idle stop ignores a running build or inference job.",
+      "The standard preview token opens the whole sandbox and cannot be revoked.",
+      "Tier 1 and 2 cannot reach the open internet, so package installs fail.",
+      "Any organisation member can exec in any running sandbox.",
+      "50 GiB disks exist only on Windows."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "Every sandbox is said to have a dedicated kernel, then said to be a container",
+      "detail": "The sandboxes page claims a dedicated kernel for every sandbox and two paragraphs later says sandboxes run as Linux containers by default. The isolation page is explicit that containers get namespaces and only VM classes get their own kernel.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.daytona.io/docs/en/sandboxes.md",
+          "quote": "Each sandbox runs in isolation, giving it a dedicated kernel, filesystem, network stack, and allocated vCPU, RAM, and disk.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.daytona.io/docs/en/sandboxes.md",
+          "quote": "Sandboxes run as **Linux containers** by default.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Startup is quoted as sub-90 ms and as sub-200 ms",
+      "detail": "The homepage claims sub-90 ms from code to execution; the careers page says sub-200 ms. Neither is a measured figure for a cold sandbox.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.daytona.io/",
+          "quote": "Sub 90ms sandbox creation from code to execution.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.daytona.io/careers",
+          "quote": "isolated environments with sub 200ms startup times",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "The 10 GiB disk cap and the 50 GiB Windows presets cannot both be the maximum",
+      "detail": "The sandboxes page states a 10 GB per-sandbox disk maximum and, on the same page, lists Windows presets with 30 and 50 GB. Treating 10 GiB as the real Linux cap is the profile's judgement call: a 50 GiB Linux sandbox needs a raised limit with no published price or approval path beyond support.",
+      "status": "open"
+    },
+    {
+      "issue": "Startup credits are $50k or $100k",
+      "detail": "The pricing page offers up to $50k in credits; the startups page offers up to $100k. Both are live.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.daytona.io/pricing",
+          "quote": "up to **$50k in credits for free**",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://www.daytona.io/startups",
+          "quote": "Get up to $100k in Daytona credits",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Audit logs are an Enterprise feature on one page and a permission on another",
+      "detail": "The pricing page lists SSO and audit logs under Enterprise; the audit-log page gates them by role instead, and says compliance export is coming soon.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.daytona.io/pricing",
+          "quote": "SSO, audit logs",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://www.daytona.io/docs/en/audit-logs.md",
+          "quote": "available to administrators with full access and members with audit log permissions",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Roles do not protect running sandboxes",
+      "detail": "Any member of an organisation, and any API key valid for it, can exec in every running sandbox whatever their role. A `write:sandboxes` key can also mount any secret in the organisation.",
+      "status": "open"
+    },
+    {
+      "issue": "The standard preview token is a sandbox-wide credential",
+      "detail": "It is not restricted to the port requested, opens the web terminal and the toolbox, and cannot be revoked. Signed URLs are the shareable form: 60 seconds by default, 24 hours maximum.",
+      "status": "open"
+    },
+    {
+      "issue": "The open-source repository is archived",
+      "detail": "The public repo says development moved to a private codebase in June 2026. The managed service is closed source, so the archived code is not what you are buying.",
+      "status": "open"
+    },
+    {
+      "issue": "Two documentation trees describe different products",
+      "detail": "The default docs are v0.226; `/docs/en/v2/` documents an alpha with different API hosts and a different macOS model, including Daytona-managed Mac reservations.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "A container by default and a real VM, Windows or GPU sandbox when the workload needs one.",
+    "Reserved-resource billing per second with no plan fee and $200 of free compute.",
+    "Free S3-backed volumes, 100 per organisation, that do not count against storage.",
+    "Five SDKs, a REST API, a CLI, a first-party MCP server and a browser Playground.",
+    "A VNC desktop and a computer-use API for browser agents."
+  ],
+  "sources": [
+    {
+      "label": "Docs",
+      "url": "https://www.daytona.io/docs"
+    },
+    {
+      "label": "Sandboxes",
+      "url": "https://www.daytona.io/docs/en/sandboxes.md"
+    },
+    {
+      "label": "Isolation",
+      "url": "https://www.daytona.io/docs/en/isolation.md"
+    },
+    {
+      "label": "Billing",
+      "url": "https://www.daytona.io/docs/en/billing.md"
+    },
+    {
+      "label": "Limits and tiers",
+      "url": "https://www.daytona.io/docs/en/limits.md"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://www.daytona.io/pricing"
+    },
+    {
+      "label": "SLA",
+      "url": "https://www.daytona.io/sla"
+    },
+    {
+      "label": "Terms",
+      "url": "https://www.daytona.io/terms-of-service"
+    }
+  ]
+}

@@ -90,6 +90,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "partly",
+      "figure": "Alerts only",
+      "scenario": "Budget alerts email you after the loop; they do not pause or cap anything, and the account ceiling is 1,500 concurrent vCPU.",
+      "note": "Budget alerts are informational and do not cap usage. Concurrency is account-wide: 1,500 vCPU, 6 TiB and 30 TB. No per-sandbox IAM; the account audit log records control-plane actions only.",
+      "source": {
+        "url": "https://developers.cloudflare.com/billing/manage/budget-alerts/",
+        "quote": "Budget alerts are informational only. They do not pause or cap usage.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "partly",
+      "figure": "Org-wide resource pool",
+      "scenario": "The runaway agent is capped only by the prepaid pool, and every member of the organisation can exec in every running sandbox.",
+      "note": "Tiers are prepaid top-ups that set an org-wide vCPU, memory and disk pool. Any member or API key can address any running sandbox. SSO is Enterprise; audit logs are role-gated and export is coming soon.",
+      "source": {
+        "url": "https://www.daytona.io/docs/en/organizations.md",
+        "quote": "Every member of an organization can address that organization's running sandboxes",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "partly",
       "figure": "Per-project limit",
@@ -122,6 +146,18 @@
       "source": {
         "url": "https://lizard.build/docs/cli/keys",
         "quote": "A scoped key works only inside its projects or workspaces.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "partly",
+      "figure": "Environment budgets",
+      "scenario": "An environment budget on Team stops the workload at the limit; Starter has no budgets and only three seats.",
+      "note": "Environment budgets on Team and Enterprise stop workloads at the limit. RBAC is Team+, SSO and audit logs are Enterprise. Starter has 3 seats and 100 containers.",
+      "source": {
+        "url": "https://modal.com/docs/guide/budgets",
+        "quote": "When the spend limit is reached, Modal stops workloads that would incur additional out-of-pocket charges.",
         "confidence": "docs-confirmed"
       }
     },

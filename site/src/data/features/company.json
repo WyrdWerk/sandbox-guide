@@ -135,6 +135,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "partly",
+      "figure": "Cloudflare, Inc.; no sandbox SLA",
+      "scenario": "A 99.99% Workers SLA exists and does not cover Containers or Sandboxes; the compliance scope for this product is unpublished.",
+      "note": "Cloudflare, Inc., Delaware, incorporated July 2009, NYSE: NET, 5,156 staff. The Workers SLA covers Workers only; no sandbox SLA. SOC 2 Type II and ISO 27001 are company-wide, with no published scope for Containers or Sandboxes.",
+      "source": {
+        "url": "https://www.cloudflare.com/workers-service-level-agreement/",
+        "quote": "This Workers Service Level Agreement (“Workers SLA”) applies to use of Workers only.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "partly",
+      "figure": "Daytona Platforms Inc.; 99.95% Tier 4+",
+      "scenario": "A 99.95% SLA exists, but credits go only to Tier 4 and above, and the terms allow fee changes with no notice.",
+      "note": "Daytona Platforms Inc., New York address, Delaware law; Delaware incorporation unconfirmed. Founded 2023; $91M raised after a $60M Series B at a $1B valuation. SLA 99.95% with credits for Tier 4+; SOC 2 Type 2 is a bridge letter and ISO 27001 is in progress.",
+      "source": {
+        "url": "https://www.daytona.io/sla",
+        "quote": "Daytona will use commercially reasonable efforts to make the Services available 99.95% of the time in any given calendar month",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "partly",
       "figure": "FoundryLabs, Inc.; SOC 2 II",
@@ -167,6 +191,18 @@
       "source": {
         "url": "https://lizard.build/terms",
         "quote": "We are Dragon Labs LLC, doing business as Lizard",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "partly",
+      "figure": "Modal Labs, Inc.; no public SLA",
+      "scenario": "No public SLA: the contract attaches one only if the Service Order includes it. SOC 2 Type II covers a 2025 period.",
+      "note": "Modal Labs, Inc., Delaware, founded 2021; $750M Series D at $15.75B, over $1.2B raised, 200+ staff. No public SLA; SOC 2 Type II with a 2025 report period; HIPAA Enterprise only.",
+      "source": {
+        "url": "https://modal.com/legal/terms",
+        "quote": "If Customer has purchased a subscription plan that includes Modal's uptime and support SLAs, Modal's Service Level Agreement will be attached to the Service Order.",
         "confidence": "docs-confirmed"
       }
     },
@@ -249,7 +285,7 @@
         "what": "A SOC 2 report names an entity and a system. A badge on a marketing page names neither."
       }
     ],
-    "turn": "Most of the twelve publish no SLA at all, and the numbers that do exist cover a platform, an API or an enterprise tier rather than the sandbox product. The compliance answer is narrower than the badge: one report belongs to a different company, one covers a data centre, and one Trust Center shows HIPAA only."
+    "turn": "Most of the fifteen publish no SLA at all, and the numbers that do exist cover a platform, an API or an enterprise tier rather than the sandbox product. The compliance answer is narrower than the badge: one report belongs to a different company, one covers a data centre, and one Trust Center shows HIPAA only."
   },
   "questions": [
     "Which legal entity signs, in which jurisdiction, and does the name on the terms match the name on the invoice?",

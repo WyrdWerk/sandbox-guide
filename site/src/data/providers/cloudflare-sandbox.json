@@ -1,0 +1,361 @@
+{
+  "id": "cloudflare-sandbox",
+  "name": "Cloudflare Sandbox",
+  "url": "https://developers.cloudflare.com/sandbox/",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "A Worker that starts a Firecracker microVM, with no public port, no region pinning, and a disk that is wiped when the instance stops.",
+  "whatItIs": [
+    "Cloudflare Sandboxes are a feature of the Workers platform: you write a Worker, its Durable Object starts a Linux container on Cloudflare's network, and that container runs untrusted or generated code with its own kernel.",
+    "There is no separate sandbox service to sign up for and no sandbox console. Identity is a Durable Object name, compute is a container instance, and persistence is a snapshot you take yourself or a bucket you mount.",
+    "A second, lighter environment called Dynamic Workers runs JavaScript, Python or WebAssembly inside the Workers runtime when the code only needs to call methods you pass in."
+  ],
+  "whoFor": "Teams already running a Worker who want untrusted code execution next to their application, with the Worker holding the credentials and deciding reachability.",
+  "isolation": "A Firecracker microVM per container, with its own kernel and network. Your image runs as a Linux container inside it, and every process has root capabilities, so there is no privilege boundary between users inside one sandbox. No memory snapshot, no pause, no fork. Docker-in-Docker works with iptables and IP forwarding off; `linux/amd64` only.",
+  "sizes": "Six presets from `lite` (1/16 vCPU, 256 MiB, 2 GB) to `standard-4` (4 vCPU, 12 GiB, 20 GB). Custom sizes are capped at 4 vCPU / 12 GiB / 20 GB, with at least 3 GiB of memory per vCPU. No GPU and no ARM. Placement is chosen by Cloudflare near the request, and a sandbox cannot be pinned to a region.",
+  "billing": {
+    "model": "Per-10-millisecond Containers usage on the account's Workers Paid bill, plus Workers, Durable Objects, egress, R2 and optionally Logs.",
+    "meter": "Active CPU $0.072 per vCPU-hour, provisioned memory $0.009 per GiB-hour and provisioned disk $0.000252 per GB-hour while the instance runs. Egress is $0.025 per GB in North America and Europe.",
+    "stopped": "Nothing. A stopped instance is not billed, and its disk and processes are gone.",
+    "planFee": "Workers Paid has a $5 a month minimum for the account. There is no sandbox-specific plan or fee.",
+    "minimum": "No free tier for containers: the Free column is N/A for memory, CPU and disk. The plan includes about $0.73 of container usage a month."
+  },
+  "cost": {
+    "A": {
+      "headline": "$17.40 to $40.95 a month",
+      "shape": "standard-3 (2 vCPU / 8 GiB / 16 GB), deleted after each task",
+      "lines": [
+        {
+          "label": "Memory",
+          "arithmetic": "166.67 h × 8 GiB × $0.009, less the included 25 GiB-h",
+          "amount": "$11.78"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "166.67 h × 16 GB × $0.000252, less the included 200 GB-h",
+          "amount": "$0.62"
+        },
+        {
+          "label": "CPU",
+          "arithmetic": "0 to 166.67 h × 2 vCPU × $0.072, less 6.25 included vCPU-h",
+          "amount": "$0 to $23.55"
+        },
+        {
+          "label": "Workers Paid",
+          "arithmetic": "monthly minimum",
+          "amount": "$5.00"
+        }
+      ],
+      "total": "$17.40 to $40.95",
+      "notes": [
+        "The 2 vCPU / 4 GiB brief is not buyable: 2 vCPU needs at least 6 GiB, so standard-3 is the nearest shape.",
+        "The floor assumes CPU stays inside the monthly allowance; the ceiling saturates both vCPUs for every run."
+      ]
+    },
+    "B": {
+      "headline": "$87.24 to $297.03 a month",
+      "shape": "standard-4 (4 vCPU / 12 GiB / 20 GB), 730 h",
+      "lines": [
+        {
+          "label": "Memory",
+          "arithmetic": "730 h × 12 GiB × $0.009, less the included 25 GiB-h",
+          "amount": "$78.62"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "730 h × 20 GB × $0.000252, less the included 200 GB-h",
+          "amount": "$3.63"
+        },
+        {
+          "label": "CPU",
+          "arithmetic": "0 to 730 h × 4 vCPU × $0.072, less 6.25 included vCPU-h",
+          "amount": "$0 to $209.79"
+        },
+        {
+          "label": "Workers Paid",
+          "arithmetic": "monthly minimum",
+          "amount": "$5.00"
+        }
+      ],
+      "total": "$87.24 to $297.03",
+      "notes": [
+        "The extra 30 GB has to live outside the sandbox; R2 standard storage would be about $0.45 a month.",
+        "\"Always-on\" is not guaranteed: a host restart stops the instance and wipes it."
+      ],
+      "flag": "This workload needs a disk substitution: 50 GiB exceeds the 20 GB maximum, and a stopped instance cannot remount the missing data automatically."
+    },
+    "C": {
+      "headline": "$11.57 to $24.08 a month",
+      "shape": "standard-3 (2 vCPU / 8 GiB / 16 GB), 90 running hours, stopped otherwise",
+      "lines": [
+        {
+          "label": "Memory",
+          "arithmetic": "90 h × 8 GiB × $0.009, less the included 25 GiB-h",
+          "amount": "$6.26"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "90 h × 16 GB × $0.000252, less the included 200 GB-h",
+          "amount": "$0.31"
+        },
+        {
+          "label": "CPU",
+          "arithmetic": "0 to 90 h × 2 vCPU × $0.072, less 6.25 included vCPU-h",
+          "amount": "$0 to $12.51"
+        },
+        {
+          "label": "Workers Paid",
+          "arithmetic": "monthly minimum",
+          "amount": "$5.00"
+        }
+      ],
+      "total": "$11.57 to $24.08",
+      "notes": [
+        "Stopped hours cost nothing, but the disk is recreated from the image unless a snapshot or R2 backup restores it.",
+        "The 20 GiB brief would need standard-4, which costs more at the floor."
+      ]
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Cloudflare, Inc., a Delaware corporation incorporated in July 2009 and listed on the NYSE as NET since 13 September 2019.",
+        "source": {
+          "url": "https://www.sec.gov/Archives/edgar/data/1477333/000147733326000016/cloud-20251231.htm",
+          "quote": "The Company was incorporated in Delaware in July 2009.",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Leadership",
+        "value": "Matthew Prince is CEO and co-chair; Michelle Zatlyn is President and co-chair; Thomas Seifert is CFO.",
+        "source": {
+          "url": "https://cloudflare.net/governance/leadership/default.aspx",
+          "quote": "Mr. Prince is one of our Co-Founders and has served as our Chief Executive Officer and Chair of our Board of Directors since July 2009.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Scale",
+        "value": "5,156 full-time employees at 31 December 2025, and about 332,000 paying customers.",
+        "source": {
+          "url": "https://www.sec.gov/Archives/edgar/data/1477333/000147733326000016/cloud-20251231.htm",
+          "quote": "As of December 31, 2025, we had 5,156 full-time employees",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Status",
+        "value": "A Containers component on the status page; no Sandboxes component and no sandbox-specific uptime percentage.",
+        "source": {
+          "url": "https://www.cloudflarestatus.com/api/v2/components.json",
+          "quote": "Containers",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "SLA",
+        "value": "No sandbox SLA on any plan. The Workers SLA covers Workers only and does not extend to Containers or Sandboxes.",
+        "source": {
+          "url": "https://www.cloudflare.com/workers-service-level-agreement/",
+          "quote": "This Workers Service Level Agreement (“Workers SLA”) applies to use of Workers only.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "SOC 2 Type II, ISO 27001, PCI DSS L1 and a HIPAA AoC, all company-wide. No public statement puts Containers or Sandboxes inside that scope.",
+        "source": {
+          "url": "https://www.cloudflare.com/trust-hub/compliance-resources/soc-2/",
+          "quote": "Cloudflare's SOC 2 Type II report covers security, confidentiality, and availability controls to protect customer data and is available to download from the Cloudflare dashboard.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Price changes",
+        "value": "Thirty days' notice before a fee change.",
+        "source": {
+          "url": "https://www.cloudflare.com/terms/",
+          "quote": "provided that we give you at least thirty (30) days' prior notice of such changes",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "A Worker that already holds the credentials and decides what the code can reach: the sandbox never gets a public port.",
+      "One microVM per user or per job, with no shared kernel, at a per-second price that reaches zero when it stops.",
+      "A team already on Cloudflare: one account, one bill, Workers and Durable Objects alongside.",
+      "A JavaScript or Python snippet that does not need a container at all: a Dynamic Worker starts faster."
+    ],
+    "badly": [
+      "A long job with no inbound requests: code inside does not count as activity, so a two-hour build dies at the timeout.",
+      "Any workload needing more than 4 vCPU, 12 GiB or 20 GB, or a GPU.",
+      "EU data residency: a sandbox cannot be pinned to a region.",
+      "An agent that expects a pause or a resumable machine: stopping deletes the disk and every process."
+    ]
+  },
+  "usability": {
+    "dashboard": "A Cloudflare account dashboard for Workers, containers, instance IDs and logs. There is no sandbox console and no create-a-sandbox button.",
+    "withoutCode": "No. The first step is a Worker with a Durable Object, and the image build needs Docker locally.",
+    "signup": "A Cloudflare account and the Workers Paid plan at a $5 monthly minimum, which needs a payment method. No waitlist.",
+    "docs": "121 sandbox pages, each with a Markdown twin, plus `llms.txt`. Support is the community portal, cases, chat or phone depending on plan; no response-time commitment is published for Workers Paid.",
+    "tripsUp": [
+      "The 10-minute idle stop belongs to the deprecated 0.x SDK, not to Sandboxes 1.0.",
+      "Stopping the instance deletes the files on its disk.",
+      "The 2 vCPU / 4 GiB and 4 vCPU / 8 GiB shapes do not exist.",
+      "Sandbox names are routing keys, not authentication.",
+      "A deploy does not update a running sandbox."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "The 10-minute idle stop is 0.x behaviour, not the current product",
+      "detail": "The legacy `Container` class and the 0.x SDK stop after 10 minutes by default. Sandboxes 1.0 has no default inactivity timeout, a 6-hour maximum, and stops shortly after the Durable Object goes inactive. The 0.x SDK gets fixes only until 31 December 2026.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://developers.cloudflare.com/sandbox/sdk/concepts/sandboxes/",
+          "quote": "After a period of inactivity (10 minutes by default, configurable via `sleepAfter`), the container stops to free resources.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+          "quote": "Without a timeout, Cloudflare stops the instance shortly after the Durable Object becomes inactive.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Start time is milliseconds on the product page and 1–3 seconds in the docs",
+      "detail": "The product page promises milliseconds; the Containers FAQ says a cold start is often 1–3 seconds depending on image size and execution time.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.cloudflare.com/products/sandboxes/",
+          "quote": "Sandboxes start in milliseconds, not minutes.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/faq/",
+          "quote": "Container cold starts can often be in the 1-3 second range, but this is dependent on image size and code execution time, among other factors.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Outbound internet is off by default, required, or on by default depending on the page",
+      "detail": "The sandbox security guide says `enableInternet: false` is the default; the API reference says the field is required when options are passed; the Containers guide says the other API allows internet by default. Treat egress as an explicit per-start decision.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://developers.cloudflare.com/sandbox/concepts/security/",
+          "quote": "A Container starts with `enableInternet: false` by default, so it cannot reach the Internet.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/configuration/outbound-traffic/",
+          "quote": "By default, a Container will allow internet access",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Instance maximums are called defaults that can be increased, and a hard table",
+      "detail": "The limits page says all maximums can be increased, directly above a custom-instance table that states 4 vCPU, 12 GiB and 20 GB as constraints. Whether support can lift them is not published.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/limits/",
+          "quote": "All instance size maximums and account limits on this page are defaults and can be increased.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/limits/",
+          "quote": "Maximum vCPU | 4",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "“Start building for free” does not include a free sandbox",
+      "detail": "The product page invites you to start for free; the Containers rate card lists N/A for memory, CPU and disk on the Free plan, and the docs require Workers Paid.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.cloudflare.com/products/sandboxes/",
+          "quote": "Start building for free",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://developers.cloudflare.com/sandbox/",
+          "quote": "Available on Workers Paid plan",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "A sandbox cannot be pinned to a region",
+      "detail": "Containers support region and jurisdiction constraints, but the `durable_object` policy that sandboxes use rejects placement constraints. Placement is chosen for latency and can change when an instance restarts.",
+      "status": "open"
+    },
+    {
+      "issue": "A stop wipes the disk",
+      "detail": "Stopping the instance deletes the files on its disk. Only a snapshot (30 days, 20 GB maximum) or an R2 directory backup or mount survives it.",
+      "status": "open"
+    },
+    {
+      "issue": "There is no sandbox SLA",
+      "detail": "The Workers SLA covers Workers only, and no Containers or Sandboxes SLA page exists. The status page has no Sandboxes component, so an outage surfaces as a Workers, Durable Objects or Containers incident.",
+      "status": "open"
+    },
+    {
+      "issue": "Compliance scope for this product is unpublished",
+      "detail": "Cloudflare holds SOC 2 Type II, ISO 27001, PCI DSS L1 and a HIPAA AoC company-wide. No public statement says the audit boundary includes Containers or Sandboxes, and the reports sit behind the dashboard.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "A Firecracker microVM per sandbox with no public port; inbound is HTTP through your Worker only.",
+    "Active-CPU billing: a stopped instance costs nothing, and idle time bills memory and disk but no CPU.",
+    "One account and one bill alongside Workers, Durable Objects and R2.",
+    "Snapshots, R2 directory backups and S3/R2 mounts cover three different persistence needs.",
+    "A large, mature security programme behind the platform."
+  ],
+  "sources": [
+    {
+      "label": "Sandboxes overview",
+      "url": "https://developers.cloudflare.com/sandbox/"
+    },
+    {
+      "label": "Sandbox lifetime",
+      "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/"
+    },
+    {
+      "label": "Sandbox security",
+      "url": "https://developers.cloudflare.com/sandbox/concepts/security/"
+    },
+    {
+      "label": "Container lifecycle",
+      "url": "https://developers.cloudflare.com/containers/concepts/architecture/"
+    },
+    {
+      "label": "Limits and instance types",
+      "url": "https://developers.cloudflare.com/containers/platform/limits/"
+    },
+    {
+      "label": "Containers pricing",
+      "url": "https://developers.cloudflare.com/containers/platform/pricing/"
+    },
+    {
+      "label": "Placement",
+      "url": "https://developers.cloudflare.com/containers/concepts/placement/"
+    },
+    {
+      "label": "Workers SLA",
+      "url": "https://www.cloudflare.com/workers-service-level-agreement/"
+    }
+  ]
+}

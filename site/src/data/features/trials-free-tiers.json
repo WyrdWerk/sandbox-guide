@@ -90,6 +90,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "no",
+      "figure": "None; $5 plan",
+      "scenario": "There is no free sandbox: the $5 Workers Paid plan is required, and its included container usage is worth about $0.73.",
+      "note": "No free tier for containers; the Free column is N/A. Workers Paid has a $5 monthly minimum and includes 25 GiB-hours, 375 vCPU-minutes and 200 GB-hours of container usage.",
+      "source": {
+        "url": "https://developers.cloudflare.com/sandbox/",
+        "quote": "Available on Workers Paid plan",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "yes",
+      "figure": "$200 credit, no card",
+      "scenario": "The trial is $200 of compute with no card and no published expiry; GPU sandboxes cannot spend it.",
+      "note": "A $200 free compute credit with no card, and Tier 1 access by email verification. The credit is not available for GPU sandboxes; its expiry is not published.",
+      "source": {
+        "url": "https://www.daytona.io/pricing",
+        "quote": "$200 in free compute included",
+        "confidence": "pricing-page"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "yes",
       "figure": "$100 one-off",
@@ -123,6 +147,18 @@
         "url": "https://lizard.build/docs/platform/billing",
         "quote": "Pro starts with a 7-day trial that includes $5 of usage. You add a card to start it; Apple Pay works too. Nothing is charged when the trial starts.",
         "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "partly",
+      "figure": "$30/month credits",
+      "scenario": "Starter gives $30 of compute a month, but a payment method is required before anything runs.",
+      "note": "Starter is $0 plus compute with $30 a month of credits; Team is $250 plus compute with $100. A payment method is required to use Modal.",
+      "source": {
+        "url": "https://modal.com/pricing",
+        "quote": "$30 / month free credits",
+        "confidence": "pricing-page"
       }
     },
     {

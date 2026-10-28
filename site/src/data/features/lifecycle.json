@@ -117,6 +117,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "no",
+      "figure": "No pause; stop wipes disk",
+      "scenario": "The instance stops, the disk and every process go with it, and tomorrow starts from a snapshot that restores files but not the REPL.",
+      "note": "The instance runs only until something stops it; its processes and the files on its disk end with it. A snapshot carries files into a new instance, not memory. There is no paused state.",
+      "source": {
+        "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+        "quote": "An instance runs only until something stops it, and its processes and the files on its disk end with it.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "partly",
+      "figure": "VM pause: RAM; container stop",
+      "scenario": "The container stops: files kept, REPL gone. The VM class would pause with memory intact, and either way the disk keeps billing.",
+      "note": "Pause exists only on Linux VM and Windows sandboxes; a container stop keeps the filesystem and loses memory. Stopped and paused sandboxes bill reserved disk only, and archive is container-only.",
+      "source": {
+        "url": "https://www.daytona.io/docs/en/sandboxes.md",
+        "quote": "The filesystem and memory state are preserved, and CPU is no longer consumed.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "partly",
       "figure": "RAM + disk",
@@ -149,6 +173,18 @@
       "source": {
         "url": "https://lizard.build/docs/sandboxes",
         "quote": "A stop (kill or expiration) deletes the sandbox's disk: only files on an attached Persistent Volume at `/workspace` and the snapshots you took remain.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "no",
+      "figure": "No pause; terminate",
+      "scenario": "There is nothing to pause: the sandbox is terminated and tomorrow starts from a filesystem snapshot, so the REPL is gone.",
+      "note": "No paused or stopped state. Terminate sends SIGKILL; a memory snapshot terminates the source and restores a new sandbox within seven days. The nearest thing to a resume is an automatic exit snapshot, which is filesystem only.",
+      "source": {
+        "url": "https://modal.com/docs/guide/sandbox-snapshots",
+        "quote": "Snapshotting a Sandbox will currently cause it to terminate.",
         "confidence": "docs-confirmed"
       }
     },
@@ -231,7 +267,7 @@
         "what": "You check the dev server, the cron job and the IP address the agent had written down."
       }
     ],
-    "turn": "Ten of the twelve can restore memory in at least one mode, but not all make it the default. Boat keeps nothing, and Lizard's stop deletes the disk."
+    "turn": "Twelve of the fifteen can restore memory in at least one mode, but not all make it the default. Boat and Cloudflare keep nothing, and Lizard's stop deletes the disk."
   },
   "questions": [
     "Does your pause keep RAM, keep only files, or destroy the machine — and what does your documentation call each state?",

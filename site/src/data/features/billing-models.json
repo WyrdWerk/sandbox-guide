@@ -90,6 +90,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "partly",
+      "figure": "$0.072/vCPU-hour active",
+      "scenario": "The waiting box pays memory and disk but no CPU; the busy box pays active CPU on top.",
+      "note": "Per 10 ms while running: active CPU $0.072/vCPU-hour, provisioned memory $0.009/GiB-hour and provisioned disk $0.000252/GB-hour. A stopped instance bills nothing.",
+      "source": {
+        "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+        "quote": "Memory and disk usage are based on the *provisioned resources* for the instance type you select, while CPU usage is based on *active usage* only.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "partly",
+      "figure": "$0.0504/vCPU-hour",
+      "scenario": "The waiting box pays for its reserved 2 vCPU and 4 GiB every second; stopped, it pays disk only.",
+      "note": "Reserved vCPU at $0.0504/hour, memory at $0.0162/GiB-hour and disk at $0.000108/GiB-hour, billed per second with no plan fee. Windows adds $0.0858/vCPU-hour, which may replace or add to the Linux rate.",
+      "source": {
+        "url": "https://www.daytona.io/pricing",
+        "quote": "vCPU $0.0504/h",
+        "confidence": "pricing-page"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "partly",
       "figure": "$0.000014/vCPU-s",
@@ -123,6 +147,18 @@
         "url": "https://lizard.build/pricing",
         "quote": "Pro costs $19 a month and includes $19 of usage for the whole platform: apps, databases, Sandboxes, storage and egress.",
         "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "partly",
+      "figure": "$0.141912/core-hour",
+      "scenario": "The waiting box pays max(request, actual), so idle time inside the request bills at full rate; only termination stops the meter.",
+      "note": "Per second on the higher of request and actual use: CPU $0.141912/core-hour and memory $0.024012/GiB-hour at the non-preemptible sandbox rate, 3× list. Disk is billed as memory at 20:1.",
+      "source": {
+        "url": "https://modal.com/docs/guide/sandbox-resources",
+        "quote": "Modal Sandboxes are billed by the second based on whichever is higher: your resource request or your actual usage.",
+        "confidence": "docs-confirmed"
       }
     },
     {

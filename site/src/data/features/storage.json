@@ -90,6 +90,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "partly",
+      "figure": "20 GB; wiped on stop",
+      "scenario": "Postgres in /var/lib is gone when the instance stops; only a snapshot or a mounted R2 bucket keeps the data.",
+      "note": "20 GB maximum disk, deleted when the instance stops. A snapshot keeps the root filesystem for 30 days; an R2 directory backup or S3/R2 mount outlives every instance.",
+      "source": {
+        "url": "https://developers.cloudflare.com/sandbox/files/",
+        "quote": "Stopping the instance deletes the files on its disk.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "partly",
+      "figure": "10 GiB cap; volumes free",
+      "scenario": "Postgres in /var/lib survives a stop because the whole disk persists, but it bills while stopped and cannot exceed 10 GiB.",
+      "note": "The whole disk persists and bills in stopped and paused states at $0.000108/GiB-hour. Volumes are S3-backed FUSE mounts, 100 per organisation, free, and not usable for block storage such as database tables.",
+      "source": {
+        "url": "https://www.daytona.io/docs/en/volumes.md",
+        "quote": "Daytona volumes are included at no additional cost. Each organization can create up to 100 volumes, and volume data does not count against your storage quota.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "partly",
       "figure": "10–20 GiB; volumes in beta",
@@ -122,6 +146,18 @@
       "source": {
         "url": "https://lizard.build/docs/sandboxes/volumes.md",
         "quote": "New volumes allow **1 to 50 GB**, in whole GB, with **5 GB** as the default.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "partly",
+      "figure": "512 GiB; billed as memory",
+      "scenario": "The database lives on the fixed 512 GiB root disk, which cannot be resized and is billed as memory at 20:1; a Volume is the durable option.",
+      "note": "A fixed 512 GiB root filesystem, not resizable, billed by raising the memory request at a 20:1 ratio. Volumes are separate, survive the sandbox, are excluded from snapshots, and cost $0.09/GiB-month after 1 TiB.",
+      "source": {
+        "url": "https://modal.com/docs/guide/sandbox-resources",
+        "quote": "On the VM runtime, the root filesystem is a fixed 512 GiB.",
         "confidence": "docs-confirmed"
       }
     },
@@ -204,7 +240,7 @@
         "what": "Resume and start Postgres. If the disk was reset to the template, the database is gone and the install has to run again."
       }
     ],
-    "turn": "A provider that persists the whole disk keeps the database; one that persists only /workspace, or a single /data disk, does not. Retention is the second half: a 14-day window turns a long weekend into data loss."
+    "turn": "A provider that persists the whole disk keeps the database; one that persists only /workspace or a single /data disk does not, and one that wipes the disk on stop loses it entirely. Retention is the second half: a 14-day window turns a long weekend into data loss."
   },
   "questions": [
     "Does the whole filesystem survive a stop, or only /workspace or /data, and what resets from the template?",

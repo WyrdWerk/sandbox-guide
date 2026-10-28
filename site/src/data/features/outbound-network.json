@@ -90,6 +90,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "partly",
+      "figure": "$0.025/GB",
+      "scenario": "Outbound is off unless `enableInternet` is true; with it off, only allowedHosts or an outbound handler on ports 80 and 443 can leave.",
+      "note": "Off by default; only ports 80 and 443 through allowedHosts or an outbound handler. No static egress IP or private network. Egress is $0.025/GB in North America and Europe, $0.04–$0.05 elsewhere.",
+      "source": {
+        "url": "https://developers.cloudflare.com/sandbox/concepts/security/",
+        "quote": "A Container starts with `enableInternet: false` by default, so it cannot reach the Internet.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "partly",
+      "figure": "Tier 3 for internet",
+      "scenario": "Package installs fail on Tier 1: outbound is restricted and cannot be overridden per sandbox; full internet needs a $500 top-up.",
+      "note": "Tier 1 and 2 are restricted and cannot be overridden per sandbox; Tier 3 and 4 get full internet. Per-sandbox controls are block-all, CIDR, domain or an upstream proxy. No static egress IP or egress price is published.",
+      "source": {
+        "url": "https://www.daytona.io/docs/en/network-limits.md",
+        "quote": "**Tier 1 & Tier 2**: Network access is restricted and cannot be overridden at the sandbox level.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "yes",
       "figure": "No rate; no static IP",
@@ -122,6 +146,18 @@
       "source": {
         "url": "https://lizard.build/docs/platform/limits",
         "quote": "Sandbox egress has no separate per-GB charge. The included allowance is 2 TB per account over a rolling 30 days",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "yes",
+      "figure": "$0.04/GiB",
+      "scenario": "The download runs on the open default; over the plan allowance it bills $0.04 a GiB, including private traffic between containers.",
+      "note": "Open by default, with block-all, CIDR and domain allowlists; DNS leaks past the allowlists. Static IPs come from Proxies on Team and Enterprise. Egress is $0.04/GiB over 1, 10 or 100 TiB by plan.",
+      "source": {
+        "url": "https://modal.com/docs/guide/sandbox-networking",
+        "quote": "By default, Sandboxes can make outbound connections to any public IP address.",
         "confidence": "docs-confirmed"
       }
     },

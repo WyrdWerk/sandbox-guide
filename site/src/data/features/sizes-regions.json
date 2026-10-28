@@ -90,6 +90,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "partly",
+      "figure": "4 vCPU / 12 GiB / 20 GB",
+      "scenario": "16 GB of memory does not fit: the ceiling is 12 GiB, disk stops at 20 GB, and the sandbox cannot be pinned to the EU.",
+      "note": "Six presets from `lite` to `standard-4`; custom sizes are capped at 4 vCPU / 12 GiB / 20 GB with at least 3 GiB of memory per vCPU. No GPU, `linux/amd64` only, and placement is chosen by Cloudflare near the request.",
+      "source": {
+        "url": "https://developers.cloudflare.com/containers/platform/limits/",
+        "quote": "Maximum vCPU | 4",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "partly",
+      "figure": "4 vCPU / 8 GiB / 10 GiB",
+      "scenario": "16 GB of memory does not fit: the ceiling is 4 vCPU / 8 GiB, disk stops at 10 GiB, and `us` or `eu` are the only regions.",
+      "note": "Default 1 vCPU / 1 GB / 3 GiB; the organisation ceiling is 4 vCPU / 8 GB / 10 GiB, with `daytona-large` at 4/8/10. Windows presets reach 4/16/50 and GPU sandboxes attach up to 8 GPUs. Two shared regions, `us` and `eu`.",
+      "source": {
+        "url": "https://www.daytona.io/docs/en/sandboxes.md",
+        "quote": "Organizations get a maximum sandbox resource limit of **4 vCPUs**, **8GB RAM**, and **10GB disk**.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "partly",
       "figure": "8 vCPU / 8 GiB; no GPU",
@@ -122,6 +146,18 @@
       "source": {
         "url": "https://lizard.build/docs/sandboxes",
         "quote": "Large | 8 | 16 GB | 50 GB | $0.0648/hour",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "partly",
+      "figure": "No fixed sizes; 1 core = 2 vCPU",
+      "scenario": "No fixed menu: you ask for 1 core and 16 GiB and Modal schedules it, paying 1.15× to pin a broad region or 1.75× for a narrow one.",
+      "note": "Fractional physical cores (1 core = 2 vCPUs as documented) and MiB of memory, default 0.125 core / 128 MiB. Disk is a fixed 512 GiB. The maximum shape is unpublished. Regions are selectable at 1.15× broad and 1.75× narrow.",
+      "source": {
+        "url": "https://modal.com/docs/guide/sandbox-resources",
+        "quote": "The cpu parameter specifies physical CPU cores (1 core = 2 vCPUs), and memory specifies MiB",
         "confidence": "docs-confirmed"
       }
     },

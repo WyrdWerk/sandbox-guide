@@ -90,6 +90,30 @@
       }
     },
     {
+      "provider": "cloudflare-sandbox",
+      "verdict": "partly",
+      "figure": "No default; 6 h max",
+      "scenario": "Still running at 20 minutes if the Durable Object stays active; if it goes inactive the instance stops shortly after, unless a timeout of up to 6 hours was set.",
+      "note": "No default inactivity timeout in Sandboxes 1.0, a 6-hour maximum, and the value is lost on a Durable Object restart. Code inside does not count as activity. The 10-minute default belongs to the legacy 0.x SDK.",
+      "source": {
+        "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+        "quote": "After the Durable Object becomes inactive, the instance keeps running for the time set with `setInactivityTimeout()`, up to 6 hours.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "daytona",
+      "verdict": "partly",
+      "figure": "15 min container; 60 min VM",
+      "scenario": "Stops at 15 minutes even mid-build, because only external calls reset the timer; the VM class would pause at 60 minutes instead.",
+      "note": "Container and GPU auto-stop after 15 idle minutes by default; VM classes auto-pause after 60. Only lifecycle calls, preview requests, SSH and Toolbox calls reset it. An optional TTL destroys in any state; a stopped container archives after 7 days.",
+      "source": {
+        "url": "https://www.daytona.io/docs/en/sandboxes.md",
+        "quote": "if not set, the default interval of 15 minutes is used",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "e2b",
       "verdict": "partly",
       "figure": "5 min, then killed",
@@ -122,6 +146,18 @@
       "source": {
         "url": "https://lizard.build/docs/sandboxes",
         "quote": "Five minutes by default from the SDK and CLI; no expiration by default from the raw API and dashboard",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "modal",
+      "verdict": "partly",
+      "figure": "5 min lifetime; no idle",
+      "scenario": "Terminated at the five-minute default lifetime before the model answers, unless the timeout was raised to at most 24 hours.",
+      "note": "Default maximum lifetime 5 minutes, up to 24 hours. Idle timeout is off by default and terminates rather than pauses. There is no lifetime-free option; longer work needs snapshots.",
+      "source": {
+        "url": "https://modal.com/docs/guide/sandboxes",
+        "quote": "Sandboxes have a default maximum lifetime of 5 minutes.",
         "confidence": "docs-confirmed"
       }
     },
