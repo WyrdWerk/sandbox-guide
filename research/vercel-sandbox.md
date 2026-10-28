@@ -71,6 +71,8 @@ Research date: 2026-10-28. Scope: public information, not a product test. No acc
 - **docs-confirmed** — [Secure Compute](https://vercel.com/docs/sandbox/concepts/secure-compute#pricing): “Traffic sent over VPC peering with your AWS environment does not incur data transfer charges.”
 - **docs-confirmed** — [Secure Compute](https://vercel.com/docs/sandbox/concepts/secure-compute#pricing): “When a sandbox is attached to Secure Compute, traffic that leaves the private network via the public internet is billed as Private Data Transfer.”
 - **pricing-page** — [Networking](https://vercel.com/docs/sandbox/pricing#network): “Data your sandbox sends to the internet, plus all traffic to and from exposed ports, is billable and measured in GB.”
+- **docs-confirmed** — [Sandbox concepts](https://vercel.com/docs/sandbox/concepts#network-access): “Exposed ports are accessible via a public URL, so be mindful of what services you run.”
+- **not-published** — Directly attaching a customer's own domain to a Sandbox port was not confirmed. Searches covered Vercel's Sandbox concepts and SDK reference, custom-domain documentation, and public queries for Sandbox ports, custom domains, subdomains and proxies. A Vercel-generated public URL is not proof that a custom hostname can be attached; ask Vercel whether a separately managed proxy is supported.
 - **not-published** — A general raw inbound TCP, personal SSH, or direct public IPv4 interface was not confirmed here. Exposed web ports do not by themselves establish any of those interfaces.
 
 ## 7. Interfaces
@@ -162,7 +164,7 @@ Research date: 2026-10-28. Scope: public information, not a product test. No acc
 - **docs-confirmed** — [Hobby plan](https://vercel.com/docs/plans/hobby): “Unlock the full potential of Vercel Pro during your 14-day trial with $20 in credits.”
 - **inferred** — A free Hobby allotment and a time-limited Pro trial are different things: the quota and restrictions in section 10 apply to Hobby; the trial's post-expiry treatment and billing requirements should be checked before signup.
 - **inferred** — The dashboard described in section 7 supports inspection and stop/delete; the documented CLI/SDK workflows and agent configuration imply a technical setup burden. The dashboard evidence does not establish a complete no-code agent-building workflow.
-- **not-published** — Whether a credit card is required for each signup/trial path, whether a waitlist applies, what happens at trial expiry for every signup path, and exact support entitlements were not verified. Do not infer “no card” from a free plan.
+- **not-published** — Whether a credit card is required for each signup/trial path, whether a waitlist applies, and what happens at trial expiry for every signup path were not verified. Do not infer “no card” from a free plan. For published support terms, see section 17.
 
 ## 16. Concept examples for the guide
 
@@ -176,7 +178,68 @@ Research date: 2026-10-28. Scope: public information, not a product test. No acc
 - **inferred** — Trial: free capped personal Hobby differs from time-limited Pro trial ([Hobby](https://vercel.com/docs/plans/hobby), [pricing](https://vercel.com/docs/sandbox/pricing)).
 - **inferred** — Secrets: outbound proxy injection can keep credentials out of the guest ([firewall](https://vercel.com/docs/sandbox/concepts/firewall)).
 
+## 17. The company behind it
+
+### Entity, people, funding and launch
+
+- **docs-confirmed** — Vercel's [data processing addendum](https://vercel.com/legal/dpa) identifies “Vercel Inc., a Delaware corporation”. Delaware is the incorporation jurisdiction, not a data-storage location.
+- **docs-confirmed** — The [Series F announcement](https://vercel.com/blog/series-f) identifies its author as “Guillermo Rauch CEO and Founder, Vercel”.
+- **docs-confirmed** — [Series F announcement](https://vercel.com/blog/series-f): “Our founding insight back in 2015 was simple”. This establishes a founding year, not a precise day.
+- **docs-confirmed** — Vercel's [original Sandbox announcement](https://vercel.com/changelog/run-untrusted-code-with-vercel-sandbox) is dated “25 Jun 2025”. This is the announcement date, not an independently verified first-customer-access date.
+- **docs-confirmed** — [Sandbox GA changelog](https://vercel.com/changelog/vercel-sandboxes-ga), dated “30 Jan 2026”: “Vercel Sandboxes are now generally available, providing an ephemeral compute primitive for safely executing untrusted code.”
+- **inferred** — The [GA announcement](https://vercel.com/changelog/vercel-sandboxes-ga) identifies Sandbox itself as generally available rather than beta; that does not establish the release status of every individual Sandbox feature.
+- **docs-confirmed** — Vercel's [Series F announcement](https://vercel.com/blog/series-f), dated “30 Sep 2025”: “Today, Vercel announced an important milestone: a Series F funding round valuing our company at $9.3 billion.”
+- **docs-confirmed** — [Series F announcement](https://vercel.com/blog/series-f): “The $300M investment is co-led by longtime partners at Accel and new investors at GIC, alongside other incredible supporters.”
+- **third-party** — [Forbes company profile](https://www.forbes.com/companies/vercel/), last updated September 3, 2025: “Employees 600”. This is a dated third-party figure, not a current verified employee count.
+- **not-published** — The sources examined did not establish a more precise company founding date, current independently verified headcount, or a complete current investor/capitalization table. The cited Series F is the latest round verified in this pass, not proof that no later financing occurred.
+
+### Status and SLA
+
+- **docs-confirmed** — Vercel's [public status page](https://www.vercel-status.com/), observed 2026-10-28: “Sandbox Operational”.
+- **not-published** — The status page listed Sandbox but did not show a Sandbox-specific 90-day uptime percentage in the retrieved live page. Other products have percentages; do not attribute those numbers to Sandbox. A status snapshot is not an SLA or an independently audited reliability measurement.
+- **docs-confirmed** — The [Enterprise SLA](https://vercel.com/legal/sla#services-availability) says Vercel “will use commercially reasonable efforts to make the platform as a service that serves your content to your websites and/or applications”.
+- **docs-confirmed** — The [Enterprise SLA](https://vercel.com/legal/sla#services-availability) defines the target as “available 99.99% of the time, excluding any Excused Downtime events”.
+- **docs-confirmed** — The [Enterprise SLA](https://vercel.com/legal/sla#unscheduled-downtime): “For the avoidance of doubt, this SLA does not apply to components of the Vercel platform that do not serve customer content to your websites and/or applications (by way of example only, the API's or CLI).”
+- **docs-confirmed** — [Support queue guide](https://vercel.com/kb/guide/vercel-support-queue-time): “Our Pro and Hobby tiers are not covered by a support plan or SLA.”
+- **not-published** — The public Enterprise SLA does not expressly name Sandbox in the text reviewed; no Sandbox-specific availability commitment was found. Whether a particular sandbox port serving content qualifies is contract-dependent and not established here. Ask for Sandbox and control-plane coverage in the signed order; do not equate a 99.99% platform claim with a Sandbox SLA.
+
+### Support by plan
+
+- **docs-confirmed** — [Support terms](https://vercel.com/legal/support-terms#community-support-forum): “All Customers have access to our Community Support Forum.”
+- **docs-confirmed** — [Support terms](https://vercel.com/legal/support-terms#community-support-forum): “Customers on our Hobby plan are expected to use the Forum to discuss suspected platform issues.”
+- **docs-confirmed** — [Support terms](https://vercel.com/legal/support-terms#submitting-a-support-ticket): “The Customer holds a current paid subscription with Vercel (e.g. an Enterprise or Pro tier subscription).” This is one listed condition for submitting a ticket; the same section also requires the scope and best-practice conditions.
+- **docs-confirmed** — [Support terms](https://vercel.com/legal/support-terms#submitting-a-support-ticket), Hobby ticket exceptions: “The request is in relation to a billing issue, or” and “The request is in relation to a login or registration issue.”
+- **docs-confirmed** — [Support terms](https://vercel.com/legal/support-terms#responses): “We only commit to respond to Customers with an Enterprise subscription, using the target response time guidelines below.”
+- **docs-confirmed** — [Support terms](https://vercel.com/legal/support-terms#enterprise-target-response-time-guidelines), table row for the highest severity: “Severity 1 | < 4 business hours | < 2 hours (24/7)”. The headings are Standard and Premium, respectively.
+- **inferred** — The [support terms](https://vercel.com/legal/support-terms) distinguish a target initial response from a guaranteed repair time; check the order form for the actual tier and any negotiated terms.
+
+### Security and compliance scope
+
+- **docs-confirmed** — [Vercel compliance documentation](https://vercel.com/docs/security/compliance#soc-2-type-2): “Vercel has a SOC 2 Type 2 attestation for Security, Confidentiality, and Availability.”
+- **docs-confirmed** — [Vercel compliance documentation](https://vercel.com/docs/security/compliance#iso-27001:2022): “Vercel is ISO 27001:2022 certified.”
+- **docs-confirmed** — [Vercel compliance documentation](https://vercel.com/docs/security/compliance#hipaa): “Signing Business Associate Agreements (BAAs) with eligible Pro and Enterprise customers”.
+- **docs-confirmed** — [Vercel compliance documentation](https://vercel.com/docs/security/compliance#hipaa): “Pro teams can purchase the HIPAA BAA add-on from their team's Billing settings.”
+- **docs-confirmed** — [Self-serve terms](https://vercel.com/legal/terms#103-hipaa-compliance): “You shall not use the Services to host any Protected Health Information or information that is subject to the Health Insurance Portability and Accountability Act (HIPAA), unless you first obtain Vercel's prior written approval.”
+- **docs-confirmed** — [Vercel compliance documentation](https://vercel.com/docs/security/compliance#pci-dss): “A copy of our PCI DSS compliance documentation can be obtained through our Trust Center”. The linked trust center is [security.vercel.com](https://security.vercel.com/).
+- **not-published** — The public compliance pages reviewed do not establish whether Sandbox specifically falls within the current SOC 2 audit boundary, ISO certificate scope, or a customer's HIPAA BAA. Request the actual reports, product scope and written confirmation before handling regulated data; platform-wide statements alone do not establish Sandbox coverage.
+
+### Terms a buyer should read
+
+- **docs-confirmed** — [Self-serve terms](https://vercel.com/legal/terms#term-and-termination): “All of Your Content on the Services (if any) may be permanently deleted by Vercel upon any termination of your account.”
+- **docs-confirmed** — [Data processing addendum](https://vercel.com/legal/dpa): “Termination or expiration of the Agreement serves as instruction for Vercel to delete all Customer Data within a commercially reasonable timeframe.”
+- **docs-confirmed** — [Data processing addendum](https://vercel.com/legal/dpa): “This Addendum applies to Vercel's Processing of Personal Data as a Processor under the Agreement for Customers who are on Enterprise and Pro plans.”
+- **inferred** — The [self-serve terms](https://vercel.com/legal/terms) permit deletion on account termination; the [DPA](https://vercel.com/legal/dpa) states a commercially reasonable timeframe for covered Customer Data, not a fixed number of days. These clauses address different scopes; export needed data before terminating and check applicable contractual exceptions.
+- **docs-confirmed** — [Self-serve payment terms](https://vercel.com/legal/terms#182-payments): “Vercel may change its fees and payment terms; provided however, that such changes will not take effect for you until the start of the next payment period.”
+- **docs-confirmed** — [Self-serve payment terms](https://vercel.com/legal/terms#182-payments): “Vercel will provide written notice to you for any changes to the fees that affect the Services purchased by you.”
+- **docs-confirmed** — [Enterprise terms](https://vercel.com/legal/enterprise-terms#13-payment-of-fees): “Vercel may change its Fees and payment terms at its discretion; provided however, that such changes will not take effect for you until the start of the next Order Form or Statement of Work, as applicable.”
+- **not-published** — These quoted fee clauses do not state a fixed number of days' advance notice. A separate signed agreement, order form or mandatory law may change the position; do not substitute the account-termination notice period for a price-change notice period.
+- **docs-confirmed** — [Self-serve terms](https://vercel.com/legal/terms#3-your-content): “In addition, if you are on a Hobby plan or trial Pro plan, you agree that we may use Your Content to train our artificial intelligence (“AI”) and machine learning models, and we may share Your Content with third parties for the purpose of developing and improving their products, including training and improving their AI and machine learning models (collectively, “Model Training”).”
+- **docs-confirmed** — [Self-serve terms](https://vercel.com/legal/terms#3-your-content): “If you are on a paid Pro plan, Model Training is not enabled by default and you may opt in to Model Training.”
+- **docs-confirmed** — [Self-serve terms](https://vercel.com/legal/terms#3-your-content): “You may opt-out of Model Training at any time by adjusting your Team account settings or by upgrading to an Enterprise plan.”
+- **inferred** — The [self-serve content terms](https://vercel.com/legal/terms#3-your-content) are consequential for confidential workloads; confirm the exact treatment of Sandbox content, the relevant plan and team setting with Vercel. This is a reading of public terms, not legal advice.
+
 ## Research and verification limitations
 
 - **inferred** — Context.dev live search and fresh scrapes, TinyFish Fetch through Composio, and Parallel Search through Composio succeeded. No native Amp web fallback was used. Battleships JSON and Markdown were read as secondary references. The changing regional selector, signup flow, and the exact trial exit were not exercised; no paid Sandbox was started.
 - **inferred** — Quote audit after the claim-level revision: 81 evidence quotations were rechecked against freshly fetched live sources; 80 matched the provider's Markdown or third-party source after removing Markdown formatting, and the remaining trial quote matched the freshly rendered Hobby page via Context.dev, for 81 of 81 matches. This checks quotation text, not product behavior.
+- **inferred** — Company-info pass: 38 newly added quote excerpts were checked against fresh public pages on 2026-10-28; direct HTML matched 31, and the remaining 7 were matched against fresh Context.dev Markdown, including the custom-domain port evidence and the model-training clause. No account or paid resource was created.

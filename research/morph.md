@@ -56,14 +56,21 @@ Research date: 2026-10-28. Desk research only; no account or workload was create
 
 - **docs-confirmed** — User-selected resource counts are documented: “To create a new snapshot, specify the resource specifications like” `vcpus`, `memory`, and `disk_size`. [Snapshots](https://cloud.morph.so/docs/documentation/instances/creating-snapshot)
 - **pricing-page** — Actions has fixed named sizes; for example “2 vCPU / 4 GB RAM / 40 GB disk” and “3 MCU/hr”. [Pricing](https://cloud.morph.so/web/subscribe)
-- **not-published** — A complete VM size catalog, GPU availability, CPU architecture for ordinary Linux VMs, host locations, region selection and data residency were not confirmed in primary material inspected. Experimental OSX x86 is not proof of all host architectures.
+- **pricing-page** — Scale lists organization-level limits “Up to 1024 vCPU”, “Up to 4096 GB”, and “Up to 16384 GB”. [Pricing](https://cloud.morph.so/web/subscribe)
+- **inferred** — These are plan-wide ceilings, not evidence that a single VM can reach those sizes. Evidence: the resource allocation table on the pricing page above.
+- **not-published** — Maximum CPU, RAM and disk per individual VM; GPU availability; ordinary Linux VM architecture; host locations and customer-selectable regions remain unverified. Searched Morph's [docs index](https://cloud.morph.so/docs/llms-full.txt), [pricing](https://cloud.morph.so/web/subscribe), API reference and web search on GPU, x86, architecture and region. The experimental OSX x86 claim in §2 does not establish ordinary host architecture; metadata examples mentioning regions do not establish placement.
 
 ## 6. Network and secrets
 
 - **docs-confirmed** — An instance can expose an HTTP service: “Expose Http Service”. [API](https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post)
 - **docs-confirmed** — Devbox templates integrate with a secret manager: “Every devbox is created from a template that integrates with our secrets manager”. [Devboxes](https://cloud.morph.so/docs/devboxes/getting-started)
 - **docs-confirmed** — Secret access must be scoped carefully: “Request the smallest scope set that works.” [Agent tokens](https://cloud.morph.so/docs/devboxes/agent-tokens)
-- **not-published** — Egress price, destinations and filtering guarantees, static IPs, and whether arbitrary third-party credentials are injected without exposure inside the VM were not established. A secret manager alone does not prove a secret proxy.
+- **docs-confirmed** — Outbound connectivity is illustrated, not comprehensively guaranteed: the Claude Code example runs `instance.exec("curl -fsSL https://claude.ai/install.sh | sh")`. [Claude Code example](https://cloud.morph.so/docs/examples/claude-code)
+- **inferred** — The external download example is evidence of intended internet access, but not a guarantee of unrestricted ports or destinations. Evidence: the Claude Code example above.
+- **docs-confirmed** — The terms say egress can be charged: “Typical components may include but are not limited to compute, snapshot storage, and egress.” [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **not-published** — Outbound domain/IP allowlists, static egress IP and a per-GB egress price were not found. Searched the [pricing page](https://cloud.morph.so/web/subscribe), [HTTP services](https://cloud.morph.so/docs/documentation/instances/http-services), [docs index](https://cloud.morph.so/docs/llms-full.txt), terms and web search for egress, outbound, allowlist and static IP. Do not assume egress is free.
+- **not-published** — Custom-domain support for exposed HTTP services was not found in [HTTP services](https://cloud.morph.so/docs/documentation/instances/http-services), the [API reference](https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post), the docs index or web search. A Morph-generated public URL is not proof that a buyer can attach their own domain.
+- **not-published** — Whether arbitrary third-party credentials are injected without exposure inside the VM was not established; searched Devbox secrets and agent-token docs. A secret manager alone does not prove a secret proxy.
 
 ## 7. Interfaces
 
@@ -97,8 +104,10 @@ Research date: 2026-10-28. Desk research only; no account or workload was create
 - **pricing-page** — Overage: “Additional credits billed pay-as-you-go”. [Pricing](https://cloud.morph.so/web/subscribe)
 - **docs-confirmed** — During pause: “You only get charged for the snapshot taken”. [Pause](https://cloud.morph.so/docs/documentation/instances/pause-resume)
 - **docs-confirmed** — Separate object-storage rate: “Current runtime price: `$0.0054794/GiB-hour`” and “Approximate monthly equivalent: `~$4.00/GiB-month`”. [Volumes](https://cloud.morph.so/docs/volumes/getting-started)
+- **docs-confirmed** — The terms state “Per-second compute; per-operation Snapshot / Instance charges; snapshot / lineage storage (GB-hour); egress.” [Terms, Exhibit B](https://cloud.morph.so/web/legal/terms-of-service)
+- **inferred** — This newly found per-second billing statement corrects the earlier claim that compute granularity was unpublished. The terms mention per-operation charges without listing their amounts; the worked examples remain estimates, not complete invoices. Evidence: the terms quotation above.
 - **inferred** — At the stated $0.05 per MCU and assuming 1 TB = 1,000 GB, 5 TB snapshot-hours gives $0.00001 per GB-hour. Binary vs decimal units and the provider's measured snapshot size could change the actual calculation; evidence is the pricing page above.
-- **not-published** — Per-task billing granularity, minimum billable duration, snapshot allocation versus actual-byte accounting, plan credit rollover, taxes, network charges and whether branch-created hidden snapshots incur separate storage charges are unresolved. Do not treat unlisted charges as zero.
+- **not-published** — Minimum billable duration, per-operation prices, snapshot allocation versus actual-byte accounting, plan credit rollover, applicable taxes, egress rates and whether branch-created hidden snapshots incur separate storage charges are unresolved. Do not treat unlisted charges as zero.
 
 ## 11. Worked examples
 
@@ -146,7 +155,7 @@ All three are **inferred**, not invoices. Evidence: the pricing-page MCU formula
 - **docs-confirmed** — A dashboard workflow exists: “Create a devbox from a template (or a snapshot)” and “Open in VSCode”. [Devboxes](https://cloud.morph.so/docs/devboxes/getting-started)
 - **inferred** — A dashboard can create a workspace without writing API code, but actually using or setting up the environment may still require technical skills; the dashboard instructions above do not establish a no-code agent experience.
 - **docs-confirmed** — First-run guidance explicitly asks users to install tooling and set a key: “Install the SDK (or CLI)” and “Set your API key”. [First success](https://cloud.morph.so/docs/start-here/first-success)
-- **not-published** — Card requirement, whether invitations are currently required, trial expiration, what happens when credits run out, support response commitments and an independent status page were not verified. The free-credit conflict is in §14.
+- **not-published** — Card requirement, whether invitations are currently required, trial expiration, what happens when credits run out and support response commitments were not verified. The free-credit conflict is in §14; the provider's public status page is in §17.
 - **inferred** — The most likely surprises are the zero-credit/300-hour contradiction, paid snapshots after pausing, distinct boot and start actions, and separately billed object storage. Evidence: §§3, 4, 10 and 14.
 
 ## 16. Concept examples for the guide
@@ -161,6 +170,51 @@ All three are **inferred**, not invoices. Evidence: the pricing-page MCU formula
 - **inferred** — Trial: conflicting primary descriptions show why a free plan is not the same as guaranteed free usage; evidence: [signup](https://cloud.morph.so/docs/documentation/setup/signing-up) and [pricing](https://cloud.morph.so/web/subscribe), quoted in §14.
 - **inferred** — Secrets: a template-integrated manager and scoped agent tokens, with proxy semantics unverified; evidence: [Devboxes](https://cloud.morph.so/docs/devboxes/getting-started) and [agent tokens](https://cloud.morph.so/docs/devboxes/agent-tokens), quoted in §§6 and 8.
 
+## 17. The company behind it
+
+### Entity, people and capital
+
+- **docs-confirmed** — The terms identify the company as “Morph Labs, Inc.” and give the address “2565 3rd Street, San Francisco, CA 94107, USA”. [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **not-published** — State or country of incorporation and registry number were not established: searched the [terms](https://cloud.morph.so/web/legal/terms-of-service), Morph site and public web for the exact legal name and incorporation. A San Francisco contact address is not proof of incorporation in California.
+- **third-party** — Tracxn describes the company as “founded in 2023 by Jesse Han” and lists him as “Founder & CEO of Morph Labs.” [Tracxn](https://tracxn.com/d/companies/morph-labs/__8ZZWlPNWnRct4CJf-JJjU940HzzVxh1CEZxBQBG6tXg)
+- **third-party** — RL List reports Christian Szegedy as “Chief Scientist (joined 2025, reported; also reported to be a seed investor). Current status not re-verified in this window.” [RL List](https://www.rl-list.com/vendors/morph)
+- **third-party** — Cogniscendo reports “Szegedy had written a 2019 paper proposing autoformalization and was a seed investor in Morph”. [Cogniscendo](https://www.cogniscendo.com/p/the-superhuman-mathematician-5d1b)
+- **third-party** — Grokipedia says “Morph Labs raised $5.75 million in seed funding led by Khosla Ventures”. [Grokipedia](https://grokipedia.com/page/Morph_Labs)
+- **third-party** — Tracxn contradicts that amount and stage: “Morph Labs has not raised any funding yet.” [Tracxn](https://tracxn.com/d/companies/morph-labs/__8ZZWlPNWnRct4CJf-JJjU940HzzVxh1CEZxBQBG6tXg)
+- **inferred** — Funding stage, total amount and Khosla's involvement cannot be treated as verified: the two third-party sources conflict, and the original announcement was not found live. Cogniscendo separately reports Szegedy as a seed investor. Evidence: the three immediately preceding bullets and Battleships' company block, which also flags its estimate.
+- **third-party** — RL List estimates “~9-11 employees (as of 2026)”; this is an aggregator estimate, not a company disclosure. [RL List](https://www.rl-list.com/vendors/morph)
+- **not-published** — Company-confirmed headcount, a definitive investor list, accelerator participation, and an acquisition or other change in ownership were not established. Searched Morph's site and terms, Tracxn, RL List, Grokipedia, and web searches for funding, accelerator, acquisition and Jesse Han. Absence of a found acquisition is not proof that none occurred.
+- **inferred** — Avoid confusing this company with morphllm.com / AutoInfra, Inc.; the trust-portal evidence below makes the distinction material. Evidence: Morph Labs' terms and the AutoInfra trust page below.
+
+### Status, SLA and support
+
+- **docs-confirmed** — The provider's [status page](https://status.cloud.morph.so/) displayed “All services are online” and “100% uptime” for “Morph Cloud API” when checked on 2026-10-28; it also displayed “90 days ago” and “Today” on the chart.
+- **inferred** — The chart shows a 90-day timeline, but the displayed percentage's exact calculation, monitoring coverage and exclusions are not explained in the inspected page. It is a point-in-time provider-reported status, not a contractual guarantee; evidence: the status page above.
+- **docs-confirmed** — The public terms say “If a separate SLA is attached to the Order, that SLA controls with respect to any service-credit mechanics.” [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **not-published** — No numeric SLA, uptime target, credit schedule or qualifying plan was found in the public [terms](https://cloud.morph.so/web/legal/terms-of-service), [pricing page](https://cloud.morph.so/web/subscribe), docs index or web search for Morph Cloud SLA. Ask for the applicable order and SLA before relying on one.
+- **docs-confirmed** — The terms say “Support levels and response targets (if any) are as set forth in Customer’s Order or the Documentation.” [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **docs-confirmed** — The terms give the security/data-handling contact: “Questions about data handling or security? Email support@morph.so.” [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **not-published** — Guaranteed response times or support levels by plan were not found in the public pricing, documentation or terms searched.
+
+### Security, compliance and buyer terms
+
+- **docs-confirmed** — The terms commit to “encryption in transit / at rest; multi-factor authentication for production access; least-privilege access”. [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **docs-confirmed** — The terms say “Upon request, we’ll provide available third-party security attestations (e.g., SOC reports) under appropriate confidentiality.” [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **third-party** — RL List states “SOC 2 Type 2 is claimed only on the Delve-hosted trust portal (trust.delve.co/morph), which returned 429. Treat it as claimed-unverified.” [RL List](https://www.rl-list.com/vendors/morph)
+- **third-party** — The live [Delve portal](https://trust.delve.co/morph) instead identifies its report as “AutoInfra, Inc. SOC 2 Type 2 Report 2025” and its “Privacy Policy” link points to morphllm.com.
+- **inferred** — That Delve page belongs to the similarly named AutoInfra/morphllm business, not established as an attestation for Morph Labs, Inc.; do not repeat RL List's SOC 2 claim for Morph Cloud without a report naming the right entity and service. Evidence: both quotations above and Morph Labs' legal name in its terms.
+- **not-published** — A verified Morph Labs, Inc. SOC 2 report, other certifications, and a public audit scope were not found after checking the [terms](https://cloud.morph.so/web/legal/terms-of-service), the Delve portal, RL List and searches for Morph Cloud SOC 2. Availability of reports on request is not itself evidence of certification.
+- **docs-confirmed** — Price changes ordinarily have notice: “We may update prices with 30 days’ notice by email to Admin Contacts and a dashboard banner.” If increases cross a threshold: “If cumulative increases exceed 15% in a rolling 12-month period, we will give 60 days’ notice.” [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **docs-confirmed** — An exception applies: “If a third-party provider imposes a surcharge or regulatory fee outside our control, we may adjust affected charges with as much advance notice as practicable.” [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **docs-confirmed** — The terms restrict sensitive-data uploads: “Upload regulated/sensitive data (for example, PHI, children’s data, cardholder data, export-controlled technical data) without a signed addendum that permits it.” [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **docs-confirmed** — The restrictions include “Publish public benchmarks without our prior written consent (internal testing is fine).” [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **docs-confirmed** — Publicity clause: “to identify Customer as a Morph customer and to use Customer’s name, mark, and / or logo on Morph’s website”. [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **docs-confirmed** — Month-to-month termination is effective “the next billing cycle.” [Terms](https://cloud.morph.so/web/legal/terms-of-service)
+- **not-published** — A post-cancellation customer-data export window, deletion deadline and backup retention period were not found in the [public terms](https://cloud.morph.so/web/legal/terms-of-service), the [docs index](https://cloud.morph.so/docs/llms-full.txt), or web search for Morph Cloud cancellation and data deletion. The terms' deletion language for diagnostic artifacts and confidential information does not establish deletion of all customer snapshots after cancellation.
+- **inferred** — Buyers should request the signed order, SLA, current data-processing and deletion terms, applicable security report and egress pricing before relying on these provisions. Evidence: the terms and missing details above; this is not legal advice.
+
 ## Research process and limitations
 
 Context.dev search returned no results for the first query; Context.dev live scrapes succeeded for the pricing page, Battleships Markdown and several documentation pages. TinyFish search through the active Composio connection succeeded. Direct public `curl` fetched Morph's complete documentation export and Battleships JSON for detailed inspection and live quote checking. No Morph signup, sandbox launch or billing action was performed. No assertion that an endpoint was tested with a Morph account is implied.
+
+For the 2026-10-28 company and policy pass, Context search and fresh scrapes, TinyFish search via Composio, and direct public HTTP retrieval succeeded. All 35 newly added quote occurrences matched live sources: 29 prose quotations in §17, five prose quotations in §§5–6 and 10, and one code excerpt in §6. Some required Context's fresh rendered Markdown because direct HTML extraction was inaccessible or split formatting. The status figure is time-sensitive. No Morph account or service was used.
