@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Orb setup: install the Astro site's dependencies so `npm run build` works.
+set -euo pipefail
+cd "$(dirname "$0")/../site"
+npm ci --no-audit --no-fund
