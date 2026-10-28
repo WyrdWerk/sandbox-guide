@@ -38,7 +38,7 @@ pricing your own workload.
 
 - Sandboxer's sizes and prices match Boat's exactly while disk sizes, regions, stopped-disk
   retention and legal entity differ. No public source explains the relationship.
-- Several unpublished prices: egress at Agent 37, boxd and Boat; snapshot storage at Lizard;
+- Several unpublished prices: egress at Agent 37 and boxd; snapshot storage at Lizard;
   backup storage at boxd.
 - Contradictions inside providers' own material, listed per provider on the provider pages.
 - Thin research on company details for Morph, and on regions and GPU availability for Morph and
