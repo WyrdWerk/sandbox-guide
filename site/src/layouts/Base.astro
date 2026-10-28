@@ -1,6 +1,7 @@
 ---
 import "../styles/theme.css";
 import site from "../data/site.json";
+import { features, providers } from "../lib/data";
 
 interface Props {
   title: string;
@@ -81,7 +82,7 @@ const nav = [
           <a href="/how-we-checked/">How we checked</a>.
         </p>
         <p class="sources__note">
-          Twelve providers, sixteen features. For your own workload pricing, see{" "}
+          {providers.length} providers, {features.length} features. For your own workload pricing, see{" "}
           <a href="https://battleships.dev" rel="noreferrer noopener">battleships.dev</a>, which is
           built by the Boat team and is a price-comparison dataset rather than a guide.
         </p>

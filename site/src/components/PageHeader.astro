@@ -1,5 +1,6 @@
 ---
 import site from "../data/site.json";
+import { providers } from "../lib/data";
 
 interface Props {
   kicker: string;
@@ -10,7 +11,7 @@ interface Props {
 
 const { kicker, title, standfirst, meta = [] } = Astro.props;
 const defaultMeta = [
-  "12 providers",
+  `${providers.length} providers`,
   `Every claim dated ${site.checkedOn}`,
   "Sources linked",
 ];

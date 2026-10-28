@@ -1,7 +1,7 @@
 # Sandbox comparison
 
 A static site that helps non-technical people understand cloud sandbox providers for AI agents. It
-explains behaviour rather than ranking prices: sixteen features, twelve providers, and a separate
+explains behaviour rather than ranking prices: sixteen features, fifteen providers, and a separate
 compare section.
 
 - **Research:** `research/*.md` — one evidence-backed profile per provider, each claim with a URL,
@@ -11,9 +11,10 @@ compare section.
 
 ## Providers covered
 
-Agent 37, Blaxel, Boat, boxd, E2B, InstaBox, Lizard, Morph, Runtime, Sandboxer, Sprites and Vercel
-Sandbox. All twelve were researched on 2026-10-28. The site supports a `"status": "pending"`
-provider so a thirteenth can be added as data before its profile is finished.
+Agent 37, Blaxel, Boat, boxd, Cloudflare Sandbox, Daytona, E2B, InstaBox, Lizard, Modal, Morph,
+Runtime, Sandboxer, Sprites and Vercel Sandbox. All fifteen were researched on 2026-10-28. The site
+supports a `"status": "pending"` provider so a sixteenth can be added as data before its profile is
+finished.
 
 ## Feature groups
 
@@ -38,8 +39,10 @@ pricing your own workload.
 
 - Sandboxer's sizes and prices match Boat's exactly while disk sizes, regions, stopped-disk
   retention and legal entity differ. No public source explains the relationship.
-- Several unpublished prices: egress at Agent 37 and boxd; snapshot storage at Lizard;
-  backup storage at boxd.
+- Several unpublished prices: egress at Agent 37 and boxd; snapshot storage at Lizard, Modal and
+  Cloudflare; backup storage at boxd.
+- Whether Daytona's 10 GiB per-sandbox disk cap can be raised, and at what price. The 50 GiB Windows
+  presets contradict the cap.
 - Contradictions inside providers' own material, listed per provider on the provider pages.
 - Thin research on company details for Morph, and on regions and GPU availability for Morph and
   Sprites; those rows say “not published” rather than guessing.

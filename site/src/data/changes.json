@@ -123,6 +123,45 @@
           "confidence": "docs-confirmed"
         }
       ]
+    },
+    {
+      "date": "2026-10-20",
+      "title": "Daytona raised $60M at a $1B valuation",
+      "provider": "daytona",
+      "what": "Daytona's Series B, led by FirstMark Growth, brings total funding to $91M. It is the same month the company's open-source repository was archived and core development moved to a private codebase.",
+      "sources": [
+        {
+          "url": "https://www.daytona.io/dotfiles/daytona-raises-60m-series-b-to-build-the-agent-cloud",
+          "quote": "a $60M Series B at a $1B valuation, led by FirstMark Growth, bringing our total funding to $91M",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "title": "Modal raised $750M and said Sandboxes alone runs at $300M",
+      "provider": "modal",
+      "what": "The Series D values Modal at $15.75B post-money and takes total funding over $1.2B. The same post says the company crossed $1B in annualized run rate and that Sandboxes is a $300M run-rate product on its own.",
+      "sources": [
+        {
+          "url": "https://modal.com/blog/1-billion-annualized-run-rate-series-d",
+          "quote": "we've raised a $750M Series D at a $15.75B post-money valuation. Accel led the round.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-04-13",
+      "title": "Cloudflare Containers and Sandboxes became generally available",
+      "provider": "cloudflare-sandbox",
+      "what": "The GA entry is in the changelog, not a marketing page. Two parts of the product are still in public beta: the Durable Object scheduling policy that sandboxes use, and container snapshots. The 1.0 helper library arrived on 30 September 2026, and the 0.x SDK gets fixes only until 31 December 2026.",
+      "sources": [
+        {
+          "url": "https://developers.cloudflare.com/changelog/post/2026-04-13-containers-sandbox-ga/",
+          "quote": "Cloudflare Containers and Sandboxes are now generally available.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ]
 }

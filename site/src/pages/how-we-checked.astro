@@ -10,7 +10,7 @@ import { features, providers } from "../lib/data";
     kicker="Method"
     title="How we checked"
     standfirst="Every claim comes from a provider's own documentation, pricing page, or a named third party. Each carries a confidence tag, an exact quote and a link. Nothing is inferred into a fact, and nothing unpublished is estimated."
-    meta={["12 providers", "16 features", `Checked ${site.checkedOn}`, "No sandbox run"]}
+    meta={[`${providers.length} providers`, `${features.length} features`, `Checked ${site.checkedOn}`, "No sandbox run"]}
   />
 
   <div class="wrap">
@@ -45,7 +45,7 @@ import { features, providers } from "../lib/data";
       <div class="prose">
         <h2>Dates</h2>
         <p>
-          All twelve profiles were checked on {site.checkedOn}. Prices changed during October 2026
+          All fifteen profiles were checked on {site.checkedOn}. Prices changed during October 2026
           at several providers — boxd cut its rates by about 20% between 9 and 28 October, and Boat
           moved from credit packs to a dollar wallet — so treat any number as a dated observation,
           not a standing fact. Boat's documentation is served through a cache that can return an
@@ -79,6 +79,8 @@ import { features, providers } from "../lib/data";
           <li>What a stored snapshot costs at Lizard, and what backup storage costs at boxd. Neither is published.</li>
           <li>Whether egress is free at Agent 37 and boxd. Neither publishes a rate or a cap; Boat says it does not bill egress.</li>
           <li>Morph's regions, maximum machine sizes and GPU availability. Its terms name the company (Morph Labs, Inc., San Francisco), but none of these is published, and two third-party sources disagree on whether it has raised funding.</li>
+          <li>Whether Daytona's 10 GiB per-sandbox disk cap can be raised, and at what price. Its own 50 GiB Windows presets contradict the cap, and the only route is a support request with no published price.</li>
+          <li>What a snapshot costs at Cloudflare and at Modal, and what a Cloudflare sandbox costs to start from a snapshot. None of the three is published.</li>
         </ul>
 
         <h2>Coverage</h2>
