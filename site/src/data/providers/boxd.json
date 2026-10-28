@@ -1,0 +1,141 @@
+{
+  "id": "boxd",
+  "name": "boxd",
+  "url": "https://boxd.sh",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "KVM machines in the EU that boot in milliseconds, snapshot with memory, fork live, and hibernate when idle.",
+  "whatItIs": [
+    "boxd sells persistent Linux virtual machines: each one a KVM guest with its own kernel, root, systemd and a fixed 100 GB copy-on-write disk. They boot in milliseconds, can be copied while running, and park themselves when idle.",
+    "The pattern it is built for is: compose one machine by hand (install tools, sign into agents, leave a service running), save it as a snapshot, then stamp out identical machines from it.",
+    "It is one product sold three ways: pay-as-you-go credits, a Custom contract with SSO and audit logs, and a self-hosted version you run on your own hardware."
+  ],
+  "whoFor": "Developers and teams who want a normal Linux server that happens to be a VM, with fast copies: dev workspaces, preview environments, coding agents, one machine per customer.",
+  "isolation": "KVM microVM with its own kernel, network stack and disk, on boxd's open-source Ignition orchestrator. Docker, systemd, kernel modules and breaking the OS are all allowed and stay inside that one machine. Firecracker use is not documented.",
+  "sizes": "Four sizes named by either dimension: 1 vCPU / 4 GiB, 2 / 8 (the default), 4 / 16, 8 / 32. Disk is fixed at 100 GB and is not a size choice.",
+  "billing": {
+    "model": "Prepaid credits, no plan and no per-seat fee.",
+    "meter": "Per second, settled every 15 minutes, on three meters: vCPU on the machine's size while running, RAM on resident memory while running or in standby, disk on bytes written in every state.",
+    "stopped": "Disk only. Hibernated and stopped machines pay for written disk; a machine in standby keeps paying for RAM.",
+    "planFee": "None. Custom and self-hosted are contracts with unpublished prices.",
+    "minimum": "No minimum charge per machine. There is no free plan: $30 of credit requires a card, and an account without one is capped at two machines."
+  },
+  "cost": {
+    "A": {
+      "headline": "≈ $25.03 or $34.37 a month",
+      "shape": "2 vCPU / 8 GiB (the nearest size), 4 GiB resident, 2 GiB written, deleted after each task",
+      "lines": [
+        { "label": "vCPU", "arithmetic": "2 × $0.047 × 166.67 h", "amount": "$15.67" },
+        { "label": "RAM at 4 GiB resident", "arithmetic": "4 × $0.014 × 166.67 h", "amount": "$9.33" },
+        { "label": "Disk", "arithmetic": "2 × $0.000096 × 166.67 h", "amount": "$0.03" }
+      ],
+      "total": "$25.03 at 4 GiB, $34.37 at 8 GiB",
+      "notes": [
+        "If a task fills the shape at 8 GiB resident, the same work costs $34.37.",
+        "RAM is billed on what the machine holds, so the 8 GiB size does not force an 8 GiB bill."
+      ]
+    },
+    "B": {
+      "headline": "≈ $222.50 or $304.26 a month",
+      "shape": "4 vCPU / 16 GiB (the only 4 vCPU size), 8 GiB or 16 GiB resident, 50 GiB written",
+      "lines": [
+        { "label": "vCPU", "arithmetic": "4 × $0.047 × 730", "amount": "$137.24" },
+        { "label": "RAM at 8 GiB resident", "arithmetic": "8 × $0.014 × 730", "amount": "$81.76" },
+        { "label": "RAM at 16 GiB resident", "arithmetic": "16 × $0.014 × 730", "amount": "$163.52" },
+        { "label": "Disk", "arithmetic": "50 × $0.000096 × 730", "amount": "$3.50" }
+      ],
+      "total": "$222.50 at 8 GiB, $304.26 at 16 GiB",
+      "notes": [
+        "8 GiB is a working set, not a purchase: the 4 vCPU shape comes with 16 GiB and bills what it holds.",
+        "Sleeping 8 hours a day instead of running always: about $149.60 at 8 GiB resident."
+      ]
+    },
+    "C": {
+      "headline": "≈ $14.88 or $19.92 a month",
+      "shape": "2 vCPU / 8 GiB, 4 GiB or 8 GiB resident, 20 GiB written, 90 running hours in a 720-hour month",
+      "lines": [
+        { "label": "Running, 90 h at 4 GiB", "arithmetic": "90 × (2 × $0.047 + 4 × $0.014 + 20 × $0.000096)", "amount": "$13.67" },
+        { "label": "Running, 90 h at 8 GiB", "arithmetic": "90 × (2 × $0.047 + 8 × $0.014 + 20 × $0.000096)", "amount": "$18.71" },
+        { "label": "Stopped, 630 h", "arithmetic": "630 × 20 × $0.000096", "amount": "$1.21" }
+      ],
+      "total": "$14.88 at 4 GiB, $19.92 at 8 GiB",
+      "notes": [
+        "A 30-day month is 720 hours, so 630 hours are stopped.",
+        "Leaving it in standby instead of stopping is the expensive mistake: about $50.16 at 4 GiB, because RAM keeps billing.",
+        "Relying on the 4-hour idle hibernate instead of stopping: about $32.88."
+      ]
+    }
+  },
+  "usability": {
+    "dashboard": "Yes, at boxd.sh/app, with Machines, Backups, Domains, Integrations, Organizations and Billing pages plus a desktop viewer. It is secondary: every guide's first instruction is a CLI command, and the sign-in page leads with Download the CLI.",
+    "withoutCode": "Partly, and less than the marketing suggests. A non-coder can watch and drive a machine someone else set up (desktop, browser, files), and can copy a prompt for an AI agent to do the setup. There is no template gallery and no one-click agent.",
+    "signup": "GitHub or Google, then a card for the $30 credit and for more than two machines. There is no waitlist in the EU; the US region has one. Every account starts with a 25-minute onboarding call.",
+    "docs": "Mintlify docs with a full CLI reference, gRPC proto, SDK references and machine-readable bundles. Support is a founder by email. There is no status page.",
+    "tripsUp": [
+      "The first step is a terminal command: install the CLI, log in, create a machine.",
+      "Machine sounds like a physical server you rent; it is a VM that sleeps and keeps charging for disk.",
+      "The pricing vocabulary is engineer-facing: resident memory, GiB-hour, written disk.",
+      "The headline hourly price assumes 2 GiB of an 8 GiB machine is in use.",
+      "Whatever you serve is on the open internet at name.boxd.sh, with no auth in front.",
+      "Sleep is invisible: a cron job or long build stops when the machine hibernates, and the clock freezes."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "The bill follows resident RAM, not the shape",
+      "detail": "A 4 vCPU machine is 16 GiB, but boxd bills the memory it actually holds: $222.50 a month at 8 GiB resident and $304.26 at 16 GiB. boxd's own calculator assumes 2 GiB on an 8 GiB machine, which is a best case rather than a typical one.",
+      "status": "open"
+    },
+    {
+      "issue": "Public URLs are open, and bot protection gates only wake-ups",
+      "detail": "There is no authentication in front of name.boxd.sh. Bot protection is on by default, but it only asks a browser check when a request would wake a sleeping machine, and it applies to the main address, never to subdomain proxies or custom domains. A webhook, API client or uptime monitor that hits a sleeping machine gets a 503 check page and the machine does not wake.",
+      "status": "open"
+    },
+    {
+      "issue": "The machine quota is stated as both 50 and 100",
+      "detail": "Docs and FAQ say 50 machines per organisation; the pricing page says 100 included, raiseable on request.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "Inbound public IPv4 is contradictory",
+      "detail": "The docs say every machine's domain points at the proxy's shared public IP, and SSH runs on a dedicated port on that shared proxy IP. The FAQ says machines come with a public IPv4. No price for an inbound IPv4 is published. Both statements are current, so the answer is unresolved.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "Static egress IP is unconfirmed",
+      "detail": "No boxd page mentions a dedicated or static outbound address, and none prices one. battleships.dev lists it as a feature. We could not confirm it, so it is neither offered nor ruled out here.",
+      "status": "open"
+    },
+    {
+      "issue": "Prices moved about 20% in 19 days",
+      "detail": "The 9 October capture showed €0.049/vCPU-hour, €0.015/GiB-hour and 50 machines; the 28 October page shows €0.039, €0.012 and 100 machines. Any cost figure needs a date.",
+      "status": "open"
+    },
+    {
+      "issue": "Storage prices are not published",
+      "detail": "Snapshots, checkpoints, backups and extra disks all exist, and none has a published price. Egress has no price or allowance either.",
+      "status": "open"
+    },
+    {
+      "issue": "No status page and no REST API",
+      "detail": "status.boxd.sh does not resolve and boxd.sh/status is a 404. The only wire API is gRPC; there is no HTTP/JSON endpoint for machines.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "A live fork that copies memory and disk in 100–200 ms.",
+    "Snapshots that keep memory, so new machines come up already running.",
+    "Secrets bound to a host: the machine holds an opaque placeholder, never the key.",
+    "EU-only residency on German bare metal, plus a self-hosted option.",
+    "Four state tools with distinct jobs: snapshot, checkpoint, backup, fork."
+  ],
+  "sources": [
+    { "label": "Docs", "url": "https://docs.boxd.sh/" },
+    { "label": "Lifecycle and resources", "url": "https://docs.boxd.sh/guides/resources" },
+    { "label": "Snapshots", "url": "https://docs.boxd.sh/guides/snapshots" },
+    { "label": "Fork", "url": "https://docs.boxd.sh/guides/fork" },
+    { "label": "Egress and host-bound secrets", "url": "https://docs.boxd.sh/guides/egress" },
+    { "label": "Pricing", "url": "https://boxd.sh/pricing" },
+    { "label": "FAQ", "url": "https://boxd.sh/faq/" }
+  ]
+}

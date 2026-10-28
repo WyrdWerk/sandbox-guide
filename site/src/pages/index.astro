@@ -1,0 +1,140 @@
+---
+import Base from "../layouts/Base.astro";
+import site from "../data/site.json";
+import { features, providers, useCases } from "../lib/data";
+---
+
+<Base title={site.title}>
+  <header class="page-header">
+    <p class="kicker">A guide for non-engineers</p>
+    <h1>{site.title}</h1>
+    <p class="lede">
+      Seven providers rent out computers for AI agents. They look alike on a pricing page and
+      behave very differently once your agent is running. This site explains each feature in plain
+      language, shows what each provider actually offers, and says who to pick for which situation.
+    </p>
+  </header>
+
+  <section class="measure">
+    <h2>What a sandbox is</h2>
+    <p>
+      A sandbox is a computer in a data centre that you rent by the hour, or by the second, and can
+      throw away when you are done. It has its own disk, its own network address, and usually its own
+      copy of Linux. You do not buy hardware, wait for a delivery, or patch a machine in a spare room.
+    </p>
+    <p>
+      People need one for an AI agent because an agent does things: it runs commands, installs
+      packages, edits files, opens a browser. Letting it do that on your laptop means it can break
+      your laptop, and it stops working the moment you close the lid. A sandbox gives the agent a
+      separate computer that stays awake, keeps its files, and can be rebuilt if it goes wrong.
+    </p>
+    <p>
+      The word is also used loosely. Some providers mean a container, which is a process isolated by
+      the host's shared kernel. Some mean a virtual machine, which is a whole computer with its own
+      kernel. The difference matters when the agent runs untrusted code, and it is one of the things
+      the <a href="/features/">feature pages</a> make explicit.
+    </p>
+  </section>
+
+  <section>
+    <h2>How to use this site</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>1. Start with your situation</h3>
+        <p>
+          A personal agent, an AI-built app, team workspaces and browser automation each need
+          different things. The <a href="/use-cases/">use cases</a> page names the picks for each.
+        </p>
+      </div>
+      <div class="card">
+        <h3>2. Check the feature that worries you</h3>
+        <p>
+          Each <a href="/features/">feature page</a> explains the concept, compares all seven
+          providers, lists the questions to ask, and gives situational picks.
+        </p>
+      </div>
+      <div class="card">
+        <h3>3. Read the provider page</h3>
+        <p>
+          Every <a href="/providers/">provider page</a> collects the details in one place: sizes,
+          billing, usability, caveats and sources.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Features, in the order they bite</h2>
+    <ul class="index-list">
+      {
+        features.map((feature) => (
+          <li>
+            <a href={`/features/${feature.id}/`}>{feature.title}</a>
+            <p>{feature.standfirst}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="note">
+      Words that mean different things at different providers — pause, stop, snapshot, fork, credits —
+      have their own page: <a href="/same-word-different-meaning/">same word, different meaning</a>.
+    </p>
+    <div class="callout callout-quiet">
+      <p class="callout-title">Before you commit</p>
+      <p>
+        A trial, a credit, a free plan and a monthly allowance are four different offers, and only one
+        of the seven converts itself into a subscription.
+        <a href="/features/trying-it-before-you-pay/">See what each provider actually gives you before you pay</a>.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Use cases</h2>
+    <div class="grid">
+      {
+        useCases.map((useCase) => (
+          <div class="card">
+            <h3>
+              <a href={`/use-cases/#${useCase.id}`}>{useCase.title}</a>
+            </h3>
+            <p>{useCase.standfirst}</p>
+            <p class="meta">
+              Picks: {useCase.picks.map((p) => p.provider).join(", ")}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section>
+    <h2>The seven providers</h2>
+    <div class="grid">
+      {
+        providers.map((provider) => (
+          <div class="card">
+            <h3>
+              <a href={`/providers/${provider.id}/`}>{provider.name}</a>
+            </h3>
+            <p>{provider.oneLiner}</p>
+            <p class="meta">
+              {provider.status === "researched" ? `Checked ${provider.checkedOn}` : "Research pending"}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <div class="callout">
+    <p class="callout-title">What this site is not</p>
+    <p>
+      It is documentation research, not testing. No account was created and no sandbox was started,
+      so every claim about behaviour is something a provider wrote down, not something we measured.
+      Prices are list prices on {site.checkedOn} and several changed during October 2026. Where a
+      provider publishes nothing, the site says “not published” rather than estimating.
+      <a href="/how-we-checked/">How we checked</a> explains the tags and the sources.
+    </p>
+  </div>
+</Base>

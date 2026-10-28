@@ -1,0 +1,121 @@
+---
+import Base from "../../layouts/Base.astro";
+import CostCase from "../../components/CostCase.astro";
+import { providers } from "../../lib/data";
+
+export function getStaticPaths() {
+  return providers.map((provider) => ({ params: { id: provider.id }, props: { provider } }));
+}
+
+const { provider } = Astro.props;
+const statusLabel = {
+  open: "Open question",
+  rechecking: "Needs re-checking",
+  contradiction: "Contradiction",
+};
+---
+
+<Base title={provider.name} description={provider.oneLiner}>
+  <header class="page-header">
+    <p class="kicker">Provider · checked {provider.checkedOn}</p>
+    <h1>{provider.name}</h1>
+    <p class="standfirst">{provider.oneLiner}</p>
+    <p class="note">
+      <a href={provider.url} rel="noreferrer noopener" target="_blank">{provider.url.replace("https://", "")}</a>
+    </p>
+  </header>
+
+  <article class="measure">
+    {provider.whatItIs.map((paragraph) => <p>{paragraph}</p>)}
+
+    <h2>At a glance</h2>
+    <div class="table-scroll">
+      <table>
+        <tbody>
+          <tr><th scope="row">Who it is for</th><td>{provider.whoFor}</td></tr>
+          <tr><th scope="row">Isolation</th><td>{provider.isolation}</td></tr>
+          <tr><th scope="row">Sizes</th><td>{provider.sizes}</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>How it bills</h2>
+    <div class="table-scroll">
+      <table>
+        <tbody>
+          <tr><th scope="row">Model</th><td>{provider.billing.model}</td></tr>
+          <tr><th scope="row">Meter</th><td>{provider.billing.meter}</td></tr>
+          <tr><th scope="row">While stopped</th><td>{provider.billing.stopped}</td></tr>
+          <tr><th scope="row">Plan fee</th><td>{provider.billing.planFee}</td></tr>
+          <tr><th scope="row">Minimum</th><td>{provider.billing.minimum}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">
+      How {provider.name} lets you try before paying — free plan, trial, credit or allowance —
+      is on <a href={`/features/trying-it-before-you-pay/#${provider.id}`}>trying it before you pay</a>.
+    </p>
+
+    <h2>Where it stands out</h2>
+    <ul>
+      {provider.strengths.map((strength) => <li>{strength}</li>)}
+    </ul>
+
+    <h2>Using it without writing code</h2>
+    <div class="table-scroll">
+      <table>
+        <tbody>
+          <tr><th scope="row">Dashboard</th><td>{provider.usability.dashboard}</td></tr>
+          <tr><th scope="row">Without code</th><td>{provider.usability.withoutCode}</td></tr>
+          <tr><th scope="row">Signup</th><td>{provider.usability.signup}</td></tr>
+          <tr><th scope="row">Docs and support</th><td>{provider.usability.docs}</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>What would trip up a non-engineer</h3>
+    <ul>
+      {provider.usability.tripsUp.map((item) => <li>{item}</li>)}
+    </ul>
+
+    <h2>Caveats and contradictions</h2>
+    <p class="note">
+      These are shown as the research found them. A contradiction means the provider's own pages
+      disagree; an open question means the answer is not published.
+    </p>
+    {provider.caveats.map((caveat) => (
+      <div class:list={["callout", caveat.status === "contradiction" ? "callout-warn" : "callout-quiet"]}>
+        <p class="callout-title">
+          {caveat.issue} <span class="tag">{statusLabel[caveat.status]}</span>
+        </p>
+        <p>{caveat.detail}</p>
+      </div>
+    ))}
+
+    <h2>Sources</h2>
+    <ul>
+      {provider.sources.map((source) => (
+        <li>
+          <a href={source.url} rel="noreferrer noopener" target="_blank">{source.label}</a>
+        </li>
+      ))}
+    </ul>
+  </article>
+
+  <section>
+    <h2>The three shared workloads, priced for {provider.name}</h2>
+    {provider.cost ? (
+      <>
+        <CostCase id="A" title="1,000 short tasks" cost={provider.cost.A} />
+        <CostCase id="B" title="One always-on box" cost={provider.cost.B} />
+        <CostCase id="C" title="Three hours a day" cost={provider.cost.C} />
+      </>
+    ) : (
+      <p class="muted">Research pending. No cost examples yet.</p>
+    )}
+    <p class="note">
+      Arithmetic uses published list prices only. See the <a href="/features/billing/">pricing page</a>
+      for the models side by side.
+    </p>
+  </section>
+</Base>

@@ -1,0 +1,149 @@
+{
+  "useCases": [
+    {
+      "id": "personal-agent",
+      "title": "A personal AI agent that is always available",
+      "standfirst": "Something like OpenClaw or Hermes that answers when you message it, keeps its files and logins, and does not need a terminal to set up. This is the hardest case for this market, because most providers sell a machine, not an assistant.",
+      "needs": [
+        "A machine that is not killed by a default deadline or an idle timer",
+        "A way to reach it from a phone or chat app, not just a laptop terminal",
+        "A cheap idle state, because most of the day is idle",
+        "Somewhere for files and logins to live between sessions",
+        "A way back in after the box stops, without rebuilding it"
+      ],
+      "picks": [
+        {
+          "provider": "agent37",
+          "why": "The managed-hosting line is the only genuinely one-click personal agent here: $0 to $99.99 a month, a task board, a web terminal, a file browser and a live desktop. If you want your own box instead, the Cloud 4 vCPU / 8 GiB shape is about $10.60 a month with 20 GB of disk.",
+          "watch": "The Cloud product needs a terminal or an API call, stop loses memory, and disk bills until you delete."
+        },
+        {
+          "provider": "instabox",
+          "why": "Pause keeps the agent's session, the dashboard creates the machine, and the desktop is clickable. Claude Code and Codex are preinstalled, so you can type a request into the box's terminal.",
+          "watch": "The free plan caps continuous runtime at 8 hours, public URLs have no password, and fork is not the instant copy the homepage implies."
+        },
+        {
+          "provider": "boat",
+          "why": "The cheapest exact-fit always-on box with a real 50 GB disk: a 2 vCPU / 4 GB machine is $1.62 for 90 hours or $13.14 always on, with seven coding agents preinstalled and no egress bill.",
+          "watch": "No pause at all, a one-hour default auto-stop, disk deleted 14 days after a stop, and EU-only regions."
+        },
+        {
+          "provider": "runtime",
+          "why": "Measured CPU makes an agent that waits on a model cheap, and secrets never sit inside the box. One click gives you a shell on free hours with no card.",
+          "watch": "A stopped box still bills storage, there is one US region, and there is no preinstalled agent."
+        }
+      ],
+      "avoid": "Sandboxer, boxd and Lizard are capable machines but assume a terminal for setup. Lizard's stop deletes the disk, and Sandboxer's trial converts into a $20 plan on day eight."
+    },
+    {
+      "id": "ai-built-apps",
+      "title": "AI-built apps and websites",
+      "standfirst": "An agent writes an app, and the app needs to run somewhere with a URL, a process that restarts, and enough disk for dependencies. The machine is now a small production host, which changes what matters.",
+      "needs": [
+        "A public URL, ideally on a domain you control",
+        "A process that restarts if it crashes, or a supervisor that does",
+        "Docker or a normal Linux stack",
+        "Enough disk for dependencies, builds and uploads",
+        "A way to preview a change before it replaces the live one"
+      ],
+      "picks": [
+        {
+          "provider": "runtime",
+          "why": "Custom domains, raw TCP ports, token-gated previews and a real Linux desktop, with images built from any Dockerfile. The strongest set of hosting primitives in this group.",
+          "watch": "One region in Virginia, so no EU residency; nothing is reachable until you open a door."
+        },
+        {
+          "provider": "boxd",
+          "why": "Every machine gets an HTTPS name and a proxy per port, custom domains are self-serve, and Docker is preinstalled and running. A fork gives you a second copy for a preview in 100–200 ms.",
+          "watch": "The public URL has no authentication in front of it, so your app must provide its own; no status page."
+        },
+        {
+          "provider": "boat",
+          "why": "A full Ubuntu VM with Docker, 51 GB of disk on the small size, and an HTTPS route per port. No egress bill and a 60 fps desktop for checking the result.",
+          "watch": "No custom domains, the public URL carries HTTPS and WebSockets only, and regions are EU-only."
+        },
+        {
+          "provider": "sandboxer",
+          "why": "A stable HTTPS address per port that survives stop, resume and resize, plus a public IPv6 and a real Docker daemon. Hosted ports can be public or token-gated.",
+          "watch": "Custom domains are still on the roadmap, and the default one-hour TTL will stop a forgotten site."
+        }
+      ],
+      "avoid": "Agent 37's default type is a gVisor container that cannot run Docker, so you need its 2.5× VM type. Lizard's stop deletes the disk. InstaBox has no custom domains and no raw TCP inbound."
+    },
+    {
+      "id": "team-workspaces",
+      "title": "Separate workspaces for a team or clients",
+      "standfirst": "One machine per person or per client, with credentials kept apart and a bill someone can explain. This is where organisation features, secret scoping and spend controls matter more than hourly price.",
+      "needs": [
+        "One machine per person or client, not one shared box",
+        "A way to keep credentials apart between clients",
+        "Spend visibility, and ideally a hard cap",
+        "Fast copies of a standard setup",
+        "An audit trail, if a client asks"
+      ],
+      "picks": [
+        {
+          "provider": "boxd",
+          "why": "Every account is an organisation with roles, machines are private to their creator by default, snapshots work as golden images, and host-bound secrets keep client keys out of the machines.",
+          "watch": "No audit log or spend cap on self-serve, and the machine quota is stated as both 50 and 100."
+        },
+        {
+          "provider": "runtime",
+          "why": "Compartments wall off key groups, keys can carry a daily spend limit, secrets are scoped by label or id, and SSO, SCIM and a 400-day audit log are free.",
+          "watch": "One region, and a per-sandbox cap is a lifetime cap rather than a monthly budget."
+        },
+        {
+          "provider": "agent37",
+          "why": "Workspaces own keys, wallet and instances; teams have admin and user roles; each instance has a budget ceiling; one instance per end user is the documented pattern.",
+          "watch": "The instance cap counts sleeping and stopped boxes, so 200 clients means 200 live instances, and there is no audit log."
+        },
+        {
+          "provider": "instabox",
+          "why": "Organisations and workspaces with roles, Org Secrets with host scoping, and a monthly spend cap that stops every sandbox when reached.",
+          "watch": "Audit logs and SSO are Enterprise only, and a paused machine still counts against plan limits."
+        }
+      ],
+      "avoid": "Sandboxer's organisation plans are priced per seat, so five people on the $20 plan pay $100. Lizard has no spending cap at all. Boat publishes no audit log, and its organisation start budget is pooled, so one member can block everyone else's creates."
+    },
+    {
+      "id": "browser-automation",
+      "title": "Browser automation",
+      "standfirst": "An agent that drives a browser needs a real Chromium, enough memory to run it alongside the agent, a way to take over when it gets stuck, and an IP that sites will talk to.",
+      "needs": [
+        "A real Chromium, ideally with a desktop you can watch",
+        "Enough RAM for a browser plus an agent",
+        "A stable way to drive it: CDP, Playwright, or computer-use tools",
+        "An egress IP that is not blocked everywhere",
+        "A screen you can take over when it gets stuck"
+      ],
+      "picks": [
+        {
+          "provider": "instabox",
+          "why": "The default template ships Chromium, a VNC desktop and a computer-use MCP, and a human can take control of the desktop and hand it back to the agent.",
+          "watch": "All machines share one NAT egress IP, and there is no stealth or residential proxy option."
+        },
+        {
+          "provider": "boxd",
+          "why": "`agent-browser` is preinstalled, there is a Chromium build with anti-bot fingerprinting, and the desktop is a real display you can click.",
+          "watch": "No GPU, and anti-bot fingerprinting is a browser property, not a residential IP."
+        },
+        {
+          "provider": "sandboxer",
+          "why": "Chrome is preinstalled and documented with Playwright, Browser Use and a Selenium Grid; integrated agents get screenshot, click and type tools.",
+          "watch": "Egress shares the node's IP, and there is no stealth option."
+        },
+        {
+          "provider": "runtime",
+          "why": "Chromium over CDP, so Playwright, Puppeteer, browser-use and Stagehand connect directly, plus a Linux desktop with clicks, screenshots and MP4 recording.",
+          "watch": "No stealth or residential proxy product; one US region."
+        },
+        {
+          "provider": "lizard",
+          "why": "`desktop-camoufox` adds Camoufox, a Firefox build for scraping driven by Playwright — the only anti-detection option in this set.",
+          "watch": "It runs only in us-east-1, and the desktop has no public VNC port: you need the CLI bridge."
+        }
+      ],
+      "avoid": "Boat has Chrome 151 and a 60 fps desktop but no GPU, and its raw network path is IPv6-first. Agent 37's default container type has no desktop: you need an agent template or the VM type."
+    }
+  ]
+}

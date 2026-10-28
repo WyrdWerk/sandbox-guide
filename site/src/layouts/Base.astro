@@ -1,0 +1,68 @@
+---
+import "../styles/theme.css";
+import site from "../data/site.json";
+import { features } from "../lib/data";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+const path = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href === "/" ? path === "/" : path.startsWith(href);
+
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/use-cases/", label: "Use cases" },
+  { href: "/features/", label: "Features" },
+  { href: "/features/billing/", label: "Pricing" },
+  { href: "/same-word-different-meaning/", label: "Same word" },
+  { href: "/providers/", label: "Providers" },
+  { href: "/how-we-checked/", label: "How we checked" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title === site.title ? title : `${title} — ${site.shortTitle}`}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="site-title" href="/">{site.shortTitle}</a>
+        <nav class="site-nav" aria-label="Main">
+          {nav.map((item) => (
+            <a href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap page">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          Checked {site.checkedOn}. Documentation and published prices only; no sandbox was
+          started or billed. <a href="/how-we-checked/">How we checked</a>.
+        </p>
+        <p>
+          <a href="/glossary/">Glossary</a> ·
+          {features.map((f, i) => (
+            <>{i > 0 ? " · " : ""}<a href={`/features/${f.id}/`}>{f.navTitle}</a></>
+          ))}
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

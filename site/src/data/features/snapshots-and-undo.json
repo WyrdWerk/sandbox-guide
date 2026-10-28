@@ -1,0 +1,147 @@
+{
+  "id": "snapshots-and-undo",
+  "order": 6,
+  "title": "Backups, snapshots, forks and undo",
+  "navTitle": "Snapshots and undo",
+  "standfirst": "Four different jobs hide under “snapshot”: a restore point on one machine, a reusable image for new machines, a copy of a running machine, and a backup that survives losing the host. Ask which one you are getting.",
+  "concept": [
+    {
+      "heading": "The four jobs",
+      "paragraphs": [
+        "A restore point lets you rewind one machine after a bad change. A reusable image lets you start many identical machines from a known-good setup. A fork copies a machine, ideally while it is running, so you can try something without risking the original. A backup survives losing the host or the account.",
+        "Providers rarely offer all four, and the same word covers different subsets. Agent 37 has no snapshot product at all: it has a sleep checkpoint (not cloneable), a folder-scoped backup, and Dockerfile-built templates. Boat has automatic disk snapshots every minute but only the newest is usable, plus named saved snapshots that never expire. InstaBox's snapshot is disk-only and may stop the machine to take it."
+      ]
+    },
+    {
+      "heading": "Memory is the dividing line",
+      "paragraphs": [
+        "A snapshot with memory can resume a half-finished agent turn; a disk-only snapshot cannot. boxd, Lizard and Runtime capture memory by default. Sandboxer's stop snapshot captures memory, but its continuous and named snapshots are disk-only. Agent 37's fork copies the disk and boots fresh. InstaBox's homepage claims a fork copies running processes; its docs say a snapshot does not hold memory or processes, and fork is snapshot-save-plus-create.",
+        "A fork with memory is not free either. Runtime freezes the source while it writes memory, Lizard pauses it briefly, and boxd pauses it for a fraction of a second. None of them is a zero-impact clone of a busy machine."
+      ]
+    },
+    {
+      "heading": "What a restore does to what is there now",
+      "paragraphs": [
+        "Two restore styles, and mixing them up loses work. In-place restore replaces what it finds: Agent 37's backup restore replaces the data rather than merging, and boxd's checkpoint restore is a reboot into the captured state that discards anything written afterwards. New-machine restore leaves the original alone: Sandboxer's named snapshots and Lizard's snapshots create a separate machine.",
+        "Retention is the other half. Boat keeps a stopped sandbox's disk for 14 days. Agent 37 keeps seven nightly backups. Sandboxer's storage quota is free but finite, and going over it blocks new sandboxes rather than charging."
+      ]
+    }
+  ],
+  "comparisonIntro": "Can you rewind, clone, or recover a machine — and does the copy include what was running?",
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "partly",
+      "note": "No snapshot product. Free nightly backups of `/home/node` (seven rotating slots) plus on-demand, restored in place only; a live fork copies the disk but not memory; templates are Dockerfile-built images.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/instance-backups",
+        "quote": "Every instance's data (`/home/node`) is backed up nightly into seven rotating slots",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "yes",
+      "note": "Three snapshot kinds: a stop snapshot with disk and memory, continuous disk snapshots every ten minutes (two kept), and named disk snapshots used as templates with share codes. Forks are disk-only and boot fresh.",
+      "source": {
+        "url": "https://sandboxer.com/docs/snapshots",
+        "quote": "Every 10 minutes while a sandbox runs, and at every stop",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "yes",
+      "note": "A snapshot keeps memory and disk, is named and versioned, and boots new machines already running; a checkpoint is an in-place undo point (ten per machine); backups are disk-only and off-cluster; a fork copies memory and disk in 100–200 ms.",
+      "source": {
+        "url": "https://docs.boxd.sh/guides/snapshots",
+        "quote": "A snapshot is a saved copy of a specific machine. It captures the disk and the memory",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "partly",
+      "note": "Snapshots are disk-only and may stop the machine to take them; a fork is snapshot-save plus create, not an instant clone; snapshots survive deleting the machine and include saved logins.",
+      "source": {
+        "url": "https://instabox.sh/docs/snapshots",
+        "quote": "It is snapshot save plus create, so it takes about as long as those two.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "yes",
+      "note": "A snapshot captures memory, processes and the whole disk and restores into a new sandbox at the source's size; a fork copies a running sandbox 1–100 times with memory, pausing the source briefly. There is no trash.",
+      "source": {
+        "url": "https://lizard.build/docs/sandboxes/quickstart",
+        "quote": "A snapshot saves a running sandbox's memory, running processes and every file on its disk.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "Snapshots default to memory plus disk, with disk-only opt-in; forks copy files, memory and processes but freeze the source while capturing; a sandbox with a volume cannot be snapshotted.",
+      "source": {
+        "url": "https://withruntime.com/docs/javascript",
+        "quote": "Snapshots default to `mode: \"memory\"`. That mode keeps files, memory and running processes.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "Snapshots are automatic, disk-only and taken every minute, but only the newest one can be used: there is no point-in-time restore. Saved snapshots are named, never expire, and cost $0.056 a day beyond the included ten.",
+      "source": {
+        "url": "https://docs.boat.dev/snapshots/resume-and-fork",
+        "quote": "Resume and fork always use the newest snapshot. You cannot go back to an older one.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ],
+  "questions": [
+    "Does a snapshot include memory and running processes, or only files?",
+    "Can I boot several machines from one snapshot, and does the source keep running?",
+    "Is there a point-in-time restore, or only the newest snapshot?",
+    "Where is the copy stored — same host, same region, another provider?",
+    "Does restoring replace the disk or merge into it?",
+    "Do snapshots contain credentials, and who can restore them?",
+    "How long does a stopped machine's disk survive before it is deleted?"
+  ],
+  "picks": [
+    {
+      "situation": "Undo a bad edit on one machine",
+      "providers": ["boxd", "sandboxer"],
+      "why": "boxd has in-place checkpoints you can rewind to; Sandboxer takes a disk snapshot every ten minutes and keeps two. Most providers only offer a snapshot you remember to take."
+    },
+    {
+      "situation": "Build a golden image and stamp out copies",
+      "providers": ["boxd", "sandboxer", "boat"],
+      "why": "boxd's snapshot boots already running, Sandboxer's named snapshots work as templates with share codes, and Boat's saved snapshots never expire. Agent 37's closest equivalent is a Dockerfile-built template."
+    },
+    {
+      "situation": "Clone a running agent mid-task",
+      "providers": ["boxd", "lizard", "runtime"],
+      "why": "All three fork memory and processes. boxd's source pauses for a fraction of a second; Lizard and Runtime freeze it while memory is written, so the copy is not free of impact."
+    },
+    {
+      "situation": "Disaster recovery if the host disappears",
+      "providers": ["boxd", "runtime"],
+      "why": "boxd uploads disk backups to object storage off the cluster; Runtime copies snapshots off the server they came from. Agent 37's backups are folder-scoped and stored in the US."
+    },
+    {
+      "situation": "Keep a known-good state forever",
+      "providers": ["boat", "sandboxer", "lizard"],
+      "why": "Boat's saved snapshots never expire (beyond the included count), Sandboxer's named snapshots have no separate charge, and Lizard's snapshots persist while you have credit."
+    }
+  ],
+  "gotchas": [
+    "Boat has no point-in-time restore: only the newest minute's snapshot is usable.",
+    "Agent 37's backup covers only `/home/node`, so a database installed in `/var/lib` is not in it.",
+    "Runtime cannot snapshot a sandbox with a volume attached.",
+    "InstaBox and Lizard snapshots carry credentials and saved logins.",
+    "boxd re-saving a snapshot name replaces the previous version and cleans up older ones.",
+    "Lizard's `stop` deletes the disk: only `/workspace` and snapshots survive, and there is no trash."
+  ]
+}

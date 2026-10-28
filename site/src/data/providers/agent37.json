@@ -1,0 +1,131 @@
+{
+  "id": "agent37",
+  "name": "Agent 37",
+  "url": "https://www.agent37.com",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "Hosted Linux computers for agents, sold two ways: a prepaid Cloud API and a one-click personal-agent subscription.",
+  "whatItIs": [
+    "Agent 37 is an early-stage company (Y Combinator, Fall 2026) running two products under one brand. Agent37 Cloud is a prepaid API for persistent sandboxes: a gVisor container by default, or a full VM as an option, whose whole disk survives between runs and which can sleep when idle.",
+    "Managed hosting is the consumer side: a flat monthly plan for a pre-installed OpenClaw, Hermes, Claude Code, Codex, OpenCode or Grok agent, with a browser dashboard, task board and chat channels. It has no public API of its own.",
+    "The split matters for this site. A non-technical buyer usually wants the second product, while almost every feature described here belongs to the first."
+  ],
+  "whoFor": "Developers building one sandbox per end user, and non-technical buyers who want a personal agent without touching an API.",
+  "isolation": "gVisor container by default: a user-space kernel, stronger than a plain container but weaker than a VM, and Docker does not work inside it. The vm type gives a full VM with its own kernel at 2.5× compute; performance gives dedicated cores at 4×.",
+  "sizes": "Four shapes, with 4 vCPU as the ceiling on the default type: 2/4, 4/8, 4/16 and 4/32 vCPU/GB. Disk is any whole number of GB inside each shape's range, defaulting to 4, 6, 12 or 24 GB.",
+  "billing": {
+    "model": "Prepaid wallet, no subscription and no plan fee.",
+    "meter": "Per minute, priced from the shape you reserved: $0.80 per vCPU-month, $0.70 per GB-month, $0.09 per GB-month of disk.",
+    "stopped": "Disk only. A sleep checkpoint keeps memory at no extra charge; a stopped instance loses memory and still pays for disk.",
+    "planFee": "None on the Cloud API. The personal plans ($3.99 to $99.99 a month) are a separate product.",
+    "minimum": "No minimum charge, but creating an instance requires one day of its running cost in the wallet."
+  },
+  "cost": {
+    "A": {
+      "headline": "≈ $1.09 a month",
+      "shape": "2 vCPU / 4 GiB, 4 GB disk (the entry shape), deleted after each task",
+      "lines": [
+        { "label": "Compute", "arithmetic": "1,000 × 10 min × (2 × $0.00001826 + 4 × $0.00001598)", "amount": "$1.00" },
+        { "label": "Disk", "arithmetic": "1,000 × 10 min × 4 GB × $0.00000205", "amount": "$0.08" }
+      ],
+      "total": "$1.09",
+      "notes": [
+        "The requested shape exists exactly, so no substitution is needed.",
+        "Boot and provisioning time is not billed; transitional states such as starting and stopping are billed at the full rate.",
+        "Excludes model tokens, which usually dominate the cost of a ten-minute agent task."
+      ]
+    },
+    "B": {
+      "headline": "≈ $10.60 or $30.10 a month",
+      "shape": "The requested 4 vCPU / 8 GiB / 50 GB box does not exist as a single shape.",
+      "lines": [
+        { "label": "4 vCPU / 8 GB, 20 GB disk (the disk cap on this shape)", "arithmetic": "730 h × (4 × $0.0011 + 8 × $0.00096) + 20 × $0.09", "amount": "$10.60" },
+        { "label": "4 vCPU / 32 GB, 50 GB disk (the nearest shape that allows 50 GB)", "arithmetic": "730 h × (4 × $0.0011 + 32 × $0.00096) + 50 × $0.09", "amount": "$30.10" }
+      ],
+      "total": "$10.60 or $30.10",
+      "notes": [
+        "A VM, needed for Docker or /dev/kvm, multiplies compute by 2.5: about $23.85 or $68.59.",
+        "Both figures match the vendor's own shape table plus disk at $0.09/GB-month."
+      ],
+      "flag": "50 GB of disk forces the 4 vCPU / 32 GB shape. If 20 GB is enough, the same CPU and RAM cost a third as much."
+    },
+    "C": {
+      "headline": "≈ $1.61 or $2.86 a month",
+      "shape": "The requested 2 vCPU / 4 GiB / 20 GB box does not exist: that shape caps disk at 12 GB.",
+      "lines": [
+        { "label": "2 vCPU / 4 GB, 12 GB disk", "arithmetic": "90 h × $0.00604 + 12 × $0.09 × (720/730)", "amount": "$1.61" },
+        { "label": "4 vCPU / 8 GB, 20 GB disk", "arithmetic": "90 h × $0.01208 + 20 × $0.09 × (720/730)", "amount": "$2.86" }
+      ],
+      "total": "$1.61 or $2.86",
+      "notes": [
+        "A 30-day month is 720 hours, so disk is prorated over 720/730 of a month.",
+        "At 90 awake hours, disk is two-thirds of the bill in the first option.",
+        "Leaving the same box running all month instead would cost about $5.40."
+      ],
+      "flag": "20 GB is not orderable with 2 vCPU. The second line buys more CPU and RAM than asked to get the disk."
+    }
+  },
+  "usability": {
+    "dashboard": "Yes, two of them: agent37.com/dashboard/cloud for keys, billing, team and metrics, and a separate dashboard for the personal-agent product. The docs never describe creating a Cloud sandbox by clicking, so the documented path is an API call or the CLI.",
+    "withoutCode": "On managed hosting, yes, that is the whole product: one click, a task board, a web terminal, a file browser and a live desktop. On the Cloud API, no: every create path in the docs is `POST /v1/instances`, `npx agent37`, or a code snippet.",
+    "signup": "Cloud needs a card to unlock the $5 starter credit, or you can sign up through the API with no credit and fund it first. The personal free plan needs no card.",
+    "docs": "Mintlify docs, over 60 pages, runnable examples for every endpoint, and `llms.txt` bundles so an agent can read the whole manual. Support is a founder's email, a dashboard chat bubble and a booking link. There is a public status page.",
+    "tripsUp": [
+      "The vocabulary is developer-native: instance, template, exec, signed URL, default port.",
+      "The first step on the Cloud product is a terminal or an HTTP request.",
+      "Two dashboards and two products share one brand, and the pricing page covers only the Cloud one.",
+      "Sleep versus stop is a billing decision disguised as a lifecycle decision.",
+      "Stopped is not free: disk bills until you delete the instance.",
+      "Managed model calls fail by default because the per-instance budget starts at zero."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "The vCPU ceiling contradicts itself",
+      "detail": "The sizing page says 4 vCPU is the ceiling on every instance type and that a request for 16 vCPU comes back as 4. The VM page prices 8 vCPU / 16 GB and 16 vCPU / 32 GB. Both pages are current.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "battleships.dev models Agent 37 as having memory snapshots",
+      "detail": "Its `snapshot: mem` and $0.03 figure describe the sleep checkpoint and cold storage, not a snapshot product you can name, list or clone. There is no snapshot product.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "Egress has no published price",
+      "detail": "No per-GB rate, free allowance or overage policy appears on the pricing page or in the billing docs.",
+      "status": "open"
+    },
+    {
+      "issue": "Whether the Cloud dashboard can create a sandbox by clicking",
+      "detail": "Every documented create path is an API call or CLI command. The absence may be a documentation gap rather than a product gap.",
+      "status": "open"
+    },
+    {
+      "issue": "Regions outside the US require the 2.5× VM type, and backups are stored in the US",
+      "detail": "EU and India regions keep the instance and its disk local, but backups and the control-plane record are stored in the US.",
+      "status": "open"
+    },
+    {
+      "issue": "The $5 starter credit has moved before",
+      "detail": "battleships.dev recorded a conflict between a $5 website claim and $1 in the billing docs. The billing docs said $5 on 2026-10-28, so it appears resolved, but the number has changed at least once.",
+      "status": "rechecking"
+    }
+  ],
+  "strengths": [
+    "The whole disk persists, not just a mounted folder.",
+    "Two pauses with different memory behaviour, both billed at disk only.",
+    "Free nightly backups of /home/node with seven restore points.",
+    "Managed hosting is the only genuinely one-click personal agent in this set.",
+    "Cheapest always-on 4 vCPU box of the seven at about $10.60 a month."
+  ],
+  "sources": [
+    { "label": "Docs: overview", "url": "https://www.agent37.com/docs" },
+    { "label": "Docs: lifecycle", "url": "https://www.agent37.com/docs/agents-api/instance-lifecycle" },
+    { "label": "Docs: billing", "url": "https://www.agent37.com/docs/agents-api/billing" },
+    { "label": "Docs: URLs and auth", "url": "https://www.agent37.com/docs/agents-api/urls" },
+    { "label": "Docs: backups", "url": "https://www.agent37.com/docs/agents-api/instance-backups" },
+    { "label": "Docs: fork", "url": "https://www.agent37.com/docs/agents-api/instances/fork" },
+    { "label": "Pricing", "url": "https://www.agent37.com/pricing" },
+    { "label": "Personal agent plans", "url": "https://www.agent37.com/personal" }
+  ]
+}

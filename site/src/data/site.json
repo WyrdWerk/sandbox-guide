@@ -1,0 +1,34 @@
+{
+  "title": "Cloud sandboxes for AI agents, explained",
+  "shortTitle": "Sandbox comparison",
+  "description": "A plain-language guide to cloud sandbox providers for people running AI agents: what each feature means, what to check, and who to pick for which situation.",
+  "checkedOn": "2026-10-28",
+  "confidenceTags": [
+    {
+      "tag": "docs-confirmed",
+      "meaning": "The provider's own documentation says it at the linked page."
+    },
+    {
+      "tag": "pricing-page",
+      "meaning": "The provider's pricing page or a money-specific page says it."
+    },
+    {
+      "tag": "third-party",
+      "meaning": "Someone other than the provider said it, such as battleships.dev or a review."
+    },
+    {
+      "tag": "inferred",
+      "meaning": "Our reading of documented facts. Not a sentence the provider wrote."
+    },
+    {
+      "tag": "not-published",
+      "meaning": "We looked and found no statement. We do not guess."
+    }
+  ],
+  "limits": [
+    "This is desk research. No provider account was created and no sandbox was started or billed, so every claim about behaviour is a documentation claim, not something we measured.",
+    "Prices are the providers' published list rates in US dollars on 2026-10-28, excluding tax. Several providers changed prices during October 2026, so a number here can be out of date within weeks.",
+    "Where a provider publishes nothing, the site says 'not published' rather than estimating. Where two pages of the same provider disagree, the site shows both and marks it as a contradiction.",
+    "battleships.dev is a comparison dataset built by the Boat (boat.dev) team. We used it as a cross-check, never as a primary source, and it disagreed with live provider pages often enough that its own numbers are not repeated here as fact."
+  ]
+}

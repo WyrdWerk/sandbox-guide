@@ -1,0 +1,122 @@
+{
+  "id": "sandboxer",
+  "name": "Sandboxer",
+  "url": "https://sandboxer.com",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "Whole Ubuntu microVMs billed per second, sold through monthly plans whose dollars come back as machine time.",
+  "whatItIs": [
+    "Sandboxer rents whole Linux virtual machines to agents and to the people running them. Each sandbox is an Ubuntu 24.04 microVM on Cloud Hypervisor with its own kernel, root, systemd, Docker and `/dev/kvm`, reachable over an HTTP API, a CLI, two SDKs and an MCP server.",
+    "Its selling point is that state outlives the session: a stop writes RAM as well as disk, so a resume can bring running processes back, and a fork is a copy-on-write clone.",
+    "It launched publicly on 2026-10-18. There are two regions, no GPUs, no SLA, and no independent reviews yet."
+  ],
+  "whoFor": "Solo builders and small agent fleets, products giving every user their own computer, eval farms and teams running coding or computer-use agents in parallel.",
+  "isolation": "Cloud Hypervisor microVM with its own kernel and a separate copy-on-write root disk. Docker, systemd, `/dev/kvm` and root all work. The control channel is vsock, not TCP, so code inside cannot reach the host API.",
+  "sizes": "Four fixed sizes: small 2 vCPU / 4 GB / 12 GB, default 4 vCPU / 8 GB / 50 GB, large 8 vCPU / 16 GB / 125 GB, xlarge 16 vCPU / 32 GB / 251 GB. vCPUs are shared; RAM is reserved. Disk is space for your files, on top of a 6–7 GB OS image.",
+  "billing": {
+    "model": "Monthly plan whose dollars return as machine time, plus optional time packs.",
+    "meter": "Per second while running, at a fixed multiplier per size: small 0.5×, default 1×, large 2×, xlarge about 5.56×. One dollar buys 100,000 default-seconds.",
+    "stopped": "Nothing for compute. Storage is counted against an included quota but not billed, and going over the quota blocks new sandboxes rather than charging.",
+    "planFee": "$20, $100, $500 or $2,000 a month, per seat in an organisation. The plan price comes back as machine time, and unused plan time expires monthly.",
+    "minimum": "The $20 plan is the floor: there is no free tier, and the 7-day trial converts into it automatically."
+  },
+  "cost": {
+    "A": {
+      "headline": "$20 a month (the plan floor)",
+      "shape": "small (2 vCPU / 4 GB / 12 GB), deleted after each task",
+      "lines": [
+        { "label": "Usage", "arithmetic": "1,000 × 600 s × $0.018/h ÷ 3,600", "amount": "$3.00" },
+        { "label": "Bill", "arithmetic": "$20 plan; $3 of included time used", "amount": "$20.00" }
+      ],
+      "total": "$20.00",
+      "notes": [
+        "There is no free tier, so the plan price is the bill for any workload this small.",
+        "1,000 creates is about 33 a day, inside the $20 plan's 200-a-day start limit."
+      ]
+    },
+    "B": {
+      "headline": "$40 cash, of which $26.28 is used",
+      "shape": "default (4 vCPU / 8 GB / 50 GB), 730 h",
+      "lines": [
+        { "label": "Usage", "arithmetic": "730 × $0.036", "amount": "$26.28" },
+        { "label": "Cash", "arithmetic": "$20 plan + one $20 pack", "amount": "$40.00" }
+      ],
+      "total": "$40.00 up front",
+      "notes": [
+        "The unused $13.72 carries forward, because packs never expire.",
+        "Plan time does not roll over; only packs do."
+      ]
+    },
+    "C": {
+      "headline": "$20 a month (the plan floor)",
+      "shape": "small (2 vCPU / 4 GB / 12 GB), 90 running hours",
+      "lines": [
+        { "label": "Usage", "arithmetic": "90 × $0.018", "amount": "$1.62" },
+        { "label": "Bill", "arithmetic": "absorbed by the $20 plan", "amount": "$20.00" }
+      ],
+      "total": "$20.00",
+      "notes": [
+        "The nearest size above the ask, default, uses $3.24 and is also inside the plan.",
+        "Stopped hours are free, and an idle box pauses itself after 30 minutes on the $20 plan."
+      ],
+      "flag": "No 20 GB size exists: disk is fixed per size at 12 GB or 50 GB."
+    }
+  },
+  "usability": {
+    "dashboard": "Yes, at sandboxer.com/app: a sandbox list with a stop countdown and an Extend button, an Open desktop button, a browser terminal, billing, environments, agents, API keys, webhooks and alerts.",
+    "withoutCode": "Not really. Every documented workflow is a `sbx` command, and templates are created from the CLI or API. The one genuinely no-code route is adding its hosted MCP server as a connector in Claude or ChatGPT and asking in chat.",
+    "signup": "GitHub, Google, email code or email and password, plus a card before the first sandbox. The card starts a 7-day trial with 25 hours of machine time, which becomes the $20 plan on day 8.",
+    "docs": "About 30 pages with a Markdown mirror, an OpenAPI file, a 50-term glossary and published benchmark method. Support is email only. The status page is public with 90-day uptime.",
+    "tripsUp": [
+      "The card comes first: you cannot see a sandbox without payment details.",
+      "The trial becomes a subscription on day 8 unless cancelled.",
+      "Nothing is one-click: hosting a port is a CLI step.",
+      "The default 1-hour auto-stop stops a sandbox you forgot about, and a running job does not hold it off.",
+      "A private preview URL is a password, and anyone with the link is in.",
+      "Resume may not restore your session, which is the promise you will remember."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "Its sizes and prices exactly match Boat's",
+      "detail": "small, default, large and xlarge at $0.018 / $0.036 / $0.072 / $0.20 an hour, and the same $20 / $100 / $500 / $2,000 plan tiers. But the disk sizes differ (12/50/125/251 GB here against 51/51/111/251 GB at Boat), the regions differ (US East and Helsinki here, EU-only at Boat), Boat deletes a stopped sandbox's disk after 14 days while Sandboxer keeps it, and the legal entities are unrelated. No public source explains the relationship. This is an open question, not evidence of a reseller or a copy.",
+      "status": "open"
+    },
+    {
+      "issue": "Ten days old at the time of research",
+      "detail": "Launch post 2026-10-18, oldest changelog entry 2026-10-17, no independent reviews or benchmarks, and no company page: the legal entity is a Delaware company at a Miami private mailbox shared with unrelated products.",
+      "status": "open"
+    },
+    {
+      "issue": "Resume keeps running processes only conditionally",
+      "detail": "It needs a machine of the same CPU type within two minutes; otherwise the sandbox cold-boots from disk. `requireMemory: true` makes it strict but cannot be combined with a resize.",
+      "status": "open"
+    },
+    {
+      "issue": "No SLA, no SSO, no audit log, no compliance certification published",
+      "detail": "There is a vulnerability policy and a security.txt, but no SOC 2, ISO 27001 or HIPAA statement, and no DPA or sub-processor list.",
+      "status": "open"
+    },
+    {
+      "issue": "Two regions disagree on where us-east is",
+      "detail": "The regions page says Ashburn, Virginia; a performance note on the machines page says Leesburg, VA. Same metro, different answer.",
+      "status": "contradiction"
+    }
+  ],
+  "strengths": [
+    "A stop that writes memory to disk, so a resume can restore running processes.",
+    "Three distinct snapshot kinds, including continuous disk snapshots every ten minutes.",
+    "Named snapshots double as templates, with share codes and credentials scrubbed.",
+    "Whole VMs with Docker, systemd and /dev/kvm, created in about 0.7 seconds.",
+    "Free stopped storage within a generous quota, and no egress bill."
+  ],
+  "sources": [
+    { "label": "Docs", "url": "https://sandboxer.com/docs" },
+    { "label": "Snapshots", "url": "https://sandboxer.com/docs/snapshots" },
+    { "label": "Machines and sizes", "url": "https://sandboxer.com/docs/machines" },
+    { "label": "Billing", "url": "https://sandboxer.com/docs/billing" },
+    { "label": "Hosting and preview URLs", "url": "https://sandboxer.com/docs/hosting" },
+    { "label": "Pricing", "url": "https://sandboxer.com/pricing" },
+    { "label": "Security", "url": "https://sandboxer.com/docs/security" }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "id": "billing",
+  "order": 8,
+  "title": "How you get billed",
+  "navTitle": "Pricing",
+  "standfirst": "The billing model decides your bill more than the hourly rate does. Four shapes are in play: flat per size, per vCPU and per GB, a plan fee that comes back as credit, and measured CPU.",
+  "concept": [
+    {
+      "heading": "Four billing shapes",
+      "paragraphs": [
+        "Flat per size. You pick a fixed shape and pay an hourly rate for it whether it works or waits. Boat, Sandboxer and Lizard work this way. It is the easiest to predict, and the easiest to compare, because the rate is the whole story.",
+        "Per vCPU and per GB. The rate is a sum of parts: so much per vCPU-hour, so much per GB-hour of memory, so much per GB-month of disk. Agent 37, InstaBox and Runtime work this way, and boxd uses three meters of its own. It is flexible and hard to compare, because two providers can quote the same hourly number for different amounts of memory.",
+        "A plan fee that comes back as credit. Sandboxer, InstaBox, Lizard and Boat all sell a monthly plan whose dollars convert into usage. That is not a fee, but it is a floor: a light month still costs the plan price, and unused plan time usually expires at month end.",
+        "Measured CPU. Runtime charges for the CPU actually used, above a small floor, plus memory for as long as the sandbox runs. It is the cheapest model for an agent that waits on a model and the most surprising one for an agent that compiles."
+      ]
+    },
+    {
+      "heading": "What is still charged while stopped",
+      "paragraphs": [
+        "Every provider charges something for a stopped machine, except the ones that delete it. Agent 37, InstaBox and Runtime charge storage. Sandboxer counts stopped storage against a free quota and charges nothing. Boat charges nothing and keeps the disk for 14 days. boxd charges for written disk in every state, and charges for memory if you leave the machine in standby. Lizard's stop deletes the sandbox, so only volumes and snapshots remain.",
+        "The trap is a provider whose “pause” keeps RAM. boxd's standby is the clearest example: no vCPU charge, but memory keeps billing, so a paused machine can cost more than a running one with low CPU use."
+      ]
+    },
+    {
+      "heading": "Reading the worked examples",
+      "paragraphs": [
+        "The three examples below are the same at every provider: A is 1,000 ten-minute tasks on a 2 vCPU / 4 GiB machine, deleted after each; B is one always-on 4 vCPU / 8 GiB / 50 GiB box for a month; C is a 2 vCPU / 4 GiB / 20 GiB box used three hours a day and stopped otherwise.",
+        "Where a provider does not sell that exact shape, the page shows the nearest ones and says so. Those substitutions matter: several providers cannot sell 50 GB of disk with 4 vCPU, or 20 GB with 2 vCPU, without changing the CPU or the RAM. The arithmetic is shown so you can redo it at today's prices, which change."
+      ]
+    }
+  ],
+  "comparisonIntro": "Can you work out your bill from published prices, and what is still charged when the machine is not running?",
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "yes",
+      "note": "Prepaid wallet, per minute, priced from the shape you reserved: $0.80 per vCPU-month, $0.70 per GB-month, $0.09 per GB-month of disk. No plan fee, no minimum, and stopped time is disk only.",
+      "source": {
+        "url": "https://www.agent37.com/cloud",
+        "quote": "You top up a prepaid balance and each sandbox spends it down per minute while it runs. No subscription, no plan fee, no minimum",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "partly",
+      "note": "A monthly plan whose dollars return as machine time, metered per second at a fixed multiplier per size. Stopped time is free, but the $20 plan is a floor and plan time expires monthly.",
+      "source": {
+        "url": "https://sandboxer.com/docs/billing",
+        "quote": "Metering is per second, from the moment a sandbox is up until it is stopped.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "partly",
+      "note": "Prepaid credits and three meters: vCPU on the size while running, RAM on resident memory (also in standby), disk on bytes written in every state. No plan fee, but snapshot and backup storage have no published price.",
+      "source": {
+        "url": "https://boxd.sh/pricing",
+        "quote": "RAM bills on the memory a machine actually has resident, sampled every second, while it is running or in standby",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "yes",
+      "note": "A subscription that is also credit: $20, $100 or $500 a month, then per-second vCPU and RAM, GiB-hour storage and $0.02 per GiB of egress. Paused and stopped machines pay storage only.",
+      "source": {
+        "url": "https://instabox.sh/pricing",
+        "quote": "Usage comes out of your included credits first, then you pay as you go. Credits reset every month.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "One $19 plan including $19 of usage; sandboxes are a flat hourly price per size, billed per second including idle, and volumes bill on used space. Snapshot storage has no published price and there is no spending cap.",
+      "source": {
+        "url": "https://lizard.build/pricing",
+        "quote": "Pro costs $19 a month and includes $19 of usage for the whole platform: apps, databases, Sandboxes, storage and egress.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "partly",
+      "note": "Prepaid credit, per second: measured active CPU above a 50-millicore floor, plus reserved memory, plus storage while paused or stopped. No plan fee, but plans exist in a private beta with no published price.",
+      "source": {
+        "url": "https://withruntime.com/pricing",
+        "quote": "Compute has no one-minute minimum, and memory is billed while compute runs.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "A monthly plan that is prepaid machine time plus limits, with a separate dollar wallet for overage. Per second while running; stopped is zero machine time and the disk is kept 14 days.",
+      "source": {
+        "url": "https://docs.boat.dev/pricing",
+        "quote": "A plan is a monthly price that your card pays. **It is not a fee.** Every dollar comes back as VM time at the rates above.",
+        "confidence": "pricing-page"
+      }
+    }
+  ],
+  "questions": [
+    "Is the price per machine size, per vCPU, or per second of actual CPU use?",
+    "What am I charged for while the machine is stopped or paused?",
+    "Does the monthly fee come back as usage, or is it a fee on top?",
+    "What expires at the end of the month: plan time, credits, or nothing?",
+    "Is there a minimum spend, and what happens if I use less?",
+    "Which costs are not on the pricing page — egress, snapshots, static IPs, support?"
+  ],
+  "picks": [
+    {
+      "situation": "Low, predictable spend for a small always-on agent",
+      "providers": ["agent37", "boat"],
+      "why": "Workload C costs $1.61 at Agent 37 (12 GB disk) or Boat (51 GB), and $2.86 at Agent 37 with 20 GB. Both still bill a $20 plan if you buy one, so the floor is the real number."
+    },
+    {
+      "situation": "Many short tasks, cheapest compute",
+      "providers": ["agent37", "boat", "sandboxer"],
+      "why": "1,000 ten-minute tasks cost $1.09 at Agent 37, $3.00 at Boat and $3.00 of usage at Sandboxer. All three are dominated by their plan floor or their minimum balance rather than by compute."
+    },
+    {
+      "situation": "An always-on 4 vCPU box without a surprise bill",
+      "providers": ["agent37", "boat"],
+      "why": "About $10.60 at Agent 37 with 20 GB of disk, $30.10 with 50 GB; $26.28 at Boat with 51 GB. Both bill the reserved shape, so the bill does not move with what the software does."
+    },
+    {
+      "situation": "A plan whose fee is really credit",
+      "providers": ["boat", "sandboxer", "instabox", "lizard"],
+      "why": "All four convert the fee into usage, with different expiry rules: Boat's plan time expires monthly while its wallet does not; Sandboxer's plan time expires but packs do not; InstaBox and Lizard reset monthly."
+    },
+    {
+      "situation": "An agent that mostly waits on a model",
+      "providers": ["runtime"],
+      "why": "Measured CPU with a 50-millicore floor makes a waiting sandbox cost about $0.03 an hour in CPU plus memory. No other provider in this set meters actual CPU."
+    }
+  ],
+  "gotchas": [
+    "A “credit” can mean three things: prepaid money, included usage that expires monthly, or a per-instance spending ceiling that is not money at all.",
+    "boxd's headline rate assumes 2 GiB resident on an 8 GiB machine; a real app can double the bill.",
+    "Runtime's example C uses a 720-hour month, not 730: 30 days.",
+    "Sandboxer's and Boat's prices are identical line for line, and the relationship between the two companies is not published.",
+    "Lizard's $19 plan includes usage but has no spending cap, and overage charges arrive automatically in steps."
+  ]
+}

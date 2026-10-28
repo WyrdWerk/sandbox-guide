@@ -1,0 +1,15 @@
+{
+  "term": "Persistent",
+  "short": "What survives after the machine is not running.",
+  "whyItMatters": "Some providers mean the whole disk, some one folder, some only for 14 days, and one means “the machine keeps running”. The word is used for storage, for runtime, and for both.",
+  "meanings": [
+    { "provider": "agent37", "meaning": "The whole disk, indefinitely, at $0.09 per GB-month; `/home/node` is what gets backed up." },
+    { "provider": "sandboxer", "meaning": "The whole disk while stopped, free within a storage quota." },
+    { "provider": "boxd", "meaning": "The whole machine, including processes and shell state, while it exists; disk bills in every state." },
+    { "provider": "instabox", "meaning": "One disk at `/data` (20 GiB by default); the root disk belongs to the template." },
+    { "provider": "lizard", "meaning": "Only `/workspace`, only via a named volume, one machine at a time, node-local." },
+    { "provider": "runtime", "meaning": "`persistent: true` means “no idle pause”, not storage. Every disk persists through pause and stop anyway." },
+    { "provider": "boat", "meaning": "The whole disk for 14 days after a stop, minus `/tmp`, `~/.cache` and logs." }
+  ],
+  "checkFor": "Ask: which paths survive, for how long, and what does keeping them cost?"
+}

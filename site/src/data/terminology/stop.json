@@ -1,0 +1,15 @@
+{
+  "term": "Stop",
+  "short": "Turning the machine off.",
+  "whyItMatters": "At some providers stop keeps the disk indefinitely; at others the disk is deleted, or expires after 14 days. Stop is also where a graceful shutdown usually does not happen: several providers save the disk without letting your programs finish.",
+  "meanings": [
+    { "provider": "agent37", "meaning": "Disk stays, memory and processes are lost. Disk bills until you delete." },
+    { "provider": "sandboxer", "meaning": "Disk and memory are written to disk; resume restores memory only if a matching machine is free." },
+    { "provider": "boxd", "meaning": "Disk stays, memory is not kept, and disk keeps billing in every state." },
+    { "provider": "instabox", "meaning": "Power off: files kept, processes gone. Cannot be applied to a paused machine." },
+    { "provider": "lizard", "meaning": "Deletes the sandbox and its disk. Only `/workspace` and snapshots remain." },
+    { "provider": "runtime", "meaning": "Disk kept, memory gone, and storage keeps billing until delete." },
+    { "provider": "boat", "meaning": "Saves the disk and destroys the machine; the disk is kept 14 days, and the API calls the state archived." }
+  ],
+  "checkFor": "Ask: does stop keep the disk, for how long, does it keep billing, and do my programs get a chance to exit?"
+}

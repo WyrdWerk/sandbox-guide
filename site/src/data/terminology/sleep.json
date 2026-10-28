@@ -1,0 +1,15 @@
+{
+  "term": "Sleep",
+  "short": "An idle state the provider puts the machine into by itself.",
+  "whyItMatters": "Sleep is a policy, not an action. Whether it keeps memory, what counts as activity, and what wakes it decide whether an always-available agent is actually available.",
+  "meanings": [
+    { "provider": "agent37", "meaning": "A checkpoint of disk and memory, off by default, woken by any request to any URL." },
+    { "provider": "sandboxer", "meaning": "Idle auto-pause: memory kept, wakes on the next API call or URL request; 15–120 minutes by plan." },
+    { "provider": "boxd", "meaning": "Hibernate: memory written to disk, ~85 ms wake, disk-only billing. Separate from standby, which keeps RAM." },
+    { "provider": "instabox", "meaning": "Idle auto-pause after 30 minutes by default, memory kept; a visit to a public port wakes it, though the API says preview links stay offline." },
+    { "provider": "lizard", "meaning": "None. There is no idle timer; the only clock is the lifetime deadline." },
+    { "provider": "runtime", "meaning": "Pauses after five idle minutes by default; the next request wakes it, usually within a second." },
+    { "provider": "boat", "meaning": "None. Auto-stop counts from create or resume, not from activity." }
+  ],
+  "checkFor": "Ask: what counts as activity, what wakes it, and what does a sleeping hour cost?"
+}

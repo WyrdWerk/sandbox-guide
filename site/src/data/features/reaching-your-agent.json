@@ -1,0 +1,149 @@
+{
+  "id": "reaching-your-agent",
+  "order": 3,
+  "title": "Reaching your agent: links, ports, and who can open them",
+  "navTitle": "Reaching it",
+  "standfirst": "A machine nobody can reach is not an agent. There are four doors in — an HTTPS link, a raw TCP port, SSH, and the provider's own API — and the important difference is who can open each one.",
+  "concept": [
+    {
+      "heading": "Three ways a link can be guarded",
+      "paragraphs": [
+        "Every provider gives you an HTTPS address for a port inside the machine. What differs is the lock. A provider-key link needs an API key or a signed token on every request, which is the strongest option but awkward to open in a browser. A token-in-the-URL link is a password you can paste: convenient, and exactly as safe as the place you pasted it. An open link has no lock at all.",
+        "The open case is more common than buyers expect. boxd's `name.boxd.sh` is public to the internet with no authentication in front of it. InstaBox's public ports are unauthenticated by design. Agent 37's “public port” is deliberately credential-free and keeps working until you delete it. In each case the URL is the only secret, and URLs leak into chat logs, screenshots and browser history."
+      ]
+    },
+    {
+      "heading": "What “private” means at each provider",
+      "paragraphs": [
+        "Lizard gives one token per sandbox rather than one per port, so a link to a harmless demo also opens every other port on that machine. Sandboxer puts a token in the URL and strips it before the request reaches your app, so your app cannot check it. Runtime keeps every sandbox closed until you open a specific door, and its previews are token-gated and marked `noindex`. Agent 37 has three link types with three different auth models on the same instance."
+      ]
+    },
+    {
+      "heading": "Doors that are not a web page",
+      "paragraphs": [
+        "An agent often needs to reach something that is not HTTP: a Postgres port, an MQTT broker, a game server, an SSH session. Only Runtime, boxd and Boat offer a raw TCP path, and Boat's is limited by IPv4 not being guaranteed. Sandboxer and InstaBox expose SSH through a gateway instead. Lizard has no SSH protocol at all: its `ssh` command is an interactive shell over the provider's own transport, so `scp`, `rsync` and port forwarding do not work."
+      ]
+    },
+    {
+      "heading": "Custom domains are rarer than they look",
+      "paragraphs": [
+        "Runtime, boxd and Agent 37 support a custom domain. Boat explicitly does not, and a CNAME to an `on.boat.dev` name will not work. Sandboxer calls first-class custom domains a roadmap item, InstaBox publishes nothing, and Lizard documents custom domains for deployed apps but not for sandbox previews."
+      ]
+    }
+  ],
+  "comparisonIntro": "Can you reach a service inside the machine, and who can open that door?",
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "yes",
+      "note": "Every port gets an HTTPS URL; instance and preview URLs require an API key or a time-boxed signed URL. A “public port” is deliberately unauthenticated and permanent. SSH is tunnelled, and there is no raw TCP.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/concepts",
+        "quote": "**Instance URLs require auth on every request**",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "yes",
+      "note": "A stable HTTPS address per port, private by default with a token in the URL; `--public` removes it. Each VM also gets a public IPv6 with the firewall closed except SSH. No raw-TCP endpoint.",
+      "source": {
+        "url": "https://sandboxer.com/docs/hosting",
+        "quote": "Private (default) | `https://…-3000.box.sandboxer.com?_token=…` | Anyone with the full URL.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "yes",
+      "note": "Every machine is on `name.boxd.sh` with no authentication in front of it; subdomain proxies add ports, up to three raw TCP forwards, and SSH on a dedicated port. Bot protection is on by default, but it only gates wake-ups of sleeping machines, so webhooks and API clients get a 503 check page instead of your app.",
+      "source": {
+        "url": "https://docs.boxd.sh/guides/bot-protection",
+        "quote": "When a request would wake a sleeping machine, boxd first asks the visitor to pass a quick browser check.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "partly",
+      "note": "An HTTPS URL per port, up to 16, with no authentication: the URL is the only secret. SSH and mosh go through a gateway; there is no raw TCP inbound and no custom domain.",
+      "source": {
+        "url": "https://instabox.sh/docs/ports",
+        "quote": "It is not a secret: once published, anyone can reach the whole service until you unpublish it.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "A preview URL per exposed port, gated by one token per sandbox that opens every port on it. WebSockets pass through. No raw TCP, no SSH protocol, no custom domains for sandboxes.",
+      "source": {
+        "url": "https://lizard.build/docs/sandboxes/preview-urls",
+        "quote": "The token belongs to the sandbox, not to a port: it opens every port you expose on that sandbox",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "Nothing is reachable until you open a door: token-gated previews, custom domains, raw TCP ports, a WireGuard or Tailscale private network, or SSH over the API.",
+      "source": {
+        "url": "https://withruntime.com/docs/sandbox-environment",
+        "quote": "Nothing on the internet can connect in to a sandbox. These are the ways in. You open each one yourself",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "An HTTPS route per port, token-gated by default and `--public` to remove it; SSH on port 22; raw TCP by opening the sandbox firewall, but only IPv6 is guaranteed. No custom domains.",
+      "source": {
+        "url": "https://docs.boat.dev/hosting",
+        "quote": "boat does not support custom domains.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ],
+  "questions": [
+    "Who can open the link: only me, anyone I send it to, or anyone who guesses it?",
+    "Can I rotate or revoke access without restarting the machine?",
+    "Does the URL survive a stop and resume, or does it change?",
+    "Can I reach a non-HTTP service — a database, a game server, an SSH session?",
+    "Is there a custom domain, and does it need my own DNS?",
+    "If the machine is asleep, does an incoming request wake it?"
+  ],
+  "picks": [
+    {
+      "situation": "A private dashboard for my own agent, not a public website",
+      "providers": ["agent37", "runtime", "lizard"],
+      "why": "All three gate links by default, with a key, a signed URL or a token. Runtime goes furthest by keeping every sandbox closed until you open a named door."
+    },
+    {
+      "situation": "Send a link to a friend or client, knowing it works like a password",
+      "providers": ["boxd", "instabox", "boat"],
+      "why": "The URL is the credential. That is convenient and should be treated as a secret; none of these three offers an auth layer in front of the address."
+    },
+    {
+      "situation": "Reach a database or another non-web service",
+      "providers": ["runtime", "boxd", "boat"],
+      "why": "These support raw TCP. Boat's raw path depends on IPv4, which is not guaranteed on every sandbox, so check before relying on it."
+    },
+    {
+      "situation": "Put the agent on my own domain",
+      "providers": ["runtime", "boxd", "agent37"],
+      "why": "Runtime and boxd issue certificates for a hostname you control. Agent 37 requires delegating a whole dedicated domain's nameservers, so a subdomain of an existing site will not work."
+    },
+    {
+      "situation": "Reach the machine only from my own network",
+      "providers": ["runtime", "boxd"],
+      "why": "Runtime has a WireGuard tunnel and can join a Tailscale tailnet; boxd can serve an organisation over Tailscale. That is a stronger boundary than a token in a URL."
+    }
+  ],
+  "gotchas": [
+    "Agent 37's public ports are unauthenticated by design and keep working until you delete them.",
+    "Sandboxer strips its token before the request reaches your app, so your app cannot check it.",
+    "InstaBox's docs and its API disagree on whether a preview visit wakes a paused machine.",
+    "Boat's public URL carries HTTPS and WebSockets only; another protocol needs a firewall change and the sandbox IP.",
+    "Lizard's preview URL returns 401 without its token, which looks like an outage if you paste the bare hostname."
+  ]
+}

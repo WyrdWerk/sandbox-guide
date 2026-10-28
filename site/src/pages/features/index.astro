@@ -1,0 +1,38 @@
+---
+import Base from "../../layouts/Base.astro";
+import { features } from "../../lib/data";
+---
+
+<Base title="Features" description="One page per feature: what it means, how the seven providers compare, what to ask, and who to pick.">
+  <header class="page-header">
+    <p class="kicker">Features</p>
+    <h1>Seven features, explained and compared</h1>
+    <p class="lede">
+      Each page starts with the concept, then a provider-by-provider comparison with a source for
+      every claim, then the questions to ask any provider, then situational picks. Nothing here has
+      one overall winner.
+    </p>
+  </header>
+
+  <ul class="index-list">
+    {
+      features.map((feature) => (
+        <li>
+          <a href={`/features/${feature.id}/`}>{feature.title}</a>
+          <p>{feature.standfirst}</p>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="callout callout-quiet">
+    <p class="callout-title">How the labels work</p>
+    <p>
+      <strong>Yes</strong> means the feature exists and works the way the page describes.
+      <strong>Partly</strong> means it exists with a condition, a gap or a different meaning.
+      <strong>No</strong> means the provider does not offer it. <strong>Not published</strong> means
+      we looked and the provider does not say. <strong>Research pending</strong> means there is no
+      profile yet, so no claim is shown.
+    </p>
+  </div>
+</Base>

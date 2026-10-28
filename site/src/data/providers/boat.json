@@ -1,0 +1,122 @@
+{
+  "id": "boat",
+  "name": "Boat",
+  "url": "https://boat.dev",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "Ubuntu VMs in the EU, billed per second, with seven coding agents preinstalled and no pause at all.",
+  "whatItIs": [
+    "Boat sells whole Ubuntu virtual machines, one per sandbox, priced per second, aimed at running coding agents and agent-generated code. Each has its own kernel, a dedicated IPv6 (sometimes IPv4), Docker, SSH, SCP and a 60 fps virtual desktop.",
+    "It is built around three audiences: people running agents on their own work, platforms giving each end user a machine, and teams that want a cheap always-available dev box.",
+    "Seven coding-agent harnesses are preinstalled on every machine and can be prompted by name through one API call. Boat also runs an AI credentials proxy so sandboxes hold placeholder model keys."
+  ],
+  "whoFor": "People who want a normal Ubuntu server per agent, cheap always-on capacity in the EU, and preinstalled coding agents without building an image.",
+  "isolation": "Full Ubuntu 24.04 KVM virtual machine with its own kernel, root, Docker and SSH. Shared vCPUs on a dedicated host. No GPU and no ARM: x86-64 only.",
+  "sizes": "Four fixed sizes, all with 51 GB of disk except the largest: small 2 vCPU / 4 GB, default 4 / 8, large 8 / 16 (111 GB), xlarge 16 / 32 (251 GB). No custom size, no extra disk, no volumes.",
+  "billing": {
+    "model": "Monthly plan that is prepaid machine time plus limits, with a separate dollar wallet for overage.",
+    "meter": "Per second while the machine exists, at a flat hourly rate per size: $0.018, $0.036, $0.072 or $0.200.",
+    "stopped": "Zero machine time, and the disk is kept free for 14 days. After that the data is gone unless you saved a snapshot.",
+    "planFee": "The plan is not a fee: $20 buys $20 of VM time, but unused plan time expires monthly. Overages, extra saved snapshots and paid starts draw from the wallet.",
+    "minimum": "$20 a month, and there is no free tier. The 7-day trial needs a card and is capped at 25 hours of compute."
+  },
+  "cost": {
+    "A": {
+      "headline": "$20 a month (the plan floor)",
+      "shape": "small (2 vCPU / 4 GB / 51 GB), deleted after each task",
+      "lines": [
+        { "label": "Compute", "arithmetic": "1,000 × 600 s × $0.018/h ÷ 3,600", "amount": "$3.00" },
+        { "label": "Bill", "arithmetic": "$20 plan; included time absorbs it", "amount": "$20.00" }
+      ],
+      "total": "$20.00",
+      "notes": [
+        "The size exists exactly, so no substitution is needed.",
+        "The binding constraint is starts, not money: 33 creates a day is inside the 200-a-day limit."
+      ],
+      "flag": "All 1,000 tasks in one day would hit the start limit: starts 201–600 cost $22 from the wallet, and 601 fails."
+    },
+    "B": {
+      "headline": "$26.28 a month",
+      "shape": "default (4 vCPU / 8 GB / 51 GB), 730 h",
+      "lines": [
+        { "label": "Compute", "arithmetic": "730 × $0.036", "amount": "$26.28" },
+        { "label": "Plan plus wallet", "arithmetic": "$20 plan + $6.28 overage", "amount": "$26.28" }
+      ],
+      "total": "$26.28",
+      "notes": [
+        "The first month costs $35 cash because the minimum wallet top-up is $15, leaving $8.72 in the wallet.",
+        "Auto-stop must be turned off, or the box stops after one hour."
+      ]
+    },
+    "C": {
+      "headline": "$1.62 of usage, billed at $20",
+      "shape": "small (2 vCPU / 4 GB / 51 GB), 90 running hours",
+      "lines": [
+        { "label": "Compute", "arithmetic": "90 × $0.018", "amount": "$1.62" },
+        { "label": "Stopped time", "arithmetic": "630 h at $0", "amount": "$0.00" }
+      ],
+      "total": "$1.62 of usage",
+      "notes": [
+        "The 51 GB disk covers the 20 GB ask, so this is an exact fit.",
+        "The disk is kept free for 14 days after a stop; a longer gap needs a saved snapshot."
+      ]
+    }
+  },
+  "usability": {
+    "dashboard": "Yes: sandboxes with type, monthly cost and a desktop button, snapshots you can browse and download, environment settings, AI sign-ins, organisation, billing and account.",
+    "withoutCode": "Partly. You can watch and drive a machine, connect an AI subscription and edit what new sandboxes get, all by clicking. Creating and prompting a sandbox is `boat new` then `boat prompt`; there is no wizard and no gallery.",
+    "signup": "A card, and a terminal for the installer. There is no free tier; the first plan starts with a 7-day trial through Stripe Checkout. Agents can sign themselves up through `auth.md`, but a human still claims the account and enters the card.",
+    "docs": "About 100 Mintlify pages, each also as Markdown, plus `llms.txt` and a docs MCP server. Support is email and Discord, with a public status page.",
+    "tripsUp": [
+      "The first step is a shell command.",
+      "The default 1-hour auto-stop kills work mid-session.",
+      "Persistent means 14 days, not forever.",
+      "Stop is not off: it saves the disk, destroys the machine, and changes the IP.",
+      "The plan is not a cheap idle subscription: $20 buys time that expires.",
+      "Money lives in two places, plan credit and wallet, with different expiry rules."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "There is no pause",
+      "detail": "Stop saves the disk, removes the machine, and loses memory and hand-started processes. Every resume is a reboot with a new IP, although Docker containers and enabled systemd units come back.",
+      "status": "open"
+    },
+    {
+      "issue": "Snapshots are disk-only and newest-only",
+      "detail": "Boat snapshots the disk every minute while a sandbox runs, but only the newest snapshot can be resumed or forked. There is no point-in-time restore.",
+      "status": "open"
+    },
+    {
+      "issue": "The disk expires 14 days after a stop",
+      "detail": "Docs and FAQ say 14 days; the Terms say up to about 30 days. A box untouched for two weeks returns `409 snapshot_data_expired`.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "Its docs and marketing disagree on stop and on the number of sizes",
+      "detail": "The homepage still says three sizes and pause billing; the docs list four sizes and state there is no pause.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "battleships.dev's Boat record has drifted",
+      "detail": "battleships.dev is built by the Boat team, but its Boat entry is dated 2026-09-30 and disagrees with today's docs on disk sizes, egress caps, snapshot retention and whether xlarge needs an operator.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "Exact-size fits for all three shared workloads, and the cheapest always-on 4 vCPU box with 50 GB of disk at $26.28.",
+    "Seven coding agents preinstalled and promptable over the API.",
+    "An AI credentials proxy so sandboxes hold placeholders, not model keys.",
+    "No egress bill and free automatic snapshots.",
+    "A 60 fps desktop, SSH and Docker on a normal Ubuntu VM."
+  ],
+  "sources": [
+    { "label": "Docs: quickstart", "url": "https://docs.boat.dev/quickstart" },
+    { "label": "Docs: concepts and states", "url": "https://docs.boat.dev/concepts" },
+    { "label": "Docs: stop and snapshots", "url": "https://docs.boat.dev/snapshots/stop" },
+    { "label": "Docs: auto-stop", "url": "https://docs.boat.dev/long-running-tasks/auto-stop" },
+    { "label": "Docs: hosting", "url": "https://docs.boat.dev/hosting" },
+    { "label": "Docs: AI credentials", "url": "https://docs.boat.dev/ai-credentials" },
+    { "label": "Pricing", "url": "https://docs.boat.dev/pricing" }
+  ]
+}

@@ -1,0 +1,29 @@
+---
+import type { Pick } from "../data/schema";
+import { providerById } from "../lib/data";
+
+interface Props {
+  picks: Pick[];
+}
+
+const { picks } = Astro.props;
+---
+
+<ul class="picks">
+  {
+    picks.map((pick) => (
+      <li>
+        <p class="situation">{pick.situation}</p>
+        <p class="why">
+          <strong>
+            {pick.providers
+              .map((id) => providerById.get(id)?.name ?? id)
+              .join(", ")}
+          </strong>
+          {" — "}
+          {pick.why}
+        </p>
+      </li>
+    ))
+  }
+</ul>

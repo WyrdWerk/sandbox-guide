@@ -1,0 +1,18 @@
+---
+import type { Verdict } from "../data/schema";
+
+interface Props {
+  verdict: Verdict;
+}
+
+const { verdict } = Astro.props;
+const labels: Record<Verdict, string> = {
+  yes: "Yes",
+  partly: "Partly",
+  no: "No",
+  "not-published": "Not published",
+  pending: "Research pending",
+};
+---
+
+<span class={`verdict verdict-${verdict}`}>{labels[verdict]}</span>

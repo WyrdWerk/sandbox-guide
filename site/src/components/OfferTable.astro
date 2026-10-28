@@ -1,0 +1,55 @@
+---
+import type { FeatureRow } from "../data/schema";
+import { providerById } from "../lib/data";
+import Verdict from "./Verdict.astro";
+import SourceRef from "./SourceRef.astro";
+
+interface Props {
+  rows: FeatureRow[];
+}
+
+const { rows } = Astro.props;
+---
+
+<div class="table-scroll">
+  <table class="offer-table">
+    <thead>
+      <tr>
+        <th scope="col">Provider</th>
+        <th scope="col">Kind of offer</th>
+        <th scope="col">Card?</th>
+        <th scope="col">What you get</th>
+        <th scope="col">When it ends</th>
+        <th scope="col">Traps</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => {
+        const provider = providerById.get(row.provider);
+        const pending = !provider || provider.status === "pending";
+        const offer = row.offer;
+        return (
+          <tr id={row.provider}>
+            <th scope="row">
+              {provider ? <a href={`/providers/${provider.id}/`}>{provider.name}</a> : row.provider}
+              <br />
+              <Verdict verdict={pending ? "pending" : row.verdict} />
+              <SourceRef source={row.source} />
+            </th>
+            {pending || !offer ? (
+              <td colspan="5" class="muted">Research pending. No claims are shown until the profile is finished.</td>
+            ) : (
+              <>
+                <td>{offer.kind}</td>
+                <td>{offer.card}</td>
+                <td>{offer.get}</td>
+                <td>{offer.ends}</td>
+                <td>{offer.traps}</td>
+              </>
+            )}
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>

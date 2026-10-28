@@ -1,0 +1,201 @@
+{
+  "id": "trying-it-before-you-pay",
+  "order": 7,
+  "title": "Trying it before you pay",
+  "navTitle": "Trying it first",
+  "standfirst": "“Free trial” is used for four different offers in this market: a time-limited trial that converts to a paid plan, a one-off credit, a free plan that never charges, and a recurring monthly allowance. They differ in what you get and what happens on day eight.",
+  "concept": [
+    {
+      "heading": "Four offers, one phrase",
+      "paragraphs": [
+        "A time-limited trial gives you access for a fixed number of days and then either charges you or stops. A one-off credit is money added to a prepaid balance once, which you spend at the normal rates. A free plan is a permanent tier with hard caps. A recurring allowance is free usage that comes back every month.",
+        "The distinction is not academic. A credit is spent, so its value depends on the hourly rate and the size you pick. A trial is spent by the clock, so it ends even if you used none of it. A free plan never ends, but it usually caps size, runtime and machine count. And a recurring allowance can change behaviour on your first payment.",
+        "The most consequential difference is the card. A card at signup makes the offer a trial: forget to cancel and you are billed. A free plan with no card is a different product decision, and it usually comes with the tightest caps."
+      ]
+    },
+    {
+      "heading": "Money, hours, or a machine",
+      "paragraphs": [
+        "Offers are denominated in three units: dollars, hours of machine time, or one machine with limits. They are not interchangeable. Five dollars is about 100 hours of Agent 37's entry 2 vCPU / 4 GiB shape, but less than an hour of boxd's largest machine. Twenty-five hours at Boat is capped by a mandatory two-hour auto-stop, so it cannot be used to test an always-on agent.",
+        "Sandboxer's trial is 25 hours of machine time, and the research could not establish whether those are hours of the default size or hours of whatever size you pick. That ambiguity is worth about a factor of two in what the trial is worth."
+      ]
+    },
+    {
+      "heading": "What happens when it ends",
+      "paragraphs": [
+        "Only one offer in this set converts itself into a paid plan: Sandboxer's trial becomes $20 a month on day eight. Boat's trial ends by charging the plan chosen at checkout. Lizard's trial ends and you either subscribe to Pro at $19 or stop creating things. Credits do not convert; they run out. Free plans and recurring allowances do not convert either, but their caps decide whether the free machine is useful after the first day."
+      ]
+    },
+    {
+      "heading": "What to check before you start",
+      "paragraphs": [
+        "Five questions settle most of it: is a card required, what unit is the allowance in, which sizes and regions are excluded, what happens on the last day, and can a trial machine stay up long enough to test the thing you care about. The last one is where several offers fail: Boat's trial cannot run an always-on agent at all."
+      ]
+    }
+  ],
+  "comparisonIntro": "Can you try the provider before paying, and what exactly does the offer give you?",
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "partly",
+      "note": "Two products, two offers: a one-off $5 Cloud credit after a card, and a managed-hosting free plan with no card.",
+      "offer": {
+        "kind": "One-off credit on the Cloud API; a free plan on managed hosting.",
+        "card": "Cloud: yes, to unlock the credit. Managed hosting Free plan: no card.",
+        "get": "Cloud: $5 once per account and card, about 100 hours of the entry 2 vCPU / 4 GiB shape, and the free tier is capped at one such instance. Managed hosting Free: 1 vCPU / 4 GB / 2 GB, $0.20 of model usage, and it sleeps after 15 minutes idle.",
+        "ends": "The credit is spent, not renewed. Neither line switches to a paid plan automatically.",
+        "traps": "A workspace created through `POST /v1/signup` gets no credit. The Cloud free tier is one 2/4 instance, so a larger shape needs funding first. Managed hosting is a different product from the Cloud API this site mostly compares."
+      },
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "Add a card from the billing page (nothing is charged) and your workspace gets a one-time $5 credit",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "partly",
+      "note": "A 7-day trial with 25 hours of machine time, a card up front, and automatic conversion to $20 a month on day eight.",
+      "offer": {
+        "kind": "Time-limited trial that converts to a paid plan.",
+        "card": "Yes. Creating, forking or restoring without one answers 402 payment_method_required.",
+        "get": "25 hours of machine time, up to 2 sandboxes at once, small and default sizes only, and a trial sandbox auto-stops after 8 hours. The unit of the 25 hours is not published.",
+        "ends": "On day eight it becomes the $20/month plan and the card is charged. Plan time expires monthly; time packs do not.",
+        "traps": "The hours may be default-size hours, so the real value is unclear. Conversion is automatic, so cancelling is a deliberate step. A running job does not hold off the auto-stop. The 7-day window means the 25 hours is a cap, not a guarantee you can use it all."
+      },
+      "source": {
+        "url": "https://sandboxer.com/pricing",
+        "quote": "7 days, 25 hours of machine time, up to 2 sandboxes at once on the small and default sizes",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "partly",
+      "note": "A one-off €30/$30 credit after adding a payment method. No free plan, and only two machines without a card.",
+      "offer": {
+        "kind": "One-off credit after adding a payment method; no free plan.",
+        "card": "Yes for the credit. Without a payment method an organisation is capped at 2 machines, but no free allowance is published.",
+        "get": "$30 (€30) of credit usable on any of the four sizes, each with a fixed 100 GB disk. It is a prepaid balance, not a time limit.",
+        "ends": "The credit is drawn down at the normal rates; when it runs out, usage needs funding. There is no plan to convert to.",
+        "traps": "The homepage says every new account starts with €30 of free credits and omits the card requirement. Without a card you are capped at two machines and have no published allowance. Storage and egress have no published price, so the credit's reach is partly unknown."
+      },
+      "source": {
+        "url": "https://boxd.sh/pricing",
+        "quote": "€30 of credits when you add a payment method. Nothing is charged when you add the card",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "yes",
+      "note": "A real free plan with one machine, no end date and no automatic conversion, but hard caps on size, runtime and templates.",
+      "offer": {
+        "kind": "Free plan, not a trial.",
+        "card": "Contradictory. The pricing page offers Free at $0 with no card mentioned; the API has a state where free sandboxes answer 402 payment_method_required.",
+        "get": "One machine in any state, 4 vCPU / 8 GiB only, 20 GiB fixed disk, 5 snapshots, 100 GiB egress a month, a fixed 30-minute idle pause, an 8-hour maximum continuous run, and only the `agent-browser` and `ci` templates.",
+        "ends": "It never converts and is never billed. The machine pauses when idle and stays yours.",
+        "traps": "The 8-hour cap appears only in the OpenAPI schema, not on the pricing page. A paused or stopped machine still counts as your one machine. The disk cannot be resized. Whether a card is needed is unresolved."
+      },
+      "source": {
+        "url": "https://api.instabox.sh/v1/openapi.json",
+        "quote": "Free machines default to 480 and only an admin session can change them.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "A 7-day trial with $5 of usage, a card required, and the trial restricted to Small machines in US regions.",
+      "offer": {
+        "kind": "Time-limited trial with a usage credit.",
+        "card": "Yes, through Stripe Checkout. Nothing is charged during the trial.",
+        "get": "$5 of usage across the whole platform, Small sandboxes only (2 vCPU / 4 GB / 5 GB), US regions only, up to 5 at once. One trial per account and per card.",
+        "ends": "After 7 days you need Pro at $19/month to create anything. Nothing is charged during the trial, and you can cancel before it ends.",
+        "traps": "Small and US-only, so the trial cannot evaluate Medium or the EU region. $5 is usage, not cash. A second trial is not available on the same account or card. The $19 plan is a floor once it ends."
+      },
+      "source": {
+        "url": "https://lizard.build/docs/platform/billing",
+        "quote": "Pro starts with a 7-day trial that includes $5 of usage. You add a card to start it; Apple Pay works too. Nothing is charged when the trial starts.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "Recurring free usage with no card: monthly once you have paid, and once across the first 30 days if you never have.",
+      "offer": {
+        "kind": "Recurring free usage, with a one-off grant for accounts that never pay.",
+        "card": "No. A Google sign-in, no waitlist, and no card for free usage.",
+        "get": "100 free hours of a 1 GB machine, 100 GiB-hours of memory, 25 vCPU-hours of active CPU, 10 GB of saved copies and 5 GB of volumes. Caps: 2 vCPU / 4 GiB / 10 GiB, 4 sandboxes at once, 5 kept, 50 created a day, no scheduled jobs.",
+        "ends": "The allowance renews monthly once you have paid; otherwise it is granted once across the first 30 days. Nothing converts to a paid plan.",
+        "traps": "The docs disagree on whether the hours are monthly or once. Free usage is withheld from data-centre and VPN addresses until credit is added. The free size ceiling is hard, and public previews need a paid top-up."
+      },
+      "source": {
+        "url": "https://withruntime.com/docs/pricing",
+        "quote": "An account that has never paid gets the machine time once, across its first 30 days.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "A 7-day trial with a card and no free tier, capped at 25 hours and a mandatory 2-hour auto-stop.",
+      "offer": {
+        "kind": "Time-limited trial. Explicitly no free tier.",
+        "card": "Yes. Checkout asks for a card, and the chosen plan is charged when the trial ends.",
+        "get": "25 hours in total across all sandboxes, 2 sandboxes at once, small and default sizes only, a mandatory 2-hour auto-stop, and no new saved snapshots. Starts are limited to 5 a minute, 25 an hour and 75 a day.",
+        "ends": "After 7 days Stripe charges the plan chosen at checkout.",
+        "traps": "The 2-hour auto-stop is mandatory, so the trial cannot test an always-on agent. No saved snapshots means the image workflow cannot be tested. Only two of the four sizes are available. This is a plan trial, not a free tier."
+      },
+      "source": {
+        "url": "https://docs.boat.dev/faq",
+        "quote": "There is no free tier. Your first plan starts with a free 7-day trial, and checkout asks for a card.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ],
+  "questions": [
+    "Is this a free plan, a trial, a credit, or a recurring allowance?",
+    "Do I need a card before I can create anything?",
+    "Is the allowance in money, hours, or machines — and at which size?",
+    "What happens on the last day: charge, convert, or stop?",
+    "Which sizes, regions and templates are excluded from the offer?",
+    "Can a free or trial machine stay up, or is there an auto-stop?"
+  ],
+  "picks": [
+    {
+      "situation": "Try without giving a card",
+      "providers": ["runtime", "agent37"],
+      "why": "Runtime's free usage needs only a Google sign-in and no card. Agent 37's managed-hosting free plan also needs no card, though it is a separate product from its Cloud API."
+    },
+    {
+      "situation": "A free machine that stays usable indefinitely",
+      "providers": ["instabox", "runtime"],
+      "why": "InstaBox's free plan never converts and never bills, as long as one 4/8 machine with an 8-hour run cap is enough. Runtime's allowance renews monthly once you have paid, and is granted once before that."
+    },
+    {
+      "situation": "Evaluate a full-size VM before committing",
+      "providers": ["boxd", "agent37"],
+      "why": "boxd's $30 credit works on any of its four sizes, so it can test the 4 vCPU machine you might actually buy. Agent 37's $5 credit works on paid shapes, but the free tier is capped at one 2/4 instance."
+    },
+    {
+      "situation": "A short, cheap test with nothing charged during it",
+      "providers": ["lizard", "boat"],
+      "why": "Neither charges during the trial. Lizard gives $5 of usage in 7 days; Boat gives 25 hours in 7 days. Both need a card, and both end at a paid plan or nothing."
+    },
+    {
+      "situation": "Avoid an automatic subscription",
+      "providers": ["runtime", "instabox", "boxd", "agent37"],
+      "why": "None of these converts itself into a paid plan. Sandboxer is the one to avoid if you might forget: day eight becomes $20 a month."
+    }
+  ],
+  "gotchas": [
+    "Sandboxer is the only offer here that turns itself into a paid subscription.",
+    "A credit is not a trial: it runs out when the money does, and the boundary is silent unless the provider has balance alerts.",
+    "boxd's homepage advertises €30 of free credits without saying a card is required.",
+    "InstaBox's 8-hour continuous-run cap is in the API schema, not the pricing page.",
+    "Runtime's free hours are described as monthly on one page and once-only on another.",
+    "Boat's trial forbids saved snapshots and stops every sandbox after two hours."
+  ]
+}

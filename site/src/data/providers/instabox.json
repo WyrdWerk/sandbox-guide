@@ -1,0 +1,130 @@
+{
+  "id": "instabox",
+  "name": "InstaBox",
+  "url": "https://instabox.sh",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "Firecracker machines with a browser desktop, sold as a subscription that is also a monthly credit.",
+  "whatItIs": [
+    "InstaBox sells full Linux virtual machines, one per AI agent, that boot in about a second, keep their disk between sessions, and can be paused with memory and running processes intact.",
+    "Each machine is a Firecracker microVM running Debian 13 with its own kernel, root, systemd and Docker. You drive it from a web dashboard, a CLI, a TypeScript SDK or plain HTTP, and you can watch or take over its graphical desktop.",
+    "The intended buyer is a team running coding or computer-use agents that needs a real machine per task, not a single shared dev box. InstaBox is not InstaCloud, InsForge's separate managed-backend product."
+  ],
+  "whoFor": "Teams and individuals running agents that need a persistent, general-purpose Linux box with a browser and desktop, who are comfortable with a CLI or API.",
+  "isolation": "Firecracker microVM with its own kernel, root and passwordless sudo. Docker works. Templates are versioned images; you cannot bring your own OCI image.",
+  "sizes": "Fixed vCPU/RAM pairs by plan: Free is 4/8 only; Pro adds 2/4 and 8/16; Builder goes to 16/32; Team to 32/64. One disk at `/data`, 20 GiB by default, growable live to 200 GiB on Pro.",
+  "billing": {
+    "model": "Monthly subscription that is also a credit: $20, $100 or $500, reset monthly.",
+    "meter": "Per second while running, on the size you asked for: $0.004 per vCPU-hour, $0.00225 per GiB-hour, $0.00011 per GiB-hour of storage, $0.02 per GiB of egress.",
+    "stopped": "Storage only. Paused and stopped machines pay GiB-hours for their disk and snapshots; paused memory is not billed and does not count as stored data.",
+    "planFee": "The plan fee is the credit. Usage comes out of it first, then pay-as-you-go, and unused credit expires at month end.",
+    "minimum": "$20 a month on Pro, or the free plan: one 4/8 machine, five snapshots, 100 GiB of egress a month."
+  },
+  "cost": {
+    "A": {
+      "headline": "$3.20 of usage, billed at $20 on Pro",
+      "shape": "2 vCPU / 4 GiB / 20 GiB disk, deleted after each task (Pro or above)",
+      "lines": [
+        { "label": "vCPU", "arithmetic": "2 × $0.004 × 166.67 h", "amount": "$1.33" },
+        { "label": "Memory", "arithmetic": "4 × $0.00225 × 166.67 h", "amount": "$1.50" },
+        { "label": "Storage", "arithmetic": "20 × $0.00011 × 166.67 h", "amount": "$0.37" }
+      ],
+      "total": "$3.20 of usage",
+      "notes": [
+        "The $20 plan is also $20 of credit, so the bill is the plan price.",
+        "On Free the 2/4 size does not exist; the nearest 4/8 would be $5.67 of usage, billed at $0."
+      ],
+      "flag": "The free plan is 4 vCPU / 8 GiB only, so this workload cannot run there as specified."
+    },
+    "B": {
+      "headline": "$28.84 a month",
+      "shape": "4 vCPU / 8 GiB / 50 GiB, 730 h",
+      "lines": [
+        { "label": "vCPU", "arithmetic": "4 × $0.004 × 730", "amount": "$11.68" },
+        { "label": "Memory", "arithmetic": "8 × $0.00225 × 730", "amount": "$13.14" },
+        { "label": "Storage", "arithmetic": "50 × $0.00011 × 730", "amount": "$4.02" }
+      ],
+      "total": "$28.84",
+      "notes": [
+        "The vendor's calculator shows $24.82 because it leaves storage out of the total.",
+        "Always-on needs the idle pause turned off, which paid plans allow."
+      ]
+    },
+    "C": {
+      "headline": "$3.14 of usage, billed at $20 on Pro",
+      "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running hours",
+      "lines": [
+        { "label": "vCPU", "arithmetic": "2 × $0.004 × 90", "amount": "$0.72" },
+        { "label": "Memory", "arithmetic": "4 × $0.00225 × 90", "amount": "$0.81" },
+        { "label": "Storage, all month", "arithmetic": "20 × $0.00011 × 730", "amount": "$1.61" }
+      ],
+      "total": "$3.14 of usage",
+      "notes": [
+        "On Free the nearest size would be $4.67 of usage, billed at $0.",
+        "A free machine pauses itself after 30 idle minutes and cannot run more than 8 hours continuously."
+      ]
+    }
+  },
+  "usability": {
+    "dashboard": "Yes, a full console: create a machine from a template with a button, start/stop/pause, open the Computer tab to click the Linux desktop, publish ports, save snapshots from the Playground, read metrics and billing.",
+    "withoutCode": "Partly. Creating a machine, opening its desktop, using Chromium, publishing a port and saving a snapshot are all click-driven. Claude Code and Codex are preinstalled, so you can type a plain-English request into the box's terminal. There is no hosted agent product and no prompt-in, result-out API.",
+    "signup": "GitHub or Google. Whether a brand-new free account needs a card is not published: the pricing page says $0, while the API has a `cardMissingAt` state that blocks free machines. Paid plans subscribe by card in the dashboard.",
+    "docs": "26 pages, each available as Markdown, plus an `llms-full.txt` bundle; every page states limits and failure modes. Support is email on paid plans, priority on Team, and there is a Discord. No public status page was found.",
+    "tripsUp": [
+      "The quick start is a terminal command, `npx instabox@latest sh`.",
+      "Two different off switches: pause keeps the session, stop does not, and you cannot stop a paused machine.",
+      "A snapshot does not save the session, only files and installs.",
+      "Fork is not instant, despite the homepage.",
+      "The free machine is not a server: it pauses after 30 idle minutes and cannot run longer than 8 hours.",
+      "Public port URLs have no password."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "The homepage says a fork copies running processes; the docs say otherwise",
+      "detail": "Marketing says fork a machine mid-run and copy a running machine in seconds, listing Running Processes. The docs say fork is snapshot save plus create, and a snapshot does not hold memory or running processes.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "The free plan's 8-hour continuous runtime cap is only in the API schema",
+      "detail": "`MaxRunMinutes` defaults to 480 for free machines. No docs page mentions it, so a reader of the pricing page would not know.",
+      "status": "open"
+    },
+    {
+      "issue": "Docs and API disagree on whether a preview visit wakes a paused machine",
+      "detail": "The ports page says a visit wakes an idle-paused machine; the OpenAPI says preview links remain offline until resumed.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "Whether the free plan needs a card",
+      "detail": "The pricing page says $0 and Get started; the API has a card-missing state that makes free sandboxes answer 402. It may apply only to workspaces that once had a paid plan.",
+      "status": "open"
+    },
+    {
+      "issue": "Snapshots carry credentials",
+      "detail": "Home is `/data/home`, so saved GitHub, Claude, Codex, git and SSH logins travel into every machine built from a snapshot.",
+      "status": "open"
+    },
+    {
+      "issue": "No published regions and no status page",
+      "detail": "The Terms say the United States; there is no region selector. status.instabox.sh does not resolve.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "A dashboard that creates a machine and opens a clickable Linux desktop.",
+    "Pause that keeps memory and running programs, billing storage only.",
+    "Org Secrets in proxy mode: the machine holds a placeholder, not the key.",
+    "Cheap per-hour rates: $0.004 per vCPU-hour and $0.00225 per GiB-hour.",
+    "Computer-use MCP and human takeover of the desktop, with control handed back."
+  ],
+  "sources": [
+    { "label": "Docs", "url": "https://instabox.sh/docs" },
+    { "label": "Lifecycle", "url": "https://instabox.sh/docs/api/lifecycle" },
+    { "label": "Machines", "url": "https://instabox.sh/docs/machines" },
+    { "label": "Snapshots", "url": "https://instabox.sh/docs/snapshots" },
+    { "label": "Secrets", "url": "https://instabox.sh/docs/secrets" },
+    { "label": "Pricing", "url": "https://instabox.sh/pricing" },
+    { "label": "OpenAPI document", "url": "https://api.instabox.sh/v1/openapi.json" }
+  ]
+}

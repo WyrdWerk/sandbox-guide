@@ -1,0 +1,52 @@
+---
+import type { FeatureRow } from "../data/schema";
+import { providerById } from "../lib/data";
+import Verdict from "./Verdict.astro";
+import SourceRef from "./SourceRef.astro";
+
+interface Props {
+  rows: FeatureRow[];
+  caption?: string;
+}
+
+const { rows, caption } = Astro.props;
+---
+
+<div class="table-scroll">
+  <table>
+    {caption && <caption>{caption}</caption>}
+    <thead>
+      <tr>
+        <th scope="col">Provider</th>
+        <th scope="col">Does it?</th>
+        <th scope="col">What that means</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => {
+        const provider = providerById.get(row.provider);
+        const pending = !provider || provider.status === "pending";
+        return (
+          <tr>
+            <th scope="row">
+              {provider ? <a href={`/providers/${provider.id}/`}>{provider.name}</a> : row.provider}
+            </th>
+            <td>
+              <Verdict verdict={pending ? "pending" : row.verdict} />
+            </td>
+            <td>
+              {pending ? (
+                <span class="muted">Research pending. No claims are shown until the profile is finished.</span>
+              ) : (
+                <>
+                  {row.note}
+                  <SourceRef source={row.source} />
+                </>
+              )}
+            </td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>

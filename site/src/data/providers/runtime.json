@@ -1,0 +1,129 @@
+{
+  "id": "runtime",
+  "name": "Runtime",
+  "url": "https://withruntime.com",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "Firecracker microVMs billed on measured CPU, with the strongest secret handling in this set.",
+  "whatItIs": [
+    "Runtime Cloud is a hosted fleet of Firecracker microVMs that an agent, or the program driving it, creates, runs commands in, pauses, forks and deletes over an API.",
+    "It is sold as compute for AI-agent workloads rather than websites or long-lived servers. The commercial pitch is that CPU is billed on measured use with a very low idle floor, so a sandbox waiting on a language model costs almost nothing.",
+    "Twenty products sit behind one API, CLI, MCP server and SDK set: sandboxes, secrets, images, volumes, snapshots, previews, desktop, metrics, webhooks, OpenTelemetry, TCP ports, private networks and more."
+  ],
+  "whoFor": "Teams building agent products that execute model-written code, and teams migrating off a rival sandbox SDK: drop-in shims exist for E2B, Daytona, Vercel and Blaxel.",
+  "isolation": "Firecracker microVM on servers Runtime operates, with its own kernel; not a container and not gVisor. New sandboxes expose `/dev/kvm`, so nested virtualisation works. No GPU and no ARM: x86-64 only.",
+  "sizes": "No fixed size menu: any vCPU / memory / disk combination inside the bounds, which are 16 vCPU, 64 GiB of memory and 400 GiB of disk on a paid account. CPU is shared by default; reserved guarantees every vCPU at full price.",
+  "billing": {
+    "model": "Prepaid credit, no plan fee, no seats and no commitment.",
+    "meter": "Per second: $0.025 per active vCPU-hour measured, with a 50-millicore floor per sandbox, plus $0.0075 per reserved GiB-hour of memory. Storage while paused or stopped is $0.08 per decimal GB per 30-day month.",
+    "stopped": "Disk and saved memory blocks keep billing at the storage rate. Only delete ends the charge.",
+    "planFee": "None publicly. Plans exist in a private beta with no published prices.",
+    "minimum": "No minimum billing period. Top-ups are $10 to $10,000, and an automatic top-up earns 5% extra credit."
+  },
+  "cost": {
+    "A": {
+      "headline": "$5.21 to $13.33 a month",
+      "shape": "2 vCPU / 4 GiB / 4 GiB disk, deleted after each task",
+      "lines": [
+        { "label": "Memory", "arithmetic": "166.67 h × 4 GiB × $0.0075", "amount": "$5.00" },
+        { "label": "CPU at the 50-millicore floor", "arithmetic": "0.05 × 166.67 h × $0.025", "amount": "$0.21" },
+        { "label": "CPU fully busy", "arithmetic": "2 × 166.67 h × $0.025", "amount": "$8.33" }
+      ],
+      "total": "$5.21 to $13.33",
+      "notes": [
+        "Disk under 10 GiB is included while running, and deletion ends the charge.",
+        "The range exists because per-task CPU use is not published; the floor sets the bill for a task that mostly waits."
+      ]
+    },
+    "B": {
+      "headline": "$48.15 to $120.24 a month",
+      "shape": "4 vCPU / 8 GiB / 50 GiB, 730 h, always on",
+      "lines": [
+        { "label": "Memory", "arithmetic": "8 × 730 × $0.0075", "amount": "$43.80" },
+        { "label": "CPU at the floor", "arithmetic": "0.05 × 730 × $0.025", "amount": "$0.91" },
+        { "label": "CPU fully busy", "arithmetic": "4 × 730 × $0.025", "amount": "$73.00" },
+        { "label": "Disk past the included 10 GiB", "arithmetic": "(53.7 − 10.7) GB × $0.08", "amount": "$3.44" }
+      ],
+      "total": "$48.15 to $120.24",
+      "notes": [
+        "Always-on needs `persistent: true` or `idlePauseSeconds: 0`; otherwise the box pauses after 5 idle minutes.",
+        "Disk is an upper bound: only blocks the disk alone holds are billed, so a mostly empty disk costs less."
+      ]
+    },
+    "C": {
+      "headline": "$4.42 to $8.81 a month",
+      "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running hours in a 720-hour month, stopped otherwise",
+      "lines": [
+        { "label": "Running, at the floor", "arithmetic": "0.05 × 90 × $0.025 + 4 × 90 × $0.0075", "amount": "$2.81" },
+        { "label": "Running, fully busy", "arithmetic": "2 × 90 × $0.025 + 4 × 90 × $0.0075", "amount": "$7.20" },
+        { "label": "Stopped disk", "arithmetic": "21.5 GB × $0.08 × 630/720", "amount": "$1.50" }
+      ],
+      "total": "$4.42 to $8.81",
+      "notes": [
+        "A 30-day month is 720 hours, so 630 hours are stopped.",
+        "Pausing instead keeps memory and costs about $4.72 to $9.11."
+      ]
+    }
+  },
+  "usability": {
+    "dashboard": "Yes, a detailed console: a Home report with a Needs you section, sandboxes with Overview, Terminal, Files, Activity and Settings tabs, a limits page, and usage and billing with daily spend by product.",
+    "withoutCode": "Partly, and only for the first step: one click starts a sandbox with a shell in the page on free hours. There are no app templates and no hosted agent, and the documented no-code path is pasting its `llms.txt` link into Claude Code, Codex or Cursor.",
+    "signup": "A Google sign-in, no card and no waitlist. Free usage needs a verified sign-in and is withheld from data-centre or VPN addresses until credit is added.",
+    "docs": "Extensive, every page dated, with `llms.txt` bundles. Support is an AI agent in the same call, with humans for billing, security and data loss. The status page is public and specific.",
+    "tripsUp": [
+      "A sandbox is not a website host: nothing is reachable until you open a preview, domain or TCP port.",
+      "The bill moves while nothing happens, because memory is charged for every running second.",
+      "Pause, stop and delete are three different things with three different bills.",
+      "The first useful step still needs a command or an agent.",
+      "Memory is measured in GiB and disk in decimal GB, a 7.4% difference that shows up in quotes.",
+      "There is no EU region, and uptime was below the promised 99% during research."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "A stopped sandbox keeps billing",
+      "detail": "Only delete ends the storage charge. A stopped box is a bill, not a cleanup, and `persistent: true` bills memory around the clock.",
+      "status": "open"
+    },
+    {
+      "issue": "Uptime was below the published promise",
+      "detail": "The status page showed 96.37% over 7 days and 98.87% over 30 days against a 99% monthly promise at the time of research.",
+      "status": "open"
+    },
+    {
+      "issue": "Free hours: every month or once?",
+      "detail": "The start page says 100 free hours every month; the pricing and included-usage pages say an account that has never paid gets them once, across its first 30 days.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "The canonical state list is not published",
+      "detail": "The docs name transitions and mention starting, running, pausing, paused, resuming, stopping and stopped, but there is no quotable list of state strings.",
+      "status": "open"
+    },
+    {
+      "issue": "One region, in Virginia",
+      "detail": "Everything runs in us-east. There is no EU option, and no per-tenant residency control.",
+      "status": "open"
+    },
+    {
+      "issue": "Very young",
+      "detail": "A one-month-old repository, near-zero community discussion, and daily changelog entries including breaking changes. No preinstalled coding agents, and the vendor says no bridge harness has run on Runtime yet.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "Secrets the machine never holds: placeholders swapped into HTTPS headers for named hosts only.",
+    "OIDC workload identity that AWS and GCP can trust.",
+    "Pause with memory, and snapshots that keep memory by default.",
+    "SSO, SCIM, audit logs and roles free on every account.",
+    "Billed on measured CPU, so a box waiting on a model costs the floor, about $0.03 an hour."
+  ],
+  "sources": [
+    { "label": "Docs: sandbox environment", "url": "https://withruntime.com/docs/sandbox-environment" },
+    { "label": "Docs: pricing", "url": "https://withruntime.com/docs/pricing" },
+    { "label": "Docs: security and secrets", "url": "https://withruntime.com/docs/security" },
+    { "label": "Docs: networking", "url": "https://withruntime.com/docs/networking" },
+    { "label": "Docs: API", "url": "https://withruntime.com/docs/api" },
+    { "label": "Pricing", "url": "https://withruntime.com/pricing" }
+  ]
+}

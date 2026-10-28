@@ -1,0 +1,66 @@
+---
+import Base from "../layouts/Base.astro";
+import { providerById, terms } from "../lib/data";
+---
+
+<Base
+  title="Same word, different meaning"
+  description="Pause, stop, sleep, snapshot, fork, persistent, archive and credits mean different things at different providers."
+>
+  <header class="page-header">
+    <p class="kicker">Vocabulary</p>
+    <h1>Same word, different meaning</h1>
+    <p class="lede">
+      Eight words do most of the damage in this market. Each one means something specific at each
+      provider, and reading a competitor's meaning into it changes what you think you are buying.
+    </p>
+  </header>
+
+  <nav class="measure" aria-label="Terms">
+    <ul>
+      {terms.map((term) => <li><a href={`#${term.term.toLowerCase()}`}>{term.term}</a></li>)}
+    </ul>
+  </nav>
+
+  {terms.map((term) => (
+    <section id={term.term.toLowerCase()}>
+      <h2>{term.term}</h2>
+      <p class="standfirst">{term.short}</p>
+      <p class="measure">{term.whyItMatters}</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Provider</th>
+              <th scope="col">What the word means there</th>
+            </tr>
+          </thead>
+          <tbody>
+            {term.meanings.map((meaning) => (
+              <tr>
+                <th scope="row">
+                  <a href={`/providers/${meaning.provider}/`}>
+                    {providerById.get(meaning.provider)?.name ?? meaning.provider}
+                  </a>
+                </th>
+                <td>{meaning.meaning}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="measure"><strong>What to check:</strong> {term.checkFor}</p>
+    </section>
+  ))}
+
+  <div class="callout">
+    <p class="callout-title">The pattern</p>
+    <p>
+      Almost every confusion here comes from one question: what survives, and for how long? A
+      “paused” machine may keep memory, keep only files, or not exist. A “snapshot” may include
+      memory or not. “Persistent” may mean the whole disk, one folder, or fourteen days.
+    </p>
+  </div>
+</Base>

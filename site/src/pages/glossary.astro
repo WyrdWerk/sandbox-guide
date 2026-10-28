@@ -1,0 +1,25 @@
+---
+import Base from "../layouts/Base.astro";
+import { glossary } from "../lib/data";
+---
+
+<Base title="Glossary" description="Plain-language definitions of the terms this site uses: sandbox, microVM, snapshot, egress, spend cap and more.">
+  <header class="page-header">
+    <p class="kicker">Glossary</p>
+    <h1>Glossary</h1>
+    <p class="lede">
+      Plain definitions of the terms this site uses. Where a word means something different at a
+      specific provider, the <a href="/same-word-different-meaning/">same word page</a> has the
+      provider-by-provider detail.
+    </p>
+  </header>
+
+  <dl class="measure">
+    {glossary.map((entry) => (
+      <div>
+        <dt><strong>{entry.term}</strong></dt>
+        <dd><p>{entry.definition}</p></dd>
+      </div>
+    ))}
+  </dl>
+</Base>

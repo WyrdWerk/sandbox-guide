@@ -1,0 +1,128 @@
+{
+  "id": "lizard",
+  "name": "Lizard",
+  "url": "https://lizard.build",
+  "status": "researched",
+  "checkedOn": "2026-10-28",
+  "oneLiner": "Firecracker sandboxes at a flat hourly price per size, plus an app platform for whatever the agent builds.",
+  "whatItIs": [
+    "Lizard is a cloud platform with two halves. Sandboxes are Firecracker microVMs for running agent code, sold in three fixed sizes at a flat hourly price. An app platform deploys a repository, with managed Postgres, Redis and S3-compatible storage.",
+    "The docs describe the sandbox half first and treat app deployment as the second step, once the agent has built something. The two halves are billed on different meters, which is the most confusing thing about the product.",
+    "The self-serve plan is Pro at $19 a month, which includes $19 of usage across the whole platform."
+  ],
+  "whoFor": "Agent builders who want cheap per-hour machines with generous pause and snapshot semantics, and who may want to deploy the result on the same platform.",
+  "isolation": "Firecracker microVM with its own guest kernel, commands run as root by default, Linux only. Docker inside a sandbox, systemd and nested virtualisation are not documented.",
+  "sizes": "Three fixed sizes: Small 2 vCPU / 4 GB / 5 GB, Medium 4 vCPU / 8 GB / 20 GB, Large 8 vCPU / 16 GB / 50 GB. No custom size and no live resize. Volumes add up to 50 GB at `/workspace`.",
+  "billing": {
+    "model": "One Pro plan at $19 a month, including $19 of usage; sandboxes are a flat hourly price per size.",
+    "meter": "Per second while running, idle time included, at $0.0162 / $0.0324 / $0.0648 an hour for Small / Medium / Large. Volumes bill per GB-month on used space.",
+    "stopped": "Paused compute is $0, and no storage charge for a paused sandbox's disk or memory is published. A stopped sandbox is deleted, so only volumes and snapshots remain.",
+    "planFee": "$19 a month, which comes back as $19 of usage. Unused usage does not carry over.",
+    "minimum": "$19 a month is the floor. The 7-day trial includes $5 of usage and needs a card."
+  },
+  "cost": {
+    "A": {
+      "headline": "$19 a month (the plan floor)",
+      "shape": "Small (2 vCPU / 4 GB / 5 GB), deleted after each task",
+      "lines": [
+        { "label": "Compute", "arithmetic": "1,000 × (10/60) h × $0.0162", "amount": "$2.70" },
+        { "label": "Bill", "arithmetic": "$19 plan; included usage absorbs it", "amount": "$19.00" }
+      ],
+      "total": "$19.00",
+      "notes": [
+        "The size exists exactly, so no substitution is needed.",
+        "Pro allows 400 starts a day and 24 a minute, so 1,000 tasks cannot all run in one day."
+      ]
+    },
+    "B": {
+      "headline": "$27.85 or $47.30 a month",
+      "shape": "No size is 4 vCPU / 8 GB / 50 GB: Medium has 20 GB of disk, Large has 50 GB but 8 vCPU.",
+      "lines": [
+        { "label": "Medium + a 30 GB volume", "arithmetic": "0.0324 × 730 + 0.14 × 30", "amount": "$27.85" },
+        { "label": "Large, no volume", "arithmetic": "0.0648 × 730", "amount": "$47.30" }
+      ],
+      "total": "$27.85 or $47.30",
+      "notes": [
+        "Option one matches the CPU and RAM exactly and splits the disk across two filesystems.",
+        "Volumes bill on used space, not allocated size."
+      ],
+      "flag": "Both options over-deliver something: the first adds a volume, the second doubles CPU and RAM to get 50 GB of disk."
+    },
+    "C": {
+      "headline": "$19 a month either way",
+      "shape": "No size is 2 vCPU with 20 GB of disk.",
+      "lines": [
+        { "label": "Small + a 15 GB volume", "arithmetic": "0.0162 × 90 + 0.14 × 15", "amount": "$3.56" },
+        { "label": "Medium, no volume", "arithmetic": "0.0324 × 90", "amount": "$2.92" }
+      ],
+      "total": "$19.00",
+      "notes": [
+        "Both are under the $19 floor, so the choice is about disk layout, not money.",
+        "A 30-day month is 720 hours; 90 of them are running.",
+        "Stopped here means killed, which deletes the sandbox disk: keep anything you need on the volume."
+      ],
+      "flag": "Pausing instead of stopping keeps the whole disk and memory, at no published storage charge."
+    }
+  },
+  "usability": {
+    "dashboard": "Yes, and it creates sandboxes without code: pick a template, region, size and lifetime, then pause, resume, open a terminal or browse volumes.",
+    "withoutCode": "Partly. Creating a sandbox is click-driven, and the terminal tab gives you a shell. Running an agent, taking a snapshot, forking and attaching a volume are CLI or SDK only, and a card is needed to start the trial.",
+    "signup": "GitHub or Google, then a card through Stripe Checkout for the 7-day trial. Nothing is charged during the trial. There is no free tier to use without a plan.",
+    "docs": "Unusually candid: per-page updated dates, test-status notes saying what was and was not verified, raw Markdown twins. Support is email and Discord. The status page covers the platform but not sandbox capacity.",
+    "tripsUp": [
+      "The default lifetime is 5 minutes from the SDK and CLI, and never from the dashboard or raw API.",
+      "Stop means delete, including everything outside /workspace.",
+      "Everything interesting beyond creating a sandbox needs a terminal.",
+      "The card comes before the product.",
+      "Two bills in one number: apps are metered per vCPU-second, sandboxes are flat per hour, a 6.2× gap for the same capacity.",
+      "Overage charges arrive automatically with no spending cap."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "Snapshot storage has no published price",
+      "detail": "Restores are priced at the source's hourly rate, but stored snapshots have no rate anywhere on the pricing or billing pages.",
+      "status": "open"
+    },
+    {
+      "issue": "Stop deletes the sandbox and its disk",
+      "detail": "There is no stopped-but-restartable state. Only `/workspace` volumes and snapshots survive, and there is no trash or recycle bin.",
+      "status": "open"
+    },
+    {
+      "issue": "Two default lifetimes that contradict each other",
+      "detail": "Five minutes from the SDK and CLI, no expiry from the raw API and dashboard. A beginner following the CLI docs can lose work without warning.",
+      "status": "contradiction"
+    },
+    {
+      "issue": "Docker inside a sandbox is not documented",
+      "detail": "Neither is systemd, nested virtualisation, kernel feature support or CPU architecture. Treat all of them as unverified.",
+      "status": "open"
+    },
+    {
+      "issue": "No spending cap",
+      "detail": "Overage is charged automatically in steps from $20 up to $1,000, with no ceiling. The docs say so explicitly.",
+      "status": "open"
+    },
+    {
+      "issue": "The runtime and price changed within six weeks",
+      "detail": "A September copy of the limits page described shared-kernel Kubernetes pods at $0.009 an hour; the October page describes Firecracker microVMs at $0.0162. Older sandboxes keep the old billing.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "Pause keeps memory, processes and the whole disk, and paused compute is $0.",
+    "Snapshots capture memory, processes and the whole disk, and restore into a new sandbox.",
+    "Fork 1–100 copies of a running sandbox with memory, source paused only briefly.",
+    "A dashboard that creates sandboxes without code.",
+    "2 TB of sandbox egress a month included, with no per-GB charge."
+  ],
+  "sources": [
+    { "label": "Docs: sandboxes", "url": "https://lizard.build/docs/sandboxes" },
+    { "label": "Docs: quickstart", "url": "https://lizard.build/docs/sandboxes/quickstart" },
+    { "label": "Docs: limits and sizes", "url": "https://lizard.build/docs/platform/limits" },
+    { "label": "Docs: billing", "url": "https://lizard.build/docs/platform/billing" },
+    { "label": "Docs: dashboard", "url": "https://lizard.build/docs/sandboxes/dashboard" },
+    { "label": "Pricing", "url": "https://lizard.build/pricing" }
+  ]
+}

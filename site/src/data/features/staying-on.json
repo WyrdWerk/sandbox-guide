@@ -1,0 +1,150 @@
+{
+  "id": "staying-on",
+  "order": 1,
+  "title": "Staying on, and what it costs",
+  "navTitle": "Staying on",
+  "standfirst": "An always-available agent needs three separate promises: no deadline that kills it, no idle timer that puts it to sleep, and a way to wake it. Providers bundle those differently, and the difference is most of your bill.",
+  "concept": [
+    {
+      "heading": "Three promises that look like one",
+      "paragraphs": [
+        "“Always on” sounds like a single setting. It is really three. First, a lifetime limit: some providers give every sandbox a hard deadline, measured from creation, that no amount of activity extends. Second, an idle timer: many providers put a machine to sleep when nothing is happening. Third, wake behaviour: if it does sleep, does the next message bring it back, or does someone have to start it?",
+        "A provider can pass two of the three and still fail your use case. Boat has no idle timer at all and still stops your box after an hour, because its deadline counts from creation. Lizard never sleeps for idleness and deletes the sandbox after five minutes if you created it from the SDK. Agent 37 never stops on its own, but it also never wakes itself if you stopped it."
+      ]
+    },
+    {
+      "heading": "What an idle hour should cost",
+      "paragraphs": [
+        "Once the machine stays up, the question becomes what an idle hour costs. There are four answers in this market: full compute (you pay for the size you reserved whether or not it works), memory only (CPU is released, RAM is held), storage only (the machine is frozen or written to disk), and nothing (the machine is gone).",
+        "That is why two providers quoting similar hourly rates can differ by a factor of ten on an always-on box. A 4 vCPU / 8 GiB machine costs about $10.60 a month at Agent 37, $26.28 at Boat, $28.84 at InstaBox, $48 to $120 at Runtime, and about $222 at boxd once memory is billed on a 4 vCPU machine. The hardware is comparable. The meter is not."
+      ],
+      "bullets": [
+        "Reserved-size billing: the price is fixed by the shape you picked, so an idle hour costs the same as a busy one.",
+        "Measured-CPU billing: an idle hour costs a floor, which is cheap, but a busy hour costs more than the headline rate suggests.",
+        "Resident-memory billing: the bill follows what your software actually holds, which is hard to predict and can double.",
+        "Storage-only idle: cheap, but nothing is running when you come back."
+      ]
+    },
+    {
+      "heading": "The always-on checklist",
+      "paragraphs": [
+        "Before trusting a provider with a personal agent, find the answers to four questions in its documentation: what is the default lifetime, what is the default idle behaviour, what counts as activity, and what does a sleeping or stopped hour cost. If any answer is “not published”, assume the least convenient behaviour until you have tested it."
+      ]
+    }
+  ],
+  "comparisonIntro": "Does the provider let a machine stay up indefinitely, and what does it charge while nothing is happening?",
+  "rows": [
+    {
+      "provider": "agent37",
+      "verdict": "yes",
+      "note": "No lifetime cap, and auto-sleep is off by default, so a box stays up and bills compute by the minute until you stop or delete it. A stopped box still pays for disk.",
+      "source": {
+        "url": "https://www.agent37.com/docs/agents-api/instance-auto-sleep",
+        "quote": "Instances default to `auto_sleep: false` and never sleep on their own unless you opt them in.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "sandboxer",
+      "verdict": "partly",
+      "note": "No maximum lifetime, but a hard auto-stop defaults to one hour and idle pause to 15–120 minutes by plan. An always-on box needs `ttlSeconds: null` and `idleStopMinutes: 0`.",
+      "source": {
+        "url": "https://sandboxer.com/docs/limits",
+        "quote": "`ttlSeconds` | 1 s – 30 days, or `null`",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "boxd",
+      "verdict": "yes",
+      "note": "Runtime is unlimited and auto-suspend is off by default. Auto-hibernate is on by default after four hours without TCP/UDP traffic in either direction, and outbound calls count as activity, so a busy box stays awake but a long local compile does not. Set the timer to 0 for an always-on agent.",
+      "source": {
+        "url": "https://docs.boxd.sh/guides/suspend-resume",
+        "quote": "**On by default, set to 4 hours.** After 4 hours without TCP/UDP traffic in either direction, boxd hibernates the machine",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "instabox",
+      "verdict": "partly",
+      "note": "Paid machines have no lifetime timeout, but idle auto-pause defaults to 30 minutes; paid plans can choose 5–30 minutes or off. Free machines are capped at 8 hours of continuous runtime.",
+      "source": {
+        "url": "https://api.instabox.sh/v1/openapi.json",
+        "quote": "Sandboxes have no lifetime timeout: they pause when idle",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lizard",
+      "verdict": "partly",
+      "note": "There is no idle timer at all, but every sandbox has a hard lifetime deadline: five minutes by default from the SDK and CLI, and never by default from the dashboard and raw API.",
+      "source": {
+        "url": "https://lizard.build/docs/sandboxes",
+        "quote": "Five minutes by default from the SDK and CLI; no expiration by default from the raw API and dashboard",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "runtime",
+      "verdict": "yes",
+      "note": "No clock unless you set one, and `persistent: true` disables the idle pause. Otherwise it pauses after five idle minutes and wakes on the next request, usually within a second.",
+      "source": {
+        "url": "https://withruntime.com/docs/pricing",
+        "quote": "`persistent: true` keeps a sandbox running until you stop it, with no idle pause.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "boat",
+      "verdict": "partly",
+      "note": "No pause and no idle detection, but a hard auto-stop counts from create or resume: one hour by default, 30 days maximum, and off is allowed.",
+      "source": {
+        "url": "https://docs.boat.dev/long-running-tasks/auto-stop",
+        "quote": "The timer counts from creation or from the last resume, not from your last activity.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ],
+  "questions": [
+    "Does the lifetime timer count from creation, from last activity, or from network traffic?",
+    "What is the default, and can it be turned off — or only raised?",
+    "If the machine sleeps, does the next message wake it, or does someone have to start it?",
+    "What does an idle hour cost: full compute, memory only, or storage only?",
+    "Is there a maximum lifetime I cannot exceed, even on a paid plan?",
+    "If the agent is mid-task when the timer fires, what happens to that task?"
+  ],
+  "picks": [
+    {
+      "situation": "A personal agent that must answer at 3am with the least fiddling",
+      "providers": ["agent37", "runtime"],
+      "why": "Agent 37's managed hosting is one-click and its Cloud boxes never sleep on their own; Runtime's `persistent: true` is an explicit always-on switch. InstaBox is the third option if you can live with a pause instead of a stop."
+    },
+    {
+      "situation": "The cheapest always-on 4 vCPU / 8 GiB box",
+      "providers": ["agent37", "boat", "sandboxer"],
+      "why": "About $10.60 at Agent 37 with 20 GB of disk, $26.28 at Boat with 51 GB, and $26.28 of usage on Sandboxer's $20 plan plus a pack. boxd and Runtime cost several times more because their meters follow memory or measured CPU."
+    },
+    {
+      "situation": "An always-on box that stays in the EU",
+      "providers": ["boxd", "boat"],
+      "why": "boxd runs on German bare metal; Boat runs in Germany, Finland and France. Both are EU-only, so expect 100–200 ms round trips from the Americas."
+    },
+    {
+      "situation": "Frequent sleep and wake with the agent's session intact",
+      "providers": ["runtime", "instabox", "lizard"],
+      "why": "These three pause with memory rather than stopping, so a paused agent resumes with its processes. Runtime bills storage for the saved memory; InstaBox and Lizard publish storage-only billing."
+    },
+    {
+      "situation": "Always-on, and also needs Docker or a database",
+      "providers": ["boat", "boxd", "sandboxer"],
+      "why": "These are full VMs with working Docker. Agent 37's default type is a gVisor container that cannot run Docker at all; you need its 2.5× VM type."
+    }
+  ],
+  "gotchas": [
+    "“No time limit” and “no idle timer” are different promises. Boat has no idle timer and still stops after one hour by default.",
+    "A paused box is not free everywhere: boxd bills resident RAM in standby, and Runtime bills the disk and memory blocks it holds.",
+    "Wake on request is not universal. Boat's stop destroys the machine, so a URL cannot wake it.",
+    "An open connection can keep a box awake, or fail to: Runtime counts an open terminal as activity, while Agent 37 counts only data flow in either direction.",
+    "Agent 37's instance cap counts sleeping and stopped instances, so an always-on design with one box per user runs into the cap before it runs into the bill."
+  ]
+}

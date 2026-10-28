@@ -1,0 +1,55 @@
+---
+import type { CostCase } from "../data/schema";
+
+interface Props {
+  id: string;
+  title: string;
+  cost: CostCase;
+}
+
+const { id, title, cost } = Astro.props;
+---
+
+<section class="cost-case">
+  <h4>{id}. {title}</h4>
+  <p class="headline">{cost.headline}</p>
+  <p class="note">{cost.shape}</p>
+  {
+    cost.flag && (
+      <div class="callout callout-warn">
+        <p class="callout-title">Size or figure to check</p>
+        <p>{cost.flag}</p>
+      </div>
+    )
+  }
+  <div class="table-scroll">
+    <table class="arithmetic-table">
+      <thead>
+        <tr>
+          <th scope="col">Line</th>
+          <th scope="col">Arithmetic</th>
+          <th scope="col" class="num">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {cost.lines.map((line) => (
+          <tr>
+            <td>{line.label}</td>
+            <td class="arithmetic">{line.arithmetic}</td>
+            <td class="num">{line.amount}</td>
+          </tr>
+        ))}
+        <tr>
+          <td><strong>Total</strong></td>
+          <td></td>
+          <td class="num"><strong>{cost.total}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  {cost.notes.length > 0 && (
+    <ul class="note">
+      {cost.notes.map((note) => <li>{note}</li>)}
+    </ul>
+  )}
+</section>

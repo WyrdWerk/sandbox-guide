@@ -1,0 +1,170 @@
+/* ---------------------------------------------------------------------------
+   The one styling layer.
+
+   Everything visual lives in this file. Layout components and pages only use
+   the class names below, so a designer can replace this stylesheet without
+   touching content or markup. Deliberately plain and neutral for now.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --ink: #1a1a1a;
+  --ink-muted: #555;
+  --ink-faint: #767676;
+  --rule: #d8d8d8;
+  --rule-strong: #9a9a9a;
+  --surface: #ffffff;
+  --surface-muted: #f5f5f4;
+  --surface-note: #faf8f2;
+  --link: #1a4f8a;
+
+  --measure: 46rem;
+  --page: 68rem;
+  --space: 1rem;
+
+  --text-s: 0.82rem;
+  --text-m: 1rem;
+  --text-l: 1.18rem;
+  --text-xl: 1.6rem;
+  --text-2xl: 2.1rem;
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 100%; }
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-m);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+
+h1, h2, h3, h4 { line-height: 1.2; font-weight: 650; margin: 0 0 0.5em; }
+h1 { font-size: var(--text-2xl); letter-spacing: -0.01em; }
+h2 { font-size: var(--text-xl); margin-top: 2em; }
+h3 { font-size: var(--text-l); margin-top: 1.6em; }
+h4 { font-size: var(--text-m); margin-top: 1.4em; }
+p { margin: 0 0 1em; }
+ul, ol { margin: 0 0 1em; padding-left: 1.3em; }
+li { margin-bottom: 0.35em; }
+code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface-muted); padding: 0.1em 0.25em; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5em 0; }
+small { font-size: var(--text-s); }
+
+/* Layout ---------------------------------------------------------------- */
+
+.wrap { max-width: var(--page); margin: 0 auto; padding: 0 1.25rem; }
+.page { padding-top: 2rem; padding-bottom: 4rem; }
+.measure { max-width: var(--measure); }
+
+.site-header { border-bottom: 1px solid var(--rule); background: var(--surface); }
+.site-header .wrap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 1rem 2rem; padding-top: 0.9rem; padding-bottom: 0.9rem; }
+.site-title { font-weight: 650; font-size: var(--text-m); text-decoration: none; color: var(--ink); }
+.site-nav { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-size: var(--text-s); }
+.site-nav a { color: var(--ink-muted); text-decoration: none; }
+.site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; }
+
+.site-footer { border-top: 1px solid var(--rule); margin-top: 3rem; padding: 1.5rem 0 3rem; font-size: var(--text-s); color: var(--ink-muted); }
+.site-footer p { margin: 0 0 0.4em; }
+
+/* Page furniture -------------------------------------------------------- */
+
+.page-header { margin-bottom: 2rem; }
+.page-header .kicker { font-size: var(--text-s); text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); margin-bottom: 0.5em; }
+.lede { font-size: var(--text-l); color: var(--ink-muted); max-width: var(--measure); }
+.standfirst { font-size: var(--text-l); color: var(--ink-muted); max-width: var(--measure); }
+
+.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.grid-tight { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); }
+
+.card { border: 1px solid var(--rule); padding: 1rem; background: var(--surface); }
+.card h3 { margin-top: 0; font-size: var(--text-m); }
+.card p:last-child { margin-bottom: 0; }
+.card .meta { font-size: var(--text-s); color: var(--ink-faint); }
+
+.callout { border: 1px solid var(--rule); border-left: 3px solid var(--rule-strong); background: var(--surface-muted); padding: 1rem 1.1rem; margin: 1.5rem 0; }
+.callout > :last-child { margin-bottom: 0; }
+.callout-title { font-weight: 650; margin-bottom: 0.4em; }
+.callout-warn { background: var(--surface-note); border-left-color: #8a6d1f; }
+.callout-quiet { background: var(--surface); }
+
+.note { font-size: var(--text-s); color: var(--ink-muted); }
+.muted { color: var(--ink-muted); }
+.faint { color: var(--ink-faint); }
+.mono { font-family: var(--font-mono); font-size: 0.9em; }
+
+/* Tables ---------------------------------------------------------------- */
+
+.table-scroll { overflow-x: auto; margin: 1.5rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: var(--text-s); }
+th, td { text-align: left; vertical-align: top; padding: 0.6rem 0.7rem; border-bottom: 1px solid var(--rule); }
+thead th { border-bottom: 2px solid var(--rule-strong); font-weight: 650; white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule-strong); }
+td.num, th.num { text-align: right; white-space: nowrap; }
+table caption { caption-side: top; text-align: left; font-size: var(--text-s); color: var(--ink-muted); padding-bottom: 0.5rem; }
+
+/* Verdict labels -------------------------------------------------------- */
+
+.verdict { display: inline-block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1em 0.45em; border: 1px solid var(--rule-strong); white-space: nowrap; }
+.verdict-yes { border-color: #2f5d3a; }
+.verdict-partly { border-color: #6b5a2a; }
+.verdict-no { border-color: #7a3b3b; }
+.verdict-not-published, .verdict-pending { border-color: var(--rule); color: var(--ink-faint); }
+
+/* Sources --------------------------------------------------------------- */
+
+.source { display: block; margin-top: 0.35em; font-size: 0.78rem; color: var(--ink-faint); }
+.source a { color: var(--ink-muted); }
+.source .quote { font-style: italic; }
+.confidence { font-family: var(--font-mono); font-size: 0.72rem; border: 1px solid var(--rule); padding: 0 0.25em; color: var(--ink-muted); white-space: nowrap; }
+
+/* Lists of questions and picks ------------------------------------------ */
+
+.questions { list-style: none; padding: 0; counter-reset: q; }
+.questions li { counter-increment: q; padding-left: 2rem; position: relative; margin-bottom: 0.7em; }
+.questions li::before { content: counter(q) "."; position: absolute; left: 0; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+
+.picks { list-style: none; padding: 0; }
+.picks li { border-top: 1px solid var(--rule); padding: 0.9rem 0; margin: 0; }
+.picks li:last-child { border-bottom: 1px solid var(--rule); }
+.picks .situation { font-weight: 650; }
+.picks .why { margin: 0.2em 0 0; }
+
+/* Feature / provider indexes -------------------------------------------- */
+
+.index-list { list-style: none; padding: 0; }
+.index-list li { border-top: 1px solid var(--rule); padding: 0.9rem 0; margin: 0; }
+.index-list li:last-child { border-bottom: 1px solid var(--rule); }
+.index-list a { font-weight: 650; text-decoration: none; }
+.index-list a:hover { text-decoration: underline; }
+.index-list p { margin: 0.2em 0 0; color: var(--ink-muted); font-size: var(--text-s); }
+
+.tag { display: inline-block; font-size: 0.72rem; border: 1px solid var(--rule); padding: 0 0.3em; color: var(--ink-muted); }
+
+/* Cost arithmetic ------------------------------------------------------- */
+
+.arithmetic { font-family: var(--font-mono); font-size: 0.8rem; }
+.cost-case { border: 1px solid var(--rule); padding: 1rem; margin: 1.25rem 0; }
+.cost-case h4 { margin-top: 0; }
+.cost-case .headline { font-size: var(--text-l); font-weight: 650; }
+.cost-case table { margin: 0.75rem 0; }
+.cost-case .arithmetic-table { min-width: 30rem; }
+.offer-table { min-width: 64rem; }
+
+/* Small screens --------------------------------------------------------- */
+
+@media (max-width: 40rem) {
+  h1 { font-size: 1.7rem; }
+  h2 { font-size: 1.35rem; }
+  .lede, .standfirst { font-size: 1.05rem; }
+  th, td { padding: 0.5rem; }
+}
