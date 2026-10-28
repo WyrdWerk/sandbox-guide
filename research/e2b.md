@@ -153,6 +153,43 @@ All figures below are **inferred** from the [published rate card](https://e2b.de
 - **inferred** — Trial: one-time credits, not a recurring monthly allowance; [pricing](https://e2b.dev/pricing.md).
 - **inferred** — Secrets: outbound HTTPS proxy injection outside the VM; [secrets](https://docs.e2b.dev/secrets.md).
 
+## 17. The company behind it
+
+Company and terms research checked 2026-10-28; the status figures are a point-in-time observation, not a contractual guarantee. This section is not legal advice.
+
+### Identity, leadership and ownership
+
+- **docs-confirmed** — Legal entity and registration: “E2B's contracting entity is FoundryLabs, Inc., a Delaware corporation.” [E2B security documentation](https://docs.e2b.dev/security.md).
+- **docs-confirmed** — Founders and founding year: “E2B was founded in 2023 by Vasek Mlejnsky and Tomas Valenta.” [E2B about page](https://e2b.dev/about.md). **inferred** — Founded in 2023 makes it approximately three years old in 2026; the exact founding day is not established by that source.
+- **docs-confirmed** — In its 2025 funding announcement the company identifies “Tomas (CTO) and Vasek (CEO)” [E2B Series A](https://e2b.dev/resources/series-a.md). **not-published** — This historical identification is not independent confirmation that both still hold those roles today.
+- **not-published** — A documented acquisition, change of controlling owner, definitive current cap table, and a complete history of ownership changes were not established from sources reviewed. Absence of a found announcement does not prove none occurred.
+
+### Funding, accelerator and headcount
+
+- **docs-confirmed** — As announced in July 2025: “E2B has raised a $21M Series A funding round led by global software investor Insight Partners, with participation from Decibel, Sunflower Capital, and Kaya, along with prominent angels such as Docker's former CEO Scott Johnston.” [E2B Series A](https://e2b.dev/resources/series-a.md).
+- **docs-confirmed** — The same announcement describes “This Brings Our Total Funding to $32M” [E2B Series A](https://e2b.dev/resources/series-a.md). **inferred** — These are funding figures as of that announcement, not proof that no later funding occurred.
+- **third-party** — A founder profile says he moved to San Francisco “arriving through the Pioneer accelerator program.” [YesPress](https://yespress.io/vasek-mlejnsky). **inferred** — This establishes a reported founder connection to Pioneer, not the dates or terms of an E2B company accelerator investment.
+- **third-party** — An independent research profile updated June 11, 2026 estimates “**Employees** | ~25” [Ry Walker Research](https://rywalker.com/research/e2b). **not-published** — A current, dated, company-confirmed headcount was not found; treat the third-party figure as an unverified approximation rather than a current census.
+- **third-party** — Battleships' company block states “"value": "series-a"” and lists “"name": "Pioneer"” [Battleships JSON](https://battleships.dev/data/providers/e2b.json). **inferred** — Its narrative also says no accelerator affiliation was found, so its own Pioneer listing and narrative are inconsistent. The founder profile above is narrower evidence, not confirmation of the company portfolio claim.
+
+### Status, SLA, support and security
+
+- **docs-confirmed** — The public [E2B status page](https://status.e2b.dev/) showed “Jul 2026” to “Oct 2026”, “US-West-1” and “99.78% uptime” when checked on 2026-10-28. **inferred** — That is the page's aggregate for this region and displayed period, not an all-region figure, a current guarantee, or an independent audit; components and other regions have separate figures.
+- **docs-confirmed** — Enterprise terms: “Uptime and support terms are set in the Enterprise agreement.” [E2B Enterprise](https://e2b.dev/enterprise.md). **not-published** — A numerical uptime SLA, service-credit remedies, and SLA availability for Hobby or Pro were not established in the public sources inspected. Ask for the actual agreement and applicable exclusions; observed status uptime is not an SLA.
+- **docs-confirmed** — Support: “The fastest way to reach our support team is through **Contact support** in the **Help** menu” [Support](https://docs.e2b.dev/support.md). The enterprise page says “Discord and support@e2b.dev on every plan.” [Enterprise](https://e2b.dev/enterprise.md). **pricing-page** — Hobby lists “Community support.” [Pricing](https://e2b.dev/pricing.md). **not-published** — Guaranteed response times by plan were not established.
+- **docs-confirmed** — E2B states “E2B has a **SOC 2 Type II** report.” and identifies its [Trust Center](https://trust.e2b.dev) as “the authoritative place to check the current status of each document.” [Security documentation](https://docs.e2b.dev/security.md). The report itself is listed with “Request access” [same source](https://docs.e2b.dev/security.md). **inferred** — The claim was not verified by independently examining the report; customers should request it and check its period and scope.
+- **docs-confirmed** — HIPAA agreement: E2B's security page includes “A **HIPAA business associate agreement (BAA)**” among items to request from support. [Security documentation](https://docs.e2b.dev/security.md). **inferred** — A BAA is a contract, not by itself proof that an individual customer's deployment is compliant.
+
+### Buyer-relevant terms
+
+- **docs-confirmed** — Fee changes: “We may increase or add new fees and charges for any existing Services you are using by giving you at least 30 days’ prior notice.” [Terms](https://e2b.dev/terms.md).
+- **docs-confirmed** — General terms changes are treated differently: “Any changes to these Terms will take effect immediately from the date of publication.” [Terms](https://e2b.dev/terms.md). **inferred** — Do not assume the 30-day notice for fees applies to every terms change; check any separately negotiated agreement.
+- **docs-confirmed** — Account closure: “Upon the termination date, all your access to your Account and the Services will cease and you will remain responsible for all fees and charges you have incurred through the termination date.” [Terms](https://e2b.dev/terms.md).
+- **not-published** — A general deadline or guarantee for deletion of sandbox files, snapshots, volumes, backups, and customer data after cancellation was not established in the public terms inspected. Ask E2B for its retention/deletion schedule and DPA before relying on cancellation as data erasure.
+- **docs-confirmed** — Personal-information requests are distinct from all customer workload data: “We cannot delete your personal information except by also deleting your user account.” [Privacy policy](https://e2b.dev/privacy.md).
+- **docs-confirmed** — Material functionality: “We will provide you at least 30 days prior notice before discontinuing a material functionality of a Service that we make generally available to customers and that you are using.” [Terms](https://e2b.dev/terms.md). **docs-confirmed** — The same clause qualifies this with “We will not be obligated to provide such notice” in specified emergency, intellectual-property, or legal circumstances. [Terms](https://e2b.dev/terms.md).
+- **docs-confirmed** — The terms also contain a general disclaimer: “WE OR OUR SUPPLIERS MAY SUSPEND, WITHDRAW, DISCONTINUE OR CHANGE ALL OR ANY PART OF OUR SERVICES WITHOUT NOTICE.” [Terms](https://e2b.dev/terms.md). **inferred** — There is practical ambiguity between that disclaimer and the specific advance-notice clause above. A narrow reading applies the specific clause to the covered material functionality; a conservative buyer should seek written clarification about exceptions and precedence. This is not legal advice.
+
 ## Research method and limits
 
 **inferred** — Sources were public provider pages and the requested Battleships JSON and Markdown, retrieved live on the research date. Context.dev MCP scrape and search succeeded; Context's site-restricted search returned no results. TinyFish search through Composio succeeded. Composio discovery succeeded for Exa and Firecrawl but neither was called for retrieval. Direct HTTPS fetched provider-published Markdown and Battleships. No native Amp web search was needed. No signup, sandbox, account change or paid E2B usage was performed. Pricing and capabilities are time-sensitive; this is not a guarantee of product availability or a tested deployment.
