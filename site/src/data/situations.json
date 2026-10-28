@@ -68,6 +68,11 @@
           "provider": "e2b",
           "why": "A Firecracker microVM with a 24-hour continuous limit on Pro and snapshots that keep memory.",
           "watch": "The default timeout is five minutes and kills the sandbox; commands do not reset it. Hobby caps continuous runtime at one hour."
+        },
+        {
+          "provider": "modal",
+          "why": "A sandbox can run for up to 24 hours with no idle timeout, and a filesystem or memory snapshot carries the work into the next one.",
+          "watch": "There is no pause: the sandbox runs or it is terminated. The default lifetime is five minutes, and an idle sandbox bills its full request."
         }
       ],
       "icon": "layers",
@@ -80,6 +85,11 @@
         {
           "url": "https://docs.boxd.sh/guides/suspend-resume",
           "quote": "**On by default, set to 4 hours.** After 4 hours without TCP/UDP traffic in either direction, boxd hibernates the machine",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://modal.com/docs/guide/sandboxes",
+          "quote": "You can change this by passing a timeout of up to 24 hours",
           "confidence": "docs-confirmed"
         }
       ]
@@ -152,6 +162,11 @@
           "provider": "e2b",
           "why": "Templates can start from any Docker image, and up to 20 forks can be created from a running sandbox.",
           "watch": "Forking pauses the source and drops its connections; the default timeout kills a sandbox after five minutes."
+        },
+        {
+          "provider": "daytona",
+          "why": "Containers are fast to create, snapshots and forks cover the VM classes, and $200 of free compute pays for the first tests.",
+          "watch": "Fork is VM-only; on the default container it is snapshot-then-create. A container stops after 15 idle minutes even during a build."
         }
       ],
       "icon": "code",
@@ -164,6 +179,11 @@
         {
           "url": "https://docs.e2b.dev/sandbox/fork.md",
           "quote": "With the SDKs and the CLI you can request up to 20 forks at once.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.daytona.io/docs/en/sandboxes.md",
+          "quote": "Forking creates a duplicate of a Linux VM sandbox's filesystem and memory state in a new sandbox.",
           "confidence": "docs-confirmed"
         }
       ]
@@ -195,6 +215,11 @@
           "provider": "sandboxer",
           "why": "Every running sandbox has an XFCE desktop with Google Chrome that opens in a browser tab over VNC, and xlarge gives 16 vCPU / 32 GB.",
           "watch": "No GPU and no SLA, and outbound traffic shares the node's IP, which matters on sites that rate-limit by address."
+        },
+        {
+          "provider": "daytona",
+          "why": "Computer use is a first-class API with mouse, keyboard, screenshots and screen recording, plus a VNC desktop and a web terminal in the Playground.",
+          "watch": "No GPU desktop, a 15-minute idle stop on containers, and the standard preview token cannot be revoked."
         }
       ],
       "sources": [
@@ -211,6 +236,11 @@
         {
           "url": "https://sandboxer.com/docs/desktop",
           "quote": "Every running sandbox has a graphical desktop (XFCE with Google Chrome) that you can open in a browser tab.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.daytona.io/docs/en/computer-use.md",
+          "quote": "Computer Use enables programmatic control of desktop environments within sandboxes.",
           "confidence": "docs-confirmed"
         }
       ]
@@ -242,6 +272,11 @@
           "provider": "runtime",
           "why": "A sandbox's web port can run at your own hostname with HTTPS, and up to four volumes mount at chosen paths for customer data.",
           "watch": "One region, in Virginia, so an EU customer's data sits in the US; volumes keep billing while the sandbox is stopped."
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "why": "Cloudflare's own guidance is a sandbox for each user or each job, with the Worker deriving the sandbox name from an authenticated identity.",
+          "watch": "Names are routing keys, not authorisation; there is no region pinning, and stopping an instance wipes its disk."
         }
       ],
       "sources": [
@@ -254,6 +289,11 @@
           "url": "https://withruntime.com/docs/api",
           "quote": "**Custom domain:** a sandbox's web port at your own hostname, with HTTPS.",
           "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://developers.cloudflare.com/sandbox/concepts/security/",
+          "quote": "A sandbox for each user, or for each job",
+          "confidence": "docs-confirmed"
         }
       ]
     },
@@ -262,7 +302,7 @@
       "icon": "chip",
       "title": "Run GPU work",
       "question": "What will your agent do? It needs a GPU for inference, rendering or training.",
-      "answer": "None of the twelve providers here sells a GPU sandbox. Several say so explicitly, and the rest publish nothing. That makes this a situation where the honest answer is a different product: Fly sells GPU Machines separately from Sprites, Blaxel advertises custom hardware, and Morph leaves the question open.",
+      "answer": "Modal and Daytona both sell GPU sandboxes, up to 8 GPUs each, and Cloudflare does not. The rest of the original twelve publish nothing, so this is still a case where the honest answer may be a different product: Fly sells GPU Machines separately from Sprites.",
       "features": [
         "sizes-regions",
         "isolation",
@@ -270,31 +310,36 @@
       ],
       "providers": [
         {
+          "provider": "modal",
+          "why": "GPU sandboxes up to 8 per container across B300, B200, H200, H100, A100, L4, T4 and L40S, priced per GPU-second.",
+          "watch": "GPU sandboxes are preemptible, gVisor only, and cannot use memory snapshots."
+        },
+        {
+          "provider": "daytona",
+          "why": "GPU sandboxes attach up to 8 GPUs, each adding up to 16 vCPU / 192 GB / 512 GB, across H100, H200, B200, B300, RTX PRO 6000, RTX 4090, RTX 5090 and AMD MI355X.",
+          "watch": "Shared GPU capacity ignores your region choice, GPU sandboxes vanish on stop, spot GPUs can be killed without notice, and the $200 free credit cannot be spent on them."
+        },
+        {
           "provider": "sprites",
           "why": "Fly sells GPU Machines as a separate product on the same platform, and says plainly that Sprites is not a GPU environment.",
           "watch": "A GPU Machine is a different Fly product with a different lifecycle and API; nothing in the Sprites API starts one."
-        },
-        {
-          "provider": "blaxel",
-          "why": "Custom deployments advertise up to 256 GB of RAM and custom hardware options, which is the only opening for non-standard hardware in this set.",
-          "watch": "Custom hardware is not a GPU offer. Ask for the card model, driver version and price in writing before designing around it."
-        },
-        {
-          "provider": "morph",
-          "why": "Full VMs with Docker-in-Docker are the closest thing here to a normal server, which is what a GPU workload would need.",
-          "watch": "GPU availability, maximum sizes and regions are all unpublished, so treat the answer as unknown until it is in a quote."
         }
       ],
       "sources": [
         {
-          "url": "https://fly.io/learn/fly-vs-modal/",
-          "quote": "Sprites are not a GPU environment. Fly.io sells GPU Machines separately",
+          "url": "https://modal.com/docs/guide/gpu",
+          "quote": "Currently B300, B200, H200, H100, A100, L4, T4 and L40S instances support up to 8 GPUs",
           "confidence": "docs-confirmed"
         },
         {
-          "url": "https://e2b.dev/pricing.md",
-          "quote": "E2B sandboxes are CPU-only, sized by vCPU and RAM only, with no GPU option",
-          "confidence": "pricing-page"
+          "url": "https://www.daytona.io/docs/en/gpu-sandboxes.md",
+          "quote": "each GPU adds up to **16 vCPUs**, **192GB RAM**, and **512GB disk**",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://fly.io/learn/fly-vs-modal/",
+          "quote": "Sprites are not a GPU environment. Fly.io sells GPU Machines separately",
+          "confidence": "docs-confirmed"
         }
       ]
     },
@@ -325,6 +370,11 @@
           "provider": "lizard",
           "why": "Two regions, EU West in Limburg and US East in Virginia, and you pick one per resource.",
           "watch": "Nothing promises backups stay in the chosen region, there is no SLA outside Enterprise, and the company publishes no SOC 2."
+        },
+        {
+          "provider": "daytona",
+          "why": "Two shared regions, `us` and `eu`, plus dedicated and bring-your-own-compute regions, with a DPA that names the Irish Data Protection Commission.",
+          "watch": "Region choice does not guarantee where control-plane metadata lives, and the company's Delaware incorporation is unconfirmed."
         }
       ],
       "sources": [
@@ -341,6 +391,11 @@
         {
           "url": "https://lizard.build/docs/platform/limits.md",
           "quote": "The current configured regions include US East (Virginia), `us-east-1`, and EU West (Limburg), `eu-west-lim-a`.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.daytona.io/docs/en/regions.md",
+          "quote": "Europe | **`eu`**",
           "confidence": "docs-confirmed"
         }
       ]

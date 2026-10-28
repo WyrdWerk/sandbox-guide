@@ -48,7 +48,7 @@ const cite = (url: string) => new URL(url).hostname.replace(/^www\./, "");
           </ol>
 
           <h3 class="split__title">Providers worth a look</h3>
-          <div class="picks">
+          <div class={`picks${situation.providers.length === 4 ? " picks--four" : ""}`}>
             {situation.providers.map((pick) => {
               const provider = providerById.get(pick.provider);
               return (

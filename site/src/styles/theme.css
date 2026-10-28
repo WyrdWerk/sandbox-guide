@@ -1368,3 +1368,8 @@ h1 a:hover, h2 a:hover, h3 a:hover { color: var(--color-accent); }
   color: var(--color-text);
   margin: var(--space-2) 0 var(--space-1);
 }
+
+/* A situation with four picks reads as a 2×2 block rather than 3 + 1. */
+@media (min-width: 1025px) {
+  .picks--four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
