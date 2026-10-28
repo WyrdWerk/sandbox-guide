@@ -175,13 +175,17 @@ const payload = {
 
     for (const box of boxes) {
       box.addEventListener("change", () => {
-        const checked = boxes.filter((item) => item.checked);
-        if (checked.length > 3) {
-          const keep = checked.slice(-3).map((item) => item.value);
-          for (const item of boxes) item.checked = keep.includes(item.value);
+        if (box.checked) {
+          if (!order.includes(box.value)) order.push(box.value);
+          while (order.length > 3) {
+            const oldest = order.shift();
+            const oldBox = boxes.find((item) => item.value === oldest);
+            if (oldBox) oldBox.checked = false;
+          }
+        } else {
+          const index = order.indexOf(box.value);
+          if (index !== -1) order.splice(index, 1);
         }
-        order.length = 0;
-        for (const item of boxes) if (item.checked) order.push(item.value);
         render();
       });
     }
