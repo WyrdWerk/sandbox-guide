@@ -992,6 +992,344 @@ carries a four-row plan table, a four-bracket paid-start table, a seven-row bonu
 
 ---
 
+## 16. Disclosure: who publishes battleships.dev
+
+Battleships.dev, the cost-comparison site this profile cross-checks against, is published by the Boat
+team. Readers should weigh it accordingly. `third-party` (I keep that tag because it is a separate
+editorial site, not Boat's documentation, and every claim taken from it is cross-checked against docs or
+the Terms).
+
+> "⚓ Built by boat.dev, not for it. Same engine and rules for boat.dev." — [battleships.dev](https://battleships.dev)
+
+> "Battleships is made by boat.dev; boat.dev's numbers come from its public docs and are held to the same
+> standard as every other provider." — [battleships.dev boat.md](https://battleships.dev/data/providers/boat.md)
+
+The site also says it runs the same pricing engine for every provider, Boat included, and publishes its
+code and data. `third-party`
+
+> "One pipeline and one set of rules for every provider, boat.dev included." — [battleships.dev](https://battleships.dev)
+
+That does not make it independent: it is the vendor grading itself. Treat its Boat row as a convenience
+summary of Boat's docs, dated 2026-09-30, and use the docs for anything that matters. `inferred`
+
+---
+
+## 17. The company behind it
+
+### Legal entity and registration
+
+`docs-confirmed` — provider-owned Terms and Privacy Policy, read in full on 2026-10-28.
+
+> "boat is provided by Dedale AI, Corp., a Delaware corporation." — [Terms](https://boat.dev/terms)
+
+> "Our mailing address is 1111B S Governors Avenue, Dover, Delaware, United States." — [Terms](https://boat.dev/terms)
+
+> "Dedale is a Delaware company." — [Privacy Policy](https://boat.dev/privacy)
+
+The card statement shows the legal name, not the product name. `docs-confirmed`
+
+> "Statements show **DEDALE AI**, the company behind boat." — [billing/plan-changes](https://docs.boat.dev/billing/plan-changes)
+
+"Ascii" is a brand the same entity owns, not a separate company. `docs-confirmed`
+
+> "boat, Ascii, the sandbox website, software, APIs, CLI, documentation, design, names, logos, marks,
+> infrastructure, and related technology are owned by Dedale or its licensors." — [Terms](https://boat.dev/terms)
+
+Delaware is the state of incorporation and the governing law, and disputes are arbitrated there.
+`docs-confirmed`
+
+> "These Terms are governed by the laws of the State of Delaware" — [Terms](https://boat.dev/terms)
+
+> "The arbitration will occur in Delaware, remotely, or in another location the parties agree to."
+> — [Terms](https://boat.dev/terms)
+
+There is no registered company number, VAT number or EU establishment published on the site.
+`not-published`: no imprint, legal or company page exists (`boat.dev/legal`, `/imprint` and `/dpa` all
+return 404).
+
+### Founders and leadership
+
+Two founders, both listed on the Y Combinator company profile. `third-party`
+
+> "Anicet Nougaret … Founder/CEO" — [Y Combinator](https://www.ycombinator.com/companies/boat)
+
+> "Kirill … Founder/CTO" — [Y Combinator](https://www.ycombinator.com/companies/boat)
+
+YC lists the CTO by first name only. A third-party profile gives his surname and role. `third-party`
+
+> "Kirill Makarov Co-founder and CTO" — [EveryDev](https://www.everydev.ai/developers/ascii-dev)
+
+The CTO describes himself as CTO of the product and names the co-founder. `third-party` (read through
+TinyFish's fetch on 2026-10-28; LinkedIn blocks direct fetches)
+
+> "im Kirill, the CTO of box" — [LinkedIn](https://fr.linkedin.com/in/luaroncrew)
+
+> "Currently, with my co-founder Anicet Nougaret we're building the best computer for agents: box."
+> — [LinkedIn](https://fr.linkedin.com/in/luaroncrew)
+
+No other executives, board or advisors are published. `not-published`
+
+### Founding and launch dates
+
+Y Combinator gives the founding year as 2024. `third-party`
+
+> "Founded: 2024" — [Y Combinator](https://www.ycombinator.com/companies/boat)
+
+A second database also gives 2024. `third-party`
+
+> "Founded 2024" — [EveryDev](https://www.everydev.ai/developers/ascii-dev)
+
+The founders' own account says they started the company in 2025, in Finland. `third-party` (read through
+TinyFish's fetch on 2026-10-28; LinkedIn blocks direct fetches)
+
+> "we started Ascii in the middle of Finland in 2025." — [LinkedIn](https://fr.linkedin.com/in/luaroncrew)
+
+**These conflict and I cannot resolve them.** The plausible reading is that the company or the idea dates
+from 2024 and the founders' full-time work from 2025, but neither Boat nor YC says that. `inferred`
+
+The product launched as "box" in July 2026. `third-party`
+
+> "Launch date July 23, 2026" — [Kingy launch tracker](https://kingy.ai/ai-launch-tracker/box-by-ascii-persistent-virtual-machines-for-coding-agents-2026-07-23/)
+
+The rename to Boat is documented by Boat. `docs-confirmed`
+
+> "Box became **boat** on September 15, 2026." — [migrating-from-box](https://docs.boat.dev/migrating-from-box)
+
+> "**2026-09-15** | boat ships. Box surfaces keep working. They now answer with `Deprecation` and
+> `Sunset` headers." — [migrating-from-box](https://docs.boat.dev/migrating-from-box)
+
+The docs also say the 2026-10-31 Sunset date is a warning, not a shutdown. `docs-confirmed`
+
+> "The Sunset date that boat shows now. boat has not decided if or when legacy endpoints, binaries,
+> packages or hosted URLs retire." — [migrating-from-box](https://docs.boat.dev/migrating-from-box)
+
+### Funding
+
+Boat is a Y Combinator Fall 2026 company. `third-party`
+
+> "Batch: Fall 2026" — [Y Combinator](https://www.ycombinator.com/companies/boat)
+
+Boat publishes no funding announcement, round size, valuation or investor list. `not-published`: there is
+no press, about or investors page (`boat.dev/press`, `/about` and `/company` return 404).
+
+The only round I could find is a pre-seed, reported by a Nordic startup database. `third-party`
+
+> "Ascii raised $500k in pre-seed funding from Entrepreneurs First (EF) and Founders, Inc." — [Nordic9](https://nordic9.com/news/ascii-raised-500k-in-pre-seed-funding-from-entrepreneurs-first-ef-and-founders-inc/)
+
+> "01 April 2026" — [Nordic9](https://nordic9.com/news/ascii-raised-500k-in-pre-seed-funding-from-entrepreneurs-first-ef-and-founders-inc/)
+
+> "Total investments received (USD): 1m" — [Nordic9](https://nordic9.com/news/ascii-raised-500k-in-pre-seed-funding-from-entrepreneurs-first-ef-and-founders-inc/)
+
+The same database lists the investors. `third-party`
+
+> "Round investors: Entrepreneur First Founders Inc Guillaume Roux-Romestaing" — [Nordic9](https://nordic9.com/news/ascii-raised-500k-in-pre-seed-funding-from-entrepreneurs-first-ef-and-founders-inc/)
+
+A second database lists the backers but no amount. `third-party`
+
+> "Total Funding Backed by Founders, Inc. and accepted into Y Combinator's Fall 2026 batch"
+> — [EveryDev](https://www.everydev.ai/developers/ascii-dev)
+
+The CTO says he raised money at Founders, Inc. for "my infra company"; whether that is this round or an
+earlier one is not clear. `inferred`, resting on the quote below.
+
+> "raised money at Founders, Inc. for my infra company last year" — [LinkedIn](https://fr.linkedin.com/in/luaroncrew)
+
+No Series A, priced seed round or later round is published anywhere I could find. `not-published`
+
+### Ownership
+
+No parent company, acquisition or ownership change is disclosed. `not-published`; the Terms name only
+Dedale AI, Corp., and no page mentions a parent.
+
+The Privacy Policy anticipates a future transfer, which is standard language rather than an event.
+`docs-confirmed`
+
+> "We may also disclose information if required by law, to protect Dedale, users, or providers, to
+> enforce the Terms, or in connection with a merger, financing, or sale of the business."
+> — [Privacy Policy](https://boat.dev/privacy)
+
+Battleships records the ownership as independent. `third-party`
+
+> `"ownership": { "value": "independent", "parent": null` — [battleships.dev boat.json](https://battleships.dev/data/providers/boat.json)
+
+### Headcount
+
+Boat publishes no headcount. Two third-party sources agree on three people. `third-party`
+
+> "Team Size: 3" — [Y Combinator](https://www.ycombinator.com/companies/boat)
+
+> "3 Employees" — [EveryDev](https://www.everydev.ai/developers/ascii-dev)
+
+The CTO described a team of two at an earlier point. `third-party`
+
+> "we're just a team of 2" — [LinkedIn](https://fr.linkedin.com/in/luaroncrew)
+
+**Reading:** three today, two at an earlier point. `inferred` from the three quotes above.
+
+### Status page and recent uptime
+
+There is a public status page at `status.ascii.dev`, titled "boat status". It probes eight components.
+`docs-confirmed` for the page's existence; the component data below is read from its own JSON.
+
+> "Platform status | Live on status.ascii.dev" — [compliance](https://docs.boat.dev/compliance)
+
+> `"status": "operational"` — [status.json](https://status.ascii.dev/status.json)
+
+The eight components, as the page renders them: Boat API, Sandbox Creation, Sandbox SSH, Sandbox Desktop
+Streaming, Sandbox Stop + Resume, Sandbox Stop + Resume (extreme edge cases suite), Sandbox Fork, Boat
+Dashboard. `inferred` from rendering the page on 2026-10-28; the JSON behind it still uses the old "Box"
+and "Ascii" names.
+
+**Recent figure.** Over the page's default window (Oct 15–28, 2026), it displayed 100.00% uptime for
+seven components and 99.89% for the dashboard. `inferred`: the percentage is computed in the browser
+from `history.json`, and I read it from the rendered page rather than from a server-rendered number.
+
+**Longer window.** The same page's 90-day history, computed with its own formula (only "red" blocks count
+as downtime, degraded hours do not), gives 99.66%–100% per component and 99.39% pooled across all
+components. `inferred` from `history.json`; the lowest component is the extreme-edge-cases suite at
+97.11%, then Sandbox Fork at 98.84%.
+
+Boat's docs make a different, broader claim. `docs-confirmed`
+
+> "Sandboxes have an uptime of 99.95%. boat measures this over the history of all sandboxes."
+> — [compliance](https://docs.boat.dev/compliance)
+
+The two numbers are not the same measure: 99.95% is Boat's own sandbox-level statistic, while the status
+page reports synthetic probes per component. `inferred`
+
+### SLA
+
+No SLA is published, on any plan. `not-published`. The FAQ asks the question and answers without one.
+`docs-confirmed`
+
+> "**Do you have compliance certifications or an SLA?** … SOC 2 is in progress. Sandboxes have a measured
+> uptime of 99.95%." — [FAQ](https://docs.boat.dev/faq)
+
+The Terms disclaim uptime and availability warranties outright. `docs-confirmed`
+
+> boat is provided "as is" and "as available." — [Terms](https://boat.dev/terms)
+
+> "Dedale disclaims all warranties … including warranties of … availability, uptime, security, accuracy,
+> data retention, performance, and error-free operation." — [Terms](https://boat.dev/terms)
+
+> "We do not guarantee that sandbox will be uninterrupted" — [Terms](https://boat.dev/terms)
+
+Liability is capped. `docs-confirmed`
+
+> "our total liability for all claims relating to boat or these Terms will not exceed the greater of $100
+> or the amounts you paid to Dedale for boat in the three months before the event giving rise to the
+> claim." — [Terms](https://boat.dev/terms)
+
+There are no service credits for downtime. The automatic refunds Boat lists cover billing situations and a
+refused stop, not availability. `docs-confirmed`
+
+> "A stop is refused because a snapshot failed | No charge for that time. You do not need to ask."
+> — [billing/plan-changes](https://docs.boat.dev/billing/plan-changes)
+
+### Support channels
+
+`docs-confirmed`
+
+> "Email support@ascii.dev … Discord" — [support](https://docs.boat.dev/support)
+
+> "The support address is on `ascii.dev`, the mail domain of the company behind boat." — [support](https://docs.boat.dev/support)
+
+No phone line, live chat, ticket portal or named support tiers are documented. `not-published`. The docs
+ask for the account email, sandbox id, the command, the full error text and the `requestId`. `docs-confirmed`
+
+> "The `requestId` from the API error, if you have one." — [support](https://docs.boat.dev/support)
+
+### Security and compliance claims
+
+`docs-confirmed` — all from Boat's own pages, none independently audited as far as I can find.
+
+> "SOC 2 in progress" — [security](https://docs.boat.dev/security)
+
+> "Sandboxes run on machines in Germany, Finland and France." — [compliance](https://docs.boat.dev/compliance)
+
+> "Snapshot copies can be stored outside the EU." — [compliance](https://docs.boat.dev/compliance)
+
+Account data can leave the EU even though sandboxes do not. `docs-confirmed`
+
+> "Account, billing, email, and identity data may be processed in the United States and other countries
+> where we or our providers operate." — [Privacy Policy](https://boat.dev/privacy)
+
+Stored credentials are encrypted at rest, and the product offers zero data retention and a snapshots-off
+mode. `docs-confirmed`
+
+> "boat encrypts it at rest." — [ai-credentials](https://docs.boat.dev/ai-credentials)
+
+> "boat deletes a sandbox's data when it stops" — [data-retention](https://docs.boat.dev/data-retention)
+
+No HIPAA/BAA, SSO/SAML, audit log, ISO 27001 or pen-test report is published. `not-published`, checked
+against 60 docs pages and the Terms.
+
+### Terms that matter to a buyer
+
+**1. Retention: 14 days in the docs, "approximately 30 days" in the Terms.** The docs are specific and
+operational; the Terms are looser and control legally. `docs-confirmed` for both.
+
+> "boat keeps its disk for 14 days" — [concepts](https://docs.boat.dev/concepts)
+
+> "boat snapshots are generally retained for a limited period, currently up to approximately 30 days,
+> unless deleted earlier or retained longer" — [Terms](https://boat.dev/terms)
+
+**2. Closing the account cancels immediately and forfeits prepaid value.** `docs-confirmed`
+
+> "It cancels your subscription **immediately**, not at the end of the period. You lose the remaining
+> included time and the money in your wallet." — [close-account](https://docs.boat.dev/data-retention/close-account)
+
+> "Up to **30 days** | Closed but you can get it back." — [close-account](https://docs.boat.dev/data-retention/close-account)
+
+> "After 30 days | boat purges the sandbox data permanently." — [close-account](https://docs.boat.dev/data-retention/close-account)
+
+There is also an immediate, irreversible erasure path for GDPR requests. `docs-confirmed`
+
+> "It does not wait 30 days. It erases the data and your identity when the sandboxes finish stopping."
+> — [close-account](https://docs.boat.dev/data-retention/close-account)
+
+**3. Cancelling the plan is not closing the account.** Sandboxes keep running on wallet money, or stop
+with their disks kept, and there is no refund of the rest of the month. `docs-confirmed`
+
+> "At the end of the paid month, with an empty wallet | boat stops your running sandboxes. Their disks
+> stay." — [billing/plan-changes](https://docs.boat.dev/billing/plan-changes)
+
+> "boat does not refund the rest of the month after a cancel." — [billing/plan-changes](https://docs.boat.dev/billing/plan-changes)
+
+**4. No price-change notice period.** The Terms let Boat change pricing for future use, and the only
+notice promise is for material changes to the Terms, effective when posted. `docs-confirmed`
+
+> "We may change limits, features, machine types, regions, networking, included usage, quotas, APIs, and
+> pricing for future use." — [Terms](https://boat.dev/terms)
+
+> "The updated Terms will be effective when posted or when stated in the notice." — [Terms](https://boat.dev/terms)
+
+A plan change you request applies at once and starts a new billing month. `docs-confirmed`
+
+> "A change applies at once, up or down" — [billing/plan-changes](https://docs.boat.dev/billing/plan-changes)
+
+**5. Payments are non-refundable by default; the docs list three cases where Boat refunds by itself.**
+`docs-confirmed`
+
+> "Payments are non-refundable except where required by law or where we approve a refund case by case."
+> — [Terms](https://boat.dev/terms)
+
+> "boat does not refund unused time in general. boat refunds by itself in these cases" — [billing/plan-changes](https://docs.boat.dev/billing/plan-changes)
+
+**6. It is explicitly not a dedicated hosting contract.** `docs-confirmed`
+
+> "boat is a managed cloud service, not a dedicated hosting contract." — [Terms](https://boat.dev/terms)
+
+**7. Disputes are individual arbitration under Delaware law, with a 30-day opt-out.** `docs-confirmed`
+
+> "disputes … will be resolved by binding individual arbitration administered by the American Arbitration
+> Association" — [Terms](https://boat.dev/terms)
+
+> "You may opt out of arbitration by emailing … within 30 days after you first accept these Terms"
+> — [Terms](https://boat.dev/terms)
+
+---
+
 ## Appendix: research method, quote audit, and tool log
 
 ### Quote audit (2026-10-28)
@@ -999,7 +1337,7 @@ carries a four-row plan table, a four-bracket paid-start table, a seven-row bonu
 Every quote in this file was extracted mechanically together with the URL cited beside it, then checked
 against a cache-busted refetch of that URL:
 
-- **218 quote/URL pairs extracted, 218 matched** their live source verbatim (after normalising
+- **279 quote/URL pairs extracted, 279 matched** their live source verbatim (after normalising
   whitespace, markdown emphasis, backticks and escaped characters). Zero unmatched at the end of the audit.
 - Method: each `docs.boat.dev` page URL is fetched as `<url>.md?x=<timestamp>`; `boat.dev` and
   `battleships.dev` pages are fetched as HTML and reduced to text. A quote matches only if it appears as
@@ -1012,7 +1350,11 @@ against a cache-busted refetch of that URL:
   "are around"; the resume page says "stop the sandbox first. Then resume"; and "List named snapshots"
   now redirects to "List saved snapshots", so the mid-rename claim was removed.
 - 60 docs pages and API-reference pages were re-fetched cache-busted for this audit, plus the homepage,
-  the Terms, and both battleships files.
+  the Terms, the Privacy Policy, and every company, press and database source cited in §16 and §17.
+- Two sources need a non-default route. LinkedIn blocks direct fetches, so its five quotes were read
+  through TinyFish's fetch and checked against that copy. The status page computes its percentages in the
+  browser from `status.json`/`history.json`, so its uptime figures are reported as `inferred` and were
+  read from a rendered page, not from server-rendered text.
 
 ### Worked-example recomputation
 
@@ -1040,7 +1382,7 @@ Order used: TinyFish and Context.dev first, Composio second, Amp native web tool
 | **Composio → Firecrawl** `FIRECRAWL_CRAWL_V2` | Bounded crawl from `/pricing` (limit 10, links format) | **Succeeded**; surfaced three pricing sections the cached `.md` lacked. |
 | **Composio → Firecrawl** `FIRECRAWL_SCRAPE` | Full markdown of `/pricing` | **Partly failed**: the MCP layer returned only a truncated preview, unusable for quoting. |
 | **Firecrawl direct REST** (`api.firecrawl.dev/v2/scrape`) | Same page, full markdown | **Succeeded** (144 KB); used to detect the stale `.md`. |
-| `curl` | `sitemap.xml`, cache-busted `.md` refetches, the 218-quote audit, HTTP status checks | **Succeeded**; this is how the stale-cache problem was found, fixed, and audited. |
+| `curl` | `sitemap.xml`, cache-busted `.md` refetches, the 279-quote audit, HTTP status checks | **Succeeded**; this is how the stale-cache problem was found, fixed, and audited. |
 | Exa, Parallel, Tavily | Not needed | Not called. |
 | Amp `web_search` / `read_web_page` | Not needed | Not called. |
 
