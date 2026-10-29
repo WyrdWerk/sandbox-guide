@@ -1,0 +1,753 @@
+{
+ "collected_utc": "2026-10-29T19:10Z/2026-10-29T20:15Z",
+ "written": "2026-10-30T01:50+05:30",
+ "market": "US, en, Google",
+ "spend_usd": 0.304,
+ "volume": [
+  {
+   "keyword": "openclaw",
+   "volume": 246000,
+   "source": "serpstat",
+   "difficulty": 59.0,
+   "cpc_usd": 2.6
+  },
+  {
+   "keyword": "daytona",
+   "volume": 74000,
+   "source": "serpstat",
+   "difficulty": 90.0,
+   "cpc_usd": 0.38
+  },
+  {
+   "keyword": "code sandbox",
+   "volume": 12100,
+   "source": "serpstat",
+   "difficulty": 1.0,
+   "cpc_usd": 2.99
+  },
+  {
+   "keyword": "browser agent",
+   "volume": 5400,
+   "source": "serpstat",
+   "difficulty": 30.0,
+   "cpc_usd": 3.24
+  },
+  {
+   "keyword": "e2b",
+   "volume": 3600,
+   "source": "serpstat",
+   "difficulty": 31.0,
+   "cpc_usd": 8.0
+  },
+  {
+   "keyword": "ai sandbox",
+   "volume": 1000,
+   "source": "serpstat",
+   "difficulty": 3.0,
+   "cpc_usd": 6.88
+  },
+  {
+   "keyword": "cloudflare sandbox",
+   "volume": 720,
+   "source": "serpstat",
+   "difficulty": null,
+   "cpc_usd": 8.56
+  },
+  {
+   "keyword": "n8n hosting",
+   "volume": 390,
+   "source": "serpstat",
+   "difficulty": 1.0,
+   "cpc_usd": 156.41
+  },
+  {
+   "keyword": "cloud sandbox",
+   "volume": 170,
+   "source": "serpstat",
+   "difficulty": 5.0,
+   "cpc_usd": 7.23
+  },
+  {
+   "keyword": "hermes agent",
+   "volume": 50,
+   "source": "serpstat",
+   "difficulty": 1.0,
+   "cpc_usd": 0.0
+  },
+  {
+   "keyword": "morph cloud",
+   "volume": 40,
+   "source": "serpstat",
+   "difficulty": 1.0,
+   "cpc_usd": 0.0
+  },
+  {
+   "keyword": "e2b alternative",
+   "volume": 1,
+   "source": "serpstat",
+   "difficulty": 1.0,
+   "cpc_usd": 0.0
+  },
+  {
+   "keyword": "firecracker microvm",
+   "volume": 1,
+   "source": "serpstat",
+   "difficulty": 0.0,
+   "cpc_usd": 0.0
+  },
+  {
+   "keyword": "computer use agent",
+   "volume": 660,
+   "source": "seranking",
+   "difficulty": 21.0,
+   "cpc_usd": 4.61
+  },
+  {
+   "keyword": "openclaw hosting",
+   "volume": 590,
+   "source": "seranking",
+   "difficulty": 33.0,
+   "cpc_usd": 3.38
+  },
+  {
+   "keyword": "remote mcp server",
+   "volume": 390,
+   "source": "seranking",
+   "difficulty": 25.0,
+   "cpc_usd": 6.08
+  },
+  {
+   "keyword": "host mcp server",
+   "volume": 170,
+   "source": "seranking",
+   "difficulty": 26.0,
+   "cpc_usd": 9.93
+  },
+  {
+   "keyword": "llm sandbox",
+   "volume": 140,
+   "source": "seranking",
+   "difficulty": 21.0,
+   "cpc_usd": 0.0
+  },
+  {
+   "keyword": "ai agent sandbox",
+   "volume": 110,
+   "source": "seranking",
+   "difficulty": 50.0,
+   "cpc_usd": 5.43
+  },
+  {
+   "keyword": "modal pricing",
+   "volume": 40,
+   "source": "seranking",
+   "difficulty": 26.0,
+   "cpc_usd": 7.39
+  },
+  {
+   "keyword": "claude code",
+   "volume": 368000,
+   "source": "seranking",
+   "difficulty": 94.0,
+   "cpc_usd": 3.46
+  },
+  {
+   "keyword": "n8n",
+   "volume": 165000,
+   "source": "seranking",
+   "difficulty": 96.0,
+   "cpc_usd": 1.11
+  },
+  {
+   "keyword": "mcp server",
+   "volume": 47500,
+   "source": "seranking",
+   "difficulty": 94.0,
+   "cpc_usd": 2.72
+  },
+  {
+   "keyword": "gemini cli",
+   "volume": 40500,
+   "source": "seranking",
+   "difficulty": 95.0,
+   "cpc_usd": 4.01
+  },
+  {
+   "keyword": "manus ai",
+   "volume": 40500,
+   "source": "seranking",
+   "difficulty": 96.0,
+   "cpc_usd": 1.84
+  },
+  {
+   "keyword": "openclaw",
+   "volume": 33100,
+   "source": "seranking",
+   "difficulty": 89.0,
+   "cpc_usd": 2.77
+  },
+  {
+   "keyword": "hermes agent",
+   "volume": 27100,
+   "source": "seranking",
+   "difficulty": 84.0,
+   "cpc_usd": 2.55
+  },
+  {
+   "keyword": "langgraph",
+   "volume": 27100,
+   "source": "seranking",
+   "difficulty": 99.0,
+   "cpc_usd": 1.83
+  },
+  {
+   "keyword": "crewai",
+   "volume": 10800,
+   "source": "seranking",
+   "difficulty": 98.0,
+   "cpc_usd": 0.46
+  },
+  {
+   "keyword": "dify",
+   "volume": 10800,
+   "source": "seranking",
+   "difficulty": 89.0,
+   "cpc_usd": 0.08
+  },
+  {
+   "keyword": "openai codex",
+   "volume": 8100,
+   "source": "seranking",
+   "difficulty": 77.0,
+   "cpc_usd": 4.74
+  },
+  {
+   "keyword": "devin ai",
+   "volume": 8100,
+   "source": "seranking",
+   "difficulty": 73.0,
+   "cpc_usd": 2.6
+  },
+  {
+   "keyword": "mcp servers",
+   "volume": 8000,
+   "source": "seranking",
+   "difficulty": 69.0,
+   "cpc_usd": 2.72
+  },
+  {
+   "keyword": "browser use",
+   "volume": 6600,
+   "source": "seranking",
+   "difficulty": 69.0,
+   "cpc_usd": 2.24
+  },
+  {
+   "keyword": "flowise",
+   "volume": 4400,
+   "source": "seranking",
+   "difficulty": 74.0,
+   "cpc_usd": 4.86
+  },
+  {
+   "keyword": "autogen",
+   "volume": 4400,
+   "source": "seranking",
+   "difficulty": 75.0,
+   "cpc_usd": 3.84
+  },
+  {
+   "keyword": "claude code web",
+   "volume": 1900,
+   "source": "seranking",
+   "difficulty": 66.0,
+   "cpc_usd": 3.54
+  },
+  {
+   "keyword": "computer use",
+   "volume": 1300,
+   "source": "seranking",
+   "difficulty": 70.0,
+   "cpc_usd": 3.83
+  },
+  {
+   "keyword": "gpu cloud",
+   "volume": 1000,
+   "source": "seranking",
+   "difficulty": 66.0,
+   "cpc_usd": 5.16
+  },
+  {
+   "keyword": "n8n self hosted",
+   "volume": 720,
+   "source": "seranking",
+   "difficulty": 51.0,
+   "cpc_usd": 1.37
+  },
+  {
+   "keyword": "codex cloud",
+   "volume": 660,
+   "source": "seranking",
+   "difficulty": 28.0,
+   "cpc_usd": 1.01
+  },
+  {
+   "keyword": "openclaw setup",
+   "volume": 440,
+   "source": "seranking",
+   "difficulty": 33.0,
+   "cpc_usd": 1.65
+  },
+  {
+   "keyword": "ollama hosting",
+   "volume": 110,
+   "source": "seranking",
+   "difficulty": 32.0,
+   "cpc_usd": 2.16
+  },
+  {
+   "keyword": "deploy ai agent",
+   "volume": 90,
+   "source": "seranking",
+   "difficulty": 13.0,
+   "cpc_usd": 8.33
+  },
+  {
+   "keyword": "ai agent hosting",
+   "volume": 40,
+   "source": "seranking",
+   "difficulty": 12.0,
+   "cpc_usd": 5.25
+  },
+  {
+   "keyword": "vps for ai",
+   "volume": 40,
+   "source": "seranking",
+   "difficulty": 19.0,
+   "cpc_usd": 3.73
+  },
+  {
+   "keyword": "jupyter api",
+   "volume": 40,
+   "source": "seranking",
+   "difficulty": 21.0,
+   "cpc_usd": 0.0
+  },
+  {
+   "keyword": "code execution sandbox",
+   "volume": 20,
+   "source": "seranking",
+   "difficulty": 28.0,
+   "cpc_usd": 0.0
+  },
+  {
+   "keyword": "replit",
+   "volume": 246000,
+   "source": "seranking",
+   "difficulty": 98.0,
+   "cpc_usd": 2.99
+  },
+  {
+   "keyword": "render",
+   "volume": 90500,
+   "source": "seranking",
+   "difficulty": 95.0,
+   "cpc_usd": 2.27
+  },
+  {
+   "keyword": "railway",
+   "volume": 40500,
+   "source": "seranking",
+   "difficulty": 95.0,
+   "cpc_usd": 0.01
+  },
+  {
+   "keyword": "daytona",
+   "volume": 33100,
+   "source": "seranking",
+   "difficulty": 88.0,
+   "cpc_usd": 0.46
+  },
+  {
+   "keyword": "hetzner",
+   "volume": 22200,
+   "source": "seranking",
+   "difficulty": 90.0,
+   "cpc_usd": 0.88
+  },
+  {
+   "keyword": "ona",
+   "volume": 18100,
+   "source": "seranking",
+   "difficulty": 63.0,
+   "cpc_usd": 1.47
+  },
+  {
+   "keyword": "coder",
+   "volume": 14800,
+   "source": "seranking",
+   "difficulty": 83.0,
+   "cpc_usd": 3.91
+  },
+  {
+   "keyword": "together ai",
+   "volume": 12100,
+   "source": "seranking",
+   "difficulty": 83.0,
+   "cpc_usd": 3.03
+  },
+  {
+   "keyword": "hostinger vps",
+   "volume": 3600,
+   "source": "seranking",
+   "difficulty": 74.0,
+   "cpc_usd": 1.03
+  },
+  {
+   "keyword": "e2b",
+   "volume": 2400,
+   "source": "seranking",
+   "difficulty": 63.0,
+   "cpc_usd": 8.0
+  },
+  {
+   "keyword": "koyeb",
+   "volume": 1100,
+   "source": "seranking",
+   "difficulty": 72.0,
+   "cpc_usd": 5.4
+  },
+  {
+   "keyword": "gitpod",
+   "volume": 1100,
+   "source": "seranking",
+   "difficulty": 68.0,
+   "cpc_usd": 5.4
+  },
+  {
+   "keyword": "digitalocean droplet",
+   "volume": 1000,
+   "source": "seranking",
+   "difficulty": 74.0,
+   "cpc_usd": 4.92
+  },
+  {
+   "keyword": "runloop",
+   "volume": 590,
+   "source": "seranking",
+   "difficulty": 18.0,
+   "cpc_usd": 1.65
+  },
+  {
+   "keyword": "beam cloud",
+   "volume": 170,
+   "source": "seranking",
+   "difficulty": 17.0,
+   "cpc_usd": 6.1
+  },
+  {
+   "keyword": "steel browser",
+   "volume": 140,
+   "source": "seranking",
+   "difficulty": 27.0,
+   "cpc_usd": 1.89
+  },
+  {
+   "keyword": "morph labs",
+   "volume": 40,
+   "source": "seranking",
+   "difficulty": 10.0,
+   "cpc_usd": 0.0
+  },
+  {
+   "keyword": "openrouter",
+   "volume": 96200,
+   "source": "seranking",
+   "difficulty": 95.0,
+   "cpc_usd": 2.33
+  },
+  {
+   "keyword": "playwright",
+   "volume": 60500,
+   "source": "seranking",
+   "difficulty": 95.0,
+   "cpc_usd": 1.48
+  },
+  {
+   "keyword": "firecracker",
+   "volume": 27800,
+   "source": "seranking",
+   "difficulty": 73.0,
+   "cpc_usd": 1.11
+  },
+  {
+   "keyword": "claude api pricing",
+   "volume": 5400,
+   "source": "seranking",
+   "difficulty": 68.0,
+   "cpc_usd": 3.64
+  },
+  {
+   "keyword": "cold start",
+   "volume": 2900,
+   "source": "seranking",
+   "difficulty": 69.0,
+   "cpc_usd": 0.0
+  },
+  {
+   "keyword": "prompt injection",
+   "volume": 1900,
+   "source": "seranking",
+   "difficulty": 76.0,
+   "cpc_usd": 4.74
+  },
+  {
+   "keyword": "what is a sandbox",
+   "volume": 1800,
+   "source": "seranking",
+   "difficulty": 57.0,
+   "cpc_usd": 4.63
+  },
+  {
+   "keyword": "headless browser",
+   "volume": 880,
+   "source": "seranking",
+   "difficulty": 7.0,
+   "cpc_usd": 1.94
+  },
+  {
+   "keyword": "mcp security",
+   "volume": 590,
+   "source": "seranking",
+   "difficulty": 42.0,
+   "cpc_usd": 14.0
+  },
+  {
+   "keyword": "secrets management",
+   "volume": 540,
+   "source": "seranking",
+   "difficulty": 23.0,
+   "cpc_usd": 8.48
+  },
+  {
+   "keyword": "agent memory",
+   "volume": 540,
+   "source": "seranking",
+   "difficulty": 58.0,
+   "cpc_usd": 4.81
+  },
+  {
+   "keyword": "browser automation",
+   "volume": 540,
+   "source": "seranking",
+   "difficulty": 48.0,
+   "cpc_usd": 3.91
+  },
+  {
+   "keyword": "agent security",
+   "volume": 390,
+   "source": "seranking",
+   "difficulty": 29.0,
+   "cpc_usd": 8.38
+  },
+  {
+   "keyword": "yolo mode",
+   "volume": 320,
+   "source": "seranking",
+   "difficulty": 7.0,
+   "cpc_usd": 0.0
+  },
+  {
+   "keyword": "serverless gpu",
+   "volume": 210,
+   "source": "seranking",
+   "difficulty": 29.0,
+   "cpc_usd": 3.18
+  },
+  {
+   "keyword": "llm api pricing",
+   "volume": 170,
+   "source": "seranking",
+   "difficulty": 43.0,
+   "cpc_usd": 3.03
+  },
+  {
+   "keyword": "discord bot hosting",
+   "volume": 120,
+   "source": "seranking",
+   "difficulty": 17.0,
+   "cpc_usd": 1.22
+  },
+  {
+   "keyword": "whatsapp ai agent",
+   "volume": 110,
+   "source": "seranking",
+   "difficulty": 35.0,
+   "cpc_usd": 5.76
+  },
+  {
+   "keyword": "ai agent pricing",
+   "volume": 90,
+   "source": "seranking",
+   "difficulty": 30.0,
+   "cpc_usd": 4.59
+  },
+  {
+   "keyword": "ai agent cost",
+   "volume": 90,
+   "source": "seranking",
+   "difficulty": 35.0,
+   "cpc_usd": 4.44
+  },
+  {
+   "keyword": "api key security",
+   "volume": 70,
+   "source": "seranking",
+   "difficulty": 24.0,
+   "cpc_usd": 12.65
+  },
+  {
+   "keyword": "sandbox escape",
+   "volume": 70,
+   "source": "seranking",
+   "difficulty": 14.0,
+   "cpc_usd": 0.0
+  },
+  {
+   "keyword": "egress firewall",
+   "volume": 40,
+   "source": "seranking",
+   "difficulty": 12.0,
+   "cpc_usd": 0.0
+  },
+  {
+   "keyword": "docker vs vm",
+   "volume": 20,
+   "source": "seranking",
+   "difficulty": 25.0,
+   "cpc_usd": 0.02
+  },
+  {
+   "keyword": "24/7 ai agent",
+   "volume": 10,
+   "source": "seranking",
+   "difficulty": 19.0,
+   "cpc_usd": 9.6
+  }
+ ],
+ "phrase_ideas_serpstat": {
+  "openclaw": {
+   "openclaw": 246000,
+   "openclaw ai": 14800,
+   "openclaw agents": 880,
+   "openclaw vs chatgpt": 70
+  },
+  "claude code": {
+   "claude code": 550000,
+   "claude code github": 6600,
+   "claude code anthropic": 4400,
+   "claude code down": 3600,
+   "claude code security": 2900,
+   "claude code setup": 1900,
+   "claude code tool": 1000,
+   "anthropic claude code security": 880,
+   "anthropic claude code pro plan": 720,
+   "claude code removed from pro": 320
+  }
+ },
+ "trends_index_dataforseo": {
+  "period": "2025-11-02 to 2026-10-29, avg of first vs last 13 weeks, relative within group",
+  "group1": {
+   "openclaw": [
+    1,
+    5
+   ],
+   "hermes agent": [
+    0,
+    6
+   ],
+   "claude code": [
+    25,
+    36
+   ],
+   "manus ai": [
+    2,
+    3
+   ],
+   "mcp server": [
+    3,
+    4
+   ]
+  },
+  "group2": {
+   "e2b": [
+    0,
+    0
+   ],
+   "daytona": [
+    13,
+    10
+   ],
+   "modal": [
+    7,
+    7
+   ],
+   "cloud sandbox": [
+    0,
+    0
+   ],
+   "codex": [
+    18,
+    70
+   ]
+  }
+ },
+ "serp_top_domains": {
+  "openclaw hosting": [
+   "docs.openclaw.ai",
+   "reddit.com",
+   "hostinger.com",
+   "xcloud.host",
+   "openclawai.io",
+   "ovhcloud.com",
+   "allaboutcookies.org"
+  ],
+  "ai agent sandbox": [
+   "medium.com",
+   "reddit.com",
+   "windmill.dev",
+   "github.com",
+   "luiscardoso.dev",
+   "blaxel.ai",
+   "northflank.com",
+   "kdnuggets.com"
+  ],
+  "remote mcp server": [
+   "mcpservers.org",
+   "reddit.com",
+   "mcp.so",
+   "github.com",
+   "lobehub.com"
+  ]
+ },
+ "no_estimate": [
+  "ai agent sandbox (serpstat)",
+  "e2b pricing",
+  "daytona pricing",
+  "e2b vs daytona",
+  "vercel sandbox",
+  "code interpreter api",
+  "host openclaw",
+  "claude code cloud",
+  "self host n8n",
+  "blaxel",
+  "northflank",
+  "browserbase",
+  "modal labs",
+  "fly.io",
+  "claude code sandbox",
+  "gvisor",
+  "microvm",
+  "docker sandbox"
+ ]
+}

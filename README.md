@@ -1,4 +1,4 @@
-# Bot Perch
+# Botperch
 
 A plain-language guide to cloud sandboxes for AI agents. It helps people choose a provider for a job, understand the catches, and estimate machine and model costs separately.
 
