@@ -3401,9 +3401,9 @@
         },
         {
           "provider": "boat",
-          "verdict": "yes",
+          "verdict": "partly",
           "figure": "Every minute",
-          "shortfall": "Only the newest automatic copy is kept, so there is no history to go back through.",
+          "shortfall": "These are automatic snapshots kept with the machine, not an off-site backup, and only the newest one is kept, so there is no history to go back through.",
           "source": {
             "url": "https://docs.boat.dev/snapshots/templates",
             "quote": "boat, every minute and at each stop",
@@ -3504,9 +3504,9 @@
         },
         {
           "provider": "sandboxer",
-          "verdict": "yes",
+          "verdict": "partly",
           "figure": "Every 10 minutes",
-          "shortfall": "The copies sit on the same machine, so they do not survive losing the host.",
+          "shortfall": "These are automatic snapshots kept on the same host as the machine, not an off-site backup, so they do not survive losing that host.",
           "source": {
             "url": "https://sandboxer.com/docs/snapshots",
             "quote": "**Continuous snapshots** (disk) | Every 10 minutes while a sandbox runs, and at every stop",
