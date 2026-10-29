@@ -1,0 +1,216 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import SectionNav from "../components/SectionNav.astro";
+import { pricing, providerName } from "../lib/data";
+import { price, presets, formatMoney } from "../lib/cost";
+
+// The personal-agent workload, priced on every sandbox with the calculator's engine.
+const personal = presets.personal.workload;
+const sandboxes = pricing
+  .map((card) => ({ id: card.provider, q: price(card, personal) }))
+  .filter((r) => r.q.feasible)
+  .sort((a, b) => a.q.total - b.q.total);
+const cheapest = sandboxes.slice(0, 3);
+const median = sandboxes[Math.floor(sandboxes.length / 2)];
+
+// Non-sandbox homes for the same 2 vCPU / 4 GB always-on machine. Read 2026-10-29.
+const others = [
+  {
+    kind: "A plain server (VPS)",
+    name: "Hetzner Cloud CX23",
+    size: "2 vCPU, 4 GB, 40 GB disk, 20 TB traffic",
+    month: "€5.99 (about $7), excl. VAT",
+    url: "https://www.hetzner.com/cloud/cost-optimized/",
+    note: "EU and US locations. The monthly price is a cap; deleting early bills by the hour.",
+  },
+  {
+    kind: "A plain server (VPS)",
+    name: "DigitalOcean Basic Droplet",
+    size: "2 vCPU, 4 GB, 80 GB disk, 4 TB transfer",
+    month: "$24",
+    url: "https://www.digitalocean.com/pricing/droplets",
+    note: "Smaller sizes from $6 (1 vCPU, 1 GB) and $12 (1 vCPU, 2 GB).",
+  },
+  {
+    kind: "An app platform",
+    name: "Fly.io shared-cpu-2x",
+    size: "2 shared vCPU, 4 GB, plus a 20 GB volume",
+    month: "about $25 ($22.22 machine + $3.00 volume)",
+    url: "https://fly.io/docs/about/pricing/",
+    note: "Price varies by region, from $21.40 to $34.56 for the machine. OpenClaw's own Fly guide expects $10–15 on 2 GB.",
+  },
+  {
+    kind: "An app platform",
+    name: "Railway Hobby",
+    size: "Billed on what the service actually uses",
+    month: "about $26 if it holds 2 GB and idles (inferred)",
+    url: "https://railway.com/pricing",
+    note: "$5 minimum includes $5 of usage. Memory about $10 per GB-month, CPU about $20 per vCPU-month while working, volumes $0.16 per GB-month.",
+  },
+  {
+    kind: "An app platform",
+    name: "Render",
+    size: "1 CPU, 2 GB",
+    month: "$25",
+    url: "https://render.com/pricing",
+    note: "The free tier sleeps after 15 minutes without traffic, which an agent waiting for chat messages cannot use.",
+  },
+  {
+    kind: "Managed one-click",
+    name: "Hostinger OpenClaw",
+    size: "OpenClaw set up for you",
+    month: "$4.99 promotional, renews at $11.99 (24-month term)",
+    url: "https://www.hostinger.com/openclaw",
+    note: "Only OpenClaw. You pick it from a menu instead of installing it.",
+  },
+  {
+    kind: "Managed one-click",
+    name: "Agent 37 Personal",
+    size: "Hermes or OpenClaw set up for you",
+    month: "from $3.99; $29.99 with a built-in browser",
+    url: "https://www.agent37.com/personal",
+    note: "Agent 37 is also one of the sandboxes this guide compares. Its free tier sleeps after 15 minutes.",
+  },
+];
+
+const nav = [
+  { href: "#short", label: "Short answer" },
+  { href: "#options", label: "Five places to run it" },
+  { href: "#prices", label: "Same machine, every home" },
+  { href: "#worth-it", label: "When a sandbox is worth it" },
+  { href: "#not", label: "When it is not" },
+];
+---
+
+<Base title="Do you even need a sandbox?" description="A cloud sandbox is one of five places to run an AI agent. What each costs for the same always-on machine, and when a sandbox is worth paying for.">
+  <PageHeader
+    kicker="Before you choose"
+    title="Do you even need a sandbox?"
+    standfirst="A cloud sandbox is one of five places an agent can live. For one personal agent that stays on all day, a plain rented server is often cheaper; a sandbox earns its price when you need many machines, throwaway machines, or machines that sleep when nobody is using them."
+    meta={["Prices read 2026-10-29", "Same 2 vCPU / 4 GB machine throughout", "Sources linked"]}
+  />
+
+  <SectionNav items={nav} />
+
+  <div class="wrap">
+    <section class="section section--flush" id="short">
+      <div class="section__head"><h2 class="section__title">The short answer</h2></div>
+      <div class="prose">
+        <ul>
+          <li><strong>One agent for yourself, always on, and you are happy to follow a setup guide:</strong> a plain server (Hetzner, DigitalOcean) is usually the cheapest. You look after it yourself.</li>
+          <li><strong>One agent for yourself and you never want to see a terminal:</strong> a managed one-click service (Hostinger, Agent 37). It costs little, but you get only the agents on its menu.</li>
+          <li><strong>Many short jobs, code from other people, or agents that should cost nothing when idle:</strong> a cloud sandbox. That is what the rest of this guide compares.</li>
+        </ul>
+        <p>Not sure? <a href="/choose/">Help me choose</a> asks four questions and gives you a short list.</p>
+      </div>
+    </section>
+
+    <section class="section" id="options">
+      <div class="section__head"><h2 class="section__title">Five places to run an agent</h2></div>
+      <div class="prose">
+        <h3>1. Your own computer</h3>
+        <p>
+          Free, and the quickest way to try an agent. It stops when the computer sleeps or loses its connection, and
+          the agent can read and change your own files. Fine for an afternoon, not for something you message from your phone.
+        </p>
+        <h3>2. A plain rented server (a VPS)</h3>
+        <p>
+          A whole machine in a data centre at a flat monthly price, running all the time. You connect to it from a
+          terminal, install the agent by following its guide, and you keep the system updated and secure yourself. The
+          Hermes README describes running it on <a href="https://github.com/NousResearch/hermes-agent" rel="noreferrer noopener">"a $5 VPS"</a>.
+          Nothing is sealed off: if the agent misbehaves, it can damage only that server, which is the main thing a sandbox would add.
+        </p>
+        <h3>3. An app platform</h3>
+        <p>
+          Services like Fly.io, Railway and Render run a program from a template or a short configuration file and
+          keep it running. Less server upkeep than a VPS, more setup than a one-click service. OpenClaw publishes guides
+          for <a href="https://docs.openclaw.ai/install/fly" rel="noreferrer noopener">Fly.io</a> and{" "}
+          <a href="https://docs.openclaw.ai/install/render" rel="noreferrer noopener">Render</a>.
+        </p>
+        <h3>4. A managed one-click service</h3>
+        <p>
+          You sign up, pick the agent from a list and connect your chat app. No terminal. The trade is choice: you get
+          the agents and settings the service offers, and moving away later means starting over.
+        </p>
+        <h3>5. A cloud sandbox</h3>
+        <p>
+          A sealed-off machine you create from a program or a dashboard, often in under a second, billed by the second,
+          and easy to copy, pause or throw away. Built for software that creates machines on demand. See{" "}
+          <a href="/features/">what sandboxes offer</a> and <a href="/use-cases/">what people run on them</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="prices">
+      <div class="section__head"><h2 class="section__title">The same machine in every kind of home</h2></div>
+      <div class="prose">
+        <p>
+          One machine with 2 vCPU and 4 GB of memory that stays on all month, the size this guide uses for a personal
+          Hermes or OpenClaw agent. Prices are the published list prices, before tax, read on 2026-10-29. The AI model
+          is billed separately and is the same wherever the machine lives.
+        </p>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr><th scope="col">Kind</th><th scope="col">Option</th><th scope="col">What you get</th><th scope="col">Per month</th></tr>
+          </thead>
+          <tbody>
+            {others.map((o) => (
+              <tr>
+                <td>{o.kind}</td>
+                <th scope="row"><a href={o.url} rel="noreferrer noopener">{o.name}</a></th>
+                <td>{o.size}<br /><span class="muted">{o.note}</span></td>
+                <td>{o.month}</td>
+              </tr>
+            ))}
+            {cheapest.map((r) => (
+              <tr>
+                <td>A cloud sandbox</td>
+                <th scope="row"><a href={`/providers/${r.id}/`}>{providerName(r.id)}</a></th>
+                <td>{r.q.shape}{r.q.plan ? ` (plan: ${r.q.plan})` : ""}<br /><span class="muted">Priced by the calculator with 20 GiB kept and about 6% CPU use.</span></td>
+                <td>{formatMoney(r.q.total)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Those are the three cheapest of the {sandboxes.length} sandboxes that can run this machine. The middle one,{" "}
+          {providerName(median.id)}, comes to {formatMoney(median.q.total)}.{" "}
+          <a href="/costs/?preset=personal">Change the numbers in the calculator</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="worth-it">
+      <div class="section__head"><h2 class="section__title">When a sandbox is worth paying for</h2></div>
+      <div class="prose">
+        <ul>
+          <li><strong>The agent runs code you did not write</strong>, such as code from your customers or from the model itself, and it must not reach anything else. Sandboxes are built to keep it sealed in.</li>
+          <li><strong>You need many machines, briefly.</strong> A thousand ten-minute jobs a month cost a few dollars on a sandbox; a server would sit idle the rest of the time.</li>
+          <li><strong>It should cost nothing while nobody uses it.</strong> Several sandboxes sleep when idle and wake on a request, so a part-time agent pays for part-time hours.</li>
+          <li><strong>You want to copy, roll back or pause it.</strong> Snapshots and forks let you save a machine exactly as it is and start new ones from that point.</li>
+          <li><strong>Your own software creates the machines.</strong> Every sandbox has an API for this; a VPS usually means a person clicking.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="not">
+      <div class="section__head"><h2 class="section__title">When it is probably not</h2></div>
+      <div class="prose">
+        <ul>
+          <li><strong>One personal agent, on all the time, that only you use.</strong> A server at a flat price usually wins on cost, and the isolation a sandbox adds protects little that a separate server does not.</li>
+          <li><strong>You want no setup at all.</strong> Most sandboxes expect you to follow developer instructions. A managed one-click service, or Agent 37's one-click route, is closer to what you want.</li>
+          <li><strong>A predictable bill matters more than flexibility.</strong> Flat monthly prices are easier to plan around than per-second rates.</li>
+        </ul>
+        <p>
+          The server and app-platform prices on this page were read once, on 2026-10-29. Unlike the sandbox rates,
+          they are not checked again with each update, so follow the links before you rely on them.
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>
