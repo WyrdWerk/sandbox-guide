@@ -4165,13 +4165,12 @@
         },
         {
           "provider": "instabox",
-          "verdict": "no",
-          "figure": "Shared address",
-          "shortfall": "All machines send from one shared address, so another service sees the same address for everyone.",
+          "verdict": "not-published",
+          "note": "No outbound address, fixed or shared, is published; the limits page covers only the speed cap. A third-party review says machines share one address.",
           "source": {
-            "url": "https://dev.to/samsam4060/instabox-free-cloud-sandboxes-for-ai-agents-honest-notes-after-a-week-of-testing-47ld",
-            "quote": "All machines share one NAT egress IP",
-            "confidence": "third-party"
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "Outbound bandwidth",
+            "confidence": "not-published"
           }
         },
         {

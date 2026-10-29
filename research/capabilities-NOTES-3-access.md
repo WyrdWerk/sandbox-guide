@@ -66,8 +66,8 @@ Checked 2026-10-29. 15 capabilities × 16 providers = 240 rows.
 - **Morph `tunnel` = yes.** Inferred from its documented SSH.
 - **Runtime `ssh` = partly.** The docs say SSH and port forwarding run "through Runtime's API ...
   over one WebSocket per connection"; not confirmed that a plain `ssh` client works.
-- **InstaBox `static-ip` = no.** Rests on a third-party review saying all machines share one NAT
-  address; InstaBox publishes nothing on the subject.
+- **InstaBox `static-ip` = not-published.** A third-party review says all machines share one NAT
+  address, but InstaBox publishes nothing about outbound addresses, so the row cannot claim a no.
 - **E2B `egress-included` = not-published.** The billing page has no egress line at all; it may
   simply be free.
 - **Modal `web-terminal` = not-published.** No browser terminal in the docs; the dashboard may have
@@ -78,7 +78,7 @@ Checked 2026-10-29. 15 capabilities × 16 providers = 240 rows.
 
 ## Scope notes
 
-- Counts across the 240 rows: 118 yes, 44 partly, 26 no, 52 not-published.
+- Counts across the 240 rows: 118 yes, 44 partly, 25 no, 53 not-published.
 - `not-published` means nothing on the provider's site answers the question. It is not a "no".
 - Suggested additions in the file: private network between machines, desktop in the browser,
   graphics card, event notifications, agent tool connection (MCP).

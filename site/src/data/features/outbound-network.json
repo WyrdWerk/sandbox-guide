@@ -129,8 +129,8 @@
       "provider": "instabox",
       "verdict": "partly",
       "figure": "100 GiB–50 TiB included",
-      "scenario": "Each plan includes outbound data every month (100 GiB on Free, 1 TiB on Pro), then $0.02 per GiB; machines share a NAT address, so an external rate limit is shared too.",
-      "note": "No general egress allowlist is published; host scoping applies to Secrets, not all sandbox traffic. Each plan includes egress every month (100 GiB Free, 1 TiB Pro, 5 TiB Builder, 50 TiB Team), then $0.02 per GiB. Machines share a NAT address.",
+      "scenario": "Each plan includes outbound data every month (100 GiB on Free, 1 TiB on Pro), then $0.02 per GiB. InstaBox's docs say nothing about which address outbound traffic leaves from.",
+      "note": "No general egress allowlist is published; host scoping applies to Secrets, not all sandbox traffic. Each plan includes egress every month (100 GiB Free, 1 TiB Pro, 5 TiB Builder, 50 TiB Team), then $0.02 per GiB. Outbound addresses are not published.",
       "source": {
         "url": "https://instabox.sh/pricing",
         "quote": "$0.02000",
