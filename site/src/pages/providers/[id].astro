@@ -6,7 +6,7 @@ import CompanyFacts from "../../components/CompanyFacts.astro";
 import Quote from "../../components/Quote.astro";
 import SectionNav from "../../components/SectionNav.astro";
 import Badge from "../../components/Badge.astro";
-import { providers, pricing, useCases, engineCase, features, capabilitiesOf, capabilityLabel } from "../../lib/data";
+import { providers, pricing, useCases, engineCase, features, capabilitiesOf, capabilityLabel, formatDate } from "../../lib/data";
 import { price, presets, formatMoney } from "../../lib/cost";
 
 export function getStaticPaths() {
@@ -212,7 +212,7 @@ const statusLabel = {
         <section class="section" id="costs" aria-labelledby="costs-h">
           <div class="section__head">
             <h2 class="section__title" id="costs-h">The three shared workloads</h2>
-            <p class="section__note">List-price illustrations from the <a href="/costs/">calculator</a>, not quotes</p>
+            <p class="section__note">List-price illustrations from the <a href="/costs/">calculator</a>, not quotes. Prices checked {formatDate(card.checkedOn)}.</p>
           </div>
           <div class="cost-grid">
             <CostCard label="A" title="1,000 short tasks" cost={engineCase(provider.id, "a")} />

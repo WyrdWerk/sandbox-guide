@@ -2,7 +2,8 @@
 import Base from "../layouts/Base.astro";
 import PageHeader from "../components/PageHeader.astro";
 import Quote from "../components/Quote.astro";
-import { changes, providerById } from "../lib/data";
+import { changes, providerById, checked, formatDate } from "../lib/data";
+import site from "../data/site.json";
 
 const formatter = new Intl.DateTimeFormat("en-GB", {
   day: "numeric",
@@ -24,7 +25,7 @@ const shown = changes.map((change) => ({
     kicker="Record"
     title="What changed recently"
     standfirst="A sandbox you picked last quarter may not be the same product today. These are the dated changes the research found, newest first, with the source for each. Where a provider announced nothing and the change is only visible in an archive, the entry says so."
-    meta={[`${changes.length} entries`, "Dated and sourced", "Checked 28 October 2026"]}
+    meta={[`${changes.length} entries`, "Dated and sourced", `Prices checked ${formatDate(checked.prices)}`]}
   />
 
   <div class="wrap">
@@ -66,7 +67,7 @@ const shown = changes.map((change) => ({
       </div>
 
       <p class="section__note">
-        Price and product facts elsewhere on this site are dated 28 October 2026. For a live price
+        Prices elsewhere on this site were last checked on {formatDate(checked.prices)}; product facts on {formatDate(site.checkedOn)}. For a live price
         comparison, use <a href="https://battleships.dev" rel="noreferrer noopener">battleships.dev</a>,
         which is built by the Boat team.
       </p>

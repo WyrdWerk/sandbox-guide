@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import SituationIcon from "../components/SituationIcon.astro";
-import { features, groups, providers, situations, useCases } from "../lib/data";
+import { features, groups, providers, situations, useCases, checked, formatDate } from "../lib/data";
 ---
 
 <Base title="Sandbox guide">
@@ -20,7 +20,7 @@ import { features, groups, providers, situations, useCases } from "../lib/data";
       <p class="hero-aside">New to this? <a href="/do-you-need-a-sandbox/">Do you even need a sandbox?</a></p>
       <p class="page-meta">
         <span class="page-meta__item"><span class="page-meta__dot" aria-hidden="true"></span>{providers.length} providers</span>
-        <span class="page-meta__item">Checked 28 October 2026</span>
+        <span class="page-meta__item">Prices checked {formatDate(checked.prices)}</span>
         <span class="page-meta__item">Sources linked</span>
       </p>
     </header>

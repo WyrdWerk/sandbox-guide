@@ -1,6 +1,19 @@
 {
   "changes": [
     {
+      "date": "2026-10-29",
+      "title": "Lizard added two bigger plans, Pro 5x and Pro 20x",
+      "provider": "lizard",
+      "what": "Lizard's pricing page now lists Pro 5x at $99 a month and Pro 20x at $499, alongside Pro at $19. Each includes its fee back as usage and raises the sandbox limits; neither has a trial. Sandbox rates per size did not change, so no cost figure on this site moves.",
+      "sources": [
+        {
+          "url": "https://lizard.build/pricing",
+          "quote": "Pro 5x is $99 a month with $99 of usage included. Beyond that, pay as you go. It has no trial.",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
       "date": "2026-10-28",
       "title": "Sprites' rates are roughly half the figures still in circulation",
       "provider": "sprites",

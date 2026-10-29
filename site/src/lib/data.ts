@@ -54,7 +54,7 @@ const pricingModules = import.meta.glob<RateCard>("../data/pricing/*.json", {
   eager: true,
   import: "default",
 });
-const useCaseModule = import.meta.glob<{ usecases: UseCase[] }>("../data/usecases.json", {
+const useCaseModule = import.meta.glob<{ usecases: UseCase[]; checkedOn: string }>("../data/usecases.json", {
   eager: true,
   import: "default",
 });
@@ -118,6 +118,20 @@ export const pricing: RateCard[] = Object.values(pricingModules).sort((a, b) =>
  * markup, unlike provider quotes, which are stripped to plain text.
  */
 export const useCases: UseCase[] = Object.values(useCaseModule)[0]?.usecases ?? [];
+
+/** "2026-10-29" -> "29 October 2026". */
+export const formatDate = (iso: string) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+
+/**
+ * When each kind of claim was last checked. Prices use the oldest rate card, so
+ * "prices checked on X" stays true for every card; the weekly price check moves it.
+ */
+export const checked = {
+  prices: pricing.map((c) => c.checkedOn).sort()[0],
+  useCases: Object.values(useCaseModule)[0]!.checkedOn,
+  capabilities: (capabilityData as { checkedOn: string }).checkedOn,
+};
 
 /** Specific capabilities, each checked for every provider. Strings keep their [links](url). */
 export const capabilities: Capability[] = (capabilityData as { capabilities: Capability[] }).capabilities;

@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import CostCard from "../../components/CostCard.astro";
 import SectionNav from "../../components/SectionNav.astro";
-import { providers, engineCase as card } from "../../lib/data";
+import { providers, engineCase as card, checked, formatDate } from "../../lib/data";
 
 const researched = providers.filter((provider) => provider.status === "researched");
 
@@ -19,7 +19,7 @@ const nav = [
     kicker="Reference costs"
     title="Three workloads, priced at list rates"
     standfirst="A reference point, not a quote. The arithmetic is shown so you can redo it when prices change, and every substituted size is named. For your own workload, use the cost calculator."
-    meta={[`${researched.length} providers`, "List prices checked 29 October 2026", "Illustrations, not quotes"]}
+    meta={[`${researched.length} providers`, `List prices checked ${formatDate(checked.prices)}`, "Illustrations, not quotes"]}
   />
 
   <SectionNav items={nav} />
@@ -41,7 +41,7 @@ const nav = [
       </p>
       <p class="section__note">
         These are illustrations from published list rates, not invoices. Every card is produced by the
-        same engine as the <a href="/costs/?preset=a">cost calculator</a>, from rates re-checked on 29 October,
+        same engine as the <a href="/costs/?preset=a">cost calculator</a>, from rates re-checked on {formatDate(checked.prices)},
         and the engine is tested against the same workloads worked by hand. <a href="/costs/how-it-works/">How the
         costs are calculated</a>.
       </p>

@@ -8,16 +8,16 @@
   "whatItIs": [
     "Lizard is a cloud platform with two halves. Sandboxes are Firecracker microVMs for running agent code, sold in three fixed sizes at a flat hourly price. An app platform deploys a repository, with managed Postgres, Redis and S3-compatible storage.",
     "The docs describe the sandbox half first and treat app deployment as the second step, once the agent has built something. The two halves are billed on different meters, which is the most confusing thing about the product.",
-    "The self-serve plan is Pro at $19 a month, which includes $19 of usage across the whole platform."
+    "The self-serve plans are Pro at $19 a month, Pro 5x at $99 and Pro 20x at $499; each includes its own fee back as usage across the whole platform, and the bigger two raise the sandbox limits."
   ],
   "whoFor": "Agent builders who want cheap per-hour machines with generous pause and snapshot semantics, and who may want to deploy the result on the same platform.",
   "isolation": "Firecracker microVM with its own guest kernel, commands run as root by default, Linux only. Docker inside a sandbox, systemd and nested virtualisation are not documented.",
   "sizes": "Three fixed sizes: Small 2 vCPU / 4 GB / 5 GB, Medium 4 vCPU / 8 GB / 20 GB, Large 8 vCPU / 16 GB / 50 GB. No custom size and no live resize. Volumes add up to 50 GB at `/workspace`.",
   "billing": {
-    "model": "One Pro plan at $19 a month, including $19 of usage; sandboxes are a flat hourly price per size.",
+    "model": "Three plans, Pro at $19, Pro 5x at $99 and Pro 20x at $499 a month, each including its fee as usage; sandboxes are a flat hourly price per size.",
     "meter": "Per second while running, idle time included, at $0.0162 / $0.0324 / $0.0648 an hour for Small / Medium / Large. Volumes bill per GB-month on used space.",
     "stopped": "Paused compute is $0, and no storage charge for a paused sandbox's disk or memory is published. A stopped sandbox is deleted, so only volumes and snapshots remain.",
-    "planFee": "$19 a month, which comes back as $19 of usage. Unused usage does not carry over.",
+    "planFee": "$19 (Pro), $99 (Pro 5x) or $499 (Pro 20x) a month, each coming back as the same amount of usage. Unused usage does not carry over.",
     "minimum": "$19 a month is the floor. The 7-day trial includes $5 of usage and needs a card."
   },
   "cost": {

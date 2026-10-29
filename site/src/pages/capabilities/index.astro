@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import SectionNav from "../../components/SectionNav.astro";
 import CapabilityMatrix from "../../components/CapabilityMatrix.astro";
-import { capabilities, capabilitiesOf, features, groups, providers } from "../../lib/data";
+import { capabilities, capabilitiesOf, features, groups, providers, checked, formatDate } from "../../lib/data";
 
 const researched = providers.filter((p) => p.status === "researched");
 const byGroup = groups
@@ -28,7 +28,7 @@ const nav = [
     kicker="Capabilities"
     title="What each provider can actually do"
     standfirst={`${capabilities.length} specific capabilities, each checked for all ${researched.length} providers. Tick the ones you need to see who has all of them. Where a provider offers something with a limit, such as resizing only while the machine is stopped, the guide says so instead of calling it a yes.`}
-    meta={[`${capabilities.length} capabilities`, `${researched.length} providers`, "Every mark has a source"]}
+    meta={[`${capabilities.length} capabilities`, `${researched.length} providers`, `Checked ${formatDate(checked.capabilities)}`, "Every mark has a source"]}
   />
 
   <SectionNav items={nav} />

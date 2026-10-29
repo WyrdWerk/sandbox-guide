@@ -1,8 +1,13 @@
 # Price check
 
 Instructions for a person or a bot (such as Grokbot) that keeps this guide's prices
-current. Nothing runs this on a schedule; whoever runs it opens a pull request, and a
-person reviews and merges it. Merging to `main` publishes the site.
+current. An Amp schedule runs it every Monday morning (India time) in the thread that
+built this guide; whoever runs it opens a pull request, and a person reviews and merges
+it. Merging to `main` publishes the site.
+
+Every "Prices checked" date on the site comes from the rate cards' `checkedOn`: a provider
+page shows its own card's date, and site-wide lines show the oldest card's date. Set
+`checkedOn` only after reading the provider's pages, never just to make a date look fresh.
 
 ## 1. Find what changed
 

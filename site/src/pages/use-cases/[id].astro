@@ -4,7 +4,7 @@ import PageHeader from "../../components/PageHeader.astro";
 import SectionNav from "../../components/SectionNav.astro";
 import Calculator from "../../components/Calculator.astro";
 import Inline from "../../components/Inline.astro";
-import { features, providerById, providerName, useCases } from "../../lib/data";
+import { features, providerById, providerName, useCases, checked, formatDate } from "../../lib/data";
 import { presets } from "../../lib/cost";
 import type { RouteTier, UseCase } from "../../data/schema";
 
@@ -46,7 +46,7 @@ const nav = [
     kicker={useCase.kicker}
     title={useCase.title}
     standfirst={useCase.standfirst}
-    meta={["Setup checked 29 October 2026", "Docs linked in the text", "Priced from list rates"]}
+    meta={[`Setup checked ${formatDate(checked.useCases)}`, "Docs linked in the text", "Priced from list rates"]}
   />
 
   <SectionNav items={nav} />
@@ -125,7 +125,7 @@ const nav = [
             </tbody>
           </table>
         </div>
-        <p class="section__note">Read from each provider's documentation on {"29 October 2026"}. A provider not listed as one click can still be the right home; it means someone has to follow its instructions.</p>
+        <p class="section__note">Read from each provider's documentation on {formatDate(checked.useCases)}. A provider not listed as one click can still be the right home; it means someone has to follow its instructions.</p>
       </section>
     )}
 

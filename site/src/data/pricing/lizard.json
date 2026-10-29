@@ -40,12 +40,23 @@
       "name": "Pro",
       "fee": 19,
       "credit": 19
+    },
+    {
+      "name": "Pro 5x",
+      "fee": 99,
+      "credit": 99
+    },
+    {
+      "name": "Pro 20x",
+      "fee": 499,
+      "credit": 499
     }
   ],
   "notes": [
     "Between sessions the machine is paused, not stopped: a stopped sandbox is deleted. No storage charge for a paused sandbox is published.",
     "Extra disk is a volume at $0.14 per GB-month of used space.",
-    "Sandbox egress is included up to 2 TB per rolling 30 days; the price beyond that is not published."
+    "Sandbox egress is included up to 2 TB per rolling 30 days; the price beyond that is not published.",
+    "Pro 5x ($99) and Pro 20x ($499) include the same amount of usage as their fee and raise the sandbox limits; they never lower a bill, so the calculator lands on Pro unless you need the higher limits."
   ],
   "sources": [
     {

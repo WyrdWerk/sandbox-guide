@@ -4,7 +4,7 @@ import PageHeader from "../../components/PageHeader.astro";
 import Badge from "../../components/Badge.astro";
 import Inline from "../../components/Inline.astro";
 import Related from "../../components/Related.astro";
-import { capabilities, capabilitiesOf, capabilityLabel, capabilityVerdicts, features, providers, tagClass } from "../../lib/data";
+import { capabilities, capabilitiesOf, capabilityLabel, capabilityVerdicts, features, providers, tagClass, checked, formatDate } from "../../lib/data";
 
 export function getStaticPaths() {
   return capabilities.map((cap) => ({ params: { id: cap.id }, props: { cap } }));
@@ -30,7 +30,7 @@ const list = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1)
     title={cap.title}
     standfirst={cap.plain}
     meta={cap.rows.length
-      ? [`${count("yes")} yes`, `${count("partly")} with a catch`, `${count("no")} no`, `${count("not-published")} not published`]
+      ? [`${count("yes")} yes`, `${count("partly")} with a catch`, `${count("no")} no`, `${count("not-published")} not published`, `Checked ${formatDate(checked.capabilities)}`]
       : ["Research pending"]}
   />
 

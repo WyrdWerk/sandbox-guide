@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import Quote from "../../components/Quote.astro";
 import SectionNav from "../../components/SectionNav.astro";
-import { features, providerById, situations } from "../../lib/data";
+import { features, providerById, situations, checked, formatDate } from "../../lib/data";
 
 const featureById = new Map(features.map((feature) => [feature.id, feature]));
 const words = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
@@ -87,7 +87,7 @@ const cite = (url: string) => new URL(url).hostname.replace(/^www\./, "");
 
     <p class="section__note">
       The reasoning behind each pick is on the feature pages, with a source for every claim.
-      Prices are list prices checked on 28 October 2026.
+      Prices are list prices checked on {formatDate(checked.prices)}.
     </p>
   </div>
 </Base>
