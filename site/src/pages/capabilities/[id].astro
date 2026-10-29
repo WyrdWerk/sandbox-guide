@@ -1,0 +1,92 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Badge from "../../components/Badge.astro";
+import Inline from "../../components/Inline.astro";
+import Related from "../../components/Related.astro";
+import { capabilities, capabilitiesOf, capabilityLabel, capabilityVerdicts, features, providers, tagClass } from "../../lib/data";
+
+export function getStaticPaths() {
+  return capabilities.map((cap) => ({ params: { id: cap.id }, props: { cap } }));
+}
+
+const { cap } = Astro.props;
+const feature = features.find((f) => f.id === cap.feature)!;
+const order = (v: string) => capabilityVerdicts.indexOf(v as never);
+const rows = providers
+  .filter((p) => p.status === "researched")
+  .map((p) => ({ p, row: cap.rows.find((r) => r.provider === p.id) }))
+  .sort((a, b) => order(a.row?.verdict ?? "not-published") - order(b.row?.verdict ?? "not-published") || a.p.name.localeCompare(b.p.name));
+const count = (v: string) => cap.rows.filter((r) => r.verdict === v).length;
+const siblings = capabilitiesOf(cap.feature).filter((c) => c.id !== cap.id);
+const names = (v: string) => rows.filter((r) => r.row?.verdict === v).map((r) => r.p.name);
+const list = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`);
+---
+
+<Base title={cap.title} description={`${cap.plain} Which of ${rows.length} cloud sandbox providers offer it, and the catch where one falls short.`}>
+  <PageHeader
+    parent={{ href: "/capabilities/", label: "Capabilities" }}
+    kicker={feature.navTitle}
+    title={cap.title}
+    standfirst={cap.plain}
+    meta={cap.rows.length
+      ? [`${count("yes")} yes`, `${count("partly")} with a catch`, `${count("no")} no`, `${count("not-published")} not published`]
+      : ["Research pending"]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush" aria-labelledby="who-h">
+      <div class="section__head">
+        <h2 class="section__title" id="who-h">Who offers it</h2>
+        <p class="section__note">
+          Part of <a href={`/features/${feature.id}/`}>{feature.title}</a>, which explains why it matters.
+        </p>
+      </div>
+      {cap.rows.length > 0 && (
+        <div class="prose">
+          <p>
+            {names("yes").length ? <>Fully: {list(names("yes"))}. </> : <>No provider offers this without a catch. </>}
+            {names("partly").length > 0 && <>With a catch: {list(names("partly"))}. </>}
+            {names("no").length > 0 && <>Not at all: {list(names("no"))}.</>}
+          </p>
+        </div>
+      )}
+      <ul class="cap-rows">
+        {rows.map(({ p, row }) => (
+          <li id={p.id}>
+            <div class="cap-rows__head">
+              <a href={`/providers/${p.id}/`}><strong>{p.name}</strong></a>
+              {row ? (
+                <Badge verdict={row.verdict} label={capabilityLabel[row.verdict]} />
+              ) : (
+                <Badge verdict="pending" label="Research pending" />
+              )}
+              {row?.figure && <span class="cap-rows__figure">{row.figure}</span>}
+            </div>
+            {row?.shortfall && (
+              <p class="cap-rows__shortfall"><strong>{row.verdict === "partly" ? "The catch:" : "Note:"}</strong> <Inline text={row.shortfall} /></p>
+            )}
+            {row?.note && <p class="cap-rows__shortfall"><Inline text={row.note} /></p>}
+            {row?.source && (
+              <p class="cap-rows__src">
+                <span class={tagClass[row.source.confidence]}>{row.source.confidence}</span>{" "}
+                {row.source.quote && <>“{row.source.quote}” </>}
+                <a href={row.source.url} rel="noreferrer noopener">Source<span class="ext" aria-hidden="true">↗</span></a>
+              </p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="related-h">
+      <div class="section__head"><h2 class="section__title" id="related-h">Related</h2></div>
+      <Related feature={feature.id} capabilities={siblings} />
+    </section>
+
+    <p class="section__note">
+      Need several capabilities at once? <a href={`/capabilities/?need=${cap.id}`}>Add more in the capability finder</a>.
+      Something wrong here? Use the report link at the bottom of the page.
+    </p>
+  </div>
+</Base>

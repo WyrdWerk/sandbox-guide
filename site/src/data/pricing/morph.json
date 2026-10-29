@@ -1,7 +1,7 @@
 {
   "provider": "morph",
   "checkedOn": "2026-10-29",
-  "summary": "Compute units per hour: the largest of vCPU, RAM \u00f7 4 and disk \u00f7 16, at $0.05 each.",
+  "summary": "Compute units per hour: the largest of vCPU, RAM ÷ 4 and disk ÷ 16, at $0.05 each.",
   "mcu": {
     "rate": 0.05,
     "ramPer": 4,
@@ -12,6 +12,11 @@
     "stoppedIncludesRam": true
   },
   "between": "kept",
+  "egress": {
+    "perGiB": null,
+    "note": "Named as billable in the terms, but no rate is published.",
+    "url": "https://cloud.morph.so/web/legal/terms-of-service"
+  },
   "plans": [
     {
       "name": "Developer",

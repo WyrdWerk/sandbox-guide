@@ -41,6 +41,11 @@
     }
   ],
   "between": "kept",
+  "egress": {
+    "perGiB": null,
+    "note": "Not published; do not assume it is free.",
+    "url": "https://boxd.sh/pricing"
+  },
   "plans": [
     {
       "name": "Prepaid credit",

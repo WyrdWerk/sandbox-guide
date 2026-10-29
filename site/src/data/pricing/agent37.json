@@ -40,6 +40,11 @@
     }
   ],
   "between": "kept",
+  "egress": {
+    "perGiB": null,
+    "note": "Not published: the billing docs meter only compute and disk.",
+    "url": "https://www.agent37.com/pricing"
+  },
   "plans": [
     {
       "name": "Cloud API wallet",

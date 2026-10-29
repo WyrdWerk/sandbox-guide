@@ -10,6 +10,11 @@
     "rate": 0.0162
   },
   "between": "kept",
+  "egress": {
+    "perGiB": null,
+    "note": "Not published: the rate table lists vCPU, memory and storage only.",
+    "url": "https://e2b.dev/pricing"
+  },
   "plans": [
     {
       "name": "Hobby",

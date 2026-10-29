@@ -14,6 +14,12 @@
     "stopped": 0.00011
   },
   "between": "kept",
+  "egress": {
+    "perGiB": 0.02,
+    "note": "Sending is capped at about 50 Mbit/s per machine.",
+    "url": "https://instabox.sh/docs/pricing",
+    "included": "100 GiB on Free, 1 TiB on Pro, 5 TiB on Builder"
+  },
   "plans": [
     {
       "name": "Pro",

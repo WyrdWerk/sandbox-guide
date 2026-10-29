@@ -53,6 +53,12 @@
   ],
   "between": "lost",
   "lostNote": "A stopped instance loses its disk; files have to be backed up to R2 or a snapshot and restored.",
+  "egress": {
+    "perGiB": 0.025,
+    "note": "$0.04–$0.05 per GB elsewhere, with 500 GB included. Outbound traffic is off unless turned on.",
+    "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+    "included": "1 TB a month in North America and Europe"
+  },
   "plans": [
     {
       "name": "Workers Paid",

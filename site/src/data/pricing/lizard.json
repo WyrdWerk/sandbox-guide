@@ -29,6 +29,12 @@
     "extraMonthly": 0.14
   },
   "between": "kept",
+  "egress": {
+    "perGiB": null,
+    "note": "No price is published beyond the allowance; Lizard asks you to contact it first.",
+    "url": "https://lizard.build/docs/platform/limits",
+    "included": "2 TB per account over a rolling 30 days"
+  },
   "plans": [
     {
       "name": "Pro",

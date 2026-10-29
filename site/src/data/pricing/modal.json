@@ -1,7 +1,7 @@
 {
   "provider": "modal",
   "checkedOn": "2026-10-29",
-  "summary": "Per second on the higher of requested and used CPU and memory, at 3\u00d7 list for sandboxes; there is no stopped state.",
+  "summary": "Per second on the higher of requested and used CPU and memory, at 3× list for sandboxes; there is no stopped state.",
   "cpu": {
     "rate": 0.070956,
     "billing": "allocated",
@@ -12,6 +12,12 @@
   },
   "between": "lost",
   "lostNote": "Modal sandboxes have no stopped state; keeping files needs a Volume or a snapshot.",
+  "egress": {
+    "perGiB": 0.04,
+    "note": "Counted across the whole workspace.",
+    "url": "https://modal.com/docs/guide/network-egress-billing",
+    "included": "1 TiB a month on Starter, 10 TiB on Team"
+  },
   "plans": [
     {
       "name": "Starter",

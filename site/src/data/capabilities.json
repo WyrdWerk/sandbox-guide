@@ -1,0 +1,550 @@
+{
+  "capabilities": [
+    {
+      "id": "own-vm",
+      "feature": "isolation",
+      "title": "Its own virtual machine",
+      "plain": "Each sandbox is a separate virtual machine (microVM or full VM), not a container sharing a kernel with neighbours.",
+      "rows": []
+    },
+    {
+      "id": "root",
+      "feature": "isolation",
+      "title": "Root access",
+      "plain": "You (and the agent) can act as the administrator: install anything, change system settings.",
+      "rows": []
+    },
+    {
+      "id": "docker-inside",
+      "feature": "isolation",
+      "title": "Docker inside",
+      "plain": "You can run Docker containers inside the sandbox.",
+      "rows": []
+    },
+    {
+      "id": "nested-virt",
+      "feature": "isolation",
+      "title": "Nested virtualisation",
+      "plain": "You can start virtual machines inside the sandbox, for tools that need their own VM.",
+      "rows": []
+    },
+    {
+      "id": "custom-image",
+      "feature": "isolation",
+      "title": "Your own image",
+      "plain": "Start machines from your own Dockerfile or image instead of the provider's default.",
+      "rows": []
+    },
+    {
+      "id": "any-size",
+      "feature": "sizes-regions",
+      "title": "Any size you like",
+      "plain": "Choose CPU and memory freely instead of picking from a short list of fixed sizes.",
+      "rows": []
+    },
+    {
+      "id": "big-machines",
+      "feature": "sizes-regions",
+      "title": "Large machines",
+      "plain": "Machines of 16 vCPU or 32 GiB memory or more are available.",
+      "rows": []
+    },
+    {
+      "id": "live-resize",
+      "feature": "sizes-regions",
+      "title": "Resize while running",
+      "plain": "Change CPU or memory without stopping the machine or losing what is running.",
+      "rows": []
+    },
+    {
+      "id": "gpu",
+      "feature": "sizes-regions",
+      "title": "GPUs",
+      "plain": "Machines with a graphics processor, for running AI models or other GPU work inside the sandbox.",
+      "rows": []
+    },
+    {
+      "id": "choose-region",
+      "feature": "sizes-regions",
+      "title": "Choose the region",
+      "plain": "You decide which part of the world the machine runs in.",
+      "rows": []
+    },
+    {
+      "id": "eu-region",
+      "feature": "sizes-regions",
+      "title": "Runs in the EU",
+      "plain": "At least one region inside the European Union, for EU data rules.",
+      "rows": []
+    },
+    {
+      "id": "pause-memory",
+      "feature": "lifecycle",
+      "title": "Pause keeps memory",
+      "plain": "Pausing keeps memory and running programs, so the machine resumes exactly where it was.",
+      "rows": []
+    },
+    {
+      "id": "warm-pool",
+      "feature": "lifecycle",
+      "title": "Pre-started pools",
+      "plain": "Keep machines ready in advance so new work starts without waiting for a boot.",
+      "rows": []
+    },
+    {
+      "id": "fast-start",
+      "feature": "lifecycle",
+      "title": "Starts in under a second",
+      "plain": "The provider documents new or resumed machines being ready in under a second.",
+      "rows": []
+    },
+    {
+      "id": "snapshot-files",
+      "feature": "snapshots-forks",
+      "title": "Snapshots of files",
+      "plain": "Save the machine's files at a moment and restore them later.",
+      "rows": []
+    },
+    {
+      "id": "snapshot-memory",
+      "feature": "snapshots-forks",
+      "title": "Snapshots with memory",
+      "plain": "A snapshot also keeps memory and running programs.",
+      "rows": []
+    },
+    {
+      "id": "fork-running",
+      "feature": "snapshots-forks",
+      "title": "Copy a running machine",
+      "plain": "Make copies of a machine while it keeps running.",
+      "rows": []
+    },
+    {
+      "id": "older-snapshot",
+      "feature": "snapshots-forks",
+      "title": "Pick an older snapshot",
+      "plain": "Restore any earlier snapshot, not only the latest one.",
+      "rows": []
+    },
+    {
+      "id": "templates",
+      "feature": "snapshots-forks",
+      "title": "Reusable templates",
+      "plain": "Turn a set-up machine into a template and start many new machines from it.",
+      "rows": []
+    },
+    {
+      "id": "backups",
+      "feature": "snapshots-forks",
+      "title": "Automatic backups",
+      "plain": "The provider takes backups for you on a schedule.",
+      "rows": []
+    },
+    {
+      "id": "files-survive-stop",
+      "feature": "storage",
+      "title": "Files survive a stop",
+      "plain": "Stopping the machine keeps its disk; starting it again finds the files where they were.",
+      "rows": []
+    },
+    {
+      "id": "volumes",
+      "feature": "storage",
+      "title": "Separate volumes",
+      "plain": "Storage that lives on after the machine is deleted and can be attached to a new one.",
+      "rows": []
+    },
+    {
+      "id": "shared-volume",
+      "feature": "storage",
+      "title": "One volume, several machines",
+      "plain": "Several machines can use the same storage at once.",
+      "rows": []
+    },
+    {
+      "id": "mount-buckets",
+      "feature": "storage",
+      "title": "Mount outside storage",
+      "plain": "Attach an S3-style bucket or another outside filesystem as a folder.",
+      "rows": []
+    },
+    {
+      "id": "big-disk",
+      "feature": "storage",
+      "title": "Large disk",
+      "plain": "Disks of 100 GiB or more are available.",
+      "rows": []
+    },
+    {
+      "id": "stay-on",
+      "feature": "idle-timers",
+      "title": "Can stay on indefinitely",
+      "plain": "A machine can run for weeks without being stopped for idleness or a session limit.",
+      "rows": []
+    },
+    {
+      "id": "choose-idle",
+      "feature": "idle-timers",
+      "title": "Choose the idle timeout",
+      "plain": "You set how long an idle machine waits before it pauses or stops, including never.",
+      "rows": []
+    },
+    {
+      "id": "wake-on-request",
+      "feature": "idle-timers",
+      "title": "Wakes on a request",
+      "plain": "A paused machine starts again by itself when a web request or message arrives.",
+      "rows": []
+    },
+    {
+      "id": "schedules",
+      "feature": "idle-timers",
+      "title": "Scheduled runs",
+      "plain": "Start a machine or a job on a schedule, like a cron job, without your own server.",
+      "rows": []
+    },
+    {
+      "id": "public-url",
+      "feature": "reaching-it",
+      "title": "Public link to a port",
+      "plain": "A web address that reaches a program running in the sandbox.",
+      "rows": []
+    },
+    {
+      "id": "private-url",
+      "feature": "reaching-it",
+      "title": "Private link",
+      "plain": "A link only you or people with a token or login can open.",
+      "rows": []
+    },
+    {
+      "id": "ssh",
+      "feature": "reaching-it",
+      "title": "Real SSH",
+      "plain": "Connect with a standard SSH client from your own computer.",
+      "rows": []
+    },
+    {
+      "id": "web-terminal",
+      "feature": "reaching-it",
+      "title": "Terminal in the browser",
+      "plain": "Open a command line on the machine from the provider's website.",
+      "rows": []
+    },
+    {
+      "id": "tunnel",
+      "feature": "reaching-it",
+      "title": "Tunnel to your computer",
+      "plain": "Reach a port inside the sandbox as if it were on your own machine (port forwarding).",
+      "rows": []
+    },
+    {
+      "id": "raw-tcp",
+      "feature": "reaching-it",
+      "title": "Non-web ports",
+      "plain": "Reach services that are not HTTP, such as a database or game server, over TCP.",
+      "rows": []
+    },
+    {
+      "id": "custom-domain",
+      "feature": "custom-domains",
+      "title": "Your own domain",
+      "plain": "Serve what the machine runs at your own web address.",
+      "rows": []
+    },
+    {
+      "id": "auto-https",
+      "feature": "custom-domains",
+      "title": "Automatic HTTPS",
+      "plain": "The provider gets and renews the security certificate for your domain.",
+      "rows": []
+    },
+    {
+      "id": "egress-included",
+      "feature": "outbound-network",
+      "title": "Outbound data included",
+      "plain": "Data the machine sends out is free or comes with a published allowance.",
+      "rows": []
+    },
+    {
+      "id": "egress-allowlist",
+      "feature": "outbound-network",
+      "title": "Allow only some sites",
+      "plain": "Limit which internet addresses the machine can reach.",
+      "rows": []
+    },
+    {
+      "id": "no-internet",
+      "feature": "outbound-network",
+      "title": "Turn the internet off",
+      "plain": "Run a machine with no internet access at all.",
+      "rows": []
+    },
+    {
+      "id": "static-ip",
+      "feature": "outbound-network",
+      "title": "Fixed outgoing IP",
+      "plain": "Traffic leaves from a known IP address that other services can whitelist.",
+      "rows": []
+    },
+    {
+      "id": "secrets-store",
+      "feature": "keys-secrets",
+      "title": "Stored secrets",
+      "plain": "Save API keys with the provider and have them appear in the machine as environment variables.",
+      "rows": []
+    },
+    {
+      "id": "hidden-secrets",
+      "feature": "keys-secrets",
+      "title": "Secrets the agent cannot read",
+      "plain": "Keys are added to outgoing requests by the provider, so the agent never sees them.",
+      "rows": []
+    },
+    {
+      "id": "scoped-keys",
+      "feature": "keys-secrets",
+      "title": "Limited API keys",
+      "plain": "Create API keys that can do only some things, or only in one project.",
+      "rows": []
+    },
+    {
+      "id": "dashboard-create",
+      "feature": "ways-to-drive",
+      "title": "Create from the website",
+      "plain": "Start a machine by clicking in the provider's dashboard, with no terminal.",
+      "rows": []
+    },
+    {
+      "id": "cli",
+      "feature": "ways-to-drive",
+      "title": "Command-line tool",
+      "plain": "An official command-line tool.",
+      "rows": []
+    },
+    {
+      "id": "python-sdk",
+      "feature": "ways-to-drive",
+      "title": "Python SDK",
+      "plain": "An official library for Python programs.",
+      "rows": []
+    },
+    {
+      "id": "ts-sdk",
+      "feature": "ways-to-drive",
+      "title": "TypeScript SDK",
+      "plain": "An official library for JavaScript or TypeScript programs.",
+      "rows": []
+    },
+    {
+      "id": "rest-api",
+      "feature": "ways-to-drive",
+      "title": "Documented HTTP API",
+      "plain": "A documented web API that any language can call.",
+      "rows": []
+    },
+    {
+      "id": "mcp-server",
+      "feature": "ways-to-drive",
+      "title": "MCP server",
+      "plain": "An official MCP server, so an AI assistant can create and use sandboxes itself.",
+      "rows": []
+    },
+    {
+      "id": "pty",
+      "feature": "ways-to-drive",
+      "title": "Interactive terminal over the API",
+      "plain": "A program can open a live terminal session (PTY) in the sandbox, not just run one command.",
+      "rows": []
+    },
+    {
+      "id": "file-api",
+      "feature": "ways-to-drive",
+      "title": "Files over the API",
+      "plain": "Read and write files in the sandbox through the SDK or API.",
+      "rows": []
+    },
+    {
+      "id": "agents-preinstalled",
+      "feature": "built-in-agents",
+      "title": "Coding agents preinstalled",
+      "plain": "Claude Code, Codex or similar are already installed in the default image.",
+      "rows": []
+    },
+    {
+      "id": "prompt-api",
+      "feature": "built-in-agents",
+      "title": "Send it a prompt",
+      "plain": "The provider runs an agent for you: you send a prompt, it does the work in the sandbox.",
+      "rows": []
+    },
+    {
+      "id": "one-click-hermes",
+      "feature": "built-in-agents",
+      "title": "One-click Hermes",
+      "plain": "Hermes Agent can be set up without a terminal.",
+      "rows": []
+    },
+    {
+      "id": "one-click-openclaw",
+      "feature": "built-in-agents",
+      "title": "One-click OpenClaw",
+      "plain": "OpenClaw can be set up without a terminal.",
+      "rows": []
+    },
+    {
+      "id": "browser",
+      "feature": "built-in-agents",
+      "title": "Browser built in",
+      "plain": "A web browser (Chrome or Chromium) ready for an agent to drive.",
+      "rows": []
+    },
+    {
+      "id": "desktop",
+      "feature": "built-in-agents",
+      "title": "Desktop for computer use",
+      "plain": "A graphical desktop an agent can see and click, for computer-use agents.",
+      "rows": []
+    },
+    {
+      "id": "hosts-other-agents",
+      "feature": "built-in-agents",
+      "title": "Runs other platforms' agents",
+      "plain": "Documented as the machine for Cursor cloud agents, Devin, Claude Managed Agents or similar.",
+      "rows": []
+    },
+    {
+      "id": "team-workspace",
+      "feature": "teams-accounts",
+      "title": "Team workspace",
+      "plain": "Several people share machines, billing and keys.",
+      "rows": []
+    },
+    {
+      "id": "roles",
+      "feature": "teams-accounts",
+      "title": "Roles and permissions",
+      "plain": "Give people different powers, such as read-only or admin.",
+      "rows": []
+    },
+    {
+      "id": "sso",
+      "feature": "teams-accounts",
+      "title": "Single sign-on",
+      "plain": "Log in through your company's identity provider (SAML or OIDC).",
+      "rows": []
+    },
+    {
+      "id": "spend-cap",
+      "feature": "teams-accounts",
+      "title": "Hard spending cap",
+      "plain": "Set a limit the bill cannot go over; machines stop instead.",
+      "rows": []
+    },
+    {
+      "id": "usage-alerts",
+      "feature": "teams-accounts",
+      "title": "Usage alerts",
+      "plain": "Get told when spending passes an amount you set.",
+      "rows": []
+    },
+    {
+      "id": "audit-log",
+      "feature": "teams-accounts",
+      "title": "Audit log",
+      "plain": "A record of who did what in the account.",
+      "rows": []
+    },
+    {
+      "id": "per-second",
+      "feature": "billing-models",
+      "title": "Billed per second",
+      "plain": "Usage is counted to the second rather than by the hour or month.",
+      "rows": []
+    },
+    {
+      "id": "active-cpu",
+      "feature": "billing-models",
+      "title": "CPU billed only while working",
+      "plain": "An idle processor costs nothing or very little.",
+      "rows": []
+    },
+    {
+      "id": "cheap-pause",
+      "feature": "billing-models",
+      "title": "Paused costs only storage",
+      "plain": "A paused or stopped machine bills for its kept files only, not CPU or memory.",
+      "rows": []
+    },
+    {
+      "id": "no-monthly-fee",
+      "feature": "billing-models",
+      "title": "No monthly fee",
+      "plain": "Pay only for what you use, with no plan fee.",
+      "rows": []
+    },
+    {
+      "id": "flat-price",
+      "feature": "billing-models",
+      "title": "Flat monthly price",
+      "plain": "A fixed price per month for a machine, so the bill is predictable.",
+      "rows": []
+    },
+    {
+      "id": "free-tier",
+      "feature": "trials-free-tiers",
+      "title": "Ongoing free tier",
+      "plain": "Something keeps working for free every month, not only at the start.",
+      "rows": []
+    },
+    {
+      "id": "free-credit",
+      "feature": "trials-free-tiers",
+      "title": "Free starting credit",
+      "plain": "Credit to spend when you sign up.",
+      "rows": []
+    },
+    {
+      "id": "no-card",
+      "feature": "trials-free-tiers",
+      "title": "Try without a card",
+      "plain": "You can start without entering a payment card.",
+      "rows": []
+    },
+    {
+      "id": "status-page",
+      "feature": "company",
+      "title": "Public status page",
+      "plain": "A page showing outages and incidents.",
+      "rows": []
+    },
+    {
+      "id": "sla",
+      "feature": "company",
+      "title": "Uptime promise (SLA)",
+      "plain": "A written promise about availability, usually with credits if broken.",
+      "rows": []
+    },
+    {
+      "id": "soc2",
+      "feature": "company",
+      "title": "SOC 2 report",
+      "plain": "An independent security audit report you can request.",
+      "rows": []
+    },
+    {
+      "id": "dpa",
+      "feature": "company",
+      "title": "Data processing agreement",
+      "plain": "A GDPR data processing agreement is offered.",
+      "rows": []
+    },
+    {
+      "id": "open-source",
+      "feature": "company",
+      "title": "Open source or self-hostable",
+      "plain": "The sandbox software can be run on your own servers.",
+      "rows": []
+    }
+  ]
+}

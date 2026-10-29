@@ -18,6 +18,12 @@
     "decimalGB": true
   },
   "between": "kept",
+  "egress": {
+    "perGiB": 0.0215,
+    "note": "$0.02 per decimal GB after that.",
+    "url": "https://withruntime.com/docs/pricing",
+    "included": "100 GiB a month per account"
+  },
   "plans": [
     {
       "name": "Prepaid credit",

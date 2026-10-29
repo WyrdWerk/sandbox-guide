@@ -1,0 +1,139 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import SectionNav from "../../components/SectionNav.astro";
+import CapabilityMatrix from "../../components/CapabilityMatrix.astro";
+import { capabilities, capabilitiesOf, features, groups, providers } from "../../lib/data";
+
+const researched = providers.filter((p) => p.status === "researched");
+const byGroup = groups
+  .map((g) => ({
+    group: g,
+    feats: features.filter((f) => f.group === g.id).map((f) => ({ feature: f, caps: capabilitiesOf(f.id) })),
+  }))
+  .filter((g) => g.feats.some((f) => f.caps.length));
+const payload = {
+  names: Object.fromEntries(researched.map((p) => [p.id, p.name])),
+  caps: capabilities.map((c) => ({ id: c.id, title: c.title, rows: c.rows.map((r) => ({ p: r.provider, v: r.verdict, s: r.shortfall ?? "" })) })),
+};
+const pending = capabilities.every((c) => c.rows.length === 0);
+const nav = [
+  { href: "#finder", label: "Find a provider" },
+  ...byGroup.map((g) => ({ href: `#group-${g.group.id}`, label: g.group.title })),
+];
+---
+
+<Base title="Capabilities" description={`${capabilities.length} specific things a sandbox can do, each checked for every provider, with the catch spelled out where a provider's version falls short.`}>
+  <PageHeader
+    kicker="Capabilities"
+    title="What each provider can actually do"
+    standfirst={`${capabilities.length} specific capabilities, each checked for all ${researched.length} providers. Tick the ones you need to see who has all of them. Where a provider offers something with a limit, such as resizing only while the machine is stopped, the guide says so instead of calling it a yes.`}
+    meta={[`${capabilities.length} capabilities`, `${researched.length} providers`, "Every mark has a source"]}
+  />
+
+  <SectionNav items={nav} />
+
+  <div class="wrap">
+    {pending && (
+      <p class="section__note">Provider-by-provider verdicts are being researched; until they are merged every mark shows as not published.</p>
+    )}
+    <section class="section section--flush" id="finder" aria-labelledby="finder-h">
+      <div class="section__head">
+        <h2 class="section__title" id="finder-h">Find a provider that does everything you need</h2>
+        <p class="section__note">Runs in your browser. Nothing is sent anywhere.</p>
+      </div>
+      <div class="cap-finder">
+        <form id="cap-form" onsubmit="return false">
+          {byGroup.flatMap((g) => g.feats).filter((f) => f.caps.length).map(({ feature, caps }) => (
+            <fieldset class="cap-finder__group">
+              <legend><a href={`/features/${feature.id}/`}>{feature.navTitle}</a></legend>
+              {caps.map((c) => (
+                <label><input type="checkbox" name="cap" value={c.id} /> <span>{c.title}</span></label>
+              ))}
+            </fieldset>
+          ))}
+        </form>
+        <div aria-live="polite">
+          <p class="chooser__lead" id="cap-lead">Tick one or more capabilities.</p>
+          <ul class="cap-finder__list" id="cap-results"></ul>
+          <p class="section__note" id="cap-next"></p>
+        </div>
+      </div>
+    </section>
+
+    {byGroup.map(({ group, feats }) => (
+      <section class="section" aria-labelledby={`group-${group.id}`}>
+        <div class="section__head">
+          <h2 class="section__title" id={`group-${group.id}`}>{group.title}</h2>
+          <p class="section__note">{group.intro}</p>
+        </div>
+        <CapabilityMatrix caps={feats.flatMap((f) => f.caps)} caption={`${group.title}: capabilities by provider`} />
+      </section>
+    ))}
+  </div>
+
+  <script is:inline type="application/json" id="cap-data" set:html={JSON.stringify(payload)}></script>
+  <script>
+    type Row = { p: string; v: "yes" | "partly" | "no" | "not-published"; s: string };
+    const data = JSON.parse(document.getElementById("cap-data")!.textContent!) as {
+      names: Record<string, string>;
+      caps: { id: string; title: string; rows: Row[] }[];
+    };
+    const form = document.getElementById("cap-form") as HTMLFormElement;
+    const lead = document.getElementById("cap-lead")!;
+    const list = document.getElementById("cap-results")!;
+    const next = document.getElementById("cap-next")!;
+
+    function render() {
+      const picked = [...form.querySelectorAll<HTMLInputElement>("input:checked")].map((i) => i.value);
+      const url = new URL(location.href);
+      if (picked.length) url.searchParams.set("need", picked.join(","));
+      else url.searchParams.delete("need");
+      history.replaceState(null, "", url);
+      list.replaceChildren();
+      next.replaceChildren();
+      if (!picked.length) { lead.textContent = "Tick one or more capabilities."; return; }
+      const caps = data.caps.filter((c) => picked.includes(c.id));
+      const results = Object.keys(data.names).map((p) => {
+        const rows = caps.map((c) => ({ cap: c, row: c.rows.find((r) => r.p === p) }));
+        return {
+          p,
+          full: rows.every((r) => r.row?.v === "yes"),
+          ok: rows.every((r) => r.row?.v === "yes" || r.row?.v === "partly"),
+          catches: rows.filter((r) => r.row?.v === "partly").map((r) => `${r.cap.title}: ${r.row!.s}`),
+          missing: rows.filter((r) => !r.row || r.row.v === "no" || r.row.v === "not-published").map((r) => r.cap.title),
+        };
+      });
+      const fit = results.filter((r) => r.ok).sort((a, b) => Number(b.full) - Number(a.full) || a.catches.length - b.catches.length);
+      lead.textContent = fit.length
+        ? `${fit.filter((r) => r.full).length} of ${results.length} providers do all ${picked.length} fully; ${fit.filter((r) => !r.full).length} more do with a catch.`
+        : `No provider documents all ${picked.length}. Try fewer.`;
+      for (const r of fit) {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `/providers/${r.p}/`;
+        a.textContent = data.names[r.p];
+        li.append(a, document.createTextNode(r.full ? " — does all of them" : " — with a catch"));
+        for (const c of r.catches) {
+          const s = document.createElement("span");
+          s.className = "catch";
+          s.textContent = c;
+          li.append(s);
+        }
+        list.append(li);
+      }
+      const out = results.filter((r) => !r.ok);
+      if (out.length) next.textContent = `Left out: ${out.map((r) => `${data.names[r.p]} (no ${r.missing.join(", ").toLowerCase()})`).join("; ")}.`;
+      if (fit.length > 1) {
+        const a = document.createElement("a");
+        a.href = `/compare/side-by-side/?p=${fit.slice(0, 3).map((r) => r.p).join(",")}`;
+        a.textContent = "Compare the top three head to head";
+        next.append(document.createTextNode(" "), a, document.createTextNode("."));
+      }
+    }
+    const need = new URL(location.href).searchParams.get("need")?.split(",") ?? [];
+    for (const input of form.querySelectorAll<HTMLInputElement>("input")) input.checked = need.includes(input.value);
+    form.addEventListener("change", render);
+    render();
+  </script>
+</Base>

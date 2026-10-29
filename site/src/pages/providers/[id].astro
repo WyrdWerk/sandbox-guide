@@ -5,7 +5,8 @@ import CostCard from "../../components/CostCard.astro";
 import CompanyFacts from "../../components/CompanyFacts.astro";
 import Quote from "../../components/Quote.astro";
 import SectionNav from "../../components/SectionNav.astro";
-import { providers, pricing, useCases, engineCase } from "../../lib/data";
+import Badge from "../../components/Badge.astro";
+import { providers, pricing, useCases, engineCase, features, capabilitiesOf, capabilityLabel } from "../../lib/data";
 import { price, presets, formatMoney } from "../../lib/cost";
 
 export function getStaticPaths() {
@@ -19,6 +20,10 @@ const goodFor = useCases.flatMap((u) =>
   u.picks.filter((p) => p.provider === provider.id).map((p) => ({ useCase: u, pick: p })),
 );
 const personal = card ? price(card, presets.personal.workload) : undefined;
+// Every capability, grouped by feature, with this provider's verdict and catch.
+const checklist = features
+  .map((f) => ({ f, items: capabilitiesOf(f.id).map((c) => ({ c, row: c.rows.find((r) => r.provider === provider.id) })) }))
+  .filter((g) => g.items.length);
 const nav = [
   { href: "#about", label: "What it is" },
   { href: "#glance", label: "At a glance" },
@@ -26,6 +31,7 @@ const nav = [
   { href: "#billing", label: "Billing" },
   { href: "#strengths", label: "Strengths" },
   { href: "#without-code", label: "Without code" },
+  { href: "#checklist", label: "Checklist" },
   { href: "#company", label: "Company" },
   { href: "#caveats", label: "Caveats" },
   { href: "#sources", label: "Sources" },
@@ -137,6 +143,25 @@ const statusLabel = {
           <tr><th scope="row">Docs and support</th><td>{provider.usability.docs}</td></tr>
         </tbody>
       </table>
+
+      <h2 class="section__title" id="checklist">Capability checklist</h2>
+      <p class="section__note">Every capability the guide checks, with the catch where {provider.name}'s version falls short. <a href="/capabilities/">Compare all providers</a></p>
+      <div class="related">
+        {checklist.map(({ f, items }) => (
+          <div>
+            <h3><a href={`/features/${f.id}/`}>{f.navTitle}</a></h3>
+            <ul class="plain-list">
+              {items.map(({ c, row }) => (
+                <li>
+                  <a href={`/capabilities/${c.id}/#${provider.id}`}>{c.title}</a>{" "}
+                  {row ? <Badge verdict={row.verdict} label={capabilityLabel[row.verdict]} /> : <Badge verdict="pending" />}
+                  {row?.verdict === "partly" && row.shortfall && <span class="muted"> {row.shortfall}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
 
       <h2 class="section__title" id="company">The company</h2>
       <p class="section__note">

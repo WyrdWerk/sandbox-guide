@@ -1,0 +1,65 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+---
+
+<Base title="Search" description="Search every use case, feature, capability, provider and glossary term in the guide.">
+  <PageHeader
+    kicker="Search"
+    title="Find anything in the guide"
+    standfirst="Use cases, features, capabilities, providers and the glossary. Searching happens in your browser; nothing is sent anywhere."
+    meta={["Every page", "Runs in your browser"]}
+  />
+  <div class="wrap">
+    <section class="section section--flush">
+      <form role="search" onsubmit="return false" class="search">
+        <label for="q" class="visually-hidden">Search the guide</label>
+        <input id="q" name="q" type="search" placeholder="Try: resize, GPU, Hermes, egress" autocomplete="off" />
+      </form>
+      <p class="section__note" id="search-count" aria-live="polite"></p>
+      <ul class="search__results" id="search-results"></ul>
+    </section>
+  </div>
+  <script>
+    type Item = { kind: string; title: string; url: string; text: string };
+    const input = document.getElementById("q") as HTMLInputElement;
+    const list = document.getElementById("search-results")!;
+    const count = document.getElementById("search-count")!;
+    const items: Item[] = await (await fetch("/search.json")).json();
+    function render() {
+      const words = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+      const url = new URL(location.href);
+      if (words.length) url.searchParams.set("q", input.value); else url.searchParams.delete("q");
+      history.replaceState(null, "", url);
+      list.replaceChildren();
+      if (!words.length) { count.textContent = `${items.length} entries.`; return; }
+      const hits = items
+        .map((i) => {
+          const t = i.title.toLowerCase(), b = i.text.toLowerCase();
+          if (!words.every((w) => t.includes(w) || b.includes(w))) return null;
+          return { i, score: words.reduce((s, w) => s + (t.includes(w) ? 3 : 0) + (b.includes(w) ? 1 : 0), 0) };
+        })
+        .filter((x): x is { i: Item; score: number } => x !== null)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 40);
+      count.textContent = hits.length ? `${hits.length} result${hits.length === 1 ? "" : "s"}.` : "Nothing found. Try a shorter word.";
+      for (const { i } of hits) {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = i.url;
+        a.textContent = i.title;
+        const k = document.createElement("span");
+        k.className = "search__kind";
+        k.textContent = i.kind;
+        const p = document.createElement("p");
+        p.textContent = i.text.length > 180 ? `${i.text.slice(0, 180)}…` : i.text;
+        li.append(k, a, p);
+        list.append(li);
+      }
+    }
+    input.value = new URL(location.href).searchParams.get("q") ?? "";
+    input.addEventListener("input", render);
+    render();
+    input.focus();
+  </script>
+</Base>

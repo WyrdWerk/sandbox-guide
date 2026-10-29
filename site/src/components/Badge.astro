@@ -3,9 +3,11 @@ import type { Verdict } from "../data/schema";
 
 interface Props {
   verdict: Verdict;
+  /** Overrides the default word, such as "With a catch" for partly. */
+  label?: string;
 }
 
-const { verdict } = Astro.props;
+const { verdict, label } = Astro.props;
 const labels: Record<Verdict, string> = {
   yes: "Yes",
   partly: "Partly",
@@ -23,5 +25,5 @@ const classes: Record<Verdict, string> = {
 ---
 
 <span class={classes[verdict]}>
-  <span class="badge__mark" aria-hidden="true"></span>{labels[verdict]}
+  <span class="badge__mark" aria-hidden="true"></span>{label ?? labels[verdict]}
 </span>

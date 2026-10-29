@@ -1,19 +1,49 @@
 ---
-// Renders a sentence that may contain [text](url) links and **bold**, as markup.
-// External links open the provider's own documentation and are marked with ↗.
+// Renders a sentence that may contain [text](url) links, **bold**, and wiki links:
+//   [[vcpu]] or [[vcpu|text]]          a glossary term, with its definition on hover or focus
+//   [[cap:live-resize]]                a capability page
+//   [[feature:storage]]                a feature deep dive
+//   [[provider:boat]]                  a provider page
+//   [[use:hermes-agent]]               a use-case guide
+// An unknown wiki link fails the build. External links are marked with ↗.
+import Term from "./Term.astro";
+import { capabilityById, features, glossaryById, providerById, useCases } from "../lib/data";
+
 interface Props {
   text: string;
 }
 
 const { text } = Astro.props;
-type Part = { kind: "text" | "bold"; value: string } | { kind: "link"; value: string; href: string };
+type Part =
+  | { kind: "text" | "bold"; value: string }
+  | { kind: "link"; value: string; href: string }
+  | { kind: "term"; id: string; value?: string };
+
+function wiki(target: string, label?: string): Part {
+  const [ns, id] = target.includes(":") ? target.split(":", 2) : ["term", target];
+  const found: Record<string, () => { href: string; title: string } | undefined> = {
+    cap: () => { const c = capabilityById.get(id); return c && { href: `/capabilities/${id}/`, title: c.title }; },
+    feature: () => { const f = features.find((x) => x.id === id); return f && { href: `/features/${id}/`, title: f.navTitle ?? f.title }; },
+    provider: () => { const p = providerById.get(id); return p && { href: `/providers/${id}/`, title: p.name }; },
+    use: () => { const u = useCases.find((x) => x.id === id); return u && { href: `/use-cases/${id}/`, title: u.title }; },
+  };
+  if (ns === "term") {
+    if (!glossaryById.has(id)) throw new Error(`Unknown glossary term in [[${target}]]`);
+    return { kind: "term", id, value: label };
+  }
+  const hit = found[ns]?.();
+  if (!hit) throw new Error(`Unknown wiki link [[${target}]]`);
+  return { kind: "link", value: label ?? hit.title, href: hit.href };
+}
+
 const parts: Part[] = [];
-const pattern = /\[([^\]]+)\]\(([^)\s]+)\)|\*\*([^*]+)\*\*/g;
+const pattern = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]|\[([^\]]+)\]\(([^)\s]+)\)|\*\*([^*]+)\*\*/g;
 let last = 0;
 for (const match of text.matchAll(pattern)) {
   if (match.index > last) parts.push({ kind: "text", value: text.slice(last, match.index) });
-  if (match[1]) parts.push({ kind: "link", value: match[1], href: match[2] });
-  else parts.push({ kind: "bold", value: match[3] });
+  if (match[1]) parts.push(wiki(match[1].trim(), match[2]?.trim()));
+  else if (match[3]) parts.push({ kind: "link", value: match[3], href: match[4] });
+  else parts.push({ kind: "bold", value: match[5] });
   last = match.index + match[0].length;
 }
 if (last < text.length) parts.push({ kind: "text", value: text.slice(last) });
@@ -21,7 +51,9 @@ const external = (href: string) => /^https?:\/\//.test(href);
 ---
 
 {parts.map((part) =>
-  part.kind === "link" ? (
+  part.kind === "term" ? (
+    part.value ? <Term id={part.id}>{part.value}</Term> : <Term id={part.id} />
+  ) : part.kind === "link" ? (
     external(part.href) ? (
       <a href={part.href} rel="noreferrer noopener">{part.value}<span class="ext" aria-hidden="true">↗</span></a>
     ) : (

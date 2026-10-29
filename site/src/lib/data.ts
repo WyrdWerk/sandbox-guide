@@ -1,4 +1,5 @@
 import type {
+  Capability,
   Change,
   Confidence,
   CostCase,
@@ -13,6 +14,7 @@ import type {
 import { plainText } from "./plain";
 import { presets, price, formatMoney, type RateCard } from "./cost";
 import glossaryData from "../data/glossary.json";
+import capabilityData from "../data/capabilities.json";
 
 /**
  * Provider documentation uses Markdown emphasis and code fences. The data files
@@ -117,6 +119,19 @@ export const pricing: RateCard[] = Object.values(pricingModules).sort((a, b) =>
  */
 export const useCases: UseCase[] = Object.values(useCaseModule)[0]?.usecases ?? [];
 
+/** Specific capabilities, each checked for every provider. Strings keep their [links](url). */
+export const capabilities: Capability[] = (capabilityData as { capabilities: Capability[] }).capabilities;
+export const capabilityById = new Map(capabilities.map((c) => [c.id, c]));
+export const capabilitiesOf = (featureId: string) => capabilities.filter((c) => c.feature === featureId);
+/** Verdicts in the order a reader cares about: does it fully, with a catch, not at all, unknown. */
+export const capabilityVerdicts = ["yes", "partly", "no", "not-published"] as const;
+export const capabilityLabel = {
+  yes: "Yes",
+  partly: "With a catch",
+  no: "No",
+  "not-published": "Not published",
+} as const;
+
 /** Plain-language definitions, shown on hover or focus wherever a <Term> appears. */
 export const glossary: GlossaryEntry[] = glossaryData.terms;
 export const glossaryById = new Map(glossary.map((g) => [g.id, g]));
@@ -191,6 +206,20 @@ export function validateContent(): void {
     }
     for (const item of [...u.routes, ...u.picks]) {
       if (!providerById.has(item.provider)) fail(`use case ${u.id} refers to unknown provider "${item.provider}"`);
+    }
+  }
+
+  for (const c of capabilities) {
+    if (!features.some((f) => f.id === c.feature)) fail(`capability ${c.id} has unknown feature "${c.feature}"`);
+    if (c.rows.length === 0) continue; // research not merged yet
+    for (const row of c.rows) {
+      if (!providerById.has(row.provider)) fail(`capability ${c.id} refers to unknown provider "${row.provider}"`);
+      if (!capabilityVerdicts.includes(row.verdict)) fail(`capability ${c.id}/${row.provider} has verdict "${row.verdict}"`);
+      if (row.verdict === "partly" && !row.shortfall) fail(`capability ${c.id}/${row.provider} is "partly" but says no shortfall`);
+      if (!row.source?.url) fail(`capability ${c.id}/${row.provider} has no source`);
+    }
+    for (const p of providers) {
+      if (c.rows.filter((r) => r.provider === p.id).length !== 1) fail(`capability ${c.id} needs exactly one row for ${p.id}`);
     }
   }
 

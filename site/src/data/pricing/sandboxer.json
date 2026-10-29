@@ -33,6 +33,12 @@
     }
   ],
   "between": "kept",
+  "egress": {
+    "perGiB": 0,
+    "note": "The pricing FAQ says bandwidth is not billed.",
+    "url": "https://sandboxer.com/pricing",
+    "included": "Not billed"
+  },
   "plans": [
     {
       "name": "$20 plan",

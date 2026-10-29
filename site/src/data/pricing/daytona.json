@@ -16,6 +16,11 @@
   },
   "maxDisk": 10,
   "between": "kept",
+  "egress": {
+    "perGiB": null,
+    "note": "Not published: the pricing page lists compute, memory and storage only.",
+    "url": "https://www.daytona.io/pricing"
+  },
   "plans": [
     {
       "name": "Pay as you go",

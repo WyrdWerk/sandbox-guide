@@ -10,6 +10,12 @@
     "rate": 0.0212
   },
   "between": "kept",
+  "egress": {
+    "perGiB": null,
+    "note": "Enterprise pays $0.15 per GB. Downloads into the sandbox are free.",
+    "url": "https://vercel.com/docs/sandbox/pricing",
+    "included": "20 GB a month on Hobby; bundled into the Flat Rate CDN on Pro"
+  },
   "plans": [
     {
       "name": "Hobby",

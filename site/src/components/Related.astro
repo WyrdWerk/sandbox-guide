@@ -1,0 +1,58 @@
+---
+// Everything else on the site that touches one feature: its capabilities, the use
+// cases and situations that depend on it, the glossary terms it explains, and its
+// neighbours in the same group. Computed from the data, so new links appear by themselves.
+import type { Capability } from "../data/schema";
+import Term from "./Term.astro";
+import { capabilitiesOf, features, glossary, situations, useCases } from "../lib/data";
+
+interface Props {
+  feature: string;
+  /** Capabilities to list; defaults to all of this feature's. */
+  capabilities?: Capability[];
+  /** Hide the feature itself, for use on the feature's own page. */
+  self?: boolean;
+}
+
+const { feature, capabilities = capabilitiesOf(feature), self = false } = Astro.props;
+const f = features.find((x) => x.id === feature)!;
+const neighbours = features.filter((x) => x.group === f.group && x.id !== feature);
+const uses = useCases.filter((u) => u.features.includes(feature));
+const sits = situations.filter((s) => s.features.includes(feature));
+const terms = glossary.filter((g) => g.see === `/features/${feature}/`);
+---
+
+<div class="related">
+  {capabilities.length > 0 && (
+    <div>
+      <h3>{self ? "Capabilities checked here" : "Other capabilities in this feature"}</h3>
+      <ul class="plain-list">
+        {capabilities.map((c) => <li><a href={`/capabilities/${c.id}/`}>{c.title}</a></li>)}
+      </ul>
+    </div>
+  )}
+  {(uses.length > 0 || sits.length > 0) && (
+    <div>
+      <h3>Where it decides the choice</h3>
+      <ul class="plain-list">
+        {uses.map((u) => <li><a href={`/use-cases/${u.id}/`}>{u.title}</a></li>)}
+        {sits.map((s) => <li><a href={`/compare/situations/#${s.id}`}>{s.title}</a></li>)}
+      </ul>
+    </div>
+  )}
+  <div>
+    <h3>{self ? "Related features" : "The feature"}</h3>
+    <ul class="plain-list">
+      {!self && <li><a href={`/features/${f.id}/`}>{f.title}</a></li>}
+      {neighbours.map((n) => <li><a href={`/features/${n.id}/`}>{n.title}</a></li>)}
+    </ul>
+  </div>
+  {terms.length > 0 && (
+    <div>
+      <h3>Words used here</h3>
+      <ul class="plain-list">
+        {terms.map((t) => <li><Term id={t.id} /></li>)}
+      </ul>
+    </div>
+  )}
+</div>

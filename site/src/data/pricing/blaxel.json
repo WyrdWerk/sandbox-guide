@@ -9,6 +9,12 @@
     "persistentMonthly": 0.12
   },
   "between": "kept",
+  "egress": {
+    "perGiB": 0,
+    "note": "Listed as included on the pricing table.",
+    "url": "https://blaxel.ai/pricing",
+    "included": "Included"
+  },
   "plans": [
     {
       "name": "Pay as you go",

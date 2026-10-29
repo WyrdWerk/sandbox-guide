@@ -7,7 +7,10 @@ import WatchList from "../../components/WatchList.astro";
 import CompareTable from "../../components/CompareTable.astro";
 import Scenario from "../../components/Scenario.astro";
 import QuestionList from "../../components/QuestionList.astro";
-import { features, groups, providers } from "../../lib/data";
+import FeatureCosts from "../../components/FeatureCosts.astro";
+import CapabilityMatrix from "../../components/CapabilityMatrix.astro";
+import Related from "../../components/Related.astro";
+import { capabilitiesOf, features, groups, providers } from "../../lib/data";
 
 export function getStaticPaths() {
   return features.map((feature) => ({ params: { id: feature.id }, props: { feature } }));
@@ -18,13 +21,18 @@ const group = groups.find((item) => item.id === feature.group);
 const position = features.indexOf(feature);
 const previous = features[position - 1];
 const next = features[position + 1];
+const caps = capabilitiesOf(feature.id);
+const costed = ["storage", "outbound-network", "billing-models", "trials-free-tiers"].includes(feature.id);
 const nav = [
   { href: "#idea", label: "The idea" },
   { href: "#split", label: "Where providers split" },
   { href: "#scenario", label: "One worked case" },
   { href: "#watch", label: "What to watch for" },
   { href: "#compare", label: "Compare all" },
+  ...(caps.length ? [{ href: "#capabilities", label: "Capabilities" }] : []),
+  ...(costed ? [{ href: "#costs", label: "What it costs" }] : []),
   { href: "#questions", label: "Questions to ask" },
+  { href: "#related", label: "Related" },
 ];
 ---
 
@@ -85,12 +93,29 @@ const nav = [
       />
     </section>
 
+    {caps.length > 0 && (
+      <section class="section" id="capabilities" aria-labelledby="caps-h">
+        <div class="section__head">
+          <h2 class="section__title" id="caps-h">The specific capabilities</h2>
+          <p class="section__note">Each one checked for every provider, with the catch where a version falls short. <a href="/capabilities/">All capabilities</a></p>
+        </div>
+        <CapabilityMatrix caps={caps} caption={`${feature.navTitle}: capabilities by provider`} />
+      </section>
+    )}
+
+    <FeatureCosts feature={feature.id} />
+
     <section class="section" id="questions" aria-labelledby="questions-h">
       <div class="section__head">
         <h2 class="section__title" id="questions-h">Questions to ask before you sign</h2>
         <p class="section__note">Each one targets something the documentation does not answer</p>
       </div>
       <QuestionList questions={feature.questions} />
+    </section>
+
+    <section class="section" id="related" aria-labelledby="related-h">
+      <div class="section__head"><h2 class="section__title" id="related-h">Related</h2></div>
+      <Related feature={feature.id} self />
     </section>
 
     <nav class="pager" aria-label="Previous and next feature">

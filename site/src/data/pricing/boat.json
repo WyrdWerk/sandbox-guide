@@ -33,6 +33,12 @@
     }
   ],
   "between": "kept",
+  "egress": {
+    "perGiB": 0,
+    "note": "Boat says it does not bill egress; no cap is published.",
+    "url": "https://docs.boat.dev/pricing",
+    "included": "Not billed"
+  },
   "plans": [
     {
       "name": "$20 plan",

@@ -1,0 +1,57 @@
+---
+// Capabilities down the side, providers across the top, one mark per cell.
+// A "with a catch" mark carries its shortfall in the cell's title and screen-reader text.
+import type { Capability } from "../data/schema";
+import { capabilityLabel, providers } from "../lib/data";
+
+interface Props {
+  caps: Capability[];
+  caption: string;
+}
+
+const { caps, caption } = Astro.props;
+const cols = providers.filter((p) => p.status === "researched");
+const cell = (cap: Capability, provider: string) => cap.rows.find((r) => r.provider === provider);
+const mark = { yes: "badge--yes", partly: "badge--partly", no: "badge--no", "not-published": "badge--unknown" } as const;
+---
+
+<div class="cap-matrix table-scroll" tabindex="0" role="region" aria-label={caption}>
+  <table>
+    <caption class="visually-hidden">{caption}</caption>
+    <thead>
+      <tr>
+        <th scope="col" class="cap-matrix__corner">Capability</th>
+        {cols.map((p) => (
+          <th scope="col" class="cap-matrix__provider"><a href={`/providers/${p.id}/`}><span>{p.name}</span></a></th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {caps.map((cap) => (
+        <tr>
+          <th scope="row" class="cap-matrix__cap"><a href={`/capabilities/${cap.id}/`}>{cap.title}</a></th>
+          {cols.map((p) => {
+            const row = cell(cap, p.id);
+            const verdict = row?.verdict ?? "not-published";
+            const detail = row ? [capabilityLabel[verdict], row.figure, row.shortfall].filter(Boolean).join(". ") : "Research pending";
+            return (
+              <td class={`cap-matrix__cell cap-matrix__cell--${verdict}`}>
+                <a href={`/capabilities/${cap.id}/#${p.id}`} title={`${p.name}: ${detail}`}>
+                  <span class={`badge__mark cap-matrix__mark ${mark[verdict]}`} aria-hidden="true"></span>
+                  <span class="visually-hidden">{p.name}: {detail}</span>
+                </a>
+              </td>
+            );
+          })}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+<p class="cap-matrix__key">
+  <span class="badge badge--yes"><span class="badge__mark" aria-hidden="true"></span>Yes</span>
+  <span class="badge badge--partly"><span class="badge__mark" aria-hidden="true"></span>With a catch</span>
+  <span class="badge badge--no"><span class="badge__mark" aria-hidden="true"></span>No</span>
+  <span class="badge badge--unknown"><span class="badge__mark" aria-hidden="true"></span>Not published</span>
+  <span class="cap-matrix__hint">Hover or select a mark to see the catch.</span>
+</p>

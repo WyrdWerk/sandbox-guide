@@ -21,6 +21,7 @@ const issueUrl = `https://github.com/WyrdWerk/sandbox-guide/issues/new?${new URL
 const nav = [
   { href: "/use-cases/", label: "Use cases" },
   { href: "/features/", label: "Features" },
+  { href: "/capabilities/", label: "Capabilities", short: "Can it?" },
   { href: "/compare/", label: "Compare" },
   { href: "/costs/", label: "Costs" },
   { href: "/providers/", label: "Providers" },
@@ -82,6 +83,9 @@ const nav = [
             </a>
           ))}
         </nav>
+        <a class="search-link" href="/search/" aria-label="Search the guide" aria-current={isCurrent("/search/") ? "page" : undefined}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+        </a>
         <button class="theme-toggle" type="button" aria-label="Switch to dark theme" data-theme-toggle>
           <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
             <circle cx="12" cy="12" r="4"></circle>

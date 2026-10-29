@@ -181,6 +181,28 @@ export interface Change {
   sources: Source[];
 }
 
+/** One specific thing a provider can or cannot do, checked for every provider. */
+export interface CapabilityRow {
+  provider: string;
+  verdict: "yes" | "partly" | "no" | "not-published";
+  /** A number that helps, such as the largest size or a price; at most about 40 characters. */
+  figure?: string;
+  /** How the provider's version falls short; required when the verdict is "partly". */
+  shortfall?: string;
+  note?: string;
+  source: Source;
+}
+
+export interface Capability {
+  id: string;
+  /** The feature deep dive this capability belongs to. */
+  feature: string;
+  title: string;
+  /** What it means for the reader, in one plain sentence. */
+  plain: string;
+  rows: CapabilityRow[];
+}
+
 export interface GlossaryEntry {
   id: string;
   term: string;

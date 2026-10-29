@@ -17,6 +17,12 @@
   },
   "maxVcpu": 8,
   "between": "kept",
+  "egress": {
+    "perGiB": 0,
+    "note": "Sprites bandwidth \"isn't metered today\".",
+    "url": "https://fly.io/sprites/",
+    "included": "Not metered"
+  },
   "plans": [
     {
       "name": "Pay as you go",

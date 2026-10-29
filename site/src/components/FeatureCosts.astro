@@ -1,0 +1,82 @@
+---
+// "What it costs" for a feature, read from the same rate cards the calculator uses.
+// Renders nothing for features the rate cards do not price.
+import { pricing, providerName } from "../lib/data";
+import { MONTH_HOURS, formatMoney, presets, price, type RateCard } from "../lib/cost";
+
+interface Props {
+  feature: string;
+}
+
+const { feature } = Astro.props;
+const usd = (n: number) => `$${+n.toPrecision(3)}`;
+
+function keptDisk(c: RateCard): [string, string] {
+  if (c.between === "lost") return ["Lost on stop", c.lostNote ?? "Files do not survive a stop."];
+  const d = c.disk;
+  if (d?.persistentMonthly) return [`${usd(d.persistentMonthly)} per GiB-month`, "Kept as a separate volume."];
+  if (d?.stopped) return [`${usd(d.stopped * MONTH_HOURS)} per GiB-month`, d.stoppedIncludesRam ? "Charged on disk plus memory, because memory is kept too." : "While the machine is stopped."];
+  if (d?.running) return [`${usd(d.running * MONTH_HOURS)} per GiB-month`, "Same rate running or stopped."];
+  return ["Included", "Part of the size or plan; no separate disk price."];
+}
+
+const rows: { id: string; figure: string; detail: string; url?: string }[] = [];
+let title = "";
+let intro = "";
+if (feature === "storage") {
+  title = "What keeping files costs";
+  intro = "The price of keeping a machine's files between sessions, from each provider's rate card.";
+  for (const c of pricing) { const [figure, detail] = keptDisk(c); rows.push({ id: c.provider, figure, detail }); }
+} else if (feature === "outbound-network") {
+  title = "What outbound data costs";
+  intro = "Data the machine sends out. Most agents send little, but a scraper or a file server can send a lot. Not included in the calculator.";
+  for (const c of pricing) {
+    if (!c.egress) continue;
+    const e = c.egress;
+    const figure = e.perGiB === null ? (e.included ? "Allowance, then not published" : "Not published") : e.perGiB === 0 ? "Free" : `${usd(e.perGiB)} per GiB`;
+    rows.push({ id: c.provider, figure, detail: [e.included && `Included: ${e.included}.`, e.note].filter(Boolean).join(" "), url: e.url });
+  }
+} else if (feature === "billing-models") {
+  title = "What one personal agent costs";
+  intro = `${presets.personal.why} Priced by the calculator, before the AI model.`;
+  for (const c of pricing) {
+    const q = price(c, presets.personal.workload);
+    rows.push({ id: c.provider, figure: `${formatMoney(q.total)} a month`, detail: q.feasible ? c.summary : `${c.summary} The catch: ${q.problems.join(" ")}` });
+  }
+  rows.sort((a, b) => parseFloat(a.figure.replace(/[$,]/g, "")) - parseFloat(b.figure.replace(/[$,]/g, "")));
+} else if (feature === "trials-free-tiers") {
+  title = "What you get without paying";
+  intro = "Plans with no monthly fee, and the usage they include, from each rate card.";
+  for (const c of pricing) {
+    const free = c.plans.filter((p) => p.fee === 0);
+    rows.push({
+      id: c.provider,
+      figure: free.length ? free.map((p) => (p.credit ? `${formatMoney(p.credit)} of usage` : "Pay as you go")).join("; ") : "No free plan",
+      detail: free.map((p) => [p.name, p.note].filter(Boolean).join(": ")).join(" ") || `Cheapest plan ${formatMoney(Math.min(...c.plans.map((p) => p.fee)))} a month.`,
+    });
+  }
+}
+---
+
+{rows.length > 0 && (
+  <section class="section" id="costs" aria-labelledby="costs-h">
+    <div class="section__head">
+      <h2 class="section__title" id="costs-h">{title}</h2>
+      <p class="section__note">{intro} <a href="/costs/how-it-works/#cards">Every rate card</a></p>
+    </div>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr><th scope="col">Provider</th><th scope="col">Cost</th><th scope="col">Detail</th></tr></thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <th scope="row"><a href={`/providers/${r.id}/`}>{providerName(r.id)}</a></th>
+              <td>{r.figure}</td>
+              <td><span class="muted">{r.detail}</span>{r.url && <> <a href={r.url} rel="noreferrer noopener">Source<span class="ext" aria-hidden="true">↗</span></a></>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+)}
