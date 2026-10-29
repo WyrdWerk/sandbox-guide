@@ -301,6 +301,314 @@
     "Egress is free, which matters for agents that fetch a lot.",
     "Versioned volumes and hosted Git give an agent's output somewhere to live after the sandbox is gone."
   ],
+  "claims": [
+    {
+      "field": "whatItIs",
+      "claim": "Boots in hundreds of milliseconds and keeps memory and filesystem across suspend.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/introduction",
+        "quote": "Tensorlake provides isolated MicroVM sandboxes that boot in hundreds of milliseconds, with memory and filesystem preserved across suspend/resume.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "whatItIs",
+      "claim": "Runs on Firecracker microVMs.",
+      "source": {
+        "url": "https://www.tensorlake.ai/pricing",
+        "quote": "Every tier runs on the same Firecracker microVMs, the same APIs, and the same 5M-per-project ceiling.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "field": "whatItIs",
+      "claim": "Root disk is sized between 10 and 100 GiB.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/lifecycle",
+        "quote": "Must be between 10240 and 102400 (10–100 GiB).",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "whatItIs",
+      "claim": "A durable, versioned volume can be mounted as a directory.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/filesystems/introduction",
+        "quote": "Cloud Volumes are directories that can be mounted on one or more sandboxes. Volumes can be versioned and can be time-travelled.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "whatItIs",
+      "claim": "The company also sells orchestration with endpoints, durability, fan-out and retries.",
+      "source": {
+        "url": "https://www.tensorlake.ai/",
+        "quote": "The layer that adds application endpoints, durability, fan-out, retries, and application-level observability on top of sandbox execution.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "whatItIs",
+      "claim": "Hosted Git is built to scale to tens of millions of repositories.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/git/introduction",
+        "quote": "We built a disaggregated Git infrastructure to scale to tens of millions of repositories and absorb hundreds of thousands of pushes per second",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "whoFor",
+      "claim": "Built for agent harnesses, tool calls and coding-agent VMs.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/introduction",
+        "quote": "Sandboxes can be used to run agent harnesses, run tool calls or even as VMs for running coding agents, builds and IDEs.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "isolation",
+      "claim": "Exposes /dev/kvm, so a KVM hypervisor can run a VM inside.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/nested-virt",
+        "quote": "Tensorlake Sandboxes have `/dev/kvm` devices, so you can run virtual machines inside them using any KVM-based hypervisor.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "isolation",
+      "claim": "Docker runs from the ubuntu-systemd image.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/docker",
+        "quote": "Run Docker containers inside Tensorlake sandboxes using the tensorlake/ubuntu-systemd base image",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "isolation",
+      "claim": "GPU sandboxes are gVisor rather than a VM.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/introduction",
+        "quote": "GPU sandboxes use gVisor while CPU-only sandboxes run in VMs.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "sizes",
+      "claim": "Pro allows up to 16 vCPU, 64 GB RAM and a 100 GB disk.",
+      "source": {
+        "url": "https://www.tensorlake.ai/pricing",
+        "quote": "Up to 16 vCPU · 64 GB RAM · 100 GB disk · snapshot + resume",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "field": "sizes",
+      "claim": "RAM must be between 1 GB and 8 GB per vCPU.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/platform/billing",
+        "quote": "The paid-plan memory limits are also subject to the sandbox resource ratio: allocate between 1 GB and 8 GB of RAM per vCPU.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "sizes",
+      "claim": "The region is the platform's choice; no region selector is published.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/remote-dev",
+        "quote": "Which region or host the underlying VM lives on is the platform's problem.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "billing.model",
+      "claim": "One compute unit is $0.01, sold in $5, $10 and $20 packs.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/faqs/pricing-limits-faq",
+        "quote": "One compute unit (CU) is worth $0.01. Choose a $5 pack (500 CUs), $10 pack (1,000 CUs), or $20 pack (2,000 CUs), then top up as needed.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "billing.meter",
+      "claim": "Usage is metered by the second and displayed per hour.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/platform/billing",
+        "quote": "Rates are quoted per hour for readability, but runtime usage is measured by the second.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "billing.meter",
+      "claim": "CPU bills only active execution, not reserved vCPU time.",
+      "source": {
+        "url": "https://www.tensorlake.ai/pricing",
+        "quote": "CPU tracks active runtime execution when metering is available, rather than reserved vCPU time.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "field": "billing.meter",
+      "claim": "Egress is not billed.",
+      "source": {
+        "url": "https://www.tensorlake.ai/pricing",
+        "quote": "Network egress is free.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "field": "billing.stopped",
+      "claim": "A suspended sandbox bills snapshot storage per GB-month.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/platform/billing",
+        "quote": "Snapshot storage is billed per GB-month while the sandbox is suspended.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "billing.planFee",
+      "claim": "Pro includes 25,000 CU, described as $250 of usage.",
+      "source": {
+        "url": "https://www.tensorlake.ai/pricing",
+        "quote": "Includes 25,000 CU ($250 of usage) per billing cycle.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "field": "billing.minimum",
+      "claim": "Free needs no card; the first prepaid pack is $5.",
+      "source": {
+        "url": "https://www.tensorlake.ai/pricing",
+        "quote": "You can start on our Free tier and run 1 sandbox at a time — no credit card required.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "field": "cost",
+      "claim": "The A/B/C totals are arithmetic over the rates above, charging CPU on the busy share.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/faqs/pricing-limits-faq",
+        "quote": "Runtime usage is measured by the second, even though rates are displayed per hour:",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "fits.well",
+      "claim": "Suspend keeps the process tree, not just the files.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/lifecycle",
+        "quote": "Filesystem, memory, and running processes are preserved so you can resume later under the same name.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "fits.well",
+      "claim": "A pool hands out pre-booted sandboxes.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/pools",
+        "quote": "Creating a sandbox from a pool claims a warm container instead of cold-booting one, so the sandbox is ready almost instantly.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "fits.well",
+      "claim": "Standard SSH clients, including VS Code Remote-SSH, connect to a sandbox.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/pty-sessions",
+        "quote": "connect with `ssh`, `scp`, `sftp`, `rsync`, VS Code Remote-SSH, JetBrains Gateway, and any other tool that speaks SSH.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "fits.well",
+      "claim": "A mounted volume is durable and shareable, unlike the root disk.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/mount-filesystems",
+        "quote": "a mounted filesystem is durable, survives the sandbox, and can be shared by many sandboxes at once",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "fits.badly",
+      "claim": "The first machine is a CLI or SDK install, not a console button.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/quickstart",
+        "quote": "This installs the `tl` CLI, which you can use to manage sandboxes and other resources from the command line.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "fits.badly",
+      "claim": "Credentials reach the agent as environment variables it can read.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/environment-variables",
+        "quote": "Use command-scoped env when values should not persist across all sandbox processes.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "fits.badly",
+      "claim": "Only Pro and Enterprise have no session cap.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/lifecycle",
+        "quote": "The maximum allowed `timeout_secs` depends on your plan: **2 hours** on Free, **24 hours** with Usage Credits, and unlimited on Pro and Enterprise.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "fits.badly",
+      "claim": "No custom-domain setting is published; sandbox URLs use the vendor hostname.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/networking",
+        "quote": "`https://<port>-<sandbox-id-or-name>.sandbox.tensorlake.ai` routes to a user service listening on `<port>` inside the sandbox",
+        "confidence": "not-published"
+      }
+    },
+    {
+      "field": "usability.dashboard",
+      "claim": "The console shows a sandbox's process logs.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/process-logs",
+        "quote": "View, search, and filter stdout and stderr from sandbox processes in the Tensorlake Console",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "usability.signup",
+      "claim": "API keys are per project and start with tl_apiKey_.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/platform/authentication",
+        "quote": "Every tensorlake API key starts with `tl_apiKey_*`.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "usability.docs",
+      "claim": "The whole documentation set is downloadable as one file.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/llms.txt",
+        "quote": "Full text of every documentation page",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "usability.tripsUp",
+      "claim": "/workspace is not writable by the default tl-user.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/tensorlake-images",
+        "quote": "Tools hardcoded to write to root-owned paths such as `/workspace` will encounter `Permission denied` errors.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "field": "usability.tripsUp",
+      "claim": "pip needs --break-system-packages on the stock images.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/tensorlake-images",
+        "quote": "Installing packages with `pip` requires `--break-system-packages` flag, unless a virtual environment is used.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  ],
   "sources": [
     {
       "label": "Docs",
