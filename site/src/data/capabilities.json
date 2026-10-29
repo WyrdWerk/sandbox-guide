@@ -1996,126 +1996,3108 @@
       "feature": "lifecycle",
       "title": "Pause keeps memory",
       "plain": "Pausing keeps memory and running programs, so the machine resumes exactly where it was.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "partly",
+          "shortfall": "A sleep usually comes back where it left off, but a wake that has to rebuild starts fresh and loses what was running.",
+          "note": "Auto-sleep is off by default; a stop never keeps memory.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instances/sleep",
+            "quote": "A sleeping instance keeps its memory and wakes on the next request; a stopped one loses its memory and stays down until `start`.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "Standby: 25 ms",
+          "shortfall": "Network connections do not survive; only files and processes do.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "Memory state is maintained even after scaling down, including the running processes and entire filesystem.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "note": "There is no pause; a stop removes the machine and keeps a copy of the disk.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/stop",
+            "quote": "There is no pause. A stop removes the virtual machine and keeps a copy of the disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "85 ms wake",
+          "shortfall": "A hibernated machine wakes in about 85 ms; standby is faster still.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/suspend-resume",
+            "quote": "Next to `running`, boxd has two sleep states: `standby` keeps the memory in RAM, and `hibernated` writes it to disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "note": "There is no paused state; when an instance stops, its processes and its disk end with it.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "An instance runs only until something stops it, and its processes and the files on its disk end with it. The next `start()` creates a new instance.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "shortfall": "Only the full virtual machine can be paused with memory; a container sandbox loses what was running.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sandboxes.md",
+            "quote": "Pause is not supported for container sandboxes. The filesystem can be preserved on stop, but memory state is not.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "A filesystem-only pause is opt-in; the default keeps memory.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox/persistence",
+            "quote": "By default a pause saves **both** the filesystem and the memory.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "figure": "RAM; 1 s resume",
+          "shortfall": "A resume can come back without the running programs, and the machine reports that it did.",
+          "note": "A paused machine cannot be stopped; start it first.",
+          "source": {
+            "url": "https://instabox.sh/docs/machines.md",
+            "quote": "**Resume** brings back a paused machine's memory and processes. If that is not possible it starts fresh: files are kept, processes are not.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "shortfall": "A fast pause keeps only the files, so it is the option to avoid if work must survive.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/quickstart",
+            "quote": "`pause()` saves the sandbox’s memory, running processes and every file on its disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "note": "There is no pause; a sandbox is terminated, and only a snapshot can bring its state back.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-snapshots",
+            "quote": "Sandbox memory snapshots are copies of a Sandbox’s entire state, both in memory and on the filesystem.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "Only storage is billed while paused.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/pause-resume",
+            "quote": "Pausing an instance suspends its execution while preserving the memory state.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "A stop keeps the files and drops memory; only delete removes the disk.",
+          "source": {
+            "url": "https://withruntime.com/docs/sandbox-environment",
+            "quote": "A pause keeps its memory and processes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "partly",
+          "figure": "2 min window",
+          "shortfall": "Memory comes back only if a machine of the same processor type is free within two minutes; otherwise it boots fresh with the files.",
+          "source": {
+            "url": "https://sandboxer.com/docs/snapshots",
+            "quote": "Memory is restored on a machine with the same CPU type as the one the sandbox stopped on.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "100–500 ms",
+          "shortfall": "After a longer idle spell it is stopped and memory is dropped, and you are not told which happened.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+            "quote": "The VM is suspended with everything in memory frozen in place.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "note": "Stopping saves the files but not what was running; the next start is a new session.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes",
+            "quote": "Persistent sandboxes automatically save their filesystem state when stopped and restore it when resumed.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "shortfall": "Only named sandboxes can be suspended; an unnamed one runs until it ends.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/lifecycle.md",
+            "quote": "**Named**: a name given at creation. Supports suspend and resume, so you can pause between tasks and pick up exactly where you left off.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "warm-pool",
       "feature": "lifecycle",
       "title": "Pre-started pools",
       "plain": "Keep machines ready in advance so new work starts without waiting for a boot.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "note": "No pool of pre-started machines; a new instance boots, or is built from a template image.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-lifecycle",
+            "quote": "Six calls control whether the instance’s computer is running, which image it runs, and how big it is.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "note": "No pool to size or fill; machines you already made wait in standby, and a new one boots or resumes from its own snapshot.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "Sandboxes resume from standby in under 25 milliseconds and automatically scale to zero after a few seconds of inactivity.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "note": "No pool of pre-started machines.",
+          "source": {
+            "url": "https://docs.boat.dev/readiness",
+            "quote": "A resume, a fork or a deploy is ready in **a few seconds, whatever the size of the disk**.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "note": "No pool of pre-started machines; every machine is created or woken on demand.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/suspend-resume",
+            "quote": "A machine moves between these states on its own, based on network traffic.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "note": "No pool of pre-started machines; a start creates a new instance.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "When work arrives, the Durable Object calls [`this.ctx.container.start()`](/containers/api/durable-object-container/#start), which starts a container instance",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "shortfall": "Pools exist, but they must be switched on for your organisation by asking support.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/warm-pools",
+            "quote": "Warm pools must be enabled for your organization. Contact [support@daytona.io](mailto:support@daytona.io).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "note": "No pool of pre-started sandboxes.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox",
+            "quote": "The sandbox lifecycle: create, connect to, pause, resume, and kill an isolated Linux VM for your agent, and control what happens when its timeout expires.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "note": "No pool of pre-started machines; the paid plans sell a dedicated pool only as an enterprise option.",
+          "source": {
+            "url": "https://instabox.sh/docs/pricing.md",
+            "quote": "Dedicated pool or BYOC",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "not-published",
+          "note": "Nothing documents a pool you can create; the docs only mention pool capacity in passing.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "Availability depends on the region and pool capacity.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "shortfall": "You have to build and run the pool yourself; there is no setting that keeps machines waiting.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "A common use case for this is keeping a pool of Sandboxes available for executing tasks as they come in.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "note": "No pool of pre-started machines; branch makes copies on demand.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/basic-lifecycle",
+            "quote": "Each instance runs from a saved snapshot.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "partly",
+          "shortfall": "There is no pool to size or refill; you keep spare paused machines yourself and wake one for each task.",
+          "source": {
+            "url": "https://withruntime.com/docs/javascript",
+            "quote": "For many short tasks, such as fetching one page each, keep spare browsers paused.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "partly",
+          "shortfall": "The provider keeps machines ready, but you cannot say how many or which setup; a size the region does not keep boots instead.",
+          "source": {
+            "url": "https://sandboxer.com/docs/machines",
+            "quote": "Each region keeps sandboxes already booted and paused, and a new sandbox from the standard image takes one instead of booting.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "No pool of pre-started machines; each Sprite starts and pauses on its own.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+            "quote": "A Sprite is not a server that runs until you turn it off.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "note": "No pool of pre-started machines.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes",
+            "quote": "Each time you resume a sandbox, a new session starts from the last saved state.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "A pool keeps a set number of booted containers and refills itself after each claim.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/pools.md",
+            "quote": "A Sandbox Pool is a sandbox template (image, resources, entrypoint, timeout, network policy) plus a set of pre-booted warm containers.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "fast-start",
       "feature": "lifecycle",
       "title": "Starts in under a second",
       "plain": "The provider documents new or resumed machines being ready in under a second.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "not-published",
+          "note": "No start or resume time is published anywhere in the docs.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instances/sleep",
+            "quote": "Wake it with [`start`](/docs/agents-api/instances/start), a command sent through [exec](/docs/agents-api/exec), or any request to its URLs.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "Under 25 ms",
+          "note": "That is the resume from standby; a brand-new sandbox still has to start.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "Sandboxes resume from standby in under 25 milliseconds and automatically scale to zero after a few seconds of inactivity.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "figure": "A few seconds",
+          "shortfall": "A resume or a new machine takes a few seconds, not under one.",
+          "source": {
+            "url": "https://docs.boat.dev/readiness",
+            "quote": "A resume, a fork or a deploy is ready in **a few seconds, whatever the size of the disk**.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Sub-millisecond",
+          "note": "That is the wake from standby; waking from hibernation takes about 85 ms.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/suspend-resume",
+            "quote": "The first inbound packet (an SSH connection, an HTTP request, even a single TCP SYN) wakes it in **sub-millisecond** time.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "not-published",
+          "note": "No start or resume time is published.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "An instance runs only until something stops it, and its processes and the files on its disk end with it. The next `start()` creates a new instance.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "Under 90 ms",
+          "note": "The claim is for creating a sandbox from code to execution.",
+          "source": {
+            "url": "https://www.daytona.io/",
+            "quote": "Sub 90ms sandbox creation from code to execution",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "not-published",
+          "note": "No start or resume time is published in the docs.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox",
+            "quote": "Sandboxes stay running as long as you need them.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "figure": "About a second",
+          "shortfall": "A resume usually takes about a second, which is not under one.",
+          "source": {
+            "url": "https://instabox.sh/docs/integrate.md",
+            "quote": "// carries on where it left off, usually in about a second",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "228 ms median",
+          "note": "Measured from create to first Python output on 2026-10-12.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "the median time from creating a sandbox to its first Python output was 228 ms",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "Sub-second",
+          "note": "The claim is on the provider’s front page, not in the docs.",
+          "source": {
+            "url": "https://modal.com/",
+            "quote": "Sub-second starts on large custom images and at high concurrency.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No start or resume time is published.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/basic-lifecycle",
+            "quote": "Each instance runs from a saved snapshot.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "About 0.1 s",
+          "note": "The figure is for waking a paused machine; a brand-new sandbox still has to boot.",
+          "source": {
+            "url": "https://withruntime.com/docs/javascript",
+            "quote": "await spare.wake(); // about 0.1 s",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "0.18 s median",
+          "note": "Measured on 2026-10-28 from US-East for the default size.",
+          "source": {
+            "url": "https://sandboxer.com/docs/machines",
+            "quote": "One create at a time (10 each, median / slowest) | 0.18 s / 0.32 s",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "100–500 ms",
+          "note": "A cold wake takes 1–2 s instead.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+            "quote": "The next request resumes it in 100–500ms, and processes pick up mid-thought, exactly where they were.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "Sub-second",
+          "note": "The claim is a line in the concepts table.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "Startup time| Sub-second| Milliseconds (Firecracker optimized for fast boot)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "Hundreds of ms",
+          "note": "A pool claim is faster still than a cold start.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/introduction.md",
+            "quote": "Tensorlake provides isolated MicroVM sandboxes that boot in hundreds of milliseconds",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "snapshot-files",
       "feature": "snapshots-forks",
       "title": "Snapshots of files",
       "plain": "Save the machine's files at a moment and restore them later.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "partly",
+          "figure": "No snapshots; 7 backups",
+          "shortfall": "There is no snapshot you can save under a name; the only restore points are seven nightly copies of the home folder.",
+          "note": "Backups restore in place only, and cover /home/node.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-backups",
+            "quote": "Every instance’s data (`/home/node`) is backed up nightly into seven rotating slots, so the last seven nights are available as restore points.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "shortfall": "Snapshots work but are in private preview, so the provider does not recommend them for production.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Fork.md",
+            "quote": "This feature is currently in private preview and is not recommended for production use.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "Every minute",
+          "note": "Disk-only, taken automatically every minute and at each stop.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/resume-and-fork",
+            "quote": "Every stop makes the snapshot that a resume needs: `boat stop`, auto-stop, and a stop for an empty wallet.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "A named snapshot keeps the disk and the memory.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/snapshots",
+            "quote": "A snapshot is a saved copy of a specific machine. It captures the disk and the memory",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "20 GB; 30 days",
+          "shortfall": "Snapshots are in public beta, hold at most 20 GB, and are deleted 30 days after they were made or last used.",
+          "note": "Mounted buckets are not included in a snapshot.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "[`snapshotContainer()`](/containers/api/durable-object-container/#snapshotcontainer) saves the writable root filesystem of a running instance.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "A cold snapshot captures the filesystem of a stopped sandbox.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/snapshots.md",
+            "quote": "container sandboxes capture filesystem state only (**cold snapshots**), VM sandboxes capture filesystem and memory state (**hot snapshots**)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "A filesystem snapshot is the lighter option and reboots on resume.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox/persistence",
+            "quote": "To save only the filesystem — a lighter snapshot that reboots on resume — pass `mode: 'filesystem'`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "Snapshots hold installed software and the files under /data.",
+          "source": {
+            "url": "https://instabox.sh/docs/snapshots.md",
+            "quote": "A snapshot holds a machine’s installed software and its files under `/data`: home, workspace and saved sign-ins",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "A snapshot holds every file on the disk and survives the source sandbox.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/quickstart",
+            "quote": "A snapshot saves a running sandbox’s memory, running processes and every file on its disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "30 days default",
+          "note": "A filesystem snapshot becomes an image that any number of sandboxes can start from.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-snapshots",
+            "quote": "Filesystem Snapshots and Directory Snapshots are [Images](/docs/sdk/py/latest/Image) and are automatically garbage collected after their TTL expires (30 days by default).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "Snapshots hold memory and disk together.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
+            "quote": "Snapshots are immutable point-in-time copies of both memory and disk state.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "Disk mode keeps only the root filesystem and boots fresh.",
+          "source": {
+            "url": "https://withruntime.com/docs/api",
+            "quote": "Snapshots accept `mode: \"memory\"` (the default) or `mode: \"disk\"` in `POST /v1/sandboxes/{id}:snapshot`.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "A stop snapshot holds the disk and the memory.",
+          "source": {
+            "url": "https://sandboxer.com/docs/snapshots",
+            "quote": "**Stop snapshot** (disk + memory)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "note": "A checkpoint holds the writable layer on top of the base image.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/checkpoints.md",
+            "quote": "A checkpoint snapshots the writable filesystem overlay",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "30-day default",
+          "note": "Snapshots are made automatically at every stop unless you opt out.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/snapshots",
+            "quote": "Snapshots capture the state of a running sandbox, including the filesystem and installed packages.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "Filesystem is the default snapshot type and restores with a cold boot.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/snapshots.md",
+            "quote": "`filesystem`: captures filesystem state and restores with a cold boot.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "snapshot-memory",
       "feature": "snapshots-forks",
       "title": "Snapshots with memory",
       "plain": "A snapshot also keeps memory and running programs.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "note": "A fork copies files only; nothing that was running is carried over.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instances/fork",
+            "quote": "What is copied is the source’s disk, not its memory: processes running in the source do not carry over, and the fork boots fresh with the same files.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "shortfall": "A snapshot keeps memory and running programs, but the whole feature is in private preview.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Fork.md",
+            "quote": "A snapshot captures the state of a sandbox at a point in time: its filesystem, its running processes, and its memory.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "note": "Snapshots hold the disk only, never memory or running programs.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/resume-and-fork",
+            "quote": "Resume and fork both start a machine from the **newest** snapshot of a sandbox.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Under 200 ms",
+          "note": "A machine made from a snapshot comes back already running what the source ran.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/snapshots",
+            "quote": "A machine created from a snapshot resumes in the state you captured. Nothing boots.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "note": "A snapshot does not save memory or the processes that were running.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "It does not save separately mounted filesystems, memory, or processes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "shortfall": "Memory snapshots are only for full virtual machines; container sandboxes get files only.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/snapshots.md",
+            "quote": "container sandboxes capture filesystem state only (**cold snapshots**), VM sandboxes capture filesystem and memory state (**hot snapshots**)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "A memory snapshot resumes the running processes.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox/fork",
+            "quote": "The fork starts with the original’s files, processes, and memory",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "note": "Snapshots never include memory or running programs.",
+          "source": {
+            "url": "https://instabox.sh/docs/snapshots.md",
+            "quote": "It does not hold memory or running processes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "Each restore starts a new sandbox with the captured memory.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/quickstart",
+            "quote": "A snapshot saves a running sandbox’s memory, running processes and every file on its disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "Experimental; 7 days",
+          "shortfall": "Memory snapshots are still labelled experimental and are deleted after seven days, which cannot be extended.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-snapshots",
+            "quote": "To take a memory snapshot, create a Sandbox with memory snapshots enabled, then call its experimental snapshot method",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "A snapshot captures the running processes as well as the disk.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
+            "quote": "When you take a snapshot, it captures the complete state of a running instance, including all running processes and services.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "Memory mode keeps files, memory and running programs.",
+          "source": {
+            "url": "https://withruntime.com/docs/javascript",
+            "quote": "Snapshots default to `mode: \"memory\"`. That mode keeps files, memory and running processes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "The memory image is written to disk on a stop and read back on resume.",
+          "source": {
+            "url": "https://sandboxer.com/docs/snapshots",
+            "quote": "pauses the VM and writes its **memory and device state** to disk",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "A checkpoint never includes memory or running processes.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/checkpoints.md",
+            "quote": "It does not touch the base image itself, and it does not capture anything that only lives in memory.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "note": "A snapshot never includes memory; the next session starts the programs again.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes",
+            "quote": "When you resume it, a new session boots from that snapshot with a fresh [session timeout](/docs/sandbox/pricing#runtime-limits).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "A memory snapshot restores the files, memory and running processes.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/snapshots.md",
+            "quote": "`memory`: captures filesystem, memory, and running process state and restores with a warm start.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "fork-running",
       "feature": "snapshots-forks",
       "title": "Copy a running machine",
       "plain": "Make copies of a machine while it keeps running.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "shortfall": "The copy has the same files, but nothing that was running keeps running.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instances/fork",
+            "quote": "The source keeps running throughout and is not touched.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "shortfall": "You can copy a running machine, but the feature is in private preview.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Fork.md",
+            "quote": "Calling `fork()` automatically snapshots the source sandbox’s current state and forks from it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "shortfall": "The copy has the same files, but nothing that was running keeps running.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/resume-and-fork",
+            "quote": "Keeps running. boat does not change it",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "100–200 ms",
+          "note": "The source pauses for a fraction of a second while the copy is taken.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/fork",
+            "quote": "The copy includes the disk, **the memory, and every running process**",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "note": "There is no way to copy a running instance.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "Starting with a snapshot creates a new instance with the saved files, and the new instance runs its entrypoint. The processes that were running do not continue.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "The fork is independent, but the parent cannot be deleted while forks exist.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sandboxes.md",
+            "quote": "Forking creates a duplicate of a Linux VM sandbox’s filesystem and memory state in a new sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "Up to 20 at once",
+          "shortfall": "The source pauses while it is copied and its open connections drop.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox/fork",
+            "quote": "During the fork, the original sandbox is paused and resumed.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "figure": "A few seconds",
+          "shortfall": "A copy is made in a few seconds and carries the files but not the running programs.",
+          "source": {
+            "url": "https://instabox.sh/docs/snapshots.md",
+            "quote": "copies a running or stopped machine into one new machine",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "1–100 copies",
+          "shortfall": "A fork is refused when the source has a volume attached.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "`fork` copies a running sandbox, memory and processes included; it returns 409 when a volume is attached.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "note": "A fork starts several sandboxes from a saved filesystem; it is not a copy of a running machine.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-snapshots",
+            "quote": "Since Filesystem Snapshots are [Images](/docs/sdk/py/latest/modal.Image), you can create multiple Sandboxes from the same snapshot.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "A branch snapshots the source and launches the copies.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/branch",
+            "quote": "Branching an instance creates multiple clone instances based on the current state of the original instance.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "shortfall": "The source is frozen while the copy is captured, so it pauses for a moment.",
+          "source": {
+            "url": "https://withruntime.com/docs/javascript",
+            "quote": "A fork is a copy of a sandbox as it is now. It has the same files, memory and running processes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "partly",
+          "shortfall": "A fork copies the files and boots fresh; the running programs are not copied.",
+          "source": {
+            "url": "https://sandboxer.com/docs/snapshots",
+            "quote": "A fork copies the disk only, never memory or running processes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "A checkpoint restores over the same Sprite; starting a new one from it is not documented.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/checkpoints.md",
+            "quote": "It's a save point you create on purpose, a snapshot of the filesystem at one moment that you can return to later.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "shortfall": "A fork starts from a snapshot of the current state, and taking one stops the session it copies.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/snapshots",
+            "quote": "You can also snapshot a running sandbox at any time by calling `snapshot()`, which captures its current filesystem before stopping the session.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/snapshots.md",
+            "quote": "Cloning a sandbox is done with `tl sbx copy` or `sandbox.copy()` in either SDK.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "older-snapshot",
       "feature": "snapshots-forks",
       "title": "Pick an older snapshot",
       "plain": "Restore any earlier snapshot, not only the latest one.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "partly",
+          "figure": "7 nightly backups",
+          "shortfall": "You can pick one of seven nightly copies, but you cannot save a snapshot of your own and return to it later.",
+          "note": "An on-demand backup replaces the previous on-demand slot.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-backups",
+            "quote": "You can also take a backup on demand, into a separate slot that only your next on-demand backup replaces.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "Snapshots are named and kept after the source is deleted.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Fork.md",
+            "quote": "A snapshot outlives the sandbox it was captured from: it stays usable, and forkable, after that sandbox is deleted.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "partly",
+          "shortfall": "You cannot roll a machine back to an older point; an older saved copy can only start a new machine.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/resume-and-fork",
+            "quote": "Resume and fork always use the newest snapshot. **You cannot resume or fork an older snapshot.** There is no point-in-time restore.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "note": "Saving again replaces the version, and older versions are cleaned up.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/snapshots",
+            "quote": "Saving over a name you already used captures a new version that replaces the previous one, and `--from-snapshot` always uses the latest.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "30-day expiry",
+          "shortfall": "You have to store each snapshot’s ID yourself, and every snapshot is deleted 30 days after it was made or last used.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "A snapshot expires 30 days after it is created or last restored.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "Any number of sandboxes can start from the same snapshot.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/snapshots.md",
+            "quote": "any number of new sandboxes can start from the same snapshot",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "Snapshots can be listed, filtered by sandbox, and started again.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox/snapshots",
+            "quote": "You can list all snapshots. The method returns a paginator for iterating through results.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "Any saved snapshot can be restored, and deleting a machine keeps its snapshots.",
+          "source": {
+            "url": "https://instabox.sh/docs/snapshots.md",
+            "quote": "Deleting a machine keeps its snapshots; deleting a snapshot does not affect machines made from it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "Restore any snapshot you kept, into a new sandbox.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/quickstart",
+            "quote": "Each restore starts a new sandbox in the snapshot’s region",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "Snapshots are images with their own IDs and an optional TTL.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-snapshots",
+            "quote": "You can configure a custom TTL when creating a snapshot, or opt out of expiry entirely to retain snapshots indefinitely.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "Any snapshot can be started again; snapshots do not change.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
+            "quote": "Snapshots are immutable point-in-time copies of both memory and disk state.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "Each snapshot has its own id and can be started again later.",
+          "source": {
+            "url": "https://withruntime.com/docs/javascript",
+            "quote": "Each sandbox created from it boots fresh, without the saved processes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "partly",
+          "shortfall": "The automatic copies keep only the latest two; anything older you have to save yourself under a name.",
+          "source": {
+            "url": "https://sandboxer.com/docs/snapshots",
+            "quote": "each sandbox keeps its latest two",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "v0, v1, v2…",
+          "note": "Checkpoints are numbered and can be listed and restored.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/checkpoints.md",
+            "quote": "IDs are sequential (`v0`, `v1`, `v2`, and so on).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "Keep last 1–10",
+          "note": "You choose how many to keep, and how long each lasts.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes",
+            "quote": "`keepLastSnapshots`: Keep only the N (1–10) most recent snapshots",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "A snapshot survives the source sandbox and can be restored much later.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/snapshots.md",
+            "quote": "once a snapshot reaches `completed`, the artifact persists after the source sandbox is terminated",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "templates",
       "feature": "snapshots-forks",
       "title": "Reusable templates",
       "plain": "Turn a set-up machine into a template and start many new machines from it.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "Register an image or upload a Dockerfile; it is pinned by digest.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/templates",
+            "quote": "A template is a named image, plus (optionally) the port its main service listens on.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "Deploy from a Dockerfile image, or fork a snapshot.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "It is also possible to build your own [custom images](https://docs.blaxel.ai/Sandboxes/Templates.md) to create sandboxes with a consistent, customized set of tools, configurations, or entrypoint scripts.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "note": "Save a disk under a name, then start as many machines from it as you like.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/templates",
+            "quote": "Use a saved snapshot as a template: install your tools one time, then start many sandboxes from it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "A snapshot is the template: make as many machines from it as you want.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/snapshots",
+            "quote": "Each machine gets its own name, URL, and SSH port, and comes up exactly where the snapshot was taken. Make as many as you want from the same snapshot.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "You build an image and every instance starts from it.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "a Linux virtual machine that runs your image, with its own processes and its own disk",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "Build a snapshot from an image or Dockerfile, then create sandboxes from it.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/snapshots.md",
+            "quote": "define the base operating system, language runtimes, packages, and project-level setup in an image or Dockerfile, and Daytona builds it into a snapshot you can use to create sandboxes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "Templates are built from a Dockerfile or from another template.",
+          "source": {
+            "url": "https://docs.e2b.dev/template/how-it-works.md",
+            "quote": "We call this sandbox snapshot a *sandbox template*.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "Set a machine up once, save it, and start new ones from it.",
+          "source": {
+            "url": "https://instabox.sh/docs/snapshots.md",
+            "quote": "Save a machine once, start new ones from it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "There is a fixed catalogue of base templates, and your own saved snapshots act as templates.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "A snapshot holds the same, and you can restore it after the source sandbox is gone.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "Images built from a Dockerfile or from code are the template.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-snapshots",
+            "quote": "Since Filesystem Snapshots are [Images](/docs/sdk/py/latest/modal.Image), you can create multiple Sandboxes from the same snapshot.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "A snapshot is the template every instance starts from.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
+            "quote": "They serve as templates for starting instances.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "Images can be built from a package list, a Dockerfile, or a public image.",
+          "source": {
+            "url": "https://withruntime.com/llms.txt",
+            "quote": "**Custom images** from a package list, any public or private image, or a Dockerfile (multi-stage, with versions and tags).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "A named snapshot starts as many new sandboxes as you want.",
+          "source": {
+            "url": "https://sandboxer.com/docs/snapshots",
+            "quote": "**Named snapshots** (templates)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "No documented way to start a new Sprite from a checkpoint.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/checkpoints.md",
+            "quote": "A checkpoint snapshots the writable filesystem overlay",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "A sandbox boots a managed image, your own image, or a saved snapshot.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "This microVM boots an Ubuntu 26.04 image, a custom image from VCR, or a saved snapshot.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "Images and snapshots are the two starting points for a new sandbox.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/snapshots.md",
+            "quote": "This means you can snapshot an ephemeral sandbox before it ends, then restore that state into a new sandbox much later.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "backups",
       "feature": "snapshots-forks",
       "title": "Automatic backups",
       "plain": "The provider takes backups for you on a schedule.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "Nightly; 7 slots",
+          "shortfall": "Covers only /home/node, and a restore puts the files back in place.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-backups",
+            "quote": "Every instance’s data (`/home/node`) is backed up nightly into seven rotating slots, so the last seven nights are available as restore points.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "note": "Standby snapshots are for fast resumes, not for disaster recovery; there is no backup schedule.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Expiration.md",
+            "quote": "Automatic deletion differs from the automatic standby (*scale-to-zero*) which happens to **all sandboxes** when inactive and where the memory and filesystem are snapshotted to be resumed instantly.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "Every minute",
+          "shortfall": "Only the newest automatic copy is kept, so there is no history to go back through.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/templates",
+            "quote": "boat, every minute and at each stop",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "shortfall": "Off by default; you turn a schedule on for each machine.",
+          "source": {
+            "url": "https://docs.boxd.sh/cli/commands",
+            "quote": "A backup uploads a machine’s **disk** to object storage, off the cluster, for disaster recovery. Backups are off by default and set per machine.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "On stop, 30 days",
+          "shortfall": "A snapshot can be saved automatically when a sandbox stops, but there is no schedule and snapshots expire after 30 days.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "To save a sandbox each time it stops for inactivity, refer to [Save a sandbox automatically](/sandbox/files/save-a-sandbox-automatically/).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "no",
+          "note": "Snapshots are taken when you ask; there is no backup schedule.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/snapshots.md",
+            "quote": "Snapshots are persistent, point-in-time captures of sandbox state",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "note": "No automatic backup schedule; snapshots are taken when you ask.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox/snapshots",
+            "quote": "You can list all snapshots. The method returns a paginator for iterating through results.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "note": "No backup schedule; snapshots are taken when you ask.",
+          "source": {
+            "url": "https://instabox.sh/docs/snapshots.md",
+            "quote": "Save a machine once, start new ones from it.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "note": "No backup schedule; snapshots are taken when you ask.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "A snapshot holds the same, and you can restore it after the source sandbox is gone.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "note": "No backup schedule; snapshots and images are made when you ask.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-snapshots",
+            "quote": "Filesystem Snapshots and Directory Snapshots are [Images](/docs/sdk/py/latest/Image) and are automatically garbage collected after their TTL expires (30 days by default).",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "note": "No backup schedule; snapshots are taken when you ask.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
+            "quote": "Snapshots are immutable point-in-time copies of both memory and disk state.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Daily, or your cron",
+          "shortfall": "Backups cover volumes only; a sandbox's own disk has no copy.",
+          "source": {
+            "url": "https://withruntime.com/docs/storage",
+            "quote": "A volume is backed up off its server every day, and whenever you ask.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "Every 10 minutes",
+          "shortfall": "The copies sit on the same machine, so they do not survive losing the host.",
+          "source": {
+            "url": "https://sandboxer.com/docs/snapshots",
+            "quote": "**Continuous snapshots** (disk) | Every 10 minutes while a sandbox runs, and at every stop",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "No backup schedule; persistence covers pauses, and checkpoints are manual.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/checkpoints.md",
+            "quote": "Persistence keeps your filesystem across pauses on its own",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "On every stop",
+          "shortfall": "A copy is saved each time the machine stops, but there is no schedule and only the last few are kept.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/snapshots",
+            "quote": "snapshots are created automatically whenever a session stops, and the next session resumes from the most recent snapshot",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "partly",
+          "shortfall": "Only the storage you mount is saved automatically; a machine's own disk has no copy.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/filesystems/core-concepts.md",
+            "quote": "An **autosave checkpoint** is a durable, shared recovery point for the mounted file state.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "files-survive-stop",
       "feature": "storage",
       "title": "Files survive a stop",
       "plain": "Stopping the machine keeps its disk; starting it again finds the files where they were.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "shortfall": "The disk bills at $0.09 per GB-month until you delete the instance.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-lifecycle",
+            "quote": "The whole disk persists, like a VM.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "Standby keeps everything; archive keeps the files and restarts processes with new IDs.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "Unarchiving it starts the sandbox again from its image and writes the archived filesystem back over it, so you get the same sandbox back with its files.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "14 days",
+          "shortfall": "The disk is deleted 14 days after a stop unless you saved it.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/resume-and-fork",
+            "quote": "Boat keeps the snapshot of a stopped sandbox for 14 days.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "A stop keeps the disk; standby and hibernate keep memory as well.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/suspend-resume",
+            "quote": "A machine can go to sleep in place and wake on demand.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "note": "The disk is deleted with the instance; only a snapshot keeps the files.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "An instance runs only until something stops it, and its processes and the files on its disk end with it. The next `start()` creates a new instance.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "The whole disk persists and bills while stopped.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sandboxes.md",
+            "quote": "The filesystem and memory state are preserved, and CPU is no longer consumed.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "note": "Killing a sandbox ends it; files survive only in a snapshot or a volume.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox/persistence",
+            "quote": "By default a pause saves **both** the filesystem and the memory.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "The /data disk and the template’s root disk are kept on stop.",
+          "source": {
+            "url": "https://instabox.sh/docs/machines.md",
+            "quote": "The root disk and `/data` are kept; processes and memory are not.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "note": "A stop deletes the disk; only /workspace on a volume and your snapshots remain.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "A stop (kill or expiration) deletes the sandbox's disk",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "note": "A terminated sandbox is gone; its files come back only through a snapshot.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "Once finished, no further commands can be executed inside the Sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "note": "A stop releases everything; the files come back only from a snapshot.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/pause-resume",
+            "quote": "**Stop** : Use when you're completely done with the instance and want to release all resources.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "shortfall": "A stopped disk is billed and kept until you delete the sandbox.",
+          "source": {
+            "url": "https://withruntime.com/docs/sandbox-environment",
+            "quote": "A stop keeps the disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "A stopped sandbox costs nothing and keeps everything.",
+          "source": {
+            "url": "https://sandboxer.com/docs/snapshots",
+            "quote": "A stopped sandbox costs nothing and keeps everything.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "100 GB",
+          "note": "The disk persists; memory does not.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+            "quote": "The split is simple: disk persists, memory does not.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "Persistence is the default for new sandboxes.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes",
+            "quote": "Persistence is the default.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "partly",
+          "figure": "48 h after terminate",
+          "shortfall": "A terminated machine can be brought back for 48 hours; after that its files are gone.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/lifecycle.md",
+            "quote": "Call `restart` within 48 hours of termination to boot it again under the same ID and name",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "volumes",
       "feature": "storage",
       "title": "Separate volumes",
       "plain": "Storage that lives on after the machine is deleted and can be attached to a new one.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "note": "No separate volume product; the instance disk is the only storage.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-lifecycle",
+            "quote": "The whole disk persists, like a VM.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "shortfall": "Only one volume attaches to a sandbox, and it attaches to one sandbox at a time.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Volumes.md",
+            "quote": "Blaxel Volumes provide persistent storage that survives sandbox destruction and recreation.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "note": "No separate volume product.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/templates",
+            "quote": "A saved snapshot is a copy of a sandbox disk that you save under a name.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "shortfall": "A disk attaches to one machine at a time and lives on one host.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/disks",
+            "quote": "A disk is standalone storage that outlives the machine it is attached to.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "20 GB disk",
+          "shortfall": "There is no separate disk that outlives the machine; a bucket can be mounted, and a snapshot lasts 30 days.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "Mounted buckets outlive every instance",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "shortfall": "Volumes are network filesystems, not block disks, so a database table store is a poor fit.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/volumes.md",
+            "quote": "Volumes are FUSE-based mounts that provide shared file access across Daytona sandboxes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "shortfall": "Volumes exist but are in private beta and need access from support.",
+          "source": {
+            "url": "https://docs.e2b.dev/volumes",
+            "quote": "Volumes are currently in private beta.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "note": "One disk per machine; no separate volume.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "A machine has one disk, `/data` (home is `/data/home`), 20 GiB by default.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "1–50 GB",
+          "shortfall": "A volume attaches to one sandbox at a time and lives on one node.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/volumes",
+            "quote": "Persistent Volumes keep data after a sandbox stops.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "Up to 1 TiB free",
+          "note": "Volumes survive the sandbox and are not included in snapshots.",
+          "source": {
+            "url": "https://modal.com/docs/guide/volumes",
+            "quote": "Volumes are backed by multiple underlying cloud providers to guarantee high availability.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "partly",
+          "shortfall": "The volume is object storage reached over S3, not a disk attached to the machine.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/volumes/getting-started",
+            "quote": "Morph Volumes are persistent S3-compatible storage for build caches, release artifacts, checkpoints, and shared datasets.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Up to 4",
+          "note": "Each volume attaches at a path, read-write or as a read-only snapshot.",
+          "source": {
+            "url": "https://withruntime.com/docs/storage",
+            "quote": "A create attaches up to four volumes, each at a path such as `/data`, in one of two modes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "note": "No separate volume product; the machine's own disk is the only storage.",
+          "source": {
+            "url": "https://sandboxer.com/docs/machines",
+            "quote": "\"Disk\" is space for your files, added on top of the OS image",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "No attachable or shared volume; storage belongs to the Sprite.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+            "quote": "The split is simple: disk persists, memory does not.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "A drive outlives the sandbox and can be attached to another.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/drives",
+            "quote": "A drive defaults to 1 TiB when you do not set a size (1 GiB for Hobby).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "A Cloud Volume can be mounted on one or more sandboxes, read-only if you choose.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/mount-filesystems.md",
+            "quote": "Mount durable, shareable Tensorlake filesystems into sandboxes at boot, on warm-pool claims, or on a running sandbox",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "shared-volume",
       "feature": "storage",
       "title": "One volume, several machines",
       "plain": "Several machines can use the same storage at once.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "note": "No storage can be attached to two machines at once.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-lifecycle",
+            "quote": "The whole disk persists, like a VM.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "shortfall": "Shared storage is a separate product called Agent Drive; a volume itself serves one machine at a time.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Volumes.md",
+            "quote": "At this time, you can only attach one volume to a sandbox. A volume can also only be attached to one sandbox at a time.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "note": "No storage can be attached to two machines at once.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/templates",
+            "quote": "A saved snapshot is a copy of a sandbox disk that you save under a name.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "note": "A disk takes one machine at a time.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/disks",
+            "quote": "One attachment at a time. A disk’s storage is opened read-write by the machine that holds it, so a second attachment would be a second writer to the same bytes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "shortfall": "The shared option is a bucket, not a disk, so files are not locked and two machines can overwrite each other.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/files/",
+            "quote": "Share job inputs and outputs with other systems | [Mount an R2 bucket](/sandbox/files/mount-an-r2-bucket/) | Renames, locks, and permissions do not work as they do on a local disk",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "shortfall": "Writes are not transactional, so two machines writing one file means the last write wins.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/volumes.md",
+            "quote": "a single volume can be mounted to multiple sandboxes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "shortfall": "One volume can serve several sandboxes, but volumes are in private beta.",
+          "source": {
+            "url": "https://docs.e2b.dev/volumes",
+            "quote": "Persistent storage that exists independently of sandboxes and can be mounted across multiple sandboxes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "note": "A disk belongs to one machine.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "A machine has one disk, `/data` (home is `/data/home`), 20 GiB by default.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "note": "A volume serves one sandbox at a time.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/volumes",
+            "quote": "Each volume mounts at **`/workspace`** and attaches to **one sandbox at a time**.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "Hundreds of writers",
+          "shortfall": "Two machines writing the same file means the last write wins.",
+          "source": {
+            "url": "https://modal.com/docs/guide/volumes",
+            "quote": "it supports more files, higher throughput, concurrent writes from hundreds of containers",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "partly",
+          "shortfall": "Sharing happens through an S3 bucket, not a disk several machines mount.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/volumes/getting-started",
+            "quote": "Morph Volumes are persistent S3-compatible storage for build caches, release artifacts, checkpoints, and shared datasets.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "partly",
+          "shortfall": "Only one machine can write a volume at a time; others can hold a read-only copy taken when they start.",
+          "source": {
+            "url": "https://withruntime.com/docs/storage",
+            "quote": "**`\"rw\"`** (the default): read-write, attached to one sandbox at a time.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "note": "No storage can be attached to two machines at once.",
+          "source": {
+            "url": "https://sandboxer.com/docs/machines",
+            "quote": "\"Disk\" is space for your files, added on top of the OS image",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "Storage belongs to one Sprite.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+            "quote": "The split is simple: disk persists, memory does not.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "shortfall": "Only one machine can write a drive; others get a read-only copy taken when they mount it.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/drives",
+            "quote": "Only one sandbox at a time can mount a given drive as read-write: use snapshots for shared access.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "shortfall": "Same-path writes are last-writer-wins, so two machines editing one file can clash.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/filesystems/concurrent-writes.md",
+            "quote": "Disjoint paths merge automatically, same-path writes are last-writer-wins.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "mount-buckets",
       "feature": "storage",
       "title": "Mount outside storage",
       "plain": "Attach an S3-style bucket or another outside filesystem as a folder.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "note": "Only the instance’s own disk can be mounted; no outside bucket.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instances/create",
+            "quote": "The folder the instance’s disk is mounted at, and the one folder an `update` keeps.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "note": "The docs say external storage such as S3 buckets cannot be mounted.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Volumes/Overview.md",
+            "quote": "Blaxel also does not support mounting external storage (such as S3 buckets) as volumes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "note": "No outside bucket or filesystem can be mounted.",
+          "source": {
+            "url": "https://docs.boat.dev/machines",
+            "quote": "“Disk” is the maximum size of your own files.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "note": "No outside bucket or filesystem can be mounted; backups go to object storage, they are not mounted from it.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/disks",
+            "quote": "A disk is standalone storage that outlives the machine it is attached to.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "Mount one prefix of a bucket as a folder with s3fs.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/files/mount-an-r2-bucket/",
+            "quote": "The `S3Mount` class from `@cloudflare/sandbox` mounts one prefix of a bucket as a directory with `s3fs`.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "The docs walk through mounting an S3, R2 or Tigris bucket.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/mount-external-storage",
+            "quote": "Mount an Amazon S3 bucket",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "shortfall": "Mounting a bucket needs a custom template with the right filesystem tool installed; it is not built in.",
+          "source": {
+            "url": "https://docs.e2b.dev/storage/cloud-buckets",
+            "quote": "You will need to create a custom sandbox template with the FUSE file system installed.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "note": "No outside bucket can be mounted.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "A machine has one disk, `/data` (home is `/data/home`), 20 GiB by default.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "note": "The S3 addon is reached with an SDK, not mounted as a folder.",
+          "source": {
+            "url": "https://lizard.build/docs/addons/storage.md",
+            "quote": "Use them with any AWS SDK and path-style addressing.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "Mounted with Mountpoint for S3, which has its own limitations.",
+          "source": {
+            "url": "https://modal.com/docs/guide/cloud-bucket-mounts",
+            "quote": "It supports AWS S3, Cloudflare R2, and Google Cloud Storage buckets.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "note": "Volumes are reached with an S3 client; mounting an outside bucket is not documented.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/volumes/getting-started",
+            "quote": "They use your existing Morph API key, so you can use the web console, the `morphcloud volumes` CLI, the Python `MorphCloudClient().volumes` helpers, or any standard S3 client against the same gateway.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "The sandbox never holds the bucket's keys.",
+          "source": {
+            "url": "https://withruntime.com/docs/storage",
+            "quote": "You can mount your own buckets inside a sandbox, and the sandbox never holds their keys.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "note": "No outside bucket can be mounted.",
+          "source": {
+            "url": "https://sandboxer.com/docs/machines",
+            "quote": "\"Disk\" is space for your files, added on top of the OS image",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "No outside bucket can be mounted.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+            "quote": "The split is simple: disk persists, memory does not.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "note": "Drives are Vercel storage; mounting an outside bucket is not documented.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/drives",
+            "quote": "Drives are mounted as read-write by default.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "note": "The mount feature covers Tensorlake's own file systems; an outside S3 bucket is not documented.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/mount-filesystems.md",
+            "quote": "Mount durable, shareable Tensorlake filesystems into sandboxes at boot, on warm-pool claims, or on a running sandbox",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "big-disk",
       "feature": "storage",
       "title": "Large disk",
       "plain": "Disks of 100 GiB or more are available.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "figure": "80 GB max",
+          "shortfall": "The largest shape offers 80 GB of disk, short of 100 GB.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/billing",
+            "quote": "4 vCPU / 32 GB RAM / 2-80 GB disk",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "not-published",
+          "note": "No maximum disk or volume size is published.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Volumes/Overview.md",
+            "quote": "To create a standalone volume, you must provide a unique `name` and specify its `size` in megabytes (MB).",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "251 GB",
+          "note": "The largest fixed size comes with 251 GB.",
+          "source": {
+            "url": "https://docs.boat.dev/machines",
+            "quote": "251 GB",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "100 GB",
+          "note": "Every machine comes with a fixed 100 GB disk, plus detachable disks.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/disks",
+            "quote": "A machine’s own 100 GB disk goes away with the machine.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "figure": "20 GB max",
+          "shortfall": "The largest disk is 20 GB, short of 100 GB.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/platform/limits/",
+            "quote": "Maximum Disk | 20 GB",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "no",
+          "figure": "10 GiB cap",
+          "shortfall": "The organisation ceiling is 10 GiB of disk per sandbox, though some Windows presets list 50 GiB.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sandboxes.md",
+            "quote": "Organizations get a maximum sandbox resource limit of **4 vCPUs**, **8GB RAM**, and **10GB disk**.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "figure": "20 GiB max",
+          "shortfall": "The largest included disk is 20 GiB, short of 100 GB.",
+          "source": {
+            "url": "https://docs.e2b.dev/billing",
+            "quote": "**Disk size**|  10 GiB| 20+ GiB| Custom",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "Up to 1024 GiB",
+          "note": "Paid plans grow /data to 200, 500 or 1024 GiB; a free machine cannot resize.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "The size is 1-1024 GiB; 0 or absent leaves the disk unchanged.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "figure": "50 GB max",
+          "shortfall": "The largest size offers 50 GB of disk, short of 100 GB.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/limits.md",
+            "quote": "| Large | 8 vCPU / 16 GB | 50 GB | $0.0648 per hour |",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "512 GiB",
+          "note": "The root filesystem is fixed at 512 GiB and cannot be resized.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-resources",
+            "quote": "On the [VM runtime](/docs/guide/sandboxes#runtimes), the root filesystem is a fixed 512 GiB.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No maximum disk size is published.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
+            "quote": "To create a new snapshot, specify the resource specifications like `vcpus`, `memory`, and `disk_size`.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "400 GiB",
+          "note": "A sandbox disk can be up to 400 GiB.",
+          "source": {
+            "url": "https://withruntime.com/docs/jobs",
+            "quote": "It can be at most 400 GiB.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "251 GB",
+          "note": "The largest fixed size comes with 251 GB.",
+          "source": {
+            "url": "https://sandboxer.com/docs/machines",
+            "quote": "`xlarge` | 16 | 32 GB | 251 GB",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "100 GB",
+          "note": "One shape, with 100 GB of storage.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+            "quote": "its 8 vCPU, 100 GB limits",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "1 TiB drive",
+          "note": "A drive defaults to 1 TiB, with a 16 TiB quota; the sandbox's own disk is 64 GB.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/drives",
+            "quote": "A drive defaults to 1 TiB when you do not set a size (1 GiB for Hobby).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "100 GB root",
+          "note": "The Pro plan allows a 100 GB root disk; free and credit plans are smaller.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/billing.md",
+            "quote": "16 vCPU, 64 GB RAM, 100 GB root disk",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "stay-on",
       "feature": "idle-timers",
       "title": "Can stay on indefinitely",
       "plain": "A machine can run for weeks without being stopped for idleness or a session limit.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "shortfall": "Auto-sleep is off unless you turn it on.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-auto-sleep",
+            "quote": "Instances default to `auto_sleep: false` and never sleep on their own unless you opt them in.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "figure": "7 or 30 days on low tiers",
+          "shortfall": "On the two lowest tiers a sandbox is deleted after 7 or 30 days; only higher tiers allow it to wait indefinitely.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Expiration.md",
+            "quote": "Some quota tiers enforce expiration dates (Tier 0 and 1, with respectively up to 7 and 30 days). In higher tiers, unlimited persistence is permitted.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "note": "The deadline can be turned off so the machine runs until you stop it.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/resume-and-fork",
+            "quote": "boat resume bx_f7k2q9hd --no-auto-stop    # runs until you stop it",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "4 h default, or never",
+          "note": "Auto-suspend is off by default and auto-hibernate can be set to 0.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/suspend-resume",
+            "quote": "**Off by default.** When enabled, a machine goes to standby after N seconds without TCP/UDP traffic in either direction.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "6 h max",
+          "shortfall": "An instance stops when nothing has used it for up to 6 hours, the setting is lost on a restart, and Cloudflare promises no set running time.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "After the Durable Object becomes inactive, the instance keeps running for the time set with [`setInactivityTimeout()`](/containers/api/durable-object-container/#setinactivitytimeout), up to 6 hours.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "Set the auto-stop interval to 0 and the sandbox runs indefinitely.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sandboxes.md",
+            "quote": "**`0`**: disables the auto-stop functionality, allowing the sandbox to run indefinitely",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "figure": "1 h Hobby, 24 h Pro",
+          "shortfall": "A sandbox cannot run longer than an hour on the free plan or 24 hours on Pro, whether or not it is busy.",
+          "source": {
+            "url": "https://docs.e2b.dev/billing",
+            "quote": "**Max continuous runtime**|  1 hour| 24 hours| Custom",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "note": "The free plan cannot turn off the 30-minute idle pause, but nothing deletes the machine.",
+          "source": {
+            "url": "https://instabox.sh/docs/machines.md",
+            "quote": "**No forced TTL.** A paused or stopped machine and every snapshot you save stay until **you** delete them.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Paid plans only",
+          "shortfall": "Paid plans can switch off the idle pause and run with no time limit; the free plan always pauses after 30 idle minutes and stops a run after 8 hours."
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "The SDK and CLI set a five-minute deadline unless you change it; the API and dashboard set none.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "Set an explicit lifetime: `timeoutMs: 0` at creation disables expiration",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "24 h maximum",
+          "shortfall": "No sandbox can run longer than 24 hours, however busy it is.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "Sandboxes have a default maximum lifetime of 5 minutes. You can change this by passing a `timeout` of up to 24 hours",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "Devboxes can be set to behave like a persistent server.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "optionally disable auto-sleep / TTL policies to behave like a persistent VPS",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "A busy sandbox is never cut off; only an idle one pauses.",
+          "source": {
+            "url": "https://withruntime.com/docs/pricing",
+            "quote": "**Busy time is never cut off on a clock.**",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "The hard deadline can be set to null, and the idle pause to zero.",
+          "source": {
+            "url": "https://sandboxer.com/docs/limits",
+            "quote": "`ttlSeconds` | 1 s – 30 days, or `null`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "partly",
+          "figure": "30 s idle",
+          "shortfall": "A Sprite pauses about 30 seconds after its last activity; a task can hold it awake, but you cannot switch the pause off.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+            "quote": "When the activity stops, a short idle window passes (about 30 seconds today) and the Sprite pauses.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "45 min Hobby, 24 h Pro",
+          "shortfall": "A single session cannot last beyond 45 minutes on the free plan or 24 hours on paid plans.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "Max Session Duration| 45 minutes| 24 hours| 24 hours",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "partly",
+          "figure": "2 h free, 24 h credits",
+          "shortfall": "A free sandbox stops after 2 idle hours and a credit-plan sandbox after 24; only Pro and Enterprise are unlimited.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/lifecycle.md",
+            "quote": "The maximum allowed `timeout_secs` depends on your plan: **2 hours** on Free, **24 hours** with Usage Credits, and unlimited on Pro and Enterprise.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "choose-idle",
       "feature": "idle-timers",
       "title": "Choose the idle timeout",
       "plain": "You set how long an idle machine waits before it pauses or stops, including never.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "5 min to 1 day, or off",
+          "note": "The range is the auto-sleep setting; 0 or off means it never sleeps.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-auto-sleep",
+            "quote": "Once no bytes have moved through any of its URLs for `idle_timeout_seconds` (default 900, from five minutes to a day)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "note": "There is no setting for how long an idle machine waits; standby happens on its own.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Standby-control.md",
+            "quote": "There are no built-in stop or start functions available in the SDKs to manage standby mode.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "partly",
+          "figure": "1 h from start",
+          "shortfall": "The clock counts from when the machine started, not from when it was last used, so a busy machine is stopped too.",
+          "source": {
+            "url": "https://docs.boat.dev/long-running-tasks/auto-stop",
+            "quote": "Each resume sets the deadline again.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Any seconds, or off",
+          "note": "The timer counts network traffic, so a machine working offline looks idle.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/suspend-resume",
+            "quote": "boxd machine config set myapp auto-hibernate.timeout 0     # never hibernate this machine",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "Up to 6 h",
+          "shortfall": "You can set the wait up to 6 hours, but the setting is lost when the object restarts and there is no never.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "Its instance can keep running through the restart. The restarted Durable Object starts without an inactivity timeout",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "Minutes, or 0",
+          "note": "Separate settings exist for stop, pause, archive and delete.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sandboxes.md",
+            "quote": "The auto-stop interval sets the amount of time after which a running sandbox is automatically stopped.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "figure": "5 min, max 24 h",
+          "shortfall": "The clock counts down from creation and commands do not reset it, and the default action is to kill rather than pause.",
+          "source": {
+            "url": "https://docs.e2b.dev/faq/sandbox-lifetime",
+            "quote": "Every sandbox has a timeout, and it defaults to **5 minutes** if you do not set one.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "figure": "5–30 min or off",
+          "shortfall": "Only paid plans can choose; the free plan is fixed at 30 minutes and cannot turn it off.",
+          "source": {
+            "url": "https://instabox.sh/docs/concepts.md",
+            "quote": "A new machine pauses once it has been idle for 30 minutes. On a paid plan you can choose 5 to 30 minutes, or `instabox auto-suspend <machine> 0` to turn that off",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "note": "There is no idle timer, only a lifetime deadline that a busy machine also hits.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "This is not an idle timer.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "shortfall": "You can set an idle timeout, but reaching it ends the machine rather than pausing it.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "Sandboxes can also be automatically terminated after a period of inactivity - you can do this by setting the `idle_timeout` parameter.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "partly",
+          "shortfall": "You can switch the idle pause off, but the docs never say how long it waits or what values you can set.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Devboxes support wake-on-SSH/HTTP and TTL policies to auto-pause idle machines.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "300 s, or never",
+          "note": "The default is five minutes; `persistent: true` turns the idle pause off.",
+          "source": {
+            "url": "https://withruntime.com/docs/javascript",
+            "quote": "A sandbox pauses itself after **300 seconds** of idle time.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "15–120 min, or 0",
+          "note": "The default depends on the plan; 0 means never pause.",
+          "source": {
+            "url": "https://sandboxer.com/docs/long-running",
+            "quote": "`sbx idle sb_k3v9x2mq 0`            # never pause this one",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "The idle window is about 30 seconds and there is no setting for it.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+            "quote": "You don't choose between them and you can't see the transition.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "note": "There is only a session length, not an idle timer you can set.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "Max Session Duration| 45 minutes| 24 hours| 24 hours",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "The value is an idle threshold; 0 asks for the plan maximum.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/lifecycle.md",
+            "quote": "`timeout_secs` is an **idle threshold**, not a wall-clock lifetime.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "wake-on-request",
       "feature": "idle-timers",
       "title": "Wakes on a request",
       "plain": "A paused machine starts again by itself when a web request or message arrives.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "A signed URL or any request to any of its URLs brings a sleeping instance back.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-auto-sleep",
+            "quote": "opening one is exactly the kind of request that wakes the instance.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "Reconnecting to the sandbox brings it back from standby.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "Reconnecting to the sandbox transitions it back to active mode.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "note": "A stopped machine no longer exists, so a web request cannot bring it back; you have to resume it.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/stop",
+            "quote": "There is no pause. A stop removes the virtual machine and keeps a copy of the disk.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "The first inbound packet wakes it, though bot protection can answer webhooks with a 503 instead.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/suspend-resume",
+            "quote": "`boxd machine list` shows hibernated machines with `status: hibernated`. They wake automatically on the first inbound packet.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "shortfall": "A request starts a fresh machine, not the one that stopped; files come back only from a snapshot your code saved.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "Cloudflare does not wake the Durable Object when its instance stops.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "no",
+          "note": "A paused or stopped sandbox has to be started; a request to its preview URL does not start it.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sandboxes.md",
+            "quote": "Paused            | The VM sandbox is paused with filesystem and memory state preserved. State is offloaded to nearby storage.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "Connecting to a paused sandbox resumes it.",
+          "source": {
+            "url": "https://docs.e2b.dev/faq/sandbox-lifetime",
+            "quote": "Set `autoResume` to have a paused sandbox wake up on the next SDK call or HTTP request to one of its URLs.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "shortfall": "Only a machine the platform paused for being idle wakes on a request; one you paused yourself has to be resumed.",
+          "source": {
+            "url": "https://instabox.sh/docs/machines.md",
+            "quote": "Idle auto-pause wakes on use (exec, SSH, public URL, `instabox wake`). A pause or stop you requested does not: call resume or start.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "note": "Connecting or opening a URL does not resume a paused or stopped sandbox.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "`connect` attaches to an existing sandbox without changing its state, so it does not resume a paused or stopped sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "note": "A finished sandbox cannot be woken; the next request needs a new sandbox or a snapshot.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "Once finished, no further commands can be executed inside the Sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "A request brings a sleeping devbox back with its memory.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Devboxes can branch to hundreds of parallel replicas or scale to zero after a period of inactivity, preserving all application and memory state.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "The call waits while the sandbox wakes, then runs.",
+          "source": {
+            "url": "https://withruntime.com/docs/javascript",
+            "quote": "A paused sandbox wakes by itself when a request needs it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "A sandbox paused for being idle resumes by itself on the next use.",
+          "source": {
+            "url": "https://sandboxer.com/docs/long-running",
+            "quote": "**Wake on use.** A sandbox paused for being idle resumes by itself",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "note": "A request to its URL brings it back.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+            "quote": "The next request resumes it in 100–500ms",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "The call that arrives starts a new session and then retries.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes",
+            "quote": "If a persistent sandbox is stopped and you call `runCommand`, `writeFiles`, or other SDK methods on it, the SDK automatically starts a new session and retries the operation.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "Automatic resume can be switched off per sandbox.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/lifecycle.md",
+            "quote": "Setting it to `true` allows the next proxied request to wake a suspended sandbox",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "schedules",
       "feature": "idle-timers",
       "title": "Scheduled runs",
       "plain": "Start a machine or a job on a schedule, like a cron job, without your own server.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "Each firing wakes the instance, runs the turn, then lets it sleep again.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/crons",
+            "quote": "Each firing wakes the instance, runs the turn on its own session, and lets the instance go back to sleep.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "100 per sandbox",
+          "note": "Cron, a future time, or a delay; each run is recorded.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Schedules.md",
+            "quote": "Schedules run a process inside a sandbox automatically, without you triggering it from your client.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "note": "No scheduler; a cron inside the machine only runs while it is running.",
+          "source": {
+            "url": "https://docs.boat.dev/snapshots/resume-and-fork",
+            "quote": "For example, save one each day from cron:",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "partly",
+          "shortfall": "A schedule runs inside the machine, so it only fires while that machine is awake.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/automations/jobs",
+            "quote": "Jobs survive reboots. Everything in the `background` or `retrying` state is started again when the machine boots.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "A Workers Cron Trigger starts a container task on a schedule.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/examples/cron/",
+            "quote": "Run a short container task every two minutes with a Workers [Cron Trigger](/workers/configuration/cron-triggers/).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "no",
+          "note": "No scheduler that starts sandboxes; the only scheduling is where a sandbox is placed.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/regions",
+            "quote": "Every Daytona sandbox runs in a **region**",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "note": "No scheduler for starting sandboxes or jobs.",
+          "source": {
+            "url": "https://docs.e2b.dev/llms.txt",
+            "quote": "Persistent storage that exists independently of sandboxes and can be mounted across multiple sandboxes.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "note": "No scheduler for starting machines or jobs.",
+          "source": {
+            "url": "https://instabox.sh/docs/concepts.md",
+            "quote": "| **Operation** | A change to a machine (create, start, stop, pause, resume, delete).",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "note": "No scheduler that starts sandboxes.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "Create a sandbox, run commands, then call `kill`.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "Schedules attach to functions, which can then start a sandbox.",
+          "source": {
+            "url": "https://modal.com/docs/guide/cron",
+            "quote": "Modal facilitates this through function schedules.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "note": "No scheduler for starting machines or jobs.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/basic-lifecycle",
+            "quote": "Each instance runs from a saved snapshot.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "Each run starts a fresh sandbox, and a run can attach volumes.",
+          "source": {
+            "url": "https://withruntime.com/docs/jobs",
+            "quote": "A job runs a command in a fresh sandbox. It runs once, at a time you choose, or on a cron schedule.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "partly",
+          "shortfall": "A cron or timer runs inside the machine, so it never fires while the machine is stopped or paused.",
+          "source": {
+            "url": "https://sandboxer.com/guides/run-scheduled-jobs-in-a-sandbox-with-systemd-timers.md",
+            "quote": "Neither fires while the sandbox is stopped or idle-paused.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "No scheduler that starts a Sprite.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+            "quote": "A Sprite is not a server that runs until you turn it off.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "Cron triggers a function, which can then start a sandbox.",
+          "source": {
+            "url": "https://vercel.com/docs/cron-jobs",
+            "quote": "Cron jobs are time-based scheduling tools used to automate repetitive tasks.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "note": "No cron scheduler; an application is called over HTTP.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/applications/concepts.md",
+            "quote": "Each one of them will be assigned a unique HTTP entry point based on the name of the Python function.",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "public-url",

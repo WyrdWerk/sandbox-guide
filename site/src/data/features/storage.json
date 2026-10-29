@@ -79,10 +79,10 @@
     },
     {
       "provider": "boxd",
-      "verdict": "partly",
+      "verdict": "yes",
       "figure": "100 GB; billed on write",
       "scenario": "The fixed 100 GB disk persists in every state and bills on bytes written, not provisioned size.",
-      "note": "Every machine has a fixed 100 GB disk, and disk bills on bytes written in every state. Detachable disks exist in the SDK but have no guide, size list or published price.",
+      "note": "Every machine has a fixed 100 GB disk, and disk bills on bytes written in every state. Separate disks now have a guide: they outlive the machine they are attached to, and attach to one machine at a time.",
       "source": {
         "url": "https://docs.boxd.sh/guides/resources",
         "quote": "Disk | 100 GB, fixed (copy-on-write)",
