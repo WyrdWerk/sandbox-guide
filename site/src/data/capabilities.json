@@ -10603,13 +10603,15 @@
         },
         {
           "provider": "modal",
-          "verdict": "yes",
+          "verdict": "partly",
           "note": "Three workspace roles, plus environment-level roles, on Team and Enterprise.",
           "source": {
             "url": "https://modal.com/docs/guide/rbac",
-            "quote": "All Workspace Members have one of three Roles that determine their overall permissions",
+            "quote": "RBAC is available on the Team and Enterprise plans",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "Team plan and above",
+          "shortfall": "Role-based access starts on the Team plan; the free-to-start Starter plan has no roles."
         },
         {
           "provider": "morph",
