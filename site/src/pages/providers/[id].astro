@@ -8,6 +8,7 @@ import SectionNav from "../../components/SectionNav.astro";
 import Badge from "../../components/Badge.astro";
 import { providers, pricing, useCases, engineCase, features, capabilitiesOf, capabilityLabel, formatDate } from "../../lib/data";
 import { price, presets, formatMoney } from "../../lib/cost";
+import { providerAnswer } from "../../lib/agents";
 
 export function getStaticPaths() {
   return providers.map((provider) => ({ params: { id: provider.id }, props: { provider } }));
@@ -44,12 +45,13 @@ const statusLabel = {
 };
 ---
 
-<Base title={provider.name} description={provider.oneLiner} markdown={`/data/providers/${provider.id}.md`}>
+<Base title={provider.status === "researched" ? `${provider.name} pricing, limits and catches` : provider.name} description={provider.oneLiner} markdown={`/data/providers/${provider.id}.md`} modified={card?.checkedOn ?? provider.checkedOn}>
   <PageHeader
     parent={{ href: "/providers/", label: "Providers" }}
     kicker={`Checked ${provider.checkedOn ?? "pending"}`}
     title={provider.name}
     standfirst={provider.oneLiner}
+    answer={providerAnswer(provider)}
     meta={[provider.url.replace("https://", ""), `${providers.length} providers`, "Sources linked"]}
   />
 

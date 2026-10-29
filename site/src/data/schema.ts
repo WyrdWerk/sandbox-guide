@@ -217,6 +217,8 @@ export type RouteTier = "one-click" | "preinstalled" | "guide" | "manual" | "bac
 export interface UseCase {
   id: string;
   title: string;
+  /** The page's <title>, worded the way people search for it. */
+  seoTitle?: string;
   kicker: string;
   /** The reader's own words: what they want the agent to do. */
   question: string;

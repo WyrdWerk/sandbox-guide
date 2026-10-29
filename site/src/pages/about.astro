@@ -1,0 +1,61 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { capabilities, checked, features, formatDate, providers, useCases } from "../lib/data";
+---
+
+<Base title="About" description="Who runs Bot Perch, how it is kept current, what it does not do, and how to correct it.">
+  <PageHeader
+    kicker="About"
+    title="About Bot Perch"
+    standfirst="Bot Perch is an independent guide to where an AI agent can live: which cloud sandbox or machine fits the job, what it costs, and the catch."
+    meta={[`${providers.length} providers`, `Prices checked ${formatDate(checked.prices)}`, "Code and data public"]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush">
+      <div class="prose">
+        <h2>Who runs it</h2>
+        <p>
+          Bot Perch is built and maintained by <a href="https://github.com/WyrdWerk">WyrdWerk</a>. The site's code and every
+          data file are public in the <a href="https://github.com/WyrdWerk/sandbox-guide">sandbox-guide repository</a>,
+          so any number on a page can be traced to the file it came from.
+        </p>
+
+        <h2>What it covers</h2>
+        <p>
+          {providers.length} providers, {features.length} features, {capabilities.length} specific capabilities checked for every
+          provider, and {useCases.length} guides that start from what you want to run, from a personal agent to a remote MCP server.
+          Costs come from one calculator that shows its arithmetic; <a href="/costs/how-it-works/">here is how it works</a>.
+        </p>
+
+        <h2>How it stays current</h2>
+        <p>
+          Each provider's prices are re-read from its own pricing page on a weekly schedule, and a person reviews every
+          change before it is published. Every page shows the date its facts were checked, and dated changes at each
+          provider are listed on <a href="/changes/">what changed</a>.
+        </p>
+
+        <h2>What it does not do</h2>
+        <p>
+          The guide carries no ads and no affiliate links. It is desk research: no provider account was created and no
+          sandbox was started or billed, so every statement about behaviour is what the provider documents, not something
+          measured. Where a provider publishes nothing, the page says “not published” rather than guessing.
+          <a href="/how-we-checked/">How we checked</a> has the full method and its limits.
+        </p>
+
+        <h2>Corrections</h2>
+        <p>
+          If a price or a claim is wrong, use the “Report something wrong” link at the foot of any page, or
+          <a href="https://github.com/WyrdWerk/sandbox-guide/issues">open an issue</a> with a link to the provider's own page.
+        </p>
+
+        <h2>For AI agents</h2>
+        <p>
+          The same facts are available as plain files: start at <a href="/llms.txt">llms.txt</a>, or fetch
+          <a href="/data/index.json">the provider index</a> and <a href="/llms-full.txt">everything in one file</a>.
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>

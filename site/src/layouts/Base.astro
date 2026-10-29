@@ -8,21 +8,12 @@ interface Props {
   description?: string;
   /** This page's Markdown twin under /data/, for agents. */
   markdown?: string;
+  /** ISO date the page's facts were last checked; defaults to the newest dataset date. */
+  modified?: string;
 }
 
-const { title, description = site.description, markdown } = Astro.props;
-const ld = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: site.shortTitle,
-  url: new URL("/", Astro.site).href,
-  description: site.description,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: `${new URL("/search/", Astro.site).href}?q={query}`,
-    "query-input": "required name=query",
-  },
-};
+const newest = [checked.prices, checked.capabilities, checked.useCases, site.checkedOn].sort().at(-1)!;
+const { title, description = site.description, markdown, modified = newest } = Astro.props;
 const path = Astro.url.pathname;
 const isCurrent = (href: string) =>
   href === "/" ? path === "/" : path.startsWith(href);
@@ -43,6 +34,68 @@ const nav = [
   { href: "/glossary/", label: "Glossary" },
   { href: "/how-we-checked/", label: "How we checked", short: "Method" },
 ];
+
+// Structured data: who publishes the site, where this page sits, and when its facts were checked.
+const home = new URL("/", Astro.site).href;
+const pageUrl = new URL(path, Astro.site).href;
+const org = { "@type": "Organization", "@id": `${home}#publisher`, name: "WyrdWerk", url: "https://github.com/WyrdWerk" };
+const segments = path.split("/").filter(Boolean);
+const crumbs = segments.length
+  ? [
+      { name: site.shortTitle, url: home },
+      ...(segments.length > 1
+        ? [{ name: nav.find((n) => n.href === `/${segments[0]}/`)?.label ?? segments[0], url: new URL(`/${segments[0]}/`, Astro.site).href }]
+        : []),
+      { name: title, url: pageUrl },
+    ]
+  : [];
+const ld = {
+  "@context": "https://schema.org",
+  "@graph": [
+    org,
+    {
+      "@type": "WebSite",
+      "@id": `${home}#website`,
+      name: site.shortTitle,
+      url: home,
+      description: site.description,
+      publisher: { "@id": org["@id"] },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${new URL("/search/", Astro.site).href}?q={query}`,
+        "query-input": "required name=query",
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": pageUrl,
+      url: pageUrl,
+      name: title,
+      description,
+      dateModified: modified,
+      isPartOf: { "@id": `${home}#website` },
+      publisher: { "@id": org["@id"] },
+      ...(crumbs.length
+        ? { breadcrumb: { "@type": "BreadcrumbList", itemListElement: crumbs.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name, item: c.url })) } }
+        : {}),
+    },
+    ...(path === "/"
+      ? [{
+          "@type": "Dataset",
+          name: `${site.shortTitle}: cloud sandbox providers for AI agents`,
+          description: `${site.description} Prices, features, capability checks and use-case routes for ${providers.length} providers, each claim with a source URL, a quote and a confidence tag.`,
+          url: home,
+          dateModified: modified,
+          isAccessibleForFree: true,
+          creator: { "@id": org["@id"] },
+          distribution: [
+            { "@type": "DataDownload", encodingFormat: "application/json", contentUrl: new URL("/data/index.json", Astro.site).href },
+            { "@type": "DataDownload", encodingFormat: "text/markdown", contentUrl: new URL("/llms-full.txt", Astro.site).href },
+          ],
+        }]
+      : []),
+  ],
+};
 ---
 
 <!doctype html>
@@ -66,7 +119,7 @@ const nav = [
     <link rel="sitemap" href="/sitemap.xml" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="Guide for AI agents (llms.txt)" />
     {markdown && <link rel="alternate" type="text/markdown" href={markdown} title="This page as Markdown" />}
-    {path === "/" && <script type="application/ld+json" set:html={JSON.stringify(ld)}></script>}
+    <script type="application/ld+json" set:html={JSON.stringify(ld)}></script>
     <script is:inline>
       try {
         var t = localStorage.getItem("sg-theme");
@@ -140,6 +193,7 @@ const nav = [
         <p class="sources__note">
           For AI agents and scripts: <a href="/llms.txt">llms.txt</a> and the same data as plain{" "}
           <a href="/data/index.json">JSON</a> and <a href="/llms-full.txt">Markdown</a>.
+          Who runs this guide: <a href="/about/">About Bot Perch</a>.
         </p>
       </div>
     </footer>

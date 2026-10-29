@@ -6,6 +6,7 @@ import Calculator from "../../components/Calculator.astro";
 import Inline from "../../components/Inline.astro";
 import { features, providerById, providerName, useCases, checked, formatDate } from "../../lib/data";
 import { presets } from "../../lib/cost";
+import { useCaseAnswer } from "../../lib/agents";
 import type { RouteTier, UseCase } from "../../data/schema";
 
 export function getStaticPaths() {
@@ -40,12 +41,13 @@ const nav = [
 ];
 ---
 
-<Base title={useCase.title} description={useCase.standfirst} markdown={`/data/use-cases/${useCase.id}.md`}>
+<Base title={useCase.seoTitle ?? useCase.title} description={useCase.standfirst} markdown={`/data/use-cases/${useCase.id}.md`} modified={checked.useCases}>
   <PageHeader
     parent={{ href: "/use-cases/", label: "Use cases" }}
     kicker={useCase.kicker}
     title={useCase.title}
     standfirst={useCase.standfirst}
+    answer={useCaseAnswer(useCase)}
     meta={[`Setup checked ${formatDate(checked.useCases)}`, "Docs linked in the text", "Priced from list rates"]}
   />
 

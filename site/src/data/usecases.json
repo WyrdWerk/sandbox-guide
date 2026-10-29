@@ -4,6 +4,7 @@
     {
       "id": "hermes-agent",
       "title": "Run a Hermes agent",
+      "seoTitle": "Hermes agent hosting: where to run it and what it costs",
       "kicker": "Personal agent",
       "question": "I want a personal assistant that answers me on Telegram, remembers what I tell it and runs jobs on a schedule.",
       "standfirst": "Hermes is a personal AI agent you host yourself. It needs a small machine that stays on and keeps its files. Only one of the sixteen providers offers it in one click; most can run it if you can follow terminal instructions; a few are a poor fit for an assistant that never sleeps.",
@@ -269,6 +270,7 @@
     {
       "id": "openclaw",
       "title": "Run an OpenClaw agent",
+      "seoTitle": "OpenClaw hosting: where to run it and what it costs",
       "kicker": "Personal agent",
       "question": "I want OpenClaw answering me on WhatsApp or Slack, with its own browser and memory, without keeping my laptop on.",
       "standfirst": "OpenClaw is a self-hosted assistant built around one always-on gateway. It has more official hosting guides than Hermes: two of the sixteen providers deploy it in one click, and four more publish a guide or template.",
@@ -527,6 +529,7 @@
     {
       "id": "coding-agent",
       "title": "Give a coding agent its own machine",
+      "seoTitle": "Cloud machines for Claude Code and Codex, compared",
       "kicker": "Coding agent",
       "question": "I want Claude Code or Codex to work on my code in the cloud, not on my laptop.",
       "standfirst": "A coding agent reads a repository, edits files and runs tests. In a sandbox, a mistake cannot touch your laptop, and the work carries on when the laptop is closed. Several providers ship Claude Code and Codex already installed.",
@@ -728,6 +731,7 @@
     {
       "id": "code-interpreter",
       "title": "Run code inside your own product",
+      "seoTitle": "Code interpreter sandboxes for your product, compared",
       "kicker": "Code interpreter",
       "question": "My app lets users or an LLM run code, and I need somewhere safe to run it.",
       "standfirst": "A code interpreter is a sandbox your application calls: send code, get back the output, the errors and any files. Each run is short and thrown away, so the price of a second of compute, how quickly a sandbox starts and how many can run at once matter more than anything else.",
@@ -868,6 +872,7 @@
     {
       "id": "browser-agent",
       "title": "Run a browser or computer-use agent",
+      "seoTitle": "Hosting a browser or computer use agent, compared",
       "kicker": "Browser agent",
       "question": "I want an agent that opens websites, clicks and fills in forms, or uses a whole desktop.",
       "standfirst": "Browser agents drive a real Chromium, or a whole desktop with a mouse and keyboard. Memory is the constraint, not CPU, and logins are the thing people forget to keep.",
@@ -954,6 +959,7 @@
     {
       "id": "workflow-automation",
       "title": "Host your own n8n",
+      "seoTitle": "n8n hosting: where to self-host n8n and what it costs",
       "kicker": "Workflow automation",
       "question": "I want n8n running my automations around the clock, on a server I control, without paying per workflow run.",
       "standfirst": "n8n is a visual automation tool you can host yourself. It needs a small machine that never sleeps and keeps its database. Two of the sixteen providers set it up in one click; most others can run it if someone follows terminal steps; the task-only sandboxes are the wrong place for it.",
@@ -1210,6 +1216,7 @@
     {
       "id": "chat-bot",
       "title": "Host your own Discord or Slack bot",
+      "seoTitle": "Discord and Slack bot hosting: where to run it and what it costs",
       "kicker": "Chat bot",
       "question": "I wrote a bot that answers questions in our Discord or Slack using an AI model, and I need somewhere for it to live.",
       "standfirst": "A chat bot is a small program that waits for messages, asks a model and replies. How Discord or Slack delivers those messages decides whether it can ever sleep. No provider hosts your own bot in one click; one provider's guide stands out, and the task-only sandboxes are a poor fit.",
@@ -1461,6 +1468,7 @@
     {
       "id": "claude-code-team",
       "title": "Give a small team Claude Code in the cloud",
+      "seoTitle": "Claude Code in the cloud for a team: setup and costs",
       "kicker": "Coding team",
       "question": "Three to five of us want Claude Code running on cloud machines, each with our own login, without sharing one account.",
       "standfirst": "Claude Code is built for one person on one machine. For a team that means one machine per developer, each signed in with that developer's own account. Five providers ship it preinstalled and one sets it up in one click; the catch is how logins are kept.",
@@ -1717,6 +1725,7 @@
     {
       "id": "scheduled-scraper",
       "title": "Run a scraper on a schedule",
+      "seoTitle": "Run a scraper on a schedule: the cheapest cloud options",
       "kicker": "Scheduled job",
       "question": "I want a script that checks a few websites four times a day and saves what it finds, without paying for a machine that sits idle.",
       "standfirst": "A scheduled scraper runs for minutes a day and is idle the rest. What matters is where the schedule lives and where the results go, not the machine. A schedule inside a sleeping machine does not fire, so look for providers whose platform starts the run.",
@@ -1970,6 +1979,7 @@
     {
       "id": "mcp-server",
       "title": "Host your own MCP server",
+      "seoTitle": "Host a remote MCP server: where to run it and what it costs",
       "kicker": "MCP server",
       "question": "I built tools for Claude as an MCP server, and I want it at a web address so Claude can use them without anything running on my laptop.",
       "standfirst": "A remote MCP server is a small web service that gives an AI client your tools. It needs a public HTTPS address that answers, and very little else. One provider deploys one in a click, a few publish guides, and several providers' own MCP servers are something else entirely.",

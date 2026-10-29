@@ -7,6 +7,7 @@ import {
   checked,
   docLinks,
   features,
+  formatDate,
   glossary,
   pricing,
   providerById,
@@ -15,7 +16,7 @@ import {
   useCases,
 } from "./data";
 import { formatMoney, presets, price } from "./cost";
-import type { Provider } from "../data/schema";
+import type { Capability, Provider, UseCase } from "../data/schema";
 
 export const base = (import.meta.env.SITE as string).replace(/\/$/, "");
 export const abs = (path: string) => `${base}${path}`;
@@ -59,6 +60,43 @@ export function ranking(preset: string) {
     }));
 }
 
+const names = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`);
+const ordinal = (n: number) => `${n}${n % 10 === 1 && n !== 11 ? "st" : n % 10 === 2 && n !== 12 ? "nd" : n % 10 === 3 && n !== 13 ? "rd" : "th"}`;
+
+/** One or two sentences that answer a use-case page's question with prices and a date. */
+export function useCaseAnswer(u: UseCase): string {
+  const all = ranking(u.preset);
+  const fit = all.filter((r) => r.fits);
+  if (!fit.length) return `No provider runs it exactly as described; each has a catch, listed under the costs below.`;
+  const next = fit.slice(1, 3).map((r) => `${r.name} (${formatMoney(r.monthlyUsd)})`);
+  return `The cheapest machine that runs it as described is ${fit[0].name} at ${formatMoney(fit[0].monthlyUsd)} a month${next.length ? `, then ${names(next)}` : ""}. ${fit.length} of ${all.length} providers run it without a catch. Machine cost only, before any AI model, at list prices checked ${formatDate(checked.prices)}.`;
+}
+
+/** What one always-on personal agent costs on this provider, and where that ranks. */
+export function providerAnswer(p: Provider): string | undefined {
+  if (p.status !== "researched") return undefined;
+  const fit = ranking("personal").filter((r) => r.fits);
+  const r = ranking("personal").find((x) => x.provider === p.id);
+  if (!r) return undefined;
+  const cost = `One always-on personal agent (2 vCPU / 4 GiB / 20 GiB) costs about ${formatMoney(r.monthlyUsd)} a month here`;
+  const rank = r.fits
+    ? `${cost}, the ${((n) => (n === 1 ? "" : `${ordinal(n)} `))(fit.findIndex((x) => x.provider === p.id) + 1)}cheapest of the ${fit.length} providers that run it as described.`
+    : `${cost}, with a catch: ${r.problems.join(" ").replace(/\.$/, "")}.`;
+  return `${rank} Fits well: ${p.fits.well[0]}`;
+}
+
+/** Which providers offer a capability, fully and with a catch. */
+export function capabilityAnswer(c: Capability): string | undefined {
+  if (!c.rows.length) return undefined;
+  const who = (v: string) => c.rows.filter((r) => r.verdict === v).map((r) => providerName(r.provider)).sort();
+  const yes = who("yes"), partly = who("partly");
+  return [
+    yes.length ? `${yes.length} of ${c.rows.length} providers offer it fully: ${names(yes)}.` : `None of the ${c.rows.length} providers offers it without a catch.`,
+    partly.length ? `With a catch: ${names(partly)}.` : "",
+    `Checked ${formatDate(checked.capabilities)}.`,
+  ].filter(Boolean).join(" ");
+}
+
 export function rankingsMarkdown(): string {
   const out = [
     `# Monthly cost by use case`,
@@ -77,7 +115,7 @@ export function rankingsMarkdown(): string {
 export function providerMarkdown(p: Provider): string {
   const out = [`# ${p.name}`, ``, `> ${p.oneLiner}`, ``, `Website: ${p.url}  `, `Guide page: ${abs(`/providers/${p.id}/`)}  `, `Checked: ${p.checkedOn ?? site.checkedOn}`];
   if (p.status === "pending") return [...out, ``, `Research on this provider is not finished.`].join("\n") + "\n";
-  out.push(``, ...p.whatItIs, ``, `**Who it is for:** ${p.whoFor}`, ``, `**Isolation:** ${p.isolation}`, ``, `**Sizes and regions:** ${p.sizes}`);
+  out.push(``, `**Short answer:** ${providerAnswer(p)}`, ``, ...p.whatItIs, ``, `**Who it is for:** ${p.whoFor}`, ``, `**Isolation:** ${p.isolation}`, ``, `**Sizes and regions:** ${p.sizes}`);
   out.push(``, `## How it charges`, ``, ...Object.entries(p.billing).map(([k, v]) => `- ${k}: ${v}`));
   const card = pricing.find((c) => c.provider === p.id);
   if (card) out.push(``, card.summary, ...card.notes.map((n) => `- ${n}`));
@@ -109,7 +147,7 @@ export function providerMarkdown(p: Provider): string {
 
 export function useCaseMarkdown(id: string): string {
   const u = useCases.find((x) => x.id === id)!;
-  const out = [`# ${u.title}`, ``, `> ${md(u.question)}`, ``, md(u.standfirst), ``, `Guide page: ${abs(`/use-cases/${u.id}/`)}`, ``, ...u.whatItIs.map(md)];
+  const out = [`# ${u.title}`, ``, `> ${md(u.question)}`, ``, md(u.standfirst), ``, `Guide page: ${abs(`/use-cases/${u.id}/`)}`, ``, `**Short answer:** ${useCaseAnswer(u)}`, ``, ...u.whatItIs.map(md)];
   out.push(``, `## What it needs`, ``, ...u.needs.map((n) => `- **${n.label}:** ${md(n.value)} [source](${n.source})`));
   out.push(``, `## Picks`, ``, ...u.picks.map((p) => `- **${providerName(p.provider)}**, ${md(p.for)}: ${md(p.why)} Watch: ${md(p.watch)} ${p.link}`));
   out.push(``, `## How to run it on each provider`, ``, ...u.routes.map((r) => `- **${providerName(r.provider)}** (${r.tier}; no terminal: ${r.noTerminal}): ${md(r.what)}${r.price ? ` Price: ${r.price}.` : ""}${r.link ? ` [${r.link.title}](${r.link.url})` : ""}`));
@@ -164,6 +202,7 @@ ${providers.map((p) => `- [${p.name}](${abs(`/data/providers/${p.id}.md`)}): ${p
 ${useCases.map((u) => `- [${u.title}](${abs(`/data/use-cases/${u.id}.md`)}): ${md(u.question)}`).join("\n")}
 
 ## Notes
+- About and publisher: ${abs("/about/")}
 - Method and limits: ${abs("/how-we-checked/")}
 - How costs are calculated: ${abs("/costs/how-it-works/")}
 - Source code and data: https://github.com/WyrdWerk/sandbox-guide

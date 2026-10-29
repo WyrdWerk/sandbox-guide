@@ -8,9 +8,11 @@ interface Props {
   meta?: string[];
   /** The section this page sits in, shown as a link at the start of the kicker. */
   parent?: { href: string; label: string };
+  /** The direct answer to the page's question, with a figure and a date. */
+  answer?: string;
 }
 
-const { kicker, title, standfirst, meta = [], parent } = Astro.props;
+const { kicker, title, standfirst, meta = [], parent, answer } = Astro.props;
 const defaultMeta = [
   `${providers.length} providers`,
   `Prices checked ${formatDate(checked.prices)}`,
@@ -32,6 +34,7 @@ const items = meta.length > 0 ? meta : defaultMeta;
     </p>
     <h1 class="page-title">{title}</h1>
     <p class="standfirst">{standfirst}</p>
+    {answer && <p class="page-answer"><strong>Short answer:</strong> {answer}</p>}
     <p class="page-meta">
       {items.map((item, index) => (
         <span class="page-meta__item">

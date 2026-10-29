@@ -4,6 +4,7 @@ import PageHeader from "../../components/PageHeader.astro";
 import Badge from "../../components/Badge.astro";
 import Inline from "../../components/Inline.astro";
 import Related from "../../components/Related.astro";
+import { capabilityAnswer } from "../../lib/agents";
 import { capabilities, capabilitiesOf, capabilityLabel, capabilityVerdicts, features, providers, tagClass, checked, formatDate } from "../../lib/data";
 
 export function getStaticPaths() {
@@ -23,12 +24,13 @@ const names = (v: string) => rows.filter((r) => r.row?.verdict === v).map((r) =>
 const list = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`);
 ---
 
-<Base title={cap.title} description={`${cap.plain} Which of ${rows.length} cloud sandbox providers offer it, and the catch where one falls short.`}>
+<Base title={`${cap.title}: which AI sandboxes have it`} modified={checked.capabilities} description={`${cap.plain} Which of ${rows.length} cloud sandbox providers offer it, and the catch where one falls short.`}>
   <PageHeader
     parent={{ href: "/capabilities/", label: "Capabilities" }}
     kicker={feature.navTitle}
     title={cap.title}
     standfirst={cap.plain}
+    answer={capabilityAnswer(cap)}
     meta={cap.rows.length
       ? [`${count("yes")} yes`, `${count("partly")} with a catch`, `${count("no")} no`, `${count("not-published")} not published`, `Checked ${formatDate(checked.capabilities)}`]
       : ["Research pending"]}
