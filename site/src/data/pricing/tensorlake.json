@@ -12,7 +12,7 @@
   },
   "disk": {
     "running": 0.0002,
-    "stopped": 9.58904109589041e-05
+    "stopped": 0.0000958904109589041
   },
   "between": "kept",
   "maxDisk": 100,
@@ -54,7 +54,7 @@
     }
   ],
   "notes": [
-    "Rates are the Usage Credits rates. Pro's rates are 40% lower — $0.042 per active core-hour, $0.009 per GB-hour of RAM, $0.0001 per GB-hour of disk — and its $250 fee includes 25,000 CU. The calculator prices every plan at the Usage Credits rates, so a Pro bill above $250 of monthly usage is understated.",
+    "Rates are the Usage Credits rates. Pro's rates are lower — $0.042 per active core-hour, $0.009 per GB-hour of RAM (both 40% less) and $0.0001 per GB-hour of disk (50% less) — and its $250 fee includes 25,000 CU. The calculator prices every plan at the higher Usage Credits rates, so a Pro bill above $250 of monthly usage is overstated.",
     "Tensorlake's own pages word Pro differently: the pricing page says the fee includes 25,000 CU ($250 of usage); the billing docs and FAQ say \"$250 per month plus metered usage\". This guide reads them together as $250 that includes $250 of usage, with usage beyond it billed. Get it in writing before relying on it.",
     "CPU bills only while it executes, so the engine applies the workload's busy share. When Tensorlake cannot sample active CPU it falls back to allocated vCPU time, which costs more.",
     "Snapshot storage is $0.07 per GB-month while a sandbox is suspended, modelled here as a per-GB-hour stopped rate (0.07 ÷ 730) on the sandbox's disk size. Tensorlake says only unique bytes are billed, so the real figure can be lower.",
