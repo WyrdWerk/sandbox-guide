@@ -182,8 +182,11 @@ export interface Change {
 }
 
 export interface GlossaryEntry {
+  id: string;
   term: string;
   definition: string;
+  /** A page on this site that explains the idea in full. */
+  see?: string;
 }
 
 /** How a person gets a given agent running on a provider, easiest first. */

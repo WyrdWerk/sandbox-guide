@@ -1,4 +1,5 @@
 ---
+import Term from "../../components/Term.astro";
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import SectionNav from "../../components/SectionNav.astro";
@@ -55,7 +56,7 @@ const nav = [
       <div class="section__head"><h2 class="section__title">What goes in</h2></div>
       <div class="prose">
         <p>
-          You describe a machine (vCPU, memory and disk) and how it runs. Either it is a <strong>machine you keep</strong>:
+          You describe a machine (<Term id="vcpu" />, <Term id="memory">memory</Term> and <Term id="disk">disk</Term>) and how it runs. Either it is a <strong>machine you keep</strong>:
           how many, how many hours a day, on how many days, and whether its files must survive between sessions. Or it
           is a stream of <strong>short throwaway tasks</strong>: how many a month and how long each takes. A month is{" "}
           {MONTH_HOURS} hours.
@@ -75,7 +76,7 @@ const nav = [
         <p>Every one of the fifteen providers fits one of these, sometimes with a twist.</p>
         <ul>
           <li><strong>Per resource, on what you reserve.</strong> CPU, memory and sometimes disk each have an hourly rate, charged for the size you asked for whether or not it is busy. E2B, Daytona, InstaBox, Agent 37, Modal and boxd's CPU work like this.</li>
-          <li><strong>Per resource, on what you use.</strong> CPU is charged only while it works, so an idle agent pays mostly for memory. Runtime (with a small floor), Vercel Sandbox, Cloudflare Sandbox and Sprites work like this, and boxd charges memory on what is actually resident.</li>
+          <li><strong>Per resource, on what you use (<Term id="active-cpu">active-CPU billing</Term>).</strong> CPU is charged only while it works, so an idle agent pays mostly for memory. Runtime (with a small floor), Vercel Sandbox, Cloudflare Sandbox and Sprites work like this, and boxd charges memory on what is actually resident.</li>
           <li><strong>A flat price per size.</strong> You pick from a short list of sizes, each with one hourly price. Boat, Sandboxer and Lizard work like this. If no size matches, you buy the next one up.</li>
           <li><strong>Compute units.</strong> Morph charges one price per unit-hour, where the number of units is set by whichever of CPU, memory or disk is largest relative to the others.</li>
         </ul>

@@ -1,0 +1,30 @@
+{
+  "terms": [
+    { "id": "sandbox", "term": "Sandbox", "definition": "A computer you rent in the cloud, sealed off from everything else, that a program can create, use and throw away. Agents use one so the code they run cannot reach your own machine or other customers.", "see": "/do-you-need-a-sandbox/" },
+    { "id": "vcpu", "term": "vCPU", "definition": "One share of a processor. More vCPUs let a machine do more things at once; an agent waiting for messages uses a small fraction of one.", "see": "/features/sizes-regions/" },
+    { "id": "gib", "term": "GiB / GB", "definition": "Units of memory or disk. A GiB is about 7% larger than a GB; for choosing a provider the difference rarely matters." },
+    { "id": "memory", "term": "Memory (RAM)", "definition": "The machine's working space while it runs. Lost when the machine stops unless the provider saves it. A browser or a large program needs more of it.", "see": "/features/sizes-regions/" },
+    { "id": "disk", "term": "Disk", "definition": "Where files are kept. On some providers the disk survives a stop, on others it is wiped, which is why the guide asks whether files must be kept.", "see": "/features/storage/" },
+    { "id": "egress", "term": "Egress", "definition": "Data the machine sends out to the internet, such as downloads to a user or uploads to another service. Some providers charge per GB; most agents send very little.", "see": "/features/outbound-network/" },
+    { "id": "snapshot", "term": "Snapshot", "definition": "A saved copy of a machine at one moment, so it can be restored or copied later. Some providers save memory and running programs too, others only files.", "see": "/features/snapshots-forks/" },
+    { "id": "fork", "term": "Fork", "definition": "Starting one or more new machines from a snapshot, each continuing from the same point. Useful for trying several things in parallel.", "see": "/features/snapshots-forks/" },
+    { "id": "idle-timeout", "term": "Idle timeout", "definition": "How long a machine can sit unused before the provider pauses, stops or deletes it. Short timeouts save money but can break an agent that must answer at any time.", "see": "/features/idle-timers/" },
+    { "id": "sleep", "term": "Sleep and wake", "definition": "The provider pauses an idle machine and starts it again when a request arrives. You pay little while it sleeps, but the first reply after a pause is slower.", "see": "/features/idle-timers/" },
+    { "id": "cold-start", "term": "Cold start", "definition": "The wait while a machine is created or woken before it can do anything. From under a second to a minute, depending on the provider." },
+    { "id": "active-cpu", "term": "Active-CPU billing", "definition": "The processor is charged only while it is working, not while it waits. Cheap for agents that spend most of their time idle.", "see": "/features/billing-models/" },
+    { "id": "per-second", "term": "Per-second billing", "definition": "Usage is counted to the second, so a two-minute task costs two minutes. Some providers round up to a minimum first.", "see": "/features/billing-models/" },
+    { "id": "plan-credit", "term": "Included usage", "definition": "A monthly plan fee that comes with the same amount, or a set amount, of usage. You pay the fee even if you use less, and pay extra only above it.", "see": "/features/billing-models/" },
+    { "id": "isolation", "term": "Isolation", "definition": "How firmly one machine is kept apart from others on the same hardware. A microVM is a small full computer and is the stronger wall; a container shares more with its neighbours.", "see": "/features/isolation/" },
+    { "id": "region", "term": "Region", "definition": "The part of the world where the machine runs. It matters for speed if your users are far away, and for law if data must stay in a country or the EU.", "see": "/features/sizes-regions/" },
+    { "id": "vps", "term": "VPS", "definition": "A virtual private server: a machine you rent by the month that runs all the time. Cheaper for one always-on agent, but you set it up and look after it yourself.", "see": "/do-you-need-a-sandbox/" },
+    { "id": "terminal", "term": "Terminal", "definition": "A text window where you type commands instead of clicking. Many providers can be set up only this way; the guide says when one cannot." },
+    { "id": "api", "term": "API and SDK", "definition": "Ways for a program, rather than a person, to control the provider: create a machine, run a command, delete it. An SDK is a ready-made library for one programming language.", "see": "/features/ways-to-drive/" },
+    { "id": "ssh", "term": "SSH", "definition": "A standard way to open a terminal on a remote machine from your own computer." , "see": "/features/reaching-it/" },
+    { "id": "custom-domain", "term": "Custom domain", "definition": "Serving what the machine runs at your own web address, such as agent.example.com, instead of the provider's.", "see": "/features/custom-domains/" },
+    { "id": "token", "term": "Token", "definition": "The unit an AI model is billed in, roughly three-quarters of a word. An agent re-reads its instructions and history on every message, so one message can use tens of thousands." },
+    { "id": "cache-read", "term": "Cache read", "definition": "Tokens the model has already seen in this conversation and can reread cheaply. Agents reread a lot, so this is most of their tokens and much cheaper than new input." },
+    { "id": "zdr", "term": "Zero data retention", "definition": "The model provider promises not to store your prompts or replies after answering. This guide prices only model offerings that make this promise." },
+    { "id": "mcp", "term": "MCP", "definition": "Model Context Protocol: a common way to give an AI agent tools, such as reading a calendar or searching a database, served by a small program called an MCP server." },
+    { "id": "webhook", "term": "Webhook", "definition": "A web address that another service calls when something happens, such as a new chat message. It lets a sleeping machine be woken only when needed." }
+  ]
+}

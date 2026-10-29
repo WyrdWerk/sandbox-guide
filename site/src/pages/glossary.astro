@@ -1,0 +1,32 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { glossary } from "../lib/data";
+
+const terms = [...glossary].sort((a, b) => a.term.localeCompare(b.term));
+---
+
+<Base title="Glossary" description="Plain-language definitions of the words used to describe cloud sandboxes and AI agents: vCPU, egress, snapshot, idle timeout, tokens and more.">
+  <PageHeader
+    kicker="Glossary"
+    title="The words, in plain language"
+    standfirst="Every term the guide uses that a non-engineer might not know. Wherever one appears underlined with dots, hover over it or move to it with the keyboard to see the same definition."
+    meta={[`${terms.length} terms`, "Linked to the full explanation"]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush">
+      <dl class="glossary">
+        {terms.map((g) => (
+          <div class="glossary__item" id={g.id}>
+            <dt>{g.term}</dt>
+            <dd>
+              {g.definition}
+              {g.see && <> <a href={g.see}>Read more</a></>}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  </div>
+</Base>

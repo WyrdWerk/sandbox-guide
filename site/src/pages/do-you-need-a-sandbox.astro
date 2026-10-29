@@ -1,4 +1,5 @@
 ---
+import Term from "../components/Term.astro";
 import Base from "../layouts/Base.astro";
 import PageHeader from "../components/PageHeader.astro";
 import SectionNav from "../components/SectionNav.astro";
@@ -114,10 +115,10 @@ const nav = [
           Free, and the quickest way to try an agent. It stops when the computer sleeps or loses its connection, and
           the agent can read and change your own files. Fine for an afternoon, not for something you message from your phone.
         </p>
-        <h3>2. A plain rented server (a VPS)</h3>
+        <h3>2. A plain rented server (a <Term id="vps">VPS</Term>)</h3>
         <p>
           A whole machine in a data centre at a flat monthly price, running all the time. You connect to it from a
-          terminal, install the agent by following its guide, and you keep the system updated and secure yourself. The
+          <Term id="terminal">terminal</Term>, install the agent by following its guide, and you keep the system updated and secure yourself. The
           Hermes README describes running it on <a href="https://github.com/NousResearch/hermes-agent" rel="noreferrer noopener">"a $5 VPS"</a>.
           Nothing is sealed off: if the agent misbehaves, it can damage only that server, which is the main thing a sandbox would add.
         </p>
@@ -146,7 +147,7 @@ const nav = [
       <div class="section__head"><h2 class="section__title">The same machine in every kind of home</h2></div>
       <div class="prose">
         <p>
-          One machine with 2 vCPU and 4 GB of memory that stays on all month, the size this guide uses for a personal
+          One machine with 2 <Term id="vcpu" /> and 4 GB of memory that stays on all month, the size this guide uses for a personal
           Hermes or OpenClaw agent. Prices are the published list prices, before tax, read on 2026-10-29. The AI model
           is billed separately and is the same wherever the machine lives.
         </p>
@@ -192,7 +193,7 @@ const nav = [
           <li><strong>The agent runs code you did not write</strong>, such as code from your customers or from the model itself, and it must not reach anything else. Sandboxes are built to keep it sealed in.</li>
           <li><strong>You need many machines, briefly.</strong> A thousand ten-minute jobs a month cost a few dollars on a sandbox; a server would sit idle the rest of the time.</li>
           <li><strong>It should cost nothing while nobody uses it.</strong> Several sandboxes sleep when idle and wake on a request, so a part-time agent pays for part-time hours.</li>
-          <li><strong>You want to copy, roll back or pause it.</strong> Snapshots and forks let you save a machine exactly as it is and start new ones from that point.</li>
+          <li><strong>You want to copy, roll back or pause it.</strong> <Term id="snapshot">Snapshots</Term> and <Term id="fork">forks</Term> let you save a machine exactly as it is and start new ones from that point.</li>
           <li><strong>Your own software creates the machines.</strong> Every sandbox has an API for this; a VPS usually means a person clicking.</li>
         </ul>
       </div>

@@ -13,6 +13,11 @@ const path = Astro.url.pathname;
 const isCurrent = (href: string) =>
   href === "/" ? path === "/" : path.startsWith(href);
 
+const issueUrl = `https://github.com/WyrdWerk/sandbox-guide/issues/new?${new URLSearchParams({
+  title: `Correction: ${path}`,
+  body: `Page: ${new URL(path, Astro.site)}\n\nWhat is wrong:\n\nWhere the correct information is (a link to the provider's page if you have one):\n`,
+})}`;
+
 const nav = [
   { href: "/use-cases/", label: "Use cases" },
   { href: "/features/", label: "Features" },
@@ -20,6 +25,7 @@ const nav = [
   { href: "/costs/", label: "Costs" },
   { href: "/providers/", label: "Providers" },
   { href: "/changes/", label: "What changed", short: "Changes" },
+  { href: "/glossary/", label: "Glossary" },
   { href: "/how-we-checked/", label: "How we checked", short: "Method" },
 ];
 ---
@@ -31,6 +37,16 @@ const nav = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title === site.title ? title : `${title} — ${site.shortTitle}`}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.shortTitle} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={new URL(path, Astro.site)} />
+    <meta property="og:image" content={new URL("/og.png", Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
     <script is:inline>
       try {
         var t = localStorage.getItem("sg-theme");
@@ -89,7 +105,11 @@ const nav = [
         <p class="sources__note">
           Checked {site.checkedOn}. Documentation and published prices only; no sandbox was started
           or billed. Every claim carries a source link and a provenance tag.{" "}
-          <a href="/how-we-checked/">How we checked</a>.
+          <a href="/how-we-checked/">How we checked</a>. Unfamiliar word? See the <a href="/glossary/">glossary</a>.
+        </p>
+        <p class="sources__note">
+          Spotted a wrong price or an out-of-date claim? <a href={issueUrl} rel="noreferrer noopener">Report something wrong</a>{" "}
+          (opens a GitHub issue for this page; needs a free GitHub account).
         </p>
         <p class="sources__note">
           {providers.length} providers, {features.length} features. The cost calculator follows the approach of{" "}

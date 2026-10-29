@@ -1,6 +1,7 @@
 ---
 // The cost calculator: inputs on the left, every provider priced on the right.
 // The same engine (lib/cost.ts) runs here in the browser and at build time.
+import Term from "./Term.astro";
 import { pricing, providers } from "../lib/data";
 import { presets } from "../lib/cost";
 import modelData from "../data/models.json";
@@ -38,7 +39,7 @@ const field = (name: string) => `${id}-${name}`;
     <fieldset class="calc__group">
       <legend class="calc__legend">The machine</legend>
       <div class="calc__row">
-        <label>vCPU <input type="number" name="vcpu" min="0.25" max="64" step="0.25" inputmode="decimal" /></label>
+        <label><Term id="vcpu" /> <input type="number" name="vcpu" min="0.25" max="64" step="0.25" inputmode="decimal" /></label>
         <label>Memory, GiB <input type="number" name="ram" min="0.25" max="256" step="0.25" inputmode="decimal" /></label>
         <label>Disk, GiB <input type="number" name="disk" min="1" max="2000" step="1" inputmode="numeric" /></label>
       </div>
@@ -85,7 +86,7 @@ const field = (name: string) => `${id}-${name}`;
       </select>
       <div class="calc__row calc__row--two" data-model>
         <label>Messages a day <input type="number" name="messagesPerDay" min="0" max="100000" step="1" /></label>
-        <label>Thousand tokens each <input type="number" name="kTokens" min="0" max="2000" step="1" /></label>
+        <label>Thousand <Term id="token">tokens</Term> each <input type="number" name="kTokens" min="0" max="2000" step="1" /></label>
       </div>
       <p class="calc__hint">
         For most agents the model costs more than the machine. Each message re-sends the agent's instructions and history,
@@ -99,7 +100,7 @@ const field = (name: string) => `${id}-${name}`;
     <p class="calc__summary" data-summary aria-live="polite"></p>
     <ol class="calc__list" data-list></ol>
     <p class="calc__foot">
-      List prices only, excluding model tokens, egress, taxes and anything a provider does not publish.{" "}
+      List prices only, excluding model tokens, <Term id="egress">egress</Term>, taxes and anything a provider does not publish.{" "}
       <a href="/costs/how-it-works/">How the numbers are made</a>.
     </p>
   </div>

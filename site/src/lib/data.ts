@@ -2,6 +2,7 @@ import type {
   Change,
   Confidence,
   Feature,
+  GlossaryEntry,
   Group,
   Provider,
   Situation,
@@ -10,6 +11,7 @@ import type {
 } from "../data/schema";
 import { plainText } from "./plain";
 import { presets, type RateCard } from "./cost";
+import glossaryData from "../data/glossary.json";
 
 /**
  * Provider documentation uses Markdown emphasis and code fences. The data files
@@ -113,6 +115,10 @@ export const pricing: RateCard[] = Object.values(pricingModules).sort((a, b) =>
  * markup, unlike provider quotes, which are stripped to plain text.
  */
 export const useCases: UseCase[] = Object.values(useCaseModule)[0]?.usecases ?? [];
+
+/** Plain-language definitions, shown on hover or focus wherever a <Term> appears. */
+export const glossary: GlossaryEntry[] = glossaryData.terms;
+export const glossaryById = new Map(glossary.map((g) => [g.id, g]));
 
 /** The provider's own documentation page for a feature, by provider id and feature id. */
 export const docLinks: Record<string, Record<string, { title: string; url: string }>> =

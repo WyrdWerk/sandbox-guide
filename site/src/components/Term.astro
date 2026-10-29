@@ -1,0 +1,16 @@
+---
+// A word with its plain-language definition. The definition shows on hover and on
+// keyboard focus; the word links to the glossary, which is what a tap does on a phone.
+import { glossaryById } from "../lib/data";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const entry = glossaryById.get(id);
+if (!entry) throw new Error(`Unknown glossary term "${id}"`);
+const tip = `term-${id}-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<span class="term"><a class="term__word" href={`/glossary/#${id}`} aria-describedby={tip}><slot>{entry.term}</slot></a><span class="term__tip" role="tooltip" id={tip}>{entry.definition}</span></span>
