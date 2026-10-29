@@ -43,7 +43,7 @@
       ],
       "total": "$22.00",
       "notes": [
-        "Prepaid, so the bill is the packs you buy: $22.00 is 2,200 CU, bought as two $10 packs and a $5 pack.",
+        "Prepaid: $22.00 is the 2,200 CU of usage. Packs come in $5, $10 and $20, so the smallest purchase that covers it is $25 (for example a $20 and a $5 pack), leaving $3 of credit for the next month.",
         "On Pro the same month is $250, because the fee already includes $250 of usage."
       ],
       "flag": "Only 50% CPU busy is assumed; Tensorlake bills active CPU, so a task that waits on the network bills less and one that pins both cores bills more."
