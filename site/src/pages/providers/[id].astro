@@ -44,7 +44,7 @@ const statusLabel = {
 };
 ---
 
-<Base title={provider.name} description={provider.oneLiner}>
+<Base title={provider.name} description={provider.oneLiner} markdown={`/data/providers/${provider.id}.md`}>
   <PageHeader
     parent={{ href: "/providers/", label: "Providers" }}
     kicker={`Checked ${provider.checkedOn ?? "pending"}`}

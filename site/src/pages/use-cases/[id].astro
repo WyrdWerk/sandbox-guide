@@ -40,7 +40,7 @@ const nav = [
 ];
 ---
 
-<Base title={useCase.title} description={useCase.standfirst}>
+<Base title={useCase.title} description={useCase.standfirst} markdown={`/data/use-cases/${useCase.id}.md`}>
   <PageHeader
     parent={{ href: "/use-cases/", label: "Use cases" }}
     kicker={useCase.kicker}

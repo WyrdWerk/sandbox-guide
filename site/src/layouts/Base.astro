@@ -6,9 +6,23 @@ import { features, providers, checked, formatDate } from "../lib/data";
 interface Props {
   title: string;
   description?: string;
+  /** This page's Markdown twin under /data/, for agents. */
+  markdown?: string;
 }
 
-const { title, description = site.description } = Astro.props;
+const { title, description = site.description, markdown } = Astro.props;
+const ld = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.shortTitle,
+  url: new URL("/", Astro.site).href,
+  description: site.description,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${new URL("/search/", Astro.site).href}?q={query}`,
+    "query-input": "required name=query",
+  },
+};
 const path = Astro.url.pathname;
 const isCurrent = (href: string) =>
   href === "/" ? path === "/" : path.startsWith(href);
@@ -49,6 +63,10 @@ const nav = [
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Guide for AI agents (llms.txt)" />
+    {markdown && <link rel="alternate" type="text/markdown" href={markdown} title="This page as Markdown" />}
+    {path === "/" && <script type="application/ld+json" set:html={JSON.stringify(ld)}></script>}
     <script is:inline>
       try {
         var t = localStorage.getItem("sg-theme");
@@ -118,6 +136,10 @@ const nav = [
           <a href="https://battleships.dev" rel="noreferrer noopener">battleships.dev</a>, the price-comparison
           dataset built by the Boat team, with thanks; its rates here are re-read from each provider's own pages.{" "}
           <a href="/costs/how-it-works/#battleships">How the two differ</a>.
+        </p>
+        <p class="sources__note">
+          For AI agents and scripts: <a href="/llms.txt">llms.txt</a> and the same data as plain{" "}
+          <a href="/data/index.json">JSON</a> and <a href="/llms-full.txt">Markdown</a>.
         </p>
       </div>
     </footer>

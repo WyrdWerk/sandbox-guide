@@ -30,6 +30,15 @@ amp orb service start sandbox-guide \
 Adjust the absolute checkout path outside this orb. Share the returned portal URL, not a localhost
 or direct sandbox-host URL. Rebuild after changing data; preview serves `dist/` from disk.
 
+## For search engines and AI agents
+
+The build also writes plain versions of the guide, generated from the same data as the pages:
+`/llms.txt` (the entry point for agents), `/llms-full.txt` (everything in one file), and `/data/`
+(`index.json`, per-provider `.md` and `.json`, per-use-case `.md`, features, capabilities, presets
+and cost rankings). See `src/lib/agents.ts` and `src/pages/data/[...path].ts`. It also writes
+`robots.txt` and `sitemap.xml`.
+Every absolute URL comes from `site` in `astro.config.mjs` (`https://botperch.com`).
+
 ## Structure
 
 Paths in this table are relative to `site/`:
