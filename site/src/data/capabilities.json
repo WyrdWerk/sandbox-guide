@@ -166,14 +166,15 @@
         },
         {
           "provider": "tensorlake",
-          "verdict": "yes",
-          "figure": "microVM",
-          "note": "GPU sandboxes are gVisor containers instead of virtual machines.",
+          "verdict": "partly",
+          "figure": "VM, except GPU",
+          "note": "Graphics sandboxes are the exception; the standard CPU machines have their own kernel.",
           "source": {
             "url": "https://docs.tensorlake.ai/sandboxes/introduction",
             "quote": "GPU sandboxes use gVisor while CPU-only sandboxes run in VMs.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "shortfall": "The ordinary machines are real virtual machines, but the graphics-card machines you have to ask for are containers instead."
         }
       ]
     },

@@ -73,6 +73,11 @@ against live vendor pages today (29 October 2026).
   Ubuntu-based image" is the only route to a non-standard base image, and it is a support action.
 - **Modal `big-machines` = yes.** Modal enforces a per-container maximum but does not publish it; the
   `yes` rests on being able to request 16+ physical cores, not on a published ceiling.
+- **Tensorlake `own-vm` = partly.** The ordinary machines are microVMs, but the graphics-card machines,
+  which are available on request, run on gVisor instead. This was first recorded as `yes` with the GPU
+  exception only in the note; it is now `partly`, because the capability holds for the CPU sizes and not
+  for the GPU size, which is the "limited to some sizes" case. The shortfall says the standard machines
+  are still real virtual machines.
 - **Tensorlake `choose-region` / `eu-region` = yes.** EU residency is a separate API endpoint for the
   whole account, not a per-sandbox region setting.
 - **Tensorlake `big-machines` = yes.** 16 vCPU / 64 GB exists, but only on the $250-a-month Pro plan;
@@ -111,8 +116,9 @@ against live vendor pages today (29 October 2026).
 ## Decisions the parent may want to make
 
 1. **What counts as `own-vm`.** I treated a gVisor container as `partly` (Agent 37, Modal) and a plain
-   shared-kernel container as `partly` too (Daytona). If the site wants a stricter line — gVisor is not a
-   virtual machine, so `no` — those three rows change.
+   shared-kernel container as `partly` too (Daytona), and a VM that turns into a gVisor container on its
+   GPU sizes as `partly` as well (Tensorlake). If the site wants a stricter line — gVisor is not a
+   virtual machine, so `no` — those four rows change.
 2. **Whether a size behind a paid plan is still "available".** I marked Boat's 16-core `xlarge`
    ($100 plan), Sandboxer's `xlarge` ($100 plan), InstaBox's 32-core (Team, $500) and Tensorlake's 16-core
    (Pro, $250) as `yes` with the plan named in the note. Marking them `partly` would move four rows.
