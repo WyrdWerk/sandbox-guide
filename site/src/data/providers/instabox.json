@@ -97,7 +97,7 @@
       "total": "$3.14 of usage",
       "notes": [
         "On Free the nearest size would be $4.67 of usage, billed at $0.",
-        "A free machine pauses itself after 30 idle minutes and cannot run more than 8 hours continuously."
+        "A free machine pauses itself after 30 idle minutes, and the free plan cannot change that."
       ]
     }
   },
@@ -175,7 +175,7 @@
       "Claude Code and Codex in the default image, with logins that persist in /data/home."
     ],
     "badly": [
-      "An always-on agent: the free plan pauses at 30 idle minutes and caps a run at 8 hours.",
+      "An always-on agent on the free plan, which always pauses at 30 idle minutes.",
       "A client-facing service on your own address: there is no custom domain, and only private ports carry a token.",
       "A US-only data-residency requirement with a published region selector or status page."
     ]
@@ -190,7 +190,7 @@
       "Two different off switches: pause keeps the session, stop does not, and you cannot stop a paused machine.",
       "A snapshot does not save the session, only files and installs.",
       "Fork is not instant, despite the homepage.",
-      "The free machine is not a server: it pauses after 30 idle minutes and cannot run longer than 8 hours.",
+      "The free machine is not a server: it always pauses after 30 idle minutes.",
       "Public port URLs have no password."
     ]
   },
@@ -213,8 +213,8 @@
       ]
     },
     {
-      "issue": "The free plan's 8-hour continuous runtime cap is only in the API schema",
-      "detail": "`MaxRunMinutes` defaults to 480 for free machines. No docs page mentions it, so a reader of the pricing page would not know.",
+      "issue": "An 8-hour free run cap has left the docs",
+      "detail": "Earlier research found `MaxRunMinutes` defaulting to 480 for free machines in the API schema. On 29 October no docs or API page mentions it and the machines page says there is no forced TTL, so the guide no longer states a cap.",
       "status": "open"
     },
     {

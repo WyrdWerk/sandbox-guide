@@ -21,7 +21,7 @@
     {
       "heading": "The free plans have hard caps",
       "body": [
-        "InstaBox's free plan gives one 4 vCPU / 8 GiB machine, two templates, a fixed 30-minute idle pause and an 8-hour maximum continuous run. Runtime's free usage caps at 2 vCPU / 4 GiB / 10 GiB, four sandboxes at once and 50 created a day. Vercel's Hobby plan is non-commercial and pauses sandbox creation when its quotas run out.",
+        "InstaBox's free plan gives one 4 vCPU / 8 GiB machine, two templates, and a fixed 30-minute idle pause. Runtime's free usage caps at 2 vCPU / 4 GiB / 10 GiB, four sandboxes at once and 50 created a day. Vercel's Hobby plan is non-commercial and pauses sandbox creation when its quotas run out.",
         "Those caps are the product decision. A free plan that cannot stay up is not a substitute for a cheap paid one."
       ]
     },
@@ -129,8 +129,8 @@
       "provider": "instabox",
       "verdict": "yes",
       "figure": "Free plan, 1 machine",
-      "scenario": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB disk, five snapshots, an 8-hour run cap, and it never converts.",
-      "note": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB fixed disk, five snapshots, 100 GiB egress, an 8-hour run cap and two templates. It never converts.",
+      "scenario": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB disk, five snapshots and a fixed 30-minute idle pause, and it never converts.",
+      "note": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB fixed disk, five snapshots, 100 GiB egress, a fixed 30-minute idle pause and two templates. It never converts.",
       "source": {
         "url": "https://instabox.sh/pricing",
         "quote": "1 machine, 4 vCPU / 8 GiB",

@@ -3,7 +3,7 @@
 Checked 2026-10-29. 18 capabilities × 16 providers = 288 rows. Every quote in the JSON was checked
 against the live page it cites on this date, not against `research/*.md`.
 
-Counts: 144 yes, 54 partly, 83 no, 7 not-published.
+Counts: 143 yes, 55 partly, 83 no, 7 not-published.
 
 ## Contradictions between pages
 
@@ -50,6 +50,11 @@ presets list 50 GiB. Both are below 100 GiB, so the verdict is `no` either way.
 - **`backups` for Boat and Sandboxer = yes.** Both take automatic disk snapshots on a timer (every
   minute, every ten minutes), but both keep them on the same machine or cluster. They are scheduled
   copies, not disaster recovery. The notes on those rows say so.
+- **Cloudflare `templates` = partly.** Images are reusable and you can start any number of sandboxes
+  from one, but turning a *running* machine into a template is only the snapshot route, which is in
+  public beta, keeps the filesystem only, and expires after 30 days. The docs describe a snapshot
+  being restored into the next instance, not starting several machines from one snapshot. An earlier
+  pass had this as `yes` on the strength of the image sentence alone.
 - **Cloudflare `shared-volume` = partly.** Several sandboxes can mount the same R2 prefix, but the
   docs never say so outright and there is no locking.
 - **InstaBox `stay-on` = yes.** The older research recorded an 8-hour cap on free machines. That

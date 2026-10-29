@@ -20,7 +20,7 @@
         {
           "provider": "instabox",
           "why": "Pause keeps the agent's session and bills storage only, and the dashboard creates the machine and opens a clickable desktop.",
-          "watch": "The free plan caps continuous runtime at 8 hours and pauses after 30 idle minutes; public URLs have no password."
+          "watch": "The free plan pauses after 30 idle minutes and that cannot be switched off; public URLs have no password unless you make the port private."
         },
         {
           "provider": "runtime",

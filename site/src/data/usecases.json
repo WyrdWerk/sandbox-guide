@@ -915,7 +915,7 @@
           "provider": "instabox",
           "for": "A desktop you can watch",
           "why": "The agent-browser image comes with a desktop and Chromium you can open from the dashboard, and an idle machine pauses itself and wakes when its preview link is used.",
-          "watch": "The free plan is one 4 vCPU / 8 GiB machine with an 8-hour limit on each run.",
+          "watch": "The free plan is one 4 vCPU / 8 GiB machine that pauses after 30 idle minutes.",
           "link": "https://instabox.sh/docs/desktop"
         },
         {

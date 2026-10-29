@@ -38,7 +38,7 @@
     }
   ],
   "notes": [
-    "The free plan is one 4 vCPU / 8 GiB machine capped at 8 hours of continuous runtime; it is not priced here.",
+    "The free plan is one 4 vCPU / 8 GiB machine that pauses after 30 idle minutes; it is not priced here.",
     "Egress is $0.02 per GiB and is not included."
   ],
   "sources": [
