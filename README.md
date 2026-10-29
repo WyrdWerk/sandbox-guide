@@ -1,8 +1,8 @@
-# Sandbox guide
+# Bot Perch
 
 A plain-language guide to cloud sandboxes for AI agents. It helps people choose a provider for a job, understand the catches, and estimate machine and model costs separately.
 
-**Live site: https://sandbox-guide.pages.dev. A push to `main` deploys it through Cloudflare Pages. Ask the owner before pushing to `main`.** Passing local checks is not permission to publish.
+**Live site: https://botperch.com (also https://sandbox-guide.pages.dev). A push to `main` deploys it through Cloudflare Pages. Ask the owner before pushing to `main`.** Passing local checks is not permission to publish.
 
 ## What is covered
 

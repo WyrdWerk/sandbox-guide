@@ -1,10 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
+import site from "../data/site.json";
 import SituationIcon from "../components/SituationIcon.astro";
 import { features, groups, providers, situations, useCases, checked, formatDate } from "../lib/data";
 ---
 
-<Base title="Sandbox guide">
+<Base title={site.title}>
   <div class="wrap">
     <header class="page-header">
       <p class="kicker">{providers.length} providers, {features.length} features</p>

@@ -1,4 +1,4 @@
-# Sandbox guide site
+# Bot Perch site
 
 A static Astro site with no backend or client UI framework. It currently renders 16 researched
 providers, 16 features, 78 capabilities and 10 use-case guides, plus search, glossary, recommendations,
@@ -24,7 +24,7 @@ pause/resume. From the repository root at the standard orb checkout path:
 ```bash
 amp orb service start sandbox-guide \
   --command 'npm --prefix /home/user/workspace/repo/site run preview' \
-  --portal --title 'Sandbox guide'
+  --portal --title 'Bot Perch'
 ```
 
 Adjust the absolute checkout path outside this orb. Share the returned portal URL, not a localhost
