@@ -10665,13 +10665,13 @@
         {
           "provider": "tensorlake",
           "verdict": "partly",
-          "note": "Organisation roles are admin and member; project roles are admin and member.",
           "source": {
-            "url": "https://docs.tensorlake.ai/platform/access-control.md",
+            "url": "https://docs.tensorlake.ai/platform/access-control",
             "quote": "Organizations implement a role-based access control system with two distinct roles: admin and member.",
             "confidence": "docs-confirmed"
           },
-          "shortfall": "Roles are documented, but the pricing page lists role-based access under the Enterprise plan, so check which plan you need."
+          "shortfall": "Every plan gets two fixed roles, admin and member, at organization and project level; fuller role-based access is listed under the Enterprise plan.",
+          "figure": "Admin and member only"
         }
       ]
     },
