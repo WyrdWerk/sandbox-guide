@@ -22,6 +22,8 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["boxd", "b", 222.5],
   ["agent37", "b", 30.1],
   ["tensorlake", "a", 22], ["tensorlake", "b", 250], ["tensorlake", "c", 8.25],
+  // 1,000 runs at the $0.01 minimum; 730 h capped at $48; 90 on + 640 powered off, capped at $24.
+  ["digitalocean", "a", 10], ["digitalocean", "b", 48], ["digitalocean", "c", 24],
 ];
 
 for (const [id, key, expected] of handWorked) {

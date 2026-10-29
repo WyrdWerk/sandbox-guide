@@ -277,6 +277,18 @@
         "quote": "TensorLake will use commercially reasonable efforts to make the Control Plane available 99.9% of the time in each calendar month",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "yes",
+      "figure": "LLC; 99.99% SLA; SOC 2",
+      "scenario": "A public company with a 99.99% per-Droplet SLA, SOC 2 Type II and a published DPA.",
+      "note": "DigitalOcean, LLC, founded 2012, listed on the NYSE as DOCN with more than 680,000 customers. SOC 2 Type II and SOC 3 Type II, a published DPA and a public status page.",
+      "source": {
+        "url": "https://www.digitalocean.com/sla/cpu-droplets",
+        "quote": "DigitalOcean commits to a Monthly Uptime Percentage of 99.99% for each individual Droplet instance.",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "Contracting entity; promise",
@@ -297,7 +309,7 @@
         "what": "A SOC 2 report names an entity and a system. A badge on a marketing page names neither."
       }
     ],
-    "turn": "Most of the sixteen publish no SLA at all, and the numbers that do exist cover a platform, an API or an enterprise tier rather than the sandbox product. The compliance answer is narrower than the badge: one report belongs to a different company, one covers a data centre, and one Trust Center shows HIPAA only."
+    "turn": "Most of the sixteen sandbox providers publish no SLA at all (DigitalOcean, a VPS, publishes 99.99% per Droplet), and the numbers that do exist cover a platform, an API or an enterprise tier rather than the sandbox product. The compliance answer is narrower than the badge: one report belongs to a different company, one covers a data centre, and one Trust Center shows HIPAA only."
   },
   "questions": [
     "Which legal entity signs, in which jurisdiction, and does the name on the terms match the name on the invoice?",

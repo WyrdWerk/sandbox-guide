@@ -232,6 +232,18 @@
         "quote": "The sandbox's root disk is ephemeral; a mounted filesystem is durable, survives the sandbox, and can be shared by many sandboxes at once.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "yes",
+      "figure": "Whole disk + 16 TiB volumes",
+      "scenario": "Postgres in /var/lib survives a power-off and a reboot, and a volume can outlive the Droplet.",
+      "note": "The whole boot disk persists with the machine. Volumes run from 1 GiB to 16 TiB at $0.10/GiB-month and attach to one Droplet at a time. Volumes are billed whether attached or not, and are not included in Droplet backups.",
+      "source": {
+        "url": "https://docs.digitalocean.com/products/volumes/details/pricing/",
+        "quote": "DigitalOcean Volumes Block Storage cost $0.10 per GiB per month and range from 1 GiB to 16384 GiB (16 TiB).",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "Disk, and how long it is kept",

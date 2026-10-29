@@ -7,7 +7,7 @@
       "seoTitle": "Hermes agent hosting: where to run it and what it costs",
       "kicker": "Personal agent",
       "question": "I want a personal assistant that answers me on Telegram, remembers what I tell it and runs jobs on a schedule.",
-      "standfirst": "Hermes is a personal AI agent you host yourself. It needs a small machine that stays on and keeps its files. Only one of the sixteen providers offers it in one click; most can run it if you can follow terminal instructions; a few are a poor fit for an assistant that never sleeps.",
+      "standfirst": "Hermes is a personal AI agent you host yourself. It needs a small machine that stays on and keeps its files. Two providers offer it in one click (Agent 37 with no terminal at all, DigitalOcean as a Marketplace server image); most can run it if you can follow terminal instructions; a few are a poor fit for an assistant that never sleeps.",
       "preset": "personal",
       "whatItIs": [
         "[Hermes Agent](https://github.com/NousResearch/hermes-agent) is an open-source (MIT) assistant from Nous Research. You talk to it from Telegram, Slack, WhatsApp, email and [20+ other apps](https://hermes-agent.nousresearch.com/docs/), it keeps a memory of you between conversations, and it writes itself reusable skills from what it does.",
@@ -206,13 +206,24 @@
             "title": "Tensorlake: timeout and plan limits",
             "url": "https://docs.tensorlake.ai/sandboxes/lifecycle#timeout"
           }
+        },
+        {
+          "provider": "digitalocean",
+          "tier": "one-click",
+          "noTerminal": "partly",
+          "what": "The Marketplace 'Hermes Agent' image creates a Droplet with Hermes, Node and the OpenAI SDK installed. The listing publishes no post-deploy steps beyond the API example, so expect to add a model key and a channel in the console.",
+          "link": {
+            "title": "Hermes Agent 1-Click",
+            "url": "https://marketplace.digitalocean.com/apps/hermes-agent"
+          },
+          "price": "Droplet from $6/month; no agent surcharge"
         }
       ],
       "picks": [
         {
           "provider": "agent37",
           "for": "If you do not want a terminal",
-          "why": "The only provider of the sixteen that sets up Hermes in one click. Plans run from $3.99 a month (1 vCPU / 4 GB / 8 GB, bring your own model key) to $29.99 (2 vCPU / 8 GB / 20 GB, with a built-in browser).",
+          "why": "The only provider here that sets up Hermes in one click with no terminal at all. Plans run from $3.99 a month (1 vCPU / 4 GB / 8 GB, bring your own model key) to $29.99 (2 vCPU / 8 GB / 20 GB, with a built-in browser).",
           "watch": "The free plan sleeps after 15 idle minutes. These Personal plans are a separate product from the Agent 37 Cloud machines the calculator prices.",
           "link": "https://www.agent37.com/personal"
         },
@@ -273,7 +284,7 @@
       "seoTitle": "OpenClaw hosting: where to run it and what it costs",
       "kicker": "Personal agent",
       "question": "I want OpenClaw answering me on WhatsApp or Slack, with its own browser and memory, without keeping my laptop on.",
-      "standfirst": "OpenClaw is a self-hosted assistant built around one always-on gateway. It has more official hosting guides than Hermes: two of the sixteen providers deploy it in one click, and four more publish a guide or template.",
+      "standfirst": "OpenClaw is a self-hosted assistant built around one always-on gateway. It has more official hosting guides than Hermes: three providers deploy it in one click, and four more publish a guide or template.",
       "preset": "personal",
       "whatItIs": [
         "[OpenClaw](https://docs.openclaw.ai/help/faq/what-is-openclaw) is an open-source assistant you run on your own infrastructure, for yourself or a team. It replies on the apps you already use, including WhatsApp, Slack, Telegram, Discord, Signal and iMessage, and can read files, run commands, browse and keep memory.",
@@ -465,6 +476,17 @@
             "title": "Tensorlake: a sandbox as your dev environment",
             "url": "https://docs.tensorlake.ai/sandboxes/remote-dev"
           }
+        },
+        {
+          "provider": "digitalocean",
+          "tier": "one-click",
+          "noTerminal": "partly",
+          "what": "The hardened OpenClaw image provisions a Droplet with Caddy and a Let's Encrypt certificate, a generated gateway token, device pairing, container isolation, fail2ban and unattended upgrades. You still copy the gateway token and pair a device.",
+          "link": {
+            "title": "OpenClaw 1-Click",
+            "url": "https://marketplace.digitalocean.com/apps/openclaw"
+          },
+          "price": "$12/month"
         }
       ],
       "picks": [
@@ -488,6 +510,13 @@
           "why": "OpenClaw documents Daytona itself, and the default image already has it installed. $200 of free compute covers the first month or so.",
           "watch": "Each sandbox's disk is capped at 10 GiB, and a 2 vCPU / 4 GiB machine on all month is about $122.",
           "link": "https://docs.openclaw.ai/install/daytona"
+        },
+        {
+          "provider": "digitalocean",
+          "for": "A cheap, hardened, always-on OpenClaw with its own public address",
+          "why": "A $12/month Droplet arrives with TLS, a gateway token, device pairing, container isolation and fail2ban already configured, on a real VM with root and 16 regions.",
+          "watch": "Powering off does not stop the bill, and the $12 tier is the floor only since the February 2026 update; the January image needed $24.",
+          "link": "https://marketplace.digitalocean.com/apps/openclaw"
         }
       ],
       "outside": "OpenClaw also documents ordinary hosts. Hostinger sells a one-click managed OpenClaw from $4.99 a month on a two-year term, renewing at $11.99. OpenClaw's Fly.io guide estimates $10 to $15 a month. Railway and Northflank have one-click templates with no price on the guide. Render's free tier sleeps after 15 minutes, which breaks an always-on Gateway.",
@@ -676,6 +705,17 @@
             "title": "Run OpenCode with Tensorlake Sandboxes",
             "url": "https://docs.tensorlake.ai/sandboxes/opencode"
           }
+        },
+        {
+          "provider": "digitalocean",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Claude Code or Codex on a Droplet yourself; the default images have no coding agent. A 2 vCPU / 4 GiB Basic Droplet at $24/month is enough for one developer.",
+          "link": {
+            "title": "Droplets",
+            "url": "https://docs.digitalocean.com/products/droplets/"
+          },
+          "price": "$24 a month for 2 vCPU / 4 GiB, on or powered off"
         }
       ],
       "picks": [
@@ -822,6 +862,17 @@
             "title": "Tensorlake: tool calls",
             "url": "https://docs.tensorlake.ai/sandboxes/tool-calls"
           }
+        },
+        {
+          "provider": "digitalocean",
+          "tier": "backend",
+          "noTerminal": "no",
+          "what": "Harness Runtime runs each session in a Firecracker microVM through doctl, PyDo or the API. Medium (2 vCPU / 4 GB) is $0.126 an hour at full allocation, with CPU and memory billed separately from storage.",
+          "link": {
+            "title": "Harness Runtime pricing",
+            "url": "https://www.digitalocean.com/pricing/harness-runtime"
+          },
+          "price": "$0.126/hour at full Medium allocation"
         }
       ],
       "picks": [
@@ -913,6 +964,16 @@
             "title": "Tensorlake: computer use",
             "url": "https://docs.tensorlake.ai/sandboxes/computer-use"
           }
+        },
+        {
+          "provider": "digitalocean",
+          "tier": "backend",
+          "noTerminal": "no",
+          "what": "Harness Runtime sessions include chromium and a browser-automation tool, but there is no desktop and no live preview of a running app.",
+          "link": {
+            "title": "Managed Agents",
+            "url": "https://www.digitalocean.com/products/managed-agents"
+          }
         }
       ],
       "picks": [
@@ -962,7 +1023,7 @@
       "seoTitle": "n8n hosting: where to self-host n8n and what it costs",
       "kicker": "Workflow automation",
       "question": "I want n8n running my automations around the clock, on a server I control, without paying per workflow run.",
-      "standfirst": "n8n is a visual automation tool you can host yourself. It needs a small machine that never sleeps and keeps its database. Two of the sixteen providers set it up in one click; most others can run it if someone follows terminal steps; the task-only sandboxes are the wrong place for it.",
+      "standfirst": "n8n is a visual automation tool you can host yourself. It needs a small machine that never sleeps and keeps its database. Two providers set it up in one click; most others can run it if someone follows terminal steps; the task-only sandboxes are the wrong place for it.",
       "preset": "automation",
       "whatItIs": [
         "[n8n](https://docs.n8n.io/) is a workflow automation tool. You draw a workflow on a canvas: a **trigger** (something that starts it, such as a form being sent or a time of day), then steps that call other apps, reshape data or ask an AI model. Its [README](https://github.com/n8n-io/n8n) counts 1,500+ ready-made connections.",
@@ -1144,6 +1205,17 @@
           "noTerminal": "no",
           "what": "Not suitable: Vercel sandboxes are made for one task at a time, with no way to keep a web app running.",
           "link": null
+        },
+        {
+          "provider": "digitalocean",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run n8n and its database in Docker on one Droplet, keeping the encryption key yourself. A 2 vCPU / 4 GiB box at $24/month is the practical floor once the database is on the same machine.",
+          "link": {
+            "title": "Docker 1-Click",
+            "url": "https://marketplace.digitalocean.com/apps/docker"
+          },
+          "price": "$24/month"
         }
       ],
       "picks": [
@@ -1401,6 +1473,17 @@
           "noTerminal": "no",
           "what": "Not suitable: sandboxes are made for one task and functions for one request, with no documented way to hold a connection open.",
           "link": null
+        },
+        {
+          "provider": "digitalocean",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "An always-on Droplet keeps the Discord or Slack gateway connected, because nothing idles or stops it. 1 vCPU / 2 GiB at $12/month is enough for one server.",
+          "link": {
+            "title": "Droplet pricing",
+            "url": "https://www.digitalocean.com/pricing/droplets"
+          },
+          "price": "$12/month"
         }
       ],
       "picks": [
@@ -1653,6 +1736,17 @@
           "noTerminal": "no",
           "what": "Not documented, and Modal sandboxes have no stopped state that keeps a developer's files.",
           "link": null
+        },
+        {
+          "provider": "digitalocean",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "One Droplet per developer, each with its own login and credentials; there is no shared team login. A powered-off Droplet is still billed, so five 4 vCPU / 8 GiB machines used eight hours a day cost the full month each unless you destroy them after work and restore from a snapshot.",
+          "link": {
+            "title": "Droplet pricing",
+            "url": "https://www.digitalocean.com/pricing/droplets"
+          },
+          "price": "5 × $48 = $240 a month"
         }
       ],
       "picks": [
@@ -1912,6 +2006,17 @@
             "title": "Sprites: keeping Sprites running",
             "url": "https://docs.fly.io/sprites/keeping-sprites-running.md"
           }
+        },
+        {
+          "provider": "digitalocean",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "cron inside a Droplet that stays on. DigitalOcean has no scheduler that starts a machine, so the idle hours between runs are billed at the full rate.",
+          "link": {
+            "title": "Droplet pricing",
+            "url": "https://www.digitalocean.com/pricing/droplets"
+          },
+          "price": "$12/month for 1 vCPU / 2 GiB"
         }
       ],
       "picks": [
@@ -2167,6 +2272,17 @@
             "title": "Vercel Sandbox: concepts",
             "url": "https://vercel.com/docs/sandbox/concepts"
           }
+        },
+        {
+          "provider": "digitalocean",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "A small Droplet with a public IPv4 answers at a stable address all month. DigitalOcean's own MCP server manages DigitalOcean resources; it does not host your server.",
+          "link": {
+            "title": "DigitalOcean MCP servers",
+            "url": "https://docs.digitalocean.com/reference/mcp/"
+          },
+          "price": "$6/month for 1 vCPU / 1 GiB"
         }
       ],
       "picks": [
@@ -2190,6 +2306,13 @@
           "why": "CPU is billed only while it works, so a small server answering all month is about $6, with a custom domain.",
           "watch": "No MCP guide; you set up the server, HTTPS address and access check yourself. One US region.",
           "link": "https://withruntime.com/docs/pricing"
+        },
+        {
+          "provider": "digitalocean",
+          "for": "A small always-on MCP endpoint on a known address",
+          "why": "$6 a month buys a 1 vCPU / 1 GiB Droplet with a public IPv4, any TCP port except SMTP, and no idle stop to wake from.",
+          "watch": "There is no hard spend cap and no tokenised URL: you add TLS and authentication yourself, and a spend alert only emails you.",
+          "link": "https://www.digitalocean.com/pricing/droplets"
         }
       ],
       "outside": "[Cloudflare Workers](https://developers.cloudflare.com/workers/platform/pricing/) on their own are the cheapest home: free up to 100,000 requests a day, or a $5 monthly minimum. [Vercel Functions](https://vercel.com/docs/plans/pro-plan) are free on Hobby, with a $20 monthly Pro fee. [Render](https://render.com/pricing) runs an always-on web service from $7 a month for 512 MB.",

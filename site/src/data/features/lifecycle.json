@@ -259,6 +259,18 @@
         "quote": "A resumed sandbox continues from the exact memory and file system state, it was suspended.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "no",
+      "figure": "Power off bills in full",
+      "scenario": "Powering off keeps the disk but loses memory and processes, and the meter keeps running at the full hourly rate.",
+      "note": "There is no pause and no idle stop. Power off keeps the disk and the bill; destroy ends both, and the disk goes with it unless snapshotted. Managed Agents is the only product here that pauses a session and resumes it.",
+      "source": {
+        "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+        "quote": "You are still billed for bundled-plan CPU Droplets that are powered off because the compute resources stay reserved on the hypervisor.",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "What a pause keeps",
@@ -279,7 +291,7 @@
         "what": "You check the dev server, the cron job and the IP address the agent had written down."
       }
     ],
-    "turn": "Twelve of the sixteen can restore memory in at least one mode, but not all make it the default. Boat and Cloudflare keep nothing, and Lizard's stop deletes the disk."
+    "turn": "Twelve of the sixteen sandbox providers can restore memory in at least one mode, but not all make it the default. Boat and Cloudflare keep nothing, Lizard's stop deletes the disk, and a VPS keeps its disk but loses memory when it powers off."
   },
   "questions": [
     "Does your pause keep RAM, keep only files, or destroy the machine — and what does your documentation call each state?",

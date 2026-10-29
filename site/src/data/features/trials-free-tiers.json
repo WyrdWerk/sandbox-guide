@@ -232,6 +232,18 @@
         "quote": "You can start on our Free tier and run 1 sandbox at a time — no credit card required.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "partly",
+      "figure": "$5 credit, 90 days",
+      "scenario": "A $5 credit for 90 days, but a payment method is required before the first Droplet exists.",
+      "note": "No free tier. A $5 signup credit expires after 90 days, and a card or PayPal must be on file before any Droplet can be created. Managed Agents has a separate $5 trial that the blog says needs no card; that is a different product.",
+      "source": {
+        "url": "https://docs.digitalocean.com/platform/billing/signup-credit/",
+        "quote": "Signup credits expire 90 days after signup.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What you get, and what ends it",

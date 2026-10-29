@@ -232,6 +232,18 @@
         "quote": "The model edits, runs, and searches inside an isolated environment instead of on your machine.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "partly",
+      "figure": "OpenClaw/Hermes 1-Click",
+      "scenario": "OpenClaw or Hermes from the Marketplace arrives installed and configured; the default Ubuntu image has no coding agent at all.",
+      "note": "Marketplace 1-Click images for OpenClaw (hardened, from $12/month), Hermes Agent and Docker Agent. A Droplet has no prompt API. Managed Agents runs Claude Code, Codex, OpenCode, Hermes and LangGraph as a separate, separately priced product.",
+      "source": {
+        "url": "https://www.digitalocean.com/blog/moltbot-on-digitalocean",
+        "quote": "1-Click deployment for OpenClaw on DigitalOcean Droplet® servers, now starting at just $12/month",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Agents installed, and promptable?",

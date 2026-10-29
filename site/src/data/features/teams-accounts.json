@@ -232,6 +232,18 @@
         "quote": "When the balance reaches zero, Tensorlake blocks new sandbox activity and stops running sandboxes instead of creating a postpaid overage.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "partly",
+      "figure": "Roles, OIDC SSO; no cap",
+      "scenario": "A team shares Droplets and billing, with roles and OIDC single sign-on, but a spend alert cannot stop the bill.",
+      "note": "Six predefined roles plus custom roles, OIDC single sign-on, and spend alerts at percentage thresholds of a budget. The docs say a budget is not a cap; the only pause exists for model access key alerts. Account-wide audit logs are not published for Droplets.",
+      "source": {
+        "url": "https://docs.digitalocean.com/platform/billing/spend-alerts/",
+        "quote": "A spend alert budget is not a spending cap and does not limit how much you can use, unless you enable pausing on a model access key alert.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Hard spend cap?",

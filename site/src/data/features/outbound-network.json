@@ -232,6 +232,18 @@
         "quote": "values can be domains, leading-wildcard domains like `*.example.com`, IPv4 addresses, or IPv4 CIDR ranges",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "yes",
+      "figure": "$0.01/GiB after 500-11,000",
+      "scenario": "Outbound data is included per plan, 500 GiB to 11,000 GiB pooled across the team, then $0.01 a GiB.",
+      "note": "Allowances are pooled at team level with no rollover. Cloud firewalls filter by protocol, port and address in both directions at no extra cost. Each Droplet keeps its public IPv4 for its life, and Reserved IPs give a movable inbound address.",
+      "source": {
+        "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+        "quote": "Each Droplet plan includes an amount of free outbound data transfer. Additional outbound transfer is billed at $0.01 per GiB.",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "Egress price",

@@ -225,6 +225,18 @@
         "quote": "Tensorlake provides isolated MicroVM sandboxes that boot in hundreds of milliseconds, with memory and filesystem preserved across suspend/resume.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "yes",
+      "figure": "Full VM; root, Docker, SSH",
+      "scenario": "Clone, build and load the module without a workaround: own kernel, root, Docker and SSH on an ordinary Linux VM.",
+      "note": "A full VM with dedicated RAM, disk and network, and a shared or dedicated vCPU. Docker is an apt install or a 1-Click image. Nested virtualisation is mentioned in one docs page but never documented as available.",
+      "source": {
+        "url": "https://docs.digitalocean.com/products/droplets/details/features/",
+        "quote": "DigitalOcean Droplets are Linux-based virtual machines (VMs) that run on top of virtualized hardware.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Boundary, and what it allows",

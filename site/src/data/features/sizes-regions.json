@@ -232,6 +232,18 @@
         "quote": "Up to 16 vCPU · 64 GB RAM · 100 GB disk · snapshot + resume",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "yes",
+      "figure": "2 vCPU / 16 GiB, EU available",
+      "scenario": "Memory-Optimized 2 vCPU / 16 GiB fits the lopsided request exactly, in Amsterdam or Frankfurt, for $84 a month.",
+      "note": "31 bundled shapes across five families, from 512 MiB to 256 GiB, plus v5 sizing in four US datacenters. Sixteen datacenters, two of them in the EU. Resizing needs a power-off and the disk can never shrink.",
+      "source": {
+        "url": "https://www.digitalocean.com/pricing/droplets",
+        "quote": "| 16 GiB | 2 vCPUs | 4,000 GiB | 1x | 50 GiB | $0.12500 | $84.00 |",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "Largest shape; regions",

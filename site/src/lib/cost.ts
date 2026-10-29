@@ -64,6 +64,8 @@ export interface Shape {
   disk: number;
   /** A flat hourly price for the whole shape. Omit when the shape is priced by its parts. */
   hourly?: number;
+  /** The most one machine of this shape costs in a month: hourly billing stops at this price. */
+  monthly?: number;
 }
 
 export interface Plan {
@@ -117,6 +119,10 @@ export interface RateCard {
     extraMonthly?: number;
   };
   shapes?: Shape[];
+  /** A stopped machine keeps billing at its shape's hourly price (a virtual server reserved until deleted). */
+  billedWhileStopped?: boolean;
+  /** Tasks mode: each run is billed at least this much, in USD (a per-machine minimum charge). */
+  minimumPerRun?: number;
   /** How the provider puts an idle machine to sleep and wakes it. Omit when it does not. */
   sleeps?: string;
   /** What happens to the files when a machine stops between sessions. */
@@ -196,7 +202,7 @@ function pickShape(card: RateCard, w: Workload, plan: Plan): { shape?: Shape; ex
       const short = Math.max(0, w.disk - s.disk);
       if (short > 0 && !card.disk?.extraMonthly) return null;
       const extra = short * (card.disk?.extraMonthly ?? 0);
-      return { s, short, cost: hourOf(s) * MONTH_HOURS + extra };
+      return { s, short, cost: Math.min(hourOf(s) * MONTH_HOURS, s.monthly ?? Infinity) + extra };
     })
     .filter((o): o is { s: Shape; short: number; cost: number } => o !== null)
     .sort((a, b) => a.cost - b.cost);
@@ -245,7 +251,28 @@ function priceOnPlan(card: RateCard, w: Workload, plan: Plan): Quote {
   }
 
   if (shape?.hourly !== undefined) {
-    lines.push({ label: `Machine time (${shape.name})`, math: `${runH} h × ${rate(shape.hourly)}`, amount: h.run * shape.hourly });
+    const r = shape.hourly;
+    lines.push({ label: `Machine time (${shape.name})`, math: `${runH} h × ${rate(r)}`, amount: h.run * r });
+    const stoppedBilled = card.billedWhileStopped ? h.stopped : 0;
+    if (stoppedBilled > 0) {
+      lines.push({ label: "Stopped, still billed", math: `${num(stoppedBilled)} h × ${rate(r)}`, amount: stoppedBilled * r });
+    }
+    const perRun = h.session * r;
+    if (w.mode === "tasks" && card.minimumPerRun && perRun < card.minimumPerRun) {
+      lines.push({
+        label: "Minimum charge per run",
+        math: `${num(w.tasks)} runs × (${rate(card.minimumPerRun)} − ${rate(perRun)})`,
+        amount: w.tasks * (card.minimumPerRun - perRun),
+      });
+    }
+    const billed = (h.run + stoppedBilled) * r;
+    if (w.mode === "machines" && shape.monthly !== undefined && billed > shape.monthly * h.machines) {
+      lines.push({
+        label: "Monthly price cap",
+        math: `${h.machines} × ${money(shape.monthly)} a month`,
+        amount: shape.monthly * h.machines - billed,
+      });
+    }
   } else if (card.mcu) {
     const m = card.mcu;
     // Each dimension rounds up to whole units, with at least one unit an hour.

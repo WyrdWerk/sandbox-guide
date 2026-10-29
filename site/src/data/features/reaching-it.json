@@ -232,6 +232,18 @@
         "quote": "`https://<port>-<sandbox-id-or-name>.sandbox.tensorlake.ai` routes to a user service listening on `<port>` inside the sandbox",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "partly",
+      "figure": "Public IPv4; SSH; console",
+      "scenario": "The agent's port 3000 is reachable at the Droplet's public IP with nothing in front of it; SSH and a browser console are both there.",
+      "note": "A public IPv4 per Droplet, real SSH, a browser console and any TCP port except SMTP. There is no tokenised preview link and no port-forwarding service; standard ssh -L works. The OpenClaw image adds a gateway token and TLS in front of its own port.",
+      "source": {
+        "url": "https://www.digitalocean.com/pricing/droplets",
+        "quote": "By default, each Droplet you create comes with its own public IPv4 address.",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "Who can open the link",

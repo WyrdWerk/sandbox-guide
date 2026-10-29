@@ -1,0 +1,286 @@
+{
+  "id": "digitalocean",
+  "provider": "DigitalOcean Droplets",
+  "site": "https://www.digitalocean.com",
+  "checkedOn": "2026-10-29",
+  "currency": "USD",
+  "quoteNote": "Prices read from https://www.digitalocean.com/pricing/droplets as rendered by Firecrawl on 2026-10-29 (the static HTML carries no figures). Hourly prices are the page's $/hr column; monthly prices are its $/mo column, equal to hourly × 672.",
+  "rules": [
+    {
+      "rule": "Per-second billing, minimum 60 seconds or $0.01 per Droplet",
+      "quote": "Effective January 1, 2026, we're moving to per-second billing (with a minimum charge of 60 seconds or $0.01, whichever is higher) for Droplets.",
+      "url": "https://www.digitalocean.com/pricing/droplets"
+    },
+    {
+      "rule": "Monthly cap at 672 hours",
+      "quote": "Usage is capped at 672 hours (28 days) per month.",
+      "url": "https://docs.digitalocean.com/products/droplets/details/pricing/"
+    },
+    {
+      "rule": "Powered-off Droplets keep billing",
+      "quote": "You are still billed for bundled-plan CPU Droplets that are powered off because the compute resources stay reserved on the hypervisor. To end billing, destroy the Droplet.",
+      "url": "https://docs.digitalocean.com/products/droplets/details/pricing/"
+    },
+    {
+      "rule": "Volumes",
+      "quote": "DigitalOcean Volumes Block Storage cost $0.10 per GiB per month",
+      "url": "https://docs.digitalocean.com/products/volumes/details/pricing/"
+    }
+  ],
+  "shapes": [
+    {
+      "name": "Basic 1 vCPU / 512 MiB",
+      "vcpu": 1,
+      "ram": 0.5,
+      "disk": 10,
+      "hourly": 0.00595,
+      "monthly": 4.0
+    },
+    {
+      "name": "Basic 1 vCPU / 1 GiB",
+      "vcpu": 1,
+      "ram": 1,
+      "disk": 25,
+      "hourly": 0.00893,
+      "monthly": 6.0
+    },
+    {
+      "name": "Basic 1 vCPU / 2 GiB",
+      "vcpu": 1,
+      "ram": 2,
+      "disk": 50,
+      "hourly": 0.01786,
+      "monthly": 12.0
+    },
+    {
+      "name": "Basic 2 vCPU / 2 GiB",
+      "vcpu": 2,
+      "ram": 2,
+      "disk": 60,
+      "hourly": 0.02679,
+      "monthly": 18.0
+    },
+    {
+      "name": "Basic 2 vCPU / 4 GiB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 80,
+      "hourly": 0.03571,
+      "monthly": 24.0
+    },
+    {
+      "name": "Basic 4 vCPU / 8 GiB",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 160,
+      "hourly": 0.07143,
+      "monthly": 48.0
+    },
+    {
+      "name": "Basic 8 vCPU / 16 GiB",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 320,
+      "hourly": 0.14286,
+      "monthly": 96.0
+    },
+    {
+      "name": "CPU-Optimized 2 vCPU / 4 GiB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 25,
+      "hourly": 0.0625,
+      "monthly": 42.0
+    },
+    {
+      "name": "CPU-Optimized 4 vCPU / 8 GiB",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 50,
+      "hourly": 0.125,
+      "monthly": 84.0
+    },
+    {
+      "name": "CPU-Optimized 8 vCPU / 16 GiB",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 100,
+      "hourly": 0.25,
+      "monthly": 168.0
+    },
+    {
+      "name": "CPU-Optimized 16 vCPU / 32 GiB",
+      "vcpu": 16,
+      "ram": 32,
+      "disk": 200,
+      "hourly": 0.5,
+      "monthly": 336.0
+    },
+    {
+      "name": "CPU-Optimized 32 vCPU / 64 GiB",
+      "vcpu": 32,
+      "ram": 64,
+      "disk": 400,
+      "hourly": 1,
+      "monthly": 672
+    },
+    {
+      "name": "CPU-Optimized 48 vCPU / 96 GiB",
+      "vcpu": 48,
+      "ram": 96,
+      "disk": 600,
+      "hourly": 1.5,
+      "monthly": 1008.0
+    },
+    {
+      "name": "General Purpose 2 vCPU / 8 GiB",
+      "vcpu": 2,
+      "ram": 8,
+      "disk": 25,
+      "hourly": 0.09375,
+      "monthly": 63.0
+    },
+    {
+      "name": "General Purpose 4 vCPU / 16 GiB",
+      "vcpu": 4,
+      "ram": 16,
+      "disk": 50,
+      "hourly": 0.1875,
+      "monthly": 126.0
+    },
+    {
+      "name": "General Purpose 8 vCPU / 32 GiB",
+      "vcpu": 8,
+      "ram": 32,
+      "disk": 100,
+      "hourly": 0.375,
+      "monthly": 252.0
+    },
+    {
+      "name": "General Purpose 16 vCPU / 64 GiB",
+      "vcpu": 16,
+      "ram": 64,
+      "disk": 200,
+      "hourly": 0.75,
+      "monthly": 504.0
+    },
+    {
+      "name": "General Purpose 32 vCPU / 128 GiB",
+      "vcpu": 32,
+      "ram": 128,
+      "disk": 400,
+      "hourly": 1.5,
+      "monthly": 1008.0
+    },
+    {
+      "name": "General Purpose 40 vCPU / 160 GiB",
+      "vcpu": 40,
+      "ram": 160,
+      "disk": 500,
+      "hourly": 1.875,
+      "monthly": 1260.0
+    },
+    {
+      "name": "Memory-Optimized 2 vCPU / 16 GiB",
+      "vcpu": 2,
+      "ram": 16,
+      "disk": 50,
+      "hourly": 0.125,
+      "monthly": 84.0
+    },
+    {
+      "name": "Memory-Optimized 4 vCPU / 32 GiB",
+      "vcpu": 4,
+      "ram": 32,
+      "disk": 100,
+      "hourly": 0.25,
+      "monthly": 168.0
+    },
+    {
+      "name": "Memory-Optimized 8 vCPU / 64 GiB",
+      "vcpu": 8,
+      "ram": 64,
+      "disk": 200,
+      "hourly": 0.5,
+      "monthly": 336.0
+    },
+    {
+      "name": "Memory-Optimized 16 vCPU / 128 GiB",
+      "vcpu": 16,
+      "ram": 128,
+      "disk": 400,
+      "hourly": 1,
+      "monthly": 672
+    },
+    {
+      "name": "Memory-Optimized 24 vCPU / 192 GiB",
+      "vcpu": 24,
+      "ram": 192,
+      "disk": 600,
+      "hourly": 1.5,
+      "monthly": 1008.0
+    },
+    {
+      "name": "Memory-Optimized 32 vCPU / 256 GiB",
+      "vcpu": 32,
+      "ram": 256,
+      "disk": 800,
+      "hourly": 2,
+      "monthly": 1344
+    },
+    {
+      "name": "Storage-Optimized 2 vCPU / 16 GiB",
+      "vcpu": 2,
+      "ram": 16,
+      "disk": 300,
+      "hourly": 0.19494,
+      "monthly": 131.0
+    },
+    {
+      "name": "Storage-Optimized 4 vCPU / 32 GiB",
+      "vcpu": 4,
+      "ram": 32,
+      "disk": 600,
+      "hourly": 0.38988,
+      "monthly": 262.0
+    },
+    {
+      "name": "Storage-Optimized 8 vCPU / 64 GiB",
+      "vcpu": 8,
+      "ram": 64,
+      "disk": 1170,
+      "hourly": 0.77976,
+      "monthly": 524.0
+    },
+    {
+      "name": "Storage-Optimized 16 vCPU / 128 GiB",
+      "vcpu": 16,
+      "ram": 128,
+      "disk": 2340,
+      "hourly": 1.55952,
+      "monthly": 1048.0
+    },
+    {
+      "name": "Storage-Optimized 24 vCPU / 192 GiB",
+      "vcpu": 24,
+      "ram": 192,
+      "disk": 3520,
+      "hourly": 2.33929,
+      "monthly": 1572.0
+    },
+    {
+      "name": "Storage-Optimized 32 vCPU / 256 GiB",
+      "vcpu": 32,
+      "ram": 256,
+      "disk": 4690,
+      "hourly": 3.11905,
+      "monthly": 2096.0
+    }
+  ],
+  "units": {
+    "ram": "GiB",
+    "disk": "GiB SSD",
+    "hourly": "USD per hour",
+    "monthly": "USD per month"
+  }
+}

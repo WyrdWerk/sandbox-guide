@@ -50,7 +50,7 @@ const statusLabel = {
 <Base title={provider.status === "researched" ? `${provider.name} pricing, limits and catches` : provider.name} description={provider.status === "researched" ? `${provider.name}: ${provider.oneLiner} What it costs for common agent workloads, its limits and its catches, from its own docs; prices checked ${formatDate(card?.checkedOn ?? provider.checkedOn!)}.` : provider.oneLiner} markdown={`/data/providers/${provider.id}.md`} modified={card?.checkedOn ?? provider.checkedOn}>
   <PageHeader
     parent={{ href: "/providers/", label: "Providers" }}
-    kicker={`Checked ${provider.checkedOn ?? "pending"}`}
+    kicker={`${provider.kind === "vps" ? "VPS · " : ""}Checked ${provider.checkedOn ?? "pending"}`}
     title={provider.name}
     standfirst={provider.oneLiner}
     answer={providerAnswer(provider)}

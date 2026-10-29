@@ -232,6 +232,18 @@
         "quote": "If `timeout_secs` is not set, it goes with the default value which is `600` sec (10 minutes).",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "yes",
+      "figure": "No idle stop; runs for weeks",
+      "scenario": "Nothing idles a Droplet: it stays up for weeks until you power it off or destroy it.",
+      "note": "No idle timer, no session lifetime and no wake-on-request for a Droplet; billing starts at create and ends at destroy. Managed Agents is the opposite: a 15-minute idle suspend by default, resuming on new input.",
+      "source": {
+        "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+        "quote": "Billing begins when you create the Droplet and ends when you destroy it.",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "Idle or lifetime limit",

@@ -1,0 +1,275 @@
+{
+  "id": "digitalocean",
+  "name": "DigitalOcean",
+  "url": "https://www.digitalocean.com/products/droplets",
+  "status": "researched",
+  "checkedOn": "2026-10-29",
+  "oneLiner": "Ordinary Linux VMs at a flat monthly price, with a hardened one-click OpenClaw image and a separate managed agent runtime.",
+  "whatItIs": [
+    "DigitalOcean sells Linux virtual machines called Droplets: pick a size, a region and an image, and the machine is yours to administer over SSH. There is no sandbox API and no pause, so it behaves like the VPS a developer would rent for a web server.",
+    "Two catalogues sit behind the same product. Bundled plans are fixed shapes in five families, from 512 MiB for $4 a month to 32 vCPU / 256 GiB; v5 configurations on 5th-gen AMD EPYC let you choose vCPU, memory and boot disk independently, but only in four US datacenters.",
+    "For agents specifically, the Marketplace carries 1-Click Droplet images for OpenClaw, Hermes Agent and Docker Agent. DigitalOcean also sells Managed Agents, a separate product whose sessions run in Firecracker microVMs with pause, resume and fork; its monthly plan is branded Agent Droplets and is not a VM."
+  ],
+  "whoFor": "People who want a normal Linux server per agent, a flat monthly bill, a choice of 16 regions and a public IP, and who are happy to install and patch the agent themselves.",
+  "isolation": "Full Linux virtual machine with its own kernel, root and SSH. RAM, disk and network are dedicated; the vCPU is shared on Basic plans and dedicated on the four optimized families. Docker runs inside, and nested virtualisation is not documented.",
+  "sizes": "31 bundled CPU shapes: Basic shared CPU from 512 MiB / 1 vCPU / 10 GiB to 16 GiB / 8 vCPU / 320 GiB, plus CPU-Optimized, General Purpose, Memory-Optimized and Storage-Optimized up to 32 vCPU / 256 GiB / 4,690 GiB. v5 sizes CPU, memory and boot disk freely, 1-8 shared or 2-64 dedicated vCPU. GPU Droplets go up to 8x H200. 16 datacenters, two of them in the EU.",
+  "billing": {
+    "model": "Pay-as-you-go per Droplet, with no plan fee and no commitment.",
+    "meter": "Per second with a 60-second minimum, at the published hourly rate. Bundled plans cap at 672 hours a month, so an always-on machine costs the flat monthly price.",
+    "stopped": "A powered-off Droplet is billed in full, because its compute stays reserved on the hypervisor. Only destroying it ends the charge, and that also deletes the disk unless you snapshotted it.",
+    "planFee": "None. Agent Droplets ($50 or $200 a month) is a separate plan for Managed Agents, not for VMs.",
+    "minimum": "$4 a month for the smallest Basic Droplet. A $5 signup credit lasts 90 days, and a payment method is required before the first Droplet."
+  },
+  "cost": {
+    "A": {
+      "headline": "$10.00 a month",
+      "shape": "Basic 2 vCPU / 4 GiB / 80 GiB, destroyed after each task",
+      "lines": [
+        {
+          "label": "Machine time",
+          "arithmetic": "1,000 × 10 min = 166.67 h × $0.03571 = $5.95",
+          "amount": "$5.95"
+        },
+        {
+          "label": "Minimum charge",
+          "arithmetic": "each 10-minute run is $0.00595, raised to the $0.01 floor",
+          "amount": "$4.05"
+        }
+      ],
+      "total": "$10.00",
+      "notes": [
+        "The size fits exactly on CPU and memory and gives 80 GiB, more than the 10 GiB asked for.",
+        "The $0.01 minimum binds: a ten-minute run on this shape is $0.00595, so 1,000 separate Droplets cost $10.00, not $5.95."
+      ],
+      "flag": "The $0.01 floor is read per Droplet, which is how the docs describe the minimum. If it were per invoice, A would be $5.95. The calculator has no floor and prints $5.95."
+    },
+    "B": {
+      "headline": "$48.00 a month",
+      "shape": "Basic 4 vCPU / 8 GiB / 160 GiB, 730 hours",
+      "lines": [
+        {
+          "label": "Machine time",
+          "arithmetic": "730 h × $0.07143",
+          "amount": "$52.14"
+        },
+        {
+          "label": "Monthly cap",
+          "arithmetic": "672 h × $0.07143 = $48.00, the flat monthly price",
+          "amount": "−$4.14"
+        }
+      ],
+      "total": "$48.00",
+      "notes": [
+        "Bundled plans stop charging at 672 hours a month, so always-on costs the advertised $48, not 730 hours at the hourly rate.",
+        "The 160 GiB disk covers the 50 GiB ask; this size has no smaller disk.",
+        "The v5 equivalent (4 vCPU / 8 GiB / 50 GiB boot disk) is $74.80 a month and only in four US datacenters, so the bundled plan is both cheaper and more widely available."
+      ],
+      "flag": "The calculator has no monthly-cap rule and shows $52.14 for 730 hours. The bill is $48.00."
+    },
+    "C": {
+      "headline": "$24.00 a month, whether it runs or not",
+      "shape": "Basic 2 vCPU / 4 GiB / 80 GiB, 90 running + 640 powered-off hours",
+      "lines": [
+        {
+          "label": "Running",
+          "arithmetic": "90 h × $0.03571",
+          "amount": "$3.21"
+        },
+        {
+          "label": "Powered off",
+          "arithmetic": "640 h × $0.03571, still billed in full",
+          "amount": "$22.86"
+        },
+        {
+          "label": "Monthly cap",
+          "arithmetic": "730 h = $26.07, capped at the $24 monthly price",
+          "amount": "−$2.07"
+        }
+      ],
+      "total": "$24.00",
+      "notes": [
+        "Powering off keeps the disk and the files, but not memory or running processes, and the meter keeps running at the full hourly rate.",
+        "Destroying the Droplet is the only way to stop the charge; the disk goes with it unless you took a snapshot."
+      ],
+      "flag": "The calculator bills running hours only and shows $3.21. The real bill is the full $24.00, because a stopped Droplet is not a cheap state."
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "DigitalOcean, LLC, a US company. The DPA names it as the contracting party.",
+        "source": {
+          "url": "https://www.digitalocean.com/legal/data-processing-agreement",
+          "quote": "This Data Processing Agreement (“DPA”) is an addendum to the Customer Terms of Service (“Agreement”)",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded and listed",
+        "value": "Founded in 2012; public since its 2018 IPO and listed on the NYSE as DOCN, with more than 680,000 customers.",
+        "source": {
+          "url": "https://investors.digitalocean.com/",
+          "quote": "DigitalOcean (NYSE: DOCN) is the AI-Native Cloud, purpose-built for inference and agentic workloads.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Uptime promise",
+        "value": "99.99% monthly uptime per Droplet, with a 100% service credit if missed.",
+        "source": {
+          "url": "https://www.digitalocean.com/sla/cpu-droplets",
+          "quote": "DigitalOcean commits to a Monthly Uptime Percentage of 99.99% for each individual Droplet instance.",
+          "confidence": "pricing-page"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "SOC 2 Type II and SOC 3 Type II, audited by Schellman & Company; a DPA is published.",
+        "source": {
+          "url": "https://www.digitalocean.com/trust/certification-reports",
+          "quote": "DigitalOcean maintains a SOC 2 Type II and SOC 3 Type II certification, issued by our independent auditor, Schellman & Company.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Status page",
+        "value": "status.digitalocean.com lists Droplets and each datacenter separately.",
+        "source": {
+          "url": "https://status.digitalocean.com/",
+          "quote": "All Systems Operational",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "An always-on agent on a normal Linux box: root, Docker, SSH, a public IPv4 and a flat $24 a month for 2 vCPU / 4 GiB.",
+      "A hardened OpenClaw deployment from the Marketplace: TLS, a gateway token, device pairing and container isolation are configured before you log in.",
+      "Teams that need a region choice (16 datacenters, including Amsterdam and Frankfurt) and a 99.99% per-Droplet SLA.",
+      "Agents that must reach the internet on arbitrary ports, or be reached on them: no port restrictions beyond SMTP."
+    ],
+    "badly": [
+      "Anything that needs to stop and resume mid-process: powering off loses memory and keeps billing.",
+      "Bursty, short-lived work: you pay for the whole hour the Droplet exists, so 1,000 ten-minute tasks cost the same as 1,000 hours of idling.",
+      "A reader who wants the provider to install and run the agent: outside the three Marketplace images, you do the setup.",
+      "Point-in-time recovery or a fork of a running machine: snapshots are disk-only and newest-state only."
+    ]
+  },
+  "usability": {
+    "dashboard": "Yes. Create a Droplet in a few clicks, watch graphs, open a browser console, resize, snapshot, rebuild, resize disks and manage firewalls, DNS and volumes.",
+    "withoutCode": "Partly. Creating the machine and opening its console needs no terminal, and the OpenClaw image arrives configured. Installing and running any other agent does need one.",
+    "signup": "Email, password and a payment method. The $5 signup credit expires after 90 days, and no Droplet can be created until a card or PayPal is on file.",
+    "docs": "A large docs site with an llms.txt index, a release-notes feed, a public API reference, official Python, TypeScript and Go clients, and an official MCP server. Support is tickets plus community Q&A.",
+    "tripsUp": [
+      "Powering off does not stop the bill; only destroying the Droplet does.",
+      "Destroying deletes the disk, so a snapshot is the only thing that survives.",
+      "The 672-hour monthly cap is invisible in the hourly rate: 730 hours costs the monthly price, not 730 × the rate.",
+      "Resizing needs a power-off and can never shrink the disk.",
+      "A plain Droplet has no HTTPS: you install Caddy or Certbot, or put a Load Balancer in front.",
+      "The $5 credit expires in 90 days and is not a free tier.",
+      "Agent Droplets are a Managed Agents plan, not a VM; the name invites the wrong purchase."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "A powered-off Droplet bills in full",
+      "detail": "DigitalOcean keeps the compute reserved on the hypervisor, so stopping the machine changes nothing on the invoice. Workload C therefore costs the full $24 monthly price, not the $3.21 the running hours suggest.",
+      "status": "open"
+    },
+    {
+      "issue": "The monthly cap and the hourly rate disagree at 730 hours",
+      "detail": "Bundled plans are capped at 672 hours, so 730 hours costs the flat monthly price. The shared calculator has no cap rule and multiplies 730 by the hourly rate, overstating B by $4.14.",
+      "status": "open"
+    },
+    {
+      "issue": "OpenClaw's minimum Droplet size changed",
+      "detail": "The January technical deep dive says the image needs a $24/month Droplet; the February announcement says it now runs on the $12 tier. This profile uses $12 and treats the earlier figure as superseded.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.digitalocean.com/blog/technical-dive-openclaw-hardened-1-click-app",
+          "quote": "While this currently necessitates a minimum $24/month Droplet size to match the snapshot’s disk and memory requirements",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.digitalocean.com/blog/moltbot-on-digitalocean",
+          "quote": "OpenClaw is now accessible on our $12/month Droplet tier",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Nested virtualisation is mentioned but never documented",
+      "detail": "The live-migration page tells people with nested VMs to restart them afterwards, but no plan page says nested virtualisation is available or how to enable it. Treat it as unknown, not as supported.",
+      "status": "open"
+    },
+    {
+      "issue": "Agent Droplets is not a Droplet",
+      "detail": "The name describes the $50 or $200 monthly plan for Managed Agents, whose compute is per-session Firecracker microVMs at $0.044 per vCPU-hour plus $0.0095 per GB-hour. It is a different product with a different meter and should not be priced as a VM.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "A full Linux VM with root, Docker, SSH and a public IPv4 for $24 a month flat.",
+    "The cheapest hardened one-click OpenClaw deployment here, at $12 a month, with TLS and a gateway token already configured.",
+    "16 datacenters including Amsterdam and Frankfurt, and a 99.99% uptime SLA per Droplet.",
+    "No egress charge inside a 500 GiB-11,000 GiB allowance, and any TCP port except SMTP.",
+    "Granular API token scopes, OIDC single sign-on, six team roles, official Python/TypeScript/Go clients and an official MCP server."
+  ],
+  "sources": [
+    {
+      "label": "Droplet pricing",
+      "url": "https://www.digitalocean.com/pricing/droplets"
+    },
+    {
+      "label": "Docs: Droplet pricing and billing",
+      "url": "https://docs.digitalocean.com/products/droplets/details/pricing/"
+    },
+    {
+      "label": "Docs: Droplet features",
+      "url": "https://docs.digitalocean.com/products/droplets/details/features/"
+    },
+    {
+      "label": "Docs: choosing a Droplet plan",
+      "url": "https://docs.digitalocean.com/products/droplets/concepts/choosing-a-plan/"
+    },
+    {
+      "label": "Docs: resizing",
+      "url": "https://docs.digitalocean.com/products/droplets/how-to/resize/"
+    },
+    {
+      "label": "Docs: snapshots",
+      "url": "https://docs.digitalocean.com/products/snapshots/details/features/"
+    },
+    {
+      "label": "Docs: backups pricing",
+      "url": "https://docs.digitalocean.com/products/backups/details/pricing/"
+    },
+    {
+      "label": "Docs: volumes",
+      "url": "https://docs.digitalocean.com/products/volumes/details/pricing/"
+    },
+    {
+      "label": "Marketplace: OpenClaw",
+      "url": "https://marketplace.digitalocean.com/apps/openclaw"
+    },
+    {
+      "label": "Blog: OpenClaw 1-Click",
+      "url": "https://www.digitalocean.com/blog/moltbot-on-digitalocean"
+    },
+    {
+      "label": "Managed Agents",
+      "url": "https://www.digitalocean.com/products/managed-agents"
+    },
+    {
+      "label": "Agent Droplets pricing",
+      "url": "https://www.digitalocean.com/pricing/agent-droplets"
+    },
+    {
+      "label": "Harness Runtime pricing",
+      "url": "https://www.digitalocean.com/pricing/harness-runtime"
+    }
+  ]
+}

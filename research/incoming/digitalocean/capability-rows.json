@@ -1,0 +1,1065 @@
+{
+  "provider": "digitalocean",
+  "checkedOn": "2026-10-29",
+  "rows": [
+    {
+      "capability": "own-vm",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "full VM, own kernel",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/features/",
+          "quote": "DigitalOcean Droplets are Linux-based virtual machines (VMs) that run on top of virtualized hardware.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "root",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "root over SSH",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "You will need to use an SSH client and the root password or an SSH key to log in to your server.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "docker-inside",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "Docker 1-Click or apt",
+        "source": {
+          "url": "https://www.digitalocean.com/blog/moltbot-on-digitalocean",
+          "quote": "OpenClaw runs inside a dedicated Docker container, isolating agent execution from the host system.",
+          "confidence": "docs-confirmed"
+        },
+        "note": "Docker is in the default apt repositories and the Marketplace has a Docker 1-Click image; the OpenClaw image runs the agent in its own container."
+      }
+    },
+    {
+      "capability": "nested-virt",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "not-published",
+        "note": "One docs page assumes nested VMs can run, but no plan or image page says nested virtualisation is available or how to enable it. The 2021 community question on the subject has no published answer. Treat as unconfirmed, not as supported.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/live-migration/",
+          "quote": "If you have Droplets running workloads leveraging nested virtualization, you need to restart any nested VMs after a live migration.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "custom-image",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "qcow2/VMDK, up to 100 GB",
+        "note": "Raw, qcow2, VHDX, VDI and VMDK images, 100 GB or less uncompressed, with cloud-init and sshd configured.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/custom-images/details/features/",
+          "quote": "Custom images are Linux and Unix-like images you import to DigitalOcean.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "any-size",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "v5: 1-8 shared vCPU",
+        "shortfall": "Only v5 Droplets size CPU, memory and disk independently, and v5 is offered in four US datacenters, none in the EU.",
+        "note": "v5 Shared runs 1-8 vCPU with 1-24 GB at a 1x-3x ratio; v5 General Purpose runs 2-64 vCPU with 4-512 GB at 2x-8x. Bundled plans are fixed shapes.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+          "quote": "In datacenters that support v5 Droplet configurations, the Control Panel displays an hourly price for each resource (vCPU, memory, and boot disk) as you configure the Droplet.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "big-machines",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "up to 64 vCPU / 512 GB",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/concepts/choosing-a-plan/",
+          "quote": "| General Purpose | Dedicated | 2-64 | 4-512 GB, at a 2x-8x RAM-to-vCPU ratio |",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "live-resize",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "no",
+        "figure": "power off first",
+        "shortfall": "Resizing powers the Droplet off first, and the disk can never be made smaller.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/how-to/resize/",
+          "quote": "Before you can resize a Droplet in the control panel, you need to power it off.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "gpu",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "H100 $4.41/h; RTX 4000 $0.76/h",
+        "note": "On-demand, spot (public preview) and contract GPU Droplets, up to 8x H200 at $35.76/h. GPU Droplets cannot be resized.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+          "quote": "| NVIDIA H100 | $4.41 per hour |",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "choose-region",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "16 datacenters",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "DigitalOcean has data centers in multiple locations around the world, including San Francisco, Richmond, NYC, Kansas City, Atlanta, Toronto, Amsterdam, London, Frankfurt, Bangalore, Singapore, and Sydney.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "eu-region",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "Amsterdam, Frankfurt",
+        "note": "AMS3 and FRA1 are in the EU; London is a third European region outside it.",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "DigitalOcean has data centers in multiple locations around the world, including San Francisco, Richmond, NYC, Kansas City, Atlanta, Toronto, Amsterdam, London, Frankfurt, Bangalore, Singapore, and Sydney.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "pause-memory",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "Managed Agents only",
+        "shortfall": "A Droplet has no pause: powering off loses memory and running processes and still bills in full. Only Managed Agents sessions pause and resume.",
+        "source": {
+          "url": "https://www.digitalocean.com/products/managed-agents",
+          "quote": "Pause and resume without losing context; CPU and memory charges stop while a session is paused",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "warm-pool",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "autoscale pools",
+        "shortfall": "Autoscale pools keep Droplets running behind a load balancer, but there is no way to hand a pre-started machine to a job.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/limits/",
+          "quote": "autoscale pools provision Droplets with the new configuration, then wait for the pool's specified cooldown duration before deleting the old Droplets",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "fast-start",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "~1 min; 1 s sessions",
+        "shortfall": "A Droplet takes about a minute to boot; only Managed Agents sessions start in about a second.",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "your new server will be up and running in under a minute",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "snapshot-files",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "$0.06/GB-month",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/snapshots/details/features/",
+          "quote": "Creating a snapshot saves everything from the Droplet or volume's disk to a disk image saved in your DigitalOcean account.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "snapshot-memory",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "no",
+        "figure": "disk only",
+        "shortfall": "A snapshot copies the disk, not memory or running processes.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/snapshots/details/features/",
+          "quote": "Creating a snapshot saves everything from the Droplet or volume's disk to a disk image saved in your DigitalOcean account.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "fork-running",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "fork from a checkpoint",
+        "shortfall": "Managed Agents forks a new session from a checkpoint; nothing copies a running Droplet.",
+        "source": {
+          "url": "https://www.digitalocean.com/products/managed-agents",
+          "quote": "Checkpoint a session and fork a new, independent session from it",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "older-snapshot",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "kept until deleted",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/snapshots/details/features/",
+          "quote": "Snapshots are retained indefinitely until manually deleted.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "templates",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "snapshot -> new Droplet",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/snapshots/details/features/",
+          "quote": "You can use snapshots to create new Droplets or volumes with the same contents of the snapshot.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "backups",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "20% weekly, 30% daily",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/backups/details/pricing/",
+          "quote": "| Weekly | 20.0% of the Droplet's cost per month |",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "files-survive-stop",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "disk survives power-off",
+        "note": "The disk belongs to the Droplet and survives a power-off; destroying the Droplet deletes it unless a snapshot was taken.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+          "quote": "Billing begins when you create the Droplet and ends when you destroy it.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "volumes",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "1 GiB-16 TiB, $0.10/GiB-mo",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/volumes/details/pricing/",
+          "quote": "DigitalOcean Volumes Block Storage cost $0.10 per GiB per month and range from 1 GiB to 16384 GiB (16 TiB).",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "shared-volume",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "no",
+        "figure": "one Droplet at a time",
+        "shortfall": "A volume attaches to one Droplet at a time, so two agents cannot share it.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/volumes/details/limits/",
+          "quote": "You can only attach a volume to one Droplet at a time.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "mount-buckets",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "S3 client, not a mount",
+        "shortfall": "Spaces is S3-compatible, but DigitalOcean does not document mounting a bucket as a folder on a Droplet.",
+        "source": {
+          "url": "https://docs.digitalocean.com/llms.txt",
+          "quote": "For object storage, Spaces is S3-compatible.",
+          "confidence": "docs-confirmed"
+        },
+        "note": "Spaces is S3-compatible object storage reachable with any S3 client at <region>.digitaloceanspaces.com, but DigitalOcean documents no way to mount a bucket as a folder on a Droplet."
+      }
+    },
+    {
+      "capability": "big-disk",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "16 TiB volume",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/volumes/details/pricing/",
+          "quote": "DigitalOcean Volumes Block Storage cost $0.10 per GiB per month and range from 1 GiB to 16384 GiB (16 TiB).",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "stay-on",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "no session limit",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+          "quote": "Billing begins when you create the Droplet and ends when you destroy it.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "choose-idle",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "nothing stops it",
+        "note": "There is no idle timer to set because nothing idles a Droplet; it runs until you power it off or destroy it. Managed Agents instead suspends after 15 idle minutes by default.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+          "quote": "Billing begins when you create the Droplet and ends when you destroy it.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "wake-on-request",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "Managed Agents resume",
+        "shortfall": "A powered-off Droplet stays off until something calls the API; only Managed Agents sessions wake on new input.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/managed-agents/agent-harness-runtime/details/features/",
+          "quote": "The session resumes on new input when the platform wakes it.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "schedules",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "cron inside the VM",
+        "shortfall": "Scheduling means cron inside a Droplet that is already on; nothing starts a machine on a timer, and scheduled triggers exist only for Managed Agents sessions.",
+        "source": {
+          "url": "https://www.digitalocean.com/products/managed-agents",
+          "quote": "Scheduled and webhook triggers for automated runs",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "public-url",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "public IPv4 per Droplet",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "By default, each Droplet you create comes with its own public IPv4 address.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "private-url",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "firewall by address",
+        "shortfall": "A cloud firewall can limit access to your own addresses, but there is no token or login link in front of a port.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/networking/firewalls/details/features/",
+          "quote": "Firewall rules can allow or deny traffic by protocol, port range, and source or destination.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "ssh",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "standard SSH",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "You can connect to your Droplet using SSH (Secure Shell).",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "web-terminal",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "Droplet Console",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/how-to/connect-with-console/",
+          "quote": "The Droplet Console is a browser-based way to connect to Droplets.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "tunnel",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "ssh -L, no service",
+        "note": "Standard SSH port forwarding works because the Droplet runs a normal sshd; there is no provider-side tunnel command.",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "You can connect to your Droplet using SSH (Secure Shell).",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "raw-tcp",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "any port except SMTP",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/limits/",
+          "quote": "SMTP ports 25, 465, and 587 are blocked on all Droplets.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "custom-domain",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "DNS + A record",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/networking/dns/",
+          "quote": "Adding a domain you own to your DigitalOcean account lets you manage the domain's DNS records with the control panel and API.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "auto-https",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "LB/Spaces only",
+        "shortfall": "Automatic certificates exist only on Load Balancers and Spaces; a plain Droplet needs Caddy or Certbot.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/networking/dns/",
+          "quote": "Domains you manage on DigitalOcean integrate with DigitalOcean Load Balancers and Spaces to streamline automatic SSL certificate management.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "egress-included",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "500 GiB-11,000 GiB",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "Each Droplet includes a generous amount of free outbound data transfer.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "egress-allowlist",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "firewall by address",
+        "note": "Cloud firewall rules filter outbound traffic by protocol, port and destination address. Harness Runtime sessions can instead allowlist by hostname.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/networking/firewalls/details/features/",
+          "quote": "Firewall rules can allow or deny traffic by protocol, port range, and source or destination.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "no-internet",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "deny-all egress rule",
+        "note": "A cloud firewall with no outbound allow rules blocks all traffic. Private Droplets additionally have no public IP, though they still reach the internet through a VPC NAT gateway.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/networking/firewalls/details/features/",
+          "quote": "Cloud firewalls block all traffic that isn't expressly permitted by a rule.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "static-ip",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "public IPv4 for its life",
+        "note": "A Droplet's public IPv4 is its outbound address and stays with it until it is destroyed. Reserved IPs are for moving an inbound address between Droplets.",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "By default, each Droplet you create comes with its own public IPv4 address.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "secrets-store",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "Managed Agents only",
+        "shortfall": "A Droplet has no secret store, so keys sit in cloud-init, files or environment variables; only Managed Agents stores and injects secrets.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/managed-agents/agent-harness-runtime/details/features/",
+          "quote": "DigitalOcean stores them securely and injects them into the session when it starts, so the values never appear in the spec file or in logs.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "hidden-secrets",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "Action Gateway only",
+        "shortfall": "Only Action Gateway brokers credentials so the model never sees them; an agent on a Droplet can read the keys in its own environment.",
+        "source": {
+          "url": "https://www.digitalocean.com/products/managed-agents",
+          "quote": "Credential brokering: tokens resolve at execution time and never reach the model, the agent prompt, or the sandbox",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "scoped-keys",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "custom token scopes",
+        "source": {
+          "url": "https://docs.digitalocean.com/reference/api/scopes/",
+          "quote": "Most scopes in this table are granular scopes that grant access to a specific resource type and action.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "dashboard-create",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "control panel",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "Creating a Droplet is a quick and easy process. You can create a new Droplet from the DigitalOcean control panel in just a few clicks.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "cli",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "doctl",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/how-to/resize/",
+          "quote": "using the DigitalOcean API, or using `doctl`, the DigitalOcean CLI",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "python-sdk",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "PyDo",
+        "source": {
+          "url": "https://docs.digitalocean.com/reference/pydo/",
+          "quote": "Official Python client for the DigitalOcean API (OpenAPIv3).",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "ts-sdk",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "DoTs",
+        "source": {
+          "url": "https://docs.digitalocean.com/reference/dots/",
+          "quote": "Official TypeScript client for the DigitalOcean API.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "rest-api",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "REST API v2",
+        "source": {
+          "url": "https://marketplace.digitalocean.com/apps/openclaw",
+          "quote": "https://api.digitalocean.com/v2/droplets",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "mcp-server",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "official MCP servers",
+        "source": {
+          "url": "https://docs.digitalocean.com/reference/mcp/",
+          "quote": "DigitalOcean MCP servers bridge your development tools and the DigitalOcean API",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "pty",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "attach, no PTY API",
+        "shortfall": "Harness Runtime can attach to a live session, but Droplets expose no PTY over the API; you use SSH.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/managed-agents/agent-harness-runtime/details/features/",
+          "quote": "Start, attach, list, show, pause, resume, remove, and view logs for sessions",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "file-api",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "Harness upload/download",
+        "shortfall": "Only Harness Runtime uploads and downloads files over the API; a Droplet needs SSH or SFTP.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/managed-agents/agent-harness-runtime/details/features/",
+          "quote": "Upload and download workspace files.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "agents-preinstalled",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "OpenClaw/Hermes images",
+        "shortfall": "The default Ubuntu image has no coding agent; OpenClaw, Hermes and Docker Agent are separate 1-Click images.",
+        "source": {
+          "url": "https://www.digitalocean.com/blog/moltbot-on-digitalocean",
+          "quote": "OpenClaw runs inside a dedicated Docker container, isolating agent execution from the host system.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "prompt-api",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "Harness sessions",
+        "shortfall": "Managed Agents runs the harness and takes new input to resume a session, but a Droplet has no send-a-prompt call.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/managed-agents/agent-harness-runtime/details/features/",
+          "quote": "The session resumes on new input when the platform wakes it.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "one-click-hermes",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "Marketplace image",
+        "shortfall": "A 1-Click Hermes image exists, but its listing publishes no post-deploy steps, so how much needs a terminal is unclear.",
+        "source": {
+          "url": "https://marketplace.digitalocean.com/apps/hermes-agent",
+          "quote": "Create Hermes Agent Droplet",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "one-click-openclaw",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "$12/month 1-Click",
+        "note": "The hardened image ships Caddy with a Let's Encrypt certificate, a generated gateway token, device pairing, container isolation, fail2ban and unattended upgrades. The January deep dive said $24 was needed; the February update moved it to $12.",
+        "source": {
+          "url": "https://www.digitalocean.com/blog/moltbot-on-digitalocean",
+          "quote": "1-Click deployment for OpenClaw on DigitalOcean Droplet® servers, now starting at just $12/month",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "browser",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "chromium in sessions",
+        "shortfall": "Harness Runtime sessions include chromium and a browser-automation tool; a Droplet image does not.",
+        "source": {
+          "url": "https://www.digitalocean.com/products/managed-agents",
+          "quote": "Isolated execution in a dedicated Firecracker microVM per session, with its own compute and filesystem",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "desktop",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "no",
+        "figure": "none",
+        "shortfall": "There is no graphical desktop on a Droplet or in a Harness Runtime session.",
+        "note": "The Droplet Console is a text terminal, and Harness Runtime has no desktop; the docs describe a coding sandbox, not computer use.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/features/",
+          "quote": "DigitalOcean Droplets are Linux-based virtual machines (VMs) that run on top of virtualized hardware.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "hosts-other-agents",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "not-published",
+        "note": "DigitalOcean documents its own harness runtime running Claude Code, Codex, OpenCode, Hermes and LangGraph. It does not say it hosts Cursor cloud agents, Devin or Claude Managed Agents.",
+        "source": {
+          "url": "https://www.digitalocean.com/products/managed-agents",
+          "quote": "Runs the harnesses you already use",
+          "confidence": "not-published"
+        }
+      }
+    },
+    {
+      "capability": "team-workspace",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "teams share billing",
+        "source": {
+          "url": "https://docs.digitalocean.com/platform/teams/",
+          "quote": "Teams are how you manage your billing and infrastructure on DigitalOcean.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "roles",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "6 roles + custom",
+        "source": {
+          "url": "https://docs.digitalocean.com/platform/teams/roles/",
+          "quote": "Teams come with six predefined roles which cover common use cases for levels of access.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "sso",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "OIDC (Okta, Entra ID)",
+        "source": {
+          "url": "https://docs.digitalocean.com/platform/teams/settings/",
+          "quote": "Enable single sign-on (SSO) to let team members sign in to DigitalOcean with a single set of credentials from an OIDC-compatible identity provider (IdP), like Okta or Microsoft Entra ID.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "spend-cap",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "no",
+        "figure": "alerts, not a cap",
+        "shortfall": "A spend alert emails you at a percentage of a budget; it cannot stop a Droplet or the bill.",
+        "source": {
+          "url": "https://docs.digitalocean.com/platform/billing/spend-alerts/",
+          "quote": "A spend alert budget is not a spending cap and does not limit how much you can use, unless you enable pausing on a model access key alert.",
+          "confidence": "docs-confirmed"
+        },
+        "note": "A spend alert emails at a percentage of a budget and does not stop spending. The only exception is pausing on a model access key alert, which is an Inference feature, not a Droplet control."
+      }
+    },
+    {
+      "capability": "usage-alerts",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "email at % thresholds",
+        "source": {
+          "url": "https://docs.digitalocean.com/platform/billing/spend-alerts/",
+          "quote": "Spend alerts send email notifications when spending on your team or organization crosses a percentage threshold of a monthly budget you define.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "audit-log",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "per-resource events",
+        "shortfall": "API actions are recorded per resource, but Droplets have no published account-wide audit log; audit logs are listed only for Managed Agents IAM.",
+        "source": {
+          "url": "https://docs.digitalocean.com/reference/api/scopes/",
+          "quote": "View events of shared resources that have occurred in the current team",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "per-second",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "per second, 60 s minimum",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "Bundled Plan and v5 Droplets are both billed on a per-second basis, with a 60-second minimum.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "active-cpu",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "no",
+        "figure": "billed while it exists",
+        "shortfall": "CPU is billed for every hour the Droplet exists, whether the agent is working or waiting.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+          "quote": "You are still billed for bundled-plan CPU Droplets that are powered off because the compute resources stay reserved on the hypervisor.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "cheap-pause",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "no",
+        "figure": "full price when off",
+        "shortfall": "A powered-off Droplet bills exactly like a running one; only destroying it stops the charge.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+          "quote": "You are still billed for bundled-plan CPU Droplets that are powered off because the compute resources stay reserved on the hypervisor.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "no-monthly-fee",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "no plan fee",
+        "note": "There is no subscription: Droplets are billed per second at the size's rate, with no monthly platform fee.",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "Bundled Plan and v5 Droplets are both billed on a per-second basis, with a 60-second minimum.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "flat-price",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "$24/mo for 2 vCPU / 4 GiB",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "Bundled Plans have a monthly cap, so you'll never pay more than the flat monthly price for that plan.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "free-tier",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "no",
+        "figure": "$5 credit only",
+        "shortfall": "Nothing keeps running for free each month; the only free usage is a one-off $5 credit.",
+        "source": {
+          "url": "https://docs.digitalocean.com/platform/billing/signup-credit/",
+          "quote": "Signup credits expire 90 days after signup.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "free-credit",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "$5 for 90 days",
+        "source": {
+          "url": "https://docs.digitalocean.com/platform/billing/signup-credit/",
+          "quote": "When you create your first team, DigitalOcean automatically applies a $5 signup credit.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "no-card",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "no",
+        "figure": "card before Droplets",
+        "shortfall": "You must add a payment method before you can create a Droplet.",
+        "source": {
+          "url": "https://docs.digitalocean.com/platform/billing/signup-credit/",
+          "quote": "You must add a valid payment method before you can create Droplets or other resources.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "status-page",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "status.digitalocean.com",
+        "source": {
+          "url": "https://status.digitalocean.com/",
+          "quote": "All Systems Operational",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "sla",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "99.99% per Droplet",
+        "source": {
+          "url": "https://www.digitalocean.com/sla/cpu-droplets",
+          "quote": "DigitalOcean commits to a Monthly Uptime Percentage of 99.99% for each individual Droplet instance.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "soc2",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "SOC 2 Type II + SOC 3",
+        "source": {
+          "url": "https://www.digitalocean.com/trust/certification-reports",
+          "quote": "DigitalOcean maintains a SOC 2 Type II and SOC 3 Type II certification, issued by our independent auditor, Schellman & Company.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "dpa",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "DPA published",
+        "source": {
+          "url": "https://www.digitalocean.com/legal/data-processing-agreement",
+          "quote": "This Data Processing Agreement (“DPA”) is an addendum to the Customer Terms of Service (“Agreement”)",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "open-source",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "no",
+        "figure": "hosted service only",
+        "shortfall": "Droplets are a hosted service; DigitalOcean publishes clients and tools, not a self-hostable platform.",
+        "source": {
+          "url": "https://www.digitalocean.com/open-source",
+          "quote": "DigitalOcean relies on open source technologies to do what we do.",
+          "confidence": "inferred"
+        }
+      }
+    }
+  ]
+}

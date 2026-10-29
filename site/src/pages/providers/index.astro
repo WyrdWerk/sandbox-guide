@@ -17,7 +17,7 @@ import { providers } from "../../lib/data";
         {
           providers.map((provider) => (
             <article class="pick">
-              <span class="pick__label">{provider.checkedOn ? `Checked ${provider.checkedOn}` : "Research pending"}</span>
+              <span class="pick__label">{provider.kind === "vps" ? "VPS · " : ""}{provider.checkedOn ? `Checked ${provider.checkedOn}` : "Research pending"}</span>
               <h3 class="pick__title"><a href={`/providers/${provider.id}/`}>{provider.name}</a></h3>
               <p class="pick__body">{provider.oneLiner}</p>
               <p class="pick__catch">

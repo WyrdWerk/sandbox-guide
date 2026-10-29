@@ -232,6 +232,18 @@
         "quote": "`memory`: captures filesystem, memory, and running process state and restores with a warm start.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "partly",
+      "figure": "Disk only; $0.06/GB-mo",
+      "scenario": "A snapshot captures the disk, not memory, and restoring it means creating a new Droplet.",
+      "note": "On-demand disk snapshots kept until deleted, any of them restorable, usable as a template for new Droplets. Automatic backups at 20% (weekly) or 30% (daily) of the Droplet price. No memory snapshot and no fork of a running machine; only Managed Agents forks, and only from a checkpoint.",
+      "source": {
+        "url": "https://docs.digitalocean.com/products/snapshots/details/features/",
+        "quote": "Snapshots are retained indefinitely until manually deleted.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a snapshot keeps",

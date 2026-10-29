@@ -241,6 +241,18 @@
         "quote": "You own the endpoint and its domain",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "partly",
+      "figure": "DNS yes; HTTPS is yours",
+      "scenario": "Point an A record at the Droplet's IP; the certificate is yours to issue and renew.",
+      "note": "DigitalOcean runs DNS for your domain, but automatic certificates are a Load Balancer and Spaces feature. A plain Droplet needs Caddy or Certbot. The OpenClaw 1-Click image is the exception: it ships Caddy with a Let's Encrypt certificate for the IP.",
+      "source": {
+        "url": "https://docs.digitalocean.com/products/networking/dns/",
+        "quote": "Domains you manage on DigitalOcean integrate with DigitalOcean Load Balancers and Spaces to streamline automatic SSL certificate management.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Path to your domain",

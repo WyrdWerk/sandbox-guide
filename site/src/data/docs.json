@@ -1078,5 +1078,71 @@
       "title": "Security Policies — certification, data storage, encryption, subprocessors",
       "url": "https://docs.tensorlake.ai/platform/security"
     }
+  },
+  "digitalocean": {
+    "isolation": {
+      "title": "Droplet Features | DigitalOcean Documentation",
+      "url": "https://docs.digitalocean.com/products/droplets/details/features/"
+    },
+    "sizes-regions": {
+      "title": "Choosing a Droplet plan",
+      "url": "https://docs.digitalocean.com/products/droplets/concepts/choosing-a-plan/"
+    },
+    "billing-models": {
+      "title": "Droplet pricing: hourly rates and monthly caps",
+      "url": "https://www.digitalocean.com/pricing/droplets"
+    },
+    "trials-free-tiers": {
+      "title": "Signup Credit | DigitalOcean Documentation",
+      "url": "https://docs.digitalocean.com/platform/billing/signup-credit/"
+    },
+    "lifecycle": {
+      "title": "Droplet pricing and billing: what bills while powered off",
+      "url": "https://docs.digitalocean.com/products/droplets/details/pricing/"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots Features | DigitalOcean Documentation",
+      "url": "https://docs.digitalocean.com/products/snapshots/details/features/"
+    },
+    "storage": {
+      "title": "Volume Pricing | DigitalOcean Documentation",
+      "url": "https://docs.digitalocean.com/products/volumes/details/pricing/"
+    },
+    "idle-timers": {
+      "title": "Droplet pricing and billing: billing runs until you destroy it",
+      "url": "https://docs.digitalocean.com/products/droplets/details/pricing/"
+    },
+    "reaching-it": {
+      "title": "Droplet Console: connect from the browser",
+      "url": "https://docs.digitalocean.com/products/droplets/how-to/connect-with-console/"
+    },
+    "custom-domains": {
+      "title": "Domains and DNS | DigitalOcean Documentation",
+      "url": "https://docs.digitalocean.com/products/networking/dns/"
+    },
+    "outbound-network": {
+      "title": "Cloud Firewalls: inbound and outbound rules",
+      "url": "https://docs.digitalocean.com/products/networking/firewalls/details/features/"
+    },
+    "keys-secrets": {
+      "title": "Scopes for API Tokens | DigitalOcean Documentation",
+      "url": "https://docs.digitalocean.com/reference/api/scopes/"
+    },
+    "ways-to-drive": {
+      "title": "DigitalOcean MCP Servers | DigitalOcean Documentation",
+      "url": "https://docs.digitalocean.com/reference/mcp/"
+    },
+    "built-in-agents": {
+      "title": "OpenClaw 1-Click on the DigitalOcean Marketplace",
+      "url": "https://marketplace.digitalocean.com/apps/openclaw"
+    },
+    "teams-accounts": {
+      "title": "Teams: members, roles and access",
+      "url": "https://docs.digitalocean.com/platform/teams/"
+    },
+    "company": {
+      "title": "CPU Droplet service level agreement",
+      "url": "https://www.digitalocean.com/sla/cpu-droplets"
+    }
   }
 }

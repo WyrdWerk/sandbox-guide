@@ -1,0 +1,152 @@
+{
+  "provider": "digitalocean",
+  "checkedOn": "2026-10-29",
+  "summary": "Two genuine one-click routes (OpenClaw, Hermes) on a normal VM, a manual route for everything else, and a separate per-session runtime for code interpreters and browser agents. DigitalOcean is not a good fit for the last two, because a Droplet bills by the hour it exists rather than by the work it does.",
+  "routes": [
+    {
+      "useCase": "hermes-agent",
+      "tier": "one-click",
+      "noTerminal": "partly",
+      "what": "The Marketplace 'Hermes Agent' image creates a Droplet with Hermes, Node and the OpenAI SDK installed. The listing publishes no post-deploy steps beyond the API example, so expect to add a model key and a channel in the console.",
+      "link": {
+        "title": "Hermes Agent 1-Click",
+        "url": "https://marketplace.digitalocean.com/apps/hermes-agent"
+      },
+      "price": "Droplet from $6/month; no agent surcharge",
+      "disposition": "Offer as a one-click route, flagged as partly no-terminal because the setup steps are unpublished."
+    },
+    {
+      "useCase": "openclaw",
+      "tier": "one-click",
+      "noTerminal": "partly",
+      "what": "The hardened OpenClaw image provisions a Droplet with Caddy and a Let's Encrypt certificate, a generated gateway token, device pairing, container isolation, fail2ban and unattended upgrades. You still copy the gateway token and pair a device.",
+      "link": {
+        "title": "OpenClaw 1-Click",
+        "url": "https://marketplace.digitalocean.com/apps/openclaw"
+      },
+      "price": "$12/month",
+      "disposition": "Recommend. This is the cheapest hardened one-click OpenClaw here, and the only one that also gives a public IP and 16 regions."
+    },
+    {
+      "useCase": "coding-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Claude Code or Codex on a Droplet yourself; the default images have no coding agent. A 2 vCPU / 4 GiB Basic Droplet at $24/month is enough for one developer.",
+      "link": {
+        "title": "Droplets",
+        "url": "https://docs.digitalocean.com/products/droplets/"
+      },
+      "price": "Up to $24/month for 2 vCPU / 4 GiB always on; less if it sleeps",
+      "disposition": "List as a manual route; no pick."
+    },
+    {
+      "useCase": "code-interpreter",
+      "tier": "backend",
+      "noTerminal": "no",
+      "what": "Harness Runtime runs each session in a Firecracker microVM through doctl, PyDo or the API. Medium (2 vCPU / 4 GB) is $0.126 an hour at full allocation, with CPU and memory billed separately from storage.",
+      "link": {
+        "title": "Harness Runtime pricing",
+        "url": "https://www.digitalocean.com/pricing/harness-runtime"
+      },
+      "price": "$0.126/hour at full Medium allocation",
+      "disposition": "Backend route only. Do not price this with the Droplet card: it is a different product on a different meter, and the docs still bill 25% of allocated vCPU until active-CPU billing ships."
+    },
+    {
+      "useCase": "browser-agent",
+      "tier": "backend",
+      "noTerminal": "no",
+      "what": "Harness Runtime sessions include chromium and a browser-automation tool, but there is no desktop and no live preview of a running app.",
+      "link": {
+        "title": "Managed Agents",
+        "url": "https://www.digitalocean.com/products/managed-agents"
+      },
+      "disposition": "Backend route with a caveat; not a pick for computer-use agents."
+    },
+    {
+      "useCase": "workflow-automation",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run n8n and its database in Docker on one Droplet, keeping the encryption key yourself. A 2 vCPU / 4 GiB box at $24/month is the practical floor once the database is on the same machine.",
+      "link": {
+        "title": "Docker 1-Click",
+        "url": "https://marketplace.digitalocean.com/apps/docker"
+      },
+      "price": "$24/month",
+      "disposition": "Manual route; no pick. No n8n image was verified in this research."
+    },
+    {
+      "useCase": "chat-bot",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "An always-on Droplet keeps the Discord or Slack gateway connected, because nothing idles or stops it. 1 vCPU / 2 GiB at $12/month is enough for one server.",
+      "link": {
+        "title": "Droplet pricing",
+        "url": "https://www.digitalocean.com/pricing/droplets"
+      },
+      "price": "$12/month",
+      "disposition": "Manual route; no pick."
+    },
+    {
+      "useCase": "claude-code-team",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "One Droplet per developer, each with its own login and credentials; there is no shared team login. Five 4 vCPU / 8 GiB boxes for eight hours a day over 20 days is 160 machine-hours each, and the 672-hour cap never binds at that rate.",
+      "link": {
+        "title": "Droplet pricing",
+        "url": "https://www.digitalocean.com/pricing/droplets"
+      },
+      "price": "5 x $11.43 = $57.14/month",
+      "disposition": "Manual route; no pick. The cap means a part-time box still costs the full month."
+    },
+    {
+      "useCase": "scheduled-scraper",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "cron inside a Droplet that stays on. DigitalOcean has no scheduler that starts a machine, so the idle hours between runs are billed at the full rate.",
+      "link": {
+        "title": "Droplet pricing",
+        "url": "https://www.digitalocean.com/pricing/droplets"
+      },
+      "price": "$12/month for 1 vCPU / 2 GiB",
+      "disposition": "Manual route; no pick. A task-per-run provider is cheaper for four runs a day."
+    },
+    {
+      "useCase": "mcp-server",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "A small Droplet with a public IPv4 answers at a stable address all month. DigitalOcean's own MCP server manages DigitalOcean resources; it does not host your server.",
+      "link": {
+        "title": "DigitalOcean MCP servers",
+        "url": "https://docs.digitalocean.com/reference/mcp/"
+      },
+      "price": "$6/month for 1 vCPU / 1 GiB",
+      "disposition": "Recommend. Public IP, any TCP port, no idle stop, $6 a month."
+    }
+  ],
+  "picks": [
+    {
+      "useCase": "openclaw",
+      "for": "A cheap, hardened, always-on OpenClaw with its own public address",
+      "why": "A $12/month Droplet arrives with TLS, a gateway token, device pairing, container isolation and fail2ban already configured, on a real VM with root and 16 regions.",
+      "watch": "Powering off does not stop the bill, and the $12 tier is the floor only since the February 2026 update; the January image needed $24.",
+      "link": "https://marketplace.digitalocean.com/apps/openclaw"
+    },
+    {
+      "useCase": "mcp-server",
+      "for": "A small always-on MCP endpoint on a known address",
+      "why": "$6 a month buys a 1 vCPU / 1 GiB Droplet with a public IPv4, any TCP port except SMTP, and no idle stop to wake from.",
+      "watch": "There is no hard spend cap and no tokenised URL: you add TLS and authentication yourself, and a spend alert only emails you.",
+      "link": "https://www.digitalocean.com/pricing/droplets"
+    }
+  ],
+  "notPicked": [
+    {
+      "useCase": "code-interpreter",
+      "why": "A Droplet bills for the hour it exists, not the work it does, so 1,000 ten-minute runs cost $10 and 1,000 hours of idling cost $24. Harness Runtime is the right DigitalOcean product here, and it is priced separately."
+    },
+    {
+      "useCase": "browser-agent",
+      "why": "No desktop, no live preview and no per-session billing on a Droplet; Harness Runtime has chromium but is a backend product, not a computer-use desktop."
+    }
+  ]
+}

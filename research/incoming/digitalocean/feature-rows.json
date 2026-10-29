@@ -1,0 +1,246 @@
+{
+  "provider": "digitalocean",
+  "checkedOn": "2026-10-29",
+  "rows": [
+    {
+      "feature": "isolation",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "Full VM; root, Docker, SSH",
+        "scenario": "Clone, build and load the module without a workaround: own kernel, root, Docker and SSH on an ordinary Linux VM.",
+        "note": "A full VM with dedicated RAM, disk and network, and a shared or dedicated vCPU. Docker is an apt install or a 1-Click image. Nested virtualisation is mentioned in one docs page but never documented as available.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/features/",
+          "quote": "DigitalOcean Droplets are Linux-based virtual machines (VMs) that run on top of virtualized hardware.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "sizes-regions",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "2 vCPU / 16 GiB, EU available",
+        "scenario": "Memory-Optimized 2 vCPU / 16 GiB fits the lopsided request exactly, in Amsterdam or Frankfurt, for $84 a month.",
+        "note": "31 bundled shapes across five families, from 512 MiB to 256 GiB, plus v5 sizing in four US datacenters. Sixteen datacenters, two of them in the EU. Resizing needs a power-off and the disk can never shrink.",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "| 16 GiB | 2 vCPUs | 4,000 GiB | 1x | 50 GiB | $0.12500 | $84.00 |",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "feature": "billing-models",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "$0.03571/h, 672 h cap",
+        "scenario": "Per second while the Droplet exists, at $0.03571 an hour for 2 vCPU / 4 GiB, capped at the $24 monthly price.",
+        "note": "Per-second billing with a 60-second or $0.01 minimum. Bundled plans stop charging at 672 hours, so always-on costs the monthly price. A powered-off Droplet bills in full, and the $0.01 floor makes 1,000 ten-minute runs cost $10 rather than $5.95.",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "Bundled Plans have a monthly cap, so you'll never pay more than the flat monthly price for that plan.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "feature": "trials-free-tiers",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "$5 credit, 90 days",
+        "scenario": "A $5 credit for 90 days, but a payment method is required before the first Droplet exists.",
+        "note": "No free tier. A $5 signup credit expires after 90 days, and a card or PayPal must be on file before any Droplet can be created. Managed Agents has a separate $5 trial that the blog says needs no card; that is a different product.",
+        "source": {
+          "url": "https://docs.digitalocean.com/platform/billing/signup-credit/",
+          "quote": "Signup credits expire 90 days after signup.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "lifecycle",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "no",
+        "figure": "Power off bills in full",
+        "scenario": "Powering off keeps the disk but loses memory and processes, and the meter keeps running at the full hourly rate.",
+        "note": "There is no pause and no idle stop. Power off keeps the disk and the bill; destroy ends both, and the disk goes with it unless snapshotted. Managed Agents is the only product here that pauses a session and resumes it.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+          "quote": "You are still billed for bundled-plan CPU Droplets that are powered off because the compute resources stay reserved on the hypervisor.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "feature": "snapshots-forks",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "Disk only; $0.06/GB-mo",
+        "scenario": "A snapshot captures the disk, not memory, and restoring it means creating a new Droplet.",
+        "note": "On-demand disk snapshots kept until deleted, any of them restorable, usable as a template for new Droplets. Automatic backups at 20% (weekly) or 30% (daily) of the Droplet price. No memory snapshot and no fork of a running machine; only Managed Agents forks, and only from a checkpoint.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/snapshots/details/features/",
+          "quote": "Snapshots are retained indefinitely until manually deleted.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "storage",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "Whole disk + 16 TiB volumes",
+        "scenario": "Postgres in /var/lib survives a power-off and a reboot, and a volume can outlive the Droplet.",
+        "note": "The whole boot disk persists with the machine. Volumes run from 1 GiB to 16 TiB at $0.10/GiB-month and attach to one Droplet at a time. Volumes are billed whether attached or not, and are not included in Droplet backups.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/volumes/details/pricing/",
+          "quote": "DigitalOcean Volumes Block Storage cost $0.10 per GiB per month and range from 1 GiB to 16384 GiB (16 TiB).",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "feature": "idle-timers",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "No idle stop; runs for weeks",
+        "scenario": "Nothing idles a Droplet: it stays up for weeks until you power it off or destroy it.",
+        "note": "No idle timer, no session lifetime and no wake-on-request for a Droplet; billing starts at create and ends at destroy. Managed Agents is the opposite: a 15-minute idle suspend by default, resuming on new input.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+          "quote": "Billing begins when you create the Droplet and ends when you destroy it.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "feature": "reaching-it",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "Public IPv4; SSH; console",
+        "scenario": "The agent's port 3000 is reachable at the Droplet's public IP with nothing in front of it; SSH and a browser console are both there.",
+        "note": "A public IPv4 per Droplet, real SSH, a browser console and any TCP port except SMTP. There is no tokenised preview link and no port-forwarding service; standard ssh -L works. The OpenClaw image adds a gateway token and TLS in front of its own port.",
+        "source": {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "By default, each Droplet you create comes with its own public IPv4 address.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "feature": "custom-domains",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "DNS yes; HTTPS is yours",
+        "scenario": "Point an A record at the Droplet's IP; the certificate is yours to issue and renew.",
+        "note": "DigitalOcean runs DNS for your domain, but automatic certificates are a Load Balancer and Spaces feature. A plain Droplet needs Caddy or Certbot. The OpenClaw 1-Click image is the exception: it ships Caddy with a Let's Encrypt certificate for the IP.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/networking/dns/",
+          "quote": "Domains you manage on DigitalOcean integrate with DigitalOcean Load Balancers and Spaces to streamline automatic SSL certificate management.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "outbound-network",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "$0.01/GiB after 500-11,000",
+        "scenario": "Outbound data is included per plan, 500 GiB to 11,000 GiB pooled across the team, then $0.01 a GiB.",
+        "note": "Allowances are pooled at team level with no rollover. Cloud firewalls filter by protocol, port and address in both directions at no extra cost. Each Droplet keeps its public IPv4 for its life, and Reserved IPs give a movable inbound address.",
+        "source": {
+          "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+          "quote": "Each Droplet plan includes an amount of free outbound data transfer. Additional outbound transfer is billed at $0.01 per GiB.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "feature": "keys-secrets",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "Scoped tokens; no store",
+        "scenario": "The agent reads whatever is in its environment or on disk; a Droplet has no secret store to keep keys out of reach.",
+        "note": "API tokens have granular custom scopes. A Droplet has no secret manager: keys go in cloud-init, files or environment variables. Only Managed Agents stores secrets and injects them at session start, and only Action Gateway brokers credentials so the model never sees them.",
+        "source": {
+          "url": "https://docs.digitalocean.com/reference/api/scopes/",
+          "quote": "Most scopes in this table are granular scopes that grant access to a specific resource type and action.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "ways-to-drive",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "Dashboard, CLI, 3 SDKs, MCP",
+        "scenario": "Create the first Droplet by clicking, then drive it with doctl, PyDo, DoTs, the REST API or the MCP server.",
+        "note": "Control panel, doctl, official Python (PyDo), TypeScript (DoTs) and Go (Godo) clients, a documented REST API v2, an official MCP server, SSH and a browser console. No PTY or file API for Droplets; Harness Runtime has both for sessions.",
+        "source": {
+          "url": "https://docs.digitalocean.com/reference/mcp/",
+          "quote": "DigitalOcean MCP servers bridge your development tools and the DigitalOcean API",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "built-in-agents",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "OpenClaw/Hermes 1-Click",
+        "scenario": "OpenClaw or Hermes from the Marketplace arrives installed and configured; the default Ubuntu image has no coding agent at all.",
+        "note": "Marketplace 1-Click images for OpenClaw (hardened, from $12/month), Hermes Agent and Docker Agent. A Droplet has no prompt API. Managed Agents runs Claude Code, Codex, OpenCode, Hermes and LangGraph as a separate, separately priced product.",
+        "source": {
+          "url": "https://www.digitalocean.com/blog/moltbot-on-digitalocean",
+          "quote": "1-Click deployment for OpenClaw on DigitalOcean Droplet® servers, now starting at just $12/month",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "teams-accounts",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "partly",
+        "figure": "Roles, OIDC SSO; no cap",
+        "scenario": "A team shares Droplets and billing, with roles and OIDC single sign-on, but a spend alert cannot stop the bill.",
+        "note": "Six predefined roles plus custom roles, OIDC single sign-on, and spend alerts at percentage thresholds of a budget. The docs say a budget is not a cap; the only pause exists for model access key alerts. Account-wide audit logs are not published for Droplets.",
+        "source": {
+          "url": "https://docs.digitalocean.com/platform/billing/spend-alerts/",
+          "quote": "A spend alert budget is not a spending cap and does not limit how much you can use, unless you enable pausing on a model access key alert.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "company",
+      "row": {
+        "provider": "digitalocean",
+        "verdict": "yes",
+        "figure": "LLC; 99.99% SLA; SOC 2",
+        "scenario": "A public company with a 99.99% per-Droplet SLA, SOC 2 Type II and a published DPA.",
+        "note": "DigitalOcean, LLC, founded 2012, listed on the NYSE as DOCN with more than 680,000 customers. SOC 2 Type II and SOC 3 Type II, a published DPA and a public status page.",
+        "source": {
+          "url": "https://www.digitalocean.com/sla/cpu-droplets",
+          "quote": "DigitalOcean commits to a Monthly Uptime Percentage of 99.99% for each individual Droplet instance.",
+          "confidence": "pricing-page"
+        }
+      }
+    }
+  ]
+}

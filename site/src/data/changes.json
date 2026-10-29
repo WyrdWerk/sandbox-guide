@@ -175,6 +175,19 @@
           "confidence": "docs-confirmed"
         }
       ]
+    },
+    {
+      "date": "2026-01-01",
+      "title": "DigitalOcean Droplets moved from hourly to per-second billing",
+      "provider": "digitalocean",
+      "what": "DigitalOcean's pricing page says Droplets bill per second from 1 January 2026, with a minimum of 60 seconds or $0.01 per Droplet, whichever is higher. The 672-hour monthly cap stayed, so an always-on Droplet still costs its flat monthly price, and a powered-off Droplet is still billed. The date is the one DigitalOcean gives; this guide recorded it on 29 October 2026.",
+      "sources": [
+        {
+          "url": "https://www.digitalocean.com/pricing/droplets",
+          "quote": "Effective January 1, 2026, we're moving to per-second billing (with a minimum charge of 60 seconds or $0.01, whichever is higher) for Droplets.",
+          "confidence": "pricing-page"
+        }
+      ]
     }
   ]
 }

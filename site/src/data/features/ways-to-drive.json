@@ -231,6 +231,18 @@
         "quote": "This installs the `tl` CLI, which you can use to manage sandboxes and other resources from the command line.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "yes",
+      "figure": "Dashboard, CLI, 3 SDKs, MCP",
+      "scenario": "Create the first Droplet by clicking, then drive it with doctl, PyDo, DoTs, the REST API or the MCP server.",
+      "note": "Control panel, doctl, official Python (PyDo), TypeScript (DoTs) and Go (Godo) clients, a documented REST API v2, an official MCP server, SSH and a browser console. No PTY or file API for Droplets; Harness Runtime has both for sessions.",
+      "source": {
+        "url": "https://docs.digitalocean.com/reference/mcp/",
+        "quote": "DigitalOcean MCP servers bridge your development tools and the DigitalOcean API",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "First machine without a terminal?",

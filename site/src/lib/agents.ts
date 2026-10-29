@@ -146,7 +146,7 @@ export function rankingsMarkdown(): string {
 export function providerMarkdown(p: Provider): string {
   const out = [`# ${p.name}`, ``, `> ${p.oneLiner}`, ``, `Website: ${p.url}  `, `Guide page: ${abs(`/providers/${p.id}/`)}  `, `Checked: ${p.checkedOn ?? site.checkedOn}`];
   if (p.status === "pending") return [...out, ``, `Research on this provider is not finished.`].join("\n") + "\n";
-  out.push(``, `**Short answer:** ${providerAnswer(p)}`, ``, ...p.whatItIs, ``, `**Who it is for:** ${p.whoFor}`, ``, `**Isolation:** ${p.isolation}`, ``, `**Sizes and regions:** ${p.sizes}`);
+  out.push(``, `**Short answer:** ${providerAnswer(p)}`, ``, ...p.whatItIs, ``, `**Who it is for:** ${p.whoFor}`, ``, `**Isolation:** ${p.kind === "vps" ? "A VPS (virtual private server), not a sandbox built for agents. " : ""}${p.isolation}`, ``, `**Sizes and regions:** ${p.sizes}`);
   out.push(``, `## How it charges`, ``, ...Object.entries(p.billing).map(([k, v]) => `- ${k}: ${v}`));
   const card = pricing.find((c) => c.provider === p.id);
   if (card) out.push(``, card.summary, ...card.notes.map((n) => `- ${n}`));

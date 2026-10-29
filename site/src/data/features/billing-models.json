@@ -232,6 +232,18 @@
         "quote": "CPU tracks active runtime execution when metering is available, rather than reserved vCPU time.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "digitalocean",
+      "verdict": "partly",
+      "figure": "$0.03571/h, 672 h cap",
+      "scenario": "Per second while the Droplet exists, at $0.03571 an hour for 2 vCPU / 4 GiB, capped at the $24 monthly price.",
+      "note": "Per-second billing with a 60-second or $0.01 minimum. Bundled plans stop charging at 672 hours, so always-on costs the monthly price. A powered-off Droplet bills in full, and the $0.01 floor makes 1,000 ten-minute runs cost $10 rather than $5.95.",
+      "source": {
+        "url": "https://www.digitalocean.com/pricing/droplets",
+        "quote": "Bundled Plans have a monthly cap, so you'll never pay more than the flat monthly price for that plan.",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "The meter",

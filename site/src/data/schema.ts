@@ -86,6 +86,8 @@ export interface Provider {
   name: string;
   url: string;
   status: "researched" | "pending";
+  /** "vps": a plain virtual server you rent by the month and set up yourself, not a sandbox built for agents. */
+  kind?: "vps";
   checkedOn?: string;
   oneLiner: string;
   whatItIs: string[];
