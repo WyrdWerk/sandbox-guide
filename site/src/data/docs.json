@@ -1012,5 +1012,71 @@
       "title": "Fly.io Pricing — Sprites",
       "url": "https://fly.io/pricing/"
     }
+  },
+  "tensorlake": {
+    "isolation": {
+      "title": "Sandbox and Orchestration Infrastructure for Agents — microVM by default, gVisor for GPUs",
+      "url": "https://docs.tensorlake.ai/sandboxes/introduction"
+    },
+    "sizes-regions": {
+      "title": "Pricing and billing — per-sandbox vCPU, RAM, disk and session limits",
+      "url": "https://docs.tensorlake.ai/platform/billing"
+    },
+    "lifecycle": {
+      "title": "Lifecycle — ephemeral and named sandboxes, suspend, resume, restart",
+      "url": "https://docs.tensorlake.ai/sandboxes/lifecycle"
+    },
+    "snapshots-forks": {
+      "title": "Snapshot and Clone — filesystem and memory snapshots, copy a running sandbox",
+      "url": "https://docs.tensorlake.ai/sandboxes/snapshots"
+    },
+    "storage": {
+      "title": "Mount Filesystems — durable volumes on an ephemeral root disk",
+      "url": "https://docs.tensorlake.ai/sandboxes/mount-filesystems"
+    },
+    "idle-timers": {
+      "title": "Lifecycle: Timeout — the idle threshold and the plan maximum",
+      "url": "https://docs.tensorlake.ai/sandboxes/lifecycle#timeout"
+    },
+    "reaching-it": {
+      "title": "Networking — sandbox public URLs, exposed ports and auth",
+      "url": "https://docs.tensorlake.ai/sandboxes/networking"
+    },
+    "custom-domains": {
+      "title": "Set up BYOC on AWS — run the ingress on your own domain",
+      "url": "https://docs.tensorlake.ai/platform/self-hosted-compute/aws"
+    },
+    "outbound-network": {
+      "title": "Networking — outbound access, allow_out and deny_out",
+      "url": "https://docs.tensorlake.ai/sandboxes/networking"
+    },
+    "keys-secrets": {
+      "title": "Environment Variables — command-scoped and PTY-scoped env",
+      "url": "https://docs.tensorlake.ai/sandboxes/environment-variables"
+    },
+    "ways-to-drive": {
+      "title": "Sandboxes Quickstart — CLI, Python, TypeScript and HTTP",
+      "url": "https://docs.tensorlake.ai/sandboxes/quickstart"
+    },
+    "built-in-agents": {
+      "title": "Run OpenCode with Tensorlake Sandboxes — the tool-intercepting plugin",
+      "url": "https://docs.tensorlake.ai/sandboxes/opencode"
+    },
+    "teams-accounts": {
+      "title": "Access Control — organizations, projects, roles and API keys",
+      "url": "https://docs.tensorlake.ai/platform/access-control"
+    },
+    "billing-models": {
+      "title": "Pricing and billing — prepaid credits, Pro rates and metering",
+      "url": "https://docs.tensorlake.ai/platform/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing — plans, the free tier and credit packs",
+      "url": "https://www.tensorlake.ai/pricing"
+    },
+    "company": {
+      "title": "Security Policies — certification, data storage, encryption, subprocessors",
+      "url": "https://docs.tensorlake.ai/platform/security"
+    }
   }
 }

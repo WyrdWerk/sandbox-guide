@@ -73,7 +73,7 @@ const nav = [
     <section class="section" id="models">
       <div class="section__head"><h2 class="section__title">Four ways providers turn time into money</h2></div>
       <div class="prose">
-        <p>Every one of the fifteen providers fits one of these, sometimes with a twist.</p>
+        <p>Every provider fits one of these, sometimes with a twist.</p>
         <ul>
           <li><strong>Per resource, on what you reserve.</strong> CPU, memory and sometimes disk each have an hourly rate, charged for the size you asked for whether or not it is busy. E2B, Daytona, InstaBox, Agent 37, Modal and boxd's CPU work like this.</li>
           <li><strong>Per resource, on what you use (<Term id="active-cpu">active-CPU billing</Term>).</strong> CPU is charged only while it works, so an idle agent pays mostly for memory. Runtime (with a small floor), Vercel Sandbox, Cloudflare Sandbox and Sprites work like this, and boxd charges memory on what is actually resident.</li>
@@ -161,7 +161,7 @@ const nav = [
         </p>
         <p>The differences are deliberate:</p>
         <ul>
-          <li><strong>Fifteen providers, checked by hand.</strong> Every rate here comes from the provider's own pricing page or documentation, with a date, rather than from Battleships' cards. Battleships' code is not used.</li>
+          <li><strong>Every provider checked by hand.</strong> Every rate here comes from the provider's own pricing page or documentation, with a date, rather than from Battleships' cards. Battleships' code is not used.</li>
           <li><strong>Where we disagree, we say so.</strong> Modal documents one physical core as two vCPUs, so its CPU here costs half of what Battleships charges per vCPU. Battleships lists Boat's disk sizes as 12, 50, 125 and 251 GB; Boat's own pricing page says 51, 51, 111 and 251 GB, and those are used here. Other differences are listed on each provider's page.</li>
           <li><strong>Fewer inputs.</strong> Battleships also models concurrency, seats, egress, snapshots and network access tiers. This calculator keeps to the inputs a first-time reader can answer, and names what it leaves out.</li>
           <li><strong>The answer is the start, not the end.</strong> Each result links to the provider's page and to the features that decide whether it fits, because the cheapest machine that cannot keep your files is not cheap.</li>

@@ -229,6 +229,18 @@
         "quote": "Run untrusted or agent-generated code in isolated Linux microVMs.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "partly",
+      "figure": "BYOC ingress only",
+      "scenario": "On Tensorlake Cloud the hostname is fixed; a self-hosted BYOC ingress puts every sandbox under a domain you own.",
+      "note": "No custom-domain setting exists on Tensorlake Cloud: sandboxes live under `sandbox.tensorlake.ai`. In the BYOC mode where you run the ingress, you supply the NLB, an ACM certificate and a public DNS zone, and each sandbox gets a subdomain of your base domain.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/platform/self-hosted-compute/aws",
+        "quote": "You own the endpoint and its domain",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Path to your domain",

@@ -21,6 +21,7 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["sandboxer", "a", 20], ["sandboxer", "b", 40], ["sandboxer", "c", 20],
   ["boxd", "b", 222.5],
   ["agent37", "b", 30.1],
+  ["tensorlake", "a", 22], ["tensorlake", "b", 250], ["tensorlake", "c", 8.25],
 ];
 
 for (const [id, key, expected] of handWorked) {

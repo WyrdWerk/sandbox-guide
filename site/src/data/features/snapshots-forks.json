@@ -220,6 +220,18 @@
         "quote": "You can also snapshot a running sandbox at any time by calling `snapshot()`, which captures its current filesystem before stopping the session.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "yes",
+      "figure": "Memory or disk; copy ×N",
+      "scenario": "A memory snapshot warm-starts with its processes running, and copy fans one running sandbox out to N copies in a single call.",
+      "note": "Two snapshot types: `filesystem` restores with a cold boot, `memory` captures filesystem, memory and running processes and restores warm. Snapshots outlive the source sandbox and are deduplicated. `copy` boots one or many sandboxes from a running or suspended source, inheriting image, resources, network policy and exposed ports.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/snapshots",
+        "quote": "`memory`: captures filesystem, memory, and running process state and restores with a warm start.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a snapshot keeps",

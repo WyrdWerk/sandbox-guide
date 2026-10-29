@@ -220,6 +220,18 @@
         "quote": "The default image is `vercel/sandbox/universal`, which includes the current Node.js LTS, Python 3.14, coding agents, and common utilities.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "partly",
+      "figure": "None; five integrations",
+      "scenario": "No agent ships in the images, but a first-party OpenCode plugin and guides for Claude Managed Agents, Cursor, Devin and Crabbox send an agent's tool calls into a sandbox.",
+      "note": "Nothing is preinstalled: the images are Ubuntu, Debian and a VNC desktop. The routes are a `tensorlake-opencode` plugin that intercepts bash, read, write and edit, self-hosted environments for Claude Managed Agents and Cursor Cloud Agents, Devin Outposts, Crabbox for test suites, and a page on preloading skill files into images.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/opencode",
+        "quote": "The model edits, runs, and searches inside an isolated environment instead of on your machine.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Agents installed, and promptable?",

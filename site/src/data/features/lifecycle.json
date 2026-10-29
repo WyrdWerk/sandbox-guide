@@ -247,6 +247,18 @@
         "quote": "Persistent sandboxes automatically save their filesystem state when stopped and restore it when resumed.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "yes",
+      "figure": "RAM + processes; ~1 s resume",
+      "scenario": "Suspend freezes memory, processes and files, and resume returns the same sandbox in about a second; a terminated one can be restarted for 48 hours.",
+      "note": "Named sandboxes suspend on idle or on request and resume under the same ID with the process tree alive. Ephemeral sandboxes cannot suspend and are deleted at their timeout. Terminated sandboxes stay restartable for 48 hours, restoring from the latest snapshot when one exists.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/quickstart",
+        "quote": "A resumed sandbox continues from the exact memory and file system state, it was suspended.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a pause keeps",
@@ -267,7 +279,7 @@
         "what": "You check the dev server, the cron job and the IP address the agent had written down."
       }
     ],
-    "turn": "Twelve of the fifteen can restore memory in at least one mode, but not all make it the default. Boat and Cloudflare keep nothing, and Lizard's stop deletes the disk."
+    "turn": "Twelve of the sixteen can restore memory in at least one mode, but not all make it the default. Boat and Cloudflare keep nothing, and Lizard's stop deletes the disk."
   },
   "questions": [
     "Does your pause keep RAM, keep only files, or destroy the machine — and what does your documentation call each state?",

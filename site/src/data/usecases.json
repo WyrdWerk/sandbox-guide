@@ -6,7 +6,7 @@
       "title": "Run a Hermes agent",
       "kicker": "Personal agent",
       "question": "I want a personal assistant that answers me on Telegram, remembers what I tell it and runs jobs on a schedule.",
-      "standfirst": "Hermes is a personal AI agent you host yourself. It needs a small machine that stays on and keeps its files. Only one of the fifteen providers offers it in one click; most can run it if you can follow terminal instructions; a few are a poor fit for an assistant that never sleeps.",
+      "standfirst": "Hermes is a personal AI agent you host yourself. It needs a small machine that stays on and keeps its files. Only one of the sixteen providers offers it in one click; most can run it if you can follow terminal instructions; a few are a poor fit for an assistant that never sleeps.",
       "preset": "personal",
       "whatItIs": [
         "[Hermes Agent](https://github.com/NousResearch/hermes-agent) is an open-source (MIT) assistant from Nous Research. You talk to it from Telegram, Slack, WhatsApp, email and [20+ other apps](https://hermes-agent.nousresearch.com/docs/), it keeps a memory of you between conversations, and it writes itself reusable skills from what it does.",
@@ -195,13 +195,23 @@
           "noTerminal": "no",
           "what": "Neither Cloudflare nor Hermes documents this. Cloudflare sandboxes also lose their disk when they stop, so memory would have to be saved elsewhere.",
           "link": null
+        },
+        {
+          "provider": "tensorlake",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Create a named sandbox with `--timeout 0` on Pro, install Hermes and keep it in a background process or under systemd. Suspend is the catch: Hermes polls Telegram every few seconds, so the sandbox has to stay running, and only Pro allows a session with no cap. Everything in `~/.hermes` sits on the ephemeral root disk, so a snapshot or a mounted volume is what saves it if the sandbox is ever terminated.",
+          "link": {
+            "title": "Tensorlake: timeout and plan limits",
+            "url": "https://docs.tensorlake.ai/sandboxes/lifecycle#timeout"
+          }
         }
       ],
       "picks": [
         {
           "provider": "agent37",
           "for": "If you do not want a terminal",
-          "why": "The only provider of the fifteen that sets up Hermes in one click. Plans run from $3.99 a month (1 vCPU / 4 GB / 8 GB, bring your own model key) to $29.99 (2 vCPU / 8 GB / 20 GB, with a built-in browser).",
+          "why": "The only provider of the sixteen that sets up Hermes in one click. Plans run from $3.99 a month (1 vCPU / 4 GB / 8 GB, bring your own model key) to $29.99 (2 vCPU / 8 GB / 20 GB, with a built-in browser).",
           "watch": "The free plan sleeps after 15 idle minutes. These Personal plans are a separate product from the Agent 37 Cloud machines the calculator prices.",
           "link": "https://www.agent37.com/personal"
         },
@@ -261,7 +271,7 @@
       "title": "Run an OpenClaw agent",
       "kicker": "Personal agent",
       "question": "I want OpenClaw answering me on WhatsApp or Slack, with its own browser and memory, without keeping my laptop on.",
-      "standfirst": "OpenClaw is a self-hosted assistant built around one always-on gateway. It has more official hosting guides than Hermes: two of the fifteen providers deploy it in one click, and four more publish a guide or template.",
+      "standfirst": "OpenClaw is a self-hosted assistant built around one always-on gateway. It has more official hosting guides than Hermes: two of the sixteen providers deploy it in one click, and four more publish a guide or template.",
       "preset": "personal",
       "whatItIs": [
         "[OpenClaw](https://docs.openclaw.ai/help/faq/what-is-openclaw) is an open-source assistant you run on your own infrastructure, for yourself or a team. It replies on the apps you already use, including WhatsApp, Slack, Telegram, Discord, Signal and iMessage, and can read files, run commands, browse and keep memory.",
@@ -443,6 +453,16 @@
           "noTerminal": "no",
           "what": "Not documented by either side, and Modal sandboxes end after 24 hours.",
           "link": null
+        },
+        {
+          "provider": "tensorlake",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "SSH into a named sandbox on Pro, install OpenClaw and run the Gateway there, with the sandbox kept awake by the Gateway's own traffic. Tensorlake publishes no OpenClaw guide. Crabbox, the CLI from OpenClaw, does have a Tensorlake provider, but it syncs a repo and runs a test suite — it does not host the Gateway, so it is not a route to an OpenClaw agent.",
+          "link": {
+            "title": "Tensorlake: a sandbox as your dev environment",
+            "url": "https://docs.tensorlake.ai/sandboxes/remote-dev"
+          }
         }
       ],
       "picks": [
@@ -643,6 +663,16 @@
             "title": "Vercel: Claude Code",
             "url": "https://vercel.com/docs/agent-harnesses/claude-code"
           }
+        },
+        {
+          "provider": "tensorlake",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "The first-party route is the `tensorlake-opencode` plugin: OpenCode keeps running on your laptop and its bash, read, write, edit and patch calls run in a sandbox that survives restarts and can mount a volume or a hosted Git repository. Claude Code and Codex are not in the images, but they work over SSH or VS Code Remote-SSH, and Tensorlake has self-hosted guides for Claude Managed Agents, Cursor Cloud Agents and Devin Outposts.",
+          "link": {
+            "title": "Run OpenCode with Tensorlake Sandboxes",
+            "url": "https://docs.tensorlake.ai/sandboxes/opencode"
+          }
         }
       ],
       "picks": [
@@ -778,6 +808,16 @@
             "title": "Cloudflare Sandbox SDK",
             "url": "https://developers.cloudflare.com/sandbox/get-started/"
           }
+        },
+        {
+          "provider": "tensorlake",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "Wrap `sandbox.run()` as a `run_code` tool and keep one sandbox per session so installed packages and written files carry between calls; the Tool Calls page has Claude, OpenAI and OpenAI Agents SDK examples. Pre-install the usual libraries in a snapshot so each session starts warm, and turn egress off or to an allowlist before running model-written code.",
+          "link": {
+            "title": "Tensorlake: tool calls",
+            "url": "https://docs.tensorlake.ai/sandboxes/tool-calls"
+          }
         }
       ],
       "picks": [
@@ -858,7 +898,18 @@
           "source": "https://battleships.dev/data/presets.json"
         }
       ],
-      "routes": [],
+      "routes": [
+        {
+          "provider": "tensorlake",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "Boot `tensorlake/ubuntu-vnc`, which ships XFCE, TigerVNC, Firefox and Chrome, then either drive the desktop through `connectDesktop()` for screenshots, clicks and typing, or start Chrome with `--remote-debugging-port=9222` and tunnel it to localhost so Playwright, Puppeteer or `chrome-devtools-mcp` drive it as if it were local. Snapshot a warmed profile so parallel agents start with cookies already in place.",
+          "link": {
+            "title": "Tensorlake: computer use",
+            "url": "https://docs.tensorlake.ai/sandboxes/computer-use"
+          }
+        }
+      ],
       "picks": [
         {
           "provider": "instabox",
@@ -905,7 +956,7 @@
       "title": "Host your own n8n",
       "kicker": "Workflow automation",
       "question": "I want n8n running my automations around the clock, on a server I control, without paying per workflow run.",
-      "standfirst": "n8n is a visual automation tool you can host yourself. It needs a small machine that never sleeps and keeps its database. Two of the fifteen providers set it up in one click; most others can run it if someone follows terminal steps; the task-only sandboxes are the wrong place for it.",
+      "standfirst": "n8n is a visual automation tool you can host yourself. It needs a small machine that never sleeps and keeps its database. Two of the sixteen providers set it up in one click; most others can run it if someone follows terminal steps; the task-only sandboxes are the wrong place for it.",
       "preset": "automation",
       "whatItIs": [
         "[n8n](https://docs.n8n.io/) is a workflow automation tool. You draw a workflow on a canvas: a **trigger** (something that starts it, such as a form being sent or a time of day), then steps that call other apps, reshape data or ask an AI model. Its [README](https://github.com/n8n-io/n8n) counts 1,500+ ready-made connections.",

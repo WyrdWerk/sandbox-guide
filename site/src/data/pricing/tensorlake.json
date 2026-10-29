@@ -1,0 +1,78 @@
+{
+  "provider": "tensorlake",
+  "checkedOn": "2026-10-29",
+  "summary": "Per second on active CPU, allocated RAM and disk, drawn from prepaid credits or a $250 Pro plan; a suspended sandbox bills snapshot storage only.",
+  "cpu": {
+    "rate": 0.07,
+    "billing": "active"
+  },
+  "ram": {
+    "rate": 0.015,
+    "billing": "allocated"
+  },
+  "disk": {
+    "running": 0.0002,
+    "stopped": 9.58904109589041e-05
+  },
+  "between": "kept",
+  "maxDisk": 100,
+  "maxVcpu": 16,
+  "maxRam": 64,
+  "sleeps": "A named sandbox suspends after `timeout_secs` with no proxied traffic (600 s by default) and resumes on the next request or by name; a suspended sandbox bills no CPU, RAM or disk, only snapshot storage at $0.07 per GB-month.",
+  "egress": {
+    "perGiB": 0,
+    "included": "Not billed",
+    "note": "Tensorlake lists egress as free.",
+    "url": "https://docs.tensorlake.ai/platform/billing"
+  },
+  "plans": [
+    {
+      "name": "Usage Credits",
+      "fee": 0,
+      "maxSessionHours": 24,
+      "maxVcpu": 4,
+      "maxRam": 16,
+      "maxDisk": 100,
+      "note": "Prepaid packs of $5, $10 or $20 (500–2,000 CU; 1 CU = $0.01). At a zero balance Tensorlake stops running sandboxes rather than billing an overage."
+    },
+    {
+      "name": "Pro",
+      "fee": 250,
+      "credit": 250,
+      "maxDisk": 100,
+      "note": "Unlimited session duration and 1,000 concurrent sandboxes."
+    },
+    {
+      "name": "Free",
+      "fee": 0,
+      "maxSessionHours": 2,
+      "maxVcpu": 1,
+      "maxRam": 1,
+      "maxDisk": 10,
+      "capped": true,
+      "note": "One sandbox at a time, no card, 2-hour sessions."
+    }
+  ],
+  "notes": [
+    "Rates are the Usage Credits rates. Pro's rates are 40% lower — $0.042 per active core-hour, $0.009 per GB-hour of RAM, $0.0001 per GB-hour of disk — and its $250 fee includes 25,000 CU. The calculator prices every plan at the Usage Credits rates, so a Pro bill above $250 of monthly usage is understated.",
+    "Tensorlake's own pages word Pro differently: the pricing page says the fee includes 25,000 CU ($250 of usage); the billing docs and FAQ say \"$250 per month plus metered usage\". This guide reads them together as $250 that includes $250 of usage, with usage beyond it billed. Get it in writing before relying on it.",
+    "CPU bills only while it executes, so the engine applies the workload's busy share. When Tensorlake cannot sample active CPU it falls back to allocated vCPU time, which costs more.",
+    "Snapshot storage is $0.07 per GB-month while a sandbox is suspended, modelled here as a per-GB-hour stopped rate (0.07 ÷ 730) on the sandbox's disk size. Tensorlake says only unique bytes are billed, so the real figure can be lower.",
+    "Billing is by the second in whole compute units, pooled per organization. Egress is free.",
+    "Memory must be 1–8 GB per vCPU, so a 1 vCPU sandbox cannot exceed 8 GB of RAM."
+  ],
+  "sources": [
+    {
+      "label": "Pricing",
+      "url": "https://www.tensorlake.ai/pricing"
+    },
+    {
+      "label": "Pricing and billing",
+      "url": "https://docs.tensorlake.ai/platform/billing"
+    },
+    {
+      "label": "Pricing and limits FAQ",
+      "url": "https://docs.tensorlake.ai/faqs/pricing-limits-faq"
+    }
+  ]
+}

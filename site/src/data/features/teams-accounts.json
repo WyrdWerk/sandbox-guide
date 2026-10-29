@@ -220,6 +220,18 @@
         "quote": "SAML Single Sign-On: $300/month",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "partly",
+      "figure": "Roles + SSO; no spend cap",
+      "scenario": "Organisations and projects with admin and member roles and project-scoped keys; no budget is published, so a runaway loop is stopped only by an empty credit balance.",
+      "note": "Org admin and member roles, project admin and member roles, and API keys limited to project-member permissions. SSO over OIDC or SAML is available to org admins but has to be enabled for the organisation. No spend cap, budget alert or audit-log product is published; prepaid credits are the stop, and Pro adds a 1,000-sandbox concurrency ceiling.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/platform/billing",
+        "quote": "When the balance reaches zero, Tensorlake blocks new sandbox activity and stops running sandboxes instead of creating a postpaid overage.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Hard spend cap?",

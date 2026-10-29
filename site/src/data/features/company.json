@@ -265,6 +265,18 @@
         "quote": "available 99.99% of the time, excluding any Excused Downtime events",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "partly",
+      "figure": "Tensorlake, Inc.; 99.9% SLA",
+      "scenario": "SOC 2 Type 2 on every tier, HIPAA with a BAA from Pro up, a 99.9% control-plane SLA with credits, and a public status page.",
+      "note": "Tensorlake, Inc., San Francisco, founded 2023, 11–50 people, $8M seed from Artisanal Ventures, Plug and Play and Hawk Hill per third-party records with conflicting dates. SOC 2 Type 2 everywhere; HIPAA with a BAA on Pro and above but no HIPAA badge in the Trust Center. 99.9% control-plane availability, service credits capped at 50% of the month's fees and no cash refund, paid plans only. Public Datadog status page. California law, San Francisco courts.",
+      "source": {
+        "url": "https://www.tensorlake.ai/terms",
+        "quote": "TensorLake will use commercially reasonable efforts to make the Control Plane available 99.9% of the time in each calendar month",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Contracting entity; promise",
@@ -285,7 +297,7 @@
         "what": "A SOC 2 report names an entity and a system. A badge on a marketing page names neither."
       }
     ],
-    "turn": "Most of the fifteen publish no SLA at all, and the numbers that do exist cover a platform, an API or an enterprise tier rather than the sandbox product. The compliance answer is narrower than the badge: one report belongs to a different company, one covers a data centre, and one Trust Center shows HIPAA only."
+    "turn": "Most of the sixteen publish no SLA at all, and the numbers that do exist cover a platform, an API or an enterprise tier rather than the sandbox product. The compliance answer is narrower than the badge: one report belongs to a different company, one covers a data centre, and one Trust Center shows HIPAA only."
   },
   "questions": [
     "Which legal entity signs, in which jurisdiction, and does the name on the terms match the name on the invoice?",

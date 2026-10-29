@@ -220,6 +220,18 @@
         "quote": "Data your sandbox sends to the internet, plus all traffic to and from exposed ports, is billable and measured in GB.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "yes",
+      "figure": "HTTPS per port; auth on by default",
+      "scenario": "Each exposed port gets `https://<port>-<name>.sandbox.tensorlake.ai`; a project key is required unless the sandbox is switched to public access.",
+      "note": "The proxy carries HTTP, WebSocket and gRPC, and preserves path and query. Auth is the default: requests need a project API key, or a signed-in session cookie from a browser. `allow_unauthenticated_access` makes exposed user ports public, but the management API on port 9501 always requires auth.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/networking",
+        "quote": "`https://<port>-<sandbox-id-or-name>.sandbox.tensorlake.ai` routes to a user service listening on `<port>` inside the sandbox",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Who can open the link",

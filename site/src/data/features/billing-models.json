@@ -220,6 +220,18 @@
         "quote": "Sandbox Active CPU | 5 hours/month | $0.128/hour | $0.128/hour",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "yes",
+      "figure": "Active CPU; $250 Pro",
+      "scenario": "Per-second metering at $0.07 per active core-hour, $0.015 per GB-hour of RAM and $0.0002 per GB-hour of disk, or 40% less on Pro.",
+      "note": "Prepaid Usage Credits in $5–$20 packs (1 CU = $0.01) or Pro at $250 including 25,000 CU. CPU bills only while it executes, falling back to allocated vCPU time when sampling fails; RAM and disk bill on allocation while running; a suspended sandbox bills snapshot storage at $0.07 per GB-month; egress is free.",
+      "source": {
+        "url": "https://www.tensorlake.ai/pricing",
+        "quote": "CPU tracks active runtime execution when metering is available, rather than reserved vCPU time.",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "The meter",

@@ -145,7 +145,7 @@ const nav = [
           </article>
         ))}
       </div>
-      <p class="prose usecase__outside"><strong>Beyond these fifteen.</strong> <Inline text={useCase.outside} /></p>
+      <p class="prose usecase__outside"><strong>Beyond these providers.</strong> <Inline text={useCase.outside} /></p>
       <p class="section__note">
         Compare these three head to head:{" "}
         <a href={`/compare/side-by-side/?p=${useCase.picks.map((p) => p.provider).join(",")}`}>features and cost side by side</a>.
@@ -163,7 +163,7 @@ const nav = [
     <section class="section" id="features" aria-labelledby="features-h">
       <div class="section__head">
         <h2 class="section__title" id="features-h">The features that decide it</h2>
-        <p class="section__note">Each page compares all fifteen providers, with a source for every row</p>
+        <p class="section__note">Each page compares every provider, with a source for every row</p>
       </div>
       <ol class="watch">
         {useCase.features.map((id, index) => {

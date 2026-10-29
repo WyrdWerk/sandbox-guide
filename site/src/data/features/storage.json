@@ -220,6 +220,18 @@
         "quote": "Enterprise | 32 | 64GB | 15 | 64 GB",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "yes",
+      "figure": "10–100 GB root; 8 volumes",
+      "scenario": "The root disk is ephemeral, so anything that must outlive the sandbox goes on a mounted volume or a hosted Git repository.",
+      "note": "Root disk 10–100 GB, ephemeral and growth-only. Cloud Volumes mount as ordinary POSIX directories, are durable and versioned with snapshots and time travel, and up to 8 can be mounted per sandbox, read-only, prefetched or pinned to a snapshot. Hosted Git repositories mount without a clone.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/mount-filesystems",
+        "quote": "The sandbox's root disk is ephemeral; a mounted filesystem is durable, survives the sandbox, and can be shared by many sandboxes at once.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Disk, and how long it is kept",

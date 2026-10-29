@@ -220,6 +220,18 @@
         "quote": "Sandbox Data Transfer | 20 GB/month | Included in Flat Rate CDN | $0.15/GB",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "yes",
+      "figure": "Allow/deny lists; free egress",
+      "scenario": "Egress is open by default and can be turned into an allowlist or a denylist, replaced live on a running sandbox; the traffic itself is not billed.",
+      "note": "`allow_out` takes domains, leading-wildcard domains, IPv4 addresses and CIDRs; `deny_out` wins on a conflict. The policy can be swapped on a running sandbox as one atomic change that closes existing connections, and a hostname that will not resolve rejects the update. `allow_internet_access=false` with an empty allowlist blocks DNS too. Egress is free.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/networking",
+        "quote": "values can be domains, leading-wildcard domains like `*.example.com`, IPv4 addresses, or IPv4 CIDR ranges",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Egress price",

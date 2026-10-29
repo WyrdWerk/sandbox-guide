@@ -220,6 +220,18 @@
         "quote": "Sandboxes automatically stop after a timeout. The default timeout is 5 minutes",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "yes",
+      "figure": "10 min idle; 2 h to unlimited",
+      "scenario": "Ten minutes without proxied traffic suspends a named sandbox and deletes an ephemeral one; the plan caps the window at 2 hours, 24 hours or not at all.",
+      "note": "`timeout_secs` is an idle threshold measured on proxy traffic — SSH, a PTY WebSocket, an exposed port, an SDK call — not a wall-clock lifetime. Default 600 s; maximum 2 h on Free, 24 h with Usage Credits, unlimited on Pro. Setting 0 requests the plan maximum.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/lifecycle",
+        "quote": "If `timeout_secs` is not set, it goes with the default value which is `600` sec (10 minutes).",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Idle or lifetime limit",

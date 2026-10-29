@@ -219,6 +219,18 @@
         "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "partly",
+      "figure": "SDK, CLI, SSH; no MCP",
+      "scenario": "The first machine comes from `tl sbx create` or `Sandbox.create`; the console lists sandboxes and their logs, but no page documents creating one by clicking.",
+      "note": "Python and TypeScript SDKs, an async Python client, a `tl` CLI, REST, standard SSH with `scp`/`rsync`/port forwarding, a WebSocket PTY API, local TCP tunnels and an SDK desktop client. No control-plane MCP server is published; the console covers keys, spend, sandbox lists and process logs.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/quickstart",
+        "quote": "This installs the `tl` CLI, which you can use to manage sandboxes and other resources from the command line.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "First machine without a terminal?",

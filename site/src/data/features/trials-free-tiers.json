@@ -220,6 +220,18 @@
         "quote": "Unlock the full potential of Vercel Pro during your 14-day trial with $20 in credits.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "yes",
+      "figure": "Free forever, 1 sandbox",
+      "scenario": "A free account runs one 1 vCPU / 1 GB sandbox for up to two hours at a time, with no card, and nothing converts on its own.",
+      "note": "Free is $0 forever with no credit card: 1 concurrent sandbox, 1 vCPU / 1 GB / 10 GB, 2-hour sessions, unmetered sessions and SOC 2. Usage Credits begin with a $5 pack you choose; unused credits are kept rather than refunded and come back if you return to the plan.",
+      "source": {
+        "url": "https://www.tensorlake.ai/pricing",
+        "quote": "You can start on our Free tier and run 1 sandbox at a time — no credit card required.",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "What you get, and what ends it",

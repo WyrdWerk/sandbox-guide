@@ -213,6 +213,18 @@
         "quote": "each sandbox runs in its own Firecracker microVM with a dedicated kernel.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "yes",
+      "figure": "Firecracker; `/dev/kvm`",
+      "scenario": "A real microVM: a nested QEMU VM boots on `/dev/kvm`, and Docker runs once you pick the systemd image and install it.",
+      "note": "A Firecracker microVM with its own kernel, root and `/dev/kvm`, so KVM-based hypervisors run inside and snapshots still work. Docker needs `tensorlake/ubuntu-systemd` plus an install step; the default image has no Docker. GPU sandboxes are gVisor instead, without live resize or volume mounts.",
+      "source": {
+        "url": "https://docs.tensorlake.ai/sandboxes/introduction",
+        "quote": "Tensorlake provides isolated MicroVM sandboxes that boot in hundreds of milliseconds, with memory and filesystem preserved across suspend/resume.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Boundary, and what it allows",

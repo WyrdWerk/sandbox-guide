@@ -220,6 +220,18 @@
         "quote": "Vercel Sandbox is available in 19 regions. The default region is `iad1`.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tensorlake",
+      "verdict": "partly",
+      "figure": "16 vCPU / 64 GiB; no region picker",
+      "scenario": "Pro reaches 16 vCPU / 64 GiB with a 100 GB root disk, but RAM must stay between 1 and 8 GB per vCPU and no region can be chosen.",
+      "note": "Ceilings by plan: Free 1 vCPU / 1 GB / 10 GB, Usage Credits 4 / 16 / 100, Pro 16 / 64 / 100, Enterprise custom. Memory is 1–8 GB per vCPU and disk is 10–100 GB, growth-only. No region selector is published: the docs claim EU data residency, and BYOC puts sandboxes in your own AWS region.",
+      "source": {
+        "url": "https://www.tensorlake.ai/pricing",
+        "quote": "Up to 16 vCPU · 64 GB RAM · 100 GB disk · snapshot + resume",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "Largest shape; regions",

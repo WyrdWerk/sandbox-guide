@@ -1,0 +1,342 @@
+{
+  "id": "tensorlake",
+  "name": "Tensorlake",
+  "url": "https://www.tensorlake.ai",
+  "status": "researched",
+  "checkedOn": "2026-10-29",
+  "oneLiner": "Firecracker microVMs that keep their memory across a pause, sold as prepaid credits or a $250 Pro plan.",
+  "whatItIs": [
+    "Tensorlake sells isolated Linux microVMs for agents, one per task or one per session, that boot in a few hundred milliseconds and can be frozen with their memory, processes and files intact and resumed later under the same name.",
+    "Each machine is a Firecracker microVM with its own kernel and a root disk you size from 10 to 100 GB. You drive it from a Python or TypeScript SDK, a `tl` CLI, plain HTTP, SSH or a WebSocket terminal, and you can mount a durable versioned volume or a Tensorlake-hosted Git repository into it.",
+    "The same company also sells durable workflow orchestration, a versioned filesystem, hosted Git and GitHub Actions runners, so a team can put an agent's code, its working files and its long-running jobs in one place. The sandbox is the part this page compares."
+  ],
+  "whoFor": "Engineering teams running agents that must survive a pause — long coding sessions, evaluation sweeps, RL rollouts — who are comfortable installing a CLI or SDK and want a real VM rather than a container.",
+  "isolation": "Firecracker microVM with its own kernel, root and `/dev/kvm`, so nested QEMU/KVM virtual machines run inside. Docker needs the `tensorlake/ubuntu-systemd` image plus an install step. GPU sandboxes are gVisor instead of a VM.",
+  "sizes": "Per-sandbox ceilings by plan: Free 1 vCPU / 1 GB / 10 GB; Usage Credits 4 vCPU / 16 GB / 100 GB; Pro 16 vCPU / 64 GB / 100 GB; Enterprise custom. RAM must be 1–8 GB per vCPU. Disk is 10–100 GB, growth-only.",
+  "billing": {
+    "model": "Prepaid Usage Credits in $5, $10 or $20 packs (1 CU = $0.01), or Pro at $250 a billing cycle including 25,000 CU.",
+    "meter": "Per second: $0.07 per active CPU core-hour, $0.015 per GB-hour of RAM, $0.0002 per GB-hour of root disk on credits; $0.042, $0.009 and $0.0001 on Pro. Egress is free.",
+    "stopped": "A suspended sandbox bills no CPU, RAM or disk; its preserved state bills as snapshot storage at $0.07 per GB-month.",
+    "planFee": "$250 a billing cycle on Pro, which includes 25,000 CU ($250 of usage). Usage Credits have no fee: you buy packs and spend them down.",
+    "minimum": "Nothing on Free, which needs no card. Usage Credits start at a $5 pack; Pro is $250 a month."
+  },
+  "cost": {
+    "A": {
+      "headline": "$22.00 of credits",
+      "shape": "2 vCPU / 4 GiB / 10 GiB, 1,000 tasks of 10 minutes, deleted after each (Usage Credits)",
+      "lines": [
+        {
+          "label": "CPU, while working",
+          "arithmetic": "166.67 h × 1 vCPU busy (2 × 50%) × $0.07",
+          "amount": "$11.67"
+        },
+        {
+          "label": "Memory",
+          "arithmetic": "4 GiB × 166.67 h × $0.015",
+          "amount": "$10.00"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "10 GiB × 166.67 h × $0.0002",
+          "amount": "$0.33"
+        }
+      ],
+      "total": "$22.00",
+      "notes": [
+        "Prepaid, so the bill is the packs you buy: $22.00 is 2,200 CU, bought as two $10 packs and a $5 pack.",
+        "On Pro the same month is $250, because the fee already includes $250 of usage."
+      ],
+      "flag": "Only 50% CPU busy is assumed; Tensorlake bills active CPU, so a task that waits on the network bills less and one that pins both cores bills more."
+    },
+    "B": {
+      "headline": "$250 a month on Pro",
+      "shape": "4 vCPU / 8 GiB / 50 GiB, 730 h",
+      "lines": [
+        {
+          "label": "CPU, while working",
+          "arithmetic": "730 h × 0.4 vCPU busy (4 × 10%) × $0.042",
+          "amount": "$12.26"
+        },
+        {
+          "label": "Memory",
+          "arithmetic": "8 GiB × 730 h × $0.009",
+          "amount": "$52.56"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "50 GiB × 730 h × $0.0001",
+          "amount": "$3.65"
+        }
+      ],
+      "total": "$250.00",
+      "notes": [
+        "$68.47 of Pro-rate usage sits inside the 25,000 CU the $250 fee includes, so the bill is the fee.",
+        "The same shape on Usage Credits would be $115.34 of packs, but a 24-hour session cap rules that plan out for an always-on machine."
+      ]
+    },
+    "C": {
+      "headline": "$8.25 of credits",
+      "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running hours, suspended otherwise with files kept",
+      "lines": [
+        {
+          "label": "CPU, while working",
+          "arithmetic": "90 h × 0.2 vCPU busy (2 × 10%) × $0.07",
+          "amount": "$1.26"
+        },
+        {
+          "label": "Memory",
+          "arithmetic": "4 GiB × 90 h × $0.015",
+          "amount": "$5.40"
+        },
+        {
+          "label": "Disk while running",
+          "arithmetic": "20 GiB × 90 h × $0.0002",
+          "amount": "$0.36"
+        },
+        {
+          "label": "Snapshot storage while suspended",
+          "arithmetic": "20 GB × 640 h × ($0.07 ÷ 730)",
+          "amount": "$1.23"
+        }
+      ],
+      "total": "$8.25",
+      "notes": [
+        "A named sandbox suspends instead of terminating, so the 640 idle hours cost storage, not compute.",
+        "On Pro the same month is $250; the fee only pays off above roughly $250 of usage."
+      ]
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Tensorlake, Inc. (written TensorLake in the Terms). Governed by California law, with exclusive venue in San Francisco.",
+        "source": {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "The Agreement shall be governed by and construed in accordance with the laws of the State of California, excluding its conflicts of law rules, and the parties consent to exclusive jurisdiction and venue in the state and federal courts located in San Francisco, California.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "History and base",
+        "value": "Founded 2023, headquartered in San Francisco, California. Third-party records disagree on the year (one says 2022).",
+        "source": {
+          "url": "https://indexed.vc/companies/tensorlake",
+          "quote": "Tensorlake is a sandbox-native cloud infrastructure platform for building and running AI agents, founded in 2023 and headquartered in San Francisco, California.",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "$8M seed, investors Artisanal Ventures, Plug and Play and Hawk Hill Ventures. Third-party records date the round 2024 or 2025; Tensorlake publishes no announcement.",
+        "source": {
+          "url": "https://indexed.vc/companies/tensorlake",
+          "quote": "It has raised $8.0M in total across 1 round, most recently a $8.0M Seed round in 2024 (est.). Investors include Artisanal Ventures, Plug and Play and Hawk Hill Ventures.",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Headcount",
+        "value": "Small: one third-party record gives a band of 11–50 employees; Tensorlake publishes no team page that would confirm a number.",
+        "source": {
+          "url": "https://indexed.vc/companies/tensorlake",
+          "quote": "It lists 11–50 employees.",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "SOC 2 Type 2 on every tier, report gated behind the Trust Center. HIPAA is claimed with a BAA from Pro up, but the Trust Center shows only a SOC 2 badge.",
+        "source": {
+          "url": "https://docs.tensorlake.ai/platform/security",
+          "quote": "Tensorlake is SOC 2 Type 2 certified.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Data residency",
+        "value": "EU data residency and zero data retention are claimed; there is no region selector in the sandbox API, and BYOC defaults to `us-east-1`.",
+        "source": {
+          "url": "https://docs.tensorlake.ai/sandboxes/introduction",
+          "quote": "Tensorlake is HIPAA and SOC 2 Type II compliant, supports EU data residency, and offers zero data retention.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "SLA",
+        "value": "99.9% monthly availability for the control plane, with service credits capped at 50% of the month's fees and no cash refund. Paid plans only.",
+        "source": {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "TensorLake will use commercially reasonable efforts to make the Control Plane available 99.9% of the time in each calendar month",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Support",
+        "value": "Slack community and email on every tier, 24×7 Slack and email on Pro with a 24-hour P1, and a 1-hour P1 plus a resident SA on Enterprise.",
+        "source": {
+          "url": "https://www.tensorlake.ai/pricing",
+          "quote": "24×7 Slack + email",
+          "confidence": "pricing-page"
+        }
+      },
+      {
+        "label": "Status page",
+        "value": "A public Datadog status page covers Applications and Sandboxes; sandboxes showed 99.89% uptime over the 90 days to 29 October 2026.",
+        "source": {
+          "url": "https://status.tensorlake.ai/",
+          "quote": "99.89% uptime",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Subprocessors",
+        "value": "Google Cloud and AWS for infrastructure, Cloudflare and Datadog for monitoring, listed in the Trust Center as Annex III of the DPA.",
+        "source": {
+          "url": "https://trust.tensorlake.ai/",
+          "quote": "Google Cloud • Cloud Infrastructure",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "An agent that must pause mid-task: suspend and memory snapshots both keep the process tree, and resume takes about a second.",
+      "Evaluation sweeps and RL rollouts: pre-warmed pools, non-blocking creates and copy-by-N fan one warmed sandbox out to a fleet.",
+      "A coding agent that needs a real machine: `/dev/kvm`, Docker on the systemd image, SSH with port forwarding and VS Code Remote-SSH.",
+      "Work that must outlive the sandbox: versioned volumes mounted as ordinary directories, or a Tensorlake-hosted Git repository."
+    ],
+    "badly": [
+      "Someone who will not use a terminal: there is no documented console button for a first sandbox, and every guide starts with a CLI install.",
+      "Keeping credentials away from the agent: keys arrive as environment variables the agent's own processes can read.",
+      "An always-on personal assistant on a small budget: Pro is $250 a month, and cheaper plans end a session after 24 hours.",
+      "A custom hostname on the hosted product: only a self-hosted BYOC ingress lets you own the domain."
+    ]
+  },
+  "usability": {
+    "dashboard": "A cloud console at cloud.tensorlake.ai: projects, API keys, a usage tab with cost tiles and vCPU-hours, invoices and credit packs, and a Sandboxes list with a per-sandbox Logs tab you can filter and search.",
+    "withoutCode": "No. The first step is `pip install tensorlake`, `npm i @tensorlakeai/tensorlake` or the `curl | sh` CLI installer, then a create call. The console covers keys, spend and logs, not making a machine.",
+    "signup": "Email or a social login at cloud.tensorlake.ai; the free tier needs no card. API keys are per project, start with `tl_apiKey_`, and carry project-member permissions only.",
+    "docs": "108 pages in the `llms.txt` index, each available as Markdown plus an `llms-full.txt` bundle, and unusually deep on edge cases: pending reasons, resize generations, mount fail-closed rules, PTY frame bytes. Support is Slack and email, with a founder replying on smaller plans.",
+    "tripsUp": [
+      "The stock images run as `tl-user`, who cannot write to `/workspace`; guides that assume `/workspace` fail until you use `/home/tl-user`.",
+      "`timeout_secs` is an idle timer on proxy traffic, not a lifetime: a sandbox with no proxied traffic suspends even mid-task.",
+      "Only named sandboxes can suspend; an ephemeral sandbox is deleted when its timeout fires.",
+      "`pip install` needs `--break-system-packages` on the stock images, which are PEP 668 managed.",
+      "Pro is the only plan without a session cap, so anything that must stay up costs $250 a month.",
+      "A custom domain exists only in the self-hosted BYOC ingress mode, not on Tensorlake Cloud."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "Whether Pro's $250 includes $250 of usage",
+      "detail": "The pricing page says the fee includes 25,000 CU worth $250. The billing docs and the pricing FAQ both describe Pro as '$250 / month + usage' and say Pro deducts usage, with no allowance mentioned.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.tensorlake.ai/pricing",
+          "quote": "Includes 25,000 CU ($250 of usage) per billing cycle.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://docs.tensorlake.ai/platform/billing",
+          "quote": "**Pro** | \\$250 / month + usage | 1,000 | 16 vCPU, 64 GB RAM, 100 GB root disk | Unlimited |",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Resources are called fixed at create on one page and resizable on another",
+      "detail": "The lifecycle page says CPU, memory and disk are fixed when the sandbox is created and cannot be changed afterwards. The live-resize page documents changing all three on a running sandbox, and the SDK update call does it.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://docs.tensorlake.ai/sandboxes/lifecycle",
+          "quote": "These are fixed when the sandbox is created and cannot be changed afterwards.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.tensorlake.ai/sandboxes/live-resize",
+          "quote": "A sandbox can change its CPU, memory, and root disk allocation while it runs.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "The prepaid tier has two names",
+      "detail": "The docs and dashboard call it Usage Credits; the Terms call the same plan On-Demand. Nothing says whether they are the same product.",
+      "status": "open"
+    },
+    {
+      "issue": "Free credits are promised in one place and absent in another",
+      "detail": "The Harbor guide says new accounts include free credits. The pricing page describes a $0 free tier with no card and prepaid packs starting at $5, with no signup credit mentioned.",
+      "status": "open"
+    },
+    {
+      "issue": "EU data residency without a region selector",
+      "detail": "The introduction claims EU data residency, but no sandbox API parameter, console control or region list is published, and the BYOC example defaults to us-east-1. Which plan gets EU placement is unclear.",
+      "status": "open"
+    },
+    {
+      "issue": "Snapshot storage is billed per GB-month of 'unique bytes'",
+      "detail": "Rates say $0.07 per GB-month; the snapshot page says users are billed only for unique bytes, so the stored size of a suspended sandbox is not simply its disk size. The calculator models it as the disk size and will overstate.",
+      "status": "open"
+    },
+    {
+      "issue": "A malicious npm release shipped in October 2026",
+      "detail": "The Trust Center records a malicious `tensorlake@0.5.144` published to npm on 8 October 2026 with a GitHub advisory. Pin a version and check the advisory before installing the JavaScript SDK.",
+      "status": "open"
+    },
+    {
+      "issue": "HIPAA is claimed but not badged",
+      "detail": "Pricing says HIPAA with a BAA on Pro and above, and the docs call the platform HIPAA compliant; the Trust Center lists a SOC 2 badge and no HIPAA badge, and the Terms forbid storing protected health information without a written agreement.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "Active-CPU metering: an agent that waits bills RAM and disk, not cores.",
+    "Suspend and memory snapshots keep the process tree, so a long task resumes mid-line rather than restarting.",
+    "A real VM: `/dev/kvm`, Docker, systemd, SSH with port forwarding and a standard `~/.ssh/config` entry.",
+    "Egress is free, which matters for agents that fetch a lot.",
+    "Versioned volumes and hosted Git give an agent's output somewhere to live after the sandbox is gone."
+  ],
+  "sources": [
+    {
+      "label": "Docs",
+      "url": "https://docs.tensorlake.ai/sandboxes/introduction"
+    },
+    {
+      "label": "Lifecycle",
+      "url": "https://docs.tensorlake.ai/sandboxes/lifecycle"
+    },
+    {
+      "label": "Snapshots and clone",
+      "url": "https://docs.tensorlake.ai/sandboxes/snapshots"
+    },
+    {
+      "label": "Networking",
+      "url": "https://docs.tensorlake.ai/sandboxes/networking"
+    },
+    {
+      "label": "Pricing and billing",
+      "url": "https://docs.tensorlake.ai/platform/billing"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://www.tensorlake.ai/pricing"
+    },
+    {
+      "label": "Terms",
+      "url": "https://www.tensorlake.ai/terms"
+    },
+    {
+      "label": "Trust Center",
+      "url": "https://trust.tensorlake.ai/"
+    },
+    {
+      "label": "Status",
+      "url": "https://status.tensorlake.ai/"
+    }
+  ]
+}
