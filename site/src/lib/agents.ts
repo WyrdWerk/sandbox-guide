@@ -16,7 +16,8 @@ import {
   providers,
   useCases,
 } from "./data";
-import { formatMoney, presets, price } from "./cost";
+import { formatMoney, modelCost, presets, price, type ModelPrice } from "./cost";
+import modelData from "../data/models.json";
 import type { Capability, Provider, UseCase } from "../data/schema";
 
 export const base = (import.meta.env.SITE as string).replace(/\/$/, "");
@@ -86,9 +87,18 @@ const ordinal = (n: number) => `${n}${n % 10 === 1 && n !== 11 ? "st" : n % 10 =
 export function useCaseAnswer(u: UseCase): string {
   const all = ranking(u.preset);
   const fit = all.filter((r) => r.fits);
-  if (!fit.length) return `No provider runs it exactly as described; each has a catch, listed under the costs below.`;
+  const ai = modelAnswer(u.preset);
+  if (!fit.length) return `No provider runs it exactly as described; each has a catch, listed under the costs below.${ai ? ` ${ai}` : ""}`;
   const next = fit.slice(1, 3).map((r) => `${r.name} (${formatMoney(r.monthlyUsd)})`);
-  return `The cheapest machine that runs it as described is ${fit[0].name} at ${formatMoney(fit[0].monthlyUsd)} a month${next.length ? `, then ${names(next)}` : ""}. ${fit.length} of ${all.length} providers run it without a catch. Machine cost only, before any AI model, at list prices checked ${formatDate(checked.prices)}.`;
+  return `The cheapest machine that runs it as described is ${fit[0].name} at ${formatMoney(fit[0].monthlyUsd)} a month${next.length ? `, then ${names(next)}` : ""}. ${fit.length} of ${all.length} providers run it without a catch. ${ai ?? "Any AI model is billed separately and not priced here."} List prices checked ${formatDate(checked.prices)}.`;
+}
+
+/** The model estimate the calculator adds for a preset, as one sentence, or null when the preset has no model. */
+export function modelAnswer(preset: string): string | null {
+  const w = presets[preset].workload;
+  const ai = modelCost(w, (modelData as { models: ModelPrice[] }).models);
+  if (!ai) return null;
+  return `The AI model adds about ${formatMoney(ai.median)} a month on top (${ai.model.label}, ${w.messagesPerDay.toLocaleString("en-US")} requests a day at ${w.kTokens.toLocaleString("en-US")}k tokens each, median zero-retention price${ai.lowest < ai.median - 0.005 ? `; from ${formatMoney(ai.lowest)} at the cheapest host` : ""}).`;
 }
 
 /** What one always-on personal agent costs on this provider, and where that ranks. */
@@ -101,7 +111,7 @@ export function providerAnswer(p: Provider): string | undefined {
   const rank = r.fits
     ? `${cost}, the ${((n) => (n === 1 ? "" : `${ordinal(n)} `))(fit.findIndex((x) => x.provider === p.id) + 1)}cheapest of the ${fit.length} providers that run it as described.`
     : `${cost}, with a catch: ${r.problems.join(" ").replace(/\.$/, "")}.`;
-  return `${rank} Fits well: ${p.fits.well[0]}`;
+  return `${rank} ${modelAnswer("personal") ?? ""} Fits well: ${p.fits.well[0]}`.replace(/  +/g, " ");
 }
 
 /** Which providers offer a capability, fully and with a catch. */
@@ -123,7 +133,8 @@ export function rankingsMarkdown(): string {
     `Every provider priced for each preset workload by the guide's cost engine, from list rates checked ${checked.prices}. Illustrations, not quotes: tax, egress and discounts are left out. Providers that cannot run the workload exactly as described are listed after the ones that can, with the reason.`,
   ];
   for (const [id, p] of Object.entries(presets)) {
-    out.push(``, `## ${p.label} (\`${id}\`)`, ``, p.why, ``);
+    const ai = modelAnswer(id);
+    out.push(``, `## ${p.label} (\`${id}\`)`, ``, p.why, ...(ai ? [``, ai] : []), ``);
     ranking(id).forEach((r, i) =>
       out.push(`${i + 1}. ${r.name}: ${formatMoney(r.monthlyUsd)}/month${r.plan ? ` on ${r.plan}` : ""}, ${r.shape}${r.fits ? "" : `. Catch: ${r.problems.join(" ")}`}`),
     );
