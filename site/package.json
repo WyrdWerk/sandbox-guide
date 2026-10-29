@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview --host 127.0.0.1 --port 4321",
     "test": "node --test src/lib/cost.test.ts",
-    "check-rates": "node scripts/check-rates.mjs"
+    "check-rates": "node scripts/check-rates.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.2"

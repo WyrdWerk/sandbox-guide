@@ -1,0 +1,99 @@
+---
+// Alternatives to one provider, for the providers listed in data/comparisons.json.
+// Prices come from the shared engine; "does more" counts capabilities the other has fully and this one does not.
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import { capabilities, checked, formatDate, providerById, providers } from "../../../lib/data";
+import { formatMoney } from "../../../lib/cost";
+import { comparisons, names, pairSlug, quoteFor, workloads } from "../../../lib/agents";
+import type { Provider } from "../../../data/schema";
+
+export function getStaticPaths() {
+  return comparisons.alternatives.map((id) => ({ params: { id }, props: { provider: providerById.get(id)! } }));
+}
+
+const { provider } = Astro.props as { provider: Provider };
+const shown = workloads.filter((w) => ["personal", "coding", "interpreter", "browser"].includes(w.id));
+const verdict = (capId: string, p: string) => capabilities.find((c) => c.id === capId)!.rows.find((r) => r.provider === p)?.verdict;
+const others = providers
+  .filter((p) => p.id !== provider.id && p.status === "researched")
+  .map((p) => {
+    const extra = capabilities.filter((c) => verdict(c.id, p.id) === "yes" && verdict(c.id, provider.id) !== "yes");
+    const pair = comparisons.pairs.find((x) => x.includes(p.id) && x.includes(provider.id));
+    return { p, extra, vs: pair ? `/compare/${pairSlug(pair[0], pair[1])}/` : undefined, quotes: shown.map((w) => quoteFor(w.id, p.id)) };
+  })
+  .sort((x, y) => x.quotes[0].monthlyUsd - y.quotes[0].monthlyUsd);
+const own = shown.map((w) => quoteFor(w.id, provider.id));
+const cheaper = (i: number) =>
+  others.filter((o) => o.quotes[i].fits && (!own[i].fits || o.quotes[i].monthlyUsd < own[i].monthlyUsd));
+const cheapestFor = (i: number) => cheaper(i).sort((x, y) => x.quotes[i].monthlyUsd - y.quotes[i].monthlyUsd).slice(0, 3);
+const answer =
+  `An always-on personal agent costs ${formatMoney(own[0].monthlyUsd)} a month on ${provider.name}${own[0].fits ? "" : ", which cannot run it exactly as described"}; ${cheaper(0).length} providers run it as described for less` +
+  `${cheapestFor(0).length ? `, cheapest ${names(cheapestFor(0).map((o) => `${o.p.name} (${formatMoney(o.quotes[0].monthlyUsd)})`))}` : ""}. ` +
+  `For short throwaway runs in a product, ${cheaper(2).length} cost less than its ${formatMoney(own[2].monthlyUsd)}. Prices checked ${formatDate(checked.prices)}.`;
+---
+
+<Base
+  title={`${provider.name} alternatives: ${others.length} AI sandboxes compared on price and features`}
+  description={`Alternatives to ${provider.name}, priced for the same agent workloads and checked capability by capability, with what each does that ${provider.name} does not.`}
+  modified={[checked.prices, checked.capabilities].sort().at(-1)}
+>
+  <PageHeader
+    parent={{ href: `/providers/${provider.id}/`, label: provider.name }}
+    kicker="Alternatives"
+    title={`Alternatives to ${provider.name}`}
+    standfirst={`${provider.name}: ${provider.oneLiner} Here is what the other ${others.length} providers cost for the same jobs, and what each does that ${provider.name} does not.`}
+    answer={answer}
+    meta={[`Prices checked ${formatDate(checked.prices)}`, `Capabilities checked ${formatDate(checked.capabilities)}`]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush" aria-labelledby="why-h">
+      <div class="section__head">
+        <h2 class="section__title" id="why-h">Why people look elsewhere</h2>
+        <p class="section__note">Where {provider.name} fits badly, from <a href={`/providers/${provider.id}/#fits`}>its provider page</a>.</p>
+      </div>
+      <ul class="fits__list">{provider.fits.badly.map((item) => <li>{item}</li>)}</ul>
+    </section>
+
+    <section class="section" aria-labelledby="list-h">
+      <div class="section__head">
+        <h2 class="section__title" id="list-h">The alternatives, cheapest always-on agent first</h2>
+        <p class="section__note">Monthly machine cost at list prices, before any AI model. ✱ means it cannot run that workload exactly as described; the provider page says why.</p>
+      </div>
+      <div class="table-scroll"><table class="data-table">
+        <thead>
+          <tr>
+            <th scope="col">Provider</th>
+            {shown.map((w) => <th scope="col">{w.label}</th>)}
+            <th scope="col">Does fully, where {provider.name} does not</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{provider.name} (for reference)</th>
+            {own.map((q) => <td>{formatMoney(q.monthlyUsd)}{q.fits ? "" : " ✱"}</td>)}
+            <td>—</td>
+          </tr>
+          {others.map((o) => (
+            <tr>
+              <th scope="row">
+                <a href={`/providers/${o.p.id}/`}>{o.p.name}</a>
+                {o.vs && <><br /><a class="section__note" href={o.vs}>{provider.name} vs {o.p.name}</a></>}
+              </th>
+              {o.quotes.map((q) => <td>{formatMoney(q.monthlyUsd)}{q.fits ? "" : " ✱"}</td>)}
+              <td>
+                {o.extra.length
+                  ? <>{o.extra.length}: {o.extra.slice(0, 4).map((c, i) => <>{i ? ", " : ""}<a href={`/capabilities/${c.id}/`}>{c.title.charAt(0).toLowerCase() + c.title.slice(1)}</a></>)}{o.extra.length > 4 ? ", …" : ""}</>
+                  : "Nothing extra"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table></div>
+      <p class="section__note">
+        Compare any two or three in full on <a href="/compare/side-by-side/">side by side</a>, or price your own workload in the <a href="/costs/">cost calculator</a>.
+      </p>
+    </section>
+  </div>
+</Base>

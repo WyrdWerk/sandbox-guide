@@ -39,6 +39,9 @@ and cost rankings). See `src/lib/agents.ts` and `src/pages/data/[...path].ts`. I
 `robots.txt` and `sitemap.xml`.
 Every absolute URL comes from `site` in `astro.config.mjs` (`https://botperch.com`).
 
+After a deploy that adds or changes pages, run `npm run indexnow` once the new pages are live. It
+sends every sitemap URL to IndexNow (Bing, Yandex and others); the key file is in `public/`.
+
 ## Structure
 
 Paths in this table are relative to `site/`:

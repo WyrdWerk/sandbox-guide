@@ -1,6 +1,9 @@
 ---
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
+import { providerById } from "../../lib/data";
+import { comparisons, pairSlug } from "../../lib/agents";
+const name = (id: string) => providerById.get(id)!.name;
 ---
 
 <Base title="Compare" description="Compare every provider head to head on features and cost, by situation, or against list-price illustrations.">
@@ -43,6 +46,17 @@ import PageHeader from "../../components/PageHeader.astro";
           </p>
         </article>
       </div>
+    </section>
+
+    <section class="section" aria-labelledby="pairs-h">
+      <div class="section__head">
+        <h2 class="section__title" id="pairs-h">Common head-to-heads</h2>
+        <p class="section__note">The providers people search for most, compared on cost, features and capabilities</p>
+      </div>
+      <ul class="fits__list">
+        {comparisons.pairs.map(([a, b]) => <li><a href={`/compare/${pairSlug(a, b)}/`}>{name(a)} vs {name(b)}</a></li>)}
+        {comparisons.alternatives.map((id) => <li><a href={`/providers/${id}/alternatives/`}>Alternatives to {name(id)}</a></li>)}
+      </ul>
     </section>
   </div>
 </Base>

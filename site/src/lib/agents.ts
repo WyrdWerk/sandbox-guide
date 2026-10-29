@@ -2,6 +2,7 @@
 // /llms.txt, /llms-full.txt and /data/*. Built from the same data as the pages,
 // so they change when the data does.
 import site from "../data/site.json";
+import comparisonData from "../data/comparisons.json";
 import {
   capabilities,
   checked,
@@ -44,7 +45,12 @@ const text = (body: string, type = "text/markdown") =>
 export const respond = { json, text };
 
 /** Every preset priced on every provider, cheapest that can run it as asked first. */
+const rankings = new Map<string, ReturnType<typeof rank>>();
 export function ranking(preset: string) {
+  if (!rankings.has(preset)) rankings.set(preset, rank(preset));
+  return rankings.get(preset)!;
+}
+function rank(preset: string) {
   return pricing
     .map((card) => ({ provider: card.provider, quote: price(card, presets[preset].workload) }))
     .sort((a, b) => Number(b.quote.feasible) - Number(a.quote.feasible) || a.quote.total - b.quote.total)
@@ -60,7 +66,20 @@ export function ranking(preset: string) {
     }));
 }
 
-const names = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`);
+/** Head-to-head pairs and alternatives pages; an unknown provider id fails the build. */
+export const comparisons = comparisonData as { pairs: [string, string][]; alternatives: string[] };
+for (const id of [...comparisons.pairs.flat(), ...comparisons.alternatives]) {
+  if (!providerById.get(id)) throw new Error(`Content check failed: comparisons.json names unknown provider "${id}"`);
+}
+export const pairSlug = (a: string, b: string) => `${a}-vs-${b}`;
+
+/** The use-case workloads, one per preset, in guide order. */
+export const workloads = [...new Set(useCases.map((u) => u.preset))].map((id) => ({ id, label: presets[id].label }));
+
+/** One provider's price for one preset, from the shared ranking. */
+export const quoteFor = (preset: string, provider: string) => ranking(preset).find((r) => r.provider === provider)!;
+
+export const names = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`);
 const ordinal = (n: number) => `${n}${n % 10 === 1 && n !== 11 ? "st" : n % 10 === 2 && n !== 12 ? "nd" : n % 10 === 3 && n !== 13 ? "rd" : "th"}`;
 
 /** One or two sentences that answer a use-case page's question with prices and a date. */

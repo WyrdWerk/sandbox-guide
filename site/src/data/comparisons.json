@@ -1,0 +1,11 @@
+{
+  "note": "Head-to-head and alternatives pages, chosen from US search demand (treg keyword data, 2026-10-29): e2b, daytona, modal, vercel sandbox and cloudflare sandbox are the provider names people search for.",
+  "pairs": [
+    ["e2b", "daytona"],
+    ["e2b", "modal"],
+    ["daytona", "modal"],
+    ["e2b", "vercel-sandbox"],
+    ["e2b", "cloudflare-sandbox"]
+  ],
+  "alternatives": ["e2b", "daytona", "modal", "vercel-sandbox", "cloudflare-sandbox"]
+}

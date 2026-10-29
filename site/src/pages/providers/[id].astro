@@ -6,9 +6,9 @@ import CompanyFacts from "../../components/CompanyFacts.astro";
 import Quote from "../../components/Quote.astro";
 import SectionNav from "../../components/SectionNav.astro";
 import Badge from "../../components/Badge.astro";
-import { providers, pricing, useCases, engineCase, features, capabilitiesOf, capabilityLabel, formatDate } from "../../lib/data";
+import { providerById, providers, pricing, useCases, engineCase, features, capabilitiesOf, capabilityLabel, formatDate } from "../../lib/data";
 import { price, presets, formatMoney } from "../../lib/cost";
-import { providerAnswer } from "../../lib/agents";
+import { comparisons, pairSlug, providerAnswer } from "../../lib/agents";
 
 export function getStaticPaths() {
   return providers.map((provider) => ({ params: { id: provider.id }, props: { provider } }));
@@ -38,6 +38,8 @@ const nav = [
   { href: "#sources", label: "Sources" },
   ...(card ? [{ href: "#costs", label: "Costs" }] : []),
 ];
+const hasAlternatives = comparisons.alternatives.includes(provider.id);
+const headToHead = comparisons.pairs.filter((pair) => pair.includes(provider.id));
 const statusLabel = {
   open: "Open question",
   rechecking: "Needs re-checking",
@@ -45,7 +47,7 @@ const statusLabel = {
 };
 ---
 
-<Base title={provider.status === "researched" ? `${provider.name} pricing, limits and catches` : provider.name} description={provider.oneLiner} markdown={`/data/providers/${provider.id}.md`} modified={card?.checkedOn ?? provider.checkedOn}>
+<Base title={provider.status === "researched" ? `${provider.name} pricing, limits and catches` : provider.name} description={provider.status === "researched" ? `${provider.name}: ${provider.oneLiner} What it costs for common agent workloads, its limits and its catches, from its own docs; prices checked ${formatDate(card?.checkedOn ?? provider.checkedOn!)}.` : provider.oneLiner} markdown={`/data/providers/${provider.id}.md`} modified={card?.checkedOn ?? provider.checkedOn}>
   <PageHeader
     parent={{ href: "/providers/", label: "Providers" }}
     kicker={`Checked ${provider.checkedOn ?? "pending"}`}
@@ -115,6 +117,16 @@ const statusLabel = {
           </ul>
         </div>
       </div>
+
+      {(hasAlternatives || headToHead.length > 0) && (
+        <p class="section__note">
+          Compare:{" "}
+          {hasAlternatives && <a href={`/providers/${provider.id}/alternatives/`}>alternatives to {provider.name}</a>}
+          {headToHead.map(([x, y], i) => (
+            <>{hasAlternatives || i ? " · " : ""}<a href={`/compare/${pairSlug(x, y)}/`}>{providerById.get(x)!.name} vs {providerById.get(y)!.name}</a></>
+          ))}
+        </p>
+      )}
 
       <h2 class="section__title" id="billing">How it bills</h2>
       <table class="data-table">

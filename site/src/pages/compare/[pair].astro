@@ -1,0 +1,139 @@
+---
+// One page per head-to-head pair in data/comparisons.json, e.g. /compare/e2b-vs-daytona/.
+// Everything is read from the same data as the provider pages, so it changes with them.
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Badge from "../../components/Badge.astro";
+import Inline from "../../components/Inline.astro";
+import { capabilities, capabilityLabel, checked, features, formatDate, providerById } from "../../lib/data";
+import { formatMoney } from "../../lib/cost";
+import { comparisons, pairSlug, quoteFor, workloads } from "../../lib/agents";
+import type { Provider } from "../../data/schema";
+
+export function getStaticPaths() {
+  return comparisons.pairs.map(([a, b]) => ({
+    params: { pair: pairSlug(a, b) },
+    props: { a: providerById.get(a)!, b: providerById.get(b)! },
+  }));
+}
+
+const { a, b } = Astro.props as { a: Provider; b: Provider };
+const costs = workloads.map((w) => ({ w, qa: quoteFor(w.id, a.id), qb: quoteFor(w.id, b.id) }));
+// A provider "wins" a workload when it can run it as described and costs less, or the other cannot run it.
+const wins = (x: "qa" | "qb", y: "qa" | "qb") =>
+  costs.filter((c) => c[x].fits && (!c[y].fits || c[x].monthlyUsd < c[y].monthlyUsd)).length;
+const winsA = wins("qa", "qb"), winsB = wins("qb", "qa");
+const fully = (p: Provider) => capabilities.filter((c) => c.rows.find((r) => r.provider === p.id)?.verdict === "yes").length;
+const differ = capabilities
+  .map((c) => ({ c, ra: c.rows.find((r) => r.provider === a.id), rb: c.rows.find((r) => r.provider === b.id) }))
+  .filter(({ ra, rb }) => ra && rb && ra.verdict !== rb.verdict);
+const answer =
+  `${a.name} is the cheaper fit for ${winsA} of ${costs.length} common workloads and ${b.name} for ${winsB}` +
+  `${winsA + winsB < costs.length ? "; for the rest neither runs it as described or they cost the same" : ""}. ` +
+  `${a.name} offers ${fully(a)} of ${capabilities.length} checked capabilities without a catch, ${b.name} ${fully(b)}; they differ on ${differ.length}. ` +
+  `Prices checked ${formatDate(checked.prices)}.`;
+---
+
+<Base
+  title={`${a.name} vs ${b.name}: pricing, limits and which to pick`}
+  description={`${a.name} and ${b.name} compared on ${features.length} features, ${capabilities.length} capabilities and the monthly cost of ${costs.length} agent workloads, from each provider's own docs and pricing page.`}
+  modified={[checked.prices, checked.capabilities].sort().at(-1)}
+>
+  <PageHeader
+    parent={{ href: "/compare/", label: "Compare" }}
+    kicker="Head to head"
+    title={`${a.name} vs ${b.name}`}
+    standfirst={`${a.name}: ${a.oneLiner} ${b.name}: ${b.oneLiner}`}
+    answer={answer}
+    meta={[`Prices checked ${formatDate(checked.prices)}`, `Capabilities checked ${formatDate(checked.capabilities)}`, "Sources on each provider page"]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush" aria-labelledby="cost-h">
+      <div class="section__head">
+        <h2 class="section__title" id="cost-h">What each costs</h2>
+        <p class="section__note">Monthly machine cost at list prices, before any AI model. A catch means it cannot run the workload exactly as described.</p>
+      </div>
+      <div class="table-scroll"><table class="data-table">
+        <thead><tr><th scope="col">Workload</th><th scope="col">{a.name}</th><th scope="col">{b.name}</th></tr></thead>
+        <tbody>
+          {costs.map(({ w, qa, qb }) => (
+            <tr>
+              <th scope="row"><a href={`/costs/?preset=${w.id}`}>{w.label}</a></th>
+              {[qa, qb].map((q) => (
+                <td>
+                  <strong>{formatMoney(q.monthlyUsd)}</strong>{q.plan ? ` on ${q.plan}` : ""}
+                  {!q.fits && <><br /><span class="section__note">Catch: {q.problems.join(" ")}</span></>}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="section" aria-labelledby="features-h">
+      <div class="section__head">
+        <h2 class="section__title" id="features-h">Feature by feature</h2>
+        <p class="section__note">The figure that decides each feature, from each provider's own pages.</p>
+      </div>
+      <div class="table-scroll"><table class="data-table">
+        <thead><tr><th scope="col">Feature</th><th scope="col">{a.name}</th><th scope="col">{b.name}</th></tr></thead>
+        <tbody>
+          {features.map((f) => (
+            <tr>
+              <th scope="row"><a href={`/features/${f.id}/`}>{f.navTitle}</a></th>
+              {[a, b].map((p) => {
+                const row = f.rows.find((r) => r.provider === p.id)!;
+                return <td><Badge verdict={row.verdict} /> {row.figure}</td>;
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table></div>
+    </section>
+
+    {differ.length > 0 && (
+      <section class="section" aria-labelledby="differ-h">
+        <div class="section__head">
+          <h2 class="section__title" id="differ-h">Where they differ</h2>
+          <p class="section__note">The {differ.length} capabilities where one does something the other does not, or does it with a catch.</p>
+        </div>
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th scope="col">Capability</th><th scope="col">{a.name}</th><th scope="col">{b.name}</th></tr></thead>
+          <tbody>
+            {differ.map(({ c, ra, rb }) => (
+              <tr>
+                <th scope="row"><a href={`/capabilities/${c.id}/`}>{c.title}</a></th>
+                {[ra!, rb!].map((r) => (
+                  <td><Badge verdict={r.verdict} label={capabilityLabel[r.verdict]} />{r.shortfall && <> <Inline text={r.shortfall} /></>}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table></div>
+      </section>
+    )}
+
+    <section class="section" aria-labelledby="fits-h">
+      <div class="section__head">
+        <h2 class="section__title" id="fits-h">Which to pick</h2>
+        <p class="section__note">Our reading of the sourced material, not a provider claim.</p>
+      </div>
+      <div class="fits">
+        {[a, b].map((p) => (
+          <div class="fits__side fits__side--well">
+            <h3 class="fits__title">Pick {p.name} for</h3>
+            <ul class="fits__list">{p.fits.well.map((item) => <li>{item}</li>)}</ul>
+            <h3 class="fits__title">Avoid it for</h3>
+            <ul class="fits__list">{p.fits.badly.map((item) => <li>{item}</li>)}</ul>
+            <p><a href={`/providers/${p.id}/`}>Everything on {p.name}, with sources</a></p>
+          </div>
+        ))}
+      </div>
+      <p class="section__note">
+        Want a third provider in the picture? Use <a href="/compare/side-by-side/">side by side</a>, or price your own numbers in the <a href="/costs/">cost calculator</a>.
+      </p>
+    </section>
+  </div>
+</Base>
