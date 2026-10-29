@@ -5,77 +5,1990 @@
       "feature": "isolation",
       "title": "Its own virtual machine",
       "plain": "Each sandbox is a separate virtual machine (microVM or full VM), not a container sharing a kernel with neighbours.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "partly",
+          "figure": "gVisor; VM costs 2.5x",
+          "shortfall": "The standard machine is a gVisor container, which is not a computer of its own; a true virtual machine with its own kernel is a separate type at 2.5 times the price.",
+          "note": "The vm type adds Docker, Kubernetes and Android emulators.",
+          "source": {
+            "url": "https://www.agent37.com/cloud",
+            "quote": "Every sandbox is enforced by gVisor, with its own filesystem and a hard disk quota.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "microVM",
+          "note": "Each sandbox is a microVM with its own kernel; the default kernel refuses module loading.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Non-root-user.md",
+            "quote": "the microVM boundary remains the isolation guarantee between your sandbox and everything else.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "full VM, own kernel",
+          "source": {
+            "url": "https://docs.boat.dev/machines",
+            "quote": "Each sandbox is a full Linux virtual machine with its own kernel.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "KVM microVM",
+          "source": {
+            "url": "https://docs.boxd.sh/use-cases/sandboxes",
+            "quote": "Every boxd machine is a KVM microVM with its own kernel, network stack, and disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "figure": "Firecracker microVM",
+          "note": "One microVM per container; inside it every process is root, so there is no separation between users in one sandbox.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/concepts/architecture/",
+            "quote": "Each container instance runs in a Firecracker microVM with its own kernel and network.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "figure": "containers by default",
+          "shortfall": "By default each sandbox is a container sharing the host's kernel; a real virtual machine is a separate kind you have to choose.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sandboxes",
+            "quote": "Sandboxes run as Linux containers by default.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "Firecracker microVM",
+          "source": {
+            "url": "https://docs.e2b.dev/security",
+            "quote": "Every sandbox is a Firecracker microVM, not a container.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "Firecracker microVM",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "in a Firecracker microVM",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "Firecracker microVM",
+          "note": "Older sandboxes created before the October 2026 change were pods on a shared kernel.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "Sandboxes run as Firecracker microVMs, each with its own kernel.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "gVisor by default",
+          "shortfall": "The default is a gVisor container, which is not a computer of its own; a true virtual machine with its own kernel is a separate runtime you have to ask for.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "VMs run the Sandbox in a virtual machine with its own Linux kernel.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "figure": "full VM",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Full virtual machines capable of running any configuration of containers",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Firecracker microVM",
+          "source": {
+            "url": "https://withruntime.com/docs/sandbox-environment",
+            "quote": "Every sandbox is a Firecracker microVM. It has its own Linux kernel and disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "Cloud Hypervisor microVM",
+          "source": {
+            "url": "https://sandboxer.com/docs/security",
+            "quote": "Each sandbox is a separate Cloud Hypervisor microVM with its own kernel.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "microVM",
+          "note": "No systemd: a built-in service manager starts services when the machine wakes.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/index",
+            "quote": "Sprites are persistent, hardware-isolated Linux VMs on Fly.io for AI agents, dev environments and untrusted code, billed by the second and free when idle.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "Firecracker microVM",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "each sandbox runs in its own Firecracker microVM with a dedicated kernel.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "microVM",
+          "note": "GPU sandboxes are gVisor containers instead of virtual machines.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/introduction",
+            "quote": "GPU sandboxes use gVisor while CPU-only sandboxes run in VMs.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "root",
       "feature": "isolation",
       "title": "Root access",
       "plain": "You (and the agent) can act as the administrator: install anything, change system settings.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "root on request",
+          "note": "Commands run as the image's normal user unless you ask for root.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/exec",
+            "quote": "pass \"root\" to run as root, for example to install system packages with apt-get",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "root by default",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Non-root-user.md",
+            "quote": "By default, everything inside a sandbox runs as root.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "passwordless sudo",
+          "source": {
+            "url": "https://docs.boat.dev/machines",
+            "quote": "Passwordless sudo gives full root.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "passwordless sudo",
+          "source": {
+            "url": "https://docs.boxd.sh/quickstart",
+            "quote": "You get a normal shell on the machine, as the boxd user with passwordless sudo.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "figure": "every process is root",
+          "note": "There is no user separation inside one sandbox: every process has the same rights as root.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/security/",
+            "quote": "every process has the same Linux capabilities as root",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "root in the sandbox",
+          "note": "The default shell user is daytona, but code runs as root inside the container.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/isolation",
+            "quote": "Code runs as root inside the sandbox without affecting the runner.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "root via template",
+          "shortfall": "The default template runs as an ordinary user called user, not root; root has to be set in the template.",
+          "source": {
+            "url": "https://docs.e2b.dev/template/user-and-workdir",
+            "quote": "The default user in the template is user with the /home/user (home directory) as the working directory.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "passwordless sudo",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "passwordless sudo with apt for anything else",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "root by default",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/sdk-reference",
+            "quote": "commands run as root unless you pass user",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "always root",
+          "source": {
+            "url": "https://modal.com/docs/guide/existing-images",
+            "quote": "Modal containers always run as root (uid 0).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "figure": "root shell",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/fuse",
+            "quote": "The examples assume a Debian-based instance such as morphvm-minimal and a root shell",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "sudo, then root",
+          "note": "Commands start as the user runtime; sudo works without a password.",
+          "source": {
+            "url": "https://withruntime.com/docs/sandbox-environment",
+            "quote": "sudo works without a password. You are root inside your own sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "sudo inside",
+          "source": {
+            "url": "https://sandboxer.com/docs/machines",
+            "quote": "Inside it you are an ordinary Linux user with sudo.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "sudo",
+          "source": {
+            "url": "https://docs.fly.io/sprites/working-with-sprites",
+            "quote": "sudo apt install -y openssh-server",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "full root",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "Provides full root access to install any package or binary",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "sudo or --user root",
+          "note": "Commands run as the non-root user tl-user, which has passwordless sudo.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/tensorlake-images",
+            "quote": "a non-root user with passwordless sudo",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "docker-inside",
       "feature": "isolation",
       "title": "Docker inside",
       "plain": "You can run Docker containers inside the sandbox.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "partly",
+          "figure": "VM type only",
+          "shortfall": "Docker only works on the 2.5x VM type; the default machine cannot run a Docker daemon.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/vm-instances",
+            "quote": "The default gVisor instance type cannot run a Docker daemon.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "docker-in-sandbox image",
+          "source": {
+            "url": "https://docs.blaxel.ai/Tutorials/Docker.md",
+            "quote": "Blaxel provides a ready-to-use sandbox image (blaxel/docker-in-sandbox) with everything you need to build and run Docker images.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "Docker, Compose, BuildKit",
+          "source": {
+            "url": "https://docs.boat.dev/machines",
+            "quote": "Docker with BuildKit and Compose, on the sandbox's own kernel.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Docker preinstalled",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/run-docker",
+            "quote": "Docker Engine, Compose, and Buildx come pre-installed on every machine, with the daemon already running.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "docker:dind, no iptables",
+          "shortfall": "Docker works through a special image, but the firewall tool Docker normally uses is turned off, so container networking is limited.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/faq/",
+            "quote": "Yes. Use the docker:dind image, and start the Docker daemon with iptables and IP forwarding turned off",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "Docker-in-Docker",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/snapshots",
+            "quote": "Sandboxes can run Docker containers inside them (Docker-in-Docker)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "Docker image documented",
+          "source": {
+            "url": "https://docs.e2b.dev/template/examples/docker",
+            "quote": "Sandbox with Docker or Docker Compose installed for running containers",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "Docker on default image",
+          "note": "The herdr and orca templates ship without Docker.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "Docker with Compose",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "not-published",
+          "note": "The docs never say whether a Docker daemon runs inside a sandbox.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "Choose a template from the current catalog",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "VM runtime only",
+          "shortfall": "Docker needs the VM runtime; the default gVisor sandbox cannot run it.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "Use the VM runtime to run Docker in a Sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "figure": "Docker-in-Docker",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "docker",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "enable-docker",
+          "note": "Docker is not installed until you run the enable-docker command.",
+          "source": {
+            "url": "https://withruntime.com/docs/sandbox-environment",
+            "quote": "enable-docker installs Docker Engine, Buildx and Compose from Ubuntu's archive, and starts them.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "Docker preinstalled",
+          "source": {
+            "url": "https://sandboxer.com/docs/machines",
+            "quote": "Docker with BuildKit and Compose",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "partly",
+          "figure": "Docker, with limits",
+          "shortfall": "Docker runs, but some containers fail and the usual service manager is missing, so services need the provider's own manager instead.",
+          "note": "Reported by a Fly community user, not stated in the docs.",
+          "source": {
+            "url": "https://community.fly.io/t/27956",
+            "quote": "will fail for any container whose PID 1 is non-root",
+            "confidence": "third-party"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "Docker inside",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "Run Docker and other container engines inside the sandbox to build images or run containerized workloads.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "needs ubuntu-systemd image",
+          "note": "Docker needs the systemd image; the default minimal image has no init system.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/tensorlake-images",
+            "quote": "Required for workloads needing service management, such as Docker or Kubernetes, within the sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "nested-virt",
       "feature": "isolation",
       "title": "Nested virtualisation",
       "plain": "You can start virtual machines inside the sandbox, for tools that need their own VM.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "partly",
+          "figure": "VM type only",
+          "shortfall": "Starting a virtual machine inside needs hardware virtualisation, which only the 2.5x VM type has.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/vm-instances",
+            "quote": "is present inside the machine, so an AVD boots with hardware",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "not-published",
+          "note": "No page says whether /dev/kvm or nested virtual machines work.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "Without kernelExtensions, the sandbox's kernel refuses module loading and kernel tracing to every process, including root",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "/dev/kvm, no flag",
+          "source": {
+            "url": "https://docs.boat.dev/machines/virtualization",
+            "quote": "Every sandbox has nested virtualization.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "not-published",
+          "note": "The docs list Docker, kernel modules and systemd but never nested virtual machines.",
+          "source": {
+            "url": "https://docs.boxd.sh/use-cases/sandboxes",
+            "quote": "Code in the sandbox can run Docker, load kernel modules, restart systemd, edit /etc, open ports, and break the OS completely",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "not-published",
+          "note": "Neither the container docs, the FAQ nor the limits page mention nested virtual machines.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/platform/limits/",
+            "quote": "Maximum vCPU",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "figure": "Linux VM class only",
+          "shortfall": "Nested virtual machines only work on the Linux VM class, and the feature has to be switched on for your organisation.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sandboxes",
+            "quote": "Nested virtualization exposes KVM (/dev/kvm) inside the guest",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "not-published",
+          "note": "No page states whether /dev/kvm or nested virtual machines are available.",
+          "source": {
+            "url": "https://docs.e2b.dev/faq",
+            "quote": "The E2B sandbox kernel does not ship the xt_owner module",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "not-published",
+          "note": "Nested virtual machines are not mentioned anywhere in the docs.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "in a Firecracker microVM",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "not-published",
+          "note": "The sandbox docs never mention /dev/kvm or running a virtual machine inside.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "A Firecracker microVM with its own kernel",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "Enterprise plan only",
+          "shortfall": "Nested virtual machines are an Enterprise-plan option that must be switched on when the sandbox is created.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "Nested virtualization is available on the Enterprise plan by setting",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "partly",
+          "figure": "experimental",
+          "shortfall": "Running another operating system or a virtual machine inside is described as experimental.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "There is experimental support for Windows, OSX (x86), and nested virtualization as well.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "/dev/kvm",
+          "note": "Only sandboxes created after 27 October 2026 on current hosts get it.",
+          "source": {
+            "url": "https://withruntime.com/docs/changelog",
+            "quote": "expose /dev/kvm",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "/dev/kvm",
+          "note": "The inner machine's memory comes out of the sandbox's own memory.",
+          "source": {
+            "url": "https://sandboxer.com/docs/machines",
+            "quote": "/dev/kvm is available: run Firecracker, QEMU/KVM or the Android emulator inside",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "not-published",
+          "note": "The docs do not mention /dev/kvm or nested virtual machines.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/",
+            "quote": "Sprites are persistent, hardware-isolated Linux environments for running arbitrary code.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "not-published",
+          "note": "Vercel's sandbox docs do not mention nested virtual machines or /dev/kvm.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "Container runtimes: Run Docker and other container engines inside the sandbox",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "/dev/kvm",
+          "note": "GPU sandboxes cannot run nested virtual machines.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/nested-virt",
+            "quote": "Tensorlake Sandboxes have /dev/kvm devices, so you can run virtual machines inside them using any KVM-based hypervisor.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "custom-image",
       "feature": "isolation",
       "title": "Your own image",
       "plain": "Start machines from your own Dockerfile or image instead of the provider's default.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "Dockerfile or registry",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/custom-image",
+            "quote": "You can run an Agent37 instance from any Docker image.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "Dockerfile images",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Templates.md",
+            "quote": "Create reusable sandbox images with pre-configured tools, languages, and frameworks using Dockerfiles.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "figure": "one image for everyone",
+          "shortfall": "There is no way to bring your own image or build recipe; you install what you need and save a copy of the machine instead.",
+          "source": {
+            "url": "https://docs.boat.dev/faq",
+            "quote": "No. boat has no custom image and no Dockerfile build.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "partly",
+          "figure": "snapshot only",
+          "shortfall": "You cannot bring a Docker image; the way to get your own setup is to customise a machine and start new ones from a snapshot of it.",
+          "source": {
+            "url": "https://docs.boxd.sh/use-cases/sandboxes",
+            "quote": "To start every sandbox with your own toolchain, dependencies, and services already in place, create them from a snapshot instead",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "figure": "your own Dockerfile",
+          "source": {
+            "url": "https://developers.cloudflare.com/workers/wrangler/configuration/",
+            "quote": "image = \"./Dockerfile\"",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "Dockerfile or OCI image",
+          "note": "Virtual-machine sandboxes cannot be built from a Dockerfile; containers and GPU sandboxes can.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/declarative-builder",
+            "quote": "VM snapshots (Linux VM and Windows) cannot be built from a Dockerfile.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "any Docker image",
+          "note": "Multi-stage Dockerfiles are not supported.",
+          "source": {
+            "url": "https://docs.e2b.dev/template/base-image",
+            "quote": "Use any Docker image from Docker Hub or other registries",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "figure": "operator-built templates",
+          "shortfall": "You pick from fixed images or a saved copy; a different starting image needs an operator to build one for you.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "An operator can also build a template from a public Debian- or Ubuntu-based image",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "figure": "fixed template catalog",
+          "shortfall": "You choose from a fixed list of templates and cannot upload your own image.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "The public CLI does not provide a custom-template upload flow.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "any registry image",
+          "source": {
+            "url": "https://modal.com/docs/guide/existing-images",
+            "quote": "To load an image from a public registry, just pass the image name, including any tags, to Image.from_registry",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "partly",
+          "figure": "templates and snapshots",
+          "shortfall": "There is no documented way to import your own image; you start from a template or from a snapshot you saved.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Every devbox is created from a template that integrates with our secrets manager",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "custom images",
+          "source": {
+            "url": "https://withruntime.com/docs/images",
+            "quote": "You can build an image from any Dockerfile.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "partly",
+          "figure": "snapshot templates",
+          "shortfall": "You cannot start from your own image; you set a machine up and save its disk as a template.",
+          "source": {
+            "url": "https://sandboxer.com/docs/llms.txt",
+            "quote": "Set up one sandbox the way you want it, then save its disk under a name with sbx snapshot",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "figure": "fixed base image",
+          "shortfall": "There is no documented way to start a Sprite from your own image.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/checkpoints",
+            "quote": "It does not touch the base image itself",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "custom image or snapshot",
+          "note": "A custom image does not run its Docker start command; Vercel starts the sandbox itself.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "store the image in Vercel Container Registry (VCR) and create the sandbox with a custom image",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "Dockerfile builds",
+          "source": {
+            "url": "https://docs.tensorlake.ai/faqs/sandbox-images-faq",
+            "quote": "Tensorlake supports defining sandbox images in Python, TypeScript, or a raw Dockerfile.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "any-size",
       "feature": "sizes-regions",
       "title": "Any size you like",
       "plain": "Choose CPU and memory freely instead of picking from a short list of fixed sizes.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "figure": "4 fixed shapes",
+          "shortfall": "You choose from four fixed combinations of cores and memory, and anything else comes back as the nearest shape.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-sizing",
+            "quote": "4 vCPU is the ceiling on every instance type.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "figure": "memory only, cores follow",
+          "shortfall": "You set the memory and the number of cores is decided for you, so you cannot pick a memory-heavy or core-heavy machine.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "a sandbox with 8 GB memory is allocated 4 CPU cores, while one with 16 GB memory is allocated 6 CPU cores.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "figure": "4 fixed sizes",
+          "shortfall": "There are four fixed sizes and no way to ask for anything between them.",
+          "source": {
+            "url": "https://docs.boat.dev/pricing",
+            "quote": "default is the size that other providers call medium.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "figure": "4 fixed sizes",
+          "shortfall": "There are four fixed sizes; naming either cores or memory picks the pair.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/resources",
+            "quote": "Naming either dimension picks the size",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "custom within 4 cores / 12 GiB",
+          "shortfall": "You can set your own cores and memory, but only inside a ceiling of 4 cores and 12 GB, and each core needs at least 3 GB.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/platform/limits/",
+            "quote": "Minimum 3 GiB memory per vCPU",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "figure": "presets, custom on request",
+          "shortfall": "You pick from fixed sizes, and anything different needs a custom limit arranged through support.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sandboxes",
+            "quote": "Sandboxes have 1 vCPU, 1GB RAM, and 3GiB disk by default.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "figure": "up to 8 cores / 8 GiB",
+          "shortfall": "You can choose cores and memory, but only up to 8 of each; more needs a conversation with support.",
+          "source": {
+            "url": "https://docs.e2b.dev/billing",
+            "quote": "Max memory",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "figure": "fixed pairs by plan",
+          "shortfall": "Each plan sells fixed pairs of cores and memory, and any other combination is refused.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "4 vCPUs and 8 GiB of memory by default, the only size on the free plan.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "figure": "3 fixed sizes",
+          "shortfall": "There are three fixed sizes and no custom option.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes",
+            "quote": "Choose a size when you create a sandbox: Small (2 vCPU / 4 GB), Medium (4 vCPU / 8 GB, the default), or Large (8 vCPU / 16 GB).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "any cores and MiB",
+          "note": "Cores are counted as physical cores, and each one is two vCPUs.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-resources",
+            "quote": "The cpu parameter specifies physical CPU cores (1 core = 2 vCPUs), and memory specifies MiB",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "figure": "cores, memory, disk",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
+            "quote": "To create a new snapshot, specify the resource specifications like",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "any combination in bounds",
+          "note": "Bounded at 16 cores, 64 GiB of memory and 400 GiB of disk.",
+          "source": {
+            "url": "https://withruntime.com/docs/api",
+            "quote": "At most 16 on a paid sandbox, 2 without credit",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "figure": "4 fixed sizes",
+          "shortfall": "There are four fixed sizes and no custom size.",
+          "source": {
+            "url": "https://sandboxer.com/docs/machines",
+            "quote": "Moving to a smaller size isn't supported yet.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "figure": "one shape",
+          "shortfall": "There is one shape: 8 cores, memory assigned automatically, and no choice.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle",
+            "quote": "The vCPU count and the storage ceiling are fixed; memory is handled automatically.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "even cores only, 2 GB each",
+          "shortfall": "You choose cores in steps of two and each core comes with exactly 2 GB of memory, so memory cannot be set on its own.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "Each vCPU includes 2 GB of memory.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "any cores and memory",
+          "note": "Memory must sit between 1 GB and 8 GB per core.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/billing",
+            "quote": "allocate between 1 GB and 8 GB of RAM per vCPU",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "big-machines",
       "feature": "sizes-regions",
       "title": "Large machines",
       "plain": "Machines of 16 vCPU or 32 GiB memory or more are available.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "partly",
+          "figure": "4 cores; 16 on the VM type",
+          "shortfall": "One page caps every machine at 4 cores, while another prices a 16-core, 32 GB machine on the 2.5x VM type, so the large size is unclear.",
+          "note": "Contradiction between the sizing page and the VM page; see notes.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-sizing",
+            "quote": "4 vCPU is the ceiling on every instance type.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "figure": "up to 256 GB by arrangement",
+          "shortfall": "The standard sizes stop at 16 GB of memory; anything larger is a custom deployment you have to arrange.",
+          "source": {
+            "url": "https://blaxel.ai/pricing",
+            "quote": "Up to 256 GB RAM per sandbox or job",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "16 cores / 32 GB",
+          "note": "The 16-core size needs the $100-a-month plan.",
+          "source": {
+            "url": "https://docs.boat.dev/pricing",
+            "quote": "xlarge needs the $100 plan or higher.",
+            "confidence": "pricing-page"
+          },
+          "shortfall": "Only on the $100-a-month plan or above."
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "8 cores / 32 GiB",
+          "note": "The 32 GiB size is the ceiling and some accounts have to email the team to get 8 cores.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/resources",
+            "quote": "This is the largest size a single machine may have, 8 vCPU / 32 GiB unless the boxd team raised it for your org.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "figure": "4 cores / 12 GiB",
+          "shortfall": "The largest machine is 4 cores and 12 GB of memory, so a 16-core or 32 GB machine is not available.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/platform/limits/",
+            "quote": "Maximum vCPU",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "figure": "4 cores / 8 GiB; more with GPUs",
+          "shortfall": "A normal sandbox stops at 4 cores and 8 GB; larger machines only come attached to graphics cards.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sandboxes",
+            "quote": "Organizations get a maximum sandbox resource limit of 4 vCPUs, 8GB RAM, and 10GB disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "figure": "8 cores / 8 GiB",
+          "shortfall": "The ceiling is 8 cores and 8 GB of memory, so a 32 GB machine cannot be bought.",
+          "source": {
+            "url": "https://docs.e2b.dev/billing",
+            "quote": "Max vCPUs",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "32 cores / 64 GiB",
+          "note": "The 32-core size needs the $500-a-month Team plan.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "Team: 2/4 up to 32 vCPUs / 64 GiB",
+            "confidence": "docs-confirmed"
+          },
+          "shortfall": "Only on the $500-a-month plan or above."
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "figure": "8 cores / 16 GB",
+          "shortfall": "The largest machine is 8 cores and 16 GB, so a 32 GB machine is not offered.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/limits",
+            "quote": "Sandbox sizes run from Small (2 vCPU / 4 GB) to Large (8 vCPU / 16 GB)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "no published ceiling",
+          "note": "Modal enforces a maximum but does not publish what it is.",
+          "source": {
+            "url": "https://modal.com/docs/guide/resources",
+            "quote": "a maximum is enforced at Function or Sandbox creation time",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "partly",
+          "figure": "ceiling not published",
+          "shortfall": "The plan allows up to 1024 cores across the account, but the largest single machine is not published.",
+          "source": {
+            "url": "https://cloud.morph.so/web/subscribe",
+            "quote": "Up to 1024 vCPU",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "16 cores / 64 GiB",
+          "source": {
+            "url": "https://withruntime.com/docs/api",
+            "quote": "at most 65,536 (64 GiB) on a paid sandbox",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "16 cores / 32 GB",
+          "note": "The 16-core size needs the $100-a-month plan.",
+          "source": {
+            "url": "https://sandboxer.com/docs/machines",
+            "quote": "xlarge needs the $100/month plan or higher.",
+            "confidence": "pricing-page"
+          },
+          "shortfall": "Only on the $100-a-month plan or above."
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "figure": "8 cores / 16 GB",
+          "shortfall": "The machine is fixed at 8 cores and up to 16 GB of memory, below the 32 GB mark.",
+          "source": {
+            "url": "https://fly.io/sprites/checkpoint-restore/",
+            "quote": "up to 8 CPUs and 16GB of RAM for any given run",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "32 cores on Enterprise only",
+          "shortfall": "Machines above 8 cores and 16 GB need the Enterprise plan; the self-serve plans stop there.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "You can provision 1 or an even number of vCPUs between 2 and 32 depending on your plan.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "16 cores / 64 GB",
+          "note": "The 16-core size needs the $250-a-month Pro plan; prepaid credit stops at 4 cores and 16 GB.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/billing",
+            "quote": "16 vCPU, 64 GB RAM, 100 GB root disk",
+            "confidence": "docs-confirmed"
+          },
+          "shortfall": "Only on the $250-a-month plan or above."
+        }
+      ]
     },
     {
       "id": "live-resize",
       "feature": "sizes-regions",
       "title": "Resize while running",
       "plain": "Change CPU or memory without stopping the machine or losing what is running.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "partly",
+          "figure": "resize, but memory is lost",
+          "shortfall": "You can change the size without stopping the machine, but it may move to another host and everything running in memory is lost.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-lifecycle",
+            "quote": "start and resize answer 202 instead of 200 when they moved the instance to another host",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "figure": "memory change resets it",
+          "shortfall": "You can change the memory, but the sandbox resets, so anything running is lost.",
+          "source": {
+            "url": "https://docs.blaxel.ai/api-reference/compute/update-sandbox.md",
+            "quote": "Updates a sandbox's configuration. Note that certain changes (like image or memory) may reset the sandbox state.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "figure": "stop first",
+          "shortfall": "Changing the size means stopping the machine and starting it again.",
+          "source": {
+            "url": "https://docs.boat.dev/machines",
+            "quote": "To change the size, stop the sandbox, then resume it with --type.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "figure": "reboot to apply",
+          "shortfall": "A size change reboots the machine, so running programs are lost.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/resources",
+            "quote": "A running machine reboots to apply it, so its disk persists and running processes are lost.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "figure": "no resize",
+          "shortfall": "The size is fixed when the sandbox is deployed; changing it means deploying again.",
+          "note": "Inferred from the instance type being set at deploy time.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/platform/limits/",
+            "quote": "Maximum vCPU",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "figure": "grow only, support must enable",
+          "shortfall": "You can add cores and memory while it runs, but you cannot shrink them, and the feature has to be switched on by support first.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sandboxes",
+            "quote": "On a running sandbox, you can increase CPU and memory without interruption.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "figure": "fixed at creation",
+          "shortfall": "The machine keeps the size it was created with; there is no resize.",
+          "note": "Inferred: no resize call appears in the docs or API reference.",
+          "source": {
+            "url": "https://docs.e2b.dev/billing",
+            "quote": "Max vCPUs",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "figure": "only while stopped",
+          "shortfall": "Cores and memory change only while the machine is stopped, and take effect at its next start; the free plan cannot resize at all.",
+          "source": {
+            "url": "https://instabox.sh/docs/machines.md",
+            "quote": "A paid machine moves to another size of its plan while stopped",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "figure": "fixed size",
+          "shortfall": "The size is chosen when the sandbox is created and cannot be changed.",
+          "note": "Inferred: the size list is closed and no resize is documented.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/limits",
+            "quote": "Sandbox sizes run from Small (2 vCPU / 4 GB) to Large (8 vCPU / 16 GB)",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "figure": "fixed at creation",
+          "shortfall": "Resources are fixed when the sandbox is created; changing them means starting a new one.",
+          "note": "Inferred: no resize method is documented.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-resources",
+            "quote": "Sandboxes have the same disk limits as other Modal containers",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "partly",
+          "figure": "disk live; cores need reboot",
+          "shortfall": "Disk space can grow while the machine runs, but changing cores or memory means restarting it.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/examples/resizing-instances",
+            "quote": "CPU and memory changes still require reboot.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "partly",
+          "figure": "memory, while paused",
+          "shortfall": "You can change the memory only while the machine is paused, not while it is working.",
+          "source": {
+            "url": "https://withruntime.com/docs/sandbox-environment",
+            "quote": "resize this one while it is paused",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "figure": "stop and recreate",
+          "shortfall": "There is no way to change a running machine's size; you create a new one and copy your files across.",
+          "source": {
+            "url": "https://sandboxer.com/docs/machines",
+            "quote": "Moving to a smaller size isn't supported yet. To go smaller, create a new sandbox of that size and copy your files across",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "figure": "one fixed shape",
+          "shortfall": "The shape is fixed, so there is nothing to resize.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/lifecycle",
+            "quote": "The vCPU count and the storage ceiling are fixed",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "figure": "fixed for the session",
+          "shortfall": "The size is set when the sandbox is created and cannot be changed during its life.",
+          "note": "Inferred: no resize in the SDK reference.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "Each vCPU includes 2 GB of memory.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "cores, memory, disk live",
+          "note": "Memory can only shrink back to about what the running programs are using.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/live-resize",
+            "quote": "A sandbox can change its CPU, memory, and root disk allocation while it runs.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "gpu",
       "feature": "sizes-regions",
       "title": "GPUs",
       "plain": "Machines with a graphics processor, for running AI models or other GPU work inside the sandbox.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "figure": "no GPU",
+          "shortfall": "No graphics processor is offered on any machine or plan.",
+          "note": "Inferred: no GPU shape appears on the pricing page or in the sizing docs.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-sizing",
+            "quote": "4 vCPU is the ceiling on every instance type.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "not-published",
+          "note": "Custom hardware is advertised, but no GPU model or price is published.",
+          "source": {
+            "url": "https://blaxel.ai/pricing",
+            "quote": "Custom hardware options",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "figure": "no GPU",
+          "shortfall": "No size has a graphics processor, at any price.",
+          "source": {
+            "url": "https://docs.boat.dev/machines",
+            "quote": "No size has a GPU.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "figure": "no GPU",
+          "shortfall": "There is no graphics processor option.",
+          "note": "Inferred: no GPU shape, price or availability anywhere in the docs.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/resources",
+            "quote": "This is the largest size a single machine may have",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "figure": "no GPU",
+          "shortfall": "There is no graphics processor option; the largest machine is 4 cores of CPU.",
+          "note": "Inferred: no GPU instance type or price in the docs.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/platform/limits/",
+            "quote": "Maximum vCPU",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "up to 8 GPUs",
+          "note": "Graphics machines are preemptible, ignore your region choice and cannot use the free credit.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/gpu-sandboxes",
+            "quote": "each GPU adds up to 16 vCPUs, 192GB RAM, and 512GB disk",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "figure": "CPU only",
+          "shortfall": "There is no graphics processor option in any plan, tool or template.",
+          "source": {
+            "url": "https://docs.e2b.dev/faq",
+            "quote": "E2B sandboxes are CPU-only, sized by vCPU and RAM only, with no GPU option in the SDKs, CLI, API, or a template definition.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "figure": "no GPU",
+          "shortfall": "No graphics processor is offered on any plan.",
+          "note": "Inferred: no GPU appears in the plans, docs or API.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "4 vCPUs and 8 GiB of memory by default, the only size on the free plan.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "figure": "CPUs only",
+          "shortfall": "Sandboxes run on processors only; there is no graphics option.",
+          "source": {
+            "url": "https://lizard.build/sandboxes",
+            "quote": "Sandboxes run on CPUs only.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "up to 8 GPUs",
+          "note": "Graphics machines cannot be preempted and only run on the gVisor runtime, not the VM one.",
+          "source": {
+            "url": "https://modal.com/docs/guide/gpu",
+            "quote": "Currently B300, B200, H200, H100, A100, L4, T4 and L40S instances support up to 8 GPUs",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No page states whether graphics processors are available.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Full virtual machines capable of running any configuration of containers",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "no",
+          "figure": "no GPU",
+          "shortfall": "Runtime lists a GPU request as an example of something it cannot do.",
+          "source": {
+            "url": "https://withruntime.com/docs/feedback-and-support",
+            "quote": "No GPU sandboxes, so our model evaluations cannot move",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "figure": "no GPU",
+          "shortfall": "There are no graphics processors.",
+          "source": {
+            "url": "https://sandboxer.com/docs/llms.txt",
+            "quote": "You need GPUs. Sandboxer has none.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "figure": "no GPU",
+          "shortfall": "Sprites are not a graphics environment; Fly sells graphics machines as a separate product.",
+          "source": {
+            "url": "https://fly.io/learn/fly-vs-modal/",
+            "quote": "Sprites are not a GPU environment. Fly.io sells GPU Machines separately",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "figure": "no GPU",
+          "shortfall": "No graphics processor option is published for sandboxes.",
+          "note": "Inferred: no GPU appears in the pricing table or the size limits.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "Each vCPU includes 2 GB of memory.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "partly",
+          "figure": "by request",
+          "shortfall": "Graphics machines exist but you have to ask on Slack to be given access, and they cannot be resized or run virtual machines inside.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/gpu",
+            "quote": "GPU sandboxes are available by request.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "choose-region",
       "feature": "sizes-regions",
       "title": "Choose the region",
       "plain": "You decide which part of the world the machine runs in.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "3 regions",
+          "note": "Europe and India only run the more expensive VM type, and backups stay in the US.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instances/create",
+            "quote": "us is the only region that runs every instance type.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "figure": "4 regions, not all open",
+          "shortfall": "Four regions are listed, but not all of them are available to self-service accounts without asking.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Infrastructure/Regions.md",
+            "quote": "All regions are not necessarily available in self-service by default.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "figure": "no region choice",
+          "shortfall": "Machines run in Germany, Finland or France, and you cannot say which.",
+          "note": "Inferred: no region option appears in the CLI or API.",
+          "source": {
+            "url": "https://docs.boat.dev/compliance",
+            "quote": "Sandboxes run on machines in Germany, Finland and France.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "figure": "one EU region",
+          "shortfall": "There is one region, in Germany, and no way to choose another.",
+          "source": {
+            "url": "https://boxd.sh/",
+            "quote": "On bare-metal servers in Germany, so your machines and their data stay in the EU.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "figure": "placement is automatic",
+          "shortfall": "Cloudflare puts each sandbox near the request, and a sandbox cannot be pinned to a location.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/concepts/placement/",
+            "quote": "By default, containers run in the location nearest to the incoming request with a pre-fetched image.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "US or EU",
+          "note": "Graphics sandboxes ignore the region you pick.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/regions",
+            "quote": "When creating a sandbox, you can target a specific region, and Daytona schedules the workload on available capacity within that region.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "figure": "4 regions, support needed",
+          "shortfall": "Four regions exist, but outside the United States you have to contact support to be switched on.",
+          "source": {
+            "url": "https://docs.e2b.dev/faq/eu-region",
+            "quote": "To get access, contact support",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "figure": "no region setting",
+          "shortfall": "There is no region setting anywhere in the tools or docs, so you cannot ask for a European machine.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "4 vCPUs and 8 GiB of memory by default, the only size on the free plan.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "2 regions",
+          "note": "A region in the catalogue does not guarantee room for your size.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/limits",
+            "quote": "The current configured regions include US East (Virginia), us-east-1, and EU West (Limburg), eu-west-lim-a.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "broad or narrow regions",
+          "note": "Choosing a region costs 1.15 times the base price, or 1.75 times for a narrow one.",
+          "source": {
+            "url": "https://modal.com/docs/guide/region-selection",
+            "quote": "A multiplier on top of our base usage pricing will be applied to any Function or Sandbox that has a container region defined.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No page lists regions or says whether you can choose one.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Full virtual machines capable of running any configuration of containers",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "no",
+          "figure": "one region",
+          "shortfall": "Everything runs in one place, in Virginia in the United States.",
+          "source": {
+            "url": "https://withruntime.com/docs/trust",
+            "quote": "Everything runs in one region, in Virginia, United States",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "US East or EU Central",
+          "note": "New sandboxes go to the region nearest you unless you name one.",
+          "source": {
+            "url": "https://sandboxer.com/docs/regions",
+            "quote": "Run sandboxes in US East (Virginia) or EU Central (Finland).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "figure": "placement automatic",
+          "shortfall": "You cannot choose where a Sprite runs; placement is decided for you.",
+          "note": "Third-party community answer; no region setting appears in the docs.",
+          "source": {
+            "url": "https://community.fly.io/t/where-do-sprites-dev-sprites-live-as-in-which-fly-io-region-is-it/26775",
+            "quote": "it’s not currently possible to specify a region when creating a sprite",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "19 regions",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "Vercel Sandbox is available in 19 regions. The default region is iad1.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "US or EU",
+          "note": "The choice is a separate EU web address, not a per-machine setting.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/eu-data-residency",
+            "quote": "Tensorlake APIs are available in the EU region to provide data residency and compute in Europe.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "eu-region",
       "feature": "sizes-regions",
       "title": "Runs in the EU",
       "plain": "At least one region inside the European Union, for EU data rules.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "partly",
+          "figure": "France, backups in US",
+          "shortfall": "There is a French region, but backups and the account's control records are kept in the United States.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instances/create",
+            "quote": "Backups and the instance's own control-plane record (its id, shape, and status) are stored in the US",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "London and Frankfurt",
+          "source": {
+            "url": "https://docs.blaxel.ai/Infrastructure/Regions.md",
+            "quote": "Frankfurt",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "Germany, Finland, France",
+          "source": {
+            "url": "https://docs.boat.dev/compliance",
+            "quote": "Sandboxes run on machines in Germany, Finland and France.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Germany",
+          "note": "The privacy notice describes a US cluster as well, so check which one your account uses.",
+          "source": {
+            "url": "https://boxd.sh/faq/",
+            "quote": "so your machines and their data stay in the EU",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "EU locations, cannot pin",
+          "shortfall": "Cloudflare has European locations, but a sandbox cannot be required to stay in one, so it may run outside the EU.",
+          "source": {
+            "url": "https://developers.cloudflare.com/workers/wrangler/configuration/",
+            "quote": "Wrangler rejects every other Container application field for this policy, including image, instance_type, max_instances, rollout settings, and placement constraints.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "eu region",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/regions",
+            "quote": "Europe",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "europe-west1",
+          "note": "The EU region is only switched on for workspaces with a payment method, and you have to ask support.",
+          "source": {
+            "url": "https://docs.e2b.dev/faq/eu-region",
+            "quote": "E2B offers a shared EU cluster on every plan, for workspaces verified by adding a payment method.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "figure": "US only",
+          "shortfall": "There is no European region and no way to ask for one.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "4 vCPUs and 8 GiB of memory by default, the only size on the free plan.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "EU West (Limburg)",
+          "source": {
+            "url": "https://lizard.build/docs/platform/limits",
+            "quote": "EU West (Limburg)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "eu regions",
+          "note": "The service that creates and stops sandboxes sits in the US even when the machine runs in Europe.",
+          "source": {
+            "url": "https://modal.com/docs/guide/data-residency",
+            "quote": "Sandbox lifecycle requests (e.g. create and terminate) are routed through our control plane in us-east.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No page says where machines run.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Full virtual machines capable of running any configuration of containers",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "no",
+          "figure": "US only",
+          "shortfall": "Everything runs in Virginia in the United States.",
+          "source": {
+            "url": "https://withruntime.com/docs/trust",
+            "quote": "Everything runs in one region, in Virginia, United States",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "Helsinki",
+          "source": {
+            "url": "https://sandboxer.com/docs/regions",
+            "quote": "EU Central (Finland)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "partly",
+          "figure": "EU possible, not chosen",
+          "shortfall": "A Sprite may run in Europe because placement follows you, but you cannot require it to.",
+          "note": "Third-party community answer.",
+          "source": {
+            "url": "https://community.fly.io/t/where-do-sprites-dev-sprites-live-as-in-which-fly-io-region-is-it/26775",
+            "quote": "sprites are created in a Fly.io region close to you",
+            "confidence": "third-party"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "European regions",
+          "note": "Snapshot storage stays in the region the sandbox was made in and cannot be moved.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/snapshots",
+            "quote": "Snapshots can't be moved between regions.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "EU endpoint",
+          "note": "EU residency is chosen by using a separate EU web address for the whole account.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/eu-data-residency",
+            "quote": "Use Tensorlake's EU endpoints for data residency and compute in Europe.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "pause-memory",
@@ -460,56 +2373,1441 @@
       "feature": "billing-models",
       "title": "Billed per second",
       "plain": "Usage is counted to the second rather than by the hour or month.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "figure": "per minute",
+          "shortfall": "Usage is counted by the minute, not the second, so every short task rounds up.",
+          "source": {
+            "url": "https://www.agent37.com/pricing",
+            "quote": "Metered by the minute: compute while the sandbox runs, disk while you keep it.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "per second",
+          "source": {
+            "url": "https://blaxel.ai/pricing",
+            "quote": "$0.0000115 / GB RAM · second",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "per second",
+          "source": {
+            "url": "https://docs.boat.dev/pricing",
+            "quote": "You pay per second, only while a sandbox runs.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "per second",
+          "note": "Usage is added up every second but settled in 15-minute windows.",
+          "source": {
+            "url": "https://boxd.sh/pricing",
+            "quote": "Usage is metered every second and settled every 15 minutes",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "figure": "per 10 ms",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+            "quote": "Containers are billed for every 10ms that they are actively running",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "per second",
+          "source": {
+            "url": "https://www.daytona.io/pricing",
+            "quote": "All billing is calculated per second.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "per second",
+          "source": {
+            "url": "https://e2b.dev/pricing.md",
+            "quote": "Running sandboxes are billed per second for provisioned CPU and RAM.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "per second",
+          "source": {
+            "url": "https://instabox.sh/docs/pricing.md",
+            "quote": "Runtime is metered by the second, only while a machine is running.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "per second",
+          "source": {
+            "url": "https://lizard.build/pricing",
+            "quote": "Running sandboxes are billed per second, including idle time.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "per second",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-resources",
+            "quote": "Modal Sandboxes are billed by the second based on whichever is higher: your resource request or your actual usage.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "figure": "per second",
+          "source": {
+            "url": "https://cloud.morph.so/web/legal/terms-of-service",
+            "quote": "Per-second compute",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "per second",
+          "source": {
+            "url": "https://withruntime.com/docs/reservations",
+            "quote": "Sandboxes you run bill as usual, per second.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "per second",
+          "source": {
+            "url": "https://sandboxer.com/docs/billing",
+            "quote": "Metering is per second, from the moment a sandbox is up until it is stopped.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "per second",
+          "source": {
+            "url": "https://fly.io/pricing/",
+            "quote": "Compute bills by the second, storage on what you provision.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "memory rounds to a minute",
+          "shortfall": "Memory is counted in whole minutes, so a 20-second task is charged for a full minute of memory.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "Provisioned memory is billed in 1 minute minimum increments to account for sandbox lifecycle management.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "per second",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/billing",
+            "quote": "runtime usage is measured by the second",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "active-cpu",
       "feature": "billing-models",
       "title": "CPU billed only while working",
       "plain": "An idle processor costs nothing or very little.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "figure": "full rate while awake",
+          "shortfall": "A running machine pays its full compute rate whether it is working or waiting.",
+          "source": {
+            "url": "https://www.agent37.com/pricing",
+            "quote": "An awake instance still pays compute even when its CPU is idle.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "figure": "memory-based meter",
+          "shortfall": "The meter runs on the memory you allocated for as long as the sandbox is active, busy or not.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "You are charged for memory (based on how much you allocated at sandbox creation) and storage while a sandbox is in active mode.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "figure": "flat rate per size",
+          "shortfall": "A running machine costs the same whether it is working or waiting.",
+          "source": {
+            "url": "https://docs.boat.dev/pricing",
+            "quote": "You pay per second, only while a sandbox runs.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "figure": "full cores while running",
+          "shortfall": "The processor is charged at the machine's full size for as long as it runs.",
+          "source": {
+            "url": "https://boxd.sh/pricing",
+            "quote": "vCPU is the one component billed on the machine's size: its full vCPU count while it runs",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "figure": "active CPU only",
+          "note": "Memory and disk are still charged for the full size while it runs.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+            "quote": "CPU usage is based on active usage only",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "no",
+          "figure": "reserved size",
+          "shortfall": "You pay for the cores and memory you reserved, not the ones the work used.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/billing",
+            "quote": "Sandboxes are billed for the resources reserved: vCPU, RAM, and disk",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "figure": "allocated size",
+          "shortfall": "The bill follows the cores and memory you gave the machine, not what it used.",
+          "source": {
+            "url": "https://docs.e2b.dev/faq/calculate-sandbox-price",
+            "quote": "based on the vCPU and RAM allocated to it",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "figure": "size while running",
+          "shortfall": "A waiting machine costs the same as a busy one of the same size.",
+          "source": {
+            "url": "https://instabox.sh/docs/pricing.md",
+            "quote": "While a machine is running, you pay for the vCPUs and memory you gave it.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "figure": "idle is billed",
+          "shortfall": "Waiting time is charged at the same rate as working time.",
+          "source": {
+            "url": "https://lizard.build/pricing",
+            "quote": "Running sandboxes are billed per second, including idle time.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "figure": "request or use, whichever is higher",
+          "shortfall": "A machine that reserves more than it uses pays for the reservation.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-resources",
+            "quote": "You pay for max(request, actual).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "figure": "largest resource counts",
+          "shortfall": "The rate follows the largest of cores, memory and disk, so spare capacity is paid for.",
+          "source": {
+            "url": "https://cloud.morph.so/web/subscribe",
+            "quote": "MCUs = max(vCPUs, ceil(RAM/4GiB), ceil(disk/16GiB))",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "measured, 50 mcore floor",
+          "note": "A completely idle machine still pays for one twentieth of a core.",
+          "source": {
+            "url": "https://withruntime.com/docs/pricing",
+            "quote": "the same sandbox costs $0.03125 an hour, for memory plus the default CPU floor of 50 millicores",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "figure": "flat rate per size",
+          "shortfall": "The price depends on the size you picked, not on how hard it works.",
+          "source": {
+            "url": "https://sandboxer.com/docs/billing",
+            "quote": "Metering is per second, from the moment a sandbox is up until it is stopped.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "actual CPU",
+          "note": "Memory is also charged on actual use, and a minimum of 256 MB applies while running.",
+          "source": {
+            "url": "https://fly.io/pricing/",
+            "quote": "Cumulative CPU usage measured by cpu.stat",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "active CPU only",
+          "note": "Memory is still charged for the whole time the sandbox runs, including while it waits.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "Time spent waiting for I/O (such as network requests, database queries, or AI model calls) does not count toward Active CPU.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "active CPU only",
+          "note": "Memory and disk are charged on the full allocation while it runs.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/billing",
+            "quote": "CPU tracks active runtime execution, not allocated vCPU time is used.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "cheap-pause",
       "feature": "billing-models",
       "title": "Paused costs only storage",
       "plain": "A paused or stopped machine bills for its kept files only, not CPU or memory.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "disk only",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/billing",
+            "quote": "The disk rate alone: $0.09 per reserved GB per month.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "storage only",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "You are not charged for memory while a sandbox is in standby mode.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "nothing for 14 days",
+          "note": "After 14 days the disk is deleted unless you saved a snapshot.",
+          "source": {
+            "url": "https://docs.boat.dev/faq",
+            "quote": "A stopped sandbox keeps its disk for free for 14 days.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "partly",
+          "figure": "pause keeps paying for memory",
+          "shortfall": "Pausing keeps the memory in place and you keep paying for it; only hibernating or stopping brings the bill down to disk alone.",
+          "source": {
+            "url": "https://boxd.sh/pricing",
+            "quote": "a machine in standby pays for RAM and disk",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "figure": "nothing while stopped",
+          "note": "The disk does not survive a stop, so there is nothing to pay for.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+            "quote": "After the instance stops, it is not billed.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "disk only",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/billing",
+            "quote": "Billed for reserved disk only. The preserved memory state is not billed.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "nothing while paused",
+          "note": "Separately kept volumes and snapshots are billed on their own.",
+          "source": {
+            "url": "https://docs.e2b.dev/faq/calculate-sandbox-price",
+            "quote": "Paused and killed sandboxes are not billed.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "storage only",
+          "source": {
+            "url": "https://instabox.sh/docs/pricing.md",
+            "quote": "Pause it, and you just pay for its disk",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "compute stops",
+          "note": "Paused storage on a separate volume is billed on its own.",
+          "source": {
+            "url": "https://lizard.build/pricing",
+            "quote": "A successful pause stops compute charges",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "figure": "no pause",
+          "shortfall": "There is no pause: a sandbox bills until it is shut down, and its saved copy is stored separately.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-resources",
+            "quote": "Modal Sandboxes are billed by the second based on whichever is higher: your resource request or your actual usage.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "figure": "snapshot only",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/pause-resume",
+            "quote": "You only get charged for the snapshot taken",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "storage only",
+          "source": {
+            "url": "https://withruntime.com/docs/pricing",
+            "quote": "A paused sandbox keeps its files and memory for $0.08 per decimal GB per 30-day month.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "nothing while stopped",
+          "source": {
+            "url": "https://sandboxer.com/docs/billing",
+            "quote": "Time while stopped is never counted.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "compute stops",
+          "note": "Storage for the files you keep is still charged while it sleeps.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "Sprites have three states: running (billed), warm (not billed), and cold (not billed).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "compute stops",
+          "note": "A saved copy of the disk bills as snapshot storage after it stops.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "Stop a sandbox when work is done to end CPU and memory charges.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "storage only",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/lifecycle",
+            "quote": "Consumes no compute; state is preserved for resume under the same sandbox ID.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "no-monthly-fee",
       "feature": "billing-models",
       "title": "No monthly fee",
       "plain": "Pay only for what you use, with no plan fee.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "none",
+          "source": {
+            "url": "https://www.agent37.com/pricing",
+            "quote": "No monthly plan fee or seat charge.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "none",
+          "note": "Higher limits come from topping up a balance, not from a subscription.",
+          "source": {
+            "url": "https://blaxel.ai/pricing",
+            "quote": "Usage-based pricing with infinite scalability.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "figure": "$20 minimum plan",
+          "shortfall": "The smallest plan is $20 a month, and unused time expires, so a light month still costs $20.",
+          "source": {
+            "url": "https://docs.boat.dev/pricing",
+            "quote": "A plan is a monthly price that your card pays.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "none",
+          "source": {
+            "url": "https://boxd.sh/pricing",
+            "quote": "There is no monthly plan and no per-seat fee.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "figure": "$5 Workers plan",
+          "shortfall": "Sandboxes need the $5-a-month Workers Paid plan before anything can run.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/",
+            "quote": "Available on Workers Paid plan",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "none",
+          "source": {
+            "url": "https://www.daytona.io/pricing",
+            "quote": "Build for free, pay as you scale.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "none on Hobby",
+          "note": "The Pro plan adds a $150 monthly fee.",
+          "source": {
+            "url": "https://e2b.dev/pricing.md",
+            "quote": "$0 monthly plan fee.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "figure": "$20 minimum plan",
+          "shortfall": "The free plan is capped at one machine, and anything more needs a $20-a-month plan.",
+          "source": {
+            "url": "https://instabox.sh/docs/pricing.md",
+            "quote": "Free: $0",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "figure": "$19 plan",
+          "shortfall": "There is one plan at $19 a month, which includes $19 of usage.",
+          "source": {
+            "url": "https://lizard.build/pricing",
+            "quote": "Pro costs $19 a month and includes $19 of usage for the whole platform: apps, databases, Sandboxes, storage and egress.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "Starter $0",
+          "note": "The Team plan adds a $250 monthly fee.",
+          "source": {
+            "url": "https://modal.com/pricing",
+            "quote": "$30 / month free credits",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "figure": "Developer $0",
+          "note": "The free plan includes no compute; you buy units as you go.",
+          "source": {
+            "url": "https://cloud.morph.so/web/subscribe",
+            "quote": "Additional credits billed pay-as-you-go",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "none",
+          "source": {
+            "url": "https://withruntime.com/docs/pricing",
+            "quote": "There is no plan fee.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "figure": "$20 minimum plan",
+          "shortfall": "The smallest plan is $20 a month, and included time does not carry over.",
+          "source": {
+            "url": "https://sandboxer.com/docs/billing",
+            "quote": "Included time renews each billing month and does not roll over.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "none",
+          "note": "A separate product page describes optional monthly plans, which contradicts the pricing page.",
+          "source": {
+            "url": "https://fly.io/pricing/",
+            "quote": "No plans and no tiers, and nothing charged per Sprite.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "Hobby free; Pro $20",
+          "shortfall": "The free Hobby plan is for personal projects only; commercial use needs the $20-a-month Pro plan.",
+          "source": {
+            "url": "https://vercel.com/docs/plans/pro-plan",
+            "quote": "$20/month Pro platform fee",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "prepaid credit",
+          "note": "The $250-a-month Pro plan is optional; prepaid credit works without it.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/billing",
+            "quote": "Prepaid packs starting at $5",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "flat-price",
       "feature": "billing-models",
       "title": "Flat monthly price",
       "plain": "A fixed price per month for a machine, so the bill is predictable.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "figure": "metered parts",
+          "shortfall": "The bill is cores plus memory plus disk, so it moves with the shape you choose.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/billing",
+            "quote": "The monthly price is the rate; the wallet is metered per minute",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "figure": "per GB-second",
+          "shortfall": "The price follows the memory you allocate and the seconds it runs.",
+          "source": {
+            "url": "https://blaxel.ai/pricing",
+            "quote": "$0.0000115 / GB RAM · second",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "$26 a month for default",
+          "note": "A flat hourly rate per size; the monthly figure assumes 730 hours of running.",
+          "source": {
+            "url": "https://docs.boat.dev/pricing",
+            "quote": "One default sandbox that runs a full month (730 h) costs $26.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "figure": "three meters",
+          "shortfall": "Cores, memory and disk are metered separately, so there is no single monthly price.",
+          "source": {
+            "url": "https://boxd.sh/pricing",
+            "quote": "Credit-based.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "figure": "per 10 ms",
+          "shortfall": "The bill is a sum of active processor time, memory and disk.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+            "quote": "Containers are billed for every 10ms that they are actively running",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "no",
+          "figure": "metered parts",
+          "shortfall": "The bill is cores plus memory plus disk per second.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/billing",
+            "quote": "Sandboxes are billed for the resources reserved: vCPU, RAM, and disk",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "figure": "per second parts",
+          "shortfall": "The bill is cores plus memory per second.",
+          "source": {
+            "url": "https://e2b.dev/pricing.md",
+            "quote": "$0.000014 per vCPU-second",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "figure": "metered parts",
+          "shortfall": "The bill is cores plus memory per second, plus storage.",
+          "source": {
+            "url": "https://instabox.sh/docs/pricing.md",
+            "quote": "Runtime is metered by the second, only while a machine is running.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "$0.0324/h medium",
+          "note": "Three fixed sizes with a flat hourly price each.",
+          "source": {
+            "url": "https://lizard.build/pricing",
+            "quote": "Sandboxes come in three sizes, priced per hour and billed per second while they run, including idle time",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "figure": "request or use",
+          "shortfall": "The bill follows the higher of what you asked for and what you used.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-resources",
+            "quote": "You pay for max(request, actual).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "figure": "one rate per unit",
+          "shortfall": "The price is a single rate per unit hour, not a fixed monthly price per machine.",
+          "source": {
+            "url": "https://cloud.morph.so/web/subscribe",
+            "quote": "standard MCU rate of",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "no",
+          "figure": "measured parts",
+          "shortfall": "The bill is measured processor time plus reserved memory plus storage.",
+          "source": {
+            "url": "https://withruntime.com/docs/pricing",
+            "quote": "the same sandbox costs $0.03125 an hour, for memory plus the default CPU floor of 50 millicores",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "$26.28 a month default",
+          "note": "A flat rate per size inside a monthly plan.",
+          "source": {
+            "url": "https://sandboxer.com/pricing.md",
+            "quote": "Pay for running time only: one price per hour for each machine size, metered per second.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "figure": "actual use",
+          "shortfall": "The bill follows the processor and memory actually used, so it varies with the work.",
+          "source": {
+            "url": "https://fly.io/pricing/",
+            "quote": "$0.0385 / CPU-hour",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "figure": "active CPU plus memory",
+          "shortfall": "The bill is active processor time plus memory for as long as the sandbox runs.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "$0.128/hour",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "figure": "metered parts",
+          "shortfall": "The bill is processor time plus memory plus disk plus storage.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/billing",
+            "quote": "Active CPU per core-hour",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "free-tier",
       "feature": "trials-free-tiers",
       "title": "Ongoing free tier",
       "plain": "Something keeps working for free every month, not only at the start.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "figure": "one-off $5 credit",
+          "shortfall": "There is no monthly free allowance; the only free usage is a one-off $5 credit.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/billing",
+            "quote": "Add a card from the billing page (nothing is charged) and your workspace gets a one-time $5 credit",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "figure": "one-off credits",
+          "shortfall": "Free usage is a one-off promotional credit, not something that returns each month.",
+          "source": {
+            "url": "https://blaxel.ai/pricing",
+            "quote": "Up to $200 in free credits",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "figure": "trial only",
+          "shortfall": "There is no free tier; the only free usage is a seven-day trial that needs a card.",
+          "source": {
+            "url": "https://docs.boat.dev/faq",
+            "quote": "There is no free tier.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "figure": "one-off credit",
+          "shortfall": "Free usage is a one-off credit that needs a card, not a monthly allowance.",
+          "source": {
+            "url": "https://boxd.sh/pricing",
+            "quote": "€30 of credits when you add a payment method.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "figure": "none",
+          "shortfall": "Sandboxes only run on the paid Workers plan.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/",
+            "quote": "Available on Workers Paid plan",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "no",
+          "figure": "one-off $200",
+          "shortfall": "The $200 is a one-time credit, not something that returns every month.",
+          "source": {
+            "url": "https://www.daytona.io/pricing",
+            "quote": "$200 in free compute included.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "figure": "one-off $100",
+          "shortfall": "The $100 is a one-time credit, not a monthly allowance.",
+          "source": {
+            "url": "https://e2b.dev/pricing.md",
+            "quote": "One-time $100 in usage credits.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "1 machine, 4 cores / 8 GiB",
+          "note": "The free machine pauses after 30 minutes idle and cannot run more than 8 hours at a time.",
+          "source": {
+            "url": "https://instabox.sh/docs/pricing.md",
+            "quote": "1 machine, 4 vCPU / 8 GiB",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "figure": "7-day trial",
+          "shortfall": "There is no free tier, only a seven-day trial that needs a card.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/billing",
+            "quote": "Pro starts with a 7-day trial that includes $5 of usage.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "$30 a month, card needed",
+          "shortfall": "Thirty dollars of free compute returns each month, but a payment method must be on file before anything runs.",
+          "source": {
+            "url": "https://modal.com/pricing",
+            "quote": "$30 / month free credits",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "partly",
+          "figure": "300 hours claimed",
+          "shortfall": "The signup page promises 300 free hours a month, but the pricing page shows no free compute and asks you to buy units.",
+          "note": "Contradiction between two Morph pages; see notes.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/setup/signing-up",
+            "quote": "Once you have your invite, our $0/month Developer Plan provides 300 free compute hours per month",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "100 hours a month",
+          "note": "An account that never pays gets the free hours once, across its first 30 days.",
+          "source": {
+            "url": "https://withruntime.com/docs/pricing",
+            "quote": "100 free hours of a 1 GB machine",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "figure": "trial only",
+          "shortfall": "There is no free tier, only a seven-day trial that becomes a $20 plan.",
+          "source": {
+            "url": "https://sandboxer.com/docs/billing",
+            "quote": "When the 7 days end, the trial becomes the $20/month plan and your card is charged.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "figure": "one-off $30",
+          "shortfall": "Free usage is a one-time $30 credit, not a monthly allowance.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "Each user can grant one $30 trial credit, and each org can receive at most one.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "Hobby, personal use only",
+          "shortfall": "The free Hobby plan is limited to personal projects and stops creating sandboxes when its allowance runs out.",
+          "source": {
+            "url": "https://vercel.com/docs/plans/hobby",
+            "quote": "the Hobby plan restricts users to non-commercial, personal use only.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "1 machine, 1 core / 1 GB",
+          "note": "The free machine is limited to 1 core, 1 GB of memory and 2 hours at a time.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/billing",
+            "quote": "Tensorlake Cloud has a free tier",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "free-credit",
       "feature": "trials-free-tiers",
       "title": "Free starting credit",
       "plain": "Credit to spend when you sign up.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "$5",
+          "note": "The credit only appears after you add a card, though nothing is charged.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/billing",
+            "quote": "Add a card from the billing page (nothing is charged) and your workspace gets a one-time $5 credit",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "up to $200",
+          "source": {
+            "url": "https://blaxel.ai/company/security",
+            "quote": "Up to $200 in credits, no credit card required.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "figure": "none",
+          "shortfall": "There is no credit; the free offer is 25 hours of machine time inside a trial.",
+          "source": {
+            "url": "https://docs.boat.dev/free-trial",
+            "quote": "25 hours in total, all sandboxes together",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "€30",
+          "note": "You have to add a card first, though nothing is charged.",
+          "source": {
+            "url": "https://boxd.sh/pricing",
+            "quote": "€30 of credits when you add a payment method.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "figure": "none",
+          "shortfall": "There is no starting credit; you pay the $5 monthly plan from the start.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/",
+            "quote": "Available on Workers Paid plan",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "$200",
+          "note": "The credit cannot be spent on graphics machines.",
+          "source": {
+            "url": "https://www.daytona.io/pricing",
+            "quote": "$200 in free compute included.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "$100",
+          "note": "When it runs out without a payment method, every project is blocked shortly afterwards.",
+          "source": {
+            "url": "https://e2b.dev/pricing.md",
+            "quote": "One-time $100 in usage credits.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "figure": "none",
+          "shortfall": "There is no starting credit; the free plan is a machine, and paid plans include usage equal to their fee.",
+          "source": {
+            "url": "https://instabox.sh/docs/pricing.md",
+            "quote": "Usage comes out of your included credits first, then you pay as you go. Credits reset every month.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "partly",
+          "figure": "$5 inside a trial",
+          "shortfall": "The $5 comes only as part of a seven-day trial and needs a card.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/billing",
+            "quote": "Pro starts with a 7-day trial that includes $5 of usage.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "$30 a month",
+          "note": "A payment method is required before the credit can be used.",
+          "source": {
+            "url": "https://modal.com/pricing",
+            "quote": "$30 / month free credits",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "partly",
+          "figure": "300 hours claimed",
+          "shortfall": "One page promises 300 free hours a month, while the pricing page lists no free units.",
+          "note": "Contradiction between two Morph pages; see notes.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/setup/signing-up",
+            "quote": "Once you have your invite, our $0/month Developer Plan provides 300 free compute hours per month",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "partly",
+          "figure": "matched credit",
+          "shortfall": "There is no plain signup credit; whatever you add in your first 30 days is doubled, up to $1,000.",
+          "source": {
+            "url": "https://withruntime.com/docs/pricing",
+            "quote": "Credit your organization adds within 30 days of signing up is matched with credit, up to $1,000 in total.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "figure": "none",
+          "shortfall": "There is no credit; the trial is 25 hours of machine time that becomes a paid plan.",
+          "source": {
+            "url": "https://sandboxer.com/pricing.md",
+            "quote": "7 days, 25 hours of machine time, up to 2 sandboxes at once on the small and default sizes",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "$30",
+          "note": "One credit per person and one per organisation, and it cannot pay a subscription fee.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "Each user can grant one $30 trial credit, and each org can receive at most one.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "$20 in a 14-day trial",
+          "shortfall": "The credit is part of a 14-day Pro trial, not a standing signup credit.",
+          "source": {
+            "url": "https://vercel.com/docs/plans/hobby",
+            "quote": "Unlock the full potential of Vercel Pro during your 14-day trial with $20 in credits.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "figure": "none",
+          "shortfall": "There is no starting credit; the free plan is a small machine and credit is bought in packs.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/billing",
+            "quote": "Prepaid packs starting at $5",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "no-card",
       "feature": "trials-free-tiers",
       "title": "Try without a card",
       "plain": "You can start without entering a payment card.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "figure": "card for the credit",
+          "shortfall": "A card is needed to get the credit that makes the first machine runnable.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/billing",
+            "quote": "Add a card from the billing page (nothing is charged) and your workspace gets a one-time $5 credit",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "no card",
+          "source": {
+            "url": "https://blaxel.ai/company/security",
+            "quote": "Up to $200 in credits, no credit card required.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "figure": "card at checkout",
+          "shortfall": "Checkout asks for a card before the trial starts.",
+          "source": {
+            "url": "https://docs.boat.dev/free-trial",
+            "quote": "Checkout asks for a card.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "2 machines without one",
+          "note": "Without a card you are limited to two machines and get no credit.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/resources",
+            "quote": "An org without a payment method is capped at 2 machines",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "figure": "paid plan first",
+          "shortfall": "You need a paid Workers plan, which means a payment method, before a sandbox can run.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/",
+            "quote": "Available on Workers Paid plan",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "no card",
+          "source": {
+            "url": "https://www.daytona.io/pricing",
+            "quote": "Sign up for a free trial - no credit card required",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "no card",
+          "source": {
+            "url": "https://e2b.dev/pricing.md",
+            "quote": "No credit card required to start.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "free plan",
+          "note": "The docs never ask for a card on the free plan; some accounts can be asked for one before a machine starts.",
+          "source": {
+            "url": "https://instabox.sh/docs/pricing.md",
+            "quote": "Free: $0",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "figure": "card for the trial",
+          "shortfall": "You add a card to start the trial, though nothing is charged at that point.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/billing",
+            "quote": "You add a card to start it",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "figure": "card required",
+          "shortfall": "A payment method must be on file before you can use Modal at all.",
+          "source": {
+            "url": "https://modal.com/docs/guide/billing",
+            "quote": "you must have a payment method on file in order to use Modal",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No page says whether a card is needed, and an invitation is mentioned.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/setup/signing-up",
+            "quote": "Once you have your invite",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "no card",
+          "source": {
+            "url": "https://withruntime.com/docs/pricing",
+            "quote": "with no card",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "figure": "card for the trial",
+          "shortfall": "The trial needs a card up front and becomes a paid plan after seven days.",
+          "source": {
+            "url": "https://sandboxer.com/pricing.md",
+            "quote": "7 days, 25 hours of machine time, up to 2 sandboxes at once on the small and default sizes",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "not-published",
+          "note": "No page says whether a card is required to start.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "Each user can grant one $30 trial credit, and each org can receive at most one.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "not-published",
+          "note": "Vercel's pages do not say whether a card is needed for the Hobby plan or the trial.",
+          "source": {
+            "url": "https://vercel.com/docs/plans/hobby",
+            "quote": "the Hobby plan restricts users to non-commercial, personal use only.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "free plan, no card",
+          "note": "The free plan is $0 forever; paid use starts from a $5 prepaid pack.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/billing",
+            "quote": "Tensorlake Cloud has a free tier",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "status-page",
