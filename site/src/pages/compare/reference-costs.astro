@@ -3,24 +3,10 @@ import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import CostCard from "../../components/CostCard.astro";
 import SectionNav from "../../components/SectionNav.astro";
-import { providers, pricing } from "../../lib/data";
-import { price, presets, formatMoney, type Quote } from "../../lib/cost";
-import type { CostCase } from "../../data/schema";
+import { providers, engineCase as card } from "../../lib/data";
 
 const researched = providers.filter((provider) => provider.status === "researched");
 
-// Each card is the calculator's own quote, so this page and the calculator cannot disagree.
-function card(id: string, key: "a" | "b" | "c"): CostCase {
-  const q: Quote = price(pricing.find((c) => c.provider === id)!, presets[key].workload);
-  return {
-    headline: q.feasible ? formatMoney(q.total) : `${formatMoney(q.total)}, with a catch`,
-    shape: `${q.shape}${q.plan ? ` (plan: ${q.plan})` : ""}`,
-    lines: q.lines.map((l) => ({ label: l.label, arithmetic: l.math, amount: formatMoney(l.amount) })),
-    total: formatMoney(q.total),
-    notes: q.notes,
-    flag: q.problems.length ? `It cannot run this exactly as described: ${q.problems.join(" ")}` : undefined,
-  };
-}
 const nav = [
   { href: "#workloads", label: "The workloads" },
   ...researched.map((provider) => ({ href: `#cost-${provider.id}`, label: provider.name })),

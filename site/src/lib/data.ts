@@ -1,6 +1,7 @@
 import type {
   Change,
   Confidence,
+  CostCase,
   Feature,
   GlossaryEntry,
   Group,
@@ -10,7 +11,7 @@ import type {
   Verdict,
 } from "../data/schema";
 import { plainText } from "./plain";
-import { presets, type RateCard } from "./cost";
+import { presets, price, formatMoney, type RateCard } from "./cost";
 import glossaryData from "../data/glossary.json";
 
 /**
@@ -208,3 +209,16 @@ export function validateContent(): void {
 }
 
 validateContent();
+
+/** A reference workload (a, b or c) priced by the calculator engine, in the shape CostCard shows. */
+export function engineCase(providerId: string, key: "a" | "b" | "c"): CostCase {
+  const q = price(pricing.find((c) => c.provider === providerId)!, presets[key].workload);
+  return {
+    headline: q.feasible ? formatMoney(q.total) : `${formatMoney(q.total)}, with a catch`,
+    shape: `${q.shape}${q.plan ? ` (plan: ${q.plan})` : ""}`,
+    lines: q.lines.map((l) => ({ label: l.label, arithmetic: l.math, amount: formatMoney(l.amount) })),
+    total: formatMoney(q.total),
+    notes: q.notes,
+    flag: q.problems.length ? `It cannot run this exactly as described: ${q.problems.join(" ")}` : undefined,
+  };
+}

@@ -5,13 +5,20 @@ import CostCard from "../../components/CostCard.astro";
 import CompanyFacts from "../../components/CompanyFacts.astro";
 import Quote from "../../components/Quote.astro";
 import SectionNav from "../../components/SectionNav.astro";
-import { providers } from "../../lib/data";
+import { providers, pricing, useCases, engineCase } from "../../lib/data";
+import { price, presets, formatMoney } from "../../lib/cost";
 
 export function getStaticPaths() {
   return providers.map((provider) => ({ params: { id: provider.id }, props: { provider } }));
 }
 
 const { provider } = Astro.props;
+const card = pricing.find((c) => c.provider === provider.id);
+// What this provider is recommended for, taken from the use-case guides' own picks.
+const goodFor = useCases.flatMap((u) =>
+  u.picks.filter((p) => p.provider === provider.id).map((p) => ({ useCase: u, pick: p })),
+);
+const personal = card ? price(card, presets.personal.workload) : undefined;
 const nav = [
   { href: "#about", label: "What it is" },
   { href: "#glance", label: "At a glance" },
@@ -22,7 +29,7 @@ const nav = [
   { href: "#company", label: "Company" },
   { href: "#caveats", label: "Caveats" },
   { href: "#sources", label: "Sources" },
-  ...(provider.cost ? [{ href: "#costs", label: "Costs" }] : []),
+  ...(card ? [{ href: "#costs", label: "Costs" }] : []),
 ];
 const statusLabel = {
   open: "Open question",
@@ -54,6 +61,31 @@ const statusLabel = {
           <tr><th scope="row">Who it is for</th><td>{provider.whoFor}</td></tr>
           <tr><th scope="row">Isolation</th><td>{provider.isolation}</td></tr>
           <tr><th scope="row">Sizes</th><td>{provider.sizes}</td></tr>
+          {personal && (
+            <tr>
+              <th scope="row">A personal agent here</th>
+              <td>
+                About {formatMoney(personal.total)} a month for one always-on 2 vCPU / 4 GiB machine ({personal.shape}),
+                before the AI model.{" "}
+                {!personal.feasible && <strong>The catch: {personal.problems.join(" ")}</strong>}{" "}
+                <a href={`/costs/?preset=personal`}>Change the numbers</a>
+              </td>
+            </tr>
+          )}
+          <tr>
+            <th scope="row">Recommended in</th>
+            <td>
+              {goodFor.length ? (
+                <ul class="plain-list">
+                  {goodFor.map(({ useCase, pick }) => (
+                    <li><a href={`/use-cases/${useCase.id}/`}>{useCase.title}</a>: {pick.for.charAt(0).toLowerCase() + pick.for.slice(1)}</li>
+                  ))}
+                </ul>
+              ) : (
+                <>Not one of the picks in any <a href="/use-cases/">use-case guide</a>.</>
+              )}
+            </td>
+          </tr>
         </tbody>
       </table>
 
@@ -151,16 +183,16 @@ const statusLabel = {
     </section>
 
     {
-      provider.cost && (
+      card && (
         <section class="section" id="costs" aria-labelledby="costs-h">
           <div class="section__head">
             <h2 class="section__title" id="costs-h">The three shared workloads</h2>
-            <p class="section__note">List-price illustrations, not quotes</p>
+            <p class="section__note">List-price illustrations from the <a href="/costs/">calculator</a>, not quotes</p>
           </div>
           <div class="cost-grid">
-            <CostCard label="A" title="1,000 short tasks" cost={provider.cost.A} />
-            <CostCard label="B" title="One always-on box" cost={provider.cost.B} />
-            <CostCard label="C" title="Three hours a day" cost={provider.cost.C} />
+            <CostCard label="A" title="1,000 short tasks" cost={engineCase(provider.id, "a")} />
+            <CostCard label="B" title="One always-on box" cost={engineCase(provider.id, "b")} />
+            <CostCard label="C" title="Three hours a day" cost={engineCase(provider.id, "c")} />
           </div>
         </section>
       )
