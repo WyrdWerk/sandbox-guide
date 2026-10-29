@@ -233,8 +233,8 @@ function priceOnPlan(card: RateCard, w: Workload, plan: Plan): Quote {
   if (plan.maxSessionHours !== undefined && h.session > plan.maxSessionHours) {
     problems.push(
       h.session >= MONTH_HOURS
-        ? `Sessions end after ${plan.maxSessionHours} hours, so an always-on machine has to be restarted by your own code.`
-        : `Sessions end after ${plan.maxSessionHours} hours, shorter than the ${num(h.session)} hours asked for.`,
+        ? `Sessions end after ${plan.maxSessionHours} hour${plan.maxSessionHours === 1 ? "" : "s"}, so an always-on machine has to be restarted by your own code.`
+        : `Sessions end after ${plan.maxSessionHours} hour${plan.maxSessionHours === 1 ? "" : "s"}, shorter than the ${num(h.session)} hours asked for.`,
     );
   }
   if (h.keep && card.between === "lost") {

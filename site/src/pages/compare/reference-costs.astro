@@ -3,9 +3,24 @@ import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import CostCard from "../../components/CostCard.astro";
 import SectionNav from "../../components/SectionNav.astro";
-import { providers } from "../../lib/data";
+import { providers, pricing } from "../../lib/data";
+import { price, presets, formatMoney, type Quote } from "../../lib/cost";
+import type { CostCase } from "../../data/schema";
 
 const researched = providers.filter((provider) => provider.status === "researched");
+
+// Each card is the calculator's own quote, so this page and the calculator cannot disagree.
+function card(id: string, key: "a" | "b" | "c"): CostCase {
+  const q: Quote = price(pricing.find((c) => c.provider === id)!, presets[key].workload);
+  return {
+    headline: q.feasible ? formatMoney(q.total) : `${formatMoney(q.total)}, with a catch`,
+    shape: `${q.shape}${q.plan ? ` (plan: ${q.plan})` : ""}`,
+    lines: q.lines.map((l) => ({ label: l.label, arithmetic: l.math, amount: formatMoney(l.amount) })),
+    total: formatMoney(q.total),
+    notes: q.notes,
+    flag: q.problems.length ? `It cannot run this exactly as described: ${q.problems.join(" ")}` : undefined,
+  };
+}
 const nav = [
   { href: "#workloads", label: "The workloads" },
   ...researched.map((provider) => ({ href: `#cost-${provider.id}`, label: provider.name })),
@@ -18,7 +33,7 @@ const nav = [
     kicker="Reference costs"
     title="Three workloads, priced at list rates"
     standfirst="A reference point, not a quote. The arithmetic is shown so you can redo it when prices change, and every substituted size is named. For your own workload, use the cost calculator."
-    meta={[`${researched.length} providers`, "List prices checked 28 October 2026", "Illustrations, not quotes"]}
+    meta={[`${researched.length} providers`, "List prices checked 29 October 2026", "Illustrations, not quotes"]}
   />
 
   <SectionNav items={nav} />
@@ -28,21 +43,21 @@ const nav = [
       <div class="section__head">
         <h2 class="section__title">The three shared workloads</h2>
         <p class="section__note">
-          A — 1,000 ten-minute tasks a month, 2 vCPU / 4 GiB, deleted after each.<br />
-          B — one always-on 4 vCPU / 8 GiB / 50 GiB box for a month.<br />
-          C — one 2 vCPU / 4 GiB / 20 GiB box, three hours a day, stopped otherwise.
+          A — 1,000 ten-minute tasks a month, 2 vCPU / 4 GiB, deleted after each, CPU working half the time.<br />
+          B — one always-on 4 vCPU / 8 GiB / 50 GiB box for a month, CPU working 10% of the time.<br />
+          C — one 2 vCPU / 4 GiB / 20 GiB box, three hours a day, stopped otherwise with its files kept.
         </p>
       </div>
       <p class="prose">
-        Where a provider does not sell the exact shape, the nearest one is used and named in the card.
-        Model tokens, taxes and anything the provider does not price are excluded. A range means the
-        provider bills a dimension it does not publish, such as measured CPU or resident memory.
+        Where a provider does not sell the exact shape, the cheapest size that fits is used and named in the card.
+        Model tokens, taxes and anything the provider does not price are excluded. Providers that bill CPU only
+        while it works are priced at the CPU share stated above, so a busier workload costs more on those.
       </p>
       <p class="section__note">
-        These are illustrations from published list rates, not invoices, worked by hand on 28 October.
-        The <a href="/costs/?preset=a">cost calculator</a> prices the same three workloads (and your own)
-        from rates re-checked on 29 October; small differences come from its rule of picking the cheapest
-        size that fits.
+        These are illustrations from published list rates, not invoices. Every card is produced by the
+        same engine as the <a href="/costs/?preset=a">cost calculator</a>, from rates re-checked on 29 October,
+        and the engine is tested against the same workloads worked by hand. <a href="/costs/how-it-works/">How the
+        costs are calculated</a>.
       </p>
     </section>
 
@@ -55,13 +70,11 @@ const nav = [
             </h2>
             <p class="section__note">{provider.billing.model}</p>
           </div>
-          {provider.cost && (
-            <div class="cost-grid">
-              <CostCard label="A" title="1,000 short tasks" cost={provider.cost.A} />
-              <CostCard label="B" title="One always-on box" cost={provider.cost.B} />
-              <CostCard label="C" title="Three hours a day" cost={provider.cost.C} />
-            </div>
-          )}
+          <div class="cost-grid">
+            <CostCard label="A" title="1,000 short tasks" cost={card(provider.id, "a")} />
+            <CostCard label="B" title="One always-on box" cost={card(provider.id, "b")} />
+            <CostCard label="C" title="Three hours a day" cost={card(provider.id, "c")} />
+          </div>
         </section>
       ))
     }
