@@ -1,0 +1,123 @@
+name: Request a provider listing
+description: Submit a cloud sandbox provider for independent research and comparison.
+title: "[Provider listing]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We compare sandbox providers for people running AI agents, including limitations, setup effort and published costs. A request does not guarantee a listing or recommendation.
+
+        Please link public, first-party documentation wherever possible. Write "not published" or "not supported" when appropriate, and distinguish those answers. Include exact quotes for important claims and identify preview, plan, region and support gates. We independently verify submissions.
+
+        This issue is public. Do not include API keys, login details, private reports, customer data or personal contact information you do not want published.
+  - type: input
+    id: provider
+    attributes:
+      label: Provider name and website
+      description: Name the sandbox product if your company offers several products.
+      placeholder: "Example Sandboxes, https://example.com/sandboxes"
+    validations:
+      required: true
+  - type: textarea
+    id: docs
+    attributes:
+      label: Official documentation and quickstart
+      description: Link the docs, getting-started guide and API/SDK reference. Include llms.txt or a sitemap if available, and any public access restrictions.
+      placeholder: |
+        Documentation:
+        Quickstart:
+        API / SDK / CLI:
+        Documentation index:
+    validations:
+      required: true
+  - type: textarea
+    id: product
+    attributes:
+      label: What can a customer run, and how do they start?
+      description: Explain the product in plain language. Say whether a non-coder can create a sandbox in the dashboard, whether a terminal is required, and how signup/payment works. Link evidence for dashboard, CLI, Python, TypeScript, HTTP API or MCP support.
+    validations:
+      required: true
+  - type: textarea
+    id: pricing
+    attributes:
+      label: Public pricing, plans and billing units
+      description: Link the current pricing and billing/limits docs, or explicitly say no public pricing. Cover allocated versus active CPU, CPU floors, memory/disk units, minimum billing duration, plan fees, included usage, signup credit, recurring free usage, prepaid packs, card requirements and taxes/currency. Distinguish managed-agent products from sandbox machines.
+      placeholder: |
+        Pricing / billing URLs:
+        CPU, memory and running disk rates with units:
+        Stopped / paused disk, snapshots, backups and retention costs:
+        Egress, dedicated IP, seats and other fees:
+        Plans, fees, allowances, minimum purchase and free-tier restrictions:
+        Effective date and any pricing contradictions:
+    validations:
+      required: true
+  - type: textarea
+    id: isolation
+    attributes:
+      label: Isolation, images and machine sizes
+      description: Link the isolation/security architecture and size limits. Cover container versus microVM/VM, separate kernel, root, Docker, custom images, nested virtualization, GPU differences, CPU/RAM/disk ranges, live resizing, concurrency and session limits. Mark plan/support/preview gates and preserve GB versus GiB units.
+    validations:
+      required: true
+  - type: textarea
+    id: regions
+    attributes:
+      label: Regions and data residency
+      description: List published regions, whether customers select them, and any EU-only residency guarantees or exceptions for control-plane data/backups. Link documentation and note plan restrictions, or say not published.
+    validations:
+      required: true
+  - type: textarea
+    id: lifecycle
+    attributes:
+      label: Stop, pause, persistence and scheduled work
+      description: Link lifecycle, storage and scheduling docs. What survives stop/pause/delete (files, memory, processes)? Cover idle/hard timeouts, staying awake, HTTP wake, snapshots/forks/templates, pools, backup location/retention, separate/shared volumes, bucket mounts and schedules that run while machines sleep.
+    validations:
+      required: true
+  - type: textarea
+    id: network-secrets
+    attributes:
+      label: Networking, access and credentials
+      description: Link public/private URLs, standard SSH, browser terminal, local forwarding, raw TCP, domains/HTTPS, fixed outgoing IP, egress rates/allowances, destination restrictions and no-internet mode. Explain saved secrets versus readable environment variables versus credentials hidden from the agent, and scoped API keys.
+    validations:
+      required: true
+  - type: textarea
+    id: agents
+    attributes:
+      label: Agents, browser and desktop support
+      description: Link default-image contents, preinstalled agents, prompt APIs, browser/desktop interfaces and hosted-agent integrations. Distinguish included software, optional images, manual installs and first-party guides.
+    validations:
+      required: false
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: Setup guides and suitable use cases
+      description: Link real deployment instructions for any of Hermes, OpenClaw, coding agents, code interpreters, browser agents, n8n, Discord/Slack bots, Claude Code teams, scheduled scrapers and remote MCP servers. Label one-click, preinstalled, guided, manual or execution-backend-only routes, and any separate managed-product prices. Say what is a poor fit too.
+    validations:
+      required: false
+  - type: textarea
+    id: teams-company
+    attributes:
+      label: Teams, company and trust documentation
+      description: Link company/legal entity and terms, status page, availability SLA, SOC 2 report scope, DPA, SSO/roles, audit logs, spend caps versus alerts, and self-hosting/licensing. Identify plan gates. Public funding/team sources are welcome; do not attach confidential reports.
+    validations:
+      required: true
+  - type: textarea
+    id: restrictions
+    attributes:
+      label: Known limitations and recent changes
+      description: Include beta/preview features, unsupported cases, temporary limits, conflicting documentation and changelog links with dates. Optional exact quoted passages make verification easier. Write none known only if that is accurate.
+    validations:
+      required: true
+  - type: textarea
+    id: contact
+    attributes:
+      label: Affiliation and public contact
+      description: State whether you work for the provider and your role, or that you are an independent user. Give a GitHub handle or public support/contact URL we can use for factual follow-up. Do not share a private email address here.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Submission acknowledgement
+      options:
+        - label: I understand this is a public request, contains no secrets, and the guide independently verifies claims and reports limitations.
+          required: true

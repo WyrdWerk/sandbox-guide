@@ -1,9 +1,11 @@
 # Sandbox guide site
 
-A static Astro site. No backend, no framework components, one stylesheet and one small script for
-the side-by-side compare picker.
+A static Astro site with no backend or client UI framework. It currently renders 16 researched
+providers, 16 features, 78 capabilities and 10 use-case guides, plus search, glossary, recommendations,
+comparison and a shared build/browser cost calculator. Data files, not this count, are authoritative.
 
-The `research/` and `site/` folders sit at the repo root.
+The `research/` and `site/` folders sit at the repo root. Read [the root guidance](../AGENTS.md)
+and [repository overview](../README.md) for evidence, research routing and publishing rules.
 
 ## Run it
 
@@ -11,60 +13,55 @@ The `research/` and `site/` folders sit at the repo root.
 cd site
 npm ci
 npm run build          # writes dist/
-npm run preview        # serves dist/ at http://127.0.0.1:4321
+npm run preview        # serves the last dist/ build on loopback port 4321
 npm test               # checks the cost engine against the hand-worked reference workloads
 npm run check-rates    # lists provider pricing pages whose figures changed (see ../PRICE-CHECK.md)
 ```
 
-In an orb, run it as a supervised service so it survives pause/resume:
+`npm run dev` serves development mode. In an orb, run preview as a supervised service so it survives
+pause/resume. From the repository root at the standard orb checkout path:
 
 ```bash
 amp orb service start sandbox-guide \
-  --command 'npx astro preview --host 127.0.0.1 --port 4321' \
-  --cwd site \
+  --command 'npm --prefix /home/user/workspace/repo/site run preview' \
   --portal --title 'Sandbox guide'
 ```
 
-Rebuild after changing data; the static server serves `dist/` from disk.
+Adjust the absolute checkout path outside this orb. Share the returned portal URL, not a localhost
+or direct sandbox-host URL. Rebuild after changing data; preview serves `dist/` from disk.
 
 ## Structure
 
-```
-src/
-  data/
-    providers/<id>.json     one file per provider
-    features/<id>.json      one file per feature page
-    groups.json             the seven feature groups, in order
-    situations.json         the eight jobs on the home page and compare/situations
-    changes.json            the dated changes on /changes/, newest first
-    pricing/<id>.json       one rate card per provider for the cost calculator
-    usecases.json           the use-case guides; text may carry [links](url) and **bold**
-    docs.json               per provider, the doc page for each feature (from research/rates)
-    site.json               site title, check date, confidence tags, limits
-    schema.ts               TypeScript types for all of the above
-  lib/data.ts               loads the JSON, sorts it, validates it at build time
-  lib/plain.ts              strips Markdown emphasis from provider text once at load
-  lib/cost.ts               the pricing engine and calculator presets, shared by build and browser
-  layouts/Base.astro        page shell: skip link, header, nav, footer
-  components/               badge, quote, page header, section nav, split, watch, compare table, cost card
-  pages/                    home, use cases, features, compare, costs, providers, changes, how-we-checked
-  styles/tokens.css         design tokens: dark and light palettes, type, space
-  styles/theme.css          the single stylesheet; imports tokens.css
-```
+Paths in this table are relative to `site/`:
 
-## Adding a provider
+| Path | Responsibility |
+|---|---|
+| `src/data/providers/<id>.json` | Provider profile, status, checked date, sources and hand-worked costs. |
+| `src/data/pricing/<id>.json` | Executable rate card for the calculator and rendered cost tables. |
+| `src/data/features/<id>.json`, `groups.json` | Feature explanations/scenarios, provider rows and seven groups. |
+| `src/data/capabilities.json` | 78 specific capability definitions and per-provider verdicts, catches and evidence. |
+| `src/data/usecases.json`, `situations.json` | Ten setup guides and eight situation-based recommendations. |
+| `src/data/docs.json`, `changes.json` | Published provider doc links and dated sourced changes. |
+| `src/data/site.json`, `glossary.json`, `models.json` | Site metadata, jargon definitions and committed model prices. |
+| `src/data/schema.ts` | Content types; pricing/workload types live in `lib/cost.ts`. |
+| `src/lib/data.ts`, `plain.ts` | Data loading/sorting/checks, date semantics and provider/feature Markdown normalization. |
+| `src/lib/cost.ts`, `cost.test.ts` | Shared engine/presets and independent arithmetic regression fixtures. |
+| `src/layouts/Base.astro`, `components/`, `pages/` | Page shell, reusable UI, static routes and client interactions. |
+| `src/styles/tokens.css`, `theme.css` | Design tokens and shared stylesheet. |
+| `scripts/check-rates.mjs`, `price-baseline.json` | Price-source currency detector and generated baseline. |
+| `scripts/fetch-model-prices.mjs` | Optional TokenWatch refresh into `src/data/models.json`. |
 
-1. Copy a provider file in `src/data/providers/` and change `id`, `name` and `url`.
-2. Fill the fields, including `company.facts` (section 17 of the profile) and the `fits.well` /
-   `fits.badly` pair. If research is unfinished, set `"status": "pending"` and leave the optional
-   fields out; comparisons show it as pending and render no claims.
-3. Add a row for the provider to every file in `src/data/features/`, with a `figure` (the number
-   that decides the row, or “Not published”) and a one-line `scenario`. The build fails, naming the
-   feature, if a provider has no row, no figure or no scenario.
-4. Add a rate card in `src/data/pricing/` (the build fails without one) and its doc links to
-   `docs.json`. Add it to `situations.json` and the `routes` of each use case where relevant, to `changes.json` for dated changes, and to
-   `compare/side-by-side.astro`'s `kinds` map.
-5. `npm run build`.
+## Adding or rechecking a provider
+
+Use the repo skill [maintaining-providers](../.agents/skills/maintaining-providers/SKILL.md), in
+**add** or **recheck** mode. Its [file and verification checklist](../.agents/skills/maintaining-providers/reference/provider-checklist.md)
+replaces the old short add-provider procedure: a complete listing needs all feature and capability
+rows, research, pricing, docs, use-case review, recommendations, changes, baseline and A/B/C tests,
+not just a profile and build. Recheck uses the same checklist with the existing ID.
+
+`npm run build` invokes `validateContent()` but does not verify source quotations, all schema fields
+or arithmetic. Run the skill's coverage audit and `npm test` as well. Render and inspect affected
+provider/comparison/capability/cost/use-case states for site content changes, including narrow mobile.
 
 ## Adding a feature
 
@@ -92,7 +89,17 @@ data tables and the compare picker.
 
 - A claim needs a source URL, an exact quote and one of the five confidence tags.
 - Unpublished facts are written as “not published”, never estimated.
+- `partly` needs a plain-language shortfall; keep plan, preview, region and size restrictions visible.
 - Contradictions between a provider's own pages are shown as contradictions, with both sides.
 - A cost example shows its arithmetic, names any substituted size, and is labelled an illustration.
+- Rendered costs use the engine, not just provider `cost` prose. Derive A/B/C expectations by hand;
+  use the engine's 730-hour month, including C's 640 stopped hours. Keep unknown charges explicit.
 - Data files keep the provider's original wording, including Markdown emphasis. `src/lib/data.ts`
-  strips it once at load, so pages never show literal backticks or asterisks.
+  strips it for provider/feature content. Use-case and capability text retains links/emphasis through
+  `Inline.astro`; wiki targets must resolve.
+- Use Composio-first research and fresh price sources per `../AGENTS.md`. battleships.dev is built
+  by the Boat team and is only a disclosed cross-check, not sole evidence.
+
+Weekly price checks follow [PRICE-CHECK.md](../PRICE-CHECK.md); they do not replace full-provider
+rechecks. Their Amp host starts fresh threads Monday at 10:00 Asia/Kolkata. Ask the owner before
+pushing to `main`: Cloudflare Pages deploys every push to the live site.
