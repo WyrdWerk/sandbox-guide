@@ -1,0 +1,32 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { guides } from "../../lib/data";
+---
+
+<Base title="Guides" description="Plain-language guides to running AI agents safely: coding agents in a sandbox, API keys, prompt injection, and choosing between agents.">
+  <PageHeader
+    kicker="Guides"
+    title="Questions that are not one use case"
+    standfirst="Safety, keys, prompt injection and choosing between agents, each answered from the vendors' own documentation with the quotes linked."
+    meta={[`${guides.length} guides`, "Sources quoted"]}
+  />
+  <div class="wrap">
+    <section class="section section--flush">
+      <div class="picks">
+        {guides.map((g) => (
+          <article class="pick">
+            <span class="pick__label">{g.kicker}</span>
+            <h3 class="pick__title"><a href={`/guides/${g.id}/`}>{g.title}</a></h3>
+            <p class="pick__body">“{g.question}”</p>
+          </article>
+        ))}
+        <article class="pick">
+          <span class="pick__label">Choosing an agent</span>
+          <h3 class="pick__title"><a href="/compare/hermes-vs-openclaw/">Hermes agent vs OpenClaw</a></h3>
+          <p class="pick__body">“Which personal agent should I run, and what does each need?”</p>
+        </article>
+      </div>
+    </section>
+  </div>
+</Base>

@@ -147,6 +147,28 @@ const nav = [
           </article>
         ))}
       </div>
+      {useCase.managed?.length ? (
+        <>
+          <h3 class="section__title" id="managed">Or pay someone to run it</h3>
+          <p class="section__note">Managed services that run {useCase.title.replace(/^(Run|Host your own|Host) /, "")} for a monthly fee, with no server to look after. Prices from each service's own page, checked on the date shown.</p>
+          <div class="table-scroll"><table class="data-table">
+            <thead><tr><th scope="col">Service</th><th scope="col">What you get</th><th scope="col">From</th><th scope="col">Catch</th></tr></thead>
+            <tbody>
+              {useCase.managed.map((m) => (
+                <tr>
+                  <th scope="row"><a href={m.url} rel="noreferrer noopener">{m.name} ↗</a></th>
+                  <td><Inline text={m.what} /></td>
+                  <td>{m.price}<br /><a class="section__note" href={m.source.url} rel="noreferrer noopener">checked {formatDate(m.source.checkedOn)}</a></td>
+                  <td><Inline text={m.catch} /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table></div>
+        </>
+      ) : null}
+      {(useCase.id === "hermes-agent" || useCase.id === "openclaw") && (
+        <p class="section__note">Still choosing between the two agents? <a href="/compare/hermes-vs-openclaw/">Hermes agent vs OpenClaw</a>, from each project's docs.</p>
+      )}
       <p class="prose usecase__outside"><strong>Beyond these providers.</strong> <Inline text={useCase.outside} /></p>
       <p class="section__note">
         Compare these three head to head:{" "}

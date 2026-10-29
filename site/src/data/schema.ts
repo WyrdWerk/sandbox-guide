@@ -240,7 +240,42 @@ export interface UseCase {
     price?: string;
   }[];
   picks: { provider: string; for: string; why: string; watch: string; link: string }[];
+  /** Managed services that run this agent for a monthly fee, outside the providers compared here. */
+  managed?: ManagedService[];
   outside: string;
   features: string[];
   sources: { label: string; url: string }[];
+}
+
+/** A service that runs one agent for you: no server to manage, a monthly fee. */
+export interface ManagedService {
+  name: string;
+  url: string;
+  /** What you get, in one plain sentence. */
+  what: string;
+  /** The cheapest ongoing monthly price, with its term, e.g. "$24 a month, billed monthly". */
+  price: string;
+  /** The limit or condition a buyer should know about. */
+  catch: string;
+  source: Source & { checkedOn: string };
+}
+
+/** A plain-language article: safety, security and other questions that are not one use case. */
+export interface Guide {
+  id: string;
+  title: string;
+  /** The page's <title>, worded the way people search for it. */
+  seoTitle: string;
+  kicker: string;
+  /** The reader's question in their own words. */
+  question: string;
+  standfirst: string;
+  /** One or two sentences that answer the question directly. */
+  answer: string;
+  checkedOn: string;
+  /** Paragraphs may contain [text](url) links, **bold** and [[wiki]] links. */
+  sections: { id: string; heading: string; body: string[] }[];
+  /** Capabilities whose provider-by-provider verdicts back the guide. */
+  capabilities: string[];
+  sources: (Source & { label: string; checkedOn: string })[];
 }

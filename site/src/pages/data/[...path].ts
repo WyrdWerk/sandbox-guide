@@ -1,9 +1,9 @@
 // Every file under /data/, for agents and scripts. Listed in /llms.txt.
-import { capabilities, features, providers, useCases } from "../../lib/data";
+import { capabilities, features, guides, providers, useCases } from "../../lib/data";
 import { presets } from "../../lib/cost";
 import {
   abs, capabilitiesMarkdown, featuresMarkdown, glossaryMarkdown, providerMarkdown, providerRecord,
-  ranking, rankingsMarkdown, respond, useCaseMarkdown,
+  guideMarkdown, ranking, rankingsMarkdown, respond, useCaseMarkdown,
 } from "../../lib/agents";
 
 const files: Record<string, () => unknown> = {
@@ -27,6 +27,7 @@ const files: Record<string, () => unknown> = {
     [`providers/${p.id}.md`, () => providerMarkdown(p)],
     [`providers/${p.id}.json`, () => providerRecord(p.id)],
   ])),
+  ...Object.fromEntries(guides.map((g) => [`guides/${g.id}.md`, () => guideMarkdown(g.id)])),
   ...Object.fromEntries(useCases.map((u) => [`use-cases/${u.id}.md`, () => useCaseMarkdown(u.id)])),
   ...Object.fromEntries(Object.keys(presets).map((id) => [`rankings/${id}.json`, () => ({ preset: id, ...presets[id], providers: ranking(id) })])),
 };

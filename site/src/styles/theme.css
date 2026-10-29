@@ -1759,3 +1759,8 @@ details[open] > .calc__head .calc__name::before { transform: rotate(90deg); }
   .site-nav__link[href="/capabilities/"] .site-nav__full { display: inline; }
   .site-nav__link[href="/capabilities/"] .site-nav__short { display: none; }
 }
+
+/* ---------- guide sources ------------------------------------------------- */
+.guide-sources { padding-left: var(--space-6); line-height: var(--leading-relaxed); }
+.guide-sources li { margin-bottom: var(--space-4); overflow-wrap: anywhere; }
+.guide-sources blockquote { margin: var(--space-2) 0 0; padding-left: var(--space-4); border-left: 2px solid var(--color-border); color: var(--color-text-muted); }

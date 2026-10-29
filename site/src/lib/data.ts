@@ -6,6 +6,7 @@ import type {
   Feature,
   GlossaryEntry,
   Group,
+  Guide,
   Provider,
   Situation,
   UseCase,
@@ -62,6 +63,10 @@ const docsModule = import.meta.glob<Record<string, Record<string, { title: strin
   "../data/docs.json",
   { eager: true, import: "default" },
 );
+const guideModule = import.meta.glob<{ guides: Guide[] }>("../data/guides.json", { eager: true, import: "default" });
+/** Articles; strings keep their [links](url), like use cases. */
+export const guides: Guide[] = Object.values(guideModule)[0]?.guides ?? [];
+
 const changeModule = import.meta.glob<{ changes: Change[] }>(
   "../data/changes.json",
   { eager: true, import: "default" },
@@ -220,6 +225,17 @@ export function validateContent(): void {
     }
     for (const item of [...u.routes, ...u.picks]) {
       if (!providerById.has(item.provider)) fail(`use case ${u.id} refers to unknown provider "${item.provider}"`);
+    }
+  }
+
+  for (const g of guides) {
+    if (!g.sources.length) fail(`guide ${g.id} has no sources`);
+    for (const s of g.sources) if (!s.url || !s.quote || !s.checkedOn) fail(`guide ${g.id} has a source without url, quote or date`);
+    for (const id of g.capabilities) if (!capabilities.some((c) => c.id === id)) fail(`guide ${g.id} refers to unknown capability "${id}"`);
+  }
+  for (const u of useCases) {
+    for (const m of u.managed ?? []) {
+      if (!m.source?.url || !m.source.quote || !m.source.checkedOn) fail(`use case ${u.id}: managed service ${m.name} has no dated, quoted source`);
     }
   }
 

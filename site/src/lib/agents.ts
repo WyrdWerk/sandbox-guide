@@ -10,6 +10,7 @@ import {
   features,
   formatDate,
   glossary,
+  guides,
   pricing,
   providerById,
   providerName,
@@ -182,8 +183,19 @@ export function useCaseMarkdown(id: string): string {
   out.push(``, `## Picks`, ``, ...u.picks.map((p) => `- **${providerName(p.provider)}**, ${md(p.for)}: ${md(p.why)} Watch: ${md(p.watch)} ${p.link}`));
   out.push(``, `## How to run it on each provider`, ``, ...u.routes.map((r) => `- **${providerName(r.provider)}** (${r.tier}; no terminal: ${r.noTerminal}): ${md(r.what)}${r.price ? ` Price: ${r.price}.` : ""}${r.link ? ` [${r.link.title}](${r.link.url})` : ""}`));
   out.push(``, `## Monthly machine cost (preset \`${u.preset}\`)`, ``, presets[u.preset].why, ``, ...ranking(u.preset).map((r) => `- ${r.name}: ${formatMoney(r.monthlyUsd)}${r.fits ? "" : ` (catch: ${r.problems.join(" ")})`}`));
+  if (u.managed?.length) out.push(``, `## Managed services (someone else runs it)`, ``, ...u.managed.map((m) => `- **${m.name}** (${m.url}): ${md(m.what)} From ${m.price}. Catch: ${md(m.catch)} [source](${m.source.url}), checked ${m.source.checkedOn}`));
   out.push(``, `## Outside a sandbox`, ``, md(u.outside), ``, `## Sources`, ``, ...u.sources.map((s) => `- [${s.label}](${s.url})`));
   return out.join("\n") + "\n";
+}
+
+export function guideMarkdown(id: string): string {
+  const g = guides.find((x) => x.id === id)!;
+  return [
+    `# ${g.title}`, ``, `> ${g.question}`, ``, g.standfirst, ``, `Guide page: ${abs(`/guides/${g.id}/`)}  `, `Checked: ${g.checkedOn}`, ``,
+    `**Short answer:** ${md(g.answer)}`,
+    ...g.sections.flatMap((s) => [``, `## ${s.heading}`, ``, ...s.body.map(md)]),
+    ``, `## Sources`, ``, ...g.sources.map((s) => `- [${s.label}](${s.url}) (${s.confidence}, checked ${s.checkedOn}): "${s.quote}"`),
+  ].join("\n") + "\n";
 }
 
 export function featuresMarkdown(): string {
@@ -231,6 +243,9 @@ ${providers.map((p) => `- [${p.name}](${abs(`/data/providers/${p.id}.md`)}): ${p
 ## Use cases
 ${useCases.map((u) => `- [${u.title}](${abs(`/data/use-cases/${u.id}.md`)}): ${md(u.question)}`).join("\n")}
 
+## Guides
+${guides.map((g) => `- [${g.title}](${abs(`/data/guides/${g.id}.md`)}): ${g.question}`).join("\n")}
+
 ## Notes
 - About and publisher: ${abs("/about/")}
 - Method and limits: ${abs("/how-we-checked/")}
@@ -245,6 +260,7 @@ export function llmsFullTxt(): string {
     llmsTxt(),
     `# Limits of this research\n\n${site.limits.map((l) => `- ${l}`).join("\n")}\n`,
     ...useCases.map((u) => useCaseMarkdown(u.id)),
+    ...guides.map((g) => guideMarkdown(g.id)),
     featuresMarkdown(),
     capabilitiesMarkdown(),
     rankingsMarkdown(),

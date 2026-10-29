@@ -1,9 +1,10 @@
 // Everything a reader might look up, written once at build time for the search page.
-import { capabilities, features, glossary, providers, useCases, situations } from "../lib/data";
+import { capabilities, features, glossary, guides, providers, useCases, situations } from "../lib/data";
 
 export function GET() {
   const items = [
     ...useCases.map((u) => ({ kind: "Use case", title: u.title, url: `/use-cases/${u.id}/`, text: `${u.question} ${u.standfirst}` })),
+    ...guides.map((g) => ({ kind: "Guide", title: g.title, url: `/guides/${g.id}/`, text: `${g.question} ${g.standfirst}` })),
     ...features.map((f) => ({ kind: "Feature", title: f.title, url: `/features/${f.id}/`, text: `${f.standfirst} ${f.idea.join(" ")}` })),
     ...capabilities.map((c) => ({ kind: "Capability", title: c.title, url: `/capabilities/${c.id}/`, text: c.plain })),
     ...providers.map((p) => ({ kind: "Provider", title: p.name, url: `/providers/${p.id}/`, text: p.oneLiner })),

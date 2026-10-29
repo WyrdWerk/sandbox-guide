@@ -1,0 +1,89 @@
+---
+// The two personal agents compared on what they are, from data/hermes-vs-openclaw.json.
+// Hosting them (size, staying on, routes, cost) lives in the two use-case guides.
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import data from "../../data/hermes-vs-openclaw.json";
+import { formatDate, tagClass } from "../../lib/data";
+import { formatMoney } from "../../lib/cost";
+import { modelAnswer, ranking } from "../../lib/agents";
+import type { Confidence } from "../../data/schema";
+
+type Src = { agent: string; url: string; quote: string; confidence: Confidence; checkedOn: string };
+const facts = data.facts as { dimension: string; hermes: string; openclaw: string; sources: Src[] }[];
+const all = facts.flatMap((f) => f.sources);
+const num = new Map<string, number>();
+all.forEach((s) => { if (!num.has(s.url + s.quote)) num.set(s.url + s.quote, num.size + 1); });
+const refs = (f: (typeof facts)[number], agent: string) => f.sources.filter((s) => s.agent === agent).map((s) => num.get(s.url + s.quote)!);
+const list = [...num.keys()].map((k) => all.find((s) => s.url + s.quote === k)!);
+const cheapest = ranking("personal").find((r) => r.fits)!;
+const answer =
+  `Both are free, MIT-licensed personal agents you can host yourself, and both fit the same small always-on machine: from ${formatMoney(cheapest.monthlyUsd)} a month on ${cheapest.name}. ${modelAnswer("personal") ?? ""} ` +
+  `The documented differences: Hermes comes from Nous Research, which also sells a hosted Hermes Cloud and a model subscription; its memory is deliberately capped at a few thousand characters. ` +
+  `OpenClaw is run by a non-profit foundation with no paid tier or hosted service, keeps memory as ordinary files, releases far more often, and leaves tool sandboxing off by default.`;
+const host = (u: string) => new URL(u).hostname.replace(/^www\./, "");
+---
+
+<Base
+  title="Hermes agent vs OpenClaw: features, hosting and which to pick"
+  description="Hermes agent and OpenClaw compared on chat apps, models, memory, skills, security, install and hosting, from each project's own docs, with what it costs to host either."
+  modified={data.checkedOn}
+>
+  <PageHeader
+    parent={{ href: "/compare/", label: "Compare" }}
+    kicker="Choosing an agent"
+    title="Hermes agent vs OpenClaw"
+    standfirst="Two open-source personal agents that answer you in chat apps, remember things and run jobs on a schedule. What each project documents about itself, side by side."
+    answer={answer.replace(/  +/g, " ")}
+    meta={[`Checked ${formatDate(data.checkedOn)}`, `${list.length} quotes`, "Docs quoted, not tested"]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush" aria-labelledby="table-h">
+      <div class="section__head">
+        <h2 class="section__title" id="table-h">Side by side</h2>
+        <p class="section__note">Numbers in brackets point to the quoted sources below. Star counts and release counts are a snapshot from GitHub on the date checked.</p>
+      </div>
+      <div class="table-scroll"><table class="data-table">
+        <thead><tr><th scope="col">What</th><th scope="col">Hermes agent</th><th scope="col">OpenClaw</th></tr></thead>
+        <tbody>
+          {facts.map((f) => (
+            <tr>
+              <th scope="row">{f.dimension}</th>
+              {(["hermes", "openclaw"] as const).map((a) => (
+                <td>{f[a]} {refs(f, a).map((n) => <a href={`#src-${n}`} class="section__note">[{n}]</a>)}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="section" aria-labelledby="host-h">
+      <div class="section__head"><h2 class="section__title" id="host-h">Hosting either one</h2></div>
+      <div class="prose">
+        <p>
+          Both need a machine that stays on, keeps its files across restarts and has about 2 GB of memory once a browser is involved.
+          The guides price every provider for that and show how to set each agent up on it:
+          <a href="/use-cases/hermes-agent/">hosting Hermes</a> and <a href="/use-cases/openclaw/">hosting OpenClaw</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="sources" aria-labelledby="sources-h">
+      <div class="section__head">
+        <h2 class="section__title" id="sources-h">Sources</h2>
+        <p class="section__note">Each quote was read on the page linked, on the date shown</p>
+      </div>
+      <ol class="guide-sources">
+        {list.map((s, i) => (
+          <li id={`src-${i + 1}`}>
+            <strong>{s.agent === "hermes" ? "Hermes" : "OpenClaw"}:</strong> <a href={s.url} rel="noreferrer noopener">{host(s.url)}{new URL(s.url).pathname}</a>{" "}
+            <span class="section__note">({formatDate(s.checkedOn)})</span> <span class={tagClass[s.confidence]}>{s.confidence}</span>
+            <blockquote>“{s.quote}”</blockquote>
+          </li>
+        ))}
+      </ol>
+    </section>
+  </div>
+</Base>

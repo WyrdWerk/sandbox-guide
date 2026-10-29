@@ -1,0 +1,559 @@
+{
+ "checkedOn": "2026-10-29",
+ "research": "research/incoming/hermes-vs-openclaw/",
+ "facts": [
+  {
+   "dimension": "Maker and licence",
+   "hermes": "Nous Research builds Hermes Agent; the LICENSE file is MIT, copyright Nous Research.",
+   "openclaw": "OpenClaw is stewarded by the OpenClaw Foundation, an independent 501(c)(3); the LICENSE file is MIT, copyright OpenClaw Foundation.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/",
+     "quote": "The self-improving AI agent built by Nous Research.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://github.com/NousResearch/hermes-agent/blob/main/LICENSE",
+     "quote": "Copyright (c) 2025 Nous Research",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://github.com/openclaw/openclaw",
+     "quote": "OpenClaw is an open-source AI assistant that runs on your own computer and meets you in the channels you already use",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://github.com/openclaw/openclaw/blob/main/LICENSE",
+     "quote": "Copyright (c) 2026 OpenClaw Foundation",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Chat apps",
+   "hermes": "The platform table lists 28 entries, including Telegram, Discord, Slack, WhatsApp, Signal, SMS, email, iMessage through BlueBubbles or Photon, Microsoft Teams, Matrix, Google Chat, IRC and SimpleX.",
+   "openclaw": "The channel catalogue also lists Feishu, IRC, LINE, Matrix, Microsoft Teams, Nextcloud Talk, Nostr, SMS, WeChat, WeCom, X, Zalo and others.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/",
+     "quote": "Chat with Hermes from Telegram, Discord, Slack, WhatsApp, Signal, SMS, Email, Home Assistant, Mattermost, Matrix, DingTalk, Feishu/Lark, WeCom, Weixin, BlueBubbles (iMessage), QQ, Yuanbao, Microsoft Teams, LINE, ntfy, or your browser.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/help/faq/what-is-openclaw",
+     "quote": "It replies on the messaging surfaces you already use (Discord, Google Chat, iMessage, Mattermost, Signal, Slack, Telegram, WebChat, WhatsApp, and bundled channel plugins such as QQ Bot)",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "AI models and bring-your-own key",
+   "hermes": "Any provider works: Nous Portal (OAuth subscription), OpenRouter, Anthropic, OpenAI/Codex, Google Vertex, xAI, Qwen, MiniMax, Ollama and other local OpenAI-compatible servers. Nous Portal is the recommended route: one OAuth login covers 300+ models plus the Tool Gateway. Bring-your-own keys remain supported per provider. Keys are optional per tool; the README says you can bring your own keys per tool.",
+   "openclaw": "Bundled provider plugins cover OpenAI, Anthropic, Google Gemini, Z.AI, OpenRouter, Amazon Bedrock, xAI, NVIDIA, MiniMax and others; Ollama, vLLM, LM Studio and llama.cpp cover local models. Keys are stored in the auth store or supplied through the Gateway environment; there is no OpenClaw account in the loop.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/integrations/providers",
+     "quote": "You need at least one way to connect to an LLM.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/integrations/providers",
+     "quote": "Nous Portal is Nous Research's unified subscription gateway and the recommended way to run Hermes Agent.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://github.com/NousResearch/hermes-agent",
+     "quote": "You can still bring your own keys per-tool whenever you want - the gateway is per-backend, not all-or-nothing.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/help/faq/what-is-openclaw",
+     "quote": "Model-agnostic: use Anthropic, MiniMax, OpenAI, OpenRouter, etc., with per-agent routing and failover.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/concepts/model-providers/control-ui-and-keys",
+     "quote": "Open Settings → Models in the Control UI to add, replace, or remove provider API keys.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Memory",
+   "hermes": "Two files under ~/.hermes/memories: MEMORY.md (2,200 characters, about 800 tokens) and USER.md (1,375 characters, about 500 tokens), injected into the system prompt at session start. Memory is deliberately capped and does not grow without bound; the agent must consolidate or delete entries when full.",
+   "openclaw": "Memory is plain files on disk; the docs say the limit is your storage, not the model. A pre-compaction flush reminds the model to write durable notes first. Session context is still bounded by the model window, so long conversations compact or truncate.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory",
+     "quote": "Hermes Agent has bounded, curated memory that persists across sessions.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory",
+     "quote": "Character limits keep memory focused. Memory does not auto-compact: when a write would exceed the limit, the memory tool returns an error instead of silently dropping entries.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/help/faq/sandboxing-and-memory",
+     "quote": "OpenClaw memory is Markdown files in the agent workspace: daily notes in memory/YYYY-MM-DD.md, curated long-term notes in MEMORY.md (main/private sessions only).",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/help/faq/sandboxing-and-memory",
+     "quote": "Memory files live on disk and persist until deleted; the limit is your storage, not the model.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Skills and plugins",
+   "hermes": "Skills live in ~/.hermes/skills, follow the agentskills.io standard, and the agent can create, modify or delete them. Bundled, hub-installed and agent-created skills share one directory; MCP servers are the separate plugin route for external tools.",
+   "openclaw": "Skills are SKILL.md folders with YAML frontmatter, loaded from the workspace or ~/.openclaw/skills, with bundled skills and ClawHub community installs. ClawHub is the community skill registry; plugins are separate packages with their own install and enable commands.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/skills",
+     "quote": "Skills are on-demand knowledge documents the agent can load when needed.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/skills",
+     "quote": "All skills live in ~/.hermes/skills/ - the primary directory and source of truth.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/tools/skills",
+     "quote": "Skills are markdown instruction files that teach the agent how and when to use tools.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/cli/skills",
+     "quote": "Inspect local skills, search ClawHub, install skills from ClawHub/Git/local directories, verify ClawHub skills, and update ClawHub-tracked installs.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Scheduled tasks",
+   "hermes": "One cronjob_manage tool creates, pauses, edits and removes jobs; jobs can run headless scripts with no model call, deliver to a chat or file, and fire on webhooks. The messaging gateway process owns the scheduler, so scheduled jobs need the gateway running.",
+   "openclaw": "Jobs persist, wake the agent on a schedule, and deliver to a chat channel, a webhook or nowhere; openclaw automations is the CLI, with openclaw cron as an alias.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/cron",
+     "quote": "Schedule tasks to run automatically with natural language or cron expressions.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/",
+     "quote": "The gateway also runs the cron scheduler, ticking every 60 seconds to execute any due jobs.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/automation/cron-jobs",
+     "quote": "Automations are OpenClaw's built-in scheduler.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Browser and computer use",
+   "hermes": "browser_exec drives a Hermes-packaged Chromium by default; cloud browsers (Nous, Browserbase, Browser Use, Firecrawl) and an attached personal Chrome are alternatives. Computer use runs through the cua-driver MCP server and works with any tool-capable model; it acts on the machine the bot runs on.",
+   "openclaw": "The managed profile is isolated from the personal browser; an optional user profile attaches to the real signed-in Chrome through Chrome DevTools MCP. macOS uses Peekaboo by default or CUA; Windows and Linux use the experimental cua-computer plugin; a vision-capable model is required.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/browser",
+     "quote": "The browser toolset gives the agent a real web browser.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/computer-use",
+     "quote": "Hermes Agent can drive your desktop - clicking, typing, scrolling, dragging - in the background on macOS, Windows, and Linux.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/tools/browser",
+     "quote": "OpenClaw can run a dedicated Chrome/Brave/Edge/Chromium profile that the agent controls.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/nodes/computer-use",
+     "quote": "Computer use lets an agent see and control the Gateway's own desktop or a paired node's desktop through one built-in computer tool.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Multi-user and teams",
+   "hermes": "Access is granted by per-platform user allowlists, Discord role allowlists, a global allowlist or DM pairing codes. Access control is opt-in: an unconfigured gateway refuses everyone, so the owner must add the people who may use the bot. Several people can talk to one bot in a shared channel, each with a separate session. Bot Mode adds several named agents, each with its own memory and credentials.",
+   "openclaw": "Sessions carry an immutable creator, an assignable owner and participant history, with live presence in the Control UI. Ownership and presence are usability features, not security boundaries; adversarial users need separate gateways.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/security",
+     "quote": "When running the messaging gateway, Hermes controls who can interact with the bot through a layered authorization system.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/security",
+     "quote": "If no allowlists are configured and GATEWAY_ALLOW_ALL_USERS is not set, all users are denied.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/discord",
+     "quote": "By default, Hermes isolates session history per user inside the channel for safety and clarity.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/concepts/multi-user",
+     "quote": "Multi-user mode lets several trusted people operate the same OpenClaw agent.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/concepts/multi-user",
+     "quote": "Everyone who can operate an agent can make it do anything that agent can do.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Install methods",
+   "hermes": "One-line install.sh for Linux/macOS/WSL2, install.ps1 for Windows, desktop installers (DMG, MSIX), Docker image, Nix flake and modules, Termux APT package for aarch64 Android. The Docker image is stateless and upgraded by pulling a new tag; data lives in the mounted volume.",
+   "openclaw": "One-line install.sh or install.ps1, npm install -g openclaw@latest, Docker, Nix, and desktop companion apps for macOS and Windows; the installer provisions Node when it is missing. The npm package itself needs Node 24.22.1+ or 26.12.1+, with Node 26 recommended.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/",
+     "quote": "Install in 60 seconds on Linux, macOS, WSL2, native Windows, Nix & NixOS or Android",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/docker",
+     "quote": "The container stores all user data (config, API keys, sessions, skills, memories) in a single directory mounted from the host at /opt/data.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://github.com/openclaw/openclaw",
+     "quote": "The installer supports macOS, Linux, and Windows.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://github.com/openclaw/openclaw",
+     "quote": "Already manage Node.js? Install the published package instead (Node 24.22.1+ or 26.12.1+; Node 26 recommended)",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://github.com/openclaw/openclaw",
+     "quote": "npm install -g openclaw@latest --allow-scripts=openclaw",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Supported operating systems",
+   "hermes": "Tier 1: macOS on Apple Silicon, Windows 10/11 (x86_64 and aarch64), Linux/WSL2 (x86_64 and aarch64) and Docker. Tier 2: Nix and Termux on aarch64. Intel macOS is not a supported platform for the desktop installer; Intel bundles exist only in releases cut with --with macos-intel.",
+   "openclaw": "Windows has a native Hub app, a PowerShell CLI installer or a WSL2 Gateway; macOS has a menu-bar app; Linux runs the Gateway on any server. The docs also have pages for iOS, Android and ChromeOS.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/getting-started/platform-support",
+     "quote": "We test on the latest Ubuntu and WSL2.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/getting-started/installation",
+     "quote": "The macOS installer is Apple Silicon only. macOS on x86 (Intel) processors is not a supported platform.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/install",
+     "quote": "macOS, Linux, or Windows - Windows users can start with the native Windows Hub app, the PowerShell CLI installer, or a WSL2 Gateway.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Minimum and recommended machine size",
+   "hermes": "Table on the same page: memory 1 GB minimum, 2-4 GB recommended; CPU 1 core minimum, 2 cores recommended; data disk 500 MB minimum, 2+ GB recommended. Browser use raises the practical memory floor to 2 GB.",
+   "openclaw": "Same page: recommended 1-2 vCPU and 2 GB+ RAM for headroom; browser automation and multiple channels raise the need. The Fly.io guide uses shared-cpu-2x with 2 GB RAM.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/docker",
+     "quote": "The Hermes container needs moderate resources. Recommended minimums:",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/docker",
+     "quote": "Browser automation (Playwright/Chromium) is the most memory-hungry feature. If you don't need browser tools, 1 GB is sufficient. With browser tools active, allocate at least 2 GB.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/help/faq-first-run/providers-and-hosting",
+     "quote": "Absolute minimum: 1 vCPU, 1 GB RAM, ~500 MB disk.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/help/faq-first-run/providers-and-hosting",
+     "quote": "Recommended: 1-2 vCPU, 2 GB+ RAM for headroom (logs, media, multiple channels).",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Security model",
+   "hermes": "Layers: user authorization, dangerous-command approval, file-write safety, container isolation, MCP credential filtering, context-file scanning, cross-session isolation and input sanitization. Approvals run in smart, manual or off mode; unattended contexts (cron, webhooks, single-query) deny dangerous commands by default.",
+   "openclaw": "When enabled, tool execution moves into Docker, Podman, SSH, OpenShell or Crabbox; the Gateway itself always stays on the host. Four modes: read-only, guarded (human review after an allowlist fast path), workspace (LLM review, human on ask) and full, which needs operator.admin. The Gateway binds to loopback, unknown DM senders get a pairing code, and group access is allowlisted behind a mention gate. One gateway is one trust domain; mixed-trust use needs separate gateways and credentials.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/security",
+     "quote": "The security model has eight layers:",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/security",
+     "quote": "Before executing any command, Hermes checks it against a curated list of dangerous patterns. If a match is found, the user must explicitly approve it.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/gateway/sandboxing",
+     "quote": "Sandboxing is off by default and controlled by agents.defaults.sandbox",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/gateway/permission-modes",
+     "quote": "Session permission modes set one session's filesystem boundary and exec escalation reviewer.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/gateway/security",
+     "quote": "OpenClaw ships with conservative defaults.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/gateway/security",
+     "quote": "OpenClaw is not a hostile multi-tenant security boundary for mutually adversarial users sharing one agent or gateway.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Official or recommended hosting",
+   "hermes": "Nous Research runs Hermes Cloud, managed from the /agents page of Nous Portal, alongside self-hosting on a VPS, Docker or serverless backends.",
+   "openclaw": "The docs publish provider guides for Azure, DigitalOcean, Fly.io, GCP, Hetzner, Hostinger, Northflank, Oracle Cloud, Daytona and exe.dev. There is no first-party hosted OpenClaw; hosting is self-managed on a VPS, home server or one of the documented platforms.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/guides/manage-hermes-cloud-with-mcp",
+     "quote": "Hermes Cloud runs hosted Hermes Agent instances for you.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/vps",
+     "quote": "Run the OpenClaw Gateway on any Linux server or cloud VPS.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://github.com/openclaw/openclaw",
+     "quote": "has no paid tier, hosted service, or token",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Release cadence and latest version",
+   "hermes": "Latest GitHub release v0.22.5, published 2026-10-23. GitHub lists 8 releases in the 30 days to 2026-10-29 and 21 in 90 days, roughly one or two a week.",
+   "openclaw": "Latest GitHub release 2026.10.9, published 2026-10-29; npm latest is also 2026.10.9. GitHub lists 29 releases in the 30 days to 2026-10-29 and 49 in 90 days. Four channels: stable, extended-stable, beta and dev.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://api.github.com/repos/NousResearch/hermes-agent/releases/latest",
+     "quote": "\"name\":\"Hermes Agent v0.22.5\"",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://api.github.com/repos/openclaw/openclaw/releases/latest",
+     "quote": "\"name\":\"openclaw 2026.10.9\"",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/install/development-channels",
+     "quote": "Stable builds usually ship to beta first, get vetted there, then get promoted to latest without a version bump.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "GitHub stars and repository age",
+   "hermes": "about 258,474 stars and 56,761 forks on 2026-10-29, as counted by GitHub's API. Repository created 2025-07-22, so about 15 months old on 2026-10-29.",
+   "openclaw": "about 393,376 stars and 82,688 forks on 2026-10-29, as counted by GitHub's API. Repository created 2025-11-24, so about 11 months old on 2026-10-29.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://api.github.com/repos/NousResearch/hermes-agent",
+     "quote": "\"stargazers_count\":258474",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://api.github.com/repos/NousResearch/hermes-agent",
+     "quote": "\"created_at\":\"2025-07-22T22:22:28Z\"",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://api.github.com/repos/openclaw/openclaw",
+     "quote": "\"stargazers_count\":393376",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://api.github.com/repos/openclaw/openclaw",
+     "quote": "\"created_at\":\"2025-11-24T10:16:47Z\"",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "dimension": "Notable differences and known issues",
+   "hermes": "One Hermes home serves one agent process; a second agent needs its own profile. You cannot bind several profiles to different chats on one WhatsApp number.",
+   "openclaw": "The docs describe sandboxing as damage limitation, not a hardened boundary. The stock Docker image needs extra build flags to add a browser or system packages.",
+   "sources": [
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory",
+     "quote": "Don't point two agent processes at the same Hermes home directory.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "hermes",
+     "url": "https://hermes-agent.nousresearch.com/docs/reference/faq",
+     "quote": "Current limitation: Hermes profiles each require their own WhatsApp number/session.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/gateway/sandboxing",
+     "quote": "This is not a perfect security boundary, but it materially limits filesystem and process access when the model does something dumb.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "agent": "openclaw",
+     "url": "https://docs.openclaw.ai/help/faq/sandboxing-and-memory",
+     "quote": "The default image is security-first and runs as the node user, so it excludes system packages, Homebrew, and bundled browsers.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  }
+ ]
+}

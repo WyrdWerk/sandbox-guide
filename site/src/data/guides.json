@@ -1,0 +1,691 @@
+{
+ "guides": [
+  {
+   "id": "coding-agents-safely",
+   "title": "Running Claude Code, Codex and Gemini CLI safely",
+   "seoTitle": "Claude Code safety: sandboxes, permissions and YOLO mode (with Codex and Gemini CLI)",
+   "kicker": "Coding agents",
+   "question": "I want my coding agent to stop asking me before every command. How do I do that without it wrecking my machine or leaking my keys?",
+   "standfirst": "What Claude Code, OpenAI's Codex and Gemini CLI do out of the box, what their \"skip the prompts\" modes switch off, and why the safe answer is a separate machine rather than a setting.",
+   "answer": "Let it run without prompts only on a machine you can afford to lose, not your laptop. All three agents have a mode that approves everything, and Anthropic's advice for its version is \"Only use this mode in isolated environments like containers, VMs, or dev containers without internet access\", because it \"offers no protection against prompt injection\". Of the three, only Codex starts inside a sandbox with the network off; Claude Code's sandbox is off until you turn it on.",
+   "checkedOn": "2026-10-29",
+   "sections": [
+    {
+     "id": "defaults",
+     "heading": "What each agent does out of the box",
+     "body": [
+      "**Claude Code.** From version 2.1.283, interactive sessions start in an \"auto\" permission mode [(5)](#src-5); the older manual mode starts read-only and asks before edits and commands [(6)](#src-6). Either way, the project folder is only a permission prompt, not a wall: \"a Bash command you approve can still write anywhere your user account can\" [(7)](#src-7). Claude Code also has a sandbox for shell commands, but \"The sandbox is off by default\" [(4)](#src-4), it covers shell commands only, not its file tools, MCP servers or hooks [(8)](#src-8), and by default sandboxed commands can still read \"credential files such as ~/.ssh and ~/.aws/credentials\" [(9)](#src-9). Its network goes through a local proxy whose allowed sites \"start empty\" [(10)](#src-10).",
+      "**Codex.** OpenAI's agent combines a sandbox with an approval policy. \"By default, the agent runs with network access turned off\" [(3)](#src-3). Its three sandbox levels are read-only [(11)](#src-11), workspace-write, which can edit and run routine commands inside the project [(12)](#src-12), and danger-full-access, which \"runs without sandbox restrictions\" [(13)](#src-13). With the on-request policy it works inside the sandbox and asks before going beyond it [(14)](#src-14).",
+      "**Gemini CLI.** Google's agent can isolate \"shell commands or file modifications\" from your computer [(15)](#src-15), using containers [(16)](#src-16) or, on Linux, gVisor, which it calls its \"Strongest isolation available\" [(17)](#src-17). Its default macOS profile \"confines writes to the project directory while allowing broad file reads and network access\" [(18)](#src-18)."
+     ]
+    },
+    {
+     "id": "yolo",
+     "heading": "Skipping the prompts (\"YOLO mode\")",
+     "body": [
+      "Each agent has a switch that approves everything. In Claude Code it is --dangerously-skip-permissions, the same as the bypassPermissions mode [(19)](#src-19); Anthropic's docs say this mode \"offers no protection against prompt injection or unintended actions\" [(2)](#src-2), and it refuses to start as root or under sudo [(20)](#src-20). Codex's is --dangerously-bypass-approvals-and-sandbox, \"alias: --yolo\" [(21)](#src-21), which means \"No sandbox; no approvals\" [(22)](#src-22). In Gemini CLI the old --yolo flag is deprecated in favour of --approval-mode=yolo [(23)](#src-23), which will \"Automatically approve all tool calls\" [(24)](#src-24).",
+      "These modes exist for good reasons: long unattended tasks, CI jobs, agents working overnight. The question is not whether to use them but where. Anthropic's answer is an isolated container or virtual machine without internet access [(1)](#src-1)."
+     ]
+    },
+    {
+     "id": "limits",
+     "heading": "A sandbox shrinks the damage; it does not remove it",
+     "body": [
+      "Anthropic's own docs are blunt: \"Sandbox isolation reduces the impact of a breach, but it does not eliminate risk\" [(25)](#src-25). Any setup that lets the agent reach the internet \"can still leak data the agent can read\", and any setup that mounts your project writable \"can still modify that code\" [(26)](#src-26). Isolation also \"does not change what is sent to the model\" [(27)](#src-27).",
+      "Two traps catch people. A development container still shares your project folder: \"Claude can still modify any file in the bind-mounted workspace, which appears directly on your host\" [(28)](#src-28). And OpenAI warns that with full access inside a dev container, \"a malicious project can exfiltrate anything available inside the devcontainer, including Codex credentials\" [(29)](#src-29). Codex's network filter also covers only commands it runs, not \"web search, app or connector tool calls, MCP server connections, browser or Computer Use activity\" [(30)](#src-30)."
+     ]
+    },
+    {
+     "id": "setup",
+     "heading": "A setup that holds up",
+     "body": [
+      "Our reading of the sources above, not a vendor's instruction: run the agent on a cloud machine of its own, as in [[use:coding-agent|giving a coding agent its own machine]], so the worst case is a machine you delete. Anthropic itself recommends virtual machines \"to run scripts and make tool calls, especially when interacting with external web services\" [(31)](#src-31).",
+      "Then shrink what it can reach. Keep only the keys that task needs on the machine, ideally behind a provider that keeps them out of the agent's sight ([[cap:hidden-secrets]]), with a hard spend limit on the model key (see [giving an agent your API keys](/guides/api-keys/)). Allow only the sites it needs ([[cap:egress-allowlist]]), but keep the list tight: \"Allowing broad domains such as github.com can create paths for data exfiltration\" [(32)](#src-32). And take a snapshot before a long unattended run ([[cap:snapshot-files]]), so a bad night costs a restore, not a rebuild."
+     ]
+    }
+   ],
+   "capabilities": [
+    "own-vm",
+    "egress-allowlist",
+    "no-internet",
+    "hidden-secrets",
+    "snapshot-files",
+    "agents-preinstalled"
+   ],
+   "sources": [
+    {
+     "label": "Claude Code docs: permission modes",
+     "url": "https://code.claude.com/docs/en/permission-modes",
+     "quote": "Only use this mode in isolated environments like containers, VMs, or dev containers without internet access, where Claude Code cannot damage your host system.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: permission modes",
+     "url": "https://code.claude.com/docs/en/permission-modes",
+     "quote": "`bypassPermissions` offers no protection against prompt injection or unintended actions.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Codex docs: approvals and security",
+     "url": "https://learn.chatgpt.com/docs/agent-approvals-security",
+     "quote": "By default, the agent runs with network access turned off.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandboxing",
+     "url": "https://code.claude.com/docs/en/sandboxing",
+     "quote": "The sandbox is off by default.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: permission modes",
+     "url": "https://code.claude.com/docs/en/permission-modes",
+     "quote": "With Claude Code v2.1.283 or later, auto mode is the built-in starting permission mode for interactive terminal and VS Code sessions.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: security",
+     "url": "https://code.claude.com/docs/en/security",
+     "quote": "Manual mode: Claude Code starts with read-only permissions.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: security",
+     "url": "https://code.claude.com/docs/en/security",
+     "quote": "The boundary is a permission prompt, so a Bash command you approve can still write anywhere your user account can",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandboxing",
+     "url": "https://code.claude.com/docs/en/sandboxing",
+     "quote": "The sandbox covers shell commands only. Claude's file tools, MCP servers, and hooks run outside it.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandboxing",
+     "url": "https://code.claude.com/docs/en/sandboxing",
+     "quote": "Most of the machine, including credential files such as `~/.ssh` and `~/.aws/credentials`",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandboxing",
+     "url": "https://code.claude.com/docs/en/sandboxing",
+     "quote": "Connections go through a proxy on your machine that checks each host against your allowed domains, which start empty.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Codex docs: sandboxing",
+     "url": "https://learn.chatgpt.com/docs/sandboxing",
+     "quote": "`read-only`: The agent can inspect files, but it can't edit files or run commands without approval.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Codex docs: sandboxing",
+     "url": "https://learn.chatgpt.com/docs/sandboxing",
+     "quote": "`workspace-write`: The agent can read files, edit within the workspace, and run routine local commands inside that boundary.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Codex docs: sandboxing",
+     "url": "https://learn.chatgpt.com/docs/sandboxing",
+     "quote": "`danger-full-access`: The agent runs without sandbox restrictions.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Codex docs: sandboxing",
+     "url": "https://learn.chatgpt.com/docs/sandboxing",
+     "quote": "`on-request`: The agent works inside the sandbox by default and asks when it needs to go beyond that boundary.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Gemini CLI docs: sandboxing",
+     "url": "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/docs/cli/sandbox.md",
+     "quote": "Sandboxing isolates potentially dangerous operations (such as shell commands or file modifications) from your host system",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Gemini CLI docs: sandboxing",
+     "url": "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/docs/cli/sandbox.md",
+     "quote": "Cross-platform sandboxing with complete process isolation using container technology.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Gemini CLI docs: sandboxing",
+     "url": "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/docs/cli/sandbox.md",
+     "quote": "Strongest isolation available: runs containers inside a user-space kernel via gVisor.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Gemini CLI docs: sandboxing",
+     "url": "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/docs/cli/sandbox.md",
+     "quote": "confines writes to the project directory while allowing broad file reads and network access.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: permission modes",
+     "url": "https://code.claude.com/docs/en/permission-modes",
+     "quote": "The `--dangerously-skip-permissions` flag is equivalent.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: permission modes",
+     "url": "https://code.claude.com/docs/en/permission-modes",
+     "quote": "Claude Code refuses to start in `bypassPermissions` mode when running as root or under `sudo`",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Codex docs: approvals and security",
+     "url": "https://learn.chatgpt.com/docs/agent-approvals-security",
+     "quote": "`--dangerously-bypass-approvals-and-sandbox` (alias: `--yolo`)",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Codex docs: approvals and security",
+     "url": "https://learn.chatgpt.com/docs/agent-approvals-security",
+     "quote": "No sandbox; no approvals",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Gemini CLI docs: CLI reference",
+     "url": "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/docs/cli/cli-reference.md",
+     "quote": "Deprecated. Auto-approve all actions. Use `--approval-mode=yolo` instead.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Gemini CLI docs: configuration",
+     "url": "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/docs/reference/configuration.md",
+     "quote": "`yolo`: Automatically approve all tool calls (equivalent to `--yolo`)",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandbox environments",
+     "url": "https://code.claude.com/docs/en/sandbox-environments",
+     "quote": "Sandbox isolation reduces the impact of a breach, but it does not eliminate risk.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandbox environments",
+     "url": "https://code.claude.com/docs/en/sandbox-environments",
+     "quote": "Any approach that allows network egress can still leak data the agent can read, and any approach that mounts your project directory writable can still modify that code.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandbox environments",
+     "url": "https://code.claude.com/docs/en/sandbox-environments",
+     "quote": "Isolation also does not change what is sent to the model.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: development containers",
+     "url": "https://code.claude.com/docs/en/devcontainer",
+     "quote": "Claude can still modify any file in the bind-mounted workspace, which appears directly on your host, and reach anything the container's network policy allows.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Codex docs: approvals and security",
+     "url": "https://learn.chatgpt.com/docs/agent-approvals-security",
+     "quote": "a malicious project can exfiltrate anything available inside the devcontainer, including Codex credentials",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Codex docs: approvals and security",
+     "url": "https://learn.chatgpt.com/docs/agent-approvals-security",
+     "quote": "The network proxy filters scripts, programs, and child processes that run inside the local command sandbox. It does not filter web search, app or connector tool calls, MCP server connections, browser or Computer Use activity, Codex cloud tasks, or the client's model and authentication requests.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: security",
+     "url": "https://code.claude.com/docs/en/security",
+     "quote": "Use virtual machines (VMs) to run scripts and make tool calls, especially when interacting with external web services",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandboxing",
+     "url": "https://code.claude.com/docs/en/sandboxing",
+     "quote": "Allowing broad domains such as `github.com` can create paths for data exfiltration.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "id": "api-keys",
+   "title": "Giving an AI agent your API keys",
+   "seoTitle": "Is it safe to give an AI agent your API keys? How to limit the damage",
+   "kicker": "Security",
+   "question": "My agent needs my OpenAI, Anthropic or GitHub keys to do its job. How worried should I be?",
+   "standfirst": "Why a key on an agent's machine is easier to leak than a key in your own app, and the four controls that limit the damage: one key per agent, narrow permissions, a hard spend limit, and keeping the real key out of the agent's reach.",
+   "answer": "Assume anything the agent can read can leak: environment variables are \"generally accessible to all processes\", and rules written into a prompt \"could be bypassed via prompt injection\". So give each agent its own key with only the permissions it needs, set a hard spend limit, since \"Spend alerts alone don't stop API traffic\", and where you can, use a setup where the agent sees only a placeholder and a proxy adds the real key.",
+   "checkedOn": "2026-10-29",
+   "sections": [
+    {
+     "id": "why",
+     "heading": "Why agents leak keys",
+     "body": [
+      "The usual way to hand a key to a program is an environment variable. OWASP notes these \"are generally accessible to all processes and may be included in logs or system dumps\" [(1)](#src-1), and an agent runs a lot of processes. Claude Code's shell sandbox, for example, passes on its environment \"including any secrets in its environment\" [(5)](#src-5).",
+      "Telling the model not to reveal a key is not a control. OWASP says such restrictions \"may not always be honored and could be bypassed via prompt injection or other methods\" [(2)](#src-2). If the agent also reads untrusted content and can send data out, an attacker \"can easily trick it into accessing your private data and sending it to that attacker\" [(6)](#src-6); see [prompt injection](/guides/prompt-injection/)."
+     ]
+    },
+    {
+     "id": "scope",
+     "heading": "One key per agent, with only the access it needs",
+     "body": [
+      "Do not reuse your personal key. OpenAI states \"The sharing of API keys is against the Terms of Use\" [(7)](#src-7), and a separate key per agent means you can revoke one without breaking everything else. OpenAI keys can be \"Restricted: Choose scopes for specific resources or endpoints\" [(8)](#src-8); an Anthropic key covers \"Either a single workspace or the workspaces where your role allows API use\" [(9)](#src-9), so a workspace per agent is the way to narrow it. Google Cloud's advice is the same: restrictions limit \"the impact of a compromised API key\" [(10)](#src-10).",
+      "Give keys an end date. OpenAI \"strongly recommend[s] creating keys with an expiration date and establishing a regular key rotation process\" [(11)](#src-11). Where the agent runs on a cloud platform that supports it, workload identity federation replaces stored keys with short-lived tokens, so \"There are no static secrets to mint, store in CI, rotate, or leak\" [(12)](#src-12)[(13)](#src-13)."
+     ]
+    },
+    {
+     "id": "spend",
+     "heading": "Cap the bill, not just the alerts",
+     "body": [
+      "A leaked model key is mostly a money problem. OpenAI recommends you \"Set monthly spend limits for your organization or projects, and enable hard enforcement\" [(14)](#src-14), and adds that \"Spend alerts alone don't stop API traffic\" [(3)](#src-3). Anthropic lets you \"Cap monthly spending for a workspace\" [(15)](#src-15), with one catch: \"You cannot set spend limits on the Default Workspace\" [(16)](#src-16), so put the agent's key in a workspace of its own.",
+      "The same applies to the machine. Some sandbox providers can stop a runaway agent at a fixed amount; the [[cap:spend-cap]] page lists which."
+     ]
+    },
+    {
+     "id": "hide",
+     "heading": "Keep the real key out of the agent's reach",
+     "body": [
+      "The strongest pattern is a proxy that holds the key: \"Programs receive a placeholder; the proxy substitutes the real value for allowed destinations\" [(4)](#src-4), which is how Codex cloud environments handle network secrets. Claude Code can do something similar for credentials it masks: \"The command and anything it logs never hold the real credential, but its requests still authenticate\" [(17)](#src-17). It can also \"strip credentials from the environments of the subprocesses Claude Code starts\" [(18)](#src-18), which \"reduces what a prompt injection attack can read\" [(19)](#src-19), though \"The Claude Code process keeps the credentials for its own API calls\" [(20)](#src-20).",
+      "Store the real keys properly: Anthropic says to \"Store API keys in a secrets manager, rotate them periodically, and disable or delete any key you suspect has leaked\" [(21)](#src-21), and OpenAI says \"Never commit your key to your repository\" [(22)](#src-22). If you build MCP servers, the MCP spec calls forwarding a client's token to another API \"an anti-pattern\" [(23)](#src-23).",
+      "On a hosted machine, the provider decides how much of this you get. The table below shows which providers can store secrets, hide them from the agent, and issue limited keys."
+     ]
+    }
+   ],
+   "capabilities": [
+    "hidden-secrets",
+    "secrets-store",
+    "scoped-keys",
+    "spend-cap",
+    "egress-allowlist"
+   ],
+   "sources": [
+    {
+     "label": "OWASP Secrets Management Cheat Sheet",
+     "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+     "quote": "environment variables are generally accessible to all processes and may be included in logs or system dumps.",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OWASP Top 10 for LLM Applications: LLM02 Sensitive Information Disclosure",
+     "url": "https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/",
+     "quote": "such restrictions may not always be honored and could be bypassed via prompt injection or other methods",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Help: best practices for API key safety",
+     "url": "https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety",
+     "quote": "Spend alerts alone don't stop API traffic.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Codex docs: cloud environments",
+     "url": "https://learn.chatgpt.com/docs/environments/cloud-environments",
+     "quote": "Programs receive a placeholder; the proxy substitutes the real value for allowed destinations.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandboxing",
+     "url": "https://code.claude.com/docs/en/sandboxing",
+     "quote": "Inherited from Claude Code, including any secrets in its environment",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Simon Willison: The lethal trifecta for AI agents",
+     "url": "https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/",
+     "quote": "If your agent combines these three features, an attacker can easily trick it into accessing your private data and sending it to that attacker.",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Help: best practices for API key safety",
+     "url": "https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety",
+     "quote": "The sharing of API keys is against the Terms of Use.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Help: managing projects in the API platform",
+     "url": "https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform",
+     "quote": "Restricted: Choose scopes for specific resources or endpoints.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude API docs: authentication",
+     "url": "https://platform.claude.com/docs/en/manage-claude/authentication",
+     "quote": "Either a single workspace or the workspaces where your role allows API use, chosen when the key is created",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Google Cloud: best practices for API keys",
+     "url": "https://cloud.google.com/docs/authentication/api-keys-best-practices",
+     "quote": "By adding restrictions, you can limit the ways an API key can be used, reducing the impact of a compromised API key.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Help: best practices for API key safety",
+     "url": "https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety",
+     "quote": "We strongly recommend creating keys with an expiration date and establishing a regular key rotation process.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude API docs: workload identity federation",
+     "url": "https://platform.claude.com/docs/en/manage-claude/workload-identity-federation",
+     "quote": "There are no static secrets to mint, store in CI, rotate, or leak.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Help: best practices for API key safety",
+     "url": "https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety",
+     "quote": "use workload identity federation instead of storing a long-lived OpenAI API key",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Help: best practices for API key safety",
+     "url": "https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety",
+     "quote": "Set monthly spend limits for your organization or projects, and enable hard enforcement to help limit unexpected costs from a leaked key.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude API docs: workspaces",
+     "url": "https://platform.claude.com/docs/en/manage-claude/workspaces",
+     "quote": "Cap monthly spending for a workspace.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude API docs: workspaces",
+     "url": "https://platform.claude.com/docs/en/manage-claude/workspaces",
+     "quote": "You cannot set spend limits on the Default Workspace.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandboxing",
+     "url": "https://code.claude.com/docs/en/sandboxing",
+     "quote": "The command and anything it logs never hold the real credential, but its requests still authenticate.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: environment variables",
+     "url": "https://code.claude.com/docs/en/env-vars",
+     "quote": "strip credentials from the environments of the subprocesses Claude Code starts, such as Bash commands, hooks, and stdio MCP servers",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: environment variables",
+     "url": "https://code.claude.com/docs/en/env-vars",
+     "quote": "This reduces what a prompt injection attack can read.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: environment variables",
+     "url": "https://code.claude.com/docs/en/env-vars",
+     "quote": "The Claude Code process keeps the credentials for its own API calls.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude API docs: authentication",
+     "url": "https://platform.claude.com/docs/en/manage-claude/authentication",
+     "quote": "Store API keys in a secrets manager, rotate them periodically, and disable or delete any key you suspect has leaked.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Help: best practices for API key safety",
+     "url": "https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety",
+     "quote": "Never commit your key to your repository",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Model Context Protocol: security best practices",
+     "url": "https://modelcontextprotocol.io/docs/2026-07-28/tutorials/security/security_best_practices",
+     "quote": "\"Token passthrough\" is an anti-pattern where an MCP server accepts tokens from an MCP client without validating that the tokens were properly issued to the MCP server and passes them through to the downstream API.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  },
+  {
+   "id": "prompt-injection",
+   "title": "Prompt injection: what a sandbox can and can't stop",
+   "seoTitle": "Prompt injection and AI agents: what a sandbox stops and what it doesn't",
+   "kicker": "Security",
+   "question": "If I run my agent in a sandbox, am I safe from prompt injection?",
+   "standfirst": "Prompt injection is text hidden in a web page, email or file that hijacks an agent. A sandbox limits what a hijacked agent can break or reach. It does nothing to stop the hijack, so the useful question is what you let the agent combine.",
+   "answer": "No. A sandbox limits the damage a tricked agent can do; it does not stop it being tricked, and OWASP says \"it is unclear if there are fool-proof methods of prevention for prompt injection\". The practical defence is to avoid giving one agent your private data, untrusted content and a way to send data out at the same time.",
+   "checkedOn": "2026-10-29",
+   "sections": [
+    {
+     "id": "what",
+     "heading": "What prompt injection is",
+     "body": [
+      "OWASP, which keeps the standard list of risks for AI applications, defines it as prompts that \"alter the LLM's behavior or output in unintended ways\" [(4)](#src-4). The kind that matters for agents is indirect: it \"occur[s] when an LLM accepts input from external sources, such as websites or files\" [(5)](#src-5). Anthropic describes the same case: the user is trusted, but the model \"processes third-party content (webpages, emails, documents, tool results) that contains adversarial instructions\" [(6)](#src-6).",
+      "No vendor claims to have solved it. Anthropic: \"no system is completely immune to all attacks\" [(7)](#src-7). Codex's docs: \"Prompt injection can cause the agent to fetch and follow untrusted instructions\" [(8)](#src-8)."
+     ]
+    },
+    {
+     "id": "trifecta",
+     "heading": "The combination to avoid",
+     "body": [
+      "Simon Willison's \"lethal trifecta\" is the clearest test. An agent is at risk when it has \"Access to your private data\", \"Exposure to untrusted content\" and \"The ability to externally communicate in a way that could be used to steal your data\" [(2)](#src-2). \"If your agent combines these three features, an attacker can easily trick it into accessing your private data and sending it to that attacker\" [(9)](#src-9), and his conclusion is that \"The only way to stay safe there is to avoid that lethal trifecta combination entirely\" [(3)](#src-3).",
+      "Most useful agents have all three: a personal assistant that reads your email, browses the web and can send messages is the textbook case."
+     ]
+    },
+    {
+     "id": "sandbox",
+     "heading": "What a sandbox does, and what it doesn't",
+     "body": [
+      "It limits the blast radius. OpenAI uses sandboxing \"to prevent the model from making harmful changes that might be the result of a prompt injection\" [(10)](#src-10), and Anthropic says isolation \"reduces the impact of a breach, but it does not eliminate risk\" [(11)](#src-11).",
+      "It does not stop data leaving through any route you leave open: \"Any approach that allows network egress can still leak data the agent can read\" [(12)](#src-12). It does not change what the model sees, because \"Isolation also does not change what is sent to the model\" [(13)](#src-13). And filters can have gaps: Codex's network proxy does not cover \"web search, app or connector tool calls, MCP server connections, browser or Computer Use activity\" [(14)](#src-14)."
+     ]
+    },
+    {
+     "id": "helps",
+     "heading": "What actually helps",
+     "body": [
+      "**Give it less.** OWASP's advice is to \"Restrict the model's access privileges to the minimum necessary\" [(15)](#src-15), and it lists \"excessive functionality; excessive permissions; excessive autonomy\" as the root causes of damage [(16)](#src-16). OpenAI says the same: \"limit an agent's access to only the sensitive data or credentials it needs to complete the task\" [(17)](#src-17).",
+      "**Break the trifecta on purpose.** Turn the internet off for jobs that do not need it ([[cap:no-internet]]), allow only named sites for those that do ([[cap:egress-allowlist]]), and keep keys where the agent cannot read them ([[cap:hidden-secrets]]). These are machine settings, so they hold even when the model is fooled.",
+      "**Keep a human on the risky steps.** OWASP recommends \"human-in-the-loop controls for privileged operations\" [(18)](#src-18), and OpenAI's design goal is that dangerous actions or transmissions of sensitive information \"should not happen silently or without appropriate safeguards\" [(19)](#src-19). If you write your own agent, Anthropic's advice is to \"Put untrusted content only in tool results\" [(20)](#src-20), so the model can tell instructions from data."
+     ]
+    }
+   ],
+   "capabilities": [
+    "no-internet",
+    "egress-allowlist",
+    "hidden-secrets",
+    "own-vm"
+   ],
+   "sources": [
+    {
+     "label": "OWASP Top 10 for LLM Applications: LLM01 Prompt Injection",
+     "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+     "quote": "it is unclear if there are fool-proof methods of prevention for prompt injection",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Simon Willison: The lethal trifecta for AI agents",
+     "url": "https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/",
+     "quote": "Access to your private data —one of the most common purposes of tools in the first place! Exposure to untrusted content —any mechanism by which text (or images) controlled by a malicious attacker could become available to your LLM The ability to externally communicate in a way that could be used to steal your data",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Simon Willison: The lethal trifecta for AI agents",
+     "url": "https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/",
+     "quote": "The only way to stay safe there is to avoid that lethal trifecta combination entirely.",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OWASP Top 10 for LLM Applications: LLM01 Prompt Injection",
+     "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+     "quote": "A Prompt Injection Vulnerability occurs when user prompts alter the LLM’s behavior or output in unintended ways.",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OWASP Top 10 for LLM Applications: LLM01 Prompt Injection",
+     "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+     "quote": "Indirect prompt injections occur when an LLM accepts input from external sources, such as websites or files.",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude API docs: mitigate jailbreaks and prompt injections",
+     "url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks",
+     "quote": "where the user is trusted but Claude processes third-party content (webpages, emails, documents, tool results) that contains adversarial instructions",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: security",
+     "url": "https://code.claude.com/docs/en/security",
+     "quote": "While these protections significantly reduce risk, no system is completely immune to all attacks.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Codex docs: approvals and security",
+     "url": "https://learn.chatgpt.com/docs/agent-approvals-security",
+     "quote": "Prompt injection can cause the agent to fetch and follow untrusted instructions.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Simon Willison: The lethal trifecta for AI agents",
+     "url": "https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/",
+     "quote": "If your agent combines these three features, an attacker can easily trick it into accessing your private data and sending it to that attacker.",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI: Understanding prompt injections",
+     "url": "https://openai.com/index/prompt-injections/",
+     "quote": "we use a technique called sandboxing to prevent the model from making harmful changes that might be the result of a prompt injection",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandbox environments",
+     "url": "https://code.claude.com/docs/en/sandbox-environments",
+     "quote": "Sandbox isolation reduces the impact of a breach, but it does not eliminate risk.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandbox environments",
+     "url": "https://code.claude.com/docs/en/sandbox-environments",
+     "quote": "Any approach that allows network egress can still leak data the agent can read, and any approach that mounts your project directory writable can still modify that code.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude Code docs: sandbox environments",
+     "url": "https://code.claude.com/docs/en/sandbox-environments",
+     "quote": "Isolation also does not change what is sent to the model.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI Codex docs: approvals and security",
+     "url": "https://learn.chatgpt.com/docs/agent-approvals-security",
+     "quote": "The network proxy filters scripts, programs, and child processes that run inside the local command sandbox. It does not filter web search, app or connector tool calls, MCP server connections, browser or Computer Use activity, Codex cloud tasks, or the client's model and authentication requests.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OWASP Top 10 for LLM Applications: LLM01 Prompt Injection",
+     "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+     "quote": "Restrict the model’s access privileges to the minimum necessary for its intended operations.",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OWASP Top 10 for LLM Applications: LLM06 Excessive Agency",
+     "url": "https://genai.owasp.org/llmrisk/llm062025-excessive-agency/",
+     "quote": "excessive functionality; excessive permissions; excessive autonomy.",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI: Understanding prompt injections",
+     "url": "https://openai.com/index/prompt-injections/",
+     "quote": "Where possible, limit an agent’s access to only the sensitive data or credentials it needs to complete the task.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OWASP Top 10 for LLM Applications: LLM01 Prompt Injection",
+     "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+     "quote": "Implement human-in-the-loop controls for privileged operations to prevent unauthorized actions.",
+     "confidence": "third-party",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "OpenAI: Designing AI agents to resist prompt injection",
+     "url": "https://openai.com/index/designing-agents-to-resist-prompt-injection/",
+     "quote": "potentially dangerous actions, or transmissions of potentially sensitive information, should not happen silently or without appropriate safeguards.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    },
+    {
+     "label": "Claude API docs: mitigate jailbreaks and prompt injections",
+     "url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks",
+     "quote": "Put untrusted content only in tool results.",
+     "confidence": "docs-confirmed",
+     "checkedOn": "2026-10-29"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,85 @@
+---
+// One article from data/guides.json. Every claim in it links to a source in its list.
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import SectionNav from "../../components/SectionNav.astro";
+import Inline from "../../components/Inline.astro";
+import Badge from "../../components/Badge.astro";
+import { capabilityById, capabilityLabel, formatDate, guides, providerName, tagClass } from "../../lib/data";
+import type { Guide } from "../../data/schema";
+
+export function getStaticPaths() {
+  return guides.map((guide) => ({ params: { id: guide.id }, props: { guide } }));
+}
+
+const { guide } = Astro.props as { guide: Guide };
+const caps = guide.capabilities.map((id) => capabilityById.get(id)!);
+const nav = [
+  ...guide.sections.map((s) => ({ href: `#${s.id}`, label: s.heading })),
+  ...(caps.length ? [{ href: "#providers", label: "Which providers help" }] : []),
+  { href: "#sources", label: "Sources" },
+];
+const host = (url: string) => new URL(url).hostname.replace(/^www\./, "");
+---
+
+<Base title={guide.seoTitle} description={guide.standfirst} markdown={`/data/guides/${guide.id}.md`} modified={guide.checkedOn}>
+  <PageHeader
+    parent={{ href: "/guides/", label: "Guides" }}
+    kicker={guide.kicker}
+    title={guide.title}
+    standfirst={guide.standfirst}
+    answer={guide.answer}
+    meta={[`Checked ${formatDate(guide.checkedOn)}`, `${guide.sources.length} sources`, "Docs quoted, not tested"]}
+  />
+
+  <SectionNav items={nav} />
+
+  <div class="wrap">
+    {guide.sections.map((s, i) => (
+      <section class={i === 0 ? "section section--flush" : "section"} id={s.id} aria-labelledby={`${s.id}-h`}>
+        <div class="section__head"><h2 class="section__title" id={`${s.id}-h`}>{s.heading}</h2></div>
+        <div class="prose">{s.body.map((p) => <p><Inline text={p} /></p>)}</div>
+      </section>
+    ))}
+
+    {caps.length > 0 && (
+      <section class="section" id="providers" aria-labelledby="providers-h">
+        <div class="section__head">
+          <h2 class="section__title" id="providers-h">Which providers help</h2>
+          <p class="section__note">From the capability checks; each links to every provider's verdict and its catch</p>
+        </div>
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th scope="col">Capability</th><th scope="col">Yes</th><th scope="col">With a catch</th></tr></thead>
+          <tbody>
+            {caps.map((c) => {
+              const who = (v: string) => c.rows.filter((r) => r.verdict === v).map((r) => providerName(r.provider)).sort().join(", ") || "None";
+              return (
+                <tr>
+                  <th scope="row"><a href={`/capabilities/${c.id}/`}>{c.title}</a><br /><span class="section__note">{c.plain}</span></th>
+                  <td><Badge verdict="yes" label={capabilityLabel.yes} /> {who("yes")}</td>
+                  <td><Badge verdict="partly" label={capabilityLabel.partly} /> {who("partly")}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table></div>
+      </section>
+    )}
+
+    <section class="section" id="sources" aria-labelledby="sources-h">
+      <div class="section__head">
+        <h2 class="section__title" id="sources-h">Sources</h2>
+        <p class="section__note">Each quote was read on the page linked, on the date shown</p>
+      </div>
+      <ol class="guide-sources">
+        {guide.sources.map((s, i) => (
+          <li id={`src-${i + 1}`}>
+            <a href={s.url} rel="noreferrer noopener">{s.label}</a> <span class="section__note">({host(s.url)}, {formatDate(s.checkedOn)})</span>{" "}
+            <span class={tagClass[s.confidence]}>{s.confidence}</span>
+            <blockquote>“{s.quote}”</blockquote>
+          </li>
+        ))}
+      </ol>
+    </section>
+  </div>
+</Base>

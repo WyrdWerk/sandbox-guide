@@ -55,6 +55,7 @@ const name = (id: string) => providerById.get(id)!.name;
       </div>
       <ul class="fits__list">
         {comparisons.pairs.map(([a, b]) => <li><a href={`/compare/${pairSlug(a, b)}/`}>{name(a)} vs {name(b)}</a></li>)}
+        <li><a href="/compare/hermes-vs-openclaw/">Hermes agent vs OpenClaw</a> (the agents themselves)</li>
         {comparisons.alternatives.map((id) => <li><a href={`/providers/${id}/alternatives/`}>Alternatives to {name(id)}</a></li>)}
       </ul>
     </section>
