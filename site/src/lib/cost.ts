@@ -126,6 +126,9 @@ export interface RateCard {
   maxDisk?: number;
   maxVcpu?: number;
   maxRam?: number;
+  /** Outbound data, USD per GiB beyond `included`. Not priced by the calculator; shown on the
+   *  outbound-network feature. null means no price is published. */
+  egress?: { perGiB: number | null; included?: string; note: string; url: string };
   plans: Plan[];
   /** Always shown under the result: credits, minimums, things not priced. */
   notes: string[];
@@ -390,6 +393,31 @@ export const presets: Record<string, { label: string; workload: Workload; why: s
     label: "A browser agent for a small team",
     why: "30,000 ten-minute browser sessions a month on 2 vCPU / 4 GiB / 10 GiB machines, thrown away after each. Chromium needs memory more than CPU: about 3% CPU on average.",
     workload: { vcpu: 2, ram: 4, disk: 10, mode: "tasks", tasks: 30000, taskMinutes: 10, machines: 1, hoursPerDay: 0, daysPerMonth: 30, keepDisk: false, busy: 0.03, awake: 1, model: "", messagesPerDay: 0, kTokens: 0 },
+  },
+  automation: {
+    label: "Self-hosted n8n for a small team",
+    why: "One always-on 2 vCPU / 4 GiB / 20 GiB machine that keeps its database and encryption key: 730 hours, because webhooks and schedules stop when it sleeps. About 6% CPU on average, with peaks near 100% when a big workflow runs. The model line assumes 50 workflow steps a day that ask a cheap model, 10,000 tokens each.",
+    workload: { vcpu: 2, ram: 4, disk: 20, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.058, awake: 1, model: "deepseek-v4.1-flash", messagesPerDay: 50, kTokens: 10 },
+  },
+  chatbot: {
+    label: "A Discord or Slack bot for one server",
+    why: "One always-on 1 vCPU / 2 GiB / 10 GiB machine that keeps its history: 730 hours, because a bot holding a Discord or Slack connection cannot sleep. About 3% CPU on average, since one community sees little traffic. The model line assumes 100 replies a day at 10,000 tokens each (instructions plus recent messages).",
+    workload: { vcpu: 1, ram: 2, disk: 10, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.03, awake: 1, model: "glm-5.3", messagesPerDay: 100, kTokens: 10 },
+  },
+  team: {
+    label: "Claude Code for a team of five",
+    why: "Five 4 vCPU / 8 GiB / 40 GiB machines, one per developer, eight hours a day on 20 working days (800 machine-hours), stopped otherwise with each repository and login kept. About 3% CPU on average. The model line is 20 requests a day per developer at 300,000 tokens each, at API prices; developers who sign in with Claude subscriptions pay per seat instead.",
+    workload: { vcpu: 4, ram: 8, disk: 40, mode: "machines", tasks: 0, taskMinutes: 0, machines: 5, hoursPerDay: 8, daysPerMonth: 20, keepDisk: true, busy: 0.034, awake: 1, model: "claude-sonnet-5", messagesPerDay: 100, kTokens: 300 },
+  },
+  scraper: {
+    label: "A scraper that runs four times a day",
+    why: "Four ten-minute runs a day, 120 a month (20 machine-hours), each on a fresh 1 vCPU / 2 GiB / 10 GiB machine thrown away afterwards; the results go to your own storage. The CPU is about 40% busy while a headless browser renders pages. No model.",
+    workload: { vcpu: 1, ram: 2, disk: 10, mode: "tasks", tasks: 120, taskMinutes: 10, machines: 1, hoursPerDay: 0, daysPerMonth: 30, keepDisk: false, busy: 0.4, awake: 1, model: "", messagesPerDay: 0, kTokens: 0 },
+  },
+  mcp: {
+    label: "Your own remote MCP server",
+    why: "One small 1 vCPU / 1 GiB / 10 GiB server that must answer at a public address all month. About 2% CPU, because it only passes tool calls on. Where a provider sleeps an idle machine and wakes it on a request, it is awake about a third of the time (roughly the working day when people call it) and billed as stopped the rest. No model: the AI runs in the client.",
+    workload: { vcpu: 1, ram: 1, disk: 10, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.02, awake: 0.33, model: "", messagesPerDay: 0, kTokens: 0 },
   },
   a: {
     label: "A: 1,000 short tasks",

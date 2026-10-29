@@ -899,6 +899,1276 @@
           "url": "https://browser-use.com/pricing"
         }
       ]
+    },
+    {
+      "id": "workflow-automation",
+      "title": "Host your own n8n",
+      "kicker": "Workflow automation",
+      "question": "I want n8n running my automations around the clock, on a server I control, without paying per workflow run.",
+      "standfirst": "n8n is a visual automation tool you can host yourself. It needs a small machine that never sleeps and keeps its database. Two of the fifteen providers set it up in one click; most others can run it if someone follows terminal steps; the task-only sandboxes are the wrong place for it.",
+      "preset": "automation",
+      "whatItIs": [
+        "[n8n](https://docs.n8n.io/) is a workflow automation tool. You draw a workflow on a canvas: a **trigger** (something that starts it, such as a form being sent or a time of day), then steps that call other apps, reshape data or ask an AI model. Its [README](https://github.com/n8n-io/n8n) counts 1,500+ ready-made connections.",
+        "Hosting it yourself means you run the server, its database, its encryption key and its upgrades. In return there is no per-run fee: n8n's own hosted [n8n Cloud](https://n8n.io/pricing/) is billed by how many workflow runs you use.",
+        "Most workflows start in one of two ways: a **webhook**, which is a web address another app calls when something happens, or the [Schedule Trigger](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.scheduletrigger), n8n's own built-in clock. Both only work while n8n is running, which decides what kind of machine it needs."
+      ],
+      "needs": [
+        {
+          "label": "Machine size",
+          "value": "n8n publishes no self-hosting minimum. Its Cloud plans run from 640 MiB of memory to 4 GiB, and the software alone uses about 180 MiB. Because any single step can pull a large file into memory, 2 vCPU / 4 GiB / 20 GiB is the safer buy.",
+          "source": "https://docs.n8n.io/deploy/use-n8n-cloud/configure-cloud/manage-your-data/"
+        },
+        {
+          "label": "Does it stay on?",
+          "value": "Yes. n8n listens for webhooks only while it runs, and the Schedule Trigger works \"in a similar way to the Cron software utility\": its clock lives inside the machine. A sleeping machine misses both. A host that wakes on a web request can still catch webhooks after a short delay, but scheduled runs will not fire while it sleeps.",
+          "source": "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.scheduletrigger"
+        },
+        {
+          "label": "What must survive a restart",
+          "value": "The database (workflows, saved logins to other apps, run history; SQLite by default, PostgreSQL for anything larger) and the encryption key n8n creates on first start. Without that key the saved logins cannot be read, and a database backup alone will not bring them back.",
+          "source": "https://docs.n8n.io/deploy/host-n8n/configure-n8n/basic-configuration/use-environment-variables/database"
+        },
+        {
+          "label": "Browser, Docker, GPU",
+          "value": "No browser on the server: the editor opens in yours. The documented install uses Docker (a standard way to package and run software); npm on Node.js 20.19 to 24.x is the alternative. No GPU.",
+          "source": "https://docs.n8n.io/deploy/host-n8n/install-options/install-using-docker-compose"
+        },
+        {
+          "label": "How busy it is",
+          "value": "Mostly waiting. No benchmark measures n8n; Battleships' nearest always-on workload averages about 6% CPU, with peaks near 100% when a large workflow runs. Size for the peak, not the average.",
+          "source": "https://battleships.dev/data/rankings/employees.json"
+        }
+      ],
+      "routes": [
+        {
+          "provider": "lizard",
+          "tier": "one-click",
+          "noTerminal": "yes",
+          "what": "A Deploy Now template creates an n8n app and a separate managed PostgreSQL database, connects them and gives n8n a public HTTPS address. It does not set an encryption key, attach a volume or add worker processes.",
+          "link": {
+            "title": "Lizard: Deploy n8n",
+            "url": "https://lizard.build/deploy/n8n--n8n"
+          }
+        },
+        {
+          "provider": "agent37",
+          "tier": "one-click",
+          "noTerminal": "yes",
+          "what": "The agent37-n8n template runs the official n8n image with a public editor address and SQLite on a disk that is kept. The dashboard asks only for an owner password, and auto-sleep is off by default; leave it off for scheduled workflows.",
+          "link": {
+            "title": "Agent 37: host n8n",
+            "url": "https://www.agent37.com/docs/agents-api/n8n"
+          },
+          "price": "Default 2 vCPU / 4 GB instance at $4.76 a month"
+        },
+        {
+          "provider": "boat",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "A full Ubuntu machine with Docker. Install n8n as a service that comes back after a restart, make its port public, and keep the disk. No n8n guide, and no custom domains.",
+          "link": {
+            "title": "Boat: always-on services",
+            "url": "https://docs.boat.dev/long-running-tasks/always-on-services"
+          }
+        },
+        {
+          "provider": "boxd",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Docker is preinstalled and running, and custom domains are self-serve. Turn hibernation off so schedules fire. No n8n template or guide.",
+          "link": {
+            "title": "boxd: run Docker",
+            "url": "https://docs.boxd.sh/guides/run-docker"
+          }
+        },
+        {
+          "provider": "daytona",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Create a sandbox with auto-stop turned off (it stops after 15 idle minutes by default), install n8n with npm and make its port public. n8n names Daytona as the sandbox for its own AI Assistant feature, which is not the same as hosting n8n there.",
+          "link": {
+            "title": "Daytona: auto-stop",
+            "url": "https://www.daytona.io/docs/en/sandboxes#auto-stop-interval"
+          }
+        },
+        {
+          "provider": "instabox",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "The agent-browser image includes Docker. Turn auto-pause off, install n8n and publish port 5678. No n8n guide.",
+          "link": {
+            "title": "InstaBox: concepts",
+            "url": "https://instabox.sh/docs/concepts"
+          }
+        },
+        {
+          "provider": "morph",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "A Devbox can serve n8n and wake when a request arrives, but a paused Devbox's clock stops, so scheduled workflows need it kept running. No n8n guide.",
+          "link": {
+            "title": "Morph: wake on request",
+            "url": "https://cloud.morph.so/docs/documentation/instances/wake-on"
+          }
+        },
+        {
+          "provider": "runtime",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Docker, persistent sandboxes (\"no idle pause\") and custom domains are all documented, which is what n8n needs. No n8n guide.",
+          "link": {
+            "title": "Runtime: pricing and persistent sandboxes",
+            "url": "https://withruntime.com/docs/pricing"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Create a sandbox with auto-stop and idle pause off, install n8n, run it as a service and make its port public. No n8n guide.",
+          "link": {
+            "title": "Sandboxer: long-running tasks",
+            "url": "https://sandboxer.com/docs/long-running"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Blaxel's n8n page is about n8n calling a Blaxel agent, not about hosting n8n. Running n8n itself would be a manual install with a volume for its database.",
+          "link": {
+            "title": "Blaxel: n8n integration",
+            "url": "https://docs.blaxel.ai/Tutorials/n8n"
+          }
+        },
+        {
+          "provider": "sprites",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Command line only, and a Sprite pauses when idle unless something holds it awake. Its fixed large size is far more than n8n uses. No guide.",
+          "link": {
+            "title": "Sprites: quickstart",
+            "url": "https://docs.fly.io/sprites/quickstart.md"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "A poor fit: \"stopping the instance deletes the files on its disk\", so n8n's database and encryption key would have to be kept somewhere else. No guide.",
+          "link": {
+            "title": "Cloudflare Sandbox: files",
+            "url": "https://developers.cloudflare.com/sandbox/files/"
+          }
+        },
+        {
+          "provider": "e2b",
+          "tier": "none",
+          "noTerminal": "no",
+          "what": "Not suitable: a sandbox session ends after one hour on the free plan and 24 hours on Pro, and n8n has to outlive its schedule.",
+          "link": {
+            "title": "E2B: pricing",
+            "url": "https://e2b.dev/pricing.md"
+          }
+        },
+        {
+          "provider": "modal",
+          "tier": "none",
+          "noTerminal": "no",
+          "what": "Not documented. Modal is built for functions and short sandboxes, which end after at most 24 hours.",
+          "link": {
+            "title": "Modal: sandboxes",
+            "url": "https://modal.com/docs/guide/sandboxes"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "tier": "none",
+          "noTerminal": "no",
+          "what": "Not suitable: Vercel sandboxes are made for one task at a time, with no way to keep a web app running.",
+          "link": null
+        }
+      ],
+      "picks": [
+        {
+          "provider": "lizard",
+          "for": "If you do not want a terminal",
+          "why": "The most complete one-click setup: n8n plus a managed PostgreSQL database and a public HTTPS address, inside the $19 monthly plan that comes back as usage.",
+          "watch": "The template does not set an encryption key; note the one n8n creates and keep it safe. It runs on Lizard's app platform, not at the sandbox sizes the calculator prices.",
+          "link": "https://lizard.build/deploy/n8n--n8n"
+        },
+        {
+          "provider": "agent37",
+          "for": "If you want the cheapest one click",
+          "why": "The agent37-n8n template sets up n8n on its default 2 vCPU / 4 GB instance at $4.76 a month, with auto-sleep off by default.",
+          "watch": "It uses SQLite on the instance's disk rather than a separate database. Turning auto-sleep on stops scheduled workflows.",
+          "link": "https://www.agent37.com/docs/agents-api/n8n"
+        },
+        {
+          "provider": "runtime",
+          "for": "If you can follow terminal steps",
+          "why": "CPU is billed only while it works, so an n8n that mostly waits is about $25 a month at 2 vCPU / 4 GiB, in a persistent sandbox with your own domain.",
+          "watch": "No n8n guide, one US region, and storage keeps billing while the machine is stopped.",
+          "link": "https://withruntime.com/docs/pricing"
+        }
+      ],
+      "outside": "n8n's own [n8n Cloud](https://n8n.io/pricing/) costs €20 a month on Starter (2,500 workflow runs) and €50 on Pro (10,000), billed annually, with nothing to host. [Activepieces](https://www.activepieces.com/pricing), a similar open-source tool, has a free plan and a $20 flat monthly plan. [Windmill](https://www.windmill.dev/docs/advanced/self_host) is free to host yourself and needs PostgreSQL.",
+      "features": [
+        "idle-timers",
+        "lifecycle",
+        "storage",
+        "reaching-it",
+        "custom-domains",
+        "keys-secrets"
+      ],
+      "sources": [
+        {
+          "label": "n8n docs",
+          "url": "https://docs.n8n.io/"
+        },
+        {
+          "label": "n8n on GitHub",
+          "url": "https://github.com/n8n-io/n8n"
+        },
+        {
+          "label": "n8n Cloud: memory and storage",
+          "url": "https://docs.n8n.io/deploy/use-n8n-cloud/configure-cloud/manage-your-data/"
+        },
+        {
+          "label": "n8n: database configuration",
+          "url": "https://docs.n8n.io/deploy/host-n8n/configure-n8n/basic-configuration/use-environment-variables/database"
+        },
+        {
+          "label": "n8n: Webhook node",
+          "url": "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.webhook"
+        },
+        {
+          "label": "n8n pricing",
+          "url": "https://n8n.io/pricing/"
+        },
+        {
+          "label": "Agent 37: templates",
+          "url": "https://www.agent37.com/docs/agents-api/templates"
+        },
+        {
+          "label": "Battleships: always-on assistant workload (built by the Boat team)",
+          "url": "https://battleships.dev/data/rankings/employees.json"
+        }
+      ]
+    },
+    {
+      "id": "chat-bot",
+      "title": "Host your own Discord or Slack bot",
+      "kicker": "Chat bot",
+      "question": "I wrote a bot that answers questions in our Discord or Slack using an AI model, and I need somewhere for it to live.",
+      "standfirst": "A chat bot is a small program that waits for messages, asks a model and replies. How Discord or Slack delivers those messages decides whether it can ever sleep. No provider hosts your own bot in one click; one provider's guide stands out, and the task-only sandboxes are a poor fit.",
+      "preset": "chatbot",
+      "whatItIs": [
+        "A support or community bot holds a login token for the chat app, receives each message, assembles some context, calls a model and posts the answer. You write it with a library such as [discord.js](https://github.com/discordjs/discord.js) or Slack's Bolt; the model runs elsewhere and is billed by its own provider.",
+        "Discord bots normally keep a **WebSocket** open to Discord: a connection that stays open so messages can be pushed down it at any moment. Discord calls these [persistent connections](https://discord.com/developers/docs/topics/gateway) that the bot must keep alive with regular heartbeats. Slack offers the same in [Socket Mode](https://docs.slack.dev/apis/events-api/using-socket-mode).",
+        "The other way is a public web address that Discord or Slack calls for each message ([Slack Request URLs](https://docs.slack.dev/apis/events-api/using-http-request-urls), [Discord interactions](https://discord.com/developers/docs/interactions/overview)). A bot built that way only needs to be awake when a message arrives. A bot that reads every message in a server needs the open connection, and so a machine that stays on."
+      ],
+      "needs": [
+        {
+          "label": "Machine size",
+          "value": "Neither Discord nor Slack publishes one. 1 vCPU / 2 GiB / 10 GiB runs Node or Python, a small history database and one model call at a time, with room for logs. Battleships models this job at 2 vCPU / 4 GiB / 20 GiB.",
+          "source": "https://battleships.dev/data/presets.json"
+        },
+        {
+          "label": "Does it stay on?",
+          "value": "Yes for a bot with an open connection: if it misses a heartbeat, Discord closes the connection, and a bot may only log in to it 1,000 times a day, so a host that keeps sleeping and waking it is a bad host. A bot that only answers through a web address can sleep if the host wakes it on a request.",
+          "source": "https://discord.com/developers/docs/topics/gateway"
+        },
+        {
+          "label": "What must survive a restart",
+          "value": "The bot token (anyone with it controls the bot), conversation history and any settings. Lizard's guide keeps them in a database rather than the machine's disk, and warns to run only one copy per token, or every copy answers every message.",
+          "source": "https://lizard.build/docs/guides/discord-bot"
+        },
+        {
+          "label": "Browser, Docker, GPU",
+          "value": "No browser. Docker is optional. A database is recommended for history; SQLite (a single-file database) is enough for one copy. No GPU.",
+          "source": "https://lizard.build/docs/guides/discord-bot"
+        },
+        {
+          "label": "How busy it is",
+          "value": "Idle almost all the time, busy in short bursts when a message arrives. Battleships' always-on assistant averages about 6% CPU; one community server sees less traffic, so the calculator uses 3%.",
+          "source": "https://battleships.dev/data/rankings/employees.json"
+        }
+      ],
+      "routes": [
+        {
+          "provider": "agent37",
+          "tier": "one-click",
+          "noTerminal": "yes",
+          "what": "Not your own code: pick OpenClaw or Hermes on a Personal plan and connect it to your own Discord or Slack account, on Basic and above. The bot is that ready-made agent.",
+          "link": {
+            "title": "Agent 37 Personal",
+            "url": "https://www.agent37.com/personal"
+          },
+          "price": "Personal plans from $3.99 a month; Discord and Slack from the Basic plan"
+        },
+        {
+          "provider": "lizard",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "The most complete official walkthrough: a discord.js example deployed with no public port, one copy per token, secrets, and a managed PostgreSQL database for history. Deployed from the command line.",
+          "link": {
+            "title": "Lizard: host a Discord bot",
+            "url": "https://lizard.build/docs/guides/discord-bot"
+          }
+        },
+        {
+          "provider": "modal",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official example, but only for a bot that answers slash commands through a web address. Modal is not built to hold an open connection.",
+          "link": {
+            "title": "Modal: Discord bot",
+            "url": "https://modal.com/docs/examples/discord_bot"
+          }
+        },
+        {
+          "provider": "boat",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Boat documents the pattern: run the bot as a service that comes back by itself after a stop, resume or copy, and keep its public address. No bot-specific guide.",
+          "link": {
+            "title": "Boat: always-on services",
+            "url": "https://docs.boat.dev/long-running-tasks/always-on-services"
+          }
+        },
+        {
+          "provider": "boxd",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Turn off auto-hibernate, and turn off bot protection for that machine: it is on by default and \"chat apps can't pass\" it.",
+          "link": {
+            "title": "boxd: personal assistants",
+            "url": "https://docs.boxd.sh/use-cases/personal-assistants"
+          }
+        },
+        {
+          "provider": "daytona",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Create a sandbox with auto-stop off (the default is 15 idle minutes), install the bot and keep it running under a process manager. No bot guide.",
+          "link": {
+            "title": "Daytona: auto-stop",
+            "url": "https://www.daytona.io/docs/en/sandboxes#auto-stop-interval"
+          }
+        },
+        {
+          "provider": "instabox",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "A general Linux machine with Docker. Turn auto-pause off so the connection stays open. No bot guide.",
+          "link": {
+            "title": "InstaBox: concepts",
+            "url": "https://instabox.sh/docs/concepts"
+          }
+        },
+        {
+          "provider": "runtime",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "A persistent sandbox never idle-pauses and can run the bot. No bot guide.",
+          "link": {
+            "title": "Runtime: pricing and persistent sandboxes",
+            "url": "https://withruntime.com/docs/pricing"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Turn idle pause off, or create the keep-awake file Sandboxer documents for work it cannot see, and run the bot as a service. No bot guide.",
+          "link": {
+            "title": "Sandboxer: long-running tasks",
+            "url": "https://sandboxer.com/docs/long-running"
+          }
+        },
+        {
+          "provider": "morph",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Only for a bot that answers through a web address: a Devbox wakes on a request, but an idle one is paused, which drops an open connection.",
+          "link": {
+            "title": "Morph: wake on request",
+            "url": "https://cloud.morph.so/docs/documentation/instances/wake-on"
+          }
+        },
+        {
+          "provider": "sprites",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Only for a bot that answers through a web address: \"services don't keep a Sprite from pausing\", so a quiet connection would be paused.",
+          "link": {
+            "title": "Sprites: services",
+            "url": "https://docs.fly.io/sprites/concepts/services.md"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "A poor fit for an open connection: Blaxel treats a WebSocket with no traffic for 15 minutes as idle and puts the sandbox on standby. No bot guide.",
+          "link": {
+            "title": "Blaxel: active and standby",
+            "url": "https://docs.blaxel.ai/knowledge-base/configuration-and-operation/understanding-sandbox-active-vs-standby-states-and-billing.md"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "A Worker can serve a Slack app that answers through a web address, but a Discord bot with an open connection does not fit a sandbox built around requests and stopping. No bot guide.",
+          "link": {
+            "title": "Cloudflare Sandbox: lifetime",
+            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/"
+          }
+        },
+        {
+          "provider": "e2b",
+          "tier": "none",
+          "noTerminal": "no",
+          "what": "Not suitable: sessions end after one hour on the free plan and 24 hours on Pro.",
+          "link": {
+            "title": "E2B: pricing",
+            "url": "https://e2b.dev/pricing.md"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "tier": "none",
+          "noTerminal": "no",
+          "what": "Not suitable: sandboxes are made for one task and functions for one request, with no documented way to hold a connection open.",
+          "link": null
+        }
+      ],
+      "picks": [
+        {
+          "provider": "lizard",
+          "for": "If you wrote the bot yourself",
+          "why": "The only provider with a full official Discord bot guide, including the database for history and the one-copy rule. It fits inside the $19 monthly plan that comes back as usage.",
+          "watch": "Deployed from the command line, and it runs on Lizard's app platform rather than the sandbox sizes the calculator prices.",
+          "link": "https://lizard.build/docs/guides/discord-bot"
+        },
+        {
+          "provider": "runtime",
+          "for": "If you want to pay least for waiting",
+          "why": "CPU is billed only while it works, so a bot that mostly waits is about $12 a month at 1 vCPU / 2 GiB, in a sandbox that never idle-pauses.",
+          "watch": "No bot guide, one US region, and storage keeps billing while the machine is stopped.",
+          "link": "https://withruntime.com/docs/pricing"
+        },
+        {
+          "provider": "agent37",
+          "for": "If you do not want to write code",
+          "why": "A ready-made AI agent (OpenClaw or Hermes) answering in your Discord or Slack, set up from the browser, from $3.99 a month with your own model key.",
+          "watch": "It is not your own bot: you configure an existing agent rather than run your code. These Personal plans are separate from the Cloud machines the calculator prices.",
+          "link": "https://www.agent37.com/personal"
+        }
+      ],
+      "outside": "An ordinary host such as [Render](https://render.com/pricing) runs an always-on background worker from $7 a month for 512 MB, or $25 for 1 CPU / 2 GB. A Slack app that answers through a web address fits [Cloudflare Workers](https://developers.cloudflare.com/workers/platform/pricing/): free up to 100,000 requests a day, or a $5 monthly minimum.",
+      "features": [
+        "idle-timers",
+        "lifecycle",
+        "reaching-it",
+        "keys-secrets",
+        "billing-models"
+      ],
+      "sources": [
+        {
+          "label": "Discord: Gateway",
+          "url": "https://discord.com/developers/docs/topics/gateway"
+        },
+        {
+          "label": "Discord: interactions",
+          "url": "https://discord.com/developers/docs/interactions/overview"
+        },
+        {
+          "label": "Slack: Socket Mode",
+          "url": "https://docs.slack.dev/apis/events-api/using-socket-mode"
+        },
+        {
+          "label": "Slack: HTTP Request URLs",
+          "url": "https://docs.slack.dev/apis/events-api/using-http-request-urls"
+        },
+        {
+          "label": "Lizard: host a Discord bot",
+          "url": "https://lizard.build/docs/guides/discord-bot"
+        },
+        {
+          "label": "Render pricing",
+          "url": "https://render.com/pricing"
+        },
+        {
+          "label": "Battleships: always-on assistant workload (built by the Boat team)",
+          "url": "https://battleships.dev/data/rankings/employees.json"
+        }
+      ]
+    },
+    {
+      "id": "claude-code-team",
+      "title": "Give a small team Claude Code in the cloud",
+      "kicker": "Coding team",
+      "question": "Three to five of us want Claude Code running on cloud machines, each with our own login, without sharing one account.",
+      "standfirst": "Claude Code is built for one person on one machine. For a team that means one machine per developer, each signed in with that developer's own account. Five providers ship it preinstalled and one sets it up in one click; the catch is how logins are kept.",
+      "preset": "team",
+      "whatItIs": [
+        "[Claude Code](https://code.claude.com/docs/en/overview) is Anthropic's coding agent. A developer starts it in a repository and asks for a change; it reads and edits files and runs commands and tests on the machine where it runs.",
+        "Vercel's guide puts the hosting constraint plainly: Claude Code \"isn't built to be safe for multiple tenants: it's a command-line tool for one user, it keeps its state on disk\" ([Vercel](https://vercel.com/docs/agent-harnesses/claude-code)). A shared machine would hold one person's login and mix everyone's unfinished work, so the default is one machine each.",
+        "For a team, three things have to be decided together: where each copy runs, whose Claude account pays, and what survives when a machine is replaced. The machine does not need to stay on; it runs while people work."
+      ],
+      "needs": [
+        {
+          "label": "Machine size",
+          "value": "Anthropic asks for 4 GB of memory or more and gives no CPU or disk minimum. Its own cloud sessions allow 4 vCPU, 16 GB and 30 GB of disk. 4 vCPU / 8 GiB / 40 GiB per developer covers the agent, tests and a few containers, with room for their images.",
+          "source": "https://code.claude.com/docs/en/setup"
+        },
+        {
+          "label": "Does it stay on?",
+          "value": "No. Each machine runs during working hours: eight hours on 20 days is 160 hours each, or 800 for five developers. It can stop between sessions if its disk survives.",
+          "source": "https://code.claude.com/docs/en/claude-code-on-the-web"
+        },
+        {
+          "label": "What must survive a restart",
+          "value": "The repository and any work not yet pushed, and the login: on Linux, ~/.claude/.credentials.json. If the disk is thrown away, the developer signs in again and unpushed work is lost.",
+          "source": "https://code.claude.com/docs/en/authentication"
+        },
+        {
+          "label": "Whose login",
+          "value": "On Claude's Team plan, \"team members install Claude Code and log in with their claude.ai accounts\", so each machine holds its owner's login. Some platforms store one Claude login for the whole account, which every sandbox uses: convenient alone, wrong for a team that wants usage and access per person.",
+          "source": "https://code.claude.com/docs/en/authentication"
+        },
+        {
+          "label": "How busy it is",
+          "value": "Mostly waiting on the model: about 3% CPU on average in Battleships' software-factory workload, with peaks near half the machine during builds and tests.",
+          "source": "https://battleships.dev/data/rankings/fullstack.json"
+        }
+      ],
+      "routes": [
+        {
+          "provider": "agent37",
+          "tier": "one-click",
+          "noTerminal": "yes",
+          "what": "The agent37-claude-code template sets up one Claude Code instance on the developer's own Anthropic account. One instance each, so five developers means five; team management and roles are on the Max plan.",
+          "link": {
+            "title": "Agent 37: templates",
+            "url": "https://www.agent37.com/docs/agents-api/templates"
+          },
+          "price": "Personal Pro $29.99 a month per instance; Max with team roles $99.99"
+        },
+        {
+          "provider": "boat",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "Claude Code is one of seven coding agents on every sandbox. Create one per developer from the dashboard or command line, then run claude.",
+          "link": {
+            "title": "Boat: harnesses and models",
+            "url": "https://docs.boat.dev/integrated-agents/harnesses-and-models"
+          }
+        },
+        {
+          "provider": "boxd",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "Every machine ships with Claude Code, Codex and OpenCode, and the console opens a terminal or desktop. No shared login feature, so each developer signs in on their own machine.",
+          "link": {
+            "title": "boxd: coding agents",
+            "url": "https://docs.boxd.sh/use-cases/coding-agents"
+          }
+        },
+        {
+          "provider": "instabox",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "The default image includes Claude Code, Codex, Docker and a desktop. Open the machine's terminal from the dashboard. No Claude Code guide.",
+          "link": {
+            "title": "InstaBox: limits and images",
+            "url": "https://instabox.sh/docs/limits"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "Claude Code is in the preinstalled agent list, Sandboxer publishes a Claude Code guide, and the dashboard has a Terminal tab.",
+          "link": {
+            "title": "Sandboxer: machines",
+            "url": "https://sandboxer.com/docs/machines"
+          }
+        },
+        {
+          "provider": "lizard",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "A claude template and a guide. But \"credentials belong to your Lizard account, not to a project, and every sandbox you start can use them\": five machines would still share one Claude login.",
+          "link": {
+            "title": "Lizard: Claude Code",
+            "url": "https://lizard.build/docs/sandboxes/guides/claude-code"
+          }
+        },
+        {
+          "provider": "daytona",
+          "tier": "guide",
+          "noTerminal": "partly",
+          "what": "An official command-line guide. The dashboard Playground opens a terminal in the browser, so nothing is installed locally, but setup is typed commands.",
+          "link": {
+            "title": "Daytona: Claude Code",
+            "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox"
+          }
+        },
+        {
+          "provider": "e2b",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "A prebuilt claude template and a guide, made for a fresh sandbox per task started from code rather than each developer's own machine.",
+          "link": {
+            "title": "E2B: Claude Code",
+            "url": "https://docs.e2b.dev/agents/claude-code"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official guide that gives each Claude Code session its own sandbox, built in code.",
+          "link": {
+            "title": "Vercel: Claude Code",
+            "url": "https://vercel.com/docs/agent-harnesses/claude-code"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official guide: a Worker starts a sandbox where Claude Code edits a GitHub repository and returns the changes. Needs Workers and a container deployment.",
+          "link": {
+            "title": "Cloudflare: Claude Code",
+            "url": "https://developers.cloudflare.com/sandbox/coding-agents/claude-code/"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "A written tutorial for running Claude Code in a Blaxel sandbox against a codebase, with command-line and code steps.",
+          "link": {
+            "title": "Blaxel: Claude Code",
+            "url": "https://docs.blaxel.ai/Tutorials/Claude-Code"
+          }
+        },
+        {
+          "provider": "morph",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official example installs Claude Code in a Devbox with Anthropic's installer. Nothing on teams or logins.",
+          "link": {
+            "title": "Morph: Claude Code",
+            "url": "https://cloud.morph.so/docs/examples/claude-code"
+          }
+        },
+        {
+          "provider": "runtime",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "A sandbox opens with a shell in the browser and can run it, but there is no Claude Code guide or template.",
+          "link": {
+            "title": "Runtime: getting started",
+            "url": "https://withruntime.com/docs/start"
+          }
+        },
+        {
+          "provider": "sprites",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Sprites documents Claude Managed Agents, a different Anthropic product, not Claude Code. Installing it in a Sprite is by hand.",
+          "link": {
+            "title": "Sprites: Claude Managed Agents",
+            "url": "https://docs.fly.io/sprites/integrations/claude-managed-agents.md"
+          }
+        },
+        {
+          "provider": "modal",
+          "tier": "none",
+          "noTerminal": "no",
+          "what": "Not documented, and Modal sandboxes have no stopped state that keeps a developer's files.",
+          "link": null
+        }
+      ],
+      "picks": [
+        {
+          "provider": "boat",
+          "for": "One machine per developer",
+          "why": "Claude Code preinstalled on a full virtual machine with Docker. Five 4 vCPU / 8 GB machines for 160 hours each come to about $29 of usage: the $20 plan plus about $9 from the wallet.",
+          "watch": "A stopped machine's disk is kept for only 14 days, so push work before a holiday. There is no free plan.",
+          "link": "https://docs.boat.dev/integrated-agents/harnesses-and-models"
+        },
+        {
+          "provider": "sandboxer",
+          "for": "If you want a guide and a dashboard terminal",
+          "why": "Claude Code preinstalled, an official guide, and a Terminal tab in the dashboard. The same five machines come to $40 a month.",
+          "watch": "Usage over the $20 plan is bought in $20 packs, and storage counts against an included quota: going over blocks new sandboxes.",
+          "link": "https://sandboxer.com/docs/machines"
+        },
+        {
+          "provider": "agent37",
+          "for": "If the team does not want a terminal",
+          "why": "One-click Claude Code on each developer's own Anthropic account, so logins stay separate.",
+          "watch": "One instance per developer: five Pro instances are about $150 a month, and team roles need the $99.99 Max plan. These plans are separate from the Cloud machines the calculator prices.",
+          "link": "https://www.agent37.com/docs/agents-api/templates"
+        }
+      ],
+      "outside": "Anthropic runs Claude Code [cloud sessions](https://code.claude.com/docs/en/sandbox-environments) on its own machines for Claude subscribers, with no separate machine price. [Claude Team](https://claude.com/pricing) is $25 per seat a month ($20 billed annually) for 2 to 150 people, with central billing, single sign-on and each member on their own login. Claude Enterprise starts at 20 seats, which is why a team of five starts on Team.",
+      "features": [
+        "built-in-agents",
+        "teams-accounts",
+        "keys-secrets",
+        "storage",
+        "lifecycle",
+        "sizes-regions"
+      ],
+      "sources": [
+        {
+          "label": "Claude Code overview",
+          "url": "https://code.claude.com/docs/en/overview"
+        },
+        {
+          "label": "Claude Code: setup",
+          "url": "https://code.claude.com/docs/en/setup"
+        },
+        {
+          "label": "Claude Code: authentication",
+          "url": "https://code.claude.com/docs/en/authentication"
+        },
+        {
+          "label": "Claude Code: cloud environments",
+          "url": "https://code.claude.com/docs/en/cloud-environments"
+        },
+        {
+          "label": "Vercel: Claude Code harness",
+          "url": "https://vercel.com/docs/agent-harnesses/claude-code"
+        },
+        {
+          "label": "Lizard: Claude Code credentials",
+          "url": "https://lizard.build/docs/sandboxes/guides/claude-code"
+        },
+        {
+          "label": "Claude pricing",
+          "url": "https://claude.com/pricing"
+        },
+        {
+          "label": "Battleships: software-factory workload (built by the Boat team)",
+          "url": "https://battleships.dev/data/rankings/fullstack.json"
+        }
+      ]
+    },
+    {
+      "id": "scheduled-scraper",
+      "title": "Run a scraper on a schedule",
+      "kicker": "Scheduled job",
+      "question": "I want a script that checks a few websites four times a day and saves what it finds, without paying for a machine that sits idle.",
+      "standfirst": "A scheduled scraper runs for minutes a day and is idle the rest. What matters is where the schedule lives and where the results go, not the machine. A schedule inside a sleeping machine does not fire, so look for providers whose platform starts the run.",
+      "preset": "scraper",
+      "whatItIs": [
+        "A scraper fetches a set of pages, picks out the fields you care about (prices, listings, headlines) and writes them to a file or database. Pages that build themselves with JavaScript need a **headless browser**, a real browser such as Chromium running without a screen, driven by a tool like [Playwright](https://playwright.dev/docs/intro). Plain pages only need a download.",
+        "The schedule is usually written as a **cron** expression, a short line such as \"run at 6, 12, 18 and 24 o'clock\" named after the Unix tool that runs jobs on a timetable. The key question is who keeps that clock. Agent 37 says it directly: \"a crontab inside the container only runs while the container is running\" ([Agent 37](https://www.agent37.com/docs/agents-api/crons)).",
+        "So there are two designs: a scheduler run by the platform that starts a fresh machine for each run (cheap), or a machine that stays on all month with its own timer (simple, and billed around the clock)."
+      ],
+      "needs": [
+        {
+          "label": "Machine size",
+          "value": "No vendor publishes one. 1 vCPU / 2 GiB / 10 GiB fits a headless browser and logs; Battleships models one browser visit at 1 vCPU / 2 GiB / 5 GiB. Plain downloads fit in 1 GiB.",
+          "source": "https://battleships.dev/data/presets.json"
+        },
+        {
+          "label": "Does it stay on?",
+          "value": "No, if the schedule lives outside the machine. Four ten-minute runs a day is about 20 machine-hours a month, not 730. A timer inside the machine only works if the machine stays on.",
+          "source": "https://www.agent37.com/docs/agents-api/crons"
+        },
+        {
+          "label": "What must survive a restart",
+          "value": "The results, kept outside the run: Runtime's jobs, for example, start \"a fresh sandbox\" every time and tell you to put data on a volume. Also cookies if a site needs a login, and a marker of what was already saved so a rerun does not duplicate rows.",
+          "source": "https://withruntime.com/docs/jobs"
+        },
+        {
+          "label": "Browser, Docker, GPU",
+          "value": "A browser only for pages built with JavaScript; it is the largest memory cost. Docker is optional. A database is optional on the machine but needed somewhere. No GPU.",
+          "source": "https://playwright.dev/docs/intro"
+        },
+        {
+          "label": "How busy it is",
+          "value": "Busy while a run is open: about 40% CPU in Battleships' scraping workload, because a browser does real work. Idle for the rest of the day.",
+          "source": "https://battleships.dev/data/rankings/scrape.json"
+        }
+      ],
+      "routes": [
+        {
+          "provider": "lizard",
+          "tier": "one-click",
+          "noTerminal": "yes",
+          "what": "Lizard's sandboxes have no scheduler, but its one-click n8n template gives you n8n's Schedule Trigger and a PostgreSQL database for the results. Build the scrape as a workflow.",
+          "link": {
+            "title": "Lizard: Deploy n8n",
+            "url": "https://lizard.build/deploy/n8n--n8n"
+          }
+        },
+        {
+          "provider": "boxd",
+          "tier": "guide",
+          "noTerminal": "partly",
+          "what": "The best fit among the sandboxes: a schedule in a script, and the platform \"wakes a sleeping machine, on standby or hibernated, shortly before\" it is due. A missed slot runs once on wake.",
+          "link": {
+            "title": "boxd: jobs",
+            "url": "https://docs.boxd.sh/guides/automations/jobs"
+          }
+        },
+        {
+          "provider": "runtime",
+          "tier": "guide",
+          "noTerminal": "partly",
+          "what": "Scheduled jobs run a command in a fresh sandbox on a cron, keep its output and exit code, and show up on a Jobs page in your account. Results go to a volume or your own storage.",
+          "link": {
+            "title": "Runtime: scheduled jobs",
+            "url": "https://withruntime.com/docs/jobs"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "tier": "guide",
+          "noTerminal": "partly",
+          "what": "The schedule is a Workers feature, Cron Triggers: the scheduled Worker can start a sandbox for the scrape. Each run gets up to 15 minutes of CPU on the paid plan.",
+          "link": {
+            "title": "Cloudflare: Cron Triggers",
+            "url": "https://developers.cloudflare.com/workers/configuration/cron-triggers/"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "tier": "guide",
+          "noTerminal": "partly",
+          "what": "Vercel Cron Jobs call a function, which can start a sandbox. The free Hobby plan runs crons only once a day, which is too rare here; Pro allows once a minute.",
+          "link": {
+            "title": "Vercel: cron job limits",
+            "url": "https://vercel.com/docs/cron-jobs/usage-and-pricing"
+          }
+        },
+        {
+          "provider": "agent37",
+          "tier": "guide",
+          "noTerminal": "partly",
+          "what": "Platform crons fire \"whether the instance is awake or asleep\", but they wake an agent and give it a prompt, and are not offered on the base or n8n templates. For a script, the n8n template with auto-sleep off is the other route.",
+          "link": {
+            "title": "Agent 37: crons",
+            "url": "https://www.agent37.com/docs/agents-api/crons"
+          }
+        },
+        {
+          "provider": "modal",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "A schedule attaches to a Modal function written in code; the function can do the scrape or start a sandbox.",
+          "link": {
+            "title": "Modal: scheduled functions",
+            "url": "https://modal.com/docs/guide/cron"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "Sandbox schedules run a command inside a sandbox on a cron, with a run history; up to 100 per sandbox. Set up from code or the API.",
+          "link": {
+            "title": "Blaxel: schedules",
+            "url": "https://docs.blaxel.ai/Sandboxes/Schedules"
+          }
+        },
+        {
+          "provider": "boat",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "No scheduler. A timer inside a machine left on works, but the machine is billed all month; otherwise something outside has to start a sandbox per run.",
+          "link": {
+            "title": "Boat: always-on services",
+            "url": "https://docs.boat.dev/long-running-tasks/always-on-services"
+          }
+        },
+        {
+          "provider": "daytona",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No scheduler found. A scheduler of your own calls Daytona's API to create a sandbox for each run.",
+          "link": {
+            "title": "Daytona docs",
+            "url": "https://www.daytona.io/docs/en/"
+          }
+        },
+        {
+          "provider": "e2b",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No scheduler found. E2B is driven from code, so the schedule lives in your app or another service.",
+          "link": {
+            "title": "E2B docs",
+            "url": "https://e2b.dev/docs"
+          }
+        },
+        {
+          "provider": "instabox",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No scheduler found. A machine wakes on an API call or a visit to its public address, so an outside scheduler can start each run.",
+          "link": {
+            "title": "InstaBox: concepts",
+            "url": "https://instabox.sh/docs/concepts"
+          }
+        },
+        {
+          "provider": "morph",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No scheduler found. An outside scheduler can wake a Devbox with a web request, but its own clock stops while it is paused.",
+          "link": {
+            "title": "Morph: wake on request",
+            "url": "https://cloud.morph.so/docs/documentation/instances/wake-on"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No scheduler found. Idle pause and auto-stop are adjustable, so an outside scheduler plus the API is the route.",
+          "link": {
+            "title": "Sandboxer: long-running tasks",
+            "url": "https://sandboxer.com/docs/long-running"
+          }
+        },
+        {
+          "provider": "sprites",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No scheduler found. The Tasks API keeps a Sprite awake during a run, but something outside has to start it.",
+          "link": {
+            "title": "Sprites: keeping Sprites running",
+            "url": "https://docs.fly.io/sprites/keeping-sprites-running.md"
+          }
+        }
+      ],
+      "picks": [
+        {
+          "provider": "boxd",
+          "for": "If you want the machine to wake for the schedule",
+          "why": "The platform keeps the schedule and wakes the machine shortly before each run, so it can sleep in between. Four ten-minute runs a day is about $1.50 a month.",
+          "watch": "The schedule is written as a script file, and the $30 of starting credit needs a card.",
+          "link": "https://docs.boxd.sh/guides/automations/jobs"
+        },
+        {
+          "provider": "runtime",
+          "for": "If you want a fresh machine each run",
+          "why": "Scheduled jobs start a clean sandbox on a cron and keep each run's output on a Jobs page. CPU is billed only while it works: about $0.50 a month here.",
+          "watch": "Nothing on a job's own disk survives the run; save results to a volume or your own database. One US region.",
+          "link": "https://withruntime.com/docs/jobs"
+        },
+        {
+          "provider": "lizard",
+          "for": "If you do not want to write code",
+          "why": "The one-click n8n template gives you a visual schedule, web and browser steps, and a database for the results, inside the $19 monthly plan.",
+          "watch": "n8n stays on all month to keep its schedule, so it costs more than the run itself. It runs on Lizard's app platform, not the sandbox the calculator prices.",
+          "link": "https://lizard.build/deploy/n8n--n8n"
+        }
+      ],
+      "outside": "Many scrapes need no sandbox at all. [Cloudflare Workers Cron Triggers](https://developers.cloudflare.com/workers/platform/pricing/) can fetch and parse pages for free up to 100,000 requests a day, or within the $5 monthly paid plan. [Vercel Cron Jobs](https://vercel.com/docs/cron-jobs/usage-and-pricing) are included on every plan but run only once a day on Hobby. [Modal](https://modal.com/docs/guide/cron) schedules have no plan fee. [n8n's Schedule Trigger](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.scheduletrigger) is free self-hosted, or from €20 a month on n8n Cloud.",
+      "features": [
+        "lifecycle",
+        "billing-models",
+        "storage",
+        "outbound-network",
+        "ways-to-drive"
+      ],
+      "sources": [
+        {
+          "label": "Agent 37: crons",
+          "url": "https://www.agent37.com/docs/agents-api/crons"
+        },
+        {
+          "label": "boxd: jobs",
+          "url": "https://docs.boxd.sh/guides/automations/jobs"
+        },
+        {
+          "label": "Runtime: scheduled jobs",
+          "url": "https://withruntime.com/docs/jobs"
+        },
+        {
+          "label": "Cloudflare: Cron Triggers",
+          "url": "https://developers.cloudflare.com/workers/configuration/cron-triggers/"
+        },
+        {
+          "label": "Vercel: cron jobs",
+          "url": "https://vercel.com/docs/cron-jobs"
+        },
+        {
+          "label": "Playwright: introduction",
+          "url": "https://playwright.dev/docs/intro"
+        },
+        {
+          "label": "Battleships: scraping workload (built by the Boat team)",
+          "url": "https://battleships.dev/data/rankings/scrape.json"
+        }
+      ]
+    },
+    {
+      "id": "mcp-server",
+      "title": "Host your own MCP server",
+      "kicker": "MCP server",
+      "question": "I built tools for Claude as an MCP server, and I want it at a web address so Claude can use them without anything running on my laptop.",
+      "standfirst": "A remote MCP server is a small web service that gives an AI client your tools. It needs a public HTTPS address that answers, and very little else. One provider deploys one in a click, a few publish guides, and several providers' own MCP servers are something else entirely.",
+      "preset": "mcp",
+      "whatItIs": [
+        "The [Model Context Protocol](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports) (MCP) is how AI apps such as Claude find and use outside tools: search your documents, file a ticket, query a database. An **MCP server** is the program that offers those tools.",
+        "A local server runs on your own computer, started by the app. A remote one runs at a web address and speaks \"Streamable HTTP\", so Claude or [Claude Code](https://code.claude.com/docs/en/mcp) can connect from anywhere. Claude's guide says a remote server \"runs on infrastructure you host and is reachable over the internet\" ([Claude](https://claude.com/docs/connectors/building)).",
+        "Watch the wording on provider sites. Daytona, Sprites, Runtime and E2B all document MCP servers, but theirs let an AI agent control their sandboxes, or run MCP tools privately for your own agent. They are not a way to host your server for Claude."
+      ],
+      "needs": [
+        {
+          "label": "Machine size",
+          "value": "No vendor publishes one. A server whose tools call other services is a small web process: 1 vCPU / 1 GiB / 10 GiB covers it, logs and an optional session store. A server whose tools run code or a browser should be sized like that work.",
+          "source": "https://modelcontextprotocol.io/specification/2025-06-18/basic/transports"
+        },
+        {
+          "label": "Does it stay on?",
+          "value": "It must answer whenever the client calls. A host that sleeps can work if it wakes on the incoming request: Lizard's guide sleeps after 10 quiet minutes, and the first call afterwards takes longer. Claude allows 240 seconds per tool call.",
+          "source": "https://lizard.build/docs/guides/deploy-mcp-server"
+        },
+        {
+          "label": "What must survive a restart",
+          "value": "Usually nothing: Cloudflare's template builds a fresh server for each request. If you use OAuth (a standard sign-in so only allowed users can connect), the signing keys and registered clients must survive, or every client has to sign in again.",
+          "source": "https://developers.cloudflare.com/agents/model-context-protocol/guides/remote-mcp-server/"
+        },
+        {
+          "label": "Browser, Docker, GPU",
+          "value": "No browser unless a tool drives one. Docker is optional. A database only if a tool needs one, and it can live elsewhere. No GPU: the model runs on the client's side.",
+          "source": "https://claude.com/docs/connectors/building"
+        },
+        {
+          "label": "How busy it is",
+          "value": "Idle between tool calls and busy for milliseconds during one. There is no benchmark for it; the calculator uses 2%, below Battleships' 6% for an always-on agent, because the server only passes calls on.",
+          "source": "https://battleships.dev/data/rankings/employees.json"
+        }
+      ],
+      "routes": [
+        {
+          "provider": "cloudflare-sandbox",
+          "tier": "one-click",
+          "noTerminal": "yes",
+          "what": "A Deploy to Workers button creates a remote MCP server at a workers.dev address ending in /mcp. This is a Cloudflare Worker, not the Sandbox product.",
+          "link": {
+            "title": "Cloudflare: build a remote MCP server",
+            "url": "https://developers.cloudflare.com/agents/model-context-protocol/guides/remote-mcp-server/"
+          },
+          "price": "Workers Free plan; Workers Paid from $5 a month"
+        },
+        {
+          "provider": "lizard",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "A complete guide: Streamable HTTP, a token check so only your clients get in, a health check, a public HTTPS address and sleep when idle. Deployed from the command line.",
+          "link": {
+            "title": "Lizard: host a remote MCP server",
+            "url": "https://lizard.build/docs/guides/deploy-mcp-server"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "One command creates a TypeScript or Python MCP server, deployed as a Blaxel Function with a global web address. Command line, not dashboard.",
+          "link": {
+            "title": "Blaxel: create an MCP server",
+            "url": "https://docs.blaxel.ai/Functions/Create-MCP-server"
+          }
+        },
+        {
+          "provider": "modal",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official example deploys a stateless MCP server, written in Python, as a Modal app.",
+          "link": {
+            "title": "Modal: stateless MCP server",
+            "url": "https://modal.com/docs/examples/mcp_server_stateless"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "tier": "guide",
+          "noTerminal": "partly",
+          "what": "A detailed guide runs each MCP server in its own sandbox at a private address with its own token. Suited to clients you control, not to Claude's web connector.",
+          "link": {
+            "title": "Sandboxer: one MCP server per sandbox",
+            "url": "https://sandboxer.com/guides/run-each-mcp-server-in-its-own-sandbox"
+          }
+        },
+        {
+          "provider": "boat",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Run the server and make its port public; Boat gives the port a public address that stays the same after resume. No custom domains, and no MCP guide.",
+          "link": {
+            "title": "Boat: pricing and public URLs",
+            "url": "https://docs.boat.dev/pricing"
+          }
+        },
+        {
+          "provider": "boxd",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "A machine plus a self-serve custom domain, with HTTPS set up for you, makes a clean MCP host. No MCP guide.",
+          "link": {
+            "title": "boxd: custom domains",
+            "url": "https://docs.boxd.sh/guides/custom-domains"
+          }
+        },
+        {
+          "provider": "instabox",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "A public port works and wakes a paused machine, but published ports have no login: \"anyone can reach the whole service\". Put the access check in the server. No MCP guide.",
+          "link": {
+            "title": "InstaBox: ports",
+            "url": "https://instabox.sh/docs/ports"
+          }
+        },
+        {
+          "provider": "morph",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Public HTTP services and wake on request make a Devbox a workable host. No MCP guide.",
+          "link": {
+            "title": "Morph: HTTP services",
+            "url": "https://cloud.morph.so/docs/documentation/instances/http-services"
+          }
+        },
+        {
+          "provider": "runtime",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Runtime's catalogue MCP servers run at private addresses for your own agent. Hosting yours for Claude is a normal sandbox with a custom domain; no guide.",
+          "link": {
+            "title": "Runtime: overview",
+            "url": "https://withruntime.com/llms.txt"
+          }
+        },
+        {
+          "provider": "agent37",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No MCP template. A custom image can run the server, and every port gets a public agent37.app address. No MCP guide.",
+          "link": {
+            "title": "Agent 37: templates",
+            "url": "https://www.agent37.com/docs/agents-api/templates"
+          }
+        },
+        {
+          "provider": "daytona",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Daytona's own MCP server lets an AI agent control Daytona sandboxes. Hosting your own server is a manual install with no guide.",
+          "link": {
+            "title": "Daytona: its MCP server",
+            "url": "https://www.daytona.io/docs/en/mcp"
+          }
+        },
+        {
+          "provider": "e2b",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "E2B's MCP gateway runs MCP tools inside a sandbox for your agent, which is the opposite direction. Sessions also end after one or 24 hours.",
+          "link": {
+            "title": "E2B: MCP gateway",
+            "url": "https://docs.e2b.dev/mcp-gateway"
+          }
+        },
+        {
+          "provider": "sprites",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Sprites publishes a remote MCP server for controlling Sprites. Hosting yours means a service on a port, which wakes on a request; no guide.",
+          "link": {
+            "title": "Sprites: its remote MCP server",
+            "url": "https://docs.fly.io/sprites/integrations/remote-mcp.md"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "A sandbox port gets a public address, but sandboxes are made for one task and end; a Vercel Function would be the simpler host. No MCP guide.",
+          "link": {
+            "title": "Vercel Sandbox: concepts",
+            "url": "https://vercel.com/docs/sandbox/concepts"
+          }
+        }
+      ],
+      "picks": [
+        {
+          "provider": "cloudflare-sandbox",
+          "for": "If you do not want a terminal",
+          "why": "The only one-click route: a Deploy to Workers button creates a working remote MCP server, free up to 100,000 requests a day.",
+          "watch": "It is a Worker, not a sandbox, so the calculator's Cloudflare Sandbox price does not apply. The free plan allows 10 ms of CPU per request, enough for tools that call other services but not for heavy ones.",
+          "link": "https://developers.cloudflare.com/agents/model-context-protocol/guides/remote-mcp-server/"
+        },
+        {
+          "provider": "lizard",
+          "for": "If you want a guide that covers access",
+          "why": "The most complete guide, including a token check and sleep when idle, so a quiet server costs little. Inside the $19 monthly plan that comes back as usage.",
+          "watch": "Its sample token expires after an hour and the signing key is not saved; use your own token issuer for a lasting server.",
+          "link": "https://lizard.build/docs/guides/deploy-mcp-server"
+        },
+        {
+          "provider": "runtime",
+          "for": "If you want an always-on machine and your own domain",
+          "why": "CPU is billed only while it works, so a small server answering all month is about $6, with a custom domain.",
+          "watch": "No MCP guide; you set up the server, HTTPS address and access check yourself. One US region.",
+          "link": "https://withruntime.com/docs/pricing"
+        }
+      ],
+      "outside": "[Cloudflare Workers](https://developers.cloudflare.com/workers/platform/pricing/) on their own are the cheapest home: free up to 100,000 requests a day, or a $5 monthly minimum. [Vercel Functions](https://vercel.com/docs/plans/pro-plan) are free on Hobby, with a $20 monthly Pro fee. [Render](https://render.com/pricing) runs an always-on web service from $7 a month for 512 MB.",
+      "features": [
+        "reaching-it",
+        "custom-domains",
+        "idle-timers",
+        "keys-secrets",
+        "billing-models"
+      ],
+      "sources": [
+        {
+          "label": "MCP specification: transports",
+          "url": "https://modelcontextprotocol.io/specification/2025-06-18/basic/transports"
+        },
+        {
+          "label": "Claude: build an MCP server",
+          "url": "https://claude.com/docs/connectors/building"
+        },
+        {
+          "label": "Claude Code: MCP",
+          "url": "https://code.claude.com/docs/en/mcp"
+        },
+        {
+          "label": "Cloudflare: build a remote MCP server",
+          "url": "https://developers.cloudflare.com/agents/model-context-protocol/guides/remote-mcp-server/"
+        },
+        {
+          "label": "Lizard: host a remote MCP server",
+          "url": "https://lizard.build/docs/guides/deploy-mcp-server"
+        },
+        {
+          "label": "Cloudflare Workers pricing",
+          "url": "https://developers.cloudflare.com/workers/platform/pricing/"
+        },
+        {
+          "label": "Battleships: always-on assistant workload (built by the Boat team)",
+          "url": "https://battleships.dev/data/rankings/employees.json"
+        }
+      ]
     }
   ]
 }
