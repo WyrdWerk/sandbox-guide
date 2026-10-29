@@ -29,6 +29,31 @@ export interface Workload {
    * only this share; the rest is billed as stopped time.
    */
   awake: number;
+  /** Optional model estimate: a model id from data/models.json, or "" for none. */
+  model: string;
+  /** Messages or tasks a day that call the model. */
+  messagesPerDay: number;
+  /** Thousands of tokens per message, mostly a re-sent cached prompt. */
+  kTokens: number;
+}
+
+/** A model's price per million tokens at TokenWatch's agent mix, zero-retention offerings only. */
+export interface ModelPrice {
+  id: string;
+  label: string;
+  kind: string;
+  offerings: number;
+  lowest: { provider: string; rate: number };
+  median: number;
+  url: string;
+}
+
+/** Monthly model cost at the median and the lowest zero-retention price, over 30 days. */
+export function modelCost(w: Workload, models: ModelPrice[]) {
+  const m = models.find((x) => x.id === w.model);
+  if (!m || w.messagesPerDay <= 0 || w.kTokens <= 0) return null;
+  const millions = (w.messagesPerDay * 30 * w.kTokens) / 1000;
+  return { model: m, millions, median: millions * m.median, lowest: millions * m.lowest.rate };
 }
 
 export interface Shape {
@@ -349,36 +374,36 @@ export const presets: Record<string, { label: string; workload: Workload; why: s
   personal: {
     label: "A personal agent that stays on (Hermes, OpenClaw)",
     why: "One always-on 2 vCPU / 4 GiB / 20 GiB machine that keeps its files. It waits for messages most of the time: about 6% CPU on average, with peaks near 100% when it browses or runs a command.",
-    workload: { vcpu: 2, ram: 4, disk: 20, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.06, awake: 1 },
+    workload: { vcpu: 2, ram: 4, disk: 20, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.06, awake: 1, model: "glm-5.3", messagesPerDay: 30, kTokens: 40 },
   },
   coding: {
     label: "A coding agent for one developer",
     why: "One 4 vCPU / 8 GiB / 40 GiB machine for Claude Code or Codex, eight hours a day on 20 working days, stopped otherwise with the repository kept. The CPU works about 4% of the time on average.",
-    workload: { vcpu: 4, ram: 8, disk: 40, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 8, daysPerMonth: 20, keepDisk: true, busy: 0.04, awake: 1 },
+    workload: { vcpu: 4, ram: 8, disk: 40, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 8, daysPerMonth: 20, keepDisk: true, busy: 0.04, awake: 1, model: "claude-sonnet-5", messagesPerDay: 20, kTokens: 300 },
   },
   interpreter: {
     label: "A code interpreter inside your product",
     why: "20,000 one-minute runs a month on 2 vCPU / 4 GiB / 10 GiB machines, thrown away after each run; results go to your own storage. The CPU works about 17% of the time.",
-    workload: { vcpu: 2, ram: 4, disk: 10, mode: "tasks", tasks: 20000, taskMinutes: 1, machines: 1, hoursPerDay: 0, daysPerMonth: 30, keepDisk: false, busy: 0.17, awake: 1 },
+    workload: { vcpu: 2, ram: 4, disk: 10, mode: "tasks", tasks: 20000, taskMinutes: 1, machines: 1, hoursPerDay: 0, daysPerMonth: 30, keepDisk: false, busy: 0.17, awake: 1, model: "", messagesPerDay: 0, kTokens: 0 },
   },
   browser: {
     label: "A browser agent for a small team",
     why: "30,000 ten-minute browser sessions a month on 2 vCPU / 4 GiB / 10 GiB machines, thrown away after each. Chromium needs memory more than CPU: about 3% CPU on average.",
-    workload: { vcpu: 2, ram: 4, disk: 10, mode: "tasks", tasks: 30000, taskMinutes: 10, machines: 1, hoursPerDay: 0, daysPerMonth: 30, keepDisk: false, busy: 0.03, awake: 1 },
+    workload: { vcpu: 2, ram: 4, disk: 10, mode: "tasks", tasks: 30000, taskMinutes: 10, machines: 1, hoursPerDay: 0, daysPerMonth: 30, keepDisk: false, busy: 0.03, awake: 1, model: "", messagesPerDay: 0, kTokens: 0 },
   },
   a: {
     label: "A: 1,000 short tasks",
     why: "The site's shared workload A: 1,000 ten-minute tasks a month on 2 vCPU / 4 GiB, deleted after each.",
-    workload: { vcpu: 2, ram: 4, disk: 10, mode: "tasks", tasks: 1000, taskMinutes: 10, machines: 1, hoursPerDay: 0, daysPerMonth: 30, keepDisk: false, busy: 0.5, awake: 1 },
+    workload: { vcpu: 2, ram: 4, disk: 10, mode: "tasks", tasks: 1000, taskMinutes: 10, machines: 1, hoursPerDay: 0, daysPerMonth: 30, keepDisk: false, busy: 0.5, awake: 1, model: "", messagesPerDay: 0, kTokens: 0 },
   },
   b: {
     label: "B: one always-on box",
     why: "The site's shared workload B: one 4 vCPU / 8 GiB / 50 GiB machine running all month.",
-    workload: { vcpu: 4, ram: 8, disk: 50, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.1, awake: 1 },
+    workload: { vcpu: 4, ram: 8, disk: 50, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.1, awake: 1, model: "", messagesPerDay: 0, kTokens: 0 },
   },
   c: {
     label: "C: three hours a day",
     why: "The site's shared workload C: one 2 vCPU / 4 GiB / 20 GiB machine, three hours a day for 30 days, stopped otherwise with its files kept.",
-    workload: { vcpu: 2, ram: 4, disk: 20, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 3, daysPerMonth: 30, keepDisk: true, busy: 0.1, awake: 1 },
+    workload: { vcpu: 2, ram: 4, disk: 20, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 3, daysPerMonth: 30, keepDisk: true, busy: 0.1, awake: 1, model: "", messagesPerDay: 0, kTokens: 0 },
   },
 };
