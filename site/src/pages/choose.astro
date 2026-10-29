@@ -1,0 +1,198 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { pricing, providers, useCases } from "../lib/data";
+import modelData from "../data/models.json";
+
+// Everything the chooser needs, computed in the browser with the calculator's own engine.
+const payload = {
+  cards: pricing,
+  names: Object.fromEntries(providers.map((p) => [p.id, p.name])),
+  models: modelData.models,
+  useCases: useCases.map((u) => ({ id: u.id, title: u.title, preset: u.preset, routes: u.routes })),
+};
+const jobs = [
+  ...useCases.map((u) => ({ value: u.id, label: u.title })),
+  { value: "other", label: "Something else" },
+];
+---
+
+<Base title="Help me choose" description="Four plain questions, then two or three providers that fit, with the reasons and a monthly price.">
+  <PageHeader
+    kicker="Help me choose"
+    title="Four questions, then a short list"
+    standfirst="Answer in your own terms. The list below updates as you go: providers that cannot do the job are left out and say why, the rest are ordered by how easy they are for you and then by price."
+    meta={["Runs in your browser", "Same prices as the calculator", "Nothing is sent anywhere"]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush" aria-label="Questions and answer">
+      <div class="chooser">
+        <form class="chooser__questions" id="chooser" onsubmit="return false">
+          <fieldset class="chooser__q">
+            <legend><span class="chooser__n">1</span> What will the agent do?</legend>
+            {jobs.map((job, i) => (
+              <label><input type="radio" name="job" value={job.value} checked={i === 0} /> {job.label}</label>
+            ))}
+          </fieldset>
+          <fieldset class="chooser__q">
+            <legend><span class="chooser__n">2</span> Are you comfortable typing commands in a terminal?</legend>
+            <label><input type="radio" name="terminal" value="no" checked /> No, I want to click through a website</label>
+            <label><input type="radio" name="terminal" value="some" /> I can copy and paste instructions</label>
+            <label><input type="radio" name="terminal" value="yes" /> Yes</label>
+          </fieldset>
+          <fieldset class="chooser__q" data-ask="machines">
+            <legend><span class="chooser__n">3</span> When does it need to be running?</legend>
+            <label><input type="radio" name="when" value="always" checked /> All the time, so it can answer whenever I message it</label>
+            <label><input type="radio" name="when" value="work" /> During working hours</label>
+            <label><input type="radio" name="when" value="sometimes" /> An hour or two a day</label>
+          </fieldset>
+          <fieldset class="chooser__q">
+            <legend><span class="chooser__n">4</span> What can you spend on the machine each month?</legend>
+            <label><input type="radio" name="budget" value="10" /> Under $10</label>
+            <label><input type="radio" name="budget" value="30" checked /> Under $30</label>
+            <label><input type="radio" name="budget" value="100" /> Under $100</label>
+            <label><input type="radio" name="budget" value="100000" /> Whatever it takes</label>
+          </fieldset>
+        </form>
+
+        <div class="chooser__answer" aria-live="polite">
+          <p class="chooser__lead" id="lead"></p>
+          <ol class="chooser__picks" id="picks"></ol>
+          <details class="chooser__left">
+            <summary id="left-summary">Why the others were left out</summary>
+            <ul id="left"></ul>
+          </details>
+          <p class="section__note" id="next"></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="application/json" id="chooser-data" set:html={JSON.stringify(payload)}></script>
+  <script>
+    import { price, presets, formatMoney, modelCost, type RateCard, type Workload } from "../lib/cost";
+
+    type Route = { provider: string; tier: string; noTerminal: "yes" | "partly" | "no"; what: string; price?: string; link: { title: string; url: string } | null };
+    const data = JSON.parse(document.getElementById("chooser-data")!.textContent!);
+    const cards: RateCard[] = data.cards;
+    const names: Record<string, string> = data.names;
+    const form = document.getElementById("chooser") as HTMLFormElement;
+    const val = (name: string) => (form.querySelector(`input[name="${name}"]:checked`) as HTMLInputElement).value;
+    const tierRank: Record<string, number> = { "one-click": 0, preinstalled: 1, guide: 2, manual: 3, backend: 5, none: 6 };
+
+    function el(tag: string, cls: string, text?: string) {
+      const node = document.createElement(tag);
+      if (cls) node.className = cls;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+
+    function render() {
+      const job = val("job");
+      const terminal = val("terminal");
+      const when = val("when");
+      const budget = Number(val("budget"));
+      const useCase = data.useCases.find((u: { id: string }) => u.id === job);
+      const presetKey = useCase?.preset ?? "personal";
+      const w: Workload = { ...presets[presetKey].workload };
+      const machines = w.mode === "machines";
+      (form.querySelector('[data-ask="machines"]') as HTMLElement).hidden = !machines;
+      if (machines) {
+        if (when === "always") Object.assign(w, { hoursPerDay: 24, daysPerMonth: 30 });
+        if (when === "work") Object.assign(w, { hoursPerDay: 8, daysPerMonth: 22 });
+        if (when === "sometimes") Object.assign(w, { hoursPerDay: 2, daysPerMonth: 30 });
+      }
+      const routes: Route[] = useCase?.routes ?? [];
+      const routeOf = (id: string) => routes.find((r) => r.provider === id);
+
+      const kept: { id: string; total: number; route?: Route; reason: string; over: boolean; shape: string }[] = [];
+      const left: string[] = [];
+      for (const card of cards) {
+        const q = price(card, w);
+        const route = routeOf(card.provider);
+        const name = names[card.provider];
+        if (route && (route.tier === "none" || route.tier === "backend") && machines) {
+          left.push(`${name}: ${route.what}`);
+          continue;
+        }
+        if (terminal === "no" && routes.length && route?.noTerminal !== "yes") {
+          left.push(`${name}: setting it up means typing commands${route ? ` (${route.what})` : "."}`);
+          continue;
+        }
+        if (terminal === "no" && !routes.length) {
+          // No setup data for this job: everything is set up from code.
+          left.push(`${name}: ${useCase ? "this job is set up from code, not from a website." : "no click-through setup is documented for a general job."}`);
+          continue;
+        }
+        if (!q.feasible && !(route?.price)) {
+          left.push(`${name}: ${q.problems[0]}`);
+          continue;
+        }
+        const total = route?.price ? NaN : q.total;
+        kept.push({ id: card.provider, total, route, reason: card.summary, over: q.total > budget && !route?.price, shape: `${q.plan} · ${q.shape}` });
+      }
+      kept.sort((a, b) => {
+        const ta = a.route ? tierRank[a.route.tier] : 4;
+        const tb = b.route ? tierRank[b.route.tier] : 4;
+        const ease = terminal === "yes" ? 0 : ta - tb;
+        return Number(a.over) - Number(b.over) || ease || (isNaN(a.total) ? 0 : a.total) - (isNaN(b.total) ? 0 : b.total);
+      });
+      const top = kept.slice(0, 3);
+      const ai = modelCost(w, data.models);
+
+      const picks = document.getElementById("picks")!;
+      picks.replaceChildren();
+      for (const [i, k] of top.entries()) {
+        const li = el("li", "chooser__pick");
+        const head = el("div", "chooser__pick-head");
+        const title = el("a", "chooser__name", names[k.id]);
+        (title as HTMLAnchorElement).href = `/providers/${k.id}/`;
+        head.append(el("span", "chooser__rank", String(i + 1)), title);
+        const priceText = k.route?.price ?? `${formatMoney(k.total)} a month for the machine`;
+        head.append(el("span", "chooser__price", priceText));
+        li.append(head);
+        if (k.route) li.append(el("p", "chooser__why", k.route.what));
+        else li.append(el("p", "chooser__why", k.reason));
+        if (!k.route?.price) li.append(el("p", "chooser__shape", k.shape));
+        if (k.over) li.append(el("p", "chooser__warn", `Over your budget of ${formatMoney(budget)}; it is here because nothing in budget fits better.`));
+        if (k.route?.link) {
+          const a = el("a", "chooser__link", `${k.route.link.title} ↗`) as HTMLAnchorElement;
+          a.href = k.route.link.url;
+          a.rel = "noreferrer noopener";
+          li.append(a);
+        }
+        picks.append(li);
+      }
+
+      const lead = document.getElementById("lead")!;
+      lead.textContent = top.length
+        ? `${top.length === 1 ? "One provider fits" : `${top.length} providers fit best`}, out of ${kept.length} that can do this.` + (ai ? ` Add about ${formatMoney(ai.median)} a month for the AI model itself (${ai.model.label}).` : "")
+        : "Nothing fits every answer. Try “I can copy and paste instructions”, or a larger budget.";
+
+      const leftList = document.getElementById("left")!;
+      leftList.replaceChildren(...left.map((t) => el("li", "", t)));
+      document.getElementById("left-summary")!.textContent = `Why the other ${left.length} were left out`;
+      (leftList.parentElement as HTMLElement).hidden = left.length === 0;
+
+      const next = document.getElementById("next")!;
+      next.replaceChildren();
+      const params = new URLSearchParams({ preset: "custom" });
+      for (const [key, value] of Object.entries(w)) params.set(key, String(value));
+      const links: [string, string][] = [];
+      if (useCase) links.push([`/use-cases/${useCase.id}/`, `Read the ${useCase.title.toLowerCase()} guide`]);
+      if (top.length > 1) links.push([`/compare/side-by-side/?p=${top.map((k) => k.id).join(",")}`, "compare these head to head"]);
+      links.push([`/costs/?${params}`, "change the numbers in the calculator"]);
+      links.forEach(([href, text], i) => {
+        if (i) next.append(document.createTextNode(i === links.length - 1 ? ", or " : ", "));
+        const a = el("a", "", text) as HTMLAnchorElement;
+        a.href = href;
+        next.append(a);
+      });
+      next.append(document.createTextNode("."));
+    }
+
+    form.addEventListener("change", render);
+    render();
+  </script>
+</Base>

@@ -209,6 +209,8 @@ export interface UseCase {
     noTerminal: "yes" | "partly" | "no";
     what: string;
     link: { title: string; url: string } | null;
+    /** A managed product's own price, when the one-click route is not the machine the calculator prices. */
+    price?: string;
   }[];
   picks: { provider: string; for: string; why: string; watch: string; link: string }[];
   outside: string;
