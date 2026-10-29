@@ -176,7 +176,7 @@
     ],
     "badly": [
       "An always-on agent: the free plan pauses at 30 idle minutes and caps a run at 8 hours.",
-      "A client-facing service: public ports have no authentication, and there is no custom domain.",
+      "A client-facing service on your own address: there is no custom domain, and only private ports carry a token.",
       "A US-only data-residency requirement with a published region selector or status page."
     ]
   },

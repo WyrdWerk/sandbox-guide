@@ -2121,105 +2121,2686 @@
       "feature": "reaching-it",
       "title": "Public link to a port",
       "plain": "A web address that reaches a program running in the sandbox.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "Any port",
+          "note": "A public port is permanent and needs no key; every other address on the machine still needs one.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/public-ports",
+            "quote": "an HTTPS URL for one port of one instance that anyone can reach with no credential at all",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "Public or private",
+          "note": "A preview link can be created open to anyone or behind a token.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Preview-url.md",
+            "quote": "This preview URL can be either public (does not require you to be authenticated to access it) or private",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "Up to 50 ports",
+          "note": "The link carries a token by default; adding --public removes it.",
+          "source": {
+            "url": "https://docs.boat.dev/hosting",
+            "quote": "To get a URL without a token, add `--public`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "No sign-in at all",
+          "note": "The machine's own address has nothing in front of it, so the link is the only secret.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/https",
+            "quote": "Every machine gets an HTTPS domain automatically.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "Through your Worker",
+          "shortfall": "There is no address for the machine itself; you publish a small program of your own and anyone who can open that address gets in.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/previews/",
+            "quote": "The server has no public port, so your Worker forwards requests to it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "public flag",
+          "note": "A preview link is open to anyone when the machine is marked public.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/preview.md",
+            "quote": "If a sandbox has its `public` property set to `true`, preview links are publicly accessible without authentication.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "Anyone with the link",
+          "note": "No token or login sits in front of the link.",
+          "source": {
+            "url": "https://docs.e2b.dev/network/public-url.md",
+            "quote": "By default, a sandbox's public URLs are reachable by anyone who knows them.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "16 ports",
+          "note": "Public is the default; a private port adds a token to the link.",
+          "source": {
+            "url": "https://instabox.sh/docs/ports.md",
+            "quote": "once published **public** (the default), anyone can reach the whole service until you unpublish it",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "shortfall": "Every preview link needs the machine's access token, so there is no open address to share.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/preview-urls.md",
+            "quote": "a request without the sandbox's access token gets HTTP 401",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "Open raw port only",
+          "shortfall": "A normal web port needs a connect token; only a port exposed as raw traffic is open to anyone.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-networking",
+            "quote": "you can also expose raw TCP ports to the internet",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "An HTTP service can be exposed, but whether the link is open or locked by default is not published.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post",
+            "quote": "Expose Http Service",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Paid top-up",
+          "note": "A public preview needs a paid top-up; the default preview carries a token.",
+          "source": {
+            "url": "https://withruntime.com/docs/included-usage",
+            "quote": "Public previews need a kept top-up",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "--public",
+          "note": "Private is the default and puts a token in the link; --public clears it.",
+          "source": {
+            "url": "https://sandboxer.com/docs/hosting.md",
+            "quote": "make it public (clears the token)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "public or org-only",
+          "note": "A link can be switched between open to the internet and open only to your organisation.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/networking",
+            "quote": "Public means no authentication: anyone with the URL reaches whatever the HTTP service serves.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "Per-port switch",
+          "note": "A port stays behind your key until you mark it open to everyone.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/networking.md",
+            "quote": "So traffic to that user port becomes publicly reachable from the internet without TensorLake auth.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "Exposed ports",
+          "note": "Every exposed port answers on a public address with no lock of its own.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "Exposed ports are accessible via a public URL, so be mindful of what services you run.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "private-url",
       "feature": "reaching-it",
       "title": "Private link",
       "plain": "A link only you or people with a token or login can open.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "Key or signed link",
+          "note": "The default address needs your key on every request, or a time-limited signed link.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/concepts",
+            "quote": "Instance URLs require auth on every request",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "Token per preview",
+          "note": "A private preview needs its token as part of the link or in a request header.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Preview-url.md",
+            "quote": "When you create a private preview URL a token is required to access the URL.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "Token in link",
+          "note": "The link carries a token; anyone without it is refused.",
+          "source": {
+            "url": "https://docs.boat.dev/hosting",
+            "quote": "To get a URL without a token, add `--public`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "shortfall": "Every machine address is open to the internet, and the provider offers no token or login to put in front of it.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/https",
+            "quote": "Every machine gets an HTTPS domain automatically.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "Login is your code",
+          "shortfall": "You have to write the login check in your own small program; the machine brings no token or password of its own.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/security/",
+            "quote": "When your Worker forwards a page from a sandbox, the page runs under the hostname that served it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "Token or signed link",
+          "note": "The link needs a token unless the machine is marked public; signed links can be limited to one port and one hour.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/preview.md",
+            "quote": "Otherwise, authentication is required.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "shortfall": "There is no built-in lock: anyone who has the link can open it.",
+          "source": {
+            "url": "https://docs.e2b.dev/network/public-url.md",
+            "quote": "By default, a sandbox's public URLs are reachable by anyone who knows them.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "Token in link",
+          "note": "A private port answers only requests that carry its token, and the token can be replaced.",
+          "source": {
+            "url": "https://instabox.sh/docs/ports.md",
+            "quote": "A **private** port answers only requests that carry its token.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "One token per machine",
+          "note": "One token opens every exposed port on the machine, so a link to one app also opens the rest.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/preview-urls.md",
+            "quote": "A preview URL gives a port inside a sandbox on Lizard a private HTTPS address.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "Connect token",
+          "note": "Nothing answers until a port is exposed, and a web request then needs a token you generate.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-networking",
+            "quote": "You can make authenticated HTTP and WebSocket requests to a Sandbox by generating Sandbox Connect Tokens.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "An HTTP service can be exposed, but whether the link is locked by default is not published.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post",
+            "quote": "Expose Http Service",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Token by default",
+          "note": "The link is private with a token by default, and the token can be rotated.",
+          "source": {
+            "url": "https://withruntime.com/docs/sandbox-environment",
+            "quote": "It is private, with a token, by default.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "Token in link",
+          "note": "Private is the default and the link carries a token that the provider strips before your app sees it.",
+          "source": {
+            "url": "https://sandboxer.com/docs/hosting.md",
+            "quote": "Treat a private URL like a password",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "Org token",
+          "note": "The address is limited to your organisation and needs an organisation token from outside it.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/networking",
+            "quote": "A Sprite URL is private by default. It's reachable only by members of your org, through the browser or with an org token",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "Project key",
+          "note": "Requests need your project key unless you deliberately open the port.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/networking.md",
+            "quote": "Authenticated routing is the default model for sandbox access.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "shortfall": "An exposed port is open to anyone with the link; there is no token or login in front of it.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "Exposed ports are accessible via a public URL, so be mindful of what services you run.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "ssh",
       "feature": "reaching-it",
       "title": "Real SSH",
       "plain": "Connect with a standard SSH client from your own computer.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "Over one connection",
+          "note": "A standard ssh client works, but the connection is carried over the provider's web channel rather than a dialable port.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/ssh",
+            "quote": "`ProxyCommand` is what carries the SSH stream (there is no port to dial directly)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "shortfall": "There is no SSH address or SSH server; the only shell is the provider's own terminal.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "You can explore the contents of a sandbox with an interactive terminal.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "Port 22",
+          "note": "A standard ssh client connects to the machine on port 22 with your key.",
+          "source": {
+            "url": "https://docs.boat.dev/ssh-access",
+            "quote": "Run `boat ssh <id>` for a shell.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Real SSH",
+          "note": "File copy and editor remote access work too, because it is a real SSH server.",
+          "source": {
+            "url": "https://docs.boxd.sh/quickstart",
+            "quote": "It is real SSH",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "One provider tool",
+          "shortfall": "You cannot point a normal SSH client at the machine; the only way in is a Cloudflare command-line tool.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/guides/ssh/",
+            "quote": "SSH does not expose a publicly accessible port on the Container.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "Token, 60 min",
+          "note": "You connect with a standard client using a short-lived token.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/ssh-access.md",
+            "quote": "SSH access tokens expire automatically after 60 minutes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "figure": "You build the image",
+          "shortfall": "SSH only works if you build a custom image with an SSH server and a relay inside it.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox/ssh-access.md",
+            "quote": "Connect to your sandbox via SSH using a WebSocket proxy",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "Gateway, short cert",
+          "note": "A standard ssh client connects through the provider's gateway with a short-lived certificate.",
+          "source": {
+            "url": "https://instabox.sh/docs/ssh.md",
+            "quote": "The instabox gateway terminates SSH: `ssh -p <port> <machine-id>@<host>`, with a short-lived user certificate",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "partly",
+          "figure": "Own client only",
+          "shortfall": "Its shell command works, but it is the provider's own client rather than a standard SSH connection, so ordinary SSH tools cannot connect.",
+          "source": {
+            "url": "https://lizard.build/docs/cli/ssh.md",
+            "quote": "lizard sandbox ssh",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "Install it yourself",
+          "shortfall": "The machine has no SSH server; you have to install one and open a port for it.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-networking",
+            "quote": "you can also expose raw TCP ports to the internet",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "figure": "Built in",
+          "note": "A standard SSH client connects to the devbox directly.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "through SSH, or puppeteered through the Devbox API",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "partly",
+          "figure": "Through the CLI",
+          "shortfall": "The connection goes through the provider's own command rather than a plain SSH address.",
+          "source": {
+            "url": "https://withruntime.com/docs/editors",
+            "quote": "All of it goes through Runtime's API, authenticated with your key, over one WebSocket per connection.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "sshEndpoint",
+          "note": "A standard ssh client connects to the machine's own SSH address.",
+          "source": {
+            "url": "https://sandboxer.com/docs/ssh.md",
+            "quote": "Through the tunnel with plain ssh",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "partly",
+          "figure": "Install a server",
+          "shortfall": "You must install an SSH server inside the machine and reach it through the provider's proxy.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/working-with-sprites.md",
+            "quote": "Sprites don't expose SSH directly—you'll need to install an SSH server on your",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "Standard ssh",
+          "note": "A standard client works, including file copy, editors and port forwarding.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/pty-sessions.md",
+            "quote": "Reach a running sandbox over standard SSH, or open a programmatic PTY session over WebSocket",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "SSH-like shell",
+          "shortfall": "The command line is the provider's own tool that feels like SSH; a standard SSH client cannot connect.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/working-with-sandbox",
+            "quote": "Connect to a running sandbox for interactive debugging with an SSH-like experience:",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "web-terminal",
       "feature": "reaching-it",
       "title": "Terminal in the browser",
       "plain": "Open a command line on the machine from the provider's website.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "Port 7681",
+          "note": "The machine's own shell is served as a web page you open in a browser.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/urls",
+            "quote": "A shell in the container (browser)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "Console tab",
+          "note": "The console has a Terminal tab on each sandbox.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "selecting the **Terminal** tab",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "not-published",
+          "note": "No command line on the provider's website is documented; the desktop and the command-line tool are the documented ways in.",
+          "source": {
+            "url": "https://docs.boat.dev/ssh-access",
+            "quote": "Run `boat ssh <id>` for a shell.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Console terminal",
+          "note": "The web console opens a terminal session on the machine.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/client-utilities",
+            "quote": "a console terminal",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "You build it",
+          "shortfall": "The provider gives you code for a terminal you host yourself, not a terminal on its own website.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/commands/open-a-terminal-in-the-browser/",
+            "quote": "Expose a live shell in a Linux sandbox on a web page.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "Dashboard",
+          "note": "The dashboard opens a full terminal session on the machine.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/web-terminal.md",
+            "quote": "full terminal session connected to your sandbox",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "not-published",
+          "note": "No command line on the provider's website is documented.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox/ssh-access.md",
+            "quote": "SSH access enables remote terminal sessions, SCP/SFTP file transfers",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "Dashboard",
+          "note": "The dashboard opens a shell in the machine, and a desktop view is next to it.",
+          "source": {
+            "url": "https://api.instabox.sh/v1/openapi.json",
+            "quote": "carrying a PTY (xterm-256color) of a login shell",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "Terminal tab",
+          "note": "Each sandbox page has a Terminal tab that opens a shell.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/dashboard.md",
+            "quote": "the Terminal tab opens a shell in a running sandbox",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "not-published",
+          "note": "No command line on the provider's website is documented; the documented shells are the command-line tool and your own app.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-networking",
+            "quote": "a default Sandbox has no ability to accept incoming network connections",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No command line on the provider's website is documented; the documented access is SSH, an editor and a programming interface.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/development",
+            "quote": "one-click connect from the Devboxes UI",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Console",
+          "note": "The console has a terminal that runs in the browser.",
+          "source": {
+            "url": "https://withruntime.com/docs/products",
+            "quote": "Terminal is a shell in the browser",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "Dashboard tab",
+          "note": "The dashboard's Terminal tab opens a full shell in the browser.",
+          "source": {
+            "url": "https://sandboxer.com/docs/ssh.md",
+            "quote": "The dashboard's Terminal tab opens a full PTY in your browser over the same exec WebSocket the CLI uses",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "not-published",
+          "note": "No command line on the provider's website is documented; the documented shell is the command-line tool.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/quickstart.md",
+            "quote": "Open an interactive shell",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "not-published",
+          "note": "The console shows process logs, but no browser terminal is documented; its shell sessions are built into your own app.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/process-logs.md",
+            "quote": "View, search, and filter stdout and stderr from sandbox processes in the Tensorlake Console",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "Dashboard tab",
+          "note": "The dashboard's Connect tab runs commands in the browser.",
+          "source": {
+            "url": "https://vercel.com/changelog/connect-to-and-manage-sandboxes-from-the-dashboard",
+            "quote": "Run commands, browse the filesystem, upload and download files, and inspect open ports without leaving the browser.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "tunnel",
       "feature": "reaching-it",
       "title": "Tunnel to your computer",
       "plain": "Reach a port inside the sandbox as if it were on your own machine (port forwarding).",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "ssh -L",
+          "note": "Local port forwarding works through the same SSH connection the provider documents.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/ssh",
+            "quote": "there is no port to dial directly",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "not-published",
+          "note": "The documented shell is an interactive terminal; no local port forwarding is published.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "bl connect sandbox your-sandbox-name",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "ssh -L",
+          "note": "A standard SSH connection can carry a local port forward.",
+          "source": {
+            "url": "https://docs.boat.dev/ssh-access",
+            "quote": "Run `boat ssh <id>` for a shell.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "ssh -L",
+          "note": "Local port forwarding works because the machine runs a real SSH server.",
+          "source": {
+            "url": "https://docs.boxd.sh/quickstart",
+            "quote": "It is real SSH",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "shortfall": "There is no way to map a port inside the machine onto your own computer.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/concepts/architecture/",
+            "quote": "Because all Container requests are passed through a Worker, end-users cannot make non-HTTP TCP or UDP requests to a Container instance.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "not-published",
+          "note": "No local port forwarding is documented.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/ssh-access.md",
+            "quote": "SSH access tokens expire automatically after 60 minutes.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "not-published",
+          "note": "No local port forwarding is documented.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox/ssh-access.md",
+            "quote": "Connect to your sandbox via SSH using a WebSocket proxy",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "ssh -L, yours only",
+          "note": "A local forward is private to you and does not open a public port.",
+          "source": {
+            "url": "https://instabox.sh/docs/ssh.md",
+            "quote": "It is `ssh -N -L` with the instabox certificate, so it reaches any TCP service, and only you can use it",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "not-published",
+          "note": "No local port forwarding is documented for sandboxes.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/preview-urls.md",
+            "quote": "a request without the sandbox's access token gets HTTP 401",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "not-published",
+          "note": "Its tunnels are public addresses for a port, not a mapping onto your own computer.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-networking",
+            "quote": "served from subdomains of w.modal.host",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "figure": "ssh -L",
+          "note": "Local forwarding works over the SSH connection the provider documents.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "through SSH, or puppeteered through the Devbox API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Through the API",
+          "note": "A local forward runs over one authenticated connection without opening a port on the internet.",
+          "source": {
+            "url": "https://withruntime.com/docs/editors",
+            "quote": "All of it goes through Runtime's API, authenticated with your key, over one WebSocket per connection.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "sbx forward",
+          "note": "One command maps a machine port onto your own computer.",
+          "source": {
+            "url": "https://sandboxer.com/docs/ssh.md",
+            "quote": "`sbx forward sb_k3v9x2mq --remote 5432`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "sprite proxy",
+          "note": "A local proxy maps a machine port onto your own computer.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/networking",
+            "quote": "it maps a remote port onto your machine",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "Local tunnel",
+          "note": "A local address maps straight to a port in the machine, with no public address.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/tunnels.md",
+            "quote": "Tunnels give your machine a `localhost:<port>` that maps directly to a port inside a running sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "shortfall": "Exposed ports are reachable on the internet, but there is no documented way to map one onto your own computer.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "Exposed ports are accessible via a public URL",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "raw-tcp",
       "feature": "reaching-it",
       "title": "Non-web ports",
       "plain": "Reach services that are not HTTP, such as a database or game server, over TCP.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "shortfall": "Only web traffic gets through; a database or game server cannot be reached directly.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/urls",
+            "quote": "Every port it listens on has its own HTTPS URL",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "not-published",
+          "note": "No non-web port is documented; preview links carry web traffic.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Preview-url.md",
+            "quote": "You can have multiple preview URLs per sandbox.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "IPv6 only sometimes",
+          "note": "You open the port in the machine's own network rules and connect to its address; some machines have only the newer kind of internet address, so older clients cannot get in.",
+          "source": {
+            "url": "https://docs.boat.dev/hosting",
+            "quote": "The public URL carries HTTPS and WebSockets only. For another protocol, open the port in the sandbox firewall and connect to the sandbox IP address.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "3 forwards",
+          "note": "Up to three non-web ports per machine, each on a public port number.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/port-forwarding.md",
+            "quote": "The public port is allocated for you from the **40000 to 60000** range.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "shortfall": "Web traffic only: no other kind of connection can be made to the machine from outside.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/concepts/architecture/",
+            "quote": "Because all Container requests are passed through a Worker, end-users cannot make non-HTTP TCP or UDP requests to a Container instance.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "not-published",
+          "note": "No public non-web port is documented; preview links carry web traffic.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/preview.md",
+            "quote": "Otherwise, authentication is required.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "not-published",
+          "note": "No public non-web port is documented; the published addresses carry web traffic.",
+          "source": {
+            "url": "https://docs.e2b.dev/network/public-url.md",
+            "quote": "By default, a sandbox's public URLs are reachable by anyone who knows them.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "figure": "Preview, 5 per workspace",
+          "shortfall": "Raw non-web traffic is in a preview only administrators can use, and later will be paid-plan only with five ports per workspace.",
+          "source": {
+            "url": "https://instabox.sh/docs/ports.md",
+            "quote": "In preview (admins only) until the server opens it to everyone; then paid plans only, up to 5 per workspace.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "shortfall": "Preview links carry web traffic only, so a database or game port cannot be published.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/preview-urls.md",
+            "quote": "A preview URL gives a port inside a sandbox on Lizard a private HTTPS address.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "Raw tunnels",
+          "note": "A port can be exposed as raw traffic for protocols that are not web requests.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-networking",
+            "quote": "you can also expose raw TCP ports to the internet",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No public non-web port is documented.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/http-services",
+            "quote": "Expose Http Service",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "5 per machine",
+          "note": "Up to five public non-web addresses per machine, for databases, game servers and similar.",
+          "source": {
+            "url": "https://withruntime.com/docs/networking",
+            "quote": "TCP port: a public `address:port` for anything that is not HTTP, such as Postgres, Redis, MQTT or a game server.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "partly",
+          "figure": "Through SSH only",
+          "shortfall": "There is no public non-web port; you reach one by opening a tunnel from your own computer.",
+          "source": {
+            "url": "https://sandboxer.com/docs/security.md",
+            "quote": "Only the SSH port forward (`sshEndpoint`) and hosted ports; nothing else can address the VM",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "partly",
+          "figure": "Through your computer",
+          "shortfall": "You can map a database port onto your own computer, but there is no public address for non-web traffic.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/networking",
+            "quote": "it maps a remote port onto your machine",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "partly",
+          "figure": "Through a tunnel",
+          "shortfall": "The public address carries web traffic and SSH only; a database needs a tunnel from your own computer.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/tunnels.md",
+            "quote": "Anything else (VNC's RFB protocol, the Postgres wire protocol, MySQL, Redis's RESP, MongoDB, custom binary protocols) needs a tunnel",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "shortfall": "Only web ports can be exposed, so a database or game server cannot be reached from outside.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "Exposed ports are accessible via a public URL",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "custom-domain",
       "feature": "custom-domains",
       "title": "Your own domain",
       "plain": "Serve what the machine runs at your own web address.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "partly",
+          "figure": "Dedicated domain only",
+          "shortfall": "You must hand over the whole domain and the records that direct it, so it cannot also run your website or email, and it needs $100 of top-ups first.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/domains",
+            "quote": "The whole domain’s DNS is delegated to us, so it cannot carry your website, mail, or other records.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "Wildcard subdomains",
+          "note": "Register one domain and every name under it can point at a sandbox.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Infrastructure/Custom-domains.md",
+            "quote": "Blaxel issues a TLS certificate for each custom domain.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "shortfall": "Custom domains are explicitly unsupported; a redirect from your domain to the provider's name does not work either.",
+          "source": {
+            "url": "https://docs.boat.dev/hosting",
+            "quote": "boat does not support custom domains.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Per machine or org",
+          "note": "Point one name at one machine, or delegate a whole subdomain so every machine gets its own.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/custom-domains.md",
+            "quote": "boxd verifies your DNS and issues TLS certificates automatically.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "Through your Worker",
+          "shortfall": "You point a catch-all address at your own small program rather than at the machine, so routing is yours to run.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/previews/serve-previews-on-their-own-hostnames/",
+            "quote": "A wildcard DNS record and the route `*.example-previews.com/*` send every preview hostname to your Worker.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "figure": "Own proxy",
+          "shortfall": "You have to run your own forwarding service under your domain; the provider does not attach the domain for you.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/custom-preview-proxy.md",
+            "quote": "host your proxy under your own domain",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "figure": "Own proxy",
+          "shortfall": "You have to run a server of your own in front of the machine to use your domain.",
+          "source": {
+            "url": "https://docs.e2b.dev/network/custom-domain.md",
+            "quote": "We will set up a GCP VM running Caddy server with Docker and Cloudflare DNS to proxy the requests to the Sandboxes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "not-published",
+          "note": "No custom-domain feature is published; the public address is a fixed provider name.",
+          "source": {
+            "url": "https://instabox.sh/docs/ports.md",
+            "quote": "The URL is `https://<port>-<machine id without m_>.<domain>/`.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "partly",
+          "figure": "Apps only",
+          "shortfall": "Custom domains work for deployed apps, not for a sandbox's preview link.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/preview-urls.md",
+            "quote": "a request without the sandbox's access token gets HTTP 401",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "Team+, manual",
+          "shortfall": "Only Team and Enterprise plans get it, and you must move the domain's name servers and ask support to finish setup.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-networking",
+            "quote": "Custom domains for Sandbox tunnels are available on the Team and Enterprise plans",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No custom-domain feature appears in the documentation for exposed services.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post",
+            "quote": "Expose Http Service",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Your hostname",
+          "note": "A machine's web port can answer at your own hostname with a certificate.",
+          "source": {
+            "url": "https://withruntime.com/docs/networking",
+            "quote": "Custom domain: a sandbox's web port at your own hostname, with HTTPS.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "partly",
+          "figure": "CNAME and your certificate",
+          "shortfall": "You point a name at the provider's address and supply the security certificate yourself; a native feature is only planned.",
+          "source": {
+            "url": "https://sandboxer.com/docs/hosting.md",
+            "quote": "First-class custom domains are on the roadmap.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "not-published",
+          "note": "No native custom-domain support is documented; a community report says Sprites lack the feature regular Fly machines have.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/networking",
+            "quote": "A Sprite URL is private by default.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "not-published",
+          "note": "No custom-domain feature is published; addresses are on the provider's own name.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/networking.md",
+            "quote": "`https://<port>-<sandbox-id-or-name>.sandbox.tensorlake.ai` routes to a user service listening on `<port>` inside the sandbox",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "not-published",
+          "note": "No way to attach your own domain to a sandbox port is published; Vercel domains apply to deployments.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "Run untrusted or agent-generated code in isolated Linux microVMs.",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "auto-https",
       "feature": "custom-domains",
       "title": "Automatic HTTPS",
       "plain": "The provider gets and renews the security certificate for your domain.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "Platform certificate",
+          "note": "The provider's edge serves the certificate for your domain; there is nothing to renew yourself.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/domains",
+            "quote": "Set the nameservers",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "Issued per domain",
+          "note": "A certificate is issued for each domain, validated once when you add it.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Infrastructure/Custom-domains.md",
+            "quote": "Blaxel issues a TLS certificate for each custom domain.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "shortfall": "There is no custom domain, so there is no certificate for the provider to manage.",
+          "source": {
+            "url": "https://docs.boat.dev/hosting",
+            "quote": "boat does not support custom domains.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Automatic",
+          "note": "The provider checks your records and issues the certificate without you doing anything else.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/custom-domains.md",
+            "quote": "boxd verifies your DNS and issues TLS certificates automatically.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "figure": "Zone certificate",
+          "note": "Cloudflare already holds the certificate for your domain and renews it for you.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/previews/serve-previews-on-their-own-hostnames/",
+            "quote": "A wildcard DNS record and the route `*.example-previews.com/*` send every preview hostname to your Worker.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "no",
+          "shortfall": "You run the forwarding service, so you also get and renew the certificate.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/custom-preview-proxy.md",
+            "quote": "host your proxy under your own domain",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "shortfall": "The certificate is obtained by the server you run in front of the machine, not by the provider.",
+          "source": {
+            "url": "https://docs.e2b.dev/network/custom-domain.md",
+            "quote": "We will set up a GCP VM running Caddy server with Docker and Cloudflare DNS to proxy the requests to the Sandboxes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "not-published",
+          "note": "No custom domain is published, so there is no certificate feature to describe.",
+          "source": {
+            "url": "https://instabox.sh/docs/ports.md",
+            "quote": "The URL is `https://<port>-<machine id without m_>.<domain>/`.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "partly",
+          "figure": "Apps only",
+          "shortfall": "Certificates are handled for deployed apps, but a sandbox preview has no domain to certify.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/preview-urls.md",
+            "quote": "a request without the sandbox's access token gets HTTP 401",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "Team+, manual",
+          "shortfall": "Certificates come with the domain, but only on Team and Enterprise plans and after a manual setup step.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-networking",
+            "quote": "The infrastructure is production-grade, but onboarding requires a manual setup step.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No custom domain is published, so there is no certificate feature to describe.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post",
+            "quote": "Expose Http Service",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Let's Encrypt",
+          "note": "A certificate is obtained for your hostname on the first visit and renewed by the provider.",
+          "source": {
+            "url": "https://withruntime.com/docs/networking",
+            "quote": "Custom domain: a sandbox's web port at your own hostname, with HTTPS.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "shortfall": "You point the name and terminate the certificate yourself.",
+          "source": {
+            "url": "https://sandboxer.com/docs/hosting.md",
+            "quote": "First-class custom domains are on the roadmap.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "not-published",
+          "note": "No custom domain is published, so there is no certificate feature to describe.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/networking",
+            "quote": "A Sprite URL is private by default.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "not-published",
+          "note": "No custom domain is published, so there is no certificate feature to describe.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/networking.md",
+            "quote": "`https://<port>-<sandbox-id-or-name>.sandbox.tensorlake.ai` routes to a user service listening on `<port>` inside the sandbox",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "not-published",
+          "note": "No way to attach your own domain is published, so there is no certificate feature to describe.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "Run untrusted or agent-generated code in isolated Linux microVMs.",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "egress-included",
       "feature": "outbound-network",
       "title": "Outbound data included",
       "plain": "Data the machine sends out is free or comes with a published allowance.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "not-published",
+          "figure": "No rate published",
+          "note": "No per-gigabyte outbound price or allowance appears on the pricing page.",
+          "source": {
+            "url": "https://www.agent37.com/pricing",
+            "quote": "Cloud API pricing",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "Included in plan",
+          "note": "Outbound traffic is included rather than billed by the gigabyte.",
+          "source": {
+            "url": "https://blaxel.ai/pricing",
+            "quote": "Internet egress traffic Outbound traffic from your workloads to the internet. Included",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "$0",
+          "note": "Traffic out is not billed at all.",
+          "source": {
+            "url": "https://docs.boat.dev/pricing",
+            "quote": "Network traffic. boat does not bill egress.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "not-published",
+          "note": "No outbound price or allowance is published.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/resources.md",
+            "quote": "Resources and limits",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "figure": "1 TB a month",
+          "note": "The first terabyte each month is included; beyond it, traffic costs $0.025 a gigabyte in North America and Europe.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/pricing/",
+            "quote": "Egress from Containers is priced at the following rates:",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "not-published",
+          "note": "No outbound price or allowance is published.",
+          "source": {
+            "url": "https://www.daytona.io/pricing",
+            "quote": "Pricing",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "not-published",
+          "note": "The billing page lists no outbound charge or allowance.",
+          "source": {
+            "url": "https://docs.e2b.dev/pricing.md",
+            "quote": "you pay only for what you use",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "100 GiB free",
+          "note": "Every plan includes a monthly allowance, from 100 GiB free up to 50 TiB, then $0.02 a gigabyte.",
+          "source": {
+            "url": "https://instabox.sh/docs/pricing.md",
+            "quote": "Each plan includes egress every month (100 GiB on Free, 1 TiB on Pro, 5 TiB on Builder, 50 TiB on Team), then $0.02 per GiB.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "2 TB per 30 days",
+          "note": "Two terabytes per account over a rolling 30 days are included with no per-gigabyte charge.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/limits.md",
+            "quote": "Sandbox egress has no separate per-GB charge. The included allowance is 2 TB per account over a rolling 30 days",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "1 TiB, then $0.04",
+          "note": "The first tebibyte each month is included, then traffic costs $0.04 a gigabyte.",
+          "source": {
+            "url": "https://modal.com/docs/guide/network-egress-billing",
+            "quote": "Starting October 1, 2026, Modal charges for network egress.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "figure": "Charged, no rate",
+          "note": "Outbound traffic is chargeable under the terms, but no rate or allowance is published.",
+          "source": {
+            "url": "https://cloud.morph.so/web/legal/terms-of-service",
+            "quote": "Typical components may include but are not limited to compute, snapshot storage, and egress.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "100 GiB a month",
+          "note": "The first 100 GiB out each month is free, then $0.02 a gigabyte.",
+          "source": {
+            "url": "https://withruntime.com/pricing",
+            "quote": "each account's first 100 GiB out a month is free",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "Not billed",
+          "note": "Traffic out is not charged.",
+          "source": {
+            "url": "https://sandboxer.com/pricing",
+            "quote": "Do you bill bandwidth? No.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "Not metered",
+          "note": "Bandwidth is not measured or billed.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "No. Sprites bandwidth isn't metered today.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "not-published",
+          "note": "The price card has no outbound line, so no allowance or rate is published.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/billing.md",
+            "quote": "Metered resource rates",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "20 GB a month",
+          "shortfall": "Only 20 GB a month is included; beyond that, traffic costs $0.15 a gigabyte.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "Sandbox Data Transfer 20 GB/month Included in Flat Rate CDN $0.15/GB",
+            "confidence": "pricing-page"
+          }
+        }
+      ]
     },
     {
       "id": "egress-allowlist",
       "feature": "outbound-network",
       "title": "Allow only some sites",
       "plain": "Limit which internet addresses the machine can reach.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "100 IPv4 entries",
+          "note": "Only the listed addresses can be reached, and name lookups are blocked too unless you list a name server.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-network",
+            "quote": "DNS counts as a connection. Under `deny-all` or a list, names do not resolve unless a resolver is on the list.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "figure": "Proxy filter",
+          "shortfall": "The filter only sees programs that use its settings; anything else gets out unless stricter enforcement is switched on.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Proxy-domains.md",
+            "quote": "Traffic from tools that ignore proxy environment variables will not be filtered unless",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "partly",
+          "figure": "Firewall inside",
+          "shortfall": "The rules live inside the machine, where the agent has administrator rights and can undo them, and they are lost when the machine is restored.",
+          "source": {
+            "url": "https://docs.boat.dev/hosting/firewall",
+            "quote": "boat has no API setting for network rules.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "256 entries",
+          "note": "An allowlist is enforced outside the machine, so nothing inside can loosen it.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/egress.md",
+            "quote": "An allowlist of just `none` cuts the machine off from the internet entirely.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "figure": "Hosts or handler",
+          "note": "Only listed hosts, or what your own small program lets through, can leave the machine.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/configuration/outbound-traffic/",
+            "quote": "Use enableInternet = false to block public internet access by default",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "Domain or address list",
+          "note": "A machine can be limited to a list of domains or addresses, or to an upstream gateway.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/network-limits.md",
+            "quote": "On Tier 3 and Tier 4, setting an allow list or `networkBlockAll` at create time applies that policy for the sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "Domain or address list",
+          "note": "Outbound traffic can be limited to named domains or address ranges.",
+          "source": {
+            "url": "https://docs.e2b.dev/network/internet-access.md",
+            "quote": "Control and restrict it with a simple on/off switch or fine-grained allow and deny lists.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "shortfall": "There is no setting that limits which sites a machine may reach.",
+          "source": {
+            "url": "https://api.instabox.sh/v1/openapi.json",
+            "quote": "This scopes credential use, not all sandbox network access.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "not-published",
+          "note": "No allowlist or outbound filtering is documented.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/limits.md",
+            "quote": "Sandbox egress has no separate per-GB charge.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "Domain or address list",
+          "note": "A machine can be limited to listed address ranges or, in beta, listed domain names.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-networking",
+            "quote": "Only allows traffic to the listed CIDR ranges (any protocol).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No outbound allowlist is published.",
+          "source": {
+            "url": "https://cloud.morph.so/web/legal/terms-of-service",
+            "quote": "Typical components may include but are not limited to compute, snapshot storage, and egress.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Allow list",
+          "note": "A machine can be set to reach only the hosts on a list.",
+          "source": {
+            "url": "https://withruntime.com/docs/sandbox-environment",
+            "quote": "`internet: false` refuses every outbound connection. With an `allow` list, it is allow-list only.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "shortfall": "There is no allowlist or outbound firewall setting; every machine can reach the whole internet.",
+          "source": {
+            "url": "https://sandboxer.com/guides/what-can-reach-a-sandbox-and-what-it-can-reach",
+            "quote": "There is no egress allowlist, domain filter or outbound firewall setting in Sandboxer.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "figure": "Domain list",
+          "note": "A list of allowed domains is applied from outside the machine and cannot be changed from inside.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/networking",
+            "quote": "Applying one is opt-in and done from outside the Sprite.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "Domains or addresses",
+          "note": "A machine can be limited to named domains, addresses or ranges, and a blocked entry always wins.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/networking.md",
+            "quote": "Use `allow_out` when you want a sandbox to reach only selected destinations.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "Domain or address list",
+          "note": "A network policy can allow only listed domains or address ranges, and an empty policy blocks everything.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/firewall",
+            "quote": "a policy with no allowed domains or CIDR ranges blocks all outbound traffic, including DNS",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "no-internet",
       "feature": "outbound-network",
       "title": "Turn the internet off",
       "plain": "Run a machine with no internet access at all.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "deny-all",
+          "note": "One setting refuses every outbound connection, including name lookups.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-network",
+            "quote": "Nothing, including DNS.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "not-published",
+          "note": "No setting that removes internet access entirely is documented; the proxy can filter but not necessarily cut it off.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Proxy-domains.md",
+            "quote": "Restrict which external domains, HTTP methods, and URL paths a Blaxel sandbox can reach",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "partly",
+          "figure": "Firewall inside",
+          "shortfall": "You can block traffic with the machine's own firewall, but the agent has administrator rights there and the rules are lost on restore.",
+          "source": {
+            "url": "https://docs.boat.dev/hosting/firewall",
+            "quote": "You have root in the sandbox, so you add rules with ufw or iptables",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Allowlist none",
+          "note": "One allowlist value cuts the machine off from the internet completely.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/egress.md",
+            "quote": "An allowlist of just `none` cuts the machine off from the internet entirely.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "figure": "Off by default",
+          "note": "The machine starts with no internet access unless you switch it on.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/security/",
+            "quote": "A Container starts with `enableInternet: false` by default, so it cannot reach the Internet.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "block-all",
+          "note": "A machine can be set to block every outbound connection.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/network-limits.md",
+            "quote": "setting an allow list or `networkBlockAll` at create time applies that policy for the sandbox",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "On/off switch",
+          "note": "Internet access can be switched off entirely for a machine.",
+          "source": {
+            "url": "https://docs.e2b.dev/network/internet-access.md",
+            "quote": "Control and restrict it with a simple on/off switch or fine-grained allow and deny lists.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "not-published",
+          "note": "No setting that removes internet access entirely is documented.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "Outbound bandwidth",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "not-published",
+          "note": "No setting that removes internet access entirely is documented.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/limits.md",
+            "quote": "Sandbox egress has no separate per-GB charge.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "block_network",
+          "note": "One setting drops all outbound traffic.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-networking",
+            "quote": "Drops all outbound traffic.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No setting that removes internet access entirely is published.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Every devbox is created from a template that integrates with our secrets manager",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "internet: false",
+          "note": "One setting refuses every outbound connection.",
+          "source": {
+            "url": "https://withruntime.com/docs/sandbox-environment",
+            "quote": "`internet: false` refuses every outbound connection.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "partly",
+          "figure": "Firewall inside",
+          "shortfall": "There is no provider setting; you block traffic with the machine's own firewall, which the agent can undo.",
+          "source": {
+            "url": "https://sandboxer.com/guides/what-can-reach-a-sandbox-and-what-it-can-reach",
+            "quote": "Sandboxer has no egress allowlist; restrict outbound yourself with ufw inside the VM.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "partly",
+          "figure": "Deny every domain",
+          "shortfall": "You can deny every domain by policy, but the machine keeps its network and the rule works by refusing name lookups.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/networking",
+            "quote": "a DNS-based allowlist that decides which domains a Sprite is allowed to reach",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "--no-internet",
+          "note": "One setting blocks all outbound traffic, including name lookups.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/networking.md",
+            "quote": "Setting `allow_internet_access=false` with an empty `allow_out` blocks all outbound traffic, including DNS requests.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "deny-all",
+          "note": "A firewall policy can be set to block all outbound traffic.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/firewall",
+            "quote": "Use the explicit `deny-all` mode when you intend to block all traffic",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "static-ip",
       "feature": "outbound-network",
       "title": "Fixed outgoing IP",
       "plain": "Traffic leaves from a known IP address that other services can whitelist.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "not-published",
+          "note": "No fixed outbound address is published.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/instance-network",
+            "quote": "Entries are IPv4 for now.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "figure": "Private preview",
+          "shortfall": "Dedicated addresses are in a private preview you must ask to join, and can only be attached when a machine is created.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Infrastructure/Dedicated-egress-gateways.md",
+            "quote": "This feature is currently in private preview and is not intended for production use.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "not-published",
+          "note": "No fixed outbound address is published.",
+          "source": {
+            "url": "https://docs.boat.dev/pricing",
+            "quote": "Network traffic. boat does not bill egress.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "not-published",
+          "note": "No fixed outbound address is published.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/egress.md",
+            "quote": "A machine starts unrestricted.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "not-published",
+          "note": "No fixed outbound address is published.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/pricing/",
+            "quote": "Egress from Containers is priced at the following rates:",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "not-published",
+          "note": "No fixed outbound address is published.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/network-limits.md",
+            "quote": "block-all",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "shortfall": "There is no dedicated or fixed outbound address on any plan, including Enterprise.",
+          "source": {
+            "url": "https://docs.e2b.dev/faq/egress-ip-ranges.md",
+            "quote": "there are no dedicated or static egress IP addresses on any plan (including Enterprise).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "figure": "Shared address",
+          "shortfall": "All machines send from one shared address, so another service sees the same address for everyone.",
+          "source": {
+            "url": "https://dev.to/samsam4060/instabox-free-cloud-sandboxes-for-ai-agents-honest-notes-after-a-week-of-testing-47ld",
+            "quote": "All machines share one NAT egress IP",
+            "confidence": "third-party"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "not-published",
+          "note": "No fixed outbound address is published.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/limits.md",
+            "quote": "Sandbox egress has no separate per-GB charge.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "Team+, 5 addresses",
+          "shortfall": "Only Team and Enterprise plans get it, and each account can create one or three gateways holding up to five addresses each.",
+          "source": {
+            "url": "https://modal.com/docs/guide/proxy-ips",
+            "quote": "Team Plan users can create one Proxy and Enterprise users three Proxies. Each Proxy can have a maximum of five static IP addresses.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No fixed outbound address is published.",
+          "source": {
+            "url": "https://cloud.morph.so/web/legal/terms-of-service",
+            "quote": "Typical components may include but are not limited to compute, snapshot storage, and egress.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "$5 a month",
+          "note": "A dedicated outbound address costs $5 per 30-day month.",
+          "source": {
+            "url": "https://withruntime.com/pricing",
+            "quote": "A dedicated IPv4 address or a WireGuard tunnel costs $5 per 30-day month each.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "figure": "Shared host address",
+          "shortfall": "Outbound traffic shares the host machine's address with every other sandbox on it, so other services see one shared address.",
+          "source": {
+            "url": "https://sandboxer.com/docs/security.md",
+            "quote": "Outbound traffic shares the node's IPv4 address and IPv6 /64 with the other sandboxes on that node",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "not-published",
+          "note": "No fixed outbound address is published.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/networking",
+            "quote": "By default, a Sprite's outbound is unrestricted",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "not-published",
+          "note": "No fixed outbound address is published.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/networking.md",
+            "quote": "By default, sandboxes have outbound internet access enabled.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "not-published",
+          "note": "No fixed outbound address is published.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "Exposed ports are accessible via a public URL",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "secrets-store",
       "feature": "keys-secrets",
       "title": "Stored secrets",
       "plain": "Save API keys with the provider and have them appear in the machine as environment variables.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "Environment variables",
+          "note": "Values are saved with the machine and appear in its environment, where the agent can read them.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/browser-use",
+            "quote": "Anything in an instance's environment, the agent can read and repeat back.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "Variables and secrets",
+          "note": "Values are saved in the workspace and injected when a machine starts.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Variables-and-secrets.md",
+            "quote": "Configure environment variables and secrets in Blaxel sandboxes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "Variables and files",
+          "note": "Secrets are saved per environment and injected at start as variables or files.",
+          "source": {
+            "url": "https://docs.boat.dev/environments/secrets",
+            "quote": "boat injects two types of secret when a sandbox starts.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Org-wide",
+          "note": "A value is saved once for the organisation and injected into every machine in its scope.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/env-secrets.md",
+            "quote": "Set an environment variable or a secret once for your organization",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "figure": "Worker bindings",
+          "shortfall": "There is no saved secret inside the machine; you keep the value in your own small program and add it on the way out.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/security/",
+            "quote": "Once a value is in the sandbox, all the code there can read it and send it anywhere the sandbox can reach.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "Stored secrets",
+          "note": "Values are saved with the account and substituted by the provider, so the machine holds only a stand-in.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/secrets.md",
+            "quote": "Secrets are a secure way to store and use sensitive values such as API keys, tokens, and passwords across your Daytona sandboxes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "Per project",
+          "note": "Values are saved per project and appear in the machine as environment variables.",
+          "source": {
+            "url": "https://docs.e2b.dev/secrets.md",
+            "quote": "Secrets let you store credentials such as API keys with E2B and reference them by name.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "Org secrets",
+          "note": "Values are saved for the organisation and delivered either as a stand-in or as a real environment variable.",
+          "source": {
+            "url": "https://instabox.sh/docs/secrets.md",
+            "quote": "Inside the sandbox: any process there can read and copy it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "At create time",
+          "note": "Values are passed when the machine is created and reach every command.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/sdk-reference.md",
+            "quote": "Create-time `envs` reach every command.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "Inline secrets",
+          "note": "Values are saved with the app and delivered to the machine as environment variables.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "You can set environment variables using inline secrets",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "figure": "Template manager",
+          "note": "A template carries a secrets manager, and agent tokens can be limited to reading or writing them.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Every devbox is created from a template that integrates with our secrets manager",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Stored once",
+          "note": "A key is saved once with the hosts it may be used for, and machines never hold the value.",
+          "source": {
+            "url": "https://withruntime.com/docs/security",
+            "quote": "Store an API key once. Your sandboxes use it without holding it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "Variables and files",
+          "note": "An environment bundles variables and secret files that are written into the machine.",
+          "source": {
+            "url": "https://sandboxer.com/docs/environments.md",
+            "quote": "Variables — a `.env`-style list, exported to every process in the sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "not-published",
+          "note": "No saved secret store for a Sprite is documented; credentials are handled through its connector catalogue.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/connectors",
+            "quote": "Connectors solve this by storing the credential once, in your organization",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "shortfall": "There is no saved secret: you pass the value with each command or session.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/environment-variables.md",
+            "quote": "Set per-command and per-PTY environment variables in the CLI, Python, and TypeScript.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "Passed each time",
+          "shortfall": "There is no saved list of secrets for a sandbox; you pass the values each time you create or run one.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts",
+            "quote": "Run with environment variables",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "hidden-secrets",
       "feature": "keys-secrets",
       "title": "Secrets the agent cannot read",
       "plain": "Keys are added to outgoing requests by the provider, so the agent never sees them.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "shortfall": "There is no service that adds keys for you; a key you give the machine is a key the agent can print.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/browser-use",
+            "quote": "Anything in an instance's environment, the agent can read and repeat back.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "figure": "Public preview",
+          "shortfall": "The feature is a public preview, and programs that ignore its settings can bypass it.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Proxy-secrets-injection.md",
+            "quote": "The Blaxel proxy intercepts outbound HTTPS requests from the sandbox and injects headers, body fields, and secrets server-side.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "partly",
+          "figure": "Model keys only",
+          "shortfall": "Only model-provider keys go through the key service; other API keys are ordinary variables the agent can read.",
+          "source": {
+            "url": "https://docs.boat.dev/ai-credentials",
+            "quote": "A placeholder is worthless outside boat. It does not contain the real key.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Stand-in string",
+          "note": "The machine holds a worthless stand-in and the real value is added only for the hosts you named.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/egress.md",
+            "quote": "Inside the machine `STRIPE_KEY` is an opaque string starting with `bxds_`.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "figure": "Added by your Worker",
+          "note": "Your own small program adds the key after the request leaves the machine, so the agent never holds it.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/concepts/security/",
+            "quote": "A Container can send its request without the credential, and an outbound handler in your Worker adds the credential after the request leaves the sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "Header only",
+          "note": "The real value is added only in one fixed part of the request, so a service that wants it in the body or the address cannot be called this way.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/secrets.md",
+            "quote": "The proxy substitutes placeholders in HTTPS request headers only.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "Outside the machine",
+          "note": "The value is added to matching requests outside the machine, so the agent never sees it.",
+          "source": {
+            "url": "https://docs.e2b.dev/secrets.md",
+            "quote": "The egress proxy injects the real value into matching outbound HTTPS requests outside the sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "Web headers only",
+          "note": "Only encrypted web requests are covered; the value cannot go into a web address or a request body.",
+          "source": {
+            "url": "https://instabox.sh/docs/secrets.md",
+            "quote": "Version one supports HTTPS on port 443; URL parameters and request bodies are not substituted.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "shortfall": "There is no service that adds keys for you; keys are variables the agent can read.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/sdk-reference.md",
+            "quote": "Create-time `envs` reach every command.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "Beta",
+          "shortfall": "The feature that hides keys is in beta and cannot be changed once set up.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-secret-injection",
+            "quote": "This replacement happens outside the Sandbox so the secret never appears in the Sandbox's environment.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "A secrets manager exists, but whether a service keeps values out of the machine is not published.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Every devbox is created from a template that integrates with our secrets manager",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Placeholder",
+          "note": "The machine holds a stand-in and the real value is added only for the hosts you named.",
+          "source": {
+            "url": "https://withruntime.com/docs/security",
+            "quote": "The machine sees a placeholder. The value is added only to HTTPS requests to the hosts you name.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "shortfall": "Keys are written into the machine as variables and files, so the agent can read them.",
+          "source": {
+            "url": "https://sandboxer.com/docs/environments.md",
+            "quote": "Variables — a `.env`-style list, exported to every process in the sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "partly",
+          "figure": "Catalogue only",
+          "shortfall": "Only the services in its catalogue are covered; any other key has to go into the machine.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/concepts/connectors",
+            "quote": "Connectors solve this by storing the credential once, in your organization, and routing API calls through the Sprites gateway. Sprites never see the token.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "shortfall": "There is no service that adds keys to requests; the machine holds whatever you pass it.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/environment-variables.md",
+            "quote": "Set per-command and per-PTY environment variables",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "figure": "Outside the machine",
+          "note": "Keys are added to outgoing traffic and never enter the machine, so code inside cannot copy them.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/firewall",
+            "quote": "Credentials brokering injects credentials into egressing traffic. The secrets never enter the sandbox",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "scoped-keys",
       "feature": "keys-secrets",
       "title": "Limited API keys",
       "plain": "Create API keys that can do only some things, or only in one project.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "partly",
+          "figure": "Workspace only",
+          "shortfall": "A key is limited to one workspace but can do everything in it, and there is no read-only key.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/concepts",
+            "quote": "each key is scoped to one workspace",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "figure": "Workspace only",
+          "shortfall": "A service-account key is limited to one workspace but has no narrower permissions.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Security/Access-tokens.md",
+            "quote": "a service account's API key or client-credentials token only grants access to the single workspace that service account belongs to",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "Action sets",
+          "note": "A key can be limited to a set of actions, a set of machines and an expiry date.",
+          "source": {
+            "url": "https://docs.boat.dev/api-keys/scopes",
+            "quote": "boat grants a request only when **both** of these are true",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "partly",
+          "figure": "No scopes",
+          "shortfall": "Keys are per person and can be revoked, but there is no way to make one read-only or limit it to one machine.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/resources.md",
+            "quote": "API keys | 25 per user",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "figure": "Account tokens",
+          "note": "Cloudflare's own API tokens can be limited to specific permissions and resources.",
+          "source": {
+            "url": "https://developers.cloudflare.com/fundamentals/api/reference/permissions/",
+            "quote": "Below is a list of the available token permissions.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "Permission scopes",
+          "note": "A key can be limited to specific actions, though it can still reach every running machine in the organisation.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/api-keys.md",
+            "quote": "Sandbox runtime access is not a grantable scope. Any API key valid for an organization can address that organization's running sandboxes through the toolbox",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "figure": "One key per team",
+          "shortfall": "A key belongs to one team and there is no published read-only or per-machine scope.",
+          "source": {
+            "url": "https://docs.e2b.dev/api-key.md",
+            "quote": "The same API key authenticates both the SDKs and the",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "figure": "Per-resource scopes",
+          "note": "A key can be limited to reading, writing or deleting one kind of resource.",
+          "source": {
+            "url": "https://api.instabox.sh/v1/openapi.json",
+            "quote": "A key carries scopes: read, write and delete for each resource.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "Project or workspace",
+          "note": "A key can be limited to one project or workspace, and such a key cannot touch billing or other keys.",
+          "source": {
+            "url": "https://lizard.build/docs/cli/keys.md",
+            "quote": "A scoped key works only inside its projects or workspaces.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "figure": "Workspace role",
+          "shortfall": "Permissions come from a person's workspace role, not from a key that can only do one thing.",
+          "source": {
+            "url": "https://modal.com/docs/guide/rbac",
+            "quote": "Role-Based Access Control",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "figure": "Token scopes",
+          "note": "An agent token can be limited to the smallest set of actions that works.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/agent-tokens",
+            "quote": "Request the smallest scope set that works.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "Read-only keys",
+          "note": "A key can be read-only, carry a daily spend limit, and be walled off in its own compartment.",
+          "source": {
+            "url": "https://withruntime.com/docs/pricing",
+            "quote": "read-only keys, a daily spending limit per key, and compartments",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "Action and machine sets",
+          "note": "A request is allowed only when the key's actions and its machines both permit it.",
+          "source": {
+            "url": "https://sandboxer.com/docs/api-keys.md",
+            "quote": "A request is allowed only when both hold:",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "not-published",
+          "note": "No key scopes are published.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/cli/authentication.md",
+            "quote": "CLI Authentication",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "Project-scoped",
+          "note": "A key belongs to one project and cannot carry organisation-wide permissions.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/authentication.md",
+            "quote": "API keys are project-specific credentials that allow programmatic access to resources within a project.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "Team tokens",
+          "shortfall": "Tokens are limited to a team, but no read-only or sandbox-only scope is published.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "dashboard-create",

@@ -204,7 +204,7 @@
         {
           "provider": "instabox",
           "why": "Xfce, Chromium and VNC are in the default image, and clicking the desktop takes control from the agent until it goes idle for a minute. The free plan is one 4 vCPU / 8 GiB machine.",
-          "watch": "Public ports have no authentication, so anyone with the URL can reach whatever the browser is serving; memory above 8 GiB needs a paid plan."
+          "watch": "Public ports have no authentication, so make the port private (token-only) unless anyone with the URL may see what the browser is serving; memory above 8 GiB needs a paid plan."
         },
         {
           "provider": "boat",

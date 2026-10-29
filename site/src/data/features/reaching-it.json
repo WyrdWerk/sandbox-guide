@@ -7,7 +7,7 @@
   "standfirst": "A machine nobody can reach is not an agent. There are four doors in — an HTTPS link, a raw TCP port, SSH, and the provider's API — and the important difference is who can open each one.",
   "idea": [
     "Every provider gives you an HTTPS address for a port inside the machine. What differs is the lock. A provider-key link needs an API key or a signed token on every request. A token-in-the-URL link is a password you can paste: convenient, and exactly as safe as the place you pasted it. An open link has no lock at all.",
-    "The open case is more common than buyers expect. boxd's name.boxd.sh is public to the internet with no authentication in front of it. InstaBox's public ports are unauthenticated by design. Agent 37's public port is deliberately credential-free and keeps working until you delete it. In each case the URL is the only secret.",
+    "The open case is more common than buyers expect. boxd's name.boxd.sh is public to the internet with no authentication in front of it. InstaBox's public ports are unauthenticated by design, though a port can instead be made private behind a token. Agent 37's public port is deliberately credential-free and keeps working until you delete it. In each case the URL is the only secret.",
     "The other doors are less visible. SSH is sometimes a real port, sometimes a WebSocket tunnel, sometimes a shell over the provider's own transport. Raw TCP exists at a few providers and is missing at most. The provider's API is always a door, and sometimes the only one."
   ],
   "splits": [
@@ -128,12 +128,12 @@
     {
       "provider": "instabox",
       "verdict": "partly",
-      "figure": "No auth; URL is secret",
-      "scenario": "The URL is the only secret, and public ports cannot be authenticated.",
-      "note": "An HTTPS URL per port, up to 16, with no authentication: the URL is the only secret. SSH and mosh go through a gateway; no raw TCP inbound and no custom domain.",
+      "figure": "Public or token-only links",
+      "scenario": "A port can be public, or private so it answers only requests that carry its token, which can be replaced.",
+      "note": "An HTTPS link per port, up to 16, either public or private behind a replaceable token. SSH and mosh go through a gateway. Raw non-web ports are in an admin-only preview, later paid plans only with 5 per workspace. No custom domain.",
       "source": {
-        "url": "https://instabox.sh/docs/ports",
-        "quote": "It is not a secret: once published, anyone can reach the whole service until you unpublish it.",
+        "url": "https://instabox.sh/docs/ports.md",
+        "quote": "A **private** port answers only requests that carry its token.",
         "confidence": "docs-confirmed"
       }
     },
@@ -214,7 +214,7 @@
       "verdict": "partly",
       "figure": "Web ports only",
       "scenario": "Web ports can be exposed, up to 15, and traffic to them is billable; no general inbound TCP is published.",
-      "note": "Web ports can be exposed, up to 15 per sandbox, and traffic to them is billable. A general raw TCP inbound, personal SSH or public IPv4 is not published.",
+      "note": "Web ports can be exposed, up to 15 per sandbox, and traffic to them is billable. The dashboard's Connect tab gives a terminal in the browser. A general raw TCP inbound, standard SSH or public IPv4 is not published.",
       "source": {
         "url": "https://vercel.com/docs/sandbox/pricing#network",
         "quote": "Data your sandbox sends to the internet, plus all traffic to and from exposed ports, is billable and measured in GB.",

@@ -92,9 +92,9 @@
     {
       "provider": "cloudflare-sandbox",
       "verdict": "partly",
-      "figure": "$0.025/GB",
+      "figure": "1 TB a month, then $0.025/GB",
       "scenario": "Outbound is off unless `enableInternet` is true; with it off, only allowedHosts or an outbound handler on ports 80 and 443 can leave.",
-      "note": "Off by default; only ports 80 and 443 through allowedHosts or an outbound handler. No static egress IP or private network. Egress is $0.025/GB in North America and Europe, $0.04–$0.05 elsewhere.",
+      "note": "Off by default; only ports 80 and 443 through allowedHosts or an outbound handler. No static egress IP or private network. 1 TB a month is included in North America and Europe, then $0.025/GB; 500 GB elsewhere, then $0.04–$0.05.",
       "source": {
         "url": "https://developers.cloudflare.com/sandbox/concepts/security/",
         "quote": "A Container starts with `enableInternet: false` by default, so it cannot reach the Internet.",
@@ -128,9 +128,9 @@
     {
       "provider": "instabox",
       "verdict": "partly",
-      "figure": "$0.02000/GiB",
-      "scenario": "Egress is metered at $0.02 per GiB and machines share a NAT address, so an external rate limit is shared too.",
-      "note": "No general egress allowlist is published; host scoping applies to Secrets, not all sandbox traffic. Egress is metered at $0.02 per GiB, and machines share a NAT address.",
+      "figure": "100 GiB–50 TiB included",
+      "scenario": "Each plan includes outbound data every month (100 GiB on Free, 1 TiB on Pro), then $0.02 per GiB; machines share a NAT address, so an external rate limit is shared too.",
+      "note": "No general egress allowlist is published; host scoping applies to Secrets, not all sandbox traffic. Each plan includes egress every month (100 GiB Free, 1 TiB Pro, 5 TiB Builder, 50 TiB Team), then $0.02 per GiB. Machines share a NAT address.",
       "source": {
         "url": "https://instabox.sh/pricing",
         "quote": "$0.02000",
