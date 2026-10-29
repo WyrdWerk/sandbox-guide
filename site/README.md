@@ -12,6 +12,8 @@ cd site
 npm ci
 npm run build          # writes dist/
 npm run preview        # serves dist/ at http://127.0.0.1:4321
+npm test               # checks the cost engine against the hand-worked reference workloads
+npm run check-rates    # lists provider pricing pages whose figures changed (see ../PRICE-CHECK.md)
 ```
 
 In an orb, run it as a supervised service so it survives pause/resume:

@@ -28,6 +28,10 @@
   ],
   "sources": [
     {
+      "label": "Pricing",
+      "url": "https://www.daytona.io/pricing"
+    },
+    {
       "label": "Billing",
       "url": "https://www.daytona.io/docs/en/billing.md"
     },
