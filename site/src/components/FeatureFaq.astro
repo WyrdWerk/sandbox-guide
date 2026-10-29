@@ -1,0 +1,47 @@
+---
+// Questions people search for, answered from the capability data so the answers stay
+// sourced and change when the data does. Also emitted as FAQPage structured data.
+import { capabilitiesOf, providerName } from "../lib/data";
+
+interface Props {
+  feature: string;
+}
+
+const { feature } = Astro.props;
+const list = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`);
+const faqs = capabilitiesOf(feature)
+  .filter((c) => c.rows.length)
+  .map((c) => {
+    const names = (v: string) => c.rows.filter((r) => r.verdict === v).map((r) => providerName(r.provider)).sort();
+    const yes = names("yes"), partly = names("partly"), no = names("no");
+    const answer = [
+      yes.length ? `Fully: ${list(yes)}.` : "No provider offers this without a catch.",
+      partly.length ? `With a catch: ${list(partly)}.` : "",
+      no.length ? `Not at all: ${list(no)}.` : "",
+    ].filter(Boolean).join(" ");
+    return { cap: c, q: `Which sandbox providers offer “${c.title.charAt(0).toLowerCase() + c.title.slice(1)}”?`, a: `${c.plain} ${answer}` };
+  });
+const ld = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+
+{faqs.length > 0 && (
+  <section class="section" id="faq" aria-labelledby="faq-h">
+    <div class="section__head">
+      <h2 class="section__title" id="faq-h">Common questions</h2>
+      <p class="section__note">Answered from the capability checks; each links to the provider-by-provider detail and its sources</p>
+    </div>
+    <dl class="faq">
+      {faqs.map((f) => (
+        <>
+          <dt>{f.q}</dt>
+          <dd>{f.a} <a href={`/capabilities/${f.cap.id}/`}>See each provider's catch</a></dd>
+        </>
+      ))}
+    </dl>
+    <script type="application/ld+json" set:html={JSON.stringify(ld)}></script>
+  </section>
+)}

@@ -10,6 +10,7 @@ import QuestionList from "../../components/QuestionList.astro";
 import FeatureCosts from "../../components/FeatureCosts.astro";
 import CapabilityMatrix from "../../components/CapabilityMatrix.astro";
 import Related from "../../components/Related.astro";
+import FeatureFaq from "../../components/FeatureFaq.astro";
 import { capabilitiesOf, features, groups, providers } from "../../lib/data";
 
 export function getStaticPaths() {
@@ -32,6 +33,7 @@ const nav = [
   ...(caps.length ? [{ href: "#capabilities", label: "Capabilities" }] : []),
   ...(costed ? [{ href: "#costs", label: "What it costs" }] : []),
   { href: "#questions", label: "Questions to ask" },
+  ...(caps.length ? [{ href: "#faq", label: "Common questions" }] : []),
   { href: "#related", label: "Related" },
 ];
 ---
@@ -112,6 +114,8 @@ const nav = [
       </div>
       <QuestionList questions={feature.questions} />
     </section>
+
+    <FeatureFaq feature={feature.id} />
 
     <section class="section" id="related" aria-labelledby="related-h">
       <div class="section__head"><h2 class="section__title" id="related-h">Related</h2></div>

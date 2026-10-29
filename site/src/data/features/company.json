@@ -151,7 +151,7 @@
       "verdict": "partly",
       "figure": "Daytona Platforms Inc.; 99.95% Tier 4+",
       "scenario": "A 99.95% SLA exists, but credits go only to Tier 4 and above, and the terms allow fee changes with no notice.",
-      "note": "Daytona Platforms Inc., New York address, Delaware law; Delaware incorporation unconfirmed. Founded 2023; $91M raised after a $60M Series B at a $1B valuation. SLA 99.95% with credits for Tier 4+; SOC 2 Type 2 is a bridge letter and ISO 27001 is in progress.",
+      "note": "Daytona Platforms Inc., New York address, Delaware law; Delaware incorporation unconfirmed. Founded 2023; $91M raised after a $60M Series B at a $1B valuation. SLA 99.95% with credits for Tier 4+; A SOC 2 Type II report covering December 2025 to March 2026 is available from the trust centre; ISO 27001 is in progress.",
       "source": {
         "url": "https://www.daytona.io/sla",
         "quote": "Daytona will use commercially reasonable efforts to make the Services available 99.95% of the time in any given calendar month",

@@ -7790,147 +7790,3566 @@
       "feature": "ways-to-drive",
       "title": "Create from the website",
       "plain": "Start a machine by clicking in the provider's dashboard, with no terminal.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "The dashboard can create an instance, not just list one.",
+          "source": {
+            "url": "https://www.agent37.com/terms",
+            "quote": "You can create instances from our dashboard or provision them programmatically through the Agent 37 Cloud API",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "The console has a Deploy from console path that asks for image, resources, TTL and region.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "Click **+Create sandbox** -> **Deploy from console**.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "note": "The dashboard is for account work such as keys, billing and members; every machine starts with the CLI.",
+          "source": {
+            "url": "https://docs.boat.dev/account.md",
+            "quote": "| **[Dashboard](https://boat.dev/dashboard)** | one-off work, and the things that must not be automatable | browser sign-in |",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "note": "The console shows machines, keys and backups; the quickstart creates the first machine with the CLI.",
+          "source": {
+            "url": "https://docs.boxd.sh/quickstart.md",
+            "quote": "Install the CLI, create your first machine",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "note": "There is no sandbox console: a sandbox is a name inside your Worker, and the dashboard manages the Worker.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/manage/",
+            "quote": "Your Worker reaches each sandbox by name.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "The Playground creates sandboxes in the browser and opens terminal and desktop tabs.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/playground.md",
+            "quote": "Daytona provides an interactive environment (\"Playground\") for creating sandboxes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "note": "The console manages keys, templates and billing; sandboxes are created by code.",
+          "source": {
+            "url": "https://docs.e2b.dev/quickstart.md",
+            "quote": "This guide will show you how to start your first E2B Sandbox.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "The Machines page has a Create machine button that matches the CLI call.",
+          "source": {
+            "url": "https://instabox.sh/docs/start.md",
+            "quote": "In the dashboard, **Create machine** on the **Machines** page does what `instabox create` does.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "The dashboard creates a sandbox after you pick a template, region, size and lifetime.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/dashboard.md",
+            "quote": "The dashboard lets you create and manage Sandboxes without code.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "note": "The dashboard reports metrics and the CLI attaches to running sandboxes; creating one is a code call.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "sb = modal.Sandbox.create(app=sb_app)",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "The devbox dashboard creates a machine from a template or a snapshot.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Create a devbox from a template (or a snapshot)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "The console's Search or create box starts a sandbox from the browser.",
+          "source": {
+            "url": "https://withruntime.com/docs/products",
+            "quote": "**Search or create** , or ⌘K (Ctrl+K), opens one search box. It goes to any page or resource and starts anything.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "note": "The dashboard opens desktops and manages keys and members; the quickstart starts the first sandbox with `sbx`.",
+          "source": {
+            "url": "https://sandboxer.com/docs/quickstart",
+            "quote": "Install the sbx CLI, sign in, and run your first sandbox in about two minutes.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "Sprites are created from the command line; there is no browser console for creating one.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/cli/commands.md",
+            "quote": "sprite create - Create a new sprite",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "note": "The dashboard can stop or delete a sandbox but the docs give no way to create one there.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes",
+            "quote": "From the dashboard you can stop the current session or permanently remove the sandbox.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "note": "The console lists sandboxes, logs and billing; the docs create sandboxes from the CLI or the SDK.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/faqs/sandboxes-faq.md",
+            "quote": "Create one on demand from the CLI or the SDK.",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "cli",
       "feature": "ways-to-drive",
       "title": "Command-line tool",
       "plain": "An official command-line tool.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "`npx agent37` builds images, sets up SSH, opens tunnels and manages crons.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/templates.md",
+            "quote": "The supported path is the Agent37 CLI:",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "The `bl` CLI manages sandboxes, agents, MCP servers and jobs.",
+          "source": {
+            "url": "https://docs.blaxel.ai/cli-reference/introduction.md",
+            "quote": "Install the Blaxel CLI (bl) to manage sandboxes, agents, MCP servers, jobs, and other resources from your terminal",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "note": "One installer for macOS, Linux and Windows, then `boat` commands.",
+          "source": {
+            "url": "https://docs.boat.dev/quickstart.md",
+            "quote": "Install the boat CLI on macOS, Linux or Windows",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "The CLI is the primary surface and also ships pre-authenticated inside every machine.",
+          "source": {
+            "url": "https://docs.boxd.sh/cli/installation.md",
+            "quote": "Install the boxd CLI and get your terminal talking to your machines.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "shortfall": "The only command-line tool is Wrangler, which deploys the Worker and can open a shell; it does not create or manage sandboxes.",
+          "note": "Wrangler covers deploy, tail, instances and SSH, but sandbox lifecycle lives in Worker code.",
+          "source": {
+            "url": "https://developers.cloudflare.com/containers/guides/ssh/",
+            "quote": "`wrangler containers ssh <INSTANCE_ID>`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "The CLI covers sandbox create, exec, SSH, snapshots and MCP setup.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/mcp.md",
+            "quote": "Install the Daytona CLI to manage the MCP server.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "`@e2b/cli` builds templates and creates sandboxes.",
+          "source": {
+            "url": "https://docs.e2b.dev/cli.md",
+            "quote": "You can install E2B CLI using the following command:",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "Installed by `npx instabox@latest` or the install script.",
+          "source": {
+            "url": "https://instabox.sh/docs/start.md",
+            "quote": "It signs you in with a device code, starts a new machine, installs the `instabox` CLI",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "`lizard` covers sandboxes, deploys, keys and agents.",
+          "source": {
+            "url": "https://lizard.build/docs/cli/sandbox.md",
+            "quote": "Alias: `lizard sb`.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "The `modal` CLI deploys apps and `modal shell` attaches to a running sandbox.",
+          "source": {
+            "url": "https://modal.com/docs/cli/latest/shell",
+            "quote": "Connect to a running Sandbox by ID: modal shell sb-abc123xyz",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "Installing the Python package also installs the CLI and the Volumes helpers.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/setup/installation-guide",
+            "quote": "Once installed, the CLI and the first-party Volumes helpers are automatically available in your environment:",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "`npx withruntime` runs every product and saves a browser-approved connection.",
+          "source": {
+            "url": "https://withruntime.com/docs/cli",
+            "quote": "The CLI runs every Runtime Cloud product from a terminal or a script.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "One static binary for Linux, macOS and Windows.",
+          "source": {
+            "url": "https://sandboxer.com/docs/cli",
+            "quote": "`sbx` is one static binary for Linux, macOS and Windows.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "note": "The `sprite` CLI covers create, exec, console, checkpoint, restore and proxy.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/cli/commands.md",
+            "quote": "sprite create - Create a new sprite",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "`sandbox` (alias `sbx`) creates sandboxes and connects to them.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/cli-reference",
+            "quote": "Use the Sandbox CLI to run coding agents, manage sandboxes, execute commands, and copy files from your terminal.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "`tl` manages sandboxes, projects and contexts.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/quickstart.md",
+            "quote": "This installs the `tl` CLI, which you can use to manage sandboxes and other resources from the command line.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "python-sdk",
       "feature": "ways-to-drive",
       "title": "Python SDK",
       "plain": "An official library for Python programs.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "One file built on `requests`, with no package to install.",
+          "source": {
+            "url": "https://www.agent37.com/docs/python-sdk.md",
+            "quote": "The Agent37 Python SDK is one file built on `requests`, with no package to install.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "Python, TypeScript and Go SDKs.",
+          "source": {
+            "url": "https://blaxel.ai/pricing",
+            "quote": "Python, TypeScript, and Go SDKs for Blaxel",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "note": "`boat-sdk` on PyPI.",
+          "source": {
+            "url": "https://docs.boat.dev/sdks/overview.md",
+            "quote": "`boat-sdk` on PyPI",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "Sync and async Python clients.",
+          "source": {
+            "url": "https://docs.boxd.sh/reference/python-sdk.md",
+            "quote": "Programmatic access to boxd machines from Python, sync and async",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "note": "The SDK is TypeScript only; other languages call your Worker over HTTP.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/reference/",
+            "quote": "`@cloudflare/sandbox` works with a container you start from a Durable Object.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "Five SDKs including Python.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/architecture.md",
+            "quote": "SDKs for programmatic access",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "The Python SDK is the reference client.",
+          "source": {
+            "url": "https://docs.e2b.dev/quickstart.md",
+            "quote": "from e2b_code_interpreter import Sandbox",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "shortfall": "A Python library is named in one place but has no page, package name or install command.",
+          "note": "The docs and API are TypeScript-first; only one sentence mentions a Python option.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "the Python SDK's `persistent_disk_gib`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "`lizard-sdk` on PyPI, imported as `lizard`.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/sdk-reference.md",
+            "quote": "`lizard-sdk` on PyPI for Python, imported as `lizard`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "The Python SDK is the primary client.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "sb = modal.Sandbox.create(app=sb_app)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "`pip install morphcloud`.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/setup/installation-guide",
+            "quote": "pip install morphcloud",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "Python and JavaScript SDKs.",
+          "source": {
+            "url": "https://withruntime.com/docs/start",
+            "quote": "One API, one CLI, one MCP server and SDKs for JavaScript, Python, Go, Ruby and Java cover every Runtime product.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "Published as `sandboxer` on PyPI.",
+          "source": {
+            "url": "https://sandboxer.com/docs/llms.txt",
+            "quote": "TypeScript (`sandboxer-sdk`) and Python (`sandboxer`) SDKs",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "The documented SDK is JavaScript only.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/quickstart.md",
+            "quote": "import { SpritesClient } from '@fly/sprites';",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "A separate Python SDK reference.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "`pip install tensorlake`.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/quickstart.md",
+            "quote": "This installs the Python SDK.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "ts-sdk",
       "feature": "ways-to-drive",
       "title": "TypeScript SDK",
       "plain": "An official library for JavaScript or TypeScript programs.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "note": "There is no package: Node code calls the HTTPS API with `fetch`.",
+          "source": {
+            "url": "https://www.agent37.com/docs/quickstart.md",
+            "quote": "There is no SDK to install: the API is plain HTTPS and JSON",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "TypeScript is one of three official SDKs.",
+          "source": {
+            "url": "https://blaxel.ai/pricing",
+            "quote": "Python, TypeScript, and Go SDKs for Blaxel",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "note": "`@boatdev/sdk` on npm.",
+          "source": {
+            "url": "https://docs.boat.dev/sdks/overview.md",
+            "quote": "`@boatdev/sdk` on npm",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "`@boxd-sh/sdk` is promise-only and ESM-only.",
+          "source": {
+            "url": "https://docs.boxd.sh/reference/typescript-sdk.md",
+            "quote": "The `@boxd-sh/sdk` package",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "The Worker SDK is the primary surface.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/reference/",
+            "quote": "`@cloudflare/sandbox` works with a container you start from a Durable Object.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "One of five official SDKs.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/architecture.md",
+            "quote": "SDKs for programmatic access",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "A JavaScript SDK with its own reference.",
+          "source": {
+            "url": "https://docs.e2b.dev/llms.txt",
+            "quote": "js-sdk",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "`@insforge/instabox-sdk` is the documented client.",
+          "source": {
+            "url": "https://instabox.sh/docs/sdk.md",
+            "quote": "Version 0.5.0 of `@insforge/instabox-sdk`.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "`@lizard-build/sdk`.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes.md",
+            "quote": "Create one with Lizard SDK (`@lizard-build/sdk` for TypeScript, `lizard-sdk` for Python)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "A JavaScript client alongside Python and Go.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "JavaScript",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "`npm install morphcloud`.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/setup/installation-guide",
+            "quote": "npm install morphcloud",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "JavaScript and TypeScript client.",
+          "source": {
+            "url": "https://withruntime.com/docs/start",
+            "quote": "One API, one CLI, one MCP server and SDKs for JavaScript, Python, Go, Ruby and Java cover every Runtime product.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "Typed clients generated from the same OpenAPI document.",
+          "source": {
+            "url": "https://sandboxer.com/docs/llms.txt",
+            "quote": "TypeScript (`sandboxer-sdk`) and Python (`sandboxer`) SDKs",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "note": "`@fly/sprites` is the documented client.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/quickstart.md",
+            "quote": "import { SpritesClient } from '@fly/sprites';",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "The JS SDK is the reference client.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "`@tensorlakeai/tensorlake`.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/quickstart.md",
+            "quote": "npm install @tensorlakeai/tensorlake",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "rest-api",
       "feature": "ways-to-drive",
       "title": "Documented HTTP API",
       "plain": "A documented web API that any language can call.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "Two HTTPS planes: api.agent37.com and the instance URL.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/overview.md",
+            "quote": "Use the **Sandbox API** to create and manage persistent sandboxes for code, services, and agents.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "Every resource has an HTTP API.",
+          "source": {
+            "url": "https://blaxel.ai/pricing",
+            "quote": "HTTP API for every Blaxel resource",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "note": "JSON over HTTPS with an OpenAPI file for other languages.",
+          "source": {
+            "url": "https://docs.boat.dev/api/v1.md",
+            "quote": "The base URL is `https://boat.dev/api/v1`.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "shortfall": "The only wire API is gRPC, so a browser or a plain HTTP client cannot call it.",
+          "note": "There is no REST or JSON endpoint; TypeScript and Python SDKs wrap gRPC.",
+          "source": {
+            "url": "https://docs.boxd.sh/reference/grpc-api.md",
+            "quote": "Raw gRPC access to the boxd public API, for any language with a protoc plugin.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "shortfall": "There is no Cloudflare-hosted API to call; you write a Worker and call it yourself.",
+          "note": "A reference bridge Worker exists, but you deploy it in your own account.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/sdk/bridge/",
+            "quote": "You deploy the Worker in your account; it is not a Cloudflare-hosted shared API.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "A REST service is the entry point for every SDK and the CLI.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/architecture.md",
+            "quote": "The API is a NestJS-based RESTful service that serves as the primary entry point for all platform operations",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "An OpenAPI-described platform API on api.e2b.app.",
+          "source": {
+            "url": "https://docs.e2b.dev/api-reference/sandboxes/create-sandbox-v2.md",
+            "quote": "Complete E2B developer API. Platform endpoints are served on api.e2b.app.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "JSON REST with a published OpenAPI 3.1 document.",
+          "source": {
+            "url": "https://instabox.sh/docs/api.md",
+            "quote": "The full machine-readable description",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "REST under /api, documented call by call.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/sdk-reference.md",
+            "quote": "POST /api/sandboxes with `template`, `projectId`, `size`, `timeoutMs`, `envs`, `metadata`, `region`, `volumeName`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "shortfall": "The documented interface is the SDK and its gRPC connection; there is no separate HTTP API to call.",
+          "note": "Modal's client libraries are the API surface.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "sb = modal.Sandbox.create(app=sb_app)",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "An OpenAPI-described devbox API.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/api-reference/start-instance-instance-post",
+            "quote": "Start a new instance from a snapshot.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "An OpenAPI document describes the HTTP API.",
+          "source": {
+            "url": "https://withruntime.com/about",
+            "quote": "The HTTP API is at `https://api.withruntime.com/v1`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "REST at sandboxer.com/api/v1, with a second Daytona-compatible API.",
+          "source": {
+            "url": "https://sandboxer.com/docs/api",
+            "quote": "`https://sandboxer.com/api/v1`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "note": "A REST API at api.sprites.dev.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "https://api.sprites.dev/v1/sprites/my-sprite/exec",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "shortfall": "Sandbox is driven through the SDKs and the CLI; no HTTP API is documented.",
+          "note": "The overview names the CLI, JS SDK and Python SDK as the ways to manage sandboxes.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "A versioned API reference and a published OpenAPI file.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/llms.txt",
+            "quote": "Raw OpenAPI schema for the Tensorlake APIs, useful for exact endpoint inspection and client generation.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "mcp-server",
       "feature": "ways-to-drive",
       "title": "MCP server",
       "plain": "An official MCP server, so an AI assistant can create and use sandboxes itself.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "shortfall": "MCP is a client feature here: instances reach out to Composio and Perflo, but nothing lets an assistant create an instance.",
+          "note": "The docs index lists no MCP server for the Sandbox API.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/managed-services.md",
+            "quote": "Register Composio and Perflo with your MCP client.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "Every sandbox exposes its own MCP server for files, processes, ports and previews.",
+          "source": {
+            "url": "https://docs.blaxel.ai/llms.txt",
+            "quote": "Every Blaxel sandbox exposes a built-in MCP server so agents can operate the sandbox using tool calls for files, processes, ports, and previews.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "shortfall": "The only MCP server searches the documentation; it cannot start or drive a sandbox.",
+          "note": "Sandboxes are driven by the CLI, API or SDK.",
+          "source": {
+            "url": "https://docs.boat.dev/ai-tools.md",
+            "quote": "the boat CLI, the docs MCP server, llms.txt, skills",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "shortfall": "boxd installs other products' MCP servers into its agents; it publishes no server that creates machines.",
+          "note": "The console, CLI, SDKs and gRPC API are the control surfaces.",
+          "source": {
+            "url": "https://docs.boxd.sh/cli/commands.md",
+            "quote": "boxd manage integrations mcp linear claude",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "shortfall": "The MCP material is a separate Cloudflare code-mode project, not a server that starts sandboxes.",
+          "note": "Sandbox control is Worker code.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/commands/open-a-terminal-in-the-browser/",
+            "quote": "Code Mode MCP Server",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "A first-party MCP server with sandbox, file, git, execution and computer-use tools.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/mcp.md",
+            "quote": "daytona mcp init claude",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "shortfall": "E2B's MCP support runs other companies' tools inside a sandbox; nothing of E2B's lets your assistant create sandboxes.",
+          "note": "E2B's MCP surface is the gateway and a docs server.",
+          "source": {
+            "url": "https://docs.e2b.dev/mcp-gateway.md",
+            "quote": "Connect to 200+ tools through the Model Context Protocol",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "shortfall": "No MCP server is published for the InstaBox API, so an assistant cannot create machines through one.",
+          "note": "A computer-use MCP runs inside the machine to drive its desktop.",
+          "source": {
+            "url": "https://instabox.sh/docs/llms.txt",
+            "quote": "Every body is JSON.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "A hosted MCP server that creates sandboxes, runs commands and reads or writes files.",
+          "source": {
+            "url": "https://lizard.build/docs/agents.md",
+            "quote": "Lizard MCP lets ChatGPT, Claude and other MCP clients manage your Lizard projects: create sandboxes, run commands and read or write files in them",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "shortfall": "The only MCP guidance is how to deploy someone else's MCP server inside Modal.",
+          "note": "There is no control-plane MCP server.",
+          "source": {
+            "url": "https://modal.com/docs/examples/mcp_server_stateless.md",
+            "quote": "Deploy a remote, stateless MCP server on Modal with FastMCP",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "note": "No MCP server is documented; agents are driven through SSH, the devbox API or tmux.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "through SSH, or puppeteered through the Devbox API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "A hosted Streamable HTTP endpoint plus a local stdio bridge.",
+          "source": {
+            "url": "https://withruntime.com/docs/mcp",
+            "quote": "The endpoint is `https://api.withruntime.com/mcp`, over MCP Streamable HTTP.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "Hosted and local servers, with 18 tools and session handoff.",
+          "source": {
+            "url": "https://sandboxer.com/docs/mcp",
+            "quote": "Hosted at `https://sandboxer.com/mcp` (Streamable HTTP). Nothing to install.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "note": "Sprites are a place to run MCP servers, not a server that manages Sprites.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "Run every MCP server in its own Sprite",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "shortfall": "No MCP server manages sandboxes; Vercel's MCP material is about building MCP servers on Vercel.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "note": "MCP appears only as a client you point at the browser inside a sandbox.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/chrome-cdp.md",
+            "quote": "can both drive the same sandboxed Chrome through the official",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "pty",
       "feature": "ways-to-drive",
       "title": "Interactive terminal over the API",
       "plain": "A program can open a live terminal session (PTY) in the sandbox, not just run one command.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "A real SSH session gives a PTY, and the browser terminal is on port 7681.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/ssh.md",
+            "quote": "interactive shells with a PTY",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "An interactive terminal from the console or `bl connect`.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "You can explore the contents of a sandbox with an interactive terminal.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "note": "`boat ssh` opens an interactive shell.",
+          "source": {
+            "url": "https://docs.boat.dev/ssh-access.md",
+            "quote": "Run `boat ssh <id>` for a shell.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "Exec is bidirectional and a PTY session is a stream handle.",
+          "source": {
+            "url": "https://docs.boxd.sh/cli/commands.md",
+            "quote": "PTY execs (`--tty`) are the exception.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "shortfall": "A live shell exists only inside a web page you build; there is no call that opens a terminal session for a script.",
+          "note": "The documented terminal is xterm.js over a WebSocket into tmux.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/commands/open-a-terminal-in-the-browser/",
+            "quote": "Expose a live shell in a Linux sandbox on a web page.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "A PTY API plus a web terminal and a desktop.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/pty.md",
+            "quote": "Connect to PTY session",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "A PTY terminal with resize and signals.",
+          "source": {
+            "url": "https://docs.e2b.dev/sandbox/pty.md",
+            "quote": "Interactive terminal (PTY)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "A WebSocket terminal carrying a real PTY.",
+          "source": {
+            "url": "https://api.instabox.sh/v1/openapi.json",
+            "quote": "carrying a PTY (xterm-256color) of a login shell",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "An interactive shell over Lizard's own transport; SSH clients do not work.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/sdk-reference.md",
+            "quote": "SSH protocol access is not available; `lizard sandbox ssh` opens an interactive shell with your CLI credentials.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "`modal shell` and a PTY flag on exec.",
+          "source": {
+            "url": "https://modal.com/docs/cli/latest/shell",
+            "quote": "`--pty / --no-pty`: Run the command using a PTY.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "A tmux API creates sessions and sends keys, which is a live terminal for an agent.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Automate agents with tmux (create a session and send keys)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "A shell command and `spawn --pty` for programs that need a terminal.",
+          "source": {
+            "url": "https://withruntime.com/docs/cli",
+            "quote": "runtime sandboxes spawn \"${id}\" --pty -- htop",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "A WebSocket exec endpoint with PTY, cols and rows.",
+          "source": {
+            "url": "https://sandboxer.com/docs/api",
+            "quote": "Send a text frame `{\"command\": null, \"pty\": true, \"cols\": 120, \"rows\": 32}`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "note": "`sprite console` allocates a TTY.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/cli/commands.md",
+            "quote": "Opens an interactive shell with a TTY allocated.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "`sandbox connect` starts an interactive shell in a sandbox.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/cli-reference",
+            "quote": "`connect`: Start an interactive shell in an existing sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "A PTY API with resize and callbacks, plus SSH.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/pty-sessions.md",
+            "quote": "create_pty(",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "file-api",
       "feature": "ways-to-drive",
       "title": "Files over the API",
       "plain": "Read and write files in the sandbox through the SDK or API.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "Browse, read, write, move and delete files over the instance URL.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/files.md",
+            "quote": "Files live on the instance's disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "A file system interface from the SDK, MCP server or REST API.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Filesystem.md",
+            "quote": "Read, write, list, and delete files inside a Blaxel sandbox using a simple file system interface from the SDK, MCP server, or REST API.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "note": "Read and write files over the API without SSH.",
+          "source": {
+            "url": "https://docs.boat.dev/account.md",
+            "quote": "reading and writing files in a sandbox without SSH",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "Upload and download from the SDKs or the console, with no size cap.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/file-operations.md",
+            "quote": "Uploads and downloads have no size cap.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "A Files class moves files between the Worker and the sandbox.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/files/",
+            "quote": "The `Files` class from `@cloudflare/sandbox` moves files between your Worker and a running sandbox, and provides common file system operations.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "An `fs` module for listing, reading, writing, uploading and downloading.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/file-system-operations.md",
+            "quote": "The `fs` module covers listing directories, reading file metadata, creating directories, uploading and downloading files",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "Read, write and upload files through the SDK.",
+          "source": {
+            "url": "https://docs.e2b.dev/filesystem.md",
+            "quote": "Read and write files to the sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "Files endpoints plus `instabox push` and `pull`.",
+          "source": {
+            "url": "https://instabox.sh/docs/api/commands.md",
+            "quote": "GET /v1/machines/{id}/files/content",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "`sandbox.fs` reads and writes text and bytes.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes/sdk-reference.md",
+            "quote": "Write text or bytes; create parent directories.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "Read files up to 5 GB and write files of any size.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandbox-files",
+            "quote": "These APIs may be used to read files of up to 5GB and write files of any size.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "Upload and download files and directories through the SDK.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/file-management",
+            "quote": "Upload a local file to the instance",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "`sbx.files.upload` and `download` move files and folders.",
+          "source": {
+            "url": "https://withruntime.com/docs/javascript",
+            "quote": "await sbx.files.upload(project, \"/workspace/project\");",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "The API reads and writes files, and `sbx scp` moves them.",
+          "source": {
+            "url": "https://sandboxer.com/docs/mcp",
+            "quote": "read and write files;",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "note": "Files persist on disk and `--file` uploads before a command runs.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/cli/commands.md",
+            "quote": "`--file <source:dest>` - Upload file before exec (repeatable)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "`readFile` and `writeFiles` on the sandbox object.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/sdk-reference",
+            "quote": "sandbox.readFile()",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "Copy, read, write and list files over the API.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/file-operations.md",
+            "quote": "## Write Files",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "agents-preinstalled",
       "feature": "built-in-agents",
       "title": "Coding agents preinstalled",
       "plain": "Claude Code, Codex or similar are already installed in the default image.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "6 templates",
+          "note": "Hermes, OpenClaw, Claude Code, Codex, Grok and OpenCode, plus Pi and n8n.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/templates.md",
+            "quote": "`agent37-hermes` | Hermes, the general agent: chat, browsing, code, files.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "shortfall": "The default image is a bare sandbox; agents are code you deploy or an MCP server you connect.",
+          "note": "Agents Hosting is a separate product for your own Python or TypeScript agent.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "Sandboxes are instant-launching virtual machines",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "7 harnesses",
+          "note": "Claude Code, Codex, Pi, OpenCode, Prime Agent, Kimi Code and Mistral Vibe.",
+          "source": {
+            "url": "https://docs.boat.dev/integrated-agents.md",
+            "quote": "Every sandbox has seven coding-agent harnesses, installed and ready",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "3 agents",
+          "note": "Claude Code, Codex and OpenCode, with an in-VM CLI already signed in.",
+          "source": {
+            "url": "https://docs.boxd.sh/use-cases/coding-agents.md",
+            "quote": "Every boxd machine ships with three coding agents",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "shortfall": "The current base images ship no coding agent; you add one in your own Dockerfile, as the guides do.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/sdk/migrate/changes-in-1-0/",
+            "quote": "include none of them.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "shortfall": "OpenClaw is in the default snapshot, but Claude Code and Codex are not; those need an install step.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/guides/openclaw/openclaw-run-secure-sandbox.md",
+            "quote": "OpenClaw comes preinstalled in the default Daytona snapshot, so the command above is all you need.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "shortfall": "A prebuilt Hermes template exists, but the default image has no agent and there is no Claude Code or Codex template.",
+          "source": {
+            "url": "https://docs.e2b.dev/agents/hermes.md",
+            "quote": "E2B provides a pre-built `hermes` template with the Hermes CLI and bundled skills already installed.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "Both are in the default and agent templates; sign-ins persist because home is on the data disk.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "Claude Code, Codex",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "figure": "5 agents",
+          "note": "Codex, Claude, OpenCode, Pi and Prime templates, plus a base image.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes.md",
+            "quote": "`base`, `interpreter`, `codex`, `claude`, `opencode`, `pi`, `prime`, `desktop` and `desktop-camoufox`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "shortfall": "Nothing is preinstalled and there is no agent API; the agent is code you run.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "Sandboxes are useful for tasks like executing code generated by an LLM or isolating user-generated code.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "shortfall": "Devboxes boot from templates you build; no agent is in the default image.",
+          "note": "Agents are driven through the tmux API after you install them.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Devboxes expose a full tmux API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "no",
+          "shortfall": "The default image ships languages and tools but no coding agent; you install the agent yourself.",
+          "source": {
+            "url": "https://withruntime.com/docs/vercel-ai-sdk",
+            "quote": "No bridge harness (Claude Code, Codex) has run on Runtime yet.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "figure": "6 harnesses",
+          "note": "Claude Code, Codex, OpenCode, Pi, Kimi Code and Mistral Vibe.",
+          "source": {
+            "url": "https://sandboxer.com/docs/llms.txt",
+            "quote": "installed in every sandbox.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "shortfall": "Sprites provide plugins and integrations for agents, but no agent is in the image.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "Official plugins for every serious coding agent, plus SDKs and native integrations.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "The default universal image includes coding agents, but you drive them yourself.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "which includes the current Node.js LTS, Python 3.14, coding agents, and common utilities.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "shortfall": "The managed images ship an OS, a desktop and tooling; no coding agent is installed.",
+          "note": "You add an agent through a custom image or the OpenCode plugin.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/tensorlake-images.md",
+            "quote": "The managed tensorlake/* images, what ships in them",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "prompt-api",
       "feature": "built-in-agents",
       "title": "Send it a prompt",
       "plain": "The provider runs an agent for you: you send a prompt, it does the work in the sandbox.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "The Agent API on each template takes a message and streams the reply; sessions continue a thread.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/chat.md",
+            "quote": "Send a message or task to the agent on your instance.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "shortfall": "There is no prompt endpoint; Agent Runtime, the product that would run the loop, is marked Soon.",
+          "note": "Agents Hosting runs your own deployed agent, not a prompt-to-work API.",
+          "source": {
+            "url": "https://blaxel.ai/company/security",
+            "quote": "Session-first, stateful runtime for long-running agents.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "note": "One call queues a prompt to a named harness, with steering, interrupts and an event stream.",
+          "source": {
+            "url": "https://docs.boat.dev/api/reference/agent/prompt-sandbox-agent.md",
+            "quote": "Queue a natural-language work item for an agent harness",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "shortfall": "boxd runs the machine, not the agent loop; Anthropic or OpenAI runs the loop in the documented integrations.",
+          "source": {
+            "url": "https://docs.boxd.sh/use-cases/claude-managed-agents.md",
+            "quote": "Anthropic runs the agent loop.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "shortfall": "Your Worker holds the credentials and the agent runs as a process you start; there is no prompt endpoint.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/coding-agents/",
+            "quote": "Your Worker starts the sandbox, holds the credentials, and decides which hostnames the sandbox can reach.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "no",
+          "shortfall": "No agent is hosted and there is no prompt call; you install and drive the agent.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox.md",
+            "quote": "Run Claude Code in a Daytona Sandbox via CLI",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "shortfall": "Guides show agents running in a sandbox, but no API takes a prompt and runs one for you.",
+          "source": {
+            "url": "https://docs.e2b.dev/use-cases/coding-agents.md",
+            "quote": "Run AI coding agents like Claude Code, Codex, and Amp in secure E2B sandboxes with full terminal, filesystem, and git access.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "shortfall": "There is no prompt endpoint; the API offers exec, files, desktop and snapshots.",
+          "note": "Your agent runs as a process you start inside the machine.",
+          "source": {
+            "url": "https://instabox.sh/docs/api/commands.md",
+            "quote": "exec`: Run a command",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "partly",
+          "shortfall": "You can send a prompt from the command line, but the SDK and API have no prompt call, so a program cannot start an agent.",
+          "source": {
+            "url": "https://lizard.build/docs/cli/sandbox.md",
+            "quote": "`lizard sandbox prompt <id> <prompt...>` sends a prompt and streams what the agent does.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "shortfall": "Modal sells the computer, not an agent loop; the docs show SDK code you write.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "Sandboxes are useful for tasks like executing code generated by an LLM",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "shortfall": "The tmux API lets your program type into an agent, but Morph runs no agent loop of its own.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Devboxes expose a full tmux API, which lets you programmatically manage coding agents like OpenAI Codex or Claude Code.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "no",
+          "shortfall": "Runtime has no agent-run API; its own docs say no bridge harness has run on it yet.",
+          "source": {
+            "url": "https://withruntime.com/docs/vercel-ai-sdk",
+            "quote": "No bridge harness (Claude Code, Codex) has run on Runtime yet.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "A prompt call returns a prompt id and an event stream, with steering for three harnesses.",
+          "source": {
+            "url": "https://sandboxer.com/docs/agents",
+            "quote": "The call returns at once with `promptId`, `conversationId` and `status: \"queued\"`.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "shortfall": "Sprites host an agent you install; there is no prompt endpoint.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "Give it a Sprite that sleeps until it's needed and wakes up remembering everything.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "shortfall": "Agents are in the image but there is no API that runs one; you open a terminal or use the CLI.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "The default image is `vercel/sandbox/universal`, which includes the current Node.js LTS, Python 3.14, coding agents, and common utilities.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "shortfall": "Tensorlake exposes a sandbox as a tool for your own agent; it does not run an agent from a prompt.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/tool-calls.md",
+            "quote": "Expose Tensorlake sandboxes as tools to your LLM agents",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "one-click-hermes",
       "feature": "built-in-agents",
       "title": "One-click Hermes",
       "plain": "Hermes Agent can be set up without a terminal.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "$0-99.99/mo",
+          "note": "A Personal plan with Hermes pre-installed, live in one click, plus an `agent37-hermes` template.",
+          "source": {
+            "url": "https://www.agent37.com/personal",
+            "quote": "Run OpenClaw, Hermes, Claude Code, Codex, OpenCode, or Grok around the clock. Yours is live in one click.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "shortfall": "No Hermes template or guide is published; you would install it yourself.",
+          "source": {
+            "url": "https://docs.blaxel.ai/llms.txt",
+            "quote": "Deploy and run OpenClaw, an open-source coding agent harness, inside a Blaxel sandbox",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "partly",
+          "shortfall": "Hermes is already installed on every machine, but you still need a terminal command to start it and prompt it.",
+          "source": {
+            "url": "https://docs.boat.dev/machines/tools.md",
+            "quote": "Hermes Agent by Nous Research. Browser tools are not pre-installed",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "shortfall": "No Hermes template, harness or guide is documented.",
+          "source": {
+            "url": "https://docs.boxd.sh/use-cases/coding-agents.md",
+            "quote": "Every boxd machine ships with three coding agents",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "shortfall": "No Hermes template; you would install it in your own Dockerfile.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/coding-agents/",
+            "quote": "Run the agent in a Linux sandbox so its commands stay inside a",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "no",
+          "shortfall": "Daytona documents OpenClaw but not Hermes, so there is no one-click route.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/guides/openclaw/openclaw-run-secure-sandbox.md",
+            "quote": "OpenClaw comes preinstalled in the default Daytona snapshot",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "shortfall": "A prebuilt template is ready, but you still create the sandbox with a command and pay by usage.",
+          "source": {
+            "url": "https://docs.e2b.dev/agents/hermes.md",
+            "quote": "E2B provides a pre-built `hermes` template with the Hermes CLI and bundled skills already installed.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "shortfall": "No Hermes template, guide or one-click route is documented.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "Claude Code, Codex",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "shortfall": "The deploy catalog has no Hermes template; only a manual install in a sandbox.",
+          "source": {
+            "url": "https://lizard.build/deploy/openclaw--openclaw",
+            "quote": "OpenClaw is a self-hosted, MIT-licensed personal AI assistant and agent gateway",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "shortfall": "Hermes lists Modal as a terminal backend, not as a one-click host.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "Sandboxes are useful for tasks like executing code generated by an LLM",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "shortfall": "No Hermes template or guide is published.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Create a devbox from a template (or a snapshot)",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "no",
+          "shortfall": "No Hermes template or guide is published.",
+          "source": {
+            "url": "https://withruntime.com/docs/start",
+            "quote": "One API, one CLI, one MCP server and SDKs for JavaScript, Python, Go, Ruby and Java cover every Runtime product.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "shortfall": "Its six harnesses do not include Hermes, and there is no template.",
+          "source": {
+            "url": "https://sandboxer.com/docs/llms.txt",
+            "quote": "installed in every sandbox.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "shortfall": "Hermes is named on the marketing page, but there is no template or guided route.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "Hermes, Pi, OpenClaw… whatever your flavour",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "shortfall": "A Hermes guide exists, but you follow terminal steps; nothing is one click.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/ecosystem/hermes",
+            "quote": "Its Vercel Sandbox terminal backend runs every command the agent executes inside an isolated",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "shortfall": "No Hermes template or guide is published.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/tensorlake-images.md",
+            "quote": "The managed tensorlake/* images",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "one-click-openclaw",
       "feature": "built-in-agents",
       "title": "One-click OpenClaw",
       "plain": "OpenClaw can be set up without a terminal.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "figure": "$0-99.99/mo",
+          "note": "OpenClaw is a template and a one-click Personal plan.",
+          "source": {
+            "url": "https://www.agent37.com/personal",
+            "quote": "Run OpenClaw, Hermes, Claude Code, Codex, OpenCode, or Grok around the clock. Yours is live in one click.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "shortfall": "A tutorial walks through OpenClaw in a sandbox, but it is terminal work, not one click.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Tutorials/OpenClaw.md",
+            "quote": "Deploy and run OpenClaw, an open-source coding agent harness, inside a Blaxel sandbox with persistent volume storage and live preview URLs.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "partly",
+          "shortfall": "OpenClaw is installed on every machine, but its gateway does not start by itself and you need a terminal.",
+          "source": {
+            "url": "https://docs.boat.dev/machines/tools.md",
+            "quote": "OpenClaw CLI. The gateway does not start by itself: run `openclaw gateway`.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "shortfall": "No OpenClaw template, harness or guide is documented.",
+          "source": {
+            "url": "https://docs.boxd.sh/use-cases/coding-agents.md",
+            "quote": "Every boxd machine ships with three coding agents",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "shortfall": "No OpenClaw template; the guides cover Claude Code, Codex, OpenCode and Pi.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/coding-agents/",
+            "quote": "Run the agent in a Linux sandbox so its commands stay inside a",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "shortfall": "OpenClaw is in the default snapshot, but you still run a command to start and configure it.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/guides/openclaw/openclaw-run-secure-sandbox.md",
+            "quote": "OpenClaw comes preinstalled in the default Daytona snapshot, so the command above is all you need.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "no",
+          "shortfall": "No OpenClaw template or guide is published.",
+          "source": {
+            "url": "https://docs.e2b.dev/use-cases/coding-agents.md",
+            "quote": "Run AI coding agents like Claude Code, Codex, and Amp",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "shortfall": "No OpenClaw template or guide is published.",
+          "source": {
+            "url": "https://instabox.sh/docs/limits.md",
+            "quote": "Claude Code, Codex",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "The deploy catalog has an OpenClaw template that provisions the app and prints its gateway token.",
+          "source": {
+            "url": "https://lizard.build/deploy/openclaw--openclaw",
+            "quote": "This template's startup script generates a random gateway token on boot and prints it to the deploy logs, so it comes up reachable and authenticated on the first try.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "shortfall": "No OpenClaw template or guide is published.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "Sandboxes are useful for tasks like executing code generated by an LLM",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "shortfall": "No OpenClaw template or guide is published.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Create a devbox from a template (or a snapshot)",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "no",
+          "shortfall": "No OpenClaw template or guide is published.",
+          "source": {
+            "url": "https://withruntime.com/docs/start",
+            "quote": "One API, one CLI, one MCP server and SDKs for JavaScript, Python, Go, Ruby and Java cover every Runtime product.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "shortfall": "Its harness list does not include OpenClaw, and there is no template.",
+          "source": {
+            "url": "https://sandboxer.com/docs/llms.txt",
+            "quote": "installed in every sandbox.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "shortfall": "OpenClaw is named on the marketing page, but there is no template or guided route.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "Hermes, Pi, OpenClaw… whatever your flavour",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "shortfall": "No OpenClaw template or one-click route is documented.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/ecosystem",
+            "quote": "Cursor Cloud Agents on Self-Hosted Machines",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "shortfall": "No OpenClaw template or guide is published.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/tensorlake-images.md",
+            "quote": "The managed tensorlake/* images",
+            "confidence": "inferred"
+          }
+        }
+      ]
     },
     {
       "id": "browser",
       "feature": "built-in-agents",
       "title": "Browser built in",
       "plain": "A web browser (Chrome or Chromium) ready for an agent to drive.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "Chromium and a browser tool ship in the Hermes template; other templates do not include a browser.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/desktop.md",
+            "quote": "The stock `agent37-hermes` template includes a headless browser",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "shortfall": "No browser is installed or offered; you would add Chrome to your own image.",
+          "note": "Tutorials show code-server in a browser, not a browser in the sandbox.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "Sandboxes are instant-launching virtual machines",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "Chrome 151",
+          "note": "Chrome is preinstalled, with a browser-only stream and a desktop.",
+          "source": {
+            "url": "https://docs.boat.dev/machines/tools.md",
+            "quote": "| `google-chrome-stable` | Chrome 151 |",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "`agent-browser` drives a Chromium build with anti-bot fingerprinting, and opens on the desktop.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/client-utilities.md",
+            "quote": "the pre-installed `agent-browser`",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "shortfall": "The base images ship no browser; you install one in your own Dockerfile.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/sdk/migrate/changes-in-1-0/",
+            "quote": "include none of them.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "not-published",
+          "note": "No browser is documented in the default image or the computer-use desktop; the docs describe the desktop, not what is installed in it.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/computer-use.md",
+            "quote": "Computer Use enables programmatic control of desktop environments within sandboxes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "shortfall": "A browser comes with the desktop image or through Kernel cloud browsers, not in the default sandbox image.",
+          "source": {
+            "url": "https://docs.e2b.dev/use-cases/remote-browser.md",
+            "quote": "For **local browser automation** using a virtual desktop, see [Computer use](https://docs.e2b.dev/use-cases/computer-use.md).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "The default `agent-browser` template has a desktop and Chromium.",
+          "source": {
+            "url": "https://instabox.sh/docs/desktop.md",
+            "quote": "have a Linux desktop with a browser.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "The `desktop` template has a graphical desktop; `desktop-camoufox` adds a Firefox build for scraping, in US East only.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes.md",
+            "quote": "`desktop-camoufox` is the `desktop` template plus Camoufox, a Firefox build for scraping that you drive with Playwright; it runs only in `us-east-1` for now.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "shortfall": "No browser, desktop or computer-use API is documented; the sandbox is a headless container.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "Sandboxes are useful for tasks like executing code generated by an LLM",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "partly",
+          "shortfall": "A documented example runs headless Chrome in a container, but no browser is installed for you.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/documentation/instances/snapshot-setup",
+            "quote": "runs two containerized services (a headless Chrome and an NGINX proxy)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "One call starts Chromium and returns a CDP address for Playwright, Puppeteer or browser-use.",
+          "source": {
+            "url": "https://withruntime.com/docs/javascript",
+            "quote": "`sbx.browser.start()` runs Chromium in the sandbox. It returns `cdpUrl`, the address that Playwright, Puppeteer, browser-use and Stagehand connect to.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "Every VM has Chrome installed, and the desktop shows it.",
+          "source": {
+            "url": "https://sandboxer.com/docs/llms.txt",
+            "quote": "Every Sandboxer VM has Google Chrome installed.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "shortfall": "No browser is installed or offered; a browser is something you run and reach through a proxy.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/cli/commands.md",
+            "quote": "sprite proxy - Forward local ports through the remote server proxy",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "shortfall": "No browser is documented in the image or as an API; agents in the image are terminal tools.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "coding agents, and common utilities.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "Chrome ships in the ubuntu-vnc image and is driven over CDP through a tunnel.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/chrome-cdp.md",
+            "quote": "Run Google Chrome inside an ubuntu-vnc sandbox and drive it locally through the Chrome DevTools Protocol over a tunnel.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "desktop",
       "feature": "built-in-agents",
       "title": "Desktop for computer use",
       "plain": "A graphical desktop an agent can see and click, for computer-use agents.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "A desktop you can watch and take over, on a built recipe or the Hermes VNC template.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/vm-instances.md",
+            "quote": "plus an XFCE desktop with Firefox in the browser",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "shortfall": "No graphical desktop is documented; the browser surfaces are a terminal and preview URLs.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "You can explore the contents of a sandbox with an interactive terminal.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "figure": "1080p 60 fps",
+          "note": "Moonlight over WebRTC or VNC over HTTPS, with a browser-only stream option.",
+          "source": {
+            "url": "https://docs.boat.dev/desktop-streaming.md",
+            "quote": "The full desktop over Moonlight (WebRTC), 1920x1080 at 60 fps",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "Every machine has a display, opened in a browser window.",
+          "source": {
+            "url": "https://docs.boxd.sh/guides/desktop.md",
+            "quote": "a real desktop you can watch and control",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "shortfall": "No desktop or computer-use surface is documented.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/",
+            "quote": "A sandbox is an isolated place to run code.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "A VNC desktop plus a computer-use API for screenshots, clicks and typing.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/computer-use.md",
+            "quote": "Computer Use enables programmatic control of desktop environments within sandboxes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "A full Linux desktop with mouse, keyboard and screen capture APIs.",
+          "source": {
+            "url": "https://docs.e2b.dev/use-cases/computer-use.md",
+            "quote": "SDK gives your agent a full Linux desktop",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "Xfce with Chromium over VNC, with human takeover and handback.",
+          "source": {
+            "url": "https://instabox.sh/docs/desktop.md",
+            "quote": "Machines from the `agent-browser` template (shown as **standard**) have a Linux desktop with a browser.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "A `desktop` template, driven by the SDK or CLI, with VNC carried over a local bridge.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes.md",
+            "quote": "`desktop` runs a graphical desktop that you drive with `sandbox.desktop` or `lizard sandbox desktop`.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "shortfall": "No desktop, VNC or computer-use API is documented.",
+          "source": {
+            "url": "https://modal.com/docs/guide/sandboxes",
+            "quote": "Sandboxes are useful for tasks like executing code generated by an LLM",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "Remote desktops are configured per devbox for computer-use, rather than being on by default.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "You can also programmatically configure devboxes with",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "A live Linux desktop with clicks, screenshots and MP4 recording.",
+          "source": {
+            "url": "https://withruntime.com/docs/javascript",
+            "quote": "A Linux desktop runs in the sandbox. You drive it as a person would.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "Every running sandbox has a desktop in a browser tab, plus a browser-only stream.",
+          "source": {
+            "url": "https://sandboxer.com/docs/desktop",
+            "quote": "Every running sandbox has a graphical desktop (XFCE with Google Chrome) that you can open in a browser tab.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "shortfall": "No desktop is documented; interactive access is a terminal console.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/cli/commands.md",
+            "quote": "Opens an interactive shell with a TTY allocated.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "shortfall": "No desktop, VNC or computer-use API is published for Sandbox.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "The ubuntu-vnc image gives a desktop driven from Python or JavaScript.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/computer-use.md",
+            "quote": "Launch ubuntu-vnc sandboxes and drive their desktop from Python or JavaScript.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "hosts-other-agents",
       "feature": "built-in-agents",
       "title": "Runs other platforms' agents",
       "plain": "Documented as the machine for Cursor cloud agents, Devin, Claude Managed Agents or similar.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "Documented as the machine for Cursor self-hosted machines and Claude Managed Agents.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/cursor.md",
+            "quote": "Cursor Self-Hosted Machines on Agent37",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "Tutorials cover Claude Managed Agents and the OpenAI Agents API running on Blaxel.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Tutorials/Claude-Managed-Agents.md",
+            "quote": "Self-host the Claude Managed Agents (CMA) sandbox execution layer on Blaxel while Anthropic runs the agent loop",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "shortfall": "No page documents another platform's cloud agents using Boat as their machine.",
+          "note": "Its integrations are Harbor and Eve adapters, which are evaluation frameworks.",
+          "source": {
+            "url": "https://docs.boat.dev/integrations/harbor.md",
+            "quote": "Run Harbor agent trials and evals on Boat sandboxes",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "Pages for Claude Managed Agents and the OpenAI Agents API, both in beta on the vendor side.",
+          "source": {
+            "url": "https://docs.boxd.sh/use-cases/openai-agents-api.md",
+            "quote": "OpenAI runs the Codex harness. Every command runs inside a boxd machine you control.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "One page names Devin, Cursor, Claude Managed Agents and the OpenAI Agents API.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/coding-agents/",
+            "quote": "Devin, Cursor, Claude Managed Agents, and the OpenAI Agents API run their agent loop in their own service.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "First-party guides cover Cursor and Devin alongside Claude Code and others.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox.md",
+            "quote": "Run Claude Code in a Daytona Sandbox via CLI",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "Guides cover Claude Managed Agents, Devin Outposts, Devin and the OpenAI Agents API.",
+          "source": {
+            "url": "https://docs.e2b.dev/agents/claude-managed-agents.md",
+            "quote": "Use E2B as the sandbox runtime for Claude Managed Agents self-hosted environments.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "shortfall": "No page documents another platform's cloud agents using InstaBox.",
+          "note": "It offers SSH, exec and a desktop for your own agent.",
+          "source": {
+            "url": "https://instabox.sh/docs/llms.txt",
+            "quote": "Every body is JSON.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "shortfall": "No page documents another platform's cloud agents using Lizard.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes.md",
+            "quote": "Choose a template from the current catalog",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "An example runs Cursor Cloud Agents on Modal.",
+          "source": {
+            "url": "https://modal.com/docs/examples/cursor.md",
+            "quote": "Run Cursor Cloud Agents on Modal",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "shortfall": "No page documents another platform's cloud agents using Morph.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Devboxes expose a full tmux API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "A documented adapter for Claude Managed Agents, plus framework adapters.",
+          "source": {
+            "url": "https://withruntime.com/docs/frameworks",
+            "quote": "Use Runtime with your AI framework",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "shortfall": "Its agent pages cover SDKs and frameworks, not another platform's hosted cloud agents.",
+          "source": {
+            "url": "https://sandboxer.com/docs/llms.txt",
+            "quote": "installed in every sandbox.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "shortfall": "Its ecosystem lists coding tools, not another platform's cloud agents.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "Official plugins for every serious coding agent",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "Ecosystem pages for Cursor, Devin and the OpenAI Agents API.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/ecosystem",
+            "quote": "Cursor Cloud Agents on Self-Hosted Machines",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "Pages for Cursor Cloud Agents, Claude Managed Agents and Devin Outposts.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/sandboxes/cursor-cloud-agents.md",
+            "quote": "Use Tensorlake sandboxes as the self-hosted machines for Cursor Cloud Agents.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "team-workspace",
       "feature": "teams-accounts",
       "title": "Team workspace",
       "plain": "Several people share machines, billing and keys.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "A workspace owns the keys, the wallet and every instance, with members invited by email.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/members.md",
+            "quote": "A workspace is the account: it owns the API keys",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "Workspaces hold members, roles and service accounts.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Security/Workspace-access-control.md",
+            "quote": "There are three roles that a user or service account can have in a workspace",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "note": "An organisation has one plan and one wallet, and the owner invites people by email.",
+          "source": {
+            "url": "https://docs.boat.dev/organizations.md",
+            "quote": "It has one plan, one wallet, and members who run sandboxes on it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "Every account is an organisation; machines can be private or shared with the org.",
+          "source": {
+            "url": "https://boxd.sh/pricing",
+            "quote": "Every account is an organization. Invite your team, share machines, and draw from one credit balance.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "shortfall": "People share the Cloudflare account and its Workers, but there is no per-sandbox sharing or sandbox workspace.",
+          "note": "Sandbox names carry no owner, so your Worker must derive them from the caller.",
+          "source": {
+            "url": "https://developers.cloudflare.com/fundamentals/manage-members/",
+            "quote": "Members and permissions",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "A collaborative organisation holds members and shared sandboxes.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/organizations.md",
+            "quote": "Every member of an organization can address that organization's running sandboxes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "A workspace holds projects, who can reach them, and one billing account.",
+          "source": {
+            "url": "https://docs.e2b.dev/workspaces.md",
+            "quote": "A workspace groups your E2B projects and holds their billing.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "Organisations and workspaces carry members, roles, keys and one allowance.",
+          "source": {
+            "url": "https://api.instabox.sh/v1/openapi.json",
+            "quote": "Every member uses the org's sandboxes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "Workspaces hold projects and members; inviting people adds no seat fee.",
+          "source": {
+            "url": "https://lizard.build/docs/concepts/architecture.md",
+            "quote": "Lizard groups services into projects and projects into workspaces.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "A workspace holds members, environments and billing.",
+          "source": {
+            "url": "https://modal.com/docs/guide/rbac",
+            "quote": "All Workspace Members have one of three Roles",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "Devboxes are shareable to anyone in the organisation, and you can create several.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "devboxes are shareable live via URL to anyone in your Morph Cloud organization, and you can create multiple organizations as needed.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "One account holds as many people as you need, each with a role.",
+          "source": {
+            "url": "https://withruntime.com/docs/teams",
+            "quote": "One Runtime account can have as many people as you need.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "An organisation is a shared wallet with one plan, one balance and its members.",
+          "source": {
+            "url": "https://sandboxer.com/docs/organizations",
+            "quote": "An **organization** is a shared wallet: one plan, one balance, and the members who run sandboxes on it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "note": "Sprites uses your Fly.io account and organisation, including org switching in the CLI.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/cli/authentication.md",
+            "quote": "Sprites uses your Fly.io account for authentication",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "A Vercel team holds members, seats and billing, with unlimited free viewer seats.",
+          "source": {
+            "url": "https://vercel.com/docs/plans/pro-plan",
+            "quote": "Unlimited free Viewer seats with read-only access",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "Organisations hold projects and members, with project-level access.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/access-control.md",
+            "quote": "Organizations are the top-level entity in our system.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "roles",
       "feature": "teams-accounts",
       "title": "Roles and permissions",
       "plain": "Give people different powers, such as read-only or admin.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "Admins control instances, keys, billing and the team; users get the rest.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/members.md",
+            "quote": "`admin` | Everything: instances, keys, billing, and the team.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "Three workspace roles, plus scoped service-account tokens.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Security/Workspace-access-control.md",
+            "quote": "There are three roles that a user or service account can have in a workspace: **admin**, **member** and **viewer**.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "note": "Owners and admins manage the organisation; members run sandboxes.",
+          "source": {
+            "url": "https://docs.boat.dev/organizations.md",
+            "quote": "Every member uses them, unless an owner or admin",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "Three org roles, and a key can be a member key or a userless org key.",
+          "source": {
+            "url": "https://docs.boxd.sh/cli/commands.md",
+            "quote": "An org has three roles: **owner**, **admin**, and **member**.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "Cloudflare account roles decide who can deploy and read the Worker; there is no sandbox-level role.",
+          "source": {
+            "url": "https://developers.cloudflare.com/fundamentals/manage-members/",
+            "quote": "Members and permissions",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "shortfall": "Roles decide who can manage the organisation, but any member or key can still run commands in any running sandbox.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/organizations.md",
+            "quote": "Every member of an organization can address that organization's running sandboxes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "not-published",
+          "note": "The workspace page covers who has access but does not describe named roles or their powers.",
+          "source": {
+            "url": "https://docs.e2b.dev/workspaces.md",
+            "quote": "who has access to them",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "Organisation roles are admin and member; keys carry read, write and delete scopes.",
+          "source": {
+            "url": "https://api.instabox.sh/v1/openapi.json",
+            "quote": "Between `admin` and `member`.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "partly",
+          "shortfall": "Role-based access is listed only on the Enterprise plan; the Pro plan marks it not included.",
+          "source": {
+            "url": "https://lizard.build/pricing",
+            "quote": "RBAC & audit log",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "Three workspace roles, plus environment-level roles, on Team and Enterprise.",
+          "source": {
+            "url": "https://modal.com/docs/guide/rbac",
+            "quote": "All Workspace Members have one of three Roles that determine their overall permissions",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No role list or permission table is published; sharing is per devbox.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "devboxes are shareable live via URL to anyone in your Morph Cloud organization",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "4 roles",
+          "note": "Owner, admin, developer and billing member, with compartments for keys.",
+          "source": {
+            "url": "https://withruntime.com/docs/products",
+            "quote": "Each is an owner, admin, developer or billing member.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "partly",
+          "shortfall": "Only two roles exist; there is no read-only role or finer permission.",
+          "source": {
+            "url": "https://sandboxer.com/docs/organizations",
+            "quote": "To remove members, change roles or set caps, use the dashboard's **Organization** page.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "note": "Roles come from the Fly.io organisation that owns the Sprite.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/cli/authentication.md",
+            "quote": "Sprites uses your Fly.io account for authentication",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "Team roles include a free read-only Viewer seat.",
+          "source": {
+            "url": "https://vercel.com/docs/plans/pro-plan",
+            "quote": "Unlimited free Viewer seats with read-only access",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "partly",
+          "note": "Organisation roles are admin and member; project roles are admin and member.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/access-control.md",
+            "quote": "Organizations implement a role-based access control system with two distinct roles: admin and member.",
+            "confidence": "docs-confirmed"
+          },
+          "shortfall": "Roles are documented, but the pricing page lists role-based access under the Enterprise plan, so check which plan you need."
+        }
+      ]
     },
     {
       "id": "sso",
       "feature": "teams-accounts",
       "title": "Single sign-on",
       "plain": "Log in through your company's identity provider (SAML or OIDC).",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "not-published",
+          "note": "No SSO or SAML page, flag or plan line appears in the docs, pricing or terms.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/members.md",
+            "quote": "There is no endpoint that writes a membership directly",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "shortfall": "Single sign-on works only after Blaxel switches on a setting for your account.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Security/SSO-Directory-sync.md",
+            "quote": "require the **SAML** feature flag on your account",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "not-published",
+          "note": "No SSO or SAML page appears in the docs, and the organisation page covers only email invites.",
+          "source": {
+            "url": "https://docs.boat.dev/organizations.md",
+            "quote": "The owner invites people by email.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "partly",
+          "shortfall": "SAML is sold on Enterprise and you have to ask for it.",
+          "source": {
+            "url": "https://boxd.sh/faq/",
+            "quote": "Talk to us about SAML SSO for Enterprise.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "Dashboard single sign-on is included on every plan.",
+          "source": {
+            "url": "https://developers.cloudflare.com/fundamentals/manage-members/dashboard-sso/",
+            "quote": "Cloudflare Dashboard SSO is available for free to all plans.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "shortfall": "SSO is available only on the Enterprise plan for collaborative organisations.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/sso.md",
+            "quote": "SSO is available on the Enterprise plan for collaborative organizations.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "not-published",
+          "note": "No SSO or SAML page appears in the docs, pricing or security pages.",
+          "source": {
+            "url": "https://docs.e2b.dev/workspaces.md",
+            "quote": "who has access to them",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "shortfall": "Company sign-in, SAML and automatic user sync are listed only on the Enterprise plan.",
+          "source": {
+            "url": "https://instabox.sh/pricing",
+            "quote": "SSO / SAML and SCIM",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "partly",
+          "shortfall": "SSO and SAML are Enterprise-only; the Pro plan marks them not included.",
+          "source": {
+            "url": "https://lizard.build/pricing",
+            "quote": "SSO / SAML",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "shortfall": "Okta SSO is listed with audit logs and HIPAA on the Enterprise plan.",
+          "source": {
+            "url": "https://modal.com/pricing",
+            "quote": "Audit logs, Okta SSO, and HIPAA",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No SSO or SAML page or plan line is published.",
+          "source": {
+            "url": "https://cloud.morph.so/web/subscribe",
+            "quote": "Up to 1024 vCPU",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "SAML or OIDC single sign-on is free, and can be required for non-owners.",
+          "source": {
+            "url": "https://withruntime.com/pricing",
+            "quote": "Single sign-on over SAML or OIDC",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "not-published",
+          "note": "No SSO or SAML page or plan line is published.",
+          "source": {
+            "url": "https://sandboxer.com/docs/organizations",
+            "quote": "An **organization** is a shared wallet",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "not-published",
+          "note": "No Sprites-specific SSO page is published; the Fly.io account may offer it, but that is not stated for Sprites.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/cli/authentication.md",
+            "quote": "Sprites uses your Fly.io account for authentication",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "$300/month",
+          "shortfall": "SAML single sign-on is a paid add-on at $300 a month.",
+          "source": {
+            "url": "https://vercel.com/docs/plans/pro-plan",
+            "quote": "SAML Single Sign-On",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "partly",
+          "shortfall": "SSO is listed on the Enterprise plan, and the docs say access must be enabled for your organisation.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/sso.md",
+            "quote": "SSO access must be enabled for your organization.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "spend-cap",
       "feature": "teams-accounts",
       "title": "Hard spending cap",
       "plain": "Set a limit the bill cannot go over; machines stop instead.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "shortfall": "There is no dollar limit you can set; per-instance budgets only cap model spending, and the prepaid wallet is the only ceiling.",
+          "note": "Budget figures are ceilings, not money; the wallet is the only pot of dollars.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/budgets.md",
+            "quote": "Budget figures are ceilings, not money.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "not-published",
+          "note": "No budget, cap or alert that stops a sandbox is published beyond the quota tiers.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Security/Quotas.md",
+            "quote": "Monitor usage alerts",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "partly",
+          "shortfall": "A personal account has no dollar cap; organisations can cap a member's machine time, which stops their new sandboxes.",
+          "source": {
+            "url": "https://docs.boat.dev/billing.md",
+            "quote": "A personal account has no dollar cap.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "not-published",
+          "note": "No budget, cap or spend alert appears in the docs, pricing, FAQ or CLI reference.",
+          "source": {
+            "url": "https://boxd.sh/pricing",
+            "quote": "Every account is an organization.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "shortfall": "Budget alerts only send email; they do not pause or cap anything.",
+          "source": {
+            "url": "https://developers.cloudflare.com/billing/manage/budget-alerts/",
+            "quote": "Budget alerts are informational only. They do not pause or cap usage.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "shortfall": "The ceiling is a prepaid pool of computing resources rather than a dollar amount, and running sandboxes are not stopped when it runs out.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/billing.md",
+            "quote": "Daytona uses a pay-as-you-go billing model where you are charged based on the resources reserved for your sandboxes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "Each project has a spending limit, and reaching it blocks that project only.",
+          "source": {
+            "url": "https://docs.e2b.dev/workspaces.md",
+            "quote": "When a project reaches its spending limit, only that project is blocked.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "A monthly cap stops the organisation's sandboxes until the next month.",
+          "source": {
+            "url": "https://api.instabox.sh/v1/openapi.json",
+            "quote": "once reached, the org's sandboxes are stopped",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "shortfall": "There is no spending cap at all; only sandbox, CPU, memory and disk caps.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/billing.md",
+            "quote": "There is no spending cap.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "An environment budget stops workloads at the limit, on Team and Enterprise.",
+          "source": {
+            "url": "https://modal.com/docs/guide/budgets",
+            "quote": "When the spend limit is reached, Modal stops workloads that would incur additional out-of-pocket charges.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No budget or spend cap is published; plans sell prepaid compute units.",
+          "source": {
+            "url": "https://cloud.morph.so/web/subscribe",
+            "quote": "Purchase MCUs to use compute",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "A daily limit per key and a lifetime cap per sandbox stop spending at the limit.",
+          "source": {
+            "url": "https://withruntime.com/docs/pricing",
+            "quote": "read-only keys, a daily spending limit per key, and compartments",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "partly",
+          "shortfall": "A member's machine time can be capped, and a zero balance stops new sandboxes, but there is no account-wide dollar cap.",
+          "source": {
+            "url": "https://sandboxer.com/docs/organizations",
+            "quote": "Owners can also cap a member's machine time per billing period",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "not-published",
+          "note": "No spend cap or budget feature is published for Sprites.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "Pay only for the tool calls you use.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "shortfall": "Spend Management can pause projects at an amount you set, but it is a project pause rather than a sandbox stop.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "receive alerts or pause projects when you reach a specified amount.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "partly",
+          "shortfall": "Prepaid credit packs cannot be overspent, but the Pro plan bills overage beyond its included usage.",
+          "source": {
+            "url": "https://www.tensorlake.ai/pricing",
+            "quote": "no postpaid overage",
+            "confidence": "pricing-page"
+          }
+        }
+      ]
     },
     {
       "id": "usage-alerts",
       "feature": "teams-accounts",
       "title": "Usage alerts",
       "plain": "Get told when spending passes an amount you set.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "not-published",
+          "note": "The billing page exposes usage endpoints but no alert or threshold feature.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/billing.md",
+            "quote": "returns everything the workspace spent",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "90% of quota",
+          "note": "An email goes to workspace admins at 90% of the tier quota.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Security/Quotas.md",
+            "quote": "Blaxel automatically dispatches an email notification to workspace administrators when your infrastructure usage reaches 90% of your current tier's quota.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "not-published",
+          "note": "No usage alert or threshold feature appears in the billing or organisation pages.",
+          "source": {
+            "url": "https://docs.boat.dev/billing.md",
+            "quote": "A personal account has no dollar cap.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "not-published",
+          "note": "No usage alert is published; the only automatic message is about storage cleanup.",
+          "source": {
+            "url": "https://boxd.sh/pricing",
+            "quote": "auto top-up adds €20 at a time",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "Account budget alerts email you at amounts you set, but do not stop anything.",
+          "source": {
+            "url": "https://developers.cloudflare.com/billing/manage/budget-alerts/",
+            "quote": "Budget alerts are informational only.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "not-published",
+          "note": "No usage alert or budget threshold is published.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/billing.md",
+            "quote": "Sandboxes are billed for the resources reserved",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "not-published",
+          "note": "Spending limits block a project, but no alert or threshold notification is published.",
+          "source": {
+            "url": "https://docs.e2b.dev/workspaces.md",
+            "quote": "When a project reaches its spending limit, only that project is blocked.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "yes",
+          "note": "Owners and admins get an email when monthly usage passes what the plan includes.",
+          "source": {
+            "url": "https://api.instabox.sh/v1/openapi.json",
+            "quote": "emailed once a month when usage goes beyond what the month includes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "not-published",
+          "note": "No usage alert or threshold feature is published.",
+          "source": {
+            "url": "https://lizard.build/docs/platform/billing.md",
+            "quote": "There is no spending cap.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "not-published",
+          "note": "Budgets stop workloads, but no alert or threshold notification is published.",
+          "source": {
+            "url": "https://modal.com/docs/guide/budgets",
+            "quote": "When the spend limit is reached",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No usage alert or threshold feature is published.",
+          "source": {
+            "url": "https://cloud.morph.so/web/subscribe",
+            "quote": "Additional credits billed pay-as-you-go",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "partly",
+          "shortfall": "The console warns when credit or free usage is about to run out, but you cannot set your own threshold.",
+          "source": {
+            "url": "https://withruntime.com/docs/products",
+            "quote": "credit or free usage about to run out",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "The dashboard Alerts page takes thresholds you set yourself.",
+          "source": {
+            "url": "https://sandboxer.com/docs/billing",
+            "quote": "To hear about a low balance earlier, set your own thresholds on the dashboard's **Alerts** page.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "not-published",
+          "note": "No usage alert or threshold feature is published for Sprites.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "Pay only for the tool calls you use.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "Spend Management sends alerts at amounts you set, and can also pause projects.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox/pricing",
+            "quote": "receive alerts or pause projects when you reach a specified amount.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "not-published",
+          "note": "The billing page shows a live balance and auto-refill, but no alert or threshold is published.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/billing.md",
+            "quote": "auto-refill",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "audit-log",
       "feature": "teams-accounts",
       "title": "Audit log",
       "plain": "A record of who did what in the account.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "not-published",
+          "note": "No audit-log page or endpoint appears in the docs; the usage and logs APIs are per instance.",
+          "source": {
+            "url": "https://www.agent37.com/docs/agents-api/overview.md",
+            "quote": "REST API reference",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "not-published",
+          "note": "No customer-facing audit log is documented; the security page covers platform logging.",
+          "source": {
+            "url": "https://blaxel.ai/company/security",
+            "quote": "SOC 2, HIPAA, ISO 27001",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "not-published",
+          "note": "No audit-log page or feature appears in the docs; the dashboard keeps webhook delivery history.",
+          "source": {
+            "url": "https://docs.boat.dev/account.md",
+            "quote": "Webhook delivery history",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "partly",
+          "shortfall": "Audit logs are sold with SSO on the Custom/Enterprise line; on self-serve plans the only record is the SSH command history.",
+          "source": {
+            "url": "https://boxd.sh/pricing",
+            "quote": "SSO + audit logs",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "Cloudflare records every user-initiated API and dashboard action in the account audit log.",
+          "source": {
+            "url": "https://developers.cloudflare.com/fundamentals/account/account-security/audit-logs/",
+            "quote": "All user-initiated actions are recorded automatically across both the Cloudflare API and dashboard.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "shortfall": "The log exists, but exporting it for an audit is not shipped yet.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/audit-logs.md",
+            "quote": "**Compliance Export**: export logs for internal or external audits (coming soon)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "not-published",
+          "note": "No audit-log page or feature appears in the docs or security pages.",
+          "source": {
+            "url": "https://docs.e2b.dev/security.md",
+            "quote": "E2B has a **SOC 2 Type II** report.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "shortfall": "Audit logs are listed only on the Enterprise plan.",
+          "source": {
+            "url": "https://instabox.sh/pricing",
+            "quote": "Audit logs",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "partly",
+          "shortfall": "Audit logs are Enterprise-only; the Pro plan marks them not included.",
+          "source": {
+            "url": "https://lizard.build/pricing",
+            "quote": "RBAC & audit log",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "partly",
+          "shortfall": "Audit logs are listed with SSO and HIPAA on the Enterprise plan.",
+          "source": {
+            "url": "https://modal.com/pricing",
+            "quote": "Audit logs, Okta SSO, and HIPAA",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "The terms promise audit logging as a security control, but no customer-facing log is published.",
+          "source": {
+            "url": "https://cloud.morph.so/web/legal/terms-of-service",
+            "quote": "audit logging / monitoring",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "400 days",
+          "note": "Every change to members, keys, money and security settings is kept at least 400 days, as CSV and over the API.",
+          "source": {
+            "url": "https://withruntime.com/docs/teams",
+            "quote": "Every change to members, keys, money and security settings is recorded in an audit log",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "not-published",
+          "note": "No audit-log page or endpoint appears in the docs or API; per-sandbox command history is the nearest thing.",
+          "source": {
+            "url": "https://sandboxer.com/docs/security",
+            "quote": "with a description, the steps to reproduce, and the impact you think it has.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "shortfall": "Fly states plainly that there is no customer-facing audit log of organisation activity or staff access.",
+          "source": {
+            "url": "https://fly.io/legal/security-questionnaire/",
+            "quote": "There is no customer-facing audit log of organization activity or staff access.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "shortfall": "Audit Logs are a Vercel Enterprise feature; Sandbox-specific coverage is not established.",
+          "source": {
+            "url": "https://vercel.com/docs/audit-log",
+            "quote": "Audit Logs",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "partly",
+          "shortfall": "Audit logs are not self-serve: you ask support for them.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/security.md",
+            "quote": "access audit logs from Tensorlake, please contact us",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "per-second",
@@ -9378,35 +12797,856 @@
       "feature": "company",
       "title": "Public status page",
       "plain": "A page showing outages and incidents.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "yes",
+          "note": "A public status page reports each component's uptime over 30, 60 and 90 days.",
+          "source": {
+            "url": "https://www.agent37.com/personal",
+            "quote": "https://status.agent37.com",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "note": "Sandboxes and Platform are separate components with their own uptime figures.",
+          "source": {
+            "url": "https://blaxel.ai/company/security",
+            "quote": "https://status.blaxel.ai",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "yes",
+          "note": "The status page is separate from the FAQ's uptime claim and lists seven customer-facing components.",
+          "source": {
+            "url": "https://docs.boat.dev/compliance.md",
+            "quote": "status.ascii.dev",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "not-published",
+          "note": "No status page or uptime figure is published; the FAQ and terms describe neither.",
+          "source": {
+            "url": "https://boxd.sh/faq/",
+            "quote": "We're working on both.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "Cloudflare's status page lists Workers and Containers as components.",
+          "source": {
+            "url": "https://developers.cloudflare.com/billing/manage/budget-alerts/",
+            "quote": "cloudflarestatus.com",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "Components are grouped into Global (API) and Sandbox (creation and execution).",
+          "source": {
+            "url": "https://status.app.daytona.io/",
+            "quote": "All services are online",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "A public status page reports per-region uptime.",
+          "source": {
+            "url": "https://e2b.dev/pricing",
+            "quote": "status.e2b.dev",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "not-published",
+          "note": "No public status page is linked anywhere on the site; there are per-machine metrics only.",
+          "source": {
+            "url": "https://instabox.sh/docs/start.md",
+            "quote": "From nothing to a shell in your own cloud machine.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "A public status page carries a platform figure and incident history, but no sandbox component.",
+          "source": {
+            "url": "https://status.lizard.build",
+            "quote": "Past incidents",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "A public status page reports component availability.",
+          "source": {
+            "url": "https://modal.com/docs/cli/latest/shell",
+            "quote": "status.modal.com",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "yes",
+          "note": "A public status page reports Morph Cloud API uptime over 90 days.",
+          "source": {
+            "url": "https://status.cloud.morph.so",
+            "quote": "All services are online",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "The status page checks the API every two minutes and starts a real sandbox every ten.",
+          "source": {
+            "url": "https://withruntime.com/docs/trust",
+            "quote": "The status page publishes the API's uptime, checked from outside every two minutes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "yes",
+          "note": "Status is checked every minute from outside the network, with a JSON feed.",
+          "source": {
+            "url": "https://sandboxer.com/docs/llms.txt",
+            "quote": "live status of Sandboxer's services, checked every minute from outside our network",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "note": "Sprites is a component on Fly's status page, but no numeric figure is shown.",
+          "source": {
+            "url": "https://fly.io/sprites/",
+            "quote": "status.flyio.net",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "Sandbox appears as a component, listed as operational, without its own percentage.",
+          "source": {
+            "url": "https://www.vercel-status.com",
+            "quote": "Sandbox Operational",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "A public status page shows real-time and historical system health.",
+          "source": {
+            "url": "https://status.tensorlake.ai",
+            "quote": "Welcome to tensorlake. See real-time and historical system health.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "sla",
       "feature": "company",
       "title": "Uptime promise (SLA)",
       "plain": "A written promise about availability, usually with credits if broken.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "shortfall": "There is no uptime promise unless you negotiate one in writing.",
+          "source": {
+            "url": "https://www.agent37.com/terms",
+            "quote": "we do not promise a specific uptime level unless we have agreed to one with you in writing.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "partly",
+          "shortfall": "A standard plan carries no numeric uptime promise; only the Custom plan lists custom SLAs.",
+          "source": {
+            "url": "https://blaxel.ai/pricing",
+            "quote": "Custom SLAs",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "shortfall": "The terms disclaim uninterrupted service and no SLA is published.",
+          "source": {
+            "url": "https://boat.dev/terms",
+            "quote": "We do not guarantee that sandbox will be uninterrupted",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "not-published",
+          "note": "No SLA, uptime target or service credit appears in the terms, FAQ or pricing.",
+          "source": {
+            "url": "https://boxd.sh/terms/",
+            "quote": "These Terms are drawn up in English.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "no",
+          "shortfall": "The 99.99% Workers SLA covers Workers only, not Containers or Sandboxes.",
+          "source": {
+            "url": "https://www.cloudflare.com/workers-service-level-agreement/",
+            "quote": "applies to use of Workers only.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "figure": "99.95%, Tier 4+",
+          "shortfall": "The 99.95% target exists, but service credits go only to Tier 4 and above.",
+          "source": {
+            "url": "https://www.daytona.io/sla",
+            "quote": "Daytona will use commercially reasonable efforts to make the Services available 99.95% of the time in any given calendar month",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "partly",
+          "shortfall": "Uptime and support terms are set in the Enterprise agreement; Hobby and Pro have no public numeric SLA.",
+          "source": {
+            "url": "https://e2b.dev/enterprise.md",
+            "quote": "Uptime and support terms are set in the Enterprise agreement.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "partly",
+          "figure": "99.9%, Enterprise",
+          "shortfall": "A 99.9% promise is listed only on the Enterprise plan, with no published measurement or credits.",
+          "source": {
+            "url": "https://instabox.sh/pricing",
+            "quote": "99.9% SLA",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "partly",
+          "shortfall": "SLAs come with Enterprise support; no public numeric uptime promise exists.",
+          "source": {
+            "url": "https://lizard.build/pricing",
+            "quote": "Dedicated, hands-on support with SLAs",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "shortfall": "There is no public SLA; one is attached to the order only if you bought a plan that includes it.",
+          "source": {
+            "url": "https://modal.com/legal/terms",
+            "quote": "If Customer has purchased a subscription plan that includes Modal's uptime and support SLAs",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "shortfall": "No public uptime target or credit schedule is published; a separately signed SLA would control.",
+          "source": {
+            "url": "https://cloud.morph.so/web/legal/terms-of-service",
+            "quote": "If a separate SLA is attached to the Order, that SLA controls",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "figure": "99% API",
+          "note": "Every paid account gets 10% of the month's charges back if the API misses 99%.",
+          "source": {
+            "url": "https://withruntime.com/docs/pricing",
+            "quote": "Paid accounts are promised 99% API uptime every calendar month.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "shortfall": "There is no SLA during early access.",
+          "source": {
+            "url": "https://sandboxer.com/docs/llms.txt",
+            "quote": "There's no SLA during early access",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "partly",
+          "shortfall": "Fly's 99.9% promise is for Enterprise plans and credits must be claimed; Sprites coverage is not named.",
+          "source": {
+            "url": "https://fly.io/legal/sla-uptime/",
+            "quote": "will apply to the Services for Customers with an Enterprise plan during the applicable Subscription Term",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "figure": "99.99%, Enterprise",
+          "shortfall": "The 99.99% Enterprise SLA covers the platform and does not name Sandbox.",
+          "source": {
+            "url": "https://vercel.com/legal/sla",
+            "quote": "available 99.99% of the time, excluding any Excused Downtime events",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "no",
+          "shortfall": "The only published SLA is a 24-hour response to a P1 support ticket, not an uptime promise.",
+          "source": {
+            "url": "https://www.tensorlake.ai/pricing",
+            "quote": "P1 SLA: 24 hours",
+            "confidence": "pricing-page"
+          }
+        }
+      ]
     },
     {
       "id": "soc2",
       "feature": "company",
       "title": "SOC 2 report",
       "plain": "An independent security audit report you can request.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "partly",
+          "figure": "Type I only",
+          "shortfall": "Only a SOC 2 Type I report is available, on request; Type II is still in progress.",
+          "source": {
+            "url": "https://www.agent37.com/cloud",
+            "quote": "SOC 2 Type I and readiness reports on request.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "yes",
+          "figure": "SOC 2, HIPAA, ISO",
+          "note": "A SOC 2 report is available on request from the compliance portal.",
+          "source": {
+            "url": "https://blaxel.ai/company/security",
+            "quote": "SOC 2, HIPAA, ISO 27001",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "shortfall": "SOC 2 is in progress, so there is no report to request yet.",
+          "source": {
+            "url": "https://docs.boat.dev/security.md",
+            "quote": "SOC 2 in progress.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "no",
+          "shortfall": "boxd says it is working on SOC 2 and ISO 27001 and offers security details by email instead.",
+          "source": {
+            "url": "https://boxd.sh/faq/",
+            "quote": "We're working on both.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "Cloudflare holds a SOC 2 Type II report, but no Sandbox-specific scope is published.",
+          "source": {
+            "url": "https://www.cloudflare.com/cloudflare-customer-dpa/",
+            "quote": "AICPA SOC 2 Type II",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "figure": "Type II",
+          "note": "A SOC 2 Type II report covering December 2025 to March 2026 is available from the trust centre.",
+          "source": {
+            "url": "https://trust.daytona.io/",
+            "quote": "on July 28, 2026 with an unqualified opinion covering the period December 16, 2025",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "Type II",
+          "note": "A SOC 2 Type II report is available on request through the trust centre.",
+          "source": {
+            "url": "https://docs.e2b.dev/security.md",
+            "quote": "E2B has a **SOC 2 Type II** report.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "not-published",
+          "note": "The Trust Center shows a HIPAA badge and no SOC 2 report is claimed on the site.",
+          "source": {
+            "url": "https://instabox.sh/pricing",
+            "quote": "HIPAA BAA",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "shortfall": "The SOC 2 report is listed as coming soon.",
+          "source": {
+            "url": "https://lizard.build/pricing",
+            "quote": "SOC 2 report (coming soon)",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "figure": "Type II",
+          "note": "Modal has completed SOC 2 Type II.",
+          "source": {
+            "url": "https://modal.com/legal/terms",
+            "quote": "Modal has completed its SOC2 Type II certification",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "The terms promise attestations on request, but no SOC 2 report naming Morph Labs is published.",
+          "source": {
+            "url": "https://cloud.morph.so/web/legal/terms-of-service",
+            "quote": "we'll provide available third-party security attestations",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "partly",
+          "shortfall": "The SOC 2 and ISO certificates belong to its Virginia data centre, not to Runtime, so there is no Runtime-owned report.",
+          "note": "The certificates name the data centre, not Runtime.",
+          "source": {
+            "url": "https://withruntime.com/docs/trust",
+            "quote": "SOC 1, SOC 2 and SOC 3 Type 2; ISO 27001",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "not-published",
+          "note": "No SOC 2, ISO 27001 or HIPAA statement appears in the security page or terms.",
+          "source": {
+            "url": "https://sandboxer.com/docs/security",
+            "quote": "with a description, the steps to reproduce, and the impact you think it has.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "partly",
+          "shortfall": "Fly's SOC 2 report describes the platform and does not name Sprites.",
+          "source": {
+            "url": "https://fly.io/legal/security-questionnaire/",
+            "quote": "The report describes the Fly.io platform; it does not name individual products such as Sprites",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "partly",
+          "shortfall": "Vercel holds SOC 2 Type 2, but Sandbox's place in the audit scope is not published.",
+          "source": {
+            "url": "https://vercel.com/docs/security/compliance",
+            "quote": "Vercel has a SOC 2 Type 2 attestation",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "figure": "Type 2",
+          "note": "A SOC 2 Type 2 report is available through the trust centre.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/security.md",
+            "quote": "Tensorlake is SOC 2 Type 2 certified.",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "dpa",
       "feature": "company",
       "title": "Data processing agreement",
       "plain": "A GDPR data processing agreement is offered.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "not-published",
+          "note": "No data processing agreement is published or referenced in the terms.",
+          "source": {
+            "url": "https://www.agent37.com/terms",
+            "quote": "These Terms of Service",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "not-published",
+          "note": "No public DPA is linked from the terms, security or pricing pages.",
+          "source": {
+            "url": "https://blaxel.ai/terms",
+            "quote": "Last updated December 10, 2025",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "partly",
+          "shortfall": "You have to email support to get a data processing agreement.",
+          "source": {
+            "url": "https://boat.dev/terms",
+            "quote": "To request a data processing agreement, contact support@ascii.dev.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "note": "A data processing agreement is part of the contract where it applies.",
+          "source": {
+            "url": "https://boxd.sh/terms/",
+            "quote": "Data Processing Agreement",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "yes",
+          "note": "Cloudflare publishes a standard customer DPA that covers its services.",
+          "source": {
+            "url": "https://www.cloudflare.com/cloudflare-customer-dpa/",
+            "quote": "Data Processing Addendum",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "yes",
+          "note": "A public DPA names the supervisory authority and the subprocessor notice period.",
+          "source": {
+            "url": "https://www.daytona.io/dpa",
+            "quote": "Data Processing Agreement",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "note": "A DPA template is served with the trust-centre documents.",
+          "source": {
+            "url": "https://docs.e2b.dev/security.md",
+            "quote": "served with the DPA template",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "not-published",
+          "note": "No DPA page or reference appears on the site; the terms point to a Trust Center instead.",
+          "source": {
+            "url": "https://instabox.sh/terms",
+            "quote": "InstaBox gives each agent a Linux machine of its own in the cloud.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "yes",
+          "note": "A public DPA is linked, and a signed DPA with security review comes with Enterprise.",
+          "source": {
+            "url": "https://lizard.build/pricing",
+            "quote": "Signed DPA and security review",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "yes",
+          "note": "A data processing addendum is part of the standard terms.",
+          "source": {
+            "url": "https://modal.com/legal/terms",
+            "quote": "Data Processing Addendum",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "not-published",
+          "note": "No DPA page or reference appears in the terms; it offers security attestations on request instead.",
+          "source": {
+            "url": "https://cloud.morph.so/web/legal/terms-of-service",
+            "quote": "we'll provide available third-party security attestations",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "yes",
+          "note": "The DPA is part of the terms for every account.",
+          "source": {
+            "url": "https://withruntime.com/docs/pricing",
+            "quote": "A data processing addendum that is part of the terms for every account",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "partly",
+          "shortfall": "You have to write to privacy@ to get a data processing addendum.",
+          "source": {
+            "url": "https://sandboxer.com/terms",
+            "quote": "If you need a Data Processing Addendum, write to",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "yes",
+          "note": "The DPA is self-service on every plan and covers Sprites.",
+          "source": {
+            "url": "https://fly.io/legal/security-questionnaire/",
+            "quote": "The DPA is available to every organization on every plan",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "yes",
+          "note": "A public DPA applies to Enterprise and Pro customers.",
+          "source": {
+            "url": "https://vercel.com/legal/dpa",
+            "quote": "Data Processing Addendum",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "yes",
+          "note": "A public DPA with a dated revision is published.",
+          "source": {
+            "url": "https://www.tensorlake.ai/dpa",
+            "quote": "Data Processing Addendum",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     },
     {
       "id": "open-source",
       "feature": "company",
       "title": "Open source or self-hostable",
       "plain": "The sandbox software can be run on your own servers.",
-      "rows": []
+      "rows": [
+        {
+          "provider": "agent37",
+          "verdict": "no",
+          "shortfall": "The platform is a hosted service; only template Dockerfiles and images are published.",
+          "source": {
+            "url": "https://www.agent37.com/terms",
+            "quote": "Agent 37 provides persistent, isolated sandboxes for AI agents.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "verdict": "no",
+          "shortfall": "The sandbox platform is hosted only; there is no self-hosted or open-source edition.",
+          "source": {
+            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+            "quote": "Sandboxes are instant-launching virtual machines",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boat",
+          "verdict": "no",
+          "shortfall": "Boat runs its own machines in Germany, Finland and France; no self-hosted edition is published.",
+          "source": {
+            "url": "https://docs.boat.dev/compliance.md",
+            "quote": "Sandboxes run on machines in Germany, Finland and France.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "boxd",
+          "verdict": "yes",
+          "figure": "Annual licence",
+          "note": "Self-hosted, not open source: one binary on your own KVM hosts under an annual licence, with no licence or repository published for the code.",
+          "source": {
+            "url": "https://boxd.sh/faq/",
+            "quote": "Yes. boxd ships as a single binary that runs every role, on your own KVM-capable Linux hosts.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "verdict": "partly",
+          "shortfall": "The SDK is open source, but the platform it runs on is Cloudflare's and cannot be self-hosted.",
+          "source": {
+            "url": "https://developers.cloudflare.com/sandbox/reference/",
+            "quote": "`@cloudflare/sandbox` works with a container you start from a Durable Object.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "daytona",
+          "verdict": "partly",
+          "figure": "BYOC, Enterprise",
+          "shortfall": "Only the sandbox compute runs on your own machines, only after Daytona enables it, and the control plane stays Daytona's.",
+          "note": "The public repository is archived, so there is no open-source route either.",
+          "source": {
+            "url": "https://www.daytona.io/docs/en/bring-your-own-compute.md",
+            "quote": "Bring Your Own Compute enables you to run sandbox workloads on your own infrastructure while using Daytona's control plane to manage them.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "e2b",
+          "verdict": "yes",
+          "figure": "Embed, one machine",
+          "note": "The runtime is open source and can be self-hosted on one machine; scaling across machines is the managed product.",
+          "source": {
+            "url": "https://docs.e2b.dev/byoc.md",
+            "quote": "Self-hosting means running [E2B Embed](https://github.com/e2b-dev/runtime/tree/main/embed#readme), the open-source runtime packaged for one machine",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "instabox",
+          "verdict": "no",
+          "shortfall": "InstaBox is a hosted service; no self-hosted or open-source edition is published.",
+          "source": {
+            "url": "https://instabox.sh/docs/start.md",
+            "quote": "From nothing to a shell in your own cloud machine.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lizard",
+          "verdict": "no",
+          "shortfall": "Lizard is hosted only; the docs describe its own infrastructure and no self-hosted edition.",
+          "source": {
+            "url": "https://lizard.build/docs/sandboxes.md",
+            "quote": "Choose a template from the current catalog",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "modal",
+          "verdict": "no",
+          "shortfall": "The client libraries are open source; the platform is not.",
+          "source": {
+            "url": "https://modal.com/legal/terms",
+            "quote": "Modal Tools are community-developed and made available under open source licensing terms",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "morph",
+          "verdict": "no",
+          "shortfall": "Morph Cloud is hosted; no self-hosted or open-source edition is published.",
+          "source": {
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+            "quote": "Morph Devboxes are the simplest way to code with AI in the cloud.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "runtime",
+          "verdict": "no",
+          "shortfall": "Runtime runs everything in its own Virginia region and publishes no self-hosted edition.",
+          "source": {
+            "url": "https://withruntime.com/docs/trust",
+            "quote": "Everything runs in one region, in Virginia, United States",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "verdict": "no",
+          "shortfall": "Sandboxer runs on dedicated servers it operates; no self-hosted edition is published.",
+          "source": {
+            "url": "https://sandboxer.com/docs/llms.txt",
+            "quote": "on dedicated servers Sandboxer operates",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "sprites",
+          "verdict": "no",
+          "shortfall": "Sprites is a hosted Fly product; no self-hosted edition is published.",
+          "source": {
+            "url": "https://docs.fly.io/sprites/cli/authentication.md",
+            "quote": "Sprites uses your Fly.io account for authentication",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "verdict": "no",
+          "shortfall": "Vercel Sandbox is hosted on Vercel; no self-hosted edition is published.",
+          "source": {
+            "url": "https://vercel.com/docs/sandbox",
+            "quote": "Run untrusted or agent-generated code in isolated Linux microVMs.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tensorlake",
+          "verdict": "partly",
+          "figure": "BYOC, Enterprise",
+          "shortfall": "Self-hosting is offered only on the Enterprise plan and only in your own AWS account; the software is not open source.",
+          "source": {
+            "url": "https://docs.tensorlake.ai/platform/self-hosted-compute/aws.md",
+            "quote": "Run Tensorlake sandboxes in your AWS account",
+            "confidence": "docs-confirmed"
+          }
+        }
+      ]
     }
   ]
 }

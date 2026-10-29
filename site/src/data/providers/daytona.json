@@ -131,10 +131,10 @@
       },
       {
         "label": "Certification",
-        "value": "SOC 2 Type 2 is a management bridge letter, not an attestation report. ISO 27001 is marked in progress while the badge is displayed.",
+        "value": "A SOC 2 Type II report covering December 2025 to March 2026 is available from the trust centre (checked 29 October 2026; earlier only a bridge letter was published). ISO 27001 is marked in progress while the badge is displayed.",
         "source": {
           "url": "https://trust.daytona.io/",
-          "quote": "This letter is a representation of Daytona management",
+          "quote": "on July 28, 2026 with an unqualified opinion covering the period December 16, 2025",
           "confidence": "docs-confirmed"
         }
       },
