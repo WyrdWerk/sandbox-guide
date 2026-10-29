@@ -1,0 +1,45 @@
+{
+  "provider": "instabox",
+  "checkedOn": "2026-10-29",
+  "summary": "Per second on the size you asked for, out of a monthly plan that is also a credit; storage bills in every state.",
+  "cpu": {
+    "rate": 0.004,
+    "billing": "allocated"
+  },
+  "ram": {
+    "rate": 0.00225
+  },
+  "disk": {
+    "running": 0.00011,
+    "stopped": 0.00011
+  },
+  "between": "kept",
+  "plans": [
+    {
+      "name": "Pro",
+      "fee": 20,
+      "credit": 20
+    },
+    {
+      "name": "Max",
+      "fee": 100,
+      "credit": 100
+    },
+    {
+      "name": "Ultra",
+      "fee": 500,
+      "credit": 500
+    }
+  ],
+  "notes": [
+    "The free plan is one 4 vCPU / 8 GiB machine capped at 8 hours of continuous runtime; it is not priced here.",
+    "Egress is $0.02 per GiB and is not included."
+  ],
+  "sources": [
+    {
+      "label": "Pricing",
+      "url": "https://instabox.sh/pricing"
+    }
+  ],
+  "sleeps": "An idle machine pauses itself and wakes when its preview link is used; paused time bills storage only. A manual pause does not wake on use."
+}

@@ -1,0 +1,44 @@
+{
+  "provider": "modal",
+  "checkedOn": "2026-10-29",
+  "summary": "Per second on the higher of requested and used CPU and memory, at 3\u00d7 list for sandboxes; there is no stopped state.",
+  "cpu": {
+    "rate": 0.070956,
+    "billing": "allocated",
+    "unit": "vCPU (half a documented core)"
+  },
+  "ram": {
+    "rate": 0.024012
+  },
+  "between": "lost",
+  "lostNote": "Modal sandboxes have no stopped state; keeping files needs a Volume or a snapshot.",
+  "plans": [
+    {
+      "name": "Starter",
+      "fee": 0,
+      "credit": 30,
+      "maxSessionHours": 24
+    },
+    {
+      "name": "Team",
+      "fee": 250,
+      "credit": 100,
+      "maxSessionHours": 24
+    }
+  ],
+  "notes": [
+    "Modal bills per physical core and documents one core as 2 vCPUs, so a vCPU here is half a core. Battleships prices a whole core as one vCPU, twice this figure. How many CPUs the machine itself reports per core was not tested.",
+    "A payment method is required.",
+    "Egress beyond the plan's included amount is $0.04 per GiB and is not included."
+  ],
+  "sources": [
+    {
+      "label": "Pricing",
+      "url": "https://modal.com/pricing"
+    },
+    {
+      "label": "Sandbox resources",
+      "url": "https://modal.com/docs/guide/sandbox-resources"
+    }
+  ]
+}

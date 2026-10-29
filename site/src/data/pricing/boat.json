@@ -1,0 +1,56 @@
+{
+  "provider": "boat",
+  "checkedOn": "2026-10-29",
+  "summary": "A flat hourly price per size, per second while the machine exists; the $20 plan is prepaid machine time.",
+  "shapes": [
+    {
+      "name": "small",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 51,
+      "hourly": 0.018
+    },
+    {
+      "name": "default",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 51,
+      "hourly": 0.036
+    },
+    {
+      "name": "large",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 111,
+      "hourly": 0.072
+    },
+    {
+      "name": "xlarge",
+      "vcpu": 16,
+      "ram": 32,
+      "disk": 251,
+      "hourly": 0.2
+    }
+  ],
+  "between": "kept",
+  "plans": [
+    {
+      "name": "$20 plan",
+      "fee": 20,
+      "credit": 20,
+      "note": "Usage over the plan is drawn from a separate wallet."
+    }
+  ],
+  "notes": [
+    "A stopped machine's disk is kept free for 14 days; after that it is gone unless saved as a snapshot.",
+    "Many starts in one day can hit the start limit; paid starts draw from the wallet.",
+    "No free tier; the 7-day trial needs a card.",
+    "Boat says it does not bill egress."
+  ],
+  "sources": [
+    {
+      "label": "Pricing",
+      "url": "https://docs.boat.dev/pricing"
+    }
+  ]
+}

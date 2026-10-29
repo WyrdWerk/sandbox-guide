@@ -1,0 +1,190 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import SectionNav from "../../components/SectionNav.astro";
+import Calculator from "../../components/Calculator.astro";
+import Inline from "../../components/Inline.astro";
+import { features, providerById, providerName, useCases } from "../../lib/data";
+import { presets } from "../../lib/cost";
+import type { RouteTier, UseCase } from "../../data/schema";
+
+export function getStaticPaths() {
+  return useCases.map((useCase) => ({ params: { id: useCase.id }, props: { useCase } }));
+}
+
+const { useCase } = Astro.props as { useCase: UseCase };
+const featureById = new Map(features.map((feature) => [feature.id, feature]));
+const cite = (url: string) => new URL(url).hostname.replace(/^www\./, "");
+
+const tiers: Record<RouteTier, { label: string; badge: string; order: number }> = {
+  "one-click": { label: "One click", badge: "badge badge--yes", order: 0 },
+  preinstalled: { label: "Preinstalled", badge: "badge badge--yes", order: 1 },
+  guide: { label: "Official guide or template", badge: "badge badge--partly", order: 2 },
+  manual: { label: "By hand", badge: "badge badge--unknown", order: 3 },
+  backend: { label: "Runs its commands only", badge: "badge badge--unknown", order: 4 },
+  none: { label: "Not documented", badge: "badge badge--no", order: 5 },
+};
+const noTerminal = { yes: "Yes", partly: "Partly", no: "No" } as const;
+const routes = [...useCase.routes].sort(
+  (a, b) => tiers[a.tier].order - tiers[b.tier].order || providerName(a.provider).localeCompare(providerName(b.provider)),
+);
+
+const nav = [
+  { href: "#what", label: "What it is" },
+  { href: "#needs", label: "What it needs" },
+  ...(useCase.twoWays ? [{ href: "#two-ways", label: "Two ways" }] : []),
+  ...(routes.length ? [{ href: "#setup", label: "Setting it up" }] : []),
+  { href: "#picks", label: "Where to start" },
+  { href: "#cost", label: "What it costs" },
+  { href: "#features", label: "What decides it" },
+];
+---
+
+<Base title={useCase.title} description={useCase.standfirst}>
+  <PageHeader
+    parent={{ href: "/use-cases/", label: "Use cases" }}
+    kicker={useCase.kicker}
+    title={useCase.title}
+    standfirst={useCase.standfirst}
+    meta={["Setup checked 29 October 2026", "Docs linked in the text", "Priced from list rates"]}
+  />
+
+  <SectionNav items={nav} />
+
+  <div class="wrap">
+    <section class="section section--flush" id="what" aria-labelledby="what-h">
+      <div class="section__head">
+        <h2 class="section__title" id="what-h">What it is</h2>
+        <p class="section__note">“{useCase.question}”</p>
+      </div>
+      <div class="prose">
+        {useCase.whatItIs.map((paragraph) => <p><Inline text={paragraph} /></p>)}
+      </div>
+    </section>
+
+    <section class="section" id="needs" aria-labelledby="needs-h">
+      <div class="section__head">
+        <h2 class="section__title" id="needs-h">What it needs from a machine</h2>
+        <p class="section__note">From its own documentation, each line linked to the page it comes from</p>
+      </div>
+      <dl class="facts">
+        {useCase.needs.map((need) => (
+          <div class="fact">
+            <dt class="fact__label">{need.label}</dt>
+            <dd class="fact__body">
+              <p class="fact__value">{need.value}</p>
+              <p class="fact__source">
+                <a href={need.source} rel="noreferrer noopener">{cite(need.source)}</a>
+                {need.source.includes("battleships.dev") && <span>, built by the Boat team</span>}
+              </p>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    {useCase.twoWays && (
+      <section class="section" id="two-ways" aria-labelledby="two-ways-h">
+        <div class="section__head"><h2 class="section__title" id="two-ways-h">{useCase.twoWays.title}</h2></div>
+        <div class="prose">
+          {useCase.twoWays.body.map((paragraph) => <p><Inline text={paragraph} /></p>)}
+        </div>
+      </section>
+    )}
+
+    {routes.length > 0 && (
+      <section class="section" id="setup" aria-labelledby="setup-h">
+        <div class="section__head">
+          <h2 class="section__title" id="setup-h">Setting it up on each provider</h2>
+          <p class="section__note">Easiest first. “Without a terminal” means someone who does not type commands can get it running from the provider's website.</p>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table routes">
+            <thead>
+              <tr>
+                <th scope="col">Provider</th>
+                <th scope="col">How</th>
+                <th scope="col">Without a terminal?</th>
+                <th scope="col">What it involves</th>
+              </tr>
+            </thead>
+            <tbody>
+              {routes.map((route) => (
+                <tr>
+                  <th scope="row"><a href={`/providers/${route.provider}/`}>{providerName(route.provider)}</a></th>
+                  <td><span class={tiers[route.tier].badge}><span class="badge__mark" aria-hidden="true"></span>{tiers[route.tier].label}</span></td>
+                  <td>{noTerminal[route.noTerminal]}</td>
+                  <td>
+                    {route.what}
+                    {route.link && (
+                      <a class="routes__link" href={route.link.url} rel="noreferrer noopener">{route.link.title} ↗</a>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="section__note">Read from each provider's documentation on {"29 October 2026"}. A provider not listed as one click can still be the right home; it means someone has to follow its instructions.</p>
+      </section>
+    )}
+
+    <section class="section" id="picks" aria-labelledby="picks-h">
+      <div class="section__head">
+        <h2 class="section__title" id="picks-h">Where to start</h2>
+        <p class="section__note">Three starting points for different people, each with its catch</p>
+      </div>
+      <div class="picks">
+        {useCase.picks.map((pick) => (
+          <article class="pick">
+            <span class="pick__label">{pick.for}</span>
+            <h3 class="pick__title"><a href={`/providers/${pick.provider}/`}>{providerById.get(pick.provider)?.name}</a></h3>
+            <p class="pick__body">{pick.why}</p>
+            <p class="pick__catch"><strong>Catch:</strong> {pick.watch}</p>
+            <p class="pick__more"><a href={pick.link} rel="noreferrer noopener">{cite(pick.link)} ↗</a></p>
+          </article>
+        ))}
+      </div>
+      <p class="prose usecase__outside"><strong>Beyond these fifteen.</strong> <Inline text={useCase.outside} /></p>
+      <p class="section__note">
+        Compare these three head to head:{" "}
+        <a href={`/compare/side-by-side/?p=${useCase.picks.map((p) => p.provider).join(",")}`}>features and cost side by side</a>.
+      </p>
+    </section>
+
+    <section class="section" id="cost" aria-labelledby="cost-h">
+      <div class="section__head">
+        <h2 class="section__title" id="cost-h">What it would cost</h2>
+        <p class="section__note">{presets[useCase.preset].why} Change any number; open a row for the arithmetic.</p>
+      </div>
+      <Calculator preset={useCase.preset} />
+    </section>
+
+    <section class="section" id="features" aria-labelledby="features-h">
+      <div class="section__head">
+        <h2 class="section__title" id="features-h">The features that decide it</h2>
+        <p class="section__note">Each page compares all fifteen providers, with a source for every row</p>
+      </div>
+      <ol class="watch">
+        {useCase.features.map((id, index) => {
+          const feature = featureById.get(id);
+          return (
+            <li class="watch__item">
+              <span class="watch__index">{String(index + 1).padStart(2, "0")}</span>
+              <p class="watch__body"><a href={`/features/${id}/`}>{feature?.title ?? id}</a> — {feature?.standfirst}</p>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+
+    <section class="section" aria-labelledby="sources-h">
+      <div class="section__head"><h2 class="section__title" id="sources-h">Sources</h2></div>
+      <ul class="usecase__sources">
+        {useCase.sources.map((source) => (
+          <li><a href={source.url} rel="noreferrer noopener">{source.label}</a> <span class="usecase__host">{cite(source.url)}</span></li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Base>

@@ -587,14 +587,14 @@ For each item: what I searched, and what boxd does say instead.
 
 ### Discrepancies with battleships.dev
 
-battleships.dev is a useful cross-check, but its price row is already behind today's page, and it carries two claims I could not confirm on any boxd surface (`inferred`; comparisons below). Its feature list is a single comma-separated line under "Yes:" and another under "No:", so the quoted fragments are items from those lines rather than key-value pairs.
+battleships.dev is a useful cross-check. Its headline rate matches today's page, but one table row inside the same record still shows the pre-cut prices, and it carries two claims I could not confirm on any boxd surface (`inferred`; comparisons below). Its feature list is a single comma-separated line under "Yes:" and another under "No:", so the quoted fragments are items from those lines rather than key-value pairs.
 
 - Its "Yes:" line opens: "Yes: snapshots, memory snapshots, fork/clone, pause/resume, persistent disk, whole disk survives a stop, volumes, idle auto-stop, ≥24 h sessions" — [battleships.dev](https://battleships.dev/data/providers/boxd.md) · `third-party`
 - Its "No:" line opens: "No: your own Docker/OCI image, nested virtualization, computer-use API, code interpreter, browser + desktop control, CAPTCHA solving, residential IPs, public IPv4" — same source · `third-party`
 
 | battleships item | Live boxd evidence | Verdict |
 |---|---|---|
-| Its running-PAYG row: "$0.059 / vCPU-h (€0.049); $0.018 / GiB-h resident RAM (€0.015); $0.00012 / GiB-h written disk (€0.0001)" — [battleships.dev](https://battleships.dev/data/providers/boxd.md) · `third-party` | $0.047 / $0.014 / $0.000096 live (28 Oct) | **Stale by ~20%.** Its USD numbers match the 9 Oct page, which read "€0.049 / vCPU-hour" — [Wayback 20261009152053](http://web.archive.org/web/20261009152053/https://boxd.sh/pricing) · `third-party` |
+| Its running-PAYG row: "$0.059 / vCPU-h (€0.049); $0.018 / GiB-h resident RAM (€0.015); $0.00012 / GiB-h written disk (€0.0001)" — [battleships.dev](https://battleships.dev/data/providers/boxd.md) · `third-party` | $0.047 / $0.014 / $0.000096 live (28 Oct) | **Inconsistent inside the record, not stale overall.** The same record's headline rate is current — "Pay as you go (credits, USD list) (resource): $0.047/vCPU-h, $0.014/GiB-h" — and its price history notes the cut: "Then a ~20% rate cut, seen 2026-10-14" — [battleships.dev](https://battleships.dev/data/providers/boxd.md), re-checked 29 Oct 2026 · `third-party`. Only this table row keeps the pre-cut figures, which match the 9 Oct page ("€0.049 / vCPU-hour" — [Wayback 20261009152053](http://web.archive.org/web/20261009152053/https://boxd.sh/pricing) · `third-party`). |
 | "50 machines per org" (its regime table) | "Machines | 50 per organization" in docs, but "100 machines included" on the pricing page | **Unresolved on boxd's side** (§14 contradictions) |
 | lists "MCP server" among its Yes features | No boxd-control MCP server is documented; the only MCP named is `chrome-devtools` — [guides/client-utilities](https://docs.boxd.sh/guides/client-utilities) · `docs-confirmed` | **Unconfirmed** |
 | lists "static egress IP" among its Yes features | No mention of a static or dedicated egress address anywhere in boxd's docs, FAQ or pricing · `not-published` | **Unconfirmed** |
@@ -794,7 +794,7 @@ The practical reading: cancellation gives you 30 days before deletion, price cha
 | gritt.io, The SaaS News | https://www.gritt.io/company/boxdsh/, https://www.thesaasnews.com/news/boxd-raises-2m-pre-seed/ | 28 Oct 2026 | Conflicting founding years (§17) |
 | Sign-in page | https://app.boxd.sh | 28 Oct 2026 | GitHub/Google, CLI-first onboarding |
 | Pricing, 9 Oct 2026 | http://web.archive.org/web/20261009152053/https://boxd.sh/pricing | 28 Oct 2026 | Prior rate card and 50-machine quota |
-| battleships.dev record | https://battleships.dev/data/providers/boxd.md and `.json` | 28 Oct 2026 | Secondary; price stale, two unconfirmed claims |
+| battleships.dev record | https://battleships.dev/data/providers/boxd.md and `.json` | 28 Oct 2026 | Secondary; headline price current (one table row still pre-cut), two unconfirmed claims |
 | everydev.ai listing | https://www.everydev.ai/tools/boxd | 28 Oct 2026 | Independent description: "a real KVM virtual machine running Ubuntu" |
 | Hacker News | https://hn.algolia.com/api/v1/search?query=boxd.sh | 28 Oct 2026 | **No substantive discussion found**; only incidental mentions |
 | Internal skill notes | .agents/skills/using-boxd-api/SKILL.md | 2026-10-22 | Live gRPC verification; used only where marked `third-party` |

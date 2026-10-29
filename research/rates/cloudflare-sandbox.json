@@ -1,0 +1,620 @@
+{
+  "id": "cloudflare-sandbox",
+  "provider": "Cloudflare Sandbox SDK on Containers",
+  "checkedOn": "2026-10-29",
+  "currency": "USD",
+  "headline": "A $5/month Workers Paid plan fee, then per-10ms container billing: CPU on active use only ($0.072/vCPU-hour), memory and disk on the provisioned instance type while it runs. Sandboxes are capped at 4 vCPU / 12 GiB / 20 GB and have no published region pinning. The Workers Free plan cannot run Containers.",
+  "plans": [
+    {
+      "name": "Workers Free",
+      "monthlyFeeUsd": 0,
+      "included": {
+        "monthlyCreditUsd": 0,
+        "notes": "No container allowance. The Containers rate card's Free column reads N/A for the metered container resources."
+      },
+      "limits": {
+        "maxConcurrent": "0 (Containers not available)",
+        "maxSession": "n/a",
+        "maxSize": "n/a"
+      },
+      "evidence": [
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+          "quote": "Free N/A N/A"
+        },
+        {
+          "url": "https://developers.cloudflare.com/sandbox/",
+          "quote": "Available on Workers Paid plan"
+        }
+      ]
+    },
+    {
+      "name": "Workers Paid",
+      "monthlyFeeUsd": 5,
+      "included": {
+        "monthlyCreditUsd": 0,
+        "notes": "The $5 is an account minimum charge, not a credit. It includes 25 GiB-hours of memory, 375 vCPU-minutes of active CPU and 200 GB-hours of disk per month, plus Workers and Durable Objects allowances.",
+        "includedContainerUsage": {
+          "memoryGiBHours": 25,
+          "cpuVcpuMinutes": 375,
+          "diskGBHours": 200
+        }
+      },
+      "limits": {
+        "maxConcurrent": "account-wide 1,500 concurrent vCPU / 6 TiB memory / 30 TB disk; the durable_object policy has no per-app max_instances",
+        "maxSession": "no published cap; the inactivity timeout can be set up to 6 hours",
+        "maxSize": "4 vCPU / 12 GiB / 20 GB per instance"
+      },
+      "evidence": [
+        {
+          "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+          "quote": "The Workers Paid plan includes Workers, Pages Functions, Workers KV, Hyperdrive, and Durable Objects usage for a minimum charge of $5 USD per month for an account."
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+          "quote": "with included monthly usage as part of the $5 USD per month Workers Paid plan"
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+          "quote": "25 GiB-hours/month included"
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+          "quote": "375 vCPU-minutes/month"
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+          "quote": "200 GB-hours/month"
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/limits/",
+          "quote": "Concurrent vCPU 1,500"
+        },
+        {
+          "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+          "quote": "After the Durable Object becomes inactive, the instance keeps running for the time set with setInactivityTimeout(), up to 6 hours."
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/configuration/scheduling-policy/",
+          "quote": "The durable_object policy does not support max_instances. Running instances count toward your account limits."
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/limits/",
+          "quote": "Minimum vCPU 1 Maximum vCPU 4 Maximum Memory 12 GiB Maximum Disk 20 GB Memory to vCPU ratio Minimum 3 GiB memory per vCPU"
+        }
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "monthlyFeeUsd": null,
+      "included": {
+        "monthlyCreditUsd": null,
+        "notes": "Workers Enterprise is billed per contract; container rates and committed-use discounts are not published."
+      },
+      "limits": {
+        "maxConcurrent": "account limits are defaults and can be raised by support",
+        "maxSession": "no published cap; up to 6 hours inactivity timeout (same as Workers Paid)",
+        "maxSize": "4 vCPU / 12 GiB / 20 GB (defaults; the limits page says maximums can be increased)"
+      },
+      "evidence": [
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/limits/",
+          "quote": "All instance size maximums and account limits on this page are defaults and can be increased."
+        }
+      ]
+    }
+  ],
+  "compute": {
+    "model": "per-resource, with fixed and custom instance types",
+    "cpuBasis": "active use only: CPU is billed for the vCPU time the container actually consumes, not the vCPU count provisioned.",
+    "ramBasis": "allocated: memory is billed on the provisioned memory of the instance type for every 10ms the container runs, busy or idle.",
+    "diskBasis": "allocated: disk is billed on the provisioned disk of the instance type for every 10ms the container runs.",
+    "billingIncrement": "10 milliseconds.",
+    "minimum": "No minimum charge or minimum billed duration is published; billing is per 10ms of running time.",
+    "rates": [
+      {
+        "resource": "CPU",
+        "usdPerVcpuHour": 0.072,
+        "usdPerGibRamHour": null,
+        "derivation": "0.000020 per vCPU-second x 3600 = 0.072 per vCPU-hour.",
+        "original": {
+          "value": 2e-05,
+          "unit": "USD per vCPU-second, active use"
+        },
+        "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+        "quote": "+ $0.000020 per additional vCPU-second"
+      },
+      {
+        "resource": "Memory",
+        "usdPerVcpuHour": null,
+        "usdPerGibRamHour": 0.009,
+        "derivation": "0.0000025 per GiB-second x 3600 = 0.009 per GiB-hour.",
+        "original": {
+          "value": 2.5e-06,
+          "unit": "USD per GiB-second, provisioned"
+        },
+        "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+        "quote": "+$0.0000025 per additional GiB-second"
+      },
+      {
+        "resource": "Disk",
+        "usdPerVcpuHour": null,
+        "usdPerGibRamHour": null,
+        "usdPerGbHour": 0.000252,
+        "derivation": "0.00000007 per GB-second x 3600 = 0.000252 per GB-hour.",
+        "original": {
+          "value": 7e-08,
+          "unit": "USD per GB-second, provisioned"
+        },
+        "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+        "quote": "+$0.00000007 per additional GB-second"
+      },
+      {
+        "resource": "Billing basis",
+        "usdPerVcpuHour": null,
+        "usdPerGibRamHour": null,
+        "original": {
+          "value": 0.01,
+          "unit": "seconds (10ms billing interval)"
+        },
+        "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+        "quote": "Containers are billed for every 10ms that they are actively running at the following rates"
+      },
+      {
+        "resource": "CPU vs memory basis",
+        "usdPerVcpuHour": null,
+        "usdPerGibRamHour": null,
+        "original": {
+          "value": null,
+          "unit": null
+        },
+        "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+        "quote": "Memory and disk usage are based on the provisioned resources for the instance type you select, while CPU usage is based on active usage only."
+      }
+    ],
+    "sizes": [
+      {
+        "name": "lite",
+        "vcpu": 0.0625,
+        "ramGiB": 0.25,
+        "diskGB": 2,
+        "hourlyFloorUsd": 0.002754,
+        "monthlyFloorUsd": 2.01042,
+        "derivation": "memory + disk only, at 730 hours: 0.25 x 0.009 + 2 x 0.000252. CPU is extra at 0.072 per vCPU-hour of active use.",
+        "url": "https://developers.cloudflare.com/containers/platform/limits/",
+        "quote": "lite 1/16 256 MiB 2 GB"
+      },
+      {
+        "name": "basic",
+        "vcpu": 0.25,
+        "ramGiB": 1,
+        "diskGB": 4,
+        "hourlyFloorUsd": 0.010008,
+        "monthlyFloorUsd": 7.30584,
+        "derivation": "memory + disk only, at 730 hours.",
+        "url": "https://developers.cloudflare.com/containers/platform/limits/",
+        "quote": "basic 1/4 1 GiB 4 GB"
+      },
+      {
+        "name": "standard-1",
+        "vcpu": 0.5,
+        "ramGiB": 4,
+        "diskGB": 8,
+        "hourlyFloorUsd": 0.038016,
+        "monthlyFloorUsd": 27.75168,
+        "derivation": "memory + disk only, at 730 hours.",
+        "url": "https://developers.cloudflare.com/containers/platform/limits/",
+        "quote": "standard-1 1/2 4 GiB 8 GB"
+      },
+      {
+        "name": "standard-2",
+        "vcpu": 1,
+        "ramGiB": 6,
+        "diskGB": 12,
+        "hourlyFloorUsd": 0.057024,
+        "monthlyFloorUsd": 41.62752,
+        "derivation": "memory + disk only, at 730 hours.",
+        "url": "https://developers.cloudflare.com/containers/platform/limits/",
+        "quote": "standard-2 1 6 GiB 12 GB"
+      },
+      {
+        "name": "standard-3",
+        "vcpu": 2,
+        "ramGiB": 8,
+        "diskGB": 16,
+        "hourlyFloorUsd": 0.076032,
+        "monthlyFloorUsd": 55.50336,
+        "derivation": "memory + disk only, at 730 hours.",
+        "url": "https://developers.cloudflare.com/containers/platform/limits/",
+        "quote": "standard-3 2 8 GiB 16 GB"
+      },
+      {
+        "name": "standard-4",
+        "vcpu": 4,
+        "ramGiB": 12,
+        "diskGB": 20,
+        "hourlyFloorUsd": 0.11304,
+        "monthlyFloorUsd": 82.5192,
+        "derivation": "memory + disk only, at 730 hours. Add up to 4 x 0.072 = 0.288/hour if all four vCPUs stay busy.",
+        "url": "https://developers.cloudflare.com/containers/platform/limits/",
+        "quote": "standard-4 4 12 GiB 20 GB"
+      }
+    ],
+    "customSizes": {
+      "minVcpu": 1,
+      "maxVcpu": 4,
+      "maxRamGiB": 12,
+      "maxDiskGB": 20,
+      "ramPerVcpuMinimumGiB": 3,
+      "evidence": [
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/limits/",
+          "quote": "Minimum vCPU 1 Maximum vCPU 4 Maximum Memory 12 GiB Maximum Disk 20 GB Memory to vCPU ratio Minimum 3 GiB memory per vCPU"
+        }
+      ]
+    },
+    "classDifferences": [
+      {
+        "note": "The six instance types are the only fixed shapes; a custom size must keep at least 3 GiB of RAM per vCPU, so 2 vCPU / 4 GiB and 4 vCPU / 8 GiB cannot be bought.",
+        "url": "https://developers.cloudflare.com/containers/platform/limits/",
+        "quote": "For workloads requiring less than 1 vCPU, use the predefined instance types such as lite or basic."
+      },
+      {
+        "note": "The instance type is chosen per start on the durable_object policy used by Sandboxes, so one Worker can run mixed sizes.",
+        "url": "https://developers.cloudflare.com/containers/platform/limits/",
+        "quote": "For an application that uses the default scheduling policy, specify the size with the instance_type property in your Worker's Wrangler configuration file. For the durable_object policy, pass the named size to ctx.container.start() with the runtime instance property."
+      }
+    ],
+    "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+    "quote": "Containers are billed for every 10ms that they are actively running at the following rates, with included monthly usage as part of the $5 USD per month Workers Paid plan"
+  },
+  "storage": {
+    "ephemeralDisk": {
+      "includedGiB": "per instance type, from 2 GB (lite) to 20 GB (standard-4)",
+      "pricePerGiBMonth": 0.18396,
+      "derivation": "0.00000007 per GB-second x 2,628,000 seconds in a 30.42-day month = 0.18396 per GB-month. Billed per second only while the instance runs.",
+      "note": "The disk is part of the instance type and is deleted when the instance stops.",
+      "evidence": [
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+          "quote": "+$0.00000007 per additional GB-second"
+        },
+        {
+          "url": "https://developers.cloudflare.com/sandbox/files/",
+          "quote": "Stopping the instance deletes the files on its disk."
+        }
+      ]
+    },
+    "billedWhileStopped": {
+      "value": "nothing",
+      "note": "A stopped instance is not billed. Its disk is gone; only a snapshot, a directory backup or a mounted bucket survives.",
+      "evidence": [
+        {
+          "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+          "quote": "While an instance runs, Containers bill its memory and disk, whether or not anything inside it does work. After the instance stops, it is not billed."
+        }
+      ]
+    },
+    "snapshots": {
+      "pricePerGiBMonth": null,
+      "maxSizeGB": 20,
+      "retentionDays": 30,
+      "note": "Container snapshots are in public beta. No snapshot storage rate appears on the Containers rate card or the Sandboxes pages.",
+      "evidence": [
+        {
+          "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+          "quote": "Container snapshots are in public beta. The API and behavior may change."
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/limits/",
+          "quote": "Maximum snapshot size 20 GB Snapshot retention 30 days from creation or the most recent restore"
+        },
+        {
+          "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+          "quote": "A snapshot expires 30 days after it is created or last restored."
+        }
+      ]
+    },
+    "r2BackupsAndMounts": {
+      "pricePerGiBMonth": 0.015,
+      "freeGiBMonths": 10,
+      "note": "Directory backups and S3/R2 mounts are ordinary R2 objects, billed at the R2 Standard rate. Backups are kept until deleted; there is no TTL.",
+      "evidence": [
+        {
+          "url": "https://developers.cloudflare.com/r2/pricing/",
+          "quote": "$0.015 / GB-month"
+        },
+        {
+          "url": "https://developers.cloudflare.com/r2/pricing/",
+          "quote": "10 GB-month / month"
+        }
+      ]
+    },
+    "stoppedDataRetention": "Nothing is kept on stop: the disk is deleted. A snapshot survives 30 days from creation or last restore (20 GB max); an R2 backup survives until you delete it."
+  },
+  "egress": {
+    "note": "Priced by destination region, with a monthly included allotment. Outbound traffic is off unless enabled per start.",
+    "tiers": [
+      {
+        "region": "North America & Europe",
+        "pricePerGB": 0.025,
+        "includedPerMonth": "1 TB",
+        "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+        "quote": "North America & Europe $0.025 1 TB"
+      },
+      {
+        "region": "Oceania, Korea, Taiwan",
+        "pricePerGB": 0.05,
+        "includedPerMonth": "500 GB",
+        "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+        "quote": "Oceania, Korea, Taiwan $0.05 500 GB"
+      },
+      {
+        "region": "Everywhere Else",
+        "pricePerGB": 0.04,
+        "includedPerMonth": "500 GB",
+        "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+        "quote": "Everywhere Else $0.04 500 GB"
+      }
+    ]
+  },
+  "other": [
+    {
+      "item": "Workers requests",
+      "price": "10 million included per month, then $0.30 per additional million",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "quote": "10 million included per month +$0.30 per additional million"
+    },
+    {
+      "item": "Durable Object requests",
+      "price": "1 million/month included, then $0.15/million",
+      "url": "https://developers.cloudflare.com/durable-objects/platform/pricing/",
+      "quote": "1 million / month, + $0.15/million"
+    },
+    {
+      "item": "Durable Object duration",
+      "price": "400,000 GB-s/month included, then $12.50/million GB-s on a 128 MB allocation",
+      "url": "https://developers.cloudflare.com/durable-objects/platform/pricing/",
+      "quote": "400,000 GB-s / month, + $12.50/million GB-s"
+    },
+    {
+      "item": "Workers Logs",
+      "price": "20 million events included per month, then $0.60 per additional million; pricing changes to Cloudflare Observability pricing on 1 December 2026",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "quote": "20 million included per month +$0.60 per additional million"
+    },
+    {
+      "item": "Workers Logs (upcoming change)",
+      "price": "changes on 1 December 2026",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "quote": "Beginning December 1, 2026, Workers Logs will use Cloudflare Observability pricing."
+    },
+    {
+      "item": "Image storage",
+      "price": "50 GB total per account, no overage price published",
+      "url": "https://developers.cloudflare.com/containers/platform/limits/",
+      "quote": "Total image storage per account 50 GB"
+    },
+    {
+      "item": "Public IPv4",
+      "price": "not published; containers accept no non-HTTP TCP or UDP",
+      "url": "https://developers.cloudflare.com/containers/concepts/architecture/",
+      "quote": "Because all Container requests are passed through a Worker, end-users cannot make non-HTTP TCP or UDP requests to a Container instance."
+    },
+    {
+      "item": "Seats",
+      "price": "not published; account members are part of the Cloudflare account, not billed per sandbox",
+      "url": "https://developers.cloudflare.com/fundamentals/manage-members/",
+      "quote": "On any Cloudflare account, you can collaborate by adding members to your account and assigning them access via one or several policies."
+    },
+    {
+      "item": "Budget alerts",
+      "price": "free but informational only",
+      "url": "https://developers.cloudflare.com/billing/manage/budget-alerts/",
+      "quote": "Budget alerts are informational only. They do not pause or cap usage."
+    },
+    {
+      "item": "Minimum spend",
+      "price": "$5/month account minimum on Workers Paid",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "quote": "for a minimum charge of $5 USD per month for an account"
+    }
+  ],
+  "freeTier": {
+    "summary": "No free tier for Containers or Sandboxes. The Workers Free plan exists but the container rate card marks the Free column N/A, and the Sandboxes docs require Workers Paid.",
+    "monthlyCreditUsd": 0,
+    "limits": "Workers Paid's $5/month includes 375 vCPU-minutes, 25 GiB-hours and 200 GB-hours of container usage, which is usage included in the plan, not a free plan.",
+    "evidence": [
+      {
+        "url": "https://developers.cloudflare.com/sandbox/",
+        "quote": "Available on Workers Paid plan"
+      },
+      {
+        "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+        "quote": "Free N/A N/A"
+      }
+    ]
+  },
+  "diffs": [
+    {
+      "field": "storage.snapshots.pricePerGiBMonth",
+      "ours": "not published",
+      "battleships": "0.015 USD per GiB-month (snapshot_gib_month: 0.015), i.e. the R2 Standard rate applied to snapshots",
+      "live": "No snapshot storage rate appears on the Containers rate card, which lists only CPU, memory, disk and egress; the Sandboxes pages price snapshots nowhere. Live agrees with our research file.",
+      "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+      "quote": "Containers are billed for every 10ms that they are actively running at the following rates"
+    },
+    {
+      "field": "regions.euDataResidency",
+      "ours": "No documented way to pin a sandbox to a region or jurisdiction",
+      "battleships": "eu_data_residency: true",
+      "live": "The Wrangler reference says the durable_object policy that Sandboxes use rejects placement constraints.",
+      "url": "https://developers.cloudflare.com/workers/wrangler/configuration/",
+      "quote": "A durable_object entry accepts only the following options. Wrangler rejects every other Container application field for this policy, including image, instance_type, max_instances, rollout settings, and placement constraints."
+    },
+    {
+      "field": "storage.snapshots.status",
+      "ours": "public beta",
+      "battleships": "private beta",
+      "live": "The sandbox lifetime page says public beta.",
+      "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+      "quote": "Container snapshots are in public beta. The API and behavior may change."
+    },
+    {
+      "field": "compute.instanceTypeScope",
+      "ours": "The durable_object policy lets each start() choose an instance type; mixed sizes in one Worker are possible",
+      "battleships": "Instance type is per container class (deploy-time), not per sandbox",
+      "live": "The limits page documents passing the named size to ctx.container.start() on the durable_object policy.",
+      "url": "https://developers.cloudflare.com/containers/platform/limits/",
+      "quote": "For the durable_object policy, pass the named size to ctx.container.start() with the runtime instance property."
+    },
+    {
+      "field": "lifecycle.idleTail",
+      "ours": "No default inactivity timeout on Sandbox SDK 1.0; up to 6 hours can be set",
+      "battleships": "The Container class defaults sleepAfter to 10 minutes, so an idle tail bills memory and disk",
+      "live": "The current Sandbox lifetime page describes no default timeout.",
+      "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+      "quote": "Without a timeout, Cloudflare stops the instance shortly after the Durable Object becomes inactive."
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "Lifecycle of a Container (microVM per container)",
+      "url": "https://developers.cloudflare.com/containers/concepts/architecture/"
+    },
+    "sizes-regions": {
+      "title": "Limits and Instance Types",
+      "url": "https://developers.cloudflare.com/containers/platform/limits/",
+      "also": [
+        {
+          "title": "Placement",
+          "url": "https://developers.cloudflare.com/containers/concepts/placement/"
+        }
+      ]
+    },
+    "lifecycle": {
+      "title": "Sandbox lifetime",
+      "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/"
+    },
+    "snapshots-forks": {
+      "title": "Save and restore a sandbox with snapshots",
+      "url": "https://developers.cloudflare.com/sandbox/files/save-and-restore-a-workspace/"
+    },
+    "storage": {
+      "title": "Work with files in a sandbox",
+      "url": "https://developers.cloudflare.com/sandbox/files/"
+    },
+    "idle-timers": {
+      "title": "Sandbox lifetime: what keeps an instance running",
+      "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/#activity-keeps-an-instance-running"
+    },
+    "reaching-it": {
+      "title": "Preview a web application",
+      "url": "https://developers.cloudflare.com/sandbox/previews/"
+    },
+    "custom-domains": {
+      "title": "Serve previews on their own hostnames",
+      "url": "https://developers.cloudflare.com/sandbox/previews/serve-previews-on-their-own-hostnames/"
+    },
+    "outbound-network": {
+      "title": "Handle outbound traffic",
+      "url": "https://developers.cloudflare.com/containers/configuration/outbound-traffic/"
+    },
+    "keys-secrets": {
+      "title": "Credentials and network access",
+      "url": "https://developers.cloudflare.com/sandbox/network/"
+    },
+    "ways-to-drive": {
+      "title": "@cloudflare/sandbox reference",
+      "url": "https://developers.cloudflare.com/sandbox/reference/",
+      "also": [
+        {
+          "title": "Run a Linux command (get started)",
+          "url": "https://developers.cloudflare.com/sandbox/get-started/"
+        }
+      ]
+    },
+    "built-in-agents": {
+      "title": "Run coding agents in a sandbox",
+      "url": "https://developers.cloudflare.com/sandbox/coding-agents/"
+    },
+    "teams-accounts": {
+      "title": "Manage account members",
+      "url": "https://developers.cloudflare.com/fundamentals/manage-members/"
+    },
+    "billing-models": {
+      "title": "Containers pricing",
+      "url": "https://developers.cloudflare.com/containers/platform/pricing/"
+    },
+    "trials-free-tiers": {
+      "title": "Workers plans and pricing",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/"
+    },
+    "quickstart": {
+      "title": "Run a Linux command (get started)",
+      "url": "https://developers.cloudflare.com/sandbox/get-started/"
+    },
+    "pricing": {
+      "title": "Containers pricing",
+      "url": "https://developers.cloudflare.com/containers/platform/pricing/"
+    }
+  },
+  "deploy": {
+    "hermesAgent": {
+      "status": "not found",
+      "oneClickOrManaged": "not found",
+      "summary": "Neither Cloudflare's docs nor Hermes' docs describe a Hermes backend on Cloudflare Containers or the Sandbox SDK. Hermes lists six terminal backends and Cloudflare is not one of them.",
+      "nonCoderDashboard": "No.",
+      "evidence": [
+        {
+          "url": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration#terminal-backend-configuration",
+          "quote": "Hermes ships six terminal backends. Each determines where the agent's shell commands actually execute"
+        }
+      ]
+    },
+    "openClaw": {
+      "status": "official experimental template in the OpenClaw repository",
+      "oneClickOrManaged": "no one-click button; a documented manual deployment template (scripts/cloudflare) plus Wrangler",
+      "summary": "OpenClaw documents an experimental Cloudflare Containers target: one Worker, one named Durable Object and one Container running the OpenClaw gateway, with Litestream replicating SQLite to R2. It is designed as a single always-on installation (standard-2, max_instances 1). Deployment is manual: clone the repo, create an R2 bucket, build and push an amd64 image to Docker Hub, wrangler deploy, set secrets, then bootstrap once over `wrangler containers ssh`.",
+      "steps": [
+        "Clone openclaw/openclaw and enter scripts/cloudflare; npm install; npx wrangler login.",
+        "Create an R2 bucket and an R2 API token; put the account id and bucket name in wrangler.jsonc.",
+        "Build the image with docker buildx --platform linux/amd64, push to a public Docker Hub repo, pin the digest in wrangler.jsonc.",
+        "npm run check && npm run deploy; then wrangler secret put for the R2 keys and OPENCLAW_GATEWAY_TOKEN.",
+        "Enable ssh temporarily in wrangler.jsonc, redeploy, and run the one-time `openclaw onboard` inside the container over wrangler containers ssh.",
+        "Remove the ssh block and redeploy; state survives via the Litestream restore from R2."
+      ],
+      "nonCoderDashboard": "No. The dashboard can show the R2 replica tree and container logs, but the deployment needs git, Docker and Wrangler, and first boot needs a shell inside the container.",
+      "alwaysOn": "Yes, by default: OPENCLAW_WEBHOOK_ONLY defaults to false, so the container stays awake and bills provisioned memory and disk continuously. OpenClaw's own estimate is roughly $40-50/month on standard-2 before egress.",
+      "evidence": [
+        {
+          "url": "https://docs.openclaw.ai/install/cloudflare",
+          "quote": "Run one OpenClaw installation behind a Cloudflare Worker and a named Durable Object, with the official OpenClaw image and Litestream replication to R2."
+        },
+        {
+          "url": "https://docs.openclaw.ai/install/cloudflare",
+          "quote": "This deployment target is experimental."
+        },
+        {
+          "url": "https://docs.openclaw.ai/install/cloudflare",
+          "quote": "The template lives in scripts/cloudflare. It deploys a standard-2 Container with max_instances: 1."
+        },
+        {
+          "url": "https://docs.openclaw.ai/install/cloudflare",
+          "quote": "At the published rates, that is roughly 40 to 50 US dollars per month including the plan fee, mostly memory, before egress."
+        },
+        {
+          "url": "https://docs.openclaw.ai/install/cloudflare",
+          "quote": "OPENCLAW_WEBHOOK_ONLY defaults to false, which keeps the Container running through idle periods."
+        }
+      ]
+    },
+    "alwaysOnVerdict": "The only one of the three with an official always-on recipe for a personal agent: OpenClaw's Cloudflare Containers template keeps one container awake indefinitely and survives restarts via Litestream. It costs the full provisioned memory and disk every hour, and a sleeping (webhook-only) deployment loses its disk, so the always-on mode is the supported one."
+  },
+  "notVerified": [
+    "No account, Worker, container or deployment was created; all behaviour is from documentation.",
+    "Snapshot storage is billed somewhere but no rate is published, so it cannot be costed.",
+    "The docs conflict on whether outbound internet is on by default; treat it as an explicit per-start setting.",
+    "Whether support will raise the 4 vCPU / 12 GiB / 20 GB per-instance ceilings is not published."
+  ]
+}

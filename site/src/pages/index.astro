@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import SituationIcon from "../components/SituationIcon.astro";
-import { features, groups, providers, situations } from "../lib/data";
+import { features, groups, providers, situations, useCases } from "../lib/data";
 ---
 
 <Base title="Sandbox guide">
@@ -20,7 +20,28 @@ import { features, groups, providers, situations } from "../lib/data";
       </p>
     </header>
 
-    <section class="section section--flush" aria-labelledby="situations-h">
+    <section class="section section--flush" aria-labelledby="usecases-h">
+      <div class="section__head">
+        <h2 class="section__title" id="usecases-h">Start from what you want to run</h2>
+        <p class="section__note">What it needs, how hard it is to set up on each provider, and what it costs</p>
+      </div>
+      <div class="picks">
+        {useCases.map((useCase) => (
+          <article class="pick">
+            <span class="pick__label">{useCase.kicker}</span>
+            <h3 class="pick__title"><a href={`/use-cases/${useCase.id}/`}>{useCase.title}</a></h3>
+            <p class="pick__body">“{useCase.question}”</p>
+          </article>
+        ))}
+        <article class="pick">
+          <span class="pick__label">Your own numbers</span>
+          <h3 class="pick__title"><a href="/costs/">Cost calculator</a></h3>
+          <p class="pick__body">Describe the machine and how it runs; all fifteen providers are priced with the arithmetic shown.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="situations-h">
       <div class="section__head">
         <h2 class="section__title" id="situations-h">Pick the situation that sounds like yours</h2>
         <p class="section__note">Each answer names the features that matter and the providers worth a look</p>
@@ -102,16 +123,16 @@ import { features, groups, providers, situations } from "../lib/data";
 
     <section class="section" aria-labelledby="compare-h">
       <div class="section__head">
-        <h2 class="section__title" id="compare-h">Compare behaviour, not prices</h2>
+        <h2 class="section__title" id="compare-h">Compare head to head</h2>
         <p class="section__note">
-          Put two or three providers beside each other across all sixteen features, or read the
-          list-price illustrations for the three shared workloads.
+          Put two or three providers beside each other across all sixteen features and the cost of
+          your workload, or read the list-price illustrations for the three shared workloads.
         </p>
       </div>
       <div class="picks">
         <article class="pick">
           <h3 class="pick__title"><a href="/compare/side-by-side/">Side by side</a></h3>
-          <p class="pick__body">Choose two or three providers and read them across the features that decide your case.</p>
+          <p class="pick__body">Choose two or three providers and read them across the features that decide your case, then what each would cost.</p>
         </article>
         <article class="pick">
           <h3 class="pick__title"><a href="/compare/situations/">By situation</a></h3>
@@ -127,8 +148,8 @@ import { features, groups, providers, situations } from "../lib/data";
         </article>
       </div>
       <p class="section__note">
-        For your own workload, use <a href="https://battleships.dev" rel="noreferrer noopener">battleships.dev</a>, built by the Boat team.
-        This site explains behaviour; that one prices it.
+        For your own workload, use the <a href="/costs/">cost calculator</a>. It shows its arithmetic;{" "}
+        <a href="/costs/how-it-works/">here is how it works</a>.
       </p>
     </section>
 

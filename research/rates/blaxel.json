@@ -1,0 +1,452 @@
+{
+  "id": "blaxel",
+  "checkedOn": "2026-10-29",
+  "provider": "Blaxel (acquired by Baseten on 2026-09-10)",
+  "pricingUrl": "https://blaxel.ai/pricing",
+  "plans": [
+    {
+      "name": "Pay-as-you-go — Tier 0",
+      "monthlyFeeUsd": 0,
+      "minimumTopUpUsd": 0,
+      "feeIsCredit": false,
+      "includedUsage": "Up to $200 in promotional credits; exact grant per account is not published.",
+      "limits": {
+        "maxConcurrent": 10,
+        "maxSessionHours": null,
+        "maxVcpu": null,
+        "maxRamGiB": null,
+        "maxDiskGiB": null,
+        "maxRetentionDays": 7
+      },
+      "url": "https://blaxel.ai/pricing",
+      "quote": "Tier 0 | Free | 10",
+      "retentionQuote": "Some quota tiers enforce expiration dates (Tier 0 and 1, with respectively up to 7 and 30 days).",
+      "retentionUrl": "https://docs.blaxel.ai/Sandboxes/Expiration.md",
+      "creditQuote": "Up to $200 in free credits",
+      "sessionQuote": "Sandboxes are built for workloads lasting anywhere from a few seconds to multiple days.",
+      "notes": "No per-tier sandbox size cap is published. Battleships lists a 2 vCPU / 4 GiB cap that it says was not re-verified; see diffs."
+    },
+    {
+      "name": "Pay-as-you-go — Tier 1",
+      "monthlyFeeUsd": 0,
+      "minimumTopUpUsd": 20,
+      "feeIsCredit": true,
+      "includedUsage": "The $20 is a wallet top-up, not a fee; it becomes usage credit.",
+      "limits": {
+        "maxConcurrent": 50,
+        "maxSessionHours": null,
+        "maxVcpu": null,
+        "maxRamGiB": null,
+        "maxDiskGiB": null,
+        "maxRetentionDays": 30
+      },
+      "url": "https://blaxel.ai/pricing",
+      "quote": "Tier 1 | $20 / month | 50",
+      "topupQuote": "Top-ups are not flat fees",
+      "topupUrl": "https://docs.blaxel.ai/Security/Quotas.md",
+      "notes": "Tier is set by 30-day top-up volume and can drop if top-ups stop."
+    },
+    {
+      "name": "Pay-as-you-go — Tier 2",
+      "monthlyFeeUsd": 0,
+      "minimumTopUpUsd": 50,
+      "feeIsCredit": true,
+      "includedUsage": "The $50 is a wallet top-up, not a fee; it becomes usage credit.",
+      "limits": {
+        "maxConcurrent": 200,
+        "maxSessionHours": null,
+        "maxVcpu": null,
+        "maxRamGiB": null,
+        "maxDiskGiB": null,
+        "maxRetentionDays": null
+      },
+      "url": "https://blaxel.ai/pricing",
+      "quote": "Tier 2 | $50 / month | 200",
+      "notes": "Tiers 3-8 are not published; the pricing page jumps from Tier 2 to Tier 9."
+    },
+    {
+      "name": "Pay-as-you-go — Tier 9",
+      "monthlyFeeUsd": null,
+      "minimumTopUpUsd": null,
+      "feeIsCredit": false,
+      "includedUsage": null,
+      "limits": {
+        "maxConcurrent": 100000,
+        "maxSessionHours": null,
+        "maxVcpu": null,
+        "maxRamGiB": null,
+        "maxDiskGiB": null,
+        "maxRetentionDays": null
+      },
+      "url": "https://blaxel.ai/pricing",
+      "quote": "Tier 9 | Contact us | 100,000+"
+    },
+    {
+      "name": "Custom",
+      "monthlyFeeUsd": null,
+      "minimumTopUpUsd": null,
+      "feeIsCredit": false,
+      "includedUsage": null,
+      "limits": {
+        "maxConcurrent": null,
+        "maxSessionHours": null,
+        "maxVcpu": null,
+        "maxRamGiB": 256,
+        "maxDiskGiB": null,
+        "maxRetentionDays": null
+      },
+      "url": "https://blaxel.ai/pricing",
+      "quote": "Up to 256 GB RAM per sandbox or job",
+      "notes": "Quote-only: private networking, bring-your-own-metal, custom SLAs and hardware."
+    }
+  ],
+  "compute": {
+    "billingBasis": "Allocated memory × active seconds. CPU is allocated from the memory size and is not billed separately.",
+    "cpuBilledOn": "included_with_ram",
+    "ramBilledOn": "allocated",
+    "floor": {
+      "mcuPerHour": null,
+      "detail": "No minimum billed duration or minimum memory charge is published.",
+      "url": "https://blaxel.ai/pricing",
+      "quote": "billed by its allocated memory (CPU scales automatically)"
+    },
+    "increment": {
+      "compute": "per_second",
+      "detail": "The rate is per GB-second and billing is reported in GB-seconds.",
+      "url": "https://docs.blaxel.ai/knowledge-base/configuration-and-operation/understanding-sandbox-active-vs-standby-states-and-billing.md",
+      "quote": "measured in GB-seconds"
+    },
+    "perResourceRates": [
+      {
+        "resource": "ram",
+        "usdPerGiBRamHour": 0.0414,
+        "originalUnit": "USD per GB RAM-second",
+        "originalFigure": "$0.0000115 / GB RAM · second",
+        "url": "https://blaxel.ai/pricing",
+        "quote": "$0.0000115 / GB RAM · second",
+        "notes": "$0.0000115 × 3,600 = $0.0414 per GB-hour."
+      },
+      {
+        "resource": "cpu",
+        "usdPerVcpuHour": null,
+        "originalUnit": "not separately priced",
+        "originalFigure": "included",
+        "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+        "quote": "CPU resources are allocated accordingly by Blaxel based on your selected memory allocation and are not charged separately."
+      }
+    ],
+    "fixedSizes": [
+      {
+        "name": "8 GB sandbox",
+        "vcpu": 4,
+        "ramGiB": 8,
+        "includedDiskGiB": 0,
+        "hourlyPriceUsd": 0.3312,
+        "monthlyPriceUsd": 241.776,
+        "derivedFromRate": true,
+        "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+        "quote": "a sandbox with 8 GB memory is allocated 4 CPU cores, while one with 16 GB memory is allocated 6 CPU cores",
+        "notes": "Price derived from 8 GB × 3,600 s × $0.0000115; no disk is included because the writable layer is tmpfs in RAM."
+      },
+      {
+        "name": "16 GB sandbox",
+        "vcpu": 6,
+        "ramGiB": 16,
+        "includedDiskGiB": 0,
+        "hourlyPriceUsd": 0.6624,
+        "monthlyPriceUsd": 483.552,
+        "derivedFromRate": true,
+        "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+        "quote": "a sandbox with 8 GB memory is allocated 4 CPU cores, while one with 16 GB memory is allocated 6 CPU cores",
+        "notes": "Price derived from 16 GB × 3,600 s × $0.0000115."
+      }
+    ],
+    "planRates": [
+      {
+        "plan": "Pay-as-you-go (all tiers)",
+        "usdPerGiBRamHour": 0.0414
+      }
+    ],
+    "otherRates": [
+      {
+        "product": "Batch jobs",
+        "usdPerGiBRamHour": 0.0216,
+        "originalUnit": "USD per GB RAM-second",
+        "originalFigure": "$0.000006 / GB RAM · second",
+        "url": "https://blaxel.ai/pricing",
+        "quote": "$0.000006 / GB RAM · second"
+      },
+      {
+        "product": "MCP hosting",
+        "usdPerGiBRamHour": 0.0252,
+        "originalUnit": "USD per GB RAM-second",
+        "originalFigure": "$0.000007 / GB RAM · second",
+        "url": "https://blaxel.ai/pricing",
+        "quote": "$0.000007 / GB RAM · second"
+      }
+    ],
+    "notes": "Blaxel publishes no per-vCPU price. Because CPU scales with RAM, a bigger sandbox buys more cores at the same per-GB rate. Batch jobs ($0.000006/GB-s) and MCP hosting ($0.000007/GB-s) are separate products."
+  },
+  "storage": {
+    "disk": {
+      "usdPerGiBHour": null,
+      "usdPerGiBMonth": null,
+      "includedInRam": true,
+      "detail": "The writable filesystem lives in RAM as tmpfs, roughly 50% of allocated memory, so there is no separate local-disk charge. Persistent disk is a Volume.",
+      "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+      "quote": "a writable layer lives entirely in the sandbox's RAM using `tmpfs`"
+    },
+    "billedWhileStopped": {
+      "charged": true,
+      "model": "snapshot storage plus any attached volume",
+      "url": "https://docs.blaxel.ai/knowledge-base/configuration-and-operation/understanding-sandbox-active-vs-standby-states-and-billing.md",
+      "quote": "You are charged only for snapshot and volume storage",
+      "overviewQuote": "You are not charged for memory while a sandbox is in standby mode. However, you are charged for the storage of the snapshot and/or the volumes."
+    },
+    "snapshotStorage": {
+      "usdPerGiBMonth": 0.2,
+      "url": "https://blaxel.ai/pricing",
+      "quote": "$0.20 / GB · month",
+      "notes": "The pricing table labels this 'Snapshots storage — Memory and filesystem snapshots that keep suspended sandboxes ready to resume.' No statement of whether the billable size is allocated RAM, written bytes, or both."
+    },
+    "images": {
+      "usdPerGiBMonth": 0.045,
+      "url": "https://blaxel.ai/pricing",
+      "quote": "$0.045 / GB · month"
+    },
+    "volumes": {
+      "usdPerGiBMonth": 0.12,
+      "billedOn": "provisioned capacity, whether or not written",
+      "url": "https://blaxel.ai/pricing",
+      "quote": "$0.12 / GB · month",
+      "provisionedQuote": "Billed on the volume size you provision, for as long as the volume exists, regardless of how much data you actually write in it."
+    },
+    "agentDrive": {
+      "usdPerGiBMonth": 0,
+      "status": "free during beta",
+      "url": "https://blaxel.ai/pricing",
+      "quote": "Free during beta"
+    },
+    "retention": {
+      "stoppedDataKept": "Standby has no expiry on higher tiers; Tier 0 caps sandbox lifetime at 7 days and Tier 1 at 30 days. Without a TTL or lifecycle policy, sandboxes are not deleted.",
+      "url": "https://docs.blaxel.ai/Sandboxes/Expiration.md",
+      "quote": "If these parameters are absent, sandboxes will not be deleted.",
+      "indefiniteQuote": "sandboxes wait on standby indefinitely when not used"
+    }
+  },
+  "egress": {
+    "usdPerGiB": 0,
+    "free": true,
+    "url": "https://blaxel.ai/pricing",
+    "quote": "Internet egress traffic | Outbound traffic from your workloads to the internet. | Included",
+    "notes": "The pricing table lists outbound internet traffic as 'Included'. Dedicated egress IPs, gateway runtime and proxy data are 'Free during beta'."
+  },
+  "other": [
+    {
+      "item": "Custom domain — fully-qualified",
+      "priceUsdPerMonth": 0.25,
+      "url": "https://blaxel.ai/pricing",
+      "quote": "$0.25 / domain · month"
+    },
+    {
+      "item": "Custom domain — wildcard",
+      "priceUsdPerMonth": 20,
+      "url": "https://blaxel.ai/pricing",
+      "quote": "$20 / domain · month"
+    },
+    {
+      "item": "Email support add-on",
+      "price": "$800/month + 3% of usage",
+      "url": "https://blaxel.ai/pricing",
+      "quote": "$800/ MONTH + 3% OF USAGE"
+    },
+    {
+      "item": "Dedicated support add-on",
+      "price": "$1,600/month + 10% of usage",
+      "url": "https://blaxel.ai/pricing",
+      "quote": "$1,600/ MONTH + 10% OF USAGE"
+    },
+    {
+      "item": "HIPAA add-on (signed BAA)",
+      "priceUsdPerMonth": 250,
+      "url": "https://blaxel.ai/pricing",
+      "quote": "$250/ MONTH"
+    },
+    {
+      "item": "Dedicated egress IPs",
+      "priceUsdPerMonth": null,
+      "status": "free during beta",
+      "url": "https://blaxel.ai/pricing",
+      "quote": "Free during beta"
+    },
+    {
+      "item": "Seats",
+      "priceUsdPerMonth": null,
+      "status": "not published",
+      "url": "https://blaxel.ai/pricing",
+      "quote": "Usage-based pricing with infinite scalability.",
+      "notes": "Workspace roles are admin, member and viewer, but no per-user or per-seat price appears on the pricing page."
+    }
+  ],
+  "freeTier": {
+    "type": "promotional credits plus a free tier",
+    "amountUsd": 200,
+    "amountIsMaximum": true,
+    "limits": "Up to $200 in free credits; Tier 0 allows 10 concurrent sandboxes and caps sandbox lifetime at 7 days.",
+    "url": "https://blaxel.ai/pricing",
+    "quote": "Up to $200 in free credits",
+    "tierQuote": "Tier 0 | Free | 10",
+    "notes": "'Up to' is the only published figure; the actual grant per account and what happens at exhaustion are not documented on the pricing page."
+  },
+  "diffs": [
+    {
+      "field": "plans[Tier 0].limits",
+      "ours": "No per-tier sandbox size cap was published; custom plans go to 256 GB RAM.",
+      "battleships": "Tier 0 max 2 vCPU / 4 GiB, sizes 2 GB and 4 GB, flagged as not re-verified.",
+      "live": "Still no per-tier size table; the pricing page says to view all tiers in the console and lists only sandbox counts.",
+      "url": "https://blaxel.ai/pricing",
+      "quote": "Tier 0 | Free | 10"
+    },
+    {
+      "field": "plans[].monthlyFeeUsd",
+      "ours": "Described Tier 1 and Tier 2 as $20/month and $50/month.",
+      "battleships": "Encodes fee 20 and 50 but marks fee_is_credit true.",
+      "live": "Treats the Tier 1 and Tier 2 amounts as top-ups deposited into the wallet rather than as fees.",
+      "url": "https://docs.blaxel.ai/Security/Quotas.md",
+      "quote": "Funds added to meet a tier requirement are deposited directly into your account balance."
+    },
+    {
+      "field": "compute.idleTimer",
+      "ours": "Flagged a conflict: the pricing FAQ says about 5 seconds, the sandbox docs say about 15 seconds.",
+      "battleships": "Keeps 15 seconds and notes the 5-second claim.",
+      "live": "Both claims are still live on their respective pages, so the conflict is unresolved.",
+      "url": "https://blaxel.ai/pricing",
+      "quote": "Sandboxes scale to zero after about 5 seconds of inactivity and resume from standby in roughly 25ms"
+    },
+    {
+      "field": "compute.billingIncrement",
+      "ours": "Per-second metering implied by the per-GB-second rate.",
+      "battleships": "Minimum billed seconds per resume listed as undocumented.",
+      "live": "The billing doc states compute runtime charges are measured in GB-seconds, which confirms sub-minute metering but not a minimum increment.",
+      "url": "https://docs.blaxel.ai/knowledge-base/configuration-and-operation/understanding-sandbox-active-vs-standby-states-and-billing.md",
+      "quote": "measured in GB-seconds"
+    },
+    {
+      "field": "storage.snapshotStorage.billedOn",
+      "ours": "$0.20/GB-month with the billable size not established.",
+      "battleships": "Assumes the billable snapshot size is roughly allocated memory (2 GB standby for a month = $0.40).",
+      "live": "Neither the pricing page nor the standby doc says whether the GB figure is allocated RAM, written bytes, or both.",
+      "url": "https://blaxel.ai/pricing",
+      "quote": "$0.20 / GB · month"
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "Run sandbox workloads as a non-root user",
+      "url": "https://docs.blaxel.ai/Sandboxes/Non-root-user.md"
+    },
+    "sizes-regions": {
+      "title": "Regions",
+      "url": "https://docs.blaxel.ai/Infrastructure/Regions.md"
+    },
+    "lifecycle": {
+      "title": "Sandboxes",
+      "url": "https://docs.blaxel.ai/Sandboxes/Overview.md"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots and forking",
+      "url": "https://docs.blaxel.ai/Sandboxes/Fork.md"
+    },
+    "storage": {
+      "title": "Volumes for sandboxes",
+      "url": "https://docs.blaxel.ai/Sandboxes/Volumes.md"
+    },
+    "idle-timers": {
+      "title": "Standby control",
+      "url": "https://docs.blaxel.ai/Sandboxes/Standby-control.md"
+    },
+    "reaching-it": {
+      "title": "Real-time previews",
+      "url": "https://docs.blaxel.ai/Sandboxes/Preview-url.md"
+    },
+    "custom-domains": {
+      "title": "Custom domains",
+      "url": "https://docs.blaxel.ai/Infrastructure/Custom-domains.md"
+    },
+    "outbound-network": {
+      "title": "Domain filtering",
+      "url": "https://docs.blaxel.ai/Sandboxes/Proxy-domains.md"
+    },
+    "keys-secrets": {
+      "title": "Proxy routing with secrets injection",
+      "url": "https://docs.blaxel.ai/Sandboxes/Proxy-secrets-injection.md"
+    },
+    "ways-to-drive": {
+      "title": "Blaxel CLI overview",
+      "url": "https://docs.blaxel.ai/cli-reference/introduction.md"
+    },
+    "built-in-agents": {
+      "title": "Agents Hosting",
+      "url": "https://docs.blaxel.ai/Agents/Overview.md"
+    },
+    "teams-accounts": {
+      "title": "Workspaces, users and roles",
+      "url": "https://docs.blaxel.ai/Security/Workspace-access-control.md"
+    },
+    "billing-models": {
+      "title": "Pricing",
+      "url": "https://blaxel.ai/pricing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing",
+      "url": "https://blaxel.ai/pricing"
+    },
+    "quickstart": {
+      "title": "Get started",
+      "url": "https://docs.blaxel.ai/Get-started.md"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://blaxel.ai/pricing"
+    }
+  },
+  "deploy": {
+    "targets": [
+      "Hermes Agent (NousResearch/hermes-agent)",
+      "OpenClaw"
+    ],
+    "oneClick": false,
+    "managedOption": false,
+    "officialTemplate": false,
+    "officialGuide": "OpenClaw only",
+    "manualRoute": [
+      "Create a sandbox with the Blaxel CLI or Python SDK and open a preview URL on the agent's port.",
+      "Connect to the sandbox terminal (bl connect sandbox) and install the agent with npm or its installer.",
+      "Run the agent's onboarding, attach a Volume for persistence, and set a TTL or lifecycle policy."
+    ],
+    "nonCoder": false,
+    "evidence": [
+      {
+        "claim": "Blaxel publishes an official OpenClaw walkthrough, and it is explicitly a manual install.",
+        "url": "https://docs.blaxel.ai/Tutorials/OpenClaw.md",
+        "quote": "OpenClaw can be manually installed and configured to run inside a Blaxel sandbox."
+      },
+      {
+        "claim": "The walkthrough needs a terminal, Python, the CLI and a model-provider key.",
+        "url": "https://docs.blaxel.ai/Tutorials/OpenClaw.md",
+        "quote": "a Python development environment"
+      },
+      {
+        "claim": "Agents Hosting, the managed agent product, caps a run at 15 minutes and so is not an always-on home for a personal agent.",
+        "url": "https://docs.blaxel.ai/Agents/Overview.md",
+        "quote": "Agents deployed on Blaxel Agents Hosting have a maximum runtime of 15 minutes."
+      },
+      {
+        "claim": "Preview URLs can be created from the Console, which is the one useful no-terminal step.",
+        "url": "https://docs.blaxel.ai/Sandboxes/Preview-url.md",
+        "quote": "You can create a preview URL for a sandbox from the Blaxel Console"
+      }
+    ],
+    "notes": "No Hermes Agent guide or template was found in Blaxel's documentation index. The OpenClaw guide is a developer tutorial, not a one-click deploy: it assumes a terminal, a Python environment and a model API key. A non-coder can create a sandbox and a preview URL in the console but cannot install or configure the agent there."
+  }
+}

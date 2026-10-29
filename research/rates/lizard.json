@@ -1,0 +1,426 @@
+{
+  "id": "lizard",
+  "name": "Lizard",
+  "checkedOn": "2026-10-29",
+  "products": [
+    "Lizard Sandboxes: Firecracker microVMs sold in three fixed sizes",
+    "Lizard app platform: deploy services, Managed Postgres/Redis, object storage and one-click app templates"
+  ],
+  "plans": [
+    {
+      "name": "Pro",
+      "monthlyFeeUSD": 19,
+      "includedUsage": "$19/month of usage credits across apps, databases, sandboxes, storage and egress",
+      "limits": {
+        "maxConcurrent": 100,
+        "maxSessionLength": "No expiry by default from the API/dashboard; SDK and CLI default to 5 minutes; explicit lifetime up to 2147483647 ms",
+        "maxSize": "Large: 8 vCPU / 16 GB RAM / 50 GB disk"
+      },
+      "url": "https://lizard.build/pricing",
+      "quote": "Pro costs $19 a month and includes $19 in monthly credits for the whole platform: apps, databases, Sandboxes, storage and egress.",
+      "limitsSource": {
+        "url": "https://lizard.build/pricing",
+        "quote": "Up to 100 Sandboxes at once"
+      }
+    },
+    {
+      "name": "Pro trial",
+      "monthlyFeeUSD": 0,
+      "includedUsage": "$5 of trial usage for 7 days; card required, nothing charged at start",
+      "limits": {
+        "maxConcurrent": 5,
+        "maxSessionLength": "Same lifetime rules as Pro",
+        "maxSize": "Small only (2 vCPU / 4 GB), US regions only"
+      },
+      "url": "https://lizard.build/docs/platform/billing",
+      "quote": "Pro starts with a 7-day trial that includes $5 of usage. You add a card to start it",
+      "limitsSource": {
+        "url": "https://lizard.build/docs/platform/limits",
+        "quote": "Pro trial | 5 | 6 | 30 | 100"
+      }
+    },
+    {
+      "name": "Enterprise",
+      "monthlyFeeUSD": "custom",
+      "includedUsage": "Per contract; invoiced monthly",
+      "limits": {
+        "maxConcurrent": "per workspace, set by agreement",
+        "maxSessionLength": "per agreement",
+        "maxSize": "custom"
+      },
+      "url": "https://lizard.build/docs/platform/billing",
+      "quote": "Enterprise accounts pay as you go and get an invoice each month for the month before. Rates, limits and payment terms follow your contract."
+    }
+  ],
+  "compute": {
+    "model": "fixed sizes for sandboxes; per-resource metering for apps (not sandboxes)",
+    "cpuBilledOn": "allocated (the whole size, including idle time)",
+    "billingIncrement": "1 second",
+    "minimum": "No minimum charge published",
+    "sizes": [
+      {
+        "name": "Small",
+        "vcpu": 2,
+        "ramGiB": 4,
+        "includedDiskGiB": 5,
+        "hourlyUSD": 0.0162,
+        "monthlyUSD": 11.83,
+        "url": "https://lizard.build/docs/platform/limits",
+        "quote": "Small | 2 vCPU / 4 GB | 5 GB | $0.0162 per hour"
+      },
+      {
+        "name": "Medium",
+        "vcpu": 4,
+        "ramGiB": 8,
+        "includedDiskGiB": 20,
+        "hourlyUSD": 0.0324,
+        "monthlyUSD": 23.65,
+        "url": "https://lizard.build/docs/platform/limits",
+        "quote": "Medium (default outside the trial) | 4 vCPU / 8 GB | 20 GB | $0.0324 per hour"
+      },
+      {
+        "name": "Large",
+        "vcpu": 8,
+        "ramGiB": 16,
+        "includedDiskGiB": 50,
+        "hourlyUSD": 0.0648,
+        "monthlyUSD": 47.3,
+        "url": "https://lizard.build/docs/platform/limits",
+        "quote": "Large | 8 vCPU / 16 GB | 50 GB | $0.0648 per hour"
+      }
+    ],
+    "rates": [
+      {
+        "class": "apps, databases and other platform resources (not sandboxes)",
+        "resource": "vCPU",
+        "usdPerVcpuHour": 0.025,
+        "originalFigure": "$0.000006948 per vCPU-second; $18.26 per vCPU/month",
+        "url": "https://lizard.build/docs/platform/billing",
+        "quote": "CPU | $0.000006948 per vCPU-second"
+      },
+      {
+        "class": "apps, databases and other platform resources (not sandboxes)",
+        "resource": "RAM",
+        "usdPerGiBRamHour": 0.0125,
+        "originalFigure": "$0.000003474 per GB-second; $9.13 per GB/month",
+        "url": "https://lizard.build/docs/platform/billing",
+        "quote": "Memory | $0.000003474 per GB-second"
+      }
+    ],
+    "notes": [
+      {
+        "claim": "Sandboxes bill per second while running, including idle time.",
+        "url": "https://lizard.build/pricing",
+        "quote": "Running sandboxes are billed per second, including idle time."
+      },
+      {
+        "claim": "Monthly figures on the page assume 730 running hours.",
+        "url": "https://lizard.build/pricing",
+        "quote": "Monthly prices assume 730 hours of running time. You pay per second."
+      },
+      {
+        "claim": "CPU and memory are included in the size price; volumes are extra.",
+        "url": "https://lizard.build/docs/platform/limits",
+        "quote": "CPU and memory are included in the price. Persistent Volumes are billed separately."
+      },
+      {
+        "claim": "Paused sandbox compute is $0.",
+        "url": "https://lizard.build/pricing",
+        "quote": "A successful pause stops compute charges; Persistent Volumes storage is billed separately."
+      },
+      {
+        "claim": "Older sandboxes without a size keep usage-based billing.",
+        "url": "https://lizard.build/sandboxes",
+        "quote": "Older sandboxes without a size keep their original usage-based billing."
+      },
+      {
+        "claim": "The app rates are much higher than the flat sandbox rates; they are different products, not a second price for a sandbox.",
+        "url": "https://lizard.build/docs/platform/billing",
+        "quote": "Apps, Managed Postgres and Managed Redis use these rates. Sandboxes have a flat hourly price for each size"
+      }
+    ]
+  },
+  "storage": {
+    "model": "local disk included in the sandbox size; separate Persistent Volumes at /workspace billed per GB-month on used space; snapshots have no published storage rate",
+    "includedDisk": {
+      "value": "5 GB (Small), 20 GB (Medium), 50 GB (Large)",
+      "url": "https://lizard.build/docs/platform/limits",
+      "quote": "Small | 2 vCPU / 4 GB | 5 GB | $0.0162 per hour"
+    },
+    "volumes": {
+      "usdPerGiBMonth": 0.14,
+      "usdPerGiBSecond": 5.4e-08,
+      "billingBasis": "used space, not allocation; continues while attached or detached",
+      "sizeRange": "1-50 GB per volume, 200 GB allocated per workspace",
+      "url": "https://lizard.build/docs/platform/billing",
+      "quote": "Persistent Volumes | $0.000000054 per GB-second"
+    },
+    "billedWhilePaused": {
+      "value": "Sandbox compute is $0; Persistent Volumes continue to bill. The paused sandbox's own disk and memory have no published price.",
+      "url": "https://lizard.build/pricing",
+      "quote": "A successful pause stops compute charges; Persistent Volumes storage is billed separately."
+    },
+    "snapshots": {
+      "value": "not published: restores are priced, stored snapshots are not",
+      "url": "https://lizard.build/docs/sandboxes/quickstart",
+      "quote": "Each restore runs at the source's size and bills at that size's hourly price; `size` does not apply to a restore."
+    },
+    "retention": [
+      {
+        "case": "Paused sandbox",
+        "value": "Kept as a checkpoint on the platform; no reaping period published. A failed resume leaves the sandbox paused with its checkpoint.",
+        "url": "https://lizard.build/docs/sandboxes/quickstart",
+        "quote": "If a resume fails, the sandbox stays paused with its checkpoint; call `resume()` again."
+      },
+      {
+        "case": "Stopped (killed or expired) sandbox",
+        "value": "Disk deleted immediately; only Persistent Volume files and snapshots survive",
+        "url": "https://lizard.build/docs/sandboxes",
+        "quote": "A stop (kill or expiration) deletes the sandbox's disk: only files on an attached Persistent Volume at `/workspace` and the snapshots you took remain."
+      },
+      {
+        "case": "Deleted resources",
+        "value": "No trash or recycle bin",
+        "url": "https://lizard.build/docs/platform/storage-and-recovery",
+        "quote": "Sandboxes, their volumes and snapshots have no trash."
+      }
+    ]
+  },
+  "egress": {
+    "sandbox": {
+      "usdPerGiB": null,
+      "usdPerGiBWithinAllowance": 0,
+      "overageUSDPerGiB": null,
+      "included": "2 TB per account over a rolling 30 days, shared across sandboxes",
+      "overage": "not published; contact Lizard before exceeding the allowance",
+      "billingRule": "No per-GB charge applies inside the included 2 TB. This is not an unlimited free egress rate: the allowance is capped, and no overage price is published.",
+      "url": "https://lizard.build/docs/platform/limits",
+      "quote": "Sandbox egress has no separate per-GB charge. The included allowance is 2 TB per account over a rolling 30 days, shared across the account's sandboxes."
+    },
+    "apps": {
+      "usdPerGiB": 0.045,
+      "note": "from the first byte; counts toward the $19 included usage",
+      "url": "https://lizard.build/docs/platform/billing",
+      "quote": "Outgoing traffic | $0.045 per GB, from the first byte"
+    }
+  },
+  "other": [
+    {
+      "item": "Seats",
+      "value": "None",
+      "url": "https://lizard.build/pricing",
+      "quote": "Seat fees | None"
+    },
+    {
+      "item": "Public IPv4 / static egress IP",
+      "value": "No such product; inbound is HTTPS preview URLs, outbound has no static IP",
+      "url": "https://lizard.build/docs/sandboxes/preview-urls",
+      "quote": "You get `https://<sandbox-id>-3000.sandbox.<region>.onlizard.com/?lizard_token=…`"
+    },
+    {
+      "item": "Spending cap",
+      "value": "None; overage auto-charges in steps ($20, then $100, $200, $400, $1,000)",
+      "url": "https://lizard.build/docs/platform/billing",
+      "quote": "There is no spending cap."
+    },
+    {
+      "item": "Managed Object Storage",
+      "value": "$0.0135 per GB-month",
+      "url": "https://lizard.build/pricing",
+      "quote": "Managed Object Storage | $0.0135 per GB/month"
+    },
+    {
+      "item": "Custom domains",
+      "value": "Available for app services, not for sandbox preview URLs",
+      "url": "https://lizard.build/docs/networking",
+      "quote": "Lizard returns the DNS records to create (a `CNAME` for the hostname and a `TXT` record for verification)."
+    },
+    {
+      "item": "Team members",
+      "value": "Unlimited, no seat fee",
+      "url": "https://lizard.build/pricing",
+      "quote": "Unlimited team members"
+    }
+  ],
+  "freeTier": {
+    "value": "No free tier. A 7-day trial with $5 of usage, card required, Small size only and US regions only, 5 sandboxes at once, one trial per account and per card.",
+    "url": "https://lizard.build/docs/platform/billing",
+    "quote": "Pro starts with a 7-day trial that includes $5 of usage. You add a card to start it; Apple Pay works too. Nothing is charged when the trial starts."
+  },
+  "diffs": [
+    {
+      "field": "fork copy count",
+      "ours": "1 to 100 copies",
+      "battleships": "1 to 10",
+      "live": "1 to 100",
+      "url": "https://lizard.build/docs/sandboxes/sdk-reference",
+      "quote": "Copy a running sandbox 1 to 100 times, memory and processes included; each copy counts toward your running-sandbox limit."
+    },
+    {
+      "field": "whole disk survives a pause",
+      "ours": "yes, the whole disk including packages outside /workspace",
+      "battleships": "whole_disk: false",
+      "live": "yes",
+      "url": "https://lizard.build/docs/sandboxes",
+      "quote": "The whole disk, including packages installed outside `/workspace`, plus memory and running processes"
+    },
+    {
+      "field": "spending cap",
+      "ours": "none",
+      "battleships": "spend_limits: null",
+      "live": "none",
+      "url": "https://lizard.build/docs/platform/billing",
+      "quote": "There is no spending cap."
+    },
+    {
+      "field": "MCP server",
+      "ours": "hosted MCP server documented",
+      "battleships": "mcp_server: null",
+      "live": "Lizard MCP documented at a hosted Streamable HTTP endpoint",
+      "url": "https://lizard.build/docs/agents",
+      "quote": "Lizard MCP lets ChatGPT, Claude and other MCP clients manage your Lizard projects"
+    },
+    {
+      "field": "custom images",
+      "ours": "no custom template upload; snapshots act as templates",
+      "battleships": "custom_image: true",
+      "live": "no custom template upload",
+      "url": "https://lizard.build/docs/sandboxes",
+      "quote": "The public CLI does not provide a custom-template upload flow."
+    },
+    {
+      "field": "included usage on Pro",
+      "ours": "$19 of usage included",
+      "battleships": "included_usd: 0 (fee_is_credit: true)",
+      "live": "$19 in monthly credits",
+      "url": "https://lizard.build/pricing",
+      "quote": "Pro costs $19 a month and includes $19 in monthly credits for the whole platform"
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "Sandboxes — Firecracker microVM, own kernel, templates",
+      "url": "https://lizard.build/docs/sandboxes#runtime-and-templates"
+    },
+    "sizes-regions": {
+      "title": "Limits — sandbox sizes and regions",
+      "url": "https://lizard.build/docs/platform/limits#sandbox-sizes"
+    },
+    "lifecycle": {
+      "title": "Sandboxes — lifecycle, pause/resume, kill",
+      "url": "https://lizard.build/docs/sandboxes#lifecycle"
+    },
+    "snapshots-forks": {
+      "title": "Quickstart — pause, resume and snapshots",
+      "url": "https://lizard.build/docs/sandboxes/quickstart#pause-and-resume"
+    },
+    "storage": {
+      "title": "Persistent Volumes — keep /workspace across runs",
+      "url": "https://lizard.build/docs/sandboxes/volumes"
+    },
+    "idle-timers": {
+      "title": "Limits — lifetime is a deadline, not an idle timer",
+      "url": "https://lizard.build/docs/platform/limits"
+    },
+    "reaching-it": {
+      "title": "Preview URLs — HTTPS per port with an access token",
+      "url": "https://lizard.build/docs/sandboxes/preview-urls"
+    },
+    "custom-domains": {
+      "title": "Networking and custom domains — app services, not sandbox preview URLs",
+      "url": "https://lizard.build/docs/networking"
+    },
+    "outbound-network": {
+      "title": "Limits — sandbox egress allowance",
+      "url": "https://lizard.build/docs/platform/limits#sandbox-egress"
+    },
+    "keys-secrets": {
+      "title": "Variables and secrets — scoping and precedence",
+      "url": "https://lizard.build/docs/variables"
+    },
+    "ways-to-drive": {
+      "title": "Sandboxes dashboard — create and manage without code",
+      "url": "https://lizard.build/docs/sandboxes/dashboard"
+    },
+    "built-in-agents": {
+      "title": "CLI agents — Claude Code, Codex, OpenCode, Pi and Prime",
+      "url": "https://lizard.build/docs/cli/agents"
+    },
+    "teams-accounts": {
+      "title": "Workspace CLI — members and workspace limits",
+      "url": "https://lizard.build/docs/cli/workspace"
+    },
+    "billing-models": {
+      "title": "Billing — Pro, trial, usage rates and overage",
+      "url": "https://lizard.build/docs/platform/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Billing — trial terms",
+      "url": "https://lizard.build/docs/platform/billing#trial"
+    },
+    "quickstart": {
+      "title": "Sandboxes quickstart",
+      "url": "https://lizard.build/docs/sandboxes/quickstart"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://lizard.build/pricing"
+    }
+  },
+  "deploy": {
+    "hermes": {
+      "route": "not found as a one-click or documented route. A sandbox can host it manually: create a sandbox (dashboard, CLI or SDK), install Hermes Agent in its terminal, keep the process running, and expose its port.",
+      "oneClickOrManaged": false,
+      "officialTemplateOrGuide": "not found: the template catalog lists only n8n, Grafana and OpenClaw",
+      "manualSteps": "1) Create a sandbox (dashboard New Sandbox, or `lizard sandbox create`). 2) Open the Terminal tab. 3) Install Hermes Agent and its runtime. 4) Add the model key. 5) Run it as a long-lived process. 6) exposePort for its web UI. 7) Pause or kill it when done; use a Persistent Volume for files.",
+      "nonCoderFromDashboard": "Partly. The dashboard can create a sandbox and open a terminal without code, but the Hermes install itself is typed commands; there is no guided template.",
+      "urls": [
+        "https://lizard.build/docs/sandboxes/dashboard",
+        "https://lizard.build/docs/sandboxes/quickstart"
+      ],
+      "quotes": [
+        {
+          "url": "https://lizard.build/docs/sandboxes/dashboard",
+          "quote": "The dashboard lets you create and manage Sandboxes without code."
+        },
+        {
+          "url": "https://lizard.build/docs/sandboxes/dashboard",
+          "quote": "The Terminal tab opens a shell in a running sandbox."
+        }
+      ]
+    },
+    "openclaw": {
+      "route": "One-click template on the app platform: Deploy OpenClaw provisions the gateway, generates an auth token, and gives it a public HTTPS domain.",
+      "oneClickOrManaged": true,
+      "officialTemplateOrGuide": "Yes: https://lizard.build/deploy/openclaw--openclaw",
+      "manualSteps": "Click Deploy Now, wait for the build, then read the generated gateway token from Dashboard → Logs and open the HTTPS domain.",
+      "nonCoderFromDashboard": "Yes. The template is deployed from the browser; no terminal is required to get it running.",
+      "urls": [
+        "https://lizard.build/deploy/openclaw--openclaw",
+        "https://lizard.build/deploy"
+      ],
+      "quotes": [
+        {
+          "url": "https://lizard.build/deploy/openclaw--openclaw",
+          "quote": "On Lizard, all of the above happens when you click Deploy — the database is provisioned and its credentials are wired into the app's environment automatically."
+        },
+        {
+          "url": "https://lizard.build/deploy/openclaw--openclaw",
+          "quote": "This template's startup script generates a random gateway token on boot and prints it to the deploy logs, so it comes up reachable and authenticated on the first try."
+        }
+      ]
+    }
+  },
+  "limitsSources": {
+    "maxSessionLength": {
+      "value": "No expiry by default from API/dashboard; SDK/CLI default 5 minutes; max 2147483647 ms",
+      "url": "https://lizard.build/docs/platform/limits",
+      "quote": "The CLI also defaults to five minutes; the dashboard defaults to no expiration. Commands do not reset the deadline."
+    },
+    "maxSize": {
+      "value": "Large: 8 vCPU / 16 GB / 50 GB disk",
+      "url": "https://lizard.build/docs/platform/limits",
+      "quote": "Large | 8 vCPU / 16 GB | 50 GB | $0.0648 per hour"
+    }
+  }
+}

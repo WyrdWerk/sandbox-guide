@@ -1,16 +1,18 @@
 ---
 import type { FeatureRow } from "../data/schema";
-import { providerById, tagClass } from "../lib/data";
+import { docLinks, providerById, tagClass } from "../lib/data";
 import Badge from "./Badge.astro";
 import Quote from "./Quote.astro";
 
 interface Props {
   rows: FeatureRow[];
+  /** The feature these rows belong to, for links into each provider's own docs. */
+  feature?: string;
   caption: string;
   figureLabel: string;
 }
 
-const { rows, caption, figureLabel } = Astro.props;
+const { rows, caption, figureLabel, feature } = Astro.props;
 // Each provider's quote sits in its row behind a one-line summary. It stays in the HTML
 // (and in find-in-page); only its display is folded.
 ---
@@ -29,6 +31,7 @@ const { rows, caption, figureLabel } = Astro.props;
     rows.map((row) => {
       const provider = providerById.get(row.provider);
       const pending = !provider || provider.status === "pending";
+      const doc = feature ? docLinks[row.provider]?.[feature] : undefined;
       return (
         <tbody>
           <tr>
@@ -49,6 +52,11 @@ const { rows, caption, figureLabel } = Astro.props;
                   ? "Research pending. No claims are shown until the profile is finished."
                   : row.note}
               </span>
+              {!pending && doc && (
+                <a class="compare__doc" href={doc.url} rel="noreferrer noopener">
+                  {provider?.name ?? row.provider} docs: {doc.title} ↗
+                </a>
+              )}
               {!pending && row.source && (
                 <details class="compare__source">
                   <summary>

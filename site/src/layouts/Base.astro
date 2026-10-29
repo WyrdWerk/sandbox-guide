@@ -14,8 +14,10 @@ const isCurrent = (href: string) =>
   href === "/" ? path === "/" : path.startsWith(href);
 
 const nav = [
+  { href: "/use-cases/", label: "Use cases" },
   { href: "/features/", label: "Features" },
   { href: "/compare/", label: "Compare" },
+  { href: "/costs/", label: "Costs" },
   { href: "/providers/", label: "Providers" },
   { href: "/changes/", label: "What changed", short: "Changes" },
   { href: "/how-we-checked/", label: "How we checked", short: "Method" },
@@ -90,9 +92,10 @@ const nav = [
           <a href="/how-we-checked/">How we checked</a>.
         </p>
         <p class="sources__note">
-          {providers.length} providers, {features.length} features. For your own workload pricing, see{" "}
-          <a href="https://battleships.dev" rel="noreferrer noopener">battleships.dev</a>, which is
-          built by the Boat team and is a price-comparison dataset rather than a guide.
+          {providers.length} providers, {features.length} features. The cost calculator follows the approach of{" "}
+          <a href="https://battleships.dev" rel="noreferrer noopener">battleships.dev</a>, the price-comparison
+          dataset built by the Boat team, with thanks; its rates here are re-read from each provider's own pages.{" "}
+          <a href="/costs/how-it-works/#battleships">How the two differ</a>.
         </p>
       </div>
     </footer>

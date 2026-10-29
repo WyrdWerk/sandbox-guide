@@ -1,0 +1,901 @@
+{
+  "checkedOn": "2026-10-29",
+  "usecases": [
+    {
+      "id": "hermes-agent",
+      "title": "Run a Hermes agent",
+      "kicker": "Personal agent",
+      "question": "I want a personal assistant that answers me on Telegram, remembers what I tell it and runs jobs on a schedule.",
+      "standfirst": "Hermes is a personal AI agent you host yourself. It needs a small machine that stays on and keeps its files. Only one of the fifteen providers offers it in one click; most can run it if you can follow terminal instructions; a few are a poor fit for an assistant that never sleeps.",
+      "preset": "personal",
+      "whatItIs": [
+        "[Hermes Agent](https://github.com/NousResearch/hermes-agent) is an open-source (MIT) assistant from Nous Research. You talk to it from Telegram, Slack, WhatsApp, email and [20+ other apps](https://hermes-agent.nousresearch.com/docs/), it keeps a memory of you between conversations, and it writes itself reusable skills from what it does.",
+        "The model (Claude, GPT, an open model) runs elsewhere and is billed by its own provider. What you host is the small program that holds your memory, your logins and your schedule, and that runs commands, browses and edits files for you. That program is what this page is about.",
+        "Its own README says to run it \"on a $5 VPS, a GPU cluster, or serverless infrastructure that costs nearly nothing when idle\". A sandbox provider is one of those choices: the difference is how easy it is to set up, whether it is allowed to stay on, and what it costs when it is waiting."
+      ],
+      "needs": [
+        {
+          "label": "Machine size",
+          "value": "At least 1 CPU and 1 GB of memory; 2 CPUs and 2 to 4 GB recommended, and at least 2 GB if it uses the browser. 2 vCPU / 4 GiB / 20 GiB leaves room for Chromium and a growing memory.",
+          "source": "https://hermes-agent.nousresearch.com/docs/user-guide/docker#resource-limits"
+        },
+        {
+          "label": "Does it stay on?",
+          "value": "Yes, usually. By default it fetches Telegram messages by asking Telegram every few seconds, and the docs say plainly that \"a polling bot can never sleep\". It also runs your scheduled jobs every 60 seconds. Webhook mode lets it sleep on hosts that wake on an incoming request, but scheduled jobs then do not fire while it sleeps.",
+          "source": "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram"
+        },
+        {
+          "label": "What must survive a restart",
+          "value": "Everything in ~/.hermes: memory, past conversations, skills, scheduled jobs, API keys and chat logins. A provider that deletes the disk when the machine stops loses all of it.",
+          "source": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
+        },
+        {
+          "label": "Browser, Docker, GPU",
+          "value": "A browser is optional and is the hungriest part. Docker is optional. A GPU is only needed if you run the model yourself.",
+          "source": "https://hermes-agent.nousresearch.com/docs/reference/faq"
+        },
+        {
+          "label": "How busy it is",
+          "value": "Mostly waiting. Battleships' always-on assistant workload averages about 6% CPU, with peaks near 100% when it browses or runs a command. That is why providers that charge only for CPU actually used come out cheap here.",
+          "source": "https://battleships.dev/data/rankings/employees.json"
+        }
+      ],
+      "twoWays": {
+        "title": "Two ways to use a sandbox with Hermes",
+        "body": [
+          "**Host Hermes on the machine.** Hermes itself lives in the sandbox: it holds your memory, answers your messages and runs around the clock. This is what most people mean, and it needs a provider that lets a machine stay on and keeps its disk.",
+          "**Keep Hermes where it is, send its commands to a sandbox.** Hermes runs on your laptop or server, and only the shell commands it decides to run go to a cloud sandbox, so a mistake cannot damage your own machine. Hermes has this built in for [Modal, Daytona and Vercel Sandbox](https://hermes-agent.nousresearch.com/docs/user-guide/configuration), and Fly.io publishes the same for [Sprites](https://docs.fly.io/sprites/integrations/agent-plugins.md). It is cheap, because the sandbox only runs while a command does, but it is not hosting: your own machine still has to be on."
+        ]
+      },
+      "routes": [
+        {
+          "provider": "agent37",
+          "tier": "one-click",
+          "noTerminal": "yes",
+          "what": "Pick Hermes on the Personal plans and it is set up with a dashboard, task board, web terminal and chat channels. The free plan sleeps when idle; paid plans stay up between scheduled jobs.",
+          "link": {
+            "title": "Agent 37 Personal",
+            "url": "https://www.agent37.com/personal"
+          }
+        },
+        {
+          "provider": "boat",
+          "tier": "preinstalled",
+          "noTerminal": "no",
+          "what": "Hermes is already installed on every sandbox. Create one with auto-stop turned off, run the setup wizard over SSH, and keep the gateway running as a service.",
+          "link": {
+            "title": "Boat: always-on services",
+            "url": "https://docs.boat.dev/long-running-tasks/always-on-services"
+          }
+        },
+        {
+          "provider": "boxd",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "boxd documents the personal-assistant pattern: create a machine, install the assistant, turn off auto-hibernate (otherwise it sleeps after four quiet hours) and let chat apps reach it.",
+          "link": {
+            "title": "boxd: personal assistants",
+            "url": "https://docs.boxd.sh/use-cases/personal-assistants"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Nothing preinstalled and no guide. Create a sandbox with auto-stop off, run Hermes' installer over SSH, and keep the gateway running as a service.",
+          "link": {
+            "title": "Sandboxer: long-running tasks",
+            "url": "https://sandboxer.com/docs/long-running"
+          }
+        },
+        {
+          "provider": "runtime",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "Start a sandbox from the dashboard and you get a shell in the browser; install Hermes there and mark the sandbox persistent so it never idle-pauses. No Hermes guide.",
+          "link": {
+            "title": "Runtime: getting started",
+            "url": "https://withruntime.com/docs/start"
+          }
+        },
+        {
+          "provider": "instabox",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "The dashboard creates a machine and opens a browser terminal and desktop; installing Hermes and keeping it running is typed by hand. No Hermes template.",
+          "link": {
+            "title": "InstaBox: getting started",
+            "url": "https://instabox.sh/docs/start"
+          }
+        },
+        {
+          "provider": "lizard",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "The dashboard creates a sandbox and opens a terminal; Hermes is installed by hand. Lizard's one-click templates cover OpenClaw, not Hermes.",
+          "link": {
+            "title": "Lizard: sandbox quickstart",
+            "url": "https://lizard.build/docs/sandboxes/quickstart"
+          }
+        },
+        {
+          "provider": "morph",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Create a Devbox, install Hermes over SSH, and turn on wake-on-HTTP so it pauses between messages and wakes when one arrives.",
+          "link": {
+            "title": "Morph: Devboxes",
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started"
+          }
+        },
+        {
+          "provider": "e2b",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "E2B ships a ready-made hermes template you start from its command line. Sessions end after 24 hours on Pro and one hour on the free plan, so it suits Hermes doing tasks better than an assistant that never stops.",
+          "link": {
+            "title": "E2B: Hermes Agent",
+            "url": "https://docs.e2b.dev/agents/hermes"
+          }
+        },
+        {
+          "provider": "daytona",
+          "tier": "backend",
+          "noTerminal": "partly",
+          "what": "A built-in Hermes backend: Hermes on your own machine starts, stops and resumes a Daytona sandbox for its commands. Daytona's dashboard Playground opens a browser terminal if you want to host it there instead.",
+          "link": {
+            "title": "Hermes: Daytona backend",
+            "url": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
+          }
+        },
+        {
+          "provider": "modal",
+          "tier": "backend",
+          "noTerminal": "no",
+          "what": "A built-in Hermes backend for running its commands. Not an always-on host: Modal sandboxes end after 24 hours and cannot pause.",
+          "link": {
+            "title": "Hermes: Modal backend",
+            "url": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration#modal-backend"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "tier": "backend",
+          "noTerminal": "no",
+          "what": "Vercel publishes an official guide, but it is for the backend mode: Hermes stays on your computer and each task runs in a sandbox.",
+          "link": {
+            "title": "Vercel: Hermes",
+            "url": "https://vercel.com/docs/sandbox/ecosystem/hermes"
+          }
+        },
+        {
+          "provider": "sprites",
+          "tier": "backend",
+          "noTerminal": "no",
+          "what": "Fly.io markets Sprites for agents like Hermes, but its only official Hermes integration is the backend mode. Hosting Hermes inside a Sprite means registering it as a service, because a Sprite pauses about 30 seconds after activity stops.",
+          "link": {
+            "title": "Sprites: agent plugins",
+            "url": "https://docs.fly.io/sprites/integrations/agent-plugins.md"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Possible in a sandbox with a volume for its files, installed by hand. Blaxel's agent hosting caps a run at 15 minutes, so it is not the place for an always-on assistant.",
+          "link": {
+            "title": "Blaxel: get started",
+            "url": "https://docs.blaxel.ai/Get-started.md"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "tier": "none",
+          "noTerminal": "no",
+          "what": "Neither Cloudflare nor Hermes documents this. Cloudflare sandboxes also lose their disk when they stop, so memory would have to be saved elsewhere.",
+          "link": null
+        }
+      ],
+      "picks": [
+        {
+          "provider": "agent37",
+          "for": "If you do not want a terminal",
+          "why": "The only provider of the fifteen that sets up Hermes in one click. Plans run from $3.99 a month (1 vCPU / 4 GB / 8 GB, bring your own model key) to $29.99 (2 vCPU / 8 GB / 20 GB, with a built-in browser).",
+          "watch": "The free plan sleeps after 15 idle minutes. These Personal plans are a separate product from the Agent 37 Cloud machines the calculator prices.",
+          "link": "https://www.agent37.com/personal"
+        },
+        {
+          "provider": "boat",
+          "for": "If you can follow terminal steps",
+          "why": "Hermes is preinstalled on a full virtual machine. The small size running all month is $13.14 of usage, inside the $20 monthly plan.",
+          "watch": "Auto-stop is on by default, so create the machine with it turned off. A stopped machine's disk is kept for only 14 days, and there is no free plan.",
+          "link": "https://docs.boat.dev/long-running-tasks/always-on-services"
+        },
+        {
+          "provider": "runtime",
+          "for": "If you want to pay least for waiting",
+          "why": "It charges for CPU only while it works, so an assistant that mostly waits costs about $25 a month at 2 vCPU / 4 GiB, and a persistent sandbox never idle-pauses.",
+          "watch": "No Hermes guide, one US region, and storage keeps billing while the machine is stopped.",
+          "link": "https://withruntime.com/docs/pricing"
+        }
+      ],
+      "outside": "Hermes' own docs point to an ordinary virtual private server (\"a $5 VPS\") or Docker on a machine you own. Neither isolates the agent the way a sandbox does, and neither is set up for you.",
+      "features": [
+        "idle-timers",
+        "lifecycle",
+        "storage",
+        "reaching-it",
+        "keys-secrets",
+        "billing-models"
+      ],
+      "sources": [
+        {
+          "label": "Hermes Agent on GitHub",
+          "url": "https://github.com/NousResearch/hermes-agent"
+        },
+        {
+          "label": "Hermes docs",
+          "url": "https://hermes-agent.nousresearch.com/docs/"
+        },
+        {
+          "label": "Hermes: resource limits",
+          "url": "https://hermes-agent.nousresearch.com/docs/user-guide/docker#resource-limits"
+        },
+        {
+          "label": "Hermes: Telegram polling and webhooks",
+          "url": "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram"
+        },
+        {
+          "label": "Hermes: terminal backends",
+          "url": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
+        },
+        {
+          "label": "Battleships: always-on assistant workload (built by the Boat team)",
+          "url": "https://battleships.dev/data/presets.json"
+        }
+      ]
+    },
+    {
+      "id": "openclaw",
+      "title": "Run an OpenClaw agent",
+      "kicker": "Personal agent",
+      "question": "I want OpenClaw answering me on WhatsApp or Slack, with its own browser and memory, without keeping my laptop on.",
+      "standfirst": "OpenClaw is a self-hosted assistant built around one always-on gateway. It has more official hosting guides than Hermes: two of the fifteen providers deploy it in one click, and four more publish a guide or template.",
+      "preset": "personal",
+      "whatItIs": [
+        "[OpenClaw](https://docs.openclaw.ai/help/faq/what-is-openclaw) is an open-source assistant you run on your own infrastructure, for yourself or a team. It replies on the apps you already use, including WhatsApp, Slack, Telegram, Discord, Signal and iMessage, and can read files, run commands, browse and keep memory.",
+        "Its centre is the **Gateway**, which the docs call \"the always-on control plane\": one long-running program that holds every chat connection and hands messages to the agent. Hosting OpenClaw means hosting the Gateway.",
+        "Models run through their own APIs, so no GPU is needed. A team can share one Gateway, but the docs are clear that one Gateway is one trust domain: people who do not trust each other need separate ones."
+      ],
+      "needs": [
+        {
+          "label": "Machine size",
+          "value": "At least 1 core, 1 GB of memory and 500 MB of disk; 2 GB or more recommended. OpenClaw's Fly.io guide uses 2 shared CPUs and 2 GB. 2 vCPU / 4 GiB / 20 GiB gives the browser room.",
+          "source": "https://docs.openclaw.ai/install/raspberry-pi"
+        },
+        {
+          "label": "Does it stay on?",
+          "value": "Yes. The Gateway owns the chat connections, and Telegram uses outbound polling by default. Webhook mode needs a public HTTPS address that is always reachable.",
+          "source": "https://docs.openclaw.ai/concepts/architecture"
+        },
+        {
+          "label": "What must survive a restart",
+          "value": "~/.openclaw (config, a SQLite database and chat logins) and the agent's workspace (memory and personality files). Lose the WhatsApp credentials and you scan the QR code again.",
+          "source": "https://docs.openclaw.ai/help/faq/where-things-live-on-disk"
+        },
+        {
+          "label": "Browser, Docker, GPU",
+          "value": "A browser is optional; OpenClaw can drive its own Chrome profile. Docker is optional and tool sandboxing is off by default. No GPU for API models.",
+          "source": "https://docs.openclaw.ai/tools/browser"
+        },
+        {
+          "label": "How busy it is",
+          "value": "Mostly waiting: about 6% CPU on average in Battleships' always-on assistant workload, which names OpenClaw, with peaks near 100%.",
+          "source": "https://battleships.dev/data/presets.json"
+        }
+      ],
+      "routes": [
+        {
+          "provider": "agent37",
+          "tier": "one-click",
+          "noTerminal": "yes",
+          "what": "OpenClaw is one of the six agents on the Personal plans, set up in one click and driven from the browser.",
+          "link": {
+            "title": "Agent 37 Personal",
+            "url": "https://www.agent37.com/personal"
+          }
+        },
+        {
+          "provider": "lizard",
+          "tier": "one-click",
+          "noTerminal": "yes",
+          "what": "A Deploy OpenClaw template on Lizard's app platform builds the Gateway, creates its access token and gives it a public HTTPS address.",
+          "link": {
+            "title": "Lizard: Deploy OpenClaw",
+            "url": "https://lizard.build/deploy/openclaw--openclaw"
+          }
+        },
+        {
+          "provider": "daytona",
+          "tier": "guide",
+          "noTerminal": "partly",
+          "what": "OpenClaw publishes a Daytona guide, and OpenClaw is preinstalled in Daytona's default image. Create the sandbox with auto-stop off, connect over SSH and run onboarding.",
+          "link": {
+            "title": "OpenClaw on Daytona",
+            "url": "https://docs.openclaw.ai/install/daytona"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official, experimental template: one always-on container with its database copied to R2 storage. OpenClaw estimates roughly $40 to $50 a month. Setup is by command line with Wrangler.",
+          "link": {
+            "title": "OpenClaw on Cloudflare Containers",
+            "url": "https://docs.openclaw.ai/install/cloudflare"
+          }
+        },
+        {
+          "provider": "e2b",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "A ready-made openclaw template and a gateway guide. Sessions end after 24 hours on Pro, so staying on needs your own restart logic.",
+          "link": {
+            "title": "E2B: OpenClaw gateway",
+            "url": "https://docs.e2b.dev/agents/openclaw/openclaw-gateway"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "A Vercel walkthrough installs OpenClaw in a sandbox and links WhatsApp by QR code. Sessions end after 24 hours on Pro.",
+          "link": {
+            "title": "Vercel: OpenClaw in a sandbox",
+            "url": "https://vercel.com/kb/guide/running-openclaw-in-vercel-sandbox"
+          }
+        },
+        {
+          "provider": "blaxel",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official tutorial, which says the install is manual: a sandbox, a volume for its files, and onboarding in the terminal.",
+          "link": {
+            "title": "Blaxel: OpenClaw",
+            "url": "https://docs.blaxel.ai/Tutorials/OpenClaw.md"
+          }
+        },
+        {
+          "provider": "boat",
+          "tier": "preinstalled",
+          "noTerminal": "no",
+          "what": "The OpenClaw command is preinstalled but the Gateway does not start by itself. Turn auto-stop off and run the Gateway as a service.",
+          "link": {
+            "title": "Boat: always-on services",
+            "url": "https://docs.boat.dev/long-running-tasks/always-on-services"
+          }
+        },
+        {
+          "provider": "boxd",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "boxd's personal-assistant page is written around OpenClaw: install it, turn off bot protection so chat apps can reach it, and turn off auto-hibernate.",
+          "link": {
+            "title": "boxd: personal assistants",
+            "url": "https://docs.boxd.sh/use-cases/personal-assistants"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install OpenClaw in a sandbox with auto-stop off and run the Gateway as a service. No guide.",
+          "link": {
+            "title": "Sandboxer: long-running tasks",
+            "url": "https://sandboxer.com/docs/long-running"
+          }
+        },
+        {
+          "provider": "runtime",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "A browser shell from the dashboard, then a manual install in a persistent sandbox. No guide.",
+          "link": {
+            "title": "Runtime: getting started",
+            "url": "https://withruntime.com/docs/start"
+          }
+        },
+        {
+          "provider": "instabox",
+          "tier": "manual",
+          "noTerminal": "partly",
+          "what": "The dashboard creates a machine with a browser terminal and desktop; the install is typed by hand.",
+          "link": {
+            "title": "InstaBox: getting started",
+            "url": "https://instabox.sh/docs/start"
+          }
+        },
+        {
+          "provider": "sprites",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install it in a Sprite and register the Gateway as a service so it comes back after the Sprite pauses. No guide.",
+          "link": {
+            "title": "Sprites: quickstart",
+            "url": "https://docs.fly.io/sprites/quickstart.md"
+          }
+        },
+        {
+          "provider": "morph",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install it in a Devbox over SSH and expose its port. No guide.",
+          "link": {
+            "title": "Morph: Devboxes",
+            "url": "https://cloud.morph.so/docs/devboxes/getting-started"
+          }
+        },
+        {
+          "provider": "modal",
+          "tier": "none",
+          "noTerminal": "no",
+          "what": "Not documented by either side, and Modal sandboxes end after 24 hours.",
+          "link": null
+        }
+      ],
+      "picks": [
+        {
+          "provider": "agent37",
+          "for": "If you do not want a terminal",
+          "why": "One-click OpenClaw on the same Personal plans as Hermes, from $3.99 a month, with a built-in browser from the $29.99 plan.",
+          "watch": "The free plan sleeps after 15 idle minutes, and these plans are separate from the Cloud machines the calculator prices.",
+          "link": "https://www.agent37.com/personal"
+        },
+        {
+          "provider": "lizard",
+          "for": "If you want one click and a public address",
+          "why": "The Deploy OpenClaw template gives the Gateway an HTTPS address and a token from the browser, inside a $19 monthly plan that comes back as usage.",
+          "watch": "The template runs on Lizard's app platform, billed at $0.025 per vCPU-hour and $0.0125 per GB-hour, not at the sandbox sizes the calculator uses.",
+          "link": "https://lizard.build/deploy/openclaw--openclaw"
+        },
+        {
+          "provider": "daytona",
+          "for": "If you want OpenClaw's own guide",
+          "why": "OpenClaw documents Daytona itself, and the default image already has it installed. $200 of free compute covers the first month or so.",
+          "watch": "Each sandbox's disk is capped at 10 GiB, and a 2 vCPU / 4 GiB machine on all month is about $122.",
+          "link": "https://docs.openclaw.ai/install/daytona"
+        }
+      ],
+      "outside": "OpenClaw also documents ordinary hosts. Hostinger sells a one-click managed OpenClaw from $4.99 a month on a two-year term, renewing at $11.99. OpenClaw's Fly.io guide estimates $10 to $15 a month. Railway and Northflank have one-click templates with no price on the guide. Render's free tier sleeps after 15 minutes, which breaks an always-on Gateway.",
+      "features": [
+        "idle-timers",
+        "lifecycle",
+        "storage",
+        "reaching-it",
+        "custom-domains",
+        "keys-secrets"
+      ],
+      "sources": [
+        {
+          "label": "What is OpenClaw",
+          "url": "https://docs.openclaw.ai/help/faq/what-is-openclaw"
+        },
+        {
+          "label": "OpenClaw: Gateway architecture",
+          "url": "https://docs.openclaw.ai/concepts/architecture"
+        },
+        {
+          "label": "OpenClaw: where things live on disk",
+          "url": "https://docs.openclaw.ai/help/faq/where-things-live-on-disk"
+        },
+        {
+          "label": "OpenClaw: hosting guides",
+          "url": "https://docs.openclaw.ai/vps"
+        },
+        {
+          "label": "Hostinger OpenClaw",
+          "url": "https://www.hostinger.com/openclaw"
+        },
+        {
+          "label": "Battleships: always-on assistant workload (built by the Boat team)",
+          "url": "https://battleships.dev/data/presets.json"
+        }
+      ]
+    },
+    {
+      "id": "coding-agent",
+      "title": "Give a coding agent its own machine",
+      "kicker": "Coding agent",
+      "question": "I want Claude Code or Codex to work on my code in the cloud, not on my laptop.",
+      "standfirst": "A coding agent reads a repository, edits files and runs tests. In a sandbox, a mistake cannot touch your laptop, and the work carries on when the laptop is closed. Several providers ship Claude Code and Codex already installed.",
+      "preset": "coding",
+      "whatItIs": [
+        "Tools like [Claude Code](https://code.claude.com/docs/en/setup) and Codex run in a terminal: you give them a task, they read the code, change it and run commands to check their work. Running them in a cloud sandbox gives each one a disposable Linux machine with your repository on it.",
+        "Unlike a personal assistant, a coding agent does not need to stay on. It runs while you work and can stop at night, as long as the repository, its caches and the agent's login survive."
+      ],
+      "needs": [
+        {
+          "label": "Machine size",
+          "value": "Claude Code needs 4 GB of memory or more. Anthropic's own cloud sessions allow up to about 4 vCPU, 16 GB and 30 GB of disk. 4 vCPU / 8 GiB / 40 GiB covers the agent, tests and a few containers.",
+          "source": "https://code.claude.com/docs/en/cloud-environments"
+        },
+        {
+          "label": "Does it stay on?",
+          "value": "No. It runs during working hours; eight hours on 20 days is 160 hours a month.",
+          "source": "https://battleships.dev/data/presets.json"
+        },
+        {
+          "label": "What must survive a restart",
+          "value": "The repository and uncommitted work, the agent's login (~/.claude for Claude Code), and caches and Docker images if you want a fast start.",
+          "source": "https://code.claude.com/docs/en/setup"
+        },
+        {
+          "label": "Browser, Docker, GPU",
+          "value": "Docker helps when tests need databases or services. A browser matters only for checking web interfaces. No GPU.",
+          "source": "https://battleships.dev/data/presets.json"
+        },
+        {
+          "label": "How busy it is",
+          "value": "Mostly waiting on the model: about 4% CPU on average in Battleships' software-factory workload, with short peaks during builds.",
+          "source": "https://battleships.dev/data/rankings/fullstack.json"
+        }
+      ],
+      "routes": [
+        {
+          "provider": "boat",
+          "tier": "preinstalled",
+          "noTerminal": "no",
+          "what": "Seven coding agents on every sandbox, including Claude Code and Codex; boat prompt runs one for you.",
+          "link": {
+            "title": "Boat: harnesses and models",
+            "url": "https://docs.boat.dev/integrated-agents/harnesses-and-models"
+          }
+        },
+        {
+          "provider": "boxd",
+          "tier": "preinstalled",
+          "noTerminal": "no",
+          "what": "Every machine ships with Claude Code, Codex and OpenCode.",
+          "link": {
+            "title": "boxd: coding agents",
+            "url": "https://docs.boxd.sh/use-cases/coding-agents"
+          }
+        },
+        {
+          "provider": "sandboxer",
+          "tier": "preinstalled",
+          "noTerminal": "no",
+          "what": "Claude Code, Codex, OpenCode and others are installed on every machine.",
+          "link": {
+            "title": "Sandboxer: machines",
+            "url": "https://sandboxer.com/docs/machines"
+          }
+        },
+        {
+          "provider": "instabox",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "Claude Code and Codex come installed, with a desktop you can open in the browser.",
+          "link": {
+            "title": "InstaBox: limits and images",
+            "url": "https://instabox.sh/docs/limits"
+          }
+        },
+        {
+          "provider": "lizard",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "Choose the claude or codex template when creating a sandbox.",
+          "link": {
+            "title": "Lizard: sandboxes",
+            "url": "https://lizard.build/docs/sandboxes.md"
+          }
+        },
+        {
+          "provider": "agent37",
+          "tier": "one-click",
+          "noTerminal": "yes",
+          "what": "Claude Code and Codex are on the one-click Personal plans, on your own Anthropic or OpenAI account.",
+          "link": {
+            "title": "Agent 37 Personal",
+            "url": "https://www.agent37.com/personal"
+          }
+        },
+        {
+          "provider": "e2b",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official guide for running Claude Code, Codex and Amp in E2B sandboxes from code.",
+          "link": {
+            "title": "E2B: coding agents",
+            "url": "https://e2b.dev/docs/use-cases/coding-agents"
+          }
+        },
+        {
+          "provider": "daytona",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official guide for running Claude Code in a sandbox from the Daytona command line.",
+          "link": {
+            "title": "Daytona: Claude Code",
+            "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official guide: Claude Code edits a GitHub repository in a sandbox and returns a diff.",
+          "link": {
+            "title": "Cloudflare: Claude Code",
+            "url": "https://developers.cloudflare.com/sandbox/coding-agents/claude-code/"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "Each Claude Code session gets its own sandbox, through Vercel's agent harness.",
+          "link": {
+            "title": "Vercel: Claude Code",
+            "url": "https://vercel.com/docs/agent-harnesses/claude-code"
+          }
+        }
+      ],
+      "picks": [
+        {
+          "provider": "boat",
+          "for": "One machine per developer",
+          "why": "Claude Code and Codex preinstalled on a full VM with Docker. The 4 vCPU / 8 GB size for 160 hours is about $6 of usage, inside the $20 plan.",
+          "watch": "Auto-stop is on by default, which suits this job, and a stopped disk is kept for 14 days.",
+          "link": "https://docs.boat.dev/integrated-agents/harnesses-and-models"
+        },
+        {
+          "provider": "boxd",
+          "for": "If you want memory billed on use",
+          "why": "Three coding agents preinstalled, memory billed on what is actually in use, and a 100 GiB disk billed only for what is written.",
+          "watch": "CPU is billed on the full size while running, and the 4 vCPU size comes with 16 GiB.",
+          "link": "https://docs.boxd.sh/use-cases/coding-agents"
+        },
+        {
+          "provider": "e2b",
+          "for": "One fresh sandbox per task, from code",
+          "why": "Built for starting sandboxes from your own program, with an official coding-agent guide and pausing that keeps memory and files at no charge.",
+          "watch": "Disk is 10 GiB on the free plan and 20 GiB on Pro, and sessions longer than an hour need the $150 Pro plan.",
+          "link": "https://e2b.dev/docs/use-cases/coding-agents"
+        }
+      ],
+      "outside": "Anthropic runs Claude Code cloud sessions on its own machines for Claude subscribers, and OpenAI runs Codex Cloud for ChatGPT plans. Neither publishes a separate machine price on its docs page.",
+      "features": [
+        "isolation",
+        "snapshots-forks",
+        "lifecycle",
+        "built-in-agents",
+        "sizes-regions"
+      ],
+      "sources": [
+        {
+          "label": "Claude Code: setup",
+          "url": "https://code.claude.com/docs/en/setup"
+        },
+        {
+          "label": "Claude Code: cloud environments",
+          "url": "https://code.claude.com/docs/en/cloud-environments"
+        },
+        {
+          "label": "Claude Code: sandbox environments",
+          "url": "https://code.claude.com/docs/en/sandbox-environments"
+        },
+        {
+          "label": "Battleships: software-factory workload (built by the Boat team)",
+          "url": "https://battleships.dev/data/presets.json"
+        }
+      ]
+    },
+    {
+      "id": "code-interpreter",
+      "title": "Run code inside your own product",
+      "kicker": "Code interpreter",
+      "question": "My app lets users or an LLM run code, and I need somewhere safe to run it.",
+      "standfirst": "A code interpreter is a sandbox your application calls: send code, get back the output, the errors and any files. Each run is short and thrown away, so the price of a second of compute, how quickly a sandbox starts and how many can run at once matter more than anything else.",
+      "preset": "interpreter",
+      "whatItIs": [
+        "This is infrastructure you build into a product, not something your users log into. Your server asks the provider's API for a sandbox, runs the code, collects the result and throws the sandbox away.",
+        "The code is untrusted by definition, so isolation is the first question: whether each run gets its own kernel, and what it can reach on the network. The [isolation](/features/isolation/) and [outbound network](/features/outbound-network/) pages compare that."
+      ],
+      "needs": [
+        {
+          "label": "Machine size",
+          "value": "Small. Provider minimums run from 0.125 of a core and 128 MiB on Modal upwards. Battleships' interpreter workload uses 1 vCPU / 2 GiB / 5 GiB and fills 80% of that memory, so 2 vCPU / 4 GiB / 10 GiB is the safer size.",
+          "source": "https://modal.com/docs/guide/resources"
+        },
+        {
+          "label": "Does it stay on?",
+          "value": "No. Each run lasts seconds to minutes; 20,000 one-minute runs a month is about 650 a day.",
+          "source": "https://battleships.dev/data/presets.json"
+        },
+        {
+          "label": "What must survive a restart",
+          "value": "Usually nothing. Results go back to your app or your own storage.",
+          "source": "https://battleships.dev/data/presets.json"
+        },
+        {
+          "label": "How busy it is",
+          "value": "About 17% CPU on average in Battleships' interpreter workload. Charging by the second, and only for CPU actually used, both matter here.",
+          "source": "https://battleships.dev/data/presets.json"
+        }
+      ],
+      "routes": [
+        {
+          "provider": "e2b",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "Its original use: a code-interpreter SDK and per-second billing.",
+          "link": {
+            "title": "E2B docs",
+            "url": "https://e2b.dev/docs"
+          }
+        },
+        {
+          "provider": "daytona",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "Sandboxes started from an SDK, billed per second, with $200 of free compute.",
+          "link": {
+            "title": "Daytona docs",
+            "url": "https://www.daytona.io/docs/en/"
+          }
+        },
+        {
+          "provider": "modal",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "Sandboxes from Python or JavaScript, sized down to a fraction of a core.",
+          "link": {
+            "title": "Modal: sandboxes",
+            "url": "https://modal.com/docs/guide/sandboxes"
+          }
+        },
+        {
+          "provider": "vercel-sandbox",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "Firecracker sandboxes from an SDK, with CPU billed only while working.",
+          "link": {
+            "title": "Vercel Sandbox",
+            "url": "https://vercel.com/docs/sandbox"
+          }
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "Sandboxes started from a Worker, with CPU billed only while working.",
+          "link": {
+            "title": "Cloudflare Sandbox SDK",
+            "url": "https://developers.cloudflare.com/sandbox/get-started/"
+          }
+        }
+      ],
+      "picks": [
+        {
+          "provider": "e2b",
+          "for": "The default choice",
+          "why": "Built for exactly this. At the workload below it is about $55 a month at list price, and the free plan's one-time $100 credit covers most of the first two months.",
+          "watch": "The free plan limits sessions to an hour and disk to 10 GiB. Concurrency limits are per plan.",
+          "link": "https://e2b.dev/pricing"
+        },
+        {
+          "provider": "runtime",
+          "for": "If runs mostly wait",
+          "why": "CPU is billed only while working, so the same workload is about $13 a month.",
+          "watch": "Smaller company, one US region, and a free tier capped at four sandboxes at once.",
+          "link": "https://withruntime.com/docs/pricing"
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "for": "If your app already runs on Cloudflare",
+          "why": "Started from a Worker next to your code, with CPU billed only while working.",
+          "watch": "The smallest size that has 2 vCPU also has 8 GiB of memory, which you pay for. There is a $5 monthly account minimum.",
+          "link": "https://developers.cloudflare.com/containers/platform/pricing/"
+        }
+      ],
+      "outside": "Anthropic's hosted code-execution tool runs Claude's code for you with no sandbox to manage: 1 CPU, 5 GiB, no internet, 1,550 hours included and then $0.05 per container-hour.",
+      "features": [
+        "isolation",
+        "outbound-network",
+        "ways-to-drive",
+        "billing-models"
+      ],
+      "sources": [
+        {
+          "label": "Battleships: interpreter workload (built by the Boat team)",
+          "url": "https://battleships.dev/data/presets.json"
+        },
+        {
+          "label": "Modal: resources",
+          "url": "https://modal.com/docs/guide/resources"
+        },
+        {
+          "label": "Anthropic: code execution tool",
+          "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool"
+        }
+      ]
+    },
+    {
+      "id": "browser-agent",
+      "title": "Run a browser or computer-use agent",
+      "kicker": "Browser agent",
+      "question": "I want an agent that opens websites, clicks and fills in forms, or uses a whole desktop.",
+      "standfirst": "Browser agents drive a real Chromium, or a whole desktop with a mouse and keyboard. Memory is the constraint, not CPU, and logins are the thing people forget to keep.",
+      "preset": "browser",
+      "whatItIs": [
+        "A browser agent reads pages as text or screenshots and clicks, types and scrolls like a person. A computer-use agent does the same with a full desktop. Both need a machine with a display and enough memory for Chromium.",
+        "Sessions are usually short and thrown away. If the agent must stay logged in to sites, keep its browser profile, which means keeping the disk or saving a snapshot."
+      ],
+      "needs": [
+        {
+          "label": "Machine size",
+          "value": "2 vCPU / 4 GiB / 10 GiB for a browser; Browserless gives the same minimum. A full desktop is more comfortable at 4 vCPU / 8 GiB / 20 GiB.",
+          "source": "https://battleships.dev/data/presets.json"
+        },
+        {
+          "label": "Does it stay on?",
+          "value": "No. Typical sessions are minutes long.",
+          "source": "https://battleships.dev/data/presets.json"
+        },
+        {
+          "label": "What must survive a restart",
+          "value": "Nothing, unless logins must survive: then the browser profile and cookies.",
+          "source": "https://battleships.dev/data/presets.json"
+        },
+        {
+          "label": "How busy it is",
+          "value": "About 3% CPU on average; Chromium's memory is what fills the machine.",
+          "source": "https://battleships.dev/data/presets.json"
+        }
+      ],
+      "routes": [],
+      "picks": [
+        {
+          "provider": "instabox",
+          "for": "A desktop you can watch",
+          "why": "The agent-browser image comes with a desktop and Chromium you can open from the dashboard, and an idle machine pauses itself and wakes when its preview link is used.",
+          "watch": "The free plan is one 4 vCPU / 8 GiB machine with an 8-hour limit on each run.",
+          "link": "https://instabox.sh/docs/desktop"
+        },
+        {
+          "provider": "boat",
+          "for": "Full VMs at a flat rate",
+          "why": "A full Ubuntu VM with room for a browser, at a flat hourly price per size.",
+          "watch": "At thousands of sessions a month, the plan's start limits apply, and paid starts come out of the wallet.",
+          "link": "https://docs.boat.dev/pricing"
+        },
+        {
+          "provider": "daytona",
+          "for": "Computer use from code",
+          "why": "Documents computer use, with sandboxes started from an SDK and per-second billing.",
+          "watch": "Each sandbox's disk is capped at 10 GiB.",
+          "link": "https://www.daytona.io/docs/en/"
+        }
+      ],
+      "outside": "Browser services such as Browser Use Cloud sell hosted browser time (from $0.02 per browser-hour) without a machine to manage.",
+      "features": [
+        "sizes-regions",
+        "isolation",
+        "reaching-it",
+        "snapshots-forks"
+      ],
+      "sources": [
+        {
+          "label": "Battleships: browser and computer-use workloads (built by the Boat team)",
+          "url": "https://battleships.dev/data/presets.json"
+        },
+        {
+          "label": "Browser Use pricing",
+          "url": "https://browser-use.com/pricing"
+        }
+      ]
+    }
+  ]
+}

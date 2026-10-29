@@ -1,0 +1,61 @@
+{
+  "provider": "boxd",
+  "checkedOn": "2026-10-29",
+  "summary": "Per second on three meters: vCPU on the machine's size while running, memory on what is actually resident, disk on bytes written in every state.",
+  "cpu": {
+    "rate": 0.047,
+    "billing": "allocated"
+  },
+  "ram": {
+    "rate": 0.014,
+    "billing": "requested"
+  },
+  "disk": {
+    "running": 9.6e-05,
+    "stopped": 9.6e-05
+  },
+  "shapes": [
+    {
+      "name": "1/4",
+      "vcpu": 1,
+      "ram": 4,
+      "disk": 100
+    },
+    {
+      "name": "2/8",
+      "vcpu": 2,
+      "ram": 8,
+      "disk": 100
+    },
+    {
+      "name": "4/16",
+      "vcpu": 4,
+      "ram": 16,
+      "disk": 100
+    },
+    {
+      "name": "8/32",
+      "vcpu": 8,
+      "ram": 32,
+      "disk": 100
+    }
+  ],
+  "between": "kept",
+  "plans": [
+    {
+      "name": "Prepaid credit",
+      "fee": 0
+    }
+  ],
+  "notes": [
+    "Memory is billed on resident memory; the calculator uses the memory you entered as the resident figure, up to the size's full allocation.",
+    "$30 of credit needs a card; without one an account is capped at two machines.",
+    "Egress and snapshot storage prices are not published, so neither is included."
+  ],
+  "sources": [
+    {
+      "label": "Pricing",
+      "url": "https://boxd.sh/pricing"
+    }
+  ]
+}

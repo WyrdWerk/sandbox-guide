@@ -1,0 +1,199 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import SectionNav from "../../components/SectionNav.astro";
+import { pricing, providerName } from "../../lib/data";
+import { MONTH_HOURS, price, presets, formatMoney, type RateCard } from "../../lib/cost";
+
+const usd = (n: number) => `$${+n.toPrecision(4)}`;
+function rates(card: RateCard): string[] {
+  const out: string[] = [];
+  if (card.shapes?.some((s) => s.hourly !== undefined)) {
+    out.push(card.shapes.map((s) => `${s.name} ${s.vcpu}/${s.ram} ${usd(s.hourly!)}/h`).join(" · "));
+  }
+  if (card.mcu) out.push(`${usd(card.mcu.rate)} per unit-hour; a unit is 1 vCPU, ${card.mcu.ramPer} GiB or ${card.mcu.diskPer} GiB`);
+  if (card.cpu) out.push(`CPU ${usd(card.cpu.rate)} per vCPU-hour${card.cpu.billing === "active" ? `, only while working${card.cpu.floor ? ` (floor ${card.cpu.floor} vCPU)` : ""}` : ""}`);
+  if (card.ram) out.push(`memory ${usd(card.ram.rate)} per GiB-hour`);
+  if (card.disk?.running) out.push(`disk ${usd(card.disk.running * MONTH_HOURS)} per GiB-month while running`);
+  if (card.disk?.stopped) out.push(`${usd(card.disk.stopped * MONTH_HOURS)} per GiB-month while stopped`);
+  if (card.disk?.persistentMonthly) out.push(`kept disk ${usd(card.disk.persistentMonthly)} per GiB-month`);
+  if (card.disk?.extraMonthly) out.push(`extra disk ${usd(card.disk.extraMonthly)} per GiB-month`);
+  return out;
+}
+const plans = (card: RateCard) =>
+  card.plans.map((p) => `${p.name}${p.fee ? ` ${formatMoney(p.fee)}/mo` : ""}${p.credit ? ` incl. ${formatMoney(p.credit)}` : ""}`).join(" · ");
+
+// A worked example, priced live from the same engine the calculator uses.
+const example = presets.personal;
+const exampleCards = ["runtime", "boat", "e2b"].map((id) => pricing.find((c) => c.provider === id)!);
+const exampleQuotes = exampleCards.map((card) => ({ card, q: price(card, example.workload) }));
+
+const nav = [
+  { href: "#inputs", label: "What goes in" },
+  { href: "#models", label: "Four ways to bill" },
+  { href: "#rules", label: "The rules" },
+  { href: "#example", label: "A worked example" },
+  { href: "#left-out", label: "What is left out" },
+  { href: "#battleships", label: "Battleships" },
+  { href: "#cards", label: "Every rate card" },
+];
+---
+
+<Base title="How the costs are calculated" description="The formula behind the cost calculator, the rules it follows, what it leaves out, and how it relates to battleships.dev.">
+  <PageHeader
+    parent={{ href: "/costs/", label: "Costs" }}
+    kicker="How it works"
+    title="How the costs are calculated"
+    standfirst="The calculator multiplies the hours a machine runs by each provider's published rates, then applies the plan. That sounds simple; the differences between providers are in which hours count, which size you are forced to buy, and what a plan includes."
+    meta={[`${pricing.length} rate cards`, "Published list prices only", "Same engine on every page"]}
+  />
+
+  <SectionNav items={nav} />
+
+  <div class="wrap">
+    <section class="section section--flush" id="inputs">
+      <div class="section__head"><h2 class="section__title">What goes in</h2></div>
+      <div class="prose">
+        <p>
+          You describe a machine (vCPU, memory and disk) and how it runs. Either it is a <strong>machine you keep</strong>:
+          how many, how many hours a day, on how many days, and whether its files must survive between sessions. Or it
+          is a stream of <strong>short throwaway tasks</strong>: how many a month and how long each takes. A month is{" "}
+          {MONTH_HOURS} hours.
+        </p>
+        <p>
+          Two sliders describe behaviour rather than size. <strong>CPU working</strong> is the share of running time the
+          processor is doing something; an agent waiting for a chat message is close to zero. <strong>Awake</strong> is the
+          share of the hours the machine has to be up at all; it matters only for providers that put an idle machine to
+          sleep and wake it when a request arrives.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="models">
+      <div class="section__head"><h2 class="section__title">Four ways providers turn time into money</h2></div>
+      <div class="prose">
+        <p>Every one of the fifteen providers fits one of these, sometimes with a twist.</p>
+        <ul>
+          <li><strong>Per resource, on what you reserve.</strong> CPU, memory and sometimes disk each have an hourly rate, charged for the size you asked for whether or not it is busy. E2B, Daytona, InstaBox, Agent 37, Modal and boxd's CPU work like this.</li>
+          <li><strong>Per resource, on what you use.</strong> CPU is charged only while it works, so an idle agent pays mostly for memory. Runtime (with a small floor), Vercel Sandbox, Cloudflare Sandbox and Sprites work like this, and boxd charges memory on what is actually resident.</li>
+          <li><strong>A flat price per size.</strong> You pick from a short list of sizes, each with one hourly price. Boat, Sandboxer and Lizard work like this. If no size matches, you buy the next one up.</li>
+          <li><strong>Compute units.</strong> Morph charges one price per unit-hour, where the number of units is set by whichever of CPU, memory or disk is largest relative to the others.</li>
+        </ul>
+        <p>
+          On top of usage sits the plan. Some plans are a fee that comes back as usage (Boat, Sandboxer, Lizard, InstaBox,
+          Vercel Pro), some add usage on top of a fee (E2B Pro, Cloudflare's Workers Paid minimum), some include a
+          monthly credit (Modal) and some have no plan at all.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="rules">
+      <div class="section__head"><h2 class="section__title">The rules the calculator follows</h2></div>
+      <div class="prose">
+        <ol>
+          <li><strong>Running hours.</strong> Tasks: tasks × minutes ÷ 60. Machines: machines × hours a day × days, or {MONTH_HOURS} for always-on. For providers that sleep idle machines, running hours are multiplied by the awake share and the rest counts as stopped time.</li>
+          <li><strong>Size.</strong> Where a provider sells fixed sizes, the cheapest size with at least the vCPU and memory you asked for is used, counting any volume needed for extra disk. The size used is printed with every result.</li>
+          <li><strong>Compute.</strong> Reserved CPU is running hours × vCPU × rate. Used CPU is running hours × the larger of (vCPU × CPU working) and the provider's floor × rate. Memory is running hours × GiB × rate.</li>
+          <li><strong>Disk.</strong> Charged at the provider's running rate while running and its stopped rate while stopped, after any free allowance. Where the provider prices in decimal gigabytes, GiB are converted (1 GiB = 1.074 GB).</li>
+          <li><strong>Plan.</strong> Each plan is priced: its fee, plus usage beyond what it includes (rounded up to whole packs where overage is sold in packs). Free monthly allowances are subtracted at the provider's own rates. The plan with the fewest problems wins, then the cheapest.</li>
+          <li><strong>Problems.</strong> A result is marked <em>needs a change</em> when the size does not exist, the disk is over a limit, a session limit is shorter than your sessions, or stopping would delete files you asked to keep. The figure is still shown, for the nearest thing on sale.</li>
+          <li><strong>Unknowns stay unknown.</strong> A price a provider does not publish is not guessed; it is named in the notes and left out of the total.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="example">
+      <div class="section__head">
+        <h2 class="section__title">A worked example</h2>
+        <p class="section__note">{example.label}: {example.why}</p>
+      </div>
+      <div class="cost-grid">
+        {exampleQuotes.map(({ card, q }) => (
+          <article class="cost">
+            <p class="cost__label">{providerName(card.provider)} · {q.plan}</p>
+            <p class="cost__headline">{formatMoney(q.total)} a month</p>
+            <p class="cost__shape">{q.shape}</p>
+            <ul class="cost__lines">
+              {q.lines.map((line) => (
+                <li>
+                  <span class="cost__line-label">{line.label}</span>
+                  <span class="cost__line-arith">{line.math}</span>
+                  <span class="cost__line-amount">{formatMoney(Math.abs(line.amount)).replace("$", line.amount < 0 ? "−$" : "$")}</span>
+                </li>
+              ))}
+            </ul>
+            <ul class="cost__notes">{q.notes.slice(0, 2).map((n) => <li>{n}</li>)}</ul>
+            {q.problems.length > 0 && <p class="cost__flag">{q.problems.join(" ")}</p>}
+          </article>
+        ))}
+      </div>
+      <p class="prose">
+        The same agent costs about {formatMoney(exampleQuotes[0].q.total)} on Runtime because it pays almost nothing for a
+        CPU that is waiting, a flat {formatMoney(exampleQuotes[1].q.total)} on Boat because the plan covers it, and far more on E2B because a
+        machine that never stops needs the Pro plan and still breaks its 24-hour session limit. None of them is wrong;
+        they are built for different jobs.
+      </p>
+    </section>
+
+    <section class="section" id="left-out">
+      <div class="section__head"><h2 class="section__title">What is left out</h2></div>
+      <div class="prose">
+        <ul>
+          <li><strong>Model tokens.</strong> For most agents the language model costs more than the machine. It is billed by the model provider, not the sandbox, and depends on your prompts.</li>
+          <li><strong>Egress, public IP addresses, seats and taxes.</strong> Where a provider charges them, its notes say so.</li>
+          <li><strong>Snapshots and backups whose size or price is not published.</strong></li>
+          <li><strong>One-time sign-up credits.</strong> They are mentioned, not subtracted, because they run out. Recurring monthly credits are subtracted.</li>
+          <li><strong>Concurrency limits and start limits.</strong> A thousand tasks in one burst can hit limits that the same tasks spread over a month never meet.</li>
+          <li><strong>Discounts, commitments and enterprise contracts.</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="battleships">
+      <div class="section__head"><h2 class="section__title">How this relates to battleships.dev</h2></div>
+      <div class="prose">
+        <p>
+          <a href="https://battleships.dev" rel="noreferrer noopener">battleships.dev</a>, built by the Boat team, is an
+          estimator that prices one workload across several hundred providers. The calculator here borrows its idea of
+          describing a workload by size, sessions and how busy the machine is, and its rule that an unpublished price is
+          unknown rather than free. Thanks to them for publishing their data openly.
+        </p>
+        <p>The differences are deliberate:</p>
+        <ul>
+          <li><strong>Fifteen providers, checked by hand.</strong> Every rate here comes from the provider's own pricing page or documentation, with a date, rather than from Battleships' cards. Battleships' code is not used.</li>
+          <li><strong>Where we disagree, we say so.</strong> Modal documents one physical core as two vCPUs, so its CPU here costs half of what Battleships charges per vCPU. Battleships lists Boat's disk sizes as 12, 50, 125 and 251 GB; Boat's own pricing page says 51, 51, 111 and 251 GB, and those are used here. Other differences are listed on each provider's page.</li>
+          <li><strong>Fewer inputs.</strong> Battleships also models concurrency, seats, egress, snapshots and network access tiers. This calculator keeps to the inputs a first-time reader can answer, and names what it leaves out.</li>
+          <li><strong>The answer is the start, not the end.</strong> Each result links to the provider's page and to the features that decide whether it fits, because the cheapest machine that cannot keep your files is not cheap.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="cards">
+      <div class="section__head">
+        <h2 class="section__title">Every rate card</h2>
+        <p class="section__note">The numbers the calculator uses, with the date each was read.</p>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr><th scope="col">Provider</th><th scope="col">How it bills</th><th scope="col">Rates</th><th scope="col">Plans</th><th scope="col">Checked</th></tr>
+          </thead>
+          <tbody>
+            {pricing.map((card) => (
+              <tr>
+                <th scope="row"><a href={`/providers/${card.provider}/`}>{providerName(card.provider)}</a></th>
+                <td>{card.summary}</td>
+                <td class="mono-cell rates-cell">{rates(card).join("; ")}</td>
+                <td>{plans(card)}</td>
+                <td class="mono-cell">
+                  {card.checkedOn}
+                  {card.sources.map((s) => (<><br /><a href={s.url} rel="noreferrer noopener">{s.label} ↗</a></>))}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</Base>

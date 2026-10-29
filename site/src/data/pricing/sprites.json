@@ -1,0 +1,37 @@
+{
+  "provider": "sprites",
+  "checkedOn": "2026-10-29",
+  "summary": "Measured CPU and memory while awake, hot storage while awake and cold storage for as long as data is kept.",
+  "cpu": {
+    "rate": 0.0385,
+    "billing": "active",
+    "floor": 0.0625
+  },
+  "ram": {
+    "rate": 0.021875,
+    "billing": "requested"
+  },
+  "disk": {
+    "running": 0.00071,
+    "stopped": 2.7e-05
+  },
+  "maxVcpu": 8,
+  "between": "kept",
+  "plans": [
+    {
+      "name": "Pay as you go",
+      "fee": 0
+    }
+  ],
+  "notes": [
+    "Memory is billed on actual use; the calculator uses the memory you entered.",
+    "A one-time $30 trial credit is not subtracted.",
+    "The pricing page says there are no plans; the FAQ sells Hero ($100) and Mythic ($2,000). Pay as you go is used here."
+  ],
+  "sources": [
+    {
+      "label": "Pricing",
+      "url": "https://fly.io/pricing/"
+    }
+  ]
+}

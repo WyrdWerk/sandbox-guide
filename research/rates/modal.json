@@ -1,0 +1,589 @@
+{
+  "id": "modal",
+  "provider": "Modal Sandboxes",
+  "checkedOn": "2026-10-29",
+  "currency": "USD",
+  "headline": "Per-second billing on max(request, actual) for physical CPU cores and GiB of RAM, with no pause state. Modal's pricing page labels the CPU unit 'Physical core (2 vCPU equivalent)', and the sandbox guide says '1 core = 2 vCPUs'. Battleships prices the same dollar figure as one vCPU-hour, so its vCPU-hour rate is 2x Modal's documented vCPU-equivalent rate.",
+  "plans": [
+    {
+      "name": "Starter",
+      "monthlyFeeUsd": 0,
+      "included": {
+        "monthlyCreditUsd": 30,
+        "notes": "Monthly compute credit, not a one-time trial. Includes 1 TiB/month network egress and 1 TiB of Volumes."
+      },
+      "limits": {
+        "maxConcurrent": "100 containers + 10 GPU concurrency",
+        "maxSession": "24 hours (sandbox timeout ceiling)",
+        "maxSize": "not published (a per-container maximum is enforced at creation but no number is given)"
+      },
+      "evidence": [
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "$0 + compute / month"
+        },
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "$30 / month free credits"
+        },
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "3 workspace seats included"
+        },
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "100 containers + 10 GPU concurrency"
+        },
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "1 TiB / month free network egress"
+        },
+        {
+          "url": "https://modal.com/docs/guide/sandboxes",
+          "quote": "You can change this by passing a timeout of up to 24 hours to the Sandbox.create(...) function."
+        },
+        {
+          "url": "https://modal.com/docs/guide/resources",
+          "quote": "For both CPU and memory, a maximum is enforced at Function or Sandbox creation time to ensure your containers can be scheduled for execution."
+        }
+      ]
+    },
+    {
+      "name": "Team",
+      "monthlyFeeUsd": 250,
+      "included": {
+        "monthlyCreditUsd": 100,
+        "notes": "The $250 fee is not a credit; only $100 comes back as monthly compute credit. Adds custom domains and the static IP proxy, and raises egress to 10 TiB/month."
+      },
+      "limits": {
+        "maxConcurrent": "5000 containers + 50 GPU concurrency",
+        "maxSession": "24 hours (sandbox timeout ceiling)",
+        "maxSize": "not published"
+      },
+      "evidence": [
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "$250 + compute / month"
+        },
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "$100 / month free credits"
+        },
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "Unlimited seats"
+        },
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "5000 containers + 50 GPU concurrency"
+        },
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "10 TiB / month free network egress"
+        },
+        {
+          "url": "https://modal.com/docs/guide/sandboxes",
+          "quote": "You can change this by passing a timeout of up to 24 hours to the Sandbox.create(...) function."
+        },
+        {
+          "url": "https://modal.com/docs/guide/resources",
+          "quote": "For both CPU and memory, a maximum is enforced at Function or Sandbox creation time to ensure your containers can be scheduled for execution."
+        }
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "monthlyFeeUsd": null,
+      "included": {
+        "monthlyCreditUsd": null,
+        "notes": "Custom pricing. Adds volume-based discounts, audit logs, Okta SSO, HIPAA and 100 TiB/month egress."
+      },
+      "limits": {
+        "maxConcurrent": "custom (pricing page says 'Higher GPU concurrency')",
+        "maxSession": "24 hours (sandbox timeout ceiling)",
+        "maxSize": "not published"
+      },
+      "evidence": [
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "Custom"
+        },
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "100 TiB / month free network egress"
+        },
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "Audit logs, Okta SSO, and HIPAA"
+        },
+        {
+          "url": "https://modal.com/docs/guide/sandboxes",
+          "quote": "You can change this by passing a timeout of up to 24 hours to the Sandbox.create(...) function."
+        },
+        {
+          "url": "https://modal.com/docs/guide/resources",
+          "quote": "For both CPU and memory, a maximum is enforced at Function or Sandbox creation time to ensure your containers can be scheduled for execution."
+        }
+      ]
+    }
+  ],
+  "compute": {
+    "model": "per-resource",
+    "cpuBasis": "max(request, actual): you pay for the larger of the CPU you reserved and the CPU you used, so an idle running sandbox still pays its request.",
+    "ramBasis": "max(request, actual)",
+    "billingIncrement": "Per second. Modal states there are no minimum usage-time increments.",
+    "minimum": "0.125 physical cores and 128 MiB memory per container.",
+    "rates": [
+      {
+        "resource": "CPU",
+        "usdPerCoreHour": 0.141912,
+        "usdPerVcpuHour": 0.070956,
+        "derivation": "0.00003942 per core-second x 3600 = 0.141912 per core-hour. Divided by 2 because Modal documents 1 core = 2 vCPUs, giving 0.070956 per vCPU-hour. Battleships instead bills 0.141912 per vCPU-hour.",
+        "original": {
+          "value": 3.942e-05,
+          "unit": "USD per physical core-second"
+        },
+        "url": "https://modal.com/pricing",
+        "quote": "$0.00003942 0.00003942 / core / sec"
+      },
+      {
+        "resource": "CPU unit definition",
+        "usdPerCoreHour": null,
+        "usdPerVcpuHour": null,
+        "original": {
+          "value": 2,
+          "unit": "vCPUs per physical core"
+        },
+        "url": "https://modal.com/pricing",
+        "quote": "Physical core (2 vCPU equivalent)"
+      },
+      {
+        "resource": "CPU unit definition (docs)",
+        "usdPerCoreHour": null,
+        "usdPerVcpuHour": null,
+        "original": {
+          "value": 2,
+          "unit": "vCPUs per physical core"
+        },
+        "url": "https://modal.com/docs/guide/sandbox-resources",
+        "quote": "The cpu parameter specifies physical CPU cores (1 core = 2 vCPUs), and memory specifies MiB"
+      },
+      {
+        "resource": "Memory",
+        "usdPerGibRamHour": 0.024012,
+        "derivation": "0.00000667 per GiB-second x 3600 = 0.024012 per GiB-hour.",
+        "original": {
+          "value": 6.67e-06,
+          "unit": "USD per GiB-second"
+        },
+        "url": "https://modal.com/pricing",
+        "quote": "$0.00000667 0.00000667 / GiB / sec"
+      },
+      {
+        "resource": "Minimum request",
+        "usdPerCoreHour": null,
+        "usdPerVcpuHour": null,
+        "original": {
+          "value": 0.125,
+          "unit": "physical cores per container"
+        },
+        "url": "https://modal.com/pricing",
+        "quote": "*minimum of 0.125 cores per container"
+      }
+    ],
+    "classDifferences": [
+      {
+        "note": "Sandboxes pay 3x the list (Function) CPU and memory rates because they are non-preemptible.",
+        "url": "https://modal.com/pricing",
+        "quote": "Sandboxes are billed at non-preemptible rates of 3x list price."
+      },
+      {
+        "note": "GPU sandboxes are preemptible and billed per GPU-second, unlike CPU sandboxes.",
+        "url": "https://modal.com/docs/guide/sandbox-resources",
+        "quote": "Unlike CPU Sandboxes, GPU Sandboxes are subject to preemption."
+      },
+      {
+        "note": "A region pin multiplies CPU, memory and GPU charges by 1.15x (broad region) or 1.75x (narrow region).",
+        "url": "https://modal.com/docs/guide/region-selection",
+        "quote": "A multiplier on top of our base usage pricing will be applied to any Function or Sandbox that has a container region defined."
+      },
+      {
+        "note": "The two multiplier values.",
+        "url": "https://modal.com/docs/guide/region-selection",
+        "quote": "Broad (e.g. us) 1.15x Narrow (e.g. us-west) 1.75x"
+      }
+    ],
+    "bursting": {
+      "note": "Requests are a floor, not a cap: a sandbox may use spare host capacity and is billed for it. Without an explicit limit the soft CPU ceiling is 16 cores above the request.",
+      "evidence": [
+        {
+          "url": "https://modal.com/docs/guide/sandbox-resources",
+          "quote": "Sandboxes can burst beyond their CPU and memory requests when additional resources are available on the underlying host."
+        },
+        {
+          "url": "https://modal.com/docs/guide/sandbox-resources",
+          "quote": "You pay for max(request, actual)."
+        },
+        {
+          "url": "https://modal.com/docs/guide/resources",
+          "quote": "Modal containers have a default soft CPU limit that is set at 16 physical cores above the CPU request."
+        }
+      ]
+    },
+    "billingIncrementEvidence": [
+      {
+        "url": "https://modal.com/docs/guide/billing",
+        "quote": "there are no minimum usage-time increments"
+      },
+      {
+        "url": "https://modal.com/docs/guide/billing",
+        "quote": "All Workspaces are billed monthly."
+      }
+    ],
+    "url": "https://modal.com/pricing",
+    "quote": "CPU (non-preemptible) Physical core (2 vCPU equivalent) $0.00003942 0.00003942 / core / sec *minimum of 0.125 cores per container Memory (non-preemptible) $0.00000667 0.00000667 / GiB / sec",
+    "cpuUnitSettlement": {
+      "question": "Does Modal bill per physical core equal to 2 vCPU?",
+      "answer": "Yes on the billing unit: Modal prices sandbox CPU per physical core and states that one physical core is equivalent to 2 vCPUs, so the documented vCPU-equivalent rate is half the core rate ($0.070956/vCPU-hour vs $0.141912/core-hour). The pages do not establish how many CPUs the guest actually sees for a given cpu= value, and that was not tested; Battleships reports a benchmark where cpu=N yields N guest CPUs.",
+      "billedUnit": "physical core-second",
+      "documentedVcpusPerCore": 2,
+      "coreHourUsd": 0.141912,
+      "vcpuHourUsd": 0.070956,
+      "evidence": [
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "Physical core (2 vCPU equivalent)"
+        },
+        {
+          "url": "https://modal.com/docs/guide/sandbox-resources",
+          "quote": "The cpu parameter specifies physical CPU cores (1 core = 2 vCPUs), and memory specifies MiB"
+        },
+        {
+          "url": "https://modal.com/pricing",
+          "quote": "Note that each physical core is equivalent to 2 vCPUs as offered by AWS or GCP."
+        }
+      ]
+    }
+  },
+  "storage": {
+    "ephemeralDisk": {
+      "includedGiB": 512,
+      "pricePerGiBMonth": null,
+      "note": "There is no separate disk meter. The sandbox filesystem is a fixed 512 GiB quota; asking for more disk raises the memory request at 20:1, so it is billed at the memory rate. Sandbox docs say the disk size cannot be increased.",
+      "evidence": [
+        {
+          "url": "https://modal.com/docs/guide/resources",
+          "quote": "A per-container disk quota that defaults to 512 GiB."
+        },
+        {
+          "url": "https://modal.com/docs/guide/resources",
+          "quote": "Disk requests are billed by increasing the memory request at a 20:1 ratio. For example, requesting 500 GiB of disk will increase the memory request to 25 GiB, if it is not already set higher."
+        },
+        {
+          "url": "https://modal.com/docs/guide/sandbox-resources",
+          "quote": "Sandboxes have the same disk limits as other Modal containers, and their disk size cannot be increased."
+        }
+      ]
+    },
+    "volumes": {
+      "pricePerGiBMonth": 0.09,
+      "freeGiBMonths": 1024,
+      "note": "Volumes are the persistent filesystem that outlives a sandbox.",
+      "url": "https://modal.com/pricing",
+      "quote": "Volumes $0.09 0.09 / GiB / mo *includes 1 TiB / mo free"
+    },
+    "billedWhileStopped": {
+      "value": "no stopped state; compute accrues only while the sandbox runs",
+      "note": "Modal documents no paused or stopped state: a sandbox is running or finished, and CPU/memory are billed per second on max(request, actual). That a finished sandbox accrues no compute is inferred from per-second billing plus the finished state; no Modal page states 'terminated bills nothing' in those words. Volumes and snapshots bill separately.",
+      "evidence": [
+        {
+          "url": "https://modal.com/docs/guide/sandboxes",
+          "quote": "Finished — The Sandbox has stopped running."
+        },
+        {
+          "url": "https://modal.com/docs/guide/sandbox-resources",
+          "quote": "You pay for max(request, actual)."
+        }
+      ]
+    },
+    "snapshots": {
+      "pricePerGiBMonth": null,
+      "note": "Snapshot storage has no published rate. Retention: filesystem and directory snapshots 30 days by default (configurable, can opt out), memory snapshots 7 days, exit snapshots 30 days.",
+      "retention": {
+        "filesystem": "30 days after creation",
+        "directory": "30 days after creation",
+        "memory": "7 days after creation",
+        "exit": "30 days after creation"
+      },
+      "evidence": [
+        {
+          "url": "https://modal.com/docs/guide/sandbox-snapshots",
+          "quote": "Filesystem Snapshot 30 days after creation"
+        },
+        {
+          "url": "https://modal.com/docs/guide/sandbox-snapshots",
+          "quote": "Memory Snapshot 7 days after creation"
+        },
+        {
+          "url": "https://modal.com/docs/guide/sandbox-snapshots",
+          "quote": "Filesystem Snapshots and Directory Snapshots are Images and are automatically garbage collected after their TTL expires (30 days by default)."
+        },
+        {
+          "url": "https://modal.com/docs/guide/sandbox-exit-snapshots",
+          "quote": "Exit snapshot Images are retained for 30 days after creation"
+        }
+      ]
+    },
+    "stoppedDataRetention": "No stopped state to retain. After termination the disk is gone; data survives only in a Volume or a snapshot, subject to the retention above."
+  },
+  "egress": {
+    "pricePerGiB": 0.04,
+    "includedTiBPerMonth": {
+      "Starter": 1,
+      "Team": 10,
+      "Enterprise": 100
+    },
+    "note": "Charged across the whole workspace. Volumes do not count as egress. Private traffic between Modal containers does count.",
+    "evidence": [
+      {
+        "url": "https://modal.com/docs/guide/network-egress-billing",
+        "quote": "Egress beyond the included amount is billed at $0.04 per GiB."
+      },
+      {
+        "url": "https://modal.com/pricing",
+        "quote": "Network Egress $0.04 0.04 / GiB *See plan for included usage / mo"
+      }
+    ]
+  },
+  "other": [
+    {
+      "item": "GPU",
+      "price": "not in this file as a table; billed per GPU-second, from $0.000164/sec (Nvidia T4) to $0.001972/sec (Nvidia B300)",
+      "url": "https://modal.com/pricing",
+      "quote": "Nvidia T4 $0.000164 0.000164 / sec"
+    },
+    {
+      "item": "GPU (top of range)",
+      "price": "$0.001972 per GPU-second",
+      "url": "https://modal.com/pricing",
+      "quote": "Nvidia B300 $0.001972 0.001972 / sec"
+    },
+    {
+      "item": "Seats",
+      "price": "3 included on Starter, unlimited on Team and Enterprise",
+      "url": "https://modal.com/pricing",
+      "quote": "3 workspace seats included"
+    },
+    {
+      "item": "Custom domains for sandbox tunnels",
+      "price": "included on Team and Enterprise only",
+      "url": "https://modal.com/docs/guide/sandbox-networking",
+      "quote": "Custom domains for Sandbox tunnels are available on the Team and Enterprise plans."
+    },
+    {
+      "item": "Static IP proxy",
+      "price": "listed as a Team plan feature; no separate price published",
+      "url": "https://modal.com/pricing",
+      "quote": "Static IP proxy"
+    },
+    {
+      "item": "Public IPv4 / inbound address",
+      "price": "not published; a default sandbox cannot accept incoming connections",
+      "url": "https://modal.com/docs/guide/sandbox-networking",
+      "quote": "no ability to accept incoming network connections or access your Modal resources"
+    },
+    {
+      "item": "Minimum spend / payment method",
+      "price": "no minimum spend published; a payment method is required",
+      "url": "https://modal.com/docs/guide/billing",
+      "quote": "you must have a payment method on file in order to use Modal"
+    }
+  ],
+  "freeTier": {
+    "summary": "$30 of compute credit every month on the Starter plan, plus 1 TiB/month egress and 1 TiB of Volumes. Not a one-time trial and not a separate free plan.",
+    "monthlyCreditUsd": 30,
+    "limits": "Starter caps at 100 containers, 10 GPU concurrency and 3 seats.",
+    "evidence": [
+      {
+        "url": "https://modal.com/pricing",
+        "quote": "$30 / month free credits"
+      },
+      {
+        "url": "https://modal.com/pricing",
+        "quote": "Included usage applies to compute: Functions and Sandboxes, billed by the second for CPU, memory, and GPU time."
+      }
+    ]
+  },
+  "diffs": [
+    {
+      "field": "compute.cpuUnit / usdPerVcpuHour",
+      "ours": "1 physical core = 2 vCPU (documented); sandbox CPU is $0.141912 per core-hour, i.e. $0.070956 per vCPU-hour.",
+      "battleships": "Card vCPU = 1 Modal cpu unit = 1 guest-visible CPU, priced at $0.141912 per vCPU-hour; it reports a benchmark where cpu=N gives nproc N.",
+      "live": "Modal's pricing page labels the CPU row 'Physical core (2 vCPU equivalent)' and prices $0.00003942 per core-second. The sandbox guide repeats '1 core = 2 vCPUs'. The live pages agree with our research file; Battleships' per-vCPU rate is 2x the documented vCPU-equivalent rate.",
+      "url": "https://modal.com/docs/guide/sandbox-resources",
+      "quote": "The cpu parameter specifies physical CPU cores (1 core = 2 vCPUs), and memory specifies MiB"
+    },
+    {
+      "field": "docs.reaching-it / ssh",
+      "ours": "No SSH server; the documented path is `modal shell sb-...`.",
+      "battleships": "ssh: true",
+      "live": "The CLI reference documents `modal shell` for connecting to a running Sandbox by ID; no SSH server is documented.",
+      "url": "https://modal.com/docs/cli/latest/shell",
+      "quote": "Connect to a running Sandbox by ID:"
+    },
+    {
+      "field": "lifecycle.snapshot_auto",
+      "ours": "Exit Snapshots are automatic on every exit path, opt-in at creation.",
+      "battleships": "snapshot_auto: false",
+      "live": "Exit snapshots are automatic when enabled at creation, including on timeouts and OOM.",
+      "url": "https://modal.com/docs/guide/sandbox-exit-snapshots",
+      "quote": "Exit Snapshots take a filesystem snapshot automatically on both graceful and ungraceful Sandbox exits"
+    },
+    {
+      "field": "isolation.docker_inside",
+      "ours": "Docker is supported on the opt-in VM runtime.",
+      "battleships": "docker_inside: false",
+      "live": "The sandbox guide documents running Docker on the VM runtime.",
+      "url": "https://modal.com/docs/guide/sandboxes",
+      "quote": "Use the VM runtime to run Docker in a Sandbox."
+    },
+    {
+      "field": "lifecycle.fork",
+      "ours": "No live fork; several sandboxes can start from one filesystem snapshot.",
+      "battleships": "fork: true (fork_running: false)",
+      "live": "Snapshots can seed multiple sandboxes, each with an identical copy of the snapshotted filesystem; that is not a clone of a running sandbox.",
+      "url": "https://modal.com/docs/guide/sandbox-snapshots",
+      "quote": "Since Filesystem Snapshots are Images, you can create multiple Sandboxes from the same snapshot."
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "Sandboxes: runtimes (gVisor vs VM)",
+      "url": "https://modal.com/docs/guide/sandboxes#runtimes"
+    },
+    "sizes-regions": {
+      "title": "Sandbox resources: CPU, memory and disk requests",
+      "url": "https://modal.com/docs/guide/sandbox-resources",
+      "also": [
+        {
+          "title": "Region selection",
+          "url": "https://modal.com/docs/guide/region-selection"
+        }
+      ]
+    },
+    "lifecycle": {
+      "title": "Sandboxes: lifecycle events and timeouts",
+      "url": "https://modal.com/docs/guide/sandboxes#timeouts"
+    },
+    "snapshots-forks": {
+      "title": "Sandbox snapshots",
+      "url": "https://modal.com/docs/guide/sandbox-snapshots"
+    },
+    "storage": {
+      "title": "Sandbox files and Volumes",
+      "url": "https://modal.com/docs/guide/sandbox-files"
+    },
+    "idle-timers": {
+      "title": "Sandboxes: idle timeouts",
+      "url": "https://modal.com/docs/guide/sandboxes#idle-timeouts"
+    },
+    "reaching-it": {
+      "title": "Sandbox networking: forwarding ports and tunnels",
+      "url": "https://modal.com/docs/guide/sandbox-networking#forwarding-ports"
+    },
+    "custom-domains": {
+      "title": "Sandbox networking: custom domains",
+      "url": "https://modal.com/docs/guide/sandbox-networking#custom-domains"
+    },
+    "outbound-network": {
+      "title": "Sandbox networking: outbound access control",
+      "url": "https://modal.com/docs/guide/sandbox-networking#outbound-access-control"
+    },
+    "keys-secrets": {
+      "title": "Sandbox secret injection",
+      "url": "https://modal.com/docs/guide/sandbox-secret-injection"
+    },
+    "ways-to-drive": {
+      "title": "Sandboxes guide (Python, JavaScript and Go SDKs)",
+      "url": "https://modal.com/docs/guide/sandboxes",
+      "also": [
+        {
+          "title": "modal shell (CLI)",
+          "url": "https://modal.com/docs/cli/latest/shell"
+        }
+      ]
+    },
+    "built-in-agents": null,
+    "teams-accounts": {
+      "title": "Workspaces",
+      "url": "https://modal.com/docs/guide/workspaces"
+    },
+    "billing-models": {
+      "title": "Billing",
+      "url": "https://modal.com/docs/guide/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing plans (Starter monthly credit)",
+      "url": "https://modal.com/pricing#pricing-plans"
+    },
+    "quickstart": {
+      "title": "Getting started",
+      "url": "https://modal.com/docs/guide/getting-started"
+    },
+    "pricing": {
+      "title": "Pricing: Modal Sandbox pricing",
+      "url": "https://modal.com/pricing#sandboxes"
+    }
+  },
+  "deploy": {
+    "hermesAgent": {
+      "status": "documented terminal backend in Hermes; no Modal-side template or guide found",
+      "oneClickOrManaged": "not found",
+      "summary": "Hermes Agent documents Modal as one of its six terminal backends. Hermes itself still runs on your own machine or server; Modal only runs the shell commands the agent issues, one sandbox per task, with an optional filesystem snapshot between sessions. That is not an always-on hosted agent: Modal sandboxes have a 24-hour maximum lifetime and no pause.",
+      "steps": [
+        "Install Hermes locally (the official installer or pip).",
+        "Set terminal.backend to modal and size the container, e.g. `hermes config set terminal.backend modal`.",
+        "Provide Modal credentials: MODAL_TOKEN_ID + MODAL_TOKEN_SECRET, or a ~/.modal.toml file.",
+        "Run `hermes`. Each task's terminal commands execute in a Modal sandbox; with container_persistent the filesystem is snapshotted on cleanup and restored next session."
+      ],
+      "nonCoderDashboard": "No. The Modal dashboard shows sandbox metrics and invoices, but creating a sandbox is code (Sandbox.create) or CLI (`modal shell` attaches to one that already exists).",
+      "evidence": [
+        {
+          "url": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration#modal-backend",
+          "quote": "Runs commands in a Modal cloud sandbox. Each task gets an isolated VM with configurable CPU, memory, and disk. Filesystem can be snapshot/restored across sessions."
+        },
+        {
+          "url": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration#modal-backend",
+          "quote": "Required: Either MODAL_TOKEN_ID + MODAL_TOKEN_SECRET environment variables, or a ~/.modal.toml config file."
+        },
+        {
+          "url": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration#modal-backend",
+          "quote": "This preserves filesystem state, not live processes, PID space, or background jobs."
+        },
+        {
+          "url": "https://modal.com/docs/guide/sandboxes",
+          "quote": "You can change this by passing a timeout of up to 24 hours to the Sandbox.create(...) function."
+        }
+      ]
+    },
+    "openClaw": {
+      "status": "not found",
+      "oneClickOrManaged": "not found",
+      "summary": "OpenClaw's own hosting page lists a provider picker, Render and an experimental Cloudflare Containers template; Modal is not among its documented deployment targets, and Modal's documentation has no OpenClaw or Hermes page.",
+      "nonCoderDashboard": "No.",
+      "evidence": [
+        {
+          "url": "https://docs.openclaw.ai/install",
+          "quote": "Deploy OpenClaw on a cloud server or VPS."
+        }
+      ]
+    },
+    "alwaysOnVerdict": "Not a fit for an always-on personal agent. Sandboxes are capped at 24 hours and there is no pause; an idle but running sandbox bills its full request. A 24/7 agent needs a separate always-on host, with Modal used only as the command sandbox."
+  },
+  "notVerified": [
+    "No account was created and no sandbox was started; signup, invoice and dashboard behaviour are from documentation only.",
+    "Snapshot storage is billed but no rate is published, so it cannot be costed.",
+    "The per-container maximum CPU and memory are enforced but not published.",
+    "Whether the guest actually sees two CPUs per `cpu` unit was not tested; Battleships reports a benchmark where it does not."
+  ]
+}

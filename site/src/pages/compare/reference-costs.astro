@@ -17,7 +17,7 @@ const nav = [
     parent={{ href: "/compare/", label: "Compare" }}
     kicker="Reference costs"
     title="Three workloads, priced at list rates"
-    standfirst="A reference point, not a quote. The arithmetic is shown so you can redo it when prices change, and every substituted size is named. For your own workload, use battleships.dev."
+    standfirst="A reference point, not a quote. The arithmetic is shown so you can redo it when prices change, and every substituted size is named. For your own workload, use the cost calculator."
     meta={[`${researched.length} providers`, "List prices checked 28 October 2026", "Illustrations, not quotes"]}
   />
 
@@ -39,9 +39,10 @@ const nav = [
         provider bills a dimension it does not publish, such as measured CPU or resident memory.
       </p>
       <p class="section__note">
-        These are illustrations from published list rates, not invoices. For a price for your own
-        workload, use <a href="https://battleships.dev" rel="noreferrer noopener">battleships.dev</a>,
-        the comparison dataset built by the Boat team.
+        These are illustrations from published list rates, not invoices, worked by hand on 28 October.
+        The <a href="/costs/?preset=a">cost calculator</a> prices the same three workloads (and your own)
+        from rates re-checked on 29 October; small differences come from its rule of picking the cheapest
+        size that fits.
       </p>
     </section>
 

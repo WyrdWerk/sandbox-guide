@@ -1,0 +1,372 @@
+{
+  "id": "sprites",
+  "checkedOn": "2026-10-29",
+  "provider": "Sprites by Fly.io",
+  "pricingUrl": "https://fly.io/pricing/",
+  "plans": [
+    {
+      "name": "Pay-as-you-go",
+      "monthlyFeeUsd": 0,
+      "includedUsage": "None; every resource bills at list rates.",
+      "limits": {
+        "maxConcurrent": null,
+        "maxSessionHours": null,
+        "maxVcpu": 8,
+        "maxRamGiB": 16,
+        "maxDiskGiB": 100,
+        "createsPerMinute": 10
+      },
+      "url": "https://fly.io/pricing/",
+      "quote": "No plans and no tiers, and nothing charged per Sprite. Metered per hour of active use.",
+      "limitsQuote": "Sprite creation rate is also tiered: 10 sprites/minute on pay-as-you-go, rising with plan tier from 60/minute on Adventurer up to 240/minute on Mythic.",
+      "sessionQuote": "max 1 hour, renewable",
+      "notes": "The same pricing page also says there are no tiers, while the product FAQ on fly.io/sprites sells tiers and the FAQ quotes a per-org concurrency ceiling. 10 creates/minute on pay-as-you-go comes from the FAQ."
+    },
+    {
+      "name": "Hero",
+      "monthlyFeeUsd": 100,
+      "includedUsage": "1,200 CPU-hours, 4,800 RAM GB-hours and 150 GB of storage per month; usage above the allowance bills at standard rates on top of the fee.",
+      "limits": {
+        "maxConcurrent": 100,
+        "maxWarm": 100,
+        "maxSessionHours": null,
+        "maxVcpu": 8,
+        "maxRamGiB": 16,
+        "maxDiskGiB": 100
+      },
+      "url": "https://fly.io/sprites/",
+      "quote": "Example: Hero ($100/mo) includes 1,200 CPU-hours, 4,800 RAM GB-hours, and 150 GB of storage",
+      "limitsQuote": "Hero allows 100 concurrently running sprites and 100 warm sprites; cold sprites are unlimited, and higher tiers raise those ceilings.",
+      "notes": "The pricing page says no plans exist; Hero is the only tier whose fee and full allowance are quoted on a live Fly page."
+    },
+    {
+      "name": "Mythic",
+      "monthlyFeeUsd": 2000,
+      "includedUsage": "28,000 RAM GB-hours included (the FAQ quotes only the RAM bucket); overage at standard rates.",
+      "limits": {
+        "maxConcurrent": null,
+        "maxWarm": null,
+        "maxSessionHours": null,
+        "maxVcpu": 8,
+        "maxRamGiB": 16,
+        "maxDiskGiB": 100,
+        "createsPerMinute": 240
+      },
+      "url": "https://fly.io/sprites/",
+      "quote": "One customer's usage was close to Mythic's 28,000 included RAM GB-hours, but at $2,000/mo the plan cost more than the overage it saved.",
+      "limitsQuote": "Sprite creation rate is also tiered: 10 sprites/minute on pay-as-you-go, rising with plan tier from 60/minute on Adventurer up to 240/minute on Mythic.",
+      "notes": "240 creates/minute on Mythic comes from the same FAQ paragraph as the creation-rate quote."
+    },
+    {
+      "name": "Adventurer, Veteran, Champion, Legend, Epic",
+      "monthlyFeeUsd": null,
+      "includedUsage": null,
+      "limits": {
+        "maxConcurrent": null,
+        "maxSessionHours": null,
+        "maxVcpu": 8,
+        "maxRamGiB": 16,
+        "maxDiskGiB": 100,
+        "createsPerMinute": 60
+      },
+      "url": "https://fly.io/sprites/",
+      "quote": "Pay-as-you-go and the plans below Hero (Adventurer, Veteran) have community support.",
+      "limitsQuote": "Hero, Champion, and Legend include Standard email support; Epic and Mythic include Premium.",
+      "rateQuote": "Sprite creation rate is also tiered: 10 sprites/minute on pay-as-you-go, rising with plan tier from 60/minute on Adventurer up to 240/minute on Mythic.",
+      "notes": "These five tiers are named on the live FAQ but their fees and allowances are not published there. 60 creates/minute on Adventurer is the only published limit. Battleships carries a full ladder attributed to a 2026-01-16 community post; see diffs."
+    }
+  ],
+  "compute": {
+    "billingBasis": "Per-resource usage: cumulative CPU time, actual memory time and storage. One fixed Sprite shape; memory is autoscaled rather than chosen.",
+    "cpuBilledOn": "actual_used",
+    "ramBilledOn": "actual_used",
+    "floor": {
+      "vcpu": 0.0625,
+      "ramGiB": 0.25,
+      "url": "https://fly.io/sprites/checkpoint-restore/",
+      "quote": "Minimum 0.0625 CPU while running.",
+      "ramQuote": "Minimum 256MB RAM while running."
+    },
+    "increment": {
+      "compute": "per_second",
+      "storage": "hourly, aggregated monthly",
+      "url": "https://fly.io/sprites/checkpoint-restore/",
+      "quote": "All compute resources are billed per second. Storage is billed hourly but aggregated monthly.",
+      "conflict": "The pricing page says 'Metered per hour of active use' and 'All resources are billed hourly, based on actual usage.' Treat per-second as the finer, more specific statement and confirm with Fly for invoicing."
+    },
+    "perResourceRates": [
+      {
+        "resource": "cpu",
+        "usdPerVcpuHour": 0.0385,
+        "originalUnit": "USD per CPU-hour",
+        "originalFigure": "$0.0385 / CPU-hour",
+        "url": "https://fly.io/pricing/",
+        "quote": "Cumulative CPU usage measured by cpu.stat",
+        "figureQuote": "$0.0385 / CPU-hour"
+      },
+      {
+        "resource": "ram",
+        "usdPerGiBRamHour": 0.021875,
+        "originalUnit": "USD per GB-hour",
+        "originalFigure": "$0.021875 / GB-hour",
+        "url": "https://fly.io/pricing/",
+        "quote": "Actual memory usage",
+        "figureQuote": "$0.021875 / GB-hour"
+      }
+    ],
+    "fixedSizes": [
+      {
+        "name": "Sprite",
+        "vcpu": 8,
+        "ramGiB": null,
+        "includedDiskGiB": 100,
+        "hourlyPriceUsd": null,
+        "monthlyPriceUsd": null,
+        "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+        "quote": "The vCPU count and the storage ceiling are fixed; memory is handled automatically.",
+        "ramQuote": "up to 8 CPUs and 16GB of RAM for any given run",
+        "notes": "No fixed hourly or monthly price: the bill is usage-based. Memory is platform-managed, advertised up to 16 GB per run."
+      }
+    ],
+    "planRates": "Plan fees buy non-fungible buckets of CPU-hours, RAM GB-hours and storage GB; overage bills at the same list rates as pay-as-you-go.",
+    "notes": "Do not substitute Fly Machines preset prices: Sprites have their own section on the pricing page. The FAQ says plans' allowances are not unlimited usage."
+  },
+  "storage": {
+    "disk": {
+      "hot": {
+        "usdPerGiBHour": 0.000683,
+        "usdPerGiBMonth": 0.5,
+        "url": "https://fly.io/pricing/",
+        "quote": "Hot Bills while the Sprite is awake",
+        "figureQuote": "$0.000683 / GB-hour"
+      },
+      "cold": {
+        "usdPerGiBHour": 2.7e-05,
+        "usdPerGiBMonth": 0.02,
+        "url": "https://fly.io/pricing/",
+        "quote": "Cold Bills for as long as you keep it",
+        "figureQuote": "$0.000027 / GB-hour"
+      },
+      "includedCapacityGiB": 100,
+      "capacityQuote": "Every Sprite starts with 100 GB of storage.",
+      "capacityUrl": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+      "billedOn": "bytes actually written, not the 100 GB ceiling",
+      "writtenQuote": "you pay for the bytes you actually write, not the full 100 GB",
+      "writtenUrl": "https://docs.fly.io/sprites/concepts/lifecycle.md"
+    },
+    "billedWhileStopped": {
+      "charged": true,
+      "url": "https://fly.io/pricing/",
+      "quote": "CPU, memory and hot storage bill while a Sprite is awake. Cold storage bills until you delete the data."
+    },
+    "snapshotStorage": {
+      "usdPerGiBMonth": null,
+      "pricingModel": "Checkpoint blocks are billed as stored blocks at the storage rates; no separate checkpoint rate is published.",
+      "url": "https://docs.fly.io/sprites/concepts/checkpoints.md",
+      "quote": "You're billed for the blocks actually kept, and deleting a checkpoint frees that space right away."
+    },
+    "retention": {
+      "stoppedDataKept": "Indefinitely, at the cold storage rate, until the Sprite or its data is deleted.",
+      "url": "https://docs.fly.io/sprites/working-with-sprites.md",
+      "quote": "All data is permanently deleted: files, packages, checkpoints. No undo.",
+      "notes": "Warm and cold states both stop compute billing; cold storage continues. There is no published retention limit or expiry for a Sprite that still exists."
+    },
+    "notes": "The FAQ's shorthand that warm and cold are 'not billed' means no compute charge; the pricing page separately bills cold storage for as long as the data is kept."
+  },
+  "egress": {
+    "usdPerGiB": 0,
+    "free": true,
+    "url": "https://fly.io/sprites/",
+    "quote": "No. Sprites bandwidth isn't metered today.",
+    "notes": "The FAQ adds that any egress lines on an invoice come from Fly Machines, not Sprites."
+  },
+  "other": [
+    {
+      "item": "Dedicated IPv4",
+      "priceUsdPerMonth": null,
+      "status": "not published for Sprites",
+      "url": "https://fly.io/pricing/",
+      "quote": "Dedicated IPv4",
+      "figureQuote": "$2.00 / mo",
+      "notes": "That $2.00/mo line is under Machines Storage and network. No Sprites-specific IPv4 price or allocation is published; Sprites are reached on their own HTTPS URL."
+    },
+    {
+      "item": "Seats",
+      "priceUsdPerMonth": null,
+      "status": "not published",
+      "url": "https://fly.io/pricing/",
+      "quote": "nothing charged per Sprite",
+      "notes": "No per-user or per-seat charge is published; plan limits are per organization."
+    },
+    {
+      "item": "Minimum spend",
+      "priceUsdPerMonth": null,
+      "status": "not published",
+      "url": "https://fly.io/pricing/",
+      "quote": "Billed hourly, with nothing to pick up front"
+    }
+  ],
+  "freeTier": {
+    "type": "one-time trial credit",
+    "amountUsd": 30,
+    "monthlyCreditUsd": 0,
+    "limits": "One $30 credit per user and at most one per organization; it applies to Sprites usage only and cannot pay a plan fee.",
+    "url": "https://fly.io/sprites/",
+    "quote": "Each user can grant one $30 trial credit, and each org can receive at most one.",
+    "quote2": "Credits apply to Sprites usage only. The monthly subscription fee is billed separately and isn't covered.",
+    "notes": "Not a recurring free tier. The product page markets it as 'Create, like, 500 Sprites free.'"
+  },
+  "diffs": [
+    {
+      "field": "plans",
+      "ours": "Pricing page says there are no plans; the FAQ contradicts it and quotes only Hero's allowance.",
+      "battleships": "Full ladder with fees: Adventurer $20, Veteran $50, Hero $100, Champion $200, Legend $500, Epic $1,000, Mythic $2,000, with CPU/RAM/storage buckets and concurrency per tier, attributed to a 2026-01-16 community post.",
+      "live": "Pricing page still says no plans and no tiers. The FAQ confirms Hero at $100 with 1,200 CPU-h / 4,800 RAM GB-h / 150 GB, and Mythic at $2,000 with 28,000 RAM GB-h. Adventurer, Veteran, Champion, Legend and Epic are named without prices.",
+      "url": "https://fly.io/pricing/",
+      "quote": "No plans and no tiers, and nothing charged per Sprite."
+    },
+    {
+      "field": "compute.billingIncrement",
+      "ours": "Not published; the FAQ says resources are billed hourly.",
+      "battleships": "min_billed_seconds 0 and active_floor 0 (no minimum billed duration, no CPU floor).",
+      "live": "The checkpoint product page says compute is billed per second and storage hourly, while the pricing page and FAQ say metered per hour.",
+      "url": "https://fly.io/sprites/checkpoint-restore/",
+      "quote": "All compute resources are billed per second. Storage is billed hourly but aggregated monthly."
+    },
+    {
+      "field": "compute.cpuFloor",
+      "ours": "0.0625 CPU and 256 MB RAM minimum while running, from the checkpoint product page.",
+      "battleships": "active_floor 0, i.e. no CPU activity floor.",
+      "live": "Both minimums are still published, so the card's zero floor understates the bill for a nearly idle Sprite.",
+      "url": "https://fly.io/sprites/checkpoint-restore/",
+      "quote": "Minimum 0.0625 CPU while running."
+    },
+    {
+      "field": "plans[].limits.maxConcurrent",
+      "ours": "Not published for pay-as-you-go; limits described only as scaling with the plan.",
+      "battleships": "PAYG null; Adventurer 20, Veteran 50, Hero 100, Champion 200, Legend 500, Epic 1,000, Mythic 2,000 running plus the same number warm.",
+      "live": "Hero allows 100 concurrently running and 100 warm; pay-as-you-go still has no published cap.",
+      "url": "https://fly.io/sprites/",
+      "quote": "Hero allows 100 concurrently running sprites and 100 warm sprites; cold sprites are unlimited, and higher tiers raise those ceilings."
+    },
+    {
+      "field": "compute.fixedSizes[0].ramGiB",
+      "ours": "Up to 16 GB per run, from the checkpoint product page.",
+      "battleships": "max_ram_gib 16 as the autoscale ceiling.",
+      "live": "The lifecycle page now refuses to publish a RAM figure at all: memory is assigned per Sprite and autoscaled, and the 16 GB figure survives only on marketing pages.",
+      "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
+      "quote": "A Sprite doesn't run with one published RAM figure."
+    },
+    {
+      "field": "storage.snapshotStorage",
+      "ours": "No separate checkpoint price; blocks are billed as storage.",
+      "battleships": "snapshot_gib_month 0.02, explicitly assuming checkpoints bill as cold storage (marked unverified).",
+      "live": "Still no separate checkpoint rate; the docs say kept blocks are billed, without naming which of the hot or cold rates applies.",
+      "url": "https://docs.fly.io/sprites/concepts/checkpoints.md",
+      "quote": "You're billed for the blocks actually kept, and deleting a checkpoint frees that space right away."
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "Sprites Overview",
+      "url": "https://docs.fly.io/sprites/index.md"
+    },
+    "sizes-regions": {
+      "title": "Lifecycle and Persistence (fixed 8 vCPU, 100 GB; no region selection documented)",
+      "url": "https://docs.fly.io/sprites/concepts/lifecycle.md"
+    },
+    "lifecycle": {
+      "title": "Lifecycle and Persistence",
+      "url": "https://docs.fly.io/sprites/concepts/lifecycle.md"
+    },
+    "snapshots-forks": {
+      "title": "Checkpoints",
+      "url": "https://docs.fly.io/sprites/concepts/checkpoints.md"
+    },
+    "storage": {
+      "title": "Lifecycle and Persistence — Capacity and billing",
+      "url": "https://docs.fly.io/sprites/concepts/lifecycle.md"
+    },
+    "idle-timers": {
+      "title": "Working with Sprites — Idle detection",
+      "url": "https://docs.fly.io/sprites/working-with-sprites.md"
+    },
+    "reaching-it": {
+      "title": "Networking",
+      "url": "https://docs.fly.io/sprites/concepts/networking.md"
+    },
+    "custom-domains": null,
+    "outbound-network": {
+      "title": "Networking — Egress policy",
+      "url": "https://docs.fly.io/sprites/concepts/networking.md"
+    },
+    "keys-secrets": {
+      "title": "Connectors",
+      "url": "https://docs.fly.io/sprites/concepts/connectors.md"
+    },
+    "ways-to-drive": {
+      "title": "CLI Commands Reference",
+      "url": "https://docs.fly.io/sprites/cli/commands.md"
+    },
+    "built-in-agents": null,
+    "teams-accounts": {
+      "title": "CLI Authentication (Fly.io account and org switching)",
+      "url": "https://docs.fly.io/sprites/cli/authentication.md"
+    },
+    "billing-models": {
+      "title": "Fly.io Pricing — Sprites",
+      "url": "https://fly.io/pricing/"
+    },
+    "trials-free-tiers": {
+      "title": "Sprites FAQ — trial credits",
+      "url": "https://fly.io/sprites/"
+    },
+    "quickstart": {
+      "title": "Quickstart",
+      "url": "https://docs.fly.io/sprites/quickstart.md"
+    },
+    "pricing": {
+      "title": "Fly.io Pricing — Sprites",
+      "url": "https://fly.io/pricing/"
+    }
+  },
+  "deploy": {
+    "targets": [
+      "Hermes Agent (NousResearch/hermes-agent)",
+      "OpenClaw"
+    ],
+    "oneClick": false,
+    "managedOption": false,
+    "officialTemplate": false,
+    "manualRoute": [
+      "Install the Sprites CLI and sign in with a Fly.io account, then create a Sprite (sprite create).",
+      "Install the agent inside the Sprite, either over sprite console or by pointing the agent's terminal backend at Sprites.",
+      "Register the agent as a Sprite service so the runtime restarts it after a cold wake, and give it an HTTP port if it needs to answer requests.",
+      "Keep it awake during long runs with the Tasks API; otherwise it pauses about 30 seconds after activity stops."
+    ],
+    "nonCoder": false,
+    "evidence": [
+      {
+        "claim": "Fly's own FAQ markets Hermes and OpenClaw as things to run on a Sprite.",
+        "url": "https://fly.io/sprites/",
+        "quote": "Hermes, Pi, OpenClaw… whatever your flavour, an agent with access to your inbox and calendar shouldn't live on your laptop. Give it a Sprite that sleeps until it's needed and wakes up remembering everything."
+      },
+      {
+        "claim": "But the only official Hermes integration is a terminal backend: Hermes keeps running on your own machine and only its shell commands run in Sprites. That is not hosting Hermes on Sprites.",
+        "url": "https://docs.fly.io/sprites/integrations/agent-plugins.md",
+        "quote": "adds a terminal backend. Hermes stays on its existing host, while its shell commands execute in persistent Sprites."
+      },
+      {
+        "claim": "A service is the supported way to bring an agent back after a cold wake.",
+        "url": "https://docs.fly.io/sprites/concepts/services.md",
+        "quote": "A service is a process the Sprite runtime owns: it starts when the Sprite boots, restarts if it crashes, and can receive the HTTP traffic that hits your Sprite's URL."
+      },
+      {
+        "claim": "Getting started is a command-line flow, not a dashboard flow.",
+        "url": "https://docs.fly.io/sprites/quickstart.md",
+        "quote": "Install with our install script (macOS/Linux)"
+      }
+    ],
+    "notes": "No official Hermes or OpenClaw hosting template or one-click deploy was found. A non-coder cannot install and supervise the agent from the dashboard alone; the documented path is CLI plus shell. An always-on agent also has to defeat the ~30 second idle pause with a service or the Tasks API, and a task hold is capped at 1 hour and must be renewed."
+  }
+}

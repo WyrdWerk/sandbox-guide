@@ -1,0 +1,375 @@
+{
+  "id": "runtime",
+  "name": "Runtime (withruntime.com)",
+  "checkedOn": "2026-10-29",
+  "regions": {
+    "value": "One region: Virginia, United States. No region choice.",
+    "url": "https://withruntime.com/docs/trust",
+    "quote": "Everything runs in one region, in Virginia, United States"
+  },
+  "plans": [
+    {
+      "name": "Free usage (no credit)",
+      "monthlyFeeUsd": 0,
+      "includedUsage": "100 GiB-hours of memory, 25 vCPU-hours of active CPU, 10 GB of saved copies and 5 GB of volumes; no card.",
+      "limits": {
+        "maxConcurrent": 4,
+        "maxSessionLength": "No time limit unless timeoutSeconds is set (60 to 86,400 s).",
+        "maxSize": "2 vCPU / 4 GiB RAM / 10 GiB disk"
+      },
+      "url": "https://withruntime.com/docs/included-usage",
+      "quote": "Up to four sandboxes running at the same time, each up to 2 vCPU and 4 GiB of memory, with up to 10 GiB of disk"
+    },
+    {
+      "name": "Paid (prepaid credit, no plan)",
+      "monthlyFeeUsd": 0,
+      "includedUsage": "None beyond the monthly free usage. Prepay $10 to $10,000 by card; no plan fee, seat price or commitment.",
+      "limits": {
+        "maxConcurrent": 100,
+        "maxSessionLength": "No time limit unless timeoutSeconds is set; a busy sandbox runs until stopped, idle-paused, or out of credit.",
+        "maxSize": "16 vCPU / 64 GiB RAM / 400 GiB disk"
+      },
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "A paid account runs 100 sandboxes at once. ... One paid sandbox can have up to 16 vCPUs and 64 GiB of memory, at the same per-unit rates, and a disk of up to 400 GiB"
+    },
+    {
+      "name": "Paid with auto top-up",
+      "monthlyFeeUsd": 0,
+      "includedUsage": "Same rates and free usage; each automatic top-up adds 5% extra credit.",
+      "limits": {
+        "maxConcurrent": 200,
+        "maxSessionLength": "No time limit unless timeoutSeconds is set.",
+        "maxSize": "16 vCPU / 64 GiB RAM / 400 GiB disk"
+      },
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "While auto top-up is on with a saved card, the account runs 200 sandboxes at once instead of 100, with twice the vCPUs, memory and disk across them."
+    },
+    {
+      "name": "Plans (private beta)",
+      "monthlyFeeUsd": null,
+      "includedUsage": "A monthly fee returned as plan usage at the same measured prices; unused plan usage expires monthly. No prices published.",
+      "limits": {
+        "maxConcurrent": null,
+        "maxSessionLength": null,
+        "maxSize": null
+      },
+      "url": "https://withruntime.com/docs/plans",
+      "quote": "Plans are in a private beta. Only the organizations in it can see or choose one. ... A plan is a monthly fee that comes back as usage"
+    }
+  ],
+  "compute": {
+    "model": "per-resource",
+    "rates": [
+      {
+        "resource": "CPU (active)",
+        "usdPerVcpuHour": 0.025,
+        "original": {
+          "value": 0.025,
+          "unit": "USD per active vCPU-hour"
+        },
+        "basis": "measured CPU use, above a per-sandbox floor",
+        "url": "https://withruntime.com/pricing",
+        "quote": "$0.025 per active vCPU-hour"
+      },
+      {
+        "resource": "CPU (reserved)",
+        "usdPerVcpuHour": 0.025,
+        "original": {
+          "value": 0.025,
+          "unit": "USD per vCPU-hour, billed as if always busy"
+        },
+        "basis": "allocated; every reserved vCPU billed as if fully busy",
+        "url": "https://withruntime.com/docs/pricing",
+        "quote": "Reserved CPU keeps every vCPU for the sandbox and bills it as if it were always busy."
+      },
+      {
+        "resource": "Memory",
+        "usdPerGibRamHour": 0.0075,
+        "original": {
+          "value": 0.0075,
+          "unit": "USD per reserved GiB-hour"
+        },
+        "basis": "reserved memory, billed while compute runs",
+        "url": "https://withruntime.com/pricing",
+        "quote": "$0.0075 per reserved GiB-hour"
+      }
+    ],
+    "cpuBasis": "measured",
+    "cpuBasisNote": {
+      "value": "CPU is billed on measured use, not on the vCPUs allocated. Reserved CPU is the opt-in exception and bills every vCPU as if always busy.",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "You pay for the CPU your code uses, not the CPUs it holds: $0.025 per active vCPU-hour and $0.0075 per reserved GiB-hour of memory."
+    },
+    "floor": {
+      "value": "50 millicores (0.05 vCPU) per sandbox by default; configurable with cpuFloorMillis, up to vcpu x 1000.",
+      "url": "https://withruntime.com/pricing",
+      "quote": "Waiting means memory plus the default CPU floor of 50 millicores, a twentieth of a vCPU."
+    },
+    "billingIncrement": {
+      "value": "Per second.",
+      "url": "https://withruntime.com/docs/reservations",
+      "quote": "Sandboxes you run bill as usual, per second."
+    },
+    "minimum": {
+      "value": "No minimum billed time; no one-minute minimum.",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "Compute has no one-minute minimum."
+    },
+    "perPlanDifferences": {
+      "value": "No plan or class changes the unit rates. Free, paid and plan accounts use the same $0.025/vCPU-hour and $0.0075/GiB-hour; a plan fee is returned as plan usage at those same prices. Reserved CPU is the only class change: it bills every vCPU as if always busy at the same rate.",
+      "url": "https://withruntime.com/docs/plans",
+      "quote": "Each month, the fee is given back as plan usage, at the same measured prices as any credit."
+    },
+    "notes": "Memory is billed for the whole time compute runs, including while the code waits. CPU is billed from the moment the sandbox is ready. A running sandbox pauses itself after 300 seconds idle by default; idlePauseSeconds can be set from 60 to 86,400, or 0 to keep it running.",
+    "memoryBasis": {
+      "value": "Memory is billed for as long as compute runs, including while the code waits.",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "Memory is billed while compute runs."
+    },
+    "idle": {
+      "value": "A sandbox pauses itself after 300 seconds with nothing happening; idlePauseSeconds can be set from 60 to 86,400, or 0 to keep it running.",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "A sandbox pauses itself after 300 seconds with nothing happening in it"
+    },
+    "sessionLimit": {
+      "value": "No maximum session length by default; timeoutSeconds can set a 60-to-86,400-second limit.",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "A sandbox has no time limit unless you set one with `timeoutSeconds`."
+    }
+  },
+  "storage": {
+    "disk": {
+      "usdPerGibMonth": 0.08589934592,
+      "original": {
+        "value": 0.08,
+        "unit": "USD per decimal GB (10^9 bytes) per 30-day month"
+      },
+      "included": "First 10 GiB of a running sandbox's disk is included; past that, only the blocks the disk alone holds are billed at the same rate.",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "The first 10 GiB of a running sandbox's disk is included. Past that, the blocks that only its disk holds are billed at the ... rate, $0.08 per decimal GB per 30-day month, measured every 30 seconds while it runs."
+    },
+    "billedWhenStopped": {
+      "value": "Yes. Paused and stopped sandboxes are billed for disk and memory-snapshot blocks they alone own; paused CPU and RAM are not billed.",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "A paused sandbox keeps its files and memory for $0.08 per decimal GB per 30-day month."
+    },
+    "snapshot": {
+      "usdPerGibMonth": 0.08589934592,
+      "original": {
+        "value": 0.08,
+        "unit": "USD per decimal GB per 30-day month"
+      },
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "$0.08 per decimal GB per 30-day month ... 119 microdollars per GiB-hour"
+    },
+    "volume": {
+      "usdPerGibMonth": 0.11016,
+      "original": {
+        "value": 0.000153,
+        "unit": "USD per GiB-hour (153 microdollars)"
+      },
+      "chargedOn": "The full size you create it with, written or not.",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "153 microdollars per GiB-hour ... about $0.11 per GiB per 30-day month"
+    },
+    "volumeBackup": {
+      "usdPerGibMonth": 0.02147483648,
+      "original": {
+        "value": 0.02,
+        "unit": "USD per decimal GB per 30-day month"
+      },
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "Volume backups cost $0.02 per decimal GB per 30-day month."
+    },
+    "retention": {
+      "value": "A stopped or paused sandbox's disk is kept 30 days in an account that has bought credit or saved a card; any other item, and every item in an account that has done neither, is kept 7 days. Snapshots are kept as long as the account has credit, 7 days without.",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "A stopped or paused sandbox's disk is kept for 30 days in an account that has bought credit or saved a card. Any other item, and every item in an account that has done neither, is kept for seven days."
+    },
+    "snapshotRetention": {
+      "value": "A snapshot is kept as long as the account has credit, 7 days without credit, unless a 1-to-365-day retention is set.",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "A snapshot is kept as long as you have credit, with no end date (7 days without credit), unless you choose 1 to 365 days."
+    },
+    "billingIncrement": {
+      "value": "Storage is paid an hour at a time from the balance.",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "Storage is paid an hour at a time from your balance."
+    }
+  },
+  "egress": {
+    "included": "First 100 GiB per account per month free.",
+    "usdPerGb": 0.02,
+    "usdPerGib": 0.02147483648,
+    "original": {
+      "value": 0.02,
+      "unit": "USD per decimal GB past 100 GiB/month"
+    },
+    "url": "https://withruntime.com/docs/pricing",
+    "quote": "Each account's first 100 GiB of outbound traffic a month is free. After that, it costs $0.02 per decimal GB."
+  },
+  "other": [
+    {
+      "name": "Dedicated IPv4",
+      "price": "$5 per 30-day month",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "A dedicated IPv4 address costs $5 per 30-day month."
+    },
+    {
+      "name": "WireGuard tunnel (up to 16 peers)",
+      "price": "$5 per 30-day month",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "A WireGuard tunnel costs $5 per 30-day month, including up to 16 peers."
+    },
+    {
+      "name": "Seats, plan fee, minimum spend",
+      "price": "None",
+      "url": "https://withruntime.com/pricing",
+      "quote": "There is no plan fee, no seat price and no commitment."
+    },
+    {
+      "name": "Booked burst capacity not used",
+      "price": "$0.001875 per GiB-hour (a quarter of the memory rate)",
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "Booked room that none of them uses costs a quarter of the memory rate, $0.001875 per GiB-hour, with no CPU charge."
+    }
+  ],
+  "freeTier": {
+    "what": "100 free hours of a 1 GB machine: 100 GiB-hours of memory and 25 vCPU-hours of active CPU, plus 10 GB of saved copies and 5 GB of volumes.",
+    "conditions": "Once across the first 30 days for an account that has never paid; every month, renewed on the 1st (UTC), once the account has paid. No card.",
+    "limits": "4 sandboxes at once, 2 vCPU / 4 GiB / 10 GiB disk each, 8 vCPU / 16 GiB across running sandboxes, 5 sandboxes kept, 50 created per 24 hours.",
+    "url": "https://withruntime.com/docs/included-usage",
+    "quote": "Every account gets free usage, with no card, after a verified sign-in. It is 100 free hours of a 1 GB machine.",
+    "limitsUrl": "https://withruntime.com/docs/included-usage",
+    "limitsQuote": "At most 8 vCPU and 16 GiB at the same time across every sandbox and image build that is running. ... At most 50 sandboxes made a day",
+    "networkCaveat": {
+      "value": "An account opened from a data-centre or VPN network gets its free usage only after it adds credit.",
+      "url": "https://withruntime.com/docs/included-usage",
+      "quote": "An account opened from a data-centre or VPN network (a cloud provider's address, or a VPN company's) gets its free usage once it adds credit, not before."
+    }
+  },
+  "diffs": [
+    {
+      "field": "freeTier.maxSandboxesKept",
+      "ours": "5",
+      "battleships": "10",
+      "live": "5",
+      "url": "https://withruntime.com/docs/included-usage",
+      "quote": "At most 5 sandboxes kept, running, paused or stopped."
+    },
+    {
+      "field": "compute.cpuFloorMillicores",
+      "ours": "50",
+      "battleships": "0 (active_floor field; its note says the 0.05-vCPU floor cannot be encoded)",
+      "live": "50",
+      "url": "https://withruntime.com/pricing",
+      "quote": "Waiting means memory plus the default CPU floor of 50 millicores, a twentieth of a vCPU."
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "Isolation and account boundaries",
+      "url": "https://withruntime.com/docs/security"
+    },
+    "sizes-regions": {
+      "title": "The sandbox environment (disk, CPU, memory; one region in Virginia)",
+      "url": "https://withruntime.com/docs/sandbox-environment"
+    },
+    "lifecycle": {
+      "title": "Time and lifetime: pause, stop or delete",
+      "url": "https://withruntime.com/docs/sandbox-environment#time-and-lifetime"
+    },
+    "snapshots-forks": {
+      "title": "JavaScript SDK: snapshots and forks",
+      "url": "https://withruntime.com/docs/javascript#snapshots-and-forks"
+    },
+    "storage": {
+      "title": "Storage and backups",
+      "url": "https://withruntime.com/docs/storage"
+    },
+    "idle-timers": {
+      "title": "Idle time is paused time (pricing guide)",
+      "url": "https://withruntime.com/docs/pricing"
+    },
+    "reaching-it": {
+      "title": "Private preview links",
+      "url": "https://withruntime.com/docs/networking#private-preview-links"
+    },
+    "custom-domains": {
+      "title": "Custom domains",
+      "url": "https://withruntime.com/docs/networking#custom-domains"
+    },
+    "outbound-network": {
+      "title": "Outbound traffic",
+      "url": "https://withruntime.com/docs/egress"
+    },
+    "keys-secrets": {
+      "title": "Secrets sandboxes never see",
+      "url": "https://withruntime.com/docs/security#secrets-sandboxes-never-see"
+    },
+    "ways-to-drive": {
+      "title": "The runtime CLI",
+      "url": "https://withruntime.com/docs/cli"
+    },
+    "built-in-agents": null,
+    "teams-accounts": {
+      "title": "Teams and the audit log",
+      "url": "https://withruntime.com/docs/teams"
+    },
+    "billing-models": {
+      "title": "Understand your sandbox bill",
+      "url": "https://withruntime.com/docs/pricing"
+    },
+    "trials-free-tiers": {
+      "title": "Free usage",
+      "url": "https://withruntime.com/docs/included-usage"
+    },
+    "quickstart": {
+      "title": "Get started with Runtime Cloud",
+      "url": "https://withruntime.com/docs/start"
+    },
+    "pricing": {
+      "title": "Runtime pricing",
+      "url": "https://withruntime.com/pricing"
+    }
+  },
+  "deploy": {
+    "oneClickOrManaged": "Not found. No Hermes Agent or OpenClaw guide, template or managed option exists in Runtime's docs index; /docs/hermes.md and /docs/openclaw.md return HTTP 404 \"Guide not found\".",
+    "officialTemplateOrGuide": "Not found for Hermes Agent or OpenClaw.",
+    "manualRoute": "Sign in, press Start a sandbox on Home for a browser shell, then install Hermes with its install script inside the sandbox, set a model provider key, and keep the sandbox with persistent: true so it does not idle-pause. Runtime documents the sandbox and persistence; it does not document Hermes.",
+    "nonCoderDashboardOnly": "Partly. The dashboard creates a sandbox and opens a shell in the page, and a Desktop product exists, but installing and configuring Hermes still means typing shell commands and editing a model config. No click-only route is documented.",
+    "urls": [
+      {
+        "url": "https://withruntime.com/docs/start",
+        "quote": "It opens with a shell running in the page, on your free hours."
+      },
+      {
+        "url": "https://withruntime.com/docs/pricing",
+        "quote": "persistent: true keeps a sandbox running until you stop it, with no idle pause."
+      },
+      {
+        "url": "https://github.com/NousResearch/hermes-agent",
+        "quote": "curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash"
+      }
+    ],
+    "notFound": [
+      {
+        "url": "https://withruntime.com/docs/hermes.md",
+        "status": 404,
+        "quote": "Guide not found"
+      },
+      {
+        "url": "https://withruntime.com/docs/openclaw.md",
+        "status": 404,
+        "quote": "Guide not found"
+      }
+    ]
+  },
+  "battleships": {
+    "id": "withruntime",
+    "url": "https://battleships.dev/data/providers/withruntime.json",
+    "index": "https://battleships.dev/data/index.json",
+    "generated": "2026-10-14",
+    "role": "secondary cross-check, not proof"
+  }
+}

@@ -35,13 +35,17 @@ src/
     groups.json             the seven feature groups, in order
     situations.json         the eight jobs on the home page and compare/situations
     changes.json            the dated changes on /changes/, newest first
+    pricing/<id>.json       one rate card per provider for the cost calculator
+    usecases.json           the use-case guides; text may carry [links](url) and **bold**
+    docs.json               per provider, the doc page for each feature (from research/rates)
     site.json               site title, check date, confidence tags, limits
     schema.ts               TypeScript types for all of the above
   lib/data.ts               loads the JSON, sorts it, validates it at build time
   lib/plain.ts              strips Markdown emphasis from provider text once at load
+  lib/cost.ts               the pricing engine and calculator presets, shared by build and browser
   layouts/Base.astro        page shell: skip link, header, nav, footer
   components/               badge, quote, page header, section nav, split, watch, compare table, cost card
-  pages/                    home, features, compare, providers, changes, how-we-checked
+  pages/                    home, use cases, features, compare, costs, providers, changes, how-we-checked
   styles/tokens.css         design tokens: dark and light palettes, type, space
   styles/theme.css          the single stylesheet; imports tokens.css
 ```
@@ -55,7 +59,8 @@ src/
 3. Add a row for the provider to every file in `src/data/features/`, with a `figure` (the number
    that decides the row, or “Not published”) and a one-line `scenario`. The build fails, naming the
    feature, if a provider has no row, no figure or no scenario.
-4. Add it to `situations.json` where relevant, to `changes.json` for dated changes, and to
+4. Add a rate card in `src/data/pricing/` (the build fails without one) and its doc links to
+   `docs.json`. Add it to `situations.json` and the `routes` of each use case where relevant, to `changes.json` for dated changes, and to
    `compare/side-by-side.astro`'s `kinds` map.
 5. `npm run build`.
 

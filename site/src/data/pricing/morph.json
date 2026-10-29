@@ -1,0 +1,41 @@
+{
+  "provider": "morph",
+  "checkedOn": "2026-10-29",
+  "summary": "Compute units per hour: the largest of vCPU, RAM \u00f7 4 and disk \u00f7 16, at $0.05 each.",
+  "mcu": {
+    "rate": 0.05,
+    "ramPer": 4,
+    "diskPer": 16
+  },
+  "disk": {
+    "stopped": 1e-05,
+    "stoppedIncludesRam": true
+  },
+  "between": "kept",
+  "plans": [
+    {
+      "name": "Developer",
+      "fee": 0
+    },
+    {
+      "name": "Team",
+      "fee": 40,
+      "credit": 50
+    },
+    {
+      "name": "Scale",
+      "fee": 250,
+      "credit": 375
+    }
+  ],
+  "notes": [
+    "Between sessions the instance is paused: it bills only for its snapshot. A stopped instance is deleted.",
+    "Live pages disagree on the free tier: 0 units on the pricing page, 300 units in the plans doc, 300 compute hours on the sign-up page. None is subtracted."
+  ],
+  "sources": [
+    {
+      "label": "Pricing",
+      "url": "https://cloud.morph.so/web/subscribe"
+    }
+  ]
+}

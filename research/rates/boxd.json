@@ -1,0 +1,456 @@
+{
+  "id": "boxd",
+  "provider": "boxd",
+  "site": "https://boxd.sh",
+  "checkedOn": "2026-10-29",
+  "currency": "USD and EUR (two published lists behind a toggle; the USD list is about 1.2x the EUR list)",
+  "battleships": {
+    "id": "boxd",
+    "exists": true,
+    "url": "https://battleships.dev/data/providers/boxd.json",
+    "note": "Battleships carries the post-cut rates (checked 2026-10-14) and still says 50 machines per org."
+  },
+  "quoteNote": "Quotes are copied from the page as rendered on 2026-10-29. The rate-card quotes come from the USD toggle unless marked EUR. boxd's rate card changed in October 2026: the 9 Oct Wayback capture shows EUR 0.049 / 0.015 / 0.0001 and '50 machines included'.",
+  "plans": [
+    {
+      "name": "Pay as you go",
+      "monthlyUsd": 0,
+      "included": "$30 of one-time credits; no recurring allowance",
+      "limits": {
+        "maxConcurrent": 100,
+        "maxConcurrentNote": "The pricing page and the pricing FAQ say 100; the resources guide and the main FAQ still say 50.",
+        "maxSessionHours": null,
+        "maxSessionNote": "No session limit; a machine hibernates after 4 h without network traffic by default, and that can be turned off.",
+        "maxSize": "8 vCPU / 32 GiB (the docs quota); the FAQ says email for 8 vCPU / 32 GiB and calls 4 vCPU / 16 GiB the largest self-serve size"
+      },
+      "url": "https://boxd.sh/pricing",
+      "quote": "There is no monthly plan and no per-seat fee."
+    },
+    {
+      "name": "Custom",
+      "monthlyUsd": null,
+      "included": "not published",
+      "limits": {
+        "maxConcurrent": null,
+        "maxSessionHours": null,
+        "maxSize": "bigger machines by agreement"
+      },
+      "url": "https://boxd.sh/pricing",
+      "quote": "Bigger machines, volume pricing, or boxd on your own hardware. For companies of any size."
+    },
+    {
+      "name": "Self-hosted",
+      "monthlyUsd": null,
+      "included": "not published; annual licence",
+      "limits": {
+        "maxConcurrent": null,
+        "maxSessionHours": null,
+        "maxSize": "set by your own quotas"
+      },
+      "url": "https://boxd.sh/pricing",
+      "quote": "Self-host it: a single Rust binary you run in your own VPC, datacenter, or country. No Kubernetes, no external Postgres, no Redis. EU data residency, SSO + audit logs, annual license, dedicated support."
+    }
+  ],
+  "planNotes": [
+    {
+      "claim": "Every account is an organization with one credit balance; the included machine quota is stated as 100 on the pricing page and the pricing FAQ.",
+      "url": "https://boxd.sh/pricing",
+      "quote": "100 machines included, raiseable on request"
+    },
+    {
+      "claim": "There is no per-seat fee.",
+      "url": "https://boxd.sh/pricing",
+      "quote": "There is no monthly plan and no per-seat fee."
+    },
+    {
+      "claim": "Prices exclude VAT.",
+      "url": "https://boxd.sh/pricing",
+      "quote": "Prices exclude VAT."
+    }
+  ],
+  "compute": {
+    "model": "per-resource",
+    "cpuBasis": "allocated",
+    "cpuBasisNote": "vCPU is billed on the machine's full size while it runs, whatever the utilisation. RAM is billed on resident memory, disk on bytes written.",
+    "cpuBasisUrl": "https://boxd.sh/pricing",
+    "cpuBasisQuote": "vCPU is the one component billed on the machine's size: its full vCPU count while it runs, nothing in standby, hibernated or stopped.",
+    "ramBasis": "used",
+    "ramBasisUrl": "https://boxd.sh/pricing",
+    "ramBasisQuote": "RAM bills on the memory a machine actually has resident, sampled every second, while it is running or in standby, not on the 8 GiB it was provisioned with.",
+    "diskBasis": "used",
+    "diskBasisUrl": "https://boxd.sh/pricing",
+    "diskBasisQuote": "Disk bills on the disk you have written to, in every state, not on the 100 GiB provisioned: a machine that has written 20 GiB pays for 20 GiB.",
+    "billingIncrementSeconds": 1,
+    "settlementMinutes": 15,
+    "rounding": "each of the three meters rounded up to the next millionth of the currency, per settlement window",
+    "billingIncrementUrl": "https://boxd.sh/pricing",
+    "billingIncrementQuote": "Usage is metered every second and settled every 15 minutes: each settlement adds up your organization's vCPU, RAM and disk for that window and charges each of the three rounded up to the next millionth of your currency",
+    "minimumCharge": 0,
+    "minimumUrl": "https://boxd.sh/pricing",
+    "minimumQuote": "There is no minimum charge per machine, and a partly used window bills only the seconds used.",
+    "ratesPerPlan": "one rate card for every account; only the currency list (USD or EUR) differs",
+    "rates": [
+      {
+        "resource": "vcpu",
+        "unit": "per vCPU-hour",
+        "usd": 0.047,
+        "eur": 0.039,
+        "url": "https://boxd.sh/pricing",
+        "quote": "$0.047 / vCPU-hour, on the machine's size, only while it runs.",
+        "quoteEur": "€0.039 / vCPU-hour, on the machine's size, only while it runs."
+      },
+      {
+        "resource": "ram",
+        "unit": "per GiB-hour of resident memory",
+        "usd": 0.014,
+        "eur": 0.012,
+        "url": "https://boxd.sh/pricing",
+        "quote": "$0.014 / GiB-hour in use, not the 8 GiB provisioned.",
+        "quoteEur": "€0.012 / GiB-hour in use, not the 8 GiB provisioned."
+      },
+      {
+        "resource": "disk",
+        "unit": "per GiB-hour written",
+        "usd": 9.6e-05,
+        "eur": 8e-05,
+        "url": "https://boxd.sh/pricing",
+        "quote": "$0.000096 / GiB-hour written to, not the 100 GiB provisioned.",
+        "quoteEur": "€0.00008 / GiB-hour written to, not the 100 GiB provisioned."
+      }
+    ],
+    "sizes": [
+      {
+        "name": "1 vCPU / 4 GiB",
+        "vcpu": 1,
+        "ramGib": 4,
+        "diskGib": 100,
+        "usdPerHourAtFullRam": 0.103,
+        "usdPerHourBasis": "computed: 1 x $0.047 + 4 x $0.014, disk excluded",
+        "url": "https://docs.boxd.sh/guides/resources",
+        "quote": "| 1 | 4 GiB | |"
+      },
+      {
+        "name": "2 vCPU / 8 GiB (default)",
+        "vcpu": 2,
+        "ramGib": 8,
+        "diskGib": 100,
+        "usdPerHourAtFullRam": 0.206,
+        "usdPerHourBasis": "computed: 2 x $0.047 + 8 x $0.014, disk excluded",
+        "url": "https://docs.boxd.sh/guides/resources",
+        "quote": "| 2 | 8 GiB | the default |"
+      },
+      {
+        "name": "4 vCPU / 16 GiB",
+        "vcpu": 4,
+        "ramGib": 16,
+        "diskGib": 100,
+        "usdPerHourAtFullRam": 0.412,
+        "usdPerHourBasis": "computed: 4 x $0.047 + 16 x $0.014, disk excluded",
+        "url": "https://docs.boxd.sh/guides/resources",
+        "quote": "| 4 | 16 GiB | |"
+      },
+      {
+        "name": "8 vCPU / 32 GiB",
+        "vcpu": 8,
+        "ramGib": 32,
+        "diskGib": 100,
+        "usdPerHourAtFullRam": 0.824,
+        "usdPerHourBasis": "computed: 8 x $0.047 + 32 x $0.014, disk excluded",
+        "note": "Listed as a size and as the per-machine quota, but the FAQ says to email for it.",
+        "url": "https://docs.boxd.sh/guides/resources",
+        "quote": "| 8 | 32 GiB | |"
+      }
+    ],
+    "workedExample": {
+      "claim": "boxd's own anchor for a default machine: about $0.21/h at full memory, about $0.12/h holding 2 GiB with 20 GiB written.",
+      "url": "https://boxd.sh/pricing",
+      "quote": "A default machine (2 vCPU / 8 GiB) is about $0.21 per hour at full memory while it runs, and about $0.12 holding 2 GiB with 20 GiB written to disk."
+    },
+    "sessionLimit": {
+      "url": "https://docs.boxd.sh/guides/resources",
+      "quote": "| Runtime | Unlimited |"
+    },
+    "monthlyExamples": [
+      {
+        "name": "Personal assistant",
+        "usdPerMonth": 8.52,
+        "quote": "Personal assistant$8.52",
+        "url": "https://boxd.sh/pricing"
+      },
+      {
+        "name": "Always on",
+        "usdPerMonth": 90.46,
+        "quote": "Always on$90.46",
+        "url": "https://boxd.sh/pricing"
+      }
+    ],
+    "monthlyExamplesNote": "boxd's own 'SAME MACHINE, OVER TIME' cards for a 730-hour month, USD toggle, with boxd's assumed running/standby/hibernated split. The page labels them assumptions, not a rate: 'Typical days are our assumptions, not your bill: your machine is metered every second.'"
+  },
+  "storage": {
+    "model": "per-GiB-hour on bytes written, in every state",
+    "diskPricePerGibHourUsd": 9.6e-05,
+    "diskPricePerGibMonthUsd": 0.07008,
+    "diskPricePerGibMonthBasis": "computed: $0.000096 x 730 h",
+    "diskPricePerGibHourEur": 8e-05,
+    "diskPricePerGibMonthEur": 0.0584,
+    "diskIncluded": "none; 100 GiB is provisioned per machine but only written bytes are billed",
+    "billedWhileStopped": true,
+    "billedWhileStoppedNote": "Disk is billed in every state, including hibernated and stopped; vCPU and RAM are not.",
+    "url": "https://boxd.sh/pricing",
+    "quote": "Disk bills on the disk you have written to, in every state, not on the 100 GiB provisioned: a machine that has written 20 GiB pays for 20 GiB.",
+    "stoppedRetentionDays": null,
+    "stoppedRetentionNote": "No expiry published; a stopped machine keeps its disk until you delete it.",
+    "snapshots": {
+      "pricePerGibMonth": null,
+      "note": "not published: named snapshots, checkpoints and object-storage backups have no price line on the rate card, and no page states one.",
+      "url": "https://boxd.sh/pricing",
+      "quote": "Credit-based. You buy credits and your organization's machines draw them down at the rate card: $0.047 per vCPU-hour, $0.014 per GiB-hour of RAM, and $0.000096 per GiB-hour of disk."
+    },
+    "hibernation": {
+      "claim": "A hibernated machine bills disk only; a machine in standby also pays for RAM.",
+      "url": "https://docs.boxd.sh/guides/resources",
+      "quote": "| **hibernated** (auto-hibernate) | Written to disk | About 85ms | Disk written |"
+    }
+  },
+  "egress": {
+    "billed": null,
+    "pricePerGb": null,
+    "allowance": null,
+    "status": "not published",
+    "note": "The rate card has three meters only (vCPU, RAM, disk). The egress documentation covers allowlisting, not billing. Do not treat it as free.",
+    "url": "https://boxd.sh/pricing",
+    "quote": "Credit-based. You buy credits and your organization's machines draw them down at the rate card: $0.047 per vCPU-hour, $0.014 per GiB-hour of RAM, and $0.000096 per GiB-hour of disk."
+  },
+  "other": [
+    {
+      "item": "Seats",
+      "priceUsd": 0,
+      "url": "https://boxd.sh/pricing",
+      "quote": "There is no monthly plan and no per-seat fee."
+    },
+    {
+      "item": "Minimum spend",
+      "priceUsd": 0,
+      "url": "https://boxd.sh/pricing",
+      "quote": "There is no minimum charge per machine, and a partly used window bills only the seconds used."
+    },
+    {
+      "item": "VAT",
+      "priceUsd": null,
+      "note": "Excluded from list prices.",
+      "url": "https://boxd.sh/pricing",
+      "quote": "Prices exclude VAT."
+    },
+    {
+      "item": "Dedicated IPv4",
+      "priceUsd": null,
+      "note": "Not offered: machines sit behind a shared proxy IP, with a dedicated SSH port.",
+      "url": "https://docs.boxd.sh/guides/resources",
+      "quote": "| HTTPS/SSH address | Own domain (`name.boxd.sh`) and a dedicated SSH port on boxd's shared proxy IP |"
+    },
+    {
+      "item": "Custom domains",
+      "priceUsd": 0,
+      "note": "Included and self-serve.",
+      "url": "https://docs.boxd.sh/guides/custom-domains",
+      "quote": "Both are self-serve. boxd verifies your DNS and issues TLS certificates automatically."
+    },
+    {
+      "item": "Self-host / Custom",
+      "priceUsd": null,
+      "note": "not published; annual licence or a contract.",
+      "url": "https://boxd.sh/pricing",
+      "quote": "EU data residency, SSO + audit logs, annual license, dedicated support."
+    }
+  ],
+  "freeTier": {
+    "exists": false,
+    "note": "No free plan. A one-time $30 credit (EUR 30) requires a payment method; without a card an organization is capped at 2 machines.",
+    "url": "https://boxd.sh/pricing",
+    "quote": "$30 of credits when you add a payment method. Nothing is charged when you add the card; it is how we keep fraudsters off real machines.",
+    "limits": {
+      "creditUsd": 30,
+      "creditEur": 30,
+      "machinesWithoutCard": 2,
+      "url": "https://docs.boxd.sh/guides/resources",
+      "quote": "An org without a payment method is capped at 2 machines."
+    }
+  },
+  "diffs": [
+    {
+      "field": "plans[0].limits.maxConcurrent",
+      "ours": "50 per organization in the docs, with the pricing page saying 100; recorded as unresolved",
+      "battleships": "50",
+      "live": "100 on the pricing page and the pricing FAQ; the resources guide and the main FAQ still say 50",
+      "url": "https://boxd.sh/pricing",
+      "quote": "100 machines included, raiseable on request"
+    },
+    {
+      "field": "compute.rates",
+      "ours": "research/sandboxer.md-style note in research/boxd.md said Battleships was still on $0.059 / $0.018 / $0.00012",
+      "battleships": "$0.047 / $0.014 / $0.000096 (already the post-cut rates, checked 2026-10-14)",
+      "live": "$0.047 / $0.014 / $0.000096",
+      "url": "https://boxd.sh/pricing",
+      "quote": "$0.047 / vCPU-hour, on the machine's size, only while it runs."
+    },
+    {
+      "field": "compute.sizes[3] (8 vCPU self-serve)",
+      "ours": "unresolved: docs list 8 vCPU / 32 GiB as a size, the homepage says email for it",
+      "battleships": "4 vCPU / 16 GiB is the largest self-serve size",
+      "live": "docs still list 8 vCPU / 32 GiB as a size and as the quota; the FAQ says to email for 8 vCPU / 32 GiB or larger",
+      "url": "https://boxd.sh/faq/",
+      "quote": "Machines come in 1 vCPU / 4 GiB, 2 vCPU / 8 GiB (the default) and 4 vCPU / 16 GiB, and you can pick any of them yourself. For 8 vCPU / 32 GiB or larger, email contact@boxd.sh."
+    },
+    {
+      "field": "storage.hibernation / standby billing",
+      "ours": "standby pays for RAM and disk; hibernated pays disk only",
+      "battleships": "caveat says the docs still call standby 'near zero'",
+      "live": "docs bill standby for 'Memory in use, disk written'",
+      "url": "https://docs.boxd.sh/guides/resources",
+      "quote": "| **standby** (auto-suspend) | Kept in host RAM | Sub-millisecond | Memory in use, disk written |"
+    },
+    {
+      "field": "freeTier.credit",
+      "ours": "EUR 30 with a card; homepage omits the card requirement",
+      "battleships": "$30 one-time credit",
+      "live": "$30 on the USD list, EUR 30 on the EUR list, both requiring a payment method; the homepage still says 'New accounts get €30 of free credits'",
+      "url": "https://boxd.sh/pricing",
+      "quote": "$30 of credits when you add a payment method. Nothing is charged when you add the card"
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "Sandboxes (hardware isolation)",
+      "url": "https://docs.boxd.sh/use-cases/sandboxes"
+    },
+    "sizes-regions": {
+      "title": "Resources and limits",
+      "url": "https://docs.boxd.sh/guides/resources",
+      "note": "Sizes and quotas are here; the docs have no regions page. The only region statement is on the homepage and FAQ (bare-metal servers in Germany, US coming)."
+    },
+    "lifecycle": {
+      "title": "Suspend, resume, and hibernate",
+      "url": "https://docs.boxd.sh/guides/suspend-resume"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots",
+      "url": "https://docs.boxd.sh/guides/snapshots",
+      "also": {
+        "title": "Fork",
+        "url": "https://docs.boxd.sh/guides/fork"
+      }
+    },
+    "storage": {
+      "title": "Disks",
+      "url": "https://docs.boxd.sh/guides/disks"
+    },
+    "idle-timers": {
+      "title": "Suspend, resume, and hibernate (auto-hibernate after 4 h)",
+      "url": "https://docs.boxd.sh/guides/suspend-resume"
+    },
+    "reaching-it": {
+      "title": "HTTPS",
+      "url": "https://docs.boxd.sh/guides/https"
+    },
+    "custom-domains": {
+      "title": "Custom domains",
+      "url": "https://docs.boxd.sh/guides/custom-domains"
+    },
+    "outbound-network": {
+      "title": "Egress control",
+      "url": "https://docs.boxd.sh/guides/egress"
+    },
+    "keys-secrets": {
+      "title": "Env vars and secrets",
+      "url": "https://docs.boxd.sh/guides/env-secrets"
+    },
+    "ways-to-drive": {
+      "title": "Commands (CLI reference)",
+      "url": "https://docs.boxd.sh/cli/commands",
+      "note": "The CLI reference is the hub; SDK references are /reference/typescript-sdk and /reference/python-sdk, and the API is gRPC only (/reference/grpc-api)."
+    },
+    "built-in-agents": {
+      "title": "Coding agents",
+      "url": "https://docs.boxd.sh/use-cases/coding-agents"
+    },
+    "teams-accounts": {
+      "title": "Organizations and teams",
+      "url": "https://docs.boxd.sh/guides/organizations"
+    },
+    "billing-models": {
+      "title": "Pricing and the billing FAQ",
+      "url": "https://boxd.sh/pricing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing: what you get for free",
+      "url": "https://boxd.sh/pricing"
+    },
+    "quickstart": {
+      "title": "Quickstart",
+      "url": "https://docs.boxd.sh/quickstart"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://boxd.sh/pricing"
+    }
+  },
+  "deploy": {
+    "hermes": {
+      "route": "manual only",
+      "oneClick": false,
+      "managedOption": false,
+      "summary": "boxd has no Hermes-specific page and does not preinstall Hermes. Its 'Personal assistants' page describes the general pattern (create a machine, connect, install the assistant as its own docs say) and names OpenClaw as the example.",
+      "steps": [
+        "boxd new mybot (CLI) or create it in the console",
+        "boxd connect mybot (or ssh mybot.boxd)",
+        "Install Hermes with its installer, then hermes setup and hermes gateway",
+        "boxd machine config set mybot auto-hibernate.timeout 0 so the gateway is not hibernated after 4 h without traffic",
+        "boxd machine config set mybot bot-protection off if a chat app must reach the machine's public URL",
+        "Give it API keys through boxd env / secrets rather than a file on disk"
+      ],
+      "urls": [
+        "https://docs.boxd.sh/use-cases/personal-assistants",
+        "https://hermes-agent.nousresearch.com/docs/getting-started/installation"
+      ],
+      "quotes": [
+        {
+          "url": "https://docs.boxd.sh/use-cases/personal-assistants",
+          "quote": "Any assistant that runs on Linux can live here. Create a machine, connect, and install the assistant the way its own docs describe:"
+        },
+        {
+          "url": "https://docs.boxd.sh/use-cases/personal-assistants",
+          "quote": "If your assistant runs background tasks like scheduled jobs, keep its machine always on. Turn hibernation off with:"
+        }
+      ]
+    },
+    "openclaw": {
+      "route": "manual, but named in the docs",
+      "oneClick": false,
+      "managedOption": false,
+      "summary": "boxd's Personal assistants page is written around OpenClaw: create a machine, connect, install it, turn off bot protection so chat apps can reach the gateway, and turn off auto-hibernate to keep it always on. It is a documented pattern, not a template or one-click install.",
+      "urls": [
+        "https://docs.boxd.sh/use-cases/personal-assistants",
+        "https://docs.openclaw.ai/start/getting-started"
+      ],
+      "quotes": [
+        {
+          "url": "https://docs.boxd.sh/use-cases/personal-assistants",
+          "quote": "Run OpenClaw or any other assistant that needs a machine of its own."
+        },
+        {
+          "url": "https://docs.boxd.sh/use-cases/personal-assistants",
+          "quote": "Chat apps can't pass [bot protection](https://docs.boxd.sh/guides/bot-protection.md), so turn it off for that machine:"
+        }
+      ]
+    },
+    "dashboardOnly": {
+      "answer": "Partly. Once a machine exists, the console can open its Desktop, manage Domains and Backups, and start or stop it; the sign-in page offers a prompt to hand to an AI agent that will drive the CLI for you. But every documented first step is a CLI command, and there is no template gallery or one-click agent, so a non-coder cannot provision and install Hermes from the dashboard alone.",
+      "url": "https://docs.boxd.sh/guides/desktop",
+      "quote": "On the Machines page, open a machine's **Open** menu and choose **Desktop**.",
+      "supportingQuote": {
+        "url": "https://docs.boxd.sh/",
+        "quote": "Install the CLI and create your first machine."
+      }
+    }
+  }
+}

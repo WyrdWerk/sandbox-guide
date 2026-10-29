@@ -1,0 +1,37 @@
+{
+  "provider": "runtime",
+  "checkedOn": "2026-10-29",
+  "summary": "Per second on measured CPU with a 50-millicore floor, reserved memory, and stored disk in decimal GB.",
+  "cpu": {
+    "rate": 0.025,
+    "billing": "active",
+    "floor": 0.05
+  },
+  "ram": {
+    "rate": 0.0075
+  },
+  "disk": {
+    "running": 0.00010958904109589041,
+    "stopped": 0.00010958904109589041,
+    "included": 10,
+    "includedRunningOnly": true,
+    "decimalGB": true
+  },
+  "between": "kept",
+  "plans": [
+    {
+      "name": "Prepaid credit",
+      "fee": 0
+    }
+  ],
+  "notes": [
+    "A stopped box keeps billing storage, including saved memory; only delete ends the charge.",
+    "Automatic top-ups earn 5% extra credit, not subtracted here."
+  ],
+  "sources": [
+    {
+      "label": "Pricing",
+      "url": "https://withruntime.com/docs/pricing"
+    }
+  ]
+}

@@ -1,0 +1,577 @@
+{
+  "id": "agent37",
+  "name": "Agent 37",
+  "checkedOn": "2026-10-29",
+  "products": [
+    "Agent37 Cloud (API): prepaid wallet, per-minute metered instances",
+    "Agent 37 Personal (managed agent hosting): flat monthly per agent, browser dashboard"
+  ],
+  "plans": [
+    {
+      "name": "Cloud — Free (before first top-up)",
+      "product": "Agent37 Cloud",
+      "monthlyFeeUSD": 0,
+      "includedUsage": "No recurring allowance. One-time $5 starter credit after a card is added (nothing charged).",
+      "limits": {
+        "maxConcurrent": 1,
+        "maxSessionLength": "No maximum published; an instance lives until deleted",
+        "maxSize": "2 vCPU / 4 GB RAM, 2-12 GB disk"
+      },
+      "url": "https://www.agent37.com/docs/agents-api/billing",
+      "quote": "Free (before your first top-up) | 1, on the 2 vCPU / 4 GB shape",
+      "feeQuote": {
+        "url": "https://www.agent37.com/pricing",
+        "quote": "No monthly plan fee or seat charge"
+      }
+    },
+    {
+      "name": "Cloud — Wallet (any top-up)",
+      "product": "Agent37 Cloud",
+      "monthlyFeeUSD": 0,
+      "includedUsage": "Prepaid balance only; top-ups are $5 to $10,000 each",
+      "limits": {
+        "maxConcurrent": 10,
+        "maxSessionLength": "No maximum published",
+        "maxSize": "All default shapes (up to 4 vCPU / 32 GB); VM and Performance require a funded workspace"
+      },
+      "url": "https://www.agent37.com/docs/agents-api/billing",
+      "quote": "Topped up at least once (any amount) | 10, all shapes",
+      "feeQuote": {
+        "url": "https://www.agent37.com/pricing",
+        "quote": "No monthly plan fee or seat charge"
+      }
+    },
+    {
+      "name": "Cloud — Wallet ($100 lifetime top-ups)",
+      "product": "Agent37 Cloud",
+      "monthlyFeeUSD": 0,
+      "includedUsage": "Prepaid balance only",
+      "limits": {
+        "maxConcurrent": 50,
+        "maxSessionLength": "No maximum published",
+        "maxSize": "All shapes"
+      },
+      "url": "https://www.agent37.com/docs/agents-api/billing",
+      "quote": "Top-ups total $100 or more | 50, all shapes",
+      "feeQuote": {
+        "url": "https://www.agent37.com/pricing",
+        "quote": "No monthly plan fee or seat charge"
+      }
+    },
+    {
+      "name": "Cloud — Wallet ($250 lifetime top-ups)",
+      "product": "Agent37 Cloud",
+      "monthlyFeeUSD": 0,
+      "includedUsage": "Prepaid balance only",
+      "limits": {
+        "maxConcurrent": 200,
+        "maxSessionLength": "No maximum published",
+        "maxSize": "All shapes"
+      },
+      "url": "https://www.agent37.com/docs/agents-api/billing",
+      "quote": "Top-ups total $250 or more | 200, all shapes",
+      "feeQuote": {
+        "url": "https://www.agent37.com/pricing",
+        "quote": "No monthly plan fee or seat charge"
+      }
+    },
+    {
+      "name": "Personal — Free",
+      "product": "Agent 37 Personal (managed hosting)",
+      "monthlyFeeUSD": 0,
+      "includedUsage": "$0.20 of the default model; BYOK after that",
+      "limits": {
+        "maxConcurrent": 1,
+        "maxSessionLength": "Sleeps after 15 minutes idle; an agent left asleep for 30 days is removed",
+        "maxSize": "1 vCPU / 4 GB RAM / 2 GB storage"
+      },
+      "url": "https://www.agent37.com/personal",
+      "quote": "$0/mo … One agent, sleeps when idle … $0.20 of the default model to start … 1 vCPU · 4 GB RAM · 2 GB storage"
+    },
+    {
+      "name": "Personal — Basic",
+      "product": "Agent 37 Personal (managed hosting)",
+      "monthlyFeeUSD": 3.99,
+      "includedUsage": "$1/mo in AI credits; BYOK; all AI models",
+      "limits": {
+        "maxConcurrent": "not published",
+        "maxSessionLength": "not published (paid plans stay up between scheduled jobs)",
+        "maxSize": "1 vCPU / 4 GB RAM / 8 GB storage"
+      },
+      "url": "https://www.agent37.com/personal",
+      "quote": "$3.99/mo … $1/mo in AI credits … 1 vCPU · 4 GB RAM · 8 GB storage"
+    },
+    {
+      "name": "Personal — Plus",
+      "product": "Agent 37 Personal (managed hosting)",
+      "monthlyFeeUSD": 9.99,
+      "includedUsage": "Free models (GPT-6 Luna, DeepSeek V4.1 Flash, Mercury 2), reset every 5 hours",
+      "limits": {
+        "maxConcurrent": "not published",
+        "maxSessionLength": "not published",
+        "maxSize": "1 vCPU / 4 GB RAM / 12 GB storage"
+      },
+      "url": "https://www.agent37.com/personal",
+      "quote": "$9.99/mo … Free models: GPT-6 Luna, DeepSeek V4.1 Flash & Mercury 2 … Free model usage resets every 5 hrs … 1 vCPU · 4 GB RAM · 12 GB storage"
+    },
+    {
+      "name": "Personal — Pro",
+      "product": "Agent 37 Personal (managed hosting)",
+      "monthlyFeeUSD": 29.99,
+      "includedUsage": "$5/mo in AI credits; built-in Chromium browser",
+      "limits": {
+        "maxConcurrent": "not published",
+        "maxSessionLength": "not published",
+        "maxSize": "2 vCPU / 8 GB RAM / 20 GB storage"
+      },
+      "url": "https://www.agent37.com/personal",
+      "quote": "$29.99/mo … Built-in browser (Chromium) … $5/mo in AI credits … 2 vCPU · 8 GB RAM · 20 GB storage"
+    },
+    {
+      "name": "Personal — Max",
+      "product": "Agent 37 Personal (managed hosting)",
+      "monthlyFeeUSD": 99.99,
+      "includedUsage": "$20/mo in AI credits; team management and roles",
+      "limits": {
+        "maxConcurrent": "not published",
+        "maxSessionLength": "not published",
+        "maxSize": "4 vCPU / 16 GB RAM / 40 GB storage"
+      },
+      "url": "https://www.agent37.com/personal",
+      "quote": "$99.99/mo … Team Management + roles … $20/mo in AI credits … 4 vCPU · 16 GB RAM · 40 GB storage"
+    }
+  ],
+  "compute": {
+    "model": "per-resource, with flat monthly managed-hosting plans",
+    "cpuBilledOn": "allocated",
+    "billingIncrement": "1 minute",
+    "minimum": "No minimum charge published. Creating an instance requires one day of its running rate in the wallet, but nothing is debited at create.",
+    "rates": [
+      {
+        "class": "default (shared CPU, gVisor container)",
+        "resource": "vCPU",
+        "usdPerVcpuHour": 0.0010959,
+        "originalFigure": "$0.80 per vCPU per 730-hour month",
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "vCPU | $0.80 per vCPU per month"
+      },
+      {
+        "class": "default (shared CPU, gVisor container)",
+        "resource": "RAM",
+        "usdPerGiBRamHour": 0.0009589,
+        "originalFigure": "$0.70 per GB per 730-hour month",
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "RAM | $0.70 per GB per month"
+      },
+      {
+        "class": "performance (dedicated cores)",
+        "resource": "vCPU",
+        "usdPerVcpuHour": 0.0043836,
+        "originalFigure": "4x the default rate ($3.20 per vCPU per 730-hour month)",
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "compute is 4x the default rate, and disk is unchanged."
+      },
+      {
+        "class": "performance (dedicated cores)",
+        "resource": "RAM",
+        "usdPerGiBRamHour": 0.0038356,
+        "originalFigure": "4x the default rate ($2.80 per GB per 730-hour month)",
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "compute is 4x the default rate, and disk is unchanged."
+      },
+      {
+        "class": "vm (full VM, own kernel)",
+        "resource": "vCPU",
+        "usdPerVcpuHour": 0.0027397,
+        "originalFigure": "2.5x the default rate ($2.00 per vCPU per 730-hour month)",
+        "url": "https://www.agent37.com/docs/agents-api/vm-instances",
+        "quote": "compute meters at 2.5x the default rate"
+      },
+      {
+        "class": "vm (full VM, own kernel)",
+        "resource": "RAM",
+        "usdPerGiBRamHour": 0.0023973,
+        "originalFigure": "2.5x the default rate ($1.75 per GB per 730-hour month)",
+        "url": "https://www.agent37.com/docs/agents-api/vm-instances",
+        "quote": "compute meters at 2.5x the default rate"
+      }
+    ],
+    "shapeExamples": [
+      {
+        "name": "default entry shape",
+        "vcpu": 2,
+        "ramGiB": 4,
+        "includedDiskGiB": 4,
+        "monthlyUSD": 4.76,
+        "hourlyUSD": 0.00652,
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "2 vCPU / 4 GB RAM / 2-12 GB disk (the default) | $4.76"
+      },
+      {
+        "name": "default 4/8",
+        "vcpu": 4,
+        "ramGiB": 8,
+        "includedDiskGiB": 6,
+        "monthlyUSD": 9.34,
+        "hourlyUSD": 0.01279,
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "4 vCPU / 8 GB RAM / 2-20 GB disk | $9.34"
+      },
+      {
+        "name": "default 4/16",
+        "vcpu": 4,
+        "ramGiB": 16,
+        "includedDiskGiB": 12,
+        "monthlyUSD": 15.48,
+        "hourlyUSD": 0.02121,
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "4 vCPU / 16 GB RAM / 2-40 GB disk | $15.48"
+      },
+      {
+        "name": "default 4/32",
+        "vcpu": 4,
+        "ramGiB": 32,
+        "includedDiskGiB": 24,
+        "monthlyUSD": 27.76,
+        "hourlyUSD": 0.03803,
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "4 vCPU / 32 GB RAM / 2-80 GB disk | $27.76"
+      },
+      {
+        "name": "vm 2/4",
+        "vcpu": 2,
+        "ramGiB": 4,
+        "includedDiskGiB": 4,
+        "monthlyUSD": 11.36,
+        "hourlyUSD": 0.01556,
+        "url": "https://www.agent37.com/docs/agents-api/vm-instances",
+        "quote": "2 | 4 GB | 2-12 GB | 4 GB | $11.36"
+      },
+      {
+        "name": "vm 4/8",
+        "vcpu": 4,
+        "ramGiB": 8,
+        "includedDiskGiB": 6,
+        "monthlyUSD": 22.54,
+        "hourlyUSD": 0.03088,
+        "url": "https://www.agent37.com/docs/agents-api/vm-instances",
+        "quote": "4 | 8 GB | 2-20 GB | 6 GB | $22.54"
+      },
+      {
+        "name": "vm 8/16",
+        "vcpu": 8,
+        "ramGiB": 16,
+        "includedDiskGiB": 12,
+        "monthlyUSD": 45.08,
+        "hourlyUSD": 0.06175,
+        "url": "https://www.agent37.com/docs/agents-api/vm-instances",
+        "quote": "8 | 16 GB | 2-40 GB | 12 GB | $45.08"
+      },
+      {
+        "name": "vm 16/32",
+        "vcpu": 16,
+        "ramGiB": 32,
+        "includedDiskGiB": 24,
+        "monthlyUSD": 90.16,
+        "hourlyUSD": 0.12351,
+        "url": "https://www.agent37.com/docs/agents-api/vm-instances",
+        "quote": "16 | 32 GB | 2-80 GB | 24 GB | $90.16"
+      }
+    ],
+    "notes": [
+      {
+        "claim": "The monthly price is not a subscription; the wallet is metered per minute at monthly price / 730 / 60.",
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "The monthly price is the rate; the wallet is metered per minute (the monthly price divided by 730 hours, divided by 60)."
+      },
+      {
+        "claim": "Billing uses reserved resources, not CPU utilisation.",
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "Compute is priced from the instance’s `resources`"
+      },
+      {
+        "claim": "An idle but awake instance still pays compute.",
+        "url": "https://www.agent37.com/pricing",
+        "quote": "An awake instance still pays compute even when its CPU is idle."
+      },
+      {
+        "claim": "There is no monthly plan fee or seat charge on Cloud.",
+        "url": "https://www.agent37.com/pricing",
+        "quote": "No monthly plan fee or seat charge"
+      },
+      {
+        "claim": "Whole minutes are billed at lifecycle transitions and at least hourly.",
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "Whole minutes are billed at every lifecycle transition and at least hourly"
+      },
+      {
+        "claim": "Burstable is experimental, starts at $1/month, and publishes no shapes or rates.",
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "`burstable` is an experimental instance type for low average CPU and RAM usage, with pricing starting at $1/month."
+      }
+    ]
+  },
+  "storage": {
+    "model": "persistent disk billed per GB-month while the instance exists, plus optional cold storage for parked instances",
+    "disk": {
+      "usdPerGiBMonth": 0.09,
+      "usdPerGiBHour": 0.0001233,
+      "includedGiB": 0,
+      "url": "https://www.agent37.com/docs/agents-api/billing",
+      "quote": "Disk | $0.09 per GB per month"
+    },
+    "billedWhileStoppedOrSleeping": {
+      "value": "Disk only; compute is $0",
+      "url": "https://www.agent37.com/docs/agents-api/billing",
+      "quote": "`sleeping`, `stopped`, or `waking` | The disk rate alone: $0.09 per reserved GB per month."
+    },
+    "coldStorage": {
+      "usdPerGiBMonth": 0.03,
+      "basis": "actual compressed bytes stored",
+      "url": "https://www.agent37.com/docs/agents-api/billing",
+      "quote": "Parked in cold storage | $0.03 per GB per month, on the actual compressed bytes stored."
+    },
+    "snapshots": {
+      "value": "No snapshot product. Nightly backups into seven rotating slots plus one on-demand backup; backups and restores are free.",
+      "url": "https://www.agent37.com/docs/agents-api/instance-backups",
+      "quote": "Backups and restores are free."
+    },
+    "retention": [
+      {
+        "case": "Instance suspended for non-payment",
+        "value": "Permanently deleted after 30 days",
+        "url": "https://www.agent37.com/docs/agents-api/billing",
+        "quote": "An instance left suspended for 30 days is permanently deleted."
+      },
+      {
+        "case": "Personal managed agent left asleep",
+        "value": "Removed after 30 days, with an email a week before",
+        "url": "https://www.agent37.com/personal",
+        "quote": "An agent left asleep for 30 days is removed, and we email you a week before."
+      }
+    ]
+  },
+  "egress": {
+    "value": "not published",
+    "detail": "No egress or bandwidth rate appears on the pricing page or in the billing docs. The pricing page lists only compute and disk as metered.",
+    "url": "https://www.agent37.com/pricing",
+    "quote": "Agent37 meters compute while the sandbox runs and disk while you keep it"
+  },
+  "other": [
+    {
+      "item": "Seats",
+      "value": "None on Cloud",
+      "url": "https://www.agent37.com/pricing",
+      "quote": "No monthly plan fee or seat charge"
+    },
+    {
+      "item": "Public IPv4",
+      "value": "No IPv4 product; every port gets a derived HTTPS URL",
+      "url": "https://www.agent37.com/docs/agents-api/urls",
+      "quote": "An instance needs no public IP address. Every port it listens on has its own HTTPS URL"
+    },
+    {
+      "item": "Custom domains",
+      "value": "Up to 10 per workspace at no charge, unlocked once lifetime top-ups reach $100",
+      "url": "https://www.agent37.com/docs/agents-api/domains",
+      "quote": "Custom domains are a paid feature: they unlock once your workspace's top-ups total $100"
+    },
+    {
+      "item": "Minimum spend",
+      "value": "None published; top-ups $5-$10,000",
+      "url": "https://www.agent37.com/docs/agents-api/billing",
+      "quote": "Top-ups are $5 to $10,000 each, paid through Stripe."
+    },
+    {
+      "item": "Managed model usage",
+      "value": "OpenRouter inference cost passed through with no Agent37 markup",
+      "url": "https://www.agent37.com/docs/agents-api/budgets",
+      "quote": "Managed LLM | OpenRouter inference cost, passed through with no Agent37 markup"
+    },
+    {
+      "item": "Brave web search",
+      "value": "$0.005 per call",
+      "url": "https://www.agent37.com/docs/agents-api/budgets",
+      "quote": "Web search (Brave) | $0.005 per call (5,000 micros)"
+    },
+    {
+      "item": "Composio",
+      "value": "$0.000114 per call",
+      "url": "https://www.agent37.com/docs/agents-api/budgets",
+      "quote": "Composio | $0.000114 per call (114 micros)"
+    },
+    {
+      "item": "Perflo paid tools",
+      "value": "Reported charge passed through with no markup; discovery free",
+      "url": "https://www.agent37.com/docs/agents-api/budgets",
+      "quote": "Perflo paid tools | Reported charge, passed through with no markup; discovery is free"
+    }
+  ],
+  "freeTier": {
+    "cloud": {
+      "value": "One-time $5 credit after adding a card (nothing charged); 1 instance on the 2 vCPU / 4 GB shape; no recurring allowance",
+      "url": "https://www.agent37.com/docs/agents-api/billing",
+      "quote": "Add a card from the billing page (nothing is charged) and your workspace gets a one-time $5 credit"
+    },
+    "personal": {
+      "value": "One agent free: 1 vCPU / 4 GB RAM / 2 GB storage, $0.20 of the default model, sleeps after 15 minutes idle, no card",
+      "url": "https://www.agent37.com/personal",
+      "quote": "Yes. One agent, no card. It sleeps after 15 minutes idle and wakes when you message it."
+    }
+  },
+  "diffs": [
+    {
+      "field": "custom domains",
+      "ours": "not-published: no domain price appears in the docs or on the pricing page",
+      "battleships": "custom_domain: true (no price)",
+      "live": "Free of charge, up to 10 domains per workspace, but gated behind $100 cumulative top-ups",
+      "url": "https://www.agent37.com/docs/agents-api/domains",
+      "quote": "Custom domains are a paid feature: they unlock once your workspace's top-ups total $100 … Up to 10 domains per workspace, at no charge."
+    },
+    {
+      "field": "regions",
+      "ours": "us, eu (France), ap-south (India, Mumbai); same price in all three",
+      "battleships": "regions: [\"us\"]",
+      "live": "Create docs list us, eu, ap-south; the concepts page separately says \"Runs on dedicated servers in the United States.\" (https://www.agent37.com/docs/agents-api/concepts)",
+      "url": "https://www.agent37.com/docs/agents-api/instances/create",
+      "quote": "Where the instance runs: `us`, `eu` (France), or `ap-south` (India, Mumbai). The price is the same in all three."
+    },
+    {
+      "field": "managed hosting free idle timeout",
+      "ours": "sleeps when idle (no timer stated)",
+      "battleships": "sleeps after 15 minutes idle",
+      "live": "sleeps after 15 minutes idle",
+      "url": "https://www.agent37.com/personal",
+      "quote": "It sleeps after 15 minutes idle and wakes when you message it."
+    },
+    {
+      "field": "VM maximum size",
+      "ours": "VM page lists 8 vCPU / 16 GB and 16 vCPU / 32 GB, contradicting the sizing page's 4 vCPU ceiling (flagged, unresolved)",
+      "battleships": "max_vcpu: 16",
+      "live": "Still contradictory: instance-sizing says 4 vCPU is the ceiling on every type, while vm-instances prices 8/16 and 16/32",
+      "url": "https://www.agent37.com/docs/agents-api/instance-sizing",
+      "quote": "4 vCPU is the ceiling on every instance type. A create that asks for more cores keeps the memory it asked for and comes back with 4 vCPU"
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "VM instances — default gVisor container vs full VM with its own kernel",
+      "url": "https://www.agent37.com/docs/agents-api/vm-instances"
+    },
+    "sizes-regions": {
+      "title": "Create an instance — shapes, disk ranges and regions",
+      "url": "https://www.agent37.com/docs/agents-api/instances/create"
+    },
+    "lifecycle": {
+      "title": "Instance lifecycle — start, stop, restart, resize, update",
+      "url": "https://www.agent37.com/docs/agents-api/instance-lifecycle"
+    },
+    "snapshots-forks": {
+      "title": "Fork an instance — independent copy with its own id, URLs and billing",
+      "url": "https://www.agent37.com/docs/agents-api/instances/fork"
+    },
+    "storage": {
+      "title": "Billing — disk rate, cold storage and what bills while stopped",
+      "url": "https://www.agent37.com/docs/agents-api/billing"
+    },
+    "idle-timers": {
+      "title": "Auto-sleep — idle timeout, checkpointing and wake behaviour",
+      "url": "https://www.agent37.com/docs/agents-api/instance-auto-sleep"
+    },
+    "reaching-it": {
+      "title": "Instance and preview URLs — HTTPS per port, signed URLs",
+      "url": "https://www.agent37.com/docs/agents-api/urls"
+    },
+    "custom-domains": {
+      "title": "Custom domains — mirror every workspace URL on your own domain",
+      "url": "https://www.agent37.com/docs/agents-api/domains"
+    },
+    "outbound-network": {
+      "title": "Network access — allow-all, deny-all or an IPv4 allowlist",
+      "url": "https://www.agent37.com/docs/agents-api/instance-network"
+    },
+    "keys-secrets": {
+      "title": "Environment variables — write-only env stored with the instance",
+      "url": "https://www.agent37.com/docs/agents-api/instance-environment"
+    },
+    "ways-to-drive": {
+      "title": "API overview — Sandbox API, Agent API, keys and headers",
+      "url": "https://www.agent37.com/docs/agents-api/overview"
+    },
+    "built-in-agents": {
+      "title": "Templates — system agent images (Hermes, OpenClaw, Claude Code, Codex, OpenCode, Grok, Pi)",
+      "url": "https://www.agent37.com/docs/agents-api/templates"
+    },
+    "teams-accounts": {
+      "title": "Members — workspace membership and roles",
+      "url": "https://www.agent37.com/docs/agents-api/members"
+    },
+    "billing-models": {
+      "title": "Billing — prepaid wallet, per-minute metering and managed usage",
+      "url": "https://www.agent37.com/docs/agents-api/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing — free starter credit and what it covers",
+      "url": "https://www.agent37.com/pricing"
+    },
+    "quickstart": {
+      "title": "Documentation home / quickstart",
+      "url": "https://www.agent37.com/docs"
+    },
+    "pricing": {
+      "title": "Cloud API pricing",
+      "url": "https://www.agent37.com/pricing"
+    }
+  },
+  "deploy": {
+    "hermes": {
+      "route": "One-click managed hosting. Pick Hermes on the Personal product and it is provisioned with a dashboard, task board, web terminal, file browser, live desktop and messaging channels.",
+      "oneClickOrManaged": true,
+      "officialTemplateOrGuide": "Yes: the Personal product and a Hermes hosting guide on the Agent 37 blog",
+      "manualSteps": "None needed for the managed route. The API route is manual: create an instance from the agent37-hermes template, set model/env, then send messages to the instance URL.",
+      "nonCoderFromDashboard": "Yes. Sign-up needs no card on the free plan; the agent is configured and driven from the browser.",
+      "urls": [
+        "https://www.agent37.com/personal",
+        "https://www.agent37.com/blog/where-should-you-host-a-hermes-agent"
+      ],
+      "quotes": [
+        {
+          "url": "https://www.agent37.com/personal",
+          "quote": "Run OpenClaw, Hermes, Claude Code, Codex, OpenCode, or Grok around the clock. Yours is live in one click."
+        },
+        {
+          "url": "https://www.agent37.com/blog/where-should-you-host-a-hermes-agent",
+          "quote": "Install | Template or compose | One-click / dashboard"
+        }
+      ]
+    },
+    "openclaw": {
+      "route": "Same one-click Personal hosting; OpenClaw is one of the six selectable agents.",
+      "oneClickOrManaged": true,
+      "officialTemplateOrGuide": "Yes",
+      "manualSteps": "None for the managed route; API users can create an agent37-openclaw template instance.",
+      "nonCoderFromDashboard": "Yes",
+      "urls": [
+        "https://www.agent37.com/personal"
+      ],
+      "quotes": [
+        {
+          "url": "https://www.agent37.com/personal",
+          "quote": "Pick OpenClaw, Hermes, Claude Code, Codex, OpenCode, or Grok and go."
+        }
+      ]
+    }
+  },
+  "limitsSources": {
+    "maxSessionLength": {
+      "value": "No maximum published; an instance lives until deleted",
+      "url": "https://www.agent37.com/docs/agents-api/concepts",
+      "quote": "Lives until you delete it, metered per minute for what it holds"
+    },
+    "maxSize": {
+      "value": "4 vCPU / 32 GB on the default type; VM page lists up to 16 vCPU / 32 GB",
+      "url": "https://www.agent37.com/docs/agents-api/instance-sizing",
+      "quote": "4 vCPU is the ceiling on every instance type."
+    }
+  }
+}

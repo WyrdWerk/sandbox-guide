@@ -1,0 +1,32 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { useCases } from "../../lib/data";
+---
+
+<Base title="Use cases" description="Start from what you want to run: a Hermes or OpenClaw agent, a coding agent, a code interpreter or a browser agent.">
+  <PageHeader
+    kicker="Use cases"
+    title="What do you want to run?"
+    standfirst="Each guide starts from one program people actually run, explains what it needs from a machine in plain terms, shows how hard it is to set up on each provider, and prices it with the calculator."
+    meta={[`${useCases.length} guides`, "Setup checked 29 October 2026", "Docs linked"]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush">
+      <div class="picks">
+        {useCases.map((useCase) => (
+          <article class="pick">
+            <span class="pick__label">{useCase.kicker}</span>
+            <h3 class="pick__title"><a href={`/use-cases/${useCase.id}/`}>{useCase.title}</a></h3>
+            <p class="pick__body">“{useCase.question}”</p>
+          </article>
+        ))}
+      </div>
+      <p class="section__note">
+        Prefer to start from numbers? Use the <a href="/costs/">cost calculator</a>. Prefer to start from a
+        job description? See the <a href="/compare/situations/">situations</a>.
+      </p>
+    </section>
+  </div>
+</Base>

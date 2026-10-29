@@ -1,0 +1,577 @@
+{
+  "id": "vercel-sandbox",
+  "provider": "Vercel Sandbox",
+  "checkedOn": "2026-10-29",
+  "currency": "USD",
+  "headline": "Two meters: Active CPU at $0.128 per vCPU-hour (only while code runs, I/O wait excluded) and provisioned memory at $0.0212 per GB-hour for the whole session wall clock, with a one-minute minimum on memory only. There is no published CPU minimum. Hobby is a capped free allowance with a 45-minute session limit; Pro is a $20 platform fee that returns $20 of credit and a 24-hour session limit.",
+  "plans": [
+    {
+      "name": "Hobby",
+      "monthlyFeeUsd": 0,
+      "included": {
+        "monthlyCreditUsd": 0,
+        "notes": "Unit allowances, not dollars: 5 Active-CPU hours, 420 GB-hours of provisioned memory, 5,000 sandbox creations, 20 GB data transfer per month, plus 15 GB of snapshot storage and 15 GB of drive storage for the lifetime of the account. Hard stop: no overage.",
+        "includedUsage": {
+          "activeCpuHours": 5,
+          "provisionedMemoryGBHours": 420,
+          "creations": 5000,
+          "dataTransferGB": 20,
+          "snapshotStorageGBLifetime": 15,
+          "driveStorageGBLifetime": 15
+        }
+      },
+      "limits": {
+        "maxConcurrent": "10 concurrent sandboxes",
+        "maxSession": "45 minutes",
+        "maxSize": "4 vCPU / 8 GB memory / 64 GB disk / 15 open ports"
+      },
+      "evidence": [
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Sandbox Active CPU 5 hours/month $0.128/hour $0.128/hour"
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Sandbox Provisioned Memory 420 GB-hours/month $0.0212/GB-hour $0.0212/GB-hour"
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Max Session Duration 45 minutes 24 hours 24 hours Concurrent Sandboxes 10 10,000 10,000"
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Hobby 4 8GB 15 64 GB"
+        },
+        {
+          "url": "https://vercel.com/docs/plans/hobby",
+          "quote": "As stated in the fair use guidelines, the Hobby plan restricts users to non-commercial, personal use only."
+        }
+      ]
+    },
+    {
+      "name": "Pro",
+      "monthlyFeeUsd": 20,
+      "included": {
+        "monthlyCreditUsd": 20,
+        "notes": "The $20 platform fee includes $20 of usage credit usable across all infrastructure resources, expiring monthly. One deploying seat is included; extra deploying seats are $20/month each and viewers are free.",
+        "includedUsage": {
+          "activeCpuHours": 0,
+          "provisionedMemoryGBHours": 0,
+          "creations": 0,
+          "dataTransferGB": null
+        }
+      },
+      "limits": {
+        "maxConcurrent": "10,000 concurrent sandboxes",
+        "maxSession": "24 hours",
+        "maxSize": "8 vCPU / 16 GB memory / 64 GB disk / 15 open ports"
+      },
+      "evidence": [
+        {
+          "url": "https://vercel.com/docs/plans/pro-plan",
+          "quote": "$20/month Pro platform fee"
+        },
+        {
+          "url": "https://vercel.com/docs/plans/pro-plan",
+          "quote": "1 deploying team seat included"
+        },
+        {
+          "url": "https://vercel.com/docs/plans/pro-plan",
+          "quote": "$20/month in usage credit"
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "All Sandbox usage on Pro plans is charged against your $20/month credit. After the credit is exhausted, usage is billed at the rates shown above."
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Pro 8 16GB 15 64 GB"
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Max Session Duration 45 minutes 24 hours 24 hours Concurrent Sandboxes 10 10,000 10,000"
+        }
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "monthlyFeeUsd": null,
+      "included": {
+        "monthlyCreditUsd": null,
+        "notes": "Custom pricing and quotas. Unit rates in the public table are the same as Pro, but data transfer is billed per GB rather than bundled in the Flat Rate CDN."
+      },
+      "limits": {
+        "maxConcurrent": "10,000 concurrent sandboxes (higher via sales)",
+        "maxSession": "24 hours",
+        "maxSize": "32 vCPU / 64 GB memory / 64 GB disk / 15 open ports"
+      },
+      "evidence": [
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Enterprise plans have custom pricing and quotas."
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Enterprise 32 64GB 15 64 GB"
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Max Session Duration 45 minutes 24 hours 24 hours Concurrent Sandboxes 10 10,000 10,000"
+        }
+      ]
+    }
+  ],
+  "compute": {
+    "model": "per-resource",
+    "cpuBasis": "active use only: Active CPU counts the CPU time your code actually consumes, summed across the sandbox's vCPUs. Time waiting on I/O, database queries or model calls is not billed.",
+    "ramBasis": "allocated: provisioned memory is the memory allocated to the sandbox multiplied by the time the session runs, including idle time.",
+    "billingIncrement": "Provisioned memory is billed in 1-minute minimum increments. No CPU metering interval is published.",
+    "minimum": "A 1-minute minimum applies to provisioned memory per session. No minimum is published for Active CPU; only memory is described as having one.",
+    "rates": [
+      {
+        "resource": "Active CPU",
+        "usdPerVcpuHour": 0.128,
+        "usdPerGibRamHour": null,
+        "original": {
+          "value": 0.128,
+          "unit": "USD per vCPU-hour (active)"
+        },
+        "url": "https://vercel.com/docs/sandbox/pricing",
+        "quote": "Active CPU $0.128 per hour"
+      },
+      {
+        "resource": "Provisioned memory",
+        "usdPerVcpuHour": null,
+        "usdPerGibRamHour": 0.0212,
+        "original": {
+          "value": 0.0212,
+          "unit": "USD per GB-hour (provisioned)"
+        },
+        "url": "https://vercel.com/docs/sandbox/pricing",
+        "quote": "Provisioned Memory $0.0212 per GB-hr"
+      },
+      {
+        "resource": "CPU basis",
+        "usdPerVcpuHour": null,
+        "usdPerGibRamHour": null,
+        "original": {
+          "value": null,
+          "unit": null
+        },
+        "url": "https://vercel.com/docs/sandbox/pricing",
+        "quote": "The amount of time your code actively uses the CPU, measured in hours. Time spent waiting for I/O (such as network requests, database queries, or AI model calls) does not count toward Active CPU."
+      },
+      {
+        "resource": "Memory minimum",
+        "usdPerVcpuHour": null,
+        "usdPerGibRamHour": null,
+        "original": {
+          "value": 1,
+          "unit": "minute minimum increment"
+        },
+        "url": "https://vercel.com/docs/sandbox/pricing",
+        "quote": "Provisioned memory is billed in 1 minute minimum increments to account for sandbox lifecycle management."
+      },
+      {
+        "resource": "Size ratio",
+        "usdPerVcpuHour": null,
+        "usdPerGibRamHour": null,
+        "original": {
+          "value": 2,
+          "unit": "GB memory per vCPU"
+        },
+        "url": "https://vercel.com/docs/sandbox/pricing",
+        "quote": "You can provision 1 or an even number of vCPUs between 2 and 32 depending on your plan. The default is 2 vCPUs."
+      },
+      {
+        "resource": "Size ratio (memory)",
+        "usdPerVcpuHour": null,
+        "usdPerGibRamHour": null,
+        "original": {
+          "value": 2,
+          "unit": "GB memory per vCPU"
+        },
+        "url": "https://vercel.com/docs/sandbox/pricing",
+        "quote": "Each vCPU includes 2 GB of memory."
+      }
+    ],
+    "classDifferences": [
+      {
+        "note": "Active CPU, provisioned memory, data transfer and drive rates vary by region; the figures here are the default iad1 rates. Sandbox creations and snapshot storage are flat in every region.",
+        "url": "https://vercel.com/docs/sandbox/pricing",
+        "quote": "Rates for Active CPU, Provisioned Memory, Sandbox Data Transfer, Drive Storage, Drive Reads, and Drive Writes vary by region."
+      },
+      {
+        "note": "A running sandbox with no CPU activity still pays for its memory for the whole session; stopping it ends both charges.",
+        "url": "https://vercel.com/docs/sandbox",
+        "quote": "An idle sandbox keeps CPU charges low because it uses little CPU. Stop a sandbox when work is done to end CPU and memory charges."
+      },
+      {
+        "note": "The example table on the overview prices a stopped sandbox at zero.",
+        "url": "https://vercel.com/docs/sandbox",
+        "quote": "Stopped no CPU, no memory $0.00 $0.00"
+      },
+      {
+        "note": "Unit rates do not differ by plan: the Pro and Enterprise columns show the same $0.128/hour and $0.0212/GB-hour. Hobby has no per-unit rate because overage is blocked.",
+        "url": "https://vercel.com/docs/sandbox/pricing",
+        "quote": "Sandbox Active CPU 5 hours/month $0.128/hour $0.128/hour"
+      }
+    ],
+    "url": "https://vercel.com/docs/sandbox/pricing",
+    "quote": "Sandbox Active CPU 5 hours/month $0.128/hour $0.128/hour Sandbox Provisioned Memory 420 GB-hours/month $0.0212/GB-hour $0.0212/GB-hour Sandbox Creations 5,000/month $0.60/1M $0.60/1M"
+  },
+  "storage": {
+    "ephemeralDisk": {
+      "includedGiB": 64,
+      "pricePerGiBMonth": null,
+      "note": "Every sandbox created with Sandbox SDK 3.0.0 or above, or from a custom image, gets 64 GB of ephemeral NVMe at no separate charge. Sandboxes on deprecated runtimes get 32 GB. A sandbox can mount up to 4 drives.",
+      "evidence": [
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Each sandbox created with Sandbox SDK 3.0.0 or above, or from a custom image, is automatically provisioned 64 GB of ephemeral NVMe storage."
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Sandboxes created with runtimes (deprecated) receive 32 GB."
+        }
+      ]
+    },
+    "snapshots": {
+      "pricePerGiBMonth": 0.08,
+      "freeGiBLifetimeHobby": 15,
+      "retentionDefault": "30 days after last use, configurable including no expiry",
+      "note": "Persistent sandboxes are snapshotted automatically on stop and that snapshot storage is billed separately from compute.",
+      "evidence": [
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Snapshot Storage 15 GB (lifetime) $0.08/GB-month $0.08/GB-month"
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Snapshots expire 30 days after their last use by default."
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes",
+          "quote": "Each automatic snapshot consumes Snapshot Storage, which is billed separately from compute."
+        }
+      ]
+    },
+    "drives": {
+      "pricePerGiBMonth": 0.05,
+      "freeGiBLifetimeHobby": 15,
+      "note": "Drive storage is measured hourly on the logical used size, not the provisioned size.",
+      "evidence": [
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Drive Storage 15 GB (lifetime) $0.05/GB-month $0.05/GB-month"
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/pricing",
+          "quote": "Storage is measured hourly on the logical used size of each drive, not the size you provisioned, and billed for the hours the data is stored."
+        }
+      ]
+    },
+    "billedWhileStopped": {
+      "value": "no CPU or memory; snapshot and drive storage continue",
+      "note": "Stopping a sandbox ends compute charges. A persistent sandbox's filesystem becomes a billed snapshot; non-persistent sandboxes discard it and accrue no snapshot cost.",
+      "evidence": [
+        {
+          "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes",
+          "quote": "Non-persistent sandboxes discard their filesystem when the session stops and don't accrue Snapshot Storage costs."
+        }
+      ]
+    },
+    "stoppedDataRetention": "A persistent sandbox keeps its filesystem as a snapshot, 30 days after last use by default (configurable, including indefinitely). Vercel removes sandboxes that cannot resume from a snapshot after 14 days of inactivity.",
+    "stoppedRetentionEvidence": [
+      {
+        "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes",
+        "quote": "Vercel removes sandboxes that can't resume from a snapshot after 14 days of inactivity."
+      }
+    ]
+  },
+  "egress": {
+    "note": "Sandbox data transfer is measured in GB and billed by plan. Downloads into the sandbox are free; uploads out and traffic to exposed ports are billable. Pro bundles sandbox transfer into the Flat Rate CDN rather than listing a per-GB rate. The table columns are Hobby, Pro and Enterprise, in that order.",
+    "tiers": [
+      {
+        "plan": "Hobby",
+        "includedPerMonth": "20 GB",
+        "pricePerGB": null,
+        "url": "https://vercel.com/docs/sandbox/pricing",
+        "quote": "Sandbox Data Transfer 20 GB/month Included in Flat Rate CDN $0.15/GB"
+      },
+      {
+        "plan": "Pro",
+        "includedPerMonth": "Flat Rate CDN bundle",
+        "pricePerGB": null,
+        "url": "https://vercel.com/docs/sandbox/pricing",
+        "quote": "Sandbox Data Transfer 20 GB/month Included in Flat Rate CDN $0.15/GB"
+      },
+      {
+        "plan": "Enterprise",
+        "includedPerMonth": "none published",
+        "pricePerGB": 0.15,
+        "url": "https://vercel.com/docs/sandbox/pricing",
+        "quote": "Sandbox Data Transfer 20 GB/month Included in Flat Rate CDN $0.15/GB"
+      }
+    ],
+    "inbound": {
+      "price": "free",
+      "url": "https://vercel.com/docs/sandbox/pricing",
+      "quote": "Data your sandbox downloads from the internet, such as packages, Git repositories, artifacts, and datasets, is free."
+    },
+    "regional": {
+      "note": "Transfer rates differ by region; the regional selector on the pricing page shows the per-region values.",
+      "url": "https://vercel.com/docs/sandbox/pricing",
+      "quote": "Rates for Active CPU, Provisioned Memory, Sandbox Data Transfer, Drive Storage, Drive Reads, and Drive Writes vary by region."
+    }
+  },
+  "other": [
+    {
+      "item": "Sandbox creations",
+      "price": "$0.60 per 1 million creations",
+      "url": "https://vercel.com/docs/sandbox/pricing",
+      "quote": "Sandbox Creations 5,000/month $0.60/1M $0.60/1M"
+    },
+    {
+      "item": "Drive reads",
+      "price": "$0.0015 per GB",
+      "url": "https://vercel.com/docs/sandbox/pricing",
+      "quote": "Drive Reads 30 GB/month $0.0015/GB $0.0015/GB"
+    },
+    {
+      "item": "Drive writes",
+      "price": "$0.004 per GB",
+      "url": "https://vercel.com/docs/sandbox/pricing",
+      "quote": "Drive Writes 30 GB/month $0.004/GB $0.004/GB"
+    },
+    {
+      "item": "Seats",
+      "price": "1 deploying seat included on Pro; extra deploying seats $20/month; viewers free",
+      "url": "https://vercel.com/docs/plans/pro-plan",
+      "quote": "Additional paid seats (Owner or Member roles) for $20/month each"
+    },
+    {
+      "item": "Spend controls",
+      "price": "alerts and optional project pause, no hard cap",
+      "url": "https://vercel.com/docs/sandbox/pricing",
+      "quote": "To control costs, configure Spend Management to receive alerts or pause projects when you reach a specified amount."
+    },
+    {
+      "item": "Dedicated IPv4",
+      "price": "not published; exposed ports are public HTTPS URLs, not a dedicated IP",
+      "url": "https://vercel.com/docs/sandbox/concepts",
+      "quote": "Exposed ports are accessible via a public URL, so be mindful of what services you run."
+    },
+    {
+      "item": "Minimum spend",
+      "price": "no minimum spend published beyond the $20 Pro platform fee",
+      "url": "https://vercel.com/docs/plans/pro-plan",
+      "quote": "$20/month Pro platform fee"
+    }
+  ],
+  "freeTier": {
+    "summary": "Hobby is a capped free allowance, not a credit: 5 Active-CPU hours, 420 GB-hours of memory, 5,000 creations and 20 GB of transfer per month, plus 15 GB of snapshot and 15 GB of drive storage for the lifetime of the account. When a quota is hit, sandbox creation pauses; there is no overage billing. Hobby is non-commercial only.",
+    "monthlyCreditUsd": 0,
+    "limits": "10 concurrent sandboxes, 45-minute maximum session, 4 vCPU / 8 GB maximum size.",
+    "evidence": [
+      {
+        "url": "https://vercel.com/docs/sandbox/pricing",
+        "quote": "You will not be charged for any additional usage. Once you exceed the quotas, sandbox creation is paused until 30 days have passed since you first used the feature."
+      },
+      {
+        "url": "https://vercel.com/docs/plans/hobby",
+        "quote": "As stated in the fair use guidelines, the Hobby plan restricts users to non-commercial, personal use only."
+      }
+    ]
+  },
+  "diffs": [
+    {
+      "field": "compute.minimum (CPU)",
+      "ours": "Only provisioned memory is documented with a 1-minute minimum; a universal CPU minimum was not verified.",
+      "battleships": "Applies min_billed_seconds = 60 to CPU as well as memory, and notes its calculator may overestimate short-task CPU.",
+      "live": "The pricing page states the 1-minute minimum for provisioned memory only and publishes no CPU minimum. Live agrees with our research file.",
+      "url": "https://vercel.com/docs/sandbox/pricing",
+      "quote": "Provisioned memory is billed in 1 minute minimum increments to account for sandbox lifecycle management."
+    },
+    {
+      "field": "egress",
+      "ours": "Data transfer is billed in GB; Hobby includes 20 GB/month; Pro bundles it in the Flat Rate CDN; Enterprise $0.15/GB.",
+      "battleships": "Base mode: $0.15/GB with 1,000 GB free (egress_free_gib 1000), shared with the site CDN.",
+      "live": "The pricing table gives Hobby 20 GB/month, Pro 'Included in Flat Rate CDN' and Enterprise $0.15/GB. No 1 TB free sandbox transfer appears.",
+      "url": "https://vercel.com/docs/sandbox/pricing",
+      "quote": "Sandbox Data Transfer 20 GB/month Included in Flat Rate CDN $0.15/GB"
+    },
+    {
+      "field": "lifecycle.fork_running",
+      "ours": "Forking a running sandbox uses its latest saved snapshot, not live memory.",
+      "battleships": "fork_running: true",
+      "live": "The SDK reference describes fork from the source's current snapshot, with a fresh-create fallback when there is none.",
+      "url": "https://vercel.com/docs/sandbox/sdk-reference",
+      "quote": "If the source has no current snapshot, the fork falls back to a fresh create with the source's image plus the copied config."
+    },
+    {
+      "field": "billing.usageApi",
+      "ours": "The SDK exposes cumulative usage counters per sandbox.",
+      "battleships": "usage per sandbox (API): false",
+      "live": "The SDK reference documents cumulative usage counters across every session.",
+      "url": "https://vercel.com/docs/sandbox/sdk-reference",
+      "quote": "Cumulative usage across every session this sandbox has run."
+    },
+    {
+      "field": "freeTier.resetRule",
+      "ours": "The Hobby page mixes billing-cycle and 30-days-since-first-use language; confirm the reset rule.",
+      "battleships": "Hard stop; creation paused until 30 days after first use once any quota is exceeded.",
+      "live": "Both phrasings are still present on the live pricing page: 'until the next billing cycle' in one paragraph and 'until 30 days have passed since you first used the feature' in the Hobby section.",
+      "url": "https://vercel.com/docs/sandbox/pricing",
+      "quote": "Once you exceed your included limit on Hobby, sandbox creation is paused until the next billing cycle."
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "Sandbox concepts: isolation architecture",
+      "url": "https://vercel.com/docs/sandbox/concepts#isolation-architecture"
+    },
+    "sizes-regions": {
+      "title": "Sandbox pricing: resource limits",
+      "url": "https://vercel.com/docs/sandbox/pricing#resource-limits",
+      "also": [
+        {
+          "title": "Sandbox regions",
+          "url": "https://vercel.com/docs/sandbox/concepts/regions"
+        }
+      ]
+    },
+    "lifecycle": {
+      "title": "Persistent sandboxes: sessions, stop and resume",
+      "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots",
+      "url": "https://vercel.com/docs/sandbox/concepts/snapshots"
+    },
+    "storage": {
+      "title": "Drives",
+      "url": "https://vercel.com/docs/sandbox/concepts/drives"
+    },
+    "idle-timers": {
+      "title": "Sandbox pricing: runtime limits",
+      "url": "https://vercel.com/docs/sandbox/pricing#runtime-limits"
+    },
+    "reaching-it": {
+      "title": "Sandbox concepts: network access and exposed ports",
+      "url": "https://vercel.com/docs/sandbox/concepts#network-access"
+    },
+    "custom-domains": null,
+    "outbound-network": {
+      "title": "Firewall",
+      "url": "https://vercel.com/docs/sandbox/concepts/firewall"
+    },
+    "keys-secrets": {
+      "title": "Firewall: credentials brokering",
+      "url": "https://vercel.com/docs/sandbox/concepts/firewall#credentials-brokering"
+    },
+    "ways-to-drive": {
+      "title": "JS SDK reference",
+      "url": "https://vercel.com/docs/sandbox/sdk-reference",
+      "also": [
+        {
+          "title": "CLI reference",
+          "url": "https://vercel.com/docs/sandbox/cli-reference"
+        }
+      ]
+    },
+    "built-in-agents": {
+      "title": "Sandbox ecosystem (agent integrations)",
+      "url": "https://vercel.com/docs/sandbox/ecosystem"
+    },
+    "teams-accounts": {
+      "title": "Pro plan: team seats",
+      "url": "https://vercel.com/docs/plans/pro-plan#team-seats"
+    },
+    "billing-models": {
+      "title": "Sandbox pricing and quotas",
+      "url": "https://vercel.com/docs/sandbox/pricing"
+    },
+    "trials-free-tiers": {
+      "title": "Hobby plan",
+      "url": "https://vercel.com/docs/plans/hobby"
+    },
+    "quickstart": {
+      "title": "Sandbox quickstart",
+      "url": "https://vercel.com/docs/sandbox/quickstart"
+    },
+    "pricing": {
+      "title": "Sandbox pricing and quotas",
+      "url": "https://vercel.com/docs/sandbox/pricing"
+    }
+  },
+  "deploy": {
+    "hermesAgent": {
+      "status": "official Vercel guide for the Hermes Vercel Sandbox terminal backend",
+      "oneClickOrManaged": "no one-click deploy; a step-by-step guide that still runs Hermes on your own machine",
+      "summary": "Vercel documents Hermes as a terminal backend: you install Hermes locally, point terminal.backend at vercel_sandbox, authenticate with Vercel, and the agent's commands run in a Sandbox microVM. Hermes itself is not hosted by Vercel, so this is not an always-on agent deployment. The guide requires macOS, Linux or Windows with WSL2, Hermes 0.20.0+, and the Vercel CLI linked to a project.",
+      "steps": [
+        "Install Hermes with the official installer (or `hermes update` to 0.20.0+).",
+        "`hermes config set terminal.backend vercel_sandbox`, set terminal.vercel_runtime (node24/node22/python3.13), and set container_cpu with container_memory = 2,048 x CPU.",
+        "Authenticate: `vercel env pull` and export VERCEL_OIDC_TOKEN for local use, or set VERCEL_TOKEN, VERCEL_PROJECT_ID and VERCEL_TEAM_ID for long-running processes.",
+        "Run `hermes doctor`, then `hermes`; commands execute in a Sandbox as the vercel-sandbox user with /vercel/sandbox as the workspace root."
+      ],
+      "nonCoderDashboard": "No. It needs a terminal, a Vercel project link and environment variables; the sandbox is created by the Hermes process, not from the dashboard.",
+      "alwaysOn": "No. One sandbox per task, recreated as needed, with filesystem snapshots between tasks; live processes do not survive.",
+      "evidence": [
+        {
+          "url": "https://vercel.com/docs/sandbox/ecosystem/hermes",
+          "quote": "Its Vercel Sandbox terminal backend runs every command the agent executes inside an isolated Vercel Sandbox microVM instead of on your machine."
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/ecosystem/hermes",
+          "quote": "One sandbox per task: Hermes creates a sandbox on demand when the agent first runs a terminal command and reuses it for the rest of the task."
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/ecosystem/hermes",
+          "quote": "Live processes do not survive sandbox recreation."
+        },
+        {
+          "url": "https://vercel.com/docs/sandbox/ecosystem/hermes",
+          "quote": "macOS, Linux, or Windows with WSL2"
+        }
+      ]
+    },
+    "openClaw": {
+      "status": "official Vercel Knowledge Base guide plus a Vercel Labs proof-of-concept repository",
+      "oneClickOrManaged": "no one-click deploy; a manual CLI walkthrough (Sandbox CLI, npm, onboarding wizard, QR pairing)",
+      "summary": "Vercel's KB walks through running OpenClaw inside a Vercel Sandbox: create a sandbox with a published port and a timeout, install OpenClaw globally, run the onboarding wizard, start the gateway with nohup, pair the browser, and link WhatsApp by QR. The gateway is reachable at the sandbox's public HTTPS URL. The vercel-labs/vercel-openclaw repo is a separate review PoC for a Slack-driven warm/sleep lifecycle and is explicitly not production-ready.",
+      "steps": [
+        "`npm i -g sandbox` and `sandbox login`.",
+        "`sandbox create --timeout 30m --publish-port 18789 --connect`; note the sandbox ID and public URL.",
+        "`npm install -g openclaw`, then `openclaw onboard` (model provider, API key, skip channels).",
+        "Start the gateway in the background with nohup so it survives disconnect; open the dashboard at the public URL with the token fragment.",
+        "Approve the browser with `openclaw devices list` / `openclaw devices approve`, then link WhatsApp by QR and restart the gateway.",
+        "Optionally snapshot the sandbox after install and lock egress to an allowlist with `sandbox config network-policy`."
+      ],
+      "nonCoderDashboard": "No. Every step is a terminal command; the OpenClaw dashboard only becomes usable after the CLI onboarding and device approval.",
+      "alwaysOn": "Only up to the session timeout: the guide uses a 30-minute timeout and notes that sandboxes shut down when it expires. The KB frames this as keeping the assistant reachable without a laptop, not as an indefinite host.",
+      "evidence": [
+        {
+          "url": "https://vercel.com/kb/guide/running-openclaw-in-vercel-sandbox",
+          "quote": "A Vercel Sandbox gives OpenClaw its own isolated Linux MicroVM, completely separate from your local machine."
+        },
+        {
+          "url": "https://vercel.com/kb/guide/running-openclaw-in-vercel-sandbox",
+          "quote": "Timeouts: sandboxes shut down automatically when the timeout expires, so nothing runs forever by accident"
+        },
+        {
+          "url": "https://github.com/vercel-labs/vercel-openclaw",
+          "quote": "This is a review PoC, not a production-ready hosting service."
+        }
+      ]
+    },
+    "alwaysOnVerdict": "Weakest of the three for an always-on personal agent. Sessions cap at 24 hours on Pro (45 minutes on Hobby), a sandbox only resumes when something calls it, and live processes do not survive a stop. The official guides are for a laptop-driven agent whose commands run in a sandbox, not for hosting the agent itself."
+  },
+  "notVerified": [
+    "No Vercel account or sandbox was created; all behaviour is from documentation.",
+    "CPU metering granularity is not published; only the memory minimum is.",
+    "Per-region rates other than iad1 were not read from the interactive selector.",
+    "Whether a sandbox port can be attached to a customer's own domain was not confirmed."
+  ]
+}

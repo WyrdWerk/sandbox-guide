@@ -1,0 +1,69 @@
+{
+  "provider": "sandboxer",
+  "checkedOn": "2026-10-29",
+  "summary": "A fixed multiplier per size, per second while running, out of a plan whose dollars come back as machine time.",
+  "shapes": [
+    {
+      "name": "small",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 12,
+      "hourly": 0.018
+    },
+    {
+      "name": "default",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 50,
+      "hourly": 0.036
+    },
+    {
+      "name": "large",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 125,
+      "hourly": 0.072
+    },
+    {
+      "name": "xlarge",
+      "vcpu": 16,
+      "ram": 32,
+      "disk": 251,
+      "hourly": 0.2
+    }
+  ],
+  "between": "kept",
+  "plans": [
+    {
+      "name": "$20 plan",
+      "fee": 20,
+      "credit": 20,
+      "pack": 20,
+      "excludesShapes": [
+        "xlarge"
+      ]
+    },
+    {
+      "name": "$100 plan",
+      "fee": 100,
+      "credit": 100,
+      "pack": 20
+    },
+    {
+      "name": "$500 plan",
+      "fee": 500,
+      "credit": 500,
+      "pack": 20
+    }
+  ],
+  "notes": [
+    "Storage counts against an included quota and is not billed; going over blocks new sandboxes.",
+    "Plans are per seat in an organisation."
+  ],
+  "sources": [
+    {
+      "label": "Pricing",
+      "url": "https://sandboxer.com/pricing"
+    }
+  ]
+}

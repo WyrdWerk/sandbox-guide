@@ -1,0 +1,269 @@
+---
+// The cost calculator: inputs on the left, every provider priced on the right.
+// The same engine (lib/cost.ts) runs here in the browser and at build time.
+import { pricing, providers } from "../lib/data";
+import { presets } from "../lib/cost";
+
+interface Props {
+  /** Preset to open with. */
+  preset?: string;
+  /** Show only these providers, in this order (the head-to-head view). */
+  only?: string[];
+  id?: string;
+}
+
+const { preset = "personal", only, id = "calc" } = Astro.props;
+const payload = {
+  cards: pricing,
+  names: Object.fromEntries(providers.map((p) => [p.id, p.name])),
+  preset,
+  only: only ?? null,
+};
+const field = (name: string) => `${id}-${name}`;
+---
+
+<div class="calc" data-calc={id}>
+  <form class="calc__inputs" aria-label="Workload" onsubmit="return false">
+    <fieldset class="calc__group">
+      <legend class="calc__legend">Start from</legend>
+      <select name="preset" id={field("preset")} aria-label="Start from a ready-made workload">
+        {Object.entries(presets).map(([key, p]) => <option value={key} selected={key === preset}>{p.label}</option>)}
+        <option value="custom">Your own numbers</option>
+      </select>
+      <p class="calc__why" data-why></p>
+    </fieldset>
+
+    <fieldset class="calc__group">
+      <legend class="calc__legend">The machine</legend>
+      <div class="calc__row">
+        <label>vCPU <input type="number" name="vcpu" min="0.25" max="64" step="0.25" inputmode="decimal" /></label>
+        <label>Memory, GiB <input type="number" name="ram" min="0.25" max="256" step="0.25" inputmode="decimal" /></label>
+        <label>Disk, GiB <input type="number" name="disk" min="1" max="2000" step="1" inputmode="numeric" /></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="calc__group">
+      <legend class="calc__legend">How it runs</legend>
+      <div class="calc__modes" role="radiogroup">
+        <label><input type="radio" name="mode" value="machines" /> Machines I keep</label>
+        <label><input type="radio" name="mode" value="tasks" /> Short throwaway tasks</label>
+      </div>
+      <div class="calc__row" data-when="machines">
+        <label>Machines <input type="number" name="machines" min="1" max="10000" step="1" /></label>
+        <label>Hours a day <input type="number" name="hoursPerDay" min="0.25" max="24" step="0.25" /></label>
+        <label>Days a month <input type="number" name="daysPerMonth" min="1" max="31" step="1" /></label>
+      </div>
+      <label class="calc__check" data-when="machines">
+        <input type="checkbox" name="keepDisk" /> Keep its files between sessions
+      </label>
+      <div class="calc__row" data-when="tasks">
+        <label>Tasks a month <input type="number" name="tasks" min="1" max="10000000" step="1" /></label>
+        <label>Minutes each <input type="number" name="taskMinutes" min="0.1" max="1440" step="0.1" /></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="calc__group">
+      <legend class="calc__legend">How busy it is</legend>
+      <label class="calc__slider">
+        <span>CPU working <output data-out="busy"></output></span>
+        <input type="range" name="busy" min="0" max="100" step="1" />
+      </label>
+      <p class="calc__hint">Only providers that bill for CPU actually used look at this. An agent waiting for messages is near 0%; a build or a test run is near 100%.</p>
+      <label class="calc__slider" data-when="machines">
+        <span>Awake <output data-out="awake"></output></span>
+        <input type="range" name="awake" min="1" max="100" step="1" />
+      </label>
+      <p class="calc__hint" data-when="machines">For providers that put an idle machine to sleep and wake it on a request: the share of its hours it has to be awake. An agent that only answers webhooks can sleep; one that holds a chat connection open cannot.</p>
+    </fieldset>
+  </form>
+
+  <div class="calc__results">
+    <p class="calc__summary" data-summary aria-live="polite"></p>
+    <ol class="calc__list" data-list></ol>
+    <p class="calc__foot">
+      List prices only, excluding model tokens, egress, taxes and anything a provider does not publish.{" "}
+      <a href="/costs/how-it-works/">How the numbers are made</a>.
+    </p>
+  </div>
+</div>
+
+<script type="application/json" data-calc-data={id} set:html={JSON.stringify(payload)}></script>
+
+<script>
+  import { price, presets, formatMoney, type Workload, type RateCard } from "../lib/cost";
+
+  const NUMBER_FIELDS = ["vcpu", "ram", "disk", "machines", "hoursPerDay", "daysPerMonth", "tasks", "taskMinutes"] as const;
+
+  for (const root of document.querySelectorAll<HTMLElement>("[data-calc]")) {
+    const id = root.dataset.calc!;
+    const data = JSON.parse(document.querySelector(`[data-calc-data="${id}"]`)!.textContent!);
+    const cards: RateCard[] = data.cards;
+    const names: Record<string, string> = data.names;
+    const form = root.querySelector("form")!;
+    const list = root.querySelector<HTMLElement>("[data-list]")!;
+    const summary = root.querySelector<HTMLElement>("[data-summary]")!;
+    const why = root.querySelector<HTMLElement>("[data-why]")!;
+    const el = (name: string) => form.elements.namedItem(name) as HTMLInputElement;
+
+    // One calculator per page keeps its workload in the address bar, so a link shares it.
+    const ownsUrl = document.querySelectorAll("[data-calc]").length === 1;
+    const params = new URLSearchParams(ownsUrl ? location.search : "");
+    let only: string[] | null = params.get("only")?.split(",") ?? data.only;
+    // A page can narrow the providers later, as the side-by-side picker does.
+    root.addEventListener("calc:only", (event) => {
+      only = (event as CustomEvent<string[]>).detail;
+      render();
+    });
+
+    function load(w: Workload) {
+      for (const f of NUMBER_FIELDS) el(f).value = String(w[f]);
+      (form.querySelector(`input[name="mode"][value="${w.mode}"]`) as HTMLInputElement).checked = true;
+      el("keepDisk").checked = w.keepDisk;
+      el("busy").value = String(Math.round(w.busy * 100));
+      el("awake").value = String(Math.round(w.awake * 100));
+    }
+
+    function read(): Workload {
+      const n = (f: string) => Math.max(0, Number(el(f).value) || 0);
+      return {
+        vcpu: n("vcpu"), ram: n("ram"), disk: n("disk"),
+        mode: (form.querySelector('input[name="mode"]:checked') as HTMLInputElement).value as Workload["mode"],
+        tasks: n("tasks"), taskMinutes: n("taskMinutes"),
+        machines: Math.max(1, Math.round(n("machines"))), hoursPerDay: Math.min(24, n("hoursPerDay")), daysPerMonth: Math.min(31, n("daysPerMonth")),
+        keepDisk: el("keepDisk").checked,
+        busy: n("busy") / 100, awake: Math.max(0.01, n("awake") / 100),
+      };
+    }
+
+    function text(tag: string, className: string, content: string) {
+      const node = document.createElement(tag);
+      node.className = className;
+      node.textContent = content;
+      return node;
+    }
+
+    function render() {
+      const w = read();
+      const mode = w.mode;
+      for (const node of root.querySelectorAll<HTMLElement>("[data-when]")) node.hidden = node.dataset.when !== mode;
+      root.querySelector('[data-out="busy"]')!.textContent = `${Math.round(w.busy * 100)}%`;
+      root.querySelector('[data-out="awake"]')!.textContent = `${Math.round(w.awake * 100)}%`;
+
+      const chosen = only ? cards.filter((c) => only.includes(c.provider)) : cards;
+      const quotes = chosen.map((c) => ({ card: c, q: price(c, w) }));
+      quotes.sort((a, b) => Number(b.q.feasible) - Number(a.q.feasible) || a.q.total - b.q.total);
+      const runs = quotes.filter((x) => x.q.feasible);
+      summary.textContent = quotes.length === 0
+        ? "Choose providers to price."
+        : runs.length
+        ? `${runs.length} of ${quotes.length} providers can run this as asked. Cheapest: ${names[runs[0].card.provider]} at ${formatMoney(runs[0].q.total)} a month.`
+        : `None of these providers can run this exactly as asked. The figures show the nearest they offer.`;
+
+      list.replaceChildren();
+      for (const { card, q } of quotes) {
+        const item = document.createElement("li");
+        item.className = "calc__item" + (q.feasible ? "" : " calc__item--warn");
+        const details = document.createElement("details");
+        const head = document.createElement("summary");
+        head.className = "calc__head";
+        const name = text("span", "calc__name", names[card.provider] ?? card.provider);
+        const total = text("span", "calc__total", formatMoney(q.total));
+        const per = text("span", "calc__per", "a month");
+        const sub = text("span", "calc__sub", `${q.plan} · ${q.shape}`);
+        const status = text("span", q.feasible ? "badge badge--yes" : "badge badge--partly", q.feasible ? "Runs as asked" : "Needs a change");
+        head.append(name, status, total, per, sub);
+        details.append(head);
+
+        const body = document.createElement("div");
+        body.className = "calc__body";
+        body.append(text("p", "calc__how", card.summary));
+        if (q.problems.length) {
+          const ul = document.createElement("ul");
+          ul.className = "calc__problems";
+          for (const p of q.problems) ul.append(text("li", "", p));
+          body.append(ul);
+        }
+        const table = document.createElement("table");
+        table.className = "calc__lines";
+        const cap = document.createElement("caption");
+        cap.className = "visually-hidden";
+        cap.textContent = `${names[card.provider]} arithmetic`;
+        table.append(cap);
+        for (const line of q.lines) {
+          const tr = document.createElement("tr");
+          tr.append(text("th", "", line.label), text("td", "calc__math", line.math), text("td", "calc__amount", formatMoney(Math.abs(line.amount)).replace("$", line.amount < 0 ? "−$" : "$")));
+          table.append(tr);
+        }
+        const totalRow = document.createElement("tr");
+        totalRow.className = "calc__total-row";
+        totalRow.append(text("th", "", "Usage"), text("td", "", ""), text("td", "calc__amount", formatMoney(q.usage)));
+        table.append(totalRow);
+        body.append(table);
+        if (q.notes.length) {
+          const ul = document.createElement("ul");
+          ul.className = "calc__notes";
+          for (const n of q.notes) ul.append(text("li", "", n));
+          body.append(ul);
+        }
+        const links = document.createElement("p");
+        links.className = "calc__links";
+        for (const s of card.sources) {
+          const a = document.createElement("a");
+          a.href = s.url;
+          a.rel = "noreferrer noopener";
+          a.textContent = `${s.label} ↗`;
+          links.append(a);
+        }
+        const page = document.createElement("a");
+        page.href = `/providers/${card.provider}/`;
+        page.textContent = `About ${names[card.provider]}`;
+        links.append(page);
+        links.append(text("span", "calc__checked", `Rates checked ${card.checkedOn}`));
+        body.append(links);
+        details.append(body);
+        item.append(details);
+        list.append(item);
+      }
+
+      if (ownsUrl) {
+        const url = new URL(location.href);
+        const p = el("preset").value;
+        url.searchParams.set("preset", p);
+        for (const k of Object.keys(w)) url.searchParams.delete(k);
+        if (p === "custom") {
+          for (const [k, v] of Object.entries(w)) url.searchParams.set(k, String(v));
+        }
+        history.replaceState(null, "", url);
+      }
+    }
+
+    function applyPreset(key: string) {
+      const p = presets[key];
+      if (!p) return;
+      load(p.workload);
+      why.textContent = p.why;
+    }
+
+    // Start from the address bar, then the page's preset.
+    const start = params.get("preset") ?? data.preset;
+    el("preset").value = presets[start] || start === "custom" ? start : data.preset;
+    applyPreset(start in presets ? start : data.preset);
+    if (start === "custom") {
+      const w = { ...presets[data.preset].workload } as Record<string, unknown>;
+      for (const [k, v] of params) if (k in w) w[k] = typeof w[k] === "number" ? Number(v) : typeof w[k] === "boolean" ? v === "true" : v;
+      load(w as unknown as Workload);
+      why.textContent = "Your own numbers. The address bar keeps them, so the link shares this exact workload.";
+    }
+
+    form.addEventListener("input", (event) => {
+      const target = event.target as HTMLInputElement;
+      if (target.name === "preset") applyPreset(target.value);
+      else if (el("preset").value !== "custom") {
+        el("preset").value = "custom";
+        why.textContent = "Your own numbers. The address bar keeps them, so the link shares this exact workload.";
+      }
+      render();
+    });
+    render();
+  }
+</script>

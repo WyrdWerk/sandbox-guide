@@ -1,0 +1,35 @@
+---
+// Renders a sentence that may contain [text](url) links and **bold**, as markup.
+// External links open the provider's own documentation and are marked with ↗.
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+type Part = { kind: "text" | "bold"; value: string } | { kind: "link"; value: string; href: string };
+const parts: Part[] = [];
+const pattern = /\[([^\]]+)\]\(([^)\s]+)\)|\*\*([^*]+)\*\*/g;
+let last = 0;
+for (const match of text.matchAll(pattern)) {
+  if (match.index > last) parts.push({ kind: "text", value: text.slice(last, match.index) });
+  if (match[1]) parts.push({ kind: "link", value: match[1], href: match[2] });
+  else parts.push({ kind: "bold", value: match[3] });
+  last = match.index + match[0].length;
+}
+if (last < text.length) parts.push({ kind: "text", value: text.slice(last) });
+const external = (href: string) => /^https?:\/\//.test(href);
+---
+
+{parts.map((part) =>
+  part.kind === "link" ? (
+    external(part.href) ? (
+      <a href={part.href} rel="noreferrer noopener">{part.value}<span class="ext" aria-hidden="true">↗</span></a>
+    ) : (
+      <a href={part.href}>{part.value}</a>
+    )
+  ) : part.kind === "bold" ? (
+    <strong>{part.value}</strong>
+  ) : (
+    part.value
+  ),
+)}

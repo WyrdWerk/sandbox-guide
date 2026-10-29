@@ -1,0 +1,351 @@
+{
+  "id": "e2b",
+  "name": "E2B",
+  "checkedOn": "2026-10-29",
+  "regions": {
+    "value": "US (Google Cloud us-west1) default; US West (AWS us-west-2) all plans via support; EU (europe-west1) and APAC (asia-southeast1) on all plans for workspaces verified by adding a payment method.",
+    "url": "https://docs.e2b.dev/faq/egress-ip-ranges",
+    "quote": "| US | Google Cloud `us-west1` | All plans | Default - no action needed | ... | EU | Google Cloud `europe-west1` | All plans, workspace verified by adding a payment method | ... | ... | APAC | Google Cloud `asia-southeast1` | All plans, workspace verified by adding a payment method | ... |"
+  },
+  "plans": [
+    {
+      "name": "Hobby",
+      "monthlyFeeUsd": 0,
+      "includedUsage": "One-time $100 in usage credits. Usage charged separately.",
+      "limits": {
+        "maxConcurrent": 20,
+        "maxSessionLength": "1 hour of continuous runtime; pausing and resuming resets it.",
+        "maxSize": "8 vCPU / 8 GiB RAM / 10 GiB disk"
+      },
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "$0 monthly plan fee. ... One-time $100 in usage credits. ... Up to 20 concurrently running sandboxes. ... Up to 1 hour per sandbox session. ... 10 GiB of sandbox storage, included."
+    },
+    {
+      "name": "Pro",
+      "monthlyFeeUsd": 150,
+      "includedUsage": "No credits. The fee buys limits only.",
+      "limits": {
+        "maxConcurrent": 100,
+        "maxSessionLength": "24 hours of continuous runtime; pausing and resuming resets it.",
+        "maxSize": "8 vCPU / 8 GiB RAM / 20 GiB disk; more by support request"
+      },
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "$150 monthly plan fee, plus usage. ... Up to 100 concurrently running sandboxes. ... Up to 24 hours per sandbox session. ... 20 GiB of sandbox storage, included. ... Custom sandbox CPU and RAM."
+    },
+    {
+      "name": "Pro+ (600 concurrent)",
+      "monthlyFeeUsd": 650,
+      "includedUsage": "No credits; Pro limits plus a 500-slot concurrency add-on.",
+      "limits": {
+        "maxConcurrent": 600,
+        "maxSessionLength": "24 hours of continuous runtime.",
+        "maxSize": "8 vCPU / 8 GiB RAM / 20 GiB disk"
+      },
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "| Pro+ | 600 | $650 |"
+    },
+    {
+      "name": "Pro++ (1,100 concurrent)",
+      "monthlyFeeUsd": 1150,
+      "includedUsage": "No credits; Pro limits plus two 500-slot concurrency add-ons.",
+      "limits": {
+        "maxConcurrent": 1100,
+        "maxSessionLength": "24 hours of continuous runtime.",
+        "maxSize": "8 vCPU / 8 GiB RAM / 20 GiB disk"
+      },
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "| Pro++ | 1,100 | $1,150 |"
+    },
+    {
+      "name": "Enterprise",
+      "monthlyFeeUsd": null,
+      "includedUsage": "Custom deployment, pricing and billing; a $3,000 monthly minimum applies.",
+      "limits": {
+        "maxConcurrent": null,
+        "maxSessionLength": "Custom",
+        "maxSize": "Custom"
+      },
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "Custom deployment, pricing, billing, support, and limits. ... A $3,000 monthly minimum applies to Enterprise usage."
+    }
+  ],
+  "compute": {
+    "model": "per-resource",
+    "rates": [
+      {
+        "resource": "vCPU",
+        "usdPerVcpuHour": 0.0504,
+        "original": {
+          "value": 0.000014,
+          "unit": "USD per vCPU-second"
+        },
+        "basis": "allocated",
+        "url": "https://e2b.dev/pricing.md",
+        "quote": "| vCPU | $0.000014 per vCPU-second |"
+      },
+      {
+        "resource": "RAM",
+        "usdPerGibRamHour": 0.0162,
+        "original": {
+          "value": 0.0000045,
+          "unit": "USD per GiB-second"
+        },
+        "basis": "allocated",
+        "url": "https://e2b.dev/pricing.md",
+        "quote": "| RAM | $0.0000045 per GiB-second |"
+      }
+    ],
+    "cpuBasis": "allocated",
+    "cpuBasisNote": {
+      "value": "Billed on the vCPU and RAM allocated, not on measured use; a running but idle sandbox pays the full rate.",
+      "url": "https://docs.e2b.dev/faq/calculate-sandbox-price",
+      "quote": "The rate depends on how much compute the sandbox has allocated, not on how much it actually uses."
+    },
+    "floor": {
+      "value": "Not applicable: billing is on allocation, so there is no measured-CPU floor.",
+      "url": "https://docs.e2b.dev/faq/calculate-sandbox-price",
+      "quote": "The rate depends on how much compute the sandbox has allocated, not on how much it actually uses."
+    },
+    "billingIncrement": {
+      "value": "Per second of running time.",
+      "url": "https://docs.e2b.dev/billing",
+      "quote": "You pay per second for compute resources while your sandbox is running."
+    },
+    "minimum": {
+      "value": "Not published. No minimum billed time or minimum spend is stated for Hobby or Pro; Enterprise has a $3,000 monthly usage minimum.",
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "A $3,000 monthly minimum applies to Enterprise usage."
+    },
+    "perPlanDifferences": {
+      "value": "One published rate table applies to Hobby and Pro; Enterprise pricing is custom and not published. Pro's fee buys limits, not credits.",
+      "url": "https://docs.e2b.dev/billing",
+      "quote": "Upgrading to the Pro tier does not grant additional credits. It only increases the limits available to your project"
+    },
+    "notes": "Sandboxes can be configured with 1 to 8 vCPUs and 1 to 8 GiB of RAM. The pricing page says the default sandbox has 2 vCPUs and 4 GiB, while the billing FAQ says the default is 2 vCPU and 512 MiB; both pages are live and unreconciled. Paused and killed sandboxes are not billed.",
+    "defaultSize": {
+      "value": "Pricing page: default sandbox 2 vCPU / 4 GiB. Billing FAQ: default 2 vCPU / 512 MiB. Both are live and unreconciled.",
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "The default sandbox has 2 vCPUs and 4 GiB of RAM.",
+      "conflictUrl": "https://docs.e2b.dev/faq/calculate-sandbox-price",
+      "conflictQuote": "Start with the default resources (2 vCPU, 512 MiB RAM)"
+    }
+  },
+  "storage": {
+    "disk": {
+      "usdPerGibMonth": 0,
+      "included": "10 GiB on Hobby, 20 GiB on Pro; storage is listed as free and included with every plan, with no per-GiB price published for exceeding the included disk.",
+      "url": "https://docs.e2b.dev/faq/calculate-sandbox-price",
+      "quote": "| Disk | Included (10 GiB Hobby / 20 GiB Pro) | Included |",
+      "priceUrl": "https://e2b.dev/pricing.md",
+      "priceQuote": "| Storage | Free |"
+    },
+    "billedWhenStopped": {
+      "value": "No. Paused and killed sandboxes are not billed.",
+      "url": "https://docs.e2b.dev/billing",
+      "quote": "No. You only pay while a sandbox is actively running. Once a sandbox is paused, killed or times out, billing stops immediately."
+    },
+    "snapshot": {
+      "usdPerGibMonth": null,
+      "value": "No separate snapshot storage price is published. The pricing page lists storage as Free; snapshots are not given their own line.",
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "Sandbox storage is included with every plan at no extra cost."
+    },
+    "volume": {
+      "usdPerGibMonth": null,
+      "value": "Not published. Volumes are in private beta and have no published price.",
+      "url": "https://docs.e2b.dev/volumes",
+      "quote": "Volumes are currently in private beta."
+    },
+    "retention": {
+      "value": "Paused sandboxes are kept indefinitely.",
+      "url": "https://docs.e2b.dev/billing",
+      "quote": "| **Paused sandbox retention** | Unlimited | Unlimited | Unlimited |"
+    }
+  },
+  "egress": {
+    "published": false,
+    "value": "Not published. The published rate table has vCPU, RAM and Storage only; no egress or bandwidth price appears on the pricing page or billing docs.",
+    "url": "https://e2b.dev/pricing.md",
+    "quote": "| vCPU | $0.000014 per vCPU-second |\n| RAM | $0.0000045 per GiB-second |\n| Storage | Free |"
+  },
+  "other": [
+    {
+      "name": "Pro monthly fee",
+      "price": "$150/month",
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "$150 monthly plan fee, plus usage."
+    },
+    {
+      "name": "Concurrency add-on",
+      "price": "$500/month per 500 concurrent sandboxes",
+      "url": "https://docs.e2b.dev/billing",
+      "quote": "Each add-on adds 500 slots for $500/month, up to 1,100 on Pro."
+    },
+    {
+      "name": "Enterprise minimum",
+      "price": "$3,000/month",
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "A $3,000 monthly minimum applies to Enterprise usage."
+    }
+  ],
+  "freeTier": {
+    "what": "One-time $100 in usage credits, no credit card required.",
+    "limits": "20 concurrent sandboxes, 1 hour continuous runtime per sandbox, 10 GiB disk, default sandbox CPU and RAM.",
+    "url": "https://e2b.dev/pricing.md",
+    "quote": "One-time $100 in usage credits. ... Up to 20 concurrently running sandboxes. ... Up to 1 hour per sandbox session.",
+    "signup": {
+      "value": "No credit card required to start.",
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "No credit card required to start."
+    }
+  },
+  "diffs": [
+    {
+      "field": "storage.diskPrice",
+      "ours": "not published beyond the included 10/20 GiB",
+      "battleships": "null (no disk rate)",
+      "live": "Free",
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "| Storage | Free |"
+    },
+    {
+      "field": "storage.includedDiskGiB",
+      "ours": "10 GiB Hobby / 20 GiB Pro",
+      "battleships": "20 in storage.included_disk_gib (its Hobby plan note says 10 GiB)",
+      "live": "10 GiB Hobby / 20 GiB Pro",
+      "url": "https://docs.e2b.dev/faq/calculate-sandbox-price",
+      "quote": "| Disk | Included (10 GiB Hobby / 20 GiB Pro) | Included |"
+    },
+    {
+      "field": "regions.euApac",
+      "ours": "All plans, for workspaces verified by adding a payment method",
+      "battleships": "Pro plan and above, after contacting support",
+      "live": "All plans, workspace verified by adding a payment method",
+      "url": "https://docs.e2b.dev/faq/egress-ip-ranges",
+      "quote": "| EU | Google Cloud `europe-west1` | All plans, workspace verified by adding a payment method | ... |"
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "How sandboxes are isolated (Firecracker microVMs)",
+      "url": "https://docs.e2b.dev/faq/security-and-compliance#how-sandboxes-are-isolated"
+    },
+    "sizes-regions": {
+      "title": "Billing & limits (max vCPU, memory, disk per plan)",
+      "url": "https://docs.e2b.dev/billing"
+    },
+    "lifecycle": {
+      "title": "Sandbox lifecycle",
+      "url": "https://docs.e2b.dev/sandbox"
+    },
+    "snapshots-forks": {
+      "title": "Sandbox snapshots",
+      "url": "https://docs.e2b.dev/sandbox/snapshots"
+    },
+    "storage": {
+      "title": "Volumes overview",
+      "url": "https://docs.e2b.dev/volumes"
+    },
+    "idle-timers": {
+      "title": "How long does a sandbox live? (timeout, pause, resume)",
+      "url": "https://docs.e2b.dev/faq/sandbox-lifetime"
+    },
+    "reaching-it": {
+      "title": "Sandbox public URL",
+      "url": "https://docs.e2b.dev/network/public-url"
+    },
+    "custom-domains": {
+      "title": "Custom domain",
+      "url": "https://docs.e2b.dev/network/custom-domain"
+    },
+    "outbound-network": {
+      "title": "Internet access",
+      "url": "https://docs.e2b.dev/network/internet-access"
+    },
+    "keys-secrets": {
+      "title": "Secrets overview",
+      "url": "https://docs.e2b.dev/secrets"
+    },
+    "ways-to-drive": {
+      "title": "E2B CLI",
+      "url": "https://docs.e2b.dev/cli"
+    },
+    "built-in-agents": {
+      "title": "Hermes Agent (pre-built template)",
+      "url": "https://docs.e2b.dev/agents/hermes"
+    },
+    "teams-accounts": {
+      "title": "Workspaces",
+      "url": "https://docs.e2b.dev/workspaces"
+    },
+    "billing-models": {
+      "title": "Billing & limits",
+      "url": "https://docs.e2b.dev/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing (Hobby, Pro, Enterprise)",
+      "url": "https://e2b.dev/pricing"
+    },
+    "quickstart": {
+      "title": "Running your first Sandbox",
+      "url": "https://docs.e2b.dev/quickstart"
+    },
+    "pricing": {
+      "title": "E2B Pricing",
+      "url": "https://e2b.dev/pricing"
+    }
+  },
+  "deploy": {
+    "oneClickOrManaged": "Not found. There is no one-click or managed Hermes product; the closest is a pre-built E2B template.",
+    "officialTemplateOrGuide": "Yes. E2B documents a pre-built hermes template and a page for running Hermes Agent, plus a separate OpenClaw gateway guide.",
+    "manualRoute": "With the E2B CLI: run `e2b sbx create hermes`, then inside the sandbox run `hermes model` to configure a provider and `hermes` to start. Headless use is `hermes chat -Q --yolo ...` from the SDK. No Hermes terminal-backend integration is needed because Hermes runs inside the sandbox.",
+    "nonCoderDashboardOnly": "No documented route. The Hermes page starts with the E2B CLI, and the alternative is SDK code with an API key; the console is documented for billing, templates and workspaces, not for running Hermes.",
+    "urls": [
+      {
+        "url": "https://docs.e2b.dev/agents/hermes",
+        "quote": "E2B provides a pre-built hermes template with the Hermes CLI and bundled skills already installed."
+      },
+      {
+        "url": "https://docs.e2b.dev/agents/hermes",
+        "quote": "e2b sbx create hermes"
+      },
+      {
+        "url": "https://docs.e2b.dev/agents/hermes",
+        "quote": "No separate Hermes terminal-backend integration is required for this setup."
+      },
+      {
+        "url": "https://docs.e2b.dev/agents/openclaw/openclaw-gateway",
+        "quote": "Start the OpenClaw gateway in an E2B sandbox and connect your browser."
+      }
+    ]
+  },
+  "limitsSource": {
+    "maxVcpu": {
+      "value": "8 Hobby; 8+ Pro (contact support for more); custom Enterprise",
+      "url": "https://docs.e2b.dev/billing",
+      "quote": "| **Max vCPUs** | 8 | 8+ ... | Custom |"
+    },
+    "maxMemory": {
+      "value": "8 GiB Hobby; 8+ GiB Pro (contact support for more); custom Enterprise",
+      "url": "https://docs.e2b.dev/billing",
+      "quote": "| **Max memory** | 8 GiB | 8+ GiB ... | Custom |"
+    },
+    "disk": {
+      "value": "10 GiB Hobby; 20+ GiB Pro; custom Enterprise",
+      "url": "https://docs.e2b.dev/billing",
+      "quote": "| **Disk size** | 10 GiB | 20+ GiB ... | Custom |"
+    },
+    "maxSession": {
+      "value": "1 hour Hobby; 24 hours Pro; custom Enterprise",
+      "url": "https://docs.e2b.dev/billing",
+      "quote": "| **Max continuous runtime (Time a sandbox can run without being paused.)** | 1 hour | 24 hours | Custom |"
+    }
+  },
+  "battleships": {
+    "id": "e2b",
+    "url": "https://battleships.dev/data/providers/e2b.json",
+    "index": "https://battleships.dev/data/index.json",
+    "generated": "2026-10-14",
+    "role": "secondary cross-check, not proof"
+  }
+}

@@ -1,0 +1,386 @@
+{
+  "id": "morph",
+  "checkedOn": "2026-10-29",
+  "provider": "Morph Cloud (Morph Labs, Inc.)",
+  "pricingUrl": "https://cloud.morph.so/web/subscribe",
+  "plans": [
+    {
+      "name": "Developer",
+      "monthlyFeeUsd": 0,
+      "includedUsage": "Pricing page: 0 MCUs; Plans doc: 300 MCUs free. The two live pages disagree.",
+      "limits": {
+        "maxConcurrent": 8,
+        "maxConcurrentScope": "devboxes",
+        "maxConcurrentTotal": 32,
+        "poolVcpu": 64,
+        "poolRamGiB": 256,
+        "poolDiskGiB": 1024,
+        "maxSessionHours": null
+      },
+      "url": "https://cloud.morph.so/web/subscribe",
+      "quote": "$0 / month Purchase MCUs to use compute",
+      "includedQuote": "Starting credit allocation | 0 MCUs | 1000 MCUs | 7500 MCUs",
+      "limitsQuote": "Concurrency | 8 | 32 | 128",
+      "poolQuote": "Instances | Up to 64 vCPU | Up to 256 vCPU | Up to 1024 vCPU",
+      "poolRamQuote": "RAM | Up to 256 GB | Up to 1024 GB | Up to 4096 GB",
+      "poolDiskQuote": "Storage | Up to 1024 GB | Up to 4096 GB | Up to 16384 GB",
+      "sessionQuote": "Time-to-Live (TTL) functionality allows you to specify a duration after which an instance will automatically shut down or pause.",
+      "sessionUrl": "https://cloud.morph.so/docs/documentation/instances/ttl",
+      "notes": "Devbox concurrency is 8 with 32 total; the vCPU/RAM/storage figures are organization-wide ceilings, not per-VM sizes."
+    },
+    {
+      "name": "Team",
+      "monthlyFeeUsd": 40,
+      "includedUsage": "1,000 MCUs per month, described as a 20% discount on $50 of usage; overage billed pay-as-you-go.",
+      "limits": {
+        "maxConcurrent": 32,
+        "maxConcurrentScope": "devboxes",
+        "maxConcurrentTotal": 128,
+        "poolVcpu": 256,
+        "poolRamGiB": 1024,
+        "poolDiskGiB": 4096,
+        "maxSessionHours": null
+      },
+      "url": "https://cloud.morph.so/web/subscribe",
+      "quote": "$40 / month 20% Discount ($50 value)",
+      "includedQuote": "Starting credit allocation | 0 MCUs | 1000 MCUs | 7500 MCUs",
+      "limitsQuote": "Instances | Up to 64 vCPU | Up to 256 vCPU | Up to 1024 vCPU",
+      "poolRamQuote": "RAM | Up to 256 GB | Up to 1024 GB | Up to 4096 GB",
+      "poolDiskQuote": "Storage | Up to 1024 GB | Up to 4096 GB | Up to 16384 GB",
+      "notes": "Effective $0.04 per MCU for the included 1,000."
+    },
+    {
+      "name": "Scale",
+      "monthlyFeeUsd": 250,
+      "includedUsage": "7,500 MCUs per month, described as a 33% discount on $375 of usage; overage billed pay-as-you-go.",
+      "limits": {
+        "maxConcurrent": 128,
+        "maxConcurrentScope": "devboxes",
+        "maxConcurrentTotal": 512,
+        "poolVcpu": 1024,
+        "poolRamGiB": 4096,
+        "poolDiskGiB": 16384,
+        "maxSessionHours": null
+      },
+      "url": "https://cloud.morph.so/web/subscribe",
+      "quote": "$250 / month 33% Discount ($375 value)",
+      "includedQuote": "Starting credit allocation | 0 MCUs | 1000 MCUs | 7500 MCUs",
+      "limitsQuote": "Total | 32 | 128 | 512",
+      "poolRamQuote": "RAM | Up to 256 GB | Up to 1024 GB | Up to 4096 GB",
+      "poolDiskQuote": "Storage | Up to 1024 GB | Up to 4096 GB | Up to 16384 GB",
+      "notes": "Effective $0.0333 per MCU for the included 7,500. Badged Enterprise on the pricing page."
+    }
+  ],
+  "compute": {
+    "billingBasis": "Hourly MCU accounting. One MCU bundles 1 vCPU-hour + 4 GB RAM-hours + 16 GB disk-hours, or 5 TB of snapshot-hours. For a Devbox the hourly MCU count is max(vCPUs, ceil(RAM/4GiB), ceil(disk/16GiB)), so the largest dimension sets the price rather than the dimensions adding up.",
+    "cpuBilledOn": "allocated",
+    "ramBilledOn": "allocated",
+    "floor": {
+      "mcuPerHour": 1,
+      "detail": "max(1, vCPUs, ceil(memory_MiB/4096), ceil(disk_size_MiB/16384)) for supported instances",
+      "url": "https://cloud.morph.so/docs/documentation/instances/resize-disk",
+      "quote": "max(1, vCPUs, ceil(memory_MiB / 4096), ceil(disk_size_MiB / 16384))"
+    },
+    "increment": {
+      "compute": "per_second",
+      "detail": "The terms say per-second compute; the MCU is an hourly rate applied proportionally.",
+      "url": "https://cloud.morph.so/web/legal/terms-of-service",
+      "quote": "Per-second compute; per-operation Snapshot / Instance charges; snapshot / lineage storage (GB-hour); egress."
+    },
+    "perResourceRates": [
+      {
+        "resource": "mcu",
+        "usdPerMcu": 0.05,
+        "originalUnit": "USD per MCU",
+        "originalFigure": "$0.05",
+        "url": "https://cloud.morph.so/web/subscribe",
+        "quote": "Based on standard MCU rate of $0.05"
+      },
+      {
+        "resource": "cpu",
+        "usdPerVcpuHour": 0.05,
+        "originalUnit": "vCPU-hours per MCU",
+        "originalFigure": "1 vCPU-hour",
+        "url": "https://cloud.morph.so/web/subscribe",
+        "quote": "1 vCPU-hour",
+        "notes": "Equivalent rate when vCPU is the binding dimension."
+      },
+      {
+        "resource": "ram",
+        "usdPerGiBRamHour": 0.0125,
+        "originalUnit": "GB RAM-hours per MCU",
+        "originalFigure": "4 GB RAM-hours",
+        "url": "https://cloud.morph.so/web/subscribe",
+        "quote": "4 GB RAM-hours",
+        "notes": "Equivalent rate when RAM is the binding dimension. 4 GB per MCU at $0.05 means $0.0125 per GB-hour."
+      },
+      {
+        "resource": "disk",
+        "usdPerGiBHour": 0.003125,
+        "originalUnit": "GB disk-hours per MCU",
+        "originalFigure": "16 GB disk-hours",
+        "url": "https://cloud.morph.so/web/subscribe",
+        "quote": "16 GB disk-hours",
+        "notes": "Disk is not a separate line item while running: it raises the MCU count once it exceeds 16 GiB per billed MCU."
+      },
+      {
+        "resource": "snapshot",
+        "usdPerGiBHour": 1e-05,
+        "originalUnit": "TB snapshot-hours per MCU",
+        "originalFigure": "5 TB snapshot-hours",
+        "url": "https://cloud.morph.so/web/subscribe",
+        "quote": "5 TB snapshot-hours",
+        "notes": "5 TB (5,000 GB) hours per $0.05 MCU, i.e. $0.00001 per GB-hour, about $0.0073 per GB-month."
+      }
+    ],
+    "fixedSizes": [],
+    "planRates": [
+      {
+        "plan": "Pay-as-you-go",
+        "usdPerMcu": 0.05
+      },
+      {
+        "plan": "Team",
+        "usdPerMcu": 0.04,
+        "note": "included 1,000 MCUs for $40"
+      },
+      {
+        "plan": "Scale",
+        "usdPerMcu": 0.033333,
+        "note": "included 7,500 MCUs for $250"
+      }
+    ],
+    "notes": "No fixed size list is published: vCPUs, memory and disk are chosen per snapshot/instance. Per-instance maximums and GPU availability are not published. CPU is billed on allocated vCPUs, not measured utilisation."
+  },
+  "storage": {
+    "disk": {
+      "usdPerGiBHour": null,
+      "includedInMcu": true,
+      "detail": "Root disk has no separate price while the instance runs; it enters the MCU formula at 16 GiB per MCU.",
+      "url": "https://cloud.morph.so/docs/documentation/instances/resize-disk",
+      "quote": "Decreasing disk capacity may leave the rate unchanged when CPU or memory already determines the maximum"
+    },
+    "billedWhileStopped": {
+      "charged": true,
+      "model": "paused instance is replaced by a snapshot; only snapshot storage bills",
+      "url": "https://cloud.morph.so/docs/documentation/instances/pause-resume",
+      "quote": "You only get charged for the snapshot taken",
+      "quote2": "The VM stops consuming MCUs",
+      "termsQuote": "Paused instances incur only snapshot / storage charges."
+    },
+    "snapshotStorage": {
+      "usdPerGiBHour": 1e-05,
+      "usdPerGiBMonth": 0.0073,
+      "detail": "Derived from the published 5 TB snapshot-hours per $0.05 MCU; Morph does not print a snapshot dollar rate.",
+      "url": "https://cloud.morph.so/web/subscribe",
+      "quote": "5 TB snapshot-hours"
+    },
+    "volumes": {
+      "usdPerGiBHour": 0.0054794,
+      "usdPerGiBMonth": 4.0,
+      "type": "S3-compatible object storage, not an attached block disk",
+      "url": "https://cloud.morph.so/docs/volumes/getting-started",
+      "quote": "Current runtime price: `$0.0054794/GiB-hour`",
+      "monthlyQuote": "Approximate monthly equivalent: `~$4.00/GiB-month`"
+    },
+    "retention": {
+      "stoppedDataKept": "Snapshots have no default expiry; they persist until deleted or until an optional TTL expires. Retention of the implicit snapshot created by pausing is not published.",
+      "url": "https://cloud.morph.so/docs/documentation/instances/snapshot-ttl",
+      "quote": "When you set `ttl_seconds`, it must be greater than zero.",
+      "notes": "Stopping (rather than pausing) releases the instance; the docs say a stopped instance's running state is lost and you start again from a snapshot."
+    }
+  },
+  "egress": {
+    "usdPerGiB": null,
+    "free": null,
+    "url": "https://cloud.morph.so/web/legal/terms-of-service",
+    "quote": "Typical components may include but are not limited to compute, snapshot storage, and egress.",
+    "notes": "Egress is named as a billable component in the terms but no per-GB rate or free allowance is published on the pricing page or docs."
+  },
+  "other": [
+    {
+      "item": "Seats",
+      "priceUsdPerMonth": null,
+      "status": "not published",
+      "url": "https://cloud.morph.so/web/subscribe",
+      "quote": "$0 / month Purchase MCUs to use compute",
+      "notes": "Plans are organization-level MCU bundles; no per-seat price is listed."
+    },
+    {
+      "item": "IPv4 / static IP",
+      "priceUsdPerMonth": null,
+      "status": "not published",
+      "url": "https://cloud.morph.so/docs/documentation/instances/http-services",
+      "quote": "Morph Cloud allows you to expose HTTP services running within your instances to the public internet.",
+      "notes": "Exposed services get a Morph URL; no dedicated-IP product or price was found."
+    },
+    {
+      "item": "Minimum spend",
+      "priceUsdPerMonth": null,
+      "status": "not published",
+      "url": "https://cloud.morph.so/web/subscribe",
+      "quote": "$0 / month Purchase MCUs to use compute"
+    }
+  ],
+  "freeTier": {
+    "type": "unresolved: free credits or none",
+    "amountUsd": null,
+    "mcu": null,
+    "limits": "Three live pages disagree: the pricing table shows 0 starting MCUs, the Plans doc promises 300 MCUs free, and the Signing Up page promises 300 free compute hours per month.",
+    "url": "https://cloud.morph.so/web/subscribe",
+    "quote": "Starting credit allocation | 0 MCUs | 1000 MCUs | 7500 MCUs",
+    "sources": [
+      {
+        "url": "https://cloud.morph.so/docs/documentation/setup/plans",
+        "quote": "**Starting Credit Allocation**: 300 MCUs free"
+      },
+      {
+        "url": "https://cloud.morph.so/docs/documentation/setup/signing-up",
+        "quote": "our $0/month Developer Plan provides 300 free compute hours per month"
+      },
+      {
+        "url": "https://cloud.morph.so/docs/faq",
+        "quote": "Credits are measured in Morph Compute Units (MCUs), not fixed instance hours."
+      }
+    ],
+    "notes": "Do not advertise a free tier until Morph confirms which figure applies. The FAQ itself says to check the billing console for any free credits and their renewal terms."
+  },
+  "diffs": [
+    {
+      "field": "freeTier",
+      "ours": "Unresolved conflict: the Signing Up page promised 300 free compute hours per month while the pricing page showed 0 MCUs.",
+      "battleships": "No free credit; Developer starts at 0 MCU.",
+      "live": "Still three-way: pricing 0 MCUs, Plans doc 300 MCUs free, Signing Up 300 free compute hours per month. A fourth page says credits are measured in MCUs, not hours.",
+      "url": "https://cloud.morph.so/docs/documentation/setup/plans",
+      "quote": "**Starting Credit Allocation**: 300 MCUs free"
+    },
+    {
+      "field": "storage.volumes / EFS",
+      "ours": "Volumes are S3-compatible object storage at $0.0054794/GiB-hour (~$4.00/GiB-month); no EFS price was established.",
+      "battleships": "Adds an EFS shared filesystem at $0.12 (Developer) / $0.15 (Team) / $0.18 (Scale) per GiB-month.",
+      "live": "The pricing page and Volumes doc show only the $0.0054794/GiB-hour Volumes rate; no EFS line or price appears on either.",
+      "url": "https://cloud.morph.so/docs/volumes/getting-started",
+      "quote": "Morph Volumes are billed from stored GiB-hours rather than compute MCUs."
+    },
+    {
+      "field": "compute.billingIncrement",
+      "ours": "Per-second compute, from Exhibit B of the terms.",
+      "battleships": "Billing granularity listed as unpublished.",
+      "live": "The terms still state per-second compute, so the card is out of date on this point.",
+      "url": "https://cloud.morph.so/web/legal/terms-of-service",
+      "quote": "Per-second compute; per-operation Snapshot / Instance charges; snapshot / lineage storage (GB-hour); egress."
+    },
+    {
+      "field": "compute.floor",
+      "ours": "The MCU formula has a floor of 1, so even a tiny instance bills one MCU per hour.",
+      "battleships": "MCU formula without the max(1, ...) floor.",
+      "live": "The resize doc publishes max(1, vCPUs, ceil(memory_MiB/4096), ceil(disk_size_MiB/16384)) for supported instances.",
+      "url": "https://cloud.morph.so/docs/documentation/instances/resize-disk",
+      "quote": "max(1, vCPUs, ceil(memory_MiB / 4096), ceil(disk_size_MiB / 16384))"
+    },
+    {
+      "field": "storage.retention",
+      "ours": "Snapshot retention after pause was not published.",
+      "battleships": "Snapshots have no default TTL.",
+      "live": "Snapshot TTL is opt-in and must be greater than zero; no default expiry is documented, and the implicit pause snapshot's retention is still unpublished.",
+      "url": "https://cloud.morph.so/docs/documentation/instances/snapshot-ttl",
+      "quote": "When you set `ttl_seconds`, it must be greater than zero."
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "Getting started with Morph Devboxes",
+      "url": "https://cloud.morph.so/docs/devboxes/getting-started"
+    },
+    "sizes-regions": {
+      "title": "Basic Operations — snapshot resource specifications",
+      "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot"
+    },
+    "lifecycle": {
+      "title": "Basic Operations (start, save, stop)",
+      "url": "https://cloud.morph.so/docs/documentation/instances/basic-lifecycle"
+    },
+    "snapshots-forks": {
+      "title": "Branch",
+      "url": "https://cloud.morph.so/docs/documentation/instances/branch"
+    },
+    "storage": {
+      "title": "Getting started with Morph Volumes",
+      "url": "https://cloud.morph.so/docs/volumes/getting-started"
+    },
+    "idle-timers": {
+      "title": "Auto-Scale-to-Zero Agent Workspaces",
+      "url": "https://cloud.morph.so/docs/examples/auto-scale-agent-workspaces"
+    },
+    "reaching-it": {
+      "title": "HTTP Services",
+      "url": "https://cloud.morph.so/docs/documentation/instances/http-services"
+    },
+    "custom-domains": null,
+    "outbound-network": null,
+    "keys-secrets": {
+      "title": "Devbox agent tokens",
+      "url": "https://cloud.morph.so/docs/devboxes/agent-tokens"
+    },
+    "ways-to-drive": {
+      "title": "CLI Command Reference",
+      "url": "https://cloud.morph.so/docs/documentation/cli"
+    },
+    "built-in-agents": null,
+    "teams-accounts": {
+      "title": "Sharing & collaboration",
+      "url": "https://cloud.morph.so/docs/devboxes/sharing-and-collaboration"
+    },
+    "billing-models": {
+      "title": "Plans",
+      "url": "https://cloud.morph.so/docs/documentation/setup/plans"
+    },
+    "trials-free-tiers": {
+      "title": "Plans",
+      "url": "https://cloud.morph.so/docs/documentation/setup/plans"
+    },
+    "quickstart": {
+      "title": "First Success",
+      "url": "https://cloud.morph.so/docs/start-here/first-success"
+    },
+    "pricing": {
+      "title": "Subscribe / pricing",
+      "url": "https://cloud.morph.so/web/subscribe"
+    }
+  },
+  "deploy": {
+    "targets": [
+      "Hermes Agent (NousResearch/hermes-agent)",
+      "OpenClaw"
+    ],
+    "oneClick": false,
+    "managedOption": false,
+    "officialTemplate": false,
+    "manualRoute": [
+      "Create a Devbox from a template or snapshot in the dashboard, or call the Python/TypeScript SDK or CLI.",
+      "Install the agent inside the VM over SSH, the browser terminal, or an exec call.",
+      "Expose the agent's port as an HTTP service if it needs a URL, and enable wake-on-HTTP and wake-on-SSH.",
+      "Set a TTL with ttl_action=pause plus wake-on so the VM pauses instead of running forever."
+    ],
+    "nonCoder": false,
+    "evidence": [
+      {
+        "claim": "The dashboard can start a Devbox from a template and open it in an editor.",
+        "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+        "quote": "Create a devbox from a template (or a snapshot)",
+        "quote2": "Open in VSCode"
+      },
+      {
+        "claim": "Interactive access includes SSH and the Devbox API.",
+        "url": "https://cloud.morph.so/docs/devboxes/getting-started",
+        "quote": "through SSH, or puppeteered through the Devbox API"
+      },
+      {
+        "claim": "Idle shutdown is a TTL plus wake-on pattern, not a built-in agent supervisor.",
+        "url": "https://cloud.morph.so/docs/examples/auto-scale-agent-workspaces",
+        "quote": "Zero compute charges while idle"
+      }
+    ],
+    "notes": "No Hermes or OpenClaw guide, template or one-click deploy was found anywhere in Morph's documentation index. A non-coder can start a template Devbox from the dashboard, but installing and keeping an agent alive still needs a shell and lifecycle configuration. Morph does publish a Claude Code example, which is the closest official agent walkthrough."
+  }
+}

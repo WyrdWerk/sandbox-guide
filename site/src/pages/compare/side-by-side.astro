@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
+import Calculator from "../../components/Calculator.astro";
 import { features, providers } from "../../lib/data";
 
 const kinds: Record<string, string> = {
@@ -42,13 +43,13 @@ const payload = {
 };
 ---
 
-<Base title="Side by side" description="Pick two or three providers and compare their behaviour across sixteen features.">
+<Base title="Side by side" description="Pick two or three providers and compare them head to head: sixteen features, then the monthly cost of your workload.">
   <PageHeader
     parent={{ href: "/compare/", label: "Compare" }}
     kicker="Side by side"
-    title="Two or three providers, sixteen features"
-    standfirst="Choose the providers you are deciding between. The table compares what they do, not which is cheaper; the note under each badge is the short version, and every feature page carries the source."
-    meta={[`${providers.length} providers`, "16 features", "Behaviour, not a ranking"]}
+    title="Two or three providers, head to head"
+    standfirst="Choose the providers you are deciding between. The table compares what they do across sixteen features; below it, the same providers are priced for a workload you can change. The link in the address bar keeps your choice."
+    meta={[`${providers.length} providers`, "16 features", "Plus a cost for your workload"]}
   />
 
   <div class="wrap">
@@ -84,6 +85,14 @@ const payload = {
 
       <div id="matrix"></div>
     </section>
+
+    <section class="section" aria-labelledby="h2h-cost-h">
+      <div class="section__head">
+        <h2 class="section__title" id="h2h-cost-h">What each would cost</h2>
+        <p class="section__note">The same providers, priced for one workload. Open a row for the arithmetic.</p>
+      </div>
+      <Calculator id="h2h" only={defaults} />
+    </section>
   </div>
 
   <script type="application/json" id="compare-data" set:html={JSON.stringify(payload)}></script>
@@ -92,7 +101,14 @@ const payload = {
     const boxes = Array.from(document.querySelectorAll("#picker input"));
     const target = document.getElementById("matrix");
     const hint = document.getElementById("picker-hint");
-    const order = data.defaults.slice();
+    // ?p=e2b,daytona opens a chosen head-to-head.
+    const requested = (new URLSearchParams(location.search).get("p") ?? "")
+      .split(",")
+      .filter((id) => data.providers.some((provider) => provider.id === id))
+      .slice(0, 3);
+    const order = requested.length ? requested : data.defaults.slice();
+    for (const box of boxes) box.checked = order.includes(box.value);
+    const calc = document.querySelector('[data-calc="h2h"]');
 
     const labels = {
       yes: ["badge badge--yes", "Yes"],
@@ -177,6 +193,11 @@ const payload = {
       }
       table.append(tbody);
       target.append(table);
+
+      calc?.dispatchEvent(new CustomEvent("calc:only", { detail: selected }));
+      const url = new URL(location.href);
+      url.searchParams.set("p", selected.join(","));
+      history.replaceState(null, "", url);
 
       hint.textContent =
         chosen.length < 2

@@ -1,0 +1,483 @@
+{
+  "id": "instabox",
+  "name": "InstaBox (InsForge)",
+  "checkedOn": "2026-10-29",
+  "products": [
+    "InstaBox machines: one Firecracker microVM per agent, with a dashboard, CLI, TypeScript SDK and HTTP API"
+  ],
+  "plans": [
+    {
+      "name": "Free",
+      "monthlyFeeUSD": 0,
+      "includedUsage": "No credit; 1 machine, 5 snapshots, 100 GiB egress/month, 200 GB stored data",
+      "limits": {
+        "maxConcurrent": 1,
+        "maxTotalMachines": 1,
+        "maxSessionLength": "Free machines are fixed at 480 running minutes (8 h) per run (max-run)",
+        "maxSize": "4 vCPU / 8 GiB, 20 GiB disk"
+      },
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "**Free**: $0 … 1 machine, 4 vCPU / 8 GiB … 20 GiB disk … 5 snapshots … 100 GiB egress / month"
+    },
+    {
+      "name": "Pro",
+      "monthlyFeeUSD": 20,
+      "includedUsage": "$20/month of usage credits, reset monthly",
+      "limits": {
+        "maxConcurrent": 100,
+        "maxTotalMachines": 500,
+        "maxSessionLength": "No lifetime timeout; max-run is user-settable (-1 = unlimited)",
+        "maxSize": "8 vCPU / 16 GiB, disk up to 200 GiB"
+      },
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "**Pro**: $20/month + usage … $20 / month free credits … Max 100 concurrent machines … Up to 8 vCPU / 16 GiB … 20 GiB disk, up to 200 GiB … 1 TiB egress / month",
+      "limitsSource": {
+        "url": "https://instabox.sh/llms.txt",
+        "quote": "Plan limits: Free 1 machine, 5 snapshots, idle pause fixed at 30 min. Pro 500 machines, 100 running. Builder 1,000 machines, 200 running. Team unlimited machines, 500 running."
+      }
+    },
+    {
+      "name": "Builder",
+      "monthlyFeeUSD": 100,
+      "includedUsage": "$100/month of usage credits, reset monthly",
+      "limits": {
+        "maxConcurrent": 200,
+        "maxTotalMachines": 1000,
+        "maxSessionLength": "No lifetime timeout; max-run is user-settable (-1 = unlimited)",
+        "maxSize": "16 vCPU / 32 GiB, disk up to 500 GiB"
+      },
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "**Builder**: $100/month + usage … $100 / month free credits … Max 200 concurrent machines … Up to 16 vCPU / 32 GiB … 20 GiB disk, up to 500 GiB … 5 TiB egress / month",
+      "limitsSource": {
+        "url": "https://instabox.sh/llms.txt",
+        "quote": "Plan limits: Free 1 machine, 5 snapshots, idle pause fixed at 30 min. Pro 500 machines, 100 running. Builder 1,000 machines, 200 running. Team unlimited machines, 500 running."
+      }
+    },
+    {
+      "name": "Team",
+      "monthlyFeeUSD": 500,
+      "includedUsage": "$500/month of usage credits, reset monthly",
+      "limits": {
+        "maxConcurrent": 500,
+        "maxTotalMachines": "unlimited",
+        "maxSessionLength": "No lifetime timeout; max-run is user-settable (-1 = unlimited)",
+        "maxSize": "32 vCPU / 64 GiB, disk up to 1 TiB"
+      },
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "**Team**: $500/month + usage … $500 / month free credits … 500 concurrent machines … Unlimited machines … Custom machines CPU and RAM … 20 GiB disk, up to 1 TiB … 50 TiB egress / month",
+      "limitsSource": {
+        "url": "https://instabox.sh/llms.txt",
+        "quote": "Plan limits: Free 1 machine, 5 snapshots, idle pause fixed at 30 min. Pro 500 machines, 100 running. Builder 1,000 machines, 200 running. Team unlimited machines, 500 running."
+      }
+    },
+    {
+      "name": "Enterprise",
+      "monthlyFeeUSD": "custom",
+      "includedUsage": "Per contract",
+      "limits": {
+        "maxConcurrent": "custom",
+        "maxTotalMachines": "custom",
+        "maxSessionLength": "custom",
+        "maxSize": "custom CPU / RAM, disk up to 1 TiB"
+      },
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "**Enterprise**: Custom … 99.9% SLA … SSO / SAML and SCIM … Audit logs … Dedicated pool or BYOC … HIPAA BAA"
+    }
+  ],
+  "compute": {
+    "model": "per-resource, charged only while the machine is running",
+    "cpuBilledOn": "allocated",
+    "billingIncrement": "1 second",
+    "minimum": "No minimum charge published; runtime is metered per second only while running",
+    "rates": [
+      {
+        "resource": "vCPU",
+        "usdPerVcpuHour": 0.004,
+        "originalFigure": "$0.004 per vCPU-hour",
+        "url": "https://instabox.sh/docs/pricing",
+        "quote": "vCPU | $0.004 | per vCPU-hour"
+      },
+      {
+        "resource": "RAM",
+        "usdPerGiBRamHour": 0.00225,
+        "originalFigure": "$0.00225 per GiB-hour",
+        "url": "https://instabox.sh/docs/pricing",
+        "quote": "Memory | $0.00225 | per GiB-hour"
+      }
+    ],
+    "notes": [
+      {
+        "claim": "Runtime is metered by the second, only while running.",
+        "url": "https://instabox.sh/docs/pricing",
+        "quote": "Runtime is metered by the second, only while a machine is running."
+      },
+      {
+        "claim": "You pay for the size you allocated, not the CPU you used.",
+        "url": "https://instabox.sh/docs/pricing",
+        "quote": "While a machine is running, you pay for the vCPUs and memory you gave it."
+      },
+      {
+        "claim": "Paused time bills storage only.",
+        "url": "https://instabox.sh/docs/pricing",
+        "quote": "Pause it, and you just pay for storage."
+      },
+      {
+        "claim": "Plans include monthly credits that do not carry over.",
+        "url": "https://instabox.sh/docs/pricing",
+        "quote": "Usage comes out of your included credits first, then you pay as you go. Credits reset every month."
+      },
+      {
+        "claim": "Sizes are fixed vCPU/RAM pairs by plan.",
+        "url": "https://instabox.sh/docs/limits",
+        "quote": "Machine size | 4 vCPUs and 8 GiB of memory by default, the only size on the free plan. Pro: 2/4, 4/8 or 8/16. Team: 2/4 up to 32 vCPUs / 64 GiB."
+      },
+      {
+        "claim": "No lifetime timeout on paid machines; the free plan's max-run is fixed at 480 minutes.",
+        "url": "https://instabox.sh/docs/cli",
+        "quote": "max-run <id-or-name> <minutes> pause after that many running minutes, even while active; -1: unlimited, 0: now (free plan: fixed at 480)"
+      },
+      {
+        "claim": "The same unit rates apply on every paid plan; plans differ in credits and limits, not in per-resource price.",
+        "url": "https://instabox.sh/docs/pricing",
+        "quote": "Paid plans pay these for usage beyond their monthly credits."
+      }
+    ],
+    "sizes": [
+      {
+        "plan": "Free",
+        "vcpu": 4,
+        "ramGiB": 8,
+        "includedDiskGiB": 20,
+        "url": "https://instabox.sh/docs/machines",
+        "quote": "Free | 4 / 8192"
+      },
+      {
+        "plan": "Pro",
+        "vcpu": 2,
+        "ramGiB": 4,
+        "includedDiskGiB": 20,
+        "url": "https://instabox.sh/docs/machines",
+        "quote": "Pro | 2 / 4096, 4 / 8192 (default), 8 / 16384"
+      },
+      {
+        "plan": "Pro",
+        "vcpu": 4,
+        "ramGiB": 8,
+        "includedDiskGiB": 20,
+        "url": "https://instabox.sh/docs/machines",
+        "quote": "Pro | 2 / 4096, 4 / 8192 (default), 8 / 16384"
+      },
+      {
+        "plan": "Pro",
+        "vcpu": 8,
+        "ramGiB": 16,
+        "includedDiskGiB": 20,
+        "url": "https://instabox.sh/docs/machines",
+        "quote": "Pro | 2 / 4096, 4 / 8192 (default), 8 / 16384"
+      },
+      {
+        "plan": "Team",
+        "vcpu": 32,
+        "ramGiB": 64,
+        "includedDiskGiB": 20,
+        "url": "https://instabox.sh/docs/machines",
+        "quote": "Team | 2 / 4096, 4 / 8192 (default) up to 32 / 65536"
+      }
+    ],
+    "derivedExample": {
+      "shape": "4 vCPU / 8 GiB, 730 running hours",
+      "computeUSD": 24.82,
+      "working": "4 × $0.004 × 730 = $11.68; 8 × $0.00225 × 730 = $13.14; total $24.82, before storage",
+      "note": "Derived from the published unit rates; the pricing page's own calculator shows the same compute-only figure and excludes storage.",
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "vCPU | $0.004 | per vCPU-hour … Memory | $0.00225 | per GiB-hour"
+    }
+  },
+  "storage": {
+    "model": "one persistent /data disk per machine plus snapshot bytes, all billed as stored GiB-hours",
+    "disk": {
+      "usdPerGiBHour": 0.00011,
+      "usdPerGiBMonth": 0.0803,
+      "includedGiB": "20 GiB /data comes with the machine; free plan capped at 200 GB stored data",
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "Storage | $0.00011 | per GiB-hour"
+    },
+    "billedWhileStoppedOrPaused": {
+      "value": "Yes. Paused or stopped machines keep their disks and continue to bill storage.",
+      "url": "https://instabox.sh/docs/machines",
+      "quote": "Storage still counts toward plan limits and billing"
+    },
+    "snapshots": {
+      "value": "Snapshots are stored bytes at the same GiB-hour storage rate; no separate snapshot price. Free plan allows 5 snapshots.",
+      "url": "https://instabox.sh/docs/limits",
+      "quote": "Snapshots | Free: 5. Pro and Team: unlimited"
+    },
+    "retention": [
+      {
+        "case": "Paused or stopped machine",
+        "value": "No forced TTL; stays until you delete it",
+        "url": "https://instabox.sh/docs/machines",
+        "quote": "**No forced TTL.** A paused or stopped machine and every snapshot you save stay until **you** delete them."
+      },
+      {
+        "case": "Workspace disabled for non-payment or cancellation",
+        "value": "Machines and snapshots kept 30 days, then deleted",
+        "url": "https://instabox.sh/docs/machines",
+        "quote": "a workspace **disabled** (its subscription cancelled, or unpaid past the grace period) keeps its machines and snapshots for 30 days, then they are deleted"
+      }
+    ],
+    "diskGrowth": {
+      "value": "1-1024 GiB; grow while running, shrink only while stopped; plan caps 200 GiB Pro, 500 GiB Builder, 1024 GiB Team/Enterprise",
+      "url": "https://instabox.sh/docs/limits",
+      "quote": "The disk may grow to at most 200 GiB on Pro, 500 GiB on Builder, 1024 GiB on Team and Enterprise"
+    }
+  },
+  "egress": {
+    "usdPerGiB": 0.02,
+    "includedPerPlan": {
+      "Free": "100 GiB/month",
+      "Pro": "1 TiB/month",
+      "Builder": "5 TiB/month",
+      "Team": "50 TiB/month"
+    },
+    "ingress": "free",
+    "sendCap": "about 50 Mbit/s per VM (~6 MB/s); downloads into the VM are not capped",
+    "url": "https://instabox.sh/docs/pricing",
+    "quote": "Ingress is always free. Each plan includes egress every month (100 GiB on Free, 1 TiB on Pro, 5 TiB on Builder, 50 TiB on Team), then $0.02 per GiB."
+  },
+  "other": [
+    {
+      "item": "Seats",
+      "value": "No seat line item published",
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "**Team**: $500/month + usage … Unlimited machines"
+    },
+    {
+      "item": "Public IPv4",
+      "value": "No IPv4 product; ports are published as HTTPS URLs",
+      "url": "https://instabox.sh/docs/ports",
+      "quote": "Give a web server in a machine an HTTPS URL, for anyone or only for people with the link."
+    },
+    {
+      "item": "Custom domains",
+      "value": "not published / no feature documented",
+      "url": "https://instabox.sh/docs/ports",
+      "quote": "Give a web server in a machine an HTTPS URL, for anyone or only for people with the link."
+    },
+    {
+      "item": "Minimum spend",
+      "value": "None published",
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "Runtime is metered by the second, only while a machine is running."
+    },
+    {
+      "item": "Enterprise compliance",
+      "value": "99.9% SLA, SSO/SAML + SCIM, audit logs, dedicated pool or BYOC, HIPAA BAA",
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "**Enterprise**: Custom … 99.9% SLA … SSO / SAML and SCIM … Audit logs … Dedicated pool or BYOC … HIPAA BAA"
+    }
+  ],
+  "freeTier": {
+    "value": "1 machine, 4 vCPU / 8 GiB, 20 GiB disk, 5 snapshots, 100 GiB egress/month, 200 GB stored data, idle pause fixed at 30 minutes, max-run fixed at 480 minutes",
+    "url": "https://instabox.sh/docs/pricing",
+    "quote": "**Free**: $0 … 1 machine, 4 vCPU / 8 GiB … 20 GiB disk … 5 snapshots … 100 GiB egress / month",
+    "storageQuote": {
+      "url": "https://instabox.sh/docs/limits",
+      "quote": "Storage | Free: 200 GB for your snapshots and machine files, counted hourly."
+    }
+  },
+  "diffs": [
+    {
+      "field": "pricing / plans",
+      "ours": "Five published plans: Free $0, Pro $20, Builder $100, Team $500, Enterprise custom",
+      "battleships": "Invite-only beta (no published price); one free size",
+      "live": "Five published plans with unit rates and monthly credits",
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "**Pro**: $20/month + usage … **Builder**: $100/month + usage … **Team**: $500/month + usage"
+    },
+    {
+      "field": "free tier machine count",
+      "ours": "1 machine in any state",
+      "battleships": "5 machines",
+      "live": "1 machine in any state",
+      "url": "https://instabox.sh/docs/limits",
+      "quote": "Machines | Free: 1, in any state (paused and stopped ones count)."
+    },
+    {
+      "field": "machine sizes",
+      "ours": "Pro 2/4, 4/8, 8/16; Builder up to 16/32; Team up to 32/64",
+      "battleships": "One fixed size, 4 vCPU / 8 GiB",
+      "live": "Same as ours; Builder still missing from the Limits page but present in pricing and the docs index",
+      "url": "https://instabox.sh/docs/limits",
+      "quote": "Pro: 2/4, 4/8 or 8/16. Team: 2/4 up to 32 vCPUs / 64 GiB."
+    },
+    {
+      "field": "snapshots",
+      "ours": "Disk-only; no memory or running processes",
+      "battleships": "snapshot_mem: true",
+      "live": "Disk-only",
+      "url": "https://instabox.sh/docs/snapshots",
+      "quote": "It does not hold memory or running processes."
+    },
+    {
+      "field": "Org Secrets and SSO",
+      "ours": "Org Secrets shipped 2026-10-24; Enterprise has SSO/SAML + SCIM",
+      "battleships": "secret_proxy: false; sso: false",
+      "live": "Org Secrets documented; Enterprise lists SSO / SAML and SCIM",
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "**Enterprise**: Custom … SSO / SAML and SCIM"
+    },
+    {
+      "field": "stopped-data retention",
+      "ours": "not published",
+      "battleships": "null",
+      "live": "No forced TTL; paused/stopped machines and snapshots stay until deleted; 30 days after a workspace is disabled",
+      "url": "https://instabox.sh/docs/machines",
+      "quote": "**No forced TTL.** A paused or stopped machine and every snapshot you save stay until **you** delete them."
+    },
+    {
+      "field": "free-tier 8-hour cap",
+      "ours": "Only in the OpenAPI schema, not on any docs page",
+      "battleships": "max_session_h: null",
+      "live": "Now documented in the CLI reference: free plan fixed at 480 minutes",
+      "url": "https://instabox.sh/docs/cli",
+      "quote": "max-run <id-or-name> <minutes> pause after that many running minutes, even while active; -1: unlimited, 0: now (free plan: fixed at 480)"
+    },
+    {
+      "field": "preview URL wake behaviour",
+      "ours": "Docs say a visit wakes an idle machine; OpenAPI says preview links stay offline until resumed (flagged as a contradiction)",
+      "battleships": "public URLs go offline while paused and a visit does not wake it",
+      "live": "Resolved: an idle auto-pause wakes on use; a manual pause or stop does not",
+      "url": "https://instabox.sh/docs/machines",
+      "quote": "Commands, files, SSH and a visit to a public port URL resume an **idle** pause by themselves. A **manual** pause or stop does not wake from a URL"
+    },
+    {
+      "field": "egress price",
+      "ours": "$0.02/GiB after plan allowance",
+      "battleships": "null (no published egress rate)",
+      "live": "$0.02/GiB after plan allowance",
+      "url": "https://instabox.sh/docs/pricing",
+      "quote": "then $0.02 per GiB"
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "Limits — Firecracker microVM, own kernel, Debian 13",
+      "url": "https://instabox.sh/docs/limits"
+    },
+    "sizes-regions": {
+      "title": "Limits — machine sizes by plan (no region selector)",
+      "url": "https://instabox.sh/docs/limits"
+    },
+    "lifecycle": {
+      "title": "Machines — lifecycle, retention, auto-pause, sizes",
+      "url": "https://instabox.sh/docs/machines"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots — save a machine, start new ones from it",
+      "url": "https://instabox.sh/docs/snapshots"
+    },
+    "storage": {
+      "title": "Limits — disk sizes, storage caps and outbound bandwidth",
+      "url": "https://instabox.sh/docs/limits"
+    },
+    "idle-timers": {
+      "title": "Machines — auto-pause and max-run",
+      "url": "https://instabox.sh/docs/machines"
+    },
+    "reaching-it": {
+      "title": "Public and private ports — HTTPS URL per port",
+      "url": "https://instabox.sh/docs/ports"
+    },
+    "custom-domains": null,
+    "outbound-network": {
+      "title": "Limits — outbound bandwidth cap (no allowlist or static IP documented)",
+      "url": "https://instabox.sh/docs/limits"
+    },
+    "keys-secrets": {
+      "title": "Org Secrets — credentials injected by the outbound proxy",
+      "url": "https://instabox.sh/docs/secrets"
+    },
+    "ways-to-drive": {
+      "title": "API keys and SDK — TypeScript, HTTP and CLI",
+      "url": "https://instabox.sh/docs/keys-sdk"
+    },
+    "built-in-agents": {
+      "title": "Limits — template table (Claude Code and Codex preinstalled; no managed agent hosting)",
+      "url": "https://instabox.sh/docs/limits"
+    },
+    "teams-accounts": {
+      "title": "Account API — templates, usage, limits and key owner",
+      "url": "https://instabox.sh/docs/api/account"
+    },
+    "billing-models": {
+      "title": "Pricing — plans, credits and unit rates",
+      "url": "https://instabox.sh/docs/pricing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing — Free plan allowances",
+      "url": "https://instabox.sh/docs/pricing"
+    },
+    "quickstart": {
+      "title": "Quick start — one command to a shell",
+      "url": "https://instabox.sh/docs/start"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://instabox.sh/docs/pricing"
+    }
+  },
+  "deploy": {
+    "hermes": {
+      "route": "Manual only. Create a machine from the agent-browser template (Debian with Node, Docker and a desktop), open its Terminal tab or SSH in, install Hermes Agent from its own repository, set the model key, and keep it running with systemd or a background job; publish the port it serves.",
+      "oneClickOrManaged": false,
+      "officialTemplateOrGuide": "not found: no Hermes template, one-click or InstaBox guide",
+      "manualSteps": "1) Dashboard → Machines → Create machine (agent-browser). 2) Open the Terminal tab or `instabox ssh`. 3) Install Hermes Agent and its dependencies. 4) Add the model/API key. 5) Run it under systemd or `exec --background`. 6) Publish its port with `instabox port publish`.",
+      "nonCoderFromDashboard": "Partly. The dashboard can create the machine and open a browser terminal or desktop, but there is no guided Hermes install, so someone must type the install and service commands.",
+      "urls": [
+        "https://instabox.sh/docs/start",
+        "https://instabox.sh/docs/machines",
+        "https://instabox.sh/docs/ports"
+      ],
+      "quotes": [
+        {
+          "url": "https://instabox.sh/docs/start",
+          "quote": "In the dashboard, **Create machine** on the **Machines** page does what `instabox create` does."
+        },
+        {
+          "url": "https://instabox.sh/docs/limits",
+          "quote": "`~/.bashrc` only reaches interactive shells (SSH, the Terminal tab)"
+        }
+      ]
+    },
+    "openclaw": {
+      "route": "Manual only, same route as Hermes; no OpenClaw template or guide found.",
+      "oneClickOrManaged": false,
+      "officialTemplateOrGuide": "not found",
+      "manualSteps": "Same as Hermes: create an agent-browser machine, install OpenClaw in its terminal, configure the gateway and model key, run it as a service, publish its port.",
+      "nonCoderFromDashboard": "Partly, for the same reason: machine creation and a browser terminal exist, but the install is manual.",
+      "urls": [
+        "https://instabox.sh/docs/start",
+        "https://instabox.sh/docs/desktop"
+      ],
+      "quotes": [
+        {
+          "url": "https://instabox.sh/docs/desktop",
+          "quote": "Open a machine and choose the **Computer** tab. Click the desktop to take control; it goes back to the agent after a minute idle."
+        }
+      ]
+    }
+  },
+  "limitsSources": {
+    "maxSessionLength": {
+      "value": "Free fixed at 480 running minutes; paid settable to unlimited",
+      "url": "https://instabox.sh/docs/cli",
+      "quote": "max-run <id-or-name> <minutes> pause after that many running minutes, even while active; -1: unlimited, 0: now (free plan: fixed at 480)"
+    },
+    "maxSize": {
+      "value": "Team up to 32 vCPU / 64 GiB; Builder up to 16/32; Pro up to 8/16",
+      "url": "https://instabox.sh/docs/limits",
+      "quote": "Pro: 2/4, 4/8 or 8/16. Team: 2/4 up to 32 vCPUs / 64 GiB."
+    }
+  }
+}

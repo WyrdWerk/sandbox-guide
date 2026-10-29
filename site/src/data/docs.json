@@ -1,0 +1,1016 @@
+{
+  "agent37": {
+    "isolation": {
+      "title": "VM instances — default gVisor container vs full VM with its own kernel",
+      "url": "https://www.agent37.com/docs/agents-api/vm-instances"
+    },
+    "sizes-regions": {
+      "title": "Create an instance — shapes, disk ranges and regions",
+      "url": "https://www.agent37.com/docs/agents-api/instances/create"
+    },
+    "lifecycle": {
+      "title": "Instance lifecycle — start, stop, restart, resize, update",
+      "url": "https://www.agent37.com/docs/agents-api/instance-lifecycle"
+    },
+    "snapshots-forks": {
+      "title": "Fork an instance — independent copy with its own id, URLs and billing",
+      "url": "https://www.agent37.com/docs/agents-api/instances/fork"
+    },
+    "storage": {
+      "title": "Billing — disk rate, cold storage and what bills while stopped",
+      "url": "https://www.agent37.com/docs/agents-api/billing"
+    },
+    "idle-timers": {
+      "title": "Auto-sleep — idle timeout, checkpointing and wake behaviour",
+      "url": "https://www.agent37.com/docs/agents-api/instance-auto-sleep"
+    },
+    "reaching-it": {
+      "title": "Instance and preview URLs — HTTPS per port, signed URLs",
+      "url": "https://www.agent37.com/docs/agents-api/urls"
+    },
+    "custom-domains": {
+      "title": "Custom domains — mirror every workspace URL on your own domain",
+      "url": "https://www.agent37.com/docs/agents-api/domains"
+    },
+    "outbound-network": {
+      "title": "Network access — allow-all, deny-all or an IPv4 allowlist",
+      "url": "https://www.agent37.com/docs/agents-api/instance-network"
+    },
+    "keys-secrets": {
+      "title": "Environment variables — write-only env stored with the instance",
+      "url": "https://www.agent37.com/docs/agents-api/instance-environment"
+    },
+    "ways-to-drive": {
+      "title": "API overview — Sandbox API, Agent API, keys and headers",
+      "url": "https://www.agent37.com/docs/agents-api/overview"
+    },
+    "built-in-agents": {
+      "title": "Templates — system agent images (Hermes, OpenClaw, Claude Code, Codex, OpenCode, Grok, Pi)",
+      "url": "https://www.agent37.com/docs/agents-api/templates"
+    },
+    "teams-accounts": {
+      "title": "Members — workspace membership and roles",
+      "url": "https://www.agent37.com/docs/agents-api/members"
+    },
+    "billing-models": {
+      "title": "Billing — prepaid wallet, per-minute metering and managed usage",
+      "url": "https://www.agent37.com/docs/agents-api/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing — free starter credit and what it covers",
+      "url": "https://www.agent37.com/pricing"
+    },
+    "quickstart": {
+      "title": "Documentation home / quickstart",
+      "url": "https://www.agent37.com/docs"
+    },
+    "pricing": {
+      "title": "Cloud API pricing",
+      "url": "https://www.agent37.com/pricing"
+    }
+  },
+  "boat": {
+    "isolation": {
+      "title": "Security and isolation",
+      "url": "https://docs.boat.dev/security"
+    },
+    "sizes-regions": {
+      "title": "Sizes",
+      "url": "https://docs.boat.dev/machines"
+    },
+    "lifecycle": {
+      "title": "Concepts",
+      "url": "https://docs.boat.dev/concepts"
+    },
+    "snapshots-forks": {
+      "title": "Resume, fork and restore",
+      "url": "https://docs.boat.dev/snapshots/resume-and-fork"
+    },
+    "storage": {
+      "title": "Data retention and deletion",
+      "url": "https://docs.boat.dev/data-retention"
+    },
+    "idle-timers": {
+      "title": "Auto-stop and keep alive",
+      "url": "https://docs.boat.dev/long-running-tasks/auto-stop"
+    },
+    "reaching-it": {
+      "title": "Public URLs",
+      "url": "https://docs.boat.dev/hosting"
+    },
+    "custom-domains": {
+      "title": "Custom domain (not supported)",
+      "url": "https://docs.boat.dev/hosting#custom-domain"
+    },
+    "outbound-network": {
+      "title": "Firewall rules and outbound traffic",
+      "url": "https://docs.boat.dev/hosting/firewall"
+    },
+    "keys-secrets": {
+      "title": "Secrets",
+      "url": "https://docs.boat.dev/environments/secrets"
+    },
+    "ways-to-drive": {
+      "title": "SDKs",
+      "url": "https://docs.boat.dev/sdks/overview"
+    },
+    "built-in-agents": {
+      "title": "Integrated agents",
+      "url": "https://docs.boat.dev/integrated-agents"
+    },
+    "teams-accounts": {
+      "title": "Teams",
+      "url": "https://docs.boat.dev/organizations"
+    },
+    "billing-models": {
+      "title": "Plan, wallet and running out",
+      "url": "https://docs.boat.dev/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Free trial",
+      "url": "https://docs.boat.dev/free-trial"
+    },
+    "quickstart": {
+      "title": "Quickstart",
+      "url": "https://docs.boat.dev/quickstart"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://docs.boat.dev/pricing"
+    }
+  },
+  "boxd": {
+    "isolation": {
+      "title": "Sandboxes (hardware isolation)",
+      "url": "https://docs.boxd.sh/use-cases/sandboxes"
+    },
+    "sizes-regions": {
+      "title": "Resources and limits",
+      "url": "https://docs.boxd.sh/guides/resources"
+    },
+    "lifecycle": {
+      "title": "Suspend, resume, and hibernate",
+      "url": "https://docs.boxd.sh/guides/suspend-resume"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots",
+      "url": "https://docs.boxd.sh/guides/snapshots"
+    },
+    "storage": {
+      "title": "Disks",
+      "url": "https://docs.boxd.sh/guides/disks"
+    },
+    "idle-timers": {
+      "title": "Suspend, resume, and hibernate (auto-hibernate after 4 h)",
+      "url": "https://docs.boxd.sh/guides/suspend-resume"
+    },
+    "reaching-it": {
+      "title": "HTTPS",
+      "url": "https://docs.boxd.sh/guides/https"
+    },
+    "custom-domains": {
+      "title": "Custom domains",
+      "url": "https://docs.boxd.sh/guides/custom-domains"
+    },
+    "outbound-network": {
+      "title": "Egress control",
+      "url": "https://docs.boxd.sh/guides/egress"
+    },
+    "keys-secrets": {
+      "title": "Env vars and secrets",
+      "url": "https://docs.boxd.sh/guides/env-secrets"
+    },
+    "ways-to-drive": {
+      "title": "Commands (CLI reference)",
+      "url": "https://docs.boxd.sh/cli/commands"
+    },
+    "built-in-agents": {
+      "title": "Coding agents",
+      "url": "https://docs.boxd.sh/use-cases/coding-agents"
+    },
+    "teams-accounts": {
+      "title": "Organizations and teams",
+      "url": "https://docs.boxd.sh/guides/organizations"
+    },
+    "billing-models": {
+      "title": "Pricing and the billing FAQ",
+      "url": "https://boxd.sh/pricing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing: what you get for free",
+      "url": "https://boxd.sh/pricing"
+    },
+    "quickstart": {
+      "title": "Quickstart",
+      "url": "https://docs.boxd.sh/quickstart"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://boxd.sh/pricing"
+    }
+  },
+  "cloudflare-sandbox": {
+    "isolation": {
+      "title": "Lifecycle of a Container (microVM per container)",
+      "url": "https://developers.cloudflare.com/containers/concepts/architecture/"
+    },
+    "sizes-regions": {
+      "title": "Limits and Instance Types",
+      "url": "https://developers.cloudflare.com/containers/platform/limits/"
+    },
+    "lifecycle": {
+      "title": "Sandbox lifetime",
+      "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/"
+    },
+    "snapshots-forks": {
+      "title": "Save and restore a sandbox with snapshots",
+      "url": "https://developers.cloudflare.com/sandbox/files/save-and-restore-a-workspace/"
+    },
+    "storage": {
+      "title": "Work with files in a sandbox",
+      "url": "https://developers.cloudflare.com/sandbox/files/"
+    },
+    "idle-timers": {
+      "title": "Sandbox lifetime: what keeps an instance running",
+      "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/#activity-keeps-an-instance-running"
+    },
+    "reaching-it": {
+      "title": "Preview a web application",
+      "url": "https://developers.cloudflare.com/sandbox/previews/"
+    },
+    "custom-domains": {
+      "title": "Serve previews on their own hostnames",
+      "url": "https://developers.cloudflare.com/sandbox/previews/serve-previews-on-their-own-hostnames/"
+    },
+    "outbound-network": {
+      "title": "Handle outbound traffic",
+      "url": "https://developers.cloudflare.com/containers/configuration/outbound-traffic/"
+    },
+    "keys-secrets": {
+      "title": "Credentials and network access",
+      "url": "https://developers.cloudflare.com/sandbox/network/"
+    },
+    "ways-to-drive": {
+      "title": "@cloudflare/sandbox reference",
+      "url": "https://developers.cloudflare.com/sandbox/reference/"
+    },
+    "built-in-agents": {
+      "title": "Run coding agents in a sandbox",
+      "url": "https://developers.cloudflare.com/sandbox/coding-agents/"
+    },
+    "teams-accounts": {
+      "title": "Manage account members",
+      "url": "https://developers.cloudflare.com/fundamentals/manage-members/"
+    },
+    "billing-models": {
+      "title": "Containers pricing",
+      "url": "https://developers.cloudflare.com/containers/platform/pricing/"
+    },
+    "trials-free-tiers": {
+      "title": "Workers plans and pricing",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/"
+    },
+    "quickstart": {
+      "title": "Run a Linux command (get started)",
+      "url": "https://developers.cloudflare.com/sandbox/get-started/"
+    },
+    "pricing": {
+      "title": "Containers pricing",
+      "url": "https://developers.cloudflare.com/containers/platform/pricing/"
+    }
+  },
+  "instabox": {
+    "isolation": {
+      "title": "Limits — Firecracker microVM, own kernel, Debian 13",
+      "url": "https://instabox.sh/docs/limits"
+    },
+    "sizes-regions": {
+      "title": "Limits — machine sizes by plan (no region selector)",
+      "url": "https://instabox.sh/docs/limits"
+    },
+    "lifecycle": {
+      "title": "Machines — lifecycle, retention, auto-pause, sizes",
+      "url": "https://instabox.sh/docs/machines"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots — save a machine, start new ones from it",
+      "url": "https://instabox.sh/docs/snapshots"
+    },
+    "storage": {
+      "title": "Limits — disk sizes, storage caps and outbound bandwidth",
+      "url": "https://instabox.sh/docs/limits"
+    },
+    "idle-timers": {
+      "title": "Machines — auto-pause and max-run",
+      "url": "https://instabox.sh/docs/machines"
+    },
+    "reaching-it": {
+      "title": "Public and private ports — HTTPS URL per port",
+      "url": "https://instabox.sh/docs/ports"
+    },
+    "outbound-network": {
+      "title": "Limits — outbound bandwidth cap (no allowlist or static IP documented)",
+      "url": "https://instabox.sh/docs/limits"
+    },
+    "keys-secrets": {
+      "title": "Org Secrets — credentials injected by the outbound proxy",
+      "url": "https://instabox.sh/docs/secrets"
+    },
+    "ways-to-drive": {
+      "title": "API keys and SDK — TypeScript, HTTP and CLI",
+      "url": "https://instabox.sh/docs/keys-sdk"
+    },
+    "built-in-agents": {
+      "title": "Limits — template table (Claude Code and Codex preinstalled; no managed agent hosting)",
+      "url": "https://instabox.sh/docs/limits"
+    },
+    "teams-accounts": {
+      "title": "Account API — templates, usage, limits and key owner",
+      "url": "https://instabox.sh/docs/api/account"
+    },
+    "billing-models": {
+      "title": "Pricing — plans, credits and unit rates",
+      "url": "https://instabox.sh/docs/pricing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing — Free plan allowances",
+      "url": "https://instabox.sh/docs/pricing"
+    },
+    "quickstart": {
+      "title": "Quick start — one command to a shell",
+      "url": "https://instabox.sh/docs/start"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://instabox.sh/docs/pricing"
+    }
+  },
+  "lizard": {
+    "isolation": {
+      "title": "Sandboxes — Firecracker microVM, own kernel, templates",
+      "url": "https://lizard.build/docs/sandboxes#runtime-and-templates"
+    },
+    "sizes-regions": {
+      "title": "Limits — sandbox sizes and regions",
+      "url": "https://lizard.build/docs/platform/limits#sandbox-sizes"
+    },
+    "lifecycle": {
+      "title": "Sandboxes — lifecycle, pause/resume, kill",
+      "url": "https://lizard.build/docs/sandboxes#lifecycle"
+    },
+    "snapshots-forks": {
+      "title": "Quickstart — pause, resume and snapshots",
+      "url": "https://lizard.build/docs/sandboxes/quickstart#pause-and-resume"
+    },
+    "storage": {
+      "title": "Persistent Volumes — keep /workspace across runs",
+      "url": "https://lizard.build/docs/sandboxes/volumes"
+    },
+    "idle-timers": {
+      "title": "Limits — lifetime is a deadline, not an idle timer",
+      "url": "https://lizard.build/docs/platform/limits"
+    },
+    "reaching-it": {
+      "title": "Preview URLs — HTTPS per port with an access token",
+      "url": "https://lizard.build/docs/sandboxes/preview-urls"
+    },
+    "custom-domains": {
+      "title": "Networking and custom domains — app services, not sandbox preview URLs",
+      "url": "https://lizard.build/docs/networking"
+    },
+    "outbound-network": {
+      "title": "Limits — sandbox egress allowance",
+      "url": "https://lizard.build/docs/platform/limits#sandbox-egress"
+    },
+    "keys-secrets": {
+      "title": "Variables and secrets — scoping and precedence",
+      "url": "https://lizard.build/docs/variables"
+    },
+    "ways-to-drive": {
+      "title": "Sandboxes dashboard — create and manage without code",
+      "url": "https://lizard.build/docs/sandboxes/dashboard"
+    },
+    "built-in-agents": {
+      "title": "CLI agents — Claude Code, Codex, OpenCode, Pi and Prime",
+      "url": "https://lizard.build/docs/cli/agents"
+    },
+    "teams-accounts": {
+      "title": "Workspace CLI — members and workspace limits",
+      "url": "https://lizard.build/docs/cli/workspace"
+    },
+    "billing-models": {
+      "title": "Billing — Pro, trial, usage rates and overage",
+      "url": "https://lizard.build/docs/platform/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Billing — trial terms",
+      "url": "https://lizard.build/docs/platform/billing#trial"
+    },
+    "quickstart": {
+      "title": "Sandboxes quickstart",
+      "url": "https://lizard.build/docs/sandboxes/quickstart"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://lizard.build/pricing"
+    }
+  },
+  "modal": {
+    "isolation": {
+      "title": "Sandboxes: runtimes (gVisor vs VM)",
+      "url": "https://modal.com/docs/guide/sandboxes#runtimes"
+    },
+    "sizes-regions": {
+      "title": "Sandbox resources: CPU, memory and disk requests",
+      "url": "https://modal.com/docs/guide/sandbox-resources"
+    },
+    "lifecycle": {
+      "title": "Sandboxes: lifecycle events and timeouts",
+      "url": "https://modal.com/docs/guide/sandboxes#timeouts"
+    },
+    "snapshots-forks": {
+      "title": "Sandbox snapshots",
+      "url": "https://modal.com/docs/guide/sandbox-snapshots"
+    },
+    "storage": {
+      "title": "Sandbox files and Volumes",
+      "url": "https://modal.com/docs/guide/sandbox-files"
+    },
+    "idle-timers": {
+      "title": "Sandboxes: idle timeouts",
+      "url": "https://modal.com/docs/guide/sandboxes#idle-timeouts"
+    },
+    "reaching-it": {
+      "title": "Sandbox networking: forwarding ports and tunnels",
+      "url": "https://modal.com/docs/guide/sandbox-networking#forwarding-ports"
+    },
+    "custom-domains": {
+      "title": "Sandbox networking: custom domains",
+      "url": "https://modal.com/docs/guide/sandbox-networking#custom-domains"
+    },
+    "outbound-network": {
+      "title": "Sandbox networking: outbound access control",
+      "url": "https://modal.com/docs/guide/sandbox-networking#outbound-access-control"
+    },
+    "keys-secrets": {
+      "title": "Sandbox secret injection",
+      "url": "https://modal.com/docs/guide/sandbox-secret-injection"
+    },
+    "ways-to-drive": {
+      "title": "Sandboxes guide (Python, JavaScript and Go SDKs)",
+      "url": "https://modal.com/docs/guide/sandboxes"
+    },
+    "teams-accounts": {
+      "title": "Workspaces",
+      "url": "https://modal.com/docs/guide/workspaces"
+    },
+    "billing-models": {
+      "title": "Billing",
+      "url": "https://modal.com/docs/guide/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing plans (Starter monthly credit)",
+      "url": "https://modal.com/pricing#pricing-plans"
+    },
+    "quickstart": {
+      "title": "Getting started",
+      "url": "https://modal.com/docs/guide/getting-started"
+    },
+    "pricing": {
+      "title": "Pricing: Modal Sandbox pricing",
+      "url": "https://modal.com/pricing#sandboxes"
+    }
+  },
+  "sandboxer": {
+    "isolation": {
+      "title": "Security",
+      "url": "https://sandboxer.com/docs/security"
+    },
+    "sizes-regions": {
+      "title": "Machines & sizes",
+      "url": "https://sandboxer.com/docs/machines"
+    },
+    "lifecycle": {
+      "title": "Snapshots (stop, resume, fork)",
+      "url": "https://sandboxer.com/docs/snapshots"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots",
+      "url": "https://sandboxer.com/docs/snapshots"
+    },
+    "storage": {
+      "title": "Billing: storage",
+      "url": "https://sandboxer.com/docs/billing"
+    },
+    "idle-timers": {
+      "title": "Long-running tasks (idle auto-pause, auto-stop)",
+      "url": "https://sandboxer.com/docs/long-running"
+    },
+    "reaching-it": {
+      "title": "Hosting",
+      "url": "https://sandboxer.com/docs/hosting"
+    },
+    "custom-domains": {
+      "title": "Hosting: custom domains (roadmap only)",
+      "url": "https://sandboxer.com/docs/hosting"
+    },
+    "outbound-network": {
+      "title": "Security: network policy",
+      "url": "https://sandboxer.com/docs/security"
+    },
+    "keys-secrets": {
+      "title": "Environments & secrets",
+      "url": "https://sandboxer.com/docs/environments"
+    },
+    "ways-to-drive": {
+      "title": "API reference",
+      "url": "https://sandboxer.com/docs/api"
+    },
+    "built-in-agents": {
+      "title": "Integrated agents",
+      "url": "https://sandboxer.com/docs/agents"
+    },
+    "teams-accounts": {
+      "title": "Organizations",
+      "url": "https://sandboxer.com/docs/organizations"
+    },
+    "billing-models": {
+      "title": "Billing",
+      "url": "https://sandboxer.com/docs/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing (trial)",
+      "url": "https://sandboxer.com/pricing"
+    },
+    "quickstart": {
+      "title": "Quickstart",
+      "url": "https://sandboxer.com/docs/quickstart"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://sandboxer.com/pricing"
+    }
+  },
+  "vercel-sandbox": {
+    "isolation": {
+      "title": "Sandbox concepts: isolation architecture",
+      "url": "https://vercel.com/docs/sandbox/concepts#isolation-architecture"
+    },
+    "sizes-regions": {
+      "title": "Sandbox pricing: resource limits",
+      "url": "https://vercel.com/docs/sandbox/pricing#resource-limits"
+    },
+    "lifecycle": {
+      "title": "Persistent sandboxes: sessions, stop and resume",
+      "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots",
+      "url": "https://vercel.com/docs/sandbox/concepts/snapshots"
+    },
+    "storage": {
+      "title": "Drives",
+      "url": "https://vercel.com/docs/sandbox/concepts/drives"
+    },
+    "idle-timers": {
+      "title": "Sandbox pricing: runtime limits",
+      "url": "https://vercel.com/docs/sandbox/pricing#runtime-limits"
+    },
+    "reaching-it": {
+      "title": "Sandbox concepts: network access and exposed ports",
+      "url": "https://vercel.com/docs/sandbox/concepts#network-access"
+    },
+    "outbound-network": {
+      "title": "Firewall",
+      "url": "https://vercel.com/docs/sandbox/concepts/firewall"
+    },
+    "keys-secrets": {
+      "title": "Firewall: credentials brokering",
+      "url": "https://vercel.com/docs/sandbox/concepts/firewall#credentials-brokering"
+    },
+    "ways-to-drive": {
+      "title": "JS SDK reference",
+      "url": "https://vercel.com/docs/sandbox/sdk-reference"
+    },
+    "built-in-agents": {
+      "title": "Sandbox ecosystem (agent integrations)",
+      "url": "https://vercel.com/docs/sandbox/ecosystem"
+    },
+    "teams-accounts": {
+      "title": "Pro plan: team seats",
+      "url": "https://vercel.com/docs/plans/pro-plan#team-seats"
+    },
+    "billing-models": {
+      "title": "Sandbox pricing and quotas",
+      "url": "https://vercel.com/docs/sandbox/pricing"
+    },
+    "trials-free-tiers": {
+      "title": "Hobby plan",
+      "url": "https://vercel.com/docs/plans/hobby"
+    },
+    "quickstart": {
+      "title": "Sandbox quickstart",
+      "url": "https://vercel.com/docs/sandbox/quickstart"
+    },
+    "pricing": {
+      "title": "Sandbox pricing and quotas",
+      "url": "https://vercel.com/docs/sandbox/pricing"
+    }
+  },
+  "blaxel": {
+    "isolation": {
+      "title": "Run sandbox workloads as a non-root user",
+      "url": "https://docs.blaxel.ai/Sandboxes/Non-root-user.md"
+    },
+    "sizes-regions": {
+      "title": "Regions",
+      "url": "https://docs.blaxel.ai/Infrastructure/Regions.md"
+    },
+    "lifecycle": {
+      "title": "Sandboxes",
+      "url": "https://docs.blaxel.ai/Sandboxes/Overview.md"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots and forking",
+      "url": "https://docs.blaxel.ai/Sandboxes/Fork.md"
+    },
+    "storage": {
+      "title": "Volumes for sandboxes",
+      "url": "https://docs.blaxel.ai/Sandboxes/Volumes.md"
+    },
+    "idle-timers": {
+      "title": "Standby control",
+      "url": "https://docs.blaxel.ai/Sandboxes/Standby-control.md"
+    },
+    "reaching-it": {
+      "title": "Real-time previews",
+      "url": "https://docs.blaxel.ai/Sandboxes/Preview-url.md"
+    },
+    "custom-domains": {
+      "title": "Custom domains",
+      "url": "https://docs.blaxel.ai/Infrastructure/Custom-domains.md"
+    },
+    "outbound-network": {
+      "title": "Domain filtering",
+      "url": "https://docs.blaxel.ai/Sandboxes/Proxy-domains.md"
+    },
+    "keys-secrets": {
+      "title": "Proxy routing with secrets injection",
+      "url": "https://docs.blaxel.ai/Sandboxes/Proxy-secrets-injection.md"
+    },
+    "ways-to-drive": {
+      "title": "Blaxel CLI overview",
+      "url": "https://docs.blaxel.ai/cli-reference/introduction.md"
+    },
+    "built-in-agents": {
+      "title": "Agents Hosting",
+      "url": "https://docs.blaxel.ai/Agents/Overview.md"
+    },
+    "teams-accounts": {
+      "title": "Workspaces, users and roles",
+      "url": "https://docs.blaxel.ai/Security/Workspace-access-control.md"
+    },
+    "billing-models": {
+      "title": "Pricing",
+      "url": "https://blaxel.ai/pricing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing",
+      "url": "https://blaxel.ai/pricing"
+    },
+    "quickstart": {
+      "title": "Get started",
+      "url": "https://docs.blaxel.ai/Get-started.md"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://blaxel.ai/pricing"
+    }
+  },
+  "daytona": {
+    "isolation": {
+      "title": "Isolation (container, Linux VM, Windows and GPU classes)",
+      "url": "https://www.daytona.io/docs/en/isolation"
+    },
+    "sizes-regions": {
+      "title": "Regions (us, eu, earth for GPU)",
+      "url": "https://www.daytona.io/docs/en/regions"
+    },
+    "lifecycle": {
+      "title": "Sandboxes: lifecycle states",
+      "url": "https://www.daytona.io/docs/en/sandboxes#sandbox-lifecycle"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots",
+      "url": "https://www.daytona.io/docs/en/snapshots"
+    },
+    "storage": {
+      "title": "Volumes",
+      "url": "https://www.daytona.io/docs/en/volumes"
+    },
+    "idle-timers": {
+      "title": "Auto-stop sandboxes (default 15 minutes)",
+      "url": "https://www.daytona.io/docs/en/sandboxes#auto-stop-interval"
+    },
+    "reaching-it": {
+      "title": "Preview (preview URLs and tokens)",
+      "url": "https://www.daytona.io/docs/en/preview"
+    },
+    "custom-domains": {
+      "title": "Custom Preview Proxy",
+      "url": "https://www.daytona.io/docs/en/custom-preview-proxy"
+    },
+    "outbound-network": {
+      "title": "Network Limits (Firewall)",
+      "url": "https://www.daytona.io/docs/en/network-limits"
+    },
+    "keys-secrets": {
+      "title": "Secrets",
+      "url": "https://www.daytona.io/docs/en/secrets"
+    },
+    "ways-to-drive": {
+      "title": "CLI",
+      "url": "https://www.daytona.io/docs/en/tools/cli"
+    },
+    "built-in-agents": {
+      "title": "OpenClaw Guides (preinstalled in the default snapshot)",
+      "url": "https://www.daytona.io/docs/en/guides/openclaw"
+    },
+    "teams-accounts": {
+      "title": "Organizations",
+      "url": "https://www.daytona.io/docs/en/organizations"
+    },
+    "billing-models": {
+      "title": "Billing (what each state bills)",
+      "url": "https://www.daytona.io/docs/en/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Limits: tiers and access requirements",
+      "url": "https://www.daytona.io/docs/en/limits#tiers"
+    },
+    "quickstart": {
+      "title": "Daytona Documentation: Get started",
+      "url": "https://www.daytona.io/docs/en/#get-started"
+    },
+    "pricing": {
+      "title": "Daytona pricing",
+      "url": "https://www.daytona.io/pricing"
+    }
+  },
+  "e2b": {
+    "isolation": {
+      "title": "How sandboxes are isolated (Firecracker microVMs)",
+      "url": "https://docs.e2b.dev/faq/security-and-compliance#how-sandboxes-are-isolated"
+    },
+    "sizes-regions": {
+      "title": "Billing & limits (max vCPU, memory, disk per plan)",
+      "url": "https://docs.e2b.dev/billing"
+    },
+    "lifecycle": {
+      "title": "Sandbox lifecycle",
+      "url": "https://docs.e2b.dev/sandbox"
+    },
+    "snapshots-forks": {
+      "title": "Sandbox snapshots",
+      "url": "https://docs.e2b.dev/sandbox/snapshots"
+    },
+    "storage": {
+      "title": "Volumes overview",
+      "url": "https://docs.e2b.dev/volumes"
+    },
+    "idle-timers": {
+      "title": "How long does a sandbox live? (timeout, pause, resume)",
+      "url": "https://docs.e2b.dev/faq/sandbox-lifetime"
+    },
+    "reaching-it": {
+      "title": "Sandbox public URL",
+      "url": "https://docs.e2b.dev/network/public-url"
+    },
+    "custom-domains": {
+      "title": "Custom domain",
+      "url": "https://docs.e2b.dev/network/custom-domain"
+    },
+    "outbound-network": {
+      "title": "Internet access",
+      "url": "https://docs.e2b.dev/network/internet-access"
+    },
+    "keys-secrets": {
+      "title": "Secrets overview",
+      "url": "https://docs.e2b.dev/secrets"
+    },
+    "ways-to-drive": {
+      "title": "E2B CLI",
+      "url": "https://docs.e2b.dev/cli"
+    },
+    "built-in-agents": {
+      "title": "Hermes Agent (pre-built template)",
+      "url": "https://docs.e2b.dev/agents/hermes"
+    },
+    "teams-accounts": {
+      "title": "Workspaces",
+      "url": "https://docs.e2b.dev/workspaces"
+    },
+    "billing-models": {
+      "title": "Billing & limits",
+      "url": "https://docs.e2b.dev/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing (Hobby, Pro, Enterprise)",
+      "url": "https://e2b.dev/pricing"
+    },
+    "quickstart": {
+      "title": "Running your first Sandbox",
+      "url": "https://docs.e2b.dev/quickstart"
+    },
+    "pricing": {
+      "title": "E2B Pricing",
+      "url": "https://e2b.dev/pricing"
+    }
+  },
+  "morph": {
+    "isolation": {
+      "title": "Getting started with Morph Devboxes",
+      "url": "https://cloud.morph.so/docs/devboxes/getting-started"
+    },
+    "sizes-regions": {
+      "title": "Basic Operations — snapshot resource specifications",
+      "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot"
+    },
+    "lifecycle": {
+      "title": "Basic Operations (start, save, stop)",
+      "url": "https://cloud.morph.so/docs/documentation/instances/basic-lifecycle"
+    },
+    "snapshots-forks": {
+      "title": "Branch",
+      "url": "https://cloud.morph.so/docs/documentation/instances/branch"
+    },
+    "storage": {
+      "title": "Getting started with Morph Volumes",
+      "url": "https://cloud.morph.so/docs/volumes/getting-started"
+    },
+    "idle-timers": {
+      "title": "Auto-Scale-to-Zero Agent Workspaces",
+      "url": "https://cloud.morph.so/docs/examples/auto-scale-agent-workspaces"
+    },
+    "reaching-it": {
+      "title": "HTTP Services",
+      "url": "https://cloud.morph.so/docs/documentation/instances/http-services"
+    },
+    "keys-secrets": {
+      "title": "Devbox agent tokens",
+      "url": "https://cloud.morph.so/docs/devboxes/agent-tokens"
+    },
+    "ways-to-drive": {
+      "title": "CLI Command Reference",
+      "url": "https://cloud.morph.so/docs/documentation/cli"
+    },
+    "teams-accounts": {
+      "title": "Sharing & collaboration",
+      "url": "https://cloud.morph.so/docs/devboxes/sharing-and-collaboration"
+    },
+    "billing-models": {
+      "title": "Plans",
+      "url": "https://cloud.morph.so/docs/documentation/setup/plans"
+    },
+    "trials-free-tiers": {
+      "title": "Plans",
+      "url": "https://cloud.morph.so/docs/documentation/setup/plans"
+    },
+    "quickstart": {
+      "title": "First Success",
+      "url": "https://cloud.morph.so/docs/start-here/first-success"
+    },
+    "pricing": {
+      "title": "Subscribe / pricing",
+      "url": "https://cloud.morph.so/web/subscribe"
+    }
+  },
+  "runtime": {
+    "isolation": {
+      "title": "Isolation and account boundaries",
+      "url": "https://withruntime.com/docs/security"
+    },
+    "sizes-regions": {
+      "title": "The sandbox environment (disk, CPU, memory; one region in Virginia)",
+      "url": "https://withruntime.com/docs/sandbox-environment"
+    },
+    "lifecycle": {
+      "title": "Time and lifetime: pause, stop or delete",
+      "url": "https://withruntime.com/docs/sandbox-environment#time-and-lifetime"
+    },
+    "snapshots-forks": {
+      "title": "JavaScript SDK: snapshots and forks",
+      "url": "https://withruntime.com/docs/javascript#snapshots-and-forks"
+    },
+    "storage": {
+      "title": "Storage and backups",
+      "url": "https://withruntime.com/docs/storage"
+    },
+    "idle-timers": {
+      "title": "Idle time is paused time (pricing guide)",
+      "url": "https://withruntime.com/docs/pricing"
+    },
+    "reaching-it": {
+      "title": "Private preview links",
+      "url": "https://withruntime.com/docs/networking#private-preview-links"
+    },
+    "custom-domains": {
+      "title": "Custom domains",
+      "url": "https://withruntime.com/docs/networking#custom-domains"
+    },
+    "outbound-network": {
+      "title": "Outbound traffic",
+      "url": "https://withruntime.com/docs/egress"
+    },
+    "keys-secrets": {
+      "title": "Secrets sandboxes never see",
+      "url": "https://withruntime.com/docs/security#secrets-sandboxes-never-see"
+    },
+    "ways-to-drive": {
+      "title": "The runtime CLI",
+      "url": "https://withruntime.com/docs/cli"
+    },
+    "teams-accounts": {
+      "title": "Teams and the audit log",
+      "url": "https://withruntime.com/docs/teams"
+    },
+    "billing-models": {
+      "title": "Understand your sandbox bill",
+      "url": "https://withruntime.com/docs/pricing"
+    },
+    "trials-free-tiers": {
+      "title": "Free usage",
+      "url": "https://withruntime.com/docs/included-usage"
+    },
+    "quickstart": {
+      "title": "Get started with Runtime Cloud",
+      "url": "https://withruntime.com/docs/start"
+    },
+    "pricing": {
+      "title": "Runtime pricing",
+      "url": "https://withruntime.com/pricing"
+    }
+  },
+  "sprites": {
+    "isolation": {
+      "title": "Sprites Overview",
+      "url": "https://docs.fly.io/sprites/index.md"
+    },
+    "sizes-regions": {
+      "title": "Lifecycle and Persistence (fixed 8 vCPU, 100 GB; no region selection documented)",
+      "url": "https://docs.fly.io/sprites/concepts/lifecycle.md"
+    },
+    "lifecycle": {
+      "title": "Lifecycle and Persistence",
+      "url": "https://docs.fly.io/sprites/concepts/lifecycle.md"
+    },
+    "snapshots-forks": {
+      "title": "Checkpoints",
+      "url": "https://docs.fly.io/sprites/concepts/checkpoints.md"
+    },
+    "storage": {
+      "title": "Lifecycle and Persistence — Capacity and billing",
+      "url": "https://docs.fly.io/sprites/concepts/lifecycle.md"
+    },
+    "idle-timers": {
+      "title": "Working with Sprites — Idle detection",
+      "url": "https://docs.fly.io/sprites/working-with-sprites.md"
+    },
+    "reaching-it": {
+      "title": "Networking",
+      "url": "https://docs.fly.io/sprites/concepts/networking.md"
+    },
+    "outbound-network": {
+      "title": "Networking — Egress policy",
+      "url": "https://docs.fly.io/sprites/concepts/networking.md"
+    },
+    "keys-secrets": {
+      "title": "Connectors",
+      "url": "https://docs.fly.io/sprites/concepts/connectors.md"
+    },
+    "ways-to-drive": {
+      "title": "CLI Commands Reference",
+      "url": "https://docs.fly.io/sprites/cli/commands.md"
+    },
+    "teams-accounts": {
+      "title": "CLI Authentication (Fly.io account and org switching)",
+      "url": "https://docs.fly.io/sprites/cli/authentication.md"
+    },
+    "billing-models": {
+      "title": "Fly.io Pricing — Sprites",
+      "url": "https://fly.io/pricing/"
+    },
+    "trials-free-tiers": {
+      "title": "Sprites FAQ — trial credits",
+      "url": "https://fly.io/sprites/"
+    },
+    "quickstart": {
+      "title": "Quickstart",
+      "url": "https://docs.fly.io/sprites/quickstart.md"
+    },
+    "pricing": {
+      "title": "Fly.io Pricing — Sprites",
+      "url": "https://fly.io/pricing/"
+    }
+  }
+}

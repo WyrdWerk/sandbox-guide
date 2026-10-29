@@ -1,0 +1,411 @@
+{
+  "id": "sandboxer",
+  "provider": "Sandboxer",
+  "site": "https://sandboxer.com",
+  "checkedOn": "2026-10-29",
+  "currency": "USD",
+  "battleships": {
+    "id": "sandboxer",
+    "exists": false,
+    "checkedUrl": "https://battleships.dev/data/providers/sandboxer.json",
+    "httpStatus": 404,
+    "note": "No Battleships card exists, so every diff below is against our own research/sandboxer.md."
+  },
+  "quoteNote": "Quotes are copied from the page as rendered on 2026-10-29 (the .md mirror where the page is Markdown). Bold markers and link markup are kept as the source writes them.",
+  "plans": [
+    {
+      "name": "$20/mo",
+      "monthlyUsd": 20,
+      "included": "≈555 h of default machine time; 50 GB storage for stopped sandboxes and named snapshots",
+      "limits": {
+        "maxConcurrent": 100,
+        "startsPerMin": 12,
+        "startsPerHour": 60,
+        "startsPerDay": 200,
+        "maxSessionHours": 720,
+        "maxSessionNote": "TTL max 30 days; --no-auto-stop removes the deadline. Idle auto-pause defaults to 30 minutes.",
+        "maxSize": "large (8 vCPU / 16 GB / 125 GB)"
+      },
+      "url": "https://sandboxer.com/pricing.md",
+      "quote": "| $20 / month | 100 | 12 / 60 / 200 | 50 GB | Solo builders and small agent fleets |"
+    },
+    {
+      "name": "$100/mo",
+      "monthlyUsd": 100,
+      "included": "≈2,777 h of default machine time; 250 GB storage",
+      "limits": {
+        "maxConcurrent": 300,
+        "startsPerMin": 30,
+        "startsPerHour": 210,
+        "startsPerDay": 840,
+        "maxSessionHours": 720,
+        "maxSessionNote": "TTL max 30 days; --no-auto-stop removes the deadline. Idle auto-pause defaults to 60 minutes.",
+        "maxSize": "xlarge (16 vCPU / 32 GB / 251 GB)"
+      },
+      "url": "https://sandboxer.com/pricing.md",
+      "quote": "| $100 / month | 300 | 30 / 210 / 840 | 250 GB | Products that give every user a computer |"
+    },
+    {
+      "name": "$500/mo",
+      "monthlyUsd": 500,
+      "included": "≈13,888 h of default machine time; 1 TB storage",
+      "limits": {
+        "maxConcurrent": 1000,
+        "startsPerMin": 65,
+        "startsPerHour": 420,
+        "startsPerDay": 1680,
+        "maxSessionHours": 720,
+        "maxSessionNote": "TTL max 30 days; --no-auto-stop removes the deadline. Idle auto-pause defaults to 60 minutes.",
+        "maxSize": "xlarge (16 vCPU / 32 GB / 251 GB)"
+      },
+      "url": "https://sandboxer.com/pricing.md",
+      "quote": "| $500 / month | 1,000 | 65 / 420 / 1,680 | 1 TB | High-volume platforms and eval farms |"
+    },
+    {
+      "name": "$2,000/mo",
+      "monthlyUsd": 2000,
+      "included": "≈55,555 h of default machine time; 5 TB storage",
+      "limits": {
+        "maxConcurrent": 2000,
+        "startsPerMin": 90,
+        "startsPerHour": 600,
+        "startsPerDay": 2400,
+        "maxSessionHours": 720,
+        "maxSessionNote": "TTL max 30 days; --no-auto-stop removes the deadline. Idle auto-pause defaults to 120 minutes.",
+        "maxSize": "xlarge (16 vCPU / 32 GB / 251 GB)"
+      },
+      "url": "https://sandboxer.com/pricing.md",
+      "quote": "| $2,000 / month | 2,000 | 90 / 600 / 2,400 | 5 TB | Large fleets with headroom to burst |"
+    }
+  ],
+  "planNotes": [
+    {
+      "claim": "The plan price comes back as machine time and does not roll over.",
+      "url": "https://sandboxer.com/pricing.md",
+      "quote": "A plan sets how many sandboxes can run at once and how fast you can start them. It includes a month of machine time equal to its price; included time does not roll over."
+    },
+    {
+      "claim": "Organization plans are per seat; concurrency and start limits multiply by seats, storage does not.",
+      "url": "https://sandboxer.com/docs/organizations",
+      "quote": "An organization plan is **per seat**: the plan price × seats."
+    },
+    {
+      "claim": "Organization storage is one amount from the plan, not multiplied by seats.",
+      "url": "https://sandboxer.com/docs/billing",
+      "quote": "An organization has one amount, from its plan (not multiplied by seats)."
+    }
+  ],
+  "compute": {
+    "model": "fixed-sizes",
+    "cpuBasis": "allocated",
+    "cpuBasisNote": "One flat price per size for as long as the sandbox runs. vCPUs are shared; RAM is reserved for the sandbox.",
+    "cpuBasisUrl": "https://sandboxer.com/pricing",
+    "cpuBasisQuote": "vCPUs are shared; RAM is reserved for the sandbox.",
+    "billingIncrementSeconds": 1,
+    "billingIncrementNote": "Metered per second, from up until stopped. A large sandbox for ten minutes uses 1,200 default-seconds.",
+    "minimumCharge": null,
+    "minimumNote": "not published: no minimum seconds or minimum charge is stated anywhere on the pricing or billing pages.",
+    "ratesSameOnEveryPlan": true,
+    "ratesSameOnEveryPlanUrl": "https://sandboxer.com/docs/billing",
+    "ratesSameOnEveryPlanQuote": "One dollar buys 100,000 of them, so a `large` sandbox running ten minutes uses 1,200 seconds.",
+    "url": "https://sandboxer.com/docs/billing",
+    "quote": "Metering is per second, from the moment a sandbox is up until it is stopped.",
+    "sizes": [
+      {
+        "name": "small",
+        "vcpu": 2,
+        "ramGib": 4,
+        "diskGib": 12,
+        "usdPerHour": 0.018,
+        "usdPerMonth730h": 13.14,
+        "monthlyBasis": "page states $13.14 for 730 h; rendered page rounds to $13",
+        "url": "https://sandboxer.com/pricing.md",
+        "quote": "| `small` | 2 | 4 GB | 12 GB | 0.5× | $0.018 | $13.14 |"
+      },
+      {
+        "name": "default",
+        "vcpu": 4,
+        "ramGib": 8,
+        "diskGib": 50,
+        "usdPerHour": 0.036,
+        "usdPerMonth730h": 26.28,
+        "monthlyBasis": "page states $26.28 for 730 h; rendered page rounds to $26",
+        "url": "https://sandboxer.com/pricing.md",
+        "quote": "| `default` | 4 | 8 GB | 50 GB | 1× | $0.036 | $26.28 |"
+      },
+      {
+        "name": "large",
+        "vcpu": 8,
+        "ramGib": 16,
+        "diskGib": 125,
+        "usdPerHour": 0.072,
+        "usdPerMonth730h": 52.56,
+        "monthlyBasis": "page states $52.56 for 730 h; rendered page rounds to $53",
+        "url": "https://sandboxer.com/pricing.md",
+        "quote": "| `large` | 8 | 16 GB | 125 GB | 2× | $0.072 | $52.56 |"
+      },
+      {
+        "name": "xlarge",
+        "vcpu": 16,
+        "ramGib": 32,
+        "diskGib": 251,
+        "usdPerHour": 0.2,
+        "usdPerMonth730h": 146.0,
+        "monthlyBasis": "page states $146 for 730 h",
+        "requiresPlan": "$100/mo or higher",
+        "url": "https://sandboxer.com/pricing.md",
+        "quote": "| `xlarge` ($100+ plan) | 16 | 32 GB | 251 GB | 5.56× | $0.20 | $146 |"
+      }
+    ],
+    "sizeNotes": [
+      {
+        "claim": "xlarge needs the $100 plan.",
+        "url": "https://sandboxer.com/docs/machines",
+        "quote": "`xlarge` needs the $100/month plan or higher. Lower plans get `403 machine_class_plan_required`."
+      },
+      {
+        "claim": "Disk is on top of the OS image.",
+        "url": "https://sandboxer.com/docs/machines",
+        "quote": "\"Disk\" is space for your files, added on top of the OS image; the OS and pre-installed tools don't count against it."
+      }
+    ],
+    "sessionLimit": {
+      "url": "https://sandboxer.com/docs/long-running",
+      "quote": "| Maximum | 30 days | `2592000` |"
+    }
+  },
+  "storage": {
+    "model": "included quota, storage not billed",
+    "diskPricePerGibMonth": null,
+    "diskIncluded": "50 GB on the $20 plan, 250 GB on $100, 1 TB on $500, 5 TB on $2,000; 10 GB on the trial or with no plan; 50 GB with time packs and no plan. Counts stopped sandboxes (disk, memory and automatic snapshots) and named snapshots; running sandboxes do not count.",
+    "diskIncludedUrl": "https://sandboxer.com/docs/billing",
+    "diskIncludedQuote": "Storage isn't billed: each plan includes an amount for what you keep, **sandboxes that aren't running** (stopped or failed: their disk, memory and automatic snapshots) and **named snapshots**.",
+    "billedWhileStopped": false,
+    "billedWhileStoppedNote": "Stopped sandboxes cost nothing; their disk and snapshots count only toward the included storage quota.",
+    "stoppedRetentionDays": null,
+    "stoppedRetentionNote": "No expiry published: kept until you delete the sandbox.",
+    "url": "https://sandboxer.com/pricing",
+    "quote": "Nothing. Its disk, memory snapshot and automatic snapshots are kept at no charge until you delete it; they count toward your plan's included storage (50 GB on the $20 plan).",
+    "snapshots": {
+      "priceUsd": 0,
+      "note": "Named snapshots have no separate charge; automatic snapshots are free. Both count toward the included storage.",
+      "url": "https://sandboxer.com/pricing",
+      "quote": "They have no separate charge. Keep as many as you like; they count toward your plan's included storage."
+    },
+    "overage": {
+      "charged": false,
+      "behaviour": "New sandboxes, forks and named-snapshot saves are refused with 402 storage_limit_reached until you free space or upgrade; optional auto-delete can remove least-recently-used stopped sandboxes after an email notice.",
+      "url": "https://sandboxer.com/docs/billing",
+      "quote": "At or over it, new sandboxes (including from templates and share codes), forks and named-snapshot saves answer `402 storage_limit_reached` until you delete stopped sandboxes or named snapshots, or upgrade."
+    },
+    "quotasUrl": "https://sandboxer.com/pricing.md",
+    "quotasQuote": "**Storage included:** 50 GB on the $20 plan, 250 GB on the $100 plan, 1 TB on the $500 plan, 5 TB on the $2,000 plan; 10 GB on the trial or without a plan."
+  },
+  "egress": {
+    "billed": false,
+    "pricePerGb": null,
+    "allowance": "no cap published",
+    "url": "https://sandboxer.com/pricing",
+    "quote": "Do you bill bandwidth?\n\nNo."
+  },
+  "other": [
+    {
+      "item": "Time packs",
+      "priceUsd": 20,
+      "note": "One-off, same per-size rates, never expire; plan time is spent first.",
+      "url": "https://sandboxer.com/pricing",
+      "quote": "**Time packs:** $20 each at the same rates; they never expire."
+    },
+    {
+      "item": "Seats",
+      "priceUsd": "the plan price, per seat",
+      "url": "https://sandboxer.com/docs/organizations",
+      "quote": "An organization plan is **per seat**: the plan price × seats."
+    },
+    {
+      "item": "Public IPv4",
+      "priceUsd": null,
+      "note": "No public IPv4 of its own: private IPv4 behind NAT plus a public IPv6 address per sandbox. No price because it is not offered.",
+      "url": "https://sandboxer.com/docs/machines",
+      "quote": "Private IPv4 (NAT) and a **public IPv6** address per sandbox"
+    },
+    {
+      "item": "Custom domain",
+      "priceUsd": null,
+      "note": "Not offered; only a rename of the sandbox's own subdomain, or a CNAME you terminate yourself.",
+      "url": "https://sandboxer.com/docs/hosting",
+      "quote": "Point a CNAME at the hosted hostname and terminate TLS yourself (for example with a proxy in front), or run Caddy inside the sandbox on its IPv6 address (after `sudo ufw allow 80,443/tcp`). First-class custom domains are on the roadmap."
+    },
+    {
+      "item": "Minimum spend",
+      "priceUsd": "the plan price; every dollar returns as machine time",
+      "url": "https://sandboxer.com/docs/billing",
+      "quote": "The plan fee is not a fee on top: every dollar comes back as machine time."
+    }
+  ],
+  "freeTier": {
+    "exists": false,
+    "note": "No free tier. A card is required for a 7-day trial with 25 hours of machine time, then it becomes the $20/month plan unless cancelled.",
+    "url": "https://sandboxer.com/pricing",
+    "quote": "**Trial:** 7 days, 25 hours of machine time, up to 2 sandboxes at once on the small and default sizes, sandboxes stop within 8 hours.",
+    "trial": {
+      "days": 7,
+      "computeHours": 25,
+      "maxConcurrent": 2,
+      "sizes": "small and default",
+      "maxSessionHours": 8,
+      "idleAutoPauseMinutes": 15,
+      "url": "https://sandboxer.com/docs/long-running",
+      "quote": "During the trial, TTLs above eight hours and `--no-auto-stop` are refused."
+    }
+  },
+  "diffs": [
+    {
+      "field": "storage.diskIncluded (time packs without a plan)",
+      "ours": "10 GB trial / 50 GB / 250 GB / 1 TB / 5 TB by plan",
+      "battleships": "no provider record (404)",
+      "live": "adds a row: 50 GB for time packs without a plan, while the balance lasts",
+      "url": "https://sandboxer.com/docs/billing",
+      "quote": "| Time packs without a plan (while you have a balance) | 50 GB |"
+    },
+    {
+      "field": "plans[].maxSize ($20 plan)",
+      "ours": "xlarge requires the $100 plan; the other sizes were not tied to a plan",
+      "battleships": "no provider record (404)",
+      "live": "the $20 plan lists small, default and large explicitly; $100+ lists all sizes including xlarge",
+      "url": "https://sandboxer.com/pricing",
+      "quote": "small, default and large"
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "Security",
+      "url": "https://sandboxer.com/docs/security"
+    },
+    "sizes-regions": {
+      "title": "Machines & sizes",
+      "url": "https://sandboxer.com/docs/machines",
+      "also": {
+        "title": "Regions",
+        "url": "https://sandboxer.com/docs/regions"
+      }
+    },
+    "lifecycle": {
+      "title": "Snapshots (stop, resume, fork)",
+      "url": "https://sandboxer.com/docs/snapshots"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots",
+      "url": "https://sandboxer.com/docs/snapshots"
+    },
+    "storage": {
+      "title": "Billing: storage",
+      "url": "https://sandboxer.com/docs/billing"
+    },
+    "idle-timers": {
+      "title": "Long-running tasks (idle auto-pause, auto-stop)",
+      "url": "https://sandboxer.com/docs/long-running"
+    },
+    "reaching-it": {
+      "title": "Hosting",
+      "url": "https://sandboxer.com/docs/hosting"
+    },
+    "custom-domains": {
+      "title": "Hosting: custom domains (roadmap only)",
+      "url": "https://sandboxer.com/docs/hosting"
+    },
+    "outbound-network": {
+      "title": "Security: network policy",
+      "url": "https://sandboxer.com/docs/security"
+    },
+    "keys-secrets": {
+      "title": "Environments & secrets",
+      "url": "https://sandboxer.com/docs/environments"
+    },
+    "ways-to-drive": {
+      "title": "API reference",
+      "url": "https://sandboxer.com/docs/api"
+    },
+    "built-in-agents": {
+      "title": "Integrated agents",
+      "url": "https://sandboxer.com/docs/agents"
+    },
+    "teams-accounts": {
+      "title": "Organizations",
+      "url": "https://sandboxer.com/docs/organizations"
+    },
+    "billing-models": {
+      "title": "Billing",
+      "url": "https://sandboxer.com/docs/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing (trial)",
+      "url": "https://sandboxer.com/pricing"
+    },
+    "quickstart": {
+      "title": "Quickstart",
+      "url": "https://sandboxer.com/docs/quickstart"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://sandboxer.com/pricing"
+    }
+  },
+  "deploy": {
+    "hermes": {
+      "route": "manual only",
+      "oneClick": false,
+      "managedOption": false,
+      "summary": "Sandboxer documents no Hermes recipe and does not preinstall the Hermes CLI. The route is a sandbox with no auto-stop, then the vendor's own installer over SSH, then a systemd service for the gateway.",
+      "steps": [
+        "sbx new --no-auto-stop (or sbx extend <id> --no-auto-stop)",
+        "sbx ssh <id>",
+        "curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash",
+        "hermes setup / hermes model, then hermes gateway",
+        "Enable a systemd unit with Restart=always so the gateway survives a cold boot",
+        "sbx host <port> if the Hermes web dashboard must be reachable"
+      ],
+      "urls": [
+        "https://sandboxer.com/docs/machines",
+        "https://sandboxer.com/docs/long-running",
+        "https://hermes-agent.nousresearch.com/docs/getting-started/installation"
+      ],
+      "quotes": [
+        {
+          "url": "https://sandboxer.com/docs/machines",
+          "quote": "| Coding agents | `claude` (Claude Code), `codex`, `opencode`, `pi`, `kimi`, `vibe` (Mistral) |"
+        },
+        {
+          "url": "https://sandboxer.com/docs/long-running",
+          "quote": "For anything that must survive cold boots and forks, make it a systemd service:"
+        }
+      ],
+      "note": "The preinstalled-agent list does not include Hermes or OpenClaw, and Sandboxer's prompt API accepts only claude-code, codex, opencode, pi, prime-agent, kimi and mistral."
+    },
+    "openclaw": {
+      "route": "manual only",
+      "oneClick": false,
+      "managedOption": false,
+      "summary": "Same as Hermes: nothing preinstalled, no guide. Install OpenClaw in a sandbox and run its gateway under systemd; expose the port with sbx host.",
+      "urls": [
+        "https://sandboxer.com/docs/long-running",
+        "https://docs.openclaw.ai/start/getting-started"
+      ],
+      "quotes": [
+        {
+          "url": "https://docs.openclaw.ai/start/getting-started",
+          "quote": "Install OpenClaw, run onboarding, and chat with your AI assistant in about 5 minutes."
+        }
+      ]
+    },
+    "dashboardOnly": {
+      "answer": "Partly, and better than the other two on this point: the dashboard shows each sandbox with a countdown and an Extend button, an Open desktop button, a Terminal tab and a Billing page, and the hosted MCP server lets Claude or ChatGPT create and drive sandboxes after an OAuth sign-in, with no terminal. But no template gallery or one-click agent exists, so installing Hermes or OpenClaw still needs a shell.",
+      "url": "https://sandboxer.com/docs/mcp",
+      "quote": "Apps like Claude and ChatGPT sign in with your Sandboxer account (OAuth).",
+      "supportingQuote": {
+        "url": "https://sandboxer.com/docs/long-running",
+        "quote": "The dashboard shows a countdown (\"Stops in\") on every sandbox with an **Extend** button."
+      }
+    }
+  }
+}

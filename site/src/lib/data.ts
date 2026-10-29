@@ -5,9 +5,11 @@ import type {
   Group,
   Provider,
   Situation,
+  UseCase,
   Verdict,
 } from "../data/schema";
 import { plainText } from "./plain";
+import { presets, type RateCard } from "./cost";
 
 /**
  * Provider documentation uses Markdown emphasis and code fences. The data files
@@ -41,6 +43,18 @@ const groupModule = import.meta.glob<{ groups: Group[] }>(
 );
 const situationModule = import.meta.glob<{ situations: Situation[] }>(
   "../data/situations.json",
+  { eager: true, import: "default" },
+);
+const pricingModules = import.meta.glob<RateCard>("../data/pricing/*.json", {
+  eager: true,
+  import: "default",
+});
+const useCaseModule = import.meta.glob<{ usecases: UseCase[] }>("../data/usecases.json", {
+  eager: true,
+  import: "default",
+});
+const docsModule = import.meta.glob<Record<string, Record<string, { title: string; url: string }>>>(
+  "../data/docs.json",
   { eager: true, import: "default" },
 );
 const changeModule = import.meta.glob<{ changes: Change[] }>(
@@ -89,6 +103,21 @@ export const changes: Change[] = cleanDeep(
   Object.values(changeModule)[0]?.changes ?? [],
 ).sort((a, b) => b.date.localeCompare(a.date));
 
+/** Rate cards for the calculator, one per researched provider, sorted by provider name. */
+export const pricing: RateCard[] = Object.values(pricingModules).sort((a, b) =>
+  (providerById.get(a.provider)?.name ?? a.provider).localeCompare(providerById.get(b.provider)?.name ?? b.provider),
+);
+
+/**
+ * Use cases keep their [text](url) links and **bold**: the page renders them as
+ * markup, unlike provider quotes, which are stripped to plain text.
+ */
+export const useCases: UseCase[] = Object.values(useCaseModule)[0]?.usecases ?? [];
+
+/** The provider's own documentation page for a feature, by provider id and feature id. */
+export const docLinks: Record<string, Record<string, { title: string; url: string }>> =
+  Object.values(docsModule)[0] ?? {};
+
 export function providerName(id: string): string {
   return providerById.get(id)?.name ?? id;
 }
@@ -102,6 +131,9 @@ export function validateContent(): void {
     if (!p.id || !p.name) fail(`provider is missing id or name: ${JSON.stringify(p)}`);
     if (p.status === "researched" && !p.cost) {
       fail(`provider ${p.id} is researched but has no cost examples`);
+    }
+    if (p.status === "researched" && !pricing.some((c) => c.provider === p.id)) {
+      fail(`provider ${p.id} is researched but has no rate card in src/data/pricing`);
     }
     if (p.status === "researched" && !p.company?.facts?.length) {
       fail(`provider ${p.id} has no company facts`);
@@ -136,6 +168,22 @@ export function validateContent(): void {
     const covered = new Set(f.rows.map((r) => r.provider));
     for (const p of providers) {
       if (!covered.has(p.id)) fail(`feature ${f.id} has no row for provider ${p.id}`);
+    }
+  }
+
+  for (const c of pricing) {
+    if (!providerById.has(c.provider)) fail(`rate card for unknown provider "${c.provider}"`);
+    if (!c.plans?.length) fail(`rate card ${c.provider} has no plans`);
+    if (!c.sources?.length) fail(`rate card ${c.provider} has no sources`);
+  }
+
+  for (const u of useCases) {
+    if (!presets[u.preset]) fail(`use case ${u.id} has unknown preset "${u.preset}"`);
+    for (const id of u.features) {
+      if (!features.some((f) => f.id === id)) fail(`use case ${u.id} refers to unknown feature "${id}"`);
+    }
+    for (const item of [...u.routes, ...u.picks]) {
+      if (!providerById.has(item.provider)) fail(`use case ${u.id} refers to unknown provider "${item.provider}"`);
     }
   }
 

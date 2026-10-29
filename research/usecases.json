@@ -1,0 +1,944 @@
+{
+  "generated": "2026-10-29",
+  "method": "Desk research from official repositories and documentation, plus Battleships (built by the boat.dev team) as a secondary source for workload shape and duty cycle. No account, sandbox, or purchase was used.",
+  "caveats": [
+    "Battleships presets are fleet-scale. Use their per-machine shape and cpuUtil, then scale the machine count.",
+    "Battleships idleShare is published but undefined in its public guide, so it is recorded but not interpreted.",
+    "Prices are USD list prices on 2026-10-29 and can change.",
+    "not_found means the pages inspected did not state it; it is not proof that the capability does not exist."
+  ],
+  "use_cases": [
+    {
+      "id": "hermes-agent",
+      "name": "Hermes Agent",
+      "repository": "https://github.com/NousResearch/hermes-agent",
+      "what_it_is": "An open-source (MIT) personal AI agent by Nous Research that runs on a server you control, talks through 20+ chat platforms, keeps memory, and writes reusable skills.",
+      "minimum": {
+        "vcpu": 1,
+        "ram_gib": 1,
+        "disk_gib": 0.5,
+        "basis": "documented",
+        "note": "Hermes Docker guide: 1 GB RAM, 1 core, 500 MB data volume. Browser tools raise the RAM floor to 2 GB.",
+        "source": "https://hermes-agent.nousresearch.com/docs/user-guide/docker#resource-limits"
+      },
+      "recommended": {
+        "vcpu": 2,
+        "ram_gib": 4,
+        "disk_gib": 2,
+        "basis": "documented",
+        "note": "Hermes Docker guide: 2 cores, 2-4 GB RAM, 2+ GB disk. The 2+ GB disk grows with sessions and skills.",
+        "source": "https://hermes-agent.nousresearch.com/docs/user-guide/docker#resource-limits"
+      },
+      "must_stay_on": "conditional",
+      "always_on_detail": "Telegram long polling is outbound and cannot sleep. Webhook mode plus a host that auto-wakes on inbound HTTP can sleep between messages, but cron jobs do not fire while asleep.",
+      "inbound": "Chat platform adapters (long polling by default; webhook optional). External events can use the HTTP webhook adapter.",
+      "persists": [
+        "~/.hermes/memories/MEMORY.md and USER.md",
+        "~/.hermes/state.db (sessions, FTS5)",
+        "~/.hermes/skills, cron, sessions, logs",
+        "~/.hermes/.env and auth.json (credentials)",
+        "~/.hermes/config.yaml and SOUL.md"
+      ],
+      "needs_browser": "optional",
+      "needs_docker": "optional",
+      "needs_gpu": "only for local models",
+      "busy_share": 0.058,
+      "busy_source": "https://battleships.dev/data/rankings/employees.json",
+      "official_backends": [
+        "local",
+        "Docker",
+        "SSH",
+        "Modal",
+        "Daytona",
+        "Vercel Sandbox",
+        "Singularity/Apptainer (plugin)",
+        "E2B (documented by E2B, not a Hermes terminal backend)"
+      ],
+      "managed_hosting": [
+        {
+          "provider": "Agent 37",
+          "offering": "Managed personal Hermes, one-click; agent37-hermes template",
+          "url": "https://www.agent37.com/personal",
+          "quote": "Run OpenClaw, Hermes, Claude Code, Codex, OpenCode, or Grok around the clock. Yours is live in one click.",
+          "plans": [
+            {
+              "plan": "Free",
+              "price_usd_month": 0,
+              "vcpu": 1,
+              "ram_gib": 4,
+              "disk_gib": 2,
+              "note": "Sleeps when idle, wakes when you message it."
+            },
+            {
+              "plan": "Basic",
+              "price_usd_month": 3.99,
+              "vcpu": 1,
+              "ram_gib": 4,
+              "disk_gib": 8,
+              "note": "BYOK; $1/mo AI credits."
+            },
+            {
+              "plan": "Plus",
+              "price_usd_month": 9.99,
+              "vcpu": 1,
+              "ram_gib": 4,
+              "disk_gib": 12,
+              "note": "Free models included."
+            },
+            {
+              "plan": "Pro",
+              "price_usd_month": 29.99,
+              "vcpu": 2,
+              "ram_gib": 8,
+              "disk_gib": 20,
+              "note": "Built-in Chromium browser."
+            },
+            {
+              "plan": "Max",
+              "price_usd_month": 99.99,
+              "vcpu": 4,
+              "ram_gib": 16,
+              "disk_gib": 40,
+              "note": "Team management and roles."
+            }
+          ]
+        },
+        {
+          "provider": "E2B",
+          "offering": "Prebuilt hermes sandbox template; usage-priced, not managed hosting",
+          "url": "https://e2b.dev/docs/agents/hermes",
+          "quote": "E2B provides a pre-built `hermes` template with the Hermes CLI and bundled skills already installed.",
+          "plans": []
+        }
+      ],
+      "battleships": {
+        "preset": "employees",
+        "name": "Always-on AI employees",
+        "url": "https://battleships.dev/data/presets.json",
+        "description": "Assistant agents that each live on their own machine all the time (one per employee or customer, like OpenClaw or Hermes): they keep their memory and files, hold logins to your tools, answer messages, run scheduled jobs and use a browser.",
+        "workload": {
+          "vcpu": 2,
+          "ram": 4,
+          "disk": 20,
+          "sessions": 0,
+          "sessionMin": 0,
+          "concurrency": 0,
+          "alwaysOn": 50,
+          "snapshotGiB": 0,
+          "egress": 100,
+          "ipv4": 0,
+          "seats": 2,
+          "persistentDisk": true
+        },
+        "cpu_util": 0.058,
+        "ram_util": 0.358,
+        "idle_share": 0.28,
+        "cpu_peak_util": 0.98,
+        "ram_peak_util": 0.8,
+        "note": "50 machines on 24/7 is a fleet preset, not one person. The per-machine shape is 2 vCPU / 4 GiB / 20 GiB."
+      },
+      "proposed_workload": {
+        "audience": "one person",
+        "vcpu": 2,
+        "ram_gib": 4,
+        "disk_gib": 20,
+        "machines": 1,
+        "machine_hours_per_month": 730,
+        "wall_clock_hours_per_month": 730,
+        "cpu_busy_share": 0.06,
+        "disk_persists_when_stopped": true,
+        "reasoning": "Vendor recommendation is 2 cores / 2-4 GB / 2+ GB; browser tools need at least 2 GB. 4 GiB and 20 GiB give room for Chromium, skills and sessions. 730 hours is 24/7 for a polling gateway with cron. Battleships averages 5.8% CPU but peaks at 98%, so do not buy the 1 GB floor.",
+        "sources": [
+          "https://hermes-agent.nousresearch.com/docs/user-guide/docker#resource-limits",
+          "https://battleships.dev/data/rankings/employees.json",
+          "https://www.agent37.com/personal"
+        ]
+      },
+      "team_variant": {
+        "audience": "small team of 4-6 people who trust each other",
+        "vcpu": 4,
+        "ram_gib": 8,
+        "disk_gib": 40,
+        "machines": 1,
+        "machine_hours_per_month": 730,
+        "wall_clock_hours_per_month": 730,
+        "cpu_busy_share": 0.1,
+        "disk_persists_when_stopped": true,
+        "reasoning": "Hermes supports multiple users on one gateway with allowlists. One gateway is one shared memory and credential set; use separate machines if users are adversarial."
+      },
+      "sources": [
+        "https://github.com/NousResearch/hermes-agent",
+        "https://hermes-agent.nousresearch.com/docs/",
+        "https://hermes-agent.nousresearch.com/docs/user-guide/docker#resource-limits",
+        "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram",
+        "https://hermes-agent.nousresearch.com/docs/user-guide/configuration",
+        "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory",
+        "https://e2b.dev/docs/agents/hermes",
+        "https://www.agent37.com/personal",
+        "https://battleships.dev/data/rankings/employees.json"
+      ],
+      "not_found": [
+        "CPU or disk recommendation for the Modal, Daytona and Vercel Sandbox backends",
+        "A first-party Hermes one-click host other than Agent 37"
+      ]
+    },
+    {
+      "id": "openclaw",
+      "name": "OpenClaw",
+      "repository": "https://github.com/openclaw/openclaw",
+      "what_it_is": "An open-source, self-hosted personal AI assistant. One long-lived Gateway connects chat apps to an agent that reads files, runs commands, browses and keeps memory.",
+      "minimum": {
+        "vcpu": 1,
+        "ram_gib": 1,
+        "disk_gib": 0.5,
+        "basis": "documented",
+        "note": "OpenClaw Raspberry Pi page: 1 GB RAM, 1 core, 500 MB free disk.",
+        "source": "https://docs.openclaw.ai/install/raspberry-pi"
+      },
+      "recommended": {
+        "vcpu": 2,
+        "ram_gib": 2,
+        "disk_gib": 16,
+        "basis": "documented",
+        "note": "OpenClaw Raspberry Pi page: 2 GB+ RAM, 16 GB+ disk. Fly.io guide uses shared-cpu-2x / 2 GB.",
+        "source": "https://docs.openclaw.ai/install/raspberry-pi",
+        "secondary_source": "https://docs.openclaw.ai/install/fly"
+      },
+      "must_stay_on": "yes",
+      "always_on_detail": "The Gateway is the always-on control plane and owns the messaging connections. Telegram can use webhooks, but that still needs a running HTTP endpoint; OpenClaw documents no sleep-when-idle mode of its own.",
+      "inbound": "Long-lived Gateway provider connections; Telegram long polling by default, webhook optional when an HTTPS ingress exists.",
+      "persists": [
+        "~/.openclaw/openclaw.json",
+        "~/.openclaw/state/openclaw.sqlite (shared auth profiles, sessions)",
+        "~/.openclaw/credentials/ (e.g. whatsapp/<accountId>/creds.json)",
+        "Workspace: AGENTS.md, SOUL.md, IDENTITY.md, USER.md, MEMORY.md, memory/YYYY-MM-DD.md"
+      ],
+      "needs_browser": "optional",
+      "needs_docker": "optional",
+      "needs_gpu": "not for API models; optional for local models",
+      "busy_share": 0.058,
+      "busy_source": "https://battleships.dev/data/rankings/employees.json",
+      "official_backends": [
+        "Daytona",
+        "Cloudflare Containers",
+        "Fly.io",
+        "Northflank",
+        "Railway",
+        "Render",
+        "Upstash Box",
+        "exe.dev",
+        "Azure",
+        "DigitalOcean",
+        "GCP",
+        "Hetzner",
+        "Hostinger",
+        "Oracle Cloud",
+        "Kubernetes",
+        "Raspberry Pi",
+        "E2B (documented by E2B, not an OpenClaw hosting target)"
+      ],
+      "managed_hosting": [
+        {
+          "provider": "Agent 37",
+          "offering": "Managed personal OpenClaw, one-click; agent37-openclaw template",
+          "url": "https://www.agent37.com/personal",
+          "quote": "Run OpenClaw, Hermes, Claude Code, Codex, OpenCode, or Grok around the clock. Yours is live in one click.",
+          "plans": [
+            {
+              "plan": "Free",
+              "price_usd_month": 0,
+              "vcpu": 1,
+              "ram_gib": 4,
+              "disk_gib": 2,
+              "note": "Sleeps when idle, wakes when you message it."
+            },
+            {
+              "plan": "Basic",
+              "price_usd_month": 3.99,
+              "vcpu": 1,
+              "ram_gib": 4,
+              "disk_gib": 8,
+              "note": "BYOK; $1/mo AI credits."
+            },
+            {
+              "plan": "Plus",
+              "price_usd_month": 9.99,
+              "vcpu": 1,
+              "ram_gib": 4,
+              "disk_gib": 12,
+              "note": "Free models included."
+            },
+            {
+              "plan": "Pro",
+              "price_usd_month": 29.99,
+              "vcpu": 2,
+              "ram_gib": 8,
+              "disk_gib": 20,
+              "note": "Built-in Chromium browser."
+            },
+            {
+              "plan": "Max",
+              "price_usd_month": 99.99,
+              "vcpu": 4,
+              "ram_gib": 16,
+              "disk_gib": 40,
+              "note": "Team management and roles."
+            }
+          ]
+        },
+        {
+          "provider": "Hostinger",
+          "offering": "1-Click managed OpenClaw",
+          "url": "https://www.hostinger.com/openclaw",
+          "quote": "Choose a **1-Click** managed deployment",
+          "plans": [
+            {
+              "plan": "1-Click OpenClaw",
+              "price_usd_month": 4.99,
+              "price_note": "Promotional; renews at $11.99/mo on the 24-month term.",
+              "vcpu": null,
+              "ram_gib": null,
+              "disk_gib": null
+            }
+          ]
+        },
+        {
+          "provider": "Render",
+          "offering": "Blueprint deploy; Starter plan keeps it awake",
+          "url": "https://render.com/pricing",
+          "quote": "| 1 CPU | $25/month | 2 GB RAM | 1c-2g |",
+          "plans": [
+            {
+              "plan": "1 CPU / 2 GB",
+              "price_usd_month": 25,
+              "vcpu": 1,
+              "ram_gib": 2,
+              "disk_gib": null,
+              "note": "The $7/mo 512 MB plan is below OpenClaw's 1 GB floor."
+            }
+          ]
+        },
+        {
+          "provider": "Fly.io",
+          "offering": "Fly Machine with a persistent volume",
+          "url": "https://docs.openclaw.ai/install/fly",
+          "quote": "With the recommended config (`shared-cpu-2x`, 2GB RAM), expect roughly $10-15/month depending on usage",
+          "plans": [
+            {
+              "plan": "shared-cpu-2x / 2 GB",
+              "price_usd_month": 12.5,
+              "price_note": "Published range $10-15/month; midpoint used here.",
+              "vcpu": 2,
+              "ram_gib": 2,
+              "disk_gib": null
+            }
+          ]
+        },
+        {
+          "provider": "Northflank",
+          "offering": "One-click template with a persistent volume",
+          "url": "https://docs.openclaw.ai/install/northflank",
+          "quote": "Deploy OpenClaw on Northflank with a one-click template and access it through the web Control UI.",
+          "plans": []
+        },
+        {
+          "provider": "Railway",
+          "offering": "One-click template",
+          "url": "https://docs.openclaw.ai/install/railway",
+          "quote": "Deploy OpenClaw on Railway with a one-click template and access it through the web Control UI.",
+          "plans": []
+        }
+      ],
+      "battleships": {
+        "preset": "employees",
+        "name": "Always-on AI employees",
+        "url": "https://battleships.dev/data/presets.json",
+        "description": "Assistant agents that each live on their own machine all the time (one per employee or customer, like OpenClaw or Hermes): they keep their memory and files, hold logins to your tools, answer messages, run scheduled jobs and use a browser.",
+        "workload": {
+          "vcpu": 2,
+          "ram": 4,
+          "disk": 20,
+          "sessions": 0,
+          "sessionMin": 0,
+          "concurrency": 0,
+          "alwaysOn": 50,
+          "snapshotGiB": 0,
+          "egress": 100,
+          "ipv4": 0,
+          "seats": 2,
+          "persistentDisk": true
+        },
+        "cpu_util": 0.058,
+        "ram_util": 0.358,
+        "idle_share": 0.28,
+        "cpu_peak_util": 0.98,
+        "ram_peak_util": 0.8,
+        "note": "Same preset as Hermes; Battleships names both products."
+      },
+      "proposed_workload": {
+        "audience": "one person",
+        "vcpu": 2,
+        "ram_gib": 4,
+        "disk_gib": 20,
+        "machines": 1,
+        "machine_hours_per_month": 730,
+        "wall_clock_hours_per_month": 730,
+        "cpu_busy_share": 0.06,
+        "disk_persists_when_stopped": true,
+        "reasoning": "Published floor is 1 core / 1 GB / 500 MB; recommended is 2 GB+ / 16 GB+. 4 GiB doubles the RAM for the browser and channel adapters. 730 hours is required for long polling and scheduled jobs. Battleships averages 5.8% CPU but peaks at 98%.",
+        "sources": [
+          "https://docs.openclaw.ai/install/raspberry-pi",
+          "https://docs.openclaw.ai/install/fly",
+          "https://battleships.dev/data/rankings/employees.json"
+        ]
+      },
+      "team_variant": {
+        "audience": "small team of 4-10 people who trust each other",
+        "vcpu": 4,
+        "ram_gib": 8,
+        "disk_gib": 40,
+        "machines": 1,
+        "machine_hours_per_month": 730,
+        "wall_clock_hours_per_month": 730,
+        "cpu_busy_share": 0.1,
+        "disk_persists_when_stopped": true,
+        "reasoning": "OpenClaw supports a shared gateway as a first-class deployment. One gateway is one trust domain; mutually adversarial users need separate gateways."
+      },
+      "sources": [
+        "https://docs.openclaw.ai/help/faq/what-is-openclaw",
+        "https://docs.openclaw.ai/concepts/architecture",
+        "https://docs.openclaw.ai/install/raspberry-pi",
+        "https://docs.openclaw.ai/channels/telegram/transports",
+        "https://docs.openclaw.ai/help/faq/where-things-live-on-disk",
+        "https://docs.openclaw.ai/install/fly",
+        "https://e2b.dev/docs/agents/openclaw",
+        "https://www.agent37.com/personal",
+        "https://www.hostinger.com/openclaw",
+        "https://render.com/pricing",
+        "https://battleships.dev/data/rankings/employees.json"
+      ],
+      "not_found": [
+        "A general OpenClaw system-requirements table with CPU, RAM and disk (the Raspberry Pi table is the only hardware table found)",
+        "Prices for the Northflank and Railway one-click templates"
+      ]
+    },
+    {
+      "id": "coding-agent",
+      "name": "Coding agent in a cloud sandbox",
+      "repository": "https://github.com/anthropics/claude-code",
+      "what_it_is": "A coding agent such as Claude Code or Codex CLI that reads a repository, edits files, runs commands and tests, usually in a disposable Linux machine per developer or per task.",
+      "minimum": {
+        "vcpu": null,
+        "ram_gib": 4,
+        "disk_gib": null,
+        "basis": "documented",
+        "note": "Claude Code requires 4 GB+ RAM and an x64 or ARM64 processor. It does not publish a CPU-count or disk floor. OpenAI does not publish Codex CLI requirements in the pages inspected.",
+        "source": "https://code.claude.com/docs/en/setup"
+      },
+      "recommended": {
+        "vcpu": 4,
+        "ram_gib": 16,
+        "disk_gib": 30,
+        "basis": "documented",
+        "note": "Anthropic-hosted cloud sessions use approximate ceilings of 4 vCPU, 16 GB RAM and 30 GB disk. Battleships fullstack uses 4 vCPU / 8 GiB / 20 GiB.",
+        "source": "https://code.claude.com/docs/en/cloud-environments"
+      },
+      "must_stay_on": "no",
+      "always_on_detail": "Started for a task or work session. Anthropic cloud sessions pause after a few minutes idle with files saved; Codex Cloud keeps saved VM state for up to 7 days.",
+      "inbound": "Driven by the developer, CLI, SDK, CI or a cloud task API. No inbound chat webhook in the CLI docs.",
+      "persists": [
+        "Repository and uncommitted changes",
+        "~/.claude and ~/.claude.json (Claude Code config and login)",
+        "Package caches, Docker images and build outputs if a warm start matters"
+      ],
+      "needs_browser": "optional (only for UI checks or browser tests)",
+      "needs_docker": "often, for services and test databases",
+      "needs_gpu": "no",
+      "busy_share": 0.034,
+      "busy_source": "https://battleships.dev/data/rankings/fullstack.json",
+      "official_backends": [
+        "Claude Code built-in Bash sandbox",
+        "Claude Code sandbox runtime",
+        "Dev container",
+        "Custom container",
+        "Virtual machine",
+        "Anthropic-hosted cloud sessions",
+        "Codex local sandbox",
+        "Codex Cloud",
+        "E2B",
+        "Daytona",
+        "Cloudflare Sandbox",
+        "Vercel Sandbox",
+        "Agent 37 managed",
+        "Boat (preinstalled harness)",
+        "boxd (preinstalled harness)",
+        "InstaBox (preinstalled harness)",
+        "Lizard (preinstalled harness)"
+      ],
+      "managed_hosting": [
+        {
+          "provider": "Agent 37",
+          "offering": "Managed Claude Code / Codex personal plan, one-click",
+          "url": "https://www.agent37.com/personal",
+          "quote": "Run OpenClaw, Hermes, Claude Code, Codex, OpenCode, or Grok around the clock. Yours is live in one click.",
+          "plans": [
+            {
+              "plan": "Free",
+              "price_usd_month": 0,
+              "vcpu": 1,
+              "ram_gib": 4,
+              "disk_gib": 2,
+              "note": "Sleeps when idle, wakes when you message it."
+            },
+            {
+              "plan": "Basic",
+              "price_usd_month": 3.99,
+              "vcpu": 1,
+              "ram_gib": 4,
+              "disk_gib": 8,
+              "note": "BYOK; $1/mo AI credits."
+            },
+            {
+              "plan": "Plus",
+              "price_usd_month": 9.99,
+              "vcpu": 1,
+              "ram_gib": 4,
+              "disk_gib": 12,
+              "note": "Free models included."
+            },
+            {
+              "plan": "Pro",
+              "price_usd_month": 29.99,
+              "vcpu": 2,
+              "ram_gib": 8,
+              "disk_gib": 20,
+              "note": "Built-in Chromium browser."
+            },
+            {
+              "plan": "Max",
+              "price_usd_month": 99.99,
+              "vcpu": 4,
+              "ram_gib": 16,
+              "disk_gib": 40,
+              "note": "Team management and roles."
+            }
+          ]
+        },
+        {
+          "provider": "Anthropic",
+          "offering": "Claude Code cloud sessions on Anthropic-managed VMs",
+          "url": "https://code.claude.com/docs/en/sandbox-environments",
+          "quote": "requires a Claude subscription, and a connected GitHub account unless you launch with `claude --cloud`",
+          "plans": [
+            {
+              "plan": "Claude Code cloud",
+              "price_usd_month": null,
+              "price_note": "Requires a Claude subscription; the docs page does not list a price.",
+              "vcpu": 4,
+              "ram_gib": 16,
+              "disk_gib": 30
+            }
+          ]
+        },
+        {
+          "provider": "OpenAI",
+          "offering": "Codex Cloud on OpenAI-managed computers",
+          "url": "https://help.openai.com/en/articles/20001545-using-codex-cloud",
+          "quote": "Codex Cloud runs coding tasks on OpenAI-managed computers.",
+          "plans": [
+            {
+              "plan": "Codex Cloud",
+              "price_usd_month": null,
+              "price_note": "Included in ChatGPT plans; the docs page does not list a price.",
+              "vcpu": null,
+              "ram_gib": null,
+              "disk_gib": null
+            }
+          ]
+        }
+      ],
+      "battleships": {
+        "preset": "fullstack",
+        "name": "Software factory",
+        "url": "https://battleships.dev/data/presets.json",
+        "description": "Agents that build and ship software, each on its own machine for a work session of about 8 hours: Docker for services and test databases, a desktop and a browser to check the UI they built, and a disk that keeps the work between sessions.",
+        "workload": {
+          "vcpu": 4,
+          "ram": 8,
+          "disk": 20,
+          "sessions": 2200,
+          "sessionMin": 480,
+          "concurrency": 100,
+          "alwaysOn": 0,
+          "snapshotGiB": 250,
+          "egress": 300,
+          "ipv4": 0,
+          "seats": 3,
+          "persistentDisk": true
+        },
+        "cpu_util": 0.034,
+        "ram_util": 0.194,
+        "idle_share": 0.63,
+        "cpu_peak_util": 0.47,
+        "ram_peak_util": 0.36,
+        "note": "2,200 eight-hour sessions a month at 100 concurrent is a software-factory fleet. Use the per-machine shape and duty cycle for one developer."
+      },
+      "proposed_workload": {
+        "audience": "one developer",
+        "vcpu": 4,
+        "ram_gib": 8,
+        "disk_gib": 40,
+        "machines": 1,
+        "machine_hours_per_month": 160,
+        "wall_clock_hours_per_month": 160,
+        "cpu_busy_share": 0.04,
+        "disk_persists_when_stopped": true,
+        "reasoning": "Claude Code needs 4 GB+ RAM. 8 GiB covers the CLI, a language server, tests and a couple of containers; 40 GiB leaves room for Docker images and caches that the 20 GiB preset does not. 160 hours is 8 h x 20 workdays. Battleships averages 3.4% CPU with a 47% peak.",
+        "sources": [
+          "https://code.claude.com/docs/en/setup",
+          "https://code.claude.com/docs/en/cloud-environments",
+          "https://battleships.dev/data/rankings/fullstack.json"
+        ]
+      },
+      "team_variant": {
+        "audience": "three developers",
+        "vcpu": 4,
+        "ram_gib": 8,
+        "disk_gib": 40,
+        "machines": 3,
+        "machine_hours_per_month": 480,
+        "wall_clock_hours_per_month": 160,
+        "cpu_busy_share": 0.04,
+        "disk_persists_when_stopped": true,
+        "reasoning": "One sandbox per developer. Claude Code is not built for multiple tenants: it keeps state on disk and its tools change files on the machine it runs on."
+      },
+      "sources": [
+        "https://code.claude.com/docs/en/overview",
+        "https://code.claude.com/docs/en/setup",
+        "https://code.claude.com/docs/en/cloud-environments",
+        "https://code.claude.com/docs/en/sandbox-environments",
+        "https://help.openai.com/en/articles/20001545-using-codex-cloud",
+        "https://e2b.dev/docs/use-cases/coding-agents",
+        "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox",
+        "https://developers.cloudflare.com/sandbox/coding-agents/claude-code/",
+        "https://vercel.com/docs/agent-harnesses/claude-code",
+        "https://www.agent37.com/personal",
+        "https://battleships.dev/data/rankings/fullstack.json",
+        "https://docs.boat.dev/integrated-agents/harnesses-and-models",
+        "https://docs.boxd.sh/use-cases/coding-agents",
+        "https://instabox.sh/docs/limits",
+        "https://lizard.build/docs/sandboxes.md"
+      ],
+      "not_found": [
+        "Codex CLI CPU, RAM and disk requirements",
+        "A Claude Code disk minimum",
+        "An inbound webhook interface in the Claude Code or Codex CLI docs"
+      ]
+    },
+    {
+      "id": "code-interpreter",
+      "name": "Code interpreter inside your own product",
+      "repository": null,
+      "what_it_is": "A sandbox your application calls to run user or LLM code, returning stdout, errors and files. It is infrastructure you embed, not a product your users log into.",
+      "minimum": {
+        "vcpu": 1,
+        "ram_gib": 0.5,
+        "disk_gib": 1,
+        "basis": "inferred",
+        "note": "Provider floors vary: Modal 0.125 core / 128 MiB, E2B default 2 vCPU / 512 MiB, Daytona 1 vCPU / 1 GiB / 3 GiB. 1 vCPU / 512 MiB / 1 GiB is the practical floor.",
+        "source": "https://modal.com/docs/guide/resources",
+        "secondary_sources": [
+          "https://docs.e2b.dev/billing",
+          "https://www.daytona.io/docs/en/sandboxes/"
+        ]
+      },
+      "recommended": {
+        "vcpu": 2,
+        "ram_gib": 4,
+        "disk_gib": 10,
+        "basis": "inferred",
+        "note": "Battleships interp uses 1 vCPU / 2 GiB / 5 GiB and records 81.5% RAM utilisation, so 4 GiB is the safer general-purpose size.",
+        "source": "https://battleships.dev/data/presets.json"
+      },
+      "must_stay_on": "no",
+      "always_on_detail": "Each run is short-lived. E2B defaults to a 5-minute timeout and kills the sandbox; Vercel Sandbox also defaults to 5 minutes.",
+      "inbound": "Your app receives the request and calls the sandbox API. The sandbox needs no public inbound webhook; E2B public URLs can be restricted with allowPublicTraffic: false.",
+      "persists": [
+        "Nothing by default",
+        "Optional: E2B pause/snapshot or volume; Vercel persistent sandboxes; Daytona snapshots",
+        "Return output files to your own object storage"
+      ],
+      "needs_browser": "no",
+      "needs_docker": "optional",
+      "needs_gpu": "no",
+      "busy_share": 0.174,
+      "busy_source": "https://battleships.dev/data/rankings/interp.json",
+      "official_backends": [
+        "E2B",
+        "Daytona",
+        "Modal",
+        "Vercel Sandbox",
+        "Cloudflare Sandbox",
+        "Anthropic hosted code execution"
+      ],
+      "managed_hosting": [
+        {
+          "provider": "Anthropic",
+          "offering": "Hosted code-execution tool: fixed 1 CPU / 5 GiB / 5 GiB, no internet",
+          "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool",
+          "quote": "Additional usage beyond 1,550 hours is billed at **$0.05 USD per hour, per container**.",
+          "plans": [
+            {
+              "plan": "Code execution tool",
+              "price_usd_month": null,
+              "price_note": "1,550 hours included; $0.05 per container-hour after that.",
+              "vcpu": 1,
+              "ram_gib": 5,
+              "disk_gib": 5
+            }
+          ]
+        }
+      ],
+      "battleships": {
+        "preset": "interp",
+        "name": "Code interpreter bursts",
+        "url": "https://battleships.dev/data/presets.json",
+        "description": "An AI app that runs short pieces of code for its users: lots of one-minute runs, each on a small machine.",
+        "workload": {
+          "vcpu": 1,
+          "ram": 2,
+          "disk": 5,
+          "sessions": 200000,
+          "sessionMin": 1,
+          "concurrency": 100,
+          "alwaysOn": 0,
+          "snapshotGiB": 0,
+          "egress": 20,
+          "ipv4": 0,
+          "seats": 1,
+          "persistentDisk": false
+        },
+        "cpu_util": 0.174,
+        "ram_util": 0.815,
+        "idle_share": 0.05,
+        "cpu_peak_util": 0.56,
+        "ram_peak_util": 1,
+        "note": "200,000 one-minute runs a month at 100 concurrent. RAM is the binding resource at 2 GiB."
+      },
+      "proposed_workload": {
+        "audience": "small product",
+        "vcpu": 2,
+        "ram_gib": 4,
+        "disk_gib": 10,
+        "machines": 10,
+        "machines_note": "concurrent pool; 20,000 short-lived runs a month",
+        "machine_hours_per_month": 333,
+        "wall_clock_hours_per_month": 33,
+        "cpu_busy_share": 0.17,
+        "disk_persists_when_stopped": false,
+        "reasoning": "The 1 vCPU / 2 GiB / 5 GiB preset is the floor and is already 81.5% RAM-utilised. 2 vCPU / 4 GiB / 10 GiB gives headroom for Python libraries and temporary files. 20,000 one-minute runs is about 650 a day; a 10-machine pool absorbs bursts. Outputs go to object storage, so no persistent disk.",
+        "sources": [
+          "https://battleships.dev/data/presets.json",
+          "https://docs.e2b.dev/billing",
+          "https://www.daytona.io/docs/en/sandboxes/"
+        ]
+      },
+      "scale_variant": {
+        "audience": "consumer app with heavy burst traffic",
+        "vcpu": 1,
+        "ram_gib": 2,
+        "disk_gib": 5,
+        "machines": 100,
+        "machines_note": "concurrent pool; 200,000 runs a month",
+        "machine_hours_per_month": 3333,
+        "wall_clock_hours_per_month": 33,
+        "cpu_busy_share": 0.17,
+        "disk_persists_when_stopped": false,
+        "reasoning": "Exact Battleships interp preset."
+      },
+      "sources": [
+        "https://docs.e2b.dev/index.md",
+        "https://docs.e2b.dev/billing",
+        "https://docs.e2b.dev/faq/sandbox-lifetime",
+        "https://www.daytona.io/docs/en/sandboxes/",
+        "https://modal.com/docs/guide/resources",
+        "https://modal.com/docs/guide/sandboxes",
+        "https://vercel.com/docs/sandbox",
+        "https://vercel.com/docs/sandbox/pricing",
+        "https://developers.cloudflare.com/containers/platform/limits/",
+        "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool",
+        "https://battleships.dev/data/presets.json"
+      ],
+      "not_found": [
+        "A single vendor sizing recommendation across providers",
+        "A managed code-interpreter product among the 15 providers"
+      ]
+    },
+    {
+      "id": "browser-computer-use",
+      "name": "Browser or computer-use agent",
+      "repository": null,
+      "what_it_is": "An agent that drives a real browser (open pages, read the DOM or a screenshot, click, type, fill forms), or a whole desktop with a virtual display, mouse and keyboard.",
+      "minimum": {
+        "vcpu": 2,
+        "ram_gib": 4,
+        "disk_gib": 10,
+        "basis": "documented",
+        "note": "Battleships browseruse preset is 2 vCPU / 4 GiB / 10 GiB; Browserless minimum is 2 cores / 4 GB; Steel requires 4 GB RAM and 10 GB disk.",
+        "source": "https://battleships.dev/data/presets.json",
+        "secondary_sources": [
+          "https://docs.browserless.io/enterprise/docker/enterprise-image",
+          "https://docs.steel.dev/overview/self-hosting/docker"
+        ]
+      },
+      "recommended": {
+        "vcpu": 4,
+        "ram_gib": 8,
+        "disk_gib": 20,
+        "basis": "documented",
+        "note": "For browser-only work, the 2 vCPU / 4 GiB / 10 GiB minimum is enough. For a full desktop, Battleships cua uses 4 vCPU / 8 GiB / 20 GiB. Anthropic does not publish CPU/RAM/disk sizing for computer use.",
+        "source": "https://battleships.dev/data/presets.json"
+      },
+      "must_stay_on": "no",
+      "always_on_detail": "Sessions are task-scoped, about 10 minutes for browser use and 15 minutes for computer use in Battleships. Only a saved browser profile or cookies need to persist.",
+      "inbound": "Your app or agent loop sends a goal or action and receives a screenshot or DOM snapshot. No inbound chat webhook unless you add one.",
+      "persists": [
+        "Nothing by default",
+        "Optional: browser profile, cookies and local storage if logins must survive"
+      ],
+      "needs_browser": "yes",
+      "needs_docker": "optional",
+      "needs_gpu": "no",
+      "busy_share": 0.033,
+      "busy_source": "https://battleships.dev/data/rankings/browseruse.json",
+      "official_backends": [
+        "E2B Desktop",
+        "Daytona Computer Use",
+        "OpenClaw managed browser",
+        "Agent 37 built-in Chromium",
+        "Browser Use Cloud",
+        "Lizard desktop template",
+        "InstaBox agent-browser/desktop template"
+      ],
+      "managed_hosting": [
+        {
+          "provider": "Agent 37",
+          "offering": "Personal plan with built-in Chromium on Pro and above",
+          "url": "https://www.agent37.com/personal",
+          "quote": "Built-in browser (Chromium)",
+          "plans": [
+            {
+              "plan": "Pro",
+              "price_usd_month": 29.99,
+              "vcpu": 2,
+              "ram_gib": 8,
+              "disk_gib": 20,
+              "note": "Includes built-in Chromium."
+            },
+            {
+              "plan": "Max",
+              "price_usd_month": 99.99,
+              "vcpu": 4,
+              "ram_gib": 16,
+              "disk_gib": 40,
+              "note": "Includes built-in Chromium."
+            }
+          ]
+        },
+        {
+          "provider": "Browser Use Cloud",
+          "offering": "Hosted browser hours",
+          "url": "https://browser-use.com/pricing",
+          "quote": "$0.02 / hour",
+          "plans": [
+            {
+              "plan": "Cloud browser",
+              "price_usd_month": null,
+              "price_note": "$0.02 per browser-hour.",
+              "vcpu": null,
+              "ram_gib": null,
+              "disk_gib": null
+            }
+          ]
+        }
+      ],
+      "battleships": {
+        "preset": "browseruse",
+        "name": "Browser-use agents",
+        "url": "https://battleships.dev/data/presets.json",
+        "description": "Agents that do tasks on websites for your users: open a real browser, read the page, click and fill forms. Sessions of about 10 minutes.",
+        "workload": {
+          "vcpu": 2,
+          "ram": 4,
+          "disk": 10,
+          "sessions": 30000,
+          "sessionMin": 10,
+          "concurrency": 50,
+          "alwaysOn": 0,
+          "snapshotGiB": 0,
+          "egress": 300,
+          "ipv4": 0,
+          "seats": 2,
+          "persistentDisk": false
+        },
+        "cpu_util": 0.033,
+        "ram_util": 0.345,
+        "idle_share": 0.56,
+        "cpu_peak_util": 0.26,
+        "ram_peak_util": 0.46,
+        "note": "30,000 ten-minute sessions a month at 50 concurrent."
+      },
+      "proposed_workload": {
+        "audience": "small team",
+        "vcpu": 2,
+        "ram_gib": 4,
+        "disk_gib": 10,
+        "machines": 50,
+        "machines_note": "concurrent pool; 30,000 sessions a month",
+        "machine_hours_per_month": 5000,
+        "wall_clock_hours_per_month": 100,
+        "cpu_busy_share": 0.03,
+        "disk_persists_when_stopped": false,
+        "reasoning": "Exact Battleships browser-use shape and Browserless minimum. 30,000 ten-minute sessions is about 1,000 a day; 50 concurrent at peak. CPU is not the constraint; each Chromium instance is memory-hungry. Persist a profile only if logins must survive.",
+        "sources": [
+          "https://battleships.dev/data/presets.json",
+          "https://docs.browserless.io/enterprise/docker/enterprise-image",
+          "https://docs.steel.dev/overview/self-hosting/docker"
+        ]
+      },
+      "computer_use_variant": {
+        "audience": "small team needing a full desktop",
+        "vcpu": 4,
+        "ram_gib": 8,
+        "disk_gib": 20,
+        "machines": 50,
+        "machines_note": "concurrent pool; 20,000 sessions a month",
+        "machine_hours_per_month": 5000,
+        "wall_clock_hours_per_month": 100,
+        "cpu_busy_share": 0.03,
+        "disk_persists_when_stopped": false,
+        "reasoning": "A full desktop adds Xvfb, a window manager, VNC and a browser. Battleships cua preset doubles the shape to 4 vCPU / 8 GiB / 20 GiB. Daytona default 1 vCPU / 1 GiB / 3 GiB is a code-sandbox default, not a desktop default.",
+        "sources": [
+          "https://battleships.dev/data/presets.json",
+          "https://www.daytona.io/docs/en/computer-use/"
+        ]
+      },
+      "sources": [
+        "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool",
+        "https://e2b.dev/docs/use-cases/computer-use",
+        "https://www.daytona.io/docs/en/computer-use/",
+        "https://docs.browserless.io/enterprise/docker/enterprise-image",
+        "https://docs.steel.dev/overview/self-hosting/docker",
+        "https://www.agent37.com/personal",
+        "https://browser-use.com/pricing",
+        "https://battleships.dev/data/presets.json",
+        "https://instabox.sh/docs/limits",
+        "https://lizard.build/docs/sandboxes.md"
+      ],
+      "not_found": [
+        "Anthropic CPU/RAM/disk sizing for the computer-use reference container",
+        "A first-party browser-agent product (not just a desktop/browser template) from Modal, Vercel Sandbox, Blaxel, Sprites, Boat, boxd, Morph, Runtime or Sandboxer"
+      ]
+    }
+  ]
+}

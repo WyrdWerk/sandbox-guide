@@ -1,0 +1,61 @@
+{
+  "provider": "agent37",
+  "checkedOn": "2026-10-29",
+  "summary": "Per minute on the shape you reserve, with disk billed every hour until you delete the instance.",
+  "cpu": {
+    "rate": 0.0010958904109589042,
+    "billing": "allocated"
+  },
+  "ram": {
+    "rate": 0.0009589041095890411
+  },
+  "disk": {
+    "running": 0.0001232876712328767,
+    "stopped": 0.0001232876712328767
+  },
+  "shapes": [
+    {
+      "name": "2/4",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 12
+    },
+    {
+      "name": "4/8",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 20
+    },
+    {
+      "name": "4/16",
+      "vcpu": 4,
+      "ram": 16,
+      "disk": 40
+    },
+    {
+      "name": "4/32",
+      "vcpu": 4,
+      "ram": 32,
+      "disk": 80
+    }
+  ],
+  "between": "kept",
+  "plans": [
+    {
+      "name": "Cloud API wallet",
+      "fee": 0
+    }
+  ],
+  "notes": [
+    "Creating an instance needs one day of its running cost in the wallet.",
+    "Stopping loses memory; a sleep checkpoint keeps it at no extra charge.",
+    "The managed personal-agent plans ($3.99 to $99.99 a month) are a separate product and are not priced here.",
+    "Egress is not published."
+  ],
+  "sources": [
+    {
+      "label": "Billing",
+      "url": "https://www.agent37.com/docs/agents-api/billing"
+    }
+  ]
+}

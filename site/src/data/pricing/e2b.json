@@ -1,0 +1,38 @@
+{
+  "provider": "e2b",
+  "checkedOn": "2026-10-29",
+  "summary": "Per second on allocated vCPU and memory while running; paused sandboxes cost nothing.",
+  "cpu": {
+    "rate": 0.0504,
+    "billing": "allocated"
+  },
+  "ram": {
+    "rate": 0.0162
+  },
+  "between": "kept",
+  "plans": [
+    {
+      "name": "Hobby",
+      "fee": 0,
+      "maxSessionHours": 1,
+      "maxDisk": 10,
+      "note": "Hobby starts with a one-time $100 credit, not subtracted here."
+    },
+    {
+      "name": "Pro",
+      "fee": 150,
+      "maxSessionHours": 24,
+      "maxDisk": 20
+    }
+  ],
+  "notes": [
+    "Pausing keeps memory and files at no charge; volumes and snapshots are separate.",
+    "Sandbox storage is included at no extra cost, up to 10 GiB on Hobby and 20 GiB on Pro."
+  ],
+  "sources": [
+    {
+      "label": "Pricing",
+      "url": "https://e2b.dev/pricing"
+    }
+  ]
+}

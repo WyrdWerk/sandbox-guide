@@ -1,0 +1,44 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Calculator from "../../components/Calculator.astro";
+import { pricing } from "../../lib/data";
+---
+
+<Base title="Cost calculator" description="Describe the machine and how it runs; every provider is priced from its published rates, with the arithmetic shown.">
+  <PageHeader
+    kicker="Cost calculator"
+    title="What would it cost each month?"
+    standfirst="Describe the machine your agent needs and how it runs. Every provider is priced from its own published rates, and each result opens to show the arithmetic, the plan it assumes and anything that stops it running as asked."
+    meta={[`${pricing.length} providers`, "List prices, with the arithmetic", "Runs in your browser"]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush" aria-label="Calculator">
+      <Calculator />
+    </section>
+
+    <section class="section" aria-labelledby="read-h">
+      <div class="section__head">
+        <h2 class="section__title" id="read-h">Reading the result</h2>
+      </div>
+      <div class="prose">
+        <p>
+          <strong>Runs as asked</strong> means the provider sells this size, keeps the files if you asked for that,
+          and has no session limit shorter than your sessions. <strong>Needs a change</strong> means the figure is for
+          the nearest thing it sells, and the reason is listed when you open the row.
+        </p>
+        <p>
+          The cheapest number is rarely the whole answer. A provider that bills only for CPU actually used is cheap
+          for an agent that mostly waits and expensive for one that compiles all day; a flat monthly plan is the
+          reverse. Move the two sliders to see which providers are sensitive to them.
+        </p>
+        <p>
+          To compare two or three providers on features and cost together, use{" "}
+          <a href="/compare/side-by-side/">side by side</a>. To start from what you want to run instead of numbers,
+          see the{" "}<a href="/use-cases/">use cases</a>.
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>

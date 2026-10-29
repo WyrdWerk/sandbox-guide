@@ -1,11 +1,16 @@
 # Sandbox comparison
 
-A static site that helps non-technical people understand cloud sandbox providers for AI agents. It
-explains behaviour rather than ranking prices: sixteen features, fifteen providers, and a separate
-compare section.
+A static site that helps non-technical people understand cloud sandbox providers for AI agents and
+choose one for a job they already have in mind: use-case guides (Hermes, OpenClaw, coding agents,
+code interpreters, browser agents), sixteen features, fifteen providers, head-to-head comparisons and
+a cost calculator that shows its arithmetic.
 
 - **Research:** `research/*.md` — one evidence-backed profile per provider, each claim with a URL,
   an exact quote and a confidence tag, plus worked cost examples and a usability section.
+- **Rates and setup:** `research/rates/<id>.json` — each provider's live rate card, plan limits,
+  deep links to its docs for every feature, and how Hermes and OpenClaw get deployed on it, checked
+  2026-10-29, with a `SUMMARY-*.md` of what changed. `research/usecases.md` — what each use case
+  needs from a machine, from the agents' own docs.
 - **Site:** `site/` — an Astro site with one page per feature, a compare section, provider pages and
   a method page. See `site/README.md` for structure and how to add a provider or feature.
 
@@ -32,8 +37,14 @@ Every cost example prices the same three cases:
 - **C** — one 2 vCPU / 4 GiB / 20 GiB box, three hours a day for 30 days, stopped otherwise.
 
 Where a provider does not sell the exact shape, the site names the nearest shapes it used. The
-reference-costs page labels all of them as list-price illustrations and links to battleships.dev for
-pricing your own workload.
+reference-costs page labels all of them as list-price illustrations.
+
+## Cost calculator
+
+`/costs/` prices any workload on all fifteen providers from `site/src/data/pricing/<id>.json`, using
+one engine (`site/src/lib/cost.ts`) that also runs at build time. `/costs/how-it-works/` explains the
+formula, what it leaves out, and how it differs from battleships.dev, built by the Boat team, whose
+workload model it follows and whom the footer credits.
 
 ## Known open questions
 

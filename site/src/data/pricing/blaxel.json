@@ -1,0 +1,28 @@
+{
+  "provider": "blaxel",
+  "checkedOn": "2026-10-29",
+  "summary": "Per second on allocated memory while active, CPU included; standby bills storage only.",
+  "ram": {
+    "rate": 0.0414
+  },
+  "disk": {
+    "persistentMonthly": 0.12
+  },
+  "between": "kept",
+  "plans": [
+    {
+      "name": "Pay as you go",
+      "fee": 0
+    }
+  ],
+  "notes": [
+    "Standby keeps a snapshot, billed at $0.20 per GB-month; its size is not published, so it is not added.",
+    "Up to $200 of promotional credit is advertised; the actual grant is not published."
+  ],
+  "sources": [
+    {
+      "label": "Pricing",
+      "url": "https://blaxel.ai/pricing"
+    }
+  ]
+}

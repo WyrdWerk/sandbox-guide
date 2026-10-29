@@ -1,0 +1,39 @@
+{
+  "provider": "daytona",
+  "checkedOn": "2026-10-29",
+  "summary": "Per second on reserved vCPU, memory and disk; stopped sandboxes bill disk only.",
+  "cpu": {
+    "rate": 0.0504,
+    "billing": "allocated"
+  },
+  "ram": {
+    "rate": 0.0162
+  },
+  "disk": {
+    "running": 0.000108,
+    "stopped": 0.000108,
+    "included": 5
+  },
+  "maxDisk": 10,
+  "between": "kept",
+  "plans": [
+    {
+      "name": "Pay as you go",
+      "fee": 0
+    }
+  ],
+  "notes": [
+    "$200 of free compute with no card, not usable on GPU sandboxes.",
+    "The 10 GiB per-sandbox disk cap contradicts 50 GiB Windows presets; the cap is applied here."
+  ],
+  "sources": [
+    {
+      "label": "Billing",
+      "url": "https://www.daytona.io/docs/en/billing.md"
+    },
+    {
+      "label": "Limits",
+      "url": "https://www.daytona.io/docs/en/limits.md"
+    }
+  ]
+}

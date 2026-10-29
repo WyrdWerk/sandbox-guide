@@ -1,0 +1,55 @@
+{
+  "provider": "vercel-sandbox",
+  "checkedOn": "2026-10-29",
+  "summary": "Active CPU, excluding time spent waiting, plus provisioned memory for the whole session; persistent sandboxes keep their files as a snapshot between sessions.",
+  "cpu": {
+    "rate": 0.128,
+    "billing": "active"
+  },
+  "ram": {
+    "rate": 0.0212
+  },
+  "between": "kept",
+  "plans": [
+    {
+      "name": "Hobby",
+      "fee": 0,
+      "allowance": {
+        "cpuHours": 5,
+        "ramHours": 420
+      },
+      "capped": true,
+      "maxSessionHours": 0.75,
+      "maxVcpu": 4,
+      "maxRam": 8
+    },
+    {
+      "name": "Pro",
+      "fee": 20,
+      "credit": 20,
+      "maxSessionHours": 24,
+      "maxVcpu": 8,
+      "maxRam": 16
+    }
+  ],
+  "notes": [
+    "A persistent sandbox restores its files from a snapshot when it starts again, not its memory or running processes. Snapshot storage is $0.08 per GB-month; the calculator charges it on the full disk size, which overstates it if little is written.",
+    "Each sandbox gets 64 GB of fast disk at no separate charge while it runs.",
+    "Creations, data transfer and drives are billed separately and are not included.",
+    "Sandboxes that cannot resume from a snapshot are removed after 14 days of inactivity."
+  ],
+  "sources": [
+    {
+      "label": "Pricing",
+      "url": "https://vercel.com/docs/sandbox/pricing"
+    },
+    {
+      "label": "Persistent sandboxes",
+      "url": "https://vercel.com/docs/sandbox/concepts/persistent-sandboxes"
+    }
+  ],
+  "disk": {
+    "stopped": 0.000109589
+  },
+  "maxDisk": 64
+}

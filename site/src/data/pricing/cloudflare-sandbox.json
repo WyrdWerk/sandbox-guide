@@ -1,0 +1,84 @@
+{
+  "provider": "cloudflare-sandbox",
+  "checkedOn": "2026-10-29",
+  "summary": "Per 10 ms on the Workers Paid bill: CPU only while working, memory and disk for as long as the instance runs.",
+  "cpu": {
+    "rate": 0.072,
+    "billing": "active"
+  },
+  "ram": {
+    "rate": 0.009
+  },
+  "disk": {
+    "running": 0.000252,
+    "shapeSize": true
+  },
+  "shapes": [
+    {
+      "name": "lite",
+      "vcpu": 0.0625,
+      "ram": 0.25,
+      "disk": 2
+    },
+    {
+      "name": "basic",
+      "vcpu": 0.25,
+      "ram": 1,
+      "disk": 4
+    },
+    {
+      "name": "standard-1",
+      "vcpu": 0.5,
+      "ram": 4,
+      "disk": 8
+    },
+    {
+      "name": "standard-2",
+      "vcpu": 1,
+      "ram": 6,
+      "disk": 12
+    },
+    {
+      "name": "standard-3",
+      "vcpu": 2,
+      "ram": 8,
+      "disk": 16
+    },
+    {
+      "name": "standard-4",
+      "vcpu": 4,
+      "ram": 12,
+      "disk": 20
+    }
+  ],
+  "between": "lost",
+  "lostNote": "A stopped instance loses its disk; files have to be backed up to R2 or a snapshot and restored.",
+  "plans": [
+    {
+      "name": "Workers Paid",
+      "fee": 5,
+      "allowance": {
+        "cpuHours": 6.25,
+        "ramHours": 25,
+        "diskHours": 200
+      }
+    }
+  ],
+  "notes": [
+    "Egress is $0.025 per GB in North America and Europe and is not included.",
+    "Workers, Durable Objects and R2 usage are billed separately."
+  ],
+  "sources": [
+    {
+      "label": "Containers pricing",
+      "url": "https://developers.cloudflare.com/containers/platform/pricing/"
+    },
+    {
+      "label": "Instance types",
+      "url": "https://developers.cloudflare.com/containers/platform/limits/"
+    }
+  ],
+  "maxVcpu": 4,
+  "maxRam": 12,
+  "maxDisk": 20
+}

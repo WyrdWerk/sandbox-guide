@@ -1,0 +1,449 @@
+{
+  "id": "boat",
+  "provider": "Boat",
+  "site": "https://boat.dev",
+  "checkedOn": "2026-10-29",
+  "currency": "USD",
+  "battleships": {
+    "id": "boat",
+    "exists": true,
+    "url": "https://battleships.dev/data/providers/boat.json",
+    "note": "Card audited 2026-09-29; it predates the wallet change and the 2026-10-28 seat change."
+  },
+  "quoteNote": "Quotes are copied from the page as rendered on 2026-10-29. Backslash escapes that the docs' Markdown source uses before a dollar sign (\\$) are removed. docs.boat.dev serves a cache that can return an older revision, so every docs URL here was fetched with a cache-buster.",
+  "plans": [
+    {
+      "name": "$20/mo",
+      "monthlyUsd": 20,
+      "included": "555 h of default VM time ($20); 10 saved snapshots",
+      "limits": {
+        "maxConcurrent": 100,
+        "startsPerMin": 12,
+        "startsPerHour": 60,
+        "startsPerDay": 200,
+        "maxSessionHours": 720,
+        "maxSessionNote": "Numeric TTL max is 30 days; --no-auto-stop removes the deadline entirely.",
+        "maxSize": "large (8 vCPU / 16 GB / 111 GB)"
+      },
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "| $20/mo | 100 | 12 / 60 / 200 | 555 h of `default` ($20) | 10 |"
+    },
+    {
+      "name": "$100/mo",
+      "monthlyUsd": 100,
+      "included": "2,777 h of default VM time ($100); 50 saved snapshots",
+      "limits": {
+        "maxConcurrent": 300,
+        "startsPerMin": 30,
+        "startsPerHour": 210,
+        "startsPerDay": 840,
+        "maxSessionHours": 720,
+        "maxSessionNote": "Numeric TTL max is 30 days; --no-auto-stop removes the deadline entirely.",
+        "maxSize": "xlarge (16 vCPU / 32 GB / 251 GB)"
+      },
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "| $100/mo | 300 | 30 / 210 / 840 | 2,777 h of `default` ($100) | 50 |"
+    },
+    {
+      "name": "$500/mo",
+      "monthlyUsd": 500,
+      "included": "13,888 h of default VM time ($500); 250 saved snapshots",
+      "limits": {
+        "maxConcurrent": 1000,
+        "startsPerMin": 65,
+        "startsPerHour": 420,
+        "startsPerDay": 1680,
+        "maxSessionHours": 720,
+        "maxSessionNote": "Numeric TTL max is 30 days; --no-auto-stop removes the deadline entirely.",
+        "maxSize": "xlarge (16 vCPU / 32 GB / 251 GB)"
+      },
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "| $500/mo | 1,000 | 65 / 420 / 1,680 | 13,888 h of `default` ($500) | 250 |"
+    },
+    {
+      "name": "$2000/mo",
+      "monthlyUsd": 2000,
+      "included": "55,555 h of default VM time ($2000); 1,000 saved snapshots",
+      "limits": {
+        "maxConcurrent": 2000,
+        "startsPerMin": 90,
+        "startsPerHour": 600,
+        "startsPerDay": 2400,
+        "maxSessionHours": 720,
+        "maxSessionNote": "Numeric TTL max is 30 days; --no-auto-stop removes the deadline entirely.",
+        "maxSize": "xlarge (16 vCPU / 32 GB / 251 GB)"
+      },
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "| $2000/mo | 2,000 | 90 / 600 / 2,400 | 55,555 h of `default` ($2000) | 1,000 |"
+    }
+  ],
+  "planNotes": [
+    {
+      "claim": "The monthly fee is prepaid machine time, not a fee on top; unused included time expires.",
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "A plan is a monthly price that your card pays. **It is not a fee.** Every dollar comes back as VM time at the rates above."
+    },
+    {
+      "claim": "Included VM time does not roll over.",
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "Included VM time expires at the end of the billing period. boat does not carry it over."
+    },
+    {
+      "claim": "Organizations pay the plan price per seat; each extra seat adds the plan's included time and, below the $2000 plan, 20% of the limits.",
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "**Seats**: an organization pays the plan price once per seat. A 5-seat organization on the $20 plan pays $100 a month. Each seat adds the plan's included amounts. It adds the full limits on the $2000 plan, and 20% of them below."
+    }
+  ],
+  "compute": {
+    "model": "fixed-sizes",
+    "cpuBasis": "allocated",
+    "cpuBasisNote": "One flat price per size for as long as the sandbox runs, whatever the CPU or RAM use. vCPUs are shared, not dedicated.",
+    "cpuBasisUrl": "https://docs.boat.dev/faq",
+    "cpuBasisQuote": "Sandboxes have shared vCPUs.",
+    "billingIncrementSeconds": 1,
+    "billingIncrementNote": "Per second, from the provisioned state.",
+    "minimumCharge": null,
+    "minimumNote": "not published: no minimum seconds, minimum charge or start fee is stated; the only per-start price is for starts above a plan limit.",
+    "ratesSameOnEveryPlan": true,
+    "ratesSameOnEveryPlanUrl": "https://docs.boat.dev/pricing",
+    "ratesSameOnEveryPlanQuote": "Every dollar comes back as VM time at the rates above.",
+    "url": "https://docs.boat.dev/pricing",
+    "quote": "You pay per second, only while a sandbox runs. A stopped sandbox costs no machine time.",
+    "sizes": [
+      {
+        "name": "small",
+        "vcpu": 2,
+        "ramGib": 4,
+        "diskGib": 51,
+        "usdPerHour": 0.018,
+        "usdPerMonth730h": 13.14,
+        "monthlyBasis": "computed: hourly x 730",
+        "url": "https://docs.boat.dev/pricing",
+        "quote": "| `small` | **$0.018** | 2 vCPU | 4 GB | 51 GB |"
+      },
+      {
+        "name": "default",
+        "vcpu": 4,
+        "ramGib": 8,
+        "diskGib": 51,
+        "usdPerHour": 0.036,
+        "usdPerMonth730h": 26.28,
+        "monthlyBasis": "page states $26 for 730 h; 26.28 is hourly x 730",
+        "url": "https://docs.boat.dev/pricing",
+        "quote": "| `default` | **$0.036** | 4 vCPU | 8 GB | 51 GB |"
+      },
+      {
+        "name": "large",
+        "vcpu": 8,
+        "ramGib": 16,
+        "diskGib": 111,
+        "usdPerHour": 0.072,
+        "usdPerMonth730h": 52.56,
+        "monthlyBasis": "computed: hourly x 730",
+        "url": "https://docs.boat.dev/pricing",
+        "quote": "| `large` | **$0.072** | 8 vCPU | 16 GB | 111 GB |"
+      },
+      {
+        "name": "xlarge",
+        "vcpu": 16,
+        "ramGib": 32,
+        "diskGib": 251,
+        "usdPerHour": 0.2,
+        "usdPerMonth730h": 146.0,
+        "monthlyBasis": "computed: hourly x 730",
+        "requiresPlan": "$100/mo or higher",
+        "url": "https://docs.boat.dev/pricing",
+        "quote": "| `xlarge` * | **$0.200** | 16 vCPU | 32 GB | 251 GB |"
+      }
+    ],
+    "monthlyAnchor": {
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "One `default` sandbox that runs a full month (730 h) costs $26."
+    },
+    "sessionLimit": {
+      "url": "https://docs.boat.dev/long-running-tasks/auto-stop",
+      "quote": "The default is 1 hour. The maximum is 30 days, or no auto-stop at all."
+    }
+  },
+  "storage": {
+    "model": "disk included per size, no per-GiB disk price",
+    "diskPricePerGibMonth": null,
+    "diskIncluded": "51 GB on small and default, 111 GB on large, 251 GB on xlarge; 'Disk' is space for your own files, on top of the OS image.",
+    "diskIncludedUrl": "https://docs.boat.dev/pricing",
+    "diskIncludedQuote": "\"Disk\" is the space for your own files. The OS and the pre-installed tools are not in it.",
+    "billedWhileStopped": false,
+    "billedWhileStoppedNote": "No machine time while stopped; the disk is kept free for 14 days, then deleted.",
+    "stoppedRetentionDays": 14,
+    "url": "https://docs.boat.dev/pricing",
+    "quote": "A stopped sandbox keeps its disk for 14 days.",
+    "automaticSnapshots": {
+      "included": true,
+      "priceUsd": 0,
+      "retention": "kept while the sandbox runs and for 14 days after it stops",
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "Automatic snapshots of your sandboxes, with no count limit. boat keeps them while a sandbox runs and for **14 days after it stops**. Then it deletes them."
+    },
+    "savedSnapshots": {
+      "includedPerPlan": "10 per $20 of plan per seat, never fewer than 10",
+      "overageUsdPerSnapshotPerDay": 0.056,
+      "overageUsdPerSnapshotPer30Days": 1.68,
+      "expiry": "never expire",
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "Saved snapshots past the included count | $0.056 per snapshot per day ($1.68 for 30 days)",
+      "includedUrl": "https://docs.boat.dev/pricing",
+      "includedQuote": "Saved snapshots included with your plan: **10 for every $20 of plan per seat**, never fewer than 10. A saved snapshot has no auto-deletion date."
+    }
+  },
+  "egress": {
+    "billed": false,
+    "pricePerGb": null,
+    "allowance": "no cap published",
+    "url": "https://docs.boat.dev/pricing",
+    "quote": "Network traffic. boat does not bill egress."
+  },
+  "other": [
+    {
+      "item": "Public IPv6 and outbound IPv4",
+      "priceUsd": 0,
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "A public IPv6 address on every sandbox, and outbound IPv4. The IP address can change when a sandbox resumes."
+    },
+    {
+      "item": "Public URLs for sandbox ports",
+      "priceUsd": 0,
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "Public URLs for the ports of a sandbox."
+    },
+    {
+      "item": "Starts above a plan's start limit",
+      "priceUsd": "0.03 up to 1.5x, 0.05 up to 2x, 0.07 up to 3x",
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "Starts past a start limit | Per start, by how far past the limit: $0.03 up to 1.5x the limit, $0.05 up to 2x, $0.07 up to 3x. Paid starts stop at 3x"
+    },
+    {
+      "item": "AI credentials proxy (off by default)",
+      "priceUsd": "$1 per UTC day on, plus $1 per 1,000 proxied requests",
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "AI credentials proxy | $1 for each day it is on, plus $1 per 1,000 requests"
+    },
+    {
+      "item": "Seats",
+      "priceUsd": "the plan price, per seat",
+      "url": "https://docs.boat.dev/organizations/seats-and-limits",
+      "quote": "**One seat costs the plan price.** A 5-seat organization on the $20 plan pays $100 a month."
+    },
+    {
+      "item": "Minimum spend",
+      "priceUsd": "none published",
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "A plan is a monthly price that your card pays. **It is not a fee.** Every dollar comes back as VM time at the rates above."
+    },
+    {
+      "item": "Custom domain",
+      "priceUsd": null,
+      "note": "Not offered at any price.",
+      "url": "https://docs.boat.dev/hosting",
+      "quote": "boat does not support custom domains."
+    }
+  ],
+  "freeTier": {
+    "exists": false,
+    "note": "No free tier. The first plan starts with a 7-day trial that requires a card and auto-converts to the chosen paid plan.",
+    "url": "https://docs.boat.dev/free-trial",
+    "quote": "Your first plan starts with a free 7-day trial. Checkout asks for a card. **There is no free tier without a card.**",
+    "trial": {
+      "days": 7,
+      "computeHours": 25,
+      "maxConcurrent": 2,
+      "sizes": "small and default",
+      "maxSessionHours": 2,
+      "startsPerMin": 5,
+      "startsPerHour": 25,
+      "startsPerDay": 75,
+      "savedSnapshots": "cannot save new ones",
+      "url": "https://docs.boat.dev/free-trial",
+      "quote": "| Compute | 25 hours in total, all sandboxes together | The plan's [included time](https://docs.boat.dev/pricing.md#plans) |"
+    }
+  },
+  "diffs": [
+    {
+      "field": "compute.sizes[].diskGib",
+      "ours": "51 / 51 / 111 / 251 GB (matches live)",
+      "battleships": "12 / 50 / 125 / 251 GB",
+      "live": "51 / 51 / 111 / 251 GB",
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "| `small` | **$0.018** | 2 vCPU | 4 GB | 51 GB |"
+    },
+    {
+      "field": "egress.allowance",
+      "ours": "not billed, no cap stated",
+      "battleships": "free up to 2 TB per sandbox per month; beyond that unpublished",
+      "live": "not billed, no cap stated",
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "Network traffic. boat does not bill egress."
+    },
+    {
+      "field": "storage.stoppedRetentionDays",
+      "ours": "14 days",
+      "battleships": "snapshot kept 'for the life of the sandbox'",
+      "live": "14 days, then the data is deleted",
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "A stopped sandbox keeps its disk for 14 days."
+    },
+    {
+      "field": "compute.sizes[].requiresPlan (xlarge)",
+      "ours": "no contact needed, $100 plan or higher",
+      "battleships": "operator allocation on request",
+      "live": "self-serve on the $100 plan",
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "* `xlarge` needs the $100 plan or higher. Subscribe from [Dashboard > Billing](https://boat.dev/dashboard?tab=billing), then pass `--type xlarge`. You do not need to contact us."
+    },
+    {
+      "field": "plans[].overage",
+      "ours": "one dollar wallet; credit packs and auto-refill are gone",
+      "battleships": "$20 credit packs that never expire, plus auto-refill",
+      "live": "one dollar wallet; credit packs replaced",
+      "url": "https://docs.boat.dev/faq",
+      "quote": "**Where did credit packs and auto-refill go?**\n\nOne dollar wallet replaces them."
+    },
+    {
+      "field": "plans[].seatLimits",
+      "ours": "extra seats add 20% of the limits below the $2000 plan, full limits on $2000",
+      "battleships": "concurrency and start limits scale with seats, no percentage given",
+      "live": "20% of the limits below $2000, full limits on $2000",
+      "url": "https://docs.boat.dev/organizations/seats-and-limits",
+      "quote": "| $20, $100, $500 | 20% of the plan limits. The total never goes above the limits of the next plan. |"
+    }
+  ],
+  "docs": {
+    "isolation": {
+      "title": "Security and isolation",
+      "url": "https://docs.boat.dev/security"
+    },
+    "sizes-regions": {
+      "title": "Sizes",
+      "url": "https://docs.boat.dev/machines",
+      "note": "Sizes are on this page; the only region statement is in the FAQ, quoted in diffs."
+    },
+    "lifecycle": {
+      "title": "Concepts",
+      "url": "https://docs.boat.dev/concepts"
+    },
+    "snapshots-forks": {
+      "title": "Resume, fork and restore",
+      "url": "https://docs.boat.dev/snapshots/resume-and-fork"
+    },
+    "storage": {
+      "title": "Data retention and deletion",
+      "url": "https://docs.boat.dev/data-retention"
+    },
+    "idle-timers": {
+      "title": "Auto-stop and keep alive",
+      "url": "https://docs.boat.dev/long-running-tasks/auto-stop"
+    },
+    "reaching-it": {
+      "title": "Public URLs",
+      "url": "https://docs.boat.dev/hosting"
+    },
+    "custom-domains": {
+      "title": "Custom domain (not supported)",
+      "url": "https://docs.boat.dev/hosting#custom-domain"
+    },
+    "outbound-network": {
+      "title": "Firewall rules and outbound traffic",
+      "url": "https://docs.boat.dev/hosting/firewall"
+    },
+    "keys-secrets": {
+      "title": "Secrets",
+      "url": "https://docs.boat.dev/environments/secrets"
+    },
+    "ways-to-drive": {
+      "title": "SDKs",
+      "url": "https://docs.boat.dev/sdks/overview"
+    },
+    "built-in-agents": {
+      "title": "Integrated agents",
+      "url": "https://docs.boat.dev/integrated-agents"
+    },
+    "teams-accounts": {
+      "title": "Teams",
+      "url": "https://docs.boat.dev/organizations"
+    },
+    "billing-models": {
+      "title": "Plan, wallet and running out",
+      "url": "https://docs.boat.dev/billing"
+    },
+    "trials-free-tiers": {
+      "title": "Free trial",
+      "url": "https://docs.boat.dev/free-trial"
+    },
+    "quickstart": {
+      "title": "Quickstart",
+      "url": "https://docs.boat.dev/quickstart"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://docs.boat.dev/pricing"
+    }
+  },
+  "deploy": {
+    "hermes": {
+      "route": "manual, with the CLI pre-installed",
+      "oneClick": false,
+      "managedOption": false,
+      "summary": "Boat does not document a Hermes recipe or template. The Hermes Agent CLI is pre-installed on every sandbox, so the route is: create a sandbox with no auto-stop, open a shell, run the Hermes setup wizard, then make the gateway a systemd service so it returns after a resume.",
+      "steps": [
+        "boat new --no-auto-stop (or boat extend <id> --no-auto-stop)",
+        "boat ssh <id>",
+        "hermes setup (or hermes model to pick a provider), then hermes gateway for the messaging gateway",
+        "Write a systemd unit with Restart=always and enable it, so the gateway comes back after a stop/resume",
+        "boat host <id> <port> if the Hermes web dashboard should be reachable"
+      ],
+      "urls": [
+        "https://docs.boat.dev/machines/tools",
+        "https://docs.boat.dev/long-running-tasks/always-on-services",
+        "https://hermes-agent.nousresearch.com/docs/getting-started/installation"
+      ],
+      "quotes": [
+        {
+          "url": "https://docs.boat.dev/machines/tools",
+          "quote": "| `hermes` | Hermes Agent by Nous Research. Browser tools are not pre-installed: `hermes` offers to add them. |"
+        },
+        {
+          "url": "https://docs.boat.dev/long-running-tasks/always-on-services",
+          "quote": "To run a process 24/7, do two things:\n\n1. [Turn off auto-stop](https://docs.boat.dev/long-running-tasks/auto-stop.md#turn-off-auto-stop): `boat extend <id> --no-auto-stop`.\n2. Run the process as an enabled systemd service, as shown below. It then comes back after any stop, resume or fork."
+        },
+        {
+          "url": "https://hermes-agent.nousresearch.com/docs/getting-started/installation",
+          "quote": "Install Hermes Agent with desktop bundles, source installers, Docker, Nix, or the Termux APT package"
+        }
+      ],
+      "note": "Hermes is not one of the seven harnesses boat prompt can drive (claude, codex, pi, opencode, prime, kimi, mistral), so it is a shell-level install, not a boat feature."
+    },
+    "openclaw": {
+      "route": "manual, with the CLI pre-installed",
+      "oneClick": false,
+      "managedOption": false,
+      "summary": "The OpenClaw CLI is pre-installed; boat says the gateway does not start by itself. Same shape as Hermes: no-auto-stop sandbox, ssh in, run openclaw gateway under systemd.",
+      "urls": [
+        "https://docs.boat.dev/machines/tools",
+        "https://docs.boat.dev/long-running-tasks/always-on-services"
+      ],
+      "quotes": [
+        {
+          "url": "https://docs.boat.dev/machines/tools",
+          "quote": "| `openclaw` | OpenClaw CLI. The gateway does not start by itself: run `openclaw gateway`. |"
+        }
+      ]
+    },
+    "dashboardOnly": {
+      "answer": "Partly. A non-coder can open a running sandbox's Linux desktop, watch an agent work, connect an AI subscription in the Agents & Proxying tab, and edit repositories and setup scripts in the Environment tab. Creating the sandbox and starting an agent are CLI-only in the docs; there is no template gallery or one-click agent.",
+      "url": "https://docs.boat.dev/quickstart",
+      "quote": "`boat prompt` runs Claude Code, Codex or another integrated agent inside the sandbox. **Connect an AI key or subscription first.**",
+      "supportingQuote": {
+        "url": "https://docs.boat.dev/account",
+        "quote": "**Dashboard** | one-off work, and the things that must not be automatable"
+      }
+    }
+  }
+}

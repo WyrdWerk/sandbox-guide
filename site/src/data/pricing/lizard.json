@@ -1,0 +1,54 @@
+{
+  "provider": "lizard",
+  "checkedOn": "2026-10-29",
+  "summary": "A flat hourly price per size, idle time included, from a $19 plan that comes back as usage.",
+  "shapes": [
+    {
+      "name": "Small",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 5,
+      "hourly": 0.0162
+    },
+    {
+      "name": "Medium",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 20,
+      "hourly": 0.0324
+    },
+    {
+      "name": "Large",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 50,
+      "hourly": 0.0648
+    }
+  ],
+  "disk": {
+    "extraMonthly": 0.14
+  },
+  "between": "kept",
+  "plans": [
+    {
+      "name": "Pro",
+      "fee": 19,
+      "credit": 19
+    }
+  ],
+  "notes": [
+    "Between sessions the machine is paused, not stopped: a stopped sandbox is deleted. No storage charge for a paused sandbox is published.",
+    "Extra disk is a volume at $0.14 per GB-month of used space.",
+    "Sandbox egress is included up to 2 TB per rolling 30 days; the price beyond that is not published."
+  ],
+  "sources": [
+    {
+      "label": "Limits and sizes",
+      "url": "https://lizard.build/docs/platform/limits"
+    },
+    {
+      "label": "Pricing",
+      "url": "https://lizard.build/pricing"
+    }
+  ]
+}

@@ -185,3 +185,33 @@ export interface GlossaryEntry {
   term: string;
   definition: string;
 }
+
+/** How a person gets a given agent running on a provider, easiest first. */
+export type RouteTier = "one-click" | "preinstalled" | "guide" | "manual" | "backend" | "none";
+
+export interface UseCase {
+  id: string;
+  title: string;
+  kicker: string;
+  /** The reader's own words: what they want the agent to do. */
+  question: string;
+  standfirst: string;
+  /** Calculator preset this use case opens with. */
+  preset: string;
+  /** Paragraphs; may contain [text](url) links and **bold**. */
+  whatItIs: string[];
+  needs: { label: string; value: string; source: string }[];
+  twoWays?: { title: string; body: string[] };
+  routes: {
+    provider: string;
+    tier: RouteTier;
+    /** Can someone get it running without typing commands? */
+    noTerminal: "yes" | "partly" | "no";
+    what: string;
+    link: { title: string; url: string } | null;
+  }[];
+  picks: { provider: string; for: string; why: string; watch: string; link: string }[];
+  outside: string;
+  features: string[];
+  sources: { label: string; url: string }[];
+}
