@@ -106,7 +106,7 @@ const ld = {
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title === site.title ? title : `${title} — ${site.shortTitle}`}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(path, Astro.site)} />
+    {path.startsWith("/404") ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={new URL(path, Astro.site)} />}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.shortTitle} />
     <meta property="og:title" content={title} />

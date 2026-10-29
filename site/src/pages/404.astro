@@ -1,0 +1,23 @@
+---
+// Cloudflare Pages serves this with a 404 status. Without it, every unknown
+// address returned the home page with 200, which search engines count as soft 404s.
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+---
+
+<Base title="Page not found" description="This page does not exist on Bot Perch.">
+  <PageHeader
+    kicker="404"
+    title="Page not found"
+    standfirst="There is nothing at this address. It may have moved, or the link may have a typo."
+    meta={["Not found"]}
+  />
+  <div class="wrap">
+    <section class="section section--flush">
+      <p class="hero-actions">
+        <a class="button" href="/">Go to the home page</a>
+        <a class="button button--quiet" href="/search/">Search the guide</a>
+      </p>
+    </section>
+  </div>
+</Base>

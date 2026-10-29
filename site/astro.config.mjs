@@ -10,7 +10,7 @@ const sitemap = {
     "astro:build:done": ({ dir, pages }) => {
       const paths = pages
         .map((p) => `/${p.pathname}`)
-        .filter((p) => p.endsWith("/") && p !== "/search/")
+        .filter((p) => p.endsWith("/") && p !== "/search/" && p !== "/404/")
         .concat(["/llms.txt", "/llms-full.txt"])
         .sort();
       const urls = paths.map((p) => `<url><loc>${site}${p}</loc></url>`).join("\n");
