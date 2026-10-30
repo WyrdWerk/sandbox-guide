@@ -30,7 +30,7 @@
       ],
       "total": "$39.66",
       "notes": [
-        "If a `cpu` unit is one guest CPU rather than two vCPUs, the same shape needs 2 cores and costs $63.31 — the 1.6× swing.",
+        "If a `cpu` unit is one guest CPU rather than two vCPUs, the same shape needs 2 cores and costs $63.31: the CPU line doubles, which moves this total 1.6×.",
         "On Starter the $30 monthly credit leaves $9.66 of cash."
       ],
       "flag": "The CPU unit is disputed: Modal documents 1 core = 2 vCPUs, a third-party benchmark measures one guest CPU per unit. Both figures are shown."
@@ -211,7 +211,7 @@
     },
     {
       "issue": "One core is two vCPUs in the docs and one guest CPU in a third-party measurement",
-      "detail": "Modal prices CPU per physical core and equates a core to two vCPUs. A third-party benchmark reports that `cpu=N` gives a guest that sees N CPUs. The two readings differ by 1.6× on every cost estimate.",
+      "detail": "Modal prices CPU per physical core and equates a core to two vCPUs. A third-party benchmark reports that `cpu=N` gives a guest that sees N CPUs. Under the two readings the CPU line differs by 2×; how much a total moves depends on the workload and plan (1.6× for workload A).",
       "status": "contradiction",
       "evidence": [
         {

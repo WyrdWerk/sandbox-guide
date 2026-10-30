@@ -1,6 +1,6 @@
 {
   "provider": "runtime",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-10-30",
   "summary": "Per second on measured CPU with a 50-millicore floor, reserved memory, and stored disk in decimal GB.",
   "cpu": {
     "rate": 0.025,
@@ -11,8 +11,8 @@
     "rate": 0.0075
   },
   "disk": {
-    "running": 0.00010958904109589041,
-    "stopped": 0.00010958904109589041,
+    "running": 0.00011111111111111112,
+    "stopped": 0.00011111111111111112,
     "included": 10,
     "includedRunningOnly": true,
     "decimalGB": true
@@ -27,12 +27,18 @@
   "plans": [
     {
       "name": "Prepaid credit",
-      "fee": 0
+      "fee": 0,
+      "allowance": {
+        "cpuHours": 25,
+        "ramHours": 100
+      },
+      "note": "An account that has bought credit gets 25 active vCPU-hours and 100 GiB-hours of memory free every calendar month; the calculator takes them off first. A new account's one-time free hours are separate and not counted here."
     }
   ],
   "notes": [
     "A stopped box keeps billing storage, including saved memory; only delete ends the charge.",
-    "Automatic top-ups earn 5% extra credit, not subtracted here."
+    "Automatic top-ups earn 5% extra credit, not subtracted here.",
+    "Storage is $0.08 per decimal GB per 30-day month, so the hourly rate divides by 720 hours. Runtime rounds its own per-GiB-hour figure to 119 microdollars, which this model does not reproduce exactly."
   ],
   "sources": [
     {

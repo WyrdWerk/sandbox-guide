@@ -1,5 +1,7 @@
 # Daytona: sandbox research
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 Research date: 2026-10-28. Desk research only; no account, sandbox, purchase, or runtime test. Evidence tags describe the source, not independent verification. Each quoted excerpt below was checked against its linked live source; source content can change. `not-published` means not found in the sources inspected, not a definitive statement that the feature does not exist. `inferred` identifies reasoning and its evidence.
 
 ## 1. What it is

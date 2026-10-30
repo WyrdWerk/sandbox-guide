@@ -1,6 +1,6 @@
 {
   "provider": "digitalocean",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-10-30",
   "summary": "A flat hourly rate per bundled size, billed per second and capped at 672 hours a month; a powered-off Droplet keeps billing at the same rate.",
   "shapes": [
     {
@@ -276,7 +276,7 @@
   "notes": [
     "Bundled sizes bill per second up to 672 hours a month, so an always-on Droplet costs the flat monthly price shown on the pricing page.",
     "A powered-off Droplet is billed in full because its compute stays reserved on the hypervisor; only destroying it ends the charge. To pay only for the hours used, destroy the Droplet and keep a snapshot instead.",
-    "Each Droplet is billed at least 60 seconds or $0.01, whichever is higher, so a ten-minute run on a small size costs a cent. The calculator applies this to every run.",
+    "Each Droplet is billed at least 60 seconds or $0.01, whichever is higher, so a ten-minute run on a small size costs a cent and a one-second run on a $1-an-hour size costs about 1.7 cents. The calculator applies both minimums to every run.",
     "Disk is included in each size; the calculator's only disk charge is a volume at $0.10 per GiB-month when the request is bigger than the size's own disk.",
     "Snapshots cost $0.06 per GB-month and are kept until deleted. Backups cost 20% (weekly) or 30% (daily) of the Droplet price. Neither is in the calculator.",
     "v5 Droplets price resources separately at $0.0158219 per shared vCPU-hour, $0.0040411 per GiB-hour and $0.000137 per GiB of boot disk an hour, with no monthly cap, but only in ATL1, RIC1, MKC1 and MEM1.",
@@ -295,5 +295,6 @@
       "label": "Docs: volume pricing",
       "url": "https://docs.digitalocean.com/products/volumes/details/pricing/"
     }
-  ]
+  ],
+  "minimumSeconds": 60
 }

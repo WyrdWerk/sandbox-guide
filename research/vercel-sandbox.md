@@ -1,5 +1,7 @@
 # Vercel Sandbox: desk research
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 Research date: 2026-10-28. Scope: public information, not a product test. No account, sandbox or paid Vercel resources were created. Quotes are evidence, not endorsements. Each evidence bullet has one classification; interpretations identify the evidence they rely on. “Not-published” means not located in the sources examined, not proof that a capability cannot exist.
 
 ## 1. What it is and who it is for

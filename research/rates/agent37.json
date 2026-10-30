@@ -2,6 +2,7 @@
   "id": "agent37",
   "name": "Agent 37",
   "checkedOn": "2026-10-29",
+  "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "products": [
     "Agent37 Cloud (API): prepaid wallet, per-minute metered instances",
     "Agent 37 Personal (managed agent hosting): flat monthly per agent, browser dashboard"

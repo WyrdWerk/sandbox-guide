@@ -2,6 +2,7 @@
   "id": "lizard",
   "name": "Lizard",
   "checkedOn": "2026-10-29",
+  "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "products": [
     "Lizard Sandboxes: Firecracker microVMs sold in three fixed sizes",
     "Lizard app platform: deploy services, Managed Postgres/Redis, object storage and one-click app templates"
@@ -287,14 +288,6 @@
       "live": "no custom template upload",
       "url": "https://lizard.build/docs/sandboxes",
       "quote": "The public CLI does not provide a custom-template upload flow."
-    },
-    {
-      "field": "included usage on Pro",
-      "ours": "$19 of usage included",
-      "battleships": "included_usd: 0 (fee_is_credit: true)",
-      "live": "$19 in monthly credits",
-      "url": "https://lizard.build/pricing",
-      "quote": "Pro costs $19 a month and includes $19 in monthly credits for the whole platform"
     }
   ],
   "docs": {

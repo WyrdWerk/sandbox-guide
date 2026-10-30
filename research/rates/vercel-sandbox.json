@@ -2,6 +2,7 @@
   "id": "vercel-sandbox",
   "provider": "Vercel Sandbox",
   "checkedOn": "2026-10-29",
+  "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "currency": "USD",
   "headline": "Two meters: Active CPU at $0.128 per vCPU-hour (only while code runs, I/O wait excluded) and provisioned memory at $0.0212 per GB-hour for the whole session wall clock, with a one-minute minimum on memory only. There is no published CPU minimum. Hobby is a capped free allowance with a 45-minute session limit; Pro is a $20 platform fee that returns $20 of credit and a 24-hour session limit.",
   "plans": [

@@ -1,5 +1,7 @@
 # InstaBox (instabox.sh, by InsForge) — provider profile
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 Research date: **2026-10-28**. Desk research only: no account was created, no sandbox was started, nothing was billed.
 
 Claim tags used throughout (the five requested categories):

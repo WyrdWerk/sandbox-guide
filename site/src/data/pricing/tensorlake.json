@@ -1,6 +1,6 @@
 {
   "provider": "tensorlake",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-10-30",
   "summary": "Per second on active CPU, allocated RAM and disk, drawn from prepaid credits or a $250 Pro plan; a suspended sandbox bills snapshot storage only.",
   "cpu": {
     "rate": 0.07,
@@ -12,7 +12,7 @@
   },
   "disk": {
     "running": 0.0002,
-    "stopped": 0.0000958904109589041
+    "stopped": 9.722222222222223e-05
   },
   "between": "kept",
   "maxDisk": 100,
@@ -40,7 +40,12 @@
       "fee": 250,
       "credit": 250,
       "maxDisk": 100,
-      "note": "Unlimited session duration and 1,000 concurrent sandboxes."
+      "note": "Unlimited session duration and 1,000 concurrent sandboxes.",
+      "rates": {
+        "cpu": 0.042,
+        "ram": 0.009,
+        "diskRunning": 0.0001
+      }
     },
     {
       "name": "Free",
@@ -54,10 +59,10 @@
     }
   ],
   "notes": [
-    "Rates are the Usage Credits rates. Pro's rates are lower — $0.042 per active core-hour, $0.009 per GB-hour of RAM (both 40% less) and $0.0001 per GB-hour of disk (50% less) — and its $250 fee includes 25,000 CU. The calculator prices every plan at the higher Usage Credits rates, so a Pro bill above $250 of monthly usage is overstated.",
+    "Rates shown are the Usage Credits rates. Pro bills $0.042 per active core-hour, $0.009 per GB-hour of RAM and $0.0001 per GB-hour of disk, and the calculator uses those on Pro; snapshot storage is $0.07 per GB-month on both.",
     "Tensorlake's own pages word Pro differently: the pricing page says the fee includes 25,000 CU ($250 of usage); the billing docs and FAQ say \"$250 per month plus metered usage\". This guide reads them together as $250 that includes $250 of usage, with usage beyond it billed. Get it in writing before relying on it.",
     "CPU bills only while it executes, so the engine applies the workload's busy share. When Tensorlake cannot sample active CPU it falls back to allocated vCPU time, which costs more.",
-    "Snapshot storage is $0.07 per GB-month while a sandbox is suspended, modelled here as a per-GB-hour stopped rate (0.07 ÷ 730) on the sandbox's disk size. Tensorlake says only unique bytes are billed, so the real figure can be lower.",
+    "Snapshot storage is $0.07 per GB-month while a sandbox is suspended, modelled here as a per-GB-hour stopped rate (0.07 ÷ 720, a fixed 30-day month) on the sandbox's disk size. Tensorlake says only unique bytes are billed, so the real figure can be lower.",
     "Billing is by the second in whole compute units, pooled per organization. Egress is free.",
     "Memory must be 1–8 GB per vCPU, so a 1 vCPU sandbox cannot exceed 8 GB of RAM."
   ],

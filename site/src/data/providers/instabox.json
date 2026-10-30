@@ -49,7 +49,7 @@
       "flag": "The free plan is 4 vCPU / 8 GiB only, so this workload cannot run there as specified."
     },
     "B": {
-      "headline": "$28.84 a month",
+      "headline": "$27.23 a month",
       "shape": "4 vCPU / 8 GiB / 50 GiB, 730 h",
       "lines": [
         {
@@ -63,12 +63,12 @@
           "amount": "$13.14"
         },
         {
-          "label": "Storage",
-          "arithmetic": "50 × $0.00011 × 730",
-          "amount": "$4.02"
+          "label": "Storage beyond the free 20 GiB",
+          "arithmetic": "(50 − 20) × $0.00011 × 730",
+          "amount": "$2.41"
         }
       ],
-      "total": "$28.84",
+      "total": "$27.23",
       "notes": [
         "The vendor's calculator shows $24.82 because it leaves storage out of the total.",
         "Always-on needs the idle pause turned off, which paid plans allow."

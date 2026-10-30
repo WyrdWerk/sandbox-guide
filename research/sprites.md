@@ -1,5 +1,7 @@
 # Sprites by Fly.io: research for the sandbox guide
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 Research date: 2026-10-28. Desk research only; no account, sandbox, or billed Sprites resources were created. Rates and product descriptions can change. This is not an operational test.
 
 **Bottom line — inferred:** Sprites is best understood as a persistent Linux computer that automatically moves between running, memory-preserving suspension, and a disk-only cold state. Its bill tracks measured consumption rather than a purchased fixed-size machine; idle disk can still cost money. Evidence: lifecycle and pricing pages quoted below.

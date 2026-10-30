@@ -1,5 +1,7 @@
 # Runtime Cloud (withruntime.com) — provider profile
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 **Desk research only.** No sandbox was created, started, woken or billed. No account, key or
 credential was used.
 

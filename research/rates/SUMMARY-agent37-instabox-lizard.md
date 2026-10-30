@@ -1,5 +1,7 @@
 # Rates and doc links — agent37, instabox, lizard
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 Checked **2026-10-29** against each provider's live pricing page and docs, plus the Battleships card for each provider (`https://battleships.dev/data/providers/<id>.json`, ids confirmed in `https://battleships.dev/data/index.json`).
 
 Files: `agent37.json`, `instabox.json`, `lizard.json` in this folder.
@@ -44,7 +46,7 @@ The cards are dated: InstaBox and Lizard feature evidence checked 2026-10-14, Ag
 
 - **Agent 37**: Battleships records only `us` and `custom_domain: true` with no price. Live has three advertised regions (with the concepts-page contradiction) and free-but-gated custom domains.
 - **InstaBox**: the card is effectively the pre-October product — invite-only beta with no published price, one 4/8 size, 5 free machines, no secret proxy, no SSO, `snapshot_mem: true`, no egress or storage rate. Live has five plans, sizes to 32/64, 1 free machine, Org Secrets, Enterprise SSO, disk-only snapshots and published rates.
-- **Lizard**: fork count 1–10 (live 1–100), `whole_disk: false` (live: the whole disk survives a pause), `spend_limits: null` (live: no cap), `mcp_server: null` (live: hosted MCP), `custom_image: true` (live: no custom-template upload), and `included_usd: 0` for a $19 plan that includes $19 of credits.
+- **Lizard**: fork count 1–10 (live 1–100), `whole_disk: false` (live: the whole disk survives a pause), `spend_limits: null` (live: no cap), `mcp_server: null` (live: hosted MCP), and `custom_image: true` (live: no custom-template upload). Its `included_usd: 0` is not a disagreement: with `fee_is_credit: true`, the $19 fee is the $19 of included usage.
 
 ## Could not confirm
 

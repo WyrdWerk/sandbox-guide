@@ -1,5 +1,7 @@
 # boxd (boxd.sh) — provider profile
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 **Researched:** 28 October 2026. Desk research only; no machine was created, started, or billed.
 **Primary sources:** docs.boxd.sh (all pages, via `llms-full.txt` plus individual `.md` pages), boxd.sh/pricing (both currency toggles, rendered), boxd.sh/faq, boxd.sh homepage, boxd.sh/terms, app.boxd.sh sign-in page.
 **Secondary:** battleships.dev provider record for boxd, everydev.ai listing, Hacker News search, Wayback Machine snapshot of the pricing page, tech.eu, a KvK-derived company listing, GitHub repository metadata, gritt.io, The SaaS News.
@@ -32,7 +34,7 @@
 
 Adjacent capabilities that are part of the same product rather than separate SKUs: integrations and scheduled/event-driven automations (`*.run.ts` jobs) — "A `*.run.ts` file can run against them on a schedule or when something happens." [docs index](https://docs.boxd.sh/) · `docs-confirmed`; an in-browser desktop per machine — "Every machine has a display." [guides/desktop](https://docs.boxd.sh/guides/desktop) · `docs-confirmed`; and org-wide env vars/secrets — "Set an environment variable or a secret **once** for your organization, and boxd injects it into the machines in the var's scope." [guides/env-secrets](https://docs.boxd.sh/guides/env-secrets) · `docs-confirmed`.
 
-**Company.** "boxd.sh is operated by Azin Tech Holding (Amsterdam, Netherlands…)" with a €2M pre-seed led by BlueYard Capital, September 2026 — [battleships.dev](https://battleships.dev/data/providers/boxd.md) · `third-party`. boxd's own site no longer carries the funding banner (checked 28 Oct 2026), so the round rests on the third-party record alone · `third-party`. Funding is not a feature; it is context for how stable the platform is.
+**Company.** boxd.sh is operated by Azin Tech Operating Company B.V. (Amsterdam, Netherlands): "“Boxd”, “we”, “us” or “our” means Azin Tech Operating Company B.V." — [Terms](https://boxd.sh/terms/) · `docs-confirmed` (checked 30 Oct 2026; see §17). It raised a €2M pre-seed led by BlueYard Capital in September 2026: "boxd has raised €2 million in pre-seed funding led by BlueYard Capital, with participation from Antler, OVNI, s20, Script Capital and a group of angels who have built developer infrastructure before." — [boxd blog](https://boxd.sh/blog/we-raised-2m-to-kill-localhost/) · `docs-confirmed` (checked 30 Oct 2026). Battleships' record carries the same round but names the operator "Azin Tech Holding"; the binding documents name the Operating Company (§17) · `third-party`. Funding is not a feature; it is context for how stable the platform is.
 
 ---
 

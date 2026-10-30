@@ -29,7 +29,7 @@
       "heading": "The idle hour is where the bill lives",
       "body": [
         "An idle hour can cost full compute, memory only, storage only, or nothing. boxd's standby bills RAM. Runtime bills memory and disk blocks. Agent 37, InstaBox and Lizard bill storage only. Boat charges nothing while stopped and keeps the disk for 14 days.",
-        "That is why two providers with similar hourly rates differ by a factor of ten on an always-on box. A 4 vCPU / 8 GiB machine costs about $10.60 a month at Agent 37, $26.28 at Boat, $28.84 at InstaBox and about $222 at boxd once memory is billed on a 4 vCPU machine."
+        "That is why two providers with similar hourly rates differ by a factor of ten on an always-on box. A 4 vCPU / 8 GiB machine costs about $10.60 a month at Agent 37, $26.28 at Boat, $27.23 at InstaBox and about $222 at boxd once memory is billed on a 4 vCPU machine."
       ]
     }
   ],

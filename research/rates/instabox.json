@@ -2,6 +2,7 @@
   "id": "instabox",
   "name": "InstaBox (InsForge)",
   "checkedOn": "2026-10-29",
+  "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "products": [
     "InstaBox machines: one Firecracker microVM per agent, with a dashboard, CLI, TypeScript SDK and HTTP API"
   ],

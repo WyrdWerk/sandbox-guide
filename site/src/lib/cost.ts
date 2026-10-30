@@ -86,6 +86,8 @@ export interface Plan {
   capped?: boolean;
   /** Shapes this plan may not use. */
   excludesShapes?: string[];
+  /** Per-resource rates that replace the card's on this plan (USD per hour, as on the card). */
+  rates?: { cpu?: number; ram?: number; diskRunning?: number };
   /** The plan cannot keep a stopped machine's disk (no persistent machines). */
   noKeep?: boolean;
   note?: string;
@@ -126,6 +128,13 @@ export interface RateCard {
   billedWhileStopped?: boolean;
   /** Tasks mode: each run is billed at least this much, in USD (a per-machine minimum charge). */
   minimumPerRun?: number;
+  /** Tasks mode: each run is billed at least this many seconds of its shape's hourly price. */
+  minimumSeconds?: number;
+  /** Memory is billed in whole minutes, rounded up for each run. */
+  ramWholeMinutes?: boolean;
+  /** CPU comes with memory: the least memory that gives each core count, smallest first.
+   *  Requests above the first entry are billed at the memory that provides their cores. */
+  ramForVcpu?: { vcpu: number; ram: number }[];
   /** Tasks mode: each run is billed in whole hours, rounded up (a server that lives ten minutes bills one hour). */
   wholeHours?: boolean;
   /** Sold only as whole monthly plans: each machine costs its shape's monthly price, and tasks share as few plans as their hours need. */
@@ -222,7 +231,16 @@ function pickShape(card: RateCard, w: Workload, plan: Plan): { shape?: Shape; ex
   return { shape: options[0].s, extraDisk: options[0].short };
 }
 
-function priceOnPlan(card: RateCard, w: Workload, plan: Plan): Quote {
+function priceOnPlan(base: RateCard, w: Workload, plan: Plan): Quote {
+  const pr = plan.rates;
+  const card: RateCard = pr
+    ? {
+        ...base,
+        cpu: base.cpu && { ...base.cpu, rate: pr.cpu ?? base.cpu.rate },
+        ram: base.ram && { ...base.ram, rate: pr.ram ?? base.ram.rate },
+        disk: base.disk && { ...base.disk, running: pr.diskRunning ?? base.disk.running },
+      }
+    : base;
   const h = hoursOf(w, Boolean(card.sleeps));
   const lines: Line[] = [];
   const problems: string[] = [];
@@ -234,7 +252,16 @@ function priceOnPlan(card: RateCard, w: Workload, plan: Plan): Quote {
   }
 
   const vcpu = shape ? shape.vcpu : w.vcpu;
-  const ramBilled = card.ram?.billing === "requested" || !shape ? w.ram : shape.ram;
+  let ramBilled = card.ram?.billing === "requested" || !shape ? w.ram : shape.ram;
+  if (card.ramForVcpu) {
+    const steps = card.ramForVcpu;
+    const step = steps.find((s) => s.vcpu >= w.vcpu);
+    if (!step) problems.push(`The most CPU documented is ${steps[steps.length - 1].vcpu} cores, at ${steps[steps.length - 1].ram} GB of memory.`);
+    else if (step !== steps[0] && step.ram > ramBilled) {
+      notes.push(`${w.vcpu} CPU cores come with ${step.ram} GB of memory, so ${step.ram} GB is billed.`);
+      ramBilled = step.ram;
+    }
+  }
   const diskSize =
     shape && (card.disk?.shapeSize || (!card.disk?.running && !card.disk?.stopped && !card.disk?.persistentMonthly))
       ? Math.min(shape.disk, Math.max(w.disk, shape.disk))
@@ -287,11 +314,12 @@ function priceOnPlan(card: RateCard, w: Workload, plan: Plan): Quote {
       lines.push({ label: "Stopped, still billed", math: `${num(stoppedBilled)} h × ${rate(r)}`, amount: stoppedBilled * r });
     }
     const perRun = h.session * r;
-    if (w.mode === "tasks" && card.minimumPerRun && perRun < card.minimumPerRun) {
+    const floor = Math.max(card.minimumPerRun ?? 0, ((card.minimumSeconds ?? 0) / 3600) * r);
+    if (w.mode === "tasks" && floor > 0 && perRun < floor) {
       lines.push({
         label: "Minimum charge per run",
-        math: `${num(w.tasks)} runs × (${rate(card.minimumPerRun)} − ${rate(perRun)})`,
-        amount: w.tasks * (card.minimumPerRun - perRun),
+        math: `${num(w.tasks)} runs × (${rate(floor)} − ${rate(perRun)})`,
+        amount: w.tasks * (floor - perRun),
       });
     }
     const billed = (h.run + stoppedBilled) * r;
@@ -341,7 +369,12 @@ function priceOnPlan(card: RateCard, w: Workload, plan: Plan): Quote {
       }
     }
     if (card.ram) {
-      lines.push({ label: "Memory", math: `${runH} h × ${ramBilled} GiB × ${rate(card.ram.rate)}`, amount: h.run * ramBilled * card.ram.rate });
+      const ramH = w.mode === "tasks" && card.ramWholeMinutes ? (w.tasks * Math.ceil(w.taskMinutes - 1e-9)) / 60 : h.run;
+      lines.push({
+        label: "Memory",
+        math: `${num(ramH)} h${ramH > h.run + 1e-9 ? " (whole minutes)" : ""} × ${ramBilled} GiB × ${rate(card.ram.rate)}`,
+        amount: ramH * ramBilled * card.ram.rate,
+      });
     }
   }
 
@@ -398,7 +431,7 @@ function priceOnPlan(card: RateCard, w: Workload, plan: Plan): Quote {
     const offs: [Pick<Line, "amount"> | undefined, number | undefined, number | undefined, string][] = [
       [cpuLine, a.cpuHours, card.cpu?.rate, "vCPU-h"],
       [ramLine, a.ramHours, card.ram?.rate, "GiB-h"],
-      [diskLine, a.diskHours, card.disk?.running, "GB-h"],
+      [diskLine, a.diskHours, card.disk?.running, "GiB-h"],
     ];
     for (const [line, hours, r, unit] of offs) {
       if (line && hours && r) {

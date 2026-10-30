@@ -2,6 +2,7 @@
   "id": "cloudflare-sandbox",
   "provider": "Cloudflare Sandbox SDK on Containers",
   "checkedOn": "2026-10-29",
+  "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "currency": "USD",
   "headline": "A $5/month Workers Paid plan fee, then per-10ms container billing: CPU on active use only ($0.072/vCPU-hour), memory and disk on the provisioned instance type while it runs. Sandboxes are capped at 4 vCPU / 12 GiB / 20 GB and have no published region pinning. The Workers Free plan cannot run Containers.",
   "plans": [

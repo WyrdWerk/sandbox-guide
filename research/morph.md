@@ -1,5 +1,7 @@
 # Morph Cloud — research for sandbox-guide
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 Research date: 2026-10-28. Desk research only; no account or workload was created. Labels describe the evidence, not hands-on validation. `not-published` means not found in the sources inspected, not proof that a capability does not exist. Each sourced bullet contains its own quotation and URL; calculations are explicitly conditional inferences.
 
 ## 1. What it is and who it is for

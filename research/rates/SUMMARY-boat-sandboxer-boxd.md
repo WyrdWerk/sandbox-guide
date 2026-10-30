@@ -1,5 +1,7 @@
 # Rate cards, checked 2026-10-29
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 Machine-readable pricing for the three providers, written from their live pages on 2026-10-29 and
 cross-checked against `research/<id>.md` (2026-10-28) and the Battleships cards.
 
@@ -47,8 +49,10 @@ mechanically against the fetched page, then every flagged quote was re-read by h
   (`http://web.archive.org/web/20261009152053/https://boxd.sh/pricing`, verified today). Today's page
   shows EUR 0.039 / 0.012 / 0.00008 and "100 machines included". So the cut and the quota doubling
   landed after 15:20 UTC on 9 October.
-- Our file said Battleships was still on the old rates. It is not: today's card carries
-  $0.047 / $0.014 / $0.000096, dated 2026-10-14. That entry in `research/boxd.md` §14 is stale.
+- Battleships' card carries the current $0.047 / $0.014 / $0.000096, dated 2026-10-14.
+  `research/boxd.md` already says so: its headline rate is current, while one running-PAYG table row
+  and worked examples in Battleships' Markdown narrative keep the pre-cut $0.059 / $0.018 / $0.00012.
+  The record is internally inconsistent, not stale overall.
 - The machine quota is now contradictory in three places, not two: pricing page 100, pricing FAQ 100,
   resources guide 50, main FAQ 50.
 - 8 vCPU / 32 GiB is still unresolved: the docs list it as a size and as the quota, the FAQ tells you

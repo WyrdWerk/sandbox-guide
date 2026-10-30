@@ -2,6 +2,7 @@
   "id": "e2b",
   "name": "E2B",
   "checkedOn": "2026-10-29",
+  "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "regions": {
     "value": "US (Google Cloud us-west1) default; US West (AWS us-west-2) all plans via support; EU (europe-west1) and APAC (asia-southeast1) on all plans for workspaces verified by adding a payment method.",
     "url": "https://docs.e2b.dev/faq/egress-ip-ranges",

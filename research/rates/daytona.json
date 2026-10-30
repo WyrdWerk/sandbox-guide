@@ -2,6 +2,7 @@
   "id": "daytona",
   "name": "Daytona",
   "checkedOn": "2026-10-29",
+  "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "regions": {
     "value": "Shared regions us (United States) and eu (Europe).",
     "url": "https://www.daytona.io/docs/en/regions",

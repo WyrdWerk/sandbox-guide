@@ -2,6 +2,7 @@
   "id": "modal",
   "provider": "Modal Sandboxes",
   "checkedOn": "2026-10-29",
+  "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "currency": "USD",
   "headline": "Per-second billing on max(request, actual) for physical CPU cores and GiB of RAM, with no pause state. Modal's pricing page labels the CPU unit 'Physical core (2 vCPU equivalent)', and the sandbox guide says '1 core = 2 vCPUs'. Battleships prices the same dollar figure as one vCPU-hour, so its vCPU-hour rate is 2x Modal's documented vCPU-equivalent rate.",
   "plans": [

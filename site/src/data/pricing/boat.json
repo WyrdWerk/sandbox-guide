@@ -1,6 +1,6 @@
 {
   "provider": "boat",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-10-30",
   "summary": "A flat hourly price per size, per second while the machine exists; the $20 plan is prepaid machine time.",
   "shapes": [
     {
@@ -44,14 +44,24 @@
       "name": "$20 plan",
       "fee": 20,
       "credit": 20,
-      "note": "Usage over the plan is drawn from a separate wallet."
+      "note": "Usage over the plan is drawn from a separate wallet.",
+      "excludesShapes": [
+        "xlarge"
+      ]
+    },
+    {
+      "name": "$100 plan",
+      "fee": 100,
+      "credit": 100,
+      "note": "Needed for the xlarge size; usage over the plan is drawn from a separate wallet."
     }
   ],
   "notes": [
     "A stopped machine's disk is kept free for 14 days; after that it is gone unless saved as a snapshot.",
     "Many starts in one day can hit the start limit; paid starts draw from the wallet.",
     "No free tier; the 7-day trial needs a card.",
-    "Boat says it does not bill egress."
+    "Boat says it does not bill egress.",
+    "The xlarge size needs the $100 plan or higher; the $20 plan cannot run it."
   ],
   "sources": [
     {

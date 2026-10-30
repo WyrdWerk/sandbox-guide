@@ -1,6 +1,6 @@
 {
   "provider": "blaxel",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-10-30",
   "summary": "Per second on allocated memory while active, CPU included; standby bills storage only.",
   "ram": {
     "rate": 0.0414
@@ -23,12 +23,23 @@
   ],
   "notes": [
     "Standby keeps a snapshot, billed at $0.20 per GB-month; its size is not published, so it is not added.",
-    "Up to $200 of promotional credit is advertised; the actual grant is not published."
+    "Up to $200 of promotional credit is advertised; the actual grant is not published.",
+    "CPU is not chosen separately: Blaxel gives 4 cores with 8 GB of memory and 6 with 16 GB. More than 4 cores is billed at 16 GB; more than 6 is not documented. Core counts for smaller memory sizes are not published, so smaller requests are billed at the memory asked for."
   ],
   "sources": [
     {
       "label": "Pricing",
       "url": "https://blaxel.ai/pricing"
+    }
+  ],
+  "ramForVcpu": [
+    {
+      "vcpu": 4,
+      "ram": 8
+    },
+    {
+      "vcpu": 6,
+      "ram": 16
     }
   ]
 }

@@ -1,5 +1,7 @@
 # Cloudflare Sandbox — provider profile
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 **Researched:** 28 October 2026. Desk research only; no Cloudflare account, container, or sandbox was created, started, or billed.
 **Primary sources:** `developers.cloudflare.com/sandbox` (all 121 pages listed in its `llms.txt`, fetched as per-page `.md`), `developers.cloudflare.com/containers` (41 pages), the Containers/Workers/Durable Objects/R2/Dynamic Workers pricing pages, the Wrangler configuration reference, `cloudflare.com/products/sandboxes`, the `cloudflarestatus.com` components API, the Cloudflare Self-Serve Subscription Agreement, the Cloudflare Customer DPA, the Workers SLA, the SOC 2 and HIPAA compliance pages, Cloudflare's FY2025 Form 10-K, and the `cloudflare.net` leadership page.
 **Secondary:** `battleships.dev` provider record for Cloudflare Sandbox / Containers (cross-check only).

@@ -37,7 +37,7 @@
         },
         {
           "label": "How busy it is",
-          "value": "Mostly waiting. Battleships' always-on assistant workload averages about 6% CPU, with peaks near 100% when it browses or runs a command. That is why providers that charge only for CPU actually used come out cheap here.",
+          "value": "Mostly waiting. Battleships' modelled always-on assistant workload averages about 6% CPU, with peaks near 100% when it browses or runs a command. That is why providers that charge only for CPU actually used come out cheap here.",
           "source": "https://battleships.dev/data/rankings/employees.json"
         }
       ],
@@ -318,7 +318,7 @@
         },
         {
           "label": "Battleships: always-on assistant workload (built by the Boat team)",
-          "url": "https://battleships.dev/data/presets.json"
+          "url": "https://battleships.dev/data/rankings/employees.json"
         }
       ],
       "managed": [
@@ -412,8 +412,8 @@
         },
         {
           "label": "How busy it is",
-          "value": "Mostly waiting: about 6% CPU on average in Battleships' always-on assistant workload, which names OpenClaw, with peaks near 100%.",
-          "source": "https://battleships.dev/data/presets.json"
+          "value": "Mostly waiting: about 6% CPU on average in Battleships' modelled always-on assistant workload, which names OpenClaw, with peaks near 100%.",
+          "source": "https://battleships.dev/data/rankings/employees.json"
         }
       ],
       "routes": [
@@ -700,7 +700,7 @@
         },
         {
           "label": "Battleships: always-on assistant workload (built by the Boat team)",
-          "url": "https://battleships.dev/data/presets.json"
+          "url": "https://battleships.dev/data/rankings/employees.json"
         }
       ],
       "managed": [
@@ -804,7 +804,7 @@
         },
         {
           "label": "Does it stay on?",
-          "value": "No. It runs during working hours; eight hours on 20 days is 160 hours a month.",
+          "value": "No. It runs during working hours; this guide assumes eight hours on 20 days, 160 hours a month.",
           "source": "https://battleships.dev/data/presets.json"
         },
         {
@@ -819,7 +819,7 @@
         },
         {
           "label": "How busy it is",
-          "value": "Mostly waiting on the model: about 4% CPU on average in Battleships' software-factory workload, with short peaks during builds.",
+          "value": "Mostly waiting on the model: about 4% CPU on average in Battleships' modelled software-factory workload, with short peaks during builds.",
           "source": "https://battleships.dev/data/rankings/fullstack.json"
         }
       ],
@@ -1044,7 +1044,7 @@
         },
         {
           "label": "Battleships: software-factory workload (built by the Boat team)",
-          "url": "https://battleships.dev/data/presets.json"
+          "url": "https://battleships.dev/data/rankings/fullstack.json"
         }
       ]
     },
@@ -1068,7 +1068,7 @@
         },
         {
           "label": "Does it stay on?",
-          "value": "No. Each run lasts seconds to minutes; 20,000 one-minute runs a month is about 650 a day.",
+          "value": "No. Each run lasts seconds to minutes. This guide's example is 20,000 one-minute runs a month, about 650 a day (Battleships models 200,000 sessions).",
           "source": "https://battleships.dev/data/presets.json"
         },
         {
@@ -1078,8 +1078,8 @@
         },
         {
           "label": "How busy it is",
-          "value": "About 17% CPU on average in Battleships' interpreter workload. Charging by the second, and only for CPU actually used, both matter here.",
-          "source": "https://battleships.dev/data/presets.json"
+          "value": "About 17% CPU on average in Battleships' modelled interpreter workload. Charging by the second, and only for CPU actually used, both matter here.",
+          "source": "https://battleships.dev/data/rankings/interp.json"
         }
       ],
       "routes": [
@@ -1232,7 +1232,7 @@
       "sources": [
         {
           "label": "Battleships: interpreter workload (built by the Boat team)",
-          "url": "https://battleships.dev/data/presets.json"
+          "url": "https://battleships.dev/data/rankings/interp.json"
         },
         {
           "label": "Modal: resources",
@@ -1274,8 +1274,8 @@
         },
         {
           "label": "How busy it is",
-          "value": "About 3% CPU on average; Chromium's memory is what fills the machine.",
-          "source": "https://battleships.dev/data/presets.json"
+          "value": "About 3% CPU on average in Battleships' modelled browser workload; Chromium's memory is what fills the machine.",
+          "source": "https://battleships.dev/data/rankings/browseruse.json"
         }
       ],
       "routes": [
@@ -1384,7 +1384,7 @@
       "sources": [
         {
           "label": "Battleships: browser and computer-use workloads (built by the Boat team)",
-          "url": "https://battleships.dev/data/presets.json"
+          "url": "https://battleships.dev/data/rankings/browseruse.json"
         },
         {
           "label": "Browser Use pricing",
@@ -1428,7 +1428,7 @@
         },
         {
           "label": "How busy it is",
-          "value": "Mostly waiting. No benchmark measures n8n; Battleships' nearest always-on workload averages about 6% CPU, with peaks near 100% when a large workflow runs. Size for the peak, not the average.",
+          "value": "Mostly waiting. No benchmark measures n8n; Battleships' nearest modelled always-on workload averages about 6% CPU, with peaks near 100% when a large workflow runs. Size for the peak, not the average.",
           "source": "https://battleships.dev/data/rankings/employees.json"
         }
       ],
@@ -1814,7 +1814,7 @@
         },
         {
           "label": "How busy it is",
-          "value": "Idle almost all the time, busy in short bursts when a message arrives. Battleships' always-on assistant averages about 6% CPU; one community server sees less traffic, so the calculator uses 3%.",
+          "value": "Idle almost all the time, busy in short bursts when a message arrives. Battleships' modelled always-on assistant averages about 6% CPU; one community server sees less traffic, so the calculator uses 3%.",
           "source": "https://battleships.dev/data/rankings/employees.json"
         }
       ],
@@ -2128,7 +2128,7 @@
         },
         {
           "label": "How busy it is",
-          "value": "Mostly waiting on the model: about 3% CPU on average in Battleships' software-factory workload, with peaks near half the machine during builds and tests.",
+          "value": "Mostly waiting on the model: about 3% CPU on average in Battleships' modelled software-factory workload, with peaks near half the machine during builds and tests.",
           "source": "https://battleships.dev/data/rankings/fullstack.json"
         }
       ],
@@ -2447,7 +2447,7 @@
         },
         {
           "label": "How busy it is",
-          "value": "Busy while a run is open: about 40% CPU in Battleships' scraping workload, because a browser does real work. Idle for the rest of the day.",
+          "value": "Busy while a run is open: about 40% CPU in Battleships' modelled scraping workload, because a browser does real work. Idle for the rest of the day.",
           "source": "https://battleships.dev/data/rankings/scrape.json"
         }
       ],
@@ -2756,7 +2756,7 @@
         },
         {
           "label": "How busy it is",
-          "value": "Idle between tool calls and busy for milliseconds during one. There is no benchmark for it; the calculator uses 2%, below Battleships' 6% for an always-on agent, because the server only passes calls on.",
+          "value": "Idle between tool calls and busy for milliseconds during one. There is no benchmark for it; the calculator uses 2%, below Battleships' modelled 6% for an always-on agent, because the server only passes calls on.",
           "source": "https://battleships.dev/data/rankings/employees.json"
         }
       ],

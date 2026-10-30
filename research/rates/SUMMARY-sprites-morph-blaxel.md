@@ -1,5 +1,7 @@
 # Rates refresh — Sprites, Morph, Blaxel
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 Checked 2026-10-29 against the live pricing and documentation pages. Starting point was `research/sprites.md`, `research/morph.md` and `research/blaxel.md` (2026-10-28). Battleships cards were read as a secondary source only; its `index.json` was generated 2026-10-14, so its "live" values can be two weeks older than this check.
 
 Method: TinyFish Fetch for every page body, direct HTTPS reads for the Battleships JSON. Context.dev was not needed because TinyFish returned usable text for all pricing and doc pages. 140 quoted fragments were checked verbatim against the fetched page text. All 39 unique documentation URLs in the three files were re-fetched and returned content; one 10-URL batch hit a gateway timeout and was retried successfully.
@@ -48,7 +50,7 @@ Files: `sprites.json`, `morph.json`, `blaxel.json`, this summary.
 | Morph | freeTier | 0 MCUs vs 300 MCUs vs 300 hours, all live. Battleships says no free credit. |
 | Morph | storage.volumes / EFS | Battleships adds EFS at $0.12–$0.18/GiB-month; no EFS line exists on the live pricing page or Volumes doc. |
 | Morph | compute.billingIncrement | Live terms say per-second; Battleships says unpublished. |
-| Morph | compute.floor | Live doc has the `max(1, …)` floor; Battleships omits it. |
+| Morph | compute.floor | Live doc has the `max(1, …)` floor. Battleships' shorthand formula is written without `max(1, …)`, but its on-demand mode sets `min_vcpu: 1` separately, so this is not a demonstrated floor undercharge. Its disk-dominated limitation is the real gap. |
 | Morph | storage.retention | Battleships says snapshots have no default TTL; live docs only say TTL is opt-in. |
 | Blaxel | plans[Tier 0].limits | Battleships lists a 2 vCPU / 4 GiB cap it could not re-verify; live publishes none. |
 | Blaxel | plans[].monthlyFeeUsd | Live calls Tier 1/2 amounts minimum top-ups, not fees; Battleships encodes them as fees flagged as credit. |

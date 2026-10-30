@@ -1,5 +1,7 @@
 # Capabilities 1 (machine + money) — notes, 29 October 2026
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 Scope: 19 capabilities × 16 providers = 304 rows in `capabilities-1-machine-money.json`.
 Research base: `research/*.md` and `site/src/data/**` as checked on 28 October 2026, re-checked
 against live vendor pages today (29 October 2026).

@@ -1,5 +1,7 @@
 # Rates check — Runtime, E2B, Daytona
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 Checked 2026-10-29 against each provider's live pricing page and docs, plus Battleships' card
 (`https://battleships.dev/data/providers/<id>.json`, generated 2026-10-14). No account was created,
 no sandbox was started, and nothing was billed. Every number in the three JSON files carries a source

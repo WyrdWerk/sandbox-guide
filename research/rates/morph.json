@@ -1,6 +1,7 @@
 {
   "id": "morph",
   "checkedOn": "2026-10-29",
+  "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "provider": "Morph Cloud (Morph Labs, Inc.)",
   "pricingUrl": "https://cloud.morph.so/web/subscribe",
   "plans": [
@@ -273,7 +274,7 @@
     {
       "field": "compute.floor",
       "ours": "The MCU formula has a floor of 1, so even a tiny instance bills one MCU per hour.",
-      "battleships": "MCU formula without the max(1, ...) floor.",
+      "battleships": "Its shorthand MCU formula is written without the max(1, ...) term, but its on-demand mode separately sets min_vcpu: 1, so no supported workload is shown to bill below one MCU. Not a demonstrated floor undercharge; its separate disk-dominated limitation (disk above 16 GiB per billed MCU) is real.",
       "live": "The resize doc publishes max(1, vCPUs, ceil(memory_MiB/4096), ceil(disk_size_MiB/16384)) for supported instances.",
       "url": "https://cloud.morph.so/docs/documentation/instances/resize-disk",
       "quote": "max(1, vCPUs, ceil(memory_MiB / 4096), ceil(disk_size_MiB / 16384))"

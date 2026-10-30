@@ -75,7 +75,7 @@
       ]
     },
     "C": {
-      "headline": "$8.25 of credits",
+      "headline": "$8.26 of credits",
       "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running hours, suspended otherwise with files kept",
       "lines": [
         {
@@ -95,11 +95,11 @@
         },
         {
           "label": "Snapshot storage while suspended",
-          "arithmetic": "20 GB × 640 h × ($0.07 ÷ 730)",
-          "amount": "$1.23"
+          "arithmetic": "20 GB × 640 h × ($0.07 ÷ 720, a fixed 30-day month)",
+          "amount": "$1.24"
         }
       ],
-      "total": "$8.25",
+      "total": "$8.26",
       "notes": [
         "A named sandbox suspends instead of terminating, so the 640 idle hours cost storage, not compute.",
         "On Pro the same month is $250; the fee only pays off above roughly $250 of usage."

@@ -1,5 +1,7 @@
 # Modal Sandboxes: provider profile
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 **Researched:** 28 October 2026. Desk research only; no account was created and no sandbox was started or billed.
 **Scope:** the Sandboxes product. Functions, Inference, Training and the rest of Modal appear only where they change how Sandboxes are bought, run or governed.
 **Primary sources:** modal.com/docs (Sandboxes, Snapshots, Exit Snapshots, Resources, Networking, Files, Sidecars, Secret Injection, Region selection, Security, Data residency, Billing, Egress billing, Proxies, Existing images, GPU, Python SDK reference, CLI reference), modal.com/pricing, modal.com/products/sandboxes, modal.com/company, modal.com/legal/terms, status.modal.com, trust.modal.com, and Modal's own funding posts.

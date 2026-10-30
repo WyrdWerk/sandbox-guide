@@ -1,5 +1,7 @@
 # Rate cards: Modal, Cloudflare Sandboxes, Vercel Sandbox
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 Checked 2026-10-29 against each provider's live pricing page and docs. Files: `modal.json`, `cloudflare-sandbox.json`, `vercel-sandbox.json`.
 
 **No published rate changed since the 2026-10-28 research.** Every number in the three rate cards — Modal's $0.00003942/core-second and $0.00000667/GiB-second, Cloudflare's $0.000020/vCPU-second, $0.0000025/GiB-second and $0.00000007/GB-second, Vercel's $0.128/vCPU-hour and $0.0212/GB-hour — is still on the live page. The diffs below are with Battleships and with details the research did not pin down, not with the providers' prices.

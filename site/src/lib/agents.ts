@@ -143,6 +143,10 @@ export function rankingsMarkdown(): string {
   return out.join("\n") + "\n";
 }
 
+/** Said wherever an export cites battleships.dev, since the HTML footer does not travel with it. */
+const BATTLESHIPS = "Disclosure: battleships.dev, cited here, is built by the Boat team, and Boat is one of the providers compared. It is a cross-check, never the sole source of a rate or verdict.";
+const disclose = (text: string) => (/battleships/i.test(text) ? `${text}\n${BATTLESHIPS}\n` : text);
+
 export function providerMarkdown(p: Provider): string {
   const out = [`# ${p.name}`, ``, `> ${p.oneLiner}`, ``, `Website: ${p.url}  `, `Guide page: ${abs(`/providers/${p.id}/`)}  `, `Checked: ${p.checkedOn ?? site.checkedOn}`];
   if (p.status === "pending") return [...out, ``, `Research on this provider is not finished.`].join("\n") + "\n";
@@ -173,7 +177,7 @@ export function providerMarkdown(p: Provider): string {
   out.push(``, `## Company`, ``, ...p.company.facts.map((f) => `- ${f.label}: ${f.value}${f.source ? ` [source](${f.source.url})` : ""}`));
   if (p.caveats.length) out.push(``, `## Caveats`, ``, ...p.caveats.map((c) => `- **${c.issue}** (${c.status}): ${c.detail}`));
   out.push(``, `## Sources`, ``, ...p.sources.map((s) => `- [${s.label}](${s.url})`));
-  return out.join("\n") + "\n";
+  return disclose(out.join("\n") + "\n");
 }
 
 export function useCaseMarkdown(id: string): string {
@@ -185,7 +189,7 @@ export function useCaseMarkdown(id: string): string {
   out.push(``, `## Monthly machine cost (preset \`${u.preset}\`)`, ``, presets[u.preset].why, ``, ...ranking(u.preset).map((r) => `- ${r.name}: ${formatMoney(r.monthlyUsd)}${r.fits ? "" : ` (catch: ${r.problems.join(" ")})`}`));
   if (u.managed?.length) out.push(``, `## Managed services (someone else runs it)`, ``, ...u.managed.map((m) => `- **${m.name}** (${m.url}): ${md(m.what)} From ${m.price}. Catch: ${md(m.catch)} [source](${m.source.url}), checked ${m.source.checkedOn}`));
   out.push(``, `## Outside a sandbox`, ``, md(u.outside), ``, `## Sources`, ``, ...u.sources.map((s) => `- [${s.label}](${s.url})`));
-  return out.join("\n") + "\n";
+  return disclose(out.join("\n") + "\n");
 }
 
 export function guideMarkdown(id: string): string {
@@ -269,11 +273,14 @@ export function llmsFullTxt(): string {
   ].join("\n---\n\n");
 }
 
-export const providerRecord = (id: string) => ({
-  ...providerById.get(id),
-  page: abs(`/providers/${id}/`),
-  rateCard: pricing.find((c) => c.provider === id) ?? null,
-  docs: docLinks[id] ?? {},
-  features: Object.fromEntries(features.map((f) => [f.id, f.rows.find((r) => r.provider === id)])),
-  capabilities: Object.fromEntries(capabilities.map((c) => [c.id, c.rows.find((r) => r.provider === id) ?? null])),
-});
+export const providerRecord = (id: string) => {
+  const record = {
+    ...providerById.get(id),
+    page: abs(`/providers/${id}/`),
+    rateCard: pricing.find((c) => c.provider === id) ?? null,
+    docs: docLinks[id] ?? {},
+    features: Object.fromEntries(features.map((f) => [f.id, f.rows.find((r) => r.provider === id)])),
+    capabilities: Object.fromEntries(capabilities.map((c) => [c.id, c.rows.find((r) => r.provider === id) ?? null])),
+  };
+  return /battleships/i.test(JSON.stringify(record)) ? { disclosure: BATTLESHIPS, ...record } : record;
+};

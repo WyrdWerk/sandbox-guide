@@ -3,6 +3,7 @@
   "provider": "boxd",
   "site": "https://boxd.sh",
   "checkedOn": "2026-10-29",
+  "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "currency": "USD and EUR (two published lists behind a toggle; the USD list is about 1.2x the EUR list)",
   "battleships": {
     "id": "boxd",
@@ -287,7 +288,7 @@
     },
     {
       "field": "compute.rates",
-      "ours": "research/sandboxer.md-style note in research/boxd.md said Battleships was still on $0.059 / $0.018 / $0.00012",
+      "ours": "research/boxd.md distinguishes Battleships' current headline rate and card ($0.047 / $0.014 / $0.000096) from one running-PAYG table row in its Markdown narrative that keeps the pre-cut $0.059 / $0.018 / $0.00012; the record is internally inconsistent, not stale overall",
       "battleships": "$0.047 / $0.014 / $0.000096 (already the post-cut rates, checked 2026-10-14)",
       "live": "$0.047 / $0.014 / $0.000096",
       "url": "https://boxd.sh/pricing",

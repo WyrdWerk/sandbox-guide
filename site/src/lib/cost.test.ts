@@ -15,13 +15,17 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["blaxel", "a", 27.6], ["blaxel", "b", 247.78], ["blaxel", "c", 17.3],
   ["boat", "a", 20], ["boat", "b", 26.28],
   ["e2b", "a", 27.6], ["e2b", "c", 164.9],
-  ["instabox", "b", 28.84],
+  // 4 × $0.004 × 730 + 8 × $0.00225 × 730 + (50 − 20 free) GiB × $0.00011 × 730, over the $20 Pro credit.
+  ["instabox", "b", 27.23],
   ["lizard", "a", 19], ["lizard", "b", 27.85], ["lizard", "c", 19],
   ["morph", "a", 16.67], ["morph", "c", 9.15],
   ["sandboxer", "a", 20], ["sandboxer", "b", 40], ["sandboxer", "c", 20],
   ["boxd", "b", 222.5],
   ["agent37", "b", 30.1],
-  ["tensorlake", "a", 22], ["tensorlake", "b", 250], ["tensorlake", "c", 8.25],
+  // C: 0.2 core × $0.07 × 90 + 4 × $0.015 × 90 + 20 × $0.0002 × 90 + 640 h × 20 GB × $0.07 / 720.
+  ["tensorlake", "a", 22], ["tensorlake", "b", 250], ["tensorlake", "c", 8.26],
+  // Active CPU + memory + decimal-GB disk at $0.08 / 720 (first 10 GiB free while running), less 25 vCPU-h and 100 GiB-h a month.
+  ["runtime", "a", 7.79], ["runtime", "b", 53.21], ["runtime", "c", 3.58],
   // 1,000 runs at the $0.01 minimum; 730 h capped at $48; 90 on + 640 powered off, capped at $24.
   ["digitalocean", "a", 10], ["digitalocean", "b", 48], ["digitalocean", "c", 24],
   // 1,000 servers × 1 h (rounded up) × $0.0368 + 1,000 IPv4-hours × $0.001; min(730 h × $0.0673, $41.99) + $0.60 IPv4; CPX22 capped at $22.99 + $0.60.
@@ -33,6 +37,27 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   // One VPS XS plan runs all 1,000 tasks; VPS SM for 4 vCPU / 8 GB / 100 GB; VPS XS billed for the month.
   ["hostup", "a", 5.72], ["hostup", "b", 11.55], ["hostup", "c", 5.72],
 ];
+
+const task = (vcpu: number, ram: number, minutes: number) =>
+  ({ vcpu, ram, disk: 10, mode: "tasks", tasks: 1, taskMinutes: minutes, machines: 1, hoursPerDay: 0, daysPerMonth: 30, keepDisk: false, busy: 0, awake: 1, model: "", messagesPerDay: 0, kTokens: 0 }) as const;
+
+test("plan gates, minimums and fixed shapes from the providers' own pages", () => {
+  // Boat's xlarge needs the $100 plan; InstaBox's 16/32 needs Builder.
+  assert.equal(price(card("boat"), task(16, 32, 60)).total, 100);
+  assert.equal(price(card("instabox"), task(16, 32, 60)).plan, "Builder");
+  // DigitalOcean: a one-second run on the $1-an-hour 32/64 size is billed 60 seconds, more than the $0.01 floor.
+  assert.ok(Math.abs(price(card("digitalocean"), task(32, 64, 1 / 60)).total - 1 / 60) < 1e-4);
+  // Vercel: memory bills a whole minute, and 2 vCPU comes with 4 GB even when 1 GB is asked for.
+  const mem = price(card("vercel-sandbox"), task(2, 1, 1 / 60)).lines.find((l) => l.label === "Memory")!;
+  assert.ok(Math.abs(mem.amount - (1 / 60) * 4 * 0.0212) < 1e-9);
+  // Blaxel: 6 cores come with 16 GB ($0.6624 an hour); 7 cores are not documented.
+  assert.ok(Math.abs(price(card("blaxel"), task(6, 8, 60)).total - 0.6624) < 1e-9);
+  assert.equal(price(card("blaxel"), task(7, 8, 60)).feasible, false);
+  // Tensorlake's Pro rates: the browser preset is $197.60 of Pro usage, inside its $250 fee, against $331 on prepaid credits.
+  const tl = price(card("tensorlake"), presets.browser.workload);
+  assert.equal(tl.plan, "Pro");
+  assert.ok(Math.abs(tl.usage - 197.6) < 0.01);
+});
 
 test("the model line counts the days a month the machines work", () => {
   const models = [{ id: "m", label: "M", kind: "", offerings: 1, lowest: { provider: "x", rate: 0.5 }, median: 1, url: "" }];

@@ -315,3 +315,12 @@ All accessed 2026-10-30. Provider quotes in `findings.json` are the exact retrie
 ## Delivery state
 
 Only `research/incoming/battleships-audit/report.md` and `findings.json` were added. They are local, uncommitted and unpushed. No site content or implementation was corrected as part of this read-only audit. The requested parent-thread handoff should prioritize the missing plan gates, omitted allowances, unit errors and exported disclosures, while preserving unknowns and Botperch's independently supported newer figures.
+
+## Parent integration, 2026-10-30
+
+Applied by https://ampcode.com/threads/T-01a188d2-e3f1-734f-8aed-80041812cbe2. All 26 corrections were applied; the 10 unclear records stay unknown.
+
+- **Primary sources re-read:** every pricing correction's primary page was fetched fresh through Firecrawl (`maxAge: 0`) and its quote matched. Boat's matched once Markdown backticks were ignored. Runtime's included-usage table came back without its rows, so the page was read over plain HTTPS as a fallback: "Machine memory 100 GiB-hours", "Machine active CPU 25 vCPU-hours", renewed every calendar month for a paid account.
+- **Engine:** new `Plan.rates` (Tensorlake Pro), `RateCard.minimumSeconds` (DigitalOcean's 60 s), `ramWholeMinutes` (Vercel) and `ramForVcpu` (Blaxel). Disk allowances are labelled GiB-h.
+- **Data:** Boat's $100 plan and xlarge gate; InstaBox's free 20 GiB, Builder/Team plans, size and disk gates, and egress wording; Runtime's 720-hour storage month and recurring allowance; Tensorlake's 720-hour snapshot month; Vercel's 2 GB-per-vCPU sizes; Cloudflare's GB disk converted to GiB, and its egress rate per GiB; an Agent 37 partial-minute note; Modal's 2× CPU wording; Sprites' Hero/Mythic changelog line; the use-case workload citations; and Boat-team disclosures in the Markdown and JSON exports.
+- **Totals that moved:** InstaBox B $28.84 → $27.23; Runtime A/B/C → $7.79 / $53.21 / $3.58 in the calculator (the profile's floor-to-busy ranges also moved); Tensorlake C $8.25 → $8.26. Each was re-worked by hand and added to `cost.test.ts`.

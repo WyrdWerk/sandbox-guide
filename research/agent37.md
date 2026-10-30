@@ -1,5 +1,7 @@
 # Agent 37 — provider profile
 
+Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.
+
 Research date: 2026-10-28. Desk research only; no sandbox or agent was created, started, or billed.
 Prices are the provider's published list rates in USD. Where a fact is not published I say so rather
 than inferring a number.
@@ -1075,7 +1077,9 @@ Concepts a newcomer needs before the pricing makes sense:
 - **Performance account price.**
 - **Concurrency/rate limits** on the API — only "One instance runs up to 48 commands at a time"
   (<https://www.agent37.com/docs/agents-api/exec> `docs-confirmed`) and
-  "1 on-demand backup per instance per 15 min" (<https://battleships.dev/data/providers/agent-37.json> `third-party` for the latter) are stated.
+  "One on-demand backup per instance every 15 minutes; a second call inside the window returns `429 rate_limited` with a `Retry-After` header"
+  (<https://www.agent37.com/docs/agents-api/instances/create-backup.md> `docs-confirmed`, checked 2026-10-30;
+  Battleships' card carries the same limit as a cross-check) are stated.
 - **Audit logs, SSO/SAML, HIPAA BAA.** None documented.
 - **GPU.** None offered.
 - **IPv6.** Outbound rules are IPv4-only.

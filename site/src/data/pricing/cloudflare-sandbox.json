@@ -1,6 +1,6 @@
 {
   "provider": "cloudflare-sandbox",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-10-30",
   "summary": "Per 10 ms on the Workers Paid bill: CPU only while working, memory and disk for as long as the instance runs.",
   "cpu": {
     "rate": 0.072,
@@ -10,7 +10,7 @@
     "rate": 0.009
   },
   "disk": {
-    "running": 0.000252,
+    "running": 0.000270583,
     "shapeSize": true
   },
   "shapes": [
@@ -18,44 +18,44 @@
       "name": "lite",
       "vcpu": 0.0625,
       "ram": 0.25,
-      "disk": 2
+      "disk": 1.863
     },
     {
       "name": "basic",
       "vcpu": 0.25,
       "ram": 1,
-      "disk": 4
+      "disk": 3.725
     },
     {
       "name": "standard-1",
       "vcpu": 0.5,
       "ram": 4,
-      "disk": 8
+      "disk": 7.451
     },
     {
       "name": "standard-2",
       "vcpu": 1,
       "ram": 6,
-      "disk": 12
+      "disk": 11.176
     },
     {
       "name": "standard-3",
       "vcpu": 2,
       "ram": 8,
-      "disk": 16
+      "disk": 14.901
     },
     {
       "name": "standard-4",
       "vcpu": 4,
       "ram": 12,
-      "disk": 20
+      "disk": 18.626
     }
   ],
   "between": "lost",
   "lostNote": "A stopped instance loses its disk; files have to be backed up to R2 or a snapshot and restored.",
   "egress": {
-    "perGiB": 0.025,
-    "note": "$0.04–$0.05 per GB elsewhere, with 500 GB included. Outbound traffic is off unless turned on.",
+    "perGiB": 0.0268435,
+    "note": "$0.025 per GB in North America and Europe beyond the 1 TB included; $0.04–$0.05 per GB elsewhere, with 500 GB included. Outbound traffic is off unless turned on.",
     "url": "https://developers.cloudflare.com/containers/platform/pricing/",
     "included": "1 TB a month in North America and Europe"
   },
@@ -66,13 +66,14 @@
       "allowance": {
         "cpuHours": 6.25,
         "ramHours": 25,
-        "diskHours": 200
+        "diskHours": 186.26
       }
     }
   ],
   "notes": [
-    "Egress is $0.025 per GB in North America and Europe and is not included.",
-    "Workers, Durable Objects and R2 usage are billed separately."
+    "Workers, Durable Objects and R2 usage are billed separately.",
+    "Egress is $0.025 per GB in North America and Europe beyond the 1 TB included each month.",
+    "Disk sizes, the disk rate and the 200 GB-hour allowance are in decimal GB; they are converted to GiB here (20 GB is about 18.63 GiB)."
   ],
   "sources": [
     {
@@ -86,5 +87,5 @@
   ],
   "maxVcpu": 4,
   "maxRam": 12,
-  "maxDisk": 20
+  "maxDisk": 18.626
 }

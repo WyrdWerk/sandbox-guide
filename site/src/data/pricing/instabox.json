@@ -1,6 +1,6 @@
 {
   "provider": "instabox",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-10-30",
   "summary": "Per second on the size you asked for, out of a monthly plan that is also a credit; storage bills in every state.",
   "cpu": {
     "rate": 0.004,
@@ -11,35 +11,54 @@
   },
   "disk": {
     "running": 0.00011,
-    "stopped": 0.00011
+    "stopped": 0.00011,
+    "included": 20
   },
   "between": "kept",
   "egress": {
     "perGiB": 0.02,
     "note": "Sending is capped at about 50 Mbit/s per machine.",
     "url": "https://instabox.sh/docs/pricing",
-    "included": "100 GiB on Free, 1 TiB on Pro, 5 TiB on Builder"
+    "included": "100 GiB on Free, 1 TiB on Pro, 5 TiB on Builder, 50 TiB on Team"
   },
   "plans": [
     {
       "name": "Pro",
       "fee": 20,
-      "credit": 20
+      "credit": 20,
+      "maxVcpu": 8,
+      "maxRam": 16,
+      "maxDisk": 200,
+      "excludesShapes": [
+        "16/32",
+        "32/64"
+      ]
     },
     {
-      "name": "Max",
+      "name": "Builder",
       "fee": 100,
-      "credit": 100
+      "credit": 100,
+      "maxVcpu": 16,
+      "maxRam": 32,
+      "maxDisk": 500,
+      "excludesShapes": [
+        "32/64"
+      ]
     },
     {
-      "name": "Ultra",
+      "name": "Team",
       "fee": 500,
-      "credit": 500
+      "credit": 500,
+      "maxVcpu": 32,
+      "maxRam": 64,
+      "maxDisk": 1024
     }
   ],
   "notes": [
     "The free plan is one 4 vCPU / 8 GiB machine that pauses after 30 idle minutes; it is not priced here.",
-    "Egress is $0.02 per GiB and is not included."
+    "Egress is $0.02 per GiB beyond each plan's included allowance.",
+    "The first 20 GiB of each paid machine's /data disk is free in every state; only disk beyond it bills.",
+    "Sizes are 2 GiB of memory per vCPU: Pro allows 2/4, 4/8 and 8/16, Builder up to 16/32 and Team up to 32/64, with disk up to 200, 500 and 1,024 GiB."
   ],
   "sources": [
     {
@@ -47,5 +66,37 @@
       "url": "https://instabox.sh/pricing"
     }
   ],
-  "sleeps": "An idle machine pauses itself and wakes when its preview link is used; paused time bills storage only. A manual pause does not wake on use."
+  "sleeps": "An idle machine pauses itself and wakes when its preview link is used; paused time bills storage only. A manual pause does not wake on use.",
+  "shapes": [
+    {
+      "name": "2/4",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 1024
+    },
+    {
+      "name": "4/8",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 1024
+    },
+    {
+      "name": "8/16",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 1024
+    },
+    {
+      "name": "16/32",
+      "vcpu": 16,
+      "ram": 32,
+      "disk": 1024
+    },
+    {
+      "name": "32/64",
+      "vcpu": 32,
+      "ram": 64,
+      "disk": 1024
+    }
+  ]
 }

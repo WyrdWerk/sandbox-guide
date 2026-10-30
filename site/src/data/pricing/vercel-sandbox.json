@@ -1,6 +1,6 @@
 {
   "provider": "vercel-sandbox",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-10-30",
   "summary": "Active CPU, excluding time spent waiting, plus provisioned memory for the whole session; persistent sandboxes keep their files as a snapshot between sessions.",
   "cpu": {
     "rate": 0.128,
@@ -42,7 +42,8 @@
     "A persistent sandbox restores its files from a snapshot when it starts again, not its memory or running processes. Snapshot storage is $0.08 per GB-month; the calculator charges it on the full disk size, which overstates it if little is written.",
     "Each sandbox gets 64 GB of fast disk at no separate charge while it runs.",
     "Creations, data transfer and drives are billed separately and are not included.",
-    "Sandboxes that cannot resume from a snapshot are removed after 14 days of inactivity."
+    "Sandboxes that cannot resume from a snapshot are removed after 14 days of inactivity.",
+    "Each vCPU comes with 2 GB of memory, and sizes are 1 or an even number of vCPUs, so a request is rounded up to the next size. Memory bills in whole minutes for each sandbox, while active CPU bills only for the time it works."
   ],
   "sources": [
     {
@@ -57,5 +58,110 @@
   "disk": {
     "stopped": 0.000109589
   },
-  "maxDisk": 64
+  "maxDisk": 64,
+  "ramWholeMinutes": true,
+  "shapes": [
+    {
+      "name": "1 vCPU",
+      "vcpu": 1,
+      "ram": 2,
+      "disk": 64
+    },
+    {
+      "name": "2 vCPU",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 64
+    },
+    {
+      "name": "4 vCPU",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 64
+    },
+    {
+      "name": "6 vCPU",
+      "vcpu": 6,
+      "ram": 12,
+      "disk": 64
+    },
+    {
+      "name": "8 vCPU",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 64
+    },
+    {
+      "name": "10 vCPU",
+      "vcpu": 10,
+      "ram": 20,
+      "disk": 64
+    },
+    {
+      "name": "12 vCPU",
+      "vcpu": 12,
+      "ram": 24,
+      "disk": 64
+    },
+    {
+      "name": "14 vCPU",
+      "vcpu": 14,
+      "ram": 28,
+      "disk": 64
+    },
+    {
+      "name": "16 vCPU",
+      "vcpu": 16,
+      "ram": 32,
+      "disk": 64
+    },
+    {
+      "name": "18 vCPU",
+      "vcpu": 18,
+      "ram": 36,
+      "disk": 64
+    },
+    {
+      "name": "20 vCPU",
+      "vcpu": 20,
+      "ram": 40,
+      "disk": 64
+    },
+    {
+      "name": "22 vCPU",
+      "vcpu": 22,
+      "ram": 44,
+      "disk": 64
+    },
+    {
+      "name": "24 vCPU",
+      "vcpu": 24,
+      "ram": 48,
+      "disk": 64
+    },
+    {
+      "name": "26 vCPU",
+      "vcpu": 26,
+      "ram": 52,
+      "disk": 64
+    },
+    {
+      "name": "28 vCPU",
+      "vcpu": 28,
+      "ram": 56,
+      "disk": 64
+    },
+    {
+      "name": "30 vCPU",
+      "vcpu": 30,
+      "ram": 60,
+      "disk": 64
+    },
+    {
+      "name": "32 vCPU",
+      "vcpu": 32,
+      "ram": 64,
+      "disk": 64
+    }
+  ]
 }

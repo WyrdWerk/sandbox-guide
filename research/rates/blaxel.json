@@ -1,6 +1,7 @@
 {
   "id": "blaxel",
   "checkedOn": "2026-10-29",
+  "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "provider": "Blaxel (acquired by Baseten on 2026-09-10)",
   "pricingUrl": "https://blaxel.ai/pricing",
   "plans": [

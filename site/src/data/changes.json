@@ -43,7 +43,7 @@
       "date": "2026-10-28",
       "title": "Sprites' rates are roughly half the figures still in circulation",
       "provider": "sprites",
-      "what": "Fly's current list is $0.0385 per CPU-hour and $0.021875 per GB-hour, both measured on actual use. A widely copied comparison still narrates $0.07 and $0.04375. Fly publishes no change date, so this entry is dated by observation, not by an announcement. The same pricing page says there are no plans, while the Sprites FAQ describes a plan ladder up to Mythic at $100 a month.",
+      "what": "Fly's current list is $0.0385 per CPU-hour and $0.021875 per GB-hour, both measured on actual use. A widely copied comparison still narrates $0.07 and $0.04375. Fly publishes no change date, so this entry is dated by observation, not by an announcement. The same pricing page says there are no plans, while the Sprites FAQ describes a plan ladder that includes Hero at $100 a month and goes up to Mythic at $2,000.",
       "sources": [
         {
           "url": "https://fly.io/pricing/",

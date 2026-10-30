@@ -22,7 +22,7 @@
   },
   "cost": {
     "A": {
-      "headline": "$5.21 to $13.33 a month",
+      "headline": "$4.25 to $11.96 a month",
       "shape": "2 vCPU / 4 GiB / 4 GiB disk, deleted after each task",
       "lines": [
         {
@@ -39,16 +39,22 @@
           "label": "CPU fully busy",
           "arithmetic": "2 × 166.67 h × $0.025",
           "amount": "$8.33"
+        },
+        {
+          "label": "Monthly allowance for a paid account",
+          "arithmetic": "25 active vCPU-hours × $0.025 + 100 GiB-hours × $0.0075, up to what was used",
+          "amount": "−$0.96 to −$1.38"
         }
       ],
-      "total": "$5.21 to $13.33",
+      "total": "$4.25 to $11.96",
       "notes": [
         "Disk under 10 GiB is included while running, and deletion ends the charge.",
-        "The range exists because per-task CPU use is not published; the floor sets the bill for a task that mostly waits."
+        "The range exists because per-task CPU use is not published; the floor sets the bill for a task that mostly waits.",
+        "An account that has bought credit gets 25 active vCPU-hours and 100 GiB-hours of memory free each calendar month; both are taken off here."
       ]
     },
     "B": {
-      "headline": "$48.15 to $120.24 a month",
+      "headline": "$46.82 to $118.91 a month",
       "shape": "4 vCPU / 8 GiB / 50 GiB, 730 h, always on",
       "lines": [
         {
@@ -68,18 +74,24 @@
         },
         {
           "label": "Disk past the included 10 GiB",
-          "arithmetic": "(53.7 − 10.7) GB × $0.08",
-          "amount": "$3.44"
+          "arithmetic": "(53.7 − 10.7) GB × $0.08 × 730/720",
+          "amount": "$3.48"
+        },
+        {
+          "label": "Monthly allowance for a paid account",
+          "arithmetic": "25 active vCPU-hours × $0.025 + 100 GiB-hours × $0.0075, up to what was used",
+          "amount": "−$1.38"
         }
       ],
-      "total": "$48.15 to $120.24",
+      "total": "$46.82 to $118.91",
       "notes": [
         "Always-on needs `persistent: true` or `idlePauseSeconds: 0`; otherwise the box pauses after 5 idle minutes.",
-        "Disk is an upper bound: only blocks the disk alone holds are billed, so a mostly empty disk costs less."
+        "Disk is an upper bound: only blocks the disk alone holds are billed, so a mostly empty disk costs less.",
+        "An account that has bought credit gets 25 active vCPU-hours and 100 GiB-hours of memory free each calendar month; both are taken off here."
       ]
     },
     "C": {
-      "headline": "$4.42 to $8.81 a month",
+      "headline": "$3.56 to $7.44 a month",
       "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running hours in a 720-hour month, stopped otherwise",
       "lines": [
         {
@@ -96,12 +108,18 @@
           "label": "Stopped disk",
           "arithmetic": "21.5 GB × $0.08 × 630/720",
           "amount": "$1.50"
+        },
+        {
+          "label": "Monthly allowance for a paid account",
+          "arithmetic": "25 active vCPU-hours × $0.025 + 100 GiB-hours × $0.0075, up to what was used",
+          "amount": "−$0.86 to −$1.38"
         }
       ],
-      "total": "$4.42 to $8.81",
+      "total": "$3.56 to $7.44",
       "notes": [
         "A 30-day month is 720 hours, so 630 hours are stopped.",
-        "Pausing instead keeps memory and costs about $4.72 to $9.11."
+        "Pausing instead keeps memory and costs about $3.86 to $7.74.",
+        "An account that has bought credit gets 25 active vCPU-hours and 100 GiB-hours of memory free each calendar month; both are taken off here."
       ]
     }
   },
