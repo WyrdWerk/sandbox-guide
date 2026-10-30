@@ -28,6 +28,18 @@ prints one line per page that needs a look:
 - `NO PRICES` / `FAILED`: the page could not be read as plain HTML. Open it in a browser.
 - `NEW`: a money-bearing source URL has no baseline yet. Read it before recording one.
 - `OLD`: a rate card has not been checked for more than 30 days. Re-read all its sources.
+- `BLOCKED`: the page sits behind a Cloudflare bot check ("Just a moment") that no script
+  passes. It does not count as a problem, because such a card's prices are also tracked
+  through a feed a script can read. HostUp's web pages are blocked; its prices come from
+  `cloud.hostup.se/api/v2/products/vps` in SEK. Reread the blocked pages in a browser when
+  the card is `OLD`, and keep a readable feed on any card whose price pages are all blocked.
+
+JSON price feeds (Hostinger's cart catalog, HostUp's product API, Hetzner's price API) carry
+bare numbers beside a currency code, so the script records them as
+`<plan or price id>:<field>=<value><CURRENCY>` in the feed's own units. Hostinger's are
+cents (`price=2449USD` is $24.49); HostUp's and Hetzner's are whole units. HostUp's USD
+display is derived from SEK (÷10 for EUR, ×7/6 for USD), so a change to that conversion
+alone shows only on the blocked pages.
 
 If it prints "Every pricing page shows the same figures as the baseline" and no `OLD`
 lines, stop. There is nothing to do and no pull request to open.

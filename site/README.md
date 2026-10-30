@@ -1,7 +1,7 @@
 # Botperch site
 
-A static Astro site with no backend or client UI framework. It currently renders 16 researched
-providers, 16 features, 78 capabilities and 10 use-case guides, plus search, glossary, recommendations,
+A static Astro site with no backend or client UI framework. It currently renders 21 researched
+providers (17 sandboxes and 4 VPS providers), 16 features, 78 capabilities and 10 use-case guides, plus search, glossary, recommendations,
 comparison and a shared build/browser cost calculator. Data files, not this count, are authoritative.
 
 The `research/` and `site/` folders sit at the repo root. Read [the root guidance](../AGENTS.md)
