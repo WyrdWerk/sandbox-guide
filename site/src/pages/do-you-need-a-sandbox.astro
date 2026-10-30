@@ -3,36 +3,33 @@ import Term from "../components/Term.astro";
 import Base from "../layouts/Base.astro";
 import PageHeader from "../components/PageHeader.astro";
 import SectionNav from "../components/SectionNav.astro";
-import { pricing, providerName } from "../lib/data";
+import { pricing, providers, providerName } from "../lib/data";
 import { price, presets, formatMoney } from "../lib/cost";
 
 // The personal-agent workload, priced on every sandbox with the calculator's engine.
+// VPS rate cards are plain servers, compared on /costs/server-or-sandbox/, not sandboxes.
 const personal = presets.personal.workload;
-const sandboxes = pricing
+const isVps = new Set(providers.filter((p) => p.kind === "vps").map((p) => p.id));
+const quotes = pricing
   .map((card) => ({ id: card.provider, q: price(card, personal) }))
   .filter((r) => r.q.feasible)
   .sort((a, b) => a.q.total - b.q.total);
+const sandboxes = quotes.filter((r) => !isVps.has(r.id));
+const servers = quotes.filter((r) => isVps.has(r.id));
 const cheapest = sandboxes.slice(0, 3);
 const median = sandboxes[Math.floor(sandboxes.length / 2)];
+const checked = (id: string) => pricing.find((c) => c.provider === id)!.checkedOn;
+const sandboxCount = pricing.filter((c) => !isVps.has(c.provider)).length;
 
-// Non-sandbox homes for the same 2 vCPU / 4 GB always-on machine. Read 2026-10-29.
+// Two well-known servers, priced from their rate cards like the sandboxes.
+const serverNotes: Record<string, string> = {
+  hetzner: "Its cheaper CX23 (2 vCPU, 4 GB, €5.99) was out of stock on 2026-10-30, so this is the next size that can be ordered.",
+  digitalocean: "Smaller sizes from $4 (1 vCPU, 512 MiB) and $6 (1 vCPU, 1 GiB).",
+};
+const known = servers.filter((r) => r.id in serverNotes);
+
+// App platforms and one-click hosts for the same 2 vCPU / 4 GB always-on machine. Read 2026-10-29.
 const others = [
-  {
-    kind: "A plain server (VPS)",
-    name: "Hetzner Cloud CX23",
-    size: "2 vCPU, 4 GB, 40 GB disk, 20 TB traffic",
-    month: "€5.99 (about $7), excl. VAT",
-    url: "https://www.hetzner.com/cloud/cost-optimized/",
-    note: "EU and US locations. The monthly price is a cap; deleting early bills by the hour.",
-  },
-  {
-    kind: "A plain server (VPS)",
-    name: "DigitalOcean Basic Droplet",
-    size: "2 vCPU, 4 GB, 80 GB disk, 4 TB transfer",
-    month: "$24",
-    url: "https://www.digitalocean.com/pricing/droplets",
-    note: "Smaller sizes from $6 (1 vCPU, 1 GB) and $12 (1 vCPU, 2 GB).",
-  },
   {
     kind: "An app platform",
     name: "Fly.io shared-cpu-2x",
@@ -89,7 +86,7 @@ const nav = [
     kicker="Before you choose"
     title="Do you even need a sandbox?"
     standfirst="A cloud sandbox is one of five places an agent can live. For one personal agent that stays on all day, a plain rented server is often cheaper; a sandbox earns its price when you need many machines, throwaway machines, or machines that sleep when nobody is using them."
-    meta={["Prices read 2026-10-29", "Same 2 vCPU / 4 GB machine throughout", "Sources linked"]}
+    meta={["Sandbox and server prices from rate cards", "Other prices read 2026-10-29", "Same 2 vCPU / 4 GB machine throughout", "Sources linked"]}
   />
 
   <SectionNav items={nav} />
@@ -99,9 +96,9 @@ const nav = [
       <div class="section__head"><h2 class="section__title">The short answer</h2></div>
       <div class="prose">
         <ul>
-          <li><strong>One agent for yourself, always on, and you are happy to follow a setup guide:</strong> a plain server (Hetzner, DigitalOcean) is usually the cheapest. You look after it yourself.</li>
+          <li><strong>One agent for yourself, always on, and you are happy to follow a setup guide:</strong> a plain server is usually the cheapest. The cheapest in this guide, {providerName(servers[0].id)}, comes to {formatMoney(servers[0].q.total)} a month. You look after it yourself.</li>
           <li><strong>One agent for yourself and you never want to see a terminal:</strong> a managed one-click service (Hostinger, Agent 37). It costs little, but you get only the agents on its menu.</li>
-          <li><strong>Many short jobs, code from other people, or agents that should cost nothing when idle:</strong> a cloud sandbox. That is what the rest of this guide compares.</li>
+          <li><strong>Many short jobs, code from other people, or agents that should cost nothing when idle:</strong> a cloud sandbox (Instabox, Boat, Runtime, Freestyle, E2B and others). That is what the rest of this guide compares.</li>
         </ul>
         <p>Not sure? <a href="/choose/">Help me choose</a> asks four questions and gives you a short list.</p>
       </div>
@@ -137,7 +134,7 @@ const nav = [
         <h3>5. A cloud sandbox</h3>
         <p>
           A sealed-off machine you create from a program or a dashboard, often in under a second, billed by the second,
-          and easy to copy, pause or throw away. Built for software that creates machines on demand. See{" "}
+          and easy to copy, pause or throw away. Built for software that creates machines on demand. Instabox, Boat, Runtime, Freestyle, E2B and Daytona are examples; this guide compares {sandboxCount} of them. See{" "}
           <a href="/features/">what sandboxes offer</a> and <a href="/use-cases/">what people run on them</a>.
         </p>
       </div>
@@ -148,7 +145,7 @@ const nav = [
       <div class="prose">
         <p>
           One machine with 2 <Term id="vcpu" /> and 4 GB of memory that stays on all month, the size this guide uses for a personal
-          Hermes or OpenClaw agent. Prices are the published list prices, before tax, read on 2026-10-29. The AI model
+          Hermes or OpenClaw agent. Prices are the published list prices, before tax. Sandbox and server prices come from this guide's rate cards, each checked on the date in its row; the app-platform and one-click prices were read on 2026-10-29. The AI model
           is billed separately and is the same wherever the machine lives.
         </p>
       </div>
@@ -158,6 +155,14 @@ const nav = [
             <tr><th scope="col">Kind</th><th scope="col">Option</th><th scope="col">What you get</th><th scope="col">Per month</th></tr>
           </thead>
           <tbody>
+            {known.map((r) => (
+              <tr>
+                <td>A plain server (VPS)</td>
+                <th scope="row"><a href={`/providers/${r.id}/`}>{providerName(r.id)}</a></th>
+                <td>{r.q.shape}<br /><span class="muted">{serverNotes[r.id]} Rates checked {checked(r.id)}.</span></td>
+                <td>{formatMoney(r.q.total)}</td>
+              </tr>
+            ))}
             {others.map((o) => (
               <tr>
                 <td>{o.kind}</td>
@@ -170,7 +175,7 @@ const nav = [
               <tr>
                 <td>A cloud sandbox</td>
                 <th scope="row"><a href={`/providers/${r.id}/`}>{providerName(r.id)}</a></th>
-                <td>{r.q.shape}{r.q.plan ? ` (plan: ${r.q.plan})` : ""}<br /><span class="muted">Priced by the calculator with 20 GiB kept and about 6% CPU use.</span></td>
+                <td>{r.q.shape}{r.q.plan ? ` (plan: ${r.q.plan})` : ""}<br /><span class="muted">Priced by the calculator with 20 GiB kept and about 6% CPU use. Rates checked {checked(r.id)}.</span></td>
                 <td>{formatMoney(r.q.total)}</td>
               </tr>
             ))}
@@ -181,7 +186,10 @@ const nav = [
         <p>
           Those are the three cheapest of the {sandboxes.length} sandboxes that can run this machine. The middle one,{" "}
           {providerName(median.id)}, comes to {formatMoney(median.q.total)}.{" "}
-          <a href="/costs/?preset=personal">Change the numbers in the calculator</a>.
+          Servers are not all priced like Hetzner and DigitalOcean: the cheapest of the {servers.length} in this guide,{" "}
+          {providerName(servers[0].id)}, comes to {formatMoney(servers[0].q.total)}.{" "}
+          <a href="/costs/?preset=personal">Change the numbers in the calculator</a>, or see{" "}
+          <a href="/costs/server-or-sandbox/">every server against every sandbox</a>.
         </p>
       </div>
     </section>
@@ -208,7 +216,7 @@ const nav = [
           <li><strong>A predictable bill matters more than flexibility.</strong> Flat monthly prices are easier to plan around than per-second rates.</li>
         </ul>
         <p>
-          The server and app-platform prices on this page were read once, on 2026-10-29. Unlike the sandbox rates,
+          The app-platform and one-click prices on this page were read once, on 2026-10-29. Unlike the sandbox and server rates,
           they are not checked again with each update, so follow the links before you rely on them.
         </p>
       </div>
