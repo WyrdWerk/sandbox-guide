@@ -402,7 +402,8 @@
     "The Backups service is a paid add-on with up to four backups (daily, weekly, biweekly, manual). The backups pricing page's tables are mislabelled at this check and are not used; backups are not in the calculator.",
     "Snapshots and custom images are not in the calculator. An image is stored as Object Storage and stays until deleted; the site's images pricing page was not read for this card.",
     "Outbound transfer overage is $0.005 per GB on the pricing page. Egress is shown on the outbound-network feature, not priced here.",
-    "Not in the card: extra IPv4 addresses (billed hourly with no cap since 1 July 2026, price by region), NodeBalancers, Object Storage, Longview Pro, and GPU/Accelerated plans."
+    "Not in the card: extra IPv4 addresses (billed hourly with no cap since 1 July 2026, price by region), NodeBalancers, Object Storage, Longview Pro, and GPU/Accelerated plans.",
+    "Linode's public types API (api.linode.com/v4/linode/types, read 2026-10-30) prices the Backups add-on per plan, which the mislabelled backups pricing page does not: Linode 4 GB lists addons.backups.price monthly 5 and hourly 0.008. Not included in A/B/C."
   ],
   "sources": [
     {

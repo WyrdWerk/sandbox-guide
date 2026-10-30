@@ -318,6 +318,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "partly",
+      "figure": "Hermes + OpenClaw one-click",
+      "scenario": "Hermes or OpenClaw can be running from the Marketplace in minutes, but a coding agent is still your install and the app's default password must be changed first.",
+      "note": "Marketplace one-click apps exist for Hermes Agent and OpenClaw, each printed with the default password \"Password\". There is no coding agent preinstalled, no prompt API and no built-in browser or computer-use desktop; coding agents arrive through guides such as Codex with Dokploy.",
+      "source": {
+        "url": "https://www.vultr.com/marketplace/apps/hermesagent/",
+        "quote": "Self improving AI Agent built by Nous Research.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "partly",
+      "figure": "OpenClaw, Hermes, n8n images",
+      "scenario": "OpenClaw or Hermes arrives preinstalled from the 1-click list, but you finish setup over SSH; the default Ubuntu image has no coding agent.",
+      "note": "1-click images include OpenClaw, Hermes Agent, n8n, Paperclip AI and Ollama, installed and configured at first boot. There is no prompt API and no model credentials: you add your own keys. OpenClaw and Hermes both require SSH and their own onboarding wizard after deployment, and Contabo's support stops at the install.",
+      "source": {
+        "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+        "quote": "An OS image with an application preinstalled and configured at first boot.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "partly",
       "figure": "1-click Hermes + OpenClaw",

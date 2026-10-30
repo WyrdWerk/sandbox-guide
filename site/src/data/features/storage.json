@@ -318,6 +318,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "yes",
+      "figure": "Disk kept; 40 TB volumes",
+      "scenario": "The 20 GiB the agent writes lives on the plan disk and is still there next session, because the disk is kept while the server exists.",
+      "note": "The plan disk persists across stops and is included in the plan price. Block Storage adds up to 16 volumes per instance, 40 TB HDD or 10 TB NVMe, at $0.10/GB-month and only in the same region. Vultr File System gives multi-instance shared storage at $100/TB-month; Object Storage is S3-compatible.",
+      "source": {
+        "url": "https://www.vultr.com/products/block-storage/",
+        "quote": "Attach up to 16 volumes per instance",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "yes",
+      "figure": "Whole disk; +1.2 TB max",
+      "scenario": "Postgres in /var/lib survives a power-off and a reboot; the 100 GB plan disk covers the 20 GB asked for.",
+      "note": "The whole VM disk persists with the machine, including a stop. Storage Extension adds capacity of the plan's own type, up to 1.2 TB on the top Core plan, but it is tied to that server: there is no detachable block volume. Object Storage is a separate S3-compatible product.",
+      "source": {
+        "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+        "quote": "Storage Extension: adds storage of the plan’s type",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "yes",
       "figure": "Plan disk + 16 TB volumes",

@@ -1622,5 +1622,145 @@
       "title": "About Akamai: company, headquarters and listing",
       "url": "https://www.akamai.com/company"
     }
+  },
+  "vultr": {
+    "isolation": {
+      "title": "Cloud Compute — shared and dedicated VMs",
+      "url": "https://www.vultr.com/products/cloud-compute/"
+    },
+    "sizes-regions": {
+      "title": "Pricing — all Cloud Compute plans",
+      "url": "https://www.vultr.com/pricing/"
+    },
+    "lifecycle": {
+      "title": "How to stop an instance — billing continues",
+      "url": "https://docs.vultr.com/products/compute/instances/cloud-compute/management/stop-instance.md"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots — restore or clone",
+      "url": "https://docs.vultr.com/products/storage/snapshots"
+    },
+    "storage": {
+      "title": "Block Storage — volumes and limits",
+      "url": "https://www.vultr.com/products/block-storage/"
+    },
+    "idle-timers": {
+      "title": "Billing — servers bill until destroyed",
+      "url": "https://docs.vultr.com/support/platform/billing/how-am-i-billed-for-my-servers"
+    },
+    "reaching-it": {
+      "title": "Reserved IPs — static public addresses",
+      "url": "https://docs.vultr.com/products/network/reserved-ips"
+    },
+    "custom-domains": {
+      "title": "Vultr DNS — free anycast records",
+      "url": "https://docs.vultr.com/product-overviews/dns"
+    },
+    "outbound-network": {
+      "title": "Firewall — incoming traffic only",
+      "url": "https://docs.vultr.com/support/products/network/does-vultr-firewall-filter-outgoing-traffic-from-my-instance"
+    },
+    "keys-secrets": {
+      "title": "Enable API access — personal access token",
+      "url": "https://docs.vultr.com/platform/other/api/enable-user-api-access"
+    },
+    "ways-to-drive": {
+      "title": "API v2 reference",
+      "url": "https://www.vultr.com/api/"
+    },
+    "built-in-agents": {
+      "title": "Marketplace — one-click apps",
+      "url": "https://www.vultr.com/marketplace/"
+    },
+    "teams-accounts": {
+      "title": "IAM — organizations, roles and SSO",
+      "url": "https://www.vultr.com/products/iam/"
+    },
+    "billing-models": {
+      "title": "How am I billed for my servers",
+      "url": "https://docs.vultr.com/support/platform/billing/how-am-i-billed-for-my-servers"
+    },
+    "trials-free-tiers": {
+      "title": "Free Tier Program",
+      "url": "https://www.vultr.com/free-tier-program/"
+    },
+    "company": {
+      "title": "Compliance and certifications",
+      "url": "https://www.vultr.com/legal/compliance/"
+    },
+    "quickstart": {
+      "title": "Deploy a server with cloud-init",
+      "url": "https://docs.vultr.com/how-to-deploy-a-vultr-server-with-cloudinit-userdata"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "url": "https://www.vultr.com/pricing/"
+    }
+  },
+  "contabo": {
+    "isolation": {
+      "title": "VPS documentation: KVM, shared vCPU and limits",
+      "url": "https://docs.contabo.com/docs/servers-hosting/vps/"
+    },
+    "sizes-regions": {
+      "title": "Core VPS plans and prices",
+      "url": "https://contabo.com/en-us/vps/"
+    },
+    "billing-models": {
+      "title": "Pricing and contract terms",
+      "url": "https://contabo.com/en-us/pricing/"
+    },
+    "trials-free-tiers": {
+      "title": "How to order and pay",
+      "url": "https://help.contabo.com/en/support/solutions/articles/103000269311-which-currencies-are-accepted-by-contabo-"
+    },
+    "lifecycle": {
+      "title": "Starting, stopping and reinstalling a server",
+      "url": "https://docs.contabo.com/docs/servers-hosting/vps/"
+    },
+    "snapshots-forks": {
+      "title": "How to create a snapshot (30-day retention)",
+      "url": "https://help.contabo.com/en/support/solutions/articles/103000270385-how-do-i-create-a-snapshot-of-my-server-"
+    },
+    "storage": {
+      "title": "Storage Extension and plan disks",
+      "url": "https://docs.contabo.com/docs/servers-hosting/vps/"
+    },
+    "idle-timers": {
+      "title": "Server power states",
+      "url": "https://docs.contabo.com/docs/servers-hosting/vps/"
+    },
+    "reaching-it": {
+      "title": "IP assignment: IPv4, IPv6 and when addresses change",
+      "url": "https://docs.contabo.com/docs/network-services/ip-assignment/"
+    },
+    "custom-domains": {
+      "title": "DNS management and reverse DNS",
+      "url": "https://docs.contabo.com/docs/network-services/dns-management/"
+    },
+    "outbound-network": {
+      "title": "Traffic policy and fair use",
+      "url": "https://contabo.com/en-us/vps/"
+    },
+    "keys-secrets": {
+      "title": "Secrets Management API",
+      "url": "https://api.contabo.com/"
+    },
+    "ways-to-drive": {
+      "title": "Contabo API overview",
+      "url": "https://contabo.com/en/contabo-api/"
+    },
+    "built-in-agents": {
+      "title": "Images: operating systems and 1-click apps",
+      "url": "https://docs.contabo.com/docs/servers-hosting/images/"
+    },
+    "teams-accounts": {
+      "title": "User management and roles",
+      "url": "https://docs.contabo.com/docs/account-management/user-management/"
+    },
+    "company": {
+      "title": "Terms and conditions: availability and contract",
+      "url": "https://contabo.com/en/legal/terms-and-conditions/"
+    }
   }
 }

@@ -345,6 +345,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "no",
+      "figure": "No pause; stop still bills",
+      "scenario": "At 18:00 the server is stopped and keeps its disk and IP; at 09:00 its disk is as it was left, and the 640 stopped hours cost the same as running ones.",
+      "note": "Stop halts the operating system and all running processes and keeps billing; only destroy ends the charge, and destroying permanently deletes the data. There is no pause, hibernate or memory snapshot.",
+      "source": {
+        "url": "https://docs.vultr.com/products/compute/instances/cloud-compute/management/stop-instance.md",
+        "quote": "Stopping an instance shuts it down and disables network connectivity until it is restarted. The operating system and all running processes are halted, but billing continues unless the instance is deleted.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "no",
+      "figure": "Stop loses memory",
+      "scenario": "Stopping at 18:00 powers the VM off: the disk and cron entries stay, the REPL and the dev server on port 3000 do not.",
+      "note": "The panel and API offer start, stop, restart and shutdown, but no pause or hibernate. A stop is a power-off: memory and running processes are lost, the disk survives, and the monthly plan keeps billing.",
+      "source": {
+        "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+        "quote": "Customer Control Panel: start/stop/restart, reinstall, snapshots, VNC console, rescue system, firewall, private networking, storage extension, DNS and reverse DNS",
+        "confidence": "inferred"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "partly",
       "figure": "Stop keeps disk; no pause",

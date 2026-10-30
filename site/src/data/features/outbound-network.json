@@ -318,6 +318,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "partly",
+      "figure": "0.5–15 TB out; inbound-only FW",
+      "scenario": "The agent browses freely inside its plan allowance from a static IPv4, but an outbound allowlist has to be enforced inside the VM.",
+      "note": "Each plan includes 0.5–15 TB of egress, overage is $0.01/GB, and a VPC-only instance can be deployed with no public IP. Vultr Firewall filters only incoming traffic, so outbound allowlisting is UFW, iptables or firewalld on the instance. Outbound 25, 137–139 and 445 are blocked by default and can be removed by ticket.",
+      "source": {
+        "url": "https://docs.vultr.com/support/products/network/does-vultr-firewall-filter-outgoing-traffic-from-my-instance",
+        "quote": "No, Vultr Firewall does not filter outgoing traffic from instances.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "yes",
+      "figure": "Unlimited, fair use",
+      "scenario": "400 GB of dependencies costs nothing extra; Contabo reserves the right to throttle exceptional use.",
+      "note": "Inbound and outbound traffic are unmetered, with no per-GiB price and no allowance to exceed. The catch is a fair-use policy: Contabo may throttle exceptionally high or disruptive usage, the port is 200 Mbit/s on Cloud VPS 4, and the Terms do not guarantee the bandwidth actually available. Outbound firewall rules are not offered.",
+      "source": {
+        "url": "https://contabo.com/en-us/vps/",
+        "quote": "Outgoing Traffic: Unlimited — fair usage policy applies based on average server workloads.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "yes",
       "figure": "$0.005/GiB; 1-20 TB included",

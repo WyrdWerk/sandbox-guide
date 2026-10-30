@@ -318,6 +318,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "yes",
+      "figure": "IAM orgs, roles, OIDC SSO",
+      "scenario": "Five developers share an organization with roles and scoped policies; the owner sees an audit log, but nothing sets a hard monthly budget.",
+      "note": "Organizations, IAM policies, roles, groups, service accounts, OIDC SSO and audit logs with up to 10 years of retention. SAML is not supported. Spend control is an account credit limit plus invoice and bandwidth emails, not a user-set monthly cap.",
+      "source": {
+        "url": "https://www.vultr.com/products/iam/",
+        "quote": "Organizations create environments with shared Vultr resources that are governed by IAM permission policies.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "partly",
+      "figure": "8 roles; no SSO or cap",
+      "scenario": "Five people can share one account with role-based users, but there is no SSO, hard spend cap or usage alert documented.",
+      "note": "Several users per account with eight predefined roles (Owner, Full Access, Technician, Billing Admin, Invoice, Abuse & Fraud, Object Storage, Object Storage r/w). API audit endpoints record changes per resource. No SAML/OIDC identity-provider login, no account-wide spend cap and no usage-alert threshold is published.",
+      "source": {
+        "url": "https://docs.contabo.com/docs/account-management/user-management/",
+        "quote": "A Contabo account can have several users. Each user holds a role that determines which areas of the account and which functions are accessible.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "partly",
       "figure": "Roles, SAML SSO; no cap",

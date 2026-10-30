@@ -318,6 +318,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "partly",
+      "figure": "Free tier by application; deposit match",
+      "scenario": "A new account can apply for one small free instance in three regions, or use a promo code that matches a first deposit; a card is still needed for paid servers.",
+      "note": "The Free Tier Program offers 1 vCPU / 512 MB / 10 GB in Miami, Seattle and Frankfurt to eligible applicants, on a limited and randomized basis. Otherwise credit comes from promo codes or a dollar-for-dollar deposit match up to $100, not an automatic signup credit.",
+      "source": {
+        "url": "https://www.vultr.com/free-tier-program/",
+        "quote": "Vultr is offering free cloud compute instances to eligible applicants!",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "no",
+      "figure": "No trial or credit",
+      "scenario": "No free week and no starting credit: the first invoice is paid before the server exists.",
+      "note": "Contabo advertises no free tier, trial or signup credit on its pricing, VPS or order pages, and the cheapest 1-month plan is paid at order. Payment can be card, PayPal or bank transfer, but nothing runs before it clears.",
+      "source": {
+        "url": "https://contabo.com/en-us/vps/",
+        "quote": "Provisioning takes a few minutes after payment clears.",
+        "confidence": "inferred"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "partly",
       "figure": "$100 credit, 60 days",

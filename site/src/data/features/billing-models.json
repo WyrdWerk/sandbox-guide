@@ -318,6 +318,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "partly",
+      "figure": "Hourly, 1 h minimum, 672 h cap",
+      "scenario": "An always-on 4 vCPU machine costs the same as the cap every month, but a machine that stops between sessions is billed as if it never stopped.",
+      "note": "Hourly with a one-hour minimum and a 672-hour monthly cap (the monthly price); stopped hours bill at the same rate. Not per-second, not active-CPU, and there is no cheap paused state.",
+      "source": {
+        "url": "https://docs.vultr.com/support/platform/billing/how-am-i-billed-for-my-servers",
+        "quote": "The minimum billing unit is one hour, and hourly charges begin when a server is deployed, regardless of whether it is powered on or off.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "partly",
+      "figure": "$6.60/mo, monthly only",
+      "scenario": "One flat $6.60 for 4 vCPU / 8 GB whether the box is busy 5% or 100% of the month; the meter never follows the work.",
+      "note": "Prepaid terms of 1, 3, 6, 12 or 24 months with one flat price per server. The 1-month term is $6.60 and the 24-month rate is $5.28, paid upfront. There is no hourly or per-second meter, so a ten-minute task costs a month and a powered-off server keeps billing.",
+      "source": {
+        "url": "https://contabo.com/en-us/vps/",
+        "quote": "The price displayed is the effective monthly rate for a 24-month subscription including applicable taxes",
+        "confidence": "pricing-page"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "partly",
       "figure": "$0.036/h, cap at 667 h",

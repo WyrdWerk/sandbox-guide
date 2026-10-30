@@ -311,6 +311,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "yes",
+      "figure": "Full VM; root, Docker, ISO",
+      "scenario": "Clone, build and load the module without a workaround: an ordinary virtual machine with its own kernel, root, Docker and SSH.",
+      "note": "A full VM per instance with root, Docker and real SSH. Nested virtualisation is documented only on VX1 plans, and a custom image is a mounted ISO (two per account, under 10 GB) rather than a disk-image upload.",
+      "source": {
+        "url": "https://www.vultr.com/products/cloud-compute/",
+        "quote": "Easily deploy and scale shared or dedicated virtual machines (VMs) and bare metal across six continents",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "yes",
+      "figure": "KVM VM; root, Docker",
+      "scenario": "Clone, build and load the module without a workaround: own kernel, root and Docker on a KVM virtual machine.",
+      "note": "A full VM with its own kernel, root, Docker and public IP. The vCPU cores are shared with other customers. Nested virtualisation is not supported on Core VPS; it is supported only on the dedicated-core Cloud VDS line.",
+      "source": {
+        "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+        "quote": "Contabo VPS are KVM-based virtual servers with shared vCPU cores and a fixed RAM allocation",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "yes",
       "figure": "Full VM; root, Docker",

@@ -318,6 +318,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "yes",
+      "figure": "Public IPv4, any port, SSH",
+      "scenario": "The agent's web port is reachable at a static public address, SSH is a real port on the same host, and any other TCP or UDP service can be opened.",
+      "note": "One public IPv4 is included on paid plans, any inbound port can be opened, and SSH is a normal daemon. There is no provider-issued private or token-gated link, and the browser console is a VNC view rather than an API shell.",
+      "source": {
+        "url": "https://www.vultr.com/resources/faq/",
+        "quote": "Many of our plans come with one primary IPv4 address.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "yes",
+      "figure": "Public IPv4; SSH; VNC",
+      "scenario": "Port 3000 is reachable at the VM's public IPv4 with nothing in front of it; SSH and a VNC console are both there.",
+      "note": "One static public IPv4 plus a /64 IPv6 subnet, any TCP or UDP port, real SSH and a browser VNC console. There is no tokenised preview link and no private URL; the firewall filters inbound traffic and leaves outbound unrestricted.",
+      "source": {
+        "url": "https://docs.contabo.com/docs/network-services/ip-assignment/",
+        "quote": "Every server is assigned a public IPv4 address and an IPv6 subnet; further IPv4 addresses are available up to a per-product maximum.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "yes",
       "figure": "Public IPv4, SSH, Lish",

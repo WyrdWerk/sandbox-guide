@@ -6,9 +6,9 @@ A plain-language guide to cloud sandboxes for AI agents. It helps people choose 
 
 ## What is covered
 
-The current data contains **24 researched providers (17 sandboxes and 7 VPS providers), 16 feature pages, 78 capabilities compared across all 24 providers (1,872 rows), and 10 use-case guides**. The JSON is the source of truth for counts and research status; not every claim shares one checked date.
+The current data contains **26 researched providers (17 sandboxes and 9 VPS providers), 16 feature pages, 78 capabilities compared across all 26 providers (2,028 rows), and 10 use-case guides**. The JSON is the source of truth for counts and research status; not every claim shares one checked date.
 
-Sandboxes: Agent 37, Blaxel, Boat, boxd, Cloudflare Sandbox, Daytona, E2B, Freestyle, InstaBox, Lizard, Modal, Morph, Runtime, Sandboxer, Sprites, Tensorlake and Vercel Sandbox. VPS providers: Akamai Cloud (Linode), Amazon Lightsail, DigitalOcean, Hetzner Cloud, Hostinger, HostUp and OVHcloud. All currently have `"status": "researched"`; none is pending. The schema supports `pending` for unfinished drafts, not as a substitute for a complete listing.
+Sandboxes: Agent 37, Blaxel, Boat, boxd, Cloudflare Sandbox, Daytona, E2B, Freestyle, InstaBox, Lizard, Modal, Morph, Runtime, Sandboxer, Sprites, Tensorlake and Vercel Sandbox. VPS providers: Akamai Cloud (Linode), Amazon Lightsail, Contabo, DigitalOcean, Hetzner Cloud, Hostinger, HostUp, OVHcloud and Vultr. All currently have `"status": "researched"`; none is pending. The schema supports `pending` for unfinished drafts, not as a substitute for a complete listing.
 
 Use cases: Hermes, OpenClaw, a coding agent, a code interpreter, a browser/computer-use agent, n8n, a Discord/Slack bot, Claude Code for a team, scheduled scraping, and a remote MCP server. The site also has situation-based recommendations, side-by-side comparison, capability filters, search, a glossary and a cost calculator.
 

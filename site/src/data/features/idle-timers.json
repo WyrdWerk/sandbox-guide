@@ -318,14 +318,38 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "yes",
+      "figure": "No idle timer; no session limit",
+      "scenario": "The agent is still awake at 00:20, because there is no idle timer and no lifetime limit to configure; nothing stops it but you.",
+      "note": "There is no idle timeout, auto-stop or maximum session length. The same absence means there is no wake path: a stopped instance stays stopped until the console, API or CLI starts it.",
+      "source": {
+        "url": "https://docs.vultr.com/products/compute/instances/cloud-compute/management/stop-instance.md",
+        "quote": "Stopping an instance shuts it down and disables network connectivity until it is restarted.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "yes",
+      "figure": "No idle stop",
+      "scenario": "Nothing idles the VM: it stays up until you stop or cancel it, and stopping still bills.",
+      "note": "There is no idle timer, no session lifetime and no wake-on-request, because a VPS never sleeps. A machine can run for weeks; the trade-off is that the monthly plan bills through every idle hour.",
+      "source": {
+        "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+        "quote": "Customer Control Panel: start/stop/restart, reinstall, snapshots, VNC console, rescue system, firewall, private networking, storage extension, DNS and reverse DNS",
+        "confidence": "inferred"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "yes",
-      "figure": "No idle timer; runs for weeks",
-      "scenario": "A bot that must answer at 03:00 is still running: nothing at Akamai stops an idle Linode and there is no session limit.",
-      "note": "No idle timeout, no wake-on-request and no lifetime cap. The machine runs until it is deleted, and bills the whole time whether it is working or not.",
+      "figure": "No idle state; no session cap",
+      "scenario": "A bot that must answer at 03:00 is still running: no idle timeout or session limit exists, and only announced maintenance stops the machine.",
+      "note": "The status field has 14 values and none is a paused or idle state: running, offline, booting, busy, rebooting, shutting_down, provisioning, deleting, migrating, rebuilding, cloning, restoring, stopped, billing_suspension. The platform suspends a Linode on its own only for a past-due balance, and stops it for maintenance announced seven days ahead. There is no idle timer or lifetime cap to set, and the machine bills the whole time.",
       "source": {
-        "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
-        "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+        "url": "https://techdocs.akamai.com/linode-api/reference/get-linode-instance",
+        "quote": "`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.",
         "confidence": "docs-confirmed"
       }
     }

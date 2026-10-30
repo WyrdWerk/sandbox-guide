@@ -23,7 +23,7 @@ Linode.
 | `not-published` | Akamai does not answer the question on any current page I could find. |
 
 **Quote handling.** Quotes are copied from the fetched Markdown/HTML of each page on 2026-10-30. A
-script re-fetched 34 of the 42 cited URLs and checked every quote in `capability-rows.json`,
+script re-fetched 35 of the 43 cited URLs and checked every quote in `capability-rows.json`,
 `feature-rows.json` and `provider.json` against the raw page. Normalisation applied for the check:
 HTML tags removed, Markdown links replaced by their text, `*` and backticks removed, backslash
 escapes removed, HTML entities decoded, zero-width characters removed, typographic quotes and dashes
@@ -227,10 +227,16 @@ running machine. Backups add daily, weekly, biweekly and one manual copy
 size is 16 TB." A volume attaches to one Linode at a time
 ([Block Storage](https://techdocs.akamai.com/cloud-computing/docs/block-storage), `docs-confirmed`).
 
-**Idle timers — yes (nothing stops it).** There is no idle timeout, no wake trigger and no session
-limit; the machine runs and bills until deleted. The same evidence as lifecycle. This follows the
-definition's "including never" and DigitalOcean's existing row; Hetzner's `no` on the same fact is an
-inconsistency in the existing data, noted here rather than copied.
+**Idle timers — yes, with a maintenance caveat.** The API's status field is the authoritative
+lifecycle surface, and its 14 values — running, offline, booting, busy, rebooting, shutting_down,
+provisioning, deleting, migrating, rebuilding, cloning, restoring, stopped, billing_suspension —
+contain no paused or idle state. The only provider-initiated stops are a past-due balance
+("`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.")
+and maintenance, which the [host maintenance policy](https://techdocs.akamai.com/cloud-computing/docs/host-maintenance-policy)
+announces seven days ahead and can power a Linode off for. There is no idle timeout, wake trigger or
+session cap to set. This follows the definition's "including never" and DigitalOcean's existing row;
+Hetzner's `no` on the same fact is an inconsistency in the existing data, noted here rather than
+copied.
 
 **Reaching it — yes.** Public IPv4 and IPv6 per Linode, any inbound port, real SSH, and Lish in the
 browser: "you can log in to the Cloud Manager and use the Lish console in your web browser"
@@ -281,7 +287,8 @@ report on request, a published DPA and a status page.
 | `nested-virt` | not-published | No current doc. The only first-party answer is a 2018 Linode Staff reply: "At present, there is no option to enable nested virtualization for a Linode." Too old to state as current. |
 | `fast-start` | no | A new Linode boots an OS; nothing resumes from memory and no sub-second start is documented. `inferred`. |
 | `warm-pool` | no | No pool of pre-started machines is documented. `inferred`. |
-| `choose-idle` | yes | "No idle timer exists" — the definition includes "including never". |
+| `choose-idle` | yes | No idle state exists to time out; the status enum has no paused value, so "never" is the only behaviour. |
+| `wake-on-request` | no | Nothing pauses, so there is nothing to wake. |
 | `schedules` | no | No provider scheduler; cron inside a running Linode is your own. |
 | `mount-buckets` | partly | "Akamai's Object Storage is a globally-available, Amazon S3-compatible method…" — S3 client, no native mount. |
 | `shared-volume` | no | "a volume can only be attached to one Linode at a time." |
@@ -430,7 +437,7 @@ endpoint called live on the day.
 
 ## 12. Quote verification
 
-A script re-fetched 34 of the 42 cited URLs and checked 84 quotes. **84 matched, 0 failed** after the
+A script re-fetched 35 of the 43 cited URLs and checked 84 quotes. **84 matched, 0 failed** after the
 declared normalisation. The eight URLs not machine-checked, and how each was verified:
 
 | URL | Why not scripted | Verification |

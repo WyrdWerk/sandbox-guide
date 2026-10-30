@@ -318,6 +318,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "partly",
+      "figure": "Disk snapshots $0.05/GB-mo",
+      "scenario": "Snapshot the configured server and boot copies from it; there is no memory snapshot, no live fork and automatic backups keep only two copies.",
+      "note": "Manual snapshots are disk images kept until deleted at $0.05/GB-month, and they double as the template mechanism. They never include RAM or attached block storage, and automatic backups keep only the two most recent.",
+      "source": {
+        "url": "https://docs.vultr.com/support/platform/billing/does-vultr-charge-for-stored-snapshots",
+        "quote": "Yes. Vultr charges $0.05 per GB per month for each stored snapshot.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "partly",
+      "figure": "Disk only; 1 slot, 30 days",
+      "scenario": "A snapshot restores the disk, not the process tree; Cloud VPS 4 holds one, and it is deleted after 30 days.",
+      "note": "Snapshots do not use the plan's disk, cannot be downloaded, and are deleted after 30 days. Cloud VPS 4 includes one slot, Cloud VPS 6 two, larger plans three. There is no memory snapshot, no fork of a running machine, and no documented way to start new servers from a snapshot. Auto Backup is a separate paid add-on with 10 daily off-server backups.",
+      "source": {
+        "url": "https://help.contabo.com/en/support/solutions/articles/103000270385-how-do-i-create-a-snapshot-of-my-server-",
+        "quote": "After 30 days, the snapshots will be deleted.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "partly",
       "figure": "Disk images; 4 backups",

@@ -363,6 +363,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "yes",
+      "figure": "SOC 2+, ISO 27001, 100% SLA",
+      "scenario": "The buyer can check a 2014-founded, privately held company, a 100% uptime SLA with credits, a DPA on request and audited certifications.",
+      "note": "The Constant Company, LLC (Vultr), founded 2014, privately held, 34 regions and 80m+ instances. SOC 2+ (HIPAA), ISO 27001/27017/27018/20000-1, PCI Merchant and CSA Star; a 100% uptime SLA with service credits; a DPA by request.",
+      "source": {
+        "url": "https://www.vultr.com/legal/compliance/",
+        "quote": "SOC 2+ (HIPAA)",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "partly",
+      "figure": "GmbH; 99.9%; no SOC 2 offer",
+      "scenario": "A German GmbH with a 99.9% annual network-availability promise and a DPA, but no customer-requestable SOC 2 report is published.",
+      "note": "Contabo GmbH, Munich, founded 2003, about 300 staff and 275,000+ customers; KKR has held a majority stake since 2022. The Terms promise 99.9% annual average connectivity with no service credit, and a DPA can be created online. Location pages list SOC 1/SOC 2 Type 2 for the data centre, but Contabo publishes no trust centre or report-request route.",
+      "source": {
+        "url": "https://contabo.com/en/legal/terms-and-conditions/",
+        "quote": "The Provider will ensure that the physical connectivity of the object storage infrastructure, webspace packages, dedicated servers, virtual dedicated server and VPS is available at an annual average rate of 99.9%.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "yes",
       "figure": "Akamai; 99.99% SLA; SOC 2",

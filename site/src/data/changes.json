@@ -2,6 +2,32 @@
   "changes": [
     {
       "date": "2026-10-30",
+      "title": "Contabo added: low monthly VPS prices, with a reputation to weigh",
+      "provider": "contabo",
+      "what": "This guide now lists Contabo. Its headline price is the 24-month rate; month-to-month Cloud VPS 4 is $6.60. CPU cores are shared, there is no hourly meter and a stopped server still bills. See the What users say section before buying. The date is when this guide checked it, not a launch date.",
+      "sources": [
+        {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "The price displayed is the effective monthly rate for a 24-month subscription including applicable taxes",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "title": "Vultr added: hourly VMs in 34 regions, capped at the monthly price",
+      "provider": "vultr",
+      "what": "This guide now lists Vultr. Servers bill by the hour with a one-hour minimum, up to a monthly cap, and keep billing while stopped. Vultr's own pages give three different hourly rates for the same plan; the guide uses the monthly price divided by 672, as its billing FAQ describes. The date is when this guide checked it, not a launch date.",
+      "sources": [
+        {
+          "url": "https://docs.vultr.com/support/platform/billing/how-am-i-billed-for-my-servers",
+          "quote": "The minimum billing unit is one hour, and hourly charges begin when a server is deployed, regardless of whether it is powered on or off.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
       "title": "Akamai Cloud (Linode) added: hourly VMs with one-click Hermes and OpenClaw",
       "provider": "linode",
       "what": "This guide now lists Akamai Cloud, still called Linode in its plans, API and console. Machines bill by the hour, rounded up, up to a monthly cap, and keep billing while powered off. Hermes Agent and OpenClaw have Quick Deploy apps. The date is when this guide checked it, not a launch date.",

@@ -36,7 +36,9 @@ function figures(html) {
 // Price feeds (Hostinger's cart catalog, HostUp's product API, Hetzner's price API) are JSON
 // with bare numbers beside a currency code, so no $ or € appears. Record each as
 // "<nearest id>:<field>=<value><CURRENCY>", in the feed's own units (Hostinger's are cents).
-function jsonFigures(data) {
+// Some APIs (Vultr's plans, Linode's types) give prices with no currency field at all; with
+// `bare`, record any numeric price/cost/hourly/monthly field as "<id>:<field>=<value>".
+function jsonFigures(data, bare = false) {
   const out = new Set();
   const isNum = (v) => typeof v === "number" || (typeof v === "string" && /^\d+(\.\d+)?$/.test(v));
   const walk = (node, ctx, path) => {
@@ -49,6 +51,7 @@ function jsonFigures(data) {
       const key = inner ? `${inner}.${k}` : k;
       if (typeof cur === "string" && /price|amount/i.test(k) && isNum(v)) out.add(`${here}:${key}=${v}${cur}`);
       else if (/^[A-Z]{3}$/.test(k) && isNum(v)) out.add(`${here}:${inner}=${v}${k}`);
+      else if (bare && /price|cost|amount|hourly|monthly/i.test(k) && isNum(v)) out.add(`${here}:${key}=${v}`);
       else if (typeof v === "object") walk(v, here, key);
     }
   };
@@ -65,12 +68,15 @@ async function read(url) {
     });
     const body = await res.text();
     // Cloudflare's "Just a moment" bot check: no script gets past it, only a browser.
-    if (res.status === 403 && (res.headers.get("cf-mitigated") === "challenge" || body.includes("<title>Just a moment"))) return { blocked: true };
+    // Akamai's edge answers scripts with a bare "Access Denied" page and a reference number.
+    if (res.status === 403 && (res.headers.get("cf-mitigated") === "challenge" || body.includes("<title>Just a moment") || /<TITLE>Access Denied<\/TITLE>/i.test(body))) return { blocked: true };
     if (!res.ok) return { error: `HTTP ${res.status}` };
     // A feed that writes prices as text ("$5.35 USD", as OVHcloud's catalog does) is read like a page.
     if (/json/.test(res.headers.get("content-type") ?? "")) {
-      const found = jsonFigures(JSON.parse(body));
-      return { figures: found.length ? found : figures(body) };
+      const data = JSON.parse(body);
+      const found = jsonFigures(data);
+      const text = found.length ? found : figures(body);
+      return { figures: text.length ? text : jsonFigures(data, true) };
     }
     return { figures: figures(body) };
   } catch (e) {

@@ -28,15 +28,23 @@ prints one line per page that needs a look:
 - `NO PRICES` / `FAILED`: the page could not be read as plain HTML. Open it in a browser.
 - `NEW`: a money-bearing source URL has no baseline yet. Read it before recording one.
 - `OLD`: a rate card has not been checked for more than 30 days. Re-read all its sources.
-- `BLOCKED`: the page sits behind a Cloudflare bot check ("Just a moment") that no script
-  passes. It does not count as a problem, because such a card's prices are also tracked
-  through a feed a script can read. HostUp's web pages are blocked; its prices come from
-  `cloud.hostup.se/api/v2/products/vps` in SEK. Reread the blocked pages in a browser when
-  the card is `OLD`, and keep a readable feed on any card whose price pages are all blocked.
+- `BLOCKED`: the page sits behind a bot check that no script passes: Cloudflare's "Just a
+  moment" or Akamai's bare "Access Denied". It does not count as a problem, because such a
+  card's prices are also tracked through a feed a script can read. HostUp's web pages are
+  blocked; its prices come from `cloud.hostup.se/api/v2/products/vps` in SEK. Vultr's come
+  from `api.vultr.com/v2/plans` and Linode's from `api.linode.com/v4/linode/types`. Reread
+  the blocked pages in a browser when the card is `OLD`, and keep a readable feed on any card
+  whose price pages are all blocked.
+- **Contabo has no readable feed.** Every Contabo price page is `BLOCKED` and it publishes no
+  public price API, so the script cannot see a Contabo price change at all. Read
+  `contabo.com/en-us/vps/` in a browser (or Firecrawl with `maxAge: 0`) every week and compare
+  the month-to-month prices with `site/src/data/pricing/contabo.json`.
 
 JSON price feeds (Hostinger's cart catalog, HostUp's product API, Hetzner's price API) carry
 bare numbers beside a currency code, so the script records them as
-`<plan or price id>:<field>=<value><CURRENCY>` in the feed's own units. Hostinger's are
+`<plan or price id>:<field>=<value><CURRENCY>` in the feed's own units. OVHcloud's catalog
+writes prices as text (`$5.35 USD`) and is read like a page. Vultr's and Linode's APIs have no
+currency field (both are USD); their price fields are recorded as `<plan id>:<field>=<value>`. Hostinger's are
 cents (`price=2449USD` is $24.49); HostUp's and Hetzner's are whole units. HostUp's USD
 display is derived from SEK (÷10 for EUR, ×7/6 for USD), so a change to that conversion
 alone shows only on the blocked pages.

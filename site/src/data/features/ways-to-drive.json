@@ -317,6 +317,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "yes",
+      "figure": "Console, CLI, API, SDKs",
+      "scenario": "The first machine is clickable in the console; the agent is installed over SSH, and everything after that can be scripted through the API, CLI or Terraform.",
+      "note": "Console, REST API v2, official CLI, Terraform provider and official Go, Python, Node, PHP and Ruby clients. There is no PTY or file API, and the official MCP server is a read-only preview.",
+      "source": {
+        "url": "https://www.vultr.com/api/",
+        "quote": "All functions of the Vultr customer portal are accessible via the API",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "yes",
+      "figure": "Panel, API, CLI, Terraform",
+      "scenario": "Create the first VM by clicking, then drive it with the REST API, the open-source cntb CLI or Terraform.",
+      "note": "Control panel, documented REST API with OAuth2, open-source cntb CLI, Terraform provider, cloud-init and custom images. No official Python or TypeScript SDK, no MCP server, and no PTY or file endpoints: commands and files go over SSH.",
+      "source": {
+        "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+        "quote": "Provisioning | Control Panel, API, or CLI",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "yes",
       "figure": "Console, CLI, API, 3 SDKs",

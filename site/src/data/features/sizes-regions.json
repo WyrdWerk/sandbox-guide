@@ -318,6 +318,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "yes",
+      "figure": "24 vCPU / 96 GB; 34 regions",
+      "scenario": "A fixed plan fits the 4 vCPU / 8 GiB ask exactly, in any of 34 regions, and the plan can be upgraded later — but not downgraded.",
+      "note": "Shared Cloud Compute runs 1–24 vCPU and 0.5–96 GB with 10–1,600 GB of SSD or NVMe; dedicated Optimized plans reach 96 vCPU / 256 GB / 1,280 GB and VX1 reaches 192 vCPU / 768 GB. No custom CPU/RAM split, no downgrade on resize, and GPUs are a separate product.",
+      "source": {
+        "url": "https://www.vultr.com/products/cloud-compute/",
+        "quote": "34 cloud data center regions",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "partly",
+      "figure": "18 vCPU / 96 GB; 9 regions",
+      "scenario": "There is no 2 vCPU / 16 GB Core VPS plan: the smallest Core VPS shape with 16 GB is 8 vCPU / 24 GB at $16.80, in the EU or one of eight other regions.",
+      "note": "Six fixed Core VPS shapes from 4 vCPU / 8 GB to 18 vCPU / 96 GB, with CPU and RAM in a fixed ratio. Performance VPS and Storage VPS change the ratio, Cloud VDS goes to 24 dedicated vCores, but there is no custom sizing. Nine regions: EU (Germany), UK, three US, Singapore, Japan, India and Australia.",
+      "source": {
+        "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+        "quote": "|Cloud VPS 8 |8 vCPUs |24 GB |300 GB SSD |600 |3 |Unlimited\\* |",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "yes",
       "figure": "256 vCPU / 512 GiB; 33 regions",

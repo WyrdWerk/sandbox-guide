@@ -327,6 +327,30 @@
       }
     },
     {
+      "provider": "vultr",
+      "verdict": "partly",
+      "figure": "Your DNS, your proxy",
+      "scenario": "Point an A record at the server's static IP and run Caddy or Traefik for TLS; the certificate is yours to renew.",
+      "note": "Vultr DNS is free and anycast, so a custom domain is a DNS record. TLS is yours: the documented paths run Traefik or Caddy with Let's Encrypt, and Vultr does not issue a certificate for a compute instance.",
+      "source": {
+        "url": "https://docs.vultr.com/product-overviews/dns",
+        "quote": "Free domain record management for any domain you own",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "contabo",
+      "verdict": "partly",
+      "figure": "DNS yes; TLS yourself",
+      "scenario": "Point an A record at the static IPv4 with Contabo's DNS; the certificate is yours to install and renew.",
+      "note": "Contabo hosts DNS zones and manages PTR records for its IPs, for domains at Contabo or another registrar. It does not issue or renew TLS certificates for a VPS: you run Caddy, Certbot or a proxy. The n8n and OpenClaw images may include their own web server, but no managed certificate is documented.",
+      "source": {
+        "url": "https://docs.contabo.com/docs/network-services/dns-management/",
+        "quote": "DNS zones for domains registered with Contabo or with a third-party registrar can be hosted on Contabo’s authoritative nameservers and managed self-service in the Control Panel.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
       "provider": "linode",
       "verdict": "partly",
       "figure": "Free DNS; HTTPS is yours",

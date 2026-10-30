@@ -254,6 +254,27 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Full VM, own kernel",
+          "note": "Each instance is its own virtual machine with its own kernel, disk and public IP, so Docker, kernel modules and any TCP service work as on a normal Linux box.",
+          "source": {
+            "url": "https://www.vultr.com/products/cloud-compute/",
+            "quote": "Easily deploy and scale shared or dedicated virtual machines (VMs) and bare metal across six continents",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "KVM VM, own kernel",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Contabo VPS are KVM-based virtual servers with shared vCPU cores and a fixed RAM allocation",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "Full VM, own kernel",
@@ -510,6 +531,27 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "You can install additional software on your instances by using the in-browser SSH or your own SSH client.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Root over SSH",
+          "note": "Root login over SSH from the first boot; the VNC console gives out-of-band access if SSH fails.",
+          "source": {
+            "url": "https://www.vultr.com/company/about-us/",
+            "quote": "Local administrator/root and out-of-band console access is provided on all bare metal and virtualized compute instances.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "root over SSH",
+          "source": {
+            "url": "https://contabo.com/en-us/vps/",
+            "quote": "Reliable uptime, predictable resources, and full root access.",
             "confidence": "docs-confirmed"
           }
         },
@@ -778,6 +820,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Docker Marketplace app",
+          "note": "Docker CE is a Marketplace image, and a preconfigured docker user is included; you can also install Docker yourself.",
+          "source": {
+            "url": "https://docs.vultr.com/how-to-use-vultrs-docker-marketplace-application",
+            "quote": "The Vultr Docker Marketplace Application deploys Docker Community Edition (CE)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Docker on a KVM VM",
+          "note": "Docker is not the default image, but a KVM guest with root runs it normally; Docker is also listed among the images in the VPS configurator.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Contabo VPS are KVM-based virtual servers with shared vCPU cores and a fixed RAM allocation",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "Docker Quick Deploy app",
@@ -1036,6 +1100,30 @@
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
             "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
             "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "VX1 plans only",
+          "shortfall": "Nested virtualisation is documented only on VX1 plans, not on the Regular Performance and High Performance plans priced here.",
+          "note": "Nested virtualisation is documented for VX1, a separate newer plan family, not for the Regular Performance and High Performance plans priced here.",
+          "source": {
+            "url": "https://blogs.vultr.com/cpus-workhorse-agentic-ai-infrastructure",
+            "quote": "Vultr VX1 supports nested virtualization, enabling businesses to deploy microVM solutions with their own kernels for secure sandbox isolation.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "Only the dedicated-core Cloud VDS line supports it; Core VPS, the plan this card prices, does not.",
+          "figure": "VDS only",
+          "note": "Contabo's VDS documentation lists nested virtualisation as supported (Proxmox VE, KVM, XenServer). The Core VPS documentation says it is not supported on any VPS plan family, and the VDS line has no snapshots or Auto Backup.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/max-performance-vps/",
+            "quote": "Nested virtualization | Supported — Proxmox VE, KVM, XenServer",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -1303,6 +1391,29 @@
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html",
             "quote": "Use snapshots to create new Lightsail resources using the same plan, or larger plan, than the original resource.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "ISO only, 2 per account",
+          "shortfall": "A custom image means booting a mounted ISO, not uploading a disk image; accounts hold two ISOs under 10 GB and Windows ISOs are refused.",
+          "note": "A custom image means booting a mounted ISO, not uploading a qcow2 or OCI image; snapshots can seed a new instance at the same or larger disk size.",
+          "source": {
+            "url": "https://docs.vultr.com/how-to-upload-and-use-custom-isos-on-vultr",
+            "quote": "Each account can store a maximum of two ISOs at a time.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "ISO or QCOW2",
+          "note": "Upload an ISO or uncompressed QCOW2 image in the panel or API. Custom Windows images are not permitted, and the image needs VirtIO drivers to boot.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+            "quote": "ISO (bootable installer) or QCOW2 (pre-installed disk image, uncompressed)",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -1579,6 +1690,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "Fixed plan sizes",
+          "note": "Every Cloud Compute plan pairs a fixed vCPU, RAM and disk; the plan API lists fixed plans and no custom-size endpoint is documented.",
+          "source": {
+            "url": "https://www.vultr.com/pricing/",
+            "quote": "2 vCPUs 4 GB Memory 3.00 TB Bandwidth 80 GB Storage $20.00/mo $0.03/hr",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Fixed shapes only",
+          "note": "CPU and RAM come in six fixed Core VPS ratios. There is no way to order, for example, 2 vCPU with 16 GB; the nearest is 8 vCPU / 24 GB.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "|Cloud VPS 4 |4 vCPUs |8 GB |100 GB SSD |200 |1 |Unlimited\\* |",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "no",
           "figure": "Fixed plans only",
@@ -1851,6 +1984,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
             "quote": "16Xlarge-256GB Linux with public IPv4 | $1,764.00 | 64 | 256 GB | 1,280 GB | 10 TB",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "96 vCPU / 256 GB",
+          "note": "Optimized Cloud Compute reaches 96 vCPU / 256 GB / 1,280 GB; Regular Performance stops at 24 / 96 / 1,600 GB and VX1 reaches 192 / 768 GB.",
+          "source": {
+            "url": "https://www.vultr.com/pricing/",
+            "quote": "96 vCPUs 256 GB Memory 12.00 TB Bandwidth 1280 GB Storage $3840.00/mo $5.714/hr",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "18 vCPU / 96 GB",
+          "note": "Core VPS tops out at 18 vCPU / 96 GB; Cloud VDS offers 24 dedicated vCores / 96 GB.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "|Cloud VPS 18 |18 vCPUs |96 GB |600 GB SSD |1,000 |3 |Unlimited\\* |",
             "confidence": "docs-confirmed"
           }
         },
@@ -2134,6 +2289,30 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "Upgrades only",
+          "shortfall": "Only upgrades are supported; downgrades are refused and Vultr does not document whether running processes survive the change.",
+          "note": "A plan change is an upgrade to a larger plan; downgrades are refused, and Vultr does not document whether running processes survive.",
+          "source": {
+            "url": "https://docs.vultr.com/products/compute/instances/cloud-compute/management/resize-instance",
+            "quote": "Downgrading is not supported while upgrading the instance enables a higher plan without changes to the instance's data or file system.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "An upgrade needs a short reboot and cannot shrink; a smaller plan means a new server, a new IP and a manual migration.",
+          "figure": "Upgrade in place; reboot",
+          "note": "You can upgrade to a larger plan in the same family from the panel, keeping the IP. Live Migration preserves the data but requires a short reboot. Downgrades and plan-family changes are not supported in place.",
+          "source": {
+            "url": "https://help.contabo.com/en/support/solutions/articles/103000269700-how-to-make-changes-to-your-vps-or-vds-plan",
+            "quote": "Data is transferred to the upgraded server with no data loss. Requires a short reboot once migration completes.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "partly",
           "figure": "Warm resize reboots",
@@ -2410,6 +2589,29 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "AMD + NVIDIA",
+          "note": "Cloud GPU is a separate product with AMD and NVIDIA accelerators, available as VMs, bare metal or clusters; GPU instances are excluded from the SLA.",
+          "source": {
+            "url": "https://www.vultr.com/products/cloud-gpu/",
+            "quote": "Vultr offers global access to the latest AMD and NVIDIA GPUs",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "GPU VPS is one fixed configuration in two locations, cannot be customised, and was on a waitlist at this check.",
+          "figure": "RTX 6000 PRO; waitlist",
+          "note": "One NVIDIA RTX 6000 PRO Blackwell instance on the Cloud VPS Plus 18 tier, in EU and US Central only. No vGPU, no multi-GPU, no custom image and no API provisioning.",
+          "source": {
+            "url": "https://contabo.com/en-us/pricing/",
+            "quote": "Leave your details here and we'll notify you when GPU VPS becomes available.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "RTX 4000 Ada to RTX PRO 6000",
@@ -2675,6 +2877,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-regions-and-availability-zones-in-amazon-lightsail.html",
             "quote": "Lightsail is available in the following Regions.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "34 regions",
+          "note": "34 data-centre regions across six continents, with per-region pricing in the console.",
+          "source": {
+            "url": "https://www.vultr.com/products/cloud-compute/",
+            "quote": "34 cloud data center regions",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "9 regions, 11 locations",
+          "note": "EU (Germany), UK, US East, US Central, US West, Singapore, Japan, India and Australia. Region is chosen at order; a later move changes the IP.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Deployed across 11 locations in 9 regions",
             "confidence": "docs-confirmed"
           }
         },
@@ -2945,6 +3169,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "9 EU locations",
+          "note": "Amsterdam, Frankfurt, London, Madrid, Manchester, Milan, Paris, Stockholm and Warsaw.",
+          "source": {
+            "url": "https://www.vultr.com/products/cloud-compute/",
+            "quote": "Frankfurt DE",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Germany (EU)",
+          "note": "Five data centres in Germany serve the European Union region. The UK is a separate region outside the EU.",
+          "source": {
+            "url": "https://contabo.com/en-us/locations/",
+            "quote": "We serve Europe, Africa & Middle East from 5 Data Centers in Germany.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "6 EU countries",
@@ -3208,6 +3454,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "No pause; RAM lost",
+          "note": "Stopping halts the operating system and every running process; there is no pause, hibernate or memory snapshot.",
+          "source": {
+            "url": "https://docs.vultr.com/products/compute/instances/cloud-compute/management/stop-instance.md",
+            "quote": "The operating system and all running processes are halted, but billing continues unless the instance is deleted.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No pause",
+          "note": "Start, stop, restart and shutdown only. A stop is a power-off: the disk survives, memory and running processes do not.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Customer Control Panel: start/stop/restart, reinstall, snapshots, VNC console, rescue system, firewall, private networking, storage extension, DNS and reverse DNS",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "no",
           "figure": "No pause; power off only",
@@ -3459,6 +3727,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-start-stop-or-restart-your-instance-virtual-private-server.html",
             "quote": "When Amazon Lightsail creates your instance, your machine goes into a Pending state before it starts Running.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "No pre-started pool",
+          "note": "No pool, warm-capacity or pre-started machine product is documented; instances are created on demand.",
+          "source": {
+            "url": "https://www.vultr.com/api/",
+            "quote": "All functions of the Vultr customer portal are accessible via the API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No pre-started pool",
+          "note": "Every server is provisioned on demand in minutes. There is no pool of ready machines and no pre-warmed capacity product.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Provisioning time is typically a few minutes; may vary by location.",
             "confidence": "inferred"
           }
         },
@@ -3731,6 +4021,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "Seconds, not under one",
+          "note": "Vultr advertises deployment in seconds, not sub-second starts; a booted server takes tens of seconds.",
+          "source": {
+            "url": "https://www.vultr.com/products/cloud-compute/",
+            "quote": "Vultr Cloud Compute can be deployed in seconds",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Minutes to provision",
+          "note": "Contabo documents provisioning in minutes, and the n8n image alone can take up to 30 minutes to install.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Provisioning time is typically a few minutes; may vary by location.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "no",
           "figure": "Full boot, no resume",
@@ -3993,6 +4305,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "$0.05/GB-month",
+          "note": "Manual snapshots are disk images kept until deleted, priced at $0.05/GB-month.",
+          "source": {
+            "url": "https://docs.vultr.com/support/platform/billing/does-vultr-charge-for-stored-snapshots",
+            "quote": "Yes. Vultr charges $0.05 per GB per month for each stored snapshot.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Disk image, 30 days",
+          "note": "A snapshot is an image of the VPS disk, free to take and not counted against the disk. It cannot be downloaded and is deleted after 30 days.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Image of the VPS disk, retained for 30 days",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "Images, kept until deleted",
@@ -4247,6 +4581,28 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "We recommend stopping your instance temporarily when taking a snapshot, to ensure your data is complete and not corrupted in any way.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "Disk only",
+          "note": "A snapshot is a point-in-time image of the disk, not of RAM or running processes.",
+          "source": {
+            "url": "https://docs.vultr.com/support/platform/billing/does-vultr-charge-for-stored-snapshots",
+            "quote": "Snapshots are point-in-time images of your instance’s disk",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Disk only",
+          "note": "The snapshot is explicitly an image of the disk. No memory or process state is captured.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Image of the VPS disk, retained for 30 days",
             "confidence": "inferred"
           }
         },
@@ -4510,6 +4866,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "Snapshot, then new VM",
+          "note": "A snapshot can seed a new instance, but nothing copies a running machine with its memory.",
+          "source": {
+            "url": "https://docs.vultr.com/products/storage/snapshots",
+            "quote": "Capture the full state of a Vultr Cloud Compute instance on demand, then restore it or clone it into new instances.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No fork",
+          "note": "There is no clone, fork or copy-on-write operation for a running server. A snapshot can be restored to the same server, not used to start a copy.",
+          "source": {
+            "url": "https://api.contabo.com/",
+            "quote": "Revert the instance to a particular snapshot based on its identifier",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "no",
           "figure": "Clone needs power-off",
@@ -4769,6 +5147,29 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Kept until deleted",
+          "note": "Snapshots do not expire; any snapshot in the account can be restored or used to deploy.",
+          "source": {
+            "url": "https://docs.vultr.com/support/products/orchestration/how-can-i-destroy-my-instance-while-maintaining-its-backups",
+            "quote": "Snapshots are user-managed images that do not expire and remain in your account until you delete them manually.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "Cloud VPS 4 holds one snapshot at a time, so there is no earlier point to return to once it is replaced; every snapshot expires after 30 days.",
+          "figure": "1 slot on VPS 4",
+          "note": "Larger plans hold two or three snapshots. Any snapshot you still hold can be restored, but the 30-day deletion is automatic and there is no archive.",
+          "source": {
+            "url": "https://help.contabo.com/en/support/solutions/articles/103000270385-how-do-i-create-a-snapshot-of-my-server-",
+            "quote": "After 30 days, the snapshots will be deleted.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "Daily, weekly, biweekly + manual",
@@ -5023,6 +5424,28 @@
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "You can use snapshots as baselines to create new resources or to back up your data.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Snapshot → new VM",
+          "note": "A snapshot is the template mechanism: deploy a new instance from it, at the same or larger disk size.",
+          "source": {
+            "url": "https://docs.vultr.com/products/storage/snapshots",
+            "quote": "Capture the full state of a Vultr Cloud Compute instance on demand, then restore it or clone it into new instances.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Custom images only",
+          "note": "You can deploy the same uploaded ISO or QCOW2 to many servers, and 1-click app images are reusable. There is no action that captures a configured server as a template, and snapshots are not documented as a source for new servers.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+            "quote": "ISO (bootable installer) or QCOW2 (pre-installed disk image, uncompressed)",
+            "confidence": "inferred"
           }
         },
         {
@@ -5286,6 +5709,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Daily–monthly, +20%",
+          "note": "Automatic backups run daily, every other day, weekly or monthly, keep the two most recent and exclude attached block storage; they add 20% to the plan price.",
+          "source": {
+            "url": "https://docs.vultr.com/vps-automatic-backups",
+            "quote": "Automatic backups can be configured to run daily, every other day, weekly, or monthly.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Daily, 10 days (add-on)",
+          "note": "Auto Backup is a paid add-on: one backup a day, up to 10 kept for 10 days, stored off-server. Restores are whole-VPS and overwrite current data. Contabo does not guarantee recoverability.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps-auto-backup/",
+            "quote": "Auto Backup provides 10 days of daily off-server backups",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "4 backups, 14-day rotation",
@@ -5542,6 +5987,28 @@
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "When you stop your instance, it is powered down at its current state and is available for you to start again at any time.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Disk kept on stop",
+          "note": "Stopping keeps the disk; destroying the instance permanently deletes its data.",
+          "source": {
+            "url": "https://docs.vultr.com/support/platform/billing/are-stopped-instances-still-billed-on-vultr",
+            "quote": "Destroying an instance releases the associated resources and permanently deletes its data.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Whole disk kept",
+          "note": "A stop is a power-off, not a delete: the whole VM disk stays with the server. Only cancelling the contract ends the machine.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Existing partitions (Linux and NTFS) can be mounted to repair the installation or retrieve data",
+            "confidence": "inferred"
           }
         },
         {
@@ -5805,6 +6272,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "$0.10/GB-mo; 16 per VM",
+          "note": "Block Storage is $1 per 10 GB a month, attaches up to 16 volumes per instance and must be in the same region.",
+          "source": {
+            "url": "https://www.vultr.com/products/block-storage/",
+            "quote": "Attach up to 16 volumes per instance",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No block volumes",
+          "note": "Storage Extension adds capacity of the plan's own type to the same server. There is no detachable block volume that outlives the machine or moves to another one. Object Storage is S3, not a disk.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/storage/object-storage/",
+            "quote": "Unlike Storage VPS, which provides a full virtual machine with a block disk, Object Storage is accessed entirely via the S3 API or a web UI — there is no server to manage.",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "$0.10/GiB-mo; 10 GB-16 TB",
@@ -6058,6 +6547,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_AttachDisk.html",
             "quote": "Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "File System, multi-VM",
+          "note": "Vultr File System is shared file storage with simultaneous access and write locking, at $100/TB-month.",
+          "source": {
+            "url": "https://www.vultr.com/products/file-system/",
+            "quote": "Vultr File System supports shared access across multiple virtual machines",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No shared block volume",
+          "note": "There is no block-storage product to share. Private Networking connects machines, and Object Storage is shared through the S3 API, but neither is a shared filesystem volume.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Storage Extension: adds storage of the plan’s type",
             "confidence": "inferred"
           }
         },
@@ -6318,6 +6829,30 @@
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/buckets-in-amazon-lightsail.html",
             "quote": "It is designed to make web-scale computing easier for developers, and is built using the Amazon Simple Storage Service (Amazon S3).",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "S3 API, no native mount",
+          "shortfall": "Object Storage speaks the S3 API, but Vultr documents clients such as s3cmd rather than mounting a bucket as a folder; you add s3fs or rclone.",
+          "note": "Object Storage is S3-compatible, but Vultr documents clients such as s3cmd rather than mounting a bucket as a folder; you add s3fs or rclone.",
+          "source": {
+            "url": "https://www.vultr.com/products/object-storage/",
+            "quote": "Vultr Object Storage supports the S3 API",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "Object Storage is S3-compatible, but there is no native mount; Contabo documents s3fs-fuse or goofys for filesystem access.",
+          "figure": "S3 + s3fs/goofys",
+          "note": "Buckets are reached through the S3 API or the web UI. Contabo lists s3fs-fuse and goofys as compatible FUSE clients, so a mount is possible but is software you run and maintain.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/storage/object-storage/",
+            "quote": "use a FUSE client (s3fs-fuse, goofys) for filesystem access",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -6590,6 +7125,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "40 TB HDD / 10 TB NVMe",
+          "note": "Block Storage reaches 40 TB on HDD or 10 TB on NVMe per volume, and the plan disk reaches 1,600 GB.",
+          "source": {
+            "url": "https://www.vultr.com/products/block-storage/",
+            "quote": "up to 40 TB of highly affordable HDD, or up to 10 TB of blazing fast NVMe SSD",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "1.4 TB Storage VPS",
+          "note": "Core VPS goes to 600 GB SSD and Storage VPS to 1.4 TB SSD; Storage Extension can double a Core plan's capacity up to 1.2 TB.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "|Storage VPS 50 |14 vCPUs |50 GB |1.4 TB SSD |1,000 |Unlimited\\* |",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "16 TB per volume",
@@ -6855,13 +7412,35 @@
           }
         },
         {
-          "provider": "linode",
+          "provider": "vultr",
           "verdict": "yes",
           "figure": "No session limit",
-          "note": "A Linode runs until it is deleted; there is no session cap, idle stop or maximum lifetime. That is why an always-on agent fits here and why the bill never pauses.",
+          "note": "Nothing stops an instance for idleness; it runs until you stop or destroy it.",
           "source": {
-            "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
-            "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+            "url": "https://docs.vultr.com/products/compute/instances/cloud-compute/management/stop-instance.md",
+            "quote": "Stopping an instance shuts it down and disables network connectivity until it is restarted.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Runs until cancelled",
+          "note": "No idle timer, no session limit and no automatic stop. A server can run for weeks or years until you stop or cancel it.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Customer Control Panel: start/stop/restart, reinstall, snapshots, VNC console, rescue system, firewall, private networking, storage extension, DNS and reverse DNS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "No session or lifetime cap",
+          "note": "Nothing in the API or Cloud Manager sets a session length or a maximum lifetime. The status field's 14 values include no idle or paused state; the platform stops a Linode on its own only for announced maintenance, and suspends it for a past-due balance.",
+          "source": {
+            "url": "https://techdocs.akamai.com/linode-api/reference/get-linode-instance",
+            "quote": "`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.",
             "confidence": "docs-confirmed"
           }
         }
@@ -7120,13 +7699,36 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "No idle timer",
+          "note": "There is no idle timeout or auto-stop setting; the only stop is manual.",
+          "source": {
+            "url": "https://www.vultr.com/api/",
+            "quote": "All functions of the Vultr customer portal are accessible via the API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "There is no idle setting at all: the only behaviour is to run until you stop it, so you cannot choose a timeout or save money by letting it sleep.",
+          "figure": "Never; no timer",
+          "note": "The panel and API have no idle-timeout field. A VPS simply runs, and the monthly plan bills through the quiet hours.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Customer Control Panel: start/stop/restart, reinstall, snapshots, VNC console, rescue system, firewall, private networking, storage extension, DNS and reverse DNS",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
-          "figure": "No idle timer exists",
-          "note": "There is no idle timeout to set because nothing idles a Linode: it keeps running, and billing, until you delete it.",
+          "figure": "Nothing to set; it never idles",
+          "note": "There is no idle timeout to configure because there is no idle state: the status field has no paused value, so the only behaviour is the 'never' the capability asks about. A Linode stays up until you stop or delete it, or until announced maintenance stops it.",
           "source": {
-            "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
-            "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+            "url": "https://techdocs.akamai.com/linode-api/reference/get-linode-instance",
+            "quote": "`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.",
             "confidence": "docs-confirmed"
           }
         }
@@ -7376,13 +7978,35 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "Manual start only",
+          "note": "A stopped instance stays stopped until the console, API or CLI restarts it; an incoming request cannot wake it.",
+          "source": {
+            "url": "https://docs.vultr.com/products/compute/instances/cloud-compute/management/stop-instance.md",
+            "quote": "until it is restarted",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No sleep to wake",
+          "note": "A VPS never sleeps, so there is no wake-on-request. A stopped server stays down until you start it from the panel or API.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Customer Control Panel: start/stop/restart, reinstall, snapshots, VNC console, rescue system, firewall, private networking, storage extension, DNS and reverse DNS",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "no",
           "figure": "Nothing sleeps",
-          "note": "A Linode never suspends, so there is nothing to wake. A machine that is powered off stays off until you or your own script starts it.",
+          "note": "No paused state exists in the status field, so there is nothing to wake: a Linode that is offline stays offline until you or your own script starts it.",
           "source": {
-            "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
-            "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+            "url": "https://techdocs.akamai.com/linode-api/reference/get-linode-instance",
+            "quote": "`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.",
             "confidence": "inferred"
           }
         }
@@ -7628,6 +8252,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
             "quote": "Lightsail instances and managed databases incur charges until they are deleted.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "Cron inside the VM",
+          "note": "No provider scheduler starts or stops instances; schedules are cron or systemd timers inside the guest.",
+          "source": {
+            "url": "https://www.vultr.com/api/",
+            "quote": "All functions of the Vultr customer portal are accessible via the API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No managed scheduler",
+          "note": "There is no provider-side cron or job scheduler. You can run cron or systemd timers inside the VM, but the machine has to be running and paid for.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Provisioning | Control Panel, API, or CLI",
             "confidence": "inferred"
           }
         },
@@ -7901,6 +8547,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Public IPv4, any port",
+          "note": "One public IPv4 is included on paid plans, and any TCP or UDP port can be opened through the firewall.",
+          "source": {
+            "url": "https://www.vultr.com/resources/faq/",
+            "quote": "Many of our plans come with one primary IPv4 address.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Public IPv4, any port",
+          "note": "Every server gets a static public IPv4 and a /64 IPv6 subnet. A program on port 3000 is reachable at that address unless the firewall blocks it.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/network-services/ip-assignment/",
+            "quote": "Every server is assigned a public IPv4 address and an IPv6 subnet",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "Public IPv4, any port",
@@ -8165,6 +8833,29 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
             "quote": "you can choose to restrict a firewall rule to an IPv4 or IPv6 address or range of IP addresses.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "VPC only, no token link",
+          "shortfall": "A VPC address is reachable only inside your own network; there is no token or login link in front of a public port.",
+          "note": "A VPC address is reachable only inside your own network; there is no token or login link in front of a public port.",
+          "source": {
+            "url": "https://docs.vultr.com/products/network/vpc-networks",
+            "quote": "Create isolated Vultr VPC networks for private instance traffic",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No private link",
+          "note": "There is no tokenised or authenticated preview URL. You restrict access with the firewall, a VPN or authentication in your own app.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/network-services/firewall/",
+            "quote": "Default policy: all inbound traffic is dropped by a permanent default rule; outbound traffic is unrestricted.",
             "confidence": "inferred"
           }
         },
@@ -8439,6 +9130,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Standard SSH",
+          "note": "A normal SSH daemon with key or password login, root included.",
+          "source": {
+            "url": "https://docs.vultr.com/connect-to-a-server-using-an-ssh-key",
+            "quote": "This Quickstart Guide describes how to connect to Vultr servers over SSH with a key instead of a password.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Real SSH",
+          "note": "Root SSH with a password or an injected key, on the standard port. SSH keys can be added at deployment or later in the panel.",
+          "source": {
+            "url": "https://contabo.com/en-us/vps/",
+            "quote": "then access the server through SSH (Linux) or RDP (Windows).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "Standard SSH",
@@ -8700,6 +9413,30 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "Lightsail offers a 1-click secure connection to your instance's terminal right from your browser, supporting SSH access for Linux/Unix-based instances and RDP access for Windows-based instances.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "VNC console",
+          "shortfall": "The browser console is a VNC view of the screen for emergencies, not a shell API; you log in at the console.",
+          "note": "The browser console is a VNC view of the screen for emergencies, not a shell API; you log in at the console.",
+          "source": {
+            "url": "https://docs.vultr.com/how-to-upload-and-use-custom-isos-on-vultr",
+            "quote": "Click the View Console icon to open the VNC console",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "The browser console is a VNC screen for emergencies, not a shell; day-to-day work needs SSH.",
+          "figure": "VNC console",
+          "note": "The Customer Control Panel opens a VNC console to the server. It shows the screen and keyboard, including the boot process, rather than a browser terminal multiplexer.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "VNC console",
             "confidence": "docs-confirmed"
           }
         },
@@ -8969,6 +9706,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "ssh -L over real SSH",
+          "note": "Port forwarding over SSH works because SSH is a normal daemon; Vultr sells no tunnel service.",
+          "source": {
+            "url": "https://docs.vultr.com/connect-to-a-server-using-an-ssh-key",
+            "quote": "This Quickstart Guide describes how to connect to Vultr servers over SSH with a key instead of a password.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "ssh -L",
+          "note": "The server runs a normal sshd, so local port forwarding works without a provider product.",
+          "source": {
+            "url": "https://contabo.com/en-us/vps/",
+            "quote": "then access the server through SSH (Linux) or RDP (Windows).",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "ssh -L over real SSH",
@@ -9228,6 +9987,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-firewall-rules-reference.html",
             "quote": "A database instance needs rules that allow access for the type of database, such as access over port 3306 for MySQL.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Any port; some outbound blocked",
+          "note": "Inbound ports are yours to open. Outbound 25, 137–139 and 445 are blocked by default and can be removed by ticket; port 1688 is blocked inbound only, and a short list (17, 19, 1900, 53413, 11211) is permanently blocked.",
+          "source": {
+            "url": "https://docs.vultr.com/what-ports-are-blocked",
+            "quote": "We block several outbound ports for network security.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Any TCP/UDP port",
+          "note": "The firewall supports TCP, UDP and ICMP, so a database or game server can be exposed directly.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/network-services/firewall/",
+            "quote": "Protocols: TCP, UDP and ICMP.",
             "confidence": "docs-confirmed"
           }
         },
@@ -9493,6 +10274,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-dns-in-amazon-lightsail.html",
             "quote": "You can create up to six DNS zones in Lightsail.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Free anycast DNS",
+          "note": "Vultr DNS is free, anycast and supports A, AAAA, CNAME, MX, TXT, DNSSEC and reverse DNS.",
+          "source": {
+            "url": "https://docs.vultr.com/product-overviews/dns",
+            "quote": "Free domain record management for any domain you own",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "DNS zone + A record",
+          "note": "Host a DNS zone on Contabo's nameservers, including for a domain registered elsewhere, and point an A or AAAA record at the server.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/network-services/dns-management/",
+            "quote": "DNS zones for domains registered with Contabo or with a third-party registrar can be hosted on Contabo’s authoritative nameservers and managed self-service in the Control Panel.",
             "confidence": "docs-confirmed"
           }
         },
@@ -9764,6 +10567,29 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "Traefik/Caddy yourself",
+          "shortfall": "Vultr does not issue a certificate for a compute instance; its guides put Traefik or Caddy in front and obtain Let's Encrypt certificates.",
+          "note": "Vultr does not issue a certificate for a compute instance; its guides put Traefik or Caddy in front and obtain Let's Encrypt certificates.",
+          "source": {
+            "url": "https://docs.vultr.com/how-to-deploy-hermes-agent-open-source-self-hosted-ai-agent",
+            "quote": "This article explains how to deploy Hermes Agent on a Linux server using Docker Compose with Traefik for automatic HTTPS.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No managed certificate",
+          "note": "Contabo manages DNS records but not TLS certificates for a VPS. You install Caddy, Certbot or another proxy and renew the certificate yourself.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/network-services/dns-management/",
+            "quote": "Record types: A, AAAA, MX, TXT, SRV and CNAME records can be added and edited.",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "partly",
           "figure": "Only some one-click apps",
@@ -10032,6 +10858,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "0.5–15 TB per plan",
+          "note": "Each plan includes 0.5–15 TB of egress; overage is $0.01/GB worldwide and inbound traffic is free.",
+          "source": {
+            "url": "https://www.vultr.com/products/regular-performance-compute/",
+            "quote": "Egress bandwidth beyond generous included free bandwidth allocations is priced at a consistent $0.01/GB worldwide.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Unlimited, fair use",
+          "note": "Inbound and outbound traffic are unmetered on every plan, with no per-GiB charge. The fair-use policy allows throttling of exceptional use.",
+          "source": {
+            "url": "https://contabo.com/en-us/vps/",
+            "quote": "Outgoing Traffic: Unlimited — fair usage policy applies based on average server workloads.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "1-20 TB by plan",
@@ -10297,6 +11145,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
             "quote": "they don't control the traffic that flows out of it—the firewalls allow all outbound traffic.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "Inbound firewall only",
+          "note": "Vultr Firewall filters only incoming traffic; outbound rules are UFW, iptables or firewalld inside the instance.",
+          "source": {
+            "url": "https://docs.vultr.com/support/products/network/does-vultr-firewall-filter-outgoing-traffic-from-my-instance",
+            "quote": "No, Vultr Firewall does not filter outgoing traffic from instances.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Outbound unrestricted",
+          "note": "The network firewall only filters inbound traffic. Outbound filtering has to be done inside the guest OS.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/network-services/firewall/",
+            "quote": "Default policy: all inbound traffic is dropped by a permanent default rule; outbound traffic is unrestricted.",
             "confidence": "docs-confirmed"
           }
         },
@@ -10570,6 +11440,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "VPC-only, no public IP",
+          "note": "A VPC-only instance is deployed without a public IP; it reaches other instances over the VPC and the internet only through a NAT Gateway.",
+          "source": {
+            "url": "https://blogs.vultr.com/nat-gateways",
+            "quote": "making it possible to deploy virtual machines without public IP addresses.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No offline mode",
+          "note": "There is no provider switch that removes internet access. You can block traffic with the guest firewall or by not configuring a route, which is not a sandbox boundary.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/network-services/firewall/",
+            "quote": "Default policy: all inbound traffic is dropped by a permanent default rule; outbound traffic is unrestricted.",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "Outbound policy Drop",
@@ -10826,6 +11718,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
             "quote": "we charge a small $0.005 USD/hour fee for static IPs not attached to an instance for more than 1 hour.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Reserved IP or fixed IPv4",
+          "note": "An instance keeps its public IPv4 for its life, and a Reserved IP can be detached and reattached to another instance.",
+          "source": {
+            "url": "https://docs.vultr.com/products/network/reserved-ips",
+            "quote": "Reserve static public IP addresses that stay on your Vultr account when unattached",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Static IPv4 for life",
+          "note": "The primary IPv4 persists for the life of the server and survives upgrades and reinstalls. A region migration or a new server changes it.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/network-services/ip-assignment/",
+            "quote": "The primary IPv4 address persists for the lifetime of the server.",
             "confidence": "docs-confirmed"
           }
         },
@@ -11099,6 +12013,29 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "No secrets manager",
+          "note": "No vault or write-only environment store is documented; cloud-init and startup scripts write configuration to the disk.",
+          "source": {
+            "url": "https://www.vultr.com/api/",
+            "quote": "All functions of the Vultr customer portal are accessible via the API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "The secret store holds provisioning passwords and SSH keys; it does not put API keys into the machine as environment variables.",
+          "figure": "Password/SSH only",
+          "note": "The API stores secrets of type password or ssh and can reuse them when creating servers. It is a provisioning convenience, not a runtime secret manager.",
+          "source": {
+            "url": "https://api.contabo.com/",
+            "quote": "You can optionally save your passwords or public ssh keys using the Secrets Management API.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "no",
           "figure": "No secret store",
@@ -11362,6 +12299,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
             "quote": "they don't control the traffic that flows out of it—the firewalls allow all outbound traffic.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "None",
+          "note": "Nothing brokers credentials away from the agent; keys on the instance are readable by anything running there.",
+          "source": {
+            "url": "https://www.vultr.com/api/",
+            "quote": "All functions of the Vultr customer portal are accessible via the API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No proxy",
+          "note": "Nothing sits between the agent and an API to add credentials. A key the agent needs must exist in the machine.",
+          "source": {
+            "url": "https://api.contabo.com/",
+            "quote": "You can optionally save your passwords or public ssh keys using the Secrets Management API.",
             "confidence": "inferred"
           }
         },
@@ -11636,6 +12595,30 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "IAM users; PAT account-wide",
+          "shortfall": "Scoped access comes from IAM users and OAuth tokens; the portal's Personal Access Token is account-wide, with no per-key read-only switch.",
+          "note": "Scoped access comes from IAM users and OAuth tokens; the portal's Personal Access Token is account-wide, with no per-key read-only switch.",
+          "source": {
+            "url": "https://www.vultr.com/products/iam/",
+            "quote": "Create, rotate, list, and delete Vultr API keys for Vultr Account Users",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "API users can be limited by account role, but there are no per-key scopes or per-resource restrictions.",
+          "figure": "Role-scoped API users",
+          "note": "Each user, including an API user, holds one of eight roles that limits which areas and functions are reachable. There is no project-level or single-instance API key.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/account-management/user-management/",
+            "quote": "Each user holds a role that determines which areas of the account and which functions are accessible.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "Per-service token scopes",
@@ -11886,6 +12869,28 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "The first time you log in to the console, choose Create Instance.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Console deploy",
+          "note": "The console creates instances, storage, snapshots, firewalls, VPCs, DNS and object storage by clicking.",
+          "source": {
+            "url": "https://www.vultr.com/products/cloud-compute/",
+            "quote": "from a user-friendly control panel or API",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Control panel",
+          "note": "The Customer Control Panel creates servers, chooses the image, region and add-ons, and manages the machine afterwards.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Provisioning | Control Panel, API, or CLI",
             "confidence": "docs-confirmed"
           }
         },
@@ -12145,6 +13150,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Official vultr-cli",
+          "note": "The official Go CLI covers instances, storage, networking, DNS, snapshots, ISOs and marketplace apps.",
+          "source": {
+            "url": "https://docs.vultr.com/reference/vultr-cli",
+            "quote": "`vultr-cli` is the official command-line interface for managing Vultr cloud infrastructure",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "cntb, open source",
+          "note": "The cntb CLI is open source, uses the same OAuth2 credentials as the API, and can output JSON, YAML or CSV.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "CLI (cntb): open-source command-line client",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "linode-cli",
@@ -12397,6 +13424,28 @@
             "url": "https://docs.aws.amazon.com/boto3/latest/reference/services/lightsail.html",
             "quote": "A low-level client representing Amazon Lightsail",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Official Python client",
+          "note": "An OpenAPI-generated Python client is published in the official Vultr GitHub organisation.",
+          "source": {
+            "url": "https://github.com/vultr/vultr-python-client",
+            "quote": "An OpenAPI Python Client for Vultr",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No official SDK",
+          "note": "Contabo documents the REST API, cntb and a Terraform provider. No official Python library is published.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Contabo API (api.contabo.com): RESTful; OAuth2 authentication with client ID, client secret and an API user password created in the Control Panel; no limit on the number of API users",
+            "confidence": "inferred"
           }
         },
         {
@@ -12654,6 +13703,29 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "Official Node client, JS",
+          "shortfall": "The official @vultr/vultr-node client is JavaScript; Vultr publishes no separately typed TypeScript SDK.",
+          "note": "The official @vultr/vultr-node client is JavaScript; Vultr publishes no separately typed TypeScript SDK.",
+          "source": {
+            "url": "https://github.com/vultr/vultr-node",
+            "quote": "Official Vultr client node module.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No official SDK",
+          "note": "No official JavaScript or TypeScript client is published; the API is called directly or through Terraform.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Contabo API (api.contabo.com): RESTful; OAuth2 authentication with client ID, client secret and an API user password created in the Control Panel; no limit on the number of API users",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "@linode/api-v4",
@@ -12908,6 +13980,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/Welcome.html",
             "quote": "This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "API v2, full portal",
+          "note": "API v2 exposes every portal function over REST with bearer-token auth, cursor pagination and a 30-request-per-second limit.",
+          "source": {
+            "url": "https://www.vultr.com/api/",
+            "quote": "All functions of the Vultr customer portal are accessible via the API",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Documented REST API",
+          "note": "OAuth2-authenticated REST API for instances, actions, snapshots, images, object storage, private networks, tags, users, secrets, DNS, firewalls and audits, with an OpenAPI specification.",
+          "source": {
+            "url": "https://api.contabo.com/",
+            "quote": "Contabo API allows you to manage your resources using HTTP requests.",
             "confidence": "docs-confirmed"
           }
         },
@@ -13175,6 +14269,29 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "Read-only preview",
+          "shortfall": "The official Vultr MCP server is a read-only public preview: it can inspect resources but cannot create, change or delete them.",
+          "note": "The official Vultr MCP server is a read-only public preview: it can inspect resources but cannot create, change or delete them.",
+          "source": {
+            "url": "https://blogs.vultr.com/vultr-mcp-server-public-preview",
+            "quote": "The read-only Vultr MCP Server is available now in preview.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No MCP server",
+          "note": "No official MCP server is documented. An assistant would need to call the REST API or cntb itself.",
+          "source": {
+            "url": "https://contabo.com/en/contabo-api/",
+            "quote": "Deploy and control all aspects of Cloud VPS & VDS via RESTful HTTP requests.",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "partly",
           "figure": "Official, read-only",
@@ -13434,6 +14551,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "No PTY API",
+          "note": "The API has no interactive terminal endpoint; SSH is the interactive path.",
+          "source": {
+            "url": "https://www.vultr.com/api/",
+            "quote": "All functions of the Vultr customer portal are accessible via the API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No PTY API",
+          "note": "The API has no terminal or exec endpoint. Interactive work goes over SSH or the VNC console.",
+          "source": {
+            "url": "https://api.contabo.com/",
+            "quote": "Contabo API allows you to manage your resources using HTTP requests.",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "no",
           "figure": "No PTY endpoint",
@@ -13686,6 +14825,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-connecting-to-linux-unix-instance-using-sftp.html",
             "quote": "You can transfer files between your local computer and your Linux or Unix instance in Amazon Lightsail by connecting to your instance using SFTP (SSH File Transfer Protocol).",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "No file API",
+          "note": "Files move over SSH or the S3 API, not through an instance file API.",
+          "source": {
+            "url": "https://www.vultr.com/api/",
+            "quote": "All functions of the Vultr customer portal are accessible via the API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No file API",
+          "note": "There is no endpoint to read or write files inside the server. Files move over SSH, SCP or your own service.",
+          "source": {
+            "url": "https://api.contabo.com/",
+            "quote": "Contabo API allows you to manage your resources using HTTP requests.",
             "confidence": "inferred"
           }
         },
@@ -13954,6 +15115,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "None preinstalled",
+          "note": "Marketplace has Hermes and OpenClaw apps, but no coding-agent image; Claude Code and Codex are installed by guide.",
+          "source": {
+            "url": "https://www.vultr.com/marketplace/",
+            "quote": "Deploy Popular Apps in One Click",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No coding agent image",
+          "note": "The 1-click list has OpenClaw, Hermes Agent, n8n, Paperclip AI and Ollama, but no Claude Code or Codex image. The default OS images have neither.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+            "quote": "OpenClaw · n8n · Nextcloud · WireGuard · GitLab CE · cPanel · Plesk · Dokploy · Paperclip AI · Hermes Agent · Ollama",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "partly",
           "figure": "Hermes/OpenClaw apps only",
@@ -14208,6 +15391,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
             "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "No prompt API",
+          "note": "There is no endpoint that sends a prompt to an agent; Serverless Inference is a model API, not an agent runtime.",
+          "source": {
+            "url": "https://www.vultr.com/api/",
+            "quote": "All functions of the Vultr customer portal are accessible via the API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No prompt API",
+          "note": "There is no endpoint that runs an agent for you. You install the agent and supply the model key yourself.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Provisioning | Control Panel, API, or CLI",
             "confidence": "inferred"
           }
         },
@@ -14468,6 +15673,29 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Marketplace app",
+          "note": "The HermesAgent Marketplace app deploys on Ubuntu 24.04 with Vultr Serverless Inference configured; its listing prints username hermes and password Password.",
+          "source": {
+            "url": "https://www.vultr.com/marketplace/apps/hermesagent/",
+            "quote": "Self improving AI Agent built by Nous Research.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "Hermes is installed from a 1-click image, but you must SSH in and point it at a model before it works.",
+          "figure": "Image + SSH setup",
+          "note": "The Hermes Agent image is in the 1-click list and can also be installed on an existing server from the panel. The guide's next step is to SSH in, choose a model and connect integrations.",
+          "source": {
+            "url": "https://contabo.com/en-us/hermes-ai-vps-hosting",
+            "quote": "SSH into the server and point the Agent at a model and connect the integrations you want.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "Hermes Quick Deploy app",
@@ -14720,6 +15948,29 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Marketplace app",
+          "note": "The OpenClaw Marketplace app deploys the gateway with Homebrew, Docker and a browser VS Code terminal; its listing prints username clawmine and password Password.",
+          "source": {
+            "url": "https://www.vultr.com/marketplace/apps/openclaw/",
+            "quote": "The AI that actually does things.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "OpenClaw is installed from a 1-click image, but onboarding needs SSH and the terminal wizard.",
+          "figure": "Image + SSH setup",
+          "note": "OpenClaw is in the 1-click list and has its own order links. The documented next step is to connect over SSH and run the onboarding wizard, then reach the Control UI through an SSH tunnel.",
+          "source": {
+            "url": "https://contabo.com/en-us/openclaw-hosting",
+            "quote": "Once your server is deployed with OpenClaw installed, connect via SSH and run the onboarding wizard.",
             "confidence": "docs-confirmed"
           }
         },
@@ -14979,6 +16230,28 @@
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "Install it yourself",
+          "note": "No browser image or browser API; Vultr's Neko guide installs a virtual browser in Docker for a human to watch.",
+          "source": {
+            "url": "https://docs.vultr.com/how-to-deploy-neko-self-hosted-virtual-browser-platform",
+            "quote": "Neko is an open-source virtual browser platform that runs inside Docker and streams an interactive browser session to multiple users via WebRTC.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Not preinstalled",
+          "note": "No image includes Chrome or Chromium for an agent. You install a browser and its dependencies yourself.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+            "quote": "An OS image with an application preinstalled and configured at first boot.",
+            "confidence": "inferred"
           }
         },
         {
@@ -15243,6 +16516,29 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "Windows Server + RDP",
+          "shortfall": "A Windows Server instance with RDP gives a graphical desktop you manage; there is no computer-use API or preconfigured desktop agent.",
+          "note": "A Windows Server instance with RDP gives a graphical desktop you manage; there is no computer-use API or preconfigured desktop agent.",
+          "source": {
+            "url": "https://www.vultr.com/servers/windows/",
+            "quote": "Windows Server brings familiarity to the data center for Windows administrators with its graphical environment.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No desktop",
+          "note": "Linux and Windows Server images are offered, but there is no managed graphical desktop for computer-use agents. A Windows RDP session is an OS feature, not a sandbox desktop product.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+            "quote": "Ubuntu, Debian, AlmaLinux, Rocky Linux, CentOS, openSUSE, FreeBSD",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "partly",
           "figure": "Glish, after you install one",
@@ -15501,6 +16797,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Hermes, OpenClaw, Codex guides",
+          "note": "Vultr publishes deployment guides for Hermes, OpenClaw, Codex with Dokploy, Cursor with Coolify, n8n, Discord bots and MCP servers.",
+          "source": {
+            "url": "https://docs.vultr.com/how-to-deploy-hermes-agent-open-source-self-hosted-ai-agent",
+            "quote": "This article explains how to deploy Hermes Agent on a Linux server using Docker Compose with Traefik for automatic HTTPS.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Not documented",
+          "note": "Contabo documents OpenClaw, Hermes, n8n and Paperclip hosting. It is not named as the machine for Cursor cloud agents, Devin or Claude Managed Agents.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+            "quote": "OpenClaw · n8n · Nextcloud · WireGuard · GitLab CE · cPanel · Plesk · Dokploy · Paperclip AI · Hermes Agent · Ollama",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "not-published",
           "note": "No agent platform documents Akamai Cloud as its host. OpenClaw's own install index covers DigitalOcean, Hetzner, Hostinger, GCP, Azure and Oracle but has no Linode page; Akamai supplies its own OpenClaw app instead.",
@@ -15752,6 +17070,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-managing-access-for-an-iam-user.html",
             "quote": "you can create one or more IAM users in your AWS account, and those users can be configured with different levels of access to services offered by AWS.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "IAM organizations",
+          "note": "Organizations are separate resource and billing environments with invited members and IAM policies.",
+          "source": {
+            "url": "https://www.vultr.com/products/iam/",
+            "quote": "Organizations create environments with shared Vultr resources that are governed by IAM permission policies.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Several users",
+          "note": "One account can hold several users, each with a role, sharing the account's servers, billing and API credentials.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/account-management/user-management/",
+            "quote": "A Contabo account can have several users.",
             "confidence": "docs-confirmed"
           }
         },
@@ -16014,6 +17354,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Roles, groups, policies",
+          "note": "Predefined roles, groups and custom JSON policies at service, action and resource level; assumable roles add time- or IP-bound access.",
+          "source": {
+            "url": "https://www.vultr.com/products/iam/",
+            "quote": "Roles are predefined permission sets.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "8 predefined roles",
+          "note": "Owner, Full Access, Technician, Billing Admin, Invoice, Abuse & Fraud, Object Storage and Object Storage r/w, each limited to named areas.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/account-management/user-management/",
+            "quote": "Each user holds a role that determines which areas of the account and which functions are accessible.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "RBAC roles per service",
@@ -16267,6 +17629,28 @@
             "url": "https://aws.amazon.com/iam/identity-center/",
             "quote": "Give your workforce single sign-on access and a consistent experience across AWS services.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "OIDC; no SAML",
+          "note": "Single sign-on uses OpenID Connect with Okta, OneLogin, Google or Microsoft Entra ID; SAML is explicitly not supported.",
+          "source": {
+            "url": "https://docs.vultr.com/single-sign-on",
+            "quote": "SSO on Vultr is made available through OpenID Connect.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No SAML/OIDC",
+          "note": "Users sign in with a Contabo account. The API's one-time SSO token signs a user into the control panel; it is not a company identity-provider login.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/account-management/user-management/",
+            "quote": "A Contabo account can have several users.",
+            "confidence": "inferred"
           }
         },
         {
@@ -16527,6 +17911,29 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "No user-set cap",
+          "note": "Vultr enforces an account credit limit (a maximum instance cost) that you can view and ask to raise, but there is no user-set budget that stops machines; invoice and bandwidth emails are alerts only.",
+          "source": {
+            "url": "https://docs.vultr.com/platform/billing/manage-account-limits",
+            "quote": "Review the maximum instances, current instances, and maximum instance cost.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "The prepaid term caps the machine's own bill, but there is no account-level spending limit; add-ons and upgrades are separate purchases.",
+          "figure": "Prepaid plan only",
+          "note": "A server is paid for its term in advance, so it cannot run up an hourly bill. Nothing stops you ordering another server or add-on, and no account-wide cap is documented.",
+          "source": {
+            "url": "https://contabo.com/en/legal/terms-and-conditions/",
+            "quote": "If the customer selects a contractual term of one month for server services, then the total price will fall due immediately.",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "no",
           "figure": "No hard cap",
@@ -16780,6 +18187,29 @@
             "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
             "quote": "You can choose to be alerted for both actual (after accruing) and forecasted (before accruing) spends.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "Invoice + bandwidth email",
+          "shortfall": "Vultr emails new invoices and bandwidth usage, but there is no alert at a dollar threshold you set.",
+          "note": "Email preferences cover outages, maintenance, bandwidth usage and new invoices; there is no published spend-threshold alert.",
+          "source": {
+            "url": "https://docs.vultr.com/platform/other/manage-notifications",
+            "quote": "You can configure email notifications for maintenance, outages, bandwidth usage, and new invoices",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "The panel shows resource graphs and invoices, but no spending threshold or usage alert is documented. The question is unanswered, not a confirmed absence.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "Customer Control Panel: start/stop/restart, reinstall, snapshots, VNC console, rescue system, firewall, private networking, storage extension, DNS and reverse DNS",
+            "confidence": "not-published"
           }
         },
         {
@@ -17043,6 +18473,29 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "Up to 10 years",
+          "note": "Audit Logs retain user product activity for up to 10 years in a read-only bucket; 30 days are free, longer retention is billed by storage.",
+          "source": {
+            "url": "https://www.vultr.com/products/iam/",
+            "quote": "Vultr Audit Logs retain user product activity for a maximum of 10 years in a dedicated read-only storage bucket",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "API audit endpoints record changes per resource, but no account-wide audit log with export or a retention period is published.",
+          "figure": "Per-resource API audits",
+          "note": "The API exposes audit lists for instances, instance actions, snapshots, images, object storage, private networks, tags, users, roles, secrets, domains, DNS and firewalls, with changedBy and timestamps.",
+          "source": {
+            "url": "https://api.contabo.com/",
+            "quote": "List history about your instances (audit)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "Control-plane, streamed",
@@ -17297,6 +18750,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
             "quote": "Bundles are billed on an on-demand hourly rate, so you pay only for what you use.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "One-hour minimum",
+          "note": "Billing is hourly with a one-hour minimum per server, not per second.",
+          "source": {
+            "url": "https://docs.vultr.com/support/platform/billing/how-am-i-billed-for-my-servers",
+            "quote": "The minimum billing unit is one hour, and hourly charges begin when a server is deployed, regardless of whether it is powered on or off.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Monthly plans only",
+          "note": "There is no hourly or per-second rate. The smallest unit is a monthly plan, and the terms are prepaid.",
+          "source": {
+            "url": "https://contabo.com/en-us/vps/",
+            "quote": "The price displayed is the effective monthly rate for a 24-month subscription including applicable taxes",
             "confidence": "docs-confirmed"
           }
         },
@@ -17573,6 +19048,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "Billed while it exists",
+          "note": "CPU, RAM and disk are reserved and billed for every hour the instance exists, whether the agent works or waits.",
+          "source": {
+            "url": "https://docs.vultr.com/support/platform/billing/how-am-i-billed-for-my-servers",
+            "quote": "Servers that are stopped but not destroyed continue to incur hourly charges for reserved resources such as compute, storage, and IP address allocations.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Allocated, not active",
+          "note": "The price is for the whole server for the month, not for the CPU time used. An idle machine costs the same as a busy one.",
+          "source": {
+            "url": "https://contabo.com/en-us/vps/",
+            "quote": "One monthly price covers the resources, the network, and the platform.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "no",
           "figure": "Billed while it exists",
@@ -17834,6 +19331,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
             "quote": "These resources accrue charges even when they are in the stopped state.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "Stop bills in full",
+          "note": "A stopped instance bills at the running rate; only destroying it ends the charge.",
+          "source": {
+            "url": "https://docs.vultr.com/support/platform/billing/how-am-i-billed-for-my-servers",
+            "quote": "To stop billing for a server, you must destroy it from your account. Stopping a server does not suspend billing.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Stop still bills",
+          "note": "There is no cheaper stopped rate. The monthly plan is paid for the term, and a cancellation leaves the service active to the end of the paid period.",
+          "source": {
+            "url": "https://help.contabo.com/en/support/solutions/articles/103000387511-i-would-like-to-add-or-remove-a-service",
+            "quote": "The service will remain active until the end of its current billing period.",
             "confidence": "docs-confirmed"
           }
         },
@@ -18107,6 +19626,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "No plan fee",
+          "note": "No subscription: each server bills hourly from deployment, capped at its monthly price.",
+          "source": {
+            "url": "https://www.vultr.com/products/block-storage/",
+            "quote": "All servers on your account are billed hourly up to the monthly rate cap.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Monthly plan only",
+          "note": "Every server is sold as a monthly plan. There is no pay-as-you-go option with no plan.",
+          "source": {
+            "url": "https://contabo.com/en-us/vps/",
+            "quote": "One monthly price covers the resources, the network, and the platform.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "No plan fee",
@@ -18374,6 +19915,28 @@
             "url": "https://aws.amazon.com/lightsail/pricing/",
             "quote": "Lightsail bundles resources like memory, vCPU, and solid-state drive (SSD) storage into one plan, so budgeting is easy and straightforward.",
             "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "$20/mo for 2 vCPU / 4 GB",
+          "note": "The 2 vCPU / 4 GB / 80 GB plan is $20 a month, and 730 hours is capped at that price.",
+          "source": {
+            "url": "https://www.vultr.com/pricing/",
+            "quote": "2 vCPUs 4 GB Memory 3.00 TB Bandwidth 80 GB Storage $20.00/mo $0.03/hr",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "$6.60/mo",
+          "note": "One flat price per fixed size. Cloud VPS 4 is $6.60 on the 1-month term; add-ons are separate.",
+          "source": {
+            "url": "https://contabo.com/en-us/vps/",
+            "quote": "One monthly price covers the resources, the network, and the platform.",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -18650,6 +20213,29 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "1 vCPU/512 MB, 3 regions",
+          "shortfall": "The free instance is an application-only, randomized program limited to Miami, Seattle and Frankfurt, not a standing free tier for every account.",
+          "note": "The free instance is an application-only, randomized program limited to Miami, Seattle and Frankfurt, not a standing free tier for every account.",
+          "source": {
+            "url": "https://www.vultr.com/free-tier-program/",
+            "quote": "The free tier instance is available in Miami, Seattle, and Frankfurt.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No free tier",
+          "note": "No free plan or recurring free allowance is advertised. The cheapest machine is a paid monthly plan.",
+          "source": {
+            "url": "https://contabo.com/en-us/vps/",
+            "quote": "Provisioning takes a few minutes after payment clears.",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "no",
           "figure": "No ongoing free tier",
@@ -18921,6 +20507,29 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "partly",
+          "figure": "Deposit match up to $100",
+          "shortfall": "The advertised credit is a promo code or a dollar-for-dollar deposit match, not an automatic signup credit.",
+          "note": "The advertised credit is a promo code or a dollar-for-dollar deposit match, not an automatic signup credit.",
+          "source": {
+            "url": "https://www.vultr.com/coupons/",
+            "quote": "Vultr will match your first deposit dollar for dollar, up to $100, when you open a new account.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "No signup credit",
+          "note": "No starting credit is advertised on the pricing, VPS or order pages.",
+          "source": {
+            "url": "https://contabo.com/en-us/vps/",
+            "quote": "Provisioning takes a few minutes after payment clears.",
+            "confidence": "inferred"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "$100 for 60 days",
@@ -19187,6 +20796,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "Payment method required",
+          "note": "Paid servers need a card, PayPal, Alipay, UnionPay or crypto; the free tier is a separate application.",
+          "source": {
+            "url": "https://www.vultr.com/resources/faq/",
+            "quote": "We accept Visa, Mastercard, American Express, Discover, JCB, BitPay (BTC, BCH, ETH, DOGE, PAX, BUSD, LTC, USDC, GUSD), Alipay, UnionPay, and PayPal.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Pay before provisioning",
+          "note": "There is no trial. The first invoice is due before the server is provisioned; payment can be card, PayPal or bank transfer, so a card is not the only method, but nothing runs for free.",
+          "source": {
+            "url": "https://contabo.com/en-us/vps/",
+            "quote": "Provisioning takes a few minutes after payment clears.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "no",
           "figure": "Card required",
@@ -19437,6 +21068,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/health/latest/ug/what-is-aws-health.html",
             "quote": "All customers can use the AWS Health Dashboard, powered by the AWS Health API. The dashboard requires no setup, and it's ready to use for authenticated AWS users.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "status.vultr.com",
+          "note": "A public status page with per-region status, compute availability, JSON and RSS feeds.",
+          "source": {
+            "url": "https://status.vultr.com/",
+            "quote": "Vultr provides real-time server status in JSON and RSS format via three endpoints.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "contabo-status.com",
+          "note": "A public status page lists interruptions, running maintenance and scheduled maintenance across the data centres, with an RSS feed.",
+          "source": {
+            "url": "https://contabo-status.com/",
+            "quote": "On this page we will inform you about outages, interruptions and maintenances in our data centers.",
             "confidence": "docs-confirmed"
           }
         },
@@ -19696,6 +21349,29 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/",
             "quote": "AWS will use commercially reasonable efforts to make the Single Lightsail Instance available with an Instance-Level Uptime Percentage, as shown in the table below during any monthly billing cycle",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "100% uptime, credits",
+          "note": "A 100% uptime guarantee on network and host-node availability, credited per service item when the customer opens a ticket and asks.",
+          "source": {
+            "url": "https://www.vultr.com/legal/sla/",
+            "quote": "Vultr offers a 100% uptime guarantee via this Service Level Agreement based on network and host node availability.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "partly",
+          "shortfall": "The promise is an annual average for physical connectivity and carries no service credit or refund.",
+          "figure": "99.9%, no credits",
+          "note": "The Terms promise 99.9% annual average physical connectivity for VPS, VDS and dedicated servers, excluding maintenance and events outside Contabo's control. No credit formula is published.",
+          "source": {
+            "url": "https://contabo.com/en/legal/terms-and-conditions/",
+            "quote": "available at an annual average rate of 99.9%",
             "confidence": "docs-confirmed"
           }
         },
@@ -19962,6 +21638,28 @@
           }
         },
         {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "SOC 2+ (HIPAA)",
+          "note": "SOC 2+ with HIPAA, plus ISO 27001/27017/27018/20000-1, PCI Merchant and CSA Star Level 1.",
+          "source": {
+            "url": "https://www.vultr.com/legal/compliance/",
+            "quote": "SOC 2+ (HIPAA)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "not-published",
+          "figure": "No report offered",
+          "note": "Location pages list SOC 1 and SOC 2 Type 2 among the data centre's certifications, but Contabo publishes no trust centre, no report-request route and no statement that the report covers its VPS platform. Ask for the report and its scope.",
+          "source": {
+            "url": "https://contabo.com/en-us/locations/india/",
+            "quote": "SOC 2 Type 2 Report",
+            "confidence": "not-published"
+          }
+        },
+        {
           "provider": "linode",
           "verdict": "yes",
           "figure": "SOC 2 Type 2 on request",
@@ -20211,6 +21909,28 @@
           "source": {
             "url": "https://aws.amazon.com/service-terms/",
             "quote": "These Service Terms incorporate the AWS Data Processing Addendum (“DPA”), when you use AWS Services to process Customer Data (as defined in the DPA).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "yes",
+          "figure": "DPA by request",
+          "note": "A GDPR Data Processing Addendum is available for e-signature through an account manager or support ticket.",
+          "source": {
+            "url": "https://docs.vultr.com/support/platform/compliance/does-vultr-offer-a-data-processing-addendum",
+            "quote": "Yes, Vultr offers a Data Processing Addendum (DPA) to support customers that are subject to the EU General Data Protection Regulation (GDPR)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "yes",
+          "figure": "Online DPA",
+          "note": "A standardised GDPR DPA can be created in the control panel, in English, German or Spanish, covering VPS, VDS, dedicated servers and object storage.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/dpa/dpa/",
+            "quote": "A Data Processing Agreement (DPA) is a contract between Contabo and its customer that governs the processing of personal data by Contabo on behalf of the customer",
             "confidence": "docs-confirmed"
           }
         },
@@ -20471,6 +22191,28 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/what-is-amazon-lightsail.html",
             "quote": "Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for anyone who needs to build websites or web applications.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "vultr",
+          "verdict": "no",
+          "figure": "Hosted service only",
+          "note": "Vultr is a proprietary hosted cloud; its CLI, Terraform provider and clients are open source, the platform is not.",
+          "source": {
+            "url": "https://www.vultr.com/legal/tos/",
+            "quote": "These terms of use (the “Terms”) are a legal contract between The Constant Company, LLC, and its affiliates (“Vultr”, “we” or “us”)",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "contabo",
+          "verdict": "no",
+          "figure": "Proprietary platform",
+          "note": "The cntb CLI is open source, but the VPS platform and control panel are proprietary and cannot be self-hosted.",
+          "source": {
+            "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+            "quote": "CLI (cntb): open-source command-line client",
             "confidence": "inferred"
           }
         },

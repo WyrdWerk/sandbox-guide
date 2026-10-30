@@ -1,0 +1,105 @@
+{
+  "provider": "contabo",
+  "checkedOn": "2026-10-30",
+  "summary": "A prepaid monthly VPS plan with one flat price per fixed size: Cloud VPS 4 is $6.60 a month on the 1-month term, there is no hourly meter, and a powered-off server keeps billing until the paid period ends.",
+  "shapes": [
+    {
+      "name": "Cloud VPS 4",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 100,
+      "monthly": 6.6
+    },
+    {
+      "name": "Cloud VPS 6",
+      "vcpu": 6,
+      "ram": 12,
+      "disk": 200,
+      "monthly": 9.0
+    },
+    {
+      "name": "Cloud VPS 8",
+      "vcpu": 8,
+      "ram": 24,
+      "disk": 300,
+      "monthly": 16.8
+    },
+    {
+      "name": "Cloud VPS 12",
+      "vcpu": 12,
+      "ram": 48,
+      "disk": 400,
+      "monthly": 30.0
+    },
+    {
+      "name": "Cloud VPS 16",
+      "vcpu": 16,
+      "ram": 64,
+      "disk": 500,
+      "monthly": 44.5
+    },
+    {
+      "name": "Cloud VPS 18",
+      "vcpu": 18,
+      "ram": 96,
+      "disk": 600,
+      "monthly": 58.8
+    }
+  ],
+  "monthlyPlans": true,
+  "between": "kept",
+  "maxDisk": 600,
+  "maxVcpu": 18,
+  "maxRam": 96,
+  "egress": {
+    "perGiB": 0,
+    "included": "Unlimited inbound and outbound traffic on every Cloud VPS plan",
+    "note": "There is no per-GiB charge and no published traffic allowance. Contabo applies a fair-use policy and reserves the right to throttle servers with exceptionally high or disruptive usage; the port speed is 200 Mbit/s on Cloud VPS 4 and up to 1 Gbit/s on the largest plans. Not priced by the calculator.",
+    "url": "https://contabo.com/en-us/vps/"
+  },
+  "plans": [
+    {
+      "name": "Monthly (1-month term)",
+      "fee": 0,
+      "note": "The card uses the 1-month term, the only monthly-billed option, at its ongoing price. The 3- and 6-month terms cost the same per month; 12 months is 15% cheaper and 24 months 20% cheaper, both paid upfront."
+    }
+  ],
+  "notes": [
+    "Term choice: the card prices the 1-month term. Cloud VPS 4 is $6.60 a month on 1, 3 or 6 months, $5.28 a month on the 24-month term ($126.72 paid upfront for two years), and €5.50 (1–6 months) / €4.68 (12 months) / €4.40 (24 months) in the EUR list. The 24-month rate is the one Contabo advertises most prominently; the 1-month rate is the ongoing price a monthly buyer pays.",
+    "No setup fee was shown for any term in the configurator on 2026-10-30 (\"No Setup Fee\" under 1, 3, 6, 12 and 24 months). Contabo has advertised no VPS setup fee since 2014.",
+    "There is no hourly or per-second meter. A server is sold as a monthly plan, so a single ten-minute task costs a whole month, and tasks mode assumes all runs share one plan back to back. Running one fresh server per task would need one monthly plan per task.",
+    "A powered-off server keeps billing for the paid period: the contract is for a term, not for running time, and cancelling leaves the service active until the end of the current billing period. The card bills one monthly plan for workload C whether the server runs 90 hours or 730.",
+    "Cloud VPS 4 is 4 vCPU / 8 GB RAM / 100 GB SSD. The 4 vCPU and 8 GB are the smallest Core VPS allocation, so workload A (2 vCPU / 4 GiB) and workload C (2 vCPU / 4 GiB) are served by a larger shape. There is no custom CPU/RAM split.",
+    "Contabo labels RAM and disk in GB. The card maps 8 GB to 8 GiB, as the other VPS cards do. If 8 GB is decimal, it is 7.45 GiB and workload B's 8 GiB request is 0.55 GiB short; the next shape (Cloud VPS 6, 12 GB) would be needed. This is unresolved because Contabo does not say which unit it means.",
+    "Add-ons are separate monthly charges and are not in A/B/C: Auto Backup (€1.65/month on Cloud VPS 4 in the configurator), Private Networking (€2.29/month), one additional IPv4 (€3.50/month), 100 GB extra SSD (€1.50/month), Windows Server licence (€8.00/month). Those are net EUR prices from the configurator; the USD list is a fixed 1.2× the EUR list at this check.",
+    "Storage Extension adds capacity of the plan's own type, up to 1.2 TB on the top Core plan. It is tied to the server and is not a detachable volume, so it is not modelled as a volume.",
+    "GPU VPS (one NVIDIA RTX 6000 PRO configuration, EU and US Central) is a separate product and was showing a waitlist on 2026-10-30; it is not in this card.",
+    "Prices are Contabo's own USD list on the en-US site, excluding VAT. The account currency is fixed at order; EUR and GBP lists differ, and EU consumers pay VAT on top."
+  ],
+  "sources": [
+    {
+      "label": "Core VPS plans and prices",
+      "url": "https://contabo.com/en-us/vps/"
+    },
+    {
+      "label": "All product prices (24-month table)",
+      "url": "https://contabo.com/en-us/pricing/"
+    },
+    {
+      "label": "Cloud VPS 4 configurator (terms, setup fee, add-ons)",
+      "url": "https://contabo.com/en-us/vps/cloud-vps-core-4"
+    },
+    {
+      "label": "Product documentation: VPS plans and limits",
+      "url": "https://docs.contabo.com/docs/servers-hosting/vps/"
+    },
+    {
+      "label": "Terms: contract term and 99.9% connectivity",
+      "url": "https://contabo.com/en/legal/terms-and-conditions/"
+    },
+    {
+      "label": "Help: cancellation leaves the service active to the end of the billing period",
+      "url": "https://help.contabo.com/en/support/solutions/articles/103000387511-i-would-like-to-add-or-remove-a-service"
+    }
+  ]
+}

@@ -7,7 +7,7 @@
       "seoTitle": "Hermes agent hosting: where to run it and what it costs",
       "kicker": "Personal agent",
       "question": "I want a personal assistant that answers me on Telegram, remembers what I tell it and runs jobs on a schedule.",
-      "standfirst": "Hermes is a personal AI agent you host yourself. It needs a small machine that stays on and keeps its files. Four providers offer it in one click (Agent 37 with no terminal at all; Akamai Cloud, DigitalOcean and Hostinger as server templates you finish in a terminal); most can run it if you can follow terminal instructions; a few are a poor fit for an assistant that never sleeps.",
+      "standfirst": "Hermes is a personal AI agent you host yourself. It needs a small machine that stays on and keeps its files. Six providers offer it in one click (Agent 37 with no terminal at all; Akamai Cloud, Contabo, DigitalOcean, Hostinger and Vultr as server templates you finish in a terminal); most can run it if you can follow terminal instructions; a few are a poor fit for an assistant that never sleeps.",
       "preset": "personal",
       "whatItIs": [
         "[Hermes Agent](https://github.com/NousResearch/hermes-agent) is an open-source (MIT) assistant from Nous Research. You talk to it from Telegram, Slack, WhatsApp, email and [20+ other apps](https://hermes-agent.nousresearch.com/docs/), it keeps a memory of you between conversations, and it writes itself reusable skills from what it does.",
@@ -285,6 +285,28 @@
           "price": "$12/month for 2 vCPU / 2 GB, $24 for 2 vCPU / 4 GB; no agent surcharge"
         },
         {
+          "provider": "vultr",
+          "tier": "one-click",
+          "noTerminal": "partly",
+          "what": "The Marketplace HermesAgent app deploys Hermes on Ubuntu 24.04 with a Vultr Serverless Inference key you supply at launch, plus a web login. The listing prints a default password (hermes / Password) and channel setup is done in the app, so budget a first login and a password change.",
+          "link": {
+            "title": "HermesAgent 1-Click",
+            "url": "https://www.vultr.com/marketplace/apps/hermesagent/"
+          },
+          "price": "2 vCPU / 4 GiB plan $20/mo; no app surcharge"
+        },
+        {
+          "provider": "contabo",
+          "tier": "one-click",
+          "noTerminal": "no",
+          "what": "Order a Cloud VPS with the Hermes Agent image, or add it to an existing server from the panel. The agent is installed for you, but the next step in Contabo's own guide is to SSH in, point it at a model and connect integrations.",
+          "link": {
+            "title": "Hermes Agent hosting",
+            "url": "https://contabo.com/en-us/hermes-ai-vps-hosting"
+          },
+          "price": "$6.60/mo (Cloud VPS 4, 1-month term); model API costs separate"
+        },
+        {
           "provider": "linode",
           "tier": "one-click",
           "noTerminal": "partly",
@@ -415,7 +437,7 @@
       "seoTitle": "OpenClaw hosting: where to run it and what it costs",
       "kicker": "Personal agent",
       "question": "I want OpenClaw answering me on WhatsApp or Slack, with its own browser and memory, without keeping my laptop on.",
-      "standfirst": "OpenClaw is a self-hosted assistant built around one always-on gateway. It has more official hosting guides than Hermes: five providers deploy it in one click, and four more publish a guide or template.",
+      "standfirst": "OpenClaw is a self-hosted assistant built around one always-on gateway. It has more official hosting guides than Hermes: seven providers deploy it in one click, and four more publish a guide or template.",
       "preset": "personal",
       "whatItIs": [
         "[OpenClaw](https://docs.openclaw.ai/help/faq/what-is-openclaw) is an open-source assistant you run on your own infrastructure, for yourself or a team. It replies on the apps you already use, including WhatsApp, Slack, Telegram, Discord, Signal and iMessage, and can read files, run commands, browse and keep memory.",
@@ -684,6 +706,28 @@
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/compare-options-choose-lightsail-instance-image.html"
           },
           "price": "$24/month for 2 vCPU / 4 GB, plus $18/month if you want the managed certificate"
+        },
+        {
+          "provider": "vultr",
+          "tier": "one-click",
+          "noTerminal": "partly",
+          "what": "The Marketplace OpenClaw app deploys the gateway on Ubuntu 24.04 with Homebrew, Docker and a browser VS Code terminal, and a default clawmine / Password login. Change the password and treat the Code Server terminal as root-equivalent access.",
+          "link": {
+            "title": "OpenClaw 1-Click",
+            "url": "https://www.vultr.com/marketplace/apps/openclaw/"
+          },
+          "price": "2 vCPU / 4 GiB plan $20/mo; no app surcharge"
+        },
+        {
+          "provider": "contabo",
+          "tier": "one-click",
+          "noTerminal": "no",
+          "what": "The OpenClaw image is in the 1-click list and has dedicated order links. After deployment you connect over SSH, run the onboarding wizard, add model keys and messaging channels, then reach the Control UI through an SSH tunnel.",
+          "link": {
+            "title": "OpenClaw hosting",
+            "url": "https://contabo.com/en-us/openclaw-hosting"
+          },
+          "price": "$6.60/mo (Cloud VPS 4, 1-month term); model API costs separate"
         },
         {
           "provider": "linode",
@@ -1134,6 +1178,28 @@
           "price": null
         },
         {
+          "provider": "vultr",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Create a 4 vCPU / 8 GiB instance, SSH in and install Claude Code or Codex. Vultr's Codex guide uses Dokploy for the deploy half; the agent itself is a terminal install, and the disk survives a stop but the server bills through it.",
+          "link": {
+            "title": "Codex CLI with Dokploy",
+            "url": "https://docs.vultr.com/how-to-deploy-openai-codex-cli-projects-on-vultr-using-dokploy"
+          },
+          "price": "$40/mo for 4 vCPU / 8 GiB, on or stopped"
+        },
+        {
+          "provider": "contabo",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Claude Code or Codex on a Cloud VPS 4 (4 vCPU / 8 GB / 100 GB) over SSH. The repository and login survive a stop, but the monthly plan bills whether the developer works or not.",
+          "link": {
+            "title": "Core VPS plans",
+            "url": "https://contabo.com/en-us/vps/"
+          },
+          "price": "$6.60/mo (Cloud VPS 4, 1-month term)"
+        },
+        {
           "provider": "linode",
           "tier": "manual",
           "noTerminal": "no",
@@ -1482,6 +1548,28 @@
           "price": null
         },
         {
+          "provider": "vultr",
+          "tier": "backend",
+          "noTerminal": "no",
+          "what": "There is no execution API or sandbox pool. You would build the run endpoint and machine pool on the Vultr API, and the one-hour minimum makes 20,000 one-minute runs cost 20,000 server-hours.",
+          "link": {
+            "title": "Vultr API v2",
+            "url": "https://www.vultr.com/api/"
+          },
+          "price": "$0.02976 per server-hour: 20,000 one-minute runs ≈ $595"
+        },
+        {
+          "provider": "contabo",
+          "tier": "none",
+          "noTerminal": "no",
+          "what": "Contabo has no per-run sandbox. The API creates whole servers on monthly plans, with no per-second meter and no cheap throwaway machine. 20,000 one-minute runs would mean either one always-on server doing them back to back or 20,000 monthly plans.",
+          "link": {
+            "title": "Contabo API",
+            "url": "https://contabo.com/en/contabo-api/"
+          },
+          "price": "Not a per-task product; the smallest plan is $6.60/mo"
+        },
+        {
           "provider": "linode",
           "tier": "manual",
           "noTerminal": "no",
@@ -1825,6 +1913,28 @@
           "price": null
         },
         {
+          "provider": "vultr",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No browser or computer-use product. The Neko guide installs a virtual browser in Docker on a 4-core / 8 GB server; every ten-minute session still bills a whole hour, so 30,000 sessions are uneconomic.",
+          "link": {
+            "title": "Neko virtual browser guide",
+            "url": "https://docs.vultr.com/how-to-deploy-neko-self-hosted-virtual-browser-platform"
+          },
+          "price": "$0.02976 per server-hour, one hour minimum per session"
+        },
+        {
+          "provider": "contabo",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Chromium and the agent on Cloud VPS 4 over SSH. There is no hosted browser and no per-session isolation: every session shares one machine, one public IP and one disk, and the monthly plan bills all month.",
+          "link": {
+            "title": "Core VPS plans",
+            "url": "https://contabo.com/en-us/vps/"
+          },
+          "price": "$6.60/mo (Cloud VPS 4, 1-month term)"
+        },
+        {
           "provider": "linode",
           "tier": "manual",
           "noTerminal": "no",
@@ -1890,7 +2000,7 @@
       "seoTitle": "n8n hosting: where to self-host n8n and what it costs",
       "kicker": "Workflow automation",
       "question": "I want n8n running my automations around the clock, on a server I control, without paying per workflow run.",
-      "standfirst": "n8n is a visual automation tool you can host yourself. It needs a small machine that never sleeps and keeps its database. Three providers set it up in one click and OVHcloud ships it preinstalled; most others can run it if someone follows terminal steps; the task-only sandboxes are the wrong place for it.",
+      "standfirst": "n8n is a visual automation tool you can host yourself. It needs a small machine that never sleeps and keeps its database. Four providers set it up in one click and OVHcloud ships it preinstalled; most others can run it if someone follows terminal steps; the task-only sandboxes are the wrong place for it.",
       "preset": "automation",
       "whatItIs": [
         "[n8n](https://docs.n8n.io/) is a workflow automation tool. You draw a workflow on a canvas: a **trigger** (something that starts it, such as a form being sent or a time of day), then steps that call other apps, reshape data or ask an AI model. Its [README](https://github.com/n8n-io/n8n) counts 1,500+ ready-made connections.",
@@ -2160,6 +2270,28 @@
             "url": "https://docs.tensorlake.ai/sandboxes/commands"
           },
           "price": null
+        },
+        {
+          "provider": "vultr",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "Vultr's n8n guide runs n8n and Traefik from Docker Compose on Ubuntu 24.04, with the database and encryption key on the instance disk. It is a terminal build, not a Marketplace app.",
+          "link": {
+            "title": "Deploy n8n on Vultr",
+            "url": "https://docs.vultr.com/how-to-deploy-n8n-workflow-automation-engine"
+          },
+          "price": "2 vCPU / 4 GiB $20/mo always on"
+        },
+        {
+          "provider": "contabo",
+          "tier": "one-click",
+          "noTerminal": "yes",
+          "what": "The n8n 1-click image installs n8n on a Cloud VPS and you open the visual editor at the server's IP, with no terminal step. It must stay awake for webhooks and schedules, which suits an always-on VPS. You keep the database and the encryption key on the same disk and back them up yourself.",
+          "link": {
+            "title": "n8n hosting",
+            "url": "https://contabo.com/en-us/n8n-hosting"
+          },
+          "price": "$6.60/mo (Cloud VPS 4, 1-month term)"
         },
         {
           "provider": "linode",
@@ -2599,6 +2731,28 @@
           "price": null
         },
         {
+          "provider": "vultr",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "Vultr's Discord guide deploys a Docker app and runs a Python bot inside it; keep it as a service and store the token on the disk. A gateway connection needs the machine awake, and Vultr has no idle stop.",
+          "link": {
+            "title": "Python Discord bot on Docker",
+            "url": "https://docs.vultr.com/how-to-run-a-python-discord-bot-on-a-docker-application"
+          },
+          "price": "1 vCPU / 2 GiB $10/mo"
+        },
+        {
+          "provider": "contabo",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install the bot and its database on Cloud VPS 4 and keep it running. A Discord or Slack gateway needs an always-on process, which the VPS provides; there is no template and no managed update.",
+          "link": {
+            "title": "Core VPS plans",
+            "url": "https://contabo.com/en-us/vps/"
+          },
+          "price": "$6.60/mo (Cloud VPS 4, 1-month term)"
+        },
+        {
           "provider": "linode",
           "tier": "manual",
           "noTerminal": "no",
@@ -2955,6 +3109,28 @@
             "url": "https://docs.tensorlake.ai/sandboxes/remote-dev"
           },
           "price": null
+        },
+        {
+          "provider": "vultr",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "One instance per developer in a shared IAM organization, each with its own SSH key and Claude login. Five 4 vCPU / 8 GiB machines cost $200 a month whether the developers work eight hours or twenty-four.",
+          "link": {
+            "title": "Vultr IAM organizations",
+            "url": "https://www.vultr.com/products/iam/"
+          },
+          "price": "5 × $40 = $200/mo"
+        },
+        {
+          "provider": "contabo",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "One Cloud VPS 4 per developer, each with its own login and repository, installed over SSH. Five machines cost $33.00 a month and bill through nights and weekends unless cancelled.",
+          "link": {
+            "title": "Core VPS plans",
+            "url": "https://contabo.com/en-us/vps/"
+          },
+          "price": "5 × $6.60 = $33.00/mo (1-month term)"
         },
         {
           "provider": "linode",
@@ -3322,6 +3498,28 @@
           "price": null
         },
         {
+          "provider": "vultr",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run cron or a systemd timer inside an always-on instance, or create a fresh instance per run through the API. A fresh 1 vCPU / 2 GiB instance is billed a whole hour per run, so 120 ten-minute runs cost about $1.79 against $10 for an always-on box; write results to Object Storage.",
+          "link": {
+            "title": "Vultr Object Storage",
+            "url": "https://www.vultr.com/products/object-storage/"
+          },
+          "price": "120 runs × 1 h × $0.01488 ≈ $1.79, or $10/mo always on"
+        },
+        {
+          "provider": "contabo",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run cron or a systemd timer inside Cloud VPS 4. The schedule works because the machine never sleeps, but 20 hours of scraping a month costs the same as 730 because there is no hourly meter and a stopped server still bills.",
+          "link": {
+            "title": "Core VPS plans",
+            "url": "https://contabo.com/en-us/vps/"
+          },
+          "price": "$6.60/mo (Cloud VPS 4, 1-month term), not 20 hours"
+        },
+        {
           "provider": "linode",
           "tier": "manual",
           "noTerminal": "no",
@@ -3674,6 +3872,28 @@
             "url": "https://docs.tensorlake.ai/sandboxes/networking"
           },
           "price": null
+        },
+        {
+          "provider": "vultr",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "Vultr's MCP guide runs a FastMCP server on an Ubuntu instance and reaches it over HTTP; add TLS and authentication yourself. The instance needs a public IPv4 and must stay up.",
+          "link": {
+            "title": "Remote MCP server with mcp-proxy",
+            "url": "https://docs.vultr.com/how-to-create-remote-mcp-server-with-mcp-proxy"
+          },
+          "price": "1 vCPU / 1 GiB $5/mo"
+        },
+        {
+          "provider": "contabo",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run your MCP server on Cloud VPS 4 behind its public IPv4. The machine stays up, so the client always reaches it; TLS and authentication are yours to add, and there is no MCP-specific tooling from Contabo.",
+          "link": {
+            "title": "Core VPS plans",
+            "url": "https://contabo.com/en-us/vps/"
+          },
+          "price": "$6.60/mo (Cloud VPS 4, 1-month term)"
         },
         {
           "provider": "linode",

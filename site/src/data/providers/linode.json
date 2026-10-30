@@ -186,7 +186,8 @@
       "Outbound ports 25, 465 and 587 are blocked on some new accounts.",
       "The $100 credit expires and needs a card at signup.",
       "Backups only work on unencrypted ext3/ext4 disks and skip attached volumes.",
-      "Shared plans are meant to stay under 80% sustained CPU."
+      "Shared plans are meant to stay under 80% sustained CPU.",
+      "Planned maintenance can power a Linode off; Akamai announces it seven days ahead."
     ]
   },
   "caveats": [

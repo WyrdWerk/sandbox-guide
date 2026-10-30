@@ -3,59 +3,373 @@
   "checkedOn": "2026-10-30",
   "summary": "Fixed-size VMs billed by the hour, rounded up, up to a monthly price cap; a powered-off Linode keeps billing in full, and G8 plans have an hourly price with no cap.",
   "shapes": [
-    { "name": "Nanode 1 GB", "vcpu": 1, "ram": 1, "disk": 25, "hourly": 0.0075, "monthly": 5.0 },
-    { "name": "Linode 2 GB", "vcpu": 1, "ram": 2, "disk": 50, "hourly": 0.018, "monthly": 12.0 },
-    { "name": "Linode 4 GB", "vcpu": 2, "ram": 4, "disk": 80, "hourly": 0.036, "monthly": 24.0 },
-    { "name": "Linode 8 GB", "vcpu": 4, "ram": 8, "disk": 160, "hourly": 0.072, "monthly": 48.0 },
-    { "name": "Linode 16 GB", "vcpu": 6, "ram": 16, "disk": 320, "hourly": 0.144, "monthly": 96.0 },
-    { "name": "Linode 32 GB", "vcpu": 8, "ram": 32, "disk": 640, "hourly": 0.288, "monthly": 192.0 },
-    { "name": "Linode 64 GB", "vcpu": 16, "ram": 64, "disk": 1280, "hourly": 0.576, "monthly": 384.0 },
-    { "name": "Linode 96 GB", "vcpu": 20, "ram": 96, "disk": 1920, "hourly": 0.864, "monthly": 576.0 },
-    { "name": "Linode 128 GB", "vcpu": 24, "ram": 128, "disk": 2560, "hourly": 1.152, "monthly": 768.0 },
-    { "name": "Linode 192 GB", "vcpu": 32, "ram": 192, "disk": 3840, "hourly": 1.728, "monthly": 1152.0 },
-
-    { "name": "G6 Dedicated 4 GB", "vcpu": 2, "ram": 4, "disk": 80, "hourly": 0.054, "monthly": 36.0 },
-    { "name": "G6 Dedicated 8 GB", "vcpu": 4, "ram": 8, "disk": 160, "hourly": 0.108, "monthly": 72.0 },
-    { "name": "G6 Dedicated 16 GB", "vcpu": 8, "ram": 16, "disk": 320, "hourly": 0.216, "monthly": 144.0 },
-    { "name": "G6 Dedicated 32 GB", "vcpu": 16, "ram": 32, "disk": 640, "hourly": 0.432, "monthly": 288.0 },
-    { "name": "G6 Dedicated 64 GB", "vcpu": 32, "ram": 64, "disk": 1280, "hourly": 0.864, "monthly": 576.0 },
-    { "name": "G6 Dedicated 96 GB", "vcpu": 48, "ram": 96, "disk": 1920, "hourly": 1.296, "monthly": 864.0 },
-    { "name": "G6 Dedicated 128 GB", "vcpu": 50, "ram": 128, "disk": 2500, "hourly": 1.728, "monthly": 1152.0 },
-    { "name": "G6 Dedicated 256 GB", "vcpu": 56, "ram": 256, "disk": 5000, "hourly": 3.456, "monthly": 2304.0 },
-
-    { "name": "G7 Dedicated 4 GB", "vcpu": 2, "ram": 4, "disk": 80, "hourly": 0.0645, "monthly": 43.0 },
-    { "name": "G7 Dedicated 8 GB", "vcpu": 4, "ram": 8, "disk": 160, "hourly": 0.129, "monthly": 86.0 },
-    { "name": "G7 Dedicated 16 GB", "vcpu": 8, "ram": 16, "disk": 320, "hourly": 0.2595, "monthly": 173.0 },
-    { "name": "G7 Dedicated 32 GB", "vcpu": 16, "ram": 32, "disk": 640, "hourly": 0.519, "monthly": 346.0 },
-    { "name": "G7 Dedicated 64 GB", "vcpu": 32, "ram": 64, "disk": 1280, "hourly": 1.0365, "monthly": 691.0 },
-    { "name": "G7 Dedicated 96 GB", "vcpu": 48, "ram": 96, "disk": 1920, "hourly": 1.5555, "monthly": 1037.0 },
-    { "name": "G7 Dedicated 128 GB", "vcpu": 50, "ram": 128, "disk": 2500, "hourly": 2.073, "monthly": 1382.0 },
-    { "name": "G7 Dedicated 256 GB", "vcpu": 56, "ram": 256, "disk": 5000, "hourly": 4.1475, "monthly": 2765.0 },
-
-    { "name": "G8 Dedicated 4x2", "vcpu": 2, "ram": 4, "disk": 40, "hourly": 0.07 },
-    { "name": "G8 Dedicated 8x4", "vcpu": 4, "ram": 8, "disk": 80, "hourly": 0.14 },
-    { "name": "G8 Dedicated 16x8", "vcpu": 8, "ram": 16, "disk": 160, "hourly": 0.27 },
-    { "name": "G8 Dedicated 32x16", "vcpu": 16, "ram": 32, "disk": 320, "hourly": 0.54 },
-    { "name": "G8 Dedicated 64x32", "vcpu": 32, "ram": 64, "disk": 640, "hourly": 1.08 },
-    { "name": "G8 Dedicated 96x48", "vcpu": 48, "ram": 96, "disk": 960, "hourly": 1.62 },
-    { "name": "G8 Dedicated 128x64", "vcpu": 64, "ram": 128, "disk": 1280, "hourly": 2.16 },
-    { "name": "G8 Dedicated 256x128", "vcpu": 128, "ram": 256, "disk": 2560, "hourly": 4.32 },
-    { "name": "G8 Dedicated 512x256", "vcpu": 256, "ram": 512, "disk": 5120, "hourly": 8.64 },
-
-    { "name": "G8 Dedicated 8x2", "vcpu": 2, "ram": 8, "disk": 80, "hourly": 0.11 },
-    { "name": "G8 Dedicated 16x4", "vcpu": 4, "ram": 16, "disk": 160, "hourly": 0.21 },
-    { "name": "G8 Dedicated 32x8", "vcpu": 8, "ram": 32, "disk": 320, "hourly": 0.42 },
-    { "name": "G8 Dedicated 64x16", "vcpu": 16, "ram": 64, "disk": 640, "hourly": 0.84 },
-    { "name": "G8 Dedicated 96x24", "vcpu": 24, "ram": 96, "disk": 960, "hourly": 1.26 },
-    { "name": "G8 Dedicated 128x32", "vcpu": 32, "ram": 128, "disk": 1280, "hourly": 1.68 },
-    { "name": "G8 Dedicated 256x64", "vcpu": 64, "ram": 256, "disk": 2560, "hourly": 3.36 },
-    { "name": "G8 Dedicated 512x128", "vcpu": 128, "ram": 512, "disk": 5120, "hourly": 6.84 },
-
-    { "name": "High Memory 24 GB", "vcpu": 2, "ram": 24, "disk": 20, "hourly": 0.09, "monthly": 60.0 },
-    { "name": "High Memory 48 GB", "vcpu": 2, "ram": 48, "disk": 40, "hourly": 0.18, "monthly": 120.0 },
-    { "name": "High Memory 90 GB", "vcpu": 4, "ram": 90, "disk": 90, "hourly": 0.36, "monthly": 240.0 },
-    { "name": "High Memory 150 GB", "vcpu": 8, "ram": 150, "disk": 200, "hourly": 0.72, "monthly": 480.0 },
-    { "name": "High Memory 300 GB", "vcpu": 16, "ram": 300, "disk": 340, "hourly": 1.44, "monthly": 960.0 }
+    {
+      "name": "Nanode 1 GB",
+      "vcpu": 1,
+      "ram": 1,
+      "disk": 25,
+      "hourly": 0.0075,
+      "monthly": 5.0
+    },
+    {
+      "name": "Linode 2 GB",
+      "vcpu": 1,
+      "ram": 2,
+      "disk": 50,
+      "hourly": 0.018,
+      "monthly": 12.0
+    },
+    {
+      "name": "Linode 4 GB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 80,
+      "hourly": 0.036,
+      "monthly": 24.0
+    },
+    {
+      "name": "Linode 8 GB",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 160,
+      "hourly": 0.072,
+      "monthly": 48.0
+    },
+    {
+      "name": "Linode 16 GB",
+      "vcpu": 6,
+      "ram": 16,
+      "disk": 320,
+      "hourly": 0.144,
+      "monthly": 96.0
+    },
+    {
+      "name": "Linode 32 GB",
+      "vcpu": 8,
+      "ram": 32,
+      "disk": 640,
+      "hourly": 0.288,
+      "monthly": 192.0
+    },
+    {
+      "name": "Linode 64 GB",
+      "vcpu": 16,
+      "ram": 64,
+      "disk": 1280,
+      "hourly": 0.576,
+      "monthly": 384.0
+    },
+    {
+      "name": "Linode 96 GB",
+      "vcpu": 20,
+      "ram": 96,
+      "disk": 1920,
+      "hourly": 0.864,
+      "monthly": 576.0
+    },
+    {
+      "name": "Linode 128 GB",
+      "vcpu": 24,
+      "ram": 128,
+      "disk": 2560,
+      "hourly": 1.152,
+      "monthly": 768.0
+    },
+    {
+      "name": "Linode 192 GB",
+      "vcpu": 32,
+      "ram": 192,
+      "disk": 3840,
+      "hourly": 1.728,
+      "monthly": 1152.0
+    },
+    {
+      "name": "G6 Dedicated 4 GB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 80,
+      "hourly": 0.054,
+      "monthly": 36.0
+    },
+    {
+      "name": "G6 Dedicated 8 GB",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 160,
+      "hourly": 0.108,
+      "monthly": 72.0
+    },
+    {
+      "name": "G6 Dedicated 16 GB",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 320,
+      "hourly": 0.216,
+      "monthly": 144.0
+    },
+    {
+      "name": "G6 Dedicated 32 GB",
+      "vcpu": 16,
+      "ram": 32,
+      "disk": 640,
+      "hourly": 0.432,
+      "monthly": 288.0
+    },
+    {
+      "name": "G6 Dedicated 64 GB",
+      "vcpu": 32,
+      "ram": 64,
+      "disk": 1280,
+      "hourly": 0.864,
+      "monthly": 576.0
+    },
+    {
+      "name": "G6 Dedicated 96 GB",
+      "vcpu": 48,
+      "ram": 96,
+      "disk": 1920,
+      "hourly": 1.296,
+      "monthly": 864.0
+    },
+    {
+      "name": "G6 Dedicated 128 GB",
+      "vcpu": 50,
+      "ram": 128,
+      "disk": 2500,
+      "hourly": 1.728,
+      "monthly": 1152.0
+    },
+    {
+      "name": "G6 Dedicated 256 GB",
+      "vcpu": 56,
+      "ram": 256,
+      "disk": 5000,
+      "hourly": 3.456,
+      "monthly": 2304.0
+    },
+    {
+      "name": "G7 Dedicated 4 GB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 80,
+      "hourly": 0.0645,
+      "monthly": 43.0
+    },
+    {
+      "name": "G7 Dedicated 8 GB",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 160,
+      "hourly": 0.129,
+      "monthly": 86.0
+    },
+    {
+      "name": "G7 Dedicated 16 GB",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 320,
+      "hourly": 0.2595,
+      "monthly": 173.0
+    },
+    {
+      "name": "G7 Dedicated 32 GB",
+      "vcpu": 16,
+      "ram": 32,
+      "disk": 640,
+      "hourly": 0.519,
+      "monthly": 346.0
+    },
+    {
+      "name": "G7 Dedicated 64 GB",
+      "vcpu": 32,
+      "ram": 64,
+      "disk": 1280,
+      "hourly": 1.0365,
+      "monthly": 691.0
+    },
+    {
+      "name": "G7 Dedicated 96 GB",
+      "vcpu": 48,
+      "ram": 96,
+      "disk": 1920,
+      "hourly": 1.5555,
+      "monthly": 1037.0
+    },
+    {
+      "name": "G7 Dedicated 128 GB",
+      "vcpu": 50,
+      "ram": 128,
+      "disk": 2500,
+      "hourly": 2.073,
+      "monthly": 1382.0
+    },
+    {
+      "name": "G7 Dedicated 256 GB",
+      "vcpu": 56,
+      "ram": 256,
+      "disk": 5000,
+      "hourly": 4.1475,
+      "monthly": 2765.0
+    },
+    {
+      "name": "G8 Dedicated 4x2",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 40,
+      "hourly": 0.07
+    },
+    {
+      "name": "G8 Dedicated 8x4",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 80,
+      "hourly": 0.14
+    },
+    {
+      "name": "G8 Dedicated 16x8",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 160,
+      "hourly": 0.27
+    },
+    {
+      "name": "G8 Dedicated 32x16",
+      "vcpu": 16,
+      "ram": 32,
+      "disk": 320,
+      "hourly": 0.54
+    },
+    {
+      "name": "G8 Dedicated 64x32",
+      "vcpu": 32,
+      "ram": 64,
+      "disk": 640,
+      "hourly": 1.08
+    },
+    {
+      "name": "G8 Dedicated 96x48",
+      "vcpu": 48,
+      "ram": 96,
+      "disk": 960,
+      "hourly": 1.62
+    },
+    {
+      "name": "G8 Dedicated 128x64",
+      "vcpu": 64,
+      "ram": 128,
+      "disk": 1280,
+      "hourly": 2.16
+    },
+    {
+      "name": "G8 Dedicated 256x128",
+      "vcpu": 128,
+      "ram": 256,
+      "disk": 2560,
+      "hourly": 4.32
+    },
+    {
+      "name": "G8 Dedicated 512x256",
+      "vcpu": 256,
+      "ram": 512,
+      "disk": 5120,
+      "hourly": 8.64
+    },
+    {
+      "name": "G8 Dedicated 8x2",
+      "vcpu": 2,
+      "ram": 8,
+      "disk": 80,
+      "hourly": 0.11
+    },
+    {
+      "name": "G8 Dedicated 16x4",
+      "vcpu": 4,
+      "ram": 16,
+      "disk": 160,
+      "hourly": 0.21
+    },
+    {
+      "name": "G8 Dedicated 32x8",
+      "vcpu": 8,
+      "ram": 32,
+      "disk": 320,
+      "hourly": 0.42
+    },
+    {
+      "name": "G8 Dedicated 64x16",
+      "vcpu": 16,
+      "ram": 64,
+      "disk": 640,
+      "hourly": 0.84
+    },
+    {
+      "name": "G8 Dedicated 96x24",
+      "vcpu": 24,
+      "ram": 96,
+      "disk": 960,
+      "hourly": 1.26
+    },
+    {
+      "name": "G8 Dedicated 128x32",
+      "vcpu": 32,
+      "ram": 128,
+      "disk": 1280,
+      "hourly": 1.68
+    },
+    {
+      "name": "G8 Dedicated 256x64",
+      "vcpu": 64,
+      "ram": 256,
+      "disk": 2560,
+      "hourly": 3.36
+    },
+    {
+      "name": "G8 Dedicated 512x128",
+      "vcpu": 128,
+      "ram": 512,
+      "disk": 5120,
+      "hourly": 6.84
+    },
+    {
+      "name": "High Memory 24 GB",
+      "vcpu": 2,
+      "ram": 24,
+      "disk": 20,
+      "hourly": 0.09,
+      "monthly": 60.0
+    },
+    {
+      "name": "High Memory 48 GB",
+      "vcpu": 2,
+      "ram": 48,
+      "disk": 40,
+      "hourly": 0.18,
+      "monthly": 120.0
+    },
+    {
+      "name": "High Memory 90 GB",
+      "vcpu": 4,
+      "ram": 90,
+      "disk": 90,
+      "hourly": 0.36,
+      "monthly": 240.0
+    },
+    {
+      "name": "High Memory 150 GB",
+      "vcpu": 8,
+      "ram": 150,
+      "disk": 200,
+      "hourly": 0.72,
+      "monthly": 480.0
+    },
+    {
+      "name": "High Memory 300 GB",
+      "vcpu": 16,
+      "ram": 300,
+      "disk": 340,
+      "hourly": 1.44,
+      "monthly": 960.0
+    }
   ],
   "billedWhileStopped": true,
   "wholeHours": true,
@@ -88,14 +402,33 @@
     "The Backups service is a paid add-on with up to four backups (daily, weekly, biweekly, manual). The backups pricing page's tables are mislabelled at this check and are not used; backups are not in the calculator.",
     "Snapshots and custom images are not in the calculator. An image is stored as Object Storage and stays until deleted; the site's images pricing page was not read for this card.",
     "Outbound transfer overage is $0.005 per GB on the pricing page. Egress is shown on the outbound-network feature, not priced here.",
-    "Not in the card: extra IPv4 addresses (billed hourly with no cap since 1 July 2026, price by region), NodeBalancers, Object Storage, Longview Pro, and GPU/Accelerated plans."
+    "Not in the card: extra IPv4 addresses (billed hourly with no cap since 1 July 2026, price by region), NodeBalancers, Object Storage, Longview Pro, and GPU/Accelerated plans.",
+    "Linode's public types API (api.linode.com/v4/linode/types, read 2026-10-30) prices the Backups add-on per plan, which the mislabelled backups pricing page does not: Linode 4 GB lists addons.backups.price monthly 5 and hourly 0.008. Not included in A/B/C."
   ],
   "sources": [
-    { "label": "CPU plans and pricing", "url": "https://www.akamai.com/cloud/pricing/cpu" },
-    { "label": "Docs: billing and monthly caps", "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works" },
-    { "label": "Docs: choose a compute plan", "url": "https://techdocs.akamai.com/cloud-computing/docs/how-to-choose-a-compute-instance-plan" },
-    { "label": "Docs: network transfer usage and costs", "url": "https://techdocs.akamai.com/cloud-computing/docs/network-transfer-usage-and-costs" },
-    { "label": "Docs: Block Storage", "url": "https://techdocs.akamai.com/cloud-computing/docs/block-storage" },
-    { "label": "Live type list (public API)", "url": "https://api.linode.com/v4/linode/types" }
+    {
+      "label": "CPU plans and pricing",
+      "url": "https://www.akamai.com/cloud/pricing/cpu"
+    },
+    {
+      "label": "Docs: billing and monthly caps",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works"
+    },
+    {
+      "label": "Docs: choose a compute plan",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/how-to-choose-a-compute-instance-plan"
+    },
+    {
+      "label": "Docs: network transfer usage and costs",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/network-transfer-usage-and-costs"
+    },
+    {
+      "label": "Docs: Block Storage",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/block-storage"
+    },
+    {
+      "label": "Live type list (public API)",
+      "url": "https://api.linode.com/v4/linode/types"
+    }
   ]
 }

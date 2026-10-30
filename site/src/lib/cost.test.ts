@@ -39,6 +39,8 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["ovhcloud", "a", 5.35], ["ovhcloud", "b", 10], ["ovhcloud", "c", 5.35],
   ["lightsail", "a", 5.38], ["lightsail", "b", 82.42], ["lightsail", "c", 23.54],
   ["linode", "a", 36], ["linode", "b", 48], ["linode", "c", 24],
+  ["vultr", "a", 29.76], ["vultr", "b", 40], ["vultr", "c", 20],
+  ["contabo", "a", 6.6], ["contabo", "b", 6.6], ["contabo", "c", 6.6],
 ];
 
 const task = (vcpu: number, ram: number, minutes: number) =>
