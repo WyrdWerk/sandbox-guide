@@ -1,0 +1,180 @@
+{
+  "provider": "freestyle",
+  "checkedOn": "2026-10-30",
+  "summary": "A full VM with preinstalled coding agents and a first-party OpenClaw guide, but no one-click templates, no scheduler and no Hermes material. The $50 Hobby minimum dominates small workloads; a light scraper fits the Free allowances.",
+  "routes": [
+    {
+      "useCase": "hermes-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "No Hermes image, template or guide. Create an Ubuntu VM with the SDK or CLI, install Hermes yourself, and turn the idle timeout off so its gateway keeps its connections.",
+      "link": {
+        "title": "Quickstart",
+        "url": "https://www.freestyle.sh/docs/quickstart"
+      },
+      "price": "About $83/month on Hobby for the 2 vCPU / 4 GiB always-on preset.",
+      "disposition": "Manual route only; no Hermes material exists, so this is not a recommendation."
+    },
+    {
+      "useCase": "openclaw",
+      "tier": "guide",
+      "noTerminal": "no",
+      "what": "A first-party guide installs OpenClaw with npm, snapshots it, runs the gateway under systemd and routes a style.dev domain to it. You write the SDK script and supply an OpenAI key.",
+      "link": {
+        "title": "Run OpenClaw in a sandbox",
+        "url": "https://www.freestyle.sh/docs/guides/run-openclaw-in-a-sandbox"
+      },
+      "price": "About $83/month on Hobby for the 2 vCPU / 4 GiB always-on preset.",
+      "disposition": "Guide route; documented and current, but terminal work."
+    },
+    {
+      "useCase": "coding-agent",
+      "tier": "preinstalled",
+      "noTerminal": "no",
+      "what": "Claude Code, Codex and opencode are already in the Ubuntu image. Create a VM, then open a PTY or SSH session and run the agent; the dashboard creates the machine but does not host a chat.",
+      "link": {
+        "title": "Run Claude Code in a sandbox",
+        "url": "https://www.freestyle.sh/docs/guides/run-claude-code-in-a-sandbox"
+      },
+      "price": "$50/month on Hobby at the coding preset (4 vCPU / 8 GiB, 8 h × 20 days), which is the minimum.",
+      "disposition": "Preinstalled route and a good fit; recommend with the $50 floor and terminal requirement."
+    },
+    {
+      "useCase": "code-interpreter",
+      "tier": "backend",
+      "noTerminal": "no",
+      "what": "Build it on the SDK: create an ephemeral VM per run, execute the code, read files back, and delete it. There is no hosted interpreter product or prompt endpoint.",
+      "link": {
+        "title": "Quickstart",
+        "url": "https://www.freestyle.sh/docs/quickstart"
+      },
+      "price": "About $50/month at 20,000 one-minute runs, which the Hobby minimum covers.",
+      "disposition": "Backend route only; the product is a VM, not an interpreter."
+    },
+    {
+      "useCase": "browser-agent",
+      "tier": "guide",
+      "noTerminal": "no",
+      "what": "A guide installs Chromium or Chrome, runs it headless or headed with Xvfb and noVNC, and drives it over CDP. The browser is not in the base image.",
+      "link": {
+        "title": "Run Chromium and Chrome in a sandbox",
+        "url": "https://www.freestyle.sh/docs/guides/run-chromium-and-chrome-in-a-sandbox"
+      },
+      "price": "About $648/month on Hobby at 30,000 ten-minute sessions.",
+      "disposition": "Guide route; capable but expensive at the shared browser preset."
+    },
+    {
+      "useCase": "workflow-automation",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "No n8n template. Run the official Docker image on a VM, keep the database and encryption key on its disk, and leave the idle timeout off so webhooks and schedules keep running.",
+      "link": {
+        "title": "Run Docker in a sandbox",
+        "url": "https://www.freestyle.sh/docs/guides/run-docker-in-a-sandbox"
+      },
+      "price": "About $83/month on Hobby for an always-on 2 vCPU / 4 GiB machine.",
+      "disposition": "Manual route; no template and no managed database."
+    },
+    {
+      "useCase": "chat-bot",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "No Discord or Slack guide. The Telegram bot guide shows the pattern: a systemd service, outbound polling, and no idle timeout so the bot stays connected.",
+      "link": {
+        "title": "Run a Telegram bot in a sandbox",
+        "url": "https://www.freestyle.sh/docs/guides/run-a-telegram-bot-in-a-sandbox"
+      },
+      "price": "$50/month on Hobby at the 1 vCPU / 2 GiB always-on preset.",
+      "disposition": "Manual route; Telegram guide only, Discord and Slack are your own work."
+    },
+    {
+      "useCase": "claude-code-team",
+      "tier": "preinstalled",
+      "noTerminal": "no",
+      "what": "Claude Code is preinstalled. Create one VM per developer, add a Linux user, and hand each person a scoped identity token for SSH; the team keeps the account key.",
+      "link": {
+        "title": "SSH access and multiple developers",
+        "url": "https://www.freestyle.sh/docs/vms/ssh#multiple-developers"
+      },
+      "price": "About $206/month on Hobby for five 4 vCPU / 8 GiB machines, 8 h × 20 days.",
+      "disposition": "Preinstalled route; a good fit for per-developer isolation."
+    },
+    {
+      "useCase": "scheduled-scraper",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "No scheduler. Trigger the run from your own cron or queue, create an ephemeral VM, scrape, write results to external storage, and let the VM delete itself.",
+      "link": {
+        "title": "Quickstart",
+        "url": "https://www.freestyle.sh/docs/quickstart"
+      },
+      "price": "$0 on Free at 120 ten-minute runs a month, inside the monthly allowances.",
+      "disposition": "Manual route, but the cheapest fit: the scraper preset fits the Free allowances."
+    },
+    {
+      "useCase": "mcp-server",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run your MCP server in a VM and route a style.dev domain to its port; forward auth can gate it. There is no MCP template and no MCP server for controlling Freestyle.",
+      "link": {
+        "title": "Inbound TLS",
+        "url": "https://www.freestyle.sh/docs/vms/network/tls-inbound"
+      },
+      "price": "$50/month on Hobby at the 1 vCPU / 1 GiB preset, which is the minimum.",
+      "disposition": "Manual route; a reasonable small always-on endpoint, but the $50 floor is high for one."
+    }
+  ],
+  "picks": [
+    {
+      "useCase": "coding-agent",
+      "for": "A coding agent that keeps a full Linux workspace",
+      "why": "Claude Code and Codex are already installed, pause keeps the session's memory, a live fork lets you try two fixes at once, and the real kernel runs Docker.",
+      "watch": "The $50 Hobby minimum and the terminal start; there is no region choice.",
+      "link": "https://www.freestyle.sh/docs/guides/run-claude-code-in-a-sandbox"
+    },
+    {
+      "useCase": "claude-code-team",
+      "for": "A small team that wants one VM per developer",
+      "why": "Identities and tokens scope each developer to one VM and one Linux user without sharing the account API key.",
+      "watch": "No documented team roles or dollar spend cap, and SSO is Enterprise-only.",
+      "link": "https://www.freestyle.sh/docs/vms/ssh#multiple-developers"
+    },
+    {
+      "useCase": "browser-agent",
+      "for": "Browser sessions that need a full desktop",
+      "why": "A full VM runs Chrome headed with Xvfb and noVNC, and a snapshot keeps the installed browser for the next run.",
+      "watch": "You install Chromium yourself, and allocated CPU is billed for the whole session.",
+      "link": "https://www.freestyle.sh/docs/guides/run-chromium-and-chrome-in-a-sandbox"
+    },
+    {
+      "useCase": "openclaw",
+      "for": "OpenClaw on a full VM with memory pause",
+      "why": "A first-party guide covers the gateway, systemd and a public domain, and pausing keeps the gateway's state.",
+      "watch": "Terminal-only setup, an OpenAI key, and the $50 minimum.",
+      "link": "https://www.freestyle.sh/docs/guides/run-openclaw-in-a-sandbox"
+    }
+  ],
+  "situationPicks": [
+    {
+      "situation": "long-jobs",
+      "why": "A VM can run indefinitely, pause with memory and resume weeks later; snapshots and forks preserve a long agent run.",
+      "watch": "Hosts are oversubscribed, and the SLA is Enterprise-only."
+    },
+    {
+      "situation": "build-and-test",
+      "why": "Docker runs from boot, nested virtual machines work, Pro reaches 32 vCPU / 64 GiB, and a snapshot makes the build environment repeatable.",
+      "watch": "The company steers sustained CPU work such as kernel builds to other providers."
+    },
+    {
+      "situation": "one-per-customer",
+      "why": "Per-customer slugs, scoped identity tokens and private VPCs are built for multi-tenant products.",
+      "watch": "No region choice and no documented team roles."
+    }
+  ],
+  "notPicked": [
+    "hermes-agent: no image, template or guide.",
+    "workflow-automation: no n8n template and an always-on machine costs about $83 a month.",
+    "chat-bot: no Discord or Slack guide; the Telegram guide is the only pattern.",
+    "code-interpreter: no interpreter product, and the $50 minimum is high for short runs."
+  ]
+}

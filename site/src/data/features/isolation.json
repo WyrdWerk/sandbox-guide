@@ -261,6 +261,30 @@
         "quote": "Kernel-based virtual machine (KVM) is a full virtualization solution that divides a physical server into completely independent and isolated virtual environments.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "yes",
+      "figure": "Full VM; root, Docker, KVM",
+      "scenario": "Clone, build and load the module: the VM has its own kernel, root, Docker from boot and nested virtualisation, so nothing needs a workaround.",
+      "note": "A hardware-virtualised Linux VM with systemd as pid 1. GPU and colocated bare metal are private enterprise offers, not public plans.",
+      "source": {
+        "url": "https://www.freestyle.sh/about.md",
+        "quote": "supporting nested virtualization, FUSE, eBPF, full Linux networking and more",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "yes",
+      "figure": "KVM, own kernel, root",
+      "scenario": "Your agent gets a full KVM virtual machine with its own kernel and root, on HostUp's own hardware in Stockholm.",
+      "note": "A real virtual machine, not a container: you can install any OS or your own ISO, run Docker, and reboot without touching anyone else. The vCPUs are allocated to the guest but not permanently dedicated — a server at full load for several days is capped at 50% of its vCPUs, and heavy disk I/O can be throttled.",
+      "source": {
+        "url": "https://hostup.se/en/vps/",
+        "quote": "Every VPS is its own KVM machine with its own resources, so you can test, reboot and reinstall freely without affecting your production VPS.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Boundary, and what it allows",

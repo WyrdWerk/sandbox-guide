@@ -268,6 +268,30 @@
         "quote": "Individual resources (such as disk space or RAM) can’t be upgraded separately — upgrading the entire VPS plan is required",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "partly",
+      "figure": "16 GiB/file; S3 mount",
+      "scenario": "Write the checkpoint: up to 16 GiB per file on the VM disk, or mount an S3 bucket for shared storage; there is no separate volume.",
+      "note": "A persistent VM keeps its disk across a stop; an ephemeral VM is deleted when it stops. Files can be read while paused. No block volume product, and no shared volume beyond an S3 bucket mounted with FUSE.",
+      "source": {
+        "url": "https://www.freestyle.sh/docs/vms/files",
+        "quote": "no size limit short of 16 GiB per file",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "yes",
+      "figure": "25–1,600 GB, up to 32 TB",
+      "scenario": "Files sit on NVMe mirrored across several servers and survive a stop; the disk grows but never shrinks.",
+      "note": "Every plan includes NVMe block storage replicated across several servers (Ceph), from 25 GB to 1,600 GB, with extra disk at 0.55 SEK per GB a month up to 5,000 GB and 32 TB on request. A disk can be grown but never shrunk, and the filesystem has to be extended inside the guest. Extra disks can be attached, but a detachable volume that outlives its server exists only on the gated pay-as-you-go Cloud VM.",
+      "source": {
+        "url": "https://hostup.se/en/vps/",
+        "quote": "We can provide up to 32 TB of NVMe storage on request.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Disk, and how long it is kept",

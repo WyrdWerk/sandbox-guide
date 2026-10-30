@@ -268,6 +268,30 @@
         "quote": "Only one snapshot is stored at a time; creating a new one overwrites the previous one.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "yes",
+      "figure": "Snapshots + live forks",
+      "scenario": "Fork the running VM into three copies and try three fixes without losing the original.",
+      "note": "Snapshots capture memory and disk, are private by default and boot in about a second. Snapshots are kept until deleted, so older ones can be chosen. No automatic backup schedule.",
+      "source": {
+        "url": "https://www.freestyle.sh/products/vms",
+        "quote": "Clone a running VM without pausing it — get full copies in milliseconds.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "24 h snapshots, 7 backups",
+      "scenario": "A snapshot is a same-day undo, not a version history; the weekly backup is the copy that lasts.",
+      "note": "Snapshots capture the disk, are limited by plan slots and are all deleted automatically after 24 hours. Backups are included, scheduled weekly by default with seven slots on the smallest plan, and can be restored to the same server, to another of your servers or to a brand-new one — that restore is the closest thing to a clone, and it is a cold copy, not a copy of a running machine. There is no fork and no memory snapshot.",
+      "source": {
+        "url": "https://hostup.se/en/support/snapshots/",
+        "quote": "All snapshots are deleted automatically after 24 hours. They do not replace backups.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a snapshot keeps",

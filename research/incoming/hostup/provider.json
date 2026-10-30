@@ -1,0 +1,307 @@
+{
+  "id": "hostup",
+  "name": "HostUp",
+  "url": "https://hostup.se/en/vps/",
+  "status": "researched",
+  "kind": "vps",
+  "checkedOn": "2026-10-30",
+  "oneLiner": "Seven cheap fixed-size KVM servers in Stockholm on a monthly or yearly plan, with an unusually complete API and MCP server for the price.",
+  "whatItIs": [
+    "HostUp sells KVM virtual private servers in seven fixed sizes: VPS Nano (1 vCPU / 2 GB / 25 GB), XS (2 / 4 / 50), SM (4 / 8 / 100), MED (8 / 16 / 200), LG (16 / 32 / 400), XL (16 / 64 / 800) and XXL (32 / 128 / 1,600). Every plan includes root, a public IPv4, NVMe storage mirrored across several servers, 1–32 TB of monthly bandwidth, weekly backups and a browser VNC console. All servers run in one data hall in Älvsjö, Stockholm, in two availability zones.",
+    "It is a general-purpose VPS, not a sandbox API. You buy a server for one month or one year, paid in advance; stopping it does not stop the bill, there is no pause that keeps memory, no fork and no per-task machine. You manage the operating system, updates and TLS yourself.",
+    "The unusual part for the price is the control surface: a documented REST API with about 380 endpoints, an OpenAPI spec and a hosted MCP server, so Claude, ChatGPT, Cursor or Codex can create servers, take backups and change DNS for you. There is no CLI and no official SDK, and no application templates on the VPS — the one-click catalogue of 250+ apps belongs to HostUp's cPanel web hosting. A separate pay-as-you-go Cloud VM bills CPU and memory by the hour, but a new account cannot buy it: it needs identity verification and SEK 2,000 of prior payments."
+  ],
+  "whoFor": "Readers who want one cheap, predictable, always-on Linux box in the EU and are comfortable with a terminal — and who value being able to script the account through an API or an AI assistant. Not for anyone who needs per-task sandboxes, pause/resume, forks, GPUs, several regions or a one-click agent install.",
+  "isolation": "A KVM virtual machine with its own kernel, root, Docker and a public IPv4, on HostUp's own hardware in Stockholm. The vCPUs are allocated to the guest, but they are not a permanently dedicated core: a server that has run at full load for several days is capped at half its vCPUs, and heavy disk I/O can be throttled temporarily.",
+  "sizes": "Seven fixed plans from 1 vCPU / 2 GB / 25 GB to 32 vCPU / 128 GB / 1,600 GB. Disk can be raised to 5,000 GB on the order slider and to 32 TB on request; bandwidth to 500 TB. CPU and memory cannot be changed independently — you move to another plan, which restarts the server. Larger machines up to 1 TB of RAM are quoted on request. No GPU, and no second region.",
+  "billing": {
+    "model": "One month or one year, paid in advance. The annual option is 10% cheaper per month and the whole year is charged upfront.",
+    "meter": "A flat price per plan per month. There is no per-second or per-hour meter on a standard VPS and no usage overage on the machine.",
+    "stopped": "A stopped VPS keeps billing in full: the plan covers the period and the disk stays. Stopping is a power-off, so memory and running processes are lost. Only cancelling ends the charge.",
+    "planFee": "The plan price is the whole charge; there is no separate platform fee. Backups, DDoS scrubbing, IPv6 and the primary IPv4 are included.",
+    "minimum": "One month of VPS Nano at $4.08 (49 SEK, €3.50). There is no free tier and no starting credit; the first invoice is paid before the server is created, and a 14-day money-back guarantee is the exit."
+  },
+  "cost": {
+    "A": {
+      "headline": "$5.72 a month (one VPS XS plan)",
+      "shape": "VPS XS (2 vCPU / 4 GB / 50 GB), one plan for the whole month",
+      "lines": [
+        { "label": "One VPS XS plan", "arithmetic": "1 × $5.72 a month (€4.90, 49 SEK)", "amount": "$5.72" },
+        { "label": "The 1,000 tasks", "arithmetic": "1,000 × 10 min = 166.67 h, inside the 730 h month", "amount": "$0.00" }
+      ],
+      "total": "$5.72",
+      "notes": [
+        "VPS XS is the smallest plan with 2 vCPU and 4 GiB. Its 50 GB and 2 TB are more than the task needs.",
+        "One machine runs the tasks one after another. 166.67 hours is well inside the month, so one plan covers the work.",
+        "Buying a fresh server per task would mean 1,000 monthly plans, which is why A is not a HostUp-shaped workload.",
+        "On the annual term the same plan is $61.72 upfront, or $5.14 a month.",
+        "VAT is unresolved between two HostUp pages (see caveat): if the price calculator's ex-VAT reading holds, a private customer in Sweden pays $7.15."
+      ],
+      "flag": "This assumes one plan running the tasks one after another. Running them in parallel, or a fresh server per task, needs one monthly plan per machine."
+    },
+    "B": {
+      "headline": "$11.55 a month",
+      "shape": "VPS SM (4 vCPU / 8 GB / 100 GB), 730 h",
+      "lines": [
+        { "label": "One VPS SM plan", "arithmetic": "1 × $11.55 a month (€9.90, 99 SEK)", "amount": "$11.55" },
+        { "label": "Hours", "arithmetic": "730 h included in the plan", "amount": "$0.00" }
+      ],
+      "total": "$11.55",
+      "notes": [
+        "VPS SM is the smallest plan with 4 vCPU and 8 GiB, so it matches the ask exactly; its 100 GB and 5 TB are larger than needed.",
+        "On the annual term the same plan is $124.72 upfront, or $10.39 a month.",
+        "Average CPU is 10%, far below the 50% sustained cap, so neither the CPU nor the disk throttle binds.",
+        "VAT is unresolved between two HostUp pages (see caveat): if the price calculator's ex-VAT reading holds, a private customer in Sweden pays $14.44."
+      ]
+    },
+    "C": {
+      "headline": "$5.72 a month, even while stopped",
+      "shape": "VPS XS (2 vCPU / 4 GB / 50 GB), 90 running + 640 stopped hours",
+      "lines": [
+        { "label": "One VPS XS plan", "arithmetic": "1 × $5.72 a month (€4.90, 49 SEK)", "amount": "$5.72" },
+        { "label": "Stopped hours", "arithmetic": "640 h at no extra charge, and no credit either", "amount": "$0.00" }
+      ],
+      "total": "$5.72",
+      "notes": [
+        "Stopping keeps the disk and the files but not the bill: the month costs the same whether the server runs 90 hours or 730.",
+        "There is no pause with memory. A stop powers the machine off, so a running process is lost.",
+        "The hourly pay-as-you-go Cloud VM would bill only the disk while stopped, but it needs identity verification and SEK 2,000 of prior payments, so a new reader cannot use it.",
+        "VAT is unresolved between two HostUp pages (see caveat): if the price calculator's ex-VAT reading holds, a private customer in Sweden pays $7.15."
+      ],
+      "flag": "Workload C's 640 idle hours look cheap on a per-hour sandbox and are not cheap here: the full plan bills through them."
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Hostup AB, registered in Sweden as 559290-1325, at Mässvägen 4, 125 30 Älvsjö.",
+        "source": {
+          "url": "https://hostup.se/legal/terms-of-service-en.pdf",
+          "quote": "Hostup AB, reg. no. 559290-1325, Mässvägen 4, 125 30 Älvsjö, Sweden.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded",
+        "value": "2019, by David Berndtsson, who is still CEO and principal owner.",
+        "source": {
+          "url": "https://hostup.se/en/about-us/",
+          "quote": "The company was founded in 2019 by David Berndtsson, who is still CEO and principal owner.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Ownership",
+        "value": "100% Swedish-owned, with no venture capital and no foreign owners.",
+        "source": {
+          "url": "https://hostup.se/en/about-us/",
+          "quote": "Hostup AB is a 100% Swedish-owned internet company with our own hardware and network in Älvsjö, Stockholm. No venture capital funding, no foreign owners.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Infrastructure",
+        "value": "Its own servers and network in one data hall in Älvsjö, Stockholm, with two availability zones since November 2025. All VPS and backups stay in Sweden.",
+        "source": {
+          "url": "https://hostup.se/en/vps/",
+          "quote": "All our VPS servers are located in Sweden and are owned by us at Hostup AB.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Uptime promise",
+        "value": "99.9% availability per calendar month, with 10%, 25% or 50% service credits below it. The SLA applies to Business Customers only; a private customer gets no credit.",
+        "source": {
+          "url": "https://hostup.se/legal/terms-of-service-en.pdf",
+          "quote": "Hostup's target is 99.9% availability per calendar month.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Status page",
+        "value": "A public status page with incidents, maintenance and a 90-day uptime figure, which read 99.992% on 2026-10-30.",
+        "source": {
+          "url": "https://status.hostup.se/",
+          "quote": "99.992% uptime over 90 days",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Data processing agreement",
+        "value": "A DPA covering all services, applied automatically with no signature.",
+        "source": {
+          "url": "https://hostup.se/en/vps/",
+          "quote": "Yes. The Data Processing Agreement covers all our services and applies to every customer automatically, with no signature",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Physical security",
+        "value": "The Stockholm data hall is rated Larmklass 3 and Skyddsklass 3, the highest Swedish classes for alarm and premises protection.",
+        "source": {
+          "url": "https://hostup.se/en/security/",
+          "quote": "Certified physical security - burglary protection to Larmklass 3 and Skyddsklass 3 (Swedish standard).",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "No SOC 2 report or ISO 27001 certificate is claimed. The security page lists GDPR, the Swedish physical-security classes and a DPA instead.",
+        "source": {
+          "url": "https://hostup.se/en/security/",
+          "quote": "GDPR - data in Sweden/EU",
+          "confidence": "not-published"
+        }
+      },
+      {
+        "label": "People and funding",
+        "value": "Headcount, revenue and valuation are not published. The company describes itself as bootstrapped and Swedish-owned since 2019.",
+        "source": {
+          "url": "https://hostup.se/en/about-us/",
+          "quote": "No venture capital funding, no foreign owners.",
+          "confidence": "not-published"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "One always-on agent on a normal Linux box: VPS XS gives 2 vCPU, 4 GB, 50 GB, root and a public IPv4 for $5.72 a month, in Sweden.",
+      "A budget Discord or Slack bot, MCP server or n8n instance that must stay awake: nothing sleeps it and 1–32 TB of transfer is included.",
+      "Scripting the account: a documented REST API, an OpenAPI spec and a hosted MCP server that Claude or ChatGPT can drive, with purchases confirmed in the browser.",
+      "EU data residency on a small budget, with a Swedish company, its own hardware, a DPA that applies automatically and a public status page."
+    ],
+    "badly": [
+      "Many short-lived tasks or one machine per user: there is no cheap per-task meter a new customer can use, and the plan bills through idle hours.",
+      "Pause, resume or fork: a stop is a power-off that loses memory, and a clone is a cold restore from a backup.",
+      "A build server or inference box that pegs every vCPU for days: sustained CPU is capped at 50% of the vCPUs.",
+      "A team that needs SSO, a hard spend cap or scoped roles beyond per-service visibility; or a buyer who needs a GPU, several regions or a SOC 2 report."
+    ]
+  },
+  "usability": {
+    "dashboard": "Yes: a client area with server graphs, a browser VNC console, remote commands, firewall and firewall groups, snapshots, backups, DNS, API keys, cost management and an audit log.",
+    "withoutCode": "No. Ordering a server is click-through, but everything after it — installing the agent, opening ports, issuing a certificate — is terminal work. There are no VPS application templates, and the AI assistant and MCP server still need someone who can describe the change they want.",
+    "signup": "An email address, or Swedish BankID, then an invoice. No card is required to open an account or to pay (Bankgiro, Swish and SEPA work), but the server is created only once the invoice is paid. No free tier; the exit is a 14-day money-back guarantee.",
+    "docs": "A large support knowledge base with about 33 VPS guides, each dated 'Checked against the client area 29 October 2026', plus a separate API site with an OpenAPI spec, an llms.txt and per-endpoint pages.",
+    "tripsUp": [
+      "HostUp labels the same plan price \"excl. VAT\" in its price calculator and \"inc. VAT\" in its cart, so a private customer in Sweden may pay 25% more than the number on the page.",
+      "The page shows EUR by default and offers USD and SEK; the three are fixed display conversions (SEK ÷ 10 = EUR, EUR × 7/6 = USD), not market rates.",
+      "Stopping a server does not stop the bill, and it loses memory.",
+      "Snapshots are deleted automatically after 24 hours; the durable copy is the weekly backup.",
+      "When the monthly bandwidth is used up the server cannot start until you buy more capacity; there is no overage bill.",
+      "The hourly Cloud VM needs identity verification and SEK 2,000 of prior payments, so a new account cannot use it.",
+      "Sustained CPU is capped at 50% of the vCPUs after several days at full load, and heavy disk I/O can be throttled.",
+      "No CLI and no official SDK: the API, the OpenAPI spec and the MCP server are the programmatic routes.",
+      "Windows Server is bring-your-own-licence."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "HostUp's pages disagree on whether the plan price includes VAT",
+      "detail": "The price calculator shows a subtotal marked \"excl. VAT\" with a 25% VAT line under it; the cart labels the same €4.90 total \"inc. VAT\". The terms make the display a customer choice, so both modes exist. The card follows the calculator and calls its figures ex-VAT: a private customer in Sweden would then pay 25% more (VPS XS $5.72 becomes $7.15). If the cart's label is the literal one, the €4.90 already includes VAT, the ex-VAT price is €3.92 ($4.58), and the card overstates a business buyer's cost by 25% while a Swedish private buyer pays the same either way. Settle this with HostUp before publication.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://hostup.se/en/pricecalculator/",
+          "quote": "Subtotal (excl. VAT) VAT (25%) (for private individuals in the EU)",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://cloud.hostup.se/cart/en/vps/xs",
+          "quote": "VPS XS · Total (inc. VAT)",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "issue": "Three currencies, two fixed conversions, no published FX policy",
+      "detail": "HostUp bills in SEK, EUR or USD. The English page shows EUR by default, and the EUR figure is the SEK list price divided by ten while the USD figure is the EUR figure times 7/6. The card uses HostUp's own USD display on 2026-10-30; anyone reconciling against a Swedish invoice should use the SEK figures, and a card issuer will convert at its own rate.",
+      "status": "open"
+    },
+    {
+      "issue": "The hourly meter is real but closed to new customers",
+      "detail": "The pay-as-you-go Cloud VM bills CPU and memory only while the server runs and the disk always, which would suit bursty work far better than a monthly plan. It needs identity verification and at least SEK 2,000 of paid invoices first, and its per-hour rates are visible only inside an eligible account, so the card cannot price it.",
+      "status": "open"
+    },
+    {
+      "issue": "Stopping does not stop the bill",
+      "detail": "A standard VPS is a subscription for the period. Powering it off keeps the disk and the invoice, and loses memory and running processes. There is no pause and no cheaper stopped rate on this product.",
+      "status": "open"
+    },
+    {
+      "issue": "\"Its own resources\" sits beside a 50% sustained CPU cap",
+      "detail": "The VPS page sells each guest as its own KVM machine with its own resources, while the support guide caps a server that has run at full load for several days at half its vCPUs, and throttles heavy disk I/O. The vCPUs are allocated rather than shared, but they are not a permanently dedicated core. A, B and C sit far below the cap.",
+      "status": "open"
+    },
+    {
+      "issue": "HostUp's own pages give four different endpoint counts",
+      "detail": "The home page says 336 documented endpoints, the VPS page says over 300, the developer page says 383 and the support index says 300+. The model says 300+ and quotes 383 where a figure is needed; no verdict depends on the count.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://hostup.se/en/",
+          "quote": "336 documented endpoints with typed IDs and stable error codes",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://developer.hostup.se/",
+          "quote": "383 documented endpoints cover the things you manage in the HostUp dashboard.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "The only snapshot expires after a day",
+      "detail": "A snapshot captures the disk, and every snapshot is deleted automatically after 24 hours. The number of slots is set by the plan. Weekly backups are the longer-lived protection, and restoring either overwrites the current server.",
+      "status": "open"
+    },
+    {
+      "issue": "Bandwidth is a hard cap, not an overage bill",
+      "detail": "Inbound and outbound traffic count together against 1–32 TB a month. When the allowance is gone the server cannot be started until you buy more capacity at 10 SEK per TB a month or the next period begins. That is cheap, but it is an outage, not an invoice.",
+      "status": "open"
+    },
+    {
+      "issue": "HostUp quotes GB, the calculator uses GiB",
+      "detail": "Plans are labelled in GB (2, 4, 8 … 128 GB of memory; 25–1,600 GB of disk). The card maps those figures 1:1 to the site's GiB fields. If they are decimal GB, 128 GB is 119.2 GiB and the top plan is just under the 128 GiB mark. A/B/C asks are smaller and unaffected.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "A full Linux VM with root, Docker, a public IPv4 and 50 GB of NVMe for $5.72 a month, in the EU.",
+    "About 380 documented API endpoints, an OpenAPI spec and a hosted MCP server that Claude, ChatGPT, Cursor or Codex can drive, with purchases confirmed in the browser.",
+    "Weekly backups, DDoS scrubbing, IPv6 (/48 routed on request) and a browser console included at no extra cost.",
+    "Swedish ownership, own hardware in Stockholm, a DPA that applies automatically, and a public status page showing 99.992% over 90 days.",
+    "Predictable billing: the plan price is the whole machine charge, and 1–32 TB of transfer is included."
+  ],
+  "sources": [
+    { "label": "VPS plans and prices", "url": "https://hostup.se/en/vps/" },
+    { "label": "VPS plans in SEK (base currency)", "url": "https://hostup.se/en/vps/?currency=SEK" },
+    { "label": "VPS plans in USD (HostUp's display conversion)", "url": "https://hostup.se/en/vps/?currency=USD" },
+    { "label": "Product and add-on prices (SEK, no auth)", "url": "https://cloud.hostup.se/api/v2/products/vps" },
+    { "label": "Price calculator: VAT added on top", "url": "https://hostup.se/en/pricecalculator/" },
+    { "label": "Order a VPS", "url": "https://hostup.se/en/support/order-a-vps/" },
+    { "label": "Hourly Cloud VM (gated)", "url": "https://hostup.se/en/support/cloud-vm/" },
+    { "label": "Start, stop and restart", "url": "https://hostup.se/en/support/start-stop-restart/" },
+    { "label": "Bandwidth: hard cap", "url": "https://hostup.se/en/support/vps-bandwidth/" },
+    { "label": "Snapshots", "url": "https://hostup.se/en/support/snapshots/" },
+    { "label": "Backups", "url": "https://hostup.se/en/support/backups/" },
+    { "label": "Restore a backup", "url": "https://hostup.se/en/support/restore-a-backup/" },
+    { "label": "Volumes (PAYG only)", "url": "https://hostup.se/en/support/block-storage-volumes/" },
+    { "label": "Firewall (inbound only)", "url": "https://hostup.se/en/support/vps-firewall/" },
+    { "label": "CPU and disk warnings", "url": "https://hostup.se/en/support/vps-warnings/" },
+    { "label": "Boot from your own ISO", "url": "https://hostup.se/en/support/mount-custom-iso/" },
+    { "label": "Console (VNC)", "url": "https://hostup.se/en/support/vps-console/" },
+    { "label": "Remote commands", "url": "https://hostup.se/en/support/remote-commands/" },
+    { "label": "API keys and scopes", "url": "https://hostup.se/en/support/api-keys/" },
+    { "label": "Connect Claude or ChatGPT (MCP)", "url": "https://hostup.se/en/support/connect-claude-chatgpt-mcp/" },
+    { "label": "API documentation", "url": "https://developer.hostup.se/" },
+    { "label": "Give colleagues access", "url": "https://hostup.se/en/support/give-others-access/" },
+    { "label": "Audit log", "url": "https://hostup.se/en/support/sessions-and-activity-log/" },
+    { "label": "Costs and VAT", "url": "https://hostup.se/en/support/costs-and-vat/" },
+    { "label": "Terms of service (VAT, refunds, SLA)", "url": "https://hostup.se/legal/terms-of-service-en.pdf" },
+    { "label": "Security", "url": "https://hostup.se/en/security/" },
+    { "label": "About HostUp", "url": "https://hostup.se/en/about-us/" },
+    { "label": "Status page", "url": "https://status.hostup.se/" }
+  ]
+}

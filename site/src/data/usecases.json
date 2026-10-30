@@ -239,6 +239,28 @@
             "url": "https://www.hostinger.com/applications/hermes-agent"
           },
           "price": "KVM 2 $24.49/mo monthly-billed; KVM 1 $19.49/mo may suit a light agent"
+        },
+        {
+          "provider": "freestyle",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No Hermes image, template or guide. Create an Ubuntu VM with the SDK or CLI, install Hermes yourself, and turn the idle timeout off so its gateway keeps its connections.",
+          "link": {
+            "title": "Quickstart",
+            "url": "https://www.freestyle.sh/docs/quickstart"
+          },
+          "price": "About $83/month on Hobby for the 2 vCPU / 4 GiB always-on preset."
+        },
+        {
+          "provider": "hostup",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Hermes on an Ubuntu VPS over SSH. VPS XS gives 2 vCPU / 4 GB / 50 GB for $5.72 a month, always on, with the disk and the process surviving a reboot. There is no Hermes template and no managed update.",
+          "link": {
+            "title": "HostUp VPS plans",
+            "url": "https://hostup.se/en/vps/"
+          },
+          "price": "$5.72/mo (VPS XS, 2 vCPU / 4 GB / 50 GB), ex-VAT"
         }
       ],
       "picks": [
@@ -585,6 +607,28 @@
             "url": "https://www.hostinger.com/applications/openclaw"
           },
           "price": "KVM 2 $24.49/mo monthly-billed; KVM 1 $19.49/mo"
+        },
+        {
+          "provider": "freestyle",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "A first-party guide installs OpenClaw with npm, snapshots it, runs the gateway under systemd and routes a style.dev domain to it. You write the SDK script and supply an OpenAI key.",
+          "link": {
+            "title": "Run OpenClaw in a sandbox",
+            "url": "https://www.freestyle.sh/docs/guides/run-openclaw-in-a-sandbox"
+          },
+          "price": "About $83/month on Hobby for the 2 vCPU / 4 GiB always-on preset."
+        },
+        {
+          "provider": "hostup",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install OpenClaw on a VPS over SSH and pair WhatsApp, Telegram or Discord from the terminal. VPS XS or SM depending on how many channels and how much browsing the agent does.",
+          "link": {
+            "title": "HostUp VPS plans",
+            "url": "https://hostup.se/en/vps/"
+          },
+          "price": "$5.72–$11.55/mo (VPS XS or SM), ex-VAT"
         }
       ],
       "picks": [
@@ -615,6 +659,13 @@
           "why": "A $12/month Droplet arrives with TLS, a gateway token, device pairing, container isolation and fail2ban already configured, on a real VM with root and 16 regions.",
           "watch": "Powering off does not stop the bill, and the $12 tier is the floor only since the February 2026 update; the January image needed $24.",
           "link": "https://marketplace.digitalocean.com/apps/openclaw"
+        },
+        {
+          "provider": "freestyle",
+          "for": "OpenClaw on a full VM with memory pause",
+          "why": "A first-party guide covers the gateway, systemd and a public domain, and pausing keeps the gateway's state.",
+          "watch": "Terminal-only setup, an OpenAI key, and the $50 minimum.",
+          "link": "https://www.freestyle.sh/docs/guides/run-openclaw-in-a-sandbox"
         }
       ],
       "outside": "OpenClaw also documents ordinary hosts. Hostinger sells a one-click managed OpenClaw from $4.99 a month on a two-year term, renewing at $11.99. OpenClaw's Fly.io guide estimates $10 to $15 a month. Railway and Northflank have one-click templates with no price on the guide. Render's free tier sleeps after 15 minutes, which breaks an always-on Gateway.",
@@ -916,6 +967,28 @@
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps"
           },
           "price": "$24.49–$42.99/mo monthly-billed"
+        },
+        {
+          "provider": "freestyle",
+          "tier": "preinstalled",
+          "noTerminal": "no",
+          "what": "Claude Code, Codex and opencode are already in the Ubuntu image. Create a VM, then open a PTY or SSH session and run the agent; the dashboard creates the machine but does not host a chat.",
+          "link": {
+            "title": "Run Claude Code in a sandbox",
+            "url": "https://www.freestyle.sh/docs/guides/run-claude-code-in-a-sandbox"
+          },
+          "price": "$50/month on Hobby at the coding preset (4 vCPU / 8 GiB, 8 h × 20 days), which is the minimum."
+        },
+        {
+          "provider": "hostup",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Claude Code or Codex on VPS SM (4 vCPU / 8 GB / 100 GB, $11.55 a month). Stopping the server between sessions keeps the repository but still bills the month, so it suits someone who works most days rather than occasionally.",
+          "link": {
+            "title": "HostUp VPS plans",
+            "url": "https://hostup.se/en/vps/"
+          },
+          "price": "$11.55/mo (VPS SM), ex-VAT"
         }
       ],
       "picks": [
@@ -939,6 +1012,13 @@
           "why": "Built for starting sandboxes from your own program, with an official coding-agent guide and pausing that keeps memory and files at no charge.",
           "watch": "Disk is 10 GiB on the free plan and 20 GiB on Pro, and sessions longer than an hour need the $150 Pro plan.",
           "link": "https://e2b.dev/docs/use-cases/coding-agents"
+        },
+        {
+          "provider": "freestyle",
+          "for": "A coding agent that keeps a full Linux workspace",
+          "why": "Claude Code and Codex are already installed, pause keeps the session's memory, a live fork lets you try two fixes at once, and the real kernel runs Docker.",
+          "watch": "The $50 Hobby minimum and the terminal start; there is no region choice.",
+          "link": "https://www.freestyle.sh/docs/guides/run-claude-code-in-a-sandbox"
         }
       ],
       "outside": "Anthropic runs Claude Code cloud sessions on its own machines for Claude subscribers, and OpenAI runs Codex Cloud for ChatGPT plans. Neither publishes a separate machine price on its docs page.",
@@ -1095,6 +1175,28 @@
             "url": "https://www.hostinger.com/vps-hosting"
           },
           "price": "$24.49/mo for KVM 2"
+        },
+        {
+          "provider": "freestyle",
+          "tier": "backend",
+          "noTerminal": "no",
+          "what": "Build it on the SDK: create an ephemeral VM per run, execute the code, read files back, and delete it. There is no hosted interpreter product or prompt endpoint.",
+          "link": {
+            "title": "Quickstart",
+            "url": "https://www.freestyle.sh/docs/quickstart"
+          },
+          "price": "About $50/month at 20,000 one-minute runs, which the Hobby minimum covers."
+        },
+        {
+          "provider": "hostup",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Possible only as a build-it-yourself backend: the API creates whole servers on a monthly plan, there is no per-run sandbox, no snapshot with memory and no cheap throwaway machine for a new account. Running 20,000 one-minute jobs would mean either one machine doing them back to back or 20,000 plans.",
+          "link": {
+            "title": "HostUp API documentation",
+            "url": "https://developer.hostup.se/"
+          },
+          "price": "Not a per-task product; one VPS XS plan is $5.72/mo"
         }
       ],
       "picks": [
@@ -1218,6 +1320,28 @@
             "url": "https://www.hostinger.com/vps-hosting"
           },
           "price": "$24.49–$42.99/mo monthly-billed"
+        },
+        {
+          "provider": "freestyle",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "A guide installs Chromium or Chrome, runs it headless or headed with Xvfb and noVNC, and drives it over CDP. The browser is not in the base image.",
+          "link": {
+            "title": "Run Chromium and Chrome in a sandbox",
+            "url": "https://www.freestyle.sh/docs/guides/run-chromium-and-chrome-in-a-sandbox"
+          },
+          "price": "About $648/month on Hobby at 30,000 ten-minute sessions."
+        },
+        {
+          "provider": "hostup",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install headless Chromium and your agent on VPS SM. There is no hosted browser, no desktop stream and no per-session isolation: all sessions share one machine and one public IP.",
+          "link": {
+            "title": "HostUp VPS plans",
+            "url": "https://hostup.se/en/vps/"
+          },
+          "price": "$11.55/mo (VPS SM), ex-VAT"
         }
       ],
       "picks": [
@@ -1241,6 +1365,13 @@
           "why": "Documents computer use, with sandboxes started from an SDK and per-second billing.",
           "watch": "Each sandbox's disk is capped at 10 GiB.",
           "link": "https://www.daytona.io/docs/en/"
+        },
+        {
+          "provider": "freestyle",
+          "for": "Browser sessions that need a full desktop",
+          "why": "A full VM runs Chrome headed with Xvfb and noVNC, and a snapshot keeps the installed browser for the next run.",
+          "watch": "You install Chromium yourself, and allocated CPU is billed for the whole session.",
+          "link": "https://www.freestyle.sh/docs/guides/run-chromium-and-chrome-in-a-sandbox"
         }
       ],
       "outside": "Browser services such as Browser Use Cloud sell hosted browser time (from $0.02 per browser-hour) without a machine to manage.",
@@ -1482,6 +1613,28 @@
             "url": "https://www.hostinger.com/self-hosted-n8n"
           },
           "price": "KVM 2 $24.49/mo monthly-billed"
+        },
+        {
+          "provider": "freestyle",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No n8n template. Run the official Docker image on a VM, keep the database and encryption key on its disk, and leave the idle timeout off so webhooks and schedules keep running.",
+          "link": {
+            "title": "Run Docker in a sandbox",
+            "url": "https://www.freestyle.sh/docs/guides/run-docker-in-a-sandbox"
+          },
+          "price": "About $83/month on Hobby for an always-on 2 vCPU / 4 GiB machine."
+        },
+        {
+          "provider": "hostup",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run n8n in Docker on VPS XS or SM. It must stay awake for webhooks and scheduled workflows, which a monthly plan does well: nothing sleeps the machine and 2–5 TB of transfer is included. You keep the database and the encryption key on the same disk and back them up yourself.",
+          "link": {
+            "title": "HostUp VPS plans",
+            "url": "https://hostup.se/en/vps/"
+          },
+          "price": "$5.72–$11.55/mo (VPS XS or SM), ex-VAT"
         }
       ],
       "picks": [
@@ -1846,6 +1999,28 @@
             "url": "https://www.hostinger.com/vps-hosting"
           },
           "price": "$19.49–$24.49/mo monthly-billed"
+        },
+        {
+          "provider": "freestyle",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No Discord or Slack guide. The Telegram bot guide shows the pattern: a systemd service, outbound polling, and no idle timeout so the bot stays connected.",
+          "link": {
+            "title": "Run a Telegram bot in a sandbox",
+            "url": "https://www.freestyle.sh/docs/guides/run-a-telegram-bot-in-a-sandbox"
+          },
+          "price": "$50/month on Hobby at the 1 vCPU / 2 GiB always-on preset."
+        },
+        {
+          "provider": "hostup",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run the bot on VPS Nano ($4.08) or XS ($5.72). A Discord or Slack gateway needs a process that never sleeps, and this one does not; 1–2 TB of transfer covers a small community.",
+          "link": {
+            "title": "HostUp VPS plans",
+            "url": "https://hostup.se/en/vps/"
+          },
+          "price": "$4.08–$5.72/mo (VPS Nano or XS), ex-VAT"
         }
       ],
       "picks": [
@@ -1923,7 +2098,7 @@
       "seoTitle": "Claude Code in the cloud for a team: setup and costs",
       "kicker": "Coding team",
       "question": "Three to five of us want Claude Code running on cloud machines, each with our own login, without sharing one account.",
-      "standfirst": "Claude Code is built for one person on one machine. For a team that means one machine per developer, each signed in with that developer's own account. Five providers ship it preinstalled and one sets it up in one click; the catch is how logins are kept.",
+      "standfirst": "Claude Code is built for one person on one machine. For a team that means one machine per developer, each signed in with that developer's own account. Six providers ship it preinstalled and one sets it up in one click; the catch is how logins are kept.",
       "preset": "team",
       "whatItIs": [
         "[Claude Code](https://code.claude.com/docs/en/overview) is Anthropic's coding agent. A developer starts it in a repository and asks for a change; it reads and edits files and runs commands and tests on the machine where it runs.",
@@ -2138,6 +2313,28 @@
             "url": "https://www.hostinger.com/vps-hosting"
           },
           "price": "5 × $42.99 = $214.95/mo monthly-billed"
+        },
+        {
+          "provider": "freestyle",
+          "tier": "preinstalled",
+          "noTerminal": "no",
+          "what": "Claude Code is preinstalled. Create one VM per developer, add a Linux user, and hand each person a scoped identity token for SSH; the team keeps the account key.",
+          "link": {
+            "title": "SSH access and multiple developers",
+            "url": "https://www.freestyle.sh/docs/vms/ssh#multiple-developers"
+          },
+          "price": "About $206/month on Hobby for five 4 vCPU / 8 GiB machines, 8 h × 20 days."
+        },
+        {
+          "provider": "hostup",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "One VPS SM per developer, or one larger box with separate Linux users. The panel has no per-user machine isolation, no SSO and no hard spend cap; the audit log is account-wide.",
+          "link": {
+            "title": "Give colleagues access to the account",
+            "url": "https://hostup.se/en/support/give-others-access/"
+          },
+          "price": "$11.55/mo per developer (VPS SM), ex-VAT"
         }
       ],
       "picks": [
@@ -2161,6 +2358,13 @@
           "why": "One-click Claude Code on each developer's own Anthropic account, so logins stay separate.",
           "watch": "One instance per developer: five Pro instances are about $150 a month, and team roles need the $99.99 Max plan. These plans are separate from the Cloud machines the calculator prices.",
           "link": "https://www.agent37.com/docs/agents-api/templates"
+        },
+        {
+          "provider": "freestyle",
+          "for": "A small team that wants one VM per developer",
+          "why": "Identities and tokens scope each developer to one VM and one Linux user without sharing the account API key.",
+          "watch": "No documented team roles or dollar spend cap, and SSO is Enterprise-only.",
+          "link": "https://www.freestyle.sh/docs/vms/ssh#multiple-developers"
         }
       ],
       "outside": "Anthropic runs Claude Code [cloud sessions](https://code.claude.com/docs/en/sandbox-environments) on its own machines for Claude subscribers, with no separate machine price. [Claude Team](https://claude.com/pricing) is $25 per seat a month ($20 billed annually) for 2 to 150 people, with central billing, single sign-on and each member on their own login. Claude Enterprise starts at 20 seats, which is why a team of five starts on Team.",
@@ -2430,6 +2634,28 @@
             "url": "https://www.hostinger.com/vps-hosting"
           },
           "price": "$19.49/mo for KVM 1"
+        },
+        {
+          "provider": "freestyle",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No scheduler. Trigger the run from your own cron or queue, create an ephemeral VM, scrape, write results to external storage, and let the VM delete itself.",
+          "link": {
+            "title": "Quickstart",
+            "url": "https://www.freestyle.sh/docs/quickstart"
+          },
+          "price": "$0 on Free at 120 ten-minute runs a month, inside the monthly allowances."
+        },
+        {
+          "provider": "hostup",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Cron inside the VM runs the scraper four times a day, but a monthly plan bills the 700+ idle hours too. It only makes sense if the same box does other work; otherwise a per-task sandbox is cheaper.",
+          "link": {
+            "title": "HostUp VPS plans",
+            "url": "https://hostup.se/en/vps/"
+          },
+          "price": "$5.72/mo (VPS XS) whatever the run count, ex-VAT"
         }
       ],
       "picks": [
@@ -2718,6 +2944,28 @@
             "url": "https://www.hostinger.com/vps-hosting"
           },
           "price": "$19.49/mo monthly-billed"
+        },
+        {
+          "provider": "freestyle",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run your MCP server in a VM and route a style.dev domain to its port; forward auth can gate it. There is no MCP template and no MCP server for controlling Freestyle.",
+          "link": {
+            "title": "Inbound TLS",
+            "url": "https://www.freestyle.sh/docs/vms/network/tls-inbound"
+          },
+          "price": "$50/month on Hobby at the 1 vCPU / 1 GiB preset, which is the minimum."
+        },
+        {
+          "provider": "hostup",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "VPS Nano is the cheapest always-on public address in this guide: point DNS at the IPv4, open the port in the panel firewall and terminate TLS yourself. Nothing sleeps it, so a client's tool call never waits for a wake.",
+          "link": {
+            "title": "Firewall for your VPS",
+            "url": "https://hostup.se/en/support/vps-firewall/"
+          },
+          "price": "$4.08/mo (VPS Nano), ex-VAT"
         }
       ],
       "picks": [

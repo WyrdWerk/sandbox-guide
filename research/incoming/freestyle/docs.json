@@ -1,0 +1,74 @@
+{
+  "isolation": {
+    "title": "Freestyle VMs (full Linux VMs)",
+    "url": "https://www.freestyle.sh/docs/vms"
+  },
+  "sizes-regions": {
+    "title": "Pricing and limits (per-plan sizes)",
+    "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits"
+  },
+  "lifecycle": {
+    "title": "VM lifecycle (running, paused, stopped)",
+    "url": "https://www.freestyle.sh/docs/vms/lifecycle"
+  },
+  "snapshots-forks": {
+    "title": "Base snapshots and custom snapshots",
+    "url": "https://www.freestyle.sh/docs/vms/base-snapshots"
+  },
+  "storage": {
+    "title": "Files (read, write, large files, paused reads)",
+    "url": "https://www.freestyle.sh/docs/vms/files"
+  },
+  "idle-timers": {
+    "title": "Idle timeout",
+    "url": "https://www.freestyle.sh/docs/vms/lifecycle#idle-timeout"
+  },
+  "reaching-it": {
+    "title": "Inbound TLS (public domains and ports)",
+    "url": "https://www.freestyle.sh/docs/vms/network/tls-inbound"
+  },
+  "custom-domains": {
+    "title": "VM domains",
+    "url": "https://www.freestyle.sh/docs/vms/domains"
+  },
+  "outbound-network": {
+    "title": "Firewall",
+    "url": "https://www.freestyle.sh/docs/vms/network/firewall"
+  },
+  "keys-secrets": {
+    "title": "Outbound TLS (credential injection)",
+    "url": "https://www.freestyle.sh/docs/vms/network/tls-outbound"
+  },
+  "ways-to-drive": {
+    "title": "Quickstart (SDK, CLI, API key)",
+    "url": "https://www.freestyle.sh/docs/quickstart"
+  },
+  "built-in-agents": {
+    "title": "What's installed in the base image",
+    "url": "https://www.freestyle.sh/docs/vms/base-snapshots#whats-installed"
+  },
+  "teams-accounts": {
+    "title": "Pricing and limits (Enterprise SSO, audit logs)",
+    "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits"
+  },
+  "billing-models": {
+    "title": "Usage pricing",
+    "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits#usage-pricing"
+  },
+  "trials-free-tiers": {
+    "title": "Pricing",
+    "url": "https://www.freestyle.sh/pricing"
+  },
+  "company": {
+    "title": "System status",
+    "url": "https://www.freestyle.sh/status"
+  },
+  "quickstart": {
+    "title": "Quickstart",
+    "url": "https://www.freestyle.sh/docs/quickstart"
+  },
+  "pricing": {
+    "title": "Freestyle pricing",
+    "url": "https://www.freestyle.sh/pricing"
+  }
+}

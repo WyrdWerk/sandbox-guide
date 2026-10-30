@@ -1,0 +1,98 @@
+{
+  "provider": "freestyle",
+  "checkedOn": "2026-10-30",
+  "summary": "Per second on allocated vCPU, memory and disk, with free monthly allowances on every plan; Hobby is a $50 monthly minimum that is usable as usage.",
+  "cpu": {
+    "rate": 0.04032,
+    "billing": "allocated"
+  },
+  "ram": {
+    "rate": 0.0129,
+    "billing": "allocated"
+  },
+  "disk": {
+    "running": 8.6e-05,
+    "stopped": 8.6e-05
+  },
+  "sleeps": "An idle timeout pauses a VM after a set period without network activity; the next start or request resumes it with memory intact.",
+  "between": "kept",
+  "maxDisk": 256,
+  "maxVcpu": 32,
+  "maxRam": 64,
+  "egress": {
+    "perGiB": 0.02,
+    "included": "50 GB on Free, 500 GB on Hobby and Pro",
+    "note": "Data transfer counts bytes crossing the datacenter boundary in either direction; traffic between your own VMs in a VPC is not billed.",
+    "url": "https://www.freestyle.sh/pricing.md"
+  },
+  "plans": [
+    {
+      "name": "Free",
+      "fee": 0,
+      "allowance": {
+        "cpuHours": 200,
+        "ramHours": 400,
+        "diskHours": 60000
+      },
+      "capped": true,
+      "maxVcpu": 4,
+      "maxRam": 8,
+      "maxDisk": 32,
+      "note": "Free is a hard allowance: usage stops at the monthly limit instead of billing overage. Freestyle's pricing page says Free has no persistent VMs (its docs table says it does); the calculator follows the pricing page, so a machine whose disk is kept while stopped is priced on Hobby.",
+      "noKeep": true
+    },
+    {
+      "name": "Hobby",
+      "fee": 50,
+      "credit": 50,
+      "maxVcpu": 8,
+      "maxRam": 16,
+      "maxDisk": 64,
+      "note": "Hobby is a $50 monthly minimum; the fee covers the first $50 of usage and only the excess is billed on top.",
+      "allowance": {
+        "cpuHours": 200,
+        "ramHours": 400,
+        "diskHours": 60000
+      }
+    },
+    {
+      "name": "Pro",
+      "fee": 500,
+      "credit": 500,
+      "maxVcpu": 32,
+      "maxRam": 64,
+      "maxDisk": 256,
+      "note": "Pro is a $500 monthly minimum; the fee covers the first $500 of usage and only the excess is billed on top.",
+      "allowance": {
+        "cpuHours": 200,
+        "ramHours": 400,
+        "diskHours": 60000
+      }
+    }
+  ],
+  "notes": [
+    "The free allowances (200 vCPU-hours, 400 GiB-hours of memory, 60,000 GiB-hours of storage) apply on every plan, including Hobby and Pro.",
+    "Snapshot storage is not priced separately in the calculator. The pricing page lists only vCPU, memory, storage and data transfer, and the billable size of a snapshot is not published.",
+    "A paused VM bills storage but no compute. The product page's 'pay nothing while paused' claim conflicts with the pricing page; the rate card follows the pricing page.",
+    "Enterprise custom limits, measured-CPU billing, node-based pricing and a 99.99% SLA are not modelled because their prices are not published.",
+    "Free and persistence: the docs' plan table marks persistent VMs available on Free, but the pricing page's limit table marks them unavailable (both read 2026-10-30). The calculator follows the stricter pricing page, so a stopped-and-kept machine is priced on Hobby; if the docs are right, workload C would fit inside Free's allowances at $0."
+  ],
+  "sources": [
+    {
+      "label": "Pricing and limits",
+      "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits"
+    },
+    {
+      "label": "Pricing (machine-readable)",
+      "url": "https://www.freestyle.sh/pricing.md"
+    },
+    {
+      "label": "Pricing page",
+      "url": "https://www.freestyle.sh/pricing"
+    },
+    {
+      "label": "VM lifecycle",
+      "url": "https://www.freestyle.sh/docs/vms/lifecycle"
+    }
+  ]
+}

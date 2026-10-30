@@ -1,6 +1,32 @@
 {
   "changes": [
     {
+      "date": "2026-10-30",
+      "title": "Freestyle added: full Linux VMs that pause with memory and fork live",
+      "provider": "freestyle",
+      "what": "This guide now lists Freestyle. Its VMs bill per second on allocated vCPU, memory and storage, with monthly allowances on every plan; Hobby is a $50 monthly minimum usable as usage. The date is when this guide checked it, not a launch date.",
+      "sources": [
+        {
+          "url": "https://www.freestyle.sh/pricing.md",
+          "quote": "| **Hobby** | $50/month minimum, including $50 usage | Up to 40 |",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "title": "HostUp added: a Swedish VPS with seven fixed monthly plans",
+      "provider": "hostup",
+      "what": "This guide now lists HostUp, a VPS provider with one data hall in Stockholm. Plans are billed by the month whether the server runs or is stopped; prices here are HostUp's own USD display, before VAT. The date is when this guide checked it, not a launch date.",
+      "sources": [
+        {
+          "url": "https://hostup.se/en/support/costs-and-vat/",
+          "quote": "If you are a private customer in an EU country, you can choose whether prices in the client area include VAT.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
       "date": "2026-10-29",
       "title": "Lizard added two bigger plans, Pro 5x and Pro 20x",
       "provider": "lizard",

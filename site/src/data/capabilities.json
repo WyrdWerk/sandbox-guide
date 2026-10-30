@@ -208,6 +208,28 @@
             "quote": "Kernel-based virtual machine (KVM) is a full virtualization solution that divides a physical server into completely independent and isolated virtual environments.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Full VM, own kernel",
+          "note": "A hardware-virtualised Linux VM with systemd, not a shared-kernel container.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms",
+            "quote": "Freestyle VMs are full Linux virtual machines designed for long-running, complex tasks.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "KVM VM, own kernel",
+          "note": "A full KVM guest with its own kernel, not a container or a shared namespace.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "Every VPS is its own KVM machine with its own resources, so you can test, reboot and reinstall freely without affecting your production VPS.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -411,6 +433,28 @@
           "source": {
             "url": "https://www.hostinger.com/legal/hosting-agreement",
             "quote": "You will have administrator (root) access and a dedicated IP address.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "root via vm.linuxUser",
+          "note": "The default ubuntu user has passwordless sudo; vm.linuxUser(\"root\") runs as root.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/onboard.md",
+            "quote": "Freestyle provides real Linux VMs with full root, live forking, and pause/resume",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Root",
+          "note": "Full root inside the guest, including the panel's own command runner.",
+          "source": {
+            "url": "https://hostup.se/en/support/remote-commands/",
+            "quote": "The command runs as root with full access.",
             "confidence": "docs-confirmed"
           }
         }
@@ -622,6 +666,28 @@
             "quote": "Docker manager",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Docker preinstalled",
+          "note": "Docker Engine, Compose and Buildx are in every Ubuntu base snapshot and start at boot.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/guides/run-docker-in-a-sandbox",
+            "quote": "Docker is already installed in all Ubuntu base snapshots",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Root + own kernel",
+          "note": "No Docker guide is published, but a KVM guest with root and its own kernel runs it. HostUp's support text says Docker cannot be installed on its shared web hosting, which is a different product.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "Install any operating system and your own kernel. Run whatever you want on your VPS.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -827,6 +893,28 @@
             "url": "https://www.hostinger.com/support/10429687-is-nested-virtualization-supported-in-hostinger/",
             "quote": "Nested virtualization is not supported on Hostinger Virtual Private Server (VPS) hosting plans.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Full KVM",
+          "note": "The company says the platform supports nested virtualisation, FUSE and eBPF.",
+          "source": {
+            "url": "https://www.freestyle.sh/about.md",
+            "quote": "supporting nested virtualization, FUSE, eBPF, full Linux networking and more",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "Nothing in the VPS page, the 33 VPS support guides, the API index or site search mentions nested virtualisation or a KVM-inside-KVM flag. Ask before planning a hypervisor inside the guest.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "Gain full control over your VPS with KVM.",
+            "confidence": "not-published"
           }
         }
       ]
@@ -1038,6 +1126,28 @@
           "source": {
             "url": "https://www.hostinger.com/support/8852324-can-you-add-your-own-os-image-to-vps-at-hostinger/",
             "quote": "we don’t offer an option to upload or install your own OS images on VPS",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "No Dockerfile or image import: you configure a VM and snapshot it to make a custom base.",
+          "note": "Base images are Ubuntu, Kali and BusyBox; a custom snapshot captures memory and disk.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/base-snapshots",
+            "quote": "Start from a base snapshot, set it up however you want, resize if you need more, and capture its exact memory and disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Own ISO up to 20 GB",
+          "note": "You mount an ISO from a URL and install anything, including an encrypted system. It is an installer, not a disk image you upload.",
+          "source": {
+            "url": "https://hostup.se/en/support/mount-custom-iso/",
+            "quote": "To install an operating system we don't offer, or to start the server in a rescue system, you mount an ISO file.",
             "confidence": "docs-confirmed"
           }
         }
@@ -1256,6 +1366,29 @@
             "url": "https://www.hostinger.com/support/1583229-how-to-upgrade-a-vps-server-at-hostinger/",
             "quote": "Individual resources (such as disk space or RAM) can’t be upgraded separately — upgrading the entire VPS plan is required",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Any size to plan cap",
+          "note": "CPU and memory are chosen freely up to the plan maximum; no fixed shape list.",
+          "source": {
+            "url": "https://www.freestyle.sh/pricing.md",
+            "quote": "Every plan can create a VM at any valid size up to its CPU, memory, and disk maximums.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "partly",
+          "figure": "7 fixed plans",
+          "shortfall": "CPU and memory come only in seven fixed steps; a custom mix needs the pay-as-you-go Cloud VM, which a new account cannot buy.",
+          "note": "Disk and bandwidth are sliders, and larger machines are quoted on request, but the CPU/memory ratio is set by the plan.",
+          "source": {
+            "url": "https://cloud.hostup.se/api/v2/products/vps",
+            "quote": "\"resources\":{\"cpuCores\":2,\"memoryGb\":4,\"storageGb\":50}",
+            "confidence": "pricing-page"
           }
         }
       ]
@@ -1478,6 +1611,28 @@
             "confidence": "pricing-page"
           },
           "shortfall": "The largest plan is 8 vCPU / 32 GB; Hostinger does not say whether that is GiB, and 32 decimal GB is 29.8 GiB, just under the 32 GiB mark."
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "32 vCPU / 64 GiB (Pro)",
+          "note": "The 64 vCPU / 128 GiB image needs custom Enterprise limits.",
+          "source": {
+            "url": "https://www.freestyle.sh/products/vms",
+            "quote": "Full Linux VMs with up to 32 vCPUs, 64 GB RAM, instant startup, and live forking.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "32 vCPU / 128 GB; 1 TB on request",
+          "note": "The top listed plan is 32 vCPU / 128 GB / 1,600 GB; 1 TB of RAM is quoted on request.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "Scale up to 1 TB RAM and down just as easily.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -1701,6 +1856,28 @@
             "quote": "The upgrade can take up to 10 minutes to complete.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "CPU/RAM live; disk grow-only",
+          "note": "All three dimensions only grow; shrinking means creating a new VM.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/lifecycle",
+            "quote": "Resizing happens live. On a running VM the new CPU and memory come online without a reboot, and the disk grows in place while the guest keeps running.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Restart to resize",
+          "note": "A plan change restarts the server. Disk can grow without a restart, but CPU and memory cannot.",
+          "source": {
+            "url": "https://hostup.se/en/support/upgrade-or-downgrade/",
+            "quote": "When you change package, the server restarts by itself as the change is made.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -1921,6 +2098,27 @@
             "quote": "Run AI, rendering, and compute workloads on dedicated NVIDIA GPUs with simple hourly pricing and no long-term commitment.",
             "confidence": "pricing-page"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "GPUs are a private enterprise offer with no published price or self-serve route.",
+          "source": {
+            "url": "https://www.freestyle.sh/about.md",
+            "quote": "GPU Sandboxes: Freestyle offers private GPU sandboxes for enterprise customers",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "No GPU plan",
+          "note": "The seven products carry only CPU cores, memory and storage, the order flow offers no GPU option, and site search finds no GPU page.",
+          "source": {
+            "url": "https://cloud.hostup.se/api/v2/products/vps",
+            "quote": "\"resources\":{\"cpuCores\":1,\"memoryGb\":2,\"storageGb\":25}",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -2136,6 +2334,27 @@
             "quote": "Launch your VPS in 10 data centers across 4 continents, from Boston to Jakarta.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "no",
+          "note": "No region or location field appears in the create-VM request; placement is described as internal.",
+          "source": {
+            "url": "https://www.freestyle.sh/openapi.json",
+            "quote": "Placement and topology internals (hosting manager, VXLAN ids, node-local network allocation) are not part of this contract.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Stockholm only",
+          "note": "One data hall in Älvsjö with two availability zones. There is no region picker and no way to move a server to another country.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "All our VPS servers are located in Sweden and are owned by us at Hostup AB.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -2348,6 +2567,27 @@
             "quote": "Europe: France, Germany, Lithuania, and the United Kingdom.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "not-published",
+          "note": "No EU region or data-residency option is published anywhere in the docs or API.",
+          "source": {
+            "url": "https://www.freestyle.sh/openapi.json",
+            "quote": "Placement and topology internals (hosting manager, VXLAN ids, node-local network allocation) are not part of this contract.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Stockholm, Sweden (EU)",
+          "note": "VPS and backups stay in Sweden; the company says web hosting and email stay within the EU.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "All our VPS servers are located in Sweden and are owned by us at Hostup AB.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -2556,6 +2796,28 @@
             "quote": "This is a compute-only power state change and does not affect billing.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Memory and processes",
+          "note": "A paused VM keeps open files, processes and memory; start resumes in place.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/lifecycle",
+            "quote": "Pausing freezes the VM and saves its memory.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Stop = power off",
+          "note": "A stop shuts the machine down and then cuts power; memory and running processes are lost. There is no pause or hibernate state.",
+          "source": {
+            "url": "https://hostup.se/en/support/start-stop-restart/",
+            "quote": "Stop and restart first shut the server down gracefully, the way you shut down a computer.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -2755,6 +3017,27 @@
           "source": {
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
             "quote": "67 endpoints across 14 sections.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "not-published",
+          "note": "No pool of pre-started machines is documented; VMs and base snapshots start in about a second.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/base-snapshots",
+            "quote": "Boot a base snapshot by passing its slug as snapshotId. They start in about a second",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Created at order",
+          "note": "Each server is created when its order is paid; there is no pool of pre-started machines.",
+          "source": {
+            "url": "https://hostup.se/en/support/order-a-vps/",
+            "quote": "Once the order is paid, the server is created.",
             "confidence": "inferred"
           }
         }
@@ -2970,6 +3253,28 @@
             "quote": "67 endpoints across 14 sections.",
             "confidence": "not-published"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "65 ms; p99 < 400 ms",
+          "note": "The marketing page says 65 ms; the docs claim p99 under 400 ms.",
+          "source": {
+            "url": "https://www.freestyle.sh/products/vms",
+            "quote": "VMs provision in about 65ms from API request to ready machine.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Under 60 s",
+          "note": "Fast for a VPS, but it is a booted virtual machine, not a sub-second sandbox.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "Buy a VPS and get started in less than 60 seconds.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -3177,6 +3482,28 @@
             "quote": "Only one snapshot is stored at a time; creating a new one overwrites the previous one.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Snapshot disk",
+          "note": "A snapshot captures the disk and can boot a new VM.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/base-snapshots",
+            "quote": "Start from a base snapshot, set it up however you want, resize if you need more, and capture its exact memory and disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Disk snapshots, 24 h",
+          "note": "Snapshots capture the disk and can be rolled back; the number of slots is set by the plan and every snapshot expires after a day.",
+          "source": {
+            "url": "https://hostup.se/en/support/snapshots/",
+            "quote": "A snapshot saves the state of the server's disk right now.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -3379,6 +3706,28 @@
             "url": "https://www.hostinger.com/support/1583232-how-to-back-up-or-restore-a-vps-at-hostinger/",
             "quote": "A manual, on-demand capture of your entire VPS",
             "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Memory + disk",
+          "note": "Snapshots copy the VM's exact memory and disk state.",
+          "source": {
+            "url": "https://www.freestyle.sh/about.md",
+            "quote": "These snapshots can be used to create new VMs in the exact state of the original VM (memory and disk).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Disk only",
+          "note": "A snapshot covers the disk, not RAM, so a running process cannot be resumed from one.",
+          "source": {
+            "url": "https://hostup.se/en/support/snapshots/",
+            "quote": "A snapshot saves the state of the server's disk right now.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -3583,6 +3932,28 @@
             "url": "https://www.hostinger.com/support/1583232-how-to-back-up-or-restore-a-vps-at-hostinger/",
             "quote": "Only one snapshot is stored at a time; creating a new one overwrites the previous one.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Live fork",
+          "note": "A running VM can be cloned without pausing it, memory included.",
+          "source": {
+            "url": "https://www.freestyle.sh/products/vms",
+            "quote": "Clone a running VM without pausing it — get full copies in milliseconds.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Cold restore only",
+          "note": "You can restore a backup onto a new server, which is a cold copy of a past disk, not a fork of a running machine.",
+          "source": {
+            "url": "https://hostup.se/en/support/restore-a-backup/",
+            "quote": "You can restore a backup in three ways: to the same server, from another of your servers, or to a brand new server.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -3789,6 +4160,27 @@
             "quote": "Only one snapshot is stored at a time; creating a new one overwrites the previous one.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "note": "Snapshots are kept until deleted and can be booted by id or slug, so an older one can be chosen.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits",
+            "quote": "snapshots are kept until you delete them",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "24 h expiry",
+          "note": "Every snapshot is deleted automatically after 24 hours, so there is no older one to return to. The weekly backup is the longer history.",
+          "source": {
+            "url": "https://hostup.se/en/support/snapshots/",
+            "quote": "All snapshots are deleted automatically after 24 hours.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -3989,6 +4381,29 @@
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
             "quote": "67 endpoints across 14 sections.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Custom snapshots",
+          "note": "A configured VM becomes a private snapshot that many new VMs can boot from.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/base-snapshots",
+            "quote": "New snapshots are private, and snapshot() returns once the snapshot is fully materialized and ready to boot.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "partly",
+          "figure": "OS images + own ISO",
+          "shortfall": "You can rebuild from HostUp's OS list or your own ISO, but there is no way to save a configured server as a reusable template.",
+          "note": "Rebuild templates are the provider's operating-system images only; application templates belong to cPanel web hosting.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "At order time you choose between the following operating systems:",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -4196,6 +4611,27 @@
             "quote": "Automated weekly backups (and daily if enabled), stored separately from your server. Up to four are retained, two daily and two weekly.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "not-published",
+          "note": "Snapshots are taken when you ask; no scheduled backup feature is documented.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/base-snapshots",
+            "quote": "New snapshots are private, and snapshot() returns once the snapshot is fully materialized and ready to boot.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Weekly, 7 slots",
+          "note": "Backups are included at no extra cost, weekly by default, with seven slots on the smallest plan and a schedule you can change to daily or monthly.",
+          "source": {
+            "url": "https://hostup.se/en/support/backups/",
+            "quote": "Every new VPS gets a schedule that takes a backup once a week.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -4398,6 +4834,28 @@
           "source": {
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
             "quote": "This is a compute-only power state change and does not affect billing.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Persistent VM keeps disk",
+          "note": "A persistent VM keeps its disk across a stop; an ephemeral VM is deleted when it stops.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/lifecycle",
+            "quote": "A stopped VM keeps its disk but discards its memory.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Disk kept when stopped",
+          "note": "The disk stays and keeps billing while the server is off, so the files are there when it starts again.",
+          "source": {
+            "url": "https://hostup.se/en/support/cloud-vm/",
+            "quote": "The disk costs money for as long as the server exists, even when it is stopped.",
             "confidence": "docs-confirmed"
           }
         }
@@ -4604,6 +5062,29 @@
             "quote": "Individual resources (such as disk space or RAM) can’t be upgraded separately — upgrading the entire VPS plan is required",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "No separate volume: files outlive a VM only as a snapshot you boot a new VM from.",
+          "note": "The disk belongs to the VM; there is no detachable block volume.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/base-snapshots",
+            "quote": "Start from a base snapshot, set it up however you want, resize if you need more, and capture its exact memory and disk.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "partly",
+          "figure": "PAYG only",
+          "shortfall": "A detachable volume exists only on the pay-as-you-go Cloud VM, which a new account cannot buy; on a standard VPS an extra disk lives and dies with the server.",
+          "note": "On a standard VPS you can add a second disk from the storage you have bought, but it cannot be detached and attached elsewhere.",
+          "source": {
+            "url": "https://hostup.se/en/support/block-storage-volumes/",
+            "quote": "Volumes are only for pay-as-you-go VPS.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -4804,6 +5285,28 @@
           "source": {
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
             "quote": "67 endpoints across 14 sections.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "No shared volume; several VMs can share an S3 bucket mounted with FUSE.",
+          "note": "The shared-storage route is external object storage, not a Freestyle disk.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/guides/mount-s3-object-storage-in-a-sandbox",
+            "quote": "Mount an S3 bucket at a path in a sandbox so that any process reads and writes it like a local directory.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "One server per volume",
+          "note": "A volume attaches to one server at a time; sharing files between machines needs a network filesystem you run yourself.",
+          "source": {
+            "url": "https://hostup.se/en/support/block-storage-volumes/",
+            "quote": "Pick the server under Select VM. Only active pay-as-you-go VPS are listed.",
             "confidence": "inferred"
           }
         }
@@ -5008,6 +5511,28 @@
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
             "quote": "67 endpoints across 14 sections.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "S3 via FUSE",
+          "note": "An S3-compatible bucket mounts at a path with rclone; a cache stays on the VM disk.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/guides/mount-s3-object-storage-in-a-sandbox",
+            "quote": "Mount an S3 bucket at a path in a sandbox so that any process reads and writes it like a local directory.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "not-published",
+          "figure": "No object storage yet",
+          "note": "The About timeline still lists S3-compatible object storage as a March 2026 ETA, and no S3 product appears in the panel, the API index or the order flow. No mount feature is documented.",
+          "source": {
+            "url": "https://hostup.se/en/about-us/",
+            "quote": "March 2026 (ETA)",
+            "confidence": "not-published"
           }
         }
       ]
@@ -5222,6 +5747,28 @@
             "quote": "400 GB NVMe disk space",
             "confidence": "pricing-page"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "256 GB (Pro)",
+          "note": "Free stops at 32 GB, Hobby at 64 GB, Pro at 256 GB.",
+          "source": {
+            "url": "https://www.freestyle.sh/pricing.md",
+            "quote": "| Max disk per VM | 32 GB | 64 GB | 256 GB |",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Up to 32 TB on request",
+          "note": "5,000 GB is the slider limit on a plan; larger disks are quoted on request up to 32 TB.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "We can provide up to 32 TB of NVMe storage on request.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -5431,6 +5978,28 @@
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
             "quote": "This is a compute-only power state change and does not affect billing.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "No default run limit",
+          "note": "Run limits exist as optional ttlSeconds, maxRunSeconds and maxRunTotalSeconds; none is set by default.",
+          "source": {
+            "url": "https://www.freestyle.sh/about.md",
+            "quote": "Freestyle VMs can run forever",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "No idle stop",
+          "note": "The server runs for the period you paid for. No idle policy, sleep or session limit is documented.",
+          "source": {
+            "url": "https://hostup.se/en/support/order-a-vps/",
+            "quote": "A standard VPS is paid for one month or one year at a time.",
+            "confidence": "inferred"
           }
         }
       ]
@@ -5642,6 +6211,28 @@
             "quote": "This is a compute-only power state change and does not affect billing.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "idleTimeoutSeconds; −1 never",
+          "note": "The timeout is set per VM and can be removed with −1.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/lifecycle",
+            "quote": "Configure an idle timeout to let Freestyle pause VMs that have no network activity.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "No idle timer",
+          "note": "There is no idle timer to configure because nothing sleeps the machine.",
+          "source": {
+            "url": "https://hostup.se/en/support/order-a-vps/",
+            "quote": "A standard VPS is paid for one month or one year at a time.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -5841,6 +6432,28 @@
           "source": {
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
             "quote": "This is a compute-only power state change and does not affect billing.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Traffic wakes it",
+          "note": "The next start or the next request that reaches a paused VM resumes it.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/lifecycle",
+            "quote": "A VM paused this way resumes on its next start, or on the next traffic that reaches it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Never sleeps",
+          "note": "The machine is always up while the plan is paid, so there is no wake step. The trade is that idle hours bill like busy ones.",
+          "source": {
+            "url": "https://hostup.se/en/support/order-a-vps/",
+            "quote": "A standard VPS is paid for one month or one year at a time.",
             "confidence": "inferred"
           }
         }
@@ -6043,6 +6656,27 @@
           "source": {
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
             "quote": "67 endpoints across 14 sections.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "not-published",
+          "note": "No scheduler resource in the API; cron inside a running VM is your own and stops when the VM pauses.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/lifecycle",
+            "quote": "Delete after this many seconds from createdAt, including time spent paused or stopped",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Cron in the guest",
+          "note": "HostUp schedules backups, not your jobs. Recurring work runs from cron or systemd inside the server, which stops when the server does.",
+          "source": {
+            "url": "https://hostup.se/en/support/backups/",
+            "quote": "A server can have one schedule.",
             "confidence": "inferred"
           }
         }
@@ -6259,6 +6893,28 @@
             "quote": "You will have administrator (root) access and a dedicated IP address.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "style.dev or own domain",
+          "note": "A TLS rule routes a hostname to a VM port over HTTPS.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/network/tls-inbound",
+            "quote": "Use inbound rules to give services on your VM a public domain.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Public IPv4 + firewall",
+          "note": "A public IPv4 is included and the panel firewall opens the ports you choose, with optional source restrictions.",
+          "source": {
+            "url": "https://hostup.se/en/support/vps-firewall/",
+            "quote": "You add a rule for each service that should be reachable, for example SSH or a website.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -6470,6 +7126,28 @@
           "source": {
             "url": "https://www.hostinger.com/support/8172641-how-to-use-a-managed-vps-firewall-at-hostinger/",
             "quote": "With Hostinger VPS Firewall, packet filtering occurs before incoming traffic reaches the protected server",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "You must run your own authorizer; forward auth gates a public URL but there is no built-in share link.",
+          "note": "Forward auth calls your HTTPS endpoint for each request and fails closed.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/forward-auth",
+            "quote": "Forward auth lets your application decide whether each public HTTP request may reach a VM.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "No private link",
+          "note": "There is no authenticated private URL in front of a port. A private VLAN exists for server-to-server traffic, but the service itself still listens on the public address.",
+          "source": {
+            "url": "https://hostup.se/en/support/private-networks/",
+            "quote": "The servers keep their public addresses for internet traffic.",
             "confidence": "inferred"
           }
         }
@@ -6686,6 +7364,28 @@
             "quote": "use the Web Console in Hostinger dashboard or a local SSH client with your SSH username, IP address, and password",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "beta-ssh.freestyle.sh",
+          "note": "A standard SSH client connects with a scoped identity token as the password.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/ssh",
+            "quote": "Freestyle VMs accept SSH through beta-ssh.freestyle.sh.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Real SSH",
+          "note": "Standard SSH with keys or a password, on the public IPv4. No provider-only terminal.",
+          "source": {
+            "url": "https://hostup.se/en/support/connect-with-rdp/",
+            "quote": "If the box shows a command starting with ssh, the server runs Linux. You connect to it with SSH, not Remote Desktop.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -6894,6 +7594,28 @@
           "source": {
             "url": "https://www.hostinger.com/support/how-to-use-the-web-console-in-hostinger/",
             "quote": "The Web Console is a feature available with all Hostinger VPS plans that allows you to manage your server using terminal commands directly from your web browser.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "No hosted terminal: you build one with the PTY API and xterm.js or ttyd.",
+          "note": "The dashboard shows VM state but does not host a terminal page.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/guides/run-a-web-terminal-in-a-sandbox",
+            "quote": "Stream a VM's PTY to the browser with xterm.js or ttyd.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "VNC in the browser",
+          "note": "A VNC console in the browser works even when SSH or RDP is unreachable, plus a guest-agent command box for one-off commands.",
+          "source": {
+            "url": "https://hostup.se/en/support/vps-console/",
+            "quote": "The console, sometimes called the VNC console, shows your server's screen in the browser.",
             "confidence": "docs-confirmed"
           }
         }
@@ -7106,6 +7828,28 @@
             "quote": "use the Web Console in Hostinger dashboard or a local SSH client with your SSH username, IP address, and password",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "WireGuard into a VPC",
+          "note": "A WireGuard tunnel puts your computer on a private VPC and reaches VM ports by private IP.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/network/tunnels",
+            "quote": "A tunnel is your WireGuard identity on Freestyle.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "None provided",
+          "note": "The documented ways in are SSH, RDP, the VNC console and the guest agent. There is no provider tunnel to your own computer; you can of course run ssh -L yourself.",
+          "source": {
+            "url": "https://hostup.se/en/support/vps-console/",
+            "quote": "The console, sometimes called the VNC console, shows your server's screen in the browser.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -7312,6 +8056,28 @@
           "source": {
             "url": "https://www.hostinger.com/support/8172641-how-to-use-a-managed-vps-firewall-at-hostinger/",
             "quote": "If a protocol like **TCP** or **UDP** is selected, insert the **port value** by specifying either the port number or range",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "TLS passthrough; WireGuard",
+          "note": "Public TCP is TLS passthrough on 443, plus Minecraft and IMAP edges; a tunnel carries arbitrary ports privately.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/network/tls-inbound",
+            "quote": "Set protocol: \"tcp\" and the edge matches the name in the client's ClientHello and splices the connection to the VM without terminating it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Any TCP/UDP port",
+          "note": "Firewall rules take a protocol and a port or range, so a database or game server is reachable directly.",
+          "source": {
+            "url": "https://hostup.se/en/support/vps-firewall/",
+            "quote": "Ports only work with TCP or UDP.",
             "confidence": "docs-confirmed"
           }
         }
@@ -7524,6 +8290,28 @@
             "quote": "Free domain for 1 year",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Verified domain",
+          "note": "A verified domain routes to a VM port; single-label wildcards are supported.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/domains",
+            "quote": "Any unused subdomain of style.dev is yours to take, with no verification, no DNS records, and no certificate of your own.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "A record to your IP",
+          "note": "Point an A record at the server's IPv4, in HostUp's own DNS or anywhere else. HostUp also sells domains, so both can sit in one panel.",
+          "source": {
+            "url": "https://hostup.se/en/support/dns-records/",
+            "quote": "DNS records decide where your domain points: the website, the email and the verifications other services ask for.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -7733,6 +8521,28 @@
             "url": "https://www.hostinger.com/support/6360129-how-to-install-ssl-on-vps-at-hostinger/",
             "quote": "deploy Traefik from the Docker Catalog, run Certbot manually, or use the built-in SSL tools of your VPS control panel",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Managed certificate",
+          "note": "Freestyle terminates HTTPS and issues the certificate once the ACME challenge is delegated.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/domains",
+            "quote": "HTTPS is provisioned automatically, once _acme-challenge is delegated",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "No managed certificate",
+          "note": "You install and renew TLS inside the guest, or put a CDN in front. Automatic HTTPS is a cPanel web-hosting feature, not a VPS one.",
+          "source": {
+            "url": "https://status.hostup.se/",
+            "quote": "On a VPS you manage the software yourself and update PHP on the server.",
+            "confidence": "inferred"
           }
         }
       ]
@@ -7945,6 +8755,28 @@
             "url": "https://www.hostinger.com/vps-hosting",
             "quote": "4 TB bandwidth",
             "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "50 GB free; 500 GB paid",
+          "note": "Beyond the allowance, transfer is $0.02 per GB; VPC-internal traffic is not billed.",
+          "source": {
+            "url": "https://www.freestyle.sh/pricing.md",
+            "quote": "Free includes 50 GB a month, and Hobby and Pro include 500 GB before transfer is priced.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "1–32 TB/mo",
+          "note": "Each plan includes 1–32 TB a month, inbound and outbound together, with extra capacity at 10 SEK per TB a month.",
+          "source": {
+            "url": "https://hostup.se/en/support/vps-bandwidth/",
+            "quote": "Inbound and outbound traffic count together.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -8159,6 +8991,28 @@
             "quote": "With Hostinger VPS Firewall, packet filtering occurs before incoming traffic reaches the protected server",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Domain or CIDR rules",
+          "note": "Firewall rules and per-domain TLS grants limit what a VM can reach; broad public grants can be left off.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/network/tls-outbound",
+            "quote": "To allow only these domains, leave broad public-egress firewall grants unset.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Inbound firewall only",
+          "note": "The panel firewall filters incoming traffic. Outbound rules need something you run inside the guest.",
+          "source": {
+            "url": "https://hostup.se/en/support/vps-firewall/",
+            "quote": "The firewall only covers incoming traffic.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -8372,6 +9226,28 @@
             "quote": "With Hostinger VPS Firewall, packet filtering occurs before incoming traffic reaches the protected server",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Default deny",
+          "note": "A VM with no rules reaches nothing; internet access needs an explicit allow rule.",
+          "source": {
+            "url": "https://www.freestyle.sh/openapi.json",
+            "quote": "A VM gets nothing implicitly — no outbound Internet, no inbound",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "No off switch",
+          "note": "There is no network-level kill switch. Removing the default route inside the guest is the only way to cut egress.",
+          "source": {
+            "url": "https://hostup.se/en/support/vps-firewall/",
+            "quote": "The firewall only covers incoming traffic.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -8575,6 +9451,28 @@
           "source": {
             "url": "https://www.hostinger.com/legal/hosting-agreement",
             "quote": "You will have administrator (root) access and a dedicated IP address.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "Every VM shares one account-level outbound IPv4 that survives restarts, but Freestyle does not promise it stays fixed.",
+          "note": "The API exposes egressIpv4 but calls it optional and not guaranteed.",
+          "source": {
+            "url": "https://www.freestyle.sh/openapi.json",
+            "quote": "It belongs to your account rather than to this VM: every VM you own shares it, and it survives restarts and moves between machines.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Own RIPE subnets",
+          "note": "HostUp is a RIPE member and owns its subnets, so the address stays with the server, and it can be moved to another server before you cancel.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "we are members of RIPE and own our IP subnets, meaning your IP address stays with the server for as long as you have it",
             "confidence": "docs-confirmed"
           }
         }
@@ -8792,6 +9690,27 @@
             "quote": "API tokens give programmatic access via the Public API",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "no",
+          "note": "Credentials are injected into outbound requests at the edge; they are not put into the guest as environment variables.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/network/tls-outbound",
+            "quote": "Credential injection lets the VM authenticate without receiving the real API key or database password.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "None",
+          "note": "The only stored credentials are API keys and SSH keys. No secret vault or environment-variable store appears in the panel, the API index or the support guides.",
+          "source": {
+            "url": "https://hostup.se/en/support/api-keys/",
+            "quote": "An API key lets a script or a program manage your services without logging in to the client area.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -9002,6 +9921,28 @@
           "source": {
             "url": "https://docs.hostinger.com/account/security",
             "quote": "API tokens give programmatic access via the Public API",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Edge header injection",
+          "note": "Stored header values are encrypted and read back as \"***\"; the VM sends a placeholder.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/network/tls-outbound",
+            "quote": "Credential injection lets the VM authenticate without receiving the real API key or database password.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Root reads everything",
+          "note": "An agent running as root can read every file on the server, including its own model key. Hiding a secret needs a separate process you build.",
+          "source": {
+            "url": "https://hostup.se/en/support/remote-commands/",
+            "quote": "The command runs as root with full access.",
             "confidence": "inferred"
           }
         }
@@ -9219,6 +10160,28 @@
             "quote": "Tokens inherit the permissions of the user who created them and can be set to expire.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Per-VM identity tokens",
+          "note": "An identity token is limited to the VMs and Linux users granted to it; the account key stays server-side.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/client-sessions",
+            "quote": "Freestyle identities let an end user or agent operate an existing VM without receiving your team API key.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Scopes, IP, zone, expiry",
+          "note": "Keys carry scopes such as read:dns or write:vm, can be locked to IP addresses or networks, restricted to named DNS zones and records, and given an expiry date up to a year out.",
+          "source": {
+            "url": "https://hostup.se/en/support/api-keys/",
+            "quote": "To limit the key to certain IP addresses or DNS zones, go to the Security tab.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -9416,6 +10379,28 @@
           "source": {
             "url": "https://www.hostinger.com/support/5726606-how-to-use-the-vps-dashboard-in-hostinger/",
             "quote": "Select **Reboot** (1.4) to restart your VPS, or open the management dropdown to **Renew, Upgrade,** or **Stop** your VPS.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "dash.freestyle.sh",
+          "note": "The dashboard bundle ships a /vms/create form with slug, display name and idle timeout; no docs page describes it.",
+          "source": {
+            "url": "https://dash.freestyle.sh/assets/index-BLwRVluh.js",
+            "quote": "/vms/create",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Panel + API",
+          "note": "New Server in the client area walks through plan, OS, SSH key, resources and a one- or twelve-month term.",
+          "source": {
+            "url": "https://hostup.se/en/support/order-a-vps/",
+            "quote": "Go to VPS in the menu and click New Server.",
             "confidence": "docs-confirmed"
           }
         }
@@ -9618,6 +10603,28 @@
             "quote": "`hostinger` is the official command-line client for the Hostinger API.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "freestyle CLI",
+          "note": "The CLI covers VMs, snapshots, VPCs, tunnels, firewall, TLS, domains, identities and tokens.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/cli",
+            "quote": "Use the freestyle CLI for interactive administration, debugging, and automation scripts.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "No CLI",
+          "note": "The documented programmatic routes are API keys, the REST API with its OpenAPI spec, and the MCP server. Site search finds no command-line tool.",
+          "source": {
+            "url": "https://hostup.se/en/support/",
+            "quote": "API keys, MCP and the assistant in the client area",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -9818,6 +10825,28 @@
             "quote": "Official client libraries for the Hostinger API in PHP, Python, and TypeScript.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "The published Python package is the older Sandboxes SDK (0.0.17); current VM docs are TypeScript-only.",
+          "note": "No Python example or VM client appears in the current docs.",
+          "source": {
+            "url": "https://pypi.org/pypi/freestyle/json",
+            "quote": "Freestyle Sandboxes Python SDK",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "No official SDK",
+          "note": "There is an OpenAPI spec to generate a client from, but no official Python package is published or documented.",
+          "source": {
+            "url": "https://hostup.se/en/support/",
+            "quote": "API keys, MCP and the assistant in the client area",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -10016,6 +11045,28 @@
             "url": "https://docs.hostinger.com/api-reference/sdks",
             "quote": "Official client libraries for the Hostinger API in PHP, Python, and TypeScript.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "npm freestyle",
+          "note": "The TypeScript SDK is the documented client and includes the CLI.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/quickstart",
+            "quote": "npm install freestyle@latest",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "No official SDK",
+          "note": "Same as Python: the OpenAPI spec is the starting point, and no official TypeScript package is documented.",
+          "source": {
+            "url": "https://hostup.se/en/support/",
+            "quote": "API keys, MCP and the assistant in the client area",
+            "confidence": "inferred"
           }
         }
       ]
@@ -10218,6 +11269,28 @@
           "source": {
             "url": "https://docs.hostinger.com/api-reference/overview",
             "quote": "The Hostinger API is a mostly RESTful API over HTTPS.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "OpenAPI 3",
+          "note": "A full OpenAPI document is served at /openapi.json.",
+          "source": {
+            "url": "https://www.freestyle.sh/openapi.json",
+            "quote": "Documentation: [freestyle.sh/docs](https://freestyle.sh/docs)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "~380 endpoints, OpenAPI",
+          "note": "The panel is built on the same public v2 API, documented endpoint by endpoint with typed IDs, stable error codes, an OpenAPI spec and an llms.txt.",
+          "source": {
+            "url": "https://developer.hostup.se/",
+            "quote": "383 documented endpoints cover the things you manage in the HostUp dashboard.",
             "confidence": "docs-confirmed"
           }
         }
@@ -10427,6 +11500,27 @@
             "quote": "Start, stop, and restart virtual machines; manage firewalls, SSH keys, snapshots, and metrics",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "not-published",
+          "note": "No MCP server that controls Freestyle is published; the docs suggest running your own MCP server inside a VM.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/guides/migrate-from-e2b",
+            "quote": "Run the server or Jupyter in the VM and route a domain to it",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Hosted remote MCP",
+          "note": "A hosted MCP endpoint at cloud.hostup.se/mcp that Claude, ChatGPT, Cursor, Claude Code or Codex can use with OAuth. Purchases, reinstalls, restores and cancellations need your confirmation in the browser.",
+          "source": {
+            "url": "https://developer.hostup.se/",
+            "quote": "Hostup runs a remote MCP server.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -10629,6 +11723,29 @@
             "quote": "67 endpoints across 14 sections.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "PTY over WebSocket",
+          "note": "A PTY survives disconnects and can be reattached by id or slug.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/pty",
+            "quote": "A PTY (pseudo-terminal) is an interactive process inside a VM.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "partly",
+          "figure": "VNC + one-shot exec",
+          "shortfall": "The API opens a VNC console session and can run a single command through the guest agent, but there is no streaming PTY or interactive shell over the API.",
+          "note": "For an interactive session you use SSH or the browser console.",
+          "source": {
+            "url": "https://hostup.se/en/support/remote-commands/",
+            "quote": "The command runs as root with full access.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -10829,6 +11946,28 @@
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
             "quote": "67 endpoints across 14 sections.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "16 GiB per file",
+          "note": "Reads, writes, directory listing and ranged reads work, including while the VM is paused.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/files",
+            "quote": "no size limit short of 16 GiB per file",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "SSH/SFTP only",
+          "note": "No file endpoints in the API index; HostUp's own export instructions for a VPS are SSH and SFTP.",
+          "source": {
+            "url": "https://hostup.se/legal/terms-of-service-en.pdf",
+            "quote": "Over SSH/SFTP with your own tools, for example rsync or a disk image.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -11039,6 +12178,28 @@
             "quote": "Deploy and operate virtual machines — firewalls, snapshots, backups, Docker projects, recovery mode, SSH keys and malware scanning.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Claude Code, Codex, opencode",
+          "note": "OpenClaw is installed too; the agents live in the shared Node tree and are on PATH.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/base-snapshots",
+            "quote": "claude, codex, opencode, and openclaw, also installed in the shared Node tree",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "None",
+          "note": "The order flow offers an operating system and nothing else. Hermes, OpenClaw, n8n and coding agents are all terminal installs.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "At order time you choose between the following operating systems:",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -11240,6 +12401,27 @@
           "source": {
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
             "quote": "67 endpoints across 14 sections.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "no",
+          "note": "You run the agent yourself; there is no prompt endpoint or managed agent loop.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/guides/run-claude-code-in-a-sandbox",
+            "quote": "Bake Claude Code into a VM snapshot, then run it over PTY, one-off prompts, or the Claude Agent SDK.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "None",
+          "note": "There is no endpoint that sends a prompt to an agent. The MCP server manages the account; it is not an agent runtime.",
+          "source": {
+            "url": "https://developer.hostup.se/",
+            "quote": "Hostup runs a remote MCP server.",
             "confidence": "inferred"
           }
         }
@@ -11444,6 +12626,27 @@
             "quote": "Hermes Agent is a self-improving AI agent built by Nous Research",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "no",
+          "note": "The preinstalled agent list is Claude Code, Codex, opencode and OpenClaw; there is no Hermes image, template or guide.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/base-snapshots",
+            "quote": "claude, codex, opencode, and openclaw, also installed in the shared Node tree",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "None",
+          "note": "No Hermes template, application catalogue or marketplace for the VPS. Site search finds no Hermes page on hostup.se.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "At order time you choose between the following operating systems:",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -11646,6 +12849,27 @@
             "quote": "OpenClaw is a self-hosted personal AI assistant platform that connects to the messaging channels you already use",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "no",
+          "note": "A terminal guide installs OpenClaw with npm and snapshots it; there is no one-click template.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/guides/run-openclaw-in-a-sandbox",
+            "quote": "Install the openclaw CLI with npm and pick the default agent model",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "None",
+          "note": "No OpenClaw template or application catalogue for the VPS; the 250+ one-click apps are Softaculous on cPanel web hosting.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "At order time you choose between the following operating systems:",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -11847,6 +13071,28 @@
           "source": {
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
             "quote": "Deploy and operate virtual machines — firewalls, snapshots, backups, Docker projects, recovery mode, SSH keys and malware scanning.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "Chromium is not in the base image; a guide installs it and drives it over CDP.",
+          "note": "Headless or headed with Xvfb and noVNC, but the install is yours.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/guides/run-chromium-and-chrome-in-a-sandbox",
+            "quote": "The base VM is intentionally small, and browser installs pull many GTK, font, and media packages.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "None",
+          "note": "You can install Chromium yourself, but there is no hosted browser, no browser API and no per-session isolation for one.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "At order time you choose between the following operating systems:",
             "confidence": "inferred"
           }
         }
@@ -12052,6 +13298,29 @@
             "quote": "Deploy and operate virtual machines — firewalls, snapshots, backups, Docker projects, recovery mode, SSH keys and malware scanning.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "No built-in desktop; a guide builds GNOME with TigerVNC and noVNC.",
+          "note": "The result is a full browser-accessible desktop, but you build and snapshot it.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/guides/run-gnome-in-a-sandbox",
+            "quote": "Build a GNOME desktop with TigerVNC, Chromium, and noVNC, then snapshot and reuse it.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "partly",
+          "figure": "Windows + RDP, BYOL",
+          "shortfall": "You can run Windows Server and reach it over RDP, but you bring your own licence and there is no managed desktop or computer-use tooling.",
+          "note": "Linux plans have no desktop at all; a desktop means installing one yourself.",
+          "source": {
+            "url": "https://hostup.se/en/support/connect-with-rdp/",
+            "quote": "You connect to a VPS running Windows with Remote Desktop.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -12254,6 +13523,28 @@
             "quote": "OpenClaw is a self-hosted personal AI assistant platform that connects to the messaging channels you already use",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "Guides cover Claude Code, Codex, Copilot, t3 and Omnara; Cursor cloud agents, Devin and Claude Managed Agents are not documented.",
+          "note": "The OpenAI Agents SDK and Mastra also have first-party guides.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/guides/run-github-copilot-in-a-sandbox",
+            "quote": "Run the GitHub Copilot CLI headless in a sandbox",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "None",
+          "note": "HostUp runs no agent platform of its own and offers no integration that hosts another vendor's agent.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "At order time you choose between the following operating systems:",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -12453,6 +13744,28 @@
           "source": {
             "url": "https://www.hostinger.com/support/1583777-how-to-share-access-to-your-account-at-hostinger/",
             "quote": "Assign each shared user the Collaborator or Admin role, and remove their access at any time.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Teams and team keys",
+          "note": "A CLI login can list and switch teams; an API key belongs to one team.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/cli",
+            "quote": "freestyle team list",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Users + delegated access",
+          "note": "One account with named users, or an agency with its own account and delegated access to yours. Billing is shared by users.",
+          "source": {
+            "url": "https://hostup.se/en/support/give-others-access/",
+            "quote": "They get their own sign-in to your account and only see what you choose.",
             "confidence": "docs-confirmed"
           }
         }
@@ -12659,6 +13972,27 @@
             "quote": "you choose a role for the shared user: Collaborator or Admin",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "not-published",
+          "note": "Teams exist, but no role names or permissions are documented; identities scope VM access, not account administration.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/client-sessions",
+            "quote": "An identity-token client is limited to the VM permissions granted to that identity.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Per-service permissions",
+          "note": "Permissions are chosen per person: which services and domains they see, and whether they handle invoices, tickets and orders. Users cannot add other users or change sign-in settings.",
+          "source": {
+            "url": "https://hostup.se/en/support/give-others-access/",
+            "quote": "Choose which services and domains they can see.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -12858,6 +14192,28 @@
           "source": {
             "url": "https://www.hostinger.com/support/1583777-how-to-share-access-to-your-account-at-hostinger/",
             "quote": "If the new user does not have a Hostinger account yet, they will be prompted to create one",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "SAML SSO and SCIM are Enterprise-only.",
+          "note": "No SSO option is published for Free, Hobby or Pro.",
+          "source": {
+            "url": "https://www.freestyle.sh/pricing.md",
+            "quote": "Enterprise plans add custom usage limits, SAML SSO & SCIM, audit logs, a 99.99% SLA, and dedicated support",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "No SAML/SSO",
+          "note": "Sign-in is Swedish BankID, Google or email plus password, with six second factors. No SAML or OIDC single sign-on for a company identity provider is documented.",
+          "source": {
+            "url": "https://hostup.se/en/security/",
+            "quote": "Swedish BankID is built natively into the control panel. Prefer something else? Google sign-in and email with password are also available",
             "confidence": "inferred"
           }
         }
@@ -13063,6 +14419,27 @@
             "quote": "All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "not-published",
+          "note": "Free stops at its allowance, but no account-level dollar cap is published for Hobby or Pro.",
+          "source": {
+            "url": "https://www.freestyle.sh/pricing.md",
+            "quote": "On Free, they are hard allowances and usage does not continue into paid overage.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Alerts only",
+          "note": "Cost Management forecasts spend and can alert you, but nothing blocks a purchase or a limit increase. Its alert settings are not even saved to the account.",
+          "source": {
+            "url": "https://hostup.se/en/support/costs-and-vat/",
+            "quote": "The bell (Alerts) next to Budget Used sets up alerts for your costs.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -13263,6 +14640,27 @@
             "url": "https://www.hostinger.com/support/5726606-how-to-use-the-vps-dashboard-in-hostinger/",
             "quote": "Resource usage shows the current resources your server uses",
             "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "not-published",
+          "note": "The wallet charts estimated daily usage; no alert threshold or email is documented.",
+          "source": {
+            "url": "https://www.freestyle.sh/changelog",
+            "quote": "The wallet now charts estimated daily usage by vCPU, memory, storage, and data transfer",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "CPU/RAM + cost alerts",
+          "note": "Threshold alerts on CPU and memory by email, push or webhook, restart emails, and cost alerts in Cost Management.",
+          "source": {
+            "url": "https://hostup.se/en/support/monitor-your-vps/",
+            "quote": "You can get an alert when CPU or memory goes over a limit you choose.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -13467,6 +14865,28 @@
             "quote": "Track and review operations performed on your virtual machines.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "Audit logs are Enterprise-only.",
+          "note": "No audit log is listed for Free, Hobby or Pro.",
+          "source": {
+            "url": "https://www.freestyle.sh/pricing.md",
+            "quote": "Enterprise plans add custom usage limits, SAML SSO & SCIM, audit logs, a 99.99% SLA, and dedicated support",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "90 days, CSV export",
+          "note": "Account changes with IP address and before/after values, 90 days back, with CSV export. Users you add cannot see it.",
+          "source": {
+            "url": "https://hostup.se/en/support/sessions-and-activity-log/",
+            "quote": "The Audit Log shows what has been done on the account and when.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -13668,6 +15088,28 @@
           "source": {
             "url": "https://www.hostinger.com/vps-hosting",
             "quote": "All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Per-second meter",
+          "note": "Usage is metered per second, then billed by the hour of resource used.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits",
+            "quote": "Compute is metered per second and billed per hour of resource used.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Monthly plan",
+          "note": "The standard product is a month or a year in advance. Even the gated pay-as-you-go Cloud VM bills by the hour, not the second.",
+          "source": {
+            "url": "https://hostup.se/en/support/order-a-vps/",
+            "quote": "A standard VPS is paid for one month or one year at a time.",
             "confidence": "docs-confirmed"
           }
         }
@@ -13887,6 +15329,28 @@
             "quote": "All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.",
             "confidence": "pricing-page"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "Public plans bill allocated vCPU whether busy or not; measured CPU is an Enterprise option.",
+          "note": "The rate card uses allocated vCPU, matching the public tariff.",
+          "source": {
+            "url": "https://www.freestyle.sh/pricing.md",
+            "quote": "Active CPU pricing — bill on measured CPU time rather than allocated vCPU",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Allocated, not busy",
+          "note": "Even the hourly product bills CPU and memory while the server runs, not while the CPU is busy. The plan product bills the shape for the whole month.",
+          "source": {
+            "url": "https://hostup.se/en/support/cloud-vm/",
+            "quote": "CPU and memory only cost money while the server is running.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -14094,6 +15558,29 @@
           "source": {
             "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
             "quote": "This is a compute-only power state change and does not affect billing.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Storage only",
+          "note": "Pausing releases the compute reservation; storage keeps billing.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits",
+            "quote": "A paused VM holds no compute reservation, so it bills only for storage while it sleeps.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "partly",
+          "figure": "PAYG disk-only, gated",
+          "shortfall": "Only the pay-as-you-go Cloud VM bills just the disk while stopped, and a new account cannot buy it: it needs identity verification and SEK 2,000 of prior payments.",
+          "note": "On a standard plan a stopped server costs exactly what a running one costs.",
+          "source": {
+            "url": "https://hostup.se/en/support/cloud-vm/",
+            "quote": "CPU and memory only cost money while the server is running. The disk costs money for as long as the server exists, even when it is stopped.",
             "confidence": "docs-confirmed"
           }
         }
@@ -14307,6 +15794,29 @@
           "source": {
             "url": "https://www.hostinger.com/vps-hosting",
             "quote": "All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "Free has no fee but hard caps; paid use starts at a $50 monthly minimum.",
+          "note": "The $50 and $500 fees are usable as usage, but they are still minimums.",
+          "source": {
+            "url": "https://www.freestyle.sh/pricing.md",
+            "quote": "| **Hobby** | $50/month minimum, including $50 usage | Up to 40 |",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "partly",
+          "figure": "PAYG only, gated",
+          "shortfall": "Only the pay-as-you-go Cloud VM has no subscription, and it is closed to new accounts until they verify their identity and have paid SEK 2,000 of invoices.",
+          "note": "Every standard plan is a monthly or annual subscription.",
+          "source": {
+            "url": "https://hostup.se/en/support/order-a-vps/",
+            "quote": "A standard VPS is paid for one month or one year at a time.",
             "confidence": "docs-confirmed"
           }
         }
@@ -14523,6 +16033,27 @@
           "source": {
             "url": "https://www.hostinger.com/vps-hosting",
             "quote": "Today you pay $155.76 for 24 months. Renews at $11.99/mo for the same term. Cancel anytime.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "no",
+          "note": "Plans are minimums, not flat machine prices; usage above the minimum is metered.",
+          "source": {
+            "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits",
+            "quote": "The Hobby and Pro monthly fees are a usage credit, not a surcharge",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "$4.08–$174.88/mo",
+          "note": "A flat price per plan per month, or 10% less per month on the annual term with the year paid upfront.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "### €4.90 €4.41/mo Billed €52.90/year",
             "confidence": "pricing-page"
           }
         }
@@ -14743,6 +16274,28 @@
             "quote": "The Hostinger refund policy offers a 30-day money-back guarantee for most hosting and email services, such as web, cloud, and KVM VPS hosting plans.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "200 vCPU-h/month",
+          "note": "Free also includes 400 GiB-hours of memory, 60,000 GiB-hours of storage and 50 GB of transfer each month.",
+          "source": {
+            "url": "https://www.freestyle.sh/pricing.md",
+            "quote": "| Hour of vCPU | $0.04032 | 200 per month |",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "None",
+          "note": "No free plan, trial or free hours appear in the order flow, the price calculator or the support index. The only risk-free option is the 14-day money-back guarantee.",
+          "source": {
+            "url": "https://hostup.se/legal/terms-of-service-en.pdf",
+            "quote": "On a new order of VPS or web hosting, both Consumers and Business Customers have a money-back guarantee for 14 days from activation",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -14959,6 +16512,28 @@
             "quote": "The Hostinger refund policy offers a 30-day money-back guarantee for most hosting and email services, such as web, cloud, and KVM VPS hosting plans.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "Only a YC-founder deal ($5,000) is published; there is no general signup credit.",
+          "note": "The deal also includes a $25,000 match and is redeemed through Bookface.",
+          "source": {
+            "url": "https://www.freestyle.sh/yc",
+            "quote": "Freestyle for YC Founders - $5,000 in Credits + $25,000 Match",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "None",
+          "note": "Account credit exists, but it is money you pay in, not a gift, and it is never paid out.",
+          "source": {
+            "url": "https://hostup.se/en/support/top-up-credit/",
+            "quote": "Credit you top up is not paid out.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -15169,6 +16744,29 @@
             "quote": "Today you pay $155.76 for 24 months. Renews at $11.99/mo for the same term. Cancel anytime.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "Free plan, no card",
+          "note": "Adding a card to a Free account triggers a $1 verification that is refunded.",
+          "source": {
+            "url": "https://www.freestyle.sh/products/vms",
+            "quote": "No credit card required.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "partly",
+          "figure": "Invoice, no card needed",
+          "shortfall": "No card is needed to open an account or pay an invoice, but the server is created only once that invoice is paid, so there is no free look at the product.",
+          "note": "Bankgiro, Swish and SEPA are offered alongside cards; the hourly product does require a saved card in some countries.",
+          "source": {
+            "url": "https://hostup.se/legal/terms-of-service-en.pdf",
+            "quote": "You can pay through Stripe, for example by card, Apple Pay, Google Pay or Klarna, and also by Bankgiro or Swish for invoices in SEK and by SEPA transfer for invoices in EUR.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -15366,6 +16964,28 @@
           "source": {
             "url": "https://statuspage.hostinger.com/",
             "quote": "Scheduled maintenance is currently in progress. We will provide updates as necessary.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "yes",
+          "figure": "freestyle.sh/status",
+          "note": "Shows VMs, API and dashboard status; last updated 25 October 2026.",
+          "source": {
+            "url": "https://www.freestyle.sh/status",
+            "quote": "All Systems Operational",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "status.hostup.se",
+          "note": "Public incidents, maintenance and a 90-day uptime figure; 99.992% on 2026-10-30.",
+          "source": {
+            "url": "https://status.hostup.se/",
+            "quote": "99.992% uptime over 90 days",
             "confidence": "docs-confirmed"
           }
         }
@@ -15570,6 +17190,28 @@
           "source": {
             "url": "https://www.hostinger.com/legal/hosting-agreement",
             "quote": "We offer a Service uptime guarantee of 99.9% (“Service Uptime Guarantee”) of available time per month.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "partly",
+          "shortfall": "The 99.99% SLA is Enterprise-only; no SLA is published for Free, Hobby or Pro.",
+          "source": {
+            "url": "https://www.freestyle.sh/pricing.md",
+            "quote": "Enterprise plans add custom usage limits, SAML SSO & SCIM, audit logs, a 99.99% SLA, and dedicated support",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "partly",
+          "figure": "99.9%, business only",
+          "shortfall": "The 99.9% SLA and its credits apply only to Business Customers; a private customer gets no service credit for downtime.",
+          "note": "Credits are 10%, 25% or 50% of the monthly fee, claimed within 30 days and set against future invoices.",
+          "source": {
+            "url": "https://hostup.se/legal/terms-of-service-en.pdf",
+            "quote": "This SLA applies to Business Customers' paid VPS and web hosting.",
             "confidence": "docs-confirmed"
           }
         }
@@ -15779,6 +17421,27 @@
             "quote": "ISO/IEC 27001:2022 certified hosting provider",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "not-published",
+          "note": "No SOC 2 report or trust centre is published; the Enterprise list names SSO, audit logs and an SLA but no audit report.",
+          "source": {
+            "url": "https://www.freestyle.sh/pricing.md",
+            "quote": "Enterprise plans add custom usage limits, SAML SSO & SCIM, audit logs, a 99.99% SLA, and dedicated support",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "The security page lists GDPR, Swedish physical-security classes, BankID, 2FA, an audit log and a DPA. No SOC 2 report or ISO 27001 certificate is mentioned, so ask for one before a procurement review.",
+          "source": {
+            "url": "https://hostup.se/en/security/",
+            "quote": "GDPR - data in Sweden/EU",
+            "confidence": "not-published"
+          }
         }
       ]
     },
@@ -15976,6 +17639,27 @@
           "source": {
             "url": "https://www.hostinger.com/legal/dpa",
             "quote": "“Covered Services” means hosted services that could involve our Processing of Personal Data, such as: (1) Hosting Services, (2) VPS Services",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "not-published",
+          "note": "No DPA or subprocessor page is published; the privacy policy gives founders@freestyle.sh as the contact.",
+          "source": {
+            "url": "https://www.freestyle.sh/privacy",
+            "quote": "please contact us at founders@freestyle.sh",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "yes",
+          "figure": "Automatic DPA",
+          "note": "A DPA with sub-processors and security measures in its annexes, applied to every customer with no signature.",
+          "source": {
+            "url": "https://hostup.se/en/vps/",
+            "quote": "Yes. The Data Processing Agreement covers all our services and applies to every customer automatically, with no signature",
             "confidence": "docs-confirmed"
           }
         }
@@ -16182,6 +17866,27 @@
           "source": {
             "url": "https://www.hostinger.com/legal/universal-terms-of-service-agreement",
             "quote": "HOSTINGER INTERNATIONAL LIMITED, Cyprus private limited company",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "freestyle",
+          "verdict": "no",
+          "note": "Hosted only; no self-hosted edition or platform licence is published. The CLI repository has no licence file.",
+          "source": {
+            "url": "https://www.freestyle.sh/about.md",
+            "quote": "Freestyle builds and maintains its own custom virtualization solutions",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hostup",
+          "verdict": "no",
+          "figure": "Proprietary",
+          "note": "The panel and platform are HostUp's own closed software; there is no self-hosted edition. Its WHMCS reseller module is open source, but that is a client, not the service.",
+          "source": {
+            "url": "https://hostup.se/en/",
+            "quote": "We built our own system from scratch.",
             "confidence": "inferred"
           }
         }

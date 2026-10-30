@@ -268,6 +268,30 @@
         "quote": "you choose a role for the shared user: Collaborator or Admin",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "partly",
+      "figure": "Teams; SSO/audit Enterprise",
+      "scenario": "Add a developer: create a team identity, grant one VM and one Linux user, and hand over a scoped token.",
+      "note": "Teams, per-VM identities and tokens exist. Named roles, a dollar spend cap and usage alerts are not documented; SAML SSO, SCIM and audit logs are Enterprise-only.",
+      "source": {
+        "url": "https://www.freestyle.sh/docs/vms/client-sessions",
+        "quote": "Freestyle identities let an end user or agent operate an existing VM without receiving your team API key.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "Users, audit log, no SSO",
+      "scenario": "A small team can share the account with per-service permissions and an audit trail, but there is no SSO and no hard spend cap.",
+      "note": "The owner can add colleagues as users with their own sign-in and choose which services, domains, invoices, tickets and orders each may see, or invite an agency through delegated access. An audit log keeps 90 days of account changes with CSV export, and six second factors are available. What is missing for a company: SAML/SSO (sign-in is BankID, Google or email plus password), scoped roles beyond per-service visibility, and any hard cap on spend — Cost Management alerts but does not stop a purchase.",
+      "source": {
+        "url": "https://hostup.se/en/security/",
+        "quote": "Invite colleagues to the account with granular permissions instead of sharing login credentials.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Hard spend cap?",

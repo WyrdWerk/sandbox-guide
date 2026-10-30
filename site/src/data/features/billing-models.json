@@ -268,6 +268,30 @@
         "quote": "All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "partly",
+      "figure": "$50 minimum; per second",
+      "scenario": "Run 166 hours: the meter says $8.82 after allowances, but the Hobby minimum bills $50.",
+      "note": "Per-second meter on allocated vCPU, memory and storage, with monthly allowances on every plan. No flat machine price, and no measured-CPU billing below Enterprise.",
+      "source": {
+        "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits",
+        "quote": "The Hobby and Pro monthly fees are a usage credit, not a surcharge",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "$4.08–$174.88/mo",
+      "scenario": "A flat monthly plan is the only meter a new customer can buy; a box that mostly waits costs the same as one that works.",
+      "note": "One month or one year, paid in advance, at a flat price per plan: $4.08 to $174.88 a month, or 10% less per month on the annual term with the year paid upfront. Stopping the server does not reduce the bill. An hourly pay-as-you-go Cloud VM does exist and would bill CPU and memory only while running, but it needs identity verification and SEK 2,000 of prior payments, and its rates are not published, so it is not a route a new reader can price.",
+      "source": {
+        "url": "https://hostup.se/en/support/cloud-vm/",
+        "quote": "CPU and memory only cost money while the server is running. The disk costs money for as long as the server exists, even when it is stopped.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "The meter",

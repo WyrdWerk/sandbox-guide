@@ -1,0 +1,348 @@
+{
+  "id": "freestyle",
+  "name": "Freestyle",
+  "url": "https://www.freestyle.sh",
+  "status": "researched",
+  "checkedOn": "2026-10-30",
+  "oneLiner": "Full Linux VMs that pause with memory intact, fork while running and bill per second, with a $50 monthly minimum.",
+  "whatItIs": [
+    "Freestyle sells full Linux virtual machines for agent workloads. A VM boots from a base image in about 65 ms, accepts commands over an SDK, CLI or SSH, can pause with its memory and processes intact, can be snapshotted or forked, and can publish a port at a public HTTPS domain.",
+    "The public plans are Free, Hobby at $50 a month and Pro at $500 a month. Each fee is usable as usage rather than a surcharge, and every plan gets the same monthly allowances: 200 vCPU-hours, 400 GiB-hours of memory and 60,000 GiB-hours of storage. Usage is metered per second on allocated resources, not on measured CPU time.",
+    "It is not a VPS and not an application host. The company describes the VMs as workbenches for development, experimentation and task execution, says they are not for hosting production applications, and offers no region picker, autoscaling, load balancer or CDN."
+  ],
+  "whoFor": "Teams building agent platforms that need long-lived full Linux machines with memory snapshots, live forks, private VPC networking and credentials held outside the VM.",
+  "isolation": "A hardware-virtualised Linux VM with its own kernel, root and systemd, not a shared-kernel container. Docker runs from boot and nested virtualisation, FUSE and eBPF are supported. GPUs and colocated bare metal are private enterprise offers.",
+  "sizes": "Any size up to the plan's caps: Free 4 vCPU / 8 GiB / 32 GB, Hobby 8 vCPU / 16 GiB / 64 GB, Pro 32 vCPU / 64 GiB / 256 GB. Base images range from 1 vCPU / 128 MiB to 64 vCPU / 128 GiB, the largest needing custom limits. No region choice is published.",
+  "billing": {
+    "model": "A monthly plan with a minimum spend, plus per-second metered usage.",
+    "meter": "$0.04032 per vCPU-hour, $0.0129 per GiB-hour of memory, $0.000086 per GiB-hour of storage and $0.02 per GB of transfer. Every plan includes 200 vCPU-hours, 400 GiB-hours of memory and 60,000 GiB-hours of storage a month.",
+    "stopped": "A paused VM bills storage only; CPU and memory stop. The product page says 'pay nothing while paused', which conflicts with the pricing page's storage charge.",
+    "planFee": "Free $0; Hobby $50 a month; Pro $500 a month. The fee is a usage credit, not a surcharge.",
+    "minimum": "Hobby's $50 is a monthly minimum: a month with $22 of metered usage still costs $50. No per-run minimum is published; billing is per second."
+  },
+  "cost": {
+    "A": {
+      "headline": "$50.00",
+      "shape": "2 vCPU / 4 GiB / 10 GiB, 1,000 ten-minute runs, deleted after each",
+      "lines": [
+        {
+          "label": "CPU",
+          "arithmetic": "166.67 h × 2 vCPU × $0.04032",
+          "amount": "$13.440"
+        },
+        {
+          "label": "Memory",
+          "arithmetic": "166.67 h × 4 GiB × $0.0129",
+          "amount": "$8.600"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "166.67 h × 10 GiB × $0.000086",
+          "amount": "$0.143"
+        },
+        {
+          "label": "Monthly allowances",
+          "arithmetic": "200 vCPU-h, 400 GiB-h memory, 60,000 GiB-h storage",
+          "amount": "−$13.367"
+        },
+        {
+          "label": "Metered usage after allowances",
+          "arithmetic": "$13.440 + $8.600 + $0.143 − $13.367",
+          "amount": "$8.816"
+        },
+        {
+          "label": "Hobby monthly minimum",
+          "arithmetic": "$50.00 − $8.816 of usage",
+          "amount": "$41.184"
+        }
+      ],
+      "total": "$50.00",
+      "notes": [
+        "Free cannot run it: 333 vCPU-hours and 667 GiB-hours of memory exceed the 200 and 400 monthly allowances, and Free stops rather than billing overage.",
+        "The Hobby minimum is more than the usage, so the bill is the minimum, not the meter."
+      ],
+      "flag": "A light month still costs $50 on Hobby; there is no way to pay only the $8.82 of metered usage."
+    },
+    "B": {
+      "headline": "$179.85",
+      "shape": "4 vCPU / 8 GiB / 50 GiB, 730 hours",
+      "lines": [
+        {
+          "label": "CPU",
+          "arithmetic": "730 h × 4 vCPU × $0.04032",
+          "amount": "$117.734"
+        },
+        {
+          "label": "Memory",
+          "arithmetic": "730 h × 8 GiB × $0.0129",
+          "amount": "$75.336"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "730 h × 50 GiB × $0.000086",
+          "amount": "$3.139"
+        },
+        {
+          "label": "Monthly allowances",
+          "arithmetic": "200 vCPU-h, 400 GiB-h memory, 60,000 GiB-h storage",
+          "amount": "−$16.363"
+        },
+        {
+          "label": "Metered usage after allowances",
+          "arithmetic": "$117.734 + $75.336 + $3.139 − $16.363",
+          "amount": "$179.846"
+        }
+      ],
+      "total": "$179.85",
+      "notes": [
+        "Hobby allows 8 vCPU / 16 GiB / 64 GB, so the shape fits; Free tops out at 32 GB of disk.",
+        "The $50 Hobby fee is part of this total, not added to it: the bill is $50 plus usage above $50."
+      ]
+    },
+    "C": {
+      "headline": "$50.00 on Hobby",
+      "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running + 640 paused hours",
+      "lines": [
+        {
+          "label": "CPU",
+          "arithmetic": "90 h × 2 vCPU × $0.04032",
+          "amount": "$7.2576"
+        },
+        {
+          "label": "Memory",
+          "arithmetic": "90 h × 4 GiB × $0.0129",
+          "amount": "$4.6440"
+        },
+        {
+          "label": "Disk",
+          "arithmetic": "730 h × 20 GiB × $0.000086",
+          "amount": "$1.2556"
+        },
+        {
+          "label": "Monthly allowances",
+          "arithmetic": "180 of 200 vCPU-h, 360 of 400 GiB-h, 14,600 of 60,000 GiB-h",
+          "amount": "−$13.1572"
+        },
+        {
+          "label": "Hobby monthly minimum",
+          "arithmetic": "$50 minimum, usable as usage; $0.00 of usage left to bill",
+          "amount": "$50.00"
+        }
+      ],
+      "total": "$50.00",
+      "notes": [
+        "Every use fits the monthly allowances, so the bill is the Hobby minimum.",
+        "Freestyle's pricing page says Free cannot keep a stopped VM's disk, so this case needs Hobby. Its docs table says Free can; if the docs are right, the same month costs $0.00 on Free."
+      ],
+      "flag": "The docs' plan table marks persistent VMs available on Free; the pricing page marks them unavailable. This case and the calculator follow the pricing page ($50 on Hobby); under the docs it would be $0.00 on Free."
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Freestyle Cloud Inc. The privacy policy gives founders@freestyle.sh as the contact.",
+        "source": {
+          "url": "https://www.freestyle.sh/privacy",
+          "quote": "Freestyle Cloud Inc.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded and team",
+        "value": "Founded in 2024 by Benjamin Swerdlow (CEO) and Jacob Zwang (CTO); Y Combinator lists 5 employees in San Francisco.",
+        "source": {
+          "url": "https://www.ycombinator.com/companies/freestyle",
+          "quote": "Founded in 2024 by Benjamin Swerdlow and Jacob Zwang, Freestyle has 5 employees based in San Francisco.",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Status",
+        "value": "All systems operational on 30 October 2026; the page was last updated 25 October 2026.",
+        "source": {
+          "url": "https://www.freestyle.sh/status",
+          "quote": "All Systems Operational",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Uptime promise",
+        "value": "A 99.99% SLA is an Enterprise feature; no SLA is published for Free, Hobby or Pro.",
+        "source": {
+          "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits",
+          "quote": "Enterprise plans add custom usage limits, SAML SSO & SCIM, audit logs, a 99.99% SLA, and dedicated support",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "No SOC 2 report, trust centre or DPA page is published. The Enterprise list names SSO, audit logs and an SLA but no audit report."
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "Long-lived agent workspaces: a VM can run indefinitely, pause with memory and resume weeks later.",
+      "Branching and parallel experiments: fork a running VM, memory included, or boot many clones from one snapshot.",
+      "Agents that must not hold the real keys: credentials are injected into outbound requests at the edge.",
+      "Multi-tenant products: per-customer slugs, scoped identity tokens and private VPCs.",
+      "Work that needs a real kernel: Docker, nested virtual machines, FUSE, eBPF and WireGuard."
+    ],
+    "badly": [
+      "Production application hosting: Freestyle calls its VMs workbenches, not a place for production apps, and offers no autoscaling, load balancer or CDN.",
+      "Short, cheap tasks: the company says tasks under 15 minutes rarely benefit, and the $50 Hobby minimum dominates the bill.",
+      "Sustained CPU work: hosts are oversubscribed and the company points heavy CI at other providers.",
+      "EU data residency: no region or EU option is published.",
+      "A guaranteed fixed egress address: the shared account IPv4 is not promised to stay the same."
+    ]
+  },
+  "usability": {
+    "dashboard": "dash.freestyle.sh lists and creates VMs, shows state and wallet usage, and manages domains; the docs also point at admin.freestyle.sh for API keys.",
+    "withoutCode": "The dashboard can create a VM, but running an agent, installing packages or publishing a port still needs the SDK, CLI or API.",
+    "signup": "The Free plan needs no credit card. Adding a card to a Free account charges a $1 verification that Freestyle refunds.",
+    "docs": "Detailed docs with a machine-readable llms-full.txt, an OpenAPI document and dozens of guides. The docs index is the best starting point.",
+    "tripsUp": [
+      "The $50 Hobby minimum is a floor, not a usage cap.",
+      "A VM reaches nothing until a firewall rule allows it, including the internet.",
+      "Free has hard allowances that pause VMs instead of billing overage.",
+      "No region choice is published.",
+      "Paused VMs still pay for storage, despite 'pay nothing while paused' copy."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "Paused billing is stated two ways",
+      "detail": "The pricing page says a paused VM bills storage while it sleeps; the product page and a guide say it pays nothing. The rate card follows the pricing page, because its meter lists storage and the changelog charts storage separately.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits",
+          "quote": "A paused VM holds no compute reservation, so it bills only for storage while it sleeps.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.freestyle.sh/products/vms",
+          "quote": "Hibernate VMs and resume exactly where you left off — pay nothing while paused.",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "issue": "Free persistence is stated two ways",
+      "detail": "The docs' plan table marks persistent VMs available on all three plans and explains that a persistent VM keeps its disk; the pricing page's limit table marks Persistent VMs and Persistent Snapshots unavailable on Free. The cost case and calculator follow the stricter pricing page ($50 on Hobby for workload C) and note the $0 alternative.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits",
+          "quote": "Persistent VMs ✓ ✓ ✓",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.freestyle.sh/pricing",
+          "quote": "Persistent VMs ✗ ✓ ✓",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "issue": "Disk sizes are GB in the docs and GiB on the pricing page",
+      "detail": "The docs' limit table says 32 GB / 64 GB / 256 GB; the pricing page says 32 GiB / 64 GiB / 256 GiB. The difference is about 7% and matters at the cap.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.freestyle.sh/pricing.md",
+          "quote": "| Max disk per VM | 32 GB | 64 GB | 256 GB |",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.freestyle.sh/pricing",
+          "quote": "Max Disk per VM 32 GiB 64 GiB 256 GiB",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "issue": "Command timeout is stated two ways",
+      "detail": "The VMs page says vm.exec() stops at five minutes; the October changelog says updated guest agents allow up to 24 hours. Older VMs keep the five-minute limit.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.freestyle.sh/docs/vms",
+          "quote": "The maximum timeout is five minutes",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.freestyle.sh/changelog",
+          "quote": "supports timeouts up to 24 hours",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Snapshot storage is not priced",
+      "detail": "The tariff lists only vCPU, memory, storage and transfer. Whether a snapshot bills at the storage rate, and on what size, is not published, so the calculator does not add it.",
+      "status": "open"
+    },
+    {
+      "issue": "No published security report or DPA",
+      "detail": "No trust centre, SOC 2 report, DPA or subprocessor page is linked from the site or docs. A buyer who needs one has only the founders@freestyle.sh contact.",
+      "status": "open"
+    },
+    {
+      "issue": "Team controls are thin below Enterprise",
+      "detail": "Teams and scoped identities exist, but named roles, a dollar spend cap and usage alerts are not documented; SSO and audit logs are Enterprise-only.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "Pause keeps memory and processes; a VM can resume weeks later in the same state.",
+    "Live forking of a running VM, and snapshots that boot in about a second.",
+    "Full Linux with root, Docker, nested virtualisation, FUSE and eBPF.",
+    "Credential injection and scoped identity tokens keep keys out of the VM.",
+    "Private VPCs, WireGuard tunnels and per-domain TLS rules.",
+    "Generous monthly allowances and a $50 entry minimum."
+  ],
+  "sources": [
+    {
+      "label": "Freestyle VMs",
+      "url": "https://www.freestyle.sh/docs/vms"
+    },
+    {
+      "label": "Pricing and limits",
+      "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits"
+    },
+    {
+      "label": "Pricing page",
+      "url": "https://www.freestyle.sh/pricing"
+    },
+    {
+      "label": "VM lifecycle",
+      "url": "https://www.freestyle.sh/docs/vms/lifecycle"
+    },
+    {
+      "label": "Base snapshots",
+      "url": "https://www.freestyle.sh/docs/vms/base-snapshots"
+    },
+    {
+      "label": "SSH access",
+      "url": "https://www.freestyle.sh/docs/vms/ssh"
+    },
+    {
+      "label": "Firewall",
+      "url": "https://www.freestyle.sh/docs/vms/network/firewall"
+    },
+    {
+      "label": "Outbound TLS and credential injection",
+      "url": "https://www.freestyle.sh/docs/vms/network/tls-outbound"
+    },
+    {
+      "label": "API reference",
+      "url": "https://www.freestyle.sh/openapi.json"
+    },
+    {
+      "label": "Status",
+      "url": "https://www.freestyle.sh/status"
+    }
+  ]
+}

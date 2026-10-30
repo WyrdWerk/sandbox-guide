@@ -1,0 +1,246 @@
+{
+  "provider": "freestyle",
+  "checkedOn": "2026-10-30",
+  "rows": [
+    {
+      "feature": "isolation",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "yes",
+        "figure": "Full VM; root, Docker, KVM",
+        "scenario": "Clone, build and load the module: the VM has its own kernel, root, Docker from boot and nested virtualisation, so nothing needs a workaround.",
+        "note": "A hardware-virtualised Linux VM with systemd as pid 1. GPU and colocated bare metal are private enterprise offers, not public plans.",
+        "source": {
+          "url": "https://www.freestyle.sh/about.md",
+          "quote": "supporting nested virtualization, FUSE, eBPF, full Linux networking and more",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "sizes-regions",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "partly",
+        "figure": "4–32 vCPU; no region pick",
+        "scenario": "Ask for 2 vCPU / 4 GiB and get exactly that on Free; a 50 GiB disk needs Hobby, and there is no region to choose.",
+        "note": "Any size up to the plan caps: Free 4 vCPU / 8 GiB / 32 GB, Hobby 8 / 16 / 64, Pro 32 / 64 / 256. CPU and memory resize live and only grow. No region or EU option is published.",
+        "source": {
+          "url": "https://www.freestyle.sh/pricing.md",
+          "quote": "Every plan can create a VM at any valid size up to its CPU, memory, and disk maximums.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "lifecycle",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "yes",
+        "figure": "65 ms boot; pause keeps RAM",
+        "scenario": "Kill the power: resume the same process tree from a paused VM, or start a fresh boot after a stop.",
+        "note": "Pause keeps memory and processes; stop keeps the disk and drops memory; fork copies a running VM. Boot is about 65 ms, and a base snapshot starts in about a second.",
+        "source": {
+          "url": "https://www.freestyle.sh/products/vms",
+          "quote": "VMs provision in about 65ms from API request to ready machine.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "snapshots-forks",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "yes",
+        "figure": "Snapshots + live forks",
+        "scenario": "Fork the running VM into three copies and try three fixes without losing the original.",
+        "note": "Snapshots capture memory and disk, are private by default and boot in about a second. Snapshots are kept until deleted, so older ones can be chosen. No automatic backup schedule.",
+        "source": {
+          "url": "https://www.freestyle.sh/products/vms",
+          "quote": "Clone a running VM without pausing it — get full copies in milliseconds.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "storage",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "partly",
+        "figure": "16 GiB/file; S3 mount",
+        "scenario": "Write the checkpoint: up to 16 GiB per file on the VM disk, or mount an S3 bucket for shared storage; there is no separate volume.",
+        "note": "A persistent VM keeps its disk across a stop; an ephemeral VM is deleted when it stops. Files can be read while paused. No block volume product, and no shared volume beyond an S3 bucket mounted with FUSE.",
+        "source": {
+          "url": "https://www.freestyle.sh/docs/vms/files",
+          "quote": "no size limit short of 16 GiB per file",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "idle-timers",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "yes",
+        "figure": "Idle pause; −1 = never",
+        "scenario": "Leave it idle: set idleTimeoutSeconds and the VM pauses, then the next request wakes it; set −1 to keep it awake.",
+        "note": "A paused VM resumes on the next start or on traffic that reaches it. No scheduler: cron inside the VM only runs while it runs.",
+        "source": {
+          "url": "https://www.freestyle.sh/docs/vms/lifecycle",
+          "quote": "A VM paused this way resumes on its next start, or on the next traffic that reaches it.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "reaching-it",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "yes",
+        "figure": "HTTPS domain, SSH, PTY",
+        "scenario": "Open the app: route a style.dev name to port 3000, SSH in with a scoped token, or stream a PTY to a browser you build.",
+        "note": "Public HTTPS with managed certificates, TLS passthrough for non-HTTP, SSH through beta-ssh.freestyle.sh, and a PTY API. There is no hosted browser terminal.",
+        "source": {
+          "url": "https://www.freestyle.sh/docs/vms/network/tls-inbound",
+          "quote": "Use inbound rules to give services on your VM a public domain.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "custom-domains",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "yes",
+        "figure": "Own domain + auto HTTPS",
+        "scenario": "Serve it at your own domain: verify with a TXT record, CNAME to Freestyle, delegate the ACME challenge, and the certificate is issued.",
+        "note": "Free style.dev subdomains need no DNS or certificate. A verified domain gets a managed certificate once _acme-challenge is delegated; single-label wildcards are supported.",
+        "source": {
+          "url": "https://www.freestyle.sh/docs/vms/domains",
+          "quote": "HTTPS is provisioned automatically, once _acme-challenge is delegated",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "outbound-network",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "partly",
+        "figure": "50/500 GB free; $0.02/GB",
+        "scenario": "Call the API: outbound is denied until a firewall rule allows it, and the first 50 GB (Free) or 500 GB (paid) of transfer is included.",
+        "note": "Allowlist by domain, CIDR or identity. Default deny, so no internet until a rule allows it. Every VM shares one account-level outbound IPv4, but Freestyle does not promise it stays fixed.",
+        "source": {
+          "url": "https://www.freestyle.sh/openapi.json",
+          "quote": "A VM gets nothing implicitly — no outbound Internet, no inbound",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "keys-secrets",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "yes",
+        "figure": "Edge injection; scoped tokens",
+        "scenario": "Use the key without seeing it: the edge adds the Authorization header, and the VM only holds a placeholder.",
+        "note": "Credentials are stored encrypted at the edge and injected into outbound HTTP, Postgres or S3 requests; the VM never receives the real key. Scoped identity tokens limit an end user to named VMs and Linux users. Secrets are not exported as environment variables.",
+        "source": {
+          "url": "https://www.freestyle.sh/docs/vms/network/tls-outbound",
+          "quote": "Credential injection lets the VM authenticate without receiving the real API key or database password.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "ways-to-drive",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "yes",
+        "figure": "Dashboard, CLI, TS SDK, API",
+        "scenario": "Drive it from your product: create a VM in the dashboard, from the CLI, or through the TypeScript SDK and REST API.",
+        "note": "Dashboard, CLI, TypeScript SDK, OpenAPI and a PTY/file API. No MCP server. The PyPI package is the older Sandboxes SDK, not the current VM client.",
+        "source": {
+          "url": "https://www.freestyle.sh/docs/cli",
+          "quote": "Use the freestyle CLI for interactive administration, debugging, and automation scripts.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "built-in-agents",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "partly",
+        "figure": "Claude Code, Codex preinstalled",
+        "scenario": "Run Claude Code: it is already in the Ubuntu image, but you open the terminal and start it yourself.",
+        "note": "Claude Code, Codex, opencode and openclaw are installed in the default Ubuntu image. No prompt API and no one-click Hermes or OpenClaw; a browser and a GNOME desktop come from guides that install them.",
+        "source": {
+          "url": "https://www.freestyle.sh/docs/vms/base-snapshots",
+          "quote": "claude, codex, opencode, and openclaw, also installed in the shared Node tree",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "teams-accounts",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "partly",
+        "figure": "Teams; SSO/audit Enterprise",
+        "scenario": "Add a developer: create a team identity, grant one VM and one Linux user, and hand over a scoped token.",
+        "note": "Teams, per-VM identities and tokens exist. Named roles, a dollar spend cap and usage alerts are not documented; SAML SSO, SCIM and audit logs are Enterprise-only.",
+        "source": {
+          "url": "https://www.freestyle.sh/docs/vms/client-sessions",
+          "quote": "Freestyle identities let an end user or agent operate an existing VM without receiving your team API key.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "billing-models",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "partly",
+        "figure": "$50 minimum; per second",
+        "scenario": "Run 166 hours: the meter says $8.82 after allowances, but the Hobby minimum bills $50.",
+        "note": "Per-second meter on allocated vCPU, memory and storage, with monthly allowances on every plan. No flat machine price, and no measured-CPU billing below Enterprise.",
+        "source": {
+          "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits",
+          "quote": "The Hobby and Pro monthly fees are a usage credit, not a surcharge",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "feature": "trials-free-tiers",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "yes",
+        "figure": "Free plan; 200 vCPU-h",
+        "scenario": "Try it: the Free plan runs a light workload inside 200 vCPU-hours, 400 GiB-hours and 60,000 GiB-hours a month, with no card.",
+        "note": "Free is a hard stop, not paid overage. The only published credit is a $5,000 deal for YC founders; there is no general signup credit.",
+        "source": {
+          "url": "https://www.freestyle.sh/products/vms",
+          "quote": "No credit card required.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "company",
+      "row": {
+        "provider": "freestyle",
+        "verdict": "partly",
+        "figure": "Status page; SLA Enterprise",
+        "scenario": "Check the risk: a status page shows current state, but SOC 2, a DPA and a standard SLA are not published.",
+        "note": "Freestyle Cloud Inc., founded in 2024, YC-backed and 5 employees per Y Combinator. A 99.99% SLA is Enterprise-only; no trust centre, SOC 2 report or DPA is published.",
+        "source": {
+          "url": "https://www.freestyle.sh/status",
+          "quote": "All Systems Operational",
+          "confidence": "docs-confirmed"
+        }
+      }
+    }
+  ]
+}

@@ -268,6 +268,30 @@
         "quote": "You will have administrator (root) access and a dedicated IP address.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "yes",
+      "figure": "HTTPS domain, SSH, PTY",
+      "scenario": "Open the app: route a style.dev name to port 3000, SSH in with a scoped token, or stream a PTY to a browser you build.",
+      "note": "Public HTTPS with managed certificates, TLS passthrough for non-HTTP, SSH through beta-ssh.freestyle.sh, and a PTY API. There is no hosted browser terminal.",
+      "source": {
+        "url": "https://www.freestyle.sh/docs/vms/network/tls-inbound",
+        "quote": "Use inbound rules to give services on your VM a public domain.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "yes",
+      "figure": "IPv4, SSH, VNC",
+      "scenario": "The server answers on its own public IPv4, with real SSH, a browser VNC console and any TCP port you open.",
+      "note": "A public IPv4 is included, SSH and RDP work normally, and the panel firewall opens ports for TCP or UDP with optional source restrictions. A VNC console in the browser gets you in when SSH or a bad firewall rule locks you out, and a guest agent can run a one-off command as root. There is no provider-run tunnel to your laptop and no private authenticated URL — you would build those yourself.",
+      "source": {
+        "url": "https://hostup.se/en/support/vps-firewall/",
+        "quote": "You add a rule for each service that should be reachable, for example SSH or a website.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Who can open the link",

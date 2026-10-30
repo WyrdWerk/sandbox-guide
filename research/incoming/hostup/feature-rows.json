@@ -1,0 +1,242 @@
+[
+  {
+    "feature": "isolation",
+    "row": {
+      "provider": "hostup",
+      "verdict": "yes",
+      "figure": "KVM, own kernel, root",
+      "scenario": "Your agent gets a full KVM virtual machine with its own kernel and root, on HostUp's own hardware in Stockholm.",
+      "note": "A real virtual machine, not a container: you can install any OS or your own ISO, run Docker, and reboot without touching anyone else. The vCPUs are allocated to the guest but not permanently dedicated — a server at full load for several days is capped at 50% of its vCPUs, and heavy disk I/O can be throttled.",
+      "source": {
+        "url": "https://hostup.se/en/vps/",
+        "quote": "Every VPS is its own KVM machine with its own resources, so you can test, reboot and reinstall freely without affecting your production VPS.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "sizes-regions",
+    "row": {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "7 plans, 1–32 vCPU",
+      "scenario": "You pick one of seven fixed plans in Stockholm; disk and bandwidth grow, CPU and memory do not.",
+      "note": "Seven fixed sizes from 1 vCPU / 2 GB / 25 GB to 32 vCPU / 128 GB / 1,600 GB. Disk can be raised to 5,000 GB in the order slider and to 32 TB on request, bandwidth to 500 TB, and machines up to 1 TB of RAM are quoted on request. But CPU and memory only change by moving to another plan, which restarts the server, and there is one region: Älvsjö, Stockholm, in two availability zones. Custom CPU/RAM mixes exist only on the gated pay-as-you-go Cloud VM.",
+      "source": {
+        "url": "https://hostup.se/en/vps/",
+        "quote": "Scale up to 1 TB RAM and down just as easily.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "lifecycle",
+    "row": {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "Stop keeps disk, bills on",
+      "scenario": "You can stop and start the server, but a stop is a power-off: memory and running processes are gone and the month still bills.",
+      "note": "Start, stop and restart work from the panel and the API. A stop shuts the machine down gracefully, then cuts power after 60 seconds; the disk and its files stay. There is no pause that keeps memory, no hibernation and no fork, and a stopped standard VPS costs the same as a running one. Only the gated pay-as-you-go Cloud VM bills CPU and memory just while it runs.",
+      "source": {
+        "url": "https://hostup.se/en/support/start-stop-restart/",
+        "quote": "The server gets 60 seconds to shut itself down. If it is not off by then, the power is cut automatically.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "snapshots-forks",
+    "row": {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "24 h snapshots, 7 backups",
+      "scenario": "A snapshot is a same-day undo, not a version history; the weekly backup is the copy that lasts.",
+      "note": "Snapshots capture the disk, are limited by plan slots and are all deleted automatically after 24 hours. Backups are included, scheduled weekly by default with seven slots on the smallest plan, and can be restored to the same server, to another of your servers or to a brand-new one — that restore is the closest thing to a clone, and it is a cold copy, not a copy of a running machine. There is no fork and no memory snapshot.",
+      "source": {
+        "url": "https://hostup.se/en/support/snapshots/",
+        "quote": "All snapshots are deleted automatically after 24 hours. They do not replace backups.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "storage",
+    "row": {
+      "provider": "hostup",
+      "verdict": "yes",
+      "figure": "25–1,600 GB, up to 32 TB",
+      "scenario": "Files sit on NVMe mirrored across several servers and survive a stop; the disk grows but never shrinks.",
+      "note": "Every plan includes NVMe block storage replicated across several servers (Ceph), from 25 GB to 1,600 GB, with extra disk at 0.55 SEK per GB a month up to 5,000 GB and 32 TB on request. A disk can be grown but never shrunk, and the filesystem has to be extended inside the guest. Extra disks can be attached, but a detachable volume that outlives its server exists only on the gated pay-as-you-go Cloud VM.",
+      "source": {
+        "url": "https://hostup.se/en/vps/",
+        "quote": "We can provide up to 32 TB of NVMe storage on request.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "idle-timers",
+    "row": {
+      "provider": "hostup",
+      "verdict": "yes",
+      "figure": "No idle stop or limit",
+      "scenario": "Nothing puts the server to sleep: an agent that waits all day keeps its process and its connection.",
+      "note": "There is no idle timer, no automatic sleep and no session length limit — the server runs until you stop it or cancel the plan, which is what a Discord gateway or an always-on Hermes agent needs. The trade is that idle hours are billed like busy ones. There is also no provider-side scheduler: recurring work runs from cron inside the guest, and the only schedule HostUp runs is the backup one.",
+      "source": {
+        "url": "https://hostup.se/en/support/order-a-vps/",
+        "quote": "A standard VPS is paid for one month or one year at a time.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "feature": "reaching-it",
+    "row": {
+      "provider": "hostup",
+      "verdict": "yes",
+      "figure": "IPv4, SSH, VNC",
+      "scenario": "The server answers on its own public IPv4, with real SSH, a browser VNC console and any TCP port you open.",
+      "note": "A public IPv4 is included, SSH and RDP work normally, and the panel firewall opens ports for TCP or UDP with optional source restrictions. A VNC console in the browser gets you in when SSH or a bad firewall rule locks you out, and a guest agent can run a one-off command as root. There is no provider-run tunnel to your laptop and no private authenticated URL — you would build those yourself.",
+      "source": {
+        "url": "https://hostup.se/en/support/vps-firewall/",
+        "quote": "You add a rule for each service that should be reachable, for example SSH or a website.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "custom-domains",
+    "row": {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "Your DNS, your TLS",
+      "scenario": "Point an A record at the server and you are reachable; the certificate and its renewal are yours to run.",
+      "note": "HostUp sells domains and DNS, so a domain can live in the same panel and point at the VPS with an A record, or you can keep DNS elsewhere. What it does not do is issue or renew a certificate for a VPS: there is no managed HTTPS, so you run certbot or put a CDN or reverse proxy in front. Automatic HTTPS exists on HostUp's cPanel web hosting, which is a different product.",
+      "source": {
+        "url": "https://hostup.se/en/support/dns-records/",
+        "quote": "DNS records decide where your domain points: the website, the email and the verifications other services ask for.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "outbound-network",
+    "row": {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "1–32 TB, then blocked",
+      "scenario": "Outbound data is included up to the plan's monthly cap, and running past it stops the server rather than billing overage.",
+      "note": "Each plan includes 1–32 TB a month with inbound and outbound counted together; extra capacity is 10 SEK per TB a month, up to 500 TB. There is no metered overage: when the allowance is gone the server cannot start until you buy more or the period resets. The panel firewall is inbound only, so there is no egress allowlist and no way to switch the internet off. The address is stable — HostUp owns its RIPE subnets and the IP stays with the server.",
+      "source": {
+        "url": "https://hostup.se/en/support/vps-bandwidth/",
+        "quote": "If the bandwidth runs out, the server cannot be started or restarted until you buy more or the next period starts.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "keys-secrets",
+    "row": {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "Scoped API keys",
+      "scenario": "API keys can be narrowed by scope, IP address, DNS zone and expiry, but there is no secret store for the agent's own credentials.",
+      "note": "API keys carry scopes such as read:dns or write:vm, can be locked to IP addresses or networks, restricted to named DNS zones and records, and given an expiry date up to a year out. SSH keys are stored per account and per server. There is no secrets manager, and nothing hides a key from a process running as root inside the guest — so an agent's model key sits in a file the agent can read.",
+      "source": {
+        "url": "https://hostup.se/en/support/api-keys/",
+        "quote": "To limit the key to certain IP addresses or DNS zones, go to the Security tab.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "ways-to-drive",
+    "row": {
+      "provider": "hostup",
+      "verdict": "yes",
+      "figure": "API + MCP, no CLI",
+      "scenario": "You can create, power and back up servers from the panel, from about 380 REST endpoints, or by asking Claude or ChatGPT through the hosted MCP server.",
+      "note": "The client area is built on the same public API, which is documented endpoint by endpoint with an OpenAPI spec and an llms.txt. A hosted MCP server lets Claude, ChatGPT, Cursor, Claude Code or Codex drive the account, with purchases, reinstalls, restores and cancellations confirmed by you in the browser. There is no official CLI and no Python or TypeScript SDK, and the API has a VNC console session and a one-shot guest-agent command but no streaming PTY and no file-transfer endpoints.",
+      "source": {
+        "url": "https://developer.hostup.se/",
+        "quote": "383 documented endpoints cover the things you manage in the HostUp dashboard.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "built-in-agents",
+    "row": {
+      "provider": "hostup",
+      "verdict": "no",
+      "figure": "None",
+      "scenario": "You get a bare operating system and install the agent yourself; there is no template, no prompt API and no built-in browser.",
+      "note": "The order flow asks for an operating system and nothing else — Ubuntu, Debian, Rocky, Alma, CentOS or Windows — so Hermes, OpenClaw, n8n and a coding agent are all terminal installs. HostUp's 250+ one-click applications belong to cPanel web hosting, not the VPS. Its AI assistant and MCP server manage the account; they are not an agent runtime, and there is no prompt endpoint, hosted browser or managed desktop.",
+      "source": {
+        "url": "https://hostup.se/en/vps/",
+        "quote": "At order time you choose between the following operating systems:",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "feature": "teams-accounts",
+    "row": {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "Users, audit log, no SSO",
+      "scenario": "A small team can share the account with per-service permissions and an audit trail, but there is no SSO and no hard spend cap.",
+      "note": "The owner can add colleagues as users with their own sign-in and choose which services, domains, invoices, tickets and orders each may see, or invite an agency through delegated access. An audit log keeps 90 days of account changes with CSV export, and six second factors are available. What is missing for a company: SAML/SSO (sign-in is BankID, Google or email plus password), scoped roles beyond per-service visibility, and any hard cap on spend — Cost Management alerts but does not stop a purchase.",
+      "source": {
+        "url": "https://hostup.se/en/security/",
+        "quote": "Invite colleagues to the account with granular permissions instead of sharing login credentials.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "billing-models",
+    "row": {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "$4.08–$174.88/mo",
+      "scenario": "A flat monthly plan is the only meter a new customer can buy; a box that mostly waits costs the same as one that works.",
+      "note": "One month or one year, paid in advance, at a flat price per plan: $4.08 to $174.88 a month, or 10% less per month on the annual term with the year paid upfront. Stopping the server does not reduce the bill. An hourly pay-as-you-go Cloud VM does exist and would bill CPU and memory only while running, but it needs identity verification and SEK 2,000 of prior payments, and its rates are not published, so it is not a route a new reader can price.",
+      "source": {
+        "url": "https://hostup.se/en/support/cloud-vm/",
+        "quote": "CPU and memory only cost money while the server is running. The disk costs money for as long as the server exists, even when it is stopped.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "trials-free-tiers",
+    "row": {
+      "provider": "hostup",
+      "verdict": "no",
+      "figure": "None; 14-day refund",
+      "scenario": "There is no free tier and no starting credit; you pay the first invoice before the server exists and can ask for the money back within 14 days.",
+      "note": "No free plan, no trial credit and no free sandbox hours. A card is not required — invoices can be paid by Bankgiro, Swish or SEPA as well as by card — but the server is created only once the invoice is paid. The safety net is a 14-day money-back guarantee on a new VPS order, two days if you are outside the EU/EEA.",
+      "source": {
+        "url": "https://hostup.se/legal/terms-of-service-en.pdf",
+        "quote": "On a new order of VPS or web hosting, both Consumers and Business Customers have a money-back guarantee for 14 days from activation, or for two days if you live or have your registered office outside the EU/EEA when you order.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "company",
+    "row": {
+      "provider": "hostup",
+      "verdict": "yes",
+      "figure": "Hostup AB, 2019, Sweden",
+      "note": "A small Swedish company, not a reseller: Hostup AB (reg. no. 559290-1325) was founded in 2019 by David Berndtsson, is 100% Swedish-owned with no venture capital, and runs its own hardware and network in a data hall in Älvsjö, Stockholm. There is a public status page (99.992% over 90 days on 2026-10-30), a DPA that applies automatically, and a 99.9% SLA with credits — but only for Business Customers. No SOC 2 report or ISO 27001 certificate is claimed, and headcount and revenue are not published.",
+      "scenario": "A Swedish owner-operator with its own servers in Stockholm: good for EU residency and for asking a human a question, thin on the audit paperwork a large buyer may want.",
+      "source": {
+        "url": "https://hostup.se/en/about-us/",
+        "quote": "Hostup AB is a 100% Swedish-owned internet company with our own hardware and network in Älvsjö, Stockholm.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  }
+]

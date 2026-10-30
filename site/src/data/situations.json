@@ -78,6 +78,11 @@
           "provider": "modal",
           "why": "A sandbox can run for up to 24 hours with no idle timeout, and a filesystem or memory snapshot carries the work into the next one.",
           "watch": "There is no pause: the sandbox runs or it is terminated. The default lifetime is five minutes, and an idle sandbox bills its full request."
+        },
+        {
+          "provider": "freestyle",
+          "why": "A VM can run indefinitely, pause with memory and resume weeks later; snapshots and forks preserve a long agent run.",
+          "watch": "Hosts are oversubscribed, and the SLA is Enterprise-only."
         }
       ],
       "icon": "layers",
@@ -172,6 +177,11 @@
           "provider": "daytona",
           "why": "Containers are fast to create, snapshots and forks cover the VM classes, and $200 of free compute pays for the first tests.",
           "watch": "Fork is VM-only; on the default container it is snapshot-then-create. A container stops after 15 idle minutes even during a build."
+        },
+        {
+          "provider": "freestyle",
+          "why": "Docker runs from boot, nested virtual machines work, Pro reaches 32 vCPU / 64 GiB, and a snapshot makes the build environment repeatable.",
+          "watch": "The company steers sustained CPU work such as kernel builds to other providers."
         }
       ],
       "icon": "code",
@@ -282,6 +292,11 @@
           "provider": "cloudflare-sandbox",
           "why": "Cloudflare's own guidance is a sandbox for each user or each job, with the Worker deriving the sandbox name from an authenticated identity.",
           "watch": "Names are routing keys, not authorisation; there is no region pinning, and stopping an instance wipes its disk."
+        },
+        {
+          "provider": "freestyle",
+          "why": "Per-customer slugs, scoped identity tokens and private VPCs are built for multi-tenant products.",
+          "watch": "No region choice and no documented team roles."
         }
       ],
       "sources": [

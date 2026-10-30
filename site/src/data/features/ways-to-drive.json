@@ -267,6 +267,30 @@
         "quote": "Start, stop, and restart virtual machines; manage firewalls, SSH keys, snapshots, and metrics",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "yes",
+      "figure": "Dashboard, CLI, TS SDK, API",
+      "scenario": "Drive it from your product: create a VM in the dashboard, from the CLI, or through the TypeScript SDK and REST API.",
+      "note": "Dashboard, CLI, TypeScript SDK, OpenAPI and a PTY/file API. No MCP server. The PyPI package is the older Sandboxes SDK, not the current VM client.",
+      "source": {
+        "url": "https://www.freestyle.sh/docs/cli",
+        "quote": "Use the freestyle CLI for interactive administration, debugging, and automation scripts.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "yes",
+      "figure": "API + MCP, no CLI",
+      "scenario": "You can create, power and back up servers from the panel, from about 380 REST endpoints, or by asking Claude or ChatGPT through the hosted MCP server.",
+      "note": "The client area is built on the same public API, which is documented endpoint by endpoint with an OpenAPI spec and an llms.txt. A hosted MCP server lets Claude, ChatGPT, Cursor, Claude Code or Codex drive the account, with purchases, reinstalls, restores and cancellations confirmed by you in the browser. There is no official CLI and no Python or TypeScript SDK, and the API has a VNC console session and a one-shot guest-agent command but no streaming PTY and no file-transfer endpoints.",
+      "source": {
+        "url": "https://developer.hostup.se/",
+        "quote": "383 documented endpoints cover the things you manage in the HostUp dashboard.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "First machine without a terminal?",

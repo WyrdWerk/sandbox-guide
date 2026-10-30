@@ -28,7 +28,17 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["hetzner", "a", 37.8], ["hetzner", "b", 42.59], ["hetzner", "c", 23.59],
   // One KVM 2 plan runs all 1,000 tasks back to back; KVM 4 for 4 vCPU; KVM 2 billed for the month, on or off.
   ["hostinger", "a", 24.49], ["hostinger", "b", 42.99], ["hostinger", "c", 24.49],
+  // Metered $8.82 under the $50 Hobby minimum; $196.21 − $13.22 allowances, over the minimum; C fits the allowances but Free keeps no stopped disk, so the Hobby minimum.
+  ["freestyle", "a", 50], ["freestyle", "b", 179.85], ["freestyle", "c", 50],
+  // One VPS XS plan runs all 1,000 tasks; VPS SM for 4 vCPU / 8 GB / 100 GB; VPS XS billed for the month.
+  ["hostup", "a", 5.72], ["hostup", "b", 11.55], ["hostup", "c", 5.72],
 ];
+
+test("one storage allowance covers disk kept while stopped", () => {
+  // Five 4 vCPU / 8 GiB / 40 GiB machines, 160 h each: 800 vCPU-h, 6,400 GiB-h memory, 146,000 GiB-h disk over the month.
+  // (3,200 − 200) × $0.04032 + (6,400 − 400) × $0.0129 + (146,000 − 60,000) × $0.000086 = $120.96 + $77.40 + $7.396.
+  assert.ok(Math.abs(price(card("freestyle"), presets.team.workload).total - 205.76) < 0.01);
+});
 
 for (const [id, key, expected] of handWorked) {
   test(`${id} workload ${key.toUpperCase()} matches the hand-worked $${expected}`, () => {

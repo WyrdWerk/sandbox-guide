@@ -1284,5 +1284,145 @@
       "title": "Hosting agreement",
       "url": "https://www.hostinger.com/legal/hosting-agreement"
     }
+  },
+  "freestyle": {
+    "isolation": {
+      "title": "Freestyle VMs (full Linux VMs)",
+      "url": "https://www.freestyle.sh/docs/vms"
+    },
+    "sizes-regions": {
+      "title": "Pricing and limits (per-plan sizes)",
+      "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits"
+    },
+    "lifecycle": {
+      "title": "VM lifecycle (running, paused, stopped)",
+      "url": "https://www.freestyle.sh/docs/vms/lifecycle"
+    },
+    "snapshots-forks": {
+      "title": "Base snapshots and custom snapshots",
+      "url": "https://www.freestyle.sh/docs/vms/base-snapshots"
+    },
+    "storage": {
+      "title": "Files (read, write, large files, paused reads)",
+      "url": "https://www.freestyle.sh/docs/vms/files"
+    },
+    "idle-timers": {
+      "title": "Idle timeout",
+      "url": "https://www.freestyle.sh/docs/vms/lifecycle#idle-timeout"
+    },
+    "reaching-it": {
+      "title": "Inbound TLS (public domains and ports)",
+      "url": "https://www.freestyle.sh/docs/vms/network/tls-inbound"
+    },
+    "custom-domains": {
+      "title": "VM domains",
+      "url": "https://www.freestyle.sh/docs/vms/domains"
+    },
+    "outbound-network": {
+      "title": "Firewall",
+      "url": "https://www.freestyle.sh/docs/vms/network/firewall"
+    },
+    "keys-secrets": {
+      "title": "Outbound TLS (credential injection)",
+      "url": "https://www.freestyle.sh/docs/vms/network/tls-outbound"
+    },
+    "ways-to-drive": {
+      "title": "Quickstart (SDK, CLI, API key)",
+      "url": "https://www.freestyle.sh/docs/quickstart"
+    },
+    "built-in-agents": {
+      "title": "What's installed in the base image",
+      "url": "https://www.freestyle.sh/docs/vms/base-snapshots#whats-installed"
+    },
+    "teams-accounts": {
+      "title": "Pricing and limits (Enterprise SSO, audit logs)",
+      "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits"
+    },
+    "billing-models": {
+      "title": "Usage pricing",
+      "url": "https://www.freestyle.sh/docs/vms/pricing-and-limits#usage-pricing"
+    },
+    "trials-free-tiers": {
+      "title": "Pricing",
+      "url": "https://www.freestyle.sh/pricing"
+    },
+    "company": {
+      "title": "System status",
+      "url": "https://www.freestyle.sh/status"
+    },
+    "quickstart": {
+      "title": "Quickstart",
+      "url": "https://www.freestyle.sh/docs/quickstart"
+    },
+    "pricing": {
+      "title": "Freestyle pricing",
+      "url": "https://www.freestyle.sh/pricing"
+    }
+  },
+  "hostup": {
+    "isolation": {
+      "title": "VPS hosting: KVM, root and your own kernel",
+      "url": "https://hostup.se/en/vps/"
+    },
+    "sizes-regions": {
+      "title": "The seven plans and the Stockholm data hall",
+      "url": "https://hostup.se/en/vps/"
+    },
+    "lifecycle": {
+      "title": "Start, stop and restart your VPS",
+      "url": "https://hostup.se/en/support/start-stop-restart/"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots of your VPS",
+      "url": "https://hostup.se/en/support/snapshots/"
+    },
+    "storage": {
+      "title": "More storage: grow a disk or add one",
+      "url": "https://hostup.se/en/support/vps-disks-and-storage/"
+    },
+    "idle-timers": {
+      "title": "Order a VPS: one month or one year",
+      "url": "https://hostup.se/en/support/order-a-vps/"
+    },
+    "reaching-it": {
+      "title": "Firewall for your VPS: open ports",
+      "url": "https://hostup.se/en/support/vps-firewall/"
+    },
+    "custom-domains": {
+      "title": "Add, change and delete DNS records",
+      "url": "https://hostup.se/en/support/dns-records/"
+    },
+    "outbound-network": {
+      "title": "Bandwidth: when it runs out and buying more",
+      "url": "https://hostup.se/en/support/vps-bandwidth/"
+    },
+    "keys-secrets": {
+      "title": "API keys: create, limit and revoke",
+      "url": "https://hostup.se/en/support/api-keys/"
+    },
+    "ways-to-drive": {
+      "title": "HostUp API and MCP documentation",
+      "url": "https://developer.hostup.se/"
+    },
+    "built-in-agents": {
+      "title": "Order a VPS: operating systems only",
+      "url": "https://hostup.se/en/support/order-a-vps/"
+    },
+    "teams-accounts": {
+      "title": "Give colleagues or an agency access",
+      "url": "https://hostup.se/en/support/give-others-access/"
+    },
+    "billing-models": {
+      "title": "Create a VPS billed by the hour (gated PAYG)",
+      "url": "https://hostup.se/en/support/cloud-vm/"
+    },
+    "trials-free-tiers": {
+      "title": "Terms of service: money-back guarantee",
+      "url": "https://hostup.se/legal/terms-of-service-en.pdf"
+    },
+    "company": {
+      "title": "About HostUp",
+      "url": "https://hostup.se/en/about-us/"
+    }
   }
 }

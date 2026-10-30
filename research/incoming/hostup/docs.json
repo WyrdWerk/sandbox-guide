@@ -1,0 +1,66 @@
+{
+  "isolation": {
+    "title": "VPS hosting: KVM, root and your own kernel",
+    "url": "https://hostup.se/en/vps/"
+  },
+  "sizes-regions": {
+    "title": "The seven plans and the Stockholm data hall",
+    "url": "https://hostup.se/en/vps/"
+  },
+  "lifecycle": {
+    "title": "Start, stop and restart your VPS",
+    "url": "https://hostup.se/en/support/start-stop-restart/"
+  },
+  "snapshots-forks": {
+    "title": "Snapshots of your VPS",
+    "url": "https://hostup.se/en/support/snapshots/"
+  },
+  "storage": {
+    "title": "More storage: grow a disk or add one",
+    "url": "https://hostup.se/en/support/vps-disks-and-storage/"
+  },
+  "idle-timers": {
+    "title": "Order a VPS: one month or one year",
+    "url": "https://hostup.se/en/support/order-a-vps/"
+  },
+  "reaching-it": {
+    "title": "Firewall for your VPS: open ports",
+    "url": "https://hostup.se/en/support/vps-firewall/"
+  },
+  "custom-domains": {
+    "title": "Add, change and delete DNS records",
+    "url": "https://hostup.se/en/support/dns-records/"
+  },
+  "outbound-network": {
+    "title": "Bandwidth: when it runs out and buying more",
+    "url": "https://hostup.se/en/support/vps-bandwidth/"
+  },
+  "keys-secrets": {
+    "title": "API keys: create, limit and revoke",
+    "url": "https://hostup.se/en/support/api-keys/"
+  },
+  "ways-to-drive": {
+    "title": "HostUp API and MCP documentation",
+    "url": "https://developer.hostup.se/"
+  },
+  "built-in-agents": {
+    "title": "Order a VPS: operating systems only",
+    "url": "https://hostup.se/en/support/order-a-vps/"
+  },
+  "teams-accounts": {
+    "title": "Give colleagues or an agency access",
+    "url": "https://hostup.se/en/support/give-others-access/"
+  },
+  "billing-models": {
+    "title": "Create a VPS billed by the hour (gated PAYG)",
+    "url": "https://hostup.se/en/support/cloud-vm/"
+  },
+  "trials-free-tiers": {
+    "title": "Terms of service: money-back guarantee",
+    "url": "https://hostup.se/legal/terms-of-service-en.pdf"
+  },
+  "company": {
+    "title": "About HostUp",
+    "url": "https://hostup.se/en/about-us/"
+  }
+}

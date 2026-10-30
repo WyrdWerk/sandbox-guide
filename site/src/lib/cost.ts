@@ -85,6 +85,8 @@ export interface Plan {
   capped?: boolean;
   /** Shapes this plan may not use. */
   excludesShapes?: string[];
+  /** The plan cannot keep a stopped machine's disk (no persistent machines). */
+  noKeep?: boolean;
   note?: string;
 }
 
@@ -252,6 +254,9 @@ function priceOnPlan(card: RateCard, w: Workload, plan: Plan): Quote {
         : `Sessions end after ${plan.maxSessionHours} hour${plan.maxSessionHours === 1 ? "" : "s"}, shorter than the ${num(h.session)} hours asked for.`,
     );
   }
+  if (plan.noKeep && h.keep && h.stopped > 0) {
+    problems.push(`${plan.name} does not keep a stopped machine's disk.`);
+  }
   if (h.keep && card.between === "lost") {
     problems.push(card.lostNote ?? "Stopping deletes the machine's files; keeping them needs a snapshot or separate storage.");
   }
@@ -384,8 +389,12 @@ function priceOnPlan(card: RateCard, w: Workload, plan: Plan): Quote {
   if (a) {
     const cpuLine = lines.find((l) => l.label.startsWith("CPU"));
     const ramLine = lines.find((l) => l.label === "Memory");
-    const diskLine = lines.find((l) => l.label === "Disk while running");
-    const offs: [Line | undefined, number | undefined, number | undefined, string][] = [
+    // One storage budget covers disk kept while stopped as well as disk while running.
+    const diskAmount = lines
+      .filter((l) => l.label === "Disk while running" || l.label === "Disk while stopped")
+      .reduce((s, l) => s + l.amount, 0);
+    const diskLine = diskAmount > 0 ? { amount: diskAmount } : undefined;
+    const offs: [Pick<Line, "amount"> | undefined, number | undefined, number | undefined, string][] = [
       [cpuLine, a.cpuHours, card.cpu?.rate, "vCPU-h"],
       [ramLine, a.ramHours, card.ram?.rate, "GiB-h"],
       [diskLine, a.diskHours, card.disk?.running, "GB-h"],

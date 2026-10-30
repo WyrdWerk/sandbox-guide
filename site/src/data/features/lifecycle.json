@@ -295,6 +295,30 @@
         "quote": "This is a compute-only power state change and does not affect billing.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "yes",
+      "figure": "65 ms boot; pause keeps RAM",
+      "scenario": "Kill the power: resume the same process tree from a paused VM, or start a fresh boot after a stop.",
+      "note": "Pause keeps memory and processes; stop keeps the disk and drops memory; fork copies a running VM. Boot is about 65 ms, and a base snapshot starts in about a second.",
+      "source": {
+        "url": "https://www.freestyle.sh/products/vms",
+        "quote": "VMs provision in about 65ms from API request to ready machine.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "Stop keeps disk, bills on",
+      "scenario": "You can stop and start the server, but a stop is a power-off: memory and running processes are gone and the month still bills.",
+      "note": "Start, stop and restart work from the panel and the API. A stop shuts the machine down gracefully, then cuts power after 60 seconds; the disk and its files stay. There is no pause that keeps memory, no hibernation and no fork, and a stopped standard VPS costs the same as a running one. Only the gated pay-as-you-go Cloud VM bills CPU and memory just while it runs.",
+      "source": {
+        "url": "https://hostup.se/en/support/start-stop-restart/",
+        "quote": "The server gets 60 seconds to shut itself down. If it is not off by then, the power is cut automatically.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a pause keeps",

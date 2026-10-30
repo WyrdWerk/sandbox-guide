@@ -268,6 +268,30 @@
         "quote": "OpenClaw is a self-hosted personal AI assistant platform that connects to the messaging channels you already use",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "partly",
+      "figure": "Claude Code, Codex preinstalled",
+      "scenario": "Run Claude Code: it is already in the Ubuntu image, but you open the terminal and start it yourself.",
+      "note": "Claude Code, Codex, opencode and openclaw are installed in the default Ubuntu image. No prompt API and no one-click Hermes or OpenClaw; a browser and a GNOME desktop come from guides that install them.",
+      "source": {
+        "url": "https://www.freestyle.sh/docs/vms/base-snapshots",
+        "quote": "claude, codex, opencode, and openclaw, also installed in the shared Node tree",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "no",
+      "figure": "None",
+      "scenario": "You get a bare operating system and install the agent yourself; there is no template, no prompt API and no built-in browser.",
+      "note": "The order flow asks for an operating system and nothing else — Ubuntu, Debian, Rocky, Alma, CentOS or Windows — so Hermes, OpenClaw, n8n and a coding agent are all terminal installs. HostUp's 250+ one-click applications belong to cPanel web hosting, not the VPS. Its AI assistant and MCP server manage the account; they are not an agent runtime, and there is no prompt endpoint, hosted browser or managed desktop.",
+      "source": {
+        "url": "https://hostup.se/en/vps/",
+        "quote": "At order time you choose between the following operating systems:",
+        "confidence": "inferred"
+      }
     }
   ],
   "figureLabel": "Agents installed, and promptable?",

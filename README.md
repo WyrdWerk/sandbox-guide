@@ -6,7 +6,7 @@ A plain-language guide to cloud sandboxes for AI agents. It helps people choose 
 
 ## What is covered
 
-The current data contains **19 researched providers (16 sandboxes and 3 VPS providers), 16 feature pages, 78 capabilities compared across all 19 providers (1,482 rows), and 10 use-case guides**. The JSON is the source of truth for counts and research status; not every claim shares one checked date.
+The current data contains **21 researched providers (17 sandboxes and 4 VPS providers), 16 feature pages, 78 capabilities compared across all 21 providers (1,638 rows), and 10 use-case guides**. The JSON is the source of truth for counts and research status; not every claim shares one checked date.
 
 Providers: Agent 37, Blaxel, Boat, boxd, Cloudflare Sandbox, Daytona, E2B, InstaBox, Lizard, Modal, Morph, Runtime, Sandboxer, Sprites, **Tensorlake** and Vercel Sandbox. All currently have `"status": "researched"`; none is pending. The schema supports `pending` for unfinished drafts, not as a substitute for a complete listing.
 

@@ -1,0 +1,60 @@
+{
+  "provider": "hostup",
+  "checkedOn": "2026-10-30",
+  "summary": "A whole monthly VPS plan per fixed size, paid one month or one year in advance; the plan bills whether the server runs or is stopped, and the only hourly meter is a pay-as-you-go product new accounts cannot buy.",
+  "shapes": [
+    { "name": "VPS Nano", "vcpu": 1, "ram": 2, "disk": 25, "monthly": 4.08 },
+    { "name": "VPS XS", "vcpu": 2, "ram": 4, "disk": 50, "monthly": 5.72 },
+    { "name": "VPS SM", "vcpu": 4, "ram": 8, "disk": 100, "monthly": 11.55 },
+    { "name": "VPS MED", "vcpu": 8, "ram": 16, "disk": 200, "monthly": 23.22 },
+    { "name": "VPS LG", "vcpu": 16, "ram": 32, "disk": 400, "monthly": 46.55 },
+    { "name": "VPS XL", "vcpu": 16, "ram": 64, "disk": 800, "monthly": 87.38 },
+    { "name": "VPS XXL", "vcpu": 32, "ram": 128, "disk": 1600, "monthly": 174.88 }
+  ],
+  "monthlyPlans": true,
+  "between": "kept",
+  "disk": {
+    "extraMonthly": 0.0642
+  },
+  "maxDisk": 5000,
+  "maxVcpu": 32,
+  "maxRam": 128,
+  "egress": {
+    "perGiB": null,
+    "included": "1 TB on Nano, 2 TB on XS, 5 TB on SM, 10 TB on MED, 20 TB on LG, 32 TB on XL and XXL, per month, inbound and outbound counted together",
+    "note": "There is no per-GiB overage rate. The monthly allowance is a hard cap: when it is used up the server cannot be started or restarted until you buy more capacity or the next period begins. Extra capacity is sold in 1 TB steps at 10 SEK (about $1.17) per TB per month, up to 500 TB. Not priced by the calculator.",
+    "url": "https://hostup.se/en/support/vps-bandwidth/"
+  },
+  "plans": [
+    {
+      "name": "Monthly plan",
+      "fee": 0,
+      "note": "One plan per server per month. The same plan can be paid for 12 months at 10% off, in which case the whole year is charged upfront."
+    }
+  ],
+  "notes": [
+    "Currency: HostUp bills in SEK, EUR or USD. These USD figures are HostUp's own USD display on 2026-10-30, not a market rate: the chain is the SEK list price divided by 10 for EUR (49 SEK to 4.90 EUR) and that EUR figure times 7/6 for USD (4.90 EUR to $5.72). The SEK list prices are 35, 49, 99, 199, 399, 749 and 1,499 a month.",
+    "VAT: HostUp's own pages disagree. Its price calculator shows a subtotal marked excl. VAT with a 25% VAT line under it; its cart labels the same total inc. VAT. The card follows the calculator and treats these figures as ex-VAT: a private customer in Sweden would then add 25% (VPS XS $5.72 becomes $7.15), a private customer elsewhere in the EU their own rate, while a VAT-registered business in another EU country and a customer outside the EU pay the figure shown. If the cart label is the literal one, the published figure already includes VAT and every total here is 25% too high for a business buyer.",
+    "Annual term: 10% off the monthly price, paid for the whole year upfront. In USD that is $44.10, $61.72, $124.72, $250.72, $502.72, $943.72 and $1,888.72 a year, or $3.68 to $157.39 a month. The monthly price is the ongoing month-to-month price, not an introductory rate.",
+    "A stopped standard VPS keeps billing in full: the plan is a subscription for the period and the disk stays. Stopping is a power-off, so memory and running processes are lost. There is no pause and no cheaper stopped rate on this product.",
+    "Hourly pay-as-you-go Cloud VMs exist but are gated: the account needs identity verification (passport, ID card or Swedish BankID) and at least SEK 2,000 of paid invoices first. Their per-hour rates are shown only inside the client area, so they are not modelled here.",
+    "Disk and bandwidth can be raised on any plan: extra NVMe at 0.55 SEK (about $0.06) per GB a month up to 5,000 GB on the slider, extra bandwidth at 10 SEK (about $1.17) per TB a month. CPU and memory only change by moving to another plan, which restarts the server. The calculator charges extra disk as disk.extraMonthly at $0.0642 per GiB a month (0.55 SEK at the same display conversion); HostUp bills it as more disk on the same server, not as a separate volume, and it is bought for a whole month.",
+    "CPU is allocated to the guest but not permanently dedicated: a server that has run at full load for several days is capped at 50% of its vCPUs, and heavy disk I/O can be throttled temporarily. A, B and C sit far below that.",
+    "The primary public IPv4 is included. Extra IPv4 addresses, kept reserved addresses and the one-time private-network fee are charged, but their prices appear only in the client area and are not modelled.",
+    "Snapshots are included in plan slots and deleted after 24 hours. Backups are included, weekly by default, with seven slots on the smallest plan; extra slots cost 1 SEK (about $0.12) a month each. Neither has a separate storage rate.",
+    "Windows Server is bring-your-own-licence; the licence is not in the price."
+  ],
+  "sources": [
+    { "label": "VPS plans and prices (EUR)", "url": "https://hostup.se/en/vps/" },
+    { "label": "VPS plans and prices (USD display)", "url": "https://hostup.se/en/vps/?currency=USD" },
+    { "label": "VPS plans and prices (SEK base)", "url": "https://hostup.se/en/vps/?currency=SEK" },
+    { "label": "Product and add-on prices (SEK, no auth)", "url": "https://cloud.hostup.se/api/v2/products/vps" },
+    { "label": "VPS XS order page: add-on prices", "url": "https://cloud.hostup.se/cart/en/vps/xs" },
+    { "label": "Price calculator: VAT is added on top", "url": "https://hostup.se/en/pricecalculator/" },
+    { "label": "Terms of service: currency, VAT, refunds, SLA", "url": "https://hostup.se/legal/terms-of-service-en.pdf" },
+    { "label": "Order a VPS: one month or one year", "url": "https://hostup.se/en/support/order-a-vps/" },
+    { "label": "Hourly Cloud VM and its access requirements", "url": "https://hostup.se/en/support/cloud-vm/" },
+    { "label": "Bandwidth: hard cap, no overage", "url": "https://hostup.se/en/support/vps-bandwidth/" },
+    { "label": "CPU and disk throttling", "url": "https://hostup.se/en/support/vps-warnings/" }
+  ]
+}

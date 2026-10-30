@@ -268,6 +268,30 @@
         "quote": "This is a compute-only power state change and does not affect billing.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "yes",
+      "figure": "Idle pause; −1 = never",
+      "scenario": "Leave it idle: set idleTimeoutSeconds and the VM pauses, then the next request wakes it; set −1 to keep it awake.",
+      "note": "A paused VM resumes on the next start or on traffic that reaches it. No scheduler: cron inside the VM only runs while it runs.",
+      "source": {
+        "url": "https://www.freestyle.sh/docs/vms/lifecycle",
+        "quote": "A VM paused this way resumes on its next start, or on the next traffic that reaches it.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "yes",
+      "figure": "No idle stop or limit",
+      "scenario": "Nothing puts the server to sleep: an agent that waits all day keeps its process and its connection.",
+      "note": "There is no idle timer, no automatic sleep and no session length limit — the server runs until you stop it or cancel the plan, which is what a Discord gateway or an always-on Hermes agent needs. The trade is that idle hours are billed like busy ones. There is also no provider-side scheduler: recurring work runs from cron inside the guest, and the only schedule HostUp runs is the backup one.",
+      "source": {
+        "url": "https://hostup.se/en/support/order-a-vps/",
+        "quote": "A standard VPS is paid for one month or one year at a time.",
+        "confidence": "inferred"
+      }
     }
   ],
   "figureLabel": "Idle or lifetime limit",

@@ -1,0 +1,130 @@
+{
+  "provider": "hostup",
+  "checkedOn": "2026-10-30",
+  "summary": "A plain VPS with no application templates, so every route is manual and needs a terminal. It is cheap and always-on, which suits one agent, a bot, n8n or an MCP server; it is a poor fit for per-task sandboxes, browsers at scale or a team that wants SSO.",
+  "routes": [
+    {
+      "useCase": "hermes-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Hermes on an Ubuntu VPS over SSH. VPS XS gives 2 vCPU / 4 GB / 50 GB for $5.72 a month, always on, with the disk and the process surviving a reboot. There is no Hermes template and no managed update.",
+      "link": {
+        "title": "HostUp VPS plans",
+        "url": "https://hostup.se/en/vps/"
+      },
+      "price": "$5.72/mo (VPS XS, 2 vCPU / 4 GB / 50 GB), ex-VAT",
+      "disposition": "List as a manual route. Cheap and always-on, but no template and no no-terminal path, so no pick."
+    },
+    {
+      "useCase": "openclaw",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install OpenClaw on a VPS over SSH and pair WhatsApp, Telegram or Discord from the terminal. VPS XS or SM depending on how many channels and how much browsing the agent does.",
+      "link": {
+        "title": "HostUp VPS plans",
+        "url": "https://hostup.se/en/vps/"
+      },
+      "price": "$5.72–$11.55/mo (VPS XS or SM), ex-VAT",
+      "disposition": "Manual route only; HostUp has no OpenClaw template. No pick."
+    },
+    {
+      "useCase": "coding-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Claude Code or Codex on VPS SM (4 vCPU / 8 GB / 100 GB, $11.55 a month). Stopping the server between sessions keeps the repository but still bills the month, so it suits someone who works most days rather than occasionally.",
+      "link": {
+        "title": "HostUp VPS plans",
+        "url": "https://hostup.se/en/vps/"
+      },
+      "price": "$11.55/mo (VPS SM), ex-VAT",
+      "disposition": "Manual route. The monthly plan makes an occasional-use coding box poor value; no pick."
+    },
+    {
+      "useCase": "code-interpreter",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Possible only as a build-it-yourself backend: the API creates whole servers on a monthly plan, there is no per-run sandbox, no snapshot with memory and no cheap throwaway machine for a new account. Running 20,000 one-minute jobs would mean either one machine doing them back to back or 20,000 plans.",
+      "link": {
+        "title": "HostUp API documentation",
+        "url": "https://developer.hostup.se/"
+      },
+      "price": "Not a per-task product; one VPS XS plan is $5.72/mo",
+      "disposition": "Record the route but state the mismatch. No pick, and the use case page should not imply HostUp is a sandbox API."
+    },
+    {
+      "useCase": "browser-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install headless Chromium and your agent on VPS SM. There is no hosted browser, no desktop stream and no per-session isolation: all sessions share one machine and one public IP.",
+      "link": {
+        "title": "HostUp VPS plans",
+        "url": "https://hostup.se/en/vps/"
+      },
+      "price": "$11.55/mo (VPS SM), ex-VAT",
+      "disposition": "Manual route with a clear warning about shared state and one IP; no pick."
+    },
+    {
+      "useCase": "workflow-automation",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run n8n in Docker on VPS XS or SM. It must stay awake for webhooks and scheduled workflows, which a monthly plan does well: nothing sleeps the machine and 2–5 TB of transfer is included. You keep the database and the encryption key on the same disk and back them up yourself.",
+      "link": {
+        "title": "HostUp VPS plans",
+        "url": "https://hostup.se/en/vps/"
+      },
+      "price": "$5.72–$11.55/mo (VPS XS or SM), ex-VAT",
+      "disposition": "One of the better fits for this provider, but still a terminal install. No pick, because other providers offer a one-click n8n template at a similar price."
+    },
+    {
+      "useCase": "chat-bot",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run the bot on VPS Nano ($4.08) or XS ($5.72). A Discord or Slack gateway needs a process that never sleeps, and this one does not; 1–2 TB of transfer covers a small community.",
+      "link": {
+        "title": "HostUp VPS plans",
+        "url": "https://hostup.se/en/vps/"
+      },
+      "price": "$4.08–$5.72/mo (VPS Nano or XS), ex-VAT",
+      "disposition": "A reasonable budget option for an always-on bot. No pick, since the same money buys a one-click route elsewhere."
+    },
+    {
+      "useCase": "claude-code-team",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "One VPS SM per developer, or one larger box with separate Linux users. The panel has no per-user machine isolation, no SSO and no hard spend cap; the audit log is account-wide.",
+      "link": {
+        "title": "Give colleagues access to the account",
+        "url": "https://hostup.se/en/support/give-others-access/"
+      },
+      "price": "$11.55/mo per developer (VPS SM), ex-VAT",
+      "disposition": "Manual route; the missing SSO and spend cap are the reason it is not a pick for a team."
+    },
+    {
+      "useCase": "scheduled-scraper",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Cron inside the VM runs the scraper four times a day, but a monthly plan bills the 700+ idle hours too. It only makes sense if the same box does other work; otherwise a per-task sandbox is cheaper.",
+      "link": {
+        "title": "HostUp VPS plans",
+        "url": "https://hostup.se/en/vps/"
+      },
+      "price": "$5.72/mo (VPS XS) whatever the run count, ex-VAT",
+      "disposition": "Record the route and the idle-hour cost; no pick."
+    },
+    {
+      "useCase": "mcp-server",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "VPS Nano is the cheapest always-on public address in this guide: point DNS at the IPv4, open the port in the panel firewall and terminate TLS yourself. Nothing sleeps it, so a client's tool call never waits for a wake.",
+      "link": {
+        "title": "Firewall for your VPS",
+        "url": "https://hostup.se/en/support/vps-firewall/"
+      },
+      "price": "$4.08/mo (VPS Nano), ex-VAT",
+      "disposition": "A genuinely good cheap fit for one always-on MCP server. No pick, because the pick slots are held by providers with a managed route or a lower always-on price."
+    }
+  ],
+  "picks": [],
+  "situationPicks": [],
+  "pickReasoning": "No picks and no situation picks. HostUp is competent and cheap, but it is not the best answer to any of the ten use cases or the eight situations: it has no one-click agent route, no per-task sandbox, no fork, no GPU and one region, and its hourly meter is closed to new accounts. The honest treatment is prose in the EU-residency and always-on discussions plus a route row on each use-case page, not a recommendation card. Revisit if the pay-as-you-go Cloud VM opens to new accounts and publishes its rates, which would make it competitive for bursty work."
+}

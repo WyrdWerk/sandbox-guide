@@ -277,6 +277,30 @@
         "quote": "deploy Traefik from the Docker Catalog, run Certbot manually, or use the built-in SSL tools of your VPS control panel",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "yes",
+      "figure": "Own domain + auto HTTPS",
+      "scenario": "Serve it at your own domain: verify with a TXT record, CNAME to Freestyle, delegate the ACME challenge, and the certificate is issued.",
+      "note": "Free style.dev subdomains need no DNS or certificate. A verified domain gets a managed certificate once _acme-challenge is delegated; single-label wildcards are supported.",
+      "source": {
+        "url": "https://www.freestyle.sh/docs/vms/domains",
+        "quote": "HTTPS is provisioned automatically, once _acme-challenge is delegated",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "Your DNS, your TLS",
+      "scenario": "Point an A record at the server and you are reachable; the certificate and its renewal are yours to run.",
+      "note": "HostUp sells domains and DNS, so a domain can live in the same panel and point at the VPS with an A record, or you can keep DNS elsewhere. What it does not do is issue or renew a certificate for a VPS: there is no managed HTTPS, so you run certbot or put a CDN or reverse proxy in front. Automatic HTTPS exists on HostUp's cPanel web hosting, which is a different product.",
+      "source": {
+        "url": "https://hostup.se/en/support/dns-records/",
+        "quote": "DNS records decide where your domain points: the website, the email and the verifications other services ask for.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Path to your domain",

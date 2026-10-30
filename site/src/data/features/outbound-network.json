@@ -268,6 +268,30 @@
         "quote": "4 TB bandwidth",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "partly",
+      "figure": "50/500 GB free; $0.02/GB",
+      "scenario": "Call the API: outbound is denied until a firewall rule allows it, and the first 50 GB (Free) or 500 GB (paid) of transfer is included.",
+      "note": "Allowlist by domain, CIDR or identity. Default deny, so no internet until a rule allows it. Every VM shares one account-level outbound IPv4, but Freestyle does not promise it stays fixed.",
+      "source": {
+        "url": "https://www.freestyle.sh/openapi.json",
+        "quote": "A VM gets nothing implicitly — no outbound Internet, no inbound",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "1–32 TB, then blocked",
+      "scenario": "Outbound data is included up to the plan's monthly cap, and running past it stops the server rather than billing overage.",
+      "note": "Each plan includes 1–32 TB a month with inbound and outbound counted together; extra capacity is 10 SEK per TB a month, up to 500 TB. There is no metered overage: when the allowance is gone the server cannot start until you buy more or the period resets. The panel firewall is inbound only, so there is no egress allowlist and no way to switch the internet off. The address is stable — HostUp owns its RIPE subnets and the IP stays with the server.",
+      "source": {
+        "url": "https://hostup.se/en/support/vps-bandwidth/",
+        "quote": "If the bandwidth runs out, the server cannot be started or restarted until you buy more or the next period starts.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Egress price",

@@ -268,6 +268,30 @@
         "quote": "Launch your VPS in 10 data centers across 4 continents, from Boston to Jakarta.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "freestyle",
+      "verdict": "partly",
+      "figure": "4–32 vCPU; no region pick",
+      "scenario": "Ask for 2 vCPU / 4 GiB and get exactly that on Free; a 50 GiB disk needs Hobby, and there is no region to choose.",
+      "note": "Any size up to the plan caps: Free 4 vCPU / 8 GiB / 32 GB, Hobby 8 / 16 / 64, Pro 32 / 64 / 256. CPU and memory resize live and only grow. No region or EU option is published.",
+      "source": {
+        "url": "https://www.freestyle.sh/pricing.md",
+        "quote": "Every plan can create a VM at any valid size up to its CPU, memory, and disk maximums.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hostup",
+      "verdict": "partly",
+      "figure": "7 plans, 1–32 vCPU",
+      "scenario": "You pick one of seven fixed plans in Stockholm; disk and bandwidth grow, CPU and memory do not.",
+      "note": "Seven fixed sizes from 1 vCPU / 2 GB / 25 GB to 32 vCPU / 128 GB / 1,600 GB. Disk can be raised to 5,000 GB in the order slider and to 32 TB on request, bandwidth to 500 TB, and machines up to 1 TB of RAM are quoted on request. But CPU and memory only change by moving to another plan, which restarts the server, and there is one region: Älvsjö, Stockholm, in two availability zones. Custom CPU/RAM mixes exist only on the gated pay-as-you-go Cloud VM.",
+      "source": {
+        "url": "https://hostup.se/en/vps/",
+        "quote": "Scale up to 1 TB RAM and down just as easily.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Largest shape; regions",
