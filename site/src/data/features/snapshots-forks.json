@@ -292,6 +292,30 @@
         "quote": "All snapshots are deleted automatically after 24 hours. They do not replace backups.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "partly",
+      "figure": "1 snapshot; 7-day backup add-on",
+      "scenario": "Rewind a bad change from the single snapshot, or from one of seven daily backups if the paid Premium option is on; fanning out ten copies means ten VPS plans, not ten forks.",
+      "note": "One manual snapshot at a time, deleted when restored, plus a free 24-hour daily backup and a paid 7-day rolling backup. There is no memory snapshot, no clone of a snapshot into a new VPS and no fork of a running machine. Snapshots and backups exclude additional disks.",
+      "source": {
+        "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012573640-How-to-use-snapshots-on-a-VPS",
+        "quote": "Since you can only have one snapshot activated at a time, the existing snapshot has to be deleted before creating a new one.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "$0.05/GB-mo; 7 daily",
+      "scenario": "Snapshot the disk and build a second instance from it on the same or a larger plan; the latest seven automatic snapshots are kept for you.",
+      "note": "Manual snapshots last until deleted and cost $0.05 per GB-month; automatic snapshots keep seven daily copies and are deleted with the instance. Snapshots hold disk state only, cannot restore to a smaller plan, and a copy of a running machine starts from the snapshot moment rather than from live memory.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html",
+        "quote": "A snapshot contains all of the data that is needed to restore your resource (from the moment when the snapshot was taken).",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a snapshot keeps",

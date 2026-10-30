@@ -292,6 +292,30 @@
         "quote": "On a new order of VPS or web hosting, both Consumers and Business Customers have a money-back guarantee for 14 days from activation, or for two days if you live or have your registered office outside the EU/EEA when you order.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "no",
+      "figure": "No free tier or credit",
+      "scenario": "A week of testing costs a full month: VPS-1 is $5.35 from the first invoice, there is no trial credit to burn, and a payment method is required before the order.",
+      "note": "No free tier and no published signup credit for VPS. A payment method (bank card, PayPal or SEPA direct debit) is required, the first invoice is the full month, and the service renews automatically until cancelled.",
+      "source": {
+        "url": "https://docs.ovhcloud.com/en/guides/account-and-service-management/managing-billing-payments-and-services/faq-billing",
+        "quote": "To ensure that your services are renewed properly, you will need to set at least one payment method in the OVHcloud Control Panel.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "Up to $200 credits",
+      "scenario": "A new AWS account gets up to $200 of credits for six months; there is no recurring free Lightsail allowance after that.",
+      "note": "Lightsail's own short-term trials have been retired and replaced by AWS Free Tier credits: $100 at sign-up plus up to $100 earned, on an account that closes after six months or when the credits run out. A payment method is required to open the account.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "Lightsail’s short-term free trial offers have been replaced by the AWS Free Tier.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What you get, and what ends it",

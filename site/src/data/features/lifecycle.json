@@ -319,6 +319,30 @@
         "quote": "The server gets 60 seconds to shut itself down. If it is not off by then, the power is cut automatically.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "no",
+      "figure": "Power off only; no pause",
+      "scenario": "At 18:00 the server is powered off and keeps its disk and IP; at 09:00 it boots back with the files intact, but the queued test run and the memory are gone, and the 640 powered-off hours cost exactly the same as running ones.",
+      "note": "There is a stop/start API and a reboot, but no pause, hibernate, memory snapshot, fork, warm pool or pre-started capacity. A stopped VPS keeps billing its monthly plan, and the only way to stop paying is to cancel the service.",
+      "source": {
+        "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+        "quote": "Stop the VPS (power off) and return an asynchronous task",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Stop keeps disk; still billed",
+      "scenario": "Stopping powers the machine down and keeps the disk, but memory and running processes are gone and the meter keeps running.",
+      "note": "Stop, start and reboot exist; there is no pause, no memory snapshot and no cheap stopped state. Stopping releases the public IPv4 address unless a static IP is attached, and the instance bills at the full hourly rate until it is deleted.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "These resources accrue charges even when they are in the stopped state.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a pause keeps",

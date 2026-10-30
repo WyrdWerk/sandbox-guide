@@ -285,6 +285,30 @@
         "quote": "Every VPS is its own KVM machine with its own resources, so you can test, reboot and reinstall freely without affecting your production VPS.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "yes",
+      "figure": "Full VM; root, Docker, SSH",
+      "scenario": "Clone, build and load the module: this is an ordinary virtual machine with root, Docker and real SSH. A module that needs nested virtualisation is the one thing you cannot assume, because OVHcloud does not document whether the CPU flags are exposed.",
+      "note": "A full virtual machine per server with its own kernel, root, Docker and any TCP port. OVHcloud does not name the hypervisor, publishes no CPU-share policy, offers no GPU, and documents neither nested virtualisation nor a custom image.",
+      "source": {
+        "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+        "quote": "Unlike shared hosting, a VPS offers an isolated environment, dedicated to the customer.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Full VM; root, Docker, SSH",
+      "scenario": "Clone, build and load the module without a workaround: an ordinary Linux virtual machine with its own kernel, root, Docker and SSH.",
+      "note": "A full VM with dedicated RAM, disk and a burstable shared vCPU. Nested virtualisation is not documented, GPUs exist only in the separate Lightsail for Research product, and the hypervisor is never named.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
+        "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Boundary, and what it allows",

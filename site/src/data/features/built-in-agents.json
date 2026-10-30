@@ -292,6 +292,30 @@
         "quote": "At order time you choose between the following operating systems:",
         "confidence": "inferred"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "partly",
+      "figure": "n8n preinstalled; agents by guide",
+      "scenario": "Order the n8n image and the workflow tool is already running; for Hermes or OpenClaw, follow OVHcloud's Docker guide over SSH, because neither is an image and neither has a prompt API.",
+      "note": "Preinstalled application images include n8n, Docker, Plesk and cPanel. Hermes and OpenClaw have official step-by-step Docker guides and a landing page, but no image. There is no coding agent, browser, desktop image or prompt API.",
+      "source": {
+        "url": "https://us.ovhcloud.com/vps/vps-n8n/",
+        "quote": "Now conveniently pre-installed on a range of OVHcloud plans.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "None preinstalled",
+      "scenario": "Nothing agent-shaped is installed: you add Claude Code, Hermes or OpenClaw yourself on an Ubuntu image.",
+      "note": "Blueprints are operating systems and web stacks (Ubuntu, Amazon Linux, WordPress, LAMP, Node.js). There is no prompt API, no preinstalled coding agent, no browser and no Linux desktop; only Windows bundles offer a desktop, over RDP.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/compare-options-choose-lightsail-instance-image.html",
+        "quote": "You can install many additional software packages, such as Evolution, GIMP, Pidgin, and Synaptic by using the APT-based package management tool (`apt-get`).",
+        "confidence": "inferred"
+      }
     }
   ],
   "figureLabel": "Agents installed, and promptable?",

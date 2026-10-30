@@ -292,6 +292,30 @@
         "quote": "CPU and memory only cost money while the server is running. The disk costs money for as long as the server exists, even when it is stopped.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "partly",
+      "figure": "$5.35–$27.50/mo, monthly",
+      "scenario": "One month of a box that waits 22 hours a day still costs the full monthly plan; there is no hourly meter, no per-second billing and no cheap stopped state.",
+      "note": "A monthly subscription per VPS, renewed automatically until cancelled, with optional 6- and 12-month commitments that lower the monthly price: $5.35 to $27.50 on the no-commitment term. No hourly rate, no per-second meter, no CPU-only billing and no pause. Optional add-ons bill monthly.",
+      "source": {
+        "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360002306224-Overview-of-Billing-with-OVHcloud-US",
+        "quote": "You can choose to be billed monthly for a Virtual Private Server (VPS) regardless of whether you select a commitment that is month-to-month, 12 months, or 24 months.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "$0.03225/h, $24 cap",
+      "scenario": "A 2 vCPU / 4 GiB box is $0.03225 an hour, never more than $24 a month, and costs the same while it is stopped.",
+      "note": "Hourly billing at the monthly price divided by 744, capped at the monthly price, so 730 hours on the $24 bundle is $23.54 rather than $24. A stopped instance keeps billing at the full rate until deleted, there is no per-second meter, and AWS does not publish whether a partial hour rounds up: if it did, 1,000 ten-minute runs would cost $32.25 rather than $5.38.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
+        "quote": "Bundles are billed on an on-demand hourly rate, so you pay only for what you use.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "The meter",

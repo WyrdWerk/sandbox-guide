@@ -292,6 +292,30 @@
         "quote": "We can provide up to 32 TB of NVMe storage on request.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "yes",
+      "figure": "40–200 GB NVMe; disk to 10 TB",
+      "scenario": "The 20 GiB the agent writes lives on the plan disk and is still there next session, because a power-off keeps the disk; an additional disk survives a reinstall and can grow to 10 TB.",
+      "note": "NVMe disk is included in the plan (40 to 200 GB). An additional disk from 50 GB to 10 TB is separate storage attached to one server, billed monthly, and unaffected by a VPS reinstall; it is not a portable volume that can be moved to another server.",
+      "source": {
+        "url": "https://support.us.ovhcloud.com/hc/en-us/articles/4410563713427-Configuring-an-additional-disk-on-a-VPS",
+        "quote": "The additional disk will only be accessible from the server’s IP address, and data stored on it will remain unaffected, even if the VPS is reinstalled or suffers data loss.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "20-1,280 GB SSD; 16 TB disks",
+      "scenario": "The bundle's 80 GB SSD covers the 20 GiB ask, and extra block storage at $0.10 per GB-month outlives the instance.",
+      "note": "Each bundle includes its SSD, from 20 GB to 1,280 GB. Extra disks are $0.10 per allocated GB-month, 8 GB to 16 TB each, 15 per instance and 20,000 GB per region, attached to one instance at a time. Object storage buckets are S3-compatible but not mountable as a folder.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/elastic-block-storage-and-ssd-disks-in-amazon-lightsail.html",
+        "quote": "You can also add more storage to your virtual private server by creating additional block storage disks.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Disk, and how long it is kept",

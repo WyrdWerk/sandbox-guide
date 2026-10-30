@@ -36,6 +36,8 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["freestyle", "a", 50], ["freestyle", "b", 179.85], ["freestyle", "c", 50],
   // One VPS XS plan runs all 1,000 tasks; VPS SM for 4 vCPU / 8 GB / 100 GB; VPS XS billed for the month.
   ["hostup", "a", 5.72], ["hostup", "b", 11.55], ["hostup", "c", 5.72],
+  ["ovhcloud", "a", 5.35], ["ovhcloud", "b", 10], ["ovhcloud", "c", 5.35],
+  ["lightsail", "a", 5.38], ["lightsail", "b", 82.42], ["lightsail", "c", 23.54],
 ];
 
 const task = (vcpu: number, ram: number, minutes: number) =>

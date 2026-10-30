@@ -2,6 +2,32 @@
   "changes": [
     {
       "date": "2026-10-30",
+      "title": "Amazon Lightsail added: fixed-price AWS servers billed by the hour",
+      "provider": "lightsail",
+      "what": "This guide now lists Amazon Lightsail, AWS's bundle-priced virtual servers. Bundles run from $5 to $1,764 a month, are billed per hour up to that cap, and keep billing while stopped. The date is when this guide checked it, not a launch date.",
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
+          "quote": "Bundles are billed on an on-demand hourly rate, so you pay only for what you use.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "title": "OVHcloud added: monthly VPS plans with n8n preinstalled",
+      "provider": "ovhcloud",
+      "what": "This guide now lists OVHcloud's VPS range, priced from the US order catalog in USD before tax on the no-commitment monthly term. A switched-off VPS still bills. The date is when this guide checked it, not a launch date.",
+      "sources": [
+        {
+          "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360002306224-Overview-of-Billing-with-OVHcloud-US",
+          "quote": "You can choose to be billed monthly for a Virtual Private Server (VPS) regardless of whether you select a commitment that is month-to-month, 12 months, or 24 months.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
       "title": "Freestyle added: full Linux VMs that pause with memory and fork live",
       "provider": "freestyle",
       "what": "This guide now lists Freestyle. Its VMs bill per second on allocated vCPU, memory and storage, with monthly allowances on every plan; Hobby is a $50 monthly minimum usable as usage. The date is when this guide checked it, not a launch date.",

@@ -1,0 +1,94 @@
+{
+  "provider": "ovhcloud",
+  "checkedOn": "2026-10-30",
+  "summary": "A monthly subscription per fixed size, billed for the whole calendar month from order until cancellation; a powered-off server keeps its full bill.",
+  "shapes": [
+    {
+      "name": "VPS-1",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 40,
+      "monthly": 5.35
+    },
+    {
+      "name": "VPS-2",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 75,
+      "monthly": 10.0
+    },
+    {
+      "name": "VPS-3",
+      "vcpu": 6,
+      "ram": 12,
+      "disk": 100,
+      "monthly": 14.5
+    },
+    {
+      "name": "VPS-4",
+      "vcpu": 8,
+      "ram": 24,
+      "disk": 200,
+      "monthly": 27.5
+    }
+  ],
+  "monthlyPlans": true,
+  "between": "kept",
+  "maxVcpu": 8,
+  "maxRam": 24,
+  "egress": {
+    "perGiB": 0,
+    "included": "Unlimited traffic on every 2027 plan, at 500 Mbps on VPS-1 up to 3 Gbps on VPS-4",
+    "note": "OVHcloud advertises unlimited traffic with no per-GiB charge on the VPS pages, and publishes no overage rate or fair-use threshold for standard VPS. The bandwidth figure is the guaranteed minimum. Not priced by the calculator.",
+    "url": "https://us.ovhcloud.com/vps/"
+  },
+  "plans": [
+    {
+      "name": "Monthly, no commitment",
+      "fee": 0,
+      "note": "The card uses the no-commitment monthly price, which is also the ongoing renewal price. A 6-month commitment lowers it to $5.08 / $9.50 / $13.77 / $26.12; a 12-month commitment to $4.54 / $8.50 / $12.32 / $23.37, paid monthly. The product page's \"Starting at\" figures are the 12-month prices."
+    }
+  ],
+  "notes": [
+    "Prices are OVHcloud's own USD list for the US subsidiary, read from its live public order catalog on 2026-10-30. They exclude sales tax: the catalog reports taxRate 0 and the US Terms of Service say all fees are exclusive of taxes.",
+    "OVHcloud sells whole months, not machine-hours. There is no hourly or per-second rate, so the calculator bills one plan per machine and lets short tasks share a plan: 1,000 ten-minute tasks need 166.67 hours and fit on one VPS-1.",
+    "Powering off is a power-off, not a pause: the subscription renews and the disk stays attached. The monthly plan therefore already covers stopped hours, and billedWhileStopped is not set (it would double-count).",
+    "VPS-1 has 2 vCores / 4 GB / 40 GB at $5.35, VPS-2 4 / 8 / 75 at $10.00, VPS-3 6 / 12 / 100 at $14.50 and VPS-4 8 / 24 / 200 at $27.50. OVHcloud quotes RAM and disk in GB; the card maps them 1:1 to the site's GiB fields. A/B/C asks are small enough that the difference does not change a shape.",
+    "The additional disk is sold in fixed sizes at fixed monthly prices — 50 GB $2.60, 100 GB $5.20, 200 GB $10.30, 500 GB $25.70, 1 TB $51.30, 5 TB $256.50, 10 TB $512.90 — not as a per-GiB rate. disk.extraMonthly would pro-rate sizes OVHcloud does not sell, so it is omitted and a request above the plan's own disk is reported as infeasible; the reader can still attach an additional disk, which this card does not price.",
+    "The order catalog lists a mandatory standard daily backup at $0.50 (VPS-1), $0.60 (VPS-2), $0.80 (VPS-3) and $1.20 (VPS-4) a month, but OVHcloud's configurator waives it: on the no-commitment VPS-1 order it shows \"Automated Backup Standard - VPS-1 2027 $0.50 $0.00\" and a total of $5.35 ex. taxes/month (read 2026-10-30). The product page also calls daily backups free, so the card leaves it out.",
+    "Optional monthly add-ons not priced by the card: snapshot from $0.40 (the catalog's 20 GB option is $1.20), premium 7-day backup $1.40–$5.90, additional IPs, Plesk and cPanel licences, and a Load Balancer.",
+    "Local Zone plans are priced separately: VPS-1 LZ is $6.54 monthly-billed and VPS-2 LZ $10.00. Local Zones also lose anti-DDoS, additional IPs, Windows, cPanel/Plesk/Docker images, load balancing and managed databases. Not modelled.",
+    "Snapshots and automated backups never include additional disks. A snapshot is one at a time and is deleted when restored.",
+    "The 2026 range (VPS-1 to VPS-6, plan codes vps-2025-model*) is still listed in the catalog but is not the range OVHcloud presents for new orders; it is not modelled."
+  ],
+  "sources": [
+    {
+      "label": "VPS product page (US, USD)",
+      "url": "https://us.ovhcloud.com/vps/"
+    },
+    {
+      "label": "Public order catalog for VPS (US subsidiary, USD, live prices)",
+      "url": "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US"
+    },
+    {
+      "label": "VPS billing and commitments (US)",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360002306224-Overview-of-Billing-with-OVHcloud-US"
+    },
+    {
+      "label": "VPS API: start, stop, snapshot and disk endpoints",
+      "url": "https://api.us.ovhcloud.com/1.0/vps.json"
+    },
+    {
+      "label": "Billing FAQ: automatic renewal and payment methods",
+      "url": "https://docs.ovhcloud.com/en/guides/account-and-service-management/managing-billing-payments-and-services/faq-billing"
+    },
+    {
+      "label": "Additional disk sizes and prices (catalog add-ons)",
+      "url": "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US"
+    },
+    {
+      "label": "Terms of Service: fees exclude tax",
+      "url": "https://us.ovhcloud.com/legal/terms-of-service/"
+    }
+  ]
+}

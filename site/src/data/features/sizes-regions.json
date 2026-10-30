@@ -292,6 +292,30 @@
         "quote": "Scale up to 1 TB RAM and down just as easily.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "partly",
+      "figure": "8 vCores / 24 GB; 28 locations",
+      "scenario": "The lopsided 2 vCPU / 16 GiB request has no shape: VPS-2 has 8 GB, VPS-3 12 GB, so the next fit is VPS-4 at 8 vCores / 24 GB for $27.50, with CPU and disk you did not ask for.",
+      "note": "Four fixed 2027 models from 2 vCores / 4 GB / 40 GB to 8 vCores / 24 GB / 200 GB, in 28 locations including 15 Local Zones. CPU, RAM and disk cannot be sized independently; a VPS cannot be moved to another region, and Local Zone plans lose several options.",
+      "source": {
+        "url": "https://www.ovhcloud.com/en-gb/lp/vps-localzone/",
+        "quote": "Our virtual private servers are currently available in 28 global locations, including 15 with Local Zones already available.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "64 vCPU / 256 GiB; 19 regions",
+      "scenario": "The 4 vCPU / 8 GiB ask needs the $84 Xlarge-16GB or the equally priced compute-optimised 8 GB bundle, in one of 19 regions including six in the EU.",
+      "note": "25 fixed Linux bundles from 2 vCPU / 0.5 GB / 20 GB at $5 to 64 vCPU / 256 GB / 1,280 GB at $1,764 a month, plus memory- and compute-optimised families up to 512 GB and 72 vCPU. No independent sizing and no in-place resize: a new instance from a snapshot is the only way to change plan.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
+        "quote": "Lightsail offers a variety of instance bundles (also known as instance plans) to meet different workload requirements.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Largest shape; regions",

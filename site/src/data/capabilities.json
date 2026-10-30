@@ -230,6 +230,28 @@
             "quote": "Every VPS is its own KVM machine with its own resources, so you can test, reboot and reinstall freely without affecting your production VPS.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "Full VM, own kernel",
+          "note": "A virtual machine you administer, with its own OS and kernel, not a shared container. OVHcloud does not name the hypervisor on the VPS pages.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+            "quote": "Unlike shared hosting, a VPS offers an isolated environment, dedicated to the customer.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Full VM, own kernel",
+          "note": "Every instance is its own virtual machine with its own kernel, disk and public IP, so kernel modules, Docker and any TCP service work as on a normal Linux box.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
+            "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -455,6 +477,28 @@
           "source": {
             "url": "https://hostup.se/en/support/remote-commands/",
             "quote": "The command runs as root with full access.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "Root over SSH",
+          "note": "The first login is a named sudo user, not root, and you switch or sudo from there.",
+          "source": {
+            "url": "https://us.ovhcloud.com/vps/vps-openclaw/",
+            "quote": "You are the root user.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Root over SSH",
+          "note": "You get a Linux login over SSH or the browser terminal with sudo, and AWS documents installing extra software on the instance yourself.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "You can install additional software on your instances by using the in-browser SSH or your own SSH client.",
             "confidence": "docs-confirmed"
           }
         }
@@ -688,6 +732,28 @@
             "quote": "Install any operating system and your own kernel. Run whatever you want on your VPS.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "Docker via official repo",
+          "note": "A Docker image is also available as a preinstalled application at order.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-docker-on-vps",
+            "quote": "This guide explains how to install Docker Engine and Docker Compose on an OVHcloud VPS.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Install on Ubuntu",
+          "note": "No Lightsail image ships Docker, but the Ubuntu, Debian and Amazon Linux blueprints are ordinary distributions with root, so Docker Engine installs from the normal package repository.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/compare-options-choose-lightsail-instance-image.html",
+            "quote": "You can install many additional software packages, such as Evolution, GIMP, Pidgin, and Synaptic by using the APT-based package management tool (`apt-get`).",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -914,6 +980,28 @@
           "source": {
             "url": "https://hostup.se/en/vps/",
             "quote": "Gain full control over your VPS with KVM.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "not-published",
+          "figure": "Not documented",
+          "note": "OVHcloud says its templates do not include a virtualisation OS, but never says whether the CPU exposes vmx/svm. No VPS page answers the question, so QEMU/KVM, Firecracker or an Android emulator inside the VPS cannot be assumed.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+            "quote": "OVHcloud installation templates for VPS do not include the Proxmox Operating System or a similar OS for virtualization.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "not-published",
+          "figure": "Not documented",
+          "note": "No Lightsail page documents nested virtualisation, a hypervisor option or hardware-assisted virtualisation inside an instance. Treat it as unknown rather than supported.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
+            "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
             "confidence": "not-published"
           }
         }
@@ -1149,6 +1237,29 @@
             "url": "https://hostup.se/en/support/mount-custom-iso/",
             "quote": "To install an operating system we don't offer, or to start the server in a rescue system, you mount an ISO file.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "OVHcloud images only",
+          "note": "Reinstallation lists OVHcloud's images and the API exposes `images/available`; there is no ISO mount, image upload or BYOI path for VPS. Another system can only be installed by hand from rescue mode.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "List images available for this VPS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "partly",
+          "figure": "Snapshots only",
+          "shortfall": "You can rebuild from a snapshot of your own configured instance, but you cannot import an image or build one from a Dockerfile made elsewhere.",
+          "note": "The documented image sources are AWS's blueprints and snapshots of Lightsail instances. A snapshot can only make a new resource on the same or a larger plan.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html",
+            "quote": "Use snapshots to create new Lightsail resources using the same plan, or larger plan, than the original resource.",
+            "confidence": "inferred"
           }
         }
       ]
@@ -1389,6 +1500,28 @@
             "url": "https://cloud.hostup.se/api/v2/products/vps",
             "quote": "\"resources\":{\"cpuCores\":2,\"memoryGb\":4,\"storageGb\":50}",
             "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Four fixed models",
+          "note": "VPS-1 to VPS-4 are fixed bundles; CPU, RAM and disk cannot be chosen independently or changed at the hardware level.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+            "quote": "A VPS cannot be customized or modified at the hardware level.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "25 fixed bundles",
+          "note": "You pick from 25 fixed Linux bundles; CPU, memory and disk cannot be sized independently. The only way to change plan is to build a new instance from a snapshot.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
+            "quote": "Lightsail offers a variety of instance bundles (also known as instance plans) to meet different workload requirements.",
+            "confidence": "inferred"
           }
         }
       ]
@@ -1631,6 +1764,28 @@
           "source": {
             "url": "https://hostup.se/en/vps/",
             "quote": "Scale up to 1 TB RAM and down just as easily.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "8 vCores / 24 GB / 200 GB",
+          "note": "VPS-4 is the largest 2027 model: 8 vCores, 24 GB and 200 GB of NVMe.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US",
+            "quote": "\"description\": \"VPS 8 vCPU 24 GB RAM 200 GB disk\"",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "64 vCPU / 256 GiB",
+          "note": "The largest general-purpose bundle is 64 vCPU / 256 GB / 1,280 GB SSD at $1,764 a month, and memory-optimised bundles reach 512 GB.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
+            "quote": "16Xlarge-256GB Linux with public IPv4 | $1,764.00 | 64 | 256 GB | 1,280 GB | 10 TB",
             "confidence": "docs-confirmed"
           }
         }
@@ -1878,6 +2033,29 @@
             "quote": "When you change package, the server restarts by itself as the change is made.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "partly",
+          "figure": "In-place upgrade; reboot",
+          "shortfall": "You can add vCores, RAM or storage in place, but the US product page says a reboot is required, a downgrade needs a new plan and a data migration, and OVHcloud's US support page says upgrades are only offered in its US regions.",
+          "note": "Data and the public IP survive an upgrade. Moving to a higher model is the only way to add vCores.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/upgrade-resources",
+            "quote": "The upgrade will be effective immediately, keeping all of your data.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "New instance from snapshot",
+          "note": "There is no in-place resize. Moving up or down means snapshotting, creating a new instance on the new plan, repointing DNS and the static IP, and deleting the old one.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-right-size-instance.html",
+            "quote": "Lightsail does not change the plan of an existing instance in place.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -2119,6 +2297,29 @@
             "quote": "\"resources\":{\"cpuCores\":1,\"memoryGb\":2,\"storageGb\":25}",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "None on VPS",
+          "note": "No GPU option exists on the VPS range. GPUs are a separate Public Cloud product with its own price list.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+            "quote": "A VPS cannot be customized or modified at the hardware level.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "partly",
+          "figure": "Research product only",
+          "shortfall": "GPUs are sold only in Lightsail for Research, a separate product for researchers; an ordinary Lightsail instance is CPU-only.",
+          "note": "The instance bundle tables contain no GPU shapes. Lightsail for Research offers GPU virtual computers with RStudio and similar applications, on its own prices and console.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "Lightsail for Research offers two types of virtual computers: non-GPU and GPU.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -2355,6 +2556,28 @@
             "quote": "All our VPS servers are located in Sweden and are owned by us at Hostup AB.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "28 locations; 15 Local Zones",
+          "note": "Standard regions plus Local Zones. VPS-2 is the model sold in Local Zones. A VPS cannot be moved between locations after order.",
+          "source": {
+            "url": "https://www.ovhcloud.com/en-gb/lp/vps-localzone/",
+            "quote": "Our virtual private servers are currently available in 28 global locations, including 15 with Local Zones already available.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "19 regions",
+          "note": "19 AWS regions, four of them opt-in and disabled by default (Hong Kong, Jakarta, Malaysia, Spain). DNS zones and CDN distributions are global resources created in us-east-1.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-regions-and-availability-zones-in-amazon-lightsail.html",
+            "quote": "Lightsail is available in the following Regions.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -2588,6 +2811,28 @@
             "quote": "All our VPS servers are located in Sweden and are owned by us at Hostup AB.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "France, Germany, Italy, PL, UK",
+          "note": "OVHcloud's European regions include Roubaix, Gravelines, Strasbourg, Paris, Limburg, Milan, Warsaw and London. EU hosting is marketed as outside the US CLOUD Act.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+            "quote": "Hosting your VPS with OVHcloud in France or generally within the EU offers advantages such as competitive pricing and reinforced data protection.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "6 EU regions",
+          "note": "Frankfurt, Ireland, London, Paris and Stockholm, plus Spain as an opt-in region. Choosing an EU region keeps the machine there; AWS's DPA covers the account.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-regions-and-availability-zones-in-amazon-lightsail.html",
+            "quote": "EU (Ireland) (eu-west-1)",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -2818,6 +3063,28 @@
             "quote": "Stop and restart first shut the server down gracefully, the way you shut down a computer.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Power off only",
+          "note": "The API's only power control is start/stop; there is no pause, hibernate or memory-preserving suspend. Memory and processes are lost on stop.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "Stop the VPS (power off) and return an asynchronous task",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Stop powers down",
+          "note": "Stopping powers the machine down, so memory and running processes are gone. Starting again boots the operating system from the kept disk.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "When you stop your instance, it is powered down at its current state and is available for you to start again at any time.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -3038,6 +3305,28 @@
           "source": {
             "url": "https://hostup.se/en/support/order-a-vps/",
             "quote": "Once the order is paid, the server is created.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "None",
+          "note": "There is no pre-started pool or spare-capacity product; every VPS is ordered, installed and booted individually.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "List your VPS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No pre-started pool",
+          "note": "Every instance is created on demand and goes through Pending before Running. There is no pool of pre-booted machines to draw from.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-start-stop-or-restart-your-instance-virtual-private-server.html",
+            "quote": "When Amazon Lightsail creates your instance, your machine goes into a Pending state before it starts Running.",
             "confidence": "inferred"
           }
         }
@@ -3275,6 +3564,28 @@
             "quote": "Buy a VPS and get started in less than 60 seconds.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Full OS boot",
+          "note": "Starting is a power-on of a full operating system, not a sub-second sandbox restore. OVHcloud publishes no start-time figure.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "Start the VPS (power on) and return an asynchronous task",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Minutes",
+          "note": "AWS says a new instance spins up within minutes, not under a second. Restoring from a snapshot is slower still.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "Once you choose Create, your new instance will spin up automatically within minutes.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -3504,6 +3815,28 @@
             "quote": "A snapshot saves the state of the server's disk right now.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "One manual snapshot",
+          "note": "A snapshot is a paid option, one at a time, and can be downloaded as an image. Restoring it deletes it.",
+          "source": {
+            "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012573640-How-to-use-snapshots-on-a-VPS",
+            "quote": "Since you can only have one snapshot activated at a time, the existing snapshot has to be deleted before creating a new one.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "$0.05/GB-month",
+          "note": "Manual snapshots of an instance or disk are kept until deleted and cost $0.05 per GB-month. Restoring makes a new instance or disk, not an in-place rollback.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html",
+            "quote": "A snapshot contains all of the data that is needed to restore your resource (from the moment when the snapshot was taken).",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -3728,6 +4061,28 @@
             "url": "https://hostup.se/en/support/snapshots/",
             "quote": "A snapshot saves the state of the server's disk right now.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Disk image only",
+          "note": "A snapshot captures the disk, using the QEMU guest agent to freeze the filesystem; running memory is not saved.",
+          "source": {
+            "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012573640-How-to-use-snapshots-on-a-VPS",
+            "quote": "Snapshots are instantaneous images of your running system (“live snapshot”).",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Disk only",
+          "note": "Snapshots capture the disk. AWS recommends stopping the instance first so the data is consistent, which means nothing running survives in the snapshot.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "We recommend stopping your instance temporarily when taking a snapshot, to ensure your data is complete and not corrupted in any way.",
+            "confidence": "inferred"
           }
         }
       ]
@@ -3955,6 +4310,28 @@
             "quote": "You can restore a backup in three ways: to the same server, from another of your servers, or to a brand new server.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Snapshot, not a clone",
+          "note": "A snapshot cannot be booted as a second VPS: `images/available` lists only OVHcloud's images, and there is no clone or fork endpoint.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "Create a snapshot of this VPS (requires the snapshot option and no existing snapshot)",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Snapshot only",
+          "note": "There is no copy of a live machine. You snapshot, then create a second instance from the snapshot while the first keeps running, so the copy starts from the snapshot moment.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "We recommend stopping your instance temporarily when taking a snapshot, to ensure your data is complete and not corrupted in any way.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -4181,6 +4558,28 @@
             "quote": "All snapshots are deleted automatically after 24 hours.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "7 daily (premium add-on)",
+          "note": "The free daily backup is a single restore point; the paid Premium option keeps seven daily restore points. Both exclude additional disks.",
+          "source": {
+            "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012678619-How-to-use-automated-backups-on-a-VPS",
+            "quote": "Upgrading to Premium Automated Backup enhances your Automated backup option to a 7-day rolling daily backup.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Manual, indefinitely",
+          "note": "Manual snapshots stay until you delete them, so any earlier one can be restored. Automatic snapshots are different: only the latest seven daily copies are kept.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html",
+            "quote": "Manual snapshots are stored indefinitely until you delete them.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -4403,6 +4802,28 @@
           "source": {
             "url": "https://hostup.se/en/vps/",
             "quote": "At order time you choose between the following operating systems:",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "OS + app images",
+          "note": "Linux, Windows and BSD images plus preinstalled applications such as n8n, Docker, Plesk and cPanel. A configured server cannot be saved as a reusable template.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/apps-first-steps",
+            "quote": "OVHcloud offers VPS customers pre-installed application images for quick and easy deployment of applications in just a few clicks.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Snapshots as baselines",
+          "note": "A snapshot is the template: create as many instances from it as you like, on the same or a larger plan. AWS also ships blueprints for WordPress, LAMP, Node.js, Docker-free distros and more.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "You can use snapshots as baselines to create new resources or to back up your data.",
             "confidence": "docs-confirmed"
           }
         }
@@ -4632,6 +5053,28 @@
             "quote": "Every new VPS gets a schedule that takes a backup once a week.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "Daily, included",
+          "note": "One daily automated backup is included free, with a click-to-restore and a mount option; the control-panel guide documents 24-hour retention. The order catalog also lists a standard-backup add-on; see the provider caveat.",
+          "source": {
+            "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012678619-How-to-use-automated-backups-on-a-VPS",
+            "quote": "When you order a VPS, a single daily Automated backup is included as a free service option.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "7 daily automatic",
+          "note": "Automatic snapshots run daily and keep the latest seven. They are deleted with the instance unless you copy one to a manual snapshot first.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html",
+            "quote": "The latest seven daily automatic snapshots are stored before the oldest one is replaced with the newest one.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -4856,6 +5299,28 @@
           "source": {
             "url": "https://hostup.se/en/support/cloud-vm/",
             "quote": "The disk costs money for as long as the server exists, even when it is stopped.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "Disk and IP persist",
+          "note": "Stopping powers the machine off and leaves the system disk and IP attached; only a reinstall or cancellation removes the data.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/understand-vps-control-panel",
+            "quote": "A reinstallation will delete all data currently hosted on the VPS (except for additional disks).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Disk kept",
+          "note": "The system disk and any attached disks stay in place while the instance is stopped, so files are there when it starts. The public IPv4 address is not, unless you attached a static IP.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "When you stop your instance, it is powered down at its current state and is available for you to start again at any time.",
             "confidence": "docs-confirmed"
           }
         }
@@ -5085,6 +5550,28 @@
             "quote": "Volumes are only for pay-as-you-go VPS.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "50 GB–10 TB add-on disk",
+          "note": "An additional disk is separate storage attached to the VPS, sold in fixed sizes from 50 GB ($2.60 a month) to 10 TB ($512.90), and it survives a reinstall.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US",
+            "quote": "\"invoiceName\": \"Option Additional Disk 50GB\"",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "$0.10/GB-month",
+          "note": "Block storage disks are separate from the instance and survive its deletion. They cost $0.10 per allocated GB-month, from 8 GB to 16 TB each, up to 15 per instance.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/elastic-block-storage-and-ssd-disks-in-amazon-lightsail.html",
+            "quote": "You can also add more storage to your virtual private server by creating additional block storage disks.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -5307,6 +5794,28 @@
           "source": {
             "url": "https://hostup.se/en/support/block-storage-volumes/",
             "quote": "Pick the server under Select VM. Only active pay-as-you-go VPS are listed.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "One server only",
+          "note": "The additional disk is reachable only from its own server's IP and cannot be attached to a second VPS.",
+          "source": {
+            "url": "https://support.us.ovhcloud.com/hc/en-us/articles/4410563713427-Configuring-an-additional-disk-on-a-VPS",
+            "quote": "The additional disk will only be accessible from the server’s IP address, and data stored on it will remain unaffected, even if the VPS is reinstalled or suffers data loss.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "One instance per disk",
+          "note": "Attaching a disk names a single instance, and Lightsail does not document multi-attach or a shared filesystem. Two machines needing the same files need a network share you run yourself.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_AttachDisk.html",
+            "quote": "Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.",
             "confidence": "inferred"
           }
         }
@@ -5533,6 +6042,29 @@
             "url": "https://hostup.se/en/about-us/",
             "quote": "March 2026 (ETA)",
             "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "partly",
+          "figure": "S3 API, no native mount",
+          "shortfall": "Object Storage is S3-compatible, but OVHcloud documents no native mount on a VPS: you add s3fs, rclone or an application's own S3 client yourself.",
+          "note": "Three S3-compatible classes (High Performance, Standard, Infrequent Access) plus Cold Archive. Buckets are reached over the S3 API, not as a mounted folder.",
+          "source": {
+            "url": "https://support.us.ovhcloud.com/hc/en-us/articles/23896851215379-Object-Storage-FAQ",
+            "quote": "The Object Storage classes are largely compatible with the S3™ protocol and benefit from a recent, high-performance design and good bandwidth.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "S3 API, no mount",
+          "note": "Object storage buckets are built on S3 and reached over the S3 API or the console. AWS documents no way to mount one as a folder; a third-party FUSE client would be your own doing.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/buckets-in-amazon-lightsail.html",
+            "quote": "It is designed to make web-scale computing easier for developers, and is built using the Amazon Simple Storage Service (Amazon S3).",
+            "confidence": "inferred"
           }
         }
       ]
@@ -5769,6 +6301,28 @@
             "quote": "We can provide up to 32 TB of NVMe storage on request.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "10 TB additional disk",
+          "note": "Plan disks reach 200 GB; the largest additional disk is 10 TB. One additional disk per VPS.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US",
+            "quote": "\"invoiceName\": \"Option Additional Disk 10000GB\"",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "16 TB per disk",
+          "note": "Bundles include 20 GB to 1,280 GB of SSD, and extra disks go up to 16 TB each, with 20,000 GB attached per region by default.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/elastic-block-storage-and-ssd-disks-in-amazon-lightsail.html",
+            "quote": "16 TB per disk maximum, or 8 GB per disk minimum.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -5999,6 +6553,28 @@
           "source": {
             "url": "https://hostup.se/en/support/order-a-vps/",
             "quote": "A standard VPS is paid for one month or one year at a time.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "No session limit",
+          "note": "Nothing ends a session or forces a restart; the VPS runs until you stop it or cancel the service, under a 99.9% availability SLA.",
+          "source": {
+            "url": "https://us.ovhcloud.com/vps/",
+            "quote": "Get guaranteed availability with a 99.9% service level agreement (SLA).",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Until deleted",
+          "note": "There is no idle timeout and no session limit: an instance runs until you stop or delete it, and AWS bills it the whole time.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+            "quote": "Lightsail instances and managed databases incur charges until they are deleted.",
             "confidence": "inferred"
           }
         }
@@ -6233,6 +6809,28 @@
             "quote": "A standard VPS is paid for one month or one year at a time.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "No idle timer",
+          "note": "There is no idle timeout to configure and no automatic stop; idleness has no effect on the machine or the bill.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "Start the VPS (power on) and return an asynchronous task",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Manual stop only",
+          "note": "Nothing stops an idle instance for you and there is no timeout to configure; you stop it from the console, CLI or API.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-start-stop-or-restart-your-instance-virtual-private-server.html",
+            "quote": "After your instance is running, you can reboot it or stop and then start it.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -6456,6 +7054,28 @@
             "quote": "A standard VPS is paid for one month or one year at a time.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "No sleep to wake",
+          "note": "A stopped VPS stays stopped until an explicit start call or a control-panel action; an HTTP request does not wake it.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "Start the VPS (power on) and return an asynchronous task",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "A stopped instance does not wake on traffic; the request simply fails until you start it. There is no request-driven proxy in front of it.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-start-stop-or-restart-your-instance-virtual-private-server.html",
+            "quote": "To Start your instance, it must be in a Stopped state.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -6677,6 +7297,28 @@
           "source": {
             "url": "https://hostup.se/en/support/backups/",
             "quote": "A server can have one schedule.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "No provider scheduler",
+          "note": "No scheduled start, stop or run feature. Cron, systemd timers or an external scheduler inside or outside the guest are the only options.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "List your VPS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No scheduler",
+          "note": "Lightsail has no job or instance scheduler. You run cron or systemd timers inside the instance, which means the instance is already running and billing.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+            "quote": "Lightsail instances and managed databases incur charges until they are deleted.",
             "confidence": "inferred"
           }
         }
@@ -6915,6 +7557,28 @@
             "quote": "You add a rule for each service that should be reachable, for example SSH or a website.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "Public IPv4 + IPv6",
+          "note": "Every VPS gets a dedicated public IPv4 and IPv6; any port can be opened, subject to the guest firewall.",
+          "source": {
+            "url": "https://us.ovhcloud.com/vps/",
+            "quote": "Get a unique IPv4 address, for more flexibility and network compatibility.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Public IPv4 + firewall",
+          "note": "Every bundle with a public IPv4 address is reachable on it, and the instance firewall opens the ports you choose. A static IP keeps the address across stops.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "You can use the public IP to connect to your instance from the Internet, such as through a registered domain name or through an SSH or RDP connection from your local computer.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -7148,6 +7812,28 @@
           "source": {
             "url": "https://hostup.se/en/support/private-networks/",
             "quote": "The servers keep their public addresses for internet traffic.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "No token links",
+          "note": "There is no preview URL, signed link or per-port proxy; access control is a firewall rule or an application login.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "List your VPS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "There is no token-scoped preview link. Access control is the firewall, restricted by source IP, or a login you build into the application.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
+            "quote": "you can choose to restrict a firewall rule to an IPv4 or IPv6 address or range of IP addresses.",
             "confidence": "inferred"
           }
         }
@@ -7386,6 +8072,28 @@
             "quote": "If the box shows a command starting with ssh, the server runs Linux. You connect to it with SSH, not Remote Desktop.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "ssh user@IPv4",
+          "note": "A normal sshd on the public IPv4. The first login uses the OS-named user and a temporary password, then your own key or password.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps",
+            "quote": "ssh username@IPv4_VPS",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Standard SSH",
+          "note": "Lightsail creates a default key pair per region, and you can upload your own. Then it is ordinary OpenSSH from your terminal, with SFTP and port forwarding available.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-ssh-in-amazon-lightsail.html",
+            "quote": "In Lightsail, as soon as you create an instance in an AWS Region, we create a Default SSH key in that Region.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -7616,6 +8324,28 @@
           "source": {
             "url": "https://hostup.se/en/support/vps-console/",
             "quote": "The console, sometimes called the VNC console, shows your server's screen in the browser.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "KVM console in browser",
+          "note": "A keyboard-video-mouse console opened from the control panel, useful for boot problems and Windows setup. It is a screen, not a managed shell.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/using-kvm-for-vps",
+            "quote": "The KVM console for VPS available in your OVHcloud Control Panel allows you to open a connection to your VPS in your web browser",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Browser SSH",
+          "note": "The console opens a browser SSH session in one click for Linux instances and RDP for Windows. No local SSH client is needed.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "Lightsail offers a 1-click secure connection to your instance's terminal right from your browser, supporting SSH access for Linux/Unix-based instances and RDP access for Windows-based instances.",
             "confidence": "docs-confirmed"
           }
         }
@@ -7850,6 +8580,28 @@
             "quote": "The console, sometimes called the VNC console, shows your server's screen in the browser.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "ssh -L over real SSH",
+          "note": "Standard SSH port forwarding works because the server runs a normal sshd; there is no provider-side tunnel product.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps",
+            "quote": "ssh username@IPv4_VPS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "SSH port forwarding",
+          "note": "Because it is a normal SSH server, ssh -L reaches any port on the instance as if it were local. There is no provider tunnel command or dashboard button for it.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-ssh-in-amazon-lightsail.html",
+            "quote": "In Lightsail, as soon as you create an instance in an AWS Region, we create a Default SSH key in that Region.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -8078,6 +8830,28 @@
           "source": {
             "url": "https://hostup.se/en/support/vps-firewall/",
             "quote": "Ports only work with TCP or UDP.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "Any TCP or UDP port",
+          "note": "No port restrictions on standard VPS; port 25 is open by default outside Local Zones, where all SMTP is blocked.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+            "quote": "Port 25 is not blocked by default on OVHcloud VPS servers",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Any TCP port",
+          "note": "The firewall takes custom protocol and port rules, so databases, game servers and MQTT work. SMTP on port 25 needs reverse DNS configured or mail may be limited.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-firewall-rules-reference.html",
+            "quote": "A database instance needs rules that allow access for the type of database, such as access over port 3306 for MySQL.",
             "confidence": "docs-confirmed"
           }
         }
@@ -8312,6 +9086,28 @@
             "quote": "DNS records decide where your domain points: the website, the email and the verifications other services ask for.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "Point DNS at the IP",
+          "note": "OVHcloud sells domains and DNS separately; point an A/AAAA record at the VPS address. No domain or email service is included with the VPS.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps",
+            "quote": "Putting your VPS online usually involves using and configuring a domain name.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "6 DNS zones free",
+          "note": "Point an A or AAAA record at the instance's static IP, in a Lightsail DNS zone (six free per account) or at your own registrar. Domain registration is also sold, at cost.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-dns-in-amazon-lightsail.html",
+            "quote": "You can create up to six DNS zones in Lightsail.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -8543,6 +9339,30 @@
             "url": "https://status.hostup.se/",
             "quote": "On a VPS you manage the software yourself and update PHP on the server.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "partly",
+          "figure": "Certbot/Traefik yourself",
+          "shortfall": "OVHcloud does not issue or renew a certificate for a plain VPS: you install Certbot or Traefik and renew it yourself, or use a control panel that does.",
+          "note": "The documented route is a free Let's Encrypt certificate installed over SSH. There is no managed certificate on the VPS itself.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-ssl-certificate",
+            "quote": "This guide documents the use of Let's Encrypt, a free and automated service.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "partly",
+          "figure": "Load balancer only",
+          "shortfall": "Automatic certificates come only with the $18/month load balancer or the WordPress blueprint's guided Let's Encrypt setup; a plain instance has none.",
+          "note": "A Lightsail load balancer includes free certificate management and HTTP-to-HTTPS redirect. On a bare instance you install Caddy or Certbot and renew it yourself.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+            "quote": "Lightsail certificates and certificate management are free with use of a Lightsail load balancer.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -8776,6 +9596,28 @@
           "source": {
             "url": "https://hostup.se/en/support/vps-bandwidth/",
             "quote": "Inbound and outbound traffic count together.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "Unlimited traffic",
+          "note": "No per-GiB charge and no published fair-use threshold for standard VPS; bandwidth is 500 Mbps to 3 Gbps depending on the model.",
+          "source": {
+            "url": "https://us.ovhcloud.com/vps/",
+            "quote": "Unlimited traffic",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "1-10 TB a month",
+          "note": "Each bundle includes 1 TB to 10 TB, halved in Mumbai, Sydney, Jakarta, Malaysia, Hong Kong and Sao Paulo. Both directions count against it, but only outbound overage is charged.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-faq-data-transfer-allowance.html",
+            "quote": "Every Lightsail instance plan includes a data transfer allowance.",
             "confidence": "docs-confirmed"
           }
         }
@@ -9013,6 +9855,29 @@
             "quote": "The firewall only covers incoming traffic.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "partly",
+          "figure": "Guest iptables only",
+          "shortfall": "There is no provider-side outbound allowlist in the VPS API: filtering is iptables or ufw inside the guest, which an agent with root can change.",
+          "note": "OVHcloud's VPS firewall guide is a Linux iptables tutorial. The Edge Network Firewall linked from the FAQ is inbound anti-DDoS filtering.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/firewall-linux-iptable",
+            "quote": "Most of the rules outlined in this guide assume that your iptables is configured by default to DROP incoming traffic, and that you selectively authorize incoming traffic.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Outbound open",
+          "note": "The instance firewall filters inbound traffic only. Outbound traffic is unrestricted, so a compromised agent can reach any host; you would need a proxy or VPC egress control you run yourself.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
+            "quote": "they don't control the traffic that flows out of it—the firewalls allow all outbound traffic.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -9248,6 +10113,29 @@
             "quote": "The firewall only covers incoming traffic.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "partly",
+          "figure": "Guest firewall only",
+          "shortfall": "There is no no-internet switch or private-only VPS: you drop outbound traffic with iptables inside the guest, and the VPS still has a public IP.",
+          "note": "A VPS always ships with a public IPv4 and IPv6. Cutting egress is an OS configuration the root user can undo.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/firewall-linux-iptable",
+            "quote": "Most of the rules outlined in this guide assume that your iptables is configured by default to DROP incoming traffic, and that you selectively authorize incoming traffic.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "There is no no-internet mode. Outbound traffic is always allowed, and an IPv6-only bundle still has internet egress.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
+            "quote": "they don't control the traffic that flows out of it—the firewalls allow all outbound traffic.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -9473,6 +10361,28 @@
           "source": {
             "url": "https://hostup.se/en/vps/",
             "quote": "we are members of RIPE and own our IP subnets, meaning your IP address stays with the server for as long as you have it",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "Dedicated IPv4 + IPv6",
+          "note": "The address is fixed for the life of the VPS and survives an upgrade. Additional IPs are a separate paid option.",
+          "source": {
+            "url": "https://us.ovhcloud.com/vps/",
+            "quote": "Get a unique IPv4 address, for more flexibility and network compatibility.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "$0.005/h unattached",
+          "note": "A static IPv4 address is free while attached and costs $0.005 an hour when detached for more than an hour. Five per region by default, adjustable. IPv6-only bundles cannot take one.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+            "quote": "we charge a small $0.005 USD/hour fee for static IPs not attached to an instance for more than 1 hour.",
             "confidence": "docs-confirmed"
           }
         }
@@ -9711,6 +10621,28 @@
             "quote": "An API key lets a script or a program manage your services without logging in to the client area.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "No vault",
+          "note": "No secrets manager, encrypted variable store or injection API for VPS. Keys live in files, environment variables or the application's own configuration.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "List your VPS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "There is no Lightsail secret store or environment-variable injection. Keys live in files or a service you install, readable by anything running as the same user.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
+            "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -9943,6 +10875,28 @@
           "source": {
             "url": "https://hostup.se/en/support/remote-commands/",
             "quote": "The command runs as root with full access.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "None",
+          "note": "No credential-brokering proxy or placeholder-key mechanism; anything the agent's user can read, the agent can read.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "List your VPS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "Nothing sits between the machine and the internet to add credentials to requests, so an agent with shell access can read any key the application uses.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
+            "quote": "they don't control the traffic that flows out of it—the firewalls allow all outbound traffic.",
             "confidence": "inferred"
           }
         }
@@ -10182,6 +11136,28 @@
             "quote": "To limit the key to certain IP addresses or DNS zones, go to the Security tab.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "API rights per route",
+          "note": "Application keys carry a Rights list that limits which API routes and HTTP methods they may call, and can have a validity period.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/manage-and-operate/api/first-steps",
+            "quote": "The `Rights` field allows you to restrict the use of the application to certain APIs.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "IAM policies",
+          "note": "Every Lightsail action is an IAM action (lightsail:CreateInstances and so on), so a key can be limited to one region, resource or action set, and tags can gate creation.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/security_iam_service-with-iam.html",
+            "quote": "Policy actions in Lightsail use the following prefix before the action: `lightsail:`.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -10401,6 +11377,28 @@
           "source": {
             "url": "https://hostup.se/en/support/order-a-vps/",
             "quote": "Go to VPS in the menu and click New Server.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "Control Panel + configurator",
+          "note": "The 2027 range is ordered through a configurator: model, region, image, SSH key, options. The control panel then handles reinstall, reboot, snapshot, backup and disks.",
+          "source": {
+            "url": "https://us.ovhcloud.com/vps/",
+            "quote": "Choose the configuration that fits your needs—web hosting, gaming, VPN, development, and more.",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Console, few clicks",
+          "note": "The console's Create instance page picks the image, bundle, region and name, then boots the machine. No terminal is needed for that step.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "The first time you log in to the console, choose Create Instance.",
             "confidence": "docs-confirmed"
           }
         }
@@ -10625,6 +11623,28 @@
             "quote": "API keys, MCP and the assistant in the client area",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "ovhcloud vps",
+          "note": "The official OVHcloud CLI has a VPS command group, including `ovhcloud vps list` and `ovhcloud vps get`.",
+          "source": {
+            "url": "https://github.com/ovh/ovhcloud-cli",
+            "quote": "ovhcloud vps list",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "aws lightsail",
+          "note": "The AWS CLI includes a lightsail command group covering key pairs, instances, disks and snapshots, and AWS publishes a CLI tutorial for it.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/getstarted-awscli.html",
+            "quote": "This tutorial guides you through common Amazon Lightsail operations using the AWS Command Line Interface (AWS CLI).",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -10847,6 +11867,28 @@
             "quote": "API keys, MCP and the assistant in the client area",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "python-ovh (official)",
+          "note": "OVHcloud's official thin wrapper handles credential signing; it covers the whole API, VPS included.",
+          "source": {
+            "url": "https://github.com/ovh/python-ovh",
+            "quote": "Lightweight wrapper around OVHcloud's APIs.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "boto3",
+          "note": "boto3 ships a Lightsail client generated from the same API, so scripts can create, start, stop and snapshot instances.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/boto3/latest/reference/services/lightsail.html",
+            "quote": "A low-level client representing Amazon Lightsail",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -11067,6 +12109,28 @@
             "url": "https://hostup.se/en/support/",
             "quote": "API keys, MCP and the assistant in the client area",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "node-ovh (official)",
+          "note": "OVHcloud publishes an official Node.js wrapper on npm as `ovh`.",
+          "source": {
+            "url": "https://github.com/ovh/node-ovh",
+            "quote": "The easiest way to use the OVHcloud.com APIs in your node.js applications.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "@aws-sdk/client-lightsail",
+          "note": "The AWS SDK for JavaScript v3 has a Lightsail client for Node.js, browsers and React Native.",
+          "source": {
+            "url": "https://github.com/aws/aws-sdk-js-v3/blob/main/clients/client-lightsail/README.md",
+            "quote": "AWS SDK for JavaScript Lightsail Client for Node.js, Browser and React Native.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -11291,6 +12355,28 @@
           "source": {
             "url": "https://developer.hostup.se/",
             "quote": "383 documented endpoints cover the things you manage in the HostUp dashboard.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "REST API under /vps",
+          "note": "52 documented paths under `/vps`, covering order rules, service info, reboot, rebuild, start/stop, snapshots, backups, disks, IPs and tasks, plus a Terraform resource.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "List your VPS",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Lightsail API",
+          "note": "A documented JSON API (2016-11-28) covers instances, disks, static IPs, snapshots and DNS, with per-action reference pages and error types.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/Welcome.html",
+            "quote": "This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service.",
             "confidence": "docs-confirmed"
           }
         }
@@ -11521,6 +12607,30 @@
             "quote": "Hostup runs a remote MCP server.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "partly",
+          "figure": "Official; no VPS section",
+          "shortfall": "OVHcloud runs an official MCP server, but it is split into product sections and no VPS section or VPS tool is documented, so an agent cannot manage these servers through it today.",
+          "note": "The MCP server uses OAuth2 and per-section URLs. The documented sections cover domains and other products; the VPS docs index has no MCP page.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/web-cloud/domains/mcp-domain-getting-started",
+            "quote": "You always connect to a specific section: there is no global URL exposing every tool at once.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "partly",
+          "figure": "Generic AWS MCP",
+          "shortfall": "AWS's official MCP server is generic: it can call any AWS API, including Lightsail's, but has no Lightsail-specific tools or skills.",
+          "note": "The managed AWS MCP Server exposes call_aws, which executes AWS API operations with the caller's IAM credentials, so an assistant can create a Lightsail instance if its policy allows it.",
+          "source": {
+            "url": "https://aws.amazon.com/blogs/aws/the-aws-mcp-server-is-now-generally-available/",
+            "quote": "The `call_aws` tool executes any of the 15,000+ AWS API operations using your existing IAM credentials.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -11746,6 +12856,28 @@
             "quote": "The command runs as root with full access.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "No PTY endpoint",
+          "note": "The VPS API has no interactive shell or command endpoint; the KVM console URL is a screen, not a PTY over the API.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "List your VPS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "There is no terminal or PTY endpoint in the Lightsail API. You get a command line by SSH, or by running your own agent inside the instance.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/Welcome.html",
+            "quote": "This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -11968,6 +13100,28 @@
             "url": "https://hostup.se/legal/terms-of-service-en.pdf",
             "quote": "Over SSH/SFTP with your own tools, for example rsync or a disk image.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "No file endpoint",
+          "note": "No upload or download API for files on the VPS; you use SFTP, rsync or the snapshot download.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "List your VPS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "Files move by SFTP or SCP over SSH, not through the API. The API manages the machine and its disks, not their contents.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-connecting-to-linux-unix-instance-using-sftp.html",
+            "quote": "You can transfer files between your local computer and your Linux or Unix instance in Amazon Lightsail by connecting to your instance using SFTP (SSH File Transfer Protocol).",
+            "confidence": "inferred"
           }
         }
       ]
@@ -12200,6 +13354,28 @@
             "quote": "At order time you choose between the following operating systems:",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "None",
+          "note": "Preinstalled images are panels and tools (n8n, Docker, Plesk, cPanel), not coding or personal agents. Hermes and OpenClaw have guides, not images.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/apps-first-steps",
+            "quote": "OVHcloud offers VPS customers pre-installed application images for quick and easy deployment of applications in just a few clicks.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "Blueprints are operating systems and web stacks. AWS's own list of application templates is WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx, MEAN, Node.js and Django; no coding agent is installed, so you add Claude Code or Codex yourself.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -12422,6 +13598,28 @@
           "source": {
             "url": "https://developer.hostup.se/",
             "quote": "Hostup runs a remote MCP server.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "None",
+          "note": "No prompt or task endpoint. An agent is a process you install and run over SSH.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+            "quote": "List your VPS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "Lightsail runs machines, not agents. There is no prompt endpoint or hosted agent; any agent loop is software you install and run.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
+            "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
             "confidence": "inferred"
           }
         }
@@ -12647,6 +13845,28 @@
             "quote": "At order time you choose between the following operating systems:",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Guide, not an image",
+          "note": "OVHcloud publishes a full Hermes install guide with Telegram and scheduled tasks, but there is no Hermes image or dashboard deployment.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-hermes-agent",
+            "quote": "Find out how to deploy Hermes Agent in production on a VPS, connected to OVHcloud AI Endpoints, with a Telegram gateway and scheduled tasks",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "There is no Hermes blueprint or Marketplace listing; AWS's template list does not mention it. You install Hermes on an Ubuntu instance yourself, following its Docker or installer instructions.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -12869,6 +14089,28 @@
             "url": "https://hostup.se/en/vps/",
             "quote": "At order time you choose between the following operating systems:",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Guide, not an image",
+          "note": "A landing page and a Docker/Traefik guide; no preinstalled OpenClaw image at order.",
+          "source": {
+            "url": "https://us.ovhcloud.com/vps/vps-openclaw/",
+            "quote": "Follow our step-by-step guide to install OpenClaw using Docker on your OVHcloud VPS in less than 5 minutes",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "No OpenClaw image is offered and AWS's template list does not mention it. The closest is a bare Ubuntu instance where you install it and configure TLS yourself.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -13094,6 +14336,28 @@
             "url": "https://hostup.se/en/vps/",
             "quote": "At order time you choose between the following operating systems:",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Install it yourself",
+          "note": "No browser image, headless-browser endpoint or computer-use API. Chromium and a driver are your install.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/apps-first-steps",
+            "quote": "OVHcloud offers VPS customers pre-installed application images for quick and easy deployment of applications in just a few clicks.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "No browser is preinstalled or exposed for an agent to drive. You can apt-install Chromium and run Playwright inside the instance, but nothing is set up for it.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -13321,6 +14585,30 @@
             "quote": "You connect to a VPS running Windows with Remote Desktop.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "partly",
+          "figure": "Windows + RDP",
+          "shortfall": "A Windows VPS gives a real desktop over RDP, but there is no computer-use image, streaming API or preinstalled agent, and Linux images have no desktop at all.",
+          "note": "Windows is offered on standard VPS (not Local Zones), and OVHcloud documents connecting with Remote Desktop. Nothing is set up for an agent to drive the screen.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps",
+            "quote": "On your local Windows device, you can use the \"Remote Desktop Connection\" client application to connect to the VPS.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "partly",
+          "figure": "Windows RDP only",
+          "shortfall": "Only Windows bundles have a desktop, reached by RDP; Linux instances have no graphical desktop and there is no browser-streamed desktop or computer-use API.",
+          "note": "Windows Server bundles cost $9.50 to $4,204 a month and give an RDP desktop in the browser. A Linux agent machine has no desktop unless you install one and stream it yourself.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "Lightsail offers a 1-click secure connection to your instance's terminal right from your browser, supporting SSH access for Linux/Unix-based instances and RDP access for Windows-based instances.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -13545,6 +14833,28 @@
             "quote": "At order time you choose between the following operating systems:",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "Hermes and OpenClaw guides",
+          "note": "OVHcloud maintains first-party install guides for Hermes Agent and OpenClaw, plus a generic AI-agent guide, all on a VPS with root.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-hermes-agent",
+            "quote": "Find out how to deploy Hermes Agent in production on a VPS, connected to OVHcloud AI Endpoints, with a Telegram gateway and scheduled tasks",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "No",
+          "note": "No provider documents Lightsail as the machine behind Cursor cloud agents, Devin, Claude Managed Agents or similar. It is a general-purpose VPS, not an agent backend.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/what-is-amazon-lightsail.html",
+            "quote": "If you're an individual developer or hobbyist working on a personal project, Lightsail can help you deploy and manage basic cloud resources.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -13766,6 +15076,28 @@
           "source": {
             "url": "https://hostup.se/en/support/give-others-access/",
             "quote": "They get their own sign-in to your account and only see what you choose.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "IAM users, groups, policies",
+          "note": "OVHcloud IAM gives the account users, groups and per-resource policies, free. Services are still owned by the account, not by a project workspace.",
+          "source": {
+            "url": "https://us.ovhcloud.com/identity-security-operations/identity-access-management/",
+            "quote": "Policies contain a list of identities, such as accounts, users, and user groups, a list of resources where the policies are applicable, and a list of actions that the identities are allowed to perform.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "AWS account + IAM",
+          "note": "Everyone works inside one AWS account with IAM users, groups or roles. Lightsail itself has no separate team object; billing and resources are shared at the account level.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-managing-access-for-an-iam-user.html",
+            "quote": "you can create one or more IAM users in your AWS account, and those users can be configured with different levels of access to services offered by AWS.",
             "confidence": "docs-confirmed"
           }
         }
@@ -13993,6 +15325,28 @@
             "quote": "Choose which services and domains they can see.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "IAM policies per resource",
+          "note": "Policies grant actions on named resources to users and groups; there are no fixed Owner/Admin/Member roles, so the account owner defines each policy.",
+          "source": {
+            "url": "https://us.ovhcloud.com/identity-security-operations/identity-access-management/",
+            "quote": "Policies contain a list of identities, such as accounts, users, and user groups, a list of resources where the policies are applicable, and a list of actions that the identities are allowed to perform.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "IAM policies",
+          "note": "IAM policies and groups decide who can view, create, edit or delete Lightsail resources. There are no Lightsail-specific roles, so this is AWS IAM rather than a product feature.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-managing-access-for-an-iam-user.html",
+            "quote": "You do this when someone joins your team who requires access to view, create, edit, or delete Lightsail resources but doesn’t need access to other services offered by AWS.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -14215,6 +15569,28 @@
             "url": "https://hostup.se/en/security/",
             "quote": "Swedish BankID is built natively into the control panel. Prefer something else? Google sign-in and email with password are also available",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "SAML 2.0 (Entra, Okta)",
+          "note": "Identity federation through ADFS, Azure AD/Entra ID, Google Workspace or Okta, at no extra charge.",
+          "source": {
+            "url": "https://us.ovhcloud.com/identity-security-operations/identity-access-management/",
+            "quote": "Leverage SAML 2.0 federation protocol to seamlessly connect your Identity Provider, such as ADFS, Azure AD, Google Workspace, and Okta.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "IAM Identity Center",
+          "note": "AWS IAM Identity Center connects a SAML or OIDC identity provider and gives single sign-on to the AWS account, which covers the Lightsail console and API.",
+          "source": {
+            "url": "https://aws.amazon.com/iam/identity-center/",
+            "quote": "Give your workforce single sign-on access and a consistent experience across AWS services.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -14440,6 +15816,28 @@
             "quote": "The bell (Alerts) next to Budget Used sets up alerts for your costs.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "No hard cap",
+          "note": "No account-level spending limit. The fixed monthly price caps the machine itself, but upgrades, additional disks, IPs and licences add to the bill and nothing stops them.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/account-and-service-management/managing-billing-payments-and-services/faq-billing",
+            "quote": "By default, your services are renewed automatically when they reach their renewal date",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Alerts, no cap",
+          "note": "Lightsail has no hard spending limit. AWS Budgets can alert you and can apply an IAM policy that blocks new resources, but running instances keep billing.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+            "quote": "You can choose to be alerted for both actual (after accruing) and forecasted (before accruing) spends.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -14660,6 +16058,29 @@
           "source": {
             "url": "https://hostup.se/en/support/monitor-your-vps/",
             "quote": "You can get an alert when CPU or memory goes over a limit you choose.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "partly",
+          "figure": "Renewal emails only",
+          "shortfall": "OVHcloud emails before a service expires or renews, but there is no spend-threshold or budget alert for a VPS, whose price is fixed until you change it.",
+          "note": "Expiry and renewal notifications are documented. Public Cloud has budget alerts; the VPS pages do not.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/account-and-service-management/managing-billing-payments-and-services/best-practices",
+            "quote": "you will receive several notifications by email",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "AWS Budgets",
+          "note": "AWS Budgets sends alerts on actual or forecast spend, and Lightsail's own alarms cover CPU, network and status checks rather than money.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+            "quote": "You can choose to be alerted for both actual (after accruing) and forecasted (before accruing) spends.",
             "confidence": "docs-confirmed"
           }
         }
@@ -14887,6 +16308,29 @@
             "quote": "The Audit Log shows what has been done on the account and when.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "partly",
+          "figure": "Audit logs via paid LDP",
+          "shortfall": "Account audit, activity and access-policy logs exist, but you must forward them to Logs Data Platform, a separate paid service, to read or keep them.",
+          "note": "Log forwarding itself is free; the Logs Data Platform usage is charged at its standard price plan.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/manage-and-operate/iam/logs-forwarding",
+            "quote": "Audit Logs: Provide a security-relevant, chronological set of records documenting the sequence of actions in your OVHcloud account",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "CloudTrail",
+          "note": "CloudTrail records every Lightsail API call, from the console or code, with the identity, source IP and time. It is on by default in Event history; a trail keeps it.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/logging-lightsail-api-calls-using-aws-cloudtrail.html",
+            "quote": "CloudTrail captures all API calls for Lightsail as events.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -15110,6 +16554,28 @@
           "source": {
             "url": "https://hostup.se/en/support/order-a-vps/",
             "quote": "A standard VPS is paid for one month or one year at a time.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Monthly only",
+          "note": "There is no hourly or per-second rate for VPS; the recurring price is a monthly fee, and a part-month is prorated only for billing-date alignment.",
+          "source": {
+            "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360002306224-Overview-of-Billing-with-OVHcloud-US",
+            "quote": "You can choose to be billed monthly for a Virtual Private Server (VPS) regardless of whether you select a commitment that is month-to-month, 12 months, or 24 months.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Hourly",
+          "note": "Billing is by the instance-hour at the bundle's hourly rate, capped at the monthly price. AWS does not publish a per-second meter or a rounding rule for partial hours.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
+            "quote": "Bundles are billed on an on-demand hourly rate, so you pay only for what you use.",
             "confidence": "docs-confirmed"
           }
         }
@@ -15351,6 +16817,28 @@
             "quote": "CPU and memory only cost money while the server is running.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Fixed monthly plan",
+          "note": "The vCores are reserved for the whole month whether the CPU works or waits; there is no active-CPU meter or floor.",
+          "source": {
+            "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360002306224-Overview-of-Billing-with-OVHcloud-US",
+            "quote": "A customer purchases a VPS and is charged the full monthly amount.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Full rate while on",
+          "note": "You pay the bundle's hourly price whether the CPU is idle or busy. The vCPU is burstable, but there is no credit for leaving it idle.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "For every Lightsail plan you use, we charge you the fixed hourly price, up to the maximum monthly plan cost.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -15581,6 +17069,28 @@
           "source": {
             "url": "https://hostup.se/en/support/cloud-vm/",
             "quote": "CPU and memory only cost money while the server is running. The disk costs money for as long as the server exists, even when it is stopped.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Stop still bills",
+          "note": "Powering off keeps the full monthly charge; there is no stopped-storage rate and no suspended state that reduces the bill.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/account-and-service-management/managing-billing-payments-and-services/faq-billing",
+            "quote": "By default, your services are renewed automatically when they reach their renewal date",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Stopped still billed",
+          "note": "A stopped instance is charged at the same hourly rate as a running one until it is deleted. Only Lightsail for Research has a cheap stopped rate.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+            "quote": "These resources accrue charges even when they are in the stopped state.",
             "confidence": "docs-confirmed"
           }
         }
@@ -15819,6 +17329,28 @@
             "quote": "A standard VPS is paid for one month or one year at a time.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "No plan fee",
+          "note": "There is no separate platform or account fee; the VPS monthly price is the whole machine charge, and the installation fee is $0.",
+          "source": {
+            "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360002306224-Overview-of-Billing-with-OVHcloud-US",
+            "quote": "A customer purchases a VPS and is charged the full monthly amount.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "No plan fee",
+          "note": "There is no account or platform fee: you pay for the bundles and add-ons you use, hourly, and the account itself costs nothing.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/faq/",
+            "quote": "Lightsail plans are billed on an on-demand hourly rate, so you pay only for what you use.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -16054,6 +17586,28 @@
           "source": {
             "url": "https://hostup.se/en/vps/",
             "quote": "### €4.90 €4.41/mo Billed €52.90/year",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "$5.35–$27.50/mo",
+          "note": "A fixed monthly price per model on the no-commitment term: $5.35 for VPS-1 to $27.50 for VPS-4. 6- and 12-month commitments lower it, and the product page's \"Starting at\" figures are the 12-month prices.",
+          "source": {
+            "url": "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US",
+            "quote": "\"formattedPrice\": \"$5.35 USD\"",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "$5-$1,764 a month",
+          "note": "Each bundle has one monthly price covering CPU, memory, SSD and a transfer allowance, and that price is also the monthly cap on hourly billing.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/pricing/",
+            "quote": "Lightsail bundles resources like memory, vCPU, and solid-state drive (SSD) storage into one plan, so budgeting is easy and straightforward.",
             "confidence": "pricing-page"
           }
         }
@@ -16296,6 +17850,28 @@
             "quote": "On a new order of VPS or web hosting, both Consumers and Business Customers have a money-back guarantee for 14 days from activation",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "None",
+          "note": "Every VPS is a paid monthly plan from the first invoice; no free tier or free machine is offered on the VPS pages.",
+          "source": {
+            "url": "https://us.ovhcloud.com/vps/",
+            "quote": "Starting at $4.54 /month",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Credits only",
+          "note": "There is no recurring free Lightsail allowance. The old short-term trials are gone, replaced by AWS Free Tier credits that run out or expire.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+            "quote": "Lightsail’s short-term free trial offers have been replaced by the AWS Free Tier.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -16534,6 +18110,28 @@
             "quote": "Credit you top up is not paid out.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "No signup credit",
+          "note": "No VPS signup credit is published. Promotional offers exist from time to time but are not a standing credit.",
+          "source": {
+            "url": "https://us.ovhcloud.com/vps/",
+            "quote": "Starting at $4.54 /month",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "Up to $200",
+          "note": "New AWS accounts get $100 of credits at sign-up and can earn up to $100 more, usable on Lightsail. The credits last six months at most.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+            "quote": "you can get started with Amazon Lightsail for free with the AWS Free Tier where you can get up to $200 USD in free AWS credits.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -16767,6 +18365,28 @@
             "quote": "You can pay through Stripe, for example by card, Apple Pay, Google Pay or Klarna, and also by Bankgiro or Swish for invoices in SEK and by SEPA transfer for invoices in EUR.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Payment method required",
+          "note": "A bank card, PayPal or SEPA direct debit must be on the account before the service renews, and the first order is charged immediately.",
+          "source": {
+            "url": "https://docs.ovhcloud.com/en/guides/account-and-service-management/managing-billing-payments-and-services/faq-billing",
+            "quote": "To ensure that your services are renewed properly, you will need to set at least one payment method in the OVHcloud Control Panel.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Card required",
+          "note": "An AWS account needs a payment method on file before it can be created. AWS's own guidance says sign-up requires a valid credit card; the current Free Tier page describes credits and a no-charge plan but does not remove that requirement.",
+          "source": {
+            "url": "https://aws.amazon.com/blogs/aws-cloud-financial-management/a-quick-overview-of-aws-payment-methods/",
+            "quote": "AWS sign-up requires that you have a valid credit card on file.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -16986,6 +18606,28 @@
           "source": {
             "url": "https://status.hostup.se/",
             "quote": "99.992% uptime over 90 days",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "status-ovhcloud.com",
+          "note": "A public status page split by product family, with a separate Bare Metal Cloud status site for server incidents.",
+          "source": {
+            "url": "https://www.status-ovhcloud.com/",
+            "quote": "OVHcloud Status",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "AWS Health Dashboard",
+          "note": "The AWS Health Dashboard shows current and historical service health, including per-region events. Lightsail appears among AWS services rather than on a dedicated page.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/health/latest/ug/what-is-aws-health.html",
+            "quote": "All customers can use the AWS Health Dashboard, powered by the AWS Health API. The dashboard requires no setup, and it's ready to use for authenticated AWS users.",
             "confidence": "docs-confirmed"
           }
         }
@@ -17212,6 +18854,28 @@
           "source": {
             "url": "https://hostup.se/legal/terms-of-service-en.pdf",
             "quote": "This SLA applies to Business Customers' paid VPS and web hosting.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "99.9% monthly",
+          "note": "A 99.9% monthly availability commitment for VPS, with service credits if it is missed. The SLA's tiers and 60-day claim window are in the research ledger.",
+          "source": {
+            "url": "https://us.ovhcloud.com/vps/",
+            "quote": "Get guaranteed availability with a 99.9% service level agreement (SLA).",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "99.5% per instance",
+          "note": "The SLA promises 99.5% monthly uptime per instance and 99.99% at region level, with service credits below those figures. It is a commercially reasonable efforts commitment.",
+          "source": {
+            "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/",
+            "quote": "AWS will use commercially reasonable efforts to make the Single Lightsail Instance available with an Instance-Level Uptime Percentage, as shown in the table below during any monthly billing cycle",
             "confidence": "docs-confirmed"
           }
         }
@@ -17442,6 +19106,29 @@
             "quote": "GDPR - data in Sweden/EU",
             "confidence": "not-published"
           }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "partly",
+          "figure": "SOC 2; VPS not named",
+          "shortfall": "SOC 1/2/3 reports exist for OVHcloud Services and the US data centres, but the published scope names \"Bare Metal Cloud\" rather than VPS, and non-US services need a sales request.",
+          "note": "Security and availability are the two trust categories in scope for the SOC 2 Type 2 report.",
+          "source": {
+            "url": "https://us.ovhcloud.com/compliance/soc-1-2-3/",
+            "quote": "The scope of the SSAE 18 Type 2 SOC 1, 2, & 3 examinations is the OVHcloud Services and US Data Centers",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "SOC 1/2/3 reports",
+          "note": "AWS publishes SOC 1, SOC 2 and SOC 3 reports covering the infrastructure Lightsail runs on. The SOC 2 report is available to customers through AWS Artifact.",
+          "source": {
+            "url": "https://aws.amazon.com/compliance/soc-faqs/",
+            "quote": "AWS SOC 2 Security, Availability, Confidentiality, & Privacy Report available to AWS customers from AWS Artifact.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -17660,6 +19347,28 @@
           "source": {
             "url": "https://hostup.se/en/vps/",
             "quote": "Yes. The Data Processing Agreement covers all our services and applies to every customer automatically, with no signature",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "yes",
+          "figure": "DPA + SCCs",
+          "note": "A Data Processing Agreement forms part of the Terms of Service and covers GDPR, CCPA and standard contractual clauses, with technical and organisational measures.",
+          "source": {
+            "url": "https://us.ovhcloud.com/legal/data-processing-agreement/",
+            "quote": "This Data Processing Agreement (“DPA”) forms part of the OVHcloud Terms of Service",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "yes",
+          "figure": "AWS DPA",
+          "note": "The AWS Service Terms incorporate the AWS Data Processing Addendum for customer data, and the Standard Contractual Clauses for transfers.",
+          "source": {
+            "url": "https://aws.amazon.com/service-terms/",
+            "quote": "These Service Terms incorporate the AWS Data Processing Addendum (“DPA”), when you use AWS Services to process Customer Data (as defined in the DPA).",
             "confidence": "docs-confirmed"
           }
         }
@@ -17887,6 +19596,28 @@
           "source": {
             "url": "https://hostup.se/en/",
             "quote": "We built our own system from scratch.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "ovhcloud",
+          "verdict": "no",
+          "figure": "Proprietary platform",
+          "note": "A hosted service governed by OVHcloud's terms. The CLI, SDKs and Terraform provider are open source, but the VPS platform itself cannot be self-hosted.",
+          "source": {
+            "url": "https://us.ovhcloud.com/legal/terms-of-service/",
+            "quote": "This agreement between OVH US LLC dba OVHcloud®, a Delaware limited liability company (\"OVHcloud\"), and you (\"You,\" \"Your\" or \"Customer\")",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "lightsail",
+          "verdict": "no",
+          "figure": "Proprietary",
+          "note": "Lightsail is a closed AWS service. You cannot run its control plane on your own hardware, and the instances are ordinary VMs rather than a self-hostable sandbox platform.",
+          "source": {
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/what-is-amazon-lightsail.html",
+            "quote": "Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for anyone who needs to build websites or web applications.",
             "confidence": "inferred"
           }
         }

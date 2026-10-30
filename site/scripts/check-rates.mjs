@@ -67,7 +67,11 @@ async function read(url) {
     // Cloudflare's "Just a moment" bot check: no script gets past it, only a browser.
     if (res.status === 403 && (res.headers.get("cf-mitigated") === "challenge" || body.includes("<title>Just a moment"))) return { blocked: true };
     if (!res.ok) return { error: `HTTP ${res.status}` };
-    if (/json/.test(res.headers.get("content-type") ?? "")) return { figures: jsonFigures(JSON.parse(body)) };
+    // A feed that writes prices as text ("$5.35 USD", as OVHcloud's catalog does) is read like a page.
+    if (/json/.test(res.headers.get("content-type") ?? "")) {
+      const found = jsonFigures(JSON.parse(body));
+      return { figures: found.length ? found : figures(body) };
+    }
     return { figures: figures(body) };
   } catch (e) {
     return { error: String(e.cause?.code ?? e.name ?? e) };

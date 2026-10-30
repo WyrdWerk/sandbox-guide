@@ -1424,5 +1424,137 @@
       "title": "About HostUp",
       "url": "https://hostup.se/en/about-us/"
     }
+  },
+  "ovhcloud": {
+    "isolation": {
+      "title": "Getting started with a VPS — root, SSH and your responsibilities",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps"
+    },
+    "sizes-regions": {
+      "title": "VPS 2027 models, specs and locations",
+      "url": "https://us.ovhcloud.com/vps/"
+    },
+    "lifecycle": {
+      "title": "VPS management in the Control Panel — reboot, reinstall, rescue",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/understand-vps-control-panel"
+    },
+    "snapshots-forks": {
+      "title": "How to use snapshots on a VPS",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012573640-How-to-use-snapshots-on-a-VPS"
+    },
+    "storage": {
+      "title": "Configuring an additional disk on a VPS",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/4410563713427-Configuring-an-additional-disk-on-a-VPS"
+    },
+    "idle-timers": {
+      "title": "VPS FAQ — no idle stop, no session limit",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq"
+    },
+    "reaching-it": {
+      "title": "How to use the KVM console to access a VPS",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/using-kvm-for-vps"
+    },
+    "custom-domains": {
+      "title": "How to install an SSL certificate on a VPS",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-ssl-certificate"
+    },
+    "outbound-network": {
+      "title": "Configuring the firewall on Linux with iptables",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/firewall-linux-iptable"
+    },
+    "keys-secrets": {
+      "title": "How to secure a VPS",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/secure-your-vps"
+    },
+    "ways-to-drive": {
+      "title": "First steps with the OVHcloud APIs",
+      "url": "https://docs.ovhcloud.com/en/guides/manage-and-operate/api/first-steps"
+    },
+    "built-in-agents": {
+      "title": "First steps with pre-installed applications (n8n, Docker, Plesk, cPanel)",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/apps-first-steps"
+    },
+    "teams-accounts": {
+      "title": "Identity and Access Management — users, groups, policies and SSO",
+      "url": "https://us.ovhcloud.com/identity-security-operations/identity-access-management/"
+    },
+    "billing-models": {
+      "title": "Overview of billing with OVHcloud US — monthly VPS billing and commitments",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360002306224-Overview-of-Billing-with-OVHcloud-US"
+    },
+    "trials-free-tiers": {
+      "title": "VPS FAQ — offers, billing and what is included",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq"
+    },
+    "company": {
+      "title": "Attestations and certifications — SOC 1, SOC 2 and SOC 3 scope",
+      "url": "https://us.ovhcloud.com/compliance/soc-1-2-3/"
+    }
+  },
+  "lightsail": {
+    "isolation": {
+      "title": "Virtual private server instances in Lightsail",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html"
+    },
+    "sizes-regions": {
+      "title": "Lightsail instance bundles",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html"
+    },
+    "billing-models": {
+      "title": "Lightsail pricing: hourly rate and monthly cap",
+      "url": "https://aws.amazon.com/lightsail/pricing/"
+    },
+    "trials-free-tiers": {
+      "title": "Billing and account management: free trials and credits",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html"
+    },
+    "lifecycle": {
+      "title": "Start, stop, or reboot your Lightsail instance",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-start-stop-or-restart-your-instance-virtual-private-server.html"
+    },
+    "snapshots-forks": {
+      "title": "Snapshots in Amazon Lightsail",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html"
+    },
+    "storage": {
+      "title": "Block storage and SSD disks in Lightsail",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/elastic-block-storage-and-ssd-disks-in-amazon-lightsail.html"
+    },
+    "idle-timers": {
+      "title": "Billing and account management: charges until deleted",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html"
+    },
+    "reaching-it": {
+      "title": "Instance firewalls and port mappings",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html"
+    },
+    "custom-domains": {
+      "title": "DNS in Amazon Lightsail",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-dns-in-amazon-lightsail.html"
+    },
+    "outbound-network": {
+      "title": "Data transfer in Lightsail: allowances and overage",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-faq-data-transfer-allowance.html"
+    },
+    "keys-secrets": {
+      "title": "Lightsail policies and roles in IAM",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/security_iam_service-with-iam.html"
+    },
+    "ways-to-drive": {
+      "title": "Using Amazon Lightsail with the AWS CLI",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/getstarted-awscli.html"
+    },
+    "built-in-agents": {
+      "title": "Lightsail instance blueprints",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/compare-options-choose-lightsail-instance-image.html"
+    },
+    "teams-accounts": {
+      "title": "Grant Lightsail access for an IAM user",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-managing-access-for-an-iam-user.html"
+    },
+    "company": {
+      "title": "Lightsail instance and block storage SLA",
+      "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/"
+    }
   }
 }

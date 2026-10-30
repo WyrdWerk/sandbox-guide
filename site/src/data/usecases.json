@@ -261,6 +261,28 @@
             "url": "https://hostup.se/en/vps/"
           },
           "price": "$5.72/mo (VPS XS, 2 vCPU / 4 GB / 50 GB), ex-VAT"
+        },
+        {
+          "provider": "ovhcloud",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "OVHcloud publishes a full Hermes Agent guide for a VPS: Docker or a local install, OVHcloud AI Endpoints as the model provider, a Telegram gateway and scheduled tasks. It is a command-line walkthrough, not an image.",
+          "link": {
+            "title": "How to install Hermes Agent on a VPS",
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-hermes-agent"
+          },
+          "price": "VPS-1 $5.35/mo monthly-billed; VPS-2 $10.00/mo if 4 vCores and 8 GB are wanted"
+        },
+        {
+          "provider": "lightsail",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Create an Ubuntu 24.04 instance, add a static IP, then install Hermes with its Docker or installer instructions and keep ~/.hermes on the instance disk. The 2 vCPU / 2 GB Small-2GB bundle is the smallest that meets Hermes's recommended memory; 4 GB is safer with a browser.",
+          "link": {
+            "title": "Get started with Linux instances in Lightsail",
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/getting-started-with-amazon-lightsail.html"
+          },
+          "price": "$12/month for 2 vCPU / 2 GB, $24 for 2 vCPU / 4 GB; no agent surcharge"
         }
       ],
       "picks": [
@@ -629,6 +651,28 @@
             "url": "https://hostup.se/en/vps/"
           },
           "price": "$5.72–$11.55/mo (VPS XS or SM), ex-VAT"
+        },
+        {
+          "provider": "ovhcloud",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "A landing page plus a Docker/Traefik guide: install Docker, create a proxy network, install Traefik, then OpenClaw, then configure the gateway token and a messaging channel. Root access and a public IPv4 are there; the setup is terminal work.",
+          "link": {
+            "title": "How to install OpenClaw on a VPS",
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-openclaw"
+          },
+          "price": "VPS-1 $5.35/mo monthly-billed; VPS-2 $10.00/mo"
+        },
+        {
+          "provider": "lightsail",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install OpenClaw on an Ubuntu instance yourself, then put Caddy or the $18/month load balancer in front for TLS. Nothing is hardened for you: no generated gateway token, no device pairing, no container isolation and no fail2ban unless you add them.",
+          "link": {
+            "title": "Lightsail instance blueprints",
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/compare-options-choose-lightsail-instance-image.html"
+          },
+          "price": "$24/month for 2 vCPU / 4 GB, plus $18/month if you want the managed certificate"
         }
       ],
       "picks": [
@@ -989,6 +1033,83 @@
             "url": "https://hostup.se/en/vps/"
           },
           "price": "$11.55/mo (VPS SM), ex-VAT"
+        },
+        {
+          "provider": "ovhcloud",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Claude Code or Codex over SSH on Ubuntu. VPS-2 gives 4 vCores / 8 GB / 75 GB for $10.00 a month, or VPS-3 6 / 12 / 100 for $14.50. The disk survives a power-off, but the monthly plan bills through the stopped hours.",
+          "link": {
+            "title": "Getting started with a VPS",
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps"
+          },
+          "price": "$10.00–$14.50/mo monthly-billed"
+        },
+        {
+          "provider": "lightsail",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Claude Code or Codex on an Ubuntu instance and sign in per developer. The 4 vCPU / 8 GiB ask lands on the $84 Xlarge-16GB or compute-optimised 8 GB bundle, because no cheaper bundle has four vCPUs.",
+          "link": {
+            "title": "Lightsail instance bundles",
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html"
+          },
+          "price": "$84/month for 4 vCPU / 8-16 GB, always on"
+        },
+        {
+          "provider": "blaxel",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official tutorial runs Claude Code in a sandbox against a codebase in a second sandbox, with a login on your own Anthropic account.",
+          "link": {
+            "title": "Blaxel: run Claude Code in a sandbox",
+            "url": "https://docs.blaxel.ai/Tutorials/Claude-Code"
+          },
+          "price": null
+        },
+        {
+          "provider": "modal",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No Claude Code guide. Create a sandbox with a Volume mounted for the repository and `~/.claude`, install Claude Code, and terminate it after the session; a filesystem snapshot can keep the installed tools. A sandbox ends after at most 24 hours, so each session starts a new one.",
+          "link": {
+            "title": "Modal: sandbox files and Volumes",
+            "url": "https://modal.com/docs/guide/sandbox-files"
+          },
+          "price": null
+        },
+        {
+          "provider": "morph",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official example installs Claude Code in a Devbox with one-click VS Code or Cursor access and SSH; nothing on teams or per-developer logins.",
+          "link": {
+            "title": "Morph: Claude Code on a Devbox",
+            "url": "https://cloud.morph.so/docs/examples/claude-code"
+          },
+          "price": null
+        },
+        {
+          "provider": "runtime",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "A first-party guide installs Claude Code from npm in a microVM, keeps the Anthropic key in a host-side secret and returns the diff; each task gets a fresh sandbox.",
+          "link": {
+            "title": "Runtime: run Claude Code in a sandbox",
+            "url": "https://withruntime.com/integrations/claude-code"
+          },
+          "price": null
+        },
+        {
+          "provider": "sprites",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Claude Code yourself in a Sprite; the whole filesystem persists and the Sprite wakes on a command or request. No Claude Code guide.",
+          "link": {
+            "title": "Sprites: quickstart",
+            "url": "https://docs.fly.io/sprites/quickstart.md"
+          },
+          "price": null
         }
       ],
       "picks": [
@@ -1197,6 +1318,135 @@
             "url": "https://developer.hostup.se/"
           },
           "price": "Not a per-task product; one VPS XS plan is $5.72/mo"
+        },
+        {
+          "provider": "ovhcloud",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run your own interpreter service on a VPS. There is no sandbox API, no per-run machine and no per-second billing: one VPS-1 costs $5.35 whether it runs 20,000 one-minute jobs or none, and jobs share the same kernel and disk.",
+          "link": {
+            "title": "VPS product page",
+            "url": "https://us.ovhcloud.com/vps/"
+          },
+          "price": "$5.35/mo for VPS-1"
+        },
+        {
+          "provider": "lightsail",
+          "tier": "none",
+          "noTerminal": "no",
+          "what": "Lightsail has no per-run sandbox API. The closest is scripting CreateInstances, but each instance takes minutes to boot, cannot pause, and bills by the hour, so a code interpreter inside a product has no cheap path here.",
+          "link": null,
+          "price": "Not a fit; the smallest useful bundle is $24/month and bills while idle"
+        },
+        {
+          "provider": "agent37",
+          "tier": "backend",
+          "noTerminal": "no",
+          "what": "An instance runs a shell command through `POST /v1/instances/{id}/exec`; your app creates the machine, runs the code and deletes it. The product is an agent host, not an interpreter service.",
+          "link": {
+            "title": "Agent 37: run commands",
+            "url": "https://www.agent37.com/docs/agents-api/exec"
+          },
+          "price": null
+        },
+        {
+          "provider": "blaxel",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "The SDK runs shell commands in a sandbox and returns stdout, stderr and the exit code; your app creates the sandbox and reads the result.",
+          "link": {
+            "title": "Blaxel: process execution",
+            "url": "https://docs.blaxel.ai/Sandboxes/Processes"
+          },
+          "price": null
+        },
+        {
+          "provider": "boat",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "The REST API runs a shell command and returns stdout, stderr and the exit code, with a 600-second maximum; your app creates and stops the sandbox.",
+          "link": {
+            "title": "Boat: run a command",
+            "url": "https://docs.boat.dev/api/reference/agent/execute-sandbox-command"
+          },
+          "price": null
+        },
+        {
+          "provider": "boxd",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "The TypeScript SDK creates a machine, runs a command and reads the result; the documented path is the SDK or CLI, not a REST endpoint. Machines sleep between runs.",
+          "link": {
+            "title": "boxd: TypeScript SDK",
+            "url": "https://docs.boxd.sh/reference/typescript-sdk"
+          },
+          "price": null
+        },
+        {
+          "provider": "instabox",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "The SDK creates a machine from a template and runs a command with a timeout; your app collects the output and deletes it.",
+          "link": {
+            "title": "InstaBox: integrate with the SDK",
+            "url": "https://instabox.sh/docs/integrate"
+          },
+          "price": null
+        },
+        {
+          "provider": "lizard",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official code-interpreter page runs LLM-generated Python in the `interpreter` template, where a Jupyter kernel keeps variables between calls.",
+          "link": {
+            "title": "Lizard: code interpreter",
+            "url": "https://lizard.build/docs/sandboxes/code-interpreter"
+          },
+          "price": null
+        },
+        {
+          "provider": "morph",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "The Devbox API runs a shell command inside the VM and returns stdout, stderr and the exit code; your app creates and stops the instance.",
+          "link": {
+            "title": "Morph: exec",
+            "url": "https://cloud.morph.so/docs/api-reference/exec-instance-instance-id-exec-post"
+          },
+          "price": null
+        },
+        {
+          "provider": "runtime",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "The SDK runs a command in a fresh microVM, streams stdout and returns the exit code; CPU is billed only while working.",
+          "link": {
+            "title": "Runtime: stream command output",
+            "url": "https://withruntime.com/how-to/stream-command-output"
+          },
+          "price": null
+        },
+        {
+          "provider": "sandboxer",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "The SDK's `exec` runs a shell string or argv array with a timeout and returns stdout and the exit code; your app creates and stops the sandbox.",
+          "link": {
+            "title": "Sandboxer: TypeScript SDK",
+            "url": "https://sandboxer.com/docs/sdk-typescript"
+          },
+          "price": null
+        },
+        {
+          "provider": "sprites",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "`sprite exec` runs a single command, waits for it to finish and returns stdout and stderr; the Sprite keeps its filesystem between runs.",
+          "link": {
+            "title": "Sprites: working with Sprites",
+            "url": "https://docs.fly.io/sprites/working-with-sprites.md"
+          },
+          "price": null
         }
       ],
       "picks": [
@@ -1342,6 +1592,193 @@
             "url": "https://hostup.se/en/vps/"
           },
           "price": "$11.55/mo (VPS SM), ex-VAT"
+        },
+        {
+          "provider": "ovhcloud",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Chromium and a browser driver on VPS-2 or VPS-3. There is no browser image and no desktop streaming; the plan bills for the month, so 30,000 short sessions are a poor fit.",
+          "link": {
+            "title": "VPS product page",
+            "url": "https://us.ovhcloud.com/vps/"
+          },
+          "price": "$10.00–$14.50/mo"
+        },
+        {
+          "provider": "lightsail",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Chromium and Playwright on a 2 vCPU / 4 GB instance and drive it headlessly over a remote debugging port or a small control service you write. There is no desktop stream, no VNC and no computer-use API.",
+          "link": {
+            "title": "Instance firewalls in Lightsail",
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html"
+          },
+          "price": "$24/month for 2 vCPU / 4 GB"
+        },
+        {
+          "provider": "agent37",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "The `agent37-hermes` template ships Chromium and a browser tool, and a desktop build adds a screen you can watch and take over; other templates are not guaranteed a browser.",
+          "link": {
+            "title": "Agent 37: browser and desktop",
+            "url": "https://www.agent37.com/docs/agents-api/desktop"
+          },
+          "price": null
+        },
+        {
+          "provider": "blaxel",
+          "tier": "preinstalled",
+          "noTerminal": "no",
+          "what": "Choose a prebuilt image: `playwright-chromium` or `chromium` for headless work, or `cua-xfce` and `xfce-vnc` for a desktop, with computer-use tooling on the first.",
+          "link": {
+            "title": "Blaxel: prebuilt images",
+            "url": "https://docs.blaxel.ai/Sandboxes/Templates"
+          },
+          "price": null
+        },
+        {
+          "provider": "boat",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "Every sandbox has a Linux desktop with Chrome; open the desktop or a browser-only view from the dashboard, or let the built-in computer tools drive it.",
+          "link": {
+            "title": "Boat: desktop streaming",
+            "url": "https://docs.boat.dev/desktop-streaming"
+          },
+          "price": "About $90 of usage at 30,000 ten-minute sessions; the $100 plan covers it"
+        },
+        {
+          "provider": "boxd",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "Every machine ships `agent-browser` and a Chromium build that opens on its desktop, so you can watch or take over; drive it with Playwright or the CLI.",
+          "link": {
+            "title": "boxd: launch a browser",
+            "url": "https://docs.boxd.sh/guides/launch-a-browser"
+          },
+          "price": null
+        },
+        {
+          "provider": "cloudflare-sandbox",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No browser or desktop image: build Chromium and its dependencies into your own container. Cloudflare's browser product is Browser Run, a separate service from the Sandbox priced here.",
+          "link": {
+            "title": "Cloudflare Sandbox: get started",
+            "url": "https://developers.cloudflare.com/sandbox/get-started/"
+          },
+          "price": null
+        },
+        {
+          "provider": "daytona",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official computer-use guide starts Xvfb, XFCE and VNC in a sandbox and drives the desktop with screenshots, clicks and keys through the SDK.",
+          "link": {
+            "title": "Daytona: computer use",
+            "url": "https://www.daytona.io/docs/en/computer-use"
+          },
+          "price": null
+        },
+        {
+          "provider": "e2b",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official computer-use guide runs an Ubuntu desktop with XFCE and VNC streaming, with mouse, keyboard and screenshot calls through the Desktop SDK.",
+          "link": {
+            "title": "E2B: computer use",
+            "url": "https://docs.e2b.dev/use-cases/computer-use"
+          },
+          "price": null
+        },
+        {
+          "provider": "instabox",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "The default `agent-browser` template has a Linux desktop and Chromium; open the Computer tab to watch or take over, or let the agent drive it.",
+          "link": {
+            "title": "InstaBox: desktop",
+            "url": "https://instabox.sh/docs/desktop"
+          },
+          "price": null
+        },
+        {
+          "provider": "lizard",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "The `desktop` template runs a Linux desktop with Chromium that an agent controls with screenshots, clicks and keys; `desktop-camoufox` adds Firefox for Playwright.",
+          "link": {
+            "title": "Lizard: sandboxes and templates",
+            "url": "https://lizard.build/docs/sandboxes/"
+          },
+          "price": null
+        },
+        {
+          "provider": "modal",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official example runs Browser Use against Chromium in a VM sandbox and embeds a noVNC desktop so you can watch it work in real time.",
+          "link": {
+            "title": "Modal: computer use over VNC",
+            "url": "https://modal.com/docs/examples/computer_use_vnc"
+          },
+          "price": null
+        },
+        {
+          "provider": "morph",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "An official example builds a full XFCE desktop with VNC and noVNC on a Devbox, opened in a browser tab; the machine can pause between sessions.",
+          "link": {
+            "title": "Morph: remote desktop",
+            "url": "https://cloud.morph.so/docs/examples/remote-desktop"
+          },
+          "price": null
+        },
+        {
+          "provider": "runtime",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "A first-party guide installs Playwright and Chromium, runs the script and copies screenshots back; build an image once so later sandboxes start with the browser ready.",
+          "link": {
+            "title": "Runtime: run Playwright in a sandbox",
+            "url": "https://withruntime.com/integrations/playwright"
+          },
+          "price": null
+        },
+        {
+          "provider": "sandboxer",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "Every running sandbox has an XFCE desktop with Google Chrome, streamed to a browser tab for people and computer-use agents.",
+          "link": {
+            "title": "Sandboxer: desktop",
+            "url": "https://sandboxer.com/docs/desktop"
+          },
+          "price": null
+        },
+        {
+          "provider": "sprites",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No browser or desktop image. Install Playwright and Chromium with two commands, or run Xvfb and a VNC server yourself; the Sprite keeps the install between sessions.",
+          "link": {
+            "title": "Sprites: working with Sprites",
+            "url": "https://docs.fly.io/sprites/working-with-sprites.md"
+          },
+          "price": null
+        },
+        {
+          "provider": "vercel-sandbox",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No browser image or guide. Install Chromium and its system dependencies in the sandbox, or build an image with them; Vercel Labs' agent-browser has an example that does this.",
+          "link": {
+            "title": "Vercel Sandbox: run commands",
+            "url": "https://vercel.com/docs/sandbox/run-commands-in-sandbox"
+          },
+          "price": null
         }
       ],
       "picks": [
@@ -1635,6 +2072,39 @@
             "url": "https://hostup.se/en/vps/"
           },
           "price": "$5.72–$11.55/mo (VPS XS or SM), ex-VAT"
+        },
+        {
+          "provider": "ovhcloud",
+          "tier": "preinstalled",
+          "noTerminal": "partly",
+          "what": "n8n is offered pre-installed on OVHcloud VPS plans: choose the n8n image at order and the application is running after delivery. You still configure the domain, TLS, the database and the encryption key, and scheduled workflows stop if the VPS is powered off.",
+          "link": {
+            "title": "VPS n8n",
+            "url": "https://us.ovhcloud.com/vps/vps-n8n/"
+          },
+          "price": "VPS-1 $5.35/mo monthly-billed; VPS-2 $10.00/mo"
+        },
+        {
+          "provider": "lightsail",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run n8n and its database in Docker on one instance, keeping the encryption key yourself, and add block storage if the execution log grows. Webhooks reach it on the public IP; the firewall must open the port.",
+          "link": {
+            "title": "Create and attach block storage disks",
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/create-and-attach-additional-block-storage-disks-linux-unix.html"
+          },
+          "price": "$24/month for 2 vCPU / 4 GB, plus $0.10/GB-month for extra disk"
+        },
+        {
+          "provider": "tensorlake",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No n8n guide. n8n can run as a managed background process with its database and encryption key kept on a volume, but a named sandbox suspends after ten quiet minutes unless proxy traffic or a raised timeout keeps it awake, so a schedule inside it stops.",
+          "link": {
+            "title": "Tensorlake: commands and background processes",
+            "url": "https://docs.tensorlake.ai/sandboxes/commands"
+          },
+          "price": null
         }
       ],
       "picks": [
@@ -1665,6 +2135,13 @@
           "why": "n8n's own guide targets Hetzner, using the Docker CE one-click app, and a CPX22 with 20 TB of traffic covers a small team for $23.59 a month.",
           "watch": "Keep the database and the encryption key on a volume or snapshot; a snapshot-and-delete rebuild needs both.",
           "link": "https://docs.n8n.io/deploy/host-n8n/install-options/use-a-cloud-provider/deploy-to-hetzner"
+        },
+        {
+          "provider": "ovhcloud",
+          "for": "If you want n8n preinstalled on a plain server",
+          "why": "n8n is preinstalled on OVHcloud VPS plans, and VPS-1 gives 2 vCores, 4 GB, 40 GB and a dedicated IPv4 for $5.35 a month on the no-commitment term. The server is always on with unlimited traffic.",
+          "watch": "Domain, TLS, the database and the n8n encryption key are still your setup, and the plan bills whether the machine runs or not. The free daily backup is kept 24 hours; the 7-day history is a paid option. If the order funnel charges the $0.50 standard-backup line, the bill is $5.85.",
+          "link": "https://us.ovhcloud.com/vps/vps-n8n/"
         }
       ],
       "outside": "n8n's own [n8n Cloud](https://n8n.io/pricing/) costs €20 a month on Starter (2,500 workflow runs) and €50 on Pro (10,000), billed annually, with nothing to host. [Activepieces](https://www.activepieces.com/pricing), a similar open-source tool, has a free plan and a $20 flat monthly plan. [Windmill](https://www.windmill.dev/docs/advanced/self_host) is free to host yourself and needs PostgreSQL.",
@@ -2021,6 +2498,39 @@
             "url": "https://hostup.se/en/vps/"
           },
           "price": "$4.08–$5.72/mo (VPS Nano or XS), ex-VAT"
+        },
+        {
+          "provider": "ovhcloud",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "One always-on VPS-1 at $5.35 with a dedicated IPv4 and unlimited traffic is enough for a Discord or Slack bot. Install the runtime and keep the bot as a systemd service; the plan bills all month, which is what an always-on gateway needs.",
+          "link": {
+            "title": "Getting started with a VPS",
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps"
+          },
+          "price": "$5.35/mo"
+        },
+        {
+          "provider": "lightsail",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install the bot runtime on a Small-2GB instance, keep its history on the disk, and leave it running: a Discord or Slack gateway cannot sleep. A static IP is free while attached and keeps the address stable across reboots.",
+          "link": {
+            "title": "Create and attach a static IP",
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-create-static-ip.html"
+          },
+          "price": "$12/month for 2 vCPU / 2 GB; $7 for 1 GB if the bot is small"
+        },
+        {
+          "provider": "tensorlake",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No bot guide. A named sandbox can hold the bot as a managed process and expose its port, but it suspends after ten quiet minutes; an idle Discord gateway sends no proxied traffic to keep it awake.",
+          "link": {
+            "title": "Tensorlake: commands and background processes",
+            "url": "https://docs.tensorlake.ai/sandboxes/commands"
+          },
+          "price": null
         }
       ],
       "picks": [
@@ -2335,6 +2845,39 @@
             "url": "https://hostup.se/en/support/give-others-access/"
           },
           "price": "$11.55/mo per developer (VPS SM), ex-VAT"
+        },
+        {
+          "provider": "ovhcloud",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "One VPS per developer, each with its own IP and credentials, or one shared VPS-4 at 8 vCores / 24 GB for $27.50. There is no per-seat product, no shared workspace and no SSO-scoped machine access beyond OVHcloud IAM.",
+          "link": {
+            "title": "VPS product page",
+            "url": "https://us.ovhcloud.com/vps/"
+          },
+          "price": "$5.35–$27.50/mo per machine"
+        },
+        {
+          "provider": "lightsail",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "One 4 vCPU / 8 GiB instance per developer, each with its own login and repository, snapshotted for the next session. Five developers at the smallest four-vCPU bundle is $420 a month before model spend.",
+          "link": {
+            "title": "Lightsail instance bundles",
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html"
+          },
+          "price": "$84/month per developer, $420 for five"
+        },
+        {
+          "provider": "tensorlake",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Each developer gets a named sandbox over SSH or VS Code Remote-SSH, with their own key and Claude login; it suspends when idle and resumes with the shell, packages and files intact. No team guide.",
+          "link": {
+            "title": "Tensorlake: remote development over SSH",
+            "url": "https://docs.tensorlake.ai/sandboxes/remote-dev"
+          },
+          "price": null
         }
       ],
       "picks": [
@@ -2656,6 +3199,39 @@
             "url": "https://hostup.se/en/vps/"
           },
           "price": "$5.72/mo (VPS XS) whatever the run count, ex-VAT"
+        },
+        {
+          "provider": "ovhcloud",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run the scraper from cron or a systemd timer inside the guest. The VPS bills all month, so a ten-minute nightly scrape still costs $5.35; store results in Object Storage or somewhere outside the machine if it may be rebuilt.",
+          "link": {
+            "title": "Getting started with a VPS",
+            "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps"
+          },
+          "price": "$5.35/mo"
+        },
+        {
+          "provider": "lightsail",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run cron or a systemd timer inside a Small-2GB instance. The machine has to exist all month, so four ten-minute runs a day cost the full monthly price rather than twenty minutes of compute; write results to object storage or an external database before the instance is replaced.",
+          "link": {
+            "title": "Lightsail object storage buckets",
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/buckets-in-amazon-lightsail.html"
+          },
+          "price": "$12/month, whether it scrapes or not"
+        },
+        {
+          "provider": "tensorlake",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "A cron schedule invokes a deployed Tensorlake application, which can start a sandbox for each scrape; the schedule lives outside the sandbox, and results need a volume or your own storage.",
+          "link": {
+            "title": "Tensorlake: cron scheduler",
+            "url": "https://docs.tensorlake.ai/applications/cron-scheduler"
+          },
+          "price": null
         }
       ],
       "picks": [
@@ -2966,6 +3542,39 @@
             "url": "https://hostup.se/en/support/vps-firewall/"
           },
           "price": "$4.08/mo (VPS Nano), ex-VAT"
+        },
+        {
+          "provider": "ovhcloud",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "A public IPv4, any TCP port and root make a VPS-1 a natural home for a remote MCP server. Install the server, put TLS in front with Caddy or Traefik, and add authentication yourself; there is no private URL or OAuth layer.",
+          "link": {
+            "title": "VPS product page",
+            "url": "https://us.ovhcloud.com/vps/"
+          },
+          "price": "$5.35/mo"
+        },
+        {
+          "provider": "lightsail",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run the MCP server on a Micro-1GB instance behind Caddy for TLS, with a static IP and a firewall rule for 443. This is a good fit: a small always-on process, a fixed address and 2 TB of transfer for $7 a month.",
+          "link": {
+            "title": "Instance firewalls in Lightsail",
+            "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html"
+          },
+          "price": "$7/month for 2 vCPU / 1 GB, plus $0 for a static IP while attached"
+        },
+        {
+          "provider": "tensorlake",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No MCP guide or template. A named sandbox can run the server and expose its port at a public sandbox URL, but it suspends after ten quiet minutes, so an idle server wakes on the next call.",
+          "link": {
+            "title": "Tensorlake: sandbox networking",
+            "url": "https://docs.tensorlake.ai/sandboxes/networking"
+          },
+          "price": null
         }
       ],
       "picks": [

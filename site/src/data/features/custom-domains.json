@@ -301,6 +301,30 @@
         "quote": "DNS records decide where your domain points: the website, the email and the verifications other services ask for.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "partly",
+      "figure": "Your DNS; TLS is self-installed",
+      "scenario": "Point demo.acme.com at the VPS IPv4 and install a Let's Encrypt certificate with Certbot or Traefik; OVHcloud sells the domain but does not issue or renew the certificate for the server.",
+      "note": "A domain is a separate OVHcloud product, and OVHcloud documents pointing a domain at the VPS and installing a Let's Encrypt certificate yourself. There is no automatic HTTPS, no per-port preview URL and no managed certificate for a plain VPS.",
+      "source": {
+        "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-ssl-certificate",
+        "quote": "This guide documents the use of Let's Encrypt, a free and automated service.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "DNS zones; TLS yourself",
+      "scenario": "Point a DNS record at the static IP, then install Caddy or Certbot; automatic certificates come only with the $18/month load balancer.",
+      "note": "Six DNS zones are free, and domain registration is sold at cost. A plain instance has no managed certificate, so renewal is your job; the WordPress blueprint has a guided Let's Encrypt setup, and a Lightsail load balancer includes free certificate management and HTTP-to-HTTPS redirect.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "Lightsail certificates and certificate management are free with use of a Lightsail load balancer.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Path to your domain",

@@ -292,6 +292,30 @@
         "quote": "If the bandwidth runs out, the server cannot be started or restarted until you buy more or the next period starts.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "partly",
+      "figure": "Unlimited traffic; guest firewall",
+      "scenario": "The agent browses freely from a static IPv4 with no per-GiB bill, but restricting where it can go means iptables or ufw inside the guest, which a root agent can change.",
+      "note": "Unlimited traffic at 500 Mbps to 3 Gbps, a dedicated IPv4 and IPv6, and no published overage rate or fair-use threshold. There is no provider-side egress allowlist or no-internet switch in the VPS API; the firewall guide is iptables in the guest, and the Edge Network Firewall is inbound.",
+      "source": {
+        "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/firewall-linux-iptable",
+        "quote": "Most of the rules outlined in this guide assume that your iptables is configured by default to DROP incoming traffic, and that you selectively authorize incoming traffic.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "1-10 TB included; $0.09/GB",
+      "scenario": "The bundle includes 1 TB to 10 TB of transfer, overage is $0.09 to $0.17 a GB, and outbound traffic is otherwise unrestricted.",
+      "note": "Both directions count against the allowance, but only outbound traffic over it is charged; allowances are halved in Mumbai, Sydney, Jakarta, Malaysia, Hong Kong and Sao Paulo. There is no outbound allowlist and no no-internet mode, and the instance's public IP (static if you attach one) is its egress address.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-faq-data-transfer-allowance.html",
+        "quote": "Every Lightsail instance plan includes a data transfer allowance.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Egress price",

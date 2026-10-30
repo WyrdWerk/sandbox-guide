@@ -1,0 +1,264 @@
+{
+  "provider": "lightsail",
+  "checkedOn": "2026-10-30",
+  "summary": "Fixed Linux bundles billed by the hour at the bundle's hourly rate, capped at its monthly price; a stopped instance keeps billing at the same rate until it is deleted.",
+  "shapes": [
+    {
+      "name": "Nano-0.5GB",
+      "vcpu": 2,
+      "ram": 0.5,
+      "disk": 20,
+      "hourly": 0.00672,
+      "monthly": 5
+    },
+    {
+      "name": "Micro-1GB",
+      "vcpu": 2,
+      "ram": 1,
+      "disk": 40,
+      "hourly": 0.0094,
+      "monthly": 7
+    },
+    {
+      "name": "Small-2GB",
+      "vcpu": 2,
+      "ram": 2,
+      "disk": 60,
+      "hourly": 0.01612,
+      "monthly": 12
+    },
+    {
+      "name": "Medium-4GB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 80,
+      "hourly": 0.03225,
+      "monthly": 24
+    },
+    {
+      "name": "Large-8GB",
+      "vcpu": 2,
+      "ram": 8,
+      "disk": 160,
+      "hourly": 0.05913,
+      "monthly": 44
+    },
+    {
+      "name": "Xlarge-16GB",
+      "vcpu": 4,
+      "ram": 16,
+      "disk": 320,
+      "hourly": 0.1129,
+      "monthly": 84
+    },
+    {
+      "name": "2Xlarge-32GB",
+      "vcpu": 8,
+      "ram": 32,
+      "disk": 640,
+      "hourly": 0.22043,
+      "monthly": 164
+    },
+    {
+      "name": "4Xlarge-64GB",
+      "vcpu": 16,
+      "ram": 64,
+      "disk": 1280,
+      "hourly": 0.51612,
+      "monthly": 384
+    },
+    {
+      "name": "8Xlarge-128GB",
+      "vcpu": 32,
+      "ram": 128,
+      "disk": 1280,
+      "hourly": 1.18817,
+      "monthly": 884
+    },
+    {
+      "name": "12Xlarge-192GB",
+      "vcpu": 48,
+      "ram": 192,
+      "disk": 1280,
+      "hourly": 1.77956,
+      "monthly": 1324
+    },
+    {
+      "name": "16Xlarge-256GB",
+      "vcpu": 64,
+      "ram": 256,
+      "disk": 1280,
+      "hourly": 2.37096,
+      "monthly": 1764
+    },
+    {
+      "name": "Memory-optimized Large-16GB",
+      "vcpu": 2,
+      "ram": 16,
+      "disk": 160,
+      "hourly": 0.09946,
+      "monthly": 74
+    },
+    {
+      "name": "Memory-optimized Xlarge-32GB",
+      "vcpu": 4,
+      "ram": 32,
+      "disk": 320,
+      "hourly": 0.19355,
+      "monthly": 144
+    },
+    {
+      "name": "Memory-optimized 2Xlarge-64GB",
+      "vcpu": 8,
+      "ram": 64,
+      "disk": 640,
+      "hourly": 0.39516,
+      "monthly": 294
+    },
+    {
+      "name": "Memory-optimized 4Xlarge-128GB",
+      "vcpu": 16,
+      "ram": 128,
+      "disk": 1280,
+      "hourly": 0.78495,
+      "monthly": 584
+    },
+    {
+      "name": "Memory-optimized 8Xlarge-256GB",
+      "vcpu": 32,
+      "ram": 256,
+      "disk": 1280,
+      "hourly": 1.57796,
+      "monthly": 1174
+    },
+    {
+      "name": "Memory-optimized 12Xlarge-384GB",
+      "vcpu": 48,
+      "ram": 384,
+      "disk": 1280,
+      "hourly": 2.37097,
+      "monthly": 1764
+    },
+    {
+      "name": "Memory-optimized 16Xlarge-512GB",
+      "vcpu": 64,
+      "ram": 512,
+      "disk": 1280,
+      "hourly": 3.15054,
+      "monthly": 2344
+    },
+    {
+      "name": "Compute-optimized Large-4GB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 160,
+      "hourly": 0.05645,
+      "monthly": 42
+    },
+    {
+      "name": "Compute-optimized Xlarge-8GB",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 320,
+      "hourly": 0.1129,
+      "monthly": 84
+    },
+    {
+      "name": "Compute-optimized 2Xlarge-16GB",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 640,
+      "hourly": 0.22581,
+      "monthly": 168
+    },
+    {
+      "name": "Compute-optimized 4Xlarge-32GB",
+      "vcpu": 16,
+      "ram": 32,
+      "disk": 1280,
+      "hourly": 0.45161,
+      "monthly": 336
+    },
+    {
+      "name": "Compute-optimized 9Xlarge-72GB",
+      "vcpu": 36,
+      "ram": 72,
+      "disk": 1280,
+      "hourly": 1.13441,
+      "monthly": 844
+    },
+    {
+      "name": "Compute-optimized 12Xlarge-96GB",
+      "vcpu": 48,
+      "ram": 96,
+      "disk": 1280,
+      "hourly": 1.51344,
+      "monthly": 1126
+    },
+    {
+      "name": "Compute-optimized 18Xlarge-144GB",
+      "vcpu": 72,
+      "ram": 144,
+      "disk": 1280,
+      "hourly": 2.26882,
+      "monthly": 1688
+    }
+  ],
+  "disk": {
+    "extraMonthly": 0.1
+  },
+  "between": "kept",
+  "billedWhileStopped": true,
+  "maxDisk": 16384,
+  "maxVcpu": 72,
+  "maxRam": 512,
+  "egress": {
+    "perGiB": 0.09,
+    "included": "1 TB to 10 TB a month depending on the bundle",
+    "note": "Every bundle includes 1-10 TB of transfer, halved in Mumbai, Sydney, Jakarta, Malaysia, Hong Kong and Sao Paulo. Both directions count against the allowance, but only outbound traffic over it is charged. Overage runs from $0.09/GB (US, Canada, most of Europe, Hong Kong) to $0.17/GB (Sydney): Tokyo $0.14, Mumbai and Seoul $0.13, Jakarta $0.132, Singapore and Spain $0.12, Malaysia $0.108, Sao Paulo $0.15. Not priced by the calculator.",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-faq-data-transfer-allowance.html"
+  },
+  "plans": [
+    {
+      "name": "On-demand",
+      "fee": 0
+    }
+  ],
+  "notes": [
+    "Lightsail's hourly price is the monthly price divided by 744 (31 days), taken from AWS's own price list. A 730-hour month therefore bills $23.54 on the $24 bundle, and the $24 cap is only reached in a 31-day month. The calculator's monthly cap reproduces this.",
+    "A stopped instance is still billed: 'Lightsail instances and managed databases incur charges until they are deleted. These resources accrue charges even when they are in the stopped state.' Only deleting the instance ends the charge.",
+    "AWS does not publish whether a partial instance-hour is rounded up. The card bills pro-rata hours, so A (166.67 hours) costs $5.38. If each of the 1,000 ten-minute runs were billed a whole hour, A would be $32.25. This is an open question, not a modelled rule.",
+    "The bundle includes its SSD and its public IPv4 address; there is no separate disk or IP line. Extra block storage is $0.10 per allocated GB-month, attached to one instance, 8 GB to 16 TB per disk and 15 disks per instance.",
+    "IPv6-only bundles are $1.50-$4 cheaper a month ($3.50 for 0.5 GB) but cannot take a static IPv4 address. This card prices the public-IPv4 bundles.",
+    "Windows bundles cost more ($9.50-$4,204 a month) because they include a Windows Server licence. Not priced here.",
+    "Snapshots cost $0.05 per GB-month, manual and automatic. Automatic snapshots keep the latest seven daily copies and are deleted with the instance. Not in the calculator.",
+    "AWS labels memory and disk in GB; the card treats those numbers as GiB, the unit the site uses throughout. The difference is about 7% and never changes which bundle is the smallest fit at the sizes A/B/C use. All 25 Linux bundles with a public IPv4 address are listed.",
+    "Lightsail containers, managed databases, object storage, CDN distributions, load balancers and Lightsail for Research are separate products on separate meters and are not priced by this card."
+  ],
+  "sources": [
+    {
+      "label": "Lightsail pricing",
+      "url": "https://aws.amazon.com/lightsail/pricing/"
+    },
+    {
+      "label": "Lightsail instance bundles",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html"
+    },
+    {
+      "label": "Billing and account management FAQ",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html"
+    },
+    {
+      "label": "AWS Price List API, AmazonLightsail, us-east-1",
+      "url": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/us-east-1/index.json"
+    },
+    {
+      "label": "Data transfer in Lightsail",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-faq-data-transfer-allowance.html"
+    },
+    {
+      "label": "Block storage",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/elastic-block-storage-and-ssd-disks-in-amazon-lightsail.html"
+    }
+  ]
+}

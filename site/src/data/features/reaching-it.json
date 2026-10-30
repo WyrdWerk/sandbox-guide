@@ -292,6 +292,30 @@
         "quote": "You add a rule for each service that should be reachable, for example SSH or a website.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "yes",
+      "figure": "Public IPv4/IPv6, any port, SSH",
+      "scenario": "Paste the public IPv4 URL into the client channel; SSH is a real port on the same host, the browser KVM console works when SSH does not, and any other TCP service can be opened.",
+      "note": "A dedicated public IPv4 and IPv6 on every VPS, any TCP or UDP port, real SSH, a browser KVM console, and up to 16 additional IPs. There is no private token URL, no managed tunnel product and no raw-TCP proxy: it is a server with a public address.",
+      "source": {
+        "url": "https://us.ovhcloud.com/vps/",
+        "quote": "Get a unique IPv4 address, for more flexibility and network compatibility.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Public IPv4, SSH, browser",
+      "scenario": "Reach it on its public IPv4 address over any port you open, or open a browser SSH session from the console.",
+      "note": "Every public-IPv4 bundle is internet-reachable, and the instance firewall opens the ports you choose, optionally restricted by source IP. There is no token-scoped private link. A static IP keeps the address across stops; the default public IP changes.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "You can use the public IP to connect to your instance from the Internet, such as through a registered domain name or through an SSH or RDP connection from your local computer.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Who can open the link",

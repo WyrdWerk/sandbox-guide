@@ -291,6 +291,30 @@
         "quote": "383 documented endpoints cover the things you manage in the HostUp dashboard.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "yes",
+      "figure": "Panel, CLI, API, SDKs, Terraform",
+      "scenario": "A designer can create the VPS in the control panel and reinstall it from a list; the agent itself still needs SSH, and everything after that can be scripted through the API, the CLI or Terraform.",
+      "note": "Control-panel creation and reinstall, 52 documented VPS API endpoints, an official CLI with `ovhcloud vps` commands, Python and Node SDKs, a Terraform resource, and an official MCP server that has no documented VPS section. No PTY or file API.",
+      "source": {
+        "url": "https://github.com/ovh/ovhcloud-cli",
+        "quote": "Retrieve information and manage your VPS services",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Console, CLI, API, SDKs",
+      "scenario": "Create the machine in the console, then drive it with aws lightsail, boto3 or the JavaScript SDK; there is no PTY or file API.",
+      "note": "The console, AWS CLI, documented JSON API and generated SDKs cover instances, disks, static IPs, snapshots and DNS. AWS's official MCP server can call any AWS API, Lightsail included, but ships no Lightsail-specific tools. Terminal access is SSH, and files move by SFTP.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/getstarted-awscli.html",
+        "quote": "This tutorial guides you through common Amazon Lightsail operations using the AWS Command Line Interface (AWS CLI).",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "First machine without a terminal?",

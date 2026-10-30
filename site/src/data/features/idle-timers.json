@@ -292,6 +292,30 @@
         "quote": "A standard VPS is paid for one month or one year at a time.",
         "confidence": "inferred"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "yes",
+      "figure": "No idle stop; no session limit",
+      "scenario": "The agent is still awake at 00:20 and at 09:00, because nothing in the VPS pauses it for idleness and there is no session or lifetime limit; the monthly plan bills through all of it.",
+      "note": "No idle timeout, no sleep, no wake-on-request and no provider-side scheduler. The VPS API's lifecycle calls are start, stop, reboot, rebuild and snapshot; the machine runs until you stop it or cancel the service, and cron or systemd timers inside the guest are the only scheduling.",
+      "source": {
+        "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+        "quote": "Start the VPS (power on) and return an asynchronous task",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "No idle stop",
+      "scenario": "It runs for weeks: there is no idle timeout, session cap or automatic shutdown, and it bills for every hour it exists.",
+      "note": "Nothing stops an idle instance and nothing wakes a stopped one on a request. There is no job or instance scheduler, so cron inside the machine is the only way to run something on a timetable.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "Lightsail instances and managed databases incur charges until they are deleted.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Idle or lifetime limit",

@@ -292,6 +292,30 @@
         "quote": "Invite colleagues to the account with granular permissions instead of sharing login credentials.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "ovhcloud",
+      "verdict": "partly",
+      "figure": "IAM roles and SSO; no spend cap",
+      "scenario": "Five developers get IAM users, groups and per-resource policies, and can sign in through the company's identity provider; the bill is the account owner's, and nothing stops a runaway upgrade or add-on.",
+      "note": "OVHcloud IAM provides users, groups, policies, SAML 2.0 single sign-on and audit logs, free. There is no hard spend cap and no spend-threshold alert for VPS; billing emails warn about renewal and expiry instead.",
+      "source": {
+        "url": "https://us.ovhcloud.com/identity-security-operations/identity-access-management/",
+        "quote": "Leverage SAML 2.0 federation protocol to seamlessly connect your Identity Provider, such as ADFS, Azure AD, Google Workspace, and Okta.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "IAM roles; no spend cap",
+      "scenario": "IAM users, groups and Identity Center single sign-on cover the team; a hard spend cap does not exist, only Budgets alerts.",
+      "note": "Access is AWS IAM rather than a Lightsail feature: policies, groups, roles, federation and CloudTrail audit, and Identity Center adds SSO. There is no hard spending cap: AWS Budgets can alert on spend and apply an IAM policy action, but nothing stops a running instance when a limit is crossed.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-managing-access-for-an-iam-user.html",
+        "quote": "you can create one or more IAM users in your AWS account, and those users can be configured with different levels of access to services offered by AWS.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Hard spend cap?",
