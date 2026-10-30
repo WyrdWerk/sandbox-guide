@@ -1,6 +1,6 @@
 ---
 name: maintaining-providers
-description: Adds cloud sandbox providers or rechecks an existing provider end to end in sandbox-guide, from live evidence through pricing, capabilities, use cases and publication checks. Use for add a provider, list a provider, refresh provider research, or audit a provider for stale information.
+description: Adds cloud sandbox or VPS providers, or rechecks an existing provider, end to end in sandbox-guide, from live evidence through pricing, capabilities, use cases and publication checks. Use for add a provider, list a provider, refresh provider research, or audit a provider for stale information.
 argument-hint: "add <provider name> <docs URL> | recheck <provider-id>"
 ---
 
@@ -11,6 +11,7 @@ Turn a documentation link into a complete, evidence-backed provider listing, or 
 ## Modes and boundaries
 
 - **Add:** choose one stable lowercase, hyphenated ID; research and integrate every surface below. A name and official documentation URL are enough to begin. Discover missing pricing, legal and product links yourself; use the issue template's questions as the intake checklist.
+- **VPS providers** (rented virtual servers such as DigitalOcean, Hetzner, Hostinger) follow the same checklist with the differences in [VPS providers](#vps-providers) below.
 - **Recheck:** keep the existing ID and audit the same complete checklist, not only prices. Compare old and new claims, quotes, rates, restrictions, routes and recommendations. A confirmation with no change is still a research result; log its date, pages and unresolved questions in the provider's research notes.
 - A weekly **price-only** check follows `PRICE-CHECK.md`. It is not a full-provider recheck.
 - Research is read-only desk work unless the owner authorizes account creation, credentials, sandbox usage and a spending cap. Documentation claims are not measured behavior.
@@ -102,6 +103,27 @@ The engine uses `MONTH_HOURS = 730`, including for C's storage. Older research s
 6. Compare the engine's plan, shape, feasibility, usage **and bill**, not just equal totals: an included-credit fee can hide wrong line items. Exercise the relevant boundary (credit threshold, CPU floor, disk-driven shape or session cap). Keep only tests for observable contract regressions; use temporary probes for the rest.
 
 `RateCard` cannot represent every provider tariff. Per-plan rates, unique snapshot bytes, minimum intervals or unpublished fees may need explicit model limitations. Do not omit an unknown charge as if free, or put arbitrary `null` into numeric rate fields (`egress.perGiB` explicitly permits it). If honest pricing cannot be represented, report the blocker or make a scoped, tested engine change with an explicit unknown/infeasible result. Never force a passing illustration by inventing a rate.
+
+## VPS providers
+
+A VPS is a plain server rented by the hour or month, not a sandbox built for agents. List one when readers would realistically host an agent on it. The comparison stays the same 16 features, 78 capabilities and 10 use cases; many capability rows will honestly be `no` or `partly` (no pause, no preview URLs, no SDK for sandboxes).
+
+- Set `"kind": "vps"` in `providers/<id>.json`; the providers list, provider page and Markdown twin then show a VPS label. Give it a `VPS: …` entry in the `kinds` map of `compare/side-by-side.astro`.
+- Read the billing rules that decide A/B/C: whether a powered-off server still bills (usually yes, until deleted), a monthly cap, a minimum per server (per second, per hour, or a whole month), separately billed public IPv4, and whether only prepaid terms exist.
+- The engine has fields for these, each added for a real VPS tariff and covered by `cost.test.ts`:
+
+| Field | Meaning | First used by |
+|---|---|---|
+| `Shape.monthly` | Monthly price cap per machine | DigitalOcean, Hetzner |
+| `RateCard.billedWhileStopped` | Stopped hours bill at the running rate | DigitalOcean, Hetzner |
+| `RateCard.minimumPerRun` | Each task bills at least this many dollars | DigitalOcean |
+| `RateCard.wholeHours` | Each task bills whole hours, rounded up | Hetzner |
+| `RateCard.perMachine` | A per-server fee such as an IPv4, hourly with a monthly cap | Hetzner |
+| `RateCard.monthlyPlans` | Sold only in whole months; tasks share as few plans as their hours need | Hostinger |
+
+- Prepaid terms: price the card on the cheapest **monthly-billed** term at its ongoing (renewal) price. Record introductory, annual and multi-year prices, upfront totals and renewal rates in the notes and research, and say which the card uses. Never derive an hourly rate from a monthly-only plan.
+- Currency: price in the currency the provider bills you in, or its own published USD list. State VAT treatment and any conversion with its date; a page that switches currency by toggle or location is not a price change.
+- Picks: a VPS's case is usually the same (always on, fixed address, flat price). Before adding a pick where another VPS already makes that case, prefer a route row; recount "one-click" claims in use-case standfirsts when a VPS adds one-click templates.
 
 ## 5. Integrate, audit and report
 
