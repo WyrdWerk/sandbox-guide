@@ -256,6 +256,18 @@
         "quote": "Our apps provide you easy access to often used software, such as Docker, WordPress or Nextcloud",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "partly",
+      "figure": "OpenClaw/Hermes/n8n templates",
+      "scenario": "Send a task to OpenClaw after the template deploys; no coding agent, browser or prompt API is built into the default image.",
+      "note": "One-click Docker templates for OpenClaw, Hermes Agent, n8n, Agent Zero and Dify, but no Claude Code or Codex in the default image, no browser or desktop, and no prompt API. The separate managed AI automation plan is the no-terminal product.",
+      "source": {
+        "url": "https://www.hostinger.com/applications/openclaw",
+        "quote": "OpenClaw is a self-hosted personal AI assistant platform that connects to the messaging channels you already use",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Agents installed, and promptable?",

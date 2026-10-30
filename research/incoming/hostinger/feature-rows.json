@@ -1,0 +1,246 @@
+{
+  "provider": "hostinger",
+  "checkedOn": "2026-10-30",
+  "rows": [
+    {
+      "feature": "isolation",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "KVM VM; root and Docker",
+        "scenario": "The build needs Docker and a kernel module: Docker and root work inside a full KVM guest, but a module that needs nested virtualisation does not.",
+        "note": "A full KVM virtual machine with its own kernel, root and Docker. Hostinger explicitly does not support nested virtualisation, and does not allow a custom OS image.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "Kernel-based virtual machine (KVM) is a full virtualization solution that divides a physical server into completely independent and isolated virtual environments.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "sizes-regions",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "8 vCPU / 32 GB; 10 regions",
+        "scenario": "The lopsided 2 vCPU / 16 GiB request has no exact shape; KVM 4's 16 GB is about 14.9 GiB if decimal, so the next fit is KVM 8 at 8 vCPU / 32 GB for $73.99.",
+        "note": "Four fixed plans up to 8 vCPU / 32 GB / 400 GB, in 10 data centers including France, Germany, Lithuania and the UK. CPU, RAM and disk cannot be sized independently or upgraded separately; there is no GPU on the VPS product, and the location is fixed after setup.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "Launch your VPS in 10 data centers across 4 continents, from Boston to Jakarta.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "billing-models",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "$19.49–$73.99/mo, prepaid",
+        "scenario": "One month of a box that mostly waits still costs the full plan; there is no per-second meter and no cheap paused state.",
+        "note": "A flat plan price for a 1-, 12- or 24-month term, paid upfront. The monthly-billed renewal is $19.49–$73.99; 12- and 24-month renewals are lower but prepaid. A stopped VPS keeps billing, so idle hours are not cheaper.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "feature": "trials-free-tiers",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No free tier; 30-day refund",
+        "scenario": "A week of testing costs a month's plan; the 30-day money-back guarantee is the only way out.",
+        "note": "No ongoing free tier, no starting credit and no card-free trial. KVM VPS plans are refundable within 30 days, with a 180-day cooldown after a VPS refund.",
+        "source": {
+          "url": "https://www.hostinger.com/support/9088216-what-is-hostinger-refund-policy/",
+          "quote": "The Hostinger refund policy offers a 30-day money-back guarantee for most hosting and email services, such as web, cloud, and KVM VPS hosting plans.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "lifecycle",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "Stop keeps disk; no pause",
+        "scenario": "Stop at 18:00 and the disk is there at 09:00, but the queued test run and the memory are gone, and the plan bills through the night.",
+        "note": "A stop powers the machine off and keeps the disk; it does not pause memory or running processes, and it does not stop billing. There is no wake-on-request: a stopped machine stays stopped until you start it.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
+          "quote": "This is a compute-only power state change and does not affect billing.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "snapshots-forks",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "1 snapshot, 1 day",
+        "scenario": "Rewind a bad change only from the single snapshot taken in the last day; fanning out ten copies means ten VPS plans, not ten forks.",
+        "note": "A manual snapshot captures the whole VPS, but only one can exist, a new one overwrites it, and it expires after 1 day. Weekly backups are the longer-lived restore point. There is no fork, no clone of a running machine and no user-created template.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583232-how-to-back-up-or-restore-a-vps-at-hostinger/",
+          "quote": "Only one snapshot is stored at a time; creating a new one overwrites the previous one.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "storage",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "50–400 GB included",
+        "scenario": "Postgres in /var/lib survives a stop, but there is no separate volume to attach to a new machine after the VPS is deleted.",
+        "note": "The NVMe disk is part of the plan: 50, 100, 200 or 400 GB, and it survives a stop. There are no separate volumes, no shared volume, no bucket mount and no way to grow the disk without moving to a larger plan.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583229-how-to-upgrade-a-vps-server-at-hostinger/",
+          "quote": "Individual resources (such as disk space or RAM) can’t be upgraded separately — upgrading the entire VPS plan is required",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "idle-timers",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "No idle stop",
+        "scenario": "Still running at 00:20 and at 01:00; nothing pauses it for idleness, and the plan keeps billing.",
+        "note": "No idle timer and no lifetime cap: a VPS runs until you stop it or the subscription ends. That is good for an always-on agent, but there is no idle setting to choose and no wake-on-request, so an idle machine cannot be made cheaper.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
+          "quote": "This is a compute-only power state change and does not affect billing.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "reaching-it",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Public IPv4; SSH and web console",
+        "scenario": "Paste the public IPv4 URL into the client channel; SSH and the browser console both work.",
+        "note": "A dedicated public IPv4, standard SSH, a browser console, raw TCP and SSH local forwarding. The managed firewall drops all traffic until you add accept rules. There is no private, token-gated link.",
+        "source": {
+          "url": "https://www.hostinger.com/legal/hosting-agreement",
+          "quote": "You will have administrator (root) access and a dedicated IP address.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "custom-domains",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "DNS; HTTPS is manual",
+        "scenario": "Point demo.acme.com at the IPv4, then deploy Traefik or Certbot for a certificate; Hostinger does not issue one for the server.",
+        "note": "You can point a domain at the VPS and a free domain for one year is included. HTTPS is not automatic: Hostinger documents Traefik, Certbot or a control panel, so the certificate is your setup.",
+        "source": {
+          "url": "https://www.hostinger.com/support/6360129-how-to-install-ssl-on-vps-at-hostinger/",
+          "quote": "deploy Traefik from the Docker Catalog, run Certbot manually, or use the built-in SSL tools of your VPS control panel",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "outbound-network",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "4–32 TB/mo, then 10 Mbps",
+        "scenario": "The 400 GB download fits inside KVM 2's 8 TB; after the allowance the link drops to 10 Mbps, not a bill.",
+        "note": "4 TB on KVM 1 up to 32 TB on KVM 8, with no per-GiB overage charge; exceeding the allowance throttles to 10 Mbps until the next month. A dedicated IPv4 gives a stable outgoing address, though the terms allow a change on migration. The managed firewall filters incoming traffic only, so there is no provider-level outbound allowlist or no-internet mode.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "4 TB bandwidth",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "feature": "keys-secrets",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No secret store",
+        "scenario": "The agent pastes its environment into a message because the keys live in the OS environment, not a provider vault.",
+        "note": "There is no provider secret store, no hidden-secret proxy and no scoped key. API tokens inherit the permissions of the user who created them and can be set to expire, but cannot be limited to one machine or one action.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/overview",
+          "quote": "Tokens inherit the permissions of the user who created them and can be set to expire.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "ways-to-drive",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Dashboard, CLI, SDKs, API, MCP",
+        "scenario": "A designer can create the VPS in the dashboard, but the first agent still needs a terminal or an application template.",
+        "note": "Dashboard creation, an official CLI, Python and TypeScript SDKs, a documented REST API and an official MCP server with 63 VPS tools. There is no PTY or file API: the browser console is for a person, not a program.",
+        "source": {
+          "url": "https://docs.hostinger.com/hostinger-connector/overview",
+          "quote": "Start, stop, and restart virtual machines; manage firewalls, SSH keys, snapshots, and metrics",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "built-in-agents",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "OpenClaw/Hermes/n8n templates",
+        "scenario": "Send a task to OpenClaw after the template deploys; no coding agent, browser or prompt API is built into the default image.",
+        "note": "One-click Docker templates for OpenClaw, Hermes Agent, n8n, Agent Zero and Dify, but no Claude Code or Codex in the default image, no browser or desktop, and no prompt API. The separate managed AI automation plan is the no-terminal product.",
+        "source": {
+          "url": "https://www.hostinger.com/applications/openclaw",
+          "quote": "OpenClaw is a self-hosted personal AI assistant platform that connects to the messaging channels you already use",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "teams-accounts",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "2 roles; no SSO or spend cap",
+        "scenario": "Five people share the VPS through Account Sharing; one runaway agent cannot be stopped by an account-level spend cap.",
+        "note": "Account Sharing gives a collaborator access to selected services with a Collaborator or Admin role. There is no SSO, no account-wide spend cap and no full audit log; the VPS API keeps an action log and the account shows sign-ins.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583777-how-to-share-access-to-your-account-at-hostinger/",
+          "quote": "you choose a role for the shared user: Collaborator or Admin",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "feature": "company",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Hostinger International Ltd; 99.9%",
+        "scenario": "Procurement gets a Cyprus entity, a 99.9% SLA with a 5% credit, ISO 27001 and a DPA; no SOC 2 report is listed.",
+        "note": "Hostinger International Limited (Cyprus) for most countries including the EU, founded in 2004, 5M+ customers and 1000+ staff. ISO/IEC 27001:2022, GDPR and PCI DSS are listed; SOC 2 is not. A public status page and a DPA are available.",
+        "source": {
+          "url": "https://www.hostinger.com/legal/hosting-agreement",
+          "quote": "We offer a Service uptime guarantee of 99.9% (“Service Uptime Guarantee”) of available time per month.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    }
+  ]
+}

@@ -256,6 +256,18 @@
         "quote": "We will bill you for your servers until you delete them, independent of their state.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "partly",
+      "figure": "50–400 GB included",
+      "scenario": "Postgres in /var/lib survives a stop, but there is no separate volume to attach to a new machine after the VPS is deleted.",
+      "note": "The NVMe disk is part of the plan: 50, 100, 200 or 400 GB, and it survives a stop. There are no separate volumes, no shared volume, no bucket mount and no way to grow the disk without moving to a larger plan.",
+      "source": {
+        "url": "https://www.hostinger.com/support/1583229-how-to-upgrade-a-vps-server-at-hostinger/",
+        "quote": "Individual resources (such as disk space or RAM) can’t be upgraded separately — upgrading the entire VPS plan is required",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Disk, and how long it is kept",

@@ -256,6 +256,18 @@
         "quote": "Mathematically speaking, we will bill you for the minimum amount, whether that is the monthly price cap OR the hourly price multiplied by the number of hours you used the server.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "partly",
+      "figure": "$19.49–$73.99/mo, prepaid",
+      "scenario": "One month of a box that mostly waits still costs the full plan; there is no per-second meter and no cheap paused state.",
+      "note": "A flat plan price for a 1-, 12- or 24-month term, paid upfront. The monthly-billed renewal is $19.49–$73.99; 12- and 24-month renewals are lower but prepaid. A stopped VPS keeps billing, so idle hours are not cheaper.",
+      "source": {
+        "url": "https://www.hostinger.com/vps-hosting",
+        "quote": "All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "The meter",

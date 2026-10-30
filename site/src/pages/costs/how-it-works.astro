@@ -9,8 +9,8 @@ import { MONTH_HOURS, price, presets, formatMoney, type RateCard } from "../../l
 const usd = (n: number) => `$${+n.toPrecision(4)}`;
 function rates(card: RateCard): string[] {
   const out: string[] = [];
-  if (card.shapes?.some((s) => s.hourly !== undefined)) {
-    out.push(card.shapes.map((s) => `${s.name} ${s.vcpu}/${s.ram} ${usd(s.hourly!)}/h`).join(" · "));
+  if (card.shapes?.some((s) => s.hourly !== undefined || s.monthly !== undefined)) {
+    out.push(card.shapes.map((s) => `${s.name} ${s.vcpu}/${s.ram} ${s.hourly !== undefined ? `${usd(s.hourly)}/h` : `${formatMoney(s.monthly!)}/mo`}`).join(" · "));
   }
   if (card.mcu) out.push(`${usd(card.mcu.rate)} per unit-hour; a unit is 1 vCPU, ${card.mcu.ramPer} GiB or ${card.mcu.diskPer} GiB`);
   if (card.cpu) out.push(`CPU ${usd(card.cpu.rate)} per vCPU-hour${card.cpu.billing === "active" ? `, only while working${card.cpu.floor ? ` (floor ${card.cpu.floor} vCPU)` : ""}` : ""}`);

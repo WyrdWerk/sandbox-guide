@@ -256,6 +256,18 @@
         "quote": "Cloud servers do not have a public network interface unless at least one Primary IP is assigned to them.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "yes",
+      "figure": "Public IPv4; SSH and web console",
+      "scenario": "Paste the public IPv4 URL into the client channel; SSH and the browser console both work.",
+      "note": "A dedicated public IPv4, standard SSH, a browser console, raw TCP and SSH local forwarding. The managed firewall drops all traffic until you add accept rules. There is no private, token-gated link.",
+      "source": {
+        "url": "https://www.hostinger.com/legal/hosting-agreement",
+        "quote": "You will have administrator (root) access and a dedicated IP address.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Who can open the link",

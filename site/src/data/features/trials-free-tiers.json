@@ -256,6 +256,18 @@
         "quote": "We accept the following payment methods:",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "no",
+      "figure": "No free tier; 30-day refund",
+      "scenario": "A week of testing costs a month's plan; the 30-day money-back guarantee is the only way out.",
+      "note": "No ongoing free tier, no starting credit and no card-free trial. KVM VPS plans are refundable within 30 days, with a 180-day cooldown after a VPS refund.",
+      "source": {
+        "url": "https://www.hostinger.com/support/9088216-what-is-hostinger-refund-policy/",
+        "quote": "The Hostinger refund policy offers a 30-day money-back guarantee for most hosting and email services, such as web, cloud, and KVM VPS hosting plans.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What you get, and what ends it",

@@ -26,6 +26,8 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["digitalocean", "a", 10], ["digitalocean", "b", 48], ["digitalocean", "c", 24],
   // 1,000 servers × 1 h (rounded up) × $0.0368 + 1,000 IPv4-hours × $0.001; min(730 h × $0.0673, $41.99) + $0.60 IPv4; CPX22 capped at $22.99 + $0.60.
   ["hetzner", "a", 37.8], ["hetzner", "b", 42.59], ["hetzner", "c", 23.59],
+  // One KVM 2 plan runs all 1,000 tasks back to back; KVM 4 for 4 vCPU; KVM 2 billed for the month, on or off.
+  ["hostinger", "a", 24.49], ["hostinger", "b", 42.99], ["hostinger", "c", 24.49],
 ];
 
 for (const [id, key, expected] of handWorked) {

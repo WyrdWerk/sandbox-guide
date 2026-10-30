@@ -255,6 +255,18 @@
         "quote": "We currently provide Open Source libraries for Go and Python.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "yes",
+      "figure": "Dashboard, CLI, SDKs, API, MCP",
+      "scenario": "A designer can create the VPS in the dashboard, but the first agent still needs a terminal or an application template.",
+      "note": "Dashboard creation, an official CLI, Python and TypeScript SDKs, a documented REST API and an official MCP server with 63 VPS tools. There is no PTY or file API: the browser console is for a person, not a program.",
+      "source": {
+        "url": "https://docs.hostinger.com/hostinger-connector/overview",
+        "quote": "Start, stop, and restart virtual machines; manage firewalls, SSH keys, snapshots, and metrics",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "First machine without a terminal?",

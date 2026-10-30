@@ -249,6 +249,18 @@
         "quote": "Cloud servers are virtual machines that run on physical servers and are used to run an operating system and computer programs.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "yes",
+      "figure": "KVM VM; root and Docker",
+      "scenario": "The build needs Docker and a kernel module: Docker and root work inside a full KVM guest, but a module that needs nested virtualisation does not.",
+      "note": "A full KVM virtual machine with its own kernel, root and Docker. Hostinger explicitly does not support nested virtualisation, and does not allow a custom OS image.",
+      "source": {
+        "url": "https://www.hostinger.com/vps-hosting",
+        "quote": "Kernel-based virtual machine (KVM) is a full virtualization solution that divides a physical server into completely independent and isolated virtual environments.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Boundary, and what it allows",

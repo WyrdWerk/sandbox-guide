@@ -256,6 +256,18 @@
         "quote": "We will bill you for each cloud server until you choose to delete them.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "yes",
+      "figure": "No idle stop",
+      "scenario": "Still running at 00:20 and at 01:00; nothing pauses it for idleness, and the plan keeps billing.",
+      "note": "No idle timer and no lifetime cap: a VPS runs until you stop it or the subscription ends. That is good for an always-on agent, but there is no idle setting to choose and no wake-on-request, so an idle machine cannot be made cheaper.",
+      "source": {
+        "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
+        "quote": "This is a compute-only power state change and does not affect billing.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Idle or lifetime limit",

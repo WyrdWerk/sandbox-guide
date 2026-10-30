@@ -301,6 +301,18 @@
         "quote": "We have ISO/IEC 27001:2022 certification.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "yes",
+      "figure": "Hostinger International Ltd; 99.9%",
+      "scenario": "Procurement gets a Cyprus entity, a 99.9% SLA with a 5% credit, ISO 27001 and a DPA; no SOC 2 report is listed.",
+      "note": "Hostinger International Limited (Cyprus) for most countries including the EU, founded in 2004, 5M+ customers and 1000+ staff. ISO/IEC 27001:2022, GDPR and PCI DSS are listed; SOC 2 is not. A public status page and a DPA are available.",
+      "source": {
+        "url": "https://www.hostinger.com/legal/hosting-agreement",
+        "quote": "We offer a Service uptime guarantee of 99.9% (“Service Uptime Guarantee”) of available time per month.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Contracting entity; promise",

@@ -1,0 +1,103 @@
+{
+  "provider": "hostinger",
+  "checkedOn": "2026-10-30",
+  "summary": "A prepaid monthly VPS plan with a flat price per fixed size; the 1-month term renews at the list price, and a powered-off machine keeps billing.",
+  "shapes": [
+    {
+      "name": "KVM 1",
+      "vcpu": 1,
+      "ram": 4,
+      "disk": 50,
+      "monthly": 19.49
+    },
+    {
+      "name": "KVM 2",
+      "vcpu": 2,
+      "ram": 8,
+      "disk": 100,
+      "monthly": 24.49
+    },
+    {
+      "name": "KVM 4",
+      "vcpu": 4,
+      "ram": 16,
+      "disk": 200,
+      "monthly": 42.99
+    },
+    {
+      "name": "KVM 8",
+      "vcpu": 8,
+      "ram": 32,
+      "disk": 400,
+      "monthly": 73.99
+    }
+  ],
+  "monthlyPlans": true,
+  "between": "kept",
+  "maxDisk": 400,
+  "maxVcpu": 8,
+  "maxRam": 32,
+  "egress": {
+    "perGiB": 0,
+    "included": "4 TB on KVM 1, 8 TB on KVM 2, 16 TB on KVM 4, 32 TB on KVM 8, per month",
+    "note": "There is no per-GiB overage charge. After the monthly allowance, Hostinger throttles the connection to 10 Mbps until the allowance resets on the first of the next month. Not priced by the calculator.",
+    "url": "https://www.hostinger.com/support/8789965-what-happens-if-your-vps-bandwidth-resource-limits-are-exceeded/"
+  },
+  "plans": [
+    {
+      "name": "Monthly-billed (1-month term)",
+      "fee": 0,
+      "note": "The card uses the 1-month term's renewal price, the ongoing price for a month-to-month buyer. The first month is discounted: KVM 1 $9.99, KVM 2 $13.99, KVM 4 $25.99, KVM 8 $50.99."
+    }
+  ],
+  "notes": [
+    "Term choice: the card prices the 1-month term at renewal, because it is the only monthly-billed term. The 12-month and 24-month terms are cheaper per month but are paid upfront for the whole term. Their renewal prices per month are: KVM 1 $12.99 / $11.99, KVM 2 $16.99 / $14.99, KVM 4 $30.99 / $28.99, KVM 8 $53.99 / $49.99. The corresponding upfront totals are $155.88 / $287.76, $203.88 / $359.76, $371.88 / $695.76 and $647.88 / $1,199.76.",
+    "Prices were read during Hostinger's Black Friday sale on 2026-10-30. The introductory first-period prices may change when the sale ends; the renewal prices are the regular ongoing prices and are the ones the card uses.",
+    "The advertised 24-month prices ($6.49, $8.79, $12.99, $25.99) are introductory and apply only when the full 24 months is paid upfront. They are not the ongoing price and are not used in the card.",
+    "A powered-off VPS keeps billing. The stop endpoint says: \"This is a compute-only power state change and does not affect billing.\" Workload C therefore pays the full plan price, not 90 hours.",
+    "CPU is burstable under a credit system, not a permanently dedicated core. The baseline is 60% of allocated CPU; a full balance covers about three hours at 100%; after that the plan is throttled. This does not bind A, B or C, which sit at or below the baseline on average.",
+    "One manual snapshot at a time, deleted after 1 day. Weekly backups are free and up to four are retained (two daily, two weekly); daily backups are a paid add-on whose price varies by plan.",
+    "The managed AI automation plan runs OpenClaw, Hermes, n8n or Paperclip; it is $4.99/mo on a 24-month term (renewing at $11.99/mo) and $10.99/mo on the 1-month term. It is a separate product, not these VPS plans, and is not priced by this card.",
+    "No separate platform fee; the plan price is the whole machine charge. A free domain for one year is included but is not part of the machine price.",
+    "Hostinger quotes RAM and disk in GB; the card maps those figures 1:1 to the site's GiB fields. If they are decimal GB, 32 GB is 29.8 GiB and the largest plan is just under the 32 GiB mark. A/B/C asks are smaller and unaffected.",
+    "Hostinger sells whole monthly plans, not machine-hours. The calculator bills each machine its plan price, and runs short tasks back to back on as few plans as their hours need: 1,000 ten-minute tasks fit on one KVM 2 for $24.49."
+  ],
+  "sources": [
+    {
+      "label": "VPS hosting and plan prices",
+      "url": "https://www.hostinger.com/vps-hosting"
+    },
+    {
+      "label": "KVM 1 live catalog (all three terms, cents)",
+      "url": "https://cart.hostinger.com/api/v1/catalog/hostingercom-vps-kvm1?brand_name=hostinger.com&currency_code=USD"
+    },
+    {
+      "label": "KVM 2 live catalog (all three terms, cents)",
+      "url": "https://cart.hostinger.com/api/v1/catalog/hostingercom-vps-kvm2?brand_name=hostinger.com&currency_code=USD"
+    },
+    {
+      "label": "KVM 4 live catalog (all three terms, cents)",
+      "url": "https://cart.hostinger.com/api/v1/catalog/hostingercom-vps-kvm4?brand_name=hostinger.com&currency_code=USD"
+    },
+    {
+      "label": "KVM 8 live catalog (all three terms, cents)",
+      "url": "https://cart.hostinger.com/api/v1/catalog/hostingercom-vps-kvm8?brand_name=hostinger.com&currency_code=USD"
+    },
+    {
+      "label": "Stop endpoint: stopping does not affect billing",
+      "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine"
+    },
+    {
+      "label": "Bandwidth throttling after the monthly allowance",
+      "url": "https://www.hostinger.com/support/8789965-what-happens-if-your-vps-bandwidth-resource-limits-are-exceeded/"
+    },
+    {
+      "label": "CPU credits and throttle limits",
+      "url": "https://www.hostinger.com/support/how-cpu-credits-work-on-hostinger-vps/"
+    },
+    {
+      "label": "Snapshots and backups",
+      "url": "https://www.hostinger.com/support/1583232-how-to-back-up-or-restore-a-vps-at-hostinger/"
+    }
+  ]
+}

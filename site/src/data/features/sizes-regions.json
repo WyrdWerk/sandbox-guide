@@ -256,6 +256,18 @@
         "quote": "There are currently four network zones and six locations:",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "partly",
+      "figure": "8 vCPU / 32 GB; 10 regions",
+      "scenario": "The lopsided 2 vCPU / 16 GiB request has no exact shape; KVM 4's 16 GB is about 14.9 GiB if decimal, so the next fit is KVM 8 at 8 vCPU / 32 GB for $73.99.",
+      "note": "Four fixed plans up to 8 vCPU / 32 GB / 400 GB, in 10 data centers including France, Germany, Lithuania and the UK. CPU, RAM and disk cannot be sized independently or upgraded separately; there is no GPU on the VPS product, and the location is fixed after setup.",
+      "source": {
+        "url": "https://www.hostinger.com/vps-hosting",
+        "quote": "Launch your VPS in 10 data centers across 4 continents, from Boston to Jakarta.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Largest shape; regions",

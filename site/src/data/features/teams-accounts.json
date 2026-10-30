@@ -256,6 +256,18 @@
         "quote": "These alerts are optional and are meant to help you keep track of your spending. They are a convenience feature rather than a spending limit",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "partly",
+      "figure": "2 roles; no SSO or spend cap",
+      "scenario": "Five people share the VPS through Account Sharing; one runaway agent cannot be stopped by an account-level spend cap.",
+      "note": "Account Sharing gives a collaborator access to selected services with a Collaborator or Admin role. There is no SSO, no account-wide spend cap and no full audit log; the VPS API keeps an action log and the account shows sign-ins.",
+      "source": {
+        "url": "https://www.hostinger.com/support/1583777-how-to-share-access-to-your-account-at-hostinger/",
+        "quote": "you choose a role for the shared user: Collaborator or Admin",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Hard spend cap?",

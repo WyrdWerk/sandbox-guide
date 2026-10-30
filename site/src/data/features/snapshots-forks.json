@@ -256,6 +256,18 @@
         "quote": "A Snapshot is a copy of a server's disk that is created manually.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "partly",
+      "figure": "1 snapshot, 1 day",
+      "scenario": "Rewind a bad change only from the single snapshot taken in the last day; fanning out ten copies means ten VPS plans, not ten forks.",
+      "note": "A manual snapshot captures the whole VPS, but only one can exist, a new one overwrites it, and it expires after 1 day. Weekly backups are the longer-lived restore point. There is no fork, no clone of a running machine and no user-created template.",
+      "source": {
+        "url": "https://www.hostinger.com/support/1583232-how-to-back-up-or-restore-a-vps-at-hostinger/",
+        "quote": "Only one snapshot is stored at a time; creating a new one overwrites the previous one.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a snapshot keeps",

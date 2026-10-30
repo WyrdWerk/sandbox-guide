@@ -7,7 +7,7 @@
       "seoTitle": "Hermes agent hosting: where to run it and what it costs",
       "kicker": "Personal agent",
       "question": "I want a personal assistant that answers me on Telegram, remembers what I tell it and runs jobs on a schedule.",
-      "standfirst": "Hermes is a personal AI agent you host yourself. It needs a small machine that stays on and keeps its files. Two providers offer it in one click (Agent 37 with no terminal at all, DigitalOcean as a Marketplace server image); most can run it if you can follow terminal instructions; a few are a poor fit for an assistant that never sleeps.",
+      "standfirst": "Hermes is a personal AI agent you host yourself. It needs a small machine that stays on and keeps its files. Three providers offer it in one click (Agent 37 with no terminal at all; DigitalOcean and Hostinger as server templates you finish in a terminal); most can run it if you can follow terminal instructions; a few are a poor fit for an assistant that never sleeps.",
       "preset": "personal",
       "whatItIs": [
         "[Hermes Agent](https://github.com/NousResearch/hermes-agent) is an open-source (MIT) assistant from Nous Research. You talk to it from Telegram, Slack, WhatsApp, email and [20+ other apps](https://hermes-agent.nousresearch.com/docs/), it keeps a memory of you between conversations, and it writes itself reusable skills from what it does.",
@@ -228,6 +228,17 @@
             "url": "https://hermes-agent.nousresearch.com/docs/"
           },
           "price": "CPX22 $22.99 + $0.60 Primary IPv4 a month"
+        },
+        {
+          "provider": "hostinger",
+          "tier": "one-click",
+          "noTerminal": "partly",
+          "what": "The Hermes Agent VPS template deploys the app from the dashboard. You still add a model key and connect Telegram, Discord or another channel from the terminal. Hostinger's separate managed AI automation plan is the no-terminal alternative.",
+          "link": {
+            "title": "Hermes Agent VPS template",
+            "url": "https://www.hostinger.com/applications/hermes-agent"
+          },
+          "price": "KVM 2 $24.49/mo monthly-billed; KVM 1 $19.49/mo may suit a light agent"
         }
       ],
       "picks": [
@@ -349,7 +360,7 @@
       "seoTitle": "OpenClaw hosting: where to run it and what it costs",
       "kicker": "Personal agent",
       "question": "I want OpenClaw answering me on WhatsApp or Slack, with its own browser and memory, without keeping my laptop on.",
-      "standfirst": "OpenClaw is a self-hosted assistant built around one always-on gateway. It has more official hosting guides than Hermes: three providers deploy it in one click, and four more publish a guide or template.",
+      "standfirst": "OpenClaw is a self-hosted assistant built around one always-on gateway. It has more official hosting guides than Hermes: four providers deploy it in one click, and four more publish a guide or template.",
       "preset": "personal",
       "whatItIs": [
         "[OpenClaw](https://docs.openclaw.ai/help/faq/what-is-openclaw) is an open-source assistant you run on your own infrastructure, for yourself or a team. It replies on the apps you already use, including WhatsApp, Slack, Telegram, Discord, Signal and iMessage, and can read files, run commands, browse and keep memory.",
@@ -563,6 +574,17 @@
             "url": "https://docs.openclaw.ai/install/hetzner"
           },
           "price": "CPX32 4 vCPU / 8 GB from $41.99 + $0.60 a month; CPX22 is $22.99 if the pre-built image is used"
+        },
+        {
+          "provider": "hostinger",
+          "tier": "one-click",
+          "noTerminal": "partly",
+          "what": "The OpenClaw VPS template deploys the gateway and its dashboard. Pairing WhatsApp or Telegram and adding model keys are terminal work. The separate managed AI automation plan includes Telegram pairing, AI credits and managed updates.",
+          "link": {
+            "title": "OpenClaw VPS template",
+            "url": "https://www.hostinger.com/applications/openclaw"
+          },
+          "price": "KVM 2 $24.49/mo monthly-billed; KVM 1 $19.49/mo"
         }
       ],
       "picks": [
@@ -883,6 +905,17 @@
             "url": "https://docs.hetzner.com/cloud/servers/getting-started/connecting-to-the-server"
           },
           "price": "CPX32 $41.99 + $0.60 a month, whether or not it is running"
+        },
+        {
+          "provider": "hostinger",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Claude Code or Codex on an Ubuntu VPS yourself. KVM 4 gives 4 vCPU / 16 GB / 200 GB for $42.99/mo; KVM 2 at $24.49 has 2 vCPU and 8 GB if that is enough. The disk survives a stop, but the plan bills through the stopped hours.",
+          "link": {
+            "title": "Hostinger VPS documentation",
+            "url": "https://docs.hostinger.com/api-reference/endpoints/vps"
+          },
+          "price": "$24.49–$42.99/mo monthly-billed"
         }
       ],
       "picks": [
@@ -1051,6 +1084,17 @@
             "url": "https://docs.hetzner.cloud/reference/cloud"
           },
           "price": "$0.0368 per server-hour: 20,000 one-minute runs is about $756 a month: $736 of servers plus $20 of IPv4"
+        },
+        {
+          "provider": "hostinger",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run your own interpreter service on a VPS. There is no sandbox API, no per-run machine and no per-second billing: a KVM 2 plan costs $24.49 whether it runs 20,000 one-minute jobs or none.",
+          "link": {
+            "title": "Hostinger VPS",
+            "url": "https://www.hostinger.com/vps-hosting"
+          },
+          "price": "$24.49/mo for KVM 2"
         }
       ],
       "picks": [
@@ -1163,6 +1207,17 @@
             "url": "https://docs.hetzner.com/cloud/servers/getting-started/vnc-console"
           },
           "price": "CPX22 $0.0368 an hour, one hour minimum per session"
+        },
+        {
+          "provider": "hostinger",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Chromium and a browser driver on KVM 2 or KVM 4. There is no browser-ready image and no desktop; the plan bills for the month, so 30,000 short sessions are a poor fit.",
+          "link": {
+            "title": "Hostinger VPS",
+            "url": "https://www.hostinger.com/vps-hosting"
+          },
+          "price": "$24.49–$42.99/mo monthly-billed"
         }
       ],
       "picks": [
@@ -1212,7 +1267,7 @@
       "seoTitle": "n8n hosting: where to self-host n8n and what it costs",
       "kicker": "Workflow automation",
       "question": "I want n8n running my automations around the clock, on a server I control, without paying per workflow run.",
-      "standfirst": "n8n is a visual automation tool you can host yourself. It needs a small machine that never sleeps and keeps its database. Two providers set it up in one click; most others can run it if someone follows terminal steps; the task-only sandboxes are the wrong place for it.",
+      "standfirst": "n8n is a visual automation tool you can host yourself. It needs a small machine that never sleeps and keeps its database. Three providers set it up in one click; most others can run it if someone follows terminal steps; the task-only sandboxes are the wrong place for it.",
       "preset": "automation",
       "whatItIs": [
         "[n8n](https://docs.n8n.io/) is a workflow automation tool. You draw a workflow on a canvas: a **trigger** (something that starts it, such as a form being sent or a time of day), then steps that call other apps, reshape data or ask an AI model. Its [README](https://github.com/n8n-io/n8n) counts 1,500+ ready-made connections.",
@@ -1416,6 +1471,17 @@
             "url": "https://docs.n8n.io/deploy/host-n8n/install-options/use-a-cloud-provider/deploy-to-hetzner"
           },
           "price": "CPX22 $22.99 + $0.60 a month always on"
+        },
+        {
+          "provider": "hostinger",
+          "tier": "one-click",
+          "noTerminal": "partly",
+          "what": "The n8n template deploys n8n in Docker and opens the editor in your browser. You still point a domain at the VPS and add TLS with Traefik or Certbot, and the database and encryption key live on the VPS disk.",
+          "link": {
+            "title": "Self-hosted n8n on Hostinger",
+            "url": "https://www.hostinger.com/self-hosted-n8n"
+          },
+          "price": "KVM 2 $24.49/mo monthly-billed"
         }
       ],
       "picks": [
@@ -1769,6 +1835,17 @@
             "url": "https://docs.hetzner.com/cloud/servers/getting-started/creating-a-server"
           },
           "price": "CPX12 $13.49 + $0.60 a month"
+        },
+        {
+          "provider": "hostinger",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install a Node or Python bot, keep it running under systemd, and store its token and history on the disk. KVM 1 at $19.49 has 1 vCPU / 4 GB and is enough for one community; KVM 2 is $24.49.",
+          "link": {
+            "title": "Hostinger VPS",
+            "url": "https://www.hostinger.com/vps-hosting"
+          },
+          "price": "$19.49–$24.49/mo monthly-billed"
         }
       ],
       "picks": [
@@ -2050,6 +2127,17 @@
             "url": "https://docs.hetzner.com/cloud/servers/getting-started/connecting-to-the-server"
           },
           "price": "5 × ($41.99 + $0.60) = $212.95 a month"
+        },
+        {
+          "provider": "hostinger",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "One KVM 4 per developer, each with its own Claude login. Five machines at $42.99/mo is $214.95/mo on the monthly-billed term. Hostinger Account Sharing can give each developer access, but it does not isolate their Claude credentials.",
+          "link": {
+            "title": "Hostinger VPS",
+            "url": "https://www.hostinger.com/vps-hosting"
+          },
+          "price": "5 × $42.99 = $214.95/mo monthly-billed"
         }
       ],
       "picks": [
@@ -2331,6 +2419,17 @@
             "url": "https://www.hetzner.com/storage/object-storage/"
           },
           "price": "120 ten-minute runs × 1 h × $0.0216 ≈ $2.59 + $0.12 IPv4, against $14.09 for an always-on CPX12"
+        },
+        {
+          "provider": "hostinger",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run the scraper from cron inside the VPS. Four ten-minute runs a day is only about 20 machine-hours a month, but the VPS plan bills all 730 hours: KVM 1 costs $19.49 either way. Store results outside the VPS if it may be deleted.",
+          "link": {
+            "title": "Hostinger VPS",
+            "url": "https://www.hostinger.com/vps-hosting"
+          },
+          "price": "$19.49/mo for KVM 1"
         }
       ],
       "picks": [
@@ -2608,6 +2707,17 @@
             "url": "https://docs.hetzner.com/cloud/firewalls/overview"
           },
           "price": "CPX02 $7.49 + $0.60 a month"
+        },
+        {
+          "provider": "hostinger",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run a small HTTP MCP server on KVM 1, with systemd and a TLS reverse proxy such as Caddy or Traefik. The public IPv4, root access and always-on plan make it a straightforward fit; you own authentication and certificate renewal.",
+          "link": {
+            "title": "Hostinger VPS",
+            "url": "https://www.hostinger.com/vps-hosting"
+          },
+          "price": "$19.49/mo monthly-billed"
         }
       ],
       "picks": [

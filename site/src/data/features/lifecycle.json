@@ -283,6 +283,18 @@
         "quote": "you pay for a server that has completed the creation process for as long as it exists, regardless of whether it is turned on or not",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "partly",
+      "figure": "Stop keeps disk; no pause",
+      "scenario": "Stop at 18:00 and the disk is there at 09:00, but the queued test run and the memory are gone, and the plan bills through the night.",
+      "note": "A stop powers the machine off and keeps the disk; it does not pause memory or running processes, and it does not stop billing. There is no wake-on-request: a stopped machine stays stopped until you start it.",
+      "source": {
+        "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
+        "quote": "This is a compute-only power state change and does not affect billing.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a pause keeps",

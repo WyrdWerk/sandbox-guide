@@ -1218,5 +1218,71 @@
       "title": "Cloud plans and prices",
       "url": "https://www.hetzner.com/cloud/regular-performance/"
     }
+  },
+  "hostinger": {
+    "isolation": {
+      "title": "VPS Hosting | Fast, AI-Ready KVM VPS up to 70% off - Hostinger",
+      "url": "https://www.hostinger.com/vps-hosting"
+    },
+    "sizes-regions": {
+      "title": "VPS Hosting | Fast, AI-Ready KVM VPS up to 70% off - Hostinger",
+      "url": "https://www.hostinger.com/vps-hosting"
+    },
+    "billing-models": {
+      "title": "VPS Hosting | Fast, AI-Ready KVM VPS up to 70% off - Hostinger",
+      "url": "https://www.hostinger.com/vps-hosting"
+    },
+    "trials-free-tiers": {
+      "title": "Hostinger refund policy",
+      "url": "https://www.hostinger.com/support/9088216-what-is-hostinger-refund-policy/"
+    },
+    "lifecycle": {
+      "title": "Stop virtual machine | Hostinger Documentation",
+      "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine"
+    },
+    "snapshots-forks": {
+      "title": "How to back up or restore a Hostinger VPS",
+      "url": "https://www.hostinger.com/support/1583232-how-to-back-up-or-restore-a-vps-at-hostinger/"
+    },
+    "storage": {
+      "title": "How to upgrade a VPS server at Hostinger",
+      "url": "https://www.hostinger.com/support/1583229-how-to-upgrade-a-vps-server-at-hostinger/"
+    },
+    "idle-timers": {
+      "title": "Stop virtual machine | Hostinger Documentation",
+      "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine"
+    },
+    "reaching-it": {
+      "title": "Hosting agreement",
+      "url": "https://www.hostinger.com/legal/hosting-agreement"
+    },
+    "custom-domains": {
+      "title": "How to install SSL on VPS at Hostinger",
+      "url": "https://www.hostinger.com/support/6360129-how-to-install-ssl-on-vps-at-hostinger/"
+    },
+    "outbound-network": {
+      "title": "VPS Hosting | Fast, AI-Ready KVM VPS up to 70% off - Hostinger",
+      "url": "https://www.hostinger.com/vps-hosting"
+    },
+    "keys-secrets": {
+      "title": "API Reference | Hostinger Documentation",
+      "url": "https://docs.hostinger.com/api-reference/overview"
+    },
+    "ways-to-drive": {
+      "title": "Overview | Hostinger Documentation",
+      "url": "https://docs.hostinger.com/hostinger-connector/overview"
+    },
+    "built-in-agents": {
+      "title": "OpenClaw VPS Hosting | One-Click AI Assistant Setup",
+      "url": "https://www.hostinger.com/applications/openclaw"
+    },
+    "teams-accounts": {
+      "title": "How to share access to your account at Hostinger",
+      "url": "https://www.hostinger.com/support/1583777-how-to-share-access-to-your-account-at-hostinger/"
+    },
+    "company": {
+      "title": "Hosting agreement",
+      "url": "https://www.hostinger.com/legal/hosting-agreement"
+    }
   }
 }

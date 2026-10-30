@@ -1,0 +1,153 @@
+{
+  "provider": "hostinger",
+  "checkedOn": "2026-10-30",
+  "summary": "Three genuine one-click VPS templates (OpenClaw, Hermes, n8n) and a manual route for everything else. The VPS is a good fit for one always-on agent or a small MCP server, and a poor fit for many short-lived tasks because the plan bills for the month whether the machine runs or not.",
+  "routes": [
+    {
+      "useCase": "hermes-agent",
+      "tier": "one-click",
+      "noTerminal": "partly",
+      "what": "The Hermes Agent VPS template deploys the app from the dashboard. You still add a model key and connect Telegram, Discord or another channel from the terminal. Hostinger's separate managed AI automation plan is the no-terminal alternative.",
+      "link": {
+        "title": "Hermes Agent VPS template",
+        "url": "https://www.hostinger.com/applications/hermes-agent"
+      },
+      "price": "KVM 2 $24.49/mo monthly-billed; KVM 1 $19.49/mo may suit a light agent",
+      "disposition": "Offer as a one-click route with a terminal caveat. Do not make it the default pick for a non-coder; the managed AI automation plan is easier but is a different product."
+    },
+    {
+      "useCase": "openclaw",
+      "tier": "one-click",
+      "noTerminal": "partly",
+      "what": "The OpenClaw VPS template deploys the gateway and its dashboard. Pairing WhatsApp or Telegram and adding model keys are terminal work. The separate managed AI automation plan includes Telegram pairing, AI credits and managed updates.",
+      "link": {
+        "title": "OpenClaw VPS template",
+        "url": "https://www.hostinger.com/applications/openclaw"
+      },
+      "price": "KVM 2 $24.49/mo monthly-billed; KVM 1 $19.49/mo",
+      "disposition": "Recommend for a reader who wants root and a persistent VPS. State plainly that the template is not the managed $11.99/mo product."
+    },
+    {
+      "useCase": "coding-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Claude Code or Codex on an Ubuntu VPS yourself. KVM 4 gives 4 vCPU / 16 GB / 200 GB for $42.99/mo; KVM 2 at $24.49 has 2 vCPU and 8 GB if that is enough. The disk survives a stop, but the plan bills through the stopped hours.",
+      "link": {
+        "title": "Hostinger VPS documentation",
+        "url": "https://docs.hostinger.com/api-reference/endpoints/vps"
+      },
+      "price": "$24.49–$42.99/mo monthly-billed",
+      "disposition": "List as a manual route; no pick."
+    },
+    {
+      "useCase": "code-interpreter",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run your own interpreter service on a VPS. There is no sandbox API, no per-run machine and no per-second billing: a KVM 2 plan costs $24.49 whether it runs 20,000 one-minute jobs or none.",
+      "link": {
+        "title": "Hostinger VPS",
+        "url": "https://www.hostinger.com/vps-hosting"
+      },
+      "price": "$24.49/mo for KVM 2",
+      "disposition": "Do not recommend. A per-task sandbox is cheaper and safer for untrusted code."
+    },
+    {
+      "useCase": "browser-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Chromium and a browser driver on KVM 2 or KVM 4. There is no browser-ready image and no desktop; the plan bills for the month, so 30,000 short sessions are a poor fit.",
+      "link": {
+        "title": "Hostinger VPS",
+        "url": "https://www.hostinger.com/vps-hosting"
+      },
+      "price": "$24.49–$42.99/mo monthly-billed",
+      "disposition": "Do not recommend; manual only."
+    },
+    {
+      "useCase": "workflow-automation",
+      "tier": "one-click",
+      "noTerminal": "partly",
+      "what": "The n8n template deploys n8n in Docker and opens the editor in your browser. You still point a domain at the VPS and add TLS with Traefik or Certbot, and the database and encryption key live on the VPS disk.",
+      "link": {
+        "title": "Self-hosted n8n on Hostinger",
+        "url": "https://www.hostinger.com/self-hosted-n8n"
+      },
+      "price": "KVM 2 $24.49/mo monthly-billed",
+      "disposition": "Recommend. It is the strongest Hostinger route: one click, a real 2 vCPU / 8 GB box, 100 GB of disk and weekly backups."
+    },
+    {
+      "useCase": "chat-bot",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install a Node or Python bot, keep it running under systemd, and store its token and history on the disk. KVM 1 at $19.49 has 1 vCPU / 4 GB and is enough for one community; KVM 2 is $24.49.",
+      "link": {
+        "title": "Hostinger VPS",
+        "url": "https://www.hostinger.com/vps-hosting"
+      },
+      "price": "$19.49–$24.49/mo monthly-billed",
+      "disposition": "List as a manual route; no pick."
+    },
+    {
+      "useCase": "claude-code-team",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "One KVM 4 per developer, each with its own Claude login. Five machines at $42.99/mo is $214.95/mo on the monthly-billed term. Hostinger Account Sharing can give each developer access, but it does not isolate their Claude credentials.",
+      "link": {
+        "title": "Hostinger VPS",
+        "url": "https://www.hostinger.com/vps-hosting"
+      },
+      "price": "5 × $42.99 = $214.95/mo monthly-billed",
+      "disposition": "List as a manual route; no pick. A per-seat managed coding product is simpler for a team."
+    },
+    {
+      "useCase": "scheduled-scraper",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run the scraper from cron inside the VPS. Four ten-minute runs a day is only about 20 machine-hours a month, but the VPS plan bills all 730 hours: KVM 1 costs $19.49 either way. Store results outside the VPS if it may be deleted.",
+      "link": {
+        "title": "Hostinger VPS",
+        "url": "https://www.hostinger.com/vps-hosting"
+      },
+      "price": "$19.49/mo for KVM 1",
+      "disposition": "Do not recommend. A scheduled sandbox or a small job runner is much cheaper for 20 hours of work."
+    },
+    {
+      "useCase": "mcp-server",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run a small HTTP MCP server on KVM 1, with systemd and a TLS reverse proxy such as Caddy or Traefik. The public IPv4, root access and always-on plan make it a straightforward fit; you own authentication and certificate renewal.",
+      "link": {
+        "title": "Hostinger VPS",
+        "url": "https://www.hostinger.com/vps-hosting"
+      },
+      "price": "$19.49/mo monthly-billed",
+      "disposition": "Recommend as a value pick for a small always-on MCP server. There is no private URL or built-in auth, so the reader must add both."
+    }
+  ],
+  "picks": [
+    {
+      "useCase": "openclaw",
+      "provider": "hostinger",
+      "for": "A root-controlled OpenClaw that stays on",
+      "why": "The one-click template runs on KVM 2: 2 vCPU, 8 GB, 100 GB, a public IPv4 and weekly backups for $24.49 a month. The full root access makes it easy to add tools, a browser or a second container.",
+      "watch": "The template is not the managed AI automation plan: no AI credits, no managed automatic updates and no built-in Telegram pairing, so expect terminal work. CPU is credit-throttled after long bursts.",
+      "link": "https://www.hostinger.com/applications/openclaw"
+    },
+    {
+      "useCase": "workflow-automation",
+      "provider": "hostinger",
+      "for": "A cheap self-hosted n8n for a small team",
+      "why": "The n8n template is one click, KVM 2 gives 2 vCPU / 8 GB / 100 GB for $24.49 a month, and 8 TB of outbound data is included. Weekly backups are on by default.",
+      "watch": "Domain and TLS are manual, restoring a backup overwrites the server, and the n8n encryption key must survive with the database. CPU credits can slow a large workflow after a long burst.",
+      "link": "https://www.hostinger.com/self-hosted-n8n"
+    },
+    {
+      "useCase": "mcp-server",
+      "provider": "hostinger",
+      "for": "A small remote MCP server that must answer all month",
+      "why": "KVM 1 is $19.49 a month on the monthly-billed term, always on, with a dedicated IPv4, root and a browser console. The CLI and API make restarts and snapshots scriptable.",
+      "watch": "There is no private URL or built-in OAuth, so you add authentication and TLS yourself. The single snapshot expires after a day; use the weekly backups for recovery.",
+      "link": "https://www.hostinger.com/vps-hosting"
+    }
+  ]
+}

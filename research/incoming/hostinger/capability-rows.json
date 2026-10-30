@@ -1,0 +1,1088 @@
+{
+  "provider": "hostinger",
+  "checkedOn": "2026-10-30",
+  "rows": [
+    {
+      "capability": "own-vm",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "KVM full VM",
+        "note": "Each VPS is a KVM guest with its own kernel, not a container sharing the host kernel.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "Kernel-based virtual machine (KVM) is a full virtualization solution that divides a physical server into completely independent and isolated virtual environments.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "root",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "root over SSH",
+        "source": {
+          "url": "https://www.hostinger.com/legal/hosting-agreement",
+          "quote": "You will have administrator (root) access and a dedicated IP address.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "docker-inside",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Docker + Docker Manager",
+        "note": "Docker can be installed on any OS template; Docker Manager adds a visual Compose view but is experimental and only works with Docker OS templates.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "Docker manager",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "nested-virt",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Not supported",
+        "source": {
+          "url": "https://www.hostinger.com/support/10429687-is-nested-virtualization-supported-in-hostinger/",
+          "quote": "Nested virtualization is not supported on Hostinger Virtual Private Server (VPS) hosting plans.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "custom-image",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No custom OS image",
+        "note": "You can choose from Hostinger's OS and panel templates, but cannot upload an ISO or your own image. Docker images inside the VPS are a different thing.",
+        "source": {
+          "url": "https://www.hostinger.com/support/8852324-can-you-add-your-own-os-image-to-vps-at-hostinger/",
+          "quote": "we don’t offer an option to upload or install your own OS images on VPS",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "any-size",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "4 fixed plans",
+        "note": "Four fixed plans. CPU, RAM and disk cannot be chosen independently or upgraded separately; the only change is a whole-plan upgrade.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583229-how-to-upgrade-a-vps-server-at-hostinger/",
+          "quote": "Individual resources (such as disk space or RAM) can’t be upgraded separately — upgrading the entire VPS plan is required",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "big-machines",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "8 vCPU / 32 GB",
+        "note": "Only 8 vCPU, and the 32 GB memory is the only dimension near the threshold. If Hostinger means GiB, it meets the 32 GiB mark; if decimal GB, it falls just short.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "8 vCPU cores 32 GB RAM 400 GB NVMe disk space",
+          "confidence": "pricing-page"
+        },
+        "shortfall": "The largest plan is 8 vCPU / 32 GB; Hostinger does not say whether that is GiB, and 32 decimal GB is 29.8 GiB, just under the 32 GiB mark."
+      }
+    },
+    {
+      "capability": "live-resize",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "Whole-plan upgrade only",
+        "shortfall": "You cannot add CPU or memory on their own, only move to a bigger fixed plan, and Hostinger does not say running processes survive the upgrade.",
+        "note": "The upgrade takes up to 10 minutes and Hostinger says files and configurations remain unchanged, but it does not promise that a running process or memory survives.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583229-how-to-upgrade-a-vps-server-at-hostinger/",
+          "quote": "The upgrade can take up to 10 minutes to complete.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "gpu",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No GPU on VPS",
+        "note": "GPUs are a separate hourly Hostinger product, not a VPS shape or an add-on to one.",
+        "source": {
+          "url": "https://www.hostinger.com/gpu-hosting",
+          "quote": "Run AI, rendering, and compute workloads on dedicated NVIDIA GPUs with simple hourly pricing and no long-term commitment.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "choose-region",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "10 data centers",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "Launch your VPS in 10 data centers across 4 continents, from Boston to Jakarta.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "eu-region",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "FR, DE, LT",
+        "note": "France, Germany and Lithuania are in the EU. The UK is also a VPS location but is not in the EU. The location is chosen at setup and fixed afterwards.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583267-where-are-hostinger-servers-located/",
+          "quote": "Europe: France, Germany, Lithuania, and the United Kingdom.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "pause-memory",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Stop loses memory",
+        "note": "Stop powers the machine off. There is no pause state that keeps RAM or running programs.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
+          "quote": "This is a compute-only power state change and does not affect billing.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "warm-pool",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No pre-started pool",
+        "note": "No pool or pre-started machine product appears in the 67 VPS endpoints or the VPS dashboard.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
+          "quote": "67 endpoints across 14 sections.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "fast-start",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "not-published",
+        "figure": "Not published",
+        "note": "Hostinger publishes no boot or provisioning time. A VPS is a full boot, so a sub-second start is not plausible, but no page states a number.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
+          "quote": "67 endpoints across 14 sections.",
+          "confidence": "not-published"
+        }
+      }
+    },
+    {
+      "capability": "snapshot-files",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "1 snapshot, 1 day",
+        "note": "A manual snapshot captures the whole VPS. Only one exists at a time and it expires after 1 day.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583232-how-to-back-up-or-restore-a-vps-at-hostinger/",
+          "quote": "Only one snapshot is stored at a time; creating a new one overwrites the previous one.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "snapshot-memory",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "not-published",
+        "figure": "Not published",
+        "note": "Hostinger calls the snapshot a copy of the VPS state but does not say whether RAM or running processes are included. The documented restore path is a full server restore.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583232-how-to-back-up-or-restore-a-vps-at-hostinger/",
+          "quote": "A manual, on-demand capture of your entire VPS",
+          "confidence": "not-published"
+        }
+      }
+    },
+    {
+      "capability": "fork-running",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No fork",
+        "note": "There is no clone or fork endpoint and no copy-on-write machine. The only copy is a snapshot, which is single and expires after a day.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583232-how-to-back-up-or-restore-a-vps-at-hostinger/",
+          "quote": "Only one snapshot is stored at a time; creating a new one overwrites the previous one.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "older-snapshot",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Only 1 snapshot",
+        "note": "You cannot choose an earlier snapshot: there is only the current one, and it is deleted after 1 day.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583232-how-to-back-up-or-restore-a-vps-at-hostinger/",
+          "quote": "Only one snapshot is stored at a time; creating a new one overwrites the previous one.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "templates",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "OS/app templates only",
+        "note": "Hostinger offers OS, panel and application templates, but no way to save your configured machine as a reusable template. The OS-template endpoints are read-only.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
+          "quote": "67 endpoints across 14 sections.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "backups",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Weekly; 2 weekly + 2 daily",
+        "note": "Weekly backups are on by default and free. Up to four are retained, two weekly and two daily; daily backups are a paid add-on. A restore overwrites the whole server.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583232-how-to-back-up-or-restore-a-vps-at-hostinger/",
+          "quote": "Automated weekly backups (and daily if enabled), stored separately from your server. Up to four are retained, two daily and two weekly.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "files-survive-stop",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Disk kept on stop",
+        "note": "Stopping powers off the machine but keeps its disk. Starting it again finds the files; memory and running processes are gone.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
+          "quote": "This is a compute-only power state change and does not affect billing.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "volumes",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No volumes",
+        "note": "Storage is the NVMe disk included in the plan. There is no separate volume product that outlives the machine or can be attached to another one.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583229-how-to-upgrade-a-vps-server-at-hostinger/",
+          "quote": "Individual resources (such as disk space or RAM) can’t be upgraded separately — upgrading the entire VPS plan is required",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "shared-volume",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No shared volume",
+        "note": "No block-storage or shared-filesystem product appears in the VPS plan or the 67 VPS endpoints.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
+          "quote": "67 endpoints across 14 sections.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "mount-buckets",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No bucket mount",
+        "note": "Hostinger does not document an S3-style bucket or outside filesystem that can be mounted as a folder on the VPS.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
+          "quote": "67 endpoints across 14 sections.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "big-disk",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Up to 400 GB",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "400 GB NVMe disk space",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "stay-on",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "No idle stop",
+        "note": "No idle timer or lifetime cap. The VPS runs until you stop it or the subscription ends.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
+          "quote": "This is a compute-only power state change and does not affect billing.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "choose-idle",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "Never; no timer",
+        "shortfall": "There is no idle setting at all: the only behaviour is to run until you stop it, so you cannot choose a timeout or let it sleep to save money.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
+          "quote": "This is a compute-only power state change and does not affect billing.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "wake-on-request",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Manual start only",
+        "note": "A stopped VPS stays stopped until you start it in the dashboard or API. There is no request-triggered wake.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
+          "quote": "This is a compute-only power state change and does not affect billing.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "schedules",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Cron only inside VM",
+        "note": "There is no provider-level scheduler. A cron job inside the VPS runs only while the VPS is running, and the VPS is your own server.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
+          "quote": "67 endpoints across 14 sections.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "public-url",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Public IPv4",
+        "note": "A dedicated IPv4 reaches any open port. The managed firewall drops all traffic until you add accept rules.",
+        "source": {
+          "url": "https://www.hostinger.com/legal/hosting-agreement",
+          "quote": "You will have administrator (root) access and a dedicated IP address.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "private-url",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No private link",
+        "note": "No token- or login-gated preview link. Access control is an OS service or firewall rule you configure yourself.",
+        "source": {
+          "url": "https://www.hostinger.com/support/8172641-how-to-use-a-managed-vps-firewall-at-hostinger/",
+          "quote": "With Hostinger VPS Firewall, packet filtering occurs before incoming traffic reaches the protected server",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "ssh",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Standard SSH",
+        "source": {
+          "url": "https://www.hostinger.com/support/5723772-how-to-connect-to-your-vps-via-ssh-at-hostinger/",
+          "quote": "use the Web Console in Hostinger dashboard or a local SSH client with your SSH username, IP address, and password",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "web-terminal",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Browser console",
+        "source": {
+          "url": "https://www.hostinger.com/support/how-to-use-the-web-console-in-hostinger/",
+          "quote": "The Web Console is a feature available with all Hostinger VPS plans that allows you to manage your server using terminal commands directly from your web browser.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "tunnel",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "SSH -L",
+        "note": "Standard SSH is available, so a local port forward works even though Hostinger has no dedicated tunnel product.",
+        "source": {
+          "url": "https://www.hostinger.com/support/5723772-how-to-connect-to-your-vps-via-ssh-at-hostinger/",
+          "quote": "use the Web Console in Hostinger dashboard or a local SSH client with your SSH username, IP address, and password",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "raw-tcp",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Any TCP/UDP port",
+        "note": "The managed firewall takes TCP or UDP port numbers and ranges, so a database or game server can be exposed on its own port.",
+        "source": {
+          "url": "https://www.hostinger.com/support/8172641-how-to-use-a-managed-vps-firewall-at-hostinger/",
+          "quote": "If a protocol like **TCP** or **UDP** is selected, insert the **port value** by specifying either the port number or range",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "custom-domain",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "DNS + free domain",
+        "note": "Point DNS at the VPS IPv4; a free domain for one year is included with the plan.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "Free domain for 1 year",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "auto-https",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "Traefik/Certbot",
+        "shortfall": "Hostinger does not issue a certificate for the server; you deploy Traefik or run Certbot, or use a control panel, so HTTPS is your setup.",
+        "note": "The Traefik Docker template can issue and renew Let's Encrypt certificates automatically for containerized apps, but it is not applied to a plain VPS.",
+        "source": {
+          "url": "https://www.hostinger.com/support/6360129-how-to-install-ssl-on-vps-at-hostinger/",
+          "quote": "deploy Traefik from the Docker Catalog, run Certbot manually, or use the built-in SSL tools of your VPS control panel",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "egress-included",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "4–32 TB/mo, then 10 Mbps",
+        "note": "4 TB on KVM 1, 8 TB on KVM 2, 16 TB on KVM 4 and 32 TB on KVM 8. After the allowance, the link is throttled to 10 Mbps until the next month; there is no per-GiB overage charge.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "4 TB bandwidth",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "egress-allowlist",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Inbound firewall only",
+        "note": "The managed firewall filters incoming traffic by source, protocol and port. Outbound filtering would have to be done inside the OS.",
+        "source": {
+          "url": "https://www.hostinger.com/support/8172641-how-to-use-a-managed-vps-firewall-at-hostinger/",
+          "quote": "With Hostinger VPS Firewall, packet filtering occurs before incoming traffic reaches the protected server",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "no-internet",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No provider mode",
+        "note": "No no-internet mode or outbound-deny control in the VPS dashboard or API. You could build one inside the guest OS, but that is not a provider feature.",
+        "source": {
+          "url": "https://www.hostinger.com/support/8172641-how-to-use-a-managed-vps-firewall-at-hostinger/",
+          "quote": "With Hostinger VPS Firewall, packet filtering occurs before incoming traffic reaches the protected server",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "static-ip",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Dedicated IPv4",
+        "note": "A dedicated IPv4 is included. The terms allow Hostinger to assign a different IP during a server migration, so it is stable in practice but not contractually permanent.",
+        "source": {
+          "url": "https://www.hostinger.com/legal/hosting-agreement",
+          "quote": "You will have administrator (root) access and a dedicated IP address.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "secrets-store",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No secret store",
+        "note": "No provider vault or environment-variable injection. Keys live in the OS, a .env file or the app's own configuration.",
+        "source": {
+          "url": "https://docs.hostinger.com/account/security",
+          "quote": "API tokens give programmatic access via the Public API",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "hidden-secrets",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No secret proxy",
+        "note": "No proxy that adds credentials to outgoing requests. The agent can read anything the OS user can read.",
+        "source": {
+          "url": "https://docs.hostinger.com/account/security",
+          "quote": "API tokens give programmatic access via the Public API",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "scoped-keys",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Account-wide tokens",
+        "note": "API tokens inherit the creator's permissions and can expire, but there is no project or machine scope.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/overview",
+          "quote": "Tokens inherit the permissions of the user who created them and can be set to expire.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "dashboard-create",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Dashboard + web console",
+        "source": {
+          "url": "https://www.hostinger.com/support/5726606-how-to-use-the-vps-dashboard-in-hostinger/",
+          "quote": "Select **Reboot** (1.4) to restart your VPS, or open the management dropdown to **Renew, Upgrade,** or **Stop** your VPS.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "cli",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "hostinger CLI",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/cli",
+          "quote": "`hostinger` is the official command-line client for the Hostinger API.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "python-sdk",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "hostinger-api",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/sdks",
+          "quote": "Official client libraries for the Hostinger API in PHP, Python, and TypeScript.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "ts-sdk",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "@hostinger/sdk",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/sdks",
+          "quote": "Official client libraries for the Hostinger API in PHP, Python, and TypeScript.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "rest-api",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "90 requests/min",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/overview",
+          "quote": "The Hostinger API is a mostly RESTful API over HTTPS.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "mcp-server",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "63 VPS tools",
+        "note": "An official hosted or local MCP server. It manages Hostinger resources, not the agent inside the VPS.",
+        "source": {
+          "url": "https://docs.hostinger.com/hostinger-connector/overview",
+          "quote": "Start, stop, and restart virtual machines; manage firewalls, SSH keys, snapshots, and metrics",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "pty",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No PTY API",
+        "note": "The browser console is a human terminal. The 67 VPS endpoints have no PTY or command-execution call.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
+          "quote": "67 endpoints across 14 sections.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "file-api",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No file API",
+        "note": "No read/write file endpoints in the VPS API. You use SSH, SFTP or your own service inside the machine.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
+          "quote": "67 endpoints across 14 sections.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "agents-preinstalled",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No coding agent",
+        "note": "The default images are plain OS, control panel or application templates. Claude Code, Codex and similar are not preinstalled.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
+          "quote": "Deploy and operate virtual machines — firewalls, snapshots, backups, Docker projects, recovery mode, SSH keys and malware scanning.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "prompt-api",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No prompt API",
+        "note": "Hostinger does not run an agent for you on the VPS. The API manages the machine, not a prompt loop inside it.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
+          "quote": "67 endpoints across 14 sections.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "one-click-hermes",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "VPS template",
+        "note": "The Hermes Agent template deploys the app in one click. Model keys and messaging channels are configured afterwards, and the managed AI automation plan is the no-terminal alternative.",
+        "source": {
+          "url": "https://www.hostinger.com/applications/hermes-agent",
+          "quote": "Hermes Agent is a self-improving AI agent built by Nous Research",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "one-click-openclaw",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "VPS template",
+        "note": "The OpenClaw template deploys the app in one click. Channel pairing and model setup still need the terminal; the managed AI automation plan is the no-terminal alternative.",
+        "source": {
+          "url": "https://www.hostinger.com/applications/openclaw",
+          "quote": "OpenClaw is a self-hosted personal AI assistant platform that connects to the messaging channels you already use",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "browser",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Not preinstalled",
+        "note": "No Chrome or Chromium in the default image. You can install one, but Hostinger does not provide a browser-ready agent template.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
+          "quote": "Deploy and operate virtual machines — firewalls, snapshots, backups, Docker projects, recovery mode, SSH keys and malware scanning.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "desktop",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No desktop",
+        "note": "No graphical desktop or computer-use template. The web console is a text terminal.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps",
+          "quote": "Deploy and operate virtual machines — firewalls, snapshots, backups, Docker projects, recovery mode, SSH keys and malware scanning.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "hosts-other-agents",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Self-host only",
+        "note": "Hostinger documents OpenClaw and Hermes as self-hosted applications, not as the execution backend for Cursor, Devin or Claude Managed Agents.",
+        "source": {
+          "url": "https://www.hostinger.com/applications/openclaw",
+          "quote": "OpenClaw is a self-hosted personal AI assistant platform that connects to the messaging channels you already use",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "team-workspace",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "Account Sharing",
+        "note": "Share selected services with another Hostinger account as Collaborator or Admin.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583777-how-to-share-access-to-your-account-at-hostinger/",
+          "quote": "Assign each shared user the Collaborator or Admin role, and remove their access at any time.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "roles",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "Collaborator/Admin",
+        "shortfall": "Only two roles exist, and they are granted per shared service, not per machine with read-only or operator levels.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583777-how-to-share-access-to-your-account-at-hostinger/",
+          "quote": "you choose a role for the shared user: Collaborator or Admin",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "sso",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No SAML/OIDC",
+        "note": "Shared users sign in with a Hostinger account. No SAML or OIDC identity-provider login is documented.",
+        "source": {
+          "url": "https://www.hostinger.com/support/1583777-how-to-share-access-to-your-account-at-hostinger/",
+          "quote": "If the new user does not have a Hostinger account yet, they will be prompted to create one",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "spend-cap",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "Prepaid plan only",
+        "shortfall": "The prepaid term caps the machine's own bill, but there is no account-level spending limit and add-ons or upgrades are separate purchases.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "usage-alerts",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "not-published",
+        "figure": "Not published",
+        "note": "The VPS dashboard shows resource usage graphs, but no spending threshold or billing alert is documented.",
+        "source": {
+          "url": "https://www.hostinger.com/support/5726606-how-to-use-the-vps-dashboard-in-hostinger/",
+          "quote": "Resource usage shows the current resources your server uses",
+          "confidence": "not-published"
+        }
+      }
+    },
+    {
+      "capability": "audit-log",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "partly",
+        "figure": "VPS actions + sign-ins",
+        "shortfall": "The VPS API logs start/stop/restart actions and the account shows sign-ins, but there is no account-wide record of who changed what.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps/actions",
+          "quote": "Track and review operations performed on your virtual machines.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "per-second",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Monthly plan",
+        "note": "Billing is by the prepaid term, not by the second or hour.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "active-cpu",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Allocated plan",
+        "note": "You pay for the plan whether the CPU is busy or idle. CPU credits change the speed available, not the bill.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "cheap-pause",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Stop still bills",
+        "note": "A stopped VPS keeps billing the full plan. There is no paused state billed only for storage.",
+        "source": {
+          "url": "https://docs.hostinger.com/api-reference/endpoints/vps/virtual-machine/stop-virtual-machine",
+          "quote": "This is a compute-only power state change and does not affect billing.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "no-monthly-fee",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Monthly plan",
+        "note": "The plan is the product; there is no pay-only-for-use mode.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "flat-price",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "$19.49–$73.99/mo",
+        "note": "A fixed monthly price per plan on the monthly-billed term, with lower prepaid 12- and 24-month renewals.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "Today you pay $155.76 for 24 months. Renews at $11.99/mo for the same term. Cancel anytime.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "free-tier",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No free tier",
+        "note": "No free VPS that keeps working every month. The 30-day money-back guarantee is a refund, not a free tier.",
+        "source": {
+          "url": "https://www.hostinger.com/support/9088216-what-is-hostinger-refund-policy/",
+          "quote": "The Hostinger refund policy offers a 30-day money-back guarantee for most hosting and email services, such as web, cloud, and KVM VPS hosting plans.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "free-credit",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "No starting credit",
+        "note": "No signup credit is published. The only money-back path is the refund policy.",
+        "source": {
+          "url": "https://www.hostinger.com/support/9088216-what-is-hostinger-refund-policy/",
+          "quote": "The Hostinger refund policy offers a 30-day money-back guarantee for most hosting and email services, such as web, cloud, and KVM VPS hosting plans.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "no-card",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Card required",
+        "note": "Checkout takes payment for the term. There is no free, card-free VPS path.",
+        "source": {
+          "url": "https://www.hostinger.com/vps-hosting",
+          "quote": "Today you pay $155.76 for 24 months. Renews at $11.99/mo for the same term. Cancel anytime.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "status-page",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "statuspage.hostinger.com",
+        "source": {
+          "url": "https://statuspage.hostinger.com/",
+          "quote": "Scheduled maintenance is currently in progress. We will provide updates as necessary.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "sla",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "99.9%, 5% credit",
+        "note": "A 99.9% monthly uptime guarantee with a 5% credit of the monthly hosting fee. Scheduled maintenance and customer-caused interruptions are excluded.",
+        "source": {
+          "url": "https://www.hostinger.com/legal/hosting-agreement",
+          "quote": "We offer a Service uptime guarantee of 99.9% (“Service Uptime Guarantee”) of available time per month.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "soc2",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "ISO 27001, no SOC 2",
+        "note": "The trust center lists ISO/IEC 27001:2022, GDPR and PCI DSS v4.0.1, and no SOC 2 report.",
+        "source": {
+          "url": "https://trust.hostinger.com/",
+          "quote": "ISO/IEC 27001:2022 certified hosting provider",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "dpa",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "yes",
+        "figure": "DPA covers VPS",
+        "source": {
+          "url": "https://www.hostinger.com/legal/dpa",
+          "quote": "“Covered Services” means hosted services that could involve our Processing of Personal Data, such as: (1) Hosting Services, (2) VPS Services",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "open-source",
+      "row": {
+        "provider": "hostinger",
+        "verdict": "no",
+        "figure": "Proprietary service",
+        "note": "The VPS platform itself is a proprietary hosted service with no source or self-hosted edition. The software you run on it can be open source.",
+        "source": {
+          "url": "https://www.hostinger.com/legal/universal-terms-of-service-agreement",
+          "quote": "HOSTINGER INTERNATIONAL LIMITED, Cyprus private limited company",
+          "confidence": "inferred"
+        }
+      }
+    }
+  ]
+}

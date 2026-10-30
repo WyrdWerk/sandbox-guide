@@ -125,6 +125,8 @@ export interface RateCard {
   minimumPerRun?: number;
   /** Tasks mode: each run is billed in whole hours, rounded up (a server that lives ten minutes bills one hour). */
   wholeHours?: boolean;
+  /** Sold only as whole monthly plans: each machine costs its shape's monthly price, and tasks share as few plans as their hours need. */
+  monthlyPlans?: boolean;
   /** A fee for every machine for as long as it exists, such as a public IPv4, capped at a monthly price. */
   perMachine?: { label: string; hourly: number; monthly: number };
   /** How the provider puts an idle machine to sleep and wakes it. Omit when it does not. */
@@ -206,7 +208,7 @@ function pickShape(card: RateCard, w: Workload, plan: Plan): { shape?: Shape; ex
       const short = Math.max(0, w.disk - s.disk);
       if (short > 0 && !card.disk?.extraMonthly) return null;
       const extra = short * (card.disk?.extraMonthly ?? 0);
-      return { s, short, cost: Math.min(hourOf(s) * MONTH_HOURS, s.monthly ?? Infinity) + extra };
+      return { s, short, cost: (card.monthlyPlans && s.monthly !== undefined ? s.monthly : Math.min(hourOf(s) * MONTH_HOURS, s.monthly ?? Infinity)) + extra };
     })
     .filter((o): o is { s: Shape; short: number; cost: number } => o !== null)
     .sort((a, b) => a.cost - b.cost);
@@ -254,7 +256,15 @@ function priceOnPlan(card: RateCard, w: Workload, plan: Plan): Quote {
     problems.push(card.lostNote ?? "Stopping deletes the machine's files; keeping them needs a snapshot or separate storage.");
   }
 
-  if (shape?.hourly !== undefined) {
+  if (card.monthlyPlans && shape?.monthly !== undefined) {
+    // Tasks run one after another on a plan, so they need one plan per 730 hours of work.
+    const plans = w.mode === "tasks" ? Math.max(1, Math.ceil(h.run / MONTH_HOURS)) : h.machines;
+    lines.push({
+      label: `Monthly plan (${shape.name})`,
+      math: `${plans} × ${money(shape.monthly)} a month${w.mode === "tasks" ? `, running ${runH} h of tasks back to back` : ""}`,
+      amount: plans * shape.monthly,
+    });
+  } else if (shape?.hourly !== undefined) {
     const r = shape.hourly;
     const runHours = Math.ceil(h.session - 1e-9);
     if (w.mode === "tasks" && card.wholeHours && runHours > h.session) {

@@ -265,6 +265,18 @@
         "quote": "Handle common use-cases like TLS Termination",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "partly",
+      "figure": "DNS; HTTPS is manual",
+      "scenario": "Point demo.acme.com at the IPv4, then deploy Traefik or Certbot for a certificate; Hostinger does not issue one for the server.",
+      "note": "You can point a domain at the VPS and a free domain for one year is included. HTTPS is not automatic: Hostinger documents Traefik, Certbot or a control panel, so the certificate is your setup.",
+      "source": {
+        "url": "https://www.hostinger.com/support/6360129-how-to-install-ssl-on-vps-at-hostinger/",
+        "quote": "deploy Traefik from the Docker Catalog, run Certbot manually, or use the built-in SSL tools of your VPS control panel",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Path to your domain",

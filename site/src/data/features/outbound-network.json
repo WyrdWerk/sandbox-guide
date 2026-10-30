@@ -256,6 +256,18 @@
         "quote": "A Firewall is used to restrict the incoming and outgoing traffic a user wants on the server.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hostinger",
+      "verdict": "yes",
+      "figure": "4–32 TB/mo, then 10 Mbps",
+      "scenario": "The 400 GB download fits inside KVM 2's 8 TB; after the allowance the link drops to 10 Mbps, not a bill.",
+      "note": "4 TB on KVM 1 up to 32 TB on KVM 8, with no per-GiB overage charge; exceeding the allowance throttles to 10 Mbps until the next month. A dedicated IPv4 gives a stable outgoing address, though the terms allow a change on migration. The managed firewall filters incoming traffic only, so there is no provider-level outbound allowlist or no-internet mode.",
+      "source": {
+        "url": "https://www.hostinger.com/vps-hosting",
+        "quote": "4 TB bandwidth",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "Egress price",
