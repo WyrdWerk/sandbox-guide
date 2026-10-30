@@ -244,6 +244,18 @@
         "quote": "Billing begins when you create the Droplet and ends when you destroy it.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "yes",
+      "figure": "No timer; no session limit",
+      "scenario": "The agent is still awake at 00:20, because there is no idle timer and no lifetime limit to configure; nothing stops it but you.",
+      "note": "There is no idle timeout, no auto-stop and no maximum session length, so an always-on agent is safe from the provider. The same absence means there is no wake path: a server that is powered off stays off until something calls the API, and a stopped server cannot be woken by a request.",
+      "source": {
+        "url": "https://docs.hetzner.com/cloud/billing/faq",
+        "quote": "We will bill you for each cloud server until you choose to delete them.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Idle or lifetime limit",

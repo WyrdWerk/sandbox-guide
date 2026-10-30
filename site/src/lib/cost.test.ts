@@ -24,6 +24,8 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["tensorlake", "a", 22], ["tensorlake", "b", 250], ["tensorlake", "c", 8.25],
   // 1,000 runs at the $0.01 minimum; 730 h capped at $48; 90 on + 640 powered off, capped at $24.
   ["digitalocean", "a", 10], ["digitalocean", "b", 48], ["digitalocean", "c", 24],
+  // 1,000 servers × 1 h (rounded up) × $0.0368 + 1,000 IPv4-hours × $0.001; min(730 h × $0.0673, $41.99) + $0.60 IPv4; CPX22 capped at $22.99 + $0.60.
+  ["hetzner", "a", 37.8], ["hetzner", "b", 42.59], ["hetzner", "c", 23.59],
 ];
 
 for (const [id, key, expected] of handWorked) {

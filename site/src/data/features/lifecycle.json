@@ -271,6 +271,18 @@
         "quote": "You are still billed for bundled-plan CPU Droplets that are powered off because the compute resources stay reserved on the hypervisor.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "no",
+      "figure": "No pause; off still billed",
+      "scenario": "At 18:00 the server is powered off and keeps its disk and its IP; at 09:00 it is exactly as it was left, and the 640 powered-off hours cost the same as running ones.",
+      "note": "There is no pause, sleep or hibernate. Powering off keeps the disk but loses RAM, running processes and open sockets, and the server keeps billing until it is deleted; the documented alternative is snapshot-and-delete, which also loses the IP.",
+      "source": {
+        "url": "https://docs.hetzner.com/cloud/billing/faq",
+        "quote": "you pay for a server that has completed the creation process for as long as it exists, regardless of whether it is turned on or not",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a pause keeps",

@@ -243,6 +243,18 @@
         "quote": "DigitalOcean MCP servers bridge your development tools and the DigitalOcean API",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "yes",
+      "figure": "Console, CLI, API, SSH",
+      "scenario": "The first machine is clickable in the console; the agent itself is installed over SSH, and everything after that can be scripted through the API or hcloud.",
+      "note": "The console creates every resource by clicking, with one-click apps preselected, and the REST API, hcloud CLI and official Go and Python libraries cover automation. There is no official TypeScript library, no MCP server and no PTY or file API, so an agent driving the platform needs Go, Python or raw HTTP.",
+      "source": {
+        "url": "https://docs.hetzner.com/cloud/api/faq",
+        "quote": "We currently provide Open Source libraries for Go and Python.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "First machine without a terminal?",

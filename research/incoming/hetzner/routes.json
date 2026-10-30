@@ -1,0 +1,148 @@
+{
+  "provider": "hetzner",
+  "checkedOn": "2026-10-29",
+  "routes": {
+    "hermes-agent": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Create a CPX22 (2 vCPU / 4 GB / 80 GB) in the EU, SSH in, install Hermes and run it as a systemd service. The disk, the IP and the process survive, and nothing stops the machine for idleness. Neither Hetzner nor Hermes publishes a Hetzner page; a community Ansible playbook does the provisioning.",
+      "link": { "title": "Hermes Agent docs", "url": "https://hermes-agent.nousresearch.com/docs/" },
+      "price": "CPX22 $22.99 + $0.60 Primary IPv4 a month"
+    },
+    "openclaw": {
+      "tier": "guide",
+      "noTerminal": "no",
+      "what": "OpenClaw's own docs have a Hetzner page: create a Debian or Ubuntu server (at least 6 GB RAM to build the image), attach a Cloud Firewall allowing only SSH, install Docker, follow the Docker VM runtime page, then reach the Control UI through an ssh -L tunnel. The server must stay on because the Gateway owns the chat connections.",
+      "link": { "title": "OpenClaw: Hetzner", "url": "https://docs.openclaw.ai/install/hetzner" },
+      "price": "CPX32 4 vCPU / 8 GB from $41.99 + $0.60 a month; CPX22 is $22.99 if the pre-built image is used"
+    },
+    "coding-agent": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Create a CPX32 (4 vCPU / 8 GB / 160 GB), SSH in and install Claude Code or Codex. The repository survives between sessions, but the machine is billed for the whole month even if it is only used eight hours a day, because powering it off changes nothing.",
+      "link": { "title": "Hetzner: connecting to your server", "url": "https://docs.hetzner.com/cloud/servers/getting-started/connecting-to-the-server" },
+      "price": "CPX32 $41.99 + $0.60 a month, whether or not it is running"
+    },
+    "code-interpreter": {
+      "tier": "backend",
+      "noTerminal": "no",
+      "what": "There is no execution API. You would build the pool and the run endpoint yourself on the hcloud API, and every run shorter than an hour is billed as a full hour, which makes a per-execution interpreter uneconomic here.",
+      "link": { "title": "Hetzner Cloud API reference", "url": "https://docs.hetzner.cloud/reference/cloud" },
+      "price": "$0.0368 per server-hour: 20,000 one-minute runs is about $736 a month"
+    },
+    "browser-agent": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "No browser or desktop image: install Chromium and, for computer use, a desktop you watch through the VNC console. Sessions last minutes but each costs a whole hour, and the machine cannot sleep between them.",
+      "link": { "title": "Hetzner: using the console", "url": "https://docs.hetzner.com/cloud/servers/getting-started/vnc-console" },
+      "price": "CPX22 $0.0368 an hour, one hour minimum per session"
+    },
+    "workflow-automation": {
+      "tier": "guide",
+      "noTerminal": "no",
+      "what": "n8n publishes a Hetzner guide: pick the Docker CE one-click app when creating the server, install Docker Compose, clone the compose file with Caddy in front, and keep the SQLite database and the encryption key on the disk. n8n suggests the CPX11 type, or 2 vCPU / 4 GB once the Assistant sandbox is added.",
+      "link": { "title": "n8n: deploy to Hetzner", "url": "https://docs.n8n.io/deploy/host-n8n/install-options/use-a-cloud-provider/deploy-to-hetzner" },
+      "price": "CPX22 $22.99 + $0.60 a month always on"
+    },
+    "chat-bot": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Create a CPX12 (1 vCPU / 2 GB / 40 GB), install the bot and keep it running as a service. A bot holding a Discord or Slack gateway connection cannot sleep, and nothing here stops it, so the always-on model suits it.",
+      "link": { "title": "Hetzner: creating a server", "url": "https://docs.hetzner.com/cloud/servers/getting-started/creating-a-server" },
+      "price": "CPX12 $13.49 + $0.60 a month"
+    },
+    "claude-code-team": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "One CPX32 per developer, each with its own SSH key and its own Claude login, in a shared project with roles and read-only API keys. Because a powered-off server is billed in full, a five-developer setup costs the same whether they work eight hours a day or twenty-four.",
+      "link": { "title": "Hetzner: connecting to your server", "url": "https://docs.hetzner.com/cloud/servers/getting-started/connecting-to-the-server" },
+      "price": "5 × ($41.99 + $0.60) = $212.95 a month"
+    },
+    "scheduled-scraper": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run the schedule inside the server with cron or a systemd timer, and write results to Object Storage or a volume so they outlive the machine. A fresh server per run is possible but every run under an hour is billed as a full hour, so an always-on small server is usually cheaper.",
+      "link": { "title": "Hetzner: Object Storage", "url": "https://www.hetzner.com/storage/object-storage/" },
+      "price": "120 ten-minute runs × 1 h × $0.0216 ≈ $2.59 + $0.12 IPv4, against $14.09 for an always-on CPX12"
+    },
+    "mcp-server": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Create a CPX02 (1 vCPU / 1 GB / 20 GB) with a Primary IP and a Cloud Firewall rule for the port, then run the MCP server as a service. It must stay up, because a powered-off server cannot be woken by an incoming request.",
+      "link": { "title": "Hetzner: firewalls", "url": "https://docs.hetzner.com/cloud/firewalls/overview" },
+      "price": "CPX02 $7.49 + $0.60 a month"
+    }
+  },
+  "picks": [
+    {
+      "useCase": "mcp-server",
+      "for": "A cheap server that never sleeps",
+      "why": "A 1 vCPU / 1 GB server with a static public IP and 20 TB of included EU traffic costs $8.09 a month including the IPv4, and nothing about it idles out or expires.",
+      "watch": "There is no wake-on-request, so the server must be left running; a stopped one stays stopped and is billed anyway.",
+      "link": "https://docs.hetzner.com/cloud/firewalls/overview"
+    },
+    {
+      "useCase": "chat-bot",
+      "for": "A bot that must hold a gateway connection",
+      "why": "No idle timer and no session limit, so the always-on machine a Discord or Slack bot needs is exactly what this product is good at: CPX12 at $14.09 a month with the IPv4.",
+      "watch": "The same absence of an idle timer means there is no cheaper mode; leaving it up all month is the point.",
+      "link": "https://docs.hetzner.com/cloud/servers/getting-started/creating-a-server"
+    },
+    {
+      "useCase": "workflow-automation",
+      "for": "n8n on a documented path",
+      "why": "n8n's own guide targets Hetzner, using the Docker CE one-click app, and a CPX22 with 20 TB of traffic covers a small team for $23.59 a month.",
+      "watch": "Keep the database and the encryption key on a volume or snapshot; a snapshot-and-delete rebuild needs both.",
+      "link": "https://docs.n8n.io/deploy/host-n8n/install-options/use-a-cloud-provider/deploy-to-hetzner"
+    },
+    {
+      "useCase": "hermes-agent",
+      "for": "EU hosting with a DPA",
+      "why": "Falkenstein, Nuremberg or Helsinki with ISO 27001, BSI C5 and an online DPA, for $23.59 a month always on.",
+      "watch": "No Hermes-specific documentation: the install is a terminal job and a community Ansible playbook is the only automation.",
+      "link": "https://docs.hetzner.com/general/company-and-policy/information-security-at-hetzner/"
+    }
+  ],
+  "situationPicks": [
+    {
+      "situation": "stay-available",
+      "why": "An always-on machine is the product's strength: no idle timer, no session limit, a static IP and a predictable monthly cap.",
+      "watch": "There is no wake path, so availability depends on leaving it running and paying for it every hour."
+    },
+    {
+      "situation": "answer-when-asked",
+      "why": "A small server that answers a few requests a day is cheap to run continuously, and this guide's calculator puts a 1 vCPU / 1 GB machine at about $8 a month.",
+      "watch": "If the server is powered off between questions it costs the same as if it stayed up."
+    },
+    {
+      "situation": "eu-residency",
+      "why": "Three EU locations under German law, ISO 27001 and BSI C5, with a DPA created online and EU traffic allowances.",
+      "watch": "The US and Singapore locations are outside the EU and are priced differently."
+    },
+    {
+      "situation": "build-and-test",
+      "why": "Not recommended: each clean environment is a whole server, and every run under an hour is billed as a full hour.",
+      "watch": "1,000 ten-minute builds cost 1,000 server-hours, about $36.80, against roughly $6 on a per-second provider."
+    }
+  ],
+  "docs": {
+    "isolation": { "title": "Servers overview — what a Cloud server is", "url": "https://docs.hetzner.com/cloud/servers/overview" },
+    "sizes-regions": { "title": "Locations — network zones, data centres and products", "url": "https://docs.hetzner.com/cloud/general/locations" },
+    "lifecycle": { "title": "Billing FAQ — what a powered-off server costs", "url": "https://docs.hetzner.com/cloud/billing/faq" },
+    "snapshots-forks": { "title": "Backups and snapshots overview", "url": "https://docs.hetzner.com/cloud/servers/backups-snapshots/overview" },
+    "storage": { "title": "Volumes overview", "url": "https://docs.hetzner.com/cloud/volumes/overview" },
+    "idle-timers": { "title": "Billing FAQ — servers are billed until deleted", "url": "https://docs.hetzner.com/cloud/billing/faq" },
+    "reaching-it": { "title": "Primary IPs overview", "url": "https://docs.hetzner.com/cloud/servers/primary-ips/overview" },
+    "custom-domains": { "title": "DNS management", "url": "https://www.hetzner.com/dns/" },
+    "outbound-network": { "title": "Firewalls overview — inbound and outbound rules", "url": "https://docs.hetzner.com/cloud/firewalls/overview" },
+    "keys-secrets": { "title": "Generating an API token", "url": "https://docs.hetzner.com/cloud/api/getting-started/generating-api-token" },
+    "ways-to-drive": { "title": "Cloud API reference", "url": "https://docs.hetzner.cloud/reference/cloud" },
+    "built-in-agents": { "title": "Cloud Apps overview", "url": "https://docs.hetzner.com/cloud/apps/overview" },
+    "teams-accounts": { "title": "General FAQ — projects, members and roles", "url": "https://docs.hetzner.com/cloud/general/faq" },
+    "billing-models": { "title": "Billing FAQ — hourly rate and monthly cap", "url": "https://docs.hetzner.com/cloud/billing/faq" },
+    "trials-free-tiers": { "title": "Payment overview", "url": "https://docs.hetzner.com/general/billing-and-account-management/billing-at-hetzner/payment-overview/" },
+    "company": { "title": "Information security and certifications", "url": "https://docs.hetzner.com/general/company-and-policy/information-security-at-hetzner/" },
+    "quickstart": { "title": "Creating a server", "url": "https://docs.hetzner.com/cloud/servers/getting-started/creating-a-server" },
+    "pricing": { "title": "Cloud plans and prices", "url": "https://www.hetzner.com/cloud/regular-performance/" }
+  }
+}

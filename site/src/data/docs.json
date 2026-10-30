@@ -1144,5 +1144,79 @@
       "title": "CPU Droplet service level agreement",
       "url": "https://www.digitalocean.com/sla/cpu-droplets"
     }
+  },
+  "hetzner": {
+    "isolation": {
+      "title": "Servers overview — what a Cloud server is",
+      "url": "https://docs.hetzner.com/cloud/servers/overview"
+    },
+    "sizes-regions": {
+      "title": "Locations — network zones, data centres and products",
+      "url": "https://docs.hetzner.com/cloud/general/locations"
+    },
+    "lifecycle": {
+      "title": "Billing FAQ — what a powered-off server costs",
+      "url": "https://docs.hetzner.com/cloud/billing/faq"
+    },
+    "snapshots-forks": {
+      "title": "Backups and snapshots overview",
+      "url": "https://docs.hetzner.com/cloud/servers/backups-snapshots/overview"
+    },
+    "storage": {
+      "title": "Volumes overview",
+      "url": "https://docs.hetzner.com/cloud/volumes/overview"
+    },
+    "idle-timers": {
+      "title": "Billing FAQ — servers are billed until deleted",
+      "url": "https://docs.hetzner.com/cloud/billing/faq"
+    },
+    "reaching-it": {
+      "title": "Primary IPs overview",
+      "url": "https://docs.hetzner.com/cloud/servers/primary-ips/overview"
+    },
+    "custom-domains": {
+      "title": "DNS management",
+      "url": "https://www.hetzner.com/dns/"
+    },
+    "outbound-network": {
+      "title": "Firewalls overview — inbound and outbound rules",
+      "url": "https://docs.hetzner.com/cloud/firewalls/overview"
+    },
+    "keys-secrets": {
+      "title": "Generating an API token",
+      "url": "https://docs.hetzner.com/cloud/api/getting-started/generating-api-token"
+    },
+    "ways-to-drive": {
+      "title": "Cloud API reference",
+      "url": "https://docs.hetzner.cloud/reference/cloud"
+    },
+    "built-in-agents": {
+      "title": "Cloud Apps overview",
+      "url": "https://docs.hetzner.com/cloud/apps/overview"
+    },
+    "teams-accounts": {
+      "title": "General FAQ — projects, members and roles",
+      "url": "https://docs.hetzner.com/cloud/general/faq"
+    },
+    "billing-models": {
+      "title": "Billing FAQ — hourly rate and monthly cap",
+      "url": "https://docs.hetzner.com/cloud/billing/faq"
+    },
+    "trials-free-tiers": {
+      "title": "Payment overview",
+      "url": "https://docs.hetzner.com/general/billing-and-account-management/billing-at-hetzner/payment-overview/"
+    },
+    "company": {
+      "title": "Information security and certifications",
+      "url": "https://docs.hetzner.com/general/company-and-policy/information-security-at-hetzner/"
+    },
+    "quickstart": {
+      "title": "Creating a server",
+      "url": "https://docs.hetzner.com/cloud/servers/getting-started/creating-a-server"
+    },
+    "pricing": {
+      "title": "Cloud plans and prices",
+      "url": "https://www.hetzner.com/cloud/regular-performance/"
+    }
   }
 }

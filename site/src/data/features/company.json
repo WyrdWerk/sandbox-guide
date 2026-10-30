@@ -289,6 +289,18 @@
         "quote": "DigitalOcean commits to a Monthly Uptime Percentage of 99.99% for each individual Droplet instance.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "yes",
+      "figure": "ISO 27001, C5, 99.9% SLA",
+      "scenario": "The buyer can check a 1997-founded German company, a signed SLA with credits, an online DPA and independently audited certifications.",
+      "note": "Hetzner Online GmbH of Gunzenhausen, founded 1997 and independent, with its own data-centre parks, ISO/IEC 27001:2022, BSI C5 Type 2, KRITIS classification and PCI DSS. A 99.9% monthly availability SLA per server pays refunds as Cloud Credit, and a DPA with technical and organisational measures is created online. No SOC 2, by explicit choice, and no published venture funding.",
+      "source": {
+        "url": "https://docs.hetzner.com/general/company-and-policy/information-security-at-hetzner/",
+        "quote": "We have ISO/IEC 27001:2022 certification.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Contracting entity; promise",

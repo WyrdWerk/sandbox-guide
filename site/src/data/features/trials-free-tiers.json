@@ -244,6 +244,18 @@
         "quote": "Signup credits expire 90 days after signup.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "no",
+      "figure": "No free tier or credit",
+      "scenario": "The account needs a payment method before the first server, and the cheapest buyable plan today is CPX02 at €5.99 / $7.49 for the server plus €0.50 / $0.60 for an IPv4.",
+      "note": "No free tier, no automatic signup credit and no card-free trial: an account needs a card, SEPA direct debit, bank transfer or PayPal, invoices are due immediately, and new projects start with a small limit that is only raised after a month and a paid invoice. Promo codes exist but are handed out case by case. The advertised €5.99 Cost-Optimized plans are marked not available for ordering.",
+      "source": {
+        "url": "https://docs.hetzner.com/general/billing-and-account-management/billing-at-hetzner/payment-overview/",
+        "quote": "We accept the following payment methods:",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What you get, and what ends it",

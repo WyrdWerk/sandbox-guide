@@ -123,6 +123,10 @@ export interface RateCard {
   billedWhileStopped?: boolean;
   /** Tasks mode: each run is billed at least this much, in USD (a per-machine minimum charge). */
   minimumPerRun?: number;
+  /** Tasks mode: each run is billed in whole hours, rounded up (a server that lives ten minutes bills one hour). */
+  wholeHours?: boolean;
+  /** A fee for every machine for as long as it exists, such as a public IPv4, capped at a monthly price. */
+  perMachine?: { label: string; hourly: number; monthly: number };
   /** How the provider puts an idle machine to sleep and wakes it. Omit when it does not. */
   sleeps?: string;
   /** What happens to the files when a machine stops between sessions. */
@@ -252,7 +256,16 @@ function priceOnPlan(card: RateCard, w: Workload, plan: Plan): Quote {
 
   if (shape?.hourly !== undefined) {
     const r = shape.hourly;
-    lines.push({ label: `Machine time (${shape.name})`, math: `${runH} h × ${rate(r)}`, amount: h.run * r });
+    const runHours = Math.ceil(h.session - 1e-9);
+    if (w.mode === "tasks" && card.wholeHours && runHours > h.session) {
+      lines.push({
+        label: `Machine time (${shape.name})`,
+        math: `${num(w.tasks)} runs × ${runHours} h each, rounded up × ${rate(r)}`,
+        amount: w.tasks * runHours * r,
+      });
+    } else {
+      lines.push({ label: `Machine time (${shape.name})`, math: `${runH} h × ${rate(r)}`, amount: h.run * r });
+    }
     const stoppedBilled = card.billedWhileStopped ? h.stopped : 0;
     if (stoppedBilled > 0) {
       lines.push({ label: "Stopped, still billed", math: `${num(stoppedBilled)} h × ${rate(r)}`, amount: stoppedBilled * r });
@@ -272,6 +285,21 @@ function priceOnPlan(card: RateCard, w: Workload, plan: Plan): Quote {
         math: `${h.machines} × ${money(shape.monthly)} a month`,
         amount: shape.monthly * h.machines - billed,
       });
+    }
+    const pm = card.perMachine;
+    if (pm) {
+      if (w.mode === "tasks") {
+        const each = card.wholeHours ? runHours : h.session;
+        lines.push({ label: pm.label, math: `${num(w.tasks)} runs × ${num(each)} h × ${rate(pm.hourly)}`, amount: w.tasks * each * pm.hourly });
+      } else {
+        const perMachineHours = (h.run + stoppedBilled) / Math.max(1, h.machines);
+        const each = Math.min(pm.monthly, perMachineHours * pm.hourly);
+        lines.push({
+          label: pm.label,
+          math: `${h.machines} × min(${money(pm.monthly)}, ${num(perMachineHours)} h × ${rate(pm.hourly)})`,
+          amount: h.machines * each,
+        });
+      }
     }
   } else if (card.mcu) {
     const m = card.mcu;

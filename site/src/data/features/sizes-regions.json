@@ -244,6 +244,18 @@
         "quote": "| 16 GiB | 2 vCPUs | 4,000 GiB | 1x | 50 GiB | $0.12500 | $84.00 |",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "yes",
+      "figure": "48 vCPU / 192 GB; 6 locations",
+      "scenario": "A fixed plan fits the 4 vCPU / 8 GiB ask exactly, in Falkenstein, Nuremberg or Helsinki, and the server can be rescaled later by powering it off.",
+      "note": "Shared plans run 1–16 vCPU and 1–32 GB with 20–640 GB NVMe; dedicated plans reach 48 vCPU / 192 GB / 960 GB. No custom CPU/RAM split, no live resize, no GPU, and extra disk comes from volumes. Six locations in four network zones, with EU, US and Singapore prices differing.",
+      "source": {
+        "url": "https://docs.hetzner.com/cloud/general/locations",
+        "quote": "There are currently four network zones and six locations:",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Largest shape; regions",

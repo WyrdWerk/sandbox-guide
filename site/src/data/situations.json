@@ -26,6 +26,11 @@
           "provider": "runtime",
           "why": "`persistent: true` disables the idle pause, and measured CPU with a 50-millicore floor makes a waiting agent cost about $0.03 an hour in CPU.",
           "watch": "A stopped box still bills storage, there is one US region, and there is no preinstalled agent."
+        },
+        {
+          "provider": "hetzner",
+          "why": "An always-on machine is the product's strength: no idle timer, no session limit, a static IP and a predictable monthly cap.",
+          "watch": "There is no wake path, so availability depends on leaving it running and paying for it every hour."
         }
       ],
       "icon": "clock",
@@ -375,6 +380,11 @@
           "provider": "daytona",
           "why": "Two shared regions, `us` and `eu`, plus dedicated and bring-your-own-compute regions, with a DPA that names the Irish Data Protection Commission.",
           "watch": "Region choice does not guarantee where control-plane metadata lives, and the company's Delaware incorporation is unconfirmed."
+        },
+        {
+          "provider": "hetzner",
+          "why": "Three EU locations under German law, ISO 27001 and BSI C5, with a DPA created online and EU traffic allowances.",
+          "watch": "The US and Singapore locations are outside the EU and are priced differently."
         }
       ],
       "sources": [

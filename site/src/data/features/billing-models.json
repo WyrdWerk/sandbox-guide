@@ -244,6 +244,18 @@
         "quote": "Bundled Plans have a monthly cap, so you'll never pay more than the flat monthly price for that plan.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "partly",
+      "figure": "Hourly, rounded up; monthly cap",
+      "scenario": "An always-on 4 vCPU machine costs the same as the cap every month, but a machine that stops between sessions is billed as if it never stopped.",
+      "note": "The meter is hourly, rounded up to a whole hour per server, with the bill capped at the monthly price — so always-on is cheap and predictable (about 624 hours to reach the cap) while bursty use is expensive. A powered-off server is billed in full, and there is no pause or cheaper stopped-storage rate.",
+      "source": {
+        "url": "https://docs.hetzner.com/cloud/billing/faq",
+        "quote": "Mathematically speaking, we will bill you for the minimum amount, whether that is the monthly price cap OR the hourly price multiplied by the number of hours you used the server.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "The meter",

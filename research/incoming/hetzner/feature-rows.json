@@ -1,0 +1,118 @@
+{
+  "provider": "hetzner",
+  "checkedOn": "2026-10-29",
+  "rows": {
+    "isolation": {
+      "verdict": "yes",
+      "figure": "Full VM; root, Docker, SSH",
+      "scenario": "Clone, build and load the module without a workaround: an ordinary virtual machine with its own kernel, root, Docker and SSH.",
+      "note": "A full virtual machine per server with its own kernel, disk and IP, plus live migration of a failing host with under a second of disruption. Nested virtualisation is explicitly refused, there is no GPU, and the hypervisor is never named.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/overview", "quote": "Cloud servers are virtual machines that run on physical servers and are used to run an operating system and computer programs.", "confidence": "docs-confirmed" }
+    },
+    "sizes-regions": {
+      "verdict": "yes",
+      "figure": "48 vCPU / 192 GB; 6 locations",
+      "scenario": "A fixed plan fits the 4 vCPU / 8 GiB ask exactly, in Falkenstein, Nuremberg or Helsinki, and the server can be rescaled later by powering it off.",
+      "note": "Shared plans run 1–16 vCPU and 1–32 GB with 20–640 GB NVMe; dedicated plans reach 48 vCPU / 192 GB / 960 GB. No custom CPU/RAM split, no live resize, no GPU, and extra disk comes from volumes. Six locations in four network zones, with EU, US and Singapore prices differing.",
+      "source": { "url": "https://docs.hetzner.com/cloud/general/locations", "quote": "There are currently four network zones and six locations:", "confidence": "docs-confirmed" }
+    },
+    "lifecycle": {
+      "verdict": "no",
+      "figure": "No pause; off still billed",
+      "scenario": "At 18:00 the server is powered off and keeps its disk and its IP; at 09:00 it is exactly as it was left, and the 640 powered-off hours cost the same as running ones.",
+      "note": "There is no pause, sleep or hibernate. Powering off keeps the disk but loses RAM, running processes and open sockets, and the server keeps billing until it is deleted; the documented alternative is snapshot-and-delete, which also loses the IP.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "you pay for a server that has completed the creation process for as long as it exists, regardless of whether it is turned on or not", "confidence": "docs-confirmed" }
+    },
+    "snapshots-forks": {
+      "verdict": "partly",
+      "figure": "Disk-only; 30 per account",
+      "scenario": "Snapshot the configured server and boot copies from it; there is no memory snapshot, no live fork and no automatic retention.",
+      "note": "Snapshots are manual disk copies, kept until deleted and capped at 30 per account, and they double as the template mechanism. They never include RAM or attached volumes, are crash-consistent at best from a running server, and cannot change architecture. Daily backups exist separately with seven rotating slots at 20% of the server price.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/backups-snapshots/overview", "quote": "A Snapshot is a copy of a server's disk that is created manually.", "confidence": "docs-confirmed" }
+    },
+    "storage": {
+      "verdict": "yes",
+      "figure": "Disk kept; volumes to 10 TB",
+      "scenario": "The 20 GiB the agent writes lives on the plan disk and is still there next session, because the disk is never thrown away while the server exists.",
+      "note": "The whole disk persists and is billed whether or not the server runs. Extra storage is a volume at €0.044 per GB a month, up to 10 TB and 16 volumes per server, but a volume attaches to only one server at a time. Object Storage is S3-compatible with no native mount.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "We will bill you for your servers until you delete them, independent of their state.", "confidence": "docs-confirmed" }
+    },
+    "idle-timers": {
+      "verdict": "yes",
+      "figure": "No timer; no session limit",
+      "scenario": "The agent is still awake at 00:20, because there is no idle timer and no lifetime limit to configure; nothing stops it but you.",
+      "note": "There is no idle timeout, no auto-stop and no maximum session length, so an always-on agent is safe from the provider. The same absence means there is no wake path: a server that is powered off stays off until something calls the API, and a stopped server cannot be woken by a request.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "We will bill you for each cloud server until you choose to delete them.", "confidence": "docs-confirmed" }
+    },
+    "reaching-it": {
+      "verdict": "yes",
+      "figure": "Public IP, any port, real SSH",
+      "scenario": "The agent's web port is reachable at a static public address, SSH is a real port on the same host, and any other TCP service can be opened through the firewall.",
+      "note": "A Primary IP gives the server a static public IPv4 and/or IPv6, any port can be opened, and SSH is a normal daemon. There is no provider-issued private or token-gated link, and the browser console is an emergency VNC console rather than a shell.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/primary-ips/overview", "quote": "Cloud servers do not have a public network interface unless at least one Primary IP is assigned to them.", "confidence": "docs-confirmed" }
+    },
+    "custom-domains": {
+      "verdict": "partly",
+      "figure": "Your DNS, your own proxy",
+      "scenario": "Point an A record at the server's static IP and run Caddy or nginx for TLS; the certificate is yours to renew.",
+      "note": "Hetzner runs a free DNS service and the server has a fixed public IP, so a custom domain is a DNS record plus a reverse proxy you run. There is no managed certificate for a server: Hetzner Cloud's managed Let's Encrypt certificates belong to the paid Load Balancer, from €7.49 a month.",
+      "source": { "url": "https://www.hetzner.com/cloud/load-balancer/", "quote": "Handle common use-cases like TLS Termination", "confidence": "pricing-page" }
+    },
+    "outbound-network": {
+      "verdict": "yes",
+      "figure": "20 TB EU; firewall allowlist",
+      "scenario": "The agent browses freely inside a 20 TB EU allowance from a static IPv4, and outbound rules can restrict where it goes.",
+      "note": "Each server includes 20 TB of outbound traffic in the EU (1 TB in the US, 0.5 TB in Singapore) with overage at €1.00/$1.20 per TB, incoming and internal traffic free. Cloud Firewalls filter outgoing traffic as well as incoming and are free, and a server can be created with no public IP at all.",
+      "source": { "url": "https://docs.hetzner.com/cloud/firewalls/overview", "quote": "A Firewall is used to restrict the incoming and outgoing traffic a user wants on the server.", "confidence": "docs-confirmed" }
+    },
+    "keys-secrets": {
+      "verdict": "no",
+      "figure": "No secrets store",
+      "scenario": "Whatever key the agent needs is a file or an environment variable on the server, readable by anything running there.",
+      "note": "There is no vault, no write-only environment store and no request-signing proxy. Cloud-init user data (up to 32 KiB) is the only documented first-run injection and it lives on the disk. API tokens, by contrast, are properly scoped: one project each, read-only or read-write.",
+      "source": { "url": "https://docs.hetzner.cloud/cloud.spec.json", "quote": "As an alternative to working directly with our API you may also consider to use:", "confidence": "inferred" }
+    },
+    "ways-to-drive": {
+      "verdict": "yes",
+      "figure": "Console, CLI, API, SSH",
+      "scenario": "The first machine is clickable in the console; the agent itself is installed over SSH, and everything after that can be scripted through the API or hcloud.",
+      "note": "The console creates every resource by clicking, with one-click apps preselected, and the REST API, hcloud CLI and official Go and Python libraries cover automation. There is no official TypeScript library, no MCP server and no PTY or file API, so an agent driving the platform needs Go, Python or raw HTTP.",
+      "source": { "url": "https://docs.hetzner.com/cloud/api/faq", "quote": "We currently provide Open Source libraries for Go and Python.", "confidence": "docs-confirmed" }
+    },
+    "built-in-agents": {
+      "verdict": "no",
+      "figure": "None; you install the agent",
+      "scenario": "Nothing is preinstalled: the agent is your install, your service unit and your updates.",
+      "note": "The one-click apps are infrastructure (Docker CE, Coolify, Nextcloud, WordPress, GitLab, Grafana, WireGuard and similar). No coding agent, no Hermes, no OpenClaw and no prompt API. OpenClaw and n8n publish their own Hetzner guides, and a community Ansible playbook exists for Hermes, so the routes are documented but terminal-based.",
+      "source": { "url": "https://docs.hetzner.com/cloud/apps/overview", "quote": "Our apps provide you easy access to often used software, such as Docker, WordPress or Nextcloud", "confidence": "docs-confirmed" }
+    },
+    "teams-accounts": {
+      "verdict": "partly",
+      "figure": "Roles; alerts, not caps",
+      "scenario": "Five developers share a project with roles and read-only API keys; the bill is the owner's, and nothing stops a runaway machine.",
+      "note": "Projects with Owner, Admin, Member and Restricted roles, per-project API tokens and cost alerts. No SSO is documented, there is no account audit log with user attribution, and there is no hard spending cap: alerts only send email and never stop a machine.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "These alerts are optional and are meant to help you keep track of your spending. They are a convenience feature rather than a spending limit", "confidence": "docs-confirmed" }
+    },
+    "billing-models": {
+      "verdict": "partly",
+      "figure": "Hourly, rounded up; monthly cap",
+      "scenario": "An always-on 4 vCPU machine costs the same as the cap every month, but a machine that stops between sessions is billed as if it never stopped.",
+      "note": "The meter is hourly, rounded up to a whole hour per server, with the bill capped at the monthly price — so always-on is cheap and predictable (about 624 hours to reach the cap) while bursty use is expensive. A powered-off server is billed in full, and there is no pause or cheaper stopped-storage rate.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "Mathematically speaking, we will bill you for the minimum amount, whether that is the monthly price cap OR the hourly price multiplied by the number of hours you used the server.", "confidence": "docs-confirmed" }
+    },
+    "trials-free-tiers": {
+      "verdict": "no",
+      "figure": "No free tier or credit",
+      "scenario": "The account needs a payment method before the first server, and the cheapest buyable plan today is CPX02 at €5.99 / $7.49 for the server plus €0.50 / $0.60 for an IPv4.",
+      "note": "No free tier, no automatic signup credit and no card-free trial: an account needs a card, SEPA direct debit, bank transfer or PayPal, invoices are due immediately, and new projects start with a small limit that is only raised after a month and a paid invoice. Promo codes exist but are handed out case by case. The advertised €5.99 Cost-Optimized plans are marked not available for ordering.",
+      "source": { "url": "https://docs.hetzner.com/general/billing-and-account-management/billing-at-hetzner/payment-overview/", "quote": "We accept the following payment methods:", "confidence": "docs-confirmed" }
+    },
+    "company": {
+      "verdict": "yes",
+      "figure": "ISO 27001, C5, 99.9% SLA",
+      "scenario": "The buyer can check a 1997-founded German company, a signed SLA with credits, an online DPA and independently audited certifications.",
+      "note": "Hetzner Online GmbH of Gunzenhausen, founded 1997 and independent, with its own data-centre parks, ISO/IEC 27001:2022, BSI C5 Type 2, KRITIS classification and PCI DSS. A 99.9% monthly availability SLA per server pays refunds as Cloud Credit, and a DPA with technical and organisational measures is created online. No SOC 2, by explicit choice, and no published venture funding.",
+      "source": { "url": "https://docs.hetzner.com/general/company-and-policy/information-security-at-hetzner/", "quote": "We have ISO/IEC 27001:2022 certification.", "confidence": "docs-confirmed" }
+    }
+  }
+}

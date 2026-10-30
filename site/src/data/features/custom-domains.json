@@ -253,6 +253,18 @@
         "quote": "Domains you manage on DigitalOcean integrate with DigitalOcean Load Balancers and Spaces to streamline automatic SSL certificate management.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "partly",
+      "figure": "Your DNS, your own proxy",
+      "scenario": "Point an A record at the server's static IP and run Caddy or nginx for TLS; the certificate is yours to renew.",
+      "note": "Hetzner runs a free DNS service and the server has a fixed public IP, so a custom domain is a DNS record plus a reverse proxy you run. There is no managed certificate for a server: Hetzner Cloud's managed Let's Encrypt certificates belong to the paid Load Balancer, from €7.49 a month.",
+      "source": {
+        "url": "https://www.hetzner.com/cloud/load-balancer/",
+        "quote": "Handle common use-cases like TLS Termination",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "Path to your domain",

@@ -244,6 +244,18 @@
         "quote": "By default, each Droplet you create comes with its own public IPv4 address.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "yes",
+      "figure": "Public IP, any port, real SSH",
+      "scenario": "The agent's web port is reachable at a static public address, SSH is a real port on the same host, and any other TCP service can be opened through the firewall.",
+      "note": "A Primary IP gives the server a static public IPv4 and/or IPv6, any port can be opened, and SSH is a normal daemon. There is no provider-issued private or token-gated link, and the browser console is an emergency VNC console rather than a shell.",
+      "source": {
+        "url": "https://docs.hetzner.com/cloud/servers/primary-ips/overview",
+        "quote": "Cloud servers do not have a public network interface unless at least one Primary IP is assigned to them.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Who can open the link",

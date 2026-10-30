@@ -1,0 +1,324 @@
+{
+  "id": "hetzner",
+  "name": "Hetzner Cloud",
+  "url": "https://www.hetzner.com/cloud/",
+  "status": "researched",
+  "checkedOn": "2026-10-29",
+  "oneLiner": "German VPS provider: fixed-size virtual machines from €6.49, billed hourly but capped at the monthly price, with a powered-off server still billed in full.",
+  "whatItIs": [
+    "Hetzner Cloud sells fixed-size virtual machines (vCPUs, RAM and NVMe disk in one bundle) in six data centres across Germany, Finland, the US and Singapore. It is an ordinary Linux server product: root, SSH, any kernel module you can load, Docker if you install it, and a monthly price cap with an hourly rate underneath.",
+    "It is the reference plain VPS rather than a sandbox service. There is no prompt endpoint, no memory snapshot, no idle sleep, no per-second meter and no session limit. You create a server from the console, the API or the hcloud CLI, and it exists until you delete it.",
+    "Three plan families: Cost-Optimized (CX on Intel/AMD and CAX on Ampere, shared, older hardware), Regular Performance (CPX, shared, current AMD) and General Purpose (CCX, dedicated vCPUs). At this check the whole Cost-Optimized family was marked not available for ordering, leaving Regular Performance as the cheapest buyable option."
+  ],
+  "whoFor": "People who want a cheap, ordinary, always-on Linux server in the EU (or the US or Singapore) and are happy to run the operating system, the agent and the backups themselves. It is the natural first choice for a personal agent, a chat bot, n8n or a small MCP server that must never sleep.",
+  "isolation": "A full virtual machine per server with its own kernel, disk and IP: root, Docker inside, real SSH and live migration of a failing host with under a second of disruption. Nested virtualisation is explicitly not available, there is no GPU, and the hypervisor is never named in the docs.",
+  "sizes": "Fixed plans only, no custom CPU/RAM split. Regular Performance (AMD, shared): 1–16 vCPU, 1–32 GB RAM, 20–640 GB NVMe. General Purpose (dedicated vCPU): 2–48 vCPU, 8–192 GB, 80–960 GB. Cost-Optimized: 2–16 vCPU, 4–32 GB, 40–320 GB, currently not orderable. Extra disk comes from Volumes (10 GB–10 TB, up to 16 per server), not from the plan.",
+  "billing": {
+    "model": "Per-server hourly rate with a monthly price cap, plus separately billed Primary IPs, Volumes, Snapshots, Backups, Load Balancers and Object Storage. The account currency (EUR or USD) is fixed at signup.",
+    "meter": "Hourly, rounded up to a whole hour per server, and capped at that server's monthly price. CPX22 is $0.0368/h and $22.99/mo; the cap therefore binds at about 624 hours.",
+    "stopped": "Nothing changes. A powered-off server keeps its disk, its IP and its full bill until it is deleted: \"you pay for a server that has completed the creation process for as long as it exists, regardless of whether it is turned on or not\".",
+    "planFee": "No plan and no fee. The monthly figure is a cap on usage, not a subscription: a server deleted after 90 hours bills 90 hours at the hourly rate.",
+    "minimum": "No free tier and no signup credit. A payment method is required at signup, and the first limit increase is only available after a month and a paid invoice."
+  },
+  "cost": {
+    "A": {
+      "headline": "$37.80 a month",
+      "shape": "CPX22 (2 vCPU / 4 GB / 80 GB), created and deleted for each task",
+      "lines": [
+        {
+          "label": "Compute",
+          "arithmetic": "1,000 servers × 10 min, each rounded up to 1 h = 1,000 h × $0.0368",
+          "amount": "$36.80"
+        },
+        {
+          "label": "Primary IPv4",
+          "arithmetic": "1,000 × 1 h × $0.0010",
+          "amount": "$1.00"
+        }
+      ],
+      "total": "$37.80",
+      "notes": [
+        "The size fits exactly: CPX22 is 2 vCPU / 4 GB with 80 GB of disk, more than the 10 GB asked for.",
+        "Hetzner rounds each server's usage up to a whole hour, so 1,000 ten-minute tasks are billed as 1,000 server-hours, not 167.",
+        "An IPv6-only server would cost $36.80; IPv6 is free but many agent endpoints are IPv4-only.",
+        "The monthly cap never applies here: each server lives for one hour."
+      ],
+      "flag": "This is the workload Hetzner is worst at: a per-second sandbox provider bills only the minutes used, while the one-hour minimum makes every 10-minute task cost a full hour."
+    },
+    "B": {
+      "headline": "$42.59 a month",
+      "shape": "CPX32 (4 vCPU / 8 GB / 160 GB), 730 hours",
+      "lines": [
+        {
+          "label": "Compute",
+          "arithmetic": "730 h × $0.0673 = $49.13, capped at the $41.99 monthly price",
+          "amount": "$41.99"
+        },
+        {
+          "label": "Primary IPv4",
+          "arithmetic": "1 × $0.60 a month",
+          "amount": "$0.60"
+        }
+      ],
+      "total": "$42.59",
+      "notes": [
+        "The size fits: CPX32 is 4 vCPU / 8 GB with 160 GB of disk, more than the 50 GB asked for.",
+        "The monthly cap is what makes an always-on VPS cheap: 730 hours would cost $49.13 at the hourly rate.",
+        "An IPv6-only server would be $41.99. Backups would add 20%, about $8.40.",
+        "The 20 TB EU traffic allowance covers any realistic agent workload."
+      ]
+    },
+    "C": {
+      "headline": "$23.59 a month",
+      "shape": "CPX22 (2 vCPU / 4 GB / 80 GB), 90 running and 640 powered-off hours",
+      "lines": [
+        {
+          "label": "Compute",
+          "arithmetic": "90 running + 640 powered-off hours, billed to deletion: 730 h × $0.0368 = $26.86, capped at $22.99",
+          "amount": "$22.99"
+        },
+        {
+          "label": "Primary IPv4",
+          "arithmetic": "1 × $0.60 a month",
+          "amount": "$0.60"
+        }
+      ],
+      "total": "$23.59",
+      "notes": [
+        "Powered-off hours are not free: the server is billed until it is deleted, so a three-hours-a-day machine costs the same as an always-on one.",
+        "The only cheaper pattern is snapshot-and-delete: keep a snapshot and rebuild when needed. Hetzner no longer publishes the snapshot rate; the last figure visible in an archived page variant would put a 20 GB snapshot near $0.26 a month. That loses the IP, the memory and any running process, and needs the 90 hours of compute again at $3.31.",
+        "The 80 GB plan disk covers the 20 GB asked for, so this is an exact fit."
+      ],
+      "flag": "Stopping does not stop the meter. A workload that is idle two thirds of the month still pays the full monthly price."
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen, Germany; Ansbach HRB 6089; VAT DE 812871812. Management: Martin Hetzner, Stephan Konvickova, Günther Müller.",
+        "source": {
+          "url": "https://www.hetzner.com/legal/legal-notice/",
+          "quote": "Hetzner Online GmbH",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Age and scale",
+        "value": "A German IT company founded in 1997, one of Europe's largest hosting providers, with its own data-centre parks in Nuremberg, Falkenstein and Helsinki plus Singapore and the USA.",
+        "source": {
+          "url": "https://www.hetzner.com/unternehmen/ueber-uns/",
+          "quote": "Hetzner is a German IT company and one of Europe's largest and most trusted internet service providers, founded in 1997.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Ownership and funding",
+        "value": "No parent company, stock listing or venture round is published; Martin Hetzner is CEO and the company is headquartered in Gunzenhausen.",
+        "source": {
+          "url": "https://www.hetzner.com/legal/legal-notice/",
+          "quote": "CEO: Martin Hetzner, Stephan Konvickova, Günther Müller",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "ISO/IEC 27001:2022, BSI C5 Type 2, classified as a KRITIS operator under §8a BSIG, and PCI DSS for card handling. No SOC 2, by choice.",
+        "source": {
+          "url": "https://docs.hetzner.com/general/company-and-policy/information-security-at-hetzner/",
+          "quote": "We have ISO/IEC 27001:2022 certification.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Status and SLA",
+        "value": "A public status page and a 99.9% monthly availability SLA per Cloud server, refunded as Cloud Credit.",
+        "source": {
+          "url": "https://docs.hetzner.com/general/company-and-policy/slas-cloud/",
+          "quote": "We will make commercially reasonable efforts to ensure a monthly availability of 99.9% for every Cloud Server.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Data protection",
+        "value": "A Data Processing Agreement can be created online, with technical and organisational measures in Appendix 2; the audit protocol is available in the customer account.",
+        "source": {
+          "url": "https://docs.hetzner.com/general/company-and-policy/information-security-at-hetzner/",
+          "quote": "We provide an overview of our Technical and organizational measures (\"TOMs\" for short) in the Appendix 2 of our Data Processing Agreement.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "An always-on agent on a small machine: CPX22 at $22.99 + $0.60 IPv4 covers Hermes, OpenClaw, a chat bot, n8n or an MCP server, with 20 TB of EU traffic included.",
+      "A coding box for one developer: CPX32 gives 4 vCPU / 8 GB / 160 GB for $41.99 a month, with the repository safe on the disk between sessions.",
+      "EU data residency: Nuremberg, Falkenstein and Helsinki, German law, ISO 27001 and BSI C5, and a DPA you can sign online.",
+      "Anything that needs a real kernel, root, Docker, arbitrary ports or a stable public IP."
+    ],
+    "badly": [
+      "Bursty work: a powered-off server bills exactly like a running one, so a three-hours-a-day agent costs the same as a 24-hour one.",
+      "Many short runs: each server is rounded up to a whole hour, so 1,000 ten-minute tasks cost 1,000 hours.",
+      "Live resizing: a plan change needs the server powered off and cannot shrink the disk.",
+      "Anything that needs a GPU, nested virtualisation, a memory snapshot, an idle sleep, a hard spend cap or SSO."
+    ]
+  },
+  "usability": {
+    "dashboard": "Yes: the Hetzner Console creates servers, IPs, volumes, firewalls, networks, load balancers, snapshots and backups, with graphs, an Activity feed, per-project members and cost alerts.",
+    "withoutCode": "Yes for the machine itself. Choosing a plan, a location, an image, an SSH key and a firewall is all clicking, and one-click apps (Docker CE, Coolify, Nextcloud, WordPress, GitLab and others) are preselected from the console. Everything after that — the agent, the database, the certificate — is a terminal.",
+    "signup": "A payment method (card, SEPA direct debit for EUR accounts, bank transfer or PayPal) and an email address. No free tier, no automatic credit, and new accounts start with a small project limit that is only raised after a month and a paid invoice.",
+    "docs": "Dozens of focused pages under docs.hetzner.com/cloud plus a complete OpenAPI reference at docs.hetzner.cloud, an open-source CLI, Go and Python libraries, community tutorials and a 24/7 support desk.",
+    "tripsUp": [
+      "Powering a server off does not stop the bill; only deleting it does.",
+      "Each server's usage is rounded up to a whole hour, which is brutal for short tasks.",
+      "The advertised price includes one Primary IPv4; the server alone is €0.50/$0.60 cheaper a month, and IPv6-only is free.",
+      "Resizing needs a reboot and cannot shrink the disk; the partition may need fixing in the rescue system afterwards.",
+      "Snapshots are disk-only, capped at 30 per account, and never contain attached volumes.",
+      "Ports 25 and 465 are blocked on new accounts until a support request is approved.",
+      "The cheap Cost-Optimized plans are listed but marked not available for ordering."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "A stopped server is not a paused server",
+      "detail": "There is no pause, sleep or hibernate. A powered-off server keeps its disk and its IP but also its full monthly charge; the documented way to stop paying is to snapshot and delete, which loses memory, processes and the IP.",
+      "status": "open"
+    },
+    {
+      "issue": "Hourly rounding punishes short runs",
+      "detail": "Usage is rounded up to a whole hour per server, so any task under an hour costs a full hour: 1,000 ten-minute tasks bill 1,000 server-hours, not 167.",
+      "status": "open"
+    },
+    {
+      "issue": "The public IPv4 is billed separately",
+      "detail": "Hetzner bills the server and its public IPv4 separately: $0.60 a month or $0.001 an hour per IPv4, and IPv6 is free. The plan pages' monthly price includes one IPv4; the costs on this site include it too, so an IPv6-only server is $0.60 a month cheaper.",
+      "status": "open"
+    },
+    {
+      "issue": "The cheapest family is out of stock",
+      "detail": "Every Cost-Optimized plan (CX23 at €5.99 and up) carries a 'not available' badge and the overview says 'Currently not available', while the price API still reports active: true. The guide should treat Regular Performance as the buyable entry point until a recheck says otherwise.",
+      "status": "open"
+    },
+    {
+      "issue": "Two first-party price lists, and marketing includes the IPv4",
+      "detail": "Hetzner publishes separate EUR and USD lists (the USD one is about 1.18× the EUR one) and the account currency is fixed at signup. Plan cards add one Primary IPv4 to the server price; the API does not.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.hetzner.com/cloud/regular-performance/",
+          "quote": "€ 19.99 per month, excl. VAT",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://website-price-api.hetzner.com/api/v1/products/CLOUD_124",
+          "quote": "\"monthly\":{\"EUR\":\"19.49\",\"USD\":\"22.99\"}",
+          "confidence": "pricing-page"
+        }
+      ]
+    }
+  ],
+  "strengths": [
+    "A cheap always-on 4 vCPU machine with 160 GB of disk: $41.99 a month plus $0.60 for an IPv4.",
+    "A real server: own kernel, root, Docker, SSH, any TCP port, static IP and 20 TB of EU egress included.",
+    "EU residency with ISO 27001, BSI C5, German law and an online DPA.",
+    "Six locations across four network zones, with the same plans in Falkenstein, Nuremberg and Helsinki.",
+    "Snapshots and volumes as first-class products, and free firewalls, private networks and DNS.",
+    "A complete, documented REST API with an official CLI and Go/Python libraries."
+  ],
+  "sources": [
+    {
+      "label": "Cloud overview and plans",
+      "url": "https://www.hetzner.com/cloud/"
+    },
+    {
+      "label": "Regular Performance plans",
+      "url": "https://www.hetzner.com/cloud/regular-performance/"
+    },
+    {
+      "label": "General Purpose plans",
+      "url": "https://www.hetzner.com/cloud/general-purpose/"
+    },
+    {
+      "label": "Cost-Optimized plans",
+      "url": "https://www.hetzner.com/cloud/cost-optimized/"
+    },
+    {
+      "label": "Block storage (volumes)",
+      "url": "https://www.hetzner.com/cloud/block-storage"
+    },
+    {
+      "label": "Price API: traffic overage (CLOUD_66)",
+      "url": "https://website-price-api.hetzner.com/api/v1/products/CLOUD_66"
+    },
+    {
+      "label": "Website price API used by the plan pages",
+      "url": "https://website-price-api.hetzner.com/api/v1/products/CLOUD_124"
+    },
+    {
+      "label": "Docs: servers overview",
+      "url": "https://docs.hetzner.com/cloud/servers/overview"
+    },
+    {
+      "label": "Docs: billing FAQ",
+      "url": "https://docs.hetzner.com/cloud/billing/faq"
+    },
+    {
+      "label": "Docs: servers FAQ",
+      "url": "https://docs.hetzner.com/cloud/servers/faq"
+    },
+    {
+      "label": "Docs: locations",
+      "url": "https://docs.hetzner.com/cloud/general/locations"
+    },
+    {
+      "label": "Docs: backups and snapshots",
+      "url": "https://docs.hetzner.com/cloud/servers/backups-snapshots/overview"
+    },
+    {
+      "label": "Docs: primary IPs",
+      "url": "https://docs.hetzner.com/cloud/servers/primary-ips/overview"
+    },
+    {
+      "label": "Docs: floating IPs",
+      "url": "https://docs.hetzner.com/cloud/floating-ips/overview"
+    },
+    {
+      "label": "Docs: firewalls",
+      "url": "https://docs.hetzner.com/cloud/firewalls/overview"
+    },
+    {
+      "label": "Docs: networks",
+      "url": "https://docs.hetzner.com/cloud/networks/overview"
+    },
+    {
+      "label": "Docs: API tokens",
+      "url": "https://docs.hetzner.com/cloud/api/getting-started/generating-api-token"
+    },
+    {
+      "label": "Cloud API reference (OpenAPI)",
+      "url": "https://docs.hetzner.cloud/cloud.spec.json"
+    },
+    {
+      "label": "Docs: information security and certifications",
+      "url": "https://docs.hetzner.com/general/company-and-policy/information-security-at-hetzner/"
+    },
+    {
+      "label": "Docs: cloud SLA",
+      "url": "https://docs.hetzner.com/general/company-and-policy/slas-cloud/"
+    },
+    {
+      "label": "Legal: terms and conditions",
+      "url": "https://www.hetzner.com/legal/terms-and-conditions/"
+    },
+    {
+      "label": "OpenClaw: Hetzner install guide",
+      "url": "https://docs.openclaw.ai/install/hetzner"
+    },
+    {
+      "label": "n8n: deploy to Hetzner",
+      "url": "https://docs.n8n.io/deploy/host-n8n/install-options/use-a-cloud-provider/deploy-to-hetzner"
+    }
+  ],
+  "kind": "vps"
+}

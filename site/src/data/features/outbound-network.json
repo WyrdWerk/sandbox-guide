@@ -244,6 +244,18 @@
         "quote": "Each Droplet plan includes an amount of free outbound data transfer. Additional outbound transfer is billed at $0.01 per GiB.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "yes",
+      "figure": "20 TB EU; firewall allowlist",
+      "scenario": "The agent browses freely inside a 20 TB EU allowance from a static IPv4, and outbound rules can restrict where it goes.",
+      "note": "Each server includes 20 TB of outbound traffic in the EU (1 TB in the US, 0.5 TB in Singapore) with overage at €1.00/$1.20 per TB, incoming and internal traffic free. Cloud Firewalls filter outgoing traffic as well as incoming and are free, and a server can be created with no public IP at all.",
+      "source": {
+        "url": "https://docs.hetzner.com/cloud/firewalls/overview",
+        "quote": "A Firewall is used to restrict the incoming and outgoing traffic a user wants on the server.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Egress price",

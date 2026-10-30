@@ -1,0 +1,479 @@
+{
+  "provider": "hetzner",
+  "checkedOn": "2026-10-29",
+  "rows": {
+    "own-vm": {
+      "verdict": "yes",
+      "figure": "Full VM, own kernel",
+      "note": "Every server is its own virtual machine with its own kernel, disk and IP, so Docker, arbitrary kernel modules and any TCP service work as on a normal Linux box.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/overview", "quote": "Cloud servers are virtual machines that run on physical servers and are used to run an operating system and computer programs.", "confidence": "docs-confirmed" }
+    },
+    "root": {
+      "verdict": "yes",
+      "figure": "Root by SSH key or password",
+      "note": "Root access from the first boot, with an SSH key you supply or a mailed root password, plus a rescue system and a root-password reset if the install breaks.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/getting-started/connecting-to-the-server", "quote": "After your server has been created, you can connect to it via SSH by using a command-line interface (CLI).", "confidence": "docs-confirmed" }
+    },
+    "docker-inside": {
+      "verdict": "yes",
+      "figure": "Docker CE one-click app",
+      "note": "Docker CE is a free one-click app, and with root you can install any container runtime you prefer.",
+      "source": { "url": "https://docs.hetzner.com/cloud/apps/overview", "quote": "Our apps provide you easy access to often used software, such as Docker, WordPress or Nextcloud, with the same intuitive workflow as you already know it from the Hetzner Cloud Server deployment.", "confidence": "docs-confirmed" }
+    },
+    "nested-virt": {
+      "verdict": "no",
+      "figure": "Not available",
+      "note": "Hetzner answers this one directly and negatively: no nested virtualisation on Cloud servers, so no QEMU/KVM, Firecracker or Android emulator inside a server.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/faq", "quote": "No, this is not possible on cloud server.", "confidence": "docs-confirmed" }
+    },
+    "custom-image": {
+      "verdict": "partly",
+      "figure": "Snapshot or custom ISO",
+      "shortfall": "There is no Dockerfile or OCI-image import: a custom image is a snapshot of a Hetzner server or a mounted ISO, and a snapshot can only boot the architecture it was taken on.",
+      "note": "You configure a server, snapshot it, and boot copies from that snapshot, or attach a custom ISO to install your own system.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/getting-started/creating-a-server", "quote": "After the server was created, you can also choose to attach an ISO image or even a custom ISO image to the virtual drive of your server", "confidence": "docs-confirmed" }
+    },
+    "any-size": {
+      "verdict": "no",
+      "figure": "Fixed plans only",
+      "note": "CPU and RAM come in fixed bundles; you cannot pick 3 vCPU and 6 GB. Extra disk is bought as a volume instead.",
+      "source": { "url": "https://docs.hetzner.com/cloud/technical-details/faq", "quote": "Customized virtual servers are not currently available.", "confidence": "docs-confirmed" }
+    },
+    "big-machines": {
+      "verdict": "yes",
+      "figure": "48 vCPU / 192 GB / 960 GB",
+      "note": "Shared plans reach 16 vCPU / 32 GB; the dedicated CCX line reaches 48 vCPU / 192 GB / 960 GB NVMe.",
+      "source": { "url": "https://www.hetzner.com/cloud/general-purpose/", "quote": "With General Purpose instances, you get dedicated vCPUs that offer predictable and consistently high processor performance.", "confidence": "docs-confirmed" }
+    },
+    "live-resize": {
+      "verdict": "no",
+      "figure": "Power off, then rescale",
+      "note": "Changing the plan copies the disk and restarts the server; the API refuses the call unless the server is stopped, and the disk can never shrink.",
+      "source": { "url": "https://docs.hetzner.cloud/cloud.spec.json", "quote": "Server must be powered off for this command to succeed.", "confidence": "docs-confirmed" }
+    },
+    "gpu": {
+      "verdict": "no",
+      "figure": "None on Cloud",
+      "note": "The Cloud plans are CPU-only; Hetzner's GPU machines are on the separate dedicated-server line, which is not the Cloud product this listing prices.",
+      "source": { "url": "https://www.hetzner.com/cloud/", "quote": "Which Hetzner Cloud Server is right for you?", "confidence": "inferred" }
+    },
+    "choose-region": {
+      "verdict": "yes",
+      "figure": "6 locations, 4 zones",
+      "note": "Falkenstein, Nuremberg and Helsinki in the EU, plus Ashburn, Hillsboro and Singapore, with different prices per network zone.",
+      "source": { "url": "https://docs.hetzner.com/cloud/general/locations", "quote": "There are currently four network zones and six locations:", "confidence": "docs-confirmed" }
+    },
+    "eu-region": {
+      "verdict": "yes",
+      "figure": "Falkenstein, Nuremberg, Helsinki",
+      "note": "Three EU locations in two network zones, with German law, ISO 27001, BSI C5 and a DPA available online.",
+      "source": { "url": "https://docs.hetzner.com/cloud/general/locations", "quote": "There are currently four network zones and six locations:", "confidence": "docs-confirmed" }
+    },
+    "pause-memory": {
+      "verdict": "no",
+      "figure": "No pause state",
+      "note": "There is no pause or hibernate. Powering off keeps the disk and the IP but loses RAM, running processes and open sockets, and the server keeps billing.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "Yes, you pay for a server that has completed the creation process for as long as it exists, regardless of whether it is turned on or not.", "confidence": "docs-confirmed" }
+    },
+    "warm-pool": {
+      "verdict": "no",
+      "figure": "None",
+      "note": "No pre-started pool. You create servers ahead of time yourself and pay for every one of them while it exists.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/getting-started/creating-a-server", "quote": "You can customize your server with the following features:", "confidence": "inferred" }
+    },
+    "fast-start": {
+      "verdict": "no",
+      "figure": "Seconds, not under one",
+      "note": "A new server is usable in seconds, and there is no resume path faster than a boot, because there is nothing to resume from.",
+      "source": { "url": "https://www.hetzner.com/cloud/", "quote": "order your new server conveniently in the Hetzner Console and start using it in seconds", "confidence": "docs-confirmed" }
+    },
+    "snapshot-files": {
+      "verdict": "yes",
+      "figure": "Manual, kept until deleted",
+      "note": "Snapshots are copies of the server's disk, created on demand and kept until you delete them; up to 30 per account.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/backups-snapshots/overview", "quote": "A Snapshot is a copy of a server's disk that is created manually.", "confidence": "docs-confirmed" }
+    },
+    "snapshot-memory": {
+      "verdict": "no",
+      "figure": "Disk only",
+      "note": "Backups and snapshots are disk copies; nothing saves RAM or a running process, so a restore is always a cold boot.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/backups-snapshots/faq", "quote": "Backups and Snapshots are copies of your server's disk.", "confidence": "docs-confirmed" }
+    },
+    "fork-running": {
+      "verdict": "no",
+      "figure": "Snapshot, then new server",
+      "note": "A running server can be snapshotted (crash-consistent at best), and copies are created as new servers; the original is not forked live.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/backups-snapshots/faq", "quote": "Create a new server and select the Snapshot as source image.", "confidence": "docs-confirmed" }
+    },
+    "older-snapshot": {
+      "verdict": "yes",
+      "figure": "Up to 30, any age",
+      "note": "Snapshots are never rotated automatically, so any earlier point can be restored until you delete it; the account limit is 30.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/backups-snapshots/faq", "quote": "Up to 30 Snapshots across all projects", "confidence": "docs-confirmed" }
+    },
+    "templates": {
+      "verdict": "yes",
+      "figure": "Snapshot → many servers",
+      "note": "A configured server is snapshotted once and reused to create as many identical servers as you like, in any location.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/backups-snapshots/overview", "quote": "Simply create one server, set it up, and create your Snapshot. Next, you can use this Snapshot to duplicate this server once or several times.", "confidence": "docs-confirmed" }
+    },
+    "backups": {
+      "verdict": "yes",
+      "figure": "Daily, 7 slots, +20%",
+      "note": "Optional daily backups with seven rotating slots, billed at 20% of the server price; they die with the server unless converted to a snapshot.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/backups-snapshots/overview", "quote": "Backups are copies of a server's disk that are created automatically on a daily basis. Each server has a total of seven Backup slots.", "confidence": "docs-confirmed" }
+    },
+    "files-survive-stop": {
+      "verdict": "yes",
+      "figure": "Disk and IP persist",
+      "note": "Powering off changes nothing about the disk, and the server keeps existing (and billing) until deleted, so files are exactly where they were.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "We will bill you for your servers until you delete them, independent of their state.", "confidence": "docs-confirmed" }
+    },
+    "volumes": {
+      "verdict": "yes",
+      "figure": "€0.044/GB/mo, to 10 TB",
+      "note": "Network block storage from 10 GB to 10 TB, up to 16 per server, surviving the server it is detached from.",
+      "source": { "url": "https://www.hetzner.com/cloud/block-storage", "quote": "Volumes can be easily scaled up to 10 TB at any time.", "confidence": "docs-confirmed" }
+    },
+    "shared-volume": {
+      "verdict": "no",
+      "figure": "One server at a time",
+      "note": "A volume attaches to exactly one server and cannot be used writably by several at once.",
+      "source": { "url": "https://docs.hetzner.com/cloud/volumes/faq", "quote": "Please note that you can only attach a Volume to one server at a time.", "confidence": "docs-confirmed" }
+    },
+    "mount-buckets": {
+      "verdict": "partly",
+      "figure": "S3 buckets, no native mount",
+      "shortfall": "Object Storage is S3-compatible but Hetzner offers no native mount: you add s3fs or rclone yourself, and buckets exist only in Nuremberg, Falkenstein and Helsinki.",
+      "note": "Up to 100 buckets of 100 TB each, at €6.49 a month for 1 TB plus €6.26 per extra TB, reachable over the S3 API.",
+      "source": { "url": "https://www.hetzner.com/storage/object-storage/", "quote": "Object Storage is the S3-compatible storage solution that grows with your data requirements", "confidence": "pricing-page" }
+    },
+    "big-disk": {
+      "verdict": "yes",
+      "figure": "10 TB volume; 960 GB plan",
+      "note": "The largest plan disk is 960 GB and volumes add up to 10 TB each, with 16 volumes per server.",
+      "source": { "url": "https://www.hetzner.com/cloud/block-storage", "quote": "Volumes can be easily scaled up to 10 TB at any time.", "confidence": "docs-confirmed" }
+    },
+    "stay-on": {
+      "verdict": "yes",
+      "figure": "No session limit",
+      "note": "Nothing stops a server for idleness and no maximum lifetime exists; it runs until you delete it, and it is billed that whole time.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "We will bill you for each cloud server until you choose to delete them.", "confidence": "docs-confirmed" }
+    },
+    "choose-idle": {
+      "verdict": "no",
+      "figure": "No idle timer exists",
+      "note": "There is no idle setting to configure, because there is no automatic stop or sleep; the create-server options and the API contain none.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/getting-started/creating-a-server", "quote": "You can customize your server with the following features:", "confidence": "inferred" }
+    },
+    "wake-on-request": {
+      "verdict": "no",
+      "figure": "No sleep to wake",
+      "note": "A server never sleeps, so there is nothing to wake; a powered-off server stays off until you or the API turn it on.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/getting-started/creating-a-server", "quote": "You can customize your server with the following features:", "confidence": "inferred" }
+    },
+    "schedules": {
+      "verdict": "no",
+      "figure": "No provider scheduler",
+      "note": "Hetzner has no scheduler resource: a job runs on cron or a systemd timer inside a server that is already up, or you call the API yourself.",
+      "source": { "url": "https://docs.hetzner.cloud/cloud.spec.json", "quote": "The Hetzner Cloud API operates over HTTPS and uses JSON as its data format.", "confidence": "inferred" }
+    },
+    "public-url": {
+      "verdict": "yes",
+      "figure": "Public IPv4/IPv6, any port",
+      "note": "A Primary IP gives the server a public address and any TCP port can be opened through the firewall; the address is static for the life of the server.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/primary-ips/overview", "quote": "Cloud servers do not have a public network interface unless at least one Primary IP is assigned to them.", "confidence": "docs-confirmed" }
+    },
+    "private-url": {
+      "verdict": "no",
+      "figure": "No token links",
+      "note": "There is no provider-issued private or signed link. You restrict access with a firewall rule, a private network, a VPN or authentication in your own app.",
+      "source": { "url": "https://docs.hetzner.com/cloud/firewalls/overview", "quote": "A Firewall is used to restrict the incoming and outgoing traffic a user wants on the server.", "confidence": "inferred" }
+    },
+    "ssh": {
+      "verdict": "yes",
+      "figure": "ssh root@IP, IPv4 or IPv6",
+      "note": "Real SSH with your own key, over IPv4 or IPv6, with port forwarding available; this is the intended way to work on the machine.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/getting-started/connecting-to-the-server", "quote": "After your server has been created, you can connect to it via SSH by using a command-line interface (CLI).", "confidence": "docs-confirmed" }
+    },
+    "web-terminal": {
+      "verdict": "partly",
+      "figure": "VNC console, emergency use",
+      "shortfall": "The browser console is a VNC console for emergencies, not a shell: Hetzner recommends SSH for day-to-day work and the console needs the root password.",
+      "note": "The Hetzner Console opens a VNC console that can show a graphical desktop if you installed one on the server.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/faq", "quote": "The console that is provided on the Hetzner Console is a VNC console.", "confidence": "docs-confirmed" }
+    },
+    "tunnel": {
+      "verdict": "yes",
+      "figure": "ssh -L over real SSH",
+      "note": "Because SSH is a normal daemon on the server, local port forwarding works out of the box; there is no managed tunnel product.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/getting-started/connecting-to-the-server", "quote": "After your server has been created, you can connect to it via SSH by using a command-line interface (CLI).", "confidence": "inferred" }
+    },
+    "raw-tcp": {
+      "verdict": "yes",
+      "figure": "Any TCP or UDP port",
+      "note": "Firewall rules are per protocol and port, so databases, game servers and any non-HTTP service are reachable directly.",
+      "source": { "url": "https://docs.hetzner.com/cloud/firewalls/overview", "quote": "Traffic from and to any IP address listed in a rule will be allowed.", "confidence": "docs-confirmed" }
+    },
+    "custom-domain": {
+      "verdict": "yes",
+      "figure": "Point DNS at the server IP",
+      "note": "The server has a fixed public IP and Hetzner runs a free DNS service, so your own hostname is a DNS record plus a reverse proxy you run.",
+      "source": { "url": "https://www.hetzner.com/dns/", "quote": "With our Hetzner Console and API, you can list, add, modify or remove zones and records for free.", "confidence": "docs-confirmed" }
+    },
+    "auto-https": {
+      "verdict": "partly",
+      "figure": "Certificates only on a Load Balancer",
+      "shortfall": "Managed Let's Encrypt certificates belong to the paid Load Balancer (from €7.49 a month); a plain server needs Caddy, certbot or an app's own script.",
+      "note": "Each Load Balancer includes 10 to 50 SSL certificates and handles TLS termination; some one-click apps ship a Let's Encrypt post-install script.",
+      "source": { "url": "https://www.hetzner.com/cloud/load-balancer/", "quote": "Handle common use-cases like TLS Termination", "confidence": "pricing-page" }
+    },
+    "egress-included": {
+      "verdict": "yes",
+      "figure": "20 TB EU / 1 TB US / 0.5 TB SG",
+      "note": "Incoming and internal traffic is free, and each server includes a monthly outbound allowance by region; overage is €1.00/$1.20 per TB in the EU and US, and €7.40/$8.30 per TB in Singapore.",
+      "source": { "url": "https://www.hetzner.com/cloud/regular-performance/", "quote": "Cloud servers located in the EU include at least 20 TB of included traffic.", "confidence": "pricing-page" }
+    },
+    "egress-allowlist": {
+      "verdict": "yes",
+      "figure": "Outbound firewall rules",
+      "note": "Cloud Firewalls filter outgoing traffic as well as incoming, and are free; a rule can name allowed destinations or block everything.",
+      "source": { "url": "https://docs.hetzner.com/cloud/firewalls/overview", "quote": "Simply define IP addresses that are allowed or not allowed to call your server or to be called by your server.", "confidence": "docs-confirmed" }
+    },
+    "no-internet": {
+      "verdict": "yes",
+      "figure": "Private-only server",
+      "note": "A server can be created with no public IP at all, reachable only over a private network, and its public IPs can be removed later.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/getting-started/creating-a-server", "quote": "The server does not have a public network. Instead, it only is accessible with a private IP address and it has to be added to a private network", "confidence": "docs-confirmed" }
+    },
+    "static-ip": {
+      "verdict": "yes",
+      "figure": "Primary IP + Floating IP",
+      "note": "A Primary IPv4 stays with the server and can be moved to a replacement; a Floating IP can be reassigned between servers in the same zone for failover.",
+      "source": { "url": "https://docs.hetzner.com/cloud/floating-ips/overview", "quote": "You can freely assign them to or remove them from any server within the same network zone and project, meaning that you can dynamically reassign them at any time.", "confidence": "docs-confirmed" }
+    },
+    "secrets-store": {
+      "verdict": "no",
+      "figure": "No secrets manager",
+      "note": "There is no vault or write-only environment store. Cloud-init user data (up to 32 KiB) is the only documented first-run injection, and it lives on the server.",
+      "source": { "url": "https://docs.hetzner.cloud/cloud.spec.json", "quote": "As an alternative to working directly with our API you may also consider to use:", "confidence": "inferred" }
+    },
+    "hidden-secrets": {
+      "verdict": "no",
+      "figure": "None",
+      "note": "Hetzner has no request-signing proxy or placeholder-key mechanism; every credential you put on the server is readable by anything running there.",
+      "source": { "url": "https://docs.hetzner.cloud/cloud.spec.json", "quote": "As an alternative to working directly with our API you may also consider to use:", "confidence": "inferred" }
+    },
+    "scoped-keys": {
+      "verdict": "yes",
+      "figure": "Read or Read & Write, per project",
+      "note": "API tokens are bound to one project and to one of two permissions, so an agent can be given a read-only key for a single project.",
+      "source": { "url": "https://docs.hetzner.com/cloud/api/getting-started/generating-api-token", "quote": "Choose a permission. You can choose between Read and Read & Write.", "confidence": "docs-confirmed" }
+    },
+    "dashboard-create": {
+      "verdict": "yes",
+      "figure": "Console wizard",
+      "note": "The whole first machine — plan, location, image or app, SSH key, firewall, cloud-init — is configured by clicking in the Hetzner Console.",
+      "source": { "url": "https://www.hetzner.com/cloud/", "quote": "order your new server conveniently in the Hetzner Console and start using it in seconds", "confidence": "docs-confirmed" }
+    },
+    "cli": {
+      "verdict": "yes",
+      "figure": "hcloud (official, open source)",
+      "note": "An official open-source CLI covers servers, IPs, volumes, firewalls, networks, snapshots and DNS.",
+      "source": { "url": "https://docs.hetzner.com/cloud/api/faq", "quote": "Yes. We provide it as an Open Source project here: https://github.com/hetznercloud/cli", "confidence": "docs-confirmed" }
+    },
+    "python-sdk": {
+      "verdict": "yes",
+      "figure": "hcloud-python (official)",
+      "note": "Hetzner maintains an official Python library, and the API itself is simple enough to call directly.",
+      "source": { "url": "https://docs.hetzner.com/cloud/api/faq", "quote": "We currently provide Open Source libraries for Go and Python.", "confidence": "docs-confirmed" }
+    },
+    "ts-sdk": {
+      "verdict": "no",
+      "figure": "Go and Python only",
+      "note": "No official JavaScript or TypeScript library; the API introduction points to an Awesome List of community integrations for other languages.",
+      "source": { "url": "https://docs.hetzner.com/cloud/api/faq", "quote": "We currently provide Open Source libraries for Go and Python.", "confidence": "docs-confirmed" }
+    },
+    "rest-api": {
+      "verdict": "yes",
+      "figure": "Full REST API, OpenAPI spec",
+      "note": "Every console action has an API endpoint, documented in a complete OpenAPI 3.1 specification, including the price list.",
+      "source": { "url": "https://docs.hetzner.cloud/cloud.spec.json", "quote": "The API is a RESTful API and utilizes HTTP methods and HTTP status codes to specify requests and responses.", "confidence": "docs-confirmed" }
+    },
+    "mcp-server": {
+      "verdict": "no",
+      "figure": "None official",
+      "note": "No official MCP server; the API documentation lists the CLI, Go and Python libraries and a community Awesome List, and no MCP tooling.",
+      "source": { "url": "https://docs.hetzner.cloud/cloud.spec.json", "quote": "As an alternative to working directly with our API you may also consider to use:", "confidence": "inferred" }
+    },
+    "pty": {
+      "verdict": "no",
+      "figure": "No PTY endpoint",
+      "note": "The published API has no terminal or exec endpoint; an interactive session means SSH, or the console's request-console API for a single command.",
+      "source": { "url": "https://docs.hetzner.cloud/cloud.spec.json", "quote": "The API is a RESTful API and utilizes HTTP methods and HTTP status codes to specify requests and responses.", "confidence": "inferred" }
+    },
+    "file-api": {
+      "verdict": "no",
+      "figure": "No file endpoint",
+      "note": "There is no file read/write API; files move over SSH/SFTP, or through cloud-init at first boot.",
+      "source": { "url": "https://docs.hetzner.cloud/cloud.spec.json", "quote": "The API is a RESTful API and utilizes HTTP methods and HTTP status codes to specify requests and responses.", "confidence": "inferred" }
+    },
+    "agents-preinstalled": {
+      "verdict": "no",
+      "figure": "None",
+      "note": "The one-click apps are infrastructure (Docker, Coolify, Nextcloud, WordPress, GitLab and similar); no coding agent ships in any image.",
+      "source": { "url": "https://docs.hetzner.com/cloud/apps/overview", "quote": "Our apps provide you easy access to often used software, such as Docker, WordPress or Nextcloud", "confidence": "docs-confirmed" }
+    },
+    "prompt-api": {
+      "verdict": "no",
+      "figure": "None",
+      "note": "Hetzner never runs an agent for you: the API manages machines and resources, not prompts or tasks.",
+      "source": { "url": "https://docs.hetzner.cloud/cloud.spec.json", "quote": "The API is a RESTful API and utilizes HTTP methods and HTTP status codes to specify requests and responses.", "confidence": "inferred" }
+    },
+    "one-click-hermes": {
+      "verdict": "no",
+      "figure": "Not an app",
+      "note": "Hermes is not in the app list, so it is an SSH install; a community Ansible playbook exists for Hetzner but Hetzner does not publish one.",
+      "source": { "url": "https://docs.hetzner.com/cloud/apps/overview", "quote": "Our apps provide you easy access to often used software, such as Docker, WordPress or Nextcloud", "confidence": "docs-confirmed" }
+    },
+    "one-click-openclaw": {
+      "verdict": "no",
+      "figure": "Not an app, but a guide",
+      "note": "OpenClaw publishes its own Hetzner guide, so the route is documented but terminal-based; there is no one-click app or dashboard flow.",
+      "source": { "url": "https://docs.hetzner.com/cloud/apps/overview", "quote": "Our apps provide you easy access to often used software, such as Docker, WordPress or Nextcloud", "confidence": "docs-confirmed" }
+    },
+    "browser": {
+      "verdict": "no",
+      "figure": "Install it yourself",
+      "note": "No Chromium or Chrome image; a browser agent needs you to install the browser and its dependencies on the server.",
+      "source": { "url": "https://docs.hetzner.com/cloud/apps/overview", "quote": "Our apps provide you easy access to often used software, such as Docker, WordPress or Nextcloud", "confidence": "inferred" }
+    },
+    "desktop": {
+      "verdict": "no",
+      "figure": "Install it; view via VNC",
+      "note": "No desktop is provided, but you can install one and watch it through the VNC console; there is no streaming desktop or computer-use API.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/faq", "quote": "VNC consoles can display a graphical user interface, if the required software is installed on the server", "confidence": "docs-confirmed" }
+    },
+    "hosts-other-agents": {
+      "verdict": "yes",
+      "figure": "OpenClaw documents Hetzner",
+      "note": "OpenClaw's own installation docs treat a Hetzner VPS as the supported host for a persistent Gateway, which is exactly this guide's audience.",
+      "source": { "url": "https://docs.openclaw.ai/install/hetzner", "quote": "Run a persistent OpenClaw Gateway on a Debian or Ubuntu Hetzner VPS.", "confidence": "third-party" }
+    },
+    "team-workspace": {
+      "verdict": "yes",
+      "figure": "Projects with invited members",
+      "note": "Resources live in projects, members are invited by email, and the project owner is invoiced for everything in the project.",
+      "source": { "url": "https://docs.hetzner.com/cloud/general/faq", "quote": "You can group your servers and other resources into projects. For each project, you can invite other users to join and therefore work with you on the project via Hetzner Console.", "confidence": "docs-confirmed" }
+    },
+    "roles": {
+      "verdict": "yes",
+      "figure": "Owner, Admin, Member, Restricted",
+      "note": "Four roles, including a Restricted role that cannot create or delete servers, snapshots, volumes, networks or DNS zones.",
+      "source": { "url": "https://docs.hetzner.com/cloud/general/faq", "quote": "Each member's role in a project determines what they are allowed to do:", "confidence": "docs-confirmed" }
+    },
+    "sso": {
+      "verdict": "not-published",
+      "figure": "Email + optional 2FA",
+      "note": "No SAML or OIDC sign-in is documented; accounts use an email address and password with optional two-factor authentication.",
+      "source": { "url": "https://docs.hetzner.com/cloud/general/faq", "quote": "After registration, you can enable two-factor authentication (2FA) regardless of the account type.", "confidence": "not-published" }
+    },
+    "spend-cap": {
+      "verdict": "no",
+      "figure": "Alerts only, no cap",
+      "note": "Cost and traffic alerts send email but never stop anything, so a runaway agent can bill without a hard limit.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "These alerts are optional and are meant to help you keep track of your spending. They are a convenience feature rather than a spending limit", "confidence": "docs-confirmed" }
+    },
+    "usage-alerts": {
+      "verdict": "yes",
+      "figure": "Email cost and traffic alerts",
+      "note": "You set a cost threshold per project and get an email; traffic triggers notices at 75% and 100% of the included allowance.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "You can set alerts that will send you an email if you exceed a certain cost limit.", "confidence": "docs-confirmed" }
+    },
+    "audit-log": {
+      "verdict": "partly",
+      "figure": "Activity feed, no attribution",
+      "shortfall": "The Console shows an Activity feed of what happened to resources; no account audit log with who-did-it attribution, export or retention period is published.",
+      "note": "The API exposes per-resource actions, and an API token's prefix can be found in the list of account activities.",
+      "source": { "url": "https://docs.hetzner.com/cloud/servers/faq", "quote": "In the Hetzner Console as a failing Activity", "confidence": "inferred" }
+    },
+    "per-second": {
+      "verdict": "no",
+      "figure": "Hourly, rounded up",
+      "note": "Usage is billed per hour and always rounded up, so a server that exists for two minutes costs a full hour.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "We always round up the hourly usage of a server. If you create a server just for a few minutes, we will still bill you for one whole hour.", "confidence": "docs-confirmed" }
+    },
+    "active-cpu": {
+      "verdict": "no",
+      "figure": "Resources reserved while it exists",
+      "note": "CPU and memory are reserved for the whole life of the server, running or not, so an idle machine costs the same as a busy one.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "This is because we allocate full resources to servers, regardless of their power state.", "confidence": "docs-confirmed" }
+    },
+    "cheap-pause": {
+      "verdict": "no",
+      "figure": "Off is billed in full",
+      "note": "A powered-off server keeps its disk and its full bill; the only way to stop paying is to delete it and keep a snapshot instead.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "you pay for a server that has completed the creation process for as long as it exists, regardless of whether it is turned on or not", "confidence": "docs-confirmed" }
+    },
+    "no-monthly-fee": {
+      "verdict": "yes",
+      "figure": "No plan or fee",
+      "note": "Nothing is charged for having an account or a project; a server deleted after 90 hours bills 90 hours and nothing more.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "Servers have both a monthly price cap and a price per hour.", "confidence": "docs-confirmed" }
+    },
+    "flat-price": {
+      "verdict": "yes",
+      "figure": "Monthly cap per server",
+      "note": "Each server has a fixed monthly maximum, which binds at about 624 hours at the current rates; an always-on machine is fully predictable.",
+      "source": { "url": "https://docs.hetzner.com/cloud/billing/faq", "quote": "Your server's bill will never exceed its monthly price cap.", "confidence": "docs-confirmed" }
+    },
+    "free-tier": {
+      "verdict": "no",
+      "figure": "None",
+      "note": "There is no free plan and no recurring allowance; the cheapest buyable server today is CPX02 at €5.99 / $7.49 for the server plus €0.50 / $0.60 for an IPv4, and it bills from creation.",
+      "source": { "url": "https://www.hetzner.com/cloud/", "quote": "€ 6.49 per month, excl. VAT", "confidence": "pricing-page" }
+    },
+    "free-credit": {
+      "verdict": "no",
+      "figure": "No signup credit",
+      "note": "No standing credit is offered; promo codes exist but are given out case by case rather than on signup.",
+      "source": { "url": "https://docs.hetzner.com/general/billing-and-account-management/billing-at-hetzner/promo-code/", "quote": "Promo codes are credit or discount codes that Hetzner gives to customers or potential customers.", "confidence": "docs-confirmed" }
+    },
+    "no-card": {
+      "verdict": "no",
+      "figure": "Payment method required",
+      "note": "An account needs a card, SEPA direct debit, bank transfer or PayPal before anything can be ordered, and there is no trial without one.",
+      "source": { "url": "https://docs.hetzner.com/general/billing-and-account-management/billing-at-hetzner/payment-overview/", "quote": "We accept the following payment methods:", "confidence": "docs-confirmed" }
+    },
+    "status-page": {
+      "verdict": "yes",
+      "figure": "status.hetzner.com",
+      "note": "A public status page is linked from the site footer and covers the data-centre and cloud services.",
+      "source": { "url": "https://www.hetzner.com/cloud/", "quote": "Status System and service status", "confidence": "docs-confirmed" }
+    },
+    "sla": {
+      "verdict": "yes",
+      "figure": "99.9% monthly, Cloud Credit",
+      "note": "A written 99.9% monthly availability SLA per Cloud server, with refunds paid as Cloud Credit; the threshold is about 43 minutes of downtime in a 30-day month.",
+      "source": { "url": "https://docs.hetzner.com/general/company-and-policy/slas-cloud/", "quote": "We will make commercially reasonable efforts to ensure a monthly availability of 99.9% for every Cloud Server.", "confidence": "docs-confirmed" }
+    },
+    "soc2": {
+      "verdict": "no",
+      "figure": "ISO 27001 and C5 instead",
+      "note": "Hetzner holds ISO/IEC 27001:2022, BSI C5 Type 2 and PCI DSS, and says explicitly that it focuses on ISO 27001 rather than SOC 2.",
+      "source": { "url": "https://docs.hetzner.com/general/company-and-policy/information-security-at-hetzner/", "quote": "As an international web hosting company, we at Hetzner place our focus on the ISO/IEC 27001:2022 certification because it is more applicable to an international market.", "confidence": "docs-confirmed" }
+    },
+    "dpa": {
+      "verdict": "yes",
+      "figure": "Online DPA, TOMs in Appendix 2",
+      "note": "A Data Processing Agreement can be created in the customer account, with technical and organisational measures and an external audit protocol available to customers.",
+      "source": { "url": "https://docs.hetzner.com/general/company-and-policy/information-security-at-hetzner/", "quote": "We provide an overview of our Technical and organizational measures (\"TOMs\" for short) in the Appendix 2 of our Data Processing Agreement.", "confidence": "docs-confirmed" }
+    },
+    "open-source": {
+      "verdict": "no",
+      "figure": "Platform not self-hostable",
+      "note": "The CLI and the Go/Python libraries are open source, but the Cloud service itself is Hetzner's infrastructure and cannot be run on your own servers.",
+      "source": { "url": "https://docs.hetzner.com/cloud/api/faq", "quote": "We currently provide Open Source libraries for Go and Python.", "confidence": "inferred" }
+    }
+  }
+}

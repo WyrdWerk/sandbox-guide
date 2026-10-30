@@ -244,6 +244,18 @@
         "quote": "A spend alert budget is not a spending cap and does not limit how much you can use, unless you enable pausing on a model access key alert.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "partly",
+      "figure": "Roles; alerts, not caps",
+      "scenario": "Five developers share a project with roles and read-only API keys; the bill is the owner's, and nothing stops a runaway machine.",
+      "note": "Projects with Owner, Admin, Member and Restricted roles, per-project API tokens and cost alerts. No SSO is documented, there is no account audit log with user attribution, and there is no hard spending cap: alerts only send email and never stop a machine.",
+      "source": {
+        "url": "https://docs.hetzner.com/cloud/billing/faq",
+        "quote": "These alerts are optional and are meant to help you keep track of your spending. They are a convenience feature rather than a spending limit",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Hard spend cap?",

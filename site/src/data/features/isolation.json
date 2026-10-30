@@ -237,6 +237,18 @@
         "quote": "DigitalOcean Droplets are Linux-based virtual machines (VMs) that run on top of virtualized hardware.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "yes",
+      "figure": "Full VM; root, Docker, SSH",
+      "scenario": "Clone, build and load the module without a workaround: an ordinary virtual machine with its own kernel, root, Docker and SSH.",
+      "note": "A full virtual machine per server with its own kernel, disk and IP, plus live migration of a failing host with under a second of disruption. Nested virtualisation is explicitly refused, there is no GPU, and the hypervisor is never named.",
+      "source": {
+        "url": "https://docs.hetzner.com/cloud/servers/overview",
+        "quote": "Cloud servers are virtual machines that run on physical servers and are used to run an operating system and computer programs.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Boundary, and what it allows",

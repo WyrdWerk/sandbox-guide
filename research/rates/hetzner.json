@@ -1,0 +1,80 @@
+{
+  "id": "hetzner",
+  "provider": "Hetzner Cloud",
+  "site": "https://www.hetzner.com/cloud",
+  "checkedOn": "2026-10-29",
+  "currency": "USD",
+  "quoteNote": "Server-only USD prices from https://website-price-api.hetzner.com/api/v1/products/<key>, the API the plan pages render from, EU data centres (FSN1/NBG1/HEL1). Re-read 2026-10-30.",
+  "shapes": [
+    {
+      "name": "CPX02",
+      "vcpu": 1,
+      "ram": 1,
+      "disk": 20,
+      "hourly": 0.012,
+      "monthly": 7.49
+    },
+    {
+      "name": "CPX12",
+      "vcpu": 1,
+      "ram": 2,
+      "disk": 40,
+      "hourly": 0.0216,
+      "monthly": 13.49
+    },
+    {
+      "name": "CPX22",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 80,
+      "hourly": 0.0368,
+      "monthly": 22.99
+    },
+    {
+      "name": "CPX32",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 160,
+      "hourly": 0.0673,
+      "monthly": 41.99
+    },
+    {
+      "name": "CPX42",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 320,
+      "hourly": 0.1314,
+      "monthly": 81.99
+    },
+    {
+      "name": "CPX52",
+      "vcpu": 12,
+      "ram": 24,
+      "disk": 480,
+      "hourly": 0.1907,
+      "monthly": 118.99
+    },
+    {
+      "name": "CPX62",
+      "vcpu": 16,
+      "ram": 32,
+      "disk": 640,
+      "hourly": 0.2452,
+      "monthly": 152.99
+    }
+  ],
+  "ipv4": {
+    "productId": "CLOUD_21",
+    "hourly": 0.001,
+    "monthly": 0.6
+  },
+  "keys": {
+    "CPX02": "CLOUD_136",
+    "CPX12": "CLOUD_122",
+    "CPX22": "CLOUD_124",
+    "CPX32": "CLOUD_126",
+    "CPX42": "CLOUD_128",
+    "CPX52": "CLOUD_130",
+    "CPX62": "CLOUD_131"
+  }
+}

@@ -244,6 +244,18 @@
         "quote": "1-Click deployment for OpenClaw on DigitalOcean Droplet® servers, now starting at just $12/month",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "no",
+      "figure": "None; you install the agent",
+      "scenario": "Nothing is preinstalled: the agent is your install, your service unit and your updates.",
+      "note": "The one-click apps are infrastructure (Docker CE, Coolify, Nextcloud, WordPress, GitLab, Grafana, WireGuard and similar). No coding agent, no Hermes, no OpenClaw and no prompt API. OpenClaw and n8n publish their own Hetzner guides, and a community Ansible playbook exists for Hermes, so the routes are documented but terminal-based.",
+      "source": {
+        "url": "https://docs.hetzner.com/cloud/apps/overview",
+        "quote": "Our apps provide you easy access to often used software, such as Docker, WordPress or Nextcloud",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Agents installed, and promptable?",

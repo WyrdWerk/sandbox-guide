@@ -244,6 +244,18 @@
         "quote": "Snapshots are retained indefinitely until manually deleted.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "partly",
+      "figure": "Disk-only; 30 per account",
+      "scenario": "Snapshot the configured server and boot copies from it; there is no memory snapshot, no live fork and no automatic retention.",
+      "note": "Snapshots are manual disk copies, kept until deleted and capped at 30 per account, and they double as the template mechanism. They never include RAM or attached volumes, are crash-consistent at best from a running server, and cannot change architecture. Daily backups exist separately with seven rotating slots at 20% of the server price.",
+      "source": {
+        "url": "https://docs.hetzner.com/cloud/servers/backups-snapshots/overview",
+        "quote": "A Snapshot is a copy of a server's disk that is created manually.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a snapshot keeps",

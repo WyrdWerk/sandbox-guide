@@ -275,7 +275,7 @@ export function engineCase(providerId: string, key: "a" | "b" | "c"): CostCase {
   return {
     headline: q.feasible ? formatMoney(q.total) : `${formatMoney(q.total)}, with a catch`,
     shape: `${q.shape}${q.plan ? ` (plan: ${q.plan})` : ""}`,
-    lines: q.lines.map((l) => ({ label: l.label, arithmetic: l.math, amount: formatMoney(l.amount) })),
+    lines: q.lines.map((l) => ({ label: l.label, arithmetic: l.math, amount: formatMoney(Math.abs(l.amount)).replace("$", l.amount < 0 ? "−$" : "$") })),
     total: formatMoney(q.total),
     notes: q.notes,
     flag: q.problems.length ? `It cannot run this exactly as described: ${q.problems.join(" ")}` : undefined,

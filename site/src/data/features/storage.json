@@ -244,6 +244,18 @@
         "quote": "DigitalOcean Volumes Block Storage cost $0.10 per GiB per month and range from 1 GiB to 16384 GiB (16 TiB).",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "hetzner",
+      "verdict": "yes",
+      "figure": "Disk kept; volumes to 10 TB",
+      "scenario": "The 20 GiB the agent writes lives on the plan disk and is still there next session, because the disk is never thrown away while the server exists.",
+      "note": "The whole disk persists and is billed whether or not the server runs. Extra storage is a volume at €0.044 per GB a month, up to 10 TB and 16 volumes per server, but a volume attaches to only one server at a time. Object Storage is S3-compatible with no native mount.",
+      "source": {
+        "url": "https://docs.hetzner.com/cloud/billing/faq",
+        "quote": "We will bill you for your servers until you delete them, independent of their state.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Disk, and how long it is kept",

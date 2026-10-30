@@ -217,6 +217,17 @@
             "url": "https://marketplace.digitalocean.com/apps/hermes-agent"
           },
           "price": "Droplet from $6/month; no agent surcharge"
+        },
+        {
+          "provider": "hetzner",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Create a CPX22 (2 vCPU / 4 GB / 80 GB) in the EU, SSH in, install Hermes and run it as a systemd service. The disk, the IP and the process survive, and nothing stops the machine for idleness. Neither Hetzner nor Hermes publishes a Hetzner page; a community Ansible playbook does the provisioning.",
+          "link": {
+            "title": "Hermes Agent docs",
+            "url": "https://hermes-agent.nousresearch.com/docs/"
+          },
+          "price": "CPX22 $22.99 + $0.60 Primary IPv4 a month"
         }
       ],
       "picks": [
@@ -541,6 +552,17 @@
             "url": "https://marketplace.digitalocean.com/apps/openclaw"
           },
           "price": "$12/month"
+        },
+        {
+          "provider": "hetzner",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "OpenClaw's own docs have a Hetzner page: create a Debian or Ubuntu server (at least 6 GB RAM to build the image), attach a Cloud Firewall allowing only SSH, install Docker, follow the Docker VM runtime page, then reach the Control UI through an ssh -L tunnel. The server must stay on because the Gateway owns the chat connections.",
+          "link": {
+            "title": "OpenClaw: Hetzner",
+            "url": "https://docs.openclaw.ai/install/hetzner"
+          },
+          "price": "CPX32 4 vCPU / 8 GB from $41.99 + $0.60 a month; CPX22 is $22.99 if the pre-built image is used"
         }
       ],
       "picks": [
@@ -850,6 +872,17 @@
             "url": "https://docs.digitalocean.com/products/droplets/"
           },
           "price": "$24 a month for 2 vCPU / 4 GiB, on or powered off"
+        },
+        {
+          "provider": "hetzner",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Create a CPX32 (4 vCPU / 8 GB / 160 GB), SSH in and install Claude Code or Codex. The repository survives between sessions, but the machine is billed for the whole month even if it is only used eight hours a day, because powering it off changes nothing.",
+          "link": {
+            "title": "Hetzner: connecting to your server",
+            "url": "https://docs.hetzner.com/cloud/servers/getting-started/connecting-to-the-server"
+          },
+          "price": "CPX32 $41.99 + $0.60 a month, whether or not it is running"
         }
       ],
       "picks": [
@@ -1007,6 +1040,17 @@
             "url": "https://www.digitalocean.com/pricing/harness-runtime"
           },
           "price": "$0.126/hour at full Medium allocation"
+        },
+        {
+          "provider": "hetzner",
+          "tier": "backend",
+          "noTerminal": "no",
+          "what": "There is no execution API. You would build the pool and the run endpoint yourself on the hcloud API, and every run shorter than an hour is billed as a full hour, which makes a per-execution interpreter uneconomic here.",
+          "link": {
+            "title": "Hetzner Cloud API reference",
+            "url": "https://docs.hetzner.cloud/reference/cloud"
+          },
+          "price": "$0.0368 per server-hour: 20,000 one-minute runs is about $736 a month"
         }
       ],
       "picks": [
@@ -1108,6 +1152,17 @@
             "title": "Managed Agents",
             "url": "https://www.digitalocean.com/products/managed-agents"
           }
+        },
+        {
+          "provider": "hetzner",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "No browser or desktop image: install Chromium and, for computer use, a desktop you watch through the VNC console. Sessions last minutes but each costs a whole hour, and the machine cannot sleep between them.",
+          "link": {
+            "title": "Hetzner: using the console",
+            "url": "https://docs.hetzner.com/cloud/servers/getting-started/vnc-console"
+          },
+          "price": "CPX22 $0.0368 an hour, one hour minimum per session"
         }
       ],
       "picks": [
@@ -1350,6 +1405,17 @@
             "url": "https://marketplace.digitalocean.com/apps/docker"
           },
           "price": "$24/month"
+        },
+        {
+          "provider": "hetzner",
+          "tier": "guide",
+          "noTerminal": "no",
+          "what": "n8n publishes a Hetzner guide: pick the Docker CE one-click app when creating the server, install Docker Compose, clone the compose file with Caddy in front, and keep the SQLite database and the encryption key on the disk. n8n suggests the CPX11 type, or 2 vCPU / 4 GB once the Assistant sandbox is added.",
+          "link": {
+            "title": "n8n: deploy to Hetzner",
+            "url": "https://docs.n8n.io/deploy/host-n8n/install-options/use-a-cloud-provider/deploy-to-hetzner"
+          },
+          "price": "CPX22 $22.99 + $0.60 a month always on"
         }
       ],
       "picks": [
@@ -1373,6 +1439,13 @@
           "why": "CPU is billed only while it works, so an n8n that mostly waits is about $25 a month at 2 vCPU / 4 GiB, in a persistent sandbox with your own domain.",
           "watch": "No n8n guide, one US region, and storage keeps billing while the machine is stopped.",
           "link": "https://withruntime.com/docs/pricing"
+        },
+        {
+          "provider": "hetzner",
+          "for": "n8n on a documented path",
+          "why": "n8n's own guide targets Hetzner, using the Docker CE one-click app, and a CPX22 with 20 TB of traffic covers a small team for $23.59 a month.",
+          "watch": "Keep the database and the encryption key on a volume or snapshot; a snapshot-and-delete rebuild needs both.",
+          "link": "https://docs.n8n.io/deploy/host-n8n/install-options/use-a-cloud-provider/deploy-to-hetzner"
         }
       ],
       "outside": "n8n's own [n8n Cloud](https://n8n.io/pricing/) costs €20 a month on Starter (2,500 workflow runs) and €50 on Pro (10,000), billed annually, with nothing to host. [Activepieces](https://www.activepieces.com/pricing), a similar open-source tool, has a free plan and a $20 flat monthly plan. [Windmill](https://www.windmill.dev/docs/advanced/self_host) is free to host yourself and needs PostgreSQL.",
@@ -1423,7 +1496,7 @@
           "name": "n8n Cloud",
           "url": "https://n8n.io/pricing/",
           "what": "The official hosted n8n, with unlimited users and workflows.",
-          "price": "$20 a month, billed annually (Starter)",
+          "price": "20 a month in dollars or euros, depending on where you view the page, billed annually (Starter)",
           "catch": "Starter allows 2,500 workflow executions a month; busier automations need a higher plan.",
           "source": {
             "url": "https://n8n.io/pricing/",
@@ -1685,6 +1758,17 @@
             "url": "https://www.digitalocean.com/pricing/droplets"
           },
           "price": "$12/month"
+        },
+        {
+          "provider": "hetzner",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Create a CPX12 (1 vCPU / 2 GB / 40 GB), install the bot and keep it running as a service. A bot holding a Discord or Slack gateway connection cannot sleep, and nothing here stops it, so the always-on model suits it.",
+          "link": {
+            "title": "Hetzner: creating a server",
+            "url": "https://docs.hetzner.com/cloud/servers/getting-started/creating-a-server"
+          },
+          "price": "CPX12 $13.49 + $0.60 a month"
         }
       ],
       "picks": [
@@ -1708,6 +1792,13 @@
           "why": "A ready-made AI agent (OpenClaw or Hermes) answering in your Discord or Slack, set up from the browser, from $3.99 a month with your own model key.",
           "watch": "It is not your own bot: you configure an existing agent rather than run your code. These Personal plans are separate from the Cloud machines the calculator prices.",
           "link": "https://www.agent37.com/personal"
+        },
+        {
+          "provider": "hetzner",
+          "for": "A bot that must hold a gateway connection",
+          "why": "No idle timer and no session limit, so the always-on machine a Discord or Slack bot needs is exactly what this product is good at: CPX12 at $14.09 a month with the IPv4.",
+          "watch": "The same absence of an idle timer means there is no cheaper mode; leaving it up all month is the point.",
+          "link": "https://docs.hetzner.com/cloud/servers/getting-started/creating-a-server"
         }
       ],
       "outside": "An ordinary host such as [Render](https://render.com/pricing) runs an always-on background worker from $7 a month for 512 MB, or $25 for 1 CPU / 2 GB. A Slack app that answers through a web address fits [Cloudflare Workers](https://developers.cloudflare.com/workers/platform/pricing/): free up to 100,000 requests a day, or a $5 monthly minimum.",
@@ -1948,6 +2039,17 @@
             "url": "https://www.digitalocean.com/pricing/droplets"
           },
           "price": "5 × $48 = $240 a month"
+        },
+        {
+          "provider": "hetzner",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "One CPX32 per developer, each with its own SSH key and its own Claude login, in a shared project with roles and read-only API keys. Because a powered-off server is billed in full, a five-developer setup costs the same whether they work eight hours a day or twenty-four.",
+          "link": {
+            "title": "Hetzner: connecting to your server",
+            "url": "https://docs.hetzner.com/cloud/servers/getting-started/connecting-to-the-server"
+          },
+          "price": "5 × ($41.99 + $0.60) = $212.95 a month"
         }
       ],
       "picks": [
@@ -2218,6 +2320,17 @@
             "url": "https://www.digitalocean.com/pricing/droplets"
           },
           "price": "$12/month for 1 vCPU / 2 GiB"
+        },
+        {
+          "provider": "hetzner",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run the schedule inside the server with cron or a systemd timer, and write results to Object Storage or a volume so they outlive the machine. A fresh server per run is possible but every run under an hour is billed as a full hour, so an always-on small server is usually cheaper.",
+          "link": {
+            "title": "Hetzner: Object Storage",
+            "url": "https://www.hetzner.com/storage/object-storage/"
+          },
+          "price": "120 ten-minute runs × 1 h × $0.0216 ≈ $2.59 + $0.12 IPv4, against $14.09 for an always-on CPX12"
         }
       ],
       "picks": [
@@ -2484,6 +2597,17 @@
             "url": "https://docs.digitalocean.com/reference/mcp/"
           },
           "price": "$6/month for 1 vCPU / 1 GiB"
+        },
+        {
+          "provider": "hetzner",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Create a CPX02 (1 vCPU / 1 GB / 20 GB) with a Primary IP and a Cloud Firewall rule for the port, then run the MCP server as a service. It must stay up, because a powered-off server cannot be woken by an incoming request.",
+          "link": {
+            "title": "Hetzner: firewalls",
+            "url": "https://docs.hetzner.com/cloud/firewalls/overview"
+          },
+          "price": "CPX02 $7.49 + $0.60 a month"
         }
       ],
       "picks": [

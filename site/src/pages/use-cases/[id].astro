@@ -171,8 +171,8 @@ const nav = [
       )}
       <p class="prose usecase__outside"><strong>Beyond these providers.</strong> <Inline text={useCase.outside} /></p>
       <p class="section__note">
-        Compare these three head to head:{" "}
-        <a href={`/compare/side-by-side/?p=${useCase.picks.map((p) => p.provider).join(",")}`}>features and cost side by side</a>.
+        Compare {useCase.picks.length > 3 ? "the first three of these" : "these three"} head to head:{" "}
+        <a href={`/compare/side-by-side/?p=${useCase.picks.slice(0, 3).map((p) => p.provider).join(",")}`}>features and cost side by side</a>.
       </p>
     </section>
 

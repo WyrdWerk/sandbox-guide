@@ -1,0 +1,47 @@
+{
+  "provider": "hetzner",
+  "checkedOn": "2026-10-29",
+  "summary": "A fixed-size server billed by the hour but never more than its monthly price, from creation until deletion; a powered-off server costs the same as a running one.",
+  "shapes": [
+    { "name": "CPX02", "vcpu": 1, "ram": 1, "disk": 20, "hourly": 0.012, "monthly": 7.49 },
+    { "name": "CPX12", "vcpu": 1, "ram": 2, "disk": 40, "hourly": 0.0216, "monthly": 13.49 },
+    { "name": "CPX22", "vcpu": 2, "ram": 4, "disk": 80, "hourly": 0.0368, "monthly": 22.99 },
+    { "name": "CPX32", "vcpu": 4, "ram": 8, "disk": 160, "hourly": 0.0673, "monthly": 41.99 },
+    { "name": "CPX42", "vcpu": 8, "ram": 16, "disk": 320, "hourly": 0.1314, "monthly": 81.99 },
+    { "name": "CPX52", "vcpu": 12, "ram": 24, "disk": 480, "hourly": 0.1907, "monthly": 118.99 },
+    { "name": "CPX62", "vcpu": 16, "ram": 32, "disk": 640, "hourly": 0.2452, "monthly": 152.99 }
+  ],
+  "billedWhileStopped": true,
+  "minimumPerRun": 0.0368,
+  "between": "kept",
+  "egress": {
+    "perGiB": 0.0012,
+    "included": "20 TB per month in the EU network zone, 1 TB in the US, 0.5 TB in Singapore",
+    "note": "$1.20 per extra TB in the EU and US and $8.30 per extra TB in Singapore, billed in 100 MB blocks (Hetzner's price API, products CLOUD_66 and the plan pages). Incoming and internal traffic is free.",
+    "url": "https://www.hetzner.com/cloud/regular-performance/"
+  },
+  "plans": [
+    {
+      "name": "Pay as you go",
+      "fee": 0,
+      "note": "No plan and no fee: each server is billed from creation until deletion, at the hourly rate up to its own monthly cap."
+    }
+  ],
+  "notes": [
+    "These are Hetzner's own USD prices for the EU network zone (Falkenstein, Nuremberg, Helsinki), read from the price API the plan pages use. US and Singapore plans are priced separately and higher.",
+    "The server price excludes a public IPv4: a Primary IPv4 is $0.60 a month or $0.001 an hour, and Primary IPv6 is free. Hetzner's marketing monthly price is the server plus one IPv4. The card cannot add a per-machine IP fee, so add $0.60 per machine-month, or $1.00 for 1,000 one-hour servers.",
+    "Each server's usage is rounded up to a whole hour. minimumPerRun is set to CPX22's $0.0368 hourly rate, the shape workload A uses; because the field is card-wide, a short run on the smaller CPX12 is overstated by $0.0152 (about $1.82 across the 120-run scraper preset).",
+    "A powered-off server is billed in full until it is deleted: there is no pause, sleep or cheaper stopped-storage rate. billedWhileStopped applies the running hourly rate to stopped hours.",
+    "The bill is capped at each server's monthly price, which binds at about 624 hours at these rates. shape.monthly applies that cap to machines mode.",
+    "Snapshots, backups, volumes, Floating IPs and load balancers are separate products and are not priced by this card. Hetzner no longer publishes a snapshot rate on its live pricing pages: the API exposes an image price per GB-month (and a 20% backup surcharge) but needs a token to read, and the last figure visible on a legacy page variant was €0.011/$0.0130 per GB-month, unverified today.",
+    "Cost-Optimized plans (CX23 at €5.99 and up) are listed but marked not available for ordering at this check, so they are not modelled here."
+  ],
+  "sources": [
+    { "label": "Regular Performance plans", "url": "https://www.hetzner.com/cloud/regular-performance/" },
+    { "label": "Price API (server-only USD and EUR prices per data centre)", "url": "https://website-price-api.hetzner.com/api/v1/products/CLOUD_124" },
+    { "label": "Docs: billing FAQ", "url": "https://docs.hetzner.com/cloud/billing/faq" },
+    { "label": "Docs: locations and network zones", "url": "https://docs.hetzner.com/cloud/general/locations" },
+    { "label": "Docs: primary IPs", "url": "https://docs.hetzner.com/cloud/servers/primary-ips/overview" },
+    { "label": "Cloud API reference: pricing fields (image, volume, backup)", "url": "https://docs.hetzner.cloud/cloud.spec.json" }
+  ]
+}
