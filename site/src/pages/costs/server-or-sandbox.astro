@@ -1,0 +1,171 @@
+---
+// When does a flat-price server (VPS) beat a sandbox billed by the hour?
+// Every figure comes from the same engine and rate cards as the calculator, at build time.
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Catches from "../../components/Catches.astro";
+import { pricing, providers, reviews } from "../../lib/data";
+import { price, presets, formatMoney, catches, type Workload } from "../../lib/cost";
+
+const isVps = new Set(providers.filter((p) => p.kind === "vps").map((p) => p.id));
+const name = (id: string) => providers.find((p) => p.id === id)?.name ?? id;
+const hours = [1, 2, 4, 8, 12, 24];
+const servers = pricing.filter((c) => isVps.has(c.provider));
+const sandboxes = pricing.filter((c) => !isVps.has(c.provider));
+
+const workloads = [
+  { key: "personal", label: presets.personal.label, why: presets.personal.why, w: presets.personal.workload },
+  { key: "coding", label: presets.coding.label, why: presets.coding.why, w: presets.coding.workload },
+  {
+    key: "big",
+    label: "A bigger machine (4 vCPU / 16 GiB)",
+    why: "One 4 vCPU / 16 GiB / 80 GiB machine that keeps its files, for an agent that runs a browser, a database or several services at once. About 6% CPU on average.",
+    w: { ...presets.personal.workload, vcpu: 4, ram: 16, disk: 80 } as Workload,
+  },
+];
+
+// A reader-facing line from the dated public reviews, so a recommendation carries it too.
+function reviewWatch(id: string): string | undefined {
+  const r = reviews.byProvider.get(id);
+  if (!r) return undefined;
+  const bad = r.themes.find((t) => t.sentiment === "negative");
+  if (bad) return `Users say: ${bad.theme.charAt(0).toLowerCase()}${bad.theme.slice(1)} ([reviews](/providers/${id}/#users)).`;
+  // No complaints yet: pass on the sample's own warning (too few, or solicited-looking).
+  const first = r.caveats.split(/(?<=\.)\s/)[0];
+  if (r.sample.verdict === "too-few" || r.sample.verdict === "small") return `Users say: ${first.charAt(0).toLowerCase()}${first.slice(1)} ([reviews](/providers/${id}/#users))`;
+  return undefined;
+}
+
+function study(base: Workload) {
+  const at = (h: number): Workload => ({ ...base, hoursPerDay: h, daysPerMonth: 30, machines: 1 });
+  const ranked = (cards: typeof pricing, h: number) =>
+    cards
+      .map((c) => ({ id: c.provider, q: price(c, at(h)) }))
+      .filter((x) => x.q.feasible)
+      .sort((a, b) => a.q.total - b.q.total);
+  const rows = hours.map((h) => ({ h, sandbox: ranked(sandboxes, h)[0], server: ranked(servers, h)[0] }));
+  // Every server, at a couple of hours a day and left on, cheapest left-on first.
+  const everyServer = servers
+    .map((c) => ({ id: c.provider, short: price(c, at(2)), on: price(c, at(24)), how: catches(c)[0]?.label }))
+    .sort((a, b) => Number(b.on.feasible) - Number(a.on.feasible) || a.on.total - b.on.total);
+  // For each sandbox: the first hours a day at which the cheapest server costs less.
+  const crossings = sandboxes
+    .map((c) => {
+      let from: number | null = null;
+      let runs = true;
+      for (let h = 0.5; h <= 24; h += 0.5) {
+        const q = price(c, at(h));
+        if (!q.feasible) { runs = false; break; }
+        const v = ranked(servers, h)[0];
+        if (v && v.q.total < q.total) { from = h; break; }
+      }
+      return { id: c.provider, from, runs, always: price(c, at(24)) };
+    })
+    .sort((a, b) => Number(b.runs) - Number(a.runs) || (a.from ?? 99) - (b.from ?? 99));
+  const beaten = crossings.filter((c) => c.runs && c.from !== null && c.from <= 2).length;
+  const runnable = crossings.filter((c) => c.runs).length;
+  // Every provider that is cheapest at some number of hours gets its catches shown.
+  const winners = [...new Set(rows.flatMap((r) => [r.server?.id, r.sandbox?.id]).filter(Boolean))] as string[];
+  return { rows, everyServer, crossings, beaten, runnable, winners, on: rows.at(-1)! };
+}
+
+const hrs = (h: number) => (h === 1 ? "1 hour" : `${h} hours`);
+const studies = workloads.map((x) => ({ ...x, ...study(x.w) }));
+const p = studies[0];
+const holdouts = p.crossings
+  .filter((c) => c.runs && (c.from === null || c.from > 2))
+  .map((c) => (c.from === null ? `${name(c.id)} stays cheaper all day` : `${name(c.id)} is cheaper below ${hrs(c.from)} a day`));
+const answer = `For a 2 vCPU / 4 GiB agent, the cheapest server is ${name(p.on.server!.id)} at ${formatMoney(p.on.server!.q.total)} a month, and it costs less than ${p.beaten} of the ${p.runnable} sandboxes that can run the job even when the agent is awake only two hours a day.${holdouts.length ? ` The exceptions: ${holdouts.join("; ")}.` : ""} Read the catches before choosing on price.`;
+---
+
+<Base title="Server or sandbox? When a flat-price VPS is cheaper" description={`A VPS costs the same however many hours your agent works; a sandbox bills the hours. ${servers.length} VPS providers against ${sandboxes.length} sandboxes, for three machine sizes, with the catches.`}>
+  <PageHeader
+    parent={{ href: "/costs/", label: "Costs" }}
+    kicker="Costs"
+    title="Server or sandbox?"
+    standfirst="A rented server (VPS) costs the same whether your agent works one hour a day or all day, and most keep billing when switched off. A sandbox charges for the hours it runs. So the answer depends on how many hours a day your agent is awake, and on which server you compare against: VPS prices for the same size differ by four times or more."
+    answer={answer}
+    meta={[`${servers.length} servers, ${sandboxes.length} sandboxes`, "Same engine as the calculator", "List prices, model excluded"]}
+  />
+
+  <div class="wrap">
+    {studies.map((s) => (
+      <section class="section" aria-labelledby={`${s.key}-h`}>
+        <div class="section__head">
+          <h2 class="section__title" id={`${s.key}-h`}>{s.label}</h2>
+          <p class="section__note">{s.why} Here it runs for the hours a day shown, 30 days a month, and is switched off otherwise with its files kept.</p>
+        </div>
+
+        <h3 class="section__title">Cheapest of each, by hours awake</h3>
+        <div class="table-scroll"><table class="data-table">
+          <caption class="visually-hidden">Cheapest sandbox and cheapest server by hours a day</caption>
+          <thead><tr><th scope="col">Awake each day</th><th scope="col">Cheapest sandbox</th><th scope="col">Cheapest server (VPS)</th><th scope="col">Cheaper</th></tr></thead>
+          <tbody>
+            {s.rows.map((r) => (
+              <tr>
+                <th scope="row">{hrs(r.h)}</th>
+                <td>{r.sandbox ? <><a href={`/providers/${r.sandbox.id}/`}>{name(r.sandbox.id)}</a> {formatMoney(r.sandbox.q.total)}</> : "None runs it"}</td>
+                <td>{r.server ? <><a href={`/providers/${r.server.id}/`}>{name(r.server.id)}</a> {formatMoney(r.server.q.total)}</> : "None runs it"}</td>
+                <td>{r.sandbox && r.server ? (r.server.q.total < r.sandbox.q.total ? "Server" : "Sandbox") : "—"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table></div>
+
+        <h3 class="section__title">Every server we list</h3>
+        <p class="section__note">The plan the calculator picks for this size on each provider, so no single server stands in for all of them.</p>
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th scope="col">Server</th><th scope="col">Plan</th><th scope="col">2 hours a day</th><th scope="col">Left on</th><th scope="col">How it bills</th></tr></thead>
+          <tbody>
+            {s.everyServer.map((v) => (
+              <tr>
+                <th scope="row"><a href={`/providers/${v.id}/`}>{name(v.id)}</a></th>
+                <td>{v.on.shape || "—"}</td>
+                <td>{v.short.feasible ? formatMoney(v.short.total) : "Does not sell this size"}</td>
+                <td>{v.on.feasible ? formatMoney(v.on.total) : "Does not sell this size"}</td>
+                <td>{v.how ?? "—"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table></div>
+
+        <h3 class="section__title">Each sandbox against the cheapest server</h3>
+        <div class="table-scroll"><table class="data-table">
+          <thead><tr><th scope="col">Sandbox</th><th scope="col">Left on all day</th><th scope="col">A server is cheaper from</th></tr></thead>
+          <tbody>
+            {s.crossings.map((c) => (
+              <tr>
+                <th scope="row"><a href={`/providers/${c.id}/`}>{name(c.id)}</a></th>
+                <td>{!c.runs ? "—" : c.always.feasible ? formatMoney(c.always.total) : `${formatMoney(c.always.total)}, cannot stay on`}</td>
+                <td>{!c.runs ? "Cannot run this as described" : c.from === null ? "Never: stays cheaper all day" : c.from === 0.5 ? "Any use at all" : `${hrs(c.from)} a day`}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table></div>
+
+        <h3 class="section__title">The cheapest names above, with their catches</h3>
+        <ul class="sos-winners">
+          {s.winners.map((id) => (
+            <li class="sos-winners__item">
+              <p class="sos-winners__name"><a href={`/providers/${id}/`}>{name(id)}</a> · {isVps.has(id) ? "server" : "sandbox"}</p>
+              <Catches provider={id} watch={reviewWatch(id)} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <section class="section" aria-labelledby="read-h">
+      <div class="section__head"><h2 class="section__title" id="read-h">Reading this</h2></div>
+      <div class="prose">
+        <p>Price is only half of it. A server never sleeps, keeps a fixed address and has no session limit, which is what a chat bot or an always-on assistant needs; you also patch it, secure it and back it up yourself. A sandbox can pause, fork and throw machines away, which is what short tasks need. The cheapest servers here share CPU cores with other customers, and their public reviews vary a lot; each provider page has a dated <em>What users say</em> section. The <a href="/compare/situations/">situations</a> and <a href="/use-cases/">use cases</a> weigh those differences.</p>
+        <p>Prices are list prices before tax, on month-to-month terms where a provider offers them; longer prepaid terms are cheaper on some servers. The model's cost is the same wherever the agent runs, so it is left out. To change any number, use the <a href="/costs/">calculator</a>; <a href="/costs/how-it-works/">how the numbers are made</a> explains each provider's billing.</p>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .sos-winners { list-style: none; padding: 0; display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+  .sos-winners__name { font-weight: 600; margin: 0 0 var(--space-2); }
+</style>
