@@ -207,23 +207,6 @@
       "status": "open"
     },
     {
-      "issue": "The backups pricing page is mislabelled",
-      "detail": "At this check the backups page repeated the compute tables under a backup heading, showing 'Linode 1 GB $2.00' (the current plan is $5) and 'G7 Dedicated 4 GB $5.00' (the plan is $43). Its own description says 'Pricing starts at $2/month per GB', which is not a rate the tables support. The backup add-on price is therefore recorded as unverified and is not in the calculator.",
-      "status": "contradiction",
-      "evidence": [
-        {
-          "url": "https://www.akamai.com/cloud/pricing/backups",
-          "quote": "Available add-on for compute instances. Pricing starts at $2/month per GB for shared compute instances on Akamai Cloud.",
-          "confidence": "pricing-page"
-        },
-        {
-          "url": "https://www.akamai.com/cloud/pricing/backups",
-          "quote": "Linode 1 GB | $2.00 | $0.003 | 1 GB | 1 | 25 GB | 1 TB | 40/1 Gbps | Sign up",
-          "confidence": "pricing-page"
-        }
-      ]
-    },
-    {
       "issue": "Nested virtualisation is not documented",
       "detail": "No current Akamai page says whether a Linode can run KVM or another hypervisor inside it. The only first-party answers are 2018 and 2020 community posts saying it is not supported, which is too old to state as current fact; treat it as unpublished, not as supported.",
       "status": "open"

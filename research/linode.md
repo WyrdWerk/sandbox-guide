@@ -23,7 +23,7 @@ Linode.
 | `not-published` | Akamai does not answer the question on any current page I could find. |
 
 **Quote handling.** Quotes are copied from the fetched Markdown/HTML of each page on 2026-10-30. A
-script re-fetched 35 of the 43 cited URLs and checked every quote in `capability-rows.json`,
+script re-fetched 35 of the 42 cited URLs and checked every quote in `capability-rows.json`,
 `feature-rows.json` and `provider.json` against the raw page. Normalisation applied for the check:
 HTML tags removed, Markdown links replaced by their text, `*` and backticks removed, backslash
 escapes removed, HTML entities decoded, zero-width characters removed, typographic quotes and dashes
@@ -131,7 +131,7 @@ binds at 666.67 hours in every case.
 |---|---|---|---|
 | Block Storage | $0.10/GB-month, 10 GB-16 TB per volume | [Block Storage pricing](https://www.akamai.com/cloud/pricing/block-storage) | `pricing-page` |
 | Egress overage | US$0.005 per GB | [CPU pricing](https://www.akamai.com/cloud/pricing/cpu) | `pricing-page` |
-| Backups | paid add-on, price **unreliable** (section 9) | [Backups pricing](https://www.akamai.com/cloud/pricing/backups) | `pricing-page` |
+| Backups add-on | $2/mo (Nanode) to $200/mo; **$5/mo ($0.008/h) on Linode 4 GB** | [Backups pricing](https://www.akamai.com/cloud/pricing/backups), confirmed by `addons.backups` in `GET /v4/linode/types` | `pricing-page` |
 | Signup credit | US$100, new customers, GPU excluded, expires | [Free credit](https://www.akamai.com/lp/free-credit-100) | `pricing-page` |
 
 The pricing page's FAQ gives the credit window: "if you received a $100 credit for 60 days". A
@@ -375,31 +375,27 @@ third-party source was used to fill the gap.
 
 ## 9. Contradictions
 
-**1. The backups pricing page is mislabelled.** The page's own summary says "Pricing starts at
-$2/month per GB for shared compute instances", but its tables repeat compute plans under a backup
-heading: "Linode 1 GB | $2.00" (the plan is $5) and "G7 Dedicated 4 GB | $5.00" (the plan is $43).
-The backup add-on price is therefore recorded as unverified and excluded from the card. Both quotes
-are in `provider.json` caveats.
-
-**2. $100 or $300 of signup credit.** The pricing page and the free-credit landing page say US$100;
+**1. $100 or $300 of signup credit.** The pricing page and the free-credit landing page say US$100;
 the Akamai Cloud MCP server README says "Create an Akamai Cloud account with an API token (includes a
 $300 credit)". The card uses $100 for 60 days because that is what the two pricing pages say and what
 the terms page describes. A reader may see a different offer in a campaign.
 
-**3. G6 and G7 512 GB plans are listed but not returned by the API.** The pricing page shows
+**2. G6 and G7 512 GB plans are listed but not returned by the API.** The pricing page shows
 "G6 Dedicated 512 GB $4,608" and "G7 Dedicated 512 GB $5,530"; `GET /v4/linode/types` returns eight
 G7 sizes and nine G6 sizes with no 512 GB entry. The card prices only what the live type list returns,
 so the largest priced RAM is 512 GiB on G8 (512x256) and 256 GiB on G6/G7.
 
-**4. Two names for the same G7 plans.** The pricing page says "G7 Dedicated 4 GB"; the API returns
+**3. Two names for the same G7 plans.** The pricing page says "G7 Dedicated 4 GB"; the API returns
 both `g7-premium-4` ("Premium 4GB") and `g7-dedicated-4-2` ("G7 Dedicated 4x2") with identical specs
 and prices, and the docs say "Premium CPU plans are now offered as G7 Dedicated plans". Not a pricing
 contradiction, but a naming one that will confuse a reader comparing pages.
 
-**5. Existing site data disagrees about idle timers.** DigitalOcean's row says `yes` ("nothing stops
+**4. Existing site data disagrees about idle timers.** DigitalOcean's row says `yes` ("nothing stops
 it") and Hetzner's says `no` ("no idle timer exists") for the same fact. This profile uses `yes`,
 following the capability's own wording ("including never"). Flagged for the parent rather than
 silently joined to one side.
+
+**Correction, later on 2026-10-30: the backups page was not mislabelled.** My first reading compared its "$2.00" row with the $5 Nanode price and concluded the page repeated compute prices. It does not. The page lists the Backups add-on price for each plan, with the plan name as the row label, and `GET /v4/linode/types` confirms every figure in `addons.backups`: Nanode $2.00/mo ($0.003/h), Linode 4 GB $5.00/mo ($0.008/h), Linode 8 GB $10/mo, G6 and G7 Dedicated 4 GB $5/mo, up to $200/mo on the 256 GB plans the API returns (the advertised 512 GB rows show $240), with higher rates in Jakarta and São Paulo. That is roughly 20% of a shared plan's price and a little less on dedicated plans. It is still outside A/B/C.
 
 ---
 
@@ -408,7 +404,7 @@ silently joined to one side.
 | Question | Status | What was searched |
 |---|---|---|
 | Can a Linode run KVM inside it? | `not-published` | TechDocs compute index, Linodes FAQ, plan pages, web search restricted to akamai.com/linode.com. Only 2018/2020 community answers, both negative. |
-| What does the Backups add-on cost? | `not-published` | Backups pricing page (mislabelled), Backups docs (no figure), Billing FAQ (no figure). |
+| What does the Backups add-on cost? | **Answered: $2-$200/mo by plan, $5/mo on Linode 4 GB** | Backups pricing page, cross-checked against `addons.backups` in `GET /v4/linode/types`. |
 | What is an extra IPv4 address per hour? | `not-published` | Billing page says additional IPv4s are hourly with no cap and "pricing for additional public IPv4 addresses may vary by region"; no rate table found. Not needed for A/B/C because every Linode includes one. |
 | What do custom images cost? | `not-published` | Images docs describe storage as Object Storage; the images pricing page was not read for this card. |
 | Does a Linode boot in under a second? | `not-published` | No boot-time figure published; `fast-start` marked `no` by inference. |
@@ -437,7 +433,7 @@ endpoint called live on the day.
 
 ## 12. Quote verification
 
-A script re-fetched 35 of the 43 cited URLs and checked 84 quotes. **84 matched, 0 failed** after the
+A script re-fetched 35 of the 42 cited URLs and checked 84 quotes. **84 matched, 0 failed** after the
 declared normalisation. The eight URLs not machine-checked, and how each was verified:
 
 | URL | Why not scripted | Verification |

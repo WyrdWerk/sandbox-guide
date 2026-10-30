@@ -399,11 +399,10 @@
     "Usage is rounded up to the nearest hour per service, so a ten-minute Linode bills one hour. The calculator applies that to every task; see abc.md for the alternative reading.",
     "A powered-off Linode is billed in full until it is deleted: data and RAM are still reserved. billedWhileStopped applies the running rate to the 640 stopped hours in workload C.",
     "Disk comes with the plan. A request larger than the plan's disk is priced as Block Storage at $0.10 per GiB a month (10 GB to 16 TB per volume), not as a bigger boot disk.",
-    "The Backups service is a paid add-on with up to four backups (daily, weekly, biweekly, manual). The backups pricing page's tables are mislabelled at this check and are not used; backups are not in the calculator.",
+    "The Backups service is a paid add-on: $2 a month on the Nanode, $5 a month ($0.008/h) on Linode 4 GB, $10 on Linode 8 GB, up to $240 on the largest plans, with higher rates in Jakarta and São Paulo. It is not in the calculator.",
     "Snapshots and custom images are not in the calculator. An image is stored as Object Storage and stays until deleted; the site's images pricing page was not read for this card.",
     "Outbound transfer overage is $0.005 per GB on the pricing page. Egress is shown on the outbound-network feature, not priced here.",
-    "Not in the card: extra IPv4 addresses (billed hourly with no cap since 1 July 2026, price by region), NodeBalancers, Object Storage, Longview Pro, and GPU/Accelerated plans.",
-    "Linode's public types API (api.linode.com/v4/linode/types, read 2026-10-30) prices the Backups add-on per plan, which the mislabelled backups pricing page does not: Linode 4 GB lists addons.backups.price monthly 5 and hourly 0.008. Not included in A/B/C."
+    "Not in the card: extra IPv4 addresses (billed hourly with no cap since 1 July 2026, price by region), NodeBalancers, Object Storage, Longview Pro, and GPU/Accelerated plans."
   ],
   "sources": [
     {
