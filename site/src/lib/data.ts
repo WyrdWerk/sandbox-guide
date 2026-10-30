@@ -187,6 +187,32 @@ export const checked = {
 export const capabilities: Capability[] = (capabilityData as { capabilities: Capability[] }).capabilities;
 export const capabilityById = new Map(capabilities.map((c) => [c.id, c]));
 export const capabilitiesOf = (featureId: string) => capabilities.filter((c) => c.feature === featureId);
+/** The ten ways to drive a provider, grouped by who is driving. All are existing capability rows. */
+export const toolGroups = [
+  { label: "From the website", caps: ["dashboard-create", "web-terminal"] },
+  { label: "From a terminal", caps: ["ssh", "cli"] },
+  { label: "From your own code", caps: ["python-sdk", "ts-sdk", "rest-api"] },
+  { label: "For an AI agent", caps: ["mcp-server", "pty", "file-api"] },
+];
+
+/** One provider's verdict on each tool, plus how many it has fully and with a catch. */
+export function toolSummary(id: string) {
+  const groups = toolGroups.map((g) => ({
+    label: g.label,
+    tools: g.caps.map((c) => {
+      const cap = capabilityById.get(c)!;
+      return { cap, row: cap.rows.find((r) => r.provider === id) };
+    }),
+  }));
+  const all = groups.flatMap((g) => g.tools);
+  return {
+    groups,
+    yes: all.filter((t) => t.row?.verdict === "yes").length,
+    partly: all.filter((t) => t.row?.verdict === "partly").length,
+    total: all.length,
+  };
+}
+
 /** Verdicts in the order a reader cares about: does it fully, with a catch, not at all, unknown. */
 export const capabilityVerdicts = ["yes", "partly", "no", "not-published"] as const;
 export const capabilityLabel = {

@@ -7,7 +7,7 @@ import CompanyFacts from "../../components/CompanyFacts.astro";
 import Quote from "../../components/Quote.astro";
 import SectionNav from "../../components/SectionNav.astro";
 import Badge from "../../components/Badge.astro";
-import { providerById, providers, pricing, useCases, engineCase, features, capabilitiesOf, capabilityLabel, formatDate, reviews } from "../../lib/data";
+import { providerById, providers, pricing, useCases, engineCase, features, capabilitiesOf, capabilityLabel, formatDate, reviews, toolSummary } from "../../lib/data";
 import { price, presets, formatMoney, catches } from "../../lib/cost";
 import { comparisons, pairSlug, providerAnswer } from "../../lib/agents";
 
@@ -26,6 +26,7 @@ const personal = card ? price(card, presets.personal.workload) : undefined;
 const checklist = features
   .map((f) => ({ f, items: capabilitiesOf(f.id).map((c) => ({ c, row: c.rows.find((r) => r.provider === provider.id) })) }))
   .filter((g) => g.items.length);
+const tools = toolSummary(provider.id);
 const voices = reviews.byProvider.get(provider.id);
 const sentimentLabel = { positive: "Praise", negative: "Complaint", mixed: "Mixed" };
 const nav = [
@@ -35,6 +36,7 @@ const nav = [
   { href: "#billing", label: "Billing" },
   { href: "#strengths", label: "Strengths" },
   { href: "#without-code", label: "Without code" },
+  { href: "#tools", label: "Tools" },
   { href: "#checklist", label: "Checklist" },
   { href: "#company", label: "Company" },
   { href: "#caveats", label: "Caveats" },
@@ -162,6 +164,34 @@ const statusLabel = {
           <tr><th scope="row">Without code</th><td>{provider.usability.withoutCode}</td></tr>
           <tr><th scope="row">Signup</th><td>{provider.usability.signup}</td></tr>
           <tr><th scope="row">Docs and support</th><td>{provider.usability.docs}</td></tr>
+        </tbody>
+      </table>
+
+      <h2 class="section__title" id="tools">Tools you can use</h2>
+      <p class="section__note">
+        {provider.name} has {tools.yes} of the {tools.total} ways to drive a machine that this guide checks
+        {tools.partly > 0 && <>, and {tools.partly} more with a catch</>}. From its own documentation;
+        how pleasant each one is to use was not tested. <a href="/compare/tools/">Compare every provider</a>
+      </p>
+      <table class="data-table tools-table">
+        <tbody>
+          {tools.groups.map((g) => (
+            <tr>
+              <th scope="row">{g.label}</th>
+              <td>
+                <ul class="plain-list">
+                  {g.tools.map(({ cap, row }) => (
+                    <li>
+                      <a href={`/capabilities/${cap.id}/#${provider.id}`}>{cap.title}</a>{" "}
+                      {row ? <Badge verdict={row.verdict} label={capabilityLabel[row.verdict]} /> : <Badge verdict="pending" />}
+                      {row?.figure && <span class="muted"> {row.figure}</span>}
+                      {row?.verdict === "partly" && row.shortfall && <span class="muted">. {row.shortfall}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
 

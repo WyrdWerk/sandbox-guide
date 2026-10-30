@@ -1,0 +1,81 @@
+---
+// Which ways to drive a machine each provider documents, ranked. Built from existing capability rows.
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { providers, toolGroups, toolSummary, capabilityById, capabilityLabel, checked, formatDate } from "../../lib/data";
+
+const mark = { yes: "badge--yes", partly: "badge--partly", no: "badge--no", "not-published": "badge--unknown" } as const;
+const rows = providers
+  .filter((p) => p.status === "researched")
+  .map((p) => ({ p, s: toolSummary(p.id) }))
+  .sort((a, b) => b.s.yes - a.s.yes || b.s.partly - a.s.partly || a.p.name.localeCompare(b.p.name));
+const caps = toolGroups.flatMap((g) => g.caps.map((c) => capabilityById.get(c)!));
+const most = rows[0];
+const withMcp = rows.filter((r) => r.s.groups[3].tools[0].row?.verdict === "yes").length;
+const v = (r: (typeof rows)[number], cap: string) => r.s.groups.flatMap((g) => g.tools).find((x) => x.cap.id === cap)?.row?.verdict;
+const vps = rows.filter((r) => r.p.kind === "vps");
+const vpsBasics = vps.filter((r) => ["dashboard-create", "ssh", "rest-api"].every((c) => v(r, c) === "yes")).length;
+const vpsFull = vps.filter((r) => v(r, "pty") === "yes" || v(r, "file-api") === "yes").length;
+const vpsCatch = vps.filter((r) => [v(r, "pty"), v(r, "file-api")].includes("partly")).length;
+const tied = rows.filter((r) => r.s.yes === most.s.yes).map((r) => r.p.name);
+---
+
+<Base title="Which tools each sandbox and VPS gives you: dashboard, CLI, SDKs, API, MCP" description={`${rows.length} providers ranked by the ways you can drive a machine: create it from the website, a browser terminal, SSH, a CLI, Python and TypeScript SDKs, an HTTP API, an MCP server, and terminal or file access over the API.`}>
+  <PageHeader
+    parent={{ href: "/compare/", label: "Compare" }}
+    kicker="Compare"
+    title="Which tools does each provider give you?"
+    standfirst="Some people want to click through a website; some want a terminal; a developer wants an SDK; an AI agent needs an API it can call, ideally an MCP server. This table counts which of those ten ways each provider documents."
+    answer={`${tied.join(" and ")} ${tied.length > 1 ? "document" : "documents"} the most, ${most.s.yes} of ${most.s.total}. Only ${withMcp} of the ${rows.length} providers publish a full MCP server. ${vpsBasics} of the ${vps.length} plain servers (VPS) have a dashboard, SSH and an HTTP API, but ${vpsFull === 0 ? "none" : vpsFull} fully ${vpsFull === 1 ? "lets" : "let"} code run commands or move files without SSH${vpsCatch ? ` (${vpsCatch} with a catch)` : ""}.`}
+    meta={[`${rows.length} providers`, `${caps.length} tools`, `Capabilities checked ${formatDate(checked.capabilities)}`]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush" aria-labelledby="table-h">
+      <div class="section__head">
+        <h2 class="section__title" id="table-h">Every provider, most tools first</h2>
+        <p class="section__note">A filled mark is yes, a half mark is yes with a catch, an empty one is no, a dashed one is not published. Each mark links to the evidence.</p>
+      </div>
+      <div class="cap-matrix table-scroll" tabindex="0" role="region" aria-label="Tools by provider">
+        <table>
+          <caption class="visually-hidden">Ways to drive each provider</caption>
+          <thead>
+            <tr>
+              <th scope="col" class="cap-matrix__corner">Provider</th>
+              <th scope="col">Has</th>
+              {caps.map((c) => <th scope="col" class="cap-matrix__provider"><a href={`/capabilities/${c.id}/`}><span>{c.title}</span></a></th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(({ p, s }) => (
+              <tr>
+                <th scope="row" class="cap-matrix__cap"><a href={`/providers/${p.id}/#tools`}>{p.name}</a>{p.kind === "vps" && <span class="muted"> · VPS</span>}</th>
+                <td>{s.yes}{s.partly > 0 && <span class="muted"> +{s.partly}</span>}</td>
+                {s.groups.flatMap((g) => g.tools).map(({ cap, row }) => {
+                  const v = row?.verdict ?? "not-published";
+                  const detail = row ? [capabilityLabel[v], row.figure, row.shortfall].filter(Boolean).join(". ") : "Not checked";
+                  return (
+                    <td class={`cap-matrix__cell cap-matrix__cell--${v}`}>
+                      <a href={`/capabilities/${cap.id}/#${p.id}`} title={`${p.name}, ${cap.title}: ${detail}`}>
+                        <span class={`badge__mark cap-matrix__mark ${mark[v]}`} aria-hidden="true"></span>
+                        <span class="visually-hidden">{detail}</span>
+                      </a>
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="read-h">
+      <div class="section__head"><h2 class="section__title" id="read-h">Reading this</h2></div>
+      <div class="prose">
+        <p>More is not better for everyone. Someone who will never write code needs the first two columns and nothing else; an agent builder needs the last three. "Has" counts full yeses, and "+" counts tools that come with a catch, which each provider page spells out.</p>
+        <p>Every mark comes from the provider's own documentation. Nobody here signed up and timed how easy each dashboard is, so this measures what exists, not what is pleasant. Each provider page has a <em>Using it without writing code</em> section on the dashboard and signup.</p>
+      </div>
+    </section>
+  </div>
+</Base>
