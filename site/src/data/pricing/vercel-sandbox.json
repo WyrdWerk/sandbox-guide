@@ -163,5 +163,14 @@
       "ram": 64,
       "disk": 64
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "What you keep up",
+    "detail": "Vercel's managed images get nightly releases with operating-system security patches, but it does not say whether a resumed sandbox picks them up; assume a kept sandbox stays on its old image.",
+    "source": {
+      "url": "https://vercel.com/docs/sandbox/concepts/images",
+      "quote": "Every managed image gets a nightly release.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

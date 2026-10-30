@@ -94,5 +94,14 @@
       "label": "VM lifecycle",
       "url": "https://www.freestyle.sh/docs/vms/lifecycle"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "What you keep up",
+    "detail": "Freestyle updates its public base images, but your saved snapshots keep their installed versions, and VMs can run indefinitely, so updating what is installed is yours.",
+    "source": {
+      "url": "https://www.freestyle.sh/docs/vms/base-snapshots",
+      "quote": "Saved snapshots keep their installed versions when the public base image is updated",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

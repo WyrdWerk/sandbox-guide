@@ -71,5 +71,14 @@
       "label": "Pricing",
       "url": "https://sandboxer.com/pricing"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "Updates not published",
+    "detail": "Sandboxes are kept, with coding agents preinstalled, and snapshots keep what you install. Who updates the system or the agents is not published.",
+    "source": {
+      "url": "https://sandboxer.com/docs/agents.md",
+      "quote": "Every sandbox ships with Claude Code, Codex, OpenCode, Pi, Kimi and Mistral Vibe.",
+      "confidence": "not-published"
+    }
+  }
 }

@@ -62,5 +62,14 @@
       "label": "Pricing",
       "url": "https://boxd.sh/pricing"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "What you keep up",
+    "detail": "boxd runs the kernel and the isolation, but machines are kept, and forks and machines made from snapshots keep their source image. Who updates the packages inside a machine is not published, so assume you do.",
+    "source": {
+      "url": "https://docs.boxd.sh/guides/desktop",
+      "quote": "Forks and machines created from a snapshot keep their source machine's image, so create a fresh machine from the default image to get it.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

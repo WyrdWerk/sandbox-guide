@@ -98,5 +98,14 @@
       "ram": 64,
       "disk": 1024
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "Updates not published",
+    "detail": "Machines are kept between runs and you install software with apt. InstaBox does not say who patches a machine you keep.",
+    "source": {
+      "url": "https://instabox.sh/docs/custom-images.md",
+      "quote": "apt manages the machine's own system",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

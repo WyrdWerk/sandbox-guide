@@ -67,5 +67,14 @@
       "label": "Pricing",
       "url": "https://lizard.build/pricing"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "Updates not published",
+    "detail": "Sandboxes run Lizard's own templates and are deleted on stop unless you keep a volume. Lizard does not say whether it updates hosted apps such as n8n or OpenClaw for you.",
+    "source": {
+      "url": "https://lizard.build/docs/sandboxes.md",
+      "quote": "The public CLI does not provide a custom-template upload flow.",
+      "confidence": "not-published"
+    }
+  }
 }

@@ -44,5 +44,14 @@
       "label": "Limits",
       "url": "https://www.daytona.io/docs/en/limits.md"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "Updates not published",
+    "detail": "Daytona publishes nothing on who patches its default snapshots or a sandbox you keep running.",
+    "source": {
+      "url": "https://www.daytona.io/docs/en/snapshots/",
+      "quote": "Daytona provides default snapshots for creating sandboxes.",
+      "confidence": "not-published"
+    }
+  }
 }

@@ -39,5 +39,14 @@
       "label": "Pricing",
       "url": "https://fly.io/pricing/"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "What you keep up",
+    "detail": "Sprites are kept, and Fly says long-lived ones still need regular updates from you, including the bundled agents and language tools.",
+    "source": {
+      "url": "https://docs.fly.io/sprites/sprite-maintenance",
+      "quote": "Sprites are persistent. Everything you leave is there when you come back, including the software. Long-living Sprites still need regular updates.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

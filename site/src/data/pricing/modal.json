@@ -46,5 +46,14 @@
       "label": "Sandbox resources",
       "url": "https://modal.com/docs/guide/sandbox-resources"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "What you keep up",
+    "detail": "Modal patches its platform and runtimes; patching your images, dependencies and code is yours. Sandboxes last at most 24 hours, so each starts from your image.",
+    "source": {
+      "url": "https://modal.com/docs/guide/security",
+      "quote": "Patch your Images, dependencies, and code.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

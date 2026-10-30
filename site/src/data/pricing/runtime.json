@@ -45,5 +45,14 @@
       "label": "Pricing",
       "url": "https://withruntime.com/docs/pricing"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "What you keep up",
+    "detail": "When Runtime updates its default image, a paused sandbox or snapshot keeps its old files; only new sandboxes get the update. You run apt yourself.",
+    "source": {
+      "url": "https://withruntime.com/docs/storage",
+      "quote": "An existing paused sandbox or snapshot keeps the filesystem saved with its memory. Updating Runtime's default image does not replace those files.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

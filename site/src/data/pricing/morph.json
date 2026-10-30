@@ -42,5 +42,14 @@
       "label": "Pricing",
       "url": "https://cloud.morph.so/web/subscribe"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "Updates not published",
+    "detail": "Morph publishes nothing on who patches its default image or a snapshot you keep; snapshots are frozen copies of memory and disk.",
+    "source": {
+      "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
+      "quote": "Snapshots are immutable point-in-time copies of both memory and disk state.",
+      "confidence": "not-published"
+    }
+  }
 }

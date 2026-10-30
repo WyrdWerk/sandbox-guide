@@ -39,5 +39,14 @@
       "label": "Pricing",
       "url": "https://e2b.dev/pricing"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "Updates not published",
+    "detail": "E2B publishes nothing on patching. A paused sandbox can be kept indefinitely, so a long-lived one keeps whatever software it had.",
+    "source": {
+      "url": "https://docs.e2b.dev/sandbox/persistence",
+      "quote": "A paused sandbox is kept indefinitely.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

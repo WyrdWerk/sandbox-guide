@@ -79,5 +79,14 @@
       "label": "Pricing and limits FAQ",
       "url": "https://docs.tensorlake.ai/faqs/pricing-limits-faq"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "Updates not published",
+    "detail": "Tensorlake publishes nothing on patching. Named sandboxes keep their state across suspend and resume, so their software is yours to update.",
+    "source": {
+      "url": "https://docs.tensorlake.ai/sandboxes/tensorlake-images",
+      "quote": "Tensorlake provides managed images optimized for sandbox workloads.",
+      "confidence": "not-published"
+    }
+  }
 }

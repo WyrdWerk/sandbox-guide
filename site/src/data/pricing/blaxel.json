@@ -41,5 +41,14 @@
       "vcpu": 6,
       "ram": 16
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "What you keep up",
+    "detail": "You build the image from your own Dockerfile, and Blaxel tells you to keep base images updated; pushing a new image does not change existing sandboxes. Patching a running sandbox is not published.",
+    "source": {
+      "url": "https://docs.blaxel.ai/Sandboxes/Templates",
+      "quote": "Keep base images updated",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

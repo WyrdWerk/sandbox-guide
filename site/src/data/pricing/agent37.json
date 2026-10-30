@@ -63,5 +63,14 @@
       "label": "Billing",
       "url": "https://www.agent37.com/docs/agents-api/billing"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "What you keep up",
+    "detail": "Its hosting plans promise automatic updates and security patches, but its API docs say an instance keeps the image it was created from until you run an update, and an update resets anything installed outside your files.",
+    "source": {
+      "url": "https://www.agent37.com/docs/agents-api/templates",
+      "quote": "Existing instances are unaffected: an instance keeps the image it was created from until you update it.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

@@ -68,5 +68,14 @@
       "label": "Pricing",
       "url": "https://docs.boat.dev/pricing"
     }
-  ]
+  ],
+  "upkeep": {
+    "label": "Updates not published",
+    "detail": "boat installs the latest coding agents when it prepares a machine, on its own Ubuntu image. It does not say who updates the system or the agents in a machine you keep afterwards; you have root to do it.",
+    "source": {
+      "url": "https://docs.boat.dev/machines/tools",
+      "quote": "boat updates these to their latest release when it prepares each machine.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

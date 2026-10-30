@@ -87,5 +87,14 @@
   ],
   "maxVcpu": 4,
   "maxRam": 12,
-  "maxDisk": 18.626
+  "maxDisk": 18.626,
+  "upkeep": {
+    "label": "What you keep up",
+    "detail": "Each start is a fresh instance from the image you choose, and a running instance keeps the image it started with. Moving your image to new versions is your job.",
+    "source": {
+      "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+      "quote": "A running instance keeps the image, entrypoint, and environment variables that it started with.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }
