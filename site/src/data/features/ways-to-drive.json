@@ -315,6 +315,18 @@
         "quote": "This tutorial guides you through common Amazon Lightsail operations using the AWS Command Line Interface (AWS CLI).",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "yes",
+      "figure": "Console, CLI, API, 3 SDKs",
+      "scenario": "A script can create and delete Linodes through the API; an assistant can inspect them through the official MCP server, which is read-only.",
+      "note": "Cloud Manager, linode-cli, a documented REST API, official Python and JavaScript clients, Terraform and Pulumi providers, StackScripts and cloud-init. There is no PTY or file endpoint.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+        "quote": "Linode CLI is a wrapper around the Linode API that lets you manage your Akamai Cloud account and resources from the command line.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "First machine without a terminal?",

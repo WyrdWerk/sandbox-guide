@@ -316,6 +316,18 @@
         "quote": "Bundles are billed on an on-demand hourly rate, so you pay only for what you use.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "partly",
+      "figure": "$0.036/h, cap at 667 h",
+      "scenario": "A mostly idle box still costs the full plan: 90 running and 640 powered-off hours bill $26.28, capped at $24.",
+      "note": "An hourly rate with a monthly cap on shared and G6/G7 plans; G8 plans are hourly only with no cap since 1 July 2026. Usage rounds up to the nearest hour, and a powered-off machine bills in full until it is deleted.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+        "quote": "Most paid services offered on Akamai Cloud have predictable monthly rates, also called the monthly caps, alongside flexible hourly rates.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "The meter",

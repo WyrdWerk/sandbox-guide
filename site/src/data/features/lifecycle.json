@@ -343,6 +343,18 @@
         "quote": "These resources accrue charges even when they are in the stopped state.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "partly",
+      "figure": "Stop keeps disk; no pause",
+      "scenario": "Stopping at 18:00 keeps the files for the morning, but memory and running processes are gone and the meter keeps running.",
+      "note": "There is no pause, hibernate or sleep: a stop is a power-off that keeps the disk and the IP addresses. The charge continues at the full hourly rate, so a stopped machine is never cheaper than a running one.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+        "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a pause keeps",

@@ -309,6 +309,18 @@
         "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "yes",
+      "figure": "Full VM; root, Docker",
+      "scenario": "The build needs Docker and a kernel module: a Linode is a full virtual machine with its own kernel and root, so Docker and ordinary modules work.",
+      "note": "A KVM guest with its own kernel, disk and IPs, on shared or dedicated vCPU depending on the plan. Nested virtualisation has no current documentation, and the CPU plans have no GPU.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+        "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Boundary, and what it allows",

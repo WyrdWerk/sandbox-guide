@@ -316,6 +316,18 @@
         "quote": "You can install many additional software packages, such as Evolution, GIMP, Pidgin, and Synaptic by using the APT-based package management tool (`apt-get`).",
         "confidence": "inferred"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "partly",
+      "figure": "1-click Hermes + OpenClaw",
+      "scenario": "OpenClaw deploys from Cloud Manager in 5-10 minutes with an HTTPS dashboard, then needs a model key and channel pairing from the terminal.",
+      "note": "Two genuine one-click agent apps in the Quick Deploy catalogue, but no coding agent in the default images and no prompt endpoint. Claude Code or Codex you install yourself.",
+      "source": {
+        "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/openclaw",
+        "quote": "Deploy OpenClaw, an open source AI agent platform that runs locally and executes tasks through a persistent gateway service connecting communication channels, tools, and AI models.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Agents installed, and promptable?",

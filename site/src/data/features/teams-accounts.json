@@ -316,6 +316,18 @@
         "quote": "you can create one or more IAM users in your AWS account, and those users can be configured with different levels of access to services offered by AWS.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "partly",
+      "figure": "Roles, SAML SSO; no cap",
+      "scenario": "Five developers get five logins and five Linodes under one bill, each with its own role; nothing stops the spend if one is left running.",
+      "note": "RBAC roles, SAML 2.0 single sign-on, scoped tokens and streamed audit logs. There is no hard spend cap, and the alerting covers resource thresholds rather than money.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/identity-and-access-cm",
+        "quote": "You can use Identity and Access in Akamai Cloud to manage identities within an account and manage operations that those identities may perform.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Hard spend cap?",

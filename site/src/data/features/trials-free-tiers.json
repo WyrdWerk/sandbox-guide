@@ -316,6 +316,18 @@
         "quote": "Lightsail’s short-term free trial offers have been replaced by the AWS Free Tier.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "partly",
+      "figure": "$100 credit, 60 days",
+      "scenario": "A week of testing is covered by the $100 credit, but a card is required at signup and the credit expires with the trial.",
+      "note": "A one-off promotional credit for new customers only, excluding GPU plans; unused credit expires and there is no ongoing free allowance. A valid payment method is required to open the account.",
+      "source": {
+        "url": "https://www.akamai.com/lp/free-credit-100",
+        "quote": "Promotional credits are available only to new customers who have not yet signed up for a free trial.",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "What you get, and what ends it",

@@ -38,6 +38,7 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["hostup", "a", 5.72], ["hostup", "b", 11.55], ["hostup", "c", 5.72],
   ["ovhcloud", "a", 5.35], ["ovhcloud", "b", 10], ["ovhcloud", "c", 5.35],
   ["lightsail", "a", 5.38], ["lightsail", "b", 82.42], ["lightsail", "c", 23.54],
+  ["linode", "a", 36], ["linode", "b", 48], ["linode", "c", 24],
 ];
 
 const task = (vcpu: number, ram: number, minutes: number) =>

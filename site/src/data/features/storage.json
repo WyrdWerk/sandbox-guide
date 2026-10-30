@@ -316,6 +316,18 @@
         "quote": "You can also add more storage to your virtual private server by creating additional block storage disks.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "yes",
+      "figure": "Plan disk + 16 TB volumes",
+      "scenario": "The 20 GiB n8n database and its encryption key sit on the plan disk and survive a stop; a bigger store is a volume that outlives the Linode.",
+      "note": "SSD plan disk is included in the price. Block Storage volumes cost $0.10 per GiB a month from 10 GB to 16 TB, attach to one Linode at a time, and are not covered by the Backups service.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/block-storage",
+        "quote": "Since volumes are managed independently of Linodes, your data persists even if you delete your attached Linode.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Disk, and how long it is kept",

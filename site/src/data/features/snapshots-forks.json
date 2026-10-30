@@ -316,6 +316,18 @@
         "quote": "A snapshot contains all of the data that is needed to restore your resource (from the moment when the snapshot was taken).",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "partly",
+      "figure": "Disk images; 4 backups",
+      "scenario": "A snapshot before an upgrade is a custom image: it holds the disk, not the running process, and a clone needs the source powered off.",
+      "note": "Images capture or upload whole disks and stay until deleted; Backups keeps daily, weekly, biweekly and one manual copy. A clone copies disks and profiles but needs a power-off first, and there is no memory snapshot.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/images",
+        "quote": "The Images service lets you retain complete disk images in the cloud for quick access in the future or recover a deleted Linode.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a snapshot keeps",

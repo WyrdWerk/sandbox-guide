@@ -316,6 +316,18 @@
         "quote": "Lightsail instances and managed databases incur charges until they are deleted.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "yes",
+      "figure": "No idle timer; runs for weeks",
+      "scenario": "A bot that must answer at 03:00 is still running: nothing at Akamai stops an idle Linode and there is no session limit.",
+      "note": "No idle timeout, no wake-on-request and no lifetime cap. The machine runs until it is deleted, and bills the whole time whether it is working or not.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+        "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Idle or lifetime limit",

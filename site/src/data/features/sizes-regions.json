@@ -316,6 +316,18 @@
         "quote": "Lightsail offers a variety of instance bundles (also known as instance plans) to meet different workload requirements.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "yes",
+      "figure": "256 vCPU / 512 GiB; 33 regions",
+      "scenario": "A 4 vCPU / 8 GiB / 50 GiB coding box is the Linode 8 GB at $48 a month, in any of 33 core regions, seven of them in Europe.",
+      "note": "Fixed shapes from 1 vCPU / 1 GiB / 25 GB to 256 vCPU / 512 GiB / 5,120 GB across shared, G6, G7, G8 and High Memory families. CPU and RAM cannot be sized separately, extra disk is a Block Storage volume, and a resize reboots the machine.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/how-to-choose-a-compute-instance-plan",
+        "quote": "4 GB - 512 GB Memory, 2 - 256 Dedicated vCPUs, 40 GB - 7200 GB Storage",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Largest shape; regions",

@@ -316,6 +316,18 @@
         "quote": "You can use the public IP to connect to your instance from the Internet, such as through a registered domain name or through an SSH or RDP connection from your local computer.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "yes",
+      "figure": "Public IPv4, SSH, Lish",
+      "scenario": "A webhook and an SSH session both work: the Linode has a public IPv4, any inbound port, real SSH and a browser console.",
+      "note": "A static public IPv4 and IPv6 per Linode, Cloud Firewall rules in both directions, standard SSH and the Lish console in Cloud Manager. Outbound ports 25, 465 and 587 are blocked on some new accounts.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+        "quote": "Dedicated IPv4 and IPv6 addresses (additional addresses available on request)",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Who can open the link",

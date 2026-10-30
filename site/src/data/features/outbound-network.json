@@ -316,6 +316,18 @@
         "quote": "Every Lightsail instance plan includes a data transfer allowance.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "yes",
+      "figure": "$0.005/GiB; 1-20 TB included",
+      "scenario": "Model responses and logs fit inside the 4 TB that comes with the Linode 4 GB; beyond the allowance, transfer costs $0.005 a GB.",
+      "note": "Outbound transfer is pooled per account and prorated for part-months; inbound and intra-datacentre traffic is free. G8 and GPU plans include no transfer. Cloud Firewall outbound rules can restrict destinations, or drop everything.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+        "quote": "Metered outbound network transfer (egress) that includes 1 TB - 20 TB of prorated network transfer allowance",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Egress price",

@@ -361,6 +361,18 @@
         "quote": "AWS will use commercially reasonable efforts to make the Single Lightsail Instance available with an Instance-Level Uptime Percentage, as shown in the table below during any monthly billing cycle",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "yes",
+      "figure": "Akamai; 99.99% SLA; SOC 2",
+      "scenario": "A buyer can check a 99.99% uptime SLA, a SOC 2 Type 2 report, a DPA and a status page before signing.",
+      "note": "Linode is the contracting party in the SLA and MSA while marketing says Akamai Cloud. 99.99% monthly uptime for plans in general availability and 99% for limited-availability plans.",
+      "source": {
+        "url": "https://www.akamai.com/legal/sla-compute",
+        "quote": "We guarantee (i) 99.99% monthly uptime for Covered Services in general availability and (ii) 99% monthly uptime for Covered instances in limited availability",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Contracting entity; promise",

@@ -252,6 +252,17 @@
             "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Full VM, own kernel",
+          "note": "Each Linode is a KVM guest with its own kernel and disk, not a container sharing the host kernel.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+            "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -499,6 +510,17 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "You can install additional software on your instances by using the in-browser SSH or your own SSH client.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Root by password or SSH key",
+          "note": "Root from the first boot, with an SSH key you supply or a password you set; a Quick Deploy App can create a limited sudo user and disable root over SSH.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/faqs-for-compute-instances",
+            "quote": "Since you have full root access to your Linode's system, you're free to choose between a number of popular web servers to host your websites.",
             "confidence": "docs-confirmed"
           }
         }
@@ -754,6 +776,17 @@
             "quote": "You can install many additional software packages, such as Evolution, GIMP, Pidgin, and Synaptic by using the APT-based package management tool (`apt-get`).",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Docker Quick Deploy app",
+          "note": "Docker is a one-click app, and with root on a full VM you can install any container runtime you prefer.",
+          "source": {
+            "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/docker",
+            "quote": "Deploy Docker, a tool that enables you to create, deploy, and manage containers.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -1002,6 +1035,16 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
             "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "not-published",
+          "note": "No current Akamai page says whether a Linode can run KVM or another hypervisor inside it. The only first-party answer found is a 2018 Linode Staff reply saying there is no option to enable it, which is too old to state as current fact.",
+          "source": {
+            "url": "https://www.linode.com/community/questions/17491/how-do-i-enable-nested-virtualization-for-my-linode",
+            "quote": "At present, there is no option to enable nested virtualization for a Linode.",
             "confidence": "not-published"
           }
         }
@@ -1260,6 +1303,17 @@
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html",
             "quote": "Use snapshots to create new Lightsail resources using the same plan, or larger plan, than the original resource.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Upload or capture an image",
+          "note": "A custom image can be captured from a Linode or uploaded from an external disk, made cloud-init compatible, and deployed to a new or existing Linode in any region.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/images",
+            "quote": "A custom image is an image of a Linode you created in Akamai Cloud or an image of an external disk uploaded to Akamai Cloud.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -1522,6 +1576,17 @@
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
             "quote": "Lightsail offers a variety of instance bundles (also known as instance plans) to meet different workload requirements.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "Fixed plans only",
+          "note": "RAM and disk are bundled into each plan. You cannot buy extra RAM or boot disk for an existing Linode; a bigger need means a bigger plan or a Block Storage volume.",
+          "source": {
+            "url": "https://www.akamai.com/cloud/pricing/cpu",
+            "quote": "No, RAM and local disk storage are bundled into the specific VM size. You cannot purchase extra RAM or local disk space individually for an existing instance plan.",
+            "confidence": "pricing-page"
           }
         }
       ]
@@ -1786,6 +1851,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
             "quote": "16Xlarge-256GB Linux with public IPv4 | $1,764.00 | 64 | 256 GB | 1,280 GB | 10 TB",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "256 vCPU / 512 GiB",
+          "note": "G8 Dedicated reaches 256 vCPU and 512 GiB; Shared CPU reaches 32 vCPU / 192 GiB and G6/G7 reach 56 vCPU / 256 GiB.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/how-to-choose-a-compute-instance-plan",
+            "quote": "4 GB - 512 GB Memory, 2 - 256 Dedicated vCPUs, 40 GB - 7200 GB Storage",
             "confidence": "docs-confirmed"
           }
         }
@@ -2056,6 +2132,18 @@
             "quote": "Lightsail does not change the plan of an existing instance in place.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "partly",
+          "figure": "Warm resize reboots",
+          "shortfall": "A warm resize keeps the Linode up while it migrates but reboots it at the end, so running processes do not survive the change.",
+          "note": "You can move up, down or between plan families, and the IPs and data are kept. Shrinking the disk is a separate manual step before a downgrade.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/resize-a-compute-instance",
+            "quote": "Warm resize. Your Linode remains up during the migration and it's rebooted once the migration completes.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -2320,6 +2408,17 @@
             "quote": "Lightsail for Research offers two types of virtual computers: non-GPU and GPU.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "RTX 4000 Ada to RTX PRO 6000",
+          "note": "Separate GPU plans from one to eight NVIDIA cards, including the RTX PRO 6000 Blackwell and Quadro RTX 6000, both in limited availability. Not part of the CPU pricing here.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/gpu-compute-instances",
+            "quote": "Akamai offers Graphical Processing Unit (GPU)-optimized virtual machines designed to accelerate compute-intensive workloads, specifically AI inference, big data processing, and video encoding.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -2578,6 +2677,17 @@
             "quote": "Lightsail is available in the following Regions.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "33 core regions",
+          "note": "Counted from the live public regions endpoint on 2026-10-30; Linodes are available in all of them. Jakarta and São Paulo carry their own pricing.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+            "quote": "Linodes are available across all regions.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -2833,6 +2943,17 @@
             "quote": "EU (Ireland) (eu-west-1)",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "6 EU countries",
+          "note": "Frankfurt, Amsterdam, Stockholm, Milan, Paris and Madrid are in the EU; London is in the UK and outside it. Akamai groups all seven under European regional pricing.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/how-to-choose-a-data-center",
+            "quote": "All European data centers, located at: Frankfurt DE, London UK, Milan IT, Paris FR, Amsterdam NL, Stockholm SE, Madrid ES",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -3085,6 +3206,17 @@
             "quote": "When you stop your instance, it is powered down at its current state and is available for you to start again at any time.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "No pause; power off only",
+          "note": "There is no pause, hibernate or memory snapshot. Powering off keeps the disk and the IPs, loses memory and running processes, and keeps billing.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+            "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -3327,6 +3459,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-start-stop-or-restart-your-instance-virtual-private-server.html",
             "quote": "When Amazon Lightsail creates your instance, your machine goes into a Pending state before it starts Running.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "No pre-started pool",
+          "note": "Nothing keeps spare machines booted and waiting; a new Linode is created and boots when you ask for it. Placement groups control where machines land, not readiness.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+            "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
             "confidence": "inferred"
           }
         }
@@ -3586,6 +3729,17 @@
             "quote": "Once you choose Create, your new instance will spin up automatically within minutes.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "Full boot, no resume",
+          "note": "A new Linode boots an operating system from its disk; nothing resumes from a memory image, and no sub-second start is documented. The one-click apps quote 2-10 minutes including software installation.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+            "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -3837,6 +3991,17 @@
             "quote": "A snapshot contains all of the data that is needed to restore your resource (from the moment when the snapshot was taken).",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Images, kept until deleted",
+          "note": "Capture a Linode's disk as a custom image, restore it to a new or existing Linode in any region, and keep it until you delete it. A deleted Linode also leaves a recovery image for up to 21 days.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/images",
+            "quote": "The Images service lets you retain complete disk images in the cloud for quick access in the future or recover a deleted Linode.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -4083,6 +4248,17 @@
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "We recommend stopping your instance temporarily when taking a snapshot, to ensure your data is complete and not corrupted in any way.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "Disk images only",
+          "note": "An image is the content of a storage device, so memory and running processes are never part of it.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/images",
+            "quote": "An image is a file containing exact content and structure of a data storage device.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -4332,6 +4508,17 @@
             "quote": "We recommend stopping your instance temporarily when taking a snapshot, to ensure your data is complete and not corrupted in any way.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "Clone needs power-off",
+          "note": "Cloning copies disks and configuration profiles, and Akamai tells you to power the source off first to avoid data corruption. There is no copy of a machine while it keeps running.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/clone-a-compute-instance",
+            "quote": "Before continuing, you should power off the Linode you want to clone.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -4580,6 +4767,17 @@
             "quote": "Manual snapshots are stored indefinitely until you delete them.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Daily, weekly, biweekly + manual",
+          "note": "The Backups service keeps four copies: daily, weekly, biweekly and a manual snapshot that stays until replaced. Automated copies expire after 14 days; the manual one does not.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/backup-service",
+            "quote": "The Backups service does not keep automated backups older than 14 days, though there are no restrictions on the age of a manual snapshot.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -4824,6 +5022,17 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "You can use snapshots as baselines to create new resources or to back up your data.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Image to new Linode",
+          "note": "A configured machine becomes a custom image and that image starts as many new Linodes as you need, in any region. StackScripts do the same for installation scripts.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/images",
+            "quote": "You can quickly deploy that custom image to a new or existing Linode in the future.",
             "confidence": "docs-confirmed"
           }
         }
@@ -5075,6 +5284,17 @@
             "quote": "The latest seven daily automatic snapshots are stored before the oldest one is replaced with the newest one.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "4 backups, 14-day rotation",
+          "note": "A paid add-on, enabled with one click, that takes file-level snapshots inside a two-hour window while the machine runs. Only unencrypted ext3/ext4 disks, and attached volumes are not covered.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/backup-service",
+            "quote": "Safeguard your data with the Backups service by enabling automatic backups of the disks on your Linodes.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -5322,6 +5542,17 @@
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "When you stop your instance, it is powered down at its current state and is available for you to start again at any time.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Disk kept while off",
+          "note": "Powering off keeps the disk and the files; starting again finds them where they were. Only deleting the Linode removes the disk.",
+          "source": {
+            "url": "https://www.akamai.com/cloud/pricing/cpu",
+            "quote": "We maintain your saved data and reserve your ability to use other resources like RAM, transfer, etc., even when your VM is powered off.",
+            "confidence": "pricing-page"
           }
         }
       ]
@@ -5572,6 +5803,17 @@
             "quote": "You can also add more storage to your virtual private server by creating additional block storage disks.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "$0.10/GiB-mo; 10 GB-16 TB",
+          "note": "Block Storage volumes attach to a Linode in the same data centre, outlive the Linode they were attached to, and can be moved to another Linode after detaching.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/block-storage",
+            "quote": "Since volumes are managed independently of Linodes, your data persists even if you delete your attached Linode.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -5817,6 +6059,17 @@
             "url": "https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_AttachDisk.html",
             "quote": "Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "One Linode at a time",
+          "note": "A Linode can have many volumes attached, but a volume can only be attached to one Linode at a time. Several machines need Object Storage or a network filesystem you run yourself.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/block-storage",
+            "quote": "A Linode can have multiple volumes attached to it, but a volume can only be attached to one Linode at a time.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -6065,6 +6318,18 @@
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/buckets-in-amazon-lightsail.html",
             "quote": "It is designed to make web-scale computing easier for developers, and is built using the Amazon Simple Storage Service (Amazon S3).",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "partly",
+          "figure": "S3-compatible; no mount",
+          "shortfall": "Object Storage speaks S3, but there is no native mount: you add s3fs or rclone yourself, and a bucket is not a filesystem the agent can rely on.",
+          "note": "Buckets are reachable with any S3 client from inside a Linode, and every object gets its own URL.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/object-storage",
+            "quote": "Akamai's Object Storage is a globally-available, Amazon S3-compatible method you can use to store and access data.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -6323,6 +6588,17 @@
             "quote": "16 TB per disk maximum, or 8 GB per disk minimum.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "16 TB per volume",
+          "note": "Plan disks reach 5,120 GB on G8 and 7,200 GB on the largest G7. Extra space comes from volumes of 10 GB to 16 TB, up to 100 TB per account.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/block-storage",
+            "quote": "Minimum size for a volume is 10 GB and the maximum size is 16 TB.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -6576,6 +6852,17 @@
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
             "quote": "Lightsail instances and managed databases incur charges until they are deleted.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "No session limit",
+          "note": "A Linode runs until it is deleted; there is no session cap, idle stop or maximum lifetime. That is why an always-on agent fits here and why the bill never pauses.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+            "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -6831,6 +7118,17 @@
             "quote": "After your instance is running, you can reboot it or stop and then start it.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "No idle timer exists",
+          "note": "There is no idle timeout to set because nothing idles a Linode: it keeps running, and billing, until you delete it.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+            "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -7076,6 +7374,17 @@
             "quote": "To Start your instance, it must be in a Stopped state.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "Nothing sleeps",
+          "note": "A Linode never suspends, so there is nothing to wake. A machine that is powered off stays off until you or your own script starts it.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+            "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -7319,6 +7628,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
             "quote": "Lightsail instances and managed databases incur charges until they are deleted.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "Cron inside the VM only",
+          "note": "No provider scheduler starts a machine or a job on a timer. Cron or systemd timers inside a Linode work, but only while that Linode is running and paid for.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+            "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
             "confidence": "inferred"
           }
         }
@@ -7579,6 +7899,17 @@
             "quote": "You can use the public IP to connect to your instance from the Internet, such as through a registered domain name or through an SSH or RDP connection from your local computer.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Public IPv4, any port",
+          "note": "Every Linode gets a public IPv4 and IPv6; a service on a port is reachable at that address as soon as the Cloud Firewall allows it. There is no proxy or generated hostname.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+            "quote": "Dedicated IPv4 and IPv6 addresses (additional addresses available on request)",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -7835,6 +8166,18 @@
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
             "quote": "you can choose to restrict a firewall rule to an IPv4 or IPv6 address or range of IP addresses.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "partly",
+          "figure": "Firewall by address",
+          "shortfall": "Access is limited by source IP in a Cloud Firewall, not by a token or login link, so anyone on an allowed network reaches the port.",
+          "note": "A firewall rule can allow only your office or VPN ranges; there is no per-link credential in front of a port.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/cloud-firewall",
+            "quote": "Defend your apps and services from malicious attackers by creating rules to only allow traffic from trusted sources.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -8094,6 +8437,17 @@
             "quote": "In Lightsail, as soon as you create an instance in an AWS Region, we create a Default SSH key in that Region.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Standard SSH",
+          "note": "A normal sshd on a public address, with keys added at creation or later through Cloud Manager.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/faqs-for-compute-instances",
+            "quote": "All Linodes can be accessed through Lish and SSH (if properly configured).",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -8346,6 +8700,17 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "Lightsail offers a 1-click secure connection to your instance's terminal right from your browser, supporting SSH access for Linux/Unix-based instances and RDP access for Windows-based instances.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Lish in the browser",
+          "note": "The Lish console opens a root shell in Cloud Manager (Weblish) or over an SSH gateway. Weblish needs a root password, so a key-only machine needs one set first.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/access-your-system-console-using-lish",
+            "quote": "You can use a terminal application to connect to a Lish SSH gateway, or you can log in to the Cloud Manager and use the Lish console in your web browser.",
             "confidence": "docs-confirmed"
           }
         }
@@ -8602,6 +8967,17 @@
             "quote": "In Lightsail, as soon as you create an instance in an AWS Region, we create a Default SSH key in that Region.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "ssh -L over real SSH",
+          "note": "Standard SSH port forwarding works because the Linode runs a normal sshd; there is no provider tunnel service to configure.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/faqs-for-compute-instances",
+            "quote": "All Linodes can be accessed through Lish and SSH (if properly configured).",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -8852,6 +9228,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-firewall-rules-reference.html",
             "quote": "A database instance needs rules that allow access for the type of database, such as access over port 3306 for MySQL.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Any port except 25/465/587",
+          "note": "Inbound and outbound TCP work on any port except the SMTP ports, which are blocked by default on some new accounts to fight spam.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/faqs-for-compute-instances",
+            "quote": "In an effort to fight spam originating from our platform, outbound connections on ports 25, 465, and 587 are blocked by default on Linodes for some new accounts.",
             "confidence": "docs-confirmed"
           }
         }
@@ -9106,6 +9493,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-dns-in-amazon-lightsail.html",
             "quote": "You can create up to six DNS zones in Lightsail.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Free DNS Manager",
+          "note": "Add the domain and its records in Cloud Manager at no charge. The account needs at least one active Linode for its records to be served.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/dns-manager",
+            "quote": "Within the DNS Manager, you can add your registered domain names and manage DNS records for each of them.",
             "confidence": "docs-confirmed"
           }
         }
@@ -9364,6 +9762,18 @@
             "quote": "Lightsail certificates and certificate management are free with use of a Lightsail load balancer.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "partly",
+          "figure": "Only some one-click apps",
+          "shortfall": "The platform issues no certificate for a port: the OpenClaw app configures Let's Encrypt, and everything else needs Certbot or Caddy installed on the server.",
+          "note": "There is no managed certificate product, load-balancer TLS or automatic renewal outside the Quick Deploy apps that bake it in.",
+          "source": {
+            "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/openclaw",
+            "quote": "The email address you want to use for generating the SSL certificates via Let’s Encrypt.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -9618,6 +10028,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-faq-data-transfer-allowance.html",
             "quote": "Every Lightsail instance plan includes a data transfer allowance.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "1-20 TB by plan",
+          "note": "Shared and G6/G7 plans include 1 TB to 20 TB a month, pooled across the account and prorated for part-months. G8 and GPU plans include none and bill all transfer.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+            "quote": "Metered outbound network transfer (egress) that includes 1 TB - 20 TB of prorated network transfer allowance",
             "confidence": "docs-confirmed"
           }
         }
@@ -9878,6 +10299,17 @@
             "quote": "they don't control the traffic that flows out of it—the firewalls allow all outbound traffic.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Outbound firewall rules",
+          "note": "Cloud Firewall rules set the allowed destinations by IP, range, port and protocol, and the default outbound policy can be Drop so only listed destinations are reachable.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/manage-firewall-rules",
+            "quote": "Outbound rules limit the outgoing network connections coming from a Akamai Cloud service based on the port(s) and destinations you configure.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -10136,6 +10568,17 @@
             "quote": "they don't control the traffic that flows out of it—the firewalls allow all outbound traffic.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Outbound policy Drop",
+          "note": "Set the firewall's outbound policy to Drop with no allow rules and the Linode cannot reach the internet; inbound rules still apply separately.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/manage-firewall-rules",
+            "quote": "Accept allows all traffic except for those defined in the listed rules, and Drop denies all traffic except for those defined in the rules.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -10383,6 +10826,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
             "quote": "we charge a small $0.005 USD/hour fee for static IPs not attached to an instance for more than 1 hour.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Static IPv4 for its life",
+          "note": "The public IPv4 is the Linode's outbound address and stays with it through reboots and resizes until the machine is deleted.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+            "quote": "Dedicated IPv4 and IPv6 addresses (additional addresses available on request)",
             "confidence": "docs-confirmed"
           }
         }
@@ -10643,6 +11097,17 @@
             "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "No secret store",
+          "note": "There is no vault and no environment-variable injection at boot beyond cloud-init user data, so keys live on the disk or in the machine's own configuration.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/add-user-data-when-deploying-a-compute-instance",
+            "quote": "User data can be provided to the Metadata service, which is then consumed by cloud-init when your Linode boots up for the first time.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -10897,6 +11362,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
             "quote": "they don't control the traffic that flows out of it—the firewalls allow all outbound traffic.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "No injection proxy",
+          "note": "Nothing sits between the machine and an API to add a key, so any credential the agent uses is readable on the machine it runs on.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/add-user-data-when-deploying-a-compute-instance",
+            "quote": "User data can be provided to the Metadata service, which is then consumed by cloud-init when your Linode boots up for the first time.",
             "confidence": "inferred"
           }
         }
@@ -11158,6 +11634,17 @@
             "quote": "Policy actions in Lightsail use the following prefix before the action: `lightsail:`.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Per-service token scopes",
+          "note": "Personal access tokens are limited per product to no access, read-only or read-write, with an expiry date, and can be revoked individually.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/manage-personal-access-tokens",
+            "quote": "For each product or service on the list, select the level of access the token should have.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -11399,6 +11886,17 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "The first time you log in to the console, choose Create Instance.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Cloud Manager",
+          "note": "Create a Linode from Cloud Manager by choosing a region, an image or Quick Deploy App, a plan, keys, firewall and user data.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/create-a-compute-instance",
+            "quote": "Log in to Cloud Manager, click the Create dropdown menu on the top bar, and select Linode.",
             "confidence": "docs-confirmed"
           }
         }
@@ -11645,6 +12143,17 @@
             "quote": "This tutorial guides you through common Amazon Lightsail operations using the AWS Command Line Interface (AWS CLI).",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "linode-cli",
+          "note": "The official CLI is generated from the OpenAPI spec and installs with pipx or pip.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+            "quote": "Linode CLI is a wrapper around the Linode API that lets you manage your Akamai Cloud account and resources from the command line.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -11889,6 +12398,17 @@
             "quote": "A low-level client representing Amazon Lightsail",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "linode_api4",
+          "note": "Official Python library, installable with pip, covering the API v4 resources.",
+          "source": {
+            "url": "https://github.com/linode/linode_api4-python",
+            "quote": "The official python library for the Linode API v4 in python.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -12130,6 +12650,17 @@
           "source": {
             "url": "https://github.com/aws/aws-sdk-js-v3/blob/main/clients/client-lightsail/README.md",
             "quote": "AWS SDK for JavaScript Lightsail Client for Node.js, Browser and React Native.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "@linode/api-v4",
+          "note": "Official JavaScript/TypeScript client published to npm; the Cloud Manager itself is built on it.",
+          "source": {
+            "url": "https://github.com/linode/manager/tree/develop/packages/api-v4",
+            "quote": "JavaScript client for the Linode APIv4",
             "confidence": "docs-confirmed"
           }
         }
@@ -12377,6 +12908,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/Welcome.html",
             "quote": "This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "REST API v4",
+          "note": "A documented OpenAPI service covering Linodes, volumes, firewalls, domains, images, backups and the rest of the account.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+            "quote": "Linode API provides the ability to programmatically manage the full range of services on Akamai Cloud.",
             "confidence": "docs-confirmed"
           }
         }
@@ -12631,6 +13173,18 @@
             "quote": "The `call_aws` tool executes any of the 15,000+ AWS API operations using your existing IAM credentials.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "partly",
+          "figure": "Official, read-only",
+          "shortfall": "The official MCP server is read-only by design, so an assistant can inspect machines, prices and limits but cannot create, start or drive one.",
+          "note": "37 curated tools plus a read-only API escape hatch, installed with uvx or pipx and authenticated with a read-only token.",
+          "source": {
+            "url": "https://github.com/akamai-developers/akamai-cloud-mcp",
+            "quote": "A read-only Model Context Protocol server for Akamai Cloud (Linode).",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -12878,6 +13432,17 @@
             "quote": "This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "No PTY endpoint",
+          "note": "Console access is Lish over an SSH gateway or in the browser; the API has no endpoint that opens an interactive terminal session.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/access-your-system-console-using-lish",
+            "quote": "You can use a terminal application to connect to a Lish SSH gateway, or you can log in to the Cloud Manager and use the Lish console in your web browser.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -13121,6 +13686,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-connecting-to-linux-unix-instance-using-sftp.html",
             "quote": "You can transfer files between your local computer and your Linux or Unix instance in Amazon Lightsail by connecting to your instance using SFTP (SSH File Transfer Protocol).",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "No file endpoint",
+          "note": "Files move over SSH, SFTP or a mounted volume. The API manages disks and images, not individual files inside a running Linode.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/manage-disks-on-a-compute-instance",
+            "quote": "The storage space on a Linode can be allocated to individual disks. Disks can be used to store any data, including the operating system, applications, and files.",
             "confidence": "inferred"
           }
         }
@@ -13376,6 +13952,18 @@
             "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "partly",
+          "figure": "Hermes/OpenClaw apps only",
+          "shortfall": "The default images ship no coding agent; Hermes and OpenClaw come as one-click apps, and Claude Code or Codex you install and configure yourself.",
+          "note": "The Quick Deploy catalogue also carries Opencode, NemoClaw and other agent frameworks, all as separate deployments rather than a default image.",
+          "source": {
+            "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/hermes",
+            "quote": "Deploy Hermes Agent, an open source AI agent platform that executes tasks through a persistent gateway connecting communication channels, tools, and AI models.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -13620,6 +14208,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
             "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "No prompt endpoint",
+          "note": "A Linode is a server you administer, not a harness that takes a prompt. Akamai Agent Sandbox is a different product on Akamai Functions and does not run your agent for you.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+            "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
             "confidence": "inferred"
           }
         }
@@ -13867,6 +14466,17 @@
             "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Hermes Quick Deploy app",
+          "note": "Deployed from Cloud Manager in 5-10 minutes with a sudo user and optional DNS records. Model keys and channel pairing are still yours to add.",
+          "source": {
+            "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/hermes",
+            "quote": "Deploy Hermes Agent, an open source AI agent platform that executes tasks through a persistent gateway connecting communication channels, tools, and AI models.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -14110,6 +14720,17 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "OpenClaw Quick Deploy app",
+          "note": "Deploys OpenClaw with a limited user and an HTTPS dashboard protected by HTPASSWD, with optional Let's Encrypt and DNS. Pairing WhatsApp or Telegram and adding model keys remain terminal work.",
+          "source": {
+            "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/openclaw",
+            "quote": "This app allows you to connect to the OpenClaw dashboard via a secure HTTPS endpoint protected by HTPASSWD and creates a limited user on the system named openclaw.",
             "confidence": "docs-confirmed"
           }
         }
@@ -14357,6 +14978,17 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/faq/",
             "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "Nothing preinstalled",
+          "note": "Distribution images are bare, with no desktop and no browser. A browser agent means installing Chromium and its driver yourself, or using a GPU/desktop plan.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/access-your-desktop-environment-using-glish",
+            "quote": "Distribution images do not have any desktop environments pre-installed.",
             "confidence": "docs-confirmed"
           }
         }
@@ -14609,6 +15241,18 @@
             "quote": "Lightsail offers a 1-click secure connection to your instance's terminal right from your browser, supporting SSH access for Linux/Unix-based instances and RDP access for Windows-based instances.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "partly",
+          "figure": "Glish, after you install one",
+          "shortfall": "Glish shows a desktop in the browser, but you install the desktop environment and everything on it yourself; nothing is ready for a computer-use agent.",
+          "note": "Glish reads the tty1 console over the virtual VGA device and is enabled by default, so a desktop you install is reachable without VNC setup.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/access-your-desktop-environment-using-glish",
+            "quote": "It lets you run a desktop environment on your Linode and access it through Cloud Manager.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -14855,6 +15499,16 @@
             "quote": "If you're an individual developer or hobbyist working on a personal project, Lightsail can help you deploy and manage basic cloud resources.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "not-published",
+          "note": "No agent platform documents Akamai Cloud as its host. OpenClaw's own install index covers DigitalOcean, Hetzner, Hostinger, GCP, Azure and Oracle but has no Linode page; Akamai supplies its own OpenClaw app instead.",
+          "source": {
+            "url": "https://docs.openclaw.ai/llms.txt",
+            "quote": "- [DigitalOcean](https://docs.openclaw.ai/install/digitalocean): Host OpenClaw on a DigitalOcean Droplet",
+            "confidence": "not-published"
+          }
         }
       ]
     },
@@ -15098,6 +15752,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-managing-access-for-an-iam-user.html",
             "quote": "you can create one or more IAM users in your AWS account, and those users can be configured with different levels of access to services offered by AWS.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Users share one account",
+          "note": "An account holds the machines, billing and tokens, and additional users get their own login rather than sharing the owner's.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/identity-and-access-cm",
+            "quote": "You can use Identity and Access in Akamai Cloud to manage identities within an account and manage operations that those identities may perform.",
             "confidence": "docs-confirmed"
           }
         }
@@ -15347,6 +16012,17 @@
             "quote": "You do this when someone joins your team who requires access to view, create, edit, or delete Lightsail resources but doesn’t need access to other services offered by AWS.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "RBAC roles per service",
+          "note": "Fine-grained permissions are grouped into predefined roles and assigned to users, and are natively enabled for Linodes, firewalls, volumes, images, NodeBalancers and VPCs.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/identity-and-access-cm",
+            "quote": "Identity and Access uses the role-based access control (RBAC) model to authorize operations on entities.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -15590,6 +16266,17 @@
           "source": {
             "url": "https://aws.amazon.com/iam/identity-center/",
             "quote": "Give your workforce single sign-on access and a consistent experience across AWS services.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "SAML 2.0",
+          "note": "One identity provider per account, configured through the API, with optional enforcement and break-glass accounts excluded from SSO.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/single-sign-on-cm",
+            "quote": "Use Linode API to configure single sign-on (SSO) with federated identity providers through SAML 2.0.",
             "confidence": "docs-confirmed"
           }
         }
@@ -15838,6 +16525,17 @@
             "quote": "You can choose to be alerted for both actual (after accruing) and forecasted (before accruing) spends.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "No hard cap",
+          "note": "Nothing stops the account at a dollar figure: every service on the account bills until it is deleted, and the only threshold is a mid-month invoice at the credit limit ($50 to start).",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/billing-faqs",
+            "quote": "You pay for any service on your account, even if it's inactive or powered off. To stop additional charges, delete the service.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -16081,6 +16779,18 @@
           "source": {
             "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
             "quote": "You can choose to be alerted for both actual (after accruing) and forecasted (before accruing) spends.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "partly",
+          "figure": "Resource alerts, not money",
+          "shortfall": "Alerts cover CPU, disk and transfer thresholds, not spending: there is no billing alert that warns when the month's cost passes an amount you set.",
+          "note": "Transfer use also triggers email at 80%, 90% and 100% of the pool. Akamai Cloud Pulse adds custom metrics and notification channels, still for resource use.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/configure-email-alerts-for-resource-usage-on-compute-instances",
+            "quote": "Cloud Manager allows you to configure alerts that automatically notify you through email if certain performance thresholds are reached.",
             "confidence": "docs-confirmed"
           }
         }
@@ -16331,6 +17041,17 @@
             "quote": "CloudTrail captures all API calls for Lightsail as events.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Control-plane, streamed",
+          "note": "Create, update, delete, clone and resize events are recorded with who, what and when, but you must configure a log stream to a bucket or HTTPS endpoint to read them.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/linodes-audit-logs",
+            "quote": "Audit logs are time-stamped records that document events, actions, and changes within a service. They show what happened, who initiated the action, when it occurred",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -16576,6 +17297,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
             "quote": "Bundles are billed on an on-demand hourly rate, so you pay only for what you use.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "Hourly, rounded up",
+          "note": "There is no per-second meter: usage is rounded up to the nearest hour for each service, so a ten-minute machine bills an hour.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+            "quote": "Usage is always rounded up to the nearest hour.",
             "confidence": "docs-confirmed"
           }
         }
@@ -16839,6 +17571,17 @@
             "quote": "For every Lightsail plan you use, we charge you the fixed hourly price, up to the maximum monthly plan cost.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "Billed while it exists",
+          "note": "The whole plan is reserved and billed whether the CPU is busy or idle; only deleting the Linode ends the charge.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+            "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -17091,6 +17834,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
             "quote": "These resources accrue charges even when they are in the stopped state.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "Off bills in full",
+          "note": "There is no stopped-storage rate. A powered-off Linode bills the same hourly rate as a running one, up to the monthly cap.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+            "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
             "confidence": "docs-confirmed"
           }
         }
@@ -17351,6 +18105,17 @@
             "quote": "Lightsail plans are billed on an on-demand hourly rate, so you pay only for what you use.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "No plan fee",
+          "note": "Nothing is charged for having the account: each service bills from creation to deletion, and a machine deleted after 90 hours bills 90 hours.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+            "quote": "If you use a service for part of a month, you're charged only for the time it remains on your account.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -17609,6 +18374,17 @@
             "url": "https://aws.amazon.com/lightsail/pricing/",
             "quote": "Lightsail bundles resources like memory, vCPU, and solid-state drive (SSD) storage into one plan, so budgeting is easy and straightforward.",
             "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "$24 for 2 vCPU / 4 GiB",
+          "note": "The monthly cap is the flat price for an always-on machine: $24 for Linode 4 GB, $48 for Linode 8 GB, $5 for the Nanode. G8 plans have no cap.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+            "quote": "You're never billed more than the monthly rate for each service, excluding network transfer overages.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -17872,6 +18648,17 @@
             "quote": "Lightsail’s short-term free trial offers have been replaced by the AWS Free Tier.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "No ongoing free tier",
+          "note": "There is no allowance that renews each month. The only free money is a one-off promotional credit that expires, and unused credit is lost.",
+          "source": {
+            "url": "https://www.akamai.com/lp/free-credit-100",
+            "quote": "You must spend your service credits during the trial period.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -18132,6 +18919,17 @@
             "quote": "you can get started with Amazon Lightsail for free with the AWS Free Tier where you can get up to $200 USD in free AWS credits.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "$100 for 60 days",
+          "note": "New customers only, GPU plans excluded, and the credit expires with the trial window. The pricing page's FAQ uses a 60-day example.",
+          "source": {
+            "url": "https://www.akamai.com/lp/free-credit-100",
+            "quote": "Try Akamai Cloud with a US$100 Credit",
+            "confidence": "pricing-page"
+          }
         }
       ]
     },
@@ -18387,6 +19185,17 @@
             "quote": "AWS sign-up requires that you have a valid credit card on file.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "Card required",
+          "note": "Email, Google or GitHub creates the account, but a valid payment method is required before the trial starts, even though it is not charged during it.",
+          "source": {
+            "url": "https://www.akamai.com/lp/free-credit-100",
+            "quote": "A valid payment method is required to confirm your identity, but we will not charge you during your trial.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -18628,6 +19437,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/health/latest/ug/what-is-aws-health.html",
             "quote": "All customers can use the AWS Health Dashboard, powered by the AWS Health API. The dashboard requires no setup, and it's ready to use for authenticated AWS users.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "status.linode.com",
+          "note": "Per-data-centre components, incident history, an RSS feed and email or SMS subscriptions.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/subscribe-to-status-updates",
+            "quote": "The Linode Status page provides real-time system status and maintenance updates via email.",
             "confidence": "docs-confirmed"
           }
         }
@@ -18876,6 +19696,17 @@
           "source": {
             "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/",
             "quote": "AWS will use commercially reasonable efforts to make the Single Lightsail Instance available with an Instance-Level Uptime Percentage, as shown in the table below during any monthly billing cycle",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "99.99% monthly",
+          "note": "A pro-rata service credit, requested within 30 days, for Dedicated, High Memory, Nanode and Standard compute. Limited-availability plans carry 99%.",
+          "source": {
+            "url": "https://www.akamai.com/legal/sla-compute",
+            "quote": "We guarantee (i) 99.99% monthly uptime for Covered Services in general availability and (ii) 99% monthly uptime for Covered instances in limited availability",
             "confidence": "docs-confirmed"
           }
         }
@@ -19129,6 +19960,17 @@
             "quote": "AWS SOC 2 Security, Availability, Confidentiality, & Privacy Report available to AWS customers from AWS Artifact.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "SOC 2 Type 2 on request",
+          "note": "The DPA commits Akamai to supply its current SOC 2 Type 2 report and selected policies to customers on request; the report itself sits behind the trust centre.",
+          "source": {
+            "url": "https://www.akamai.com/site/en/documents/corporate/akamai-data-protection-addendum.pdf",
+            "quote": "Upon request, Akamai shall deliver to Customer relevant compliance documentation from such audit(s) (e.g., Akamai’s then-current SOC 2 Type 2 (or its successor) report)",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -19369,6 +20211,17 @@
           "source": {
             "url": "https://aws.amazon.com/service-terms/",
             "quote": "These Service Terms incorporate the AWS Data Processing Addendum (“DPA”), when you use AWS Services to process Customer Data (as defined in the DPA).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "yes",
+          "figure": "Published DPA",
+          "note": "The DPA is incorporated into the terms, covers sub-processors and audits, and lets the customer audit once a year at Akamai's rates.",
+          "source": {
+            "url": "https://www.akamai.com/site/en/documents/corporate/akamai-data-protection-addendum.pdf",
+            "quote": "This Data Processing Agreement (this “DPA”) is incorporated into and made a part of the most recent Terms & Conditions in effect between Akamai and a legal entity that has purchased Services from Akamai",
             "confidence": "docs-confirmed"
           }
         }
@@ -19618,6 +20471,17 @@
           "source": {
             "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/what-is-amazon-lightsail.html",
             "quote": "Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for anyone who needs to build websites or web applications.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "linode",
+          "verdict": "no",
+          "figure": "Hosted service only",
+          "note": "Akamai Cloud is a hosted platform; no self-hostable distribution of the compute service is published. Some surrounding tools (the CLI, the SDKs, the MCP server) are open source, which is not the same thing.",
+          "source": {
+            "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+            "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
             "confidence": "inferred"
           }
         }

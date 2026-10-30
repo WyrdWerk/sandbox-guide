@@ -2,6 +2,19 @@
   "changes": [
     {
       "date": "2026-10-30",
+      "title": "Akamai Cloud (Linode) added: hourly VMs with one-click Hermes and OpenClaw",
+      "provider": "linode",
+      "what": "This guide now lists Akamai Cloud, still called Linode in its plans, API and console. Machines bill by the hour, rounded up, up to a monthly cap, and keep billing while powered off. Hermes Agent and OpenClaw have Quick Deploy apps. The date is when this guide checked it, not a launch date.",
+      "sources": [
+        {
+          "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+          "quote": "Most paid services offered on Akamai Cloud have predictable monthly rates, also called the monthly caps, alongside flexible hourly rates.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
       "title": "Amazon Lightsail added: fixed-price AWS servers billed by the hour",
       "provider": "lightsail",
       "what": "This guide now lists Amazon Lightsail, AWS's bundle-priced virtual servers. Bundles run from $5 to $1,764 a month, are billed per hour up to that cap, and keep billing while stopped. The date is when this guide checked it, not a launch date.",

@@ -325,6 +325,18 @@
         "quote": "Lightsail certificates and certificate management are free with use of a Lightsail load balancer.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "linode",
+      "verdict": "partly",
+      "figure": "Free DNS; HTTPS is yours",
+      "scenario": "Point the domain at the Linode with the free DNS Manager, then install Caddy or Certbot yourself; only some one-click apps add a certificate.",
+      "note": "DNS Manager is free but needs at least one active Linode on the account. The platform issues no certificate for a port: the OpenClaw Quick Deploy App adds Let's Encrypt, everything else is your own proxy.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/dns-manager",
+        "quote": "Within the DNS Manager, you can add your registered domain names and manage DNS records for each of them.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Path to your domain",
