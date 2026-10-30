@@ -1,0 +1,1804 @@
+[
+  {
+    "id": "xcloud-openclaw",
+    "agent": "openclaw",
+    "name": "xCloud OpenClaw hosting",
+    "url": "https://xcloud.host/openclaw-hosting/",
+    "hostingModel": "Fully managed dedicated Cloud VPS with OpenClaw preinstalled (provider provisions, patches and restores the server)",
+    "whatYouGet": "One-click OpenClaw deploy on a dedicated xCloud Managed Cloud VPS, Telegram connected during setup, free SSL, security patching, monitoring, one-click restore/reinstall, 30+ server locations, 24/7 support. The server runs only OpenClaw. AI provider key is supplied by the customer. Docs list supported providers as Anthropic (API key or Claude Code CLI token), OpenAI, OpenRouter, Moonshot AI (Kimi) and Gemini.",
+    "machineSizes": [
+      "6 GB RAM, 4 vCPU cores, 100 GB NVMe SSD, 30 TB bandwidth",
+      "16 GB RAM, 6 vCPU cores, 200 GB NVMe SSD, 30 TB bandwidth",
+      "24 GB RAM, 8 vCPU cores, 300 GB NVMe SSD, 30 TB bandwidth",
+      "48 GB RAM, 12 vCPU cores, 400 GB NVMe SSD, 30 TB bandwidth",
+      "64 GB RAM, 16 vCPU cores, 500 GB NVMe SSD, 30 TB bandwidth",
+      "120 GB RAM, 24 vCPU cores, 600 GB NVMe SSD, 30 TB bandwidth"
+    ],
+    "chatApps": "Telegram connected out of the box; the marketing page and FAQ say Telegram and WhatsApp work out of the box, while the deployment documentation says Telegram is the only built-in messaging platform today",
+    "plans": [
+      {
+        "name": "Cloud VPS 6GB",
+        "price": "$9.99",
+        "currency": "USD",
+        "term": "monthly (introductory rate)",
+        "renewal": "Renews at $19.99/mo",
+        "billingNote": "Introductory rate, not a trial; cancel anytime"
+      },
+      {
+        "name": "Cloud VPS 16GB",
+        "price": "$19.99",
+        "currency": "USD",
+        "term": "monthly (introductory rate)",
+        "renewal": "Renews at $39.99/mo",
+        "billingNote": "Page also shows the struck-through list price $39.99 and 'Save 50%'"
+      },
+      {
+        "name": "Cloud VPS 24GB",
+        "price": "$29.99",
+        "currency": "USD",
+        "term": "monthly (introductory rate)",
+        "renewal": "Renews at $49.99/mo"
+      },
+      {
+        "name": "Cloud VPS 48GB",
+        "price": "$54.99",
+        "currency": "USD",
+        "term": "monthly (introductory rate)",
+        "renewal": "Renews at $95.00/mo"
+      },
+      {
+        "name": "Cloud VPS 64GB",
+        "price": "$74.99",
+        "currency": "USD",
+        "term": "monthly (introductory rate)",
+        "renewal": "Renews at $125.00/mo"
+      },
+      {
+        "name": "Cloud VPS 120GB",
+        "price": "$141.99",
+        "currency": "USD",
+        "term": "monthly (introductory rate)",
+        "renewal": "Renews at $225.00/mo"
+      }
+    ],
+    "usageLimits": "No execution or agent limits published; the server is dedicated and unlimited agents are listed as a plan feature. Bandwidth is 30 TB on every OpenClaw size. On cancellation, 'you are charged for server usage up to that date plus up to a 10% Stripe fee on the used amount.'",
+    "bringYourOwnModelKey": "yes",
+    "freeTrial": "not published for the OpenClaw product (the general xCloud hosting pages advertise a free start, but no OpenClaw free trial is stated on the OpenClaw page)",
+    "operatedBy": "xCloud Hosting, LLC, United States (page JSON-LD legal name and postal address in Milton, Delaware)",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://xcloud.host/openclaw-hosting/",
+        "quote": "Fully managed OpenClaw hosting from $9.99/mo. Your AI assistant live on Telegram and WhatsApp in about 5 minutes — no Docker, no terminal, no SSH.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://xcloud.host/openclaw-hosting/",
+        "quote": "OpenClaw on Cloud VPS 6GB",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "JSON-LD offer block on the same page; description reads 'One always-on agent. 6 GB RAM, 4 vCPU cores, 100 GB NVMe SSD, 30 TB bandwidth. Introductory rate, Renews at $19.99/mo. Cancel anytime.' with price 9.99"
+      },
+      {
+        "url": "https://xcloud.host/openclaw-hosting/",
+        "quote": "Room for tooling and browser work. 16 GB RAM, 6 vCPU cores, 200 GB NVMe SSD, 30 TB bandwidth. Introductory rate, Renews at $39.99/mo. Cancel anytime.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Offer price 19.99 for OpenClaw on Cloud VPS 16GB"
+      },
+      {
+        "url": "https://xcloud.host/openclaw-hosting/",
+        "quote": "Heavier, long-running workloads. 24 GB RAM, 8 vCPU cores, 300 GB NVMe SSD, 30 TB bandwidth. Introductory rate, Renews at $49.99/mo. Cancel anytime.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Offer price 29.99"
+      },
+      {
+        "url": "https://xcloud.host/openclaw-hosting/",
+        "quote": "Several agents side by side. 48 GB RAM, 12 vCPU cores, 400 GB NVMe SSD, 30 TB bandwidth. Introductory rate, Renews at $95.00/mo. Cancel anytime.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Offer price 54.99"
+      },
+      {
+        "url": "https://xcloud.host/openclaw-hosting/",
+        "quote": "Team-scale automation. 64 GB RAM, 16 vCPU cores, 500 GB NVMe SSD, 30 TB bandwidth. Introductory rate, Renews at $125.00/mo. Cancel anytime.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Offer price 74.99"
+      },
+      {
+        "url": "https://xcloud.host/openclaw-hosting/",
+        "quote": "The top of the ladder. 120 GB RAM, 24 vCPU cores, 600 GB NVMe SSD, 30 TB bandwidth. Introductory rate, Renews at $225.00/mo. Cancel anytime.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Offer price 141.99"
+      },
+      {
+        "url": "https://xcloud.host/openclaw-hosting/",
+        "quote": "Telegram and WhatsApp work out of the box. Discord, Slack, and Signal support are on the roadmap for Q2 2026.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://xcloud.host/openclaw-hosting/",
+        "quote": "You bring your own provider API key.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://xcloud.host/openclaw-hosting/",
+        "quote": "on cancellation you are charged for server usage up to that date plus up to a 10% Stripe fee on the used amount.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://xcloud.host/openclaw-hosting/",
+        "quote": "\"legalName\":\"xCloud Hosting, LLC\"",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29",
+        "note": "JSON-LD organization block; addressCountry US, Milton, Delaware"
+      },
+      {
+        "url": "https://xcloud.host/docs/how-to-deploy-openclaw-with-xcloud/",
+        "quote": "Right now, xCloud allows you to connect to one built-in messaging platform: ‘Telegram’.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://xcloud.host/docs/how-to-deploy-openclaw-with-xcloud/",
+        "quote": "OpenClaw requires at least 4 GB RAM",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://xcloud.host/docs/how-to-deploy-openclaw-with-xcloud/",
+        "quote": "Yes, you need to bring your own AI provider API key such as OpenAI, Anthropic, Claude Code, OpenAI, or others.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://xcloud.host/openclaw-hosting/",
+        "quote": "One always-on agent. 6 GB RAM, 4 vCPU cores, 100 GB NVMe SSD, 30 TB bandwidth. Introductory rate, Renews at $19.99/mo. Cancel anytime.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "JSON-LD offer description for the $9.99 6 GB plan; present in the page HTML, not the visible plan card"
+      }
+    ],
+    "usecase": "openclaw",
+    "what": "Managed Cloud VPS with OpenClaw preinstalled, Telegram connected, bring-your-own AI key, 30+ regions.",
+    "price": {
+      "cheapestOngoingMonthly": "$9.99 intro, renews at $19.99",
+      "currency": "USD",
+      "term": "monthly",
+      "note": "Introductory rate on the 6 GB plan; all six sizes are intro-priced and renew higher."
+    },
+    "catch": "The cheap rate is temporary and doubles at renewal; the deployment docs say Telegram is the only built-in channel while the marketing page claims WhatsApp, and xCloud labels OpenClaw support a limited beta.",
+    "source": {
+      "url": "https://xcloud.host/openclaw-hosting/",
+      "quote": "One always-on agent. 6 GB RAM, 4 vCPU cores, 100 GB NVMe SSD, 30 TB bandwidth. Introductory rate, Renews at $19.99/mo. Cancel anytime.",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "openclawai-cloud",
+    "agent": "openclaw",
+    "name": "OpenClaw Cloud (openclawai.io)",
+    "url": "https://openclawai.io/cloud",
+    "hostingModel": "Managed cloud hosting operated by a third party on the open-source OpenClaw code; the site states it is not the official OpenClaw",
+    "whatYouGet": "Sign up, connect a chat app and the agent runs 24/7. Includes managed SSL, sandboxed execution (Firecracker microVMs), auto-updates, one-click Google/Notion/GitHub OAuth integrations, team RBAC, cron/heartbeats and multi-agent orchestration. AI models are supplied through a unified credit system rather than the customer's own key.",
+    "machineSizes": "not published (no CPU, RAM or disk figures are stated on the plan cards)",
+    "chatApps": "WhatsApp, Telegram, Slack and more; Starter includes 3 chat channels, Pro includes 10 chat channels",
+    "plans": [
+      {
+        "name": "Starter",
+        "price": "$19.9",
+        "currency": "USD",
+        "term": "monthly (page has a Monthly/Yearly toggle with 'Save 32%', but no annual price is printed in the page text)",
+        "renewal": "not published",
+        "billingNote": "Includes 'Baseline AI credits (~$5 API value)', 3 chat channels, 1 agent, all 55+ built-in skills, community support"
+      },
+      {
+        "name": "Pro",
+        "price": "$39.9",
+        "currency": "USD",
+        "term": "monthly (same Monthly/Yearly toggle)",
+        "renewal": "not published",
+        "billingNote": "Includes '4× AI credits (~$20 API value)', 10 chat channels, 5 agents + parallel, analytics and cron jobs, priority support"
+      }
+    ],
+    "usageLimits": "Plan-level limits only: agents, chat channels and monthly AI credits. No execution or message caps are published.",
+    "bringYourOwnModelKey": "no",
+    "freeTrial": "no free trial; '3-day money-back guarantee · Cancel anytime · No questions asked'",
+    "operatedBy": "OpenClaw AI; terms are governed by the laws of the State of Delaware, United States, and the site says the service is an independent deployment",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://openclawai.io/cloud",
+        "quote": "Plans from $19.9/mo · 3-day money-back guarantee · Cancel anytime",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://openclawai.io/cloud",
+        "quote": "Monthly Yearly Save 32%",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Annual prices are not printed in the page text; only the discount percentage"
+      },
+      {
+        "url": "https://openclawai.io/cloud",
+        "quote": "$19.9 /mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Starter card; plan features 'Baseline AI credits (~$5 API value)', '3 chat channels, 1 agent'"
+      },
+      {
+        "url": "https://openclawai.io/cloud",
+        "quote": "$39.9 /mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Pro card; plan features '4× AI credits (~$20 API value)', '10 chat channels, 5 agents + parallel'"
+      },
+      {
+        "url": "https://openclawai.io/cloud",
+        "quote": "Claude, GPT, Gemini, and local models — all accessible through a unified credit system. Switch models per task without managing separate API keys.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://openclawai.io/cloud",
+        "quote": "No. OpenClaw Cloud is an independent deployment built on the official open-source code. Some of our team members are active contributors to the OpenClaw project.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://openclawai.io/cloud",
+        "quote": "What's the money-back guarantee policy?",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29",
+        "note": "Answer text: 'Full refund within 3 days, no questions asked, same-day processing.'"
+      },
+      {
+        "url": "https://openclawai.io/terms",
+        "quote": "These Terms shall be governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to its conflict of law provisions.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      }
+    ],
+    "usecase": "openclaw",
+    "what": "Managed OpenClaw Cloud with AI credits included, 3 chat channels and 1 agent on Starter.",
+    "price": {
+      "cheapestOngoingMonthly": "$19.9",
+      "currency": "USD",
+      "term": "monthly",
+      "note": "Yearly toggle advertises 'Save 32%' but no annual figure is printed."
+    },
+    "catch": "AI is a closed credit system with no bring-your-own-key option, the annual price is only a discount claim, and the operator states it is not the official OpenClaw.",
+    "source": {
+      "url": "https://openclawai.io/cloud",
+      "quote": "$19.9 /mo",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "hostinger-openclaw",
+    "agent": "openclaw",
+    "name": "Hostinger 1-click OpenClaw",
+    "url": "https://www.hostinger.com/openclaw",
+    "hostingModel": "Managed container on Hostinger infrastructure (the page contrasts it with its own self-managed OpenClaw VPS plans)",
+    "whatYouGet": "1-click OpenClaw deployment with no setup, maintenance or infrastructure work, visual agent management, CLI access, Telegram pairing, pre-configured AI credits, web search, an agentic mailbox, managed security and 24/7 support. Credits are bought from the Hostinger dashboard; no external AI provider account is required.",
+    "machineSizes": "not published (no CPU, RAM or disk figures appear on the OpenClaw page)",
+    "chatApps": "Telegram and WhatsApp setup described in the deploy steps; the FAQ also lists Slack and Discord",
+    "plans": [
+      {
+        "name": "AI automation apps (single OpenClaw plan shown)",
+        "price": "$4.99",
+        "currency": "USD",
+        "term": "monthly rate on a 24-month prepaid term (Black Friday intro offer, 'Up to 77% off'); the page states 'All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.'",
+        "renewal": "Renews at $11.99/mo for the same term",
+        "billingNote": "Today you pay $119.76 for 24 months. The struck-through regular price is $21.99/mo."
+      }
+    ],
+    "usageLimits": "not published (no execution, message or credit-volume limits are stated; AI credits are purchased and topped up from the dashboard)",
+    "bringYourOwnModelKey": "no",
+    "freeTrial": "no free trial; 30-day money-back guarantee",
+    "operatedBy": "HOSTINGER INTERNATIONAL LIMITED, a Cyprus private limited company registered in Larnaca, Cyprus (contracting entity named in the Hostinger terms of service)",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://www.hostinger.com/openclaw",
+        "quote": "From ~$21.99~$4.99/mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.hostinger.com/openclaw",
+        "quote": "Today you pay $119.76 for 24 months. Renews at $11.99/mo for the same term. Cancel anytime.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.hostinger.com/openclaw",
+        "quote": "All plans are paid upfront. The monthly rate reflects the total plan price divided by the number of months in your plan.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.hostinger.com/openclaw",
+        "quote": "Your AI credits come pre-integrated and ready to use right out of the box. Unlike a standard OpenClaw setup, you don't need to create accounts with AI providers like OpenAI or Anthropic, generate API keys, or handle any technical configuration.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.hostinger.com/openclaw",
+        "quote": "Try it risk-free with our 30-day money-back guarantee.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.hostinger.com/openclaw",
+        "quote": "You can connect it to your favorite messaging apps — including WhatsApp, Telegram, Slack, and Discord — and use it to automate daily tasks",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.hostinger.com/openclaw",
+        "quote": "1-click OpenClaw is designed for people who have never touched a server in their life.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.hostinger.com/legal/universal-terms-of-service-agreement",
+        "quote": "HOSTINGER INTERNATIONAL LIMITED, Cyprus private limited company, registered address 61 Lordou Vironos str., 6023 Larnaca, Cyprus",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29",
+        "note": "Quoted clause applies to countries not otherwise listed, including EU countries; the US contracting entity was not separately read"
+      }
+    ],
+    "usecase": "openclaw",
+    "what": "1-click managed OpenClaw container with preloaded AI credits, Telegram pairing and no server work.",
+    "price": {
+      "cheapestOngoingMonthly": "$4.99 on a 24-month prepaid term, renews at $11.99",
+      "currency": "USD",
+      "term": "24 months paid upfront ($119.76 today)",
+      "note": "Regular struck-through price is $21.99/mo."
+    },
+    "catch": "The headline rate needs $119.76 upfront for two years, no CPU/RAM is published, and AI credits are bought from Hostinger rather than using your own key.",
+    "source": {
+      "url": "https://www.hostinger.com/openclaw",
+      "quote": "Today you pay $119.76 for 24 months. Renews at $11.99/mo for the same term. Cancel anytime.",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "oneclickclaw-openclaw",
+    "agent": "openclaw",
+    "name": "OneClickClaw",
+    "url": "https://oneclickclaw.io/openclaw",
+    "hostingModel": "Fully managed dedicated EU server (Denmark) provisioned through Webdock, with OpenClaw installed and secured",
+    "whatYouGet": "One-click OpenClaw deploy on a dedicated, single-tenant Ubuntu server in Denmark, 24/7 health monitoring every 5 minutes, snapshots before updates, daily backups, SSL, custom domain, optional free SSH, dashboard start/stop/reboot, optional local LLM on Hobbyist and Pro, and AI-powered support with 25 credits/month.",
+    "machineSizes": [
+      "Starter: 2 vCPU, 4 GB DDR4 RAM, 15 GB NVMe SSD, 2 TB bandwidth",
+      "Hobbyist: 4 vCPU, 8 GB DDR4 RAM, 25 GB NVMe SSD, 5 TB bandwidth",
+      "Pro: 8 vCPU, 16 GB DDR4 RAM, 40 GB NVMe SSD, 9 TB bandwidth"
+    ],
+    "chatApps": "Telegram, WhatsApp, Discord, Web Chat",
+    "plans": [
+      {
+        "name": "Starter",
+        "price": "€14.99",
+        "currency": "EUR",
+        "term": "monthly",
+        "renewal": "same price (cancel anytime)",
+        "billingNote": "Annual: €149.88/year, a €12.49/month equivalent, saving €30.00/year"
+      },
+      {
+        "name": "Hobbyist",
+        "price": "€25.99",
+        "currency": "EUR",
+        "term": "monthly",
+        "renewal": "same price (cancel anytime)",
+        "billingNote": "Annual: €251.88/year, a €20.99/month equivalent, saving €60.00/year"
+      },
+      {
+        "name": "Pro",
+        "price": "€49.99",
+        "currency": "EUR",
+        "term": "monthly",
+        "renewal": "same price (cancel anytime)",
+        "billingNote": "Annual: €479.88/year, a €39.99/month equivalent, saving €120.00/year. Prices exclude VAT."
+      }
+    ],
+    "usageLimits": "One OpenClaw instance per plan; bandwidth 2-9 TB depending on tier; AI-powered support 25 credits per month (active for 30 days). No execution limits published.",
+    "bringYourOwnModelKey": "yes",
+    "freeTrial": "yes - 7-day free trial on a dedicated Starter server, Google account only, no credit card; the server and its data are removed at the end of day 7 if no payment method is added",
+    "operatedBy": "OneClickClaw; the terms are governed by the laws of Greece, with Athens courts named, and hosting is in Denmark via Webdock (the operating company name is not published)",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://oneclickclaw.io/openclaw",
+        "quote": "Your own OpenClaw agent on a dedicated EU server, live in under 10 minutes. Fully managed, BYOK so it stays portable, and optional advanced controls for power users. Free for 7 days. No credit card, just a Google account to start.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://oneclickclaw.io/openclaw",
+        "quote": "7-day free trial, just a Google account to start",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://oneclickclaw.io/openclaw",
+        "quote": "Every new customer gets a 7-day free trial on a real, dedicated Starter server. Add a payment method any time in those 7 days and your server carries on exactly as you left it. At the end of day 7 the server and its data are removed, so add one before then to keep what you built.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://oneclickclaw.io/openclaw",
+        "quote": "Yes, you bring your own key (BYOK) from Anthropic, OpenAI, or any provider supported by OpenClaw (25+ providers, 780+ models).",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://oneclickclaw.io/openclaw",
+        "quote": "Optional SSH access (free, opt-in)",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://oneclickclaw.io/openclaw",
+        "quote": "2 vCPU cores",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Starter card specs; the same card shows '4GB DDR4 RAM', '15GB NVMe SSD', '2TB bandwidth' and 'then €14.99/mo'"
+      },
+      {
+        "url": "https://oneclickclaw.io/openclaw",
+        "quote": "Billed at €251.88/year",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Hobbyist card; the same card shows '€25.99/mo' and 'Save €60.00/year'"
+      },
+      {
+        "url": "https://oneclickclaw.io/openclaw",
+        "quote": "Billed at €479.88/year",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Pro card; the same card shows '€49.99/mo' and 'Save €120.00/year'"
+      },
+      {
+        "url": "https://oneclickclaw.io/terms",
+        "quote": "These Terms are governed by and construed in accordance with the laws of **Greece**",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://oneclickclaw.io/terms",
+        "quote": "| Starter | €14.99/month | 2 vCPU / 4GB RAM / 15GB NVMe |",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Monthly plan table; Hobbyist €25.99/month and Pro €49.99/month follow in the same table"
+      },
+      {
+        "url": "https://oneclickclaw.io/terms",
+        "quote": "| Starter | €12.49/month | €149.88/year | Save €30.00/year |",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Annual plan table; Hobbyist €20.99/month and Pro €39.99/month follow in the same table"
+      },
+      {
+        "url": "https://oneclickclaw.io/terms",
+        "quote": "Each person may start one free trial of each product we offer, OpenClaw and Hermes Agent, so you can try either one or both.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      }
+    ],
+    "usecase": "openclaw",
+    "what": "Dedicated single-tenant EU server in Denmark with OpenClaw installed, monitoring, backups and optional SSH.",
+    "price": {
+      "cheapestOngoingMonthly": "€14.99",
+      "currency": "EUR",
+      "term": "monthly",
+      "note": "€12.49/mo equivalent on annual billing (€149.88/year); prices exclude VAT."
+    },
+    "catch": "Prices exclude VAT, the entry plan is 4 GB RAM and 15 GB disk, and the 7-day trial server is deleted if no payment method is added.",
+    "source": {
+      "url": "https://oneclickclaw.io/terms",
+      "quote": "| Starter | €14.99/month | 2 vCPU / 4GB RAM / 15GB NVMe |",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "hostimul-openclaw",
+    "agent": "openclaw",
+    "name": "Hostimul OpenClaw Hosting",
+    "url": "https://hostimul.com/openclaw-hosting",
+    "hostingModel": "Managed private container per customer; Hostimul runs the infrastructure",
+    "whatYouGet": "One-click deploy of a private OpenClaw instance, managed security updates and backups, built-in web browsing, a dedicated agent mailbox, dashboard plus CLI access and 24/7 support. The customer connects their own OpenAI, Anthropic or other provider account.",
+    "machineSizes": "not published (no CPU, RAM or disk figures are stated)",
+    "chatApps": "Telegram and WhatsApp",
+    "plans": [
+      {
+        "name": "OpenClaw Hosting (single published entry price)",
+        "price": "$9",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "not published",
+        "billingNote": "The page shows only 'Starting price, billed monthly'; higher tiers or annual terms are not published"
+      }
+    ],
+    "usageLimits": "not published",
+    "bringYourOwnModelKey": "yes",
+    "freeTrial": "not published",
+    "operatedBy": "HOSTIMUL MMC (VAT Number 1005344951); country not published",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://hostimul.com/openclaw-hosting",
+        "quote": "$9/mo Starting price, billed monthly",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://hostimul.com/openclaw-hosting",
+        "quote": "Connect your own OpenAI, Anthropic or other AI account – we manage the container, the updates and the uptime, around the clock.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://hostimul.com/openclaw-hosting",
+        "quote": "We don't sell AI credits. Connect your own OpenAI, Anthropic or other API key and pay that provider directly.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://hostimul.com/openclaw-hosting",
+        "quote": "Telegram & WhatsApp",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29",
+        "note": "Listed as a plan feature under 'Pick a channel & go live'"
+      },
+      {
+        "url": "https://hostimul.com/openclaw-hosting",
+        "quote": "Dashboard + CLI access",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://hostimul.com/about-us",
+        "quote": "HOSTIMUL MMC (VAT Number: 1005344951)",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      }
+    ],
+    "usecase": "openclaw",
+    "what": "Managed private OpenClaw container with your own AI account, Telegram/WhatsApp, dashboard and CLI.",
+    "price": {
+      "cheapestOngoingMonthly": "$9",
+      "currency": "USD",
+      "term": "monthly",
+      "note": "Page shows only a starting price; higher tiers and annual terms are not published."
+    },
+    "catch": "Only a starting price is published: no machine size, plan tiers, trial or renewal terms, and the operator's country is not stated.",
+    "source": {
+      "url": "https://hostimul.com/openclaw-hosting",
+      "quote": "$9/mo Starting price, billed monthly",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "myclaw",
+    "agent": "openclaw",
+    "name": "MyClaw",
+    "url": "https://myclaw.ai/pricing",
+    "hostingModel": "Managed always-on cloud computer for the agent; supports both OpenClaw and Hermes Agent",
+    "whatYouGet": "A private, always-on cloud machine per subscription with zero setup, auto-updates, daily backups, custom skills and integrations, and the choice of OpenClaw or Hermes Agent on the same plan. Pro and above include a monthly AI credit allowance; model tokens are otherwise billed separately.",
+    "machineSizes": [
+      "Lite: 2 vCPU, 4 GB RAM, 40 GB SSD, 3 TB traffic/month",
+      "Pro: 4 vCPU, 8 GB RAM, 80 GB SSD, 5 TB traffic/month",
+      "Max: 8 vCPU, 16 GB RAM, 160 GB SSD, 10 TB traffic/month",
+      "Ultra: 16-64 vCPU, 32-128 GB RAM, 320-1280 GB SSD, 20 TB traffic/month"
+    ],
+    "chatApps": "not published on the pricing page (the service is described as a personal AI assistant reachable through the agent's own channels)",
+    "plans": [
+      {
+        "name": "Lite",
+        "price": "$29",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "Yearly $199, shown as $16.6/mo, 'Save 43%'"
+      },
+      {
+        "name": "Pro",
+        "price": "$59",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "Yearly $399, shown as $33.3/mo, 'Save 58%'; extra $100 AI credits included"
+      },
+      {
+        "name": "Max",
+        "price": "$119",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "Yearly $799, shown as $66.6/mo, 'Save 55%'; extra $150 AI credits included"
+      },
+      {
+        "name": "Ultra",
+        "price": "$239",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "Yearly $1,599, shown as $133.3+/mo, 'Save 51%'; extra $200 AI credits included"
+      }
+    ],
+    "usageLimits": "Traffic 3-20 TB/month depending on plan; AI tokens are not included in the subscription. No execution limits published.",
+    "bringYourOwnModelKey": "not published",
+    "freeTrial": "not published",
+    "operatedBy": "not published",
+    "terminalNeeded": "not published",
+    "sources": [
+      {
+        "url": "https://myclaw.ai/pricing",
+        "quote": "$16.6/mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Lite card; the same card shows '$29/mo' and 'Yearly $199' with 'Save 43%'"
+      },
+      {
+        "url": "https://myclaw.ai/pricing",
+        "quote": "$33.3/mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Pro card; the same card shows '$59/mo' and 'Yearly $399' with 'Save 58%' and 'Extra $100 AI credits included'"
+      },
+      {
+        "url": "https://myclaw.ai/pricing",
+        "quote": "$66.6/mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Max card; the same card shows '$119/mo' and 'Yearly $799' with 'Save 55%' and 'Extra $150 AI credits included'"
+      },
+      {
+        "url": "https://myclaw.ai/pricing",
+        "quote": "$133.3+/mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Ultra card; the same card shows '$239/mo' and 'Yearly $1,599' with 'Save 51%' and 'Extra $200 AI credits included'"
+      },
+      {
+        "url": "https://myclaw.ai/pricing",
+        "quote": "*AI token usage isn't included in the subscription.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://myclaw.ai/pricing",
+        "quote": "Available for OpenClaw & Hermes Agent",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      }
+    ],
+    "usecase": "openclaw",
+    "what": "Always-on cloud machine for OpenClaw or Hermes Agent with daily backups and 2-64 vCPU sizes.",
+    "price": {
+      "cheapestOngoingMonthly": "$29",
+      "currency": "USD",
+      "term": "monthly",
+      "note": "$16.6/mo equivalent on yearly billing ($199/year)."
+    },
+    "catch": "AI tokens are billed separately, and the pricing page publishes no free trial, no company details and no terminal policy.",
+    "source": {
+      "url": "https://myclaw.ai/pricing",
+      "quote": "$16.6/mo",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "hermes-cloud-nous",
+    "agent": "hermes",
+    "name": "Hermes Cloud (Nous Portal)",
+    "url": "https://portal.nousresearch.com/cloud",
+    "hostingModel": "First-party hosted Hermes Agent instances operated by Nous Research; one-click deploy, no server administration",
+    "whatYouGet": "A dedicated, always-on hosted Hermes Agent instance with its own workspace and dashboard, persistent memory, natural-language scheduling, isolated containers per agent, start/stop/restart controls, MCP management and chat channels. Deploying requires credit on the account or an active Portal subscription.",
+    "machineSizes": "not published (the FAQ says to pick a size, but the size and price table lives behind the signed-in deploy screen at portal.nousresearch.com/agents/new, which redirects to sign-in)",
+    "chatApps": "Telegram, Discord, Slack, Email, CLI",
+    "plans": [
+      {
+        "name": "Instance billing (pay from Nous credit)",
+        "price": "not published",
+        "currency": "USD",
+        "term": "billed daily in arrears from Nous credit for actual usage; running is compute metered to the second plus storage, stopped is storage only",
+        "renewal": "not published",
+        "billingNote": "Minimum to deploy: $2 in credits or an active subscription. Inference and tool usage are billed separately on top of the instance price."
+      },
+      {
+        "name": "Plus (Nous Portal subscription)",
+        "price": "$20",
+        "currency": "USD",
+        "term": "per month",
+        "renewal": "same price",
+        "billingNote": "$22.00 monthly credits with a 10% bonus; $10.00 rollover cap"
+      },
+      {
+        "name": "Super (Nous Portal subscription)",
+        "price": "$100",
+        "currency": "USD",
+        "term": "per month",
+        "renewal": "same price",
+        "billingNote": "$110.00 monthly credits with a 10% bonus; $50.00 rollover cap"
+      },
+      {
+        "name": "Ultra (Nous Portal subscription)",
+        "price": "$200",
+        "currency": "USD",
+        "term": "per month",
+        "renewal": "same price",
+        "billingNote": "$220.00 monthly credits with a 10% bonus; $100.00 rollover cap"
+      },
+      {
+        "name": "Free (Nous Portal)",
+        "price": "$0",
+        "currency": "USD",
+        "term": "free tier",
+        "renewal": "n/a",
+        "billingNote": "Free models only, standard rate limits, $0 monthly credits"
+      }
+    ],
+    "usageLimits": "Compute is metered to the second of actual uptime; stopped instances bill storage only; instances scale to zero when idle. Inference and tool usage are billed separately. No execution caps published.",
+    "bringYourOwnModelKey": "not published",
+    "freeTrial": "no free trial published; the Portal has a $0 Free tier with free models only",
+    "operatedBy": "Nous Research (the docs describe Hermes Agent as 'built by Nous Research'); country not published on these pages",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://portal.nousresearch.com/cloud",
+        "quote": "$2 minimum in credits, or an active subscription, to deploy a Cloud Agent.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://portal.nousresearch.com/cloud",
+        "quote": "Hermes Cloud runs your own hosted Hermes Agent on a dedicated cloud instance that stays always on, with its own workspace and dashboard. Pick a size, deploy in seconds, and it's billed daily from your Nous credit based on actual usage.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://portal.nousresearch.com/cloud",
+        "quote": "**Running**: compute — metered to the second of actual uptime — plus storage.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29",
+        "note": "Same FAQ also states '**Stopped**: storage only' and 'Inference and tool usage are billed separately, on top of the instance price.'"
+      },
+      {
+        "url": "https://portal.nousresearch.com/cloud",
+        "quote": "Pick the size that fits your workload. You can move to a larger size later. Prices are per day and exclude inference and tool usage.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29",
+        "note": "FAQ points to portal.nousresearch.com/agents/new for the current size table; that URL redirects to the sign-in page, so per-size prices are not publicly published"
+      },
+      {
+        "url": "https://portal.nousresearch.com/cloud",
+        "quote": "Telegram, Discord, Slack, Email, CLI. One cloud agent, one memory, every surface you already use.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://portal.nousresearch.com/cloud",
+        "quote": "$22.00 monthly credits — 10% bonus",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Plus tier at $20 per month; Super and Ultra follow with $110.00 and $220.00 monthly credits"
+      },
+      {
+        "url": "https://hermes-agent.nousresearch.com/docs/guides/manage-hermes-cloud-with-mcp",
+        "quote": "runs hosted Hermes Agent instances for you",
+        "note": "Verbatim tail of the sentence '[Hermes Cloud](https://portal.nousresearch.com/cloud) runs hosted Hermes Agent instances for you.'",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      }
+    ],
+    "usecase": "hermes-agent",
+    "what": "First-party hosted Hermes Agent on Nous Portal, always on, billed daily by actual usage and scaled to zero when idle.",
+    "price": {
+      "cheapestOngoingMonthly": "usage-based from Nous credit; $2 minimum credit or an active subscription to deploy",
+      "currency": "USD",
+      "term": "billed daily in arrears",
+      "note": "Per-size instance prices are behind the signed-in deploy screen; Portal subscriptions are $20, $100 and $200 per month."
+    },
+    "catch": "No public price per instance size, and inference and tool usage are billed separately on top of compute.",
+    "source": {
+      "url": "https://portal.nousresearch.com/cloud",
+      "quote": "$2 minimum in credits, or an active subscription, to deploy a Cloud Agent.",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "flyhermes",
+    "agent": "hermes",
+    "name": "FlyHermes",
+    "url": "https://www.flyhermes.ai/",
+    "hostingModel": "Fully hosted Hermes Agent with AI usage included; the vendor sets up and runs the agent",
+    "whatYouGet": "One hosted Hermes Agent per account, always on and updated by the vendor, with AI credits included (no OpenAI or Anthropic key needed), Telegram/WhatsApp/Slack/Discord/web chat, 1,000+ apps through Composio, 39 ready-made skills, persistent memory, scheduled jobs and an installable web app.",
+    "machineSizes": "not published (no CPU, RAM or disk figures are stated)",
+    "chatApps": "Telegram, WhatsApp, Slack, Discord and web chat",
+    "plans": [
+      {
+        "name": "FlyHermes Pro (monthly billing)",
+        "price": "$49",
+        "currency": "USD",
+        "term": "monthly, no prepay",
+        "renewal": "same price",
+        "billingNote": "490 AI credits every month"
+      },
+      {
+        "name": "FlyHermes Pro (yearly billing)",
+        "price": "$39",
+        "currency": "USD",
+        "term": "monthly equivalent on a yearly plan",
+        "renewal": "renews yearly unless cancelled",
+        "billingNote": "$468 billed yearly, saving $120; 4,680 AI credits for the whole year, added at once"
+      }
+    ],
+    "usageLimits": "490 AI credits per month on monthly billing or 4,680 credits per year on yearly billing; top-ups from $10. No execution limits published.",
+    "bringYourOwnModelKey": "no",
+    "freeTrial": "no free trial; '14-day first-account guarantee, refunded minus AI credits used'",
+    "operatedBy": "not published",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://www.flyhermes.ai/",
+        "quote": "Yearly billing selected $39 /mo vs $49/mo $468 billed yearly",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.flyhermes.ai/",
+        "quote": "Monthly billing $49 /mo Billed monthly · no prepay",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.flyhermes.ai/",
+        "quote": "AI included: no OpenAI or Anthropic keys. Top-ups from $10",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.flyhermes.ai/",
+        "quote": "490 AI credits every month",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.flyhermes.ai/",
+        "quote": "Telegram, WhatsApp, Slack, Discord and web chat",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.flyhermes.ai/",
+        "quote": "14-day first-account guarantee, refunded minus AI credits used. Cancel anytime.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.flyhermes.ai/",
+        "quote": "Yes. There's no server, Docker or API key to deal with. You pay, we set up your agent, and web chat is ready in about a minute after checkout.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      }
+    ],
+    "usecase": "hermes-agent",
+    "what": "Hosted Hermes Agent with AI credits included, five chat channels and 1,000+ app integrations.",
+    "price": {
+      "cheapestOngoingMonthly": "$49",
+      "currency": "USD",
+      "term": "monthly",
+      "note": "$39/mo equivalent on yearly billing ($468/year)."
+    },
+    "catch": "One plan only, AI is capped at 490 credits per month, and there is no bring-your-own-key option.",
+    "source": {
+      "url": "https://www.flyhermes.ai/",
+      "quote": "Monthly billing $49 /mo Billed monthly · no prepay",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "agent37-hermes",
+    "agent": "hermes",
+    "name": "Agent 37",
+    "url": "https://www.agent37.com/solutions/hermes-hosting",
+    "hostingModel": "Fully managed dedicated container per customer with a browser dashboard; the same platform also sells managed OpenClaw on identical tiers",
+    "whatYouGet": "One-click managed Hermes Agent instance with task queue, browser web terminal, visual file browser, live Linux desktop, scheduled jobs, 1,000+ Composio integrations, automatic updates and an isolated container. Chat is the primary interface.",
+    "machineSizes": [
+      "Basic: 1 vCPU, 4 GB RAM, 8 GB disk",
+      "Plus: 1 vCPU, 4 GB RAM, 12 GB disk (inherits Basic compute)",
+      "Pro: 2 vCPU, 8 GB RAM, 20 GB disk",
+      "Max: 4 vCPU, 16 GB RAM, 40 GB disk"
+    ],
+    "chatApps": "WhatsApp, Telegram, iMessage, Discord, Slack",
+    "plans": [
+      {
+        "name": "Basic",
+        "price": "$3.99",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price (cancel anytime)",
+        "billingNote": "Bring your own API keys; $1/mo in AI credits; community support"
+      },
+      {
+        "name": "Plus",
+        "price": "$9.99",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "Free bundled models (GPT-6 Luna, DeepSeek V4.1 Flash, Mercury 2) with usage capped per rolling 5-hour window and per week; 12 GB disk"
+      },
+      {
+        "name": "Pro",
+        "price": "$29.99",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "Built-in Chromium browser for web automation; $5/mo in AI credits; email and chat support"
+      },
+      {
+        "name": "Max",
+        "price": "$99.99",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "$20/mo in AI credits; dedicated onboarding; team roles"
+      }
+    ],
+    "usageLimits": "Free-model usage on Plus is capped per rolling 5-hour window and per week; API-level provisioning starts at $4.76/mo. No execution limits published for the flat plans.",
+    "bringYourOwnModelKey": "yes",
+    "freeTrial": "not published",
+    "operatedBy": "Agent 37; terms are governed by the laws of the State of New York, United States",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://www.agent37.com/solutions/hermes-hosting",
+        "quote": "Deploy a managed instance in one click, from $3.99/mo, and it answers from WhatsApp, Telegram, iMessage, Discord, or Slack whenever you text it. No SSH, no Docker, no server to patch.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.agent37.com/solutions/hermes-hosting",
+        "quote": "$3.99/mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Basic tier; the same card lists '1 vCPU · 4 GB RAM · 8 GB disk' and '$1/mo in AI credits'"
+      },
+      {
+        "url": "https://www.agent37.com/solutions/hermes-hosting",
+        "quote": "$9.99/mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Plus tier; 'Free models: GPT-6 Luna, DeepSeek V4.1 Flash, Mercury 2' and 'Free-model usage capped per rolling 5-hour window and per week'"
+      },
+      {
+        "url": "https://www.agent37.com/solutions/hermes-hosting",
+        "quote": "$29.99/mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Pro tier; '2 vCPU · 8 GB RAM · 20 GB disk' and '$5/mo in AI credits'"
+      },
+      {
+        "url": "https://www.agent37.com/solutions/hermes-hosting",
+        "quote": "$99.99/mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Max tier; '4 vCPU · 16 GB RAM · 40 GB disk' and '$20/mo in AI credits'"
+      },
+      {
+        "url": "https://www.agent37.com/solutions/hermes-hosting",
+        "quote": "BYOK on every tier. Model calls go straight from your container to the provider. Your keys never pass through us.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://www.agent37.com/terms",
+        "quote": "These Terms are governed by the laws of the State of New York, without regard to its conflict of law rules.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      }
+    ],
+    "usecase": "hermes-agent",
+    "what": "Managed Hermes container from 1 vCPU/4 GB with dashboard, browser terminal, file browser and Linux desktop.",
+    "price": {
+      "cheapestOngoingMonthly": "$3.99",
+      "currency": "USD",
+      "term": "monthly",
+      "note": "Basic is BYOK with $1/mo AI credits; free bundled models start at $9.99."
+    },
+    "catch": "The $3.99 tier has only 8 GB disk and community support, and the included free models on Plus are rate-capped per 5-hour window and per week.",
+    "source": {
+      "url": "https://www.agent37.com/solutions/hermes-hosting",
+      "quote": "$3.99/mo",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "runonflux-hermes",
+    "agent": "hermes",
+    "name": "RunOnFlux Hermes Agent",
+    "url": "https://runonflux.com/apps/hermes",
+    "hostingModel": "One-click deployment of a Hermes Agent container on the Flux decentralized cloud, with a password-protected dashboard",
+    "whatYouGet": "Deployable Hermes Agent container with a password-protected dashboard, built-in Tailscale, an open HTTP API server, DDoS protection, 24/7 monitoring, choice of region among 50+ countries and bring-your-own AI provider key.",
+    "machineSizes": [
+      "Hermes Agent: 4 GB RAM, 2 vCores, 20 GB SSD/NVMe, unlimited bandwidth",
+      "Hermes Agent Pro: 8 GB RAM, 4 vCores, 80 GB SSD/NVMe, unlimited bandwidth"
+    ],
+    "chatApps": "not published (the page describes a web dashboard and API; messaging channels are not listed)",
+    "plans": [
+      {
+        "name": "Hermes Agent",
+        "price": "$5.49",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price (cancel anytime)",
+        "billingNote": "First week free for new Flux Cloud customers; 30-day money-back guarantee on the first paid month"
+      },
+      {
+        "name": "Hermes Agent Pro",
+        "price": "$9.49",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "8 GB RAM, 4 vCores, 80 GB storage"
+      }
+    ],
+    "usageLimits": "Bandwidth is unlimited on both plans; no execution limits published.",
+    "bringYourOwnModelKey": "yes",
+    "freeTrial": "yes - first week free for customers new to Flux Cloud, one free week per account, no card, ends on its own after 7 days unless the server is kept",
+    "operatedBy": "Flux decentralized cloud (the page says 'Powered by Flux Decentralized Cloud'); the operating company and country are not published",
+    "terminalNeeded": "not published",
+    "sources": [
+      {
+        "url": "https://runonflux.com/apps/hermes",
+        "quote": "$5.49",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Hermes Agent plan; the same card lists 'RAM 4 GB', 'Storage 20 GB SSD/NVMe', 'CPU 2 vCores', 'Bandwidth Unlimited'"
+      },
+      {
+        "url": "https://runonflux.com/apps/hermes",
+        "quote": "$9.49",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Hermes Agent Pro; 'RAM 8 GB', 'Storage 80 GB SSD/NVMe', 'CPU 4 vCores'"
+      },
+      {
+        "url": "https://runonflux.com/apps/hermes",
+        "quote": "bring your own AI provider key — OpenRouter, OpenAI, Anthropic and more. Your agent, your keys, your infrastructure.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://runonflux.com/apps/hermes",
+        "quote": "*The first week is free for customers new to Flux Cloud: one free week per account, not per app or per server. It takes no card and ends on its own after 7 days unless you choose to keep the server.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://runonflux.com/apps/hermes",
+        "quote": "Our 30-day money-back guarantee covers your first paid month, whether or not you took the free week first.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      }
+    ],
+    "usecase": "hermes-agent",
+    "what": "One-click Hermes Agent container on the Flux decentralized cloud with 4 GB RAM, Tailscale and BYO key.",
+    "price": {
+      "cheapestOngoingMonthly": "$5.49",
+      "currency": "USD",
+      "term": "monthly",
+      "note": "First week free for new Flux Cloud accounts; Pro is $9.49/mo."
+    },
+    "catch": "Decentralized Flux hosting rather than a white-glove managed agent, and the page publishes no messaging-channel list or terminal policy.",
+    "source": {
+      "url": "https://runonflux.com/apps/hermes",
+      "quote": "$5.49",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "oneclickclaw-hermes",
+    "agent": "hermes",
+    "name": "OneClickClaw Hermes Agent",
+    "url": "https://oneclickclaw.io/hermes",
+    "hostingModel": "Fully managed dedicated EU server (Denmark) with Hermes Agent installed and secured; same platform and plans as its OpenClaw product",
+    "whatYouGet": "One-click Hermes Agent deploy on a dedicated single-tenant Ubuntu server in Denmark, monitored around the clock, with snapshots before updates, daily backups, SSL, custom domain, optional free SSH and a dashboard. The customer signs in with an AI subscription they already pay for or brings an API key.",
+    "machineSizes": [
+      "Starter: 2 vCPU, 4 GB RAM, 15 GB NVMe",
+      "Hobbyist: 4 vCPU, 8 GB RAM, 25 GB NVMe",
+      "Pro: 8 vCPU, 16 GB RAM, 40 GB NVMe"
+    ],
+    "chatApps": "Telegram, WhatsApp, Discord, Slack and more",
+    "plans": [
+      {
+        "name": "Starter",
+        "price": "€14.99",
+        "currency": "EUR",
+        "term": "monthly",
+        "renewal": "same price (cancel anytime)",
+        "billingNote": "Annual: €149.88/year, €12.49/month equivalent"
+      },
+      {
+        "name": "Hobbyist",
+        "price": "€25.99",
+        "currency": "EUR",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "Annual: €251.88/year, €20.99/month equivalent"
+      },
+      {
+        "name": "Pro",
+        "price": "€49.99",
+        "currency": "EUR",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "Annual: €479.88/year, €39.99/month equivalent; prices exclude VAT"
+      }
+    ],
+    "usageLimits": "One instance per plan; free trial runs on the Starter server; no execution limits published.",
+    "bringYourOwnModelKey": "yes",
+    "freeTrial": "yes - 7-day free trial with a Google account, one trial per person per product (OpenClaw and Hermes Agent are counted separately)",
+    "operatedBy": "OneClickClaw; terms are governed by the laws of Greece, hosting in Denmark via Webdock (operating company name not published)",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://oneclickclaw.io/hermes",
+        "quote": "Your own Hermes agent on a dedicated EU server, fully managed. Sign in with the AI subscription you already pay for, or use your own API key. Free for 7 days, just a Google account to start.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://oneclickclaw.io/hermes",
+        "quote": "Telegram, WhatsApp, Discord, Slack and more. Your agent talks to you wherever you already hang out.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://oneclickclaw.io/hermes",
+        "quote": "Every new server is built on the Hermes release we run and test ourselves, right now v0.22.5.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://oneclickclaw.io/terms",
+        "quote": "| Starter | €14.99/month | 2 vCPU / 4GB RAM / 15GB NVMe |",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://oneclickclaw.io/terms",
+        "quote": "Each person may start one free trial of each product we offer, OpenClaw and Hermes Agent, so you can try either one or both.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      }
+    ],
+    "usecase": "hermes-agent",
+    "what": "Dedicated EU server in Denmark with Hermes Agent installed; use an existing AI subscription or your own API key.",
+    "price": {
+      "cheapestOngoingMonthly": "€14.99",
+      "currency": "EUR",
+      "term": "monthly",
+      "note": "€12.49/mo equivalent on annual billing; prices exclude VAT."
+    },
+    "catch": "Same caveats as its OpenClaw product: VAT extra, 4 GB starter plan, and the trial server is deleted after 7 days without a payment method.",
+    "source": {
+      "url": "https://oneclickclaw.io/hermes",
+      "quote": "Your own Hermes agent on a dedicated EU server, fully managed. Sign in with the AI subscription you already pay for, or use your own API key. Free for 7 days, just a Google account to start.",
+      "confidence": "docs-confirmed",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "n8n-cloud",
+    "agent": "n8n",
+    "name": "n8n Cloud (official)",
+    "url": "https://n8n.io/pricing/",
+    "hostingModel": "First-party managed n8n: n8n hosts and maintains the instance",
+    "whatYouGet": "Managed n8n instance with unlimited users, unlimited workflows, every integration, AI Agent nodes, MCP server trigger and client, hosted and embedded chat, workflow history, insights, encrypted credential store and assistant credits. Starter and Pro are cloud; Business is self-hosted only; Enterprise is hosted or self-hosted.",
+    "machineSizes": "not published (the pricing page states computing power differs per plan but prints no CPU or RAM figures; the docs say the trial has 'the same computing power as the Starter plan')",
+    "chatApps": "n8n is driven through its web editor, not chat apps; hosted and embedded chat is included as an agent feature",
+    "plans": [
+      {
+        "name": "Starter (monthly)",
+        "price": "$24",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "2.5K workflow executions, 5 concurrent executions, 1 shared project, 1,600 Assistant credits/month, 5 min max execution duration"
+      },
+      {
+        "name": "Starter (annual)",
+        "price": "€20",
+        "currency": "EUR",
+        "term": "monthly rate billed annually",
+        "renewal": "same price",
+        "billingNote": "The page switches currency with the billing toggle: monthly shows USD, annual shows EUR ('Save 17%')"
+      },
+      {
+        "name": "Pro (monthly)",
+        "price": "$60",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "10K workflow executions, up to 50 concurrent executions, 3 shared projects, up to 9,600 Assistant credits/month, 40 min max execution duration"
+      },
+      {
+        "name": "Pro (annual)",
+        "price": "€50",
+        "currency": "EUR",
+        "term": "monthly rate billed annually",
+        "renewal": "same price",
+        "billingNote": "Shown as '50€/mo, billed annually'"
+      },
+      {
+        "name": "Business (monthly)",
+        "price": "$960",
+        "currency": "USD",
+        "term": "monthly",
+        "renewal": "same price",
+        "billingNote": "40K workflow executions; the plan is labelled 'Self-hosted only' with a cloud waitlist form"
+      },
+      {
+        "name": "Business (annual)",
+        "price": "€667",
+        "currency": "EUR",
+        "term": "monthly rate billed annually",
+        "renewal": "same price",
+        "billingNote": "Shown as '667€/mo, billed annually'; self-hosted only"
+      },
+      {
+        "name": "Enterprise",
+        "price": "contact sales",
+        "currency": "n/a",
+        "term": "custom",
+        "renewal": "custom",
+        "billingNote": "Custom workflow executions, 200+ concurrent executions, 365 days of insights, SSO, external secret store, log streaming, dedicated support with SLA; hosted by n8n or self-hosted"
+      }
+    ],
+    "usageLimits": "Executions per month: 2.5K (Starter), 10K (Pro), 40K (Business), custom (Enterprise). Concurrent executions 5 / up to 50 / 200+. Max saved executions 2.5k / 25k / 50k. Overage fees are 'Capped' on Starter and Pro.",
+    "bringYourOwnModelKey": "partly",
+    "freeTrial": "yes - 14-day free trial of Pro features with a 1,000-execution limit and Starter compute, no credit card required",
+    "operatedBy": "n8n GmbH, Novalisstr. 10, 10115 Berlin, Germany",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://n8n.io/pricing/",
+        "quote": "$24/mo, billed monthly",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Starter with the Monthly toggle selected; the Annually toggle shows '20€/mo, billed annually'"
+      },
+      {
+        "url": "https://n8n.io/pricing/",
+        "quote": "$60/mo, billed monthly",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Pro; the Annually toggle shows '50€/mo, billed annually'"
+      },
+      {
+        "url": "https://n8n.io/pricing/",
+        "quote": "$960/mo, billed monthly",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Business; the Annually toggle shows '667€/mo, billed annually' and the plan is labelled 'Self-hosted only'"
+      },
+      {
+        "url": "https://n8n.io/pricing/",
+        "quote": "2.5Kworkflow executionswith unlimited steps",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Starter; Pro shows 10K and Business 40K"
+      },
+      {
+        "url": "https://n8n.io/pricing/",
+        "quote": "AI models without API keys",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Starter feature; the feature table also lists 'Encrypted credential store | Included' on Starter, so own provider credentials can be stored"
+      },
+      {
+        "url": "https://n8n.io/pricing/",
+        "quote": "No credit card required",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://docs.n8n.io/deploy/use-n8n-cloud/start-your-free-trial",
+        "quote": "you have 14 days to try all the features of the",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29",
+        "note": "Verbatim opening of 'When you create a new n8n Cloud trial, you have 14 days to try all the features of the [Pro plan](https://n8n.io/pricing/), including:'; the plan table on the same page says 'Trying n8n Cloud with Pro features for 14 days'"
+      },
+      {
+        "url": "https://docs.n8n.io/deploy/use-n8n-cloud/start-your-free-trial",
+        "quote": "The trial gives you Pro plan features with a limit of 1000 executions and the same computing power as the",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29",
+        "note": "Verbatim; the sentence continues with a markdown link to the Starter plan"
+      },
+      {
+        "url": "https://docs.n8n.io/deploy/use-n8n-cloud/start-your-free-trial",
+        "quote": "n8n hosts your instance, so you don't set up or maintain any infrastructure",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://n8n.io/imprint/",
+        "quote": "**n8n GmbH** \n**Novalisstr. 10, 10115, Berlin, Germany**",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      }
+    ],
+    "usecase": "workflow-automation",
+    "what": "Official managed n8n with unlimited users and workflows, AI nodes, 2.5K-40K executions per month.",
+    "price": {
+      "cheapestOngoingMonthly": "$24",
+      "currency": "USD",
+      "term": "monthly",
+      "note": "€20/mo billed annually (Save 17%); the page switches currency with the billing toggle."
+    },
+    "catch": "Starter is capped at 2,500 executions a month, and Business is labelled self-hosted only despite appearing in the cloud plan list.",
+    "source": {
+      "url": "https://n8n.io/pricing/",
+      "quote": "$24/mo, billed monthly",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "elestio-n8n",
+    "agent": "n8n",
+    "name": "Elestio managed n8n",
+    "url": "https://elest.io/open-source/n8n",
+    "hostingModel": "Fully managed n8n on a dedicated VM that Elestio provisions and maintains, on the customer's chosen cloud provider or Elestio's",
+    "whatYouGet": "Fully managed n8n instance with automated backups, SSL, updates, OS patches, monitoring and alerts, custom domains, AI DevOps credits and support. Deployed on 10 cloud providers and 160+ regions, with an on-premise option and unlimited usage.",
+    "machineSizes": [
+      "Medium: 2 vCPU, 4 GB RAM, 60 GB SSD, 20 TB traffic (example provider Netcup, Nuremberg)",
+      "Large: 4 vCPU, 8 GB RAM, 100 GB SSD, 20 TB traffic",
+      "Xlarge: 8 vCPU, 16 GB RAM, 200 GB SSD, 20 TB traffic",
+      "2xlarge: 16 vCPU, 32 GB RAM, 400 GB SSD, 20 TB traffic",
+      "3xlarge: 16 vCPU, 64 GB RAM, 600 GB SSD, 20 TB traffic"
+    ],
+    "chatApps": "not applicable (n8n is driven through its web editor); n8n AI Agent and MCP features are part of the app",
+    "plans": [
+      {
+        "name": "Service plans (from)",
+        "price": "$11",
+        "currency": "USD",
+        "term": "monthly equivalent, billed hourly",
+        "renewal": "same price",
+        "billingNote": "Prices depend on the chosen cloud provider and region; the table on the pricing page showed Netcup Nuremberg at $16 (Medium), $30 (Large), $55 (Xlarge), $112 (2xlarge) and $169 (3xlarge) per month, 'billed hourly; monthly figures assume 730 hours of usage'"
+      },
+      {
+        "name": "Level 2 support add-on",
+        "price": "$50",
+        "currency": "USD",
+        "term": "monthly, per service",
+        "renewal": "same price",
+        "billingNote": "24h response time, 99.5% uptime SLA, 14-day backup retention"
+      },
+      {
+        "name": "Level 3 support add-on",
+        "price": "$200",
+        "currency": "USD",
+        "term": "monthly, per service",
+        "renewal": "same price",
+        "billingNote": "4h response time, 99.9% uptime SLA, 30-day backup retention, dedicated customer success manager"
+      }
+    ],
+    "usageLimits": "Usage is listed as unlimited; extra storage $0.15/GB per month and extra bandwidth $0.02/GB beyond the included allowance. No execution limits.",
+    "bringYourOwnModelKey": "yes",
+    "freeTrial": "yes - 'Free 3-day trial included'",
+    "operatedBy": "Elestio, registered office in Dublin, Ireland (founded in Dublin in 2022)",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://elest.io/open-source/n8n",
+        "quote": "Deploy N8N as a fully managed service starting at $11/mo.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://elest.io/open-source/n8n",
+        "quote": "USAGE Unlimited",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://elest.io/pricing",
+        "quote": "| Medium | 2 | 4 GB | 60 GB SSD | 20 TB | $16$0.022/hr |",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Default view: Netcup, Nuremberg, Germany. Large $30, Xlarge $55, 2xlarge $112, 3xlarge $169 follow in the same table"
+      },
+      {
+        "url": "https://elest.io/pricing",
+        "quote": "Prices are all-inclusive and billed hourly; monthly figures assume 730 hours of usage.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://elest.io/contact",
+        "quote": "Dublin, Ireland",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29",
+        "note": "Registered office block: '29 Merrion Square, Dublin 2, D02 RW64, Ireland, Europe'; the same page states 'Free 3-day trial included.'"
+      },
+      {
+        "url": "https://elest.io/about",
+        "quote": "Founded in Dublin in 2022, Elestio is a fully managed DevOps platform for open-source software.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      }
+    ],
+    "usecase": "workflow-automation",
+    "what": "Fully managed n8n on a dedicated VM across 10 cloud providers, with backups, SSL, monitoring and unlimited usage.",
+    "price": {
+      "cheapestOngoingMonthly": "$11",
+      "currency": "USD",
+      "term": "monthly equivalent, billed hourly",
+      "note": "Provider-dependent; the visible Netcup Nuremberg table starts at $16/mo for 2 vCPU/4 GB."
+    },
+    "catch": "The $11 entry price depends on provider and region, the displayed table starts at $16, and faster support costs $50-$200/mo extra.",
+    "source": {
+      "url": "https://elest.io/open-source/n8n",
+      "quote": "Deploy N8N as a fully managed service starting at $11/mo.",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "instapods-n8n",
+    "agent": "n8n",
+    "name": "InstaPods n8n",
+    "url": "https://instapods.com/apps/n8n/",
+    "hostingModel": "Flat-price managed pod (real Linux server) with n8n installed in one click; SSH is available but not required",
+    "whatYouGet": "One-click n8n deploy on a dedicated Linux server with HTTPS, custom domains, daily backups and an optional managed PostgreSQL database added in one click. Flat monthly price with no per-execution or bandwidth billing.",
+    "machineSizes": [
+      "Build (n8n minimum): 2 vCPU, 2 GB RAM, 25 GB disk, 5 daily backups kept, managed PostgreSQL/MySQL/Redis"
+    ],
+    "chatApps": "not applicable (n8n web editor); the platform also exposes an MCP server for AI agents",
+    "plans": [
+      {
+        "name": "Build (n8n plan)",
+        "price": "$7",
+        "currency": "USD",
+        "term": "monthly, flat",
+        "renewal": "same price (billed by the day, one invoice a month)",
+        "billingNote": "$10 one-time credit when a card is added; 7-day refund on request"
+      },
+      {
+        "name": "Launch",
+        "price": "$3",
+        "currency": "USD",
+        "term": "monthly, flat",
+        "renewal": "same price",
+        "billingNote": "1 vCPU, 512 MB RAM, 10 GB disk; no managed databases; not enough for n8n"
+      },
+      {
+        "name": "Grow",
+        "price": "$15",
+        "currency": "USD",
+        "term": "monthly, flat",
+        "renewal": "same price",
+        "billingNote": "2 vCPU, 4 GB RAM, 50 GB disk, managed databases"
+      },
+      {
+        "name": "Scale",
+        "price": "$25",
+        "currency": "USD",
+        "term": "monthly, flat",
+        "renewal": "same price",
+        "billingNote": "4 vCPU, 8 GB RAM, 100 GB disk"
+      },
+      {
+        "name": "Turbo",
+        "price": "$49",
+        "currency": "USD",
+        "term": "monthly, flat",
+        "renewal": "same price",
+        "billingNote": "6 vCPU, 12 GB RAM, 150 GB disk"
+      }
+    ],
+    "usageLimits": "Unlimited workflows and executions for a flat fee; no bandwidth charges. Disk is the plan's fixed disk size.",
+    "bringYourOwnModelKey": "yes",
+    "freeTrial": "no free trial; $10 credit when a card is added and a 7-day refund on request",
+    "operatedBy": "InstaPods is owned and operated by ExpressTech Systems, founded by Vikas Singhal; server regions are Europe (France) and North America (Canada), country of the company not published",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://instapods.com/apps/n8n/",
+        "quote": "n8n hosting for [$7/mo flat](https://instapods.com/apps/n8n/#pricing). No per-execution billing, no vendor lock-in.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://instapods.com/apps/n8n/",
+        "quote": "The $7/mo Build plan is both the plan n8n needs and the plan that unlocks managed databases, so n8n and Postgres run together on one real Linux server, live in about 60 seconds.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://instapods.com/apps/n8n/",
+        "quote": "unlimited workflows and executions for a flat monthly fee",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://instapods.com/pricing",
+        "quote": "## Build\n\n$7/mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Build card lists 2 vCPU, 2 GB RAM, 25 GB disk; the page also lists Launch $3, Grow $15, Scale $25 and Turbo $49"
+      },
+      {
+        "url": "https://instapods.com/pricing",
+        "quote": "Add a card and you get a one-time $10 credit, about 3 months on Launch.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://instapods.com/about/",
+        "quote": "InstaPods is owned and operated by ExpressTech Systems, a software company founded by Vikas Singhal.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      }
+    ],
+    "usecase": "workflow-automation",
+    "what": "Flat-price n8n pod with 2 vCPU/2 GB, one-click managed PostgreSQL and unlimited executions.",
+    "price": {
+      "cheapestOngoingMonthly": "$7",
+      "currency": "USD",
+      "term": "monthly, flat",
+      "note": "Billed by the day, one invoice a month; $10 credit when a card is added."
+    },
+    "catch": "No free trial (only a $10 card credit and 7-day refund), and the $7 plan has 2 GB RAM and no per-request support promise.",
+    "source": {
+      "url": "https://instapods.com/apps/n8n/",
+      "quote": "n8n hosting for [$7/mo flat](https://instapods.com/apps/n8n/#pricing). No per-execution billing, no vendor lock-in.",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "railway-n8n",
+    "agent": "n8n",
+    "name": "Railway n8n template",
+    "url": "https://railway.com/deploy/n8n",
+    "hostingModel": "One-click template on a usage-billed PaaS: Railway runs the containers and managed Postgres, the customer owns the app configuration",
+    "whatYouGet": "One-click deploy of the official n8n Docker image plus Railway's managed Postgres, with always-on servers, public HTTPS access, GitHub auto-deploys, a browser dashboard and usage-based billing. n8n itself is the community edition, so model keys and credentials are the customer's.",
+    "machineSizes": "not fixed: service limits are Hobby up to 48 vCPU / 48 GB RAM per service, Pro up to 1,000 vCPU / 1 TB RAM; billed by the second of actual use",
+    "chatApps": "not applicable (n8n web editor)",
+    "plans": [
+      {
+        "name": "Free",
+        "price": "$0",
+        "currency": "USD",
+        "term": "monthly subscription plus usage",
+        "renewal": "n/a",
+        "billingNote": "Trial starts with $5 credits for 30 days, then $1 per month; limited to 1 vCPU / 0.5 GB RAM per service and 0.5 GB volume storage"
+      },
+      {
+        "name": "Hobby",
+        "price": "$5",
+        "currency": "USD",
+        "term": "monthly subscription plus usage",
+        "renewal": "same price",
+        "billingNote": "Includes $5 of monthly usage credits; the subscription fee goes towards usage costs"
+      },
+      {
+        "name": "Pro",
+        "price": "$20",
+        "currency": "USD",
+        "term": "monthly subscription plus usage",
+        "renewal": "same price",
+        "billingNote": "Includes $20 of monthly usage credits; unlimited workspace seats"
+      },
+      {
+        "name": "Enterprise",
+        "price": "custom",
+        "currency": "n/a",
+        "term": "custom",
+        "renewal": "custom",
+        "billingNote": "Contact sales; dedicated VMs and bring-your-own-cloud options"
+      }
+    ],
+    "usageLimits": "No execution limits (n8n community edition); cost is resource usage: memory $0.00000386 per GB/sec, CPU $0.00000772 per vCPU/sec, volumes $0.00000006 per GB/sec, egress $0.05 per GB.",
+    "bringYourOwnModelKey": "yes",
+    "freeTrial": "yes - 30-day trial with $5 credits, no credit card required",
+    "operatedBy": "Railway Corporation, United States (terms governed by the laws of the State of Delaware)",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://railway.com/deploy/n8n",
+        "quote": "Hosting n8n on Railway makes it simple to deploy and run your own instance in minutes, so you get the full power of automation with complete control.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://railway.com/deploy/n8n",
+        "quote": "Railway gives every new user a $5 free trial when signing up with GitHub",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29",
+        "note": "Community template page; the template repository is 'Shinyduo/n8n-railway-updated'"
+      },
+      {
+        "url": "https://railway.com/deploy/n8n",
+        "quote": "This template runs the official n8n Docker image with Railway’s managed Postgres.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://railway.com/pricing",
+        "quote": "Start with a 30-day free trial with $5 credits, then $1 per month",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://railway.com/pricing",
+        "quote": "$0.00000772 per vCPU / sec",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Same rate block lists memory $0.00000386 per GB/sec, volumes $0.00000006 per GB/sec and egress $0.05 per GB"
+      },
+      {
+        "url": "https://docs.railway.com/reference/pricing/plans",
+        "quote": "| **Hobby** | $5 / month |",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Subscription pricing table: Free $0/month, Hobby $5/month, Pro $20/month, Enterprise Custom"
+      },
+      {
+        "url": "https://railway.com/legal/terms",
+        "quote": "These Terms of Service (\"Terms\") are a binding contract between you and Railway Corporation.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29",
+        "note": "Same terms state Delaware choice of law"
+      }
+    ],
+    "usecase": "workflow-automation",
+    "what": "Community n8n template with managed Postgres on Railway, always on and billed by resource use.",
+    "price": {
+      "cheapestOngoingMonthly": "$5 Hobby subscription, including $5 of usage credit, plus metered usage",
+      "currency": "USD",
+      "term": "monthly",
+      "note": "Free plan is $0 with $1 credit and 1 vCPU/0.5 GB limits; Pro is $20/mo."
+    },
+    "catch": "No fixed machine or bill: you pay per vCPU/GB-second, must configure environment variables, and the template is community-maintained.",
+    "source": {
+      "url": "https://docs.railway.com/reference/pricing/plans",
+      "quote": "| **Hobby** | $5 / month |",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  },
+  {
+    "id": "render-n8n",
+    "agent": "n8n",
+    "name": "Render n8n template",
+    "url": "https://render.com/deploy-docker/n8n",
+    "hostingModel": "One-click blueprint on a usage-billed PaaS: Render runs the web service and managed Postgres; the customer connects a GitHub repo and deploys the blueprint",
+    "whatYouGet": "Render's Docker runtime running the official n8n image, plus managed PostgreSQL, private networking, managed SSDs and automatic daily snapshots. Deployment requires copying a template repo to GitHub and creating a Blueprint in the Render dashboard.",
+    "machineSizes": "not fixed: web services scale to 12 CPU and 96 GB RAM; instance examples include 'Less than 1 CPU' at 512 MB RAM for $7/month and '1 CPU' at 2 GB RAM for $25/month",
+    "chatApps": "not applicable (n8n web editor)",
+    "plans": [
+      {
+        "name": "Hobby workspace",
+        "price": "$0",
+        "currency": "USD",
+        "term": "monthly, plus compute",
+        "renewal": "n/a",
+        "billingNote": "Up to 25 services, 5 GB bandwidth included"
+      },
+      {
+        "name": "Pro workspace",
+        "price": "$25",
+        "currency": "USD",
+        "term": "monthly, plus compute",
+        "renewal": "same price",
+        "billingNote": "For teams deploying production apps and agents"
+      },
+      {
+        "name": "Scale workspace",
+        "price": "$499",
+        "currency": "USD",
+        "term": "monthly, plus compute",
+        "renewal": "same price",
+        "billingNote": "Advanced governance and compliance"
+      },
+      {
+        "name": "Enterprise workspace",
+        "price": "custom",
+        "currency": "n/a",
+        "term": "custom",
+        "renewal": "custom",
+        "billingNote": "Dedicated support and uptime SLAs"
+      },
+      {
+        "name": "Web service compute (examples)",
+        "price": "$7-$1,500",
+        "currency": "USD",
+        "term": "monthly per instance, billed by the second",
+        "renewal": "same price",
+        "billingNote": "512 MB RAM $7/month; 2 GB $25; 4 GB $85; 8 GB $135; 16 GB $200; up to 12 CPU / 96 GB RAM $1,500. A managed Postgres instance starts at $6/month (256 MB RAM)"
+      }
+    ],
+    "usageLimits": "No execution limits (n8n community edition); compute is billed by usage, prorated to the second, and disks cost $0.25/GB per month",
+    "bringYourOwnModelKey": "yes",
+    "freeTrial": "partly - free instance types exist with limitations, and the template configures 'the official n8n Docker image and a Postgres database on free instance types'; no time-limited trial is published",
+    "operatedBy": "not published",
+    "terminalNeeded": "no",
+    "sources": [
+      {
+        "url": "https://render.com/deploy-docker/n8n",
+        "quote": "With Render's Docker runtime, deploy the official n8n image in minutes.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://render.com/deploy-docker/n8n",
+        "quote": "Start for free, then upgrade whenever you're ready for production. Paid instances are billed based on usage, prorated to the second.",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29"
+      },
+      {
+        "url": "https://render.com/templates/n8n",
+        "quote": "Deploy n8n on Render using this template. It configures the official n8n Docker image and a Postgres database on free instance types.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-29",
+        "note": "Verified on the template page itself; the deploy page describes copying the template repo to GitHub and creating a Blueprint"
+      },
+      {
+        "url": "https://render.com/pricing",
+        "quote": "$25/mo",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Pro workspace plan; Hobby is $0/mo + compute and Scale $499/mo + compute"
+      },
+      {
+        "url": "https://render.com/pricing",
+        "quote": "| Less than 1 CPU | $7/month | 512 MB RAM | 0.5c-512mb |",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-29",
+        "note": "Web service compute table; 1 CPU / 2 GB is $25/month and the table runs to 12 CPU / 96 GB at $1,500/month. Managed Postgres starts at $6/month for 256 MB RAM."
+      }
+    ],
+    "usecase": "workflow-automation",
+    "what": "n8n blueprint on Render with managed Postgres, from free instance types to 12 CPU/96 GB.",
+    "price": {
+      "cheapestOngoingMonthly": "$0 Hobby workspace plus compute; smallest paid web instance $7",
+      "currency": "USD",
+      "term": "monthly",
+      "note": "$7 buys 512 MB RAM; a 2 GB instance is $25/mo and managed Postgres starts at $6/mo."
+    },
+    "catch": "Needs a GitHub account and a Blueprint deploy, and a usable n8n needs a paid instance plus a separate paid Postgres.",
+    "source": {
+      "url": "https://render.com/pricing",
+      "quote": "| Less than 1 CPU | $7/month | 512 MB RAM | 0.5c-512mb |",
+      "confidence": "pricing-page",
+      "checkedOn": "2026-10-29"
+    }
+  }
+]
