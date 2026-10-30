@@ -1835,7 +1835,7 @@
       "seoTitle": "n8n hosting: where to self-host n8n and what it costs",
       "kicker": "Workflow automation",
       "question": "I want n8n running my automations around the clock, on a server I control, without paying per workflow run.",
-      "standfirst": "n8n is a visual automation tool you can host yourself. It needs a small machine that never sleeps and keeps its database. Three providers set it up in one click; most others can run it if someone follows terminal steps; the task-only sandboxes are the wrong place for it.",
+      "standfirst": "n8n is a visual automation tool you can host yourself. It needs a small machine that never sleeps and keeps its database. Three providers set it up in one click and OVHcloud ships it preinstalled; most others can run it if someone follows terminal steps; the task-only sandboxes are the wrong place for it.",
       "preset": "automation",
       "whatItIs": [
         "[n8n](https://docs.n8n.io/) is a workflow automation tool. You draw a workflow on a canvas: a **trigger** (something that starts it, such as a form being sent or a time of day), then steps that call other apps, reshape data or ask an AI model. Its [README](https://github.com/n8n-io/n8n) counts 1,500+ ready-made connections.",

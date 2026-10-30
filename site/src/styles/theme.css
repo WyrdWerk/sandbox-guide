@@ -422,6 +422,34 @@ ul.prose, ol.prose { padding-left: 1.2em; }
   color: var(--color-text-muted);
 }
 
+/* ---------- what users say (opinion, kept apart from facts) ----------------- */
+
+.voices {
+  max-width: 72ch;
+  padding: var(--space-5) var(--space-6);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-xs);
+}
+.voices__score { font-size: 1.125rem; margin: 0 0 var(--space-2); }
+.voices__scope, .voices__trust { color: var(--color-text-secondary); font-size: 0.9375rem; }
+.voices__summary { margin: var(--space-4) 0; }
+.voices__themes { list-style: none; padding: 0; margin: var(--space-5) 0 0; display: grid; gap: var(--space-5); }
+.voices__title { font-size: 1.0625rem; margin: var(--space-2) 0; }
+.voices__tag {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: 0.65625rem;
+}
+.voices__tag--positive { background: var(--color-yes-bg); color: var(--color-yes); }
+.voices__tag--negative { background: var(--color-no-bg); color: var(--color-no); }
+.voices__tag--mixed { background: var(--color-partly-bg); color: var(--color-partly); }
+.voices__quote { margin: var(--space-2) 0 0; padding-left: var(--space-4); border-left: 2px solid var(--color-border-strong); }
+.voices__quote blockquote { margin: 0; font-style: italic; }
+.voices__quote figcaption { font-size: 0.8125rem; margin-top: 2px; }
+.voices__quote figcaption a { color: var(--color-text-muted); }
+
 /* ---------- what to watch for --------------------------------------------- */
 
 .watch {

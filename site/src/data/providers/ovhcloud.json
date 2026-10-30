@@ -234,7 +234,7 @@
   "caveats": [
     {
       "issue": "The daily backup is a priced add-on that the order waives",
-      "detail": "OVHcloud's order catalog makes a standard daily backup a mandatory option priced at $0.50 (VPS-1) to $1.20 (VPS-4) a month, while its product page and FAQ call daily backups free. The configurator settles it for now: the no-commitment VPS-1 order lists the backup at $0.50 struck through to $0.00 and totals $5.35 ex. taxes a month (checked 30 October 2026). If OVHcloud stops waiving it, each plan costs that much more.",
+      "detail": "OVHcloud's order catalog makes a standard daily backup a mandatory option priced at $0.50 (VPS-1) to $1.20 (VPS-4) a month, while its product page and FAQ call daily backups free. The configurator settles it for now: the no-commitment VPS-1 order lists the backup at $0.50 struck through to $0.00 and totals $5.35 ex. taxes a month (checked 30 October 2026). If OVHcloud stops waiving it, the three shared workloads become $5.85, $10.60 and $5.85 a month instead of $5.35, $10.00 and $5.35.",
       "status": "contradiction",
       "evidence": [
         {

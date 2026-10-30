@@ -174,6 +174,28 @@ export type SituationIcon =
   | "chip"
   | "flag";
 
+/** Public opinion about a provider, kept apart from the researched facts and never used in a verdict. */
+export interface ProviderReviews {
+  trustpilot: {
+    status: "found" | "none" | "unknown";
+    url?: string;
+    rating?: number;
+    reviews?: number;
+    readOn?: string;
+    /** What the reviewed page covers: the product, or the whole company. */
+    scope?: string;
+  };
+  sample: { trustpilotReviewsRead: number; redditPosts: number; redditComments: number; verdict: string };
+  summary: string;
+  /** How far to trust the sample. */
+  caveats: string;
+  themes: {
+    theme: string;
+    sentiment: "positive" | "negative" | "mixed";
+    evidence: { date: string; source: "trustpilot" | "reddit"; url: string; quote: string }[];
+  }[];
+}
+
 export interface Change {
   /** ISO date of the change, as reported by the source. */
   date: string;

@@ -11,11 +11,13 @@ import type {
   Situation,
   UseCase,
   Verdict,
+  ProviderReviews,
 } from "../data/schema";
 import { plainText } from "./plain";
 import { presets, price, formatMoney, catches, type RateCard } from "./cost";
 import glossaryData from "../data/glossary.json";
 import capabilityData from "../data/capabilities.json";
+import reviewData from "../data/reviews.json";
 
 /**
  * Provider documentation uses Markdown emphasis and code fences. The data files
@@ -92,6 +94,12 @@ export const providers: Provider[] = Object.values(providerModules)
   .sort((a, b) => a.name.localeCompare(b.name));
 
 export const providerById = new Map(providers.map((p) => [p.id, p]));
+
+/** Public reviews, read on one date; opinion only, kept out of every verdict. */
+export const reviews = {
+  readOn: reviewData.readOn,
+  byProvider: new Map(Object.entries(reviewData.providers) as [string, ProviderReviews][]),
+};
 
 export const features: Feature[] = Object.values(featureModules)
   .map((f) => cleanDeep(f))

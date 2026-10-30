@@ -7,7 +7,7 @@ import CompanyFacts from "../../components/CompanyFacts.astro";
 import Quote from "../../components/Quote.astro";
 import SectionNav from "../../components/SectionNav.astro";
 import Badge from "../../components/Badge.astro";
-import { providerById, providers, pricing, useCases, engineCase, features, capabilitiesOf, capabilityLabel, formatDate } from "../../lib/data";
+import { providerById, providers, pricing, useCases, engineCase, features, capabilitiesOf, capabilityLabel, formatDate, reviews } from "../../lib/data";
 import { price, presets, formatMoney, catches } from "../../lib/cost";
 import { comparisons, pairSlug, providerAnswer } from "../../lib/agents";
 
@@ -26,6 +26,8 @@ const personal = card ? price(card, presets.personal.workload) : undefined;
 const checklist = features
   .map((f) => ({ f, items: capabilitiesOf(f.id).map((c) => ({ c, row: c.rows.find((r) => r.provider === provider.id) })) }))
   .filter((g) => g.items.length);
+const voices = reviews.byProvider.get(provider.id);
+const sentimentLabel = { positive: "Praise", negative: "Complaint", mixed: "Mixed" };
 const nav = [
   { href: "#about", label: "What it is" },
   { href: "#glance", label: "At a glance" },
@@ -36,6 +38,7 @@ const nav = [
   { href: "#checklist", label: "Checklist" },
   { href: "#company", label: "Company" },
   { href: "#caveats", label: "Caveats" },
+  ...(voices ? [{ href: "#users", label: "Users say" }] : []),
   { href: "#sources", label: "Sources" },
   ...(card ? [{ href: "#costs", label: "Costs" }] : []),
 ];
@@ -216,6 +219,54 @@ const statusLabel = {
           </li>
         ))}
       </ol>
+
+      {voices && (
+        <>
+          <h2 class="section__title" id="users">What users say</h2>
+          <p class="section__note">
+            Opinion, not research. Read from public Trustpilot and Reddit pages on {formatDate(reviews.readOn)}.
+            It changes no verdict on this page; everything above comes from {provider.name}'s own documents.
+          </p>
+          <div class="voices">
+            <p class="voices__score">
+              {voices.trustpilot.status === "found" ? (
+                <>
+                  Trustpilot <strong>{voices.trustpilot.rating!.toFixed(1)} out of 5</strong> from{" "}
+                  {voices.trustpilot.reviews!.toLocaleString("en-US")} reviews ·{" "}
+                  <a href={voices.trustpilot.url} rel="noreferrer noopener">see the page</a>
+                </>
+              ) : voices.trustpilot.status === "none" ? (
+                <>No Trustpilot page</>
+              ) : (
+                <>Trustpilot page could not be read</>
+              )}
+            </p>
+            {voices.trustpilot.scope && <p class="voices__scope">{voices.trustpilot.scope}</p>}
+            <p class="voices__summary">{voices.summary}</p>
+            <p class="voices__trust"><strong>How much to trust this:</strong> {voices.caveats}</p>
+            {voices.themes.length > 0 && (
+              <ul class="voices__themes">
+                {voices.themes.map((theme) => (
+                  <li class="voices__theme">
+                    <span class={`voices__tag voices__tag--${theme.sentiment}`}>{sentimentLabel[theme.sentiment]}</span>
+                    <h3 class="voices__title">{theme.theme}</h3>
+                    {theme.evidence.slice(0, 2).map((e) => (
+                      <figure class="voices__quote">
+                        <blockquote>“{e.quote}”</blockquote>
+                        <figcaption>
+                          <a href={e.url} rel="noreferrer noopener nofollow">
+                            {e.source === "trustpilot" ? "Trustpilot review" : "Reddit"}, {formatDate(e.date)}
+                          </a>
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </>
+      )}
 
       <h2 class="section__title" id="sources">Sources</h2>
       <ul class="sources__list">

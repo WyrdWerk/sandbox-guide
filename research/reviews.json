@@ -1,0 +1,1805 @@
+{
+  "generatedOn": "2026-10-30",
+  "scope": "Public user sentiment for the 21 providers in site/src/data/providers plus six VPS providers being added (Contabo, Vultr, Akamai/Linode, OVHcloud, Scaleway, AWS Lightsail). Opinion only; it does not change or feed any verdict, rating or capability row on the site.",
+  "method": "Trustpilot company pages read through treg's crawl4ai.trustpilot.business.reviews recipe (newest 20 reviews per page, plus one older page for DigitalOcean); Reddit posts found with crawl4ai.reddit.search.posts and thread replies read with crawl4ai.reddit.post.comments. All quotes are copied from the returned text, cut at a word boundary where the source row was truncated. See notes.md for endpoints, spend and gaps.",
+  "spend": {
+    "balanceBeforeUsd": 5.44313,
+    "balanceAfterUsd": 5.36978,
+    "spentUsd": 0.07335,
+    "budgetUsd": 1
+  },
+  "providers": [
+    {
+      "id": "agent37",
+      "name": "Agent 37",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/agent37.com",
+        "rating": 4.5,
+        "reviews": 16,
+        "readOn": "2026-10-30",
+        "scope": "Agent 37's own page. Every review is about its managed VPS/agent hosting, so the page is product-specific."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 16,
+        "redditPosts": 2,
+        "redditComments": 0,
+        "verdict": "small"
+      },
+      "themes": [
+        {
+          "theme": "Support is personal and fast, and reviewers name the founder",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-07-14",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a5686de5c01abce9dce2237",
+              "quote": "Vishnu is fantastic. His knowledge, patience, and ability to effectively communicate were top tier."
+            },
+            {
+              "date": "2026-09-02",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a97daa958f9e6981099196b",
+              "quote": "Vishnu is great! Awesome product at a great price."
+            },
+            {
+              "date": "2026-07-27",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a67606f97cf5e8c45d0019e",
+              "quote": "it's only thanks to the helpful nature of Vishnu"
+            }
+          ]
+        },
+        {
+          "theme": "Predictable, low pricing versus per-token agent bills",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-08-15",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a7fe37c692f2e3d19598ee8",
+              "quote": "super affordable with predictable pricing, so no surprise bills"
+            },
+            {
+              "date": "2026-08-03",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a6fcfa2e2f0c4836c0421ae",
+              "quote": "At $3.99 you can just spin something up and see what you can do before committing to a higher plan."
+            }
+          ]
+        },
+        {
+          "theme": "Easiest path to hosting Hermes and OpenClaw agents",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-08-06",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a7480e7f10c2a8b5d75c7ef",
+              "quote": "Agent37 made hosting OpenClaw and hermes incredibly simple."
+            },
+            {
+              "date": "2026-08-12",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a7c1e6b8e9953c23897380e",
+              "quote": "setup was smooth, easy and human support team replied within hours"
+            }
+          ]
+        }
+      ],
+      "summary": "Buyers praise a hands-on founder-led support experience, predictable low pricing and quick setup for Hermes or OpenClaw agents. There is no independent criticism to weigh against that: all 16 reviews are five stars, most land in a two-month window and several name the founder, which is what solicited or coached reviews look like.",
+      "caveats": "Too few reviews to judge. 16 reviews, all 5 stars, July-September 2026, with the founder named in six of them and a brand-new official subreddit (r/Agent37, 2026-10-13). Treat the rating as marketing until independent reviews appear."
+    },
+    {
+      "id": "blaxel",
+      "name": "Blaxel",
+      "trustpilot": {
+        "status": "none",
+        "url": null,
+        "readOn": "2026-10-30",
+        "note": "Trustpilot has no page for blaxel.ai."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 0,
+        "redditPosts": 1,
+        "redditComments": 0,
+        "verdict": "too-few"
+      },
+      "themes": [],
+      "summary": "There is no user sentiment to report: no Trustpilot page exists and Reddit has one dated news post about Baseten acquiring Blaxel rather than any customer experience. Too few reviews to judge.",
+      "caveats": "The only Reddit hit is r/RuntimeWire, 2026-09-10, 'Baseten announces Blaxel acquisition to put agent runtimes beside model inference' — corporate news, not sentiment."
+    },
+    {
+      "id": "boat",
+      "name": "Boat",
+      "trustpilot": {
+        "status": "none",
+        "url": null,
+        "readOn": "2026-10-30",
+        "note": "Trustpilot has no page for boat.dev."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 0,
+        "redditPosts": 0,
+        "redditComments": 0,
+        "verdict": "too-few"
+      },
+      "themes": [],
+      "summary": "No public reviews or discussion threads about Boat's sandboxes were found. Too few reviews to judge.",
+      "caveats": "Reddit searches for 'boat.dev' and 'boat sandboxes' returned unrelated gaming threads. Boat is also the team behind battleships.dev, so any discussion there is first-party and was not counted."
+    },
+    {
+      "id": "boxd",
+      "name": "boxd",
+      "trustpilot": {
+        "status": "none",
+        "url": null,
+        "readOn": "2026-10-30",
+        "note": "Trustpilot has no page for boxd.sh (one lookup returned HTTP 502, a retry returned no page)."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 0,
+        "redditPosts": 0,
+        "redditComments": 0,
+        "verdict": "too-few"
+      },
+      "themes": [],
+      "summary": "No public reviews or discussion threads about boxd were found. Too few reviews to judge.",
+      "caveats": "Searches for 'boxd sandbox' returned unrelated sandboxing projects."
+    },
+    {
+      "id": "cloudflare-sandbox",
+      "name": "Cloudflare Sandbox",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/cloudflare.com",
+        "rating": 1.5,
+        "reviews": 1331,
+        "readOn": "2026-10-30",
+        "scope": "Company-wide page for Cloudflare's CDN, WAF, registrar and Workers platform. None of the 20 reviews read concern Sandbox or Containers; they are about bot checks, billing and support."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 20,
+        "redditPosts": 2,
+        "redditComments": 1,
+        "verdict": "large-but-off-product"
+      },
+      "themes": [
+        {
+          "theme": "Bot and captcha checks lock legitimate visitors out",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-09-02",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a975514fb90b8f945f02ffd",
+              "quote": "I have a phone ,tablet and chromebook, only phone will pass cloudflare."
+            },
+            {
+              "date": "2026-09-19",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6aade6edaee584896222b5da",
+              "quote": "Every time I want to prove I am not a robot... I am told to redo the captcha..."
+            },
+            {
+              "date": "2026-10-01",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6abec426d34d9a55b2cf7b76",
+              "quote": "Their stupid verification process stops me from legitimately accessing many sites."
+            }
+          ]
+        },
+        {
+          "theme": "Surprise charges and billing after cancellation",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-09-14",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6aa7a5ac7208b91e843e24ff",
+              "quote": "I created an Infrequent Access bucket, deleted it 2 minutes after without doing literally anything and I was charged 10$ for it."
+            },
+            {
+              "date": "2026-09-24",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ab51db79c3c011b5ea9539a",
+              "quote": "I completely closed and deleted my Cloudflare account because I was being billed for a service"
+            }
+          ]
+        },
+        {
+          "theme": "Cheap for small projects and self-hosting",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-09-27",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ab91fa87e06ea4ede0a9c99",
+              "quote": "Cheap as well for running small or personal projects, lots of services fit into the free tier."
+            },
+            {
+              "date": "2026-09-21",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ab12fd520cd4fee6ec4cb55",
+              "quote": "While automated, cloudflare is a cost-friendly solution for self-hosting."
+            }
+          ]
+        }
+      ],
+      "summary": "Cloudflare's Trustpilot page is dominated by non-customers stuck behind bot checks and by customers disputing charges, at 1.5 stars from 1,331 reviews. None of that measures Sandbox: the only sandbox-specific signals are a company post about Containers rebuilt for agent sandboxes and one developer saying a Vercel billing scare made them switch to Cloudflare.",
+      "caveats": "Off-product evidence. Do not read the 1.5 rating as a verdict on Sandbox. r/CloudFlare, 2026-09-30, 'Cloudflare Containers, rebuilt to scale agent sandboxes' has no body text and is first-party."
+    },
+    {
+      "id": "daytona",
+      "name": "Daytona",
+      "trustpilot": {
+        "status": "none",
+        "url": null,
+        "readOn": "2026-10-30",
+        "note": "Trustpilot has no page for daytona.io."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 0,
+        "redditPosts": 3,
+        "redditComments": 2,
+        "verdict": "small"
+      },
+      "themes": [
+        {
+          "theme": "Fast Firecracker cold starts make it a default choice",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-07-04",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/AI_Agents/comments/1unl2r3/how_are_you_actually_using_agent_sandboxes_like/",
+              "quote": "cold start on e2b/daytona is ~150ms (both firecracker), so the box is never your bottleneck"
+            },
+            {
+              "date": "2026-03-28",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/openclaw/comments/1s5yuxg/i_automated_secure_openclaw_sandboxes_daytona_and/",
+              "quote": "I automated secure OpenClaw sandboxes (Daytona) and open-sourced a library of monthly iterated agents to run in them"
+            }
+          ]
+        },
+        {
+          "theme": "Instances can disappear or need careful state handling",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-05-23",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/hermesagent/comments/1tl1p1m/daytona_sandbox_ate_my_instance/",
+              "quote": "Had Hermes running in a Daytona sandbox. Sandbox _somehow_ deleted the instance."
+            },
+            {
+              "date": "2026-07-04",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/AI_Agents/comments/1unl2r3/how_are_you_actually_using_agent_sandboxes_like/",
+              "quote": "don't reuse a long-lived box or you'll chase state bleed for a week"
+            }
+          ]
+        }
+      ],
+      "summary": "Developers who mention Daytona mostly treat it as a fast, standard Firecracker sandbox and build agent tooling on top of it. The few complaints are about losing a long-lived instance and about state bleeding when boxes are reused instead of paused.",
+      "caveats": "Too few reviews to judge. Two themes from three Reddit posts and two comments; no Trustpilot page and no large discussion thread."
+    },
+    {
+      "id": "digitalocean",
+      "name": "DigitalOcean",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/digitalocean.com",
+        "rating": 4.6,
+        "reviews": 2619,
+        "readOn": "2026-10-30",
+        "scope": "Company page covering Droplets, managed databases, Kubernetes and support. No review read is about agent sandboxes; they are about droplets, billing and support tickets."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 40,
+        "redditPosts": 2,
+        "redditComments": 0,
+        "verdict": "large"
+      },
+      "themes": [
+        {
+          "theme": "Support tickets are answered quickly and generously",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-10-27",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae0b7ce7abc69878066c2ba",
+              "quote": "They asked a few clear questions about the use case and lifted the restriction overnight."
+            },
+            {
+              "date": "2026-10-24",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6adccf244db5e661ed4652a2",
+              "quote": "Digital Ocean was extremely helpful in reconnecting me to my new account profile"
+            }
+          ]
+        },
+        {
+          "theme": "The chatbot wastes time before a human replies",
+          "sentiment": "mixed",
+          "evidence": [
+            {
+              "date": "2026-10-26",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6adf63557b863a7ec0b9cc09",
+              "quote": "Support was great fixed my issue with one email. Your chatbot needs work I messed with it for an hour"
+            },
+            {
+              "date": "2026-08-26",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a8ebd793b614f604585471d",
+              "quote": "I tried to buy the $6 a month droplet, and immediately my account was locked."
+            }
+          ]
+        },
+        {
+          "theme": "Straightforward pricing and stable droplets",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-10-19",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ad5a0cfe97f6e9526a60938",
+              "quote": "The pricing models are straightforward. Customer support is also prompt and effective."
+            },
+            {
+              "date": "2026-08-16",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a8212249b53fee10617248b",
+              "quote": "They may not be the cheapest option compared to some other cloud providers"
+            }
+          ]
+        },
+        {
+          "theme": "Unexpected automatic charges are the sore point",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-08-17",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a834d4fe934ffc4b3d85829",
+              "quote": "They are extremely smart when it comes to taking money from customers through automatic billing"
+            },
+            {
+              "date": "2026-08-24",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a8c4df832ff6b11bf211612",
+              "quote": "I got charged $25 unexpectedly"
+            }
+          ]
+        },
+        {
+          "theme": "Price is no longer the draw for long-time users",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-07-21",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1v26bf1/does_anyone_else_still_use_like_vultr_and_digital/",
+              "quote": "Nostalgia paints a good impression, but the pricing is not competitive any more."
+            },
+            {
+              "date": "2025-12-25",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/nextjs/comments/1pvgdj8/how_are_you_hosting_your_reactnodedjango_apps/",
+              "quote": "Looking for cheaper/better alternatives to DigitalOcean droplets"
+            }
+          ]
+        }
+      ],
+      "summary": "Buyers like the simple droplet pricing and the human support team, which resolves billing and account problems quickly. The recurring complaints are the first-line chatbot, unexpected automatic charges and, among long-time users, that the price no longer competes with cheaper European hosts.",
+      "caveats": "Page 1 is almost entirely 5-star reviews that read as sent right after a support ticket was closed; a sixth page was read to find ordinary and critical reviews. Nothing here covers a sandbox product."
+    },
+    {
+      "id": "e2b",
+      "name": "E2B",
+      "trustpilot": {
+        "status": "none",
+        "url": null,
+        "readOn": "2026-10-30",
+        "note": "Trustpilot has no page for e2b.dev."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 0,
+        "redditPosts": 3,
+        "redditComments": 4,
+        "verdict": "small"
+      },
+      "themes": [
+        {
+          "theme": "Very fast sandbox startup",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-07-04",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/AI_Agents/comments/1unl2r3/how_are_you_actually_using_agent_sandboxes_like/",
+              "quote": "cold start on e2b/daytona is ~150ms (both firecracker), so the box is never your bottleneck"
+            },
+            {
+              "date": "2026-09-12",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/AI_Agents/comments/1we9ztl/what_are_you_using_for_remote_sandboxes_for_your/",
+              "quote": "it spins up stupid fast but i hit weird timeouts on sessions that ran past 20 mins"
+            }
+          ]
+        },
+        {
+          "theme": "Long sessions time out and templates are the workaround",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-09-12",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/AI_Agents/comments/1we9ztl/what_are_you_using_for_remote_sandboxes_for_your/",
+              "quote": "i hit weird timeouts on sessions that ran past 20 mins"
+            },
+            {
+              "date": "2026-07-04",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/AI_Agents/comments/1unl2r3/how_are_you_actually_using_agent_sandboxes_like/",
+              "quote": "bake deps/repo/data into a template (e2b)"
+            }
+          ]
+        },
+        {
+          "theme": "Vendor marketing is treated with suspicion",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-16",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ArtificialInteligence/comments/1x7uge2/e2b_wants_you_to_think_sandboxes_are_dead_so_they/",
+              "quote": "E2B is now an “agent-driven private cloud”, with storage, a firewall, networking, scaling"
+            },
+            {
+              "date": "2026-09-12",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/AI_Agents/comments/1we9ztl/what_are_you_using_for_remote_sandboxes_for_your/",
+              "quote": "I work on Tensorlake, so obviously biased"
+            }
+          ]
+        }
+      ],
+      "summary": "Developers describe E2B as the fastest way to get a sandbox running, and several build agents on top of it. The doubts are about sessions that time out after long runs and about a repositioning toward a broader private cloud that some read as marketing.",
+      "caveats": "Too few reviews to judge: no Trustpilot page and only a handful of Reddit comments. The third theme's second quote is a competitor disclosing its bias, kept only to show the thread is vendor-heavy."
+    },
+    {
+      "id": "freestyle",
+      "name": "Freestyle",
+      "trustpilot": {
+        "status": "none",
+        "url": null,
+        "readOn": "2026-10-30",
+        "note": "Trustpilot has no page for freestyle.sh."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 0,
+        "redditPosts": 2,
+        "redditComments": 0,
+        "verdict": "too-few"
+      },
+      "themes": [],
+      "summary": "There is no user sentiment to report: Reddit has only a launch announcement and a pricing comparison that Freestyle's own employee posted. Too few reviews to judge.",
+      "caveats": "r/hackernews, 2026-04-06, 'Launch HN: Freestyle: Sandboxes for AI Coding Agents'; r/LangChain, 2026-04-20, opens with '[Disclosure Up Front, I work at Freestyle]'. Neither is independent."
+    },
+    {
+      "id": "hetzner",
+      "name": "Hetzner Cloud",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/hetzner.com",
+        "rating": 3.0,
+        "reviews": 3018,
+        "readOn": "2026-10-30",
+        "scope": "Hetzner Online's company page: cloud servers, dedicated servers and web hosting. Reviews do not separate Cloud from dedicated."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 20,
+        "redditPosts": 2,
+        "redditComments": 0,
+        "verdict": "large"
+      },
+      "themes": [
+        {
+          "theme": "Price-to-performance is the main reason people stay",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-10-28",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae1fb3c37e802613ad2de25",
+              "quote": "What makes a good host is when you don't notice it because there simply aren't any issues!"
+            },
+            {
+              "date": "2026-10-23",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6adbbe4a3ab98c1273a83a5d",
+              "quote": "Hetzner gives excellent price/performance and reliable VPS resources."
+            }
+          ]
+        },
+        {
+          "theme": "Support is slow and feels automated",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-23",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6adba20fa6c5cfb92a91ba57",
+              "quote": "Waiting 20 days between 2 email answers"
+            },
+            {
+              "date": "2026-10-20",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ad7beeeb138052d370d5154",
+              "quote": "An average of 4 days per (useless) response from ‘support’."
+            }
+          ]
+        },
+        {
+          "theme": "Accounts and servers locked with little warning",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-27",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae075914a2bb3ad53b52dae",
+              "quote": "My account was disabled out of nowhere"
+            },
+            {
+              "date": "2026-10-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae3084868619b69dc96bf8f",
+              "quote": "all 13 of them were blocked and account terminated due to late payment"
+            }
+          ]
+        },
+        {
+          "theme": "VAT and payment errors escalate to suspension",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-23",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6adae6a3b70860ca06c32392",
+              "quote": "We have been a Hetzner customer for years, always invoiced without VAT under reverse charge as an EU business with a valid VAT ID."
+            },
+            {
+              "date": "2026-10-20",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ad73996afaf897b8cb9c320",
+              "quote": "Suddenly, they start sending me payment reminders and including a threat to suspend all my services."
+            }
+          ]
+        },
+        {
+          "theme": "Still the cheap default, but 2026 price rises are eroding that",
+          "sentiment": "mixed",
+          "evidence": [
+            {
+              "date": "2026-09-26",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1wqhzcr/hetzner_price_hikes_whats_your_best_alternative/",
+              "quote": "Hetzner used to be the default choice for price-to-performance, but their recent price increases make it hard to justify sticking around"
+            },
+            {
+              "date": "2024-03-21",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1bk0eo0/do_not_use_contabo_for_anything_important/",
+              "quote": "I have been moving over all of my servers to Hetzner"
+            }
+          ]
+        }
+      ],
+      "summary": "Hetzner's buyers consistently praise the price-to-performance and quiet reliability of the servers. The complaints that drag the score to 3.0 are slow, templated support, sudden account or server locks, and payment or VAT mistakes that turn into suspensions.",
+      "caveats": "Recent page-1 reviews are unusually negative (12 of 20 at one star), so the 3.0 average likely understates long-run satisfaction; the Reddit thread also shows prices rising in 2026."
+    },
+    {
+      "id": "hostinger",
+      "name": "Hostinger",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/hostinger.com",
+        "rating": 4.6,
+        "reviews": 73567,
+        "readOn": "2026-10-30",
+        "scope": "Company-wide page dominated by shared hosting, the website builder and domains. Only a few reviews read mention VPS, so the score is not a VPS score."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 20,
+        "redditPosts": 1,
+        "redditComments": 0,
+        "verdict": "large-but-off-product"
+      },
+      "themes": [
+        {
+          "theme": "Named human agents get praised for rescuing tickets",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-10-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae3b7230a2030372b66a3d7",
+              "quote": "Rizka is professional, knowledgable, and KIND"
+            },
+            {
+              "date": "2026-10-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae3a0e60fb4ab93d8fc3cf4",
+              "quote": "Pedro was very helpful."
+            }
+          ]
+        },
+        {
+          "theme": "AI-first support blocks access to a human",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae371aeb5e992034ef0bd7d",
+              "quote": "Could not get any live help, only AI that did not understand questions"
+            },
+            {
+              "date": "2026-10-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae3b59a24024ff0f0085044",
+              "quote": "there is no option to speak with a human representative if needed"
+            }
+          ]
+        },
+        {
+          "theme": "Cheap VPS is easy to launch but ships insecure defaults",
+          "sentiment": "mixed",
+          "evidence": [
+            {
+              "date": "2026-10-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae376495d2e9f0b4b7158cc",
+              "quote": "easy to use VPS"
+            },
+            {
+              "date": "2026-10-19",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1x9wl74/i_scanned_20_cheap_vps_providers_contabo/",
+              "quote": "Most providers deliver VPS with: - SSH port 22 open to 0.0.0.0"
+            }
+          ]
+        }
+      ],
+      "summary": "Hostinger's page reads as a shared-hosting and website-builder page where named support agents get thanked, and the VPS itself gets only passing mentions like 'easy to use VPS'. The recurring complaint is an AI assistant that stands between the customer and a human, with a few reviewers saying email filtering and verification blocked them.",
+      "caveats": "73,567 reviews but mostly for other products, many one-line five-star entries posted the same day ('Good Service', 'BEST HOSTING'), which is what bulk solicitation looks like. Not a VPS sample."
+    },
+    {
+      "id": "hostup",
+      "name": "HostUp",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/hostup.se",
+        "rating": 4.1,
+        "reviews": 144,
+        "readOn": "2026-10-30",
+        "scope": "HostUp's own page; reviews are about its VPS and web hosting."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 20,
+        "redditPosts": 0,
+        "redditComments": 0,
+        "verdict": "moderate"
+      },
+      "themes": [
+        {
+          "theme": "Cheap VPS with fast support",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2025-07-23",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/687e3e6f80479133be52cedf",
+              "quote": "It works perfectly, costs only around 20 PLN (~4.5€), and their support replies almost instantly."
+            },
+            {
+              "date": "2025-09-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/68da43ff9571a18d9c0ae30e",
+              "quote": "The VPS is fast and runs really smooth"
+            }
+          ]
+        },
+        {
+          "theme": "Renewals jump in price without notice",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-07-28",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a6905901569765ffe059c35",
+              "quote": "increased the price to nearly five times the original amount"
+            },
+            {
+              "date": "2026-04-13",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/69dceeb540f47f6d0f78f447",
+              "quote": "Pricing jumps 5x without proper notice, and they won’t cancel or refund."
+            }
+          ]
+        },
+        {
+          "theme": "Account and payment handling frustrates some buyers",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-06-17",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a32a07fbffa42598abdd433",
+              "quote": "My account was blocked and my access cut off without any warning"
+            },
+            {
+              "date": "2026-08-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a92fcbd89b66b764b5262ba",
+              "quote": "they don't accept SEPA payments"
+            }
+          ]
+        }
+      ],
+      "summary": "HostUp earns praise for genuinely cheap VPS plans and support that answers in minutes, mostly in reviews from 2025. Every review from 2026 is a one-star complaint about renewal prices rising several-fold, charges without notice or accounts locked with no explanation.",
+      "caveats": "Small sample with a sharp time split: the 16 positive reviews are July-December 2025 and the four negative ones April-August 2026. That pattern fits either a service change or a burst of angry customers; 144 reviews total."
+    },
+    {
+      "id": "instabox",
+      "name": "InstaBox",
+      "trustpilot": {
+        "status": "none",
+        "url": null,
+        "readOn": "2026-10-30",
+        "note": "Trustpilot has no page for instabox.sh."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 0,
+        "redditPosts": 2,
+        "redditComments": 0,
+        "verdict": "too-few"
+      },
+      "themes": [
+        {
+          "theme": "New domain and an invite-only free plan raise suspicion",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-20",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1xaz5qk/instabox_invitation_code/",
+              "quote": "Has anyone received an invitation code for the free VPS plan from Instabox.sh?"
+            },
+            {
+              "date": "2026-10-15",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ScamChecker/comments/1x6nyw2/is_instaboxsh_legit_or_scam/",
+              "quote": "Domain Age: 2 days"
+            }
+          ]
+        }
+      ],
+      "summary": "The only public discussion is two October 2026 Reddit posts: one asking why an invite code for the free VPS plan never arrives, and one automated scam-check flagging the domain as days old. Too few reviews to judge.",
+      "caveats": "Do not read the r/ScamChecker score as a finding about the company; it is an automated domain-age heuristic. Note that 'Instabox' also names a Swedish parcel locker company, so most Reddit hits are about deliveries, not this product."
+    },
+    {
+      "id": "lizard",
+      "name": "Lizard",
+      "trustpilot": {
+        "status": "none",
+        "url": null,
+        "readOn": "2026-10-30",
+        "note": "Trustpilot has no page for lizard.build."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 0,
+        "redditPosts": 0,
+        "redditComments": 0,
+        "verdict": "too-few"
+      },
+      "themes": [],
+      "summary": "No public reviews or discussion threads about Lizard were found. Too few reviews to judge.",
+      "caveats": "Searches for 'lizard sandbox' returned video-game threads."
+    },
+    {
+      "id": "modal",
+      "name": "Modal",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/modal.com",
+        "rating": 2.8,
+        "reviews": 8,
+        "readOn": "2026-10-30",
+        "scope": "Modal's own page; reviews are about its compute platform, free credits and billing."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 7,
+        "redditPosts": 2,
+        "redditComments": 2,
+        "verdict": "small"
+      },
+      "themes": [
+        {
+          "theme": "Free-credit promises do not match what users get",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-08-30",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a944bc1037e62e42808c5b9",
+              "quote": "BS (marketing creativity by Modal) - there is no free credits!!!"
+            },
+            {
+              "date": "2025-10-12",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/68ebb326c9ec08b9464e9d9f",
+              "quote": "too unfair for GitHub users since they have to add a card to have the full $30/mo for free"
+            }
+          ]
+        },
+        {
+          "theme": "Hard to cancel or delete an account without support",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-06-26",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a3db2d19f7449b948e876c0",
+              "quote": "They keep charging me and I cannot even delete my account without support."
+            },
+            {
+              "date": "2026-05-31",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a1c0833acba80515cbcd8e0",
+              "quote": "Support doesnt exist, Slack is full of just bot replies, 0 help."
+            }
+          ]
+        },
+        {
+          "theme": "The product itself is well liked, especially for GPUs",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-04-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/69f20fd31aa903b4fbcdcf2b",
+              "quote": "Overall a very good product."
+            },
+            {
+              "date": "2025-12-31",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/69558e445f6c554cb62abcf6",
+              "quote": "These Modal guys give you H100 and even H200 for free."
+            }
+          ]
+        }
+      ],
+      "summary": "Reviewers who stay like the platform and its GPU access, but they describe a billing and account experience that is hard to leave. The recurring complaints are free credits that are not what marketing implied and support that answers with bots.",
+      "caveats": "Too few reviews to judge: eight Trustpilot reviews in total, of which seven were readable. Reddit discussion is warmer than Trustpilot ('Modal's solid if you're already deep in their ecosystem.', r/AI_Agents, 2026-09-12)."
+    },
+    {
+      "id": "morph",
+      "name": "Morph",
+      "trustpilot": {
+        "status": "none",
+        "url": null,
+        "readOn": "2026-10-30",
+        "note": "Trustpilot has no page for morph.so."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 0,
+        "redditPosts": 0,
+        "redditComments": 0,
+        "verdict": "too-few"
+      },
+      "themes": [],
+      "summary": "No public reviews or discussion threads about Morph were found. Too few reviews to judge.",
+      "caveats": "Searches for 'morph cloud sandbox' returned unrelated trading and game threads."
+    },
+    {
+      "id": "runtime",
+      "name": "Runtime",
+      "trustpilot": {
+        "status": "unknown",
+        "url": null,
+        "readOn": "2026-10-30",
+        "note": "The Trustpilot lookup for withruntime.com timed out twice and returned no rows; whether a page exists is unresolved."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 0,
+        "redditPosts": 0,
+        "redditComments": 0,
+        "verdict": "too-few"
+      },
+      "themes": [],
+      "summary": "No usable public sentiment was found, and the Trustpilot check did not complete. Too few reviews to judge.",
+      "caveats": "Two identical lookups timed out at the tool boundary, so this is a gap rather than a confirmed absence of a page."
+    },
+    {
+      "id": "sandboxer",
+      "name": "Sandboxer",
+      "trustpilot": {
+        "status": "none",
+        "url": null,
+        "readOn": "2026-10-30",
+        "note": "Trustpilot has no page for sandboxer.com."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 0,
+        "redditPosts": 0,
+        "redditComments": 0,
+        "verdict": "too-few"
+      },
+      "themes": [],
+      "summary": "No public reviews or discussion threads about Sandboxer were found. Too few reviews to judge.",
+      "caveats": "Reddit results for 'sandboxer' are about physical and game sandboxes."
+    },
+    {
+      "id": "sprites",
+      "name": "Sprites",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/fly.io",
+        "rating": 2.8,
+        "reviews": 20,
+        "readOn": "2026-10-30",
+        "scope": "fly.io's page for the Fly.io platform (Machines, Postgres, deploys). No review read mentions Sprites, so this is a proxy for the company behind it, not for the sandbox product."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 20,
+        "redditPosts": 2,
+        "redditComments": 1,
+        "verdict": "small"
+      },
+      "themes": [
+        {
+          "theme": "Billing surprises and charges without consent",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2025-09-02",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/68b6b0f502d5cb21e06fa189",
+              "quote": "In july 19, suddenly I got a mail from bank. Fly.io tried to deduct 25$."
+            },
+            {
+              "date": "2025-06-12",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/684b42df692758325d7f5cd4",
+              "quote": "They unilaterally added a paid dedicated IP option to all free accounts"
+            }
+          ]
+        },
+        {
+          "theme": "Stability and deploy reliability are questioned",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2025-07-08",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/686d40bc0fc35632f01ad1ab",
+              "quote": "Not stable. Definitely not production ready."
+            },
+            {
+              "date": "2023-02-12",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/63e82eb99b64b1bdaf5492d3",
+              "quote": "Cheap, low latency, everything else is meh"
+            }
+          ]
+        },
+        {
+          "theme": "Fast containers and low latency when it works",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-06-02",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a1f1504d2354ad7fbdf8fa3",
+              "quote": "We experienced zero friction migrating our containerized workloads over to Fly.io."
+            },
+            {
+              "date": "2023-05-26",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/64708da65cdf949a17e50e7b",
+              "quote": "One Dockerfile, free Let's Encrypt SSL certificates, and a reasonable cold start time."
+            }
+          ]
+        },
+        {
+          "theme": "Sprites draws interest but needed a filesystem rework",
+          "sentiment": "mixed",
+          "evidence": [
+            {
+              "date": "2026-10-22",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/RuntimeWire/comments/1xcp49w/flyio_replaces_sprites_homemade_filesystem_after/",
+              "quote": "Fly.io replaces Sprites' homemade filesystem after checkpoint failures"
+            },
+            {
+              "date": "2026-01-12",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/ClaudeAI/comments/1qaca87/sprites_stateful_sandboxes_from_flyio/",
+              "quote": "This actually looks super useful."
+            }
+          ]
+        }
+      ],
+      "summary": "Fly.io's own reviews describe fast containers and low latency, but also bills that appear without consent and a platform reviewers call not production ready. Sprites specifically has almost no user commentary beyond an October 2026 report that its homemade filesystem was replaced after checkpoint failures.",
+      "caveats": "Only 20 Fly.io reviews, none about Sprites. Do not transfer the 2.8 rating to Sprites; treat it as context about the operator."
+    },
+    {
+      "id": "tensorlake",
+      "name": "Tensorlake",
+      "trustpilot": {
+        "status": "none",
+        "url": null,
+        "readOn": "2026-10-30",
+        "note": "Trustpilot has no page for tensorlake.ai."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 0,
+        "redditPosts": 4,
+        "redditComments": 1,
+        "verdict": "too-few"
+      },
+      "themes": [
+        {
+          "theme": "Compromised npm SDK in the Shai-Hulud supply-chain attack",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-08",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/devsecops/comments/1x0iss3/supplychain_alert_tensorlake_npm_package_hit_by/",
+              "quote": "Supply-chain alert: Tensorlake npm package hit by the Shai-Hulud worm."
+            },
+            {
+              "date": "2026-10-08",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/cybersecurity/comments/1x0klic/tensorlake_npm_package_compromised_to_deliver/",
+              "quote": "Tensorlake npm Package Compromised to Deliver Shai-Hulud Credential-Stealing Worm"
+            },
+            {
+              "date": "2026-10-08",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/TechNadu/comments/1x0n2la/tensorlake_npm_sdk_05144_compromised_with/",
+              "quote": "preinstall hook steals credentials before the SDK runs"
+            }
+          ]
+        }
+      ],
+      "summary": "There is no ordinary customer sentiment, only a security incident: in October 2026 a malicious release of the Tensorlake npm package shipped credential-stealing code and was widely reported. Buyers should treat that as a supply-chain question to ask about, not as a measure of the sandbox service itself.",
+      "caveats": "Too few reviews to judge product quality. The one Reddit comment from Tensorlake is a vendor self-introduction ('I work on Tensorlake, so obviously biased', r/AI_Agents, 2026-09-12) and is not counted as sentiment."
+    },
+    {
+      "id": "vercel-sandbox",
+      "name": "Vercel Sandbox",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/vercel.com",
+        "rating": 1.6,
+        "reviews": 125,
+        "readOn": "2026-10-30",
+        "scope": "Vercel's company page for hosting, v0 and billing. Only the Reddit thread below is about Sandbox specifically; the Trustpilot reviews are about plans, cancellation and the security checkpoint."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 20,
+        "redditPosts": 2,
+        "redditComments": 8,
+        "verdict": "moderate"
+      },
+      "themes": [
+        {
+          "theme": "Cancelling and stopping charges is the top complaint",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-10",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6acaa33bfa9f11f07db39d2f",
+              "quote": "I have repeatedly tried to cancel, and they continue to bill me."
+            },
+            {
+              "date": "2026-08-27",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a9067f3efb10b2437e63feb",
+              "quote": "WARNING: Vercel will not let you cancel."
+            }
+          ]
+        },
+        {
+          "theme": "Sandbox charges can run away after an account compromise",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-21",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/vercel/comments/1xbjrlk/3152_in_unexpected_vercel_sandbox_charges_from_a/",
+              "quote": "$3,152 in unexpected Vercel Sandbox charges from a project we never created."
+            },
+            {
+              "date": "2026-10-21",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/vercel/comments/1xbjrlk/3152_in_unexpected_vercel_sandbox_charges_from_a/",
+              "quote": "damn thats scary, hopefully someone on vercel side see this and pause that billing before it hits you."
+            }
+          ]
+        },
+        {
+          "theme": "The bot checkpoint blocks real users",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-08-21",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a87de965b80a1e58011e262",
+              "quote": "VERCEL’S SECURITY CHECKPOINT STILL REFUSES TO LET ME THROUGH"
+            },
+            {
+              "date": "2026-08-13",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a7e03a4f49eff01960491bd",
+              "quote": "It blocks for example librewolf."
+            }
+          ]
+        },
+        {
+          "theme": "Support is slow when a deployment breaks",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-08-09",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a78874c71874eb291ee218f",
+              "quote": "Very bad support. Will not use Vercel again!"
+            },
+            {
+              "date": "2026-08-15",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a809a2522f5ac3e0a6fa82c",
+              "quote": "Catastrophic support failure during live client deployments—Avoid at all costs."
+            }
+          ]
+        }
+      ],
+      "summary": "Sandbox users describe a good product with a billing model that can produce four-figure surprise charges, and the one detailed Reddit case drew a same-day reply from a Vercel employee. The rest of the page is about hosting plans, cancellation and a bot checkpoint that blocks legitimate browsers.",
+      "caveats": "Trustpilot is 125 reviews for all of Vercel, not Sandbox. The $3,152 case is a single unverified customer report; the thread shows Vercel responding, not the outcome."
+    },
+    {
+      "id": "contabo",
+      "name": "Contabo",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/contabo.com",
+        "rating": 4.6,
+        "reviews": 11613,
+        "readOn": "2026-10-30",
+        "scope": "Contabo's own page for VPS, VDS and dedicated servers."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 20,
+        "redditPosts": 3,
+        "redditComments": 0,
+        "verdict": "large"
+      },
+      "themes": [
+        {
+          "theme": "Cheap specs and acceptable performance",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-10-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae36351bb705a7cd19fc398",
+              "quote": "Good ratio price/value."
+            },
+            {
+              "date": "2026-10-28",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae1d55be02893cc0366fdcd",
+              "quote": "Servers are fast and always available without much delay"
+            }
+          ]
+        },
+        {
+          "theme": "Multi-day VDS outages in October 2026",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae31584bc83db49ef9e9694",
+              "quote": "Our VDS at Contabo has been down since October 26"
+            },
+            {
+              "date": "2026-10-28",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae20ebf9823a0b5a094fe35",
+              "quote": "Our VDS at Contabo has been down since Oct 26, 20:00 (UTC+3), almost 48 hours now."
+            }
+          ]
+        },
+        {
+          "theme": "No human answer and no ETA during incidents",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae33677997106b3f948401c",
+              "quote": "We are stuck with a non-functional VDS with no way to contact Contabo"
+            },
+            {
+              "date": "2026-10-28",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae1c5167ec8d9c9bfede34b",
+              "quote": "All they provide are copy/paste"
+            }
+          ]
+        },
+        {
+          "theme": "When support engages, migrations and onboarding go well",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-10-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6adf5bb482302230fc2a804d",
+              "quote": "they resolved it cleanly through a live migration to a new host node"
+            },
+            {
+              "date": "2026-10-28",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae1b7ac60e272b8aa9c5b56",
+              "quote": "Onboarding was pretty smooth and usability is good."
+            }
+          ]
+        },
+        {
+          "theme": "Long-running users warn others off important workloads",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-09-21",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1wmq17m/contabo_deleted_my_live_server_and_gave_my_ip_to/",
+              "quote": "Contabo deleted my live server and gave my IP to another customer."
+            },
+            {
+              "date": "2025-04-28",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1k9wako/contabo_longterm_review_2_years/",
+              "quote": "I have been seeing a lot of bashing on Contabo, and let me start by saying that most of it is all justified."
+            }
+          ]
+        }
+      ],
+      "summary": "Contabo sells cheap, large VPS and VDS plans that reviewers say perform well day to day, and its support can fix things quickly when a named agent picks up the ticket. The recurring failure is outages handled with silence: multiple customers reported their VDS down for two to three days in late October 2026 with no human reply or ETA.",
+      "caveats": "The 4.6 average comes from 11,613 reviews over years; the reviews read are from a single week of outages, so both the average and this page are biased in opposite directions. Reviews appear to be solicited after support contacts."
+    },
+    {
+      "id": "vultr",
+      "name": "Vultr",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/vultr.com",
+        "rating": 1.5,
+        "reviews": 588,
+        "readOn": "2026-10-30",
+        "scope": "Vultr's own page for cloud compute, GPU and VPS."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 20,
+        "redditPosts": 3,
+        "redditComments": 0,
+        "verdict": "moderate"
+      },
+      "themes": [
+        {
+          "theme": "Charges and suspensions that customers call unexplained",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-06",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ac5395817cd7f340763618e",
+              "quote": "I was charged 1100 usd with no notice even though my usage for the month so far is only 160 usd."
+            },
+            {
+              "date": "2026-10-12",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6acd17d4983342b5cb0f7c3a",
+              "quote": "Paid $250, server suspended anyway, and only template replies"
+            }
+          ]
+        },
+        {
+          "theme": "Account-wide throttling and shutdowns hit paying servers",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-19",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ad5a8bd629e319b1fac22a7",
+              "quote": "This led to an ACCOUNT WIDE throttling to unusable levels of ALL MY SERVERS"
+            },
+            {
+              "date": "2026-10-12",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6acc4c7c7f923fb924aff475",
+              "quote": "They shut down our servers WITHOUT ANY PRIOR NOTICE, WITHOUT ANY WARNING"
+            }
+          ]
+        },
+        {
+          "theme": "Account restrictions and promo-credit friction",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-21",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ad8338fda64e925fcee6989",
+              "quote": "Vultr blocks SMTP port 25 by default"
+            },
+            {
+              "date": "2026-08-28",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a91a1da5ab7b0723037ea2c",
+              "quote": "Signup bonus is a SCAM.DO NOT ENTER YOUR CARD details."
+            }
+          ]
+        },
+        {
+          "theme": "Reliable and simple when nothing goes wrong",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-09-01",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a968e6d2a5522b4a6442df2",
+              "quote": "pretty good use their cheap vps as vpn setup for friends for long time"
+            },
+            {
+              "date": "2025-03-10",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1j8bp9c/a_vps_thats_as_good_as_vultr_but_as_cheap_as/",
+              "quote": "vultr is really expensive for me but it's really good tbh"
+            }
+          ]
+        }
+      ],
+      "summary": "Vultr's reviewers split sharply: some run cheap VPN and side-project servers for years without trouble, while a large share report surprise charges, account suspensions and support that answers with templates. The 1.5 average reflects how loud the second group is, and Reddit adds that Vultr is now expensive relative to newer hosts.",
+      "caveats": "Review-site bias toward complaints is strong here: 19 of 20 recent reviews are one star. The r/VPS thread 'Vultr blocks legitimate payments and suspends accounts' (2026-04-27) matches the Trustpilot pattern but was not read in full."
+    },
+    {
+      "id": "linode",
+      "name": "Akamai / Linode",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/linode.com",
+        "rating": 2.3,
+        "reviews": 208,
+        "readOn": "2026-10-30",
+        "scope": "Linode's page, which since the Akamai acquisition covers Linode compute and Akamai cloud services."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 20,
+        "redditPosts": 2,
+        "redditComments": 0,
+        "verdict": "moderate"
+      },
+      "themes": [
+        {
+          "theme": "Fraud filters kill new accounts after card details",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-09-07",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a9deca6a186de601b0b7984",
+              "quote": "only for an automated fraud filter to bin the entire account half an hour later"
+            },
+            {
+              "date": "2025-09-07",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/68bd6008043594b94bfbe409",
+              "quote": "A recently created account with this email address was canceled by our automated systems."
+            }
+          ]
+        },
+        {
+          "theme": "The Akamai takeover is blamed for decline",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2025-03-18",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/67d9151bf18864460f27b3f9",
+              "quote": "Akamai destroys linode reputation"
+            },
+            {
+              "date": "2026-10-21",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ad92d2543fd81d01086e597",
+              "quote": "Linode thought that we were suspicious and rejected our account AFTER asking for payment method."
+            }
+          ]
+        },
+        {
+          "theme": "Outages run for hours to a day",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2025-07-28",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6886f990d2c8d3192af258ed",
+              "quote": "Server been down for 18 hours so far - no end in sight."
+            },
+            {
+              "date": "2025-07-27",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/68865205484242e17f6a3e61",
+              "quote": "Today experiencing a 7 hour downtime."
+            }
+          ]
+        },
+        {
+          "theme": "Long-term users still like the API, though storage is pricey",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-09-05",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a9bfe5ba4505419f7fb05f0",
+              "quote": "thier SCRIPTING api is sweet, completely on par with Digital Ocean"
+            },
+            {
+              "date": "2025-09-01",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/68b5ff8b32528e59d055e00f",
+              "quote": "Their linodes are a bit pricey for the storage"
+            }
+          ]
+        },
+        {
+          "theme": "Reddit sees pricing drift and a merged Akamai UI",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2025-07-04",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1lrra6q/uk_looking_for_vps_provider_to_replace/",
+              "quote": "the pricing has become too prohibitive"
+            },
+            {
+              "date": "2026-09-09",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1wbxw28/what_happened_to_do_linode/",
+              "quote": "What happened to DO, Linode?"
+            }
+          ]
+        }
+      ],
+      "summary": "Long-time users still like the scripting API and stable Linodes, but the recent review pattern is new accounts cancelled by fraud filters minutes after adding a card. Reviewers also blame the Akamai acquisition for a worse console, higher prices and outages measured in hours.",
+      "caveats": "208 reviews is a small base for a provider this old, and the page skews to rejected signups. Several reviewers say they were never able to become customers, so their experience is of onboarding, not of running servers."
+    },
+    {
+      "id": "ovhcloud",
+      "name": "OVHcloud",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/ovhcloud.com",
+        "rating": 3.8,
+        "reviews": 9058,
+        "readOn": "2026-10-30",
+        "scope": "One company page for VPS, dedicated servers, web hosting, domains and webmail. Reviews mix all of them."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 20,
+        "redditPosts": 1,
+        "redditComments": 0,
+        "verdict": "large"
+      },
+      "themes": [
+        {
+          "theme": "Support quality swings between excellent and useless",
+          "sentiment": "mixed",
+          "evidence": [
+            {
+              "date": "2026-10-30",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae3cf08dba105522e13a809",
+              "quote": "Very easy to find and discuss the issue"
+            },
+            {
+              "date": "2026-10-27",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae10f7f0b9a9970c711da33",
+              "quote": "The worst customer service I have ever experienced in this space."
+            },
+            {
+              "date": "2026-10-23",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6adb304a82b1f50d20bb9971",
+              "quote": "Customer support at OVH is worse than McDonalds"
+            }
+          ]
+        },
+        {
+          "theme": "Orders cancelled after payment, with generic reasons",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-28",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae1b1f5f0e54ba34ec152ce",
+              "quote": "Ordered a VPS. Paid in full. Order confirmed. Told to wait. Then suddenly, CANCELLED."
+            },
+            {
+              "date": "2026-10-28",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae1d68b33ec30f40e9ed4f3",
+              "quote": "Their own wrong lead time cost me a month of IPs, no credit"
+            }
+          ]
+        },
+        {
+          "theme": "A working VPS is cheap and does the job",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-10-29",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae29ed65a3099d1c86334ef",
+              "quote": "I got a VPS-3 for testing, and learning Sys admin stuff"
+            },
+            {
+              "date": "2026-10-23",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6adb9177046f22db42bcee3d",
+              "quote": "My VPS renewal got stuck and I ended up with two overlapping invoices"
+            }
+          ]
+        },
+        {
+          "theme": "Long-term users leave over the interface and support",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2025-06-18",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1le5ajl/current_best_vps_hosting/",
+              "quote": "the support is awful and the interfaces are"
+            },
+            {
+              "date": "2026-10-28",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ae1b016e1bbef14a505b5f9",
+              "quote": "Terrible support, manual process for everything, very poor communication."
+            }
+          ]
+        }
+      ],
+      "summary": "OVHcloud is cheap enough that people keep buying VPS there, and a working server with a named support agent gets five stars. The other half of the page is orders cancelled after payment with generic reasons, invoices that go wrong, and support that cannot escalate.",
+      "caveats": "One page covers VPS, webmail, domains and dedicated servers, so many complaints are not about VPS at all. At 9,058 reviews the average is more stable than page 1 suggests."
+    },
+    {
+      "id": "scaleway",
+      "name": "Scaleway",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/scaleway.com",
+        "rating": 1.5,
+        "reviews": 360,
+        "readOn": "2026-10-30",
+        "scope": "Scaleway's own page for cloud instances, Dedibox, domains and Mac minis."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 20,
+        "redditPosts": 2,
+        "redditComments": 0,
+        "verdict": "moderate"
+      },
+      "themes": [
+        {
+          "theme": "Accounts restricted or deleted during verification",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-08-19",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a85d23a0926d613e3527994",
+              "quote": "they restrict your account with no reason"
+            },
+            {
+              "date": "2026-10-02",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6abf73486f9e86b03619eab2",
+              "quote": "They blocked and deleted new account, with all validations and verifications."
+            }
+          ]
+        },
+        {
+          "theme": "Charged before access, refunds slow",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-06",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ac4f9851141717c8626d6c9",
+              "quote": "Scaleway took my money before I had even received the service I was paying for."
+            },
+            {
+              "date": "2026-10-04",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ac2431d9dbee164c84982d7",
+              "quote": "Took my money, could not access my remote computer. Refused to refund me."
+            }
+          ]
+        },
+        {
+          "theme": "Billing timing and extra fees surprise buyers",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-08-04",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a725bc1e035ddd15a36fe15",
+              "quote": "there are fees for the IP address and block storage, which are approx. 3.5 EUR"
+            },
+            {
+              "date": "2026-08-03",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a70bf046930935b91d06bb1",
+              "quote": "try to take money 1-2 weeks early"
+            }
+          ]
+        },
+        {
+          "theme": "A minority reports a clean, developer-friendly platform",
+          "sentiment": "positive",
+          "evidence": [
+            {
+              "date": "2026-07-04",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a49404fdd7c6c2c3e9f9c96",
+              "quote": "The platform feels clean and developer-friendly"
+            },
+            {
+              "date": "2026-07-12",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a5383533aa76f12bea8474e",
+              "quote": "I don't know why they have this rating."
+            }
+          ]
+        },
+        {
+          "theme": "Reddit treats Scaleway as the expensive EU fallback",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-09-11",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1wdav8w/looking_for_an_arm_vps_in_the_eu_hetzner_netcup/",
+              "quote": "Hetzner & Netcup sold out, Scaleway costs 3x more"
+            },
+            {
+              "date": "2026-04-17",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1sogtzk/anyone_has_experience_with_scaleway_and_their/",
+              "quote": "Anyone has experience with Scaleway and their Dedibox VPS"
+            }
+          ]
+        }
+      ],
+      "summary": "Most Scaleway reviews describe being charged, then blocked by identity checks or left without the machine they paid for, and refunds that take weeks. The minority who get running servers call the console clean and developer-friendly, while Reddit mostly mentions Scaleway as a pricier fallback when Hetzner is sold out.",
+      "caveats": "1.5 from 360 reviews is a complaint-heavy sample; 17 of the 20 reviews read are one star. One five-star reviewer says the rating is undeserved, which is a useful counterweight but not a trend."
+    },
+    {
+      "id": "aws-lightsail",
+      "name": "AWS Lightsail",
+      "trustpilot": {
+        "status": "found",
+        "url": "https://www.trustpilot.com/review/aws.amazon.com",
+        "rating": 1.3,
+        "reviews": 433,
+        "readOn": "2026-10-30",
+        "scope": "The 'Aws Amazon' page covers the whole AWS account: EC2, billing, support and even Amazon retail orders. No review read mentions Lightsail by name."
+      },
+      "sample": {
+        "trustpilotReviewsRead": 20,
+        "redditPosts": 2,
+        "redditComments": 0,
+        "verdict": "large-but-off-product"
+      },
+      "themes": [
+        {
+          "theme": "Billing errors and disputed charges",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-26",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6adf63b9e94d8ea737ff7083",
+              "quote": "I ran an EC2 instance for about 1 hour and AWS billed me for about 60 instance-hours."
+            },
+            {
+              "date": "2026-10-07",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ac5ae5c54c771309c9a24b6",
+              "quote": "Dormant account with nothing in it, I received bills of $500 today"
+            }
+          ]
+        },
+        {
+          "theme": "Accounts suspended during identity checks",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-10-26",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6adfa8f8beb6946f53db27ca",
+              "quote": "Account was put on hold even though address, card and all other details matched."
+            },
+            {
+              "date": "2026-09-21",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ab145fd8d807c73b8bc6ce9",
+              "quote": "They suspended our account due to security issue that was not even there."
+            }
+          ]
+        },
+        {
+          "theme": "Support is slow or paywalled",
+          "sentiment": "negative",
+          "evidence": [
+            {
+              "date": "2026-08-22",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6a89ac59e69477251aad3807",
+              "quote": "I’ve been waiting days for a reply"
+            },
+            {
+              "date": "2026-10-22",
+              "source": "trustpilot",
+              "url": "https://www.trustpilot.com/reviews/6ad9ea75185f7d32c8e96dc8",
+              "quote": "These guys just need to sell the support charges"
+            }
+          ]
+        },
+        {
+          "theme": "Lightsail itself is a cheap, small VPS in Reddit threads",
+          "sentiment": "mixed",
+          "evidence": [
+            {
+              "date": "2025-04-02",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1jpwbsz/alternative_to_aws_lightsail/",
+              "quote": "I've the smallest Lightsail VPS (5 USD/month, 0.5GB RAM, 2 vCPUs, 20 GB SSD, 1 TB Transfer)"
+            },
+            {
+              "date": "2024-10-28",
+              "source": "reddit",
+              "url": "https://www.reddit.com/r/VPS/comments/1geegne/benchmark_running_my_php_application_on_contabo/",
+              "quote": "Benchmark: running my PHP application on Contabo, IONOS, Hetzner, DataWagon, HostMF, Amazon Lightsail"
+            }
+          ]
+        }
+      ],
+      "summary": "The AWS page is almost entirely about account-level pain: bills that do not match usage, accounts frozen during verification and support that is slow or sold separately. Lightsail appears on Reddit mainly as a small $5 VPS people benchmark against cheaper hosts, not as a product with its own review base.",
+      "caveats": "Off-product evidence: no review read mentions Lightsail, and at least one is about Amazon retail orders. Do not treat the 1.3 rating as a Lightsail score."
+    }
+  ]
+}
