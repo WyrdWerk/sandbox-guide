@@ -1,0 +1,198 @@
+{
+  "provider": "lightsail",
+  "checkedOn": "2026-10-30",
+  "rows": {
+    "isolation": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Full VM; root, Docker, SSH",
+      "scenario": "Clone, build and load the module without a workaround: an ordinary Linux virtual machine with its own kernel, root, Docker and SSH.",
+      "note": "A full VM with dedicated RAM, disk and a burstable shared vCPU. Nested virtualisation is not documented, GPUs exist only in the separate Lightsail for Research product, and the hypervisor is never named.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
+        "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "sizes-regions": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "64 vCPU / 256 GiB; 19 regions",
+      "scenario": "The 4 vCPU / 8 GiB ask needs the $84 Xlarge-16GB or the equally priced compute-optimised 8 GB bundle, in one of 19 regions including six in the EU.",
+      "note": "25 fixed Linux bundles from 2 vCPU / 0.5 GB / 20 GB at $5 to 64 vCPU / 256 GB / 1,280 GB at $1,764 a month, plus memory- and compute-optimised families up to 512 GB and 72 vCPU. No independent sizing and no in-place resize: a new instance from a snapshot is the only way to change plan.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
+        "quote": "Lightsail offers a variety of instance bundles (also known as instance plans) to meet different workload requirements.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "billing-models": {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "$0.03225/h, $24 cap",
+      "scenario": "A 2 vCPU / 4 GiB box is $0.03225 an hour, never more than $24 a month, and costs the same while it is stopped.",
+      "note": "Hourly billing at the monthly price divided by 744, capped at the monthly price, so 730 hours on the $24 bundle is $23.54 rather than $24. A stopped instance keeps billing at the full rate until deleted, there is no per-second meter, and AWS does not publish whether a partial hour rounds up: if it did, 1,000 ten-minute runs would cost $32.25 rather than $5.38.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
+        "quote": "Bundles are billed on an on-demand hourly rate, so you pay only for what you use.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "trials-free-tiers": {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "Up to $200 credits",
+      "scenario": "A new AWS account gets up to $200 of credits for six months; there is no recurring free Lightsail allowance after that.",
+      "note": "Lightsail's own short-term trials have been retired and replaced by AWS Free Tier credits: $100 at sign-up plus up to $100 earned, on an account that closes after six months or when the credits run out. A payment method is required to open the account.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "Lightsail’s short-term free trial offers have been replaced by the AWS Free Tier.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "lifecycle": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Stop keeps disk; still billed",
+      "scenario": "Stopping powers the machine down and keeps the disk, but memory and running processes are gone and the meter keeps running.",
+      "note": "Stop, start and reboot exist; there is no pause, no memory snapshot and no cheap stopped state. Stopping releases the public IPv4 address unless a static IP is attached, and the instance bills at the full hourly rate until it is deleted.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "These resources accrue charges even when they are in the stopped state.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "snapshots-forks": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "$0.05/GB-mo; 7 daily",
+      "scenario": "Snapshot the disk and build a second instance from it on the same or a larger plan; the latest seven automatic snapshots are kept for you.",
+      "note": "Manual snapshots last until deleted and cost $0.05 per GB-month; automatic snapshots keep seven daily copies and are deleted with the instance. Snapshots hold disk state only, cannot restore to a smaller plan, and a copy of a running machine starts from the snapshot moment rather than from live memory.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html",
+        "quote": "A snapshot contains all of the data that is needed to restore your resource (from the moment when the snapshot was taken).",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "storage": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "20-1,280 GB SSD; 16 TB disks",
+      "scenario": "The bundle's 80 GB SSD covers the 20 GiB ask, and extra block storage at $0.10 per GB-month outlives the instance.",
+      "note": "Each bundle includes its SSD, from 20 GB to 1,280 GB. Extra disks are $0.10 per allocated GB-month, 8 GB to 16 TB each, 15 per instance and 20,000 GB per region, attached to one instance at a time. Object storage buckets are S3-compatible but not mountable as a folder.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/elastic-block-storage-and-ssd-disks-in-amazon-lightsail.html",
+        "quote": "You can also add more storage to your virtual private server by creating additional block storage disks.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "idle-timers": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "No idle stop",
+      "scenario": "It runs for weeks: there is no idle timeout, session cap or automatic shutdown, and it bills for every hour it exists.",
+      "note": "Nothing stops an idle instance and nothing wakes a stopped one on a request. There is no job or instance scheduler, so cron inside the machine is the only way to run something on a timetable.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "Lightsail instances and managed databases incur charges until they are deleted.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "reaching-it": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Public IPv4, SSH, browser",
+      "scenario": "Reach it on its public IPv4 address over any port you open, or open a browser SSH session from the console.",
+      "note": "Every public-IPv4 bundle is internet-reachable, and the instance firewall opens the ports you choose, optionally restricted by source IP. There is no token-scoped private link. A static IP keeps the address across stops; the default public IP changes.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "You can use the public IP to connect to your instance from the Internet, such as through a registered domain name or through an SSH or RDP connection from your local computer.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "custom-domains": {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "DNS zones; TLS yourself",
+      "scenario": "Point a DNS record at the static IP, then install Caddy or Certbot; automatic certificates come only with the $18/month load balancer.",
+      "note": "Six DNS zones are free, and domain registration is sold at cost. A plain instance has no managed certificate, so renewal is your job; the WordPress blueprint has a guided Let's Encrypt setup, and a Lightsail load balancer includes free certificate management and HTTP-to-HTTPS redirect.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "Lightsail certificates and certificate management are free with use of a Lightsail load balancer.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "outbound-network": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "1-10 TB included; $0.09/GB",
+      "scenario": "The bundle includes 1 TB to 10 TB of transfer, overage is $0.09 to $0.17 a GB, and outbound traffic is otherwise unrestricted.",
+      "note": "Both directions count against the allowance, but only outbound traffic over it is charged; allowances are halved in Mumbai, Sydney, Jakarta, Malaysia, Hong Kong and Sao Paulo. There is no outbound allowlist and no no-internet mode, and the instance's public IP (static if you attach one) is its egress address.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-faq-data-transfer-allowance.html",
+        "quote": "Every Lightsail instance plan includes a data transfer allowance.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "keys-secrets": {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "IAM keys; no secret store",
+      "scenario": "Scope API keys with IAM policies, but application secrets sit in files that anything with shell access can read.",
+      "note": "IAM gives scoped API keys, resource-level permissions and tag conditions, and CloudTrail records their use. There is no Lightsail secret store, no environment-variable injection and no proxy that hides a key from the agent.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/security_iam_service-with-iam.html",
+        "quote": "Policy actions in Lightsail use the following prefix before the action: `lightsail:`.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "ways-to-drive": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Console, CLI, API, SDKs",
+      "scenario": "Create the machine in the console, then drive it with aws lightsail, boto3 or the JavaScript SDK; there is no PTY or file API.",
+      "note": "The console, AWS CLI, documented JSON API and generated SDKs cover instances, disks, static IPs, snapshots and DNS. AWS's official MCP server can call any AWS API, Lightsail included, but ships no Lightsail-specific tools. Terminal access is SSH, and files move by SFTP.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/getstarted-awscli.html",
+        "quote": "This tutorial guides you through common Amazon Lightsail operations using the AWS Command Line Interface (AWS CLI).",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "built-in-agents": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "None preinstalled",
+      "scenario": "Nothing agent-shaped is installed: you add Claude Code, Hermes or OpenClaw yourself on an Ubuntu image.",
+      "note": "Blueprints are operating systems and web stacks (Ubuntu, Amazon Linux, WordPress, LAMP, Node.js). There is no prompt API, no preinstalled coding agent, no browser and no Linux desktop; only Windows bundles offer a desktop, over RDP.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/compare-options-choose-lightsail-instance-image.html",
+        "quote": "You can install many additional software packages, such as Evolution, GIMP, Pidgin, and Synaptic by using the APT-based package management tool (`apt-get`).",
+        "confidence": "inferred"
+      }
+    },
+    "teams-accounts": {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "IAM roles; no spend cap",
+      "scenario": "IAM users, groups and Identity Center single sign-on cover the team; a hard spend cap does not exist, only Budgets alerts.",
+      "note": "Access is AWS IAM rather than a Lightsail feature: policies, groups, roles, federation and CloudTrail audit, and Identity Center adds SSO. There is no hard spending cap: AWS Budgets can alert on spend and apply an IAM policy action, but nothing stops a running instance when a limit is crossed.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-managing-access-for-an-iam-user.html",
+        "quote": "you can create one or more IAM users in your AWS account, and those users can be configured with different levels of access to services offered by AWS.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "company": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "AWS; 99.5% SLA; SOC 1/2/3",
+      "scenario": "Amazon Web Services, Inc. sells it with a 99.5% per-instance SLA, SOC 1/2/3 reports and a DPA that covers customer data.",
+      "note": "The SLA is a commercially reasonable efforts commitment with service credits, 99.5% per instance and 99.99% at region level. The contracting party depends on the account country, and the AWS Health Dashboard covers outages across all AWS services rather than Lightsail alone.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/",
+        "quote": "AWS will use commercially reasonable efforts to make the Single Lightsail Instance available with an Instance-Level Uptime Percentage, as shown in the table below during any monthly billing cycle",
+        "confidence": "docs-confirmed"
+      }
+    }
+  }
+}

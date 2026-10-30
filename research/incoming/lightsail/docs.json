@@ -1,0 +1,66 @@
+{
+  "isolation": {
+    "title": "Virtual private server instances in Lightsail",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html"
+  },
+  "sizes-regions": {
+    "title": "Lightsail instance bundles",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html"
+  },
+  "billing-models": {
+    "title": "Lightsail pricing: hourly rate and monthly cap",
+    "url": "https://aws.amazon.com/lightsail/pricing/"
+  },
+  "trials-free-tiers": {
+    "title": "Billing and account management: free trials and credits",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html"
+  },
+  "lifecycle": {
+    "title": "Start, stop, or reboot your Lightsail instance",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-start-stop-or-restart-your-instance-virtual-private-server.html"
+  },
+  "snapshots-forks": {
+    "title": "Snapshots in Amazon Lightsail",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html"
+  },
+  "storage": {
+    "title": "Block storage and SSD disks in Lightsail",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/elastic-block-storage-and-ssd-disks-in-amazon-lightsail.html"
+  },
+  "idle-timers": {
+    "title": "Billing and account management: charges until deleted",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html"
+  },
+  "reaching-it": {
+    "title": "Instance firewalls and port mappings",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html"
+  },
+  "custom-domains": {
+    "title": "DNS in Amazon Lightsail",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-dns-in-amazon-lightsail.html"
+  },
+  "outbound-network": {
+    "title": "Data transfer in Lightsail: allowances and overage",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-faq-data-transfer-allowance.html"
+  },
+  "keys-secrets": {
+    "title": "Lightsail policies and roles in IAM",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/security_iam_service-with-iam.html"
+  },
+  "ways-to-drive": {
+    "title": "Using Amazon Lightsail with the AWS CLI",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/getstarted-awscli.html"
+  },
+  "built-in-agents": {
+    "title": "Lightsail instance blueprints",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/compare-options-choose-lightsail-instance-image.html"
+  },
+  "teams-accounts": {
+    "title": "Grant Lightsail access for an IAM user",
+    "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-managing-access-for-an-iam-user.html"
+  },
+  "company": {
+    "title": "Lightsail instance and block storage SLA",
+    "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/"
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "provider": "linode",
+  "checkedOn": "2026-10-30",
+  "rows": {
+    "isolation": {
+      "verdict": "yes",
+      "figure": "Full VM; root, Docker",
+      "scenario": "The build needs Docker and a kernel module: a Linode is a full virtual machine with its own kernel and root, so Docker and ordinary modules work.",
+      "note": "A KVM guest with its own kernel, disk and IPs, on shared or dedicated vCPU depending on the plan. Nested virtualisation has no current documentation, and the CPU plans have no GPU.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+        "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "sizes-regions": {
+      "verdict": "yes",
+      "figure": "256 vCPU / 512 GiB; 33 regions",
+      "scenario": "A 4 vCPU / 8 GiB / 50 GiB coding box is the Linode 8 GB at $48 a month, in any of 33 core regions, seven of them in Europe.",
+      "note": "Fixed shapes from 1 vCPU / 1 GiB / 25 GB to 256 vCPU / 512 GiB / 5,120 GB across shared, G6, G7, G8 and High Memory families. CPU and RAM cannot be sized separately, extra disk is a Block Storage volume, and a resize reboots the machine.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/how-to-choose-a-compute-instance-plan",
+        "quote": "4 GB - 512 GB Memory, 2 - 256 Dedicated vCPUs, 40 GB - 7200 GB Storage",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "billing-models": {
+      "verdict": "partly",
+      "figure": "$0.036/h, cap at 667 h",
+      "scenario": "A mostly idle box still costs the full plan: 90 running and 640 powered-off hours bill $26.28, capped at $24.",
+      "note": "An hourly rate with a monthly cap on shared and G6/G7 plans; G8 plans are hourly only with no cap since 1 July 2026. Usage rounds up to the nearest hour, and a powered-off machine bills in full until it is deleted.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+        "quote": "Most paid services offered on Akamai Cloud have predictable monthly rates, also called the monthly caps, alongside flexible hourly rates.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "trials-free-tiers": {
+      "verdict": "partly",
+      "figure": "$100 credit, 60 days",
+      "scenario": "A week of testing is covered by the $100 credit, but a card is required at signup and the credit expires with the trial.",
+      "note": "A one-off promotional credit for new customers only, excluding GPU plans; unused credit expires and there is no ongoing free allowance. A valid payment method is required to open the account.",
+      "source": {
+        "url": "https://www.akamai.com/lp/free-credit-100",
+        "quote": "Promotional credits are available only to new customers who have not yet signed up for a free trial.",
+        "confidence": "pricing-page"
+      }
+    },
+    "lifecycle": {
+      "verdict": "partly",
+      "figure": "Stop keeps disk; no pause",
+      "scenario": "Stopping at 18:00 keeps the files for the morning, but memory and running processes are gone and the meter keeps running.",
+      "note": "There is no pause, hibernate or sleep: a stop is a power-off that keeps the disk and the IP addresses. The charge continues at the full hourly rate, so a stopped machine is never cheaper than a running one.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
+        "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "snapshots-forks": {
+      "verdict": "partly",
+      "figure": "Disk images; 4 backups",
+      "scenario": "A snapshot before an upgrade is a custom image: it holds the disk, not the running process, and a clone needs the source powered off.",
+      "note": "Images capture or upload whole disks and stay until deleted; Backups keeps daily, weekly, biweekly and one manual copy. A clone copies disks and profiles but needs a power-off first, and there is no memory snapshot.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/images",
+        "quote": "The Images service lets you retain complete disk images in the cloud for quick access in the future or recover a deleted Linode.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "storage": {
+      "verdict": "yes",
+      "figure": "Plan disk + 16 TB volumes",
+      "scenario": "The 20 GiB n8n database and its encryption key sit on the plan disk and survive a stop; a bigger store is a volume that outlives the Linode.",
+      "note": "SSD plan disk is included in the price. Block Storage volumes cost $0.10 per GiB a month from 10 GB to 16 TB, attach to one Linode at a time, and are not covered by the Backups service.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/block-storage",
+        "quote": "Since volumes are managed independently of Linodes, your data persists even if you delete your attached Linode.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "idle-timers": {
+      "verdict": "yes",
+      "figure": "No idle state; no session cap",
+      "scenario": "A bot that must answer at 03:00 is still running: no idle timeout or session limit exists, and only announced maintenance stops the machine.",
+      "note": "The status field has 14 values and none is a paused or idle state: running, offline, booting, busy, rebooting, shutting_down, provisioning, deleting, migrating, rebuilding, cloning, restoring, stopped, billing_suspension. The platform suspends a Linode on its own only for a past-due balance, and stops it for maintenance announced seven days ahead. There is no idle timer or lifetime cap to set, and the machine bills the whole time.",
+      "source": {
+        "url": "https://techdocs.akamai.com/linode-api/reference/get-linode-instance",
+        "quote": "`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "reaching-it": {
+      "verdict": "yes",
+      "figure": "Public IPv4, SSH, Lish",
+      "scenario": "A webhook and an SSH session both work: the Linode has a public IPv4, any inbound port, real SSH and a browser console.",
+      "note": "A static public IPv4 and IPv6 per Linode, Cloud Firewall rules in both directions, standard SSH and the Lish console in Cloud Manager. Outbound ports 25, 465 and 587 are blocked on some new accounts.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+        "quote": "Dedicated IPv4 and IPv6 addresses (additional addresses available on request)",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "custom-domains": {
+      "verdict": "partly",
+      "figure": "Free DNS; HTTPS is yours",
+      "scenario": "Point the domain at the Linode with the free DNS Manager, then install Caddy or Certbot yourself; only some one-click apps add a certificate.",
+      "note": "DNS Manager is free but needs at least one active Linode on the account. The platform issues no certificate for a port: the OpenClaw Quick Deploy App adds Let's Encrypt, everything else is your own proxy.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/dns-manager",
+        "quote": "Within the DNS Manager, you can add your registered domain names and manage DNS records for each of them.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "outbound-network": {
+      "verdict": "yes",
+      "figure": "$0.005/GiB; 1-20 TB included",
+      "scenario": "Model responses and logs fit inside the 4 TB that comes with the Linode 4 GB; beyond the allowance, transfer costs $0.005 a GB.",
+      "note": "Outbound transfer is pooled per account and prorated for part-months; inbound and intra-datacentre traffic is free. G8 and GPU plans include no transfer. Cloud Firewall outbound rules can restrict destinations, or drop everything.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+        "quote": "Metered outbound network transfer (egress) that includes 1 TB - 20 TB of prorated network transfer allowance",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "keys-secrets": {
+      "verdict": "no",
+      "figure": "Scoped tokens; no store",
+      "scenario": "The model key lives in a file or an environment variable on the disk, where the agent can read it; there is no provider vault.",
+      "note": "API tokens can be scoped per service and limited to read-only or read-write, which protects the account rather than the agent's keys. There is no secret store and no request-side injection.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/manage-personal-access-tokens",
+        "quote": "For each product or service on the list, select the level of access the token should have.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "ways-to-drive": {
+      "verdict": "yes",
+      "figure": "Console, CLI, API, 3 SDKs",
+      "scenario": "A script can create and delete Linodes through the API; an assistant can inspect them through the official MCP server, which is read-only.",
+      "note": "Cloud Manager, linode-cli, a documented REST API, official Python and JavaScript clients, Terraform and Pulumi providers, StackScripts and cloud-init. There is no PTY or file endpoint.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
+        "quote": "Linode CLI is a wrapper around the Linode API that lets you manage your Akamai Cloud account and resources from the command line.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "built-in-agents": {
+      "verdict": "partly",
+      "figure": "1-click Hermes + OpenClaw",
+      "scenario": "OpenClaw deploys from Cloud Manager in 5-10 minutes with an HTTPS dashboard, then needs a model key and channel pairing from the terminal.",
+      "note": "Two genuine one-click agent apps in the Quick Deploy catalogue, but no coding agent in the default images and no prompt endpoint. Claude Code or Codex you install yourself.",
+      "source": {
+        "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/openclaw",
+        "quote": "Deploy OpenClaw, an open source AI agent platform that runs locally and executes tasks through a persistent gateway service connecting communication channels, tools, and AI models.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "teams-accounts": {
+      "verdict": "partly",
+      "figure": "Roles, SAML SSO; no cap",
+      "scenario": "Five developers get five logins and five Linodes under one bill, each with its own role; nothing stops the spend if one is left running.",
+      "note": "RBAC roles, SAML 2.0 single sign-on, scoped tokens and streamed audit logs. There is no hard spend cap, and the alerting covers resource thresholds rather than money.",
+      "source": {
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/identity-and-access-cm",
+        "quote": "You can use Identity and Access in Akamai Cloud to manage identities within an account and manage operations that those identities may perform.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "company": {
+      "verdict": "yes",
+      "figure": "Akamai; 99.99% SLA; SOC 2",
+      "scenario": "A buyer can check a 99.99% uptime SLA, a SOC 2 Type 2 report, a DPA and a status page before signing.",
+      "note": "Linode is the contracting party in the SLA and MSA while marketing says Akamai Cloud. 99.99% monthly uptime for plans in general availability and 99% for limited-availability plans.",
+      "source": {
+        "url": "https://www.akamai.com/legal/sla-compute",
+        "quote": "We guarantee (i) 99.99% monthly uptime for Covered Services in general availability and (ii) 99% monthly uptime for Covered instances in limited availability",
+        "confidence": "docs-confirmed"
+      }
+    }
+  }
+}

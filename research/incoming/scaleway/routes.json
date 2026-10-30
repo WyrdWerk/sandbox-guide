@@ -1,0 +1,157 @@
+{
+  "provider": "scaleway",
+  "checkedOn": "2026-10-30",
+  "routes": {
+    "hermes-agent": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Create a DEV1-M (3 vCPU / 4 GiB) in Paris, Amsterdam, Warsaw or Milan, attach a flexible IPv4, SSH in and run Hermes as a systemd service. Neither Scaleway nor Hermes publishes a Scaleway page, so the install is the generic Linux one; the machine must stay powered on because a stopped Instance cannot be woken by a message.",
+      "link": {
+        "title": "Scaleway: create an Instance",
+        "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/"
+      },
+      "price": "DEV1-M $18.52 compute and block storage + $4.06 IPv4 = $22.59 a month, always on"
+    },
+    "openclaw": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Scaleway's own OpenClaw page only configures OpenClaw to call its Generative APIs from a local machine; hosting the Gateway on an Instance is a manual install. Create a DEV1-L (4 vCPU / 8 GiB), open the port through a security group, install Docker and OpenClaw, and keep the machine on because the Gateway owns the chat connections.",
+      "link": {
+        "title": "Scaleway: integrating OpenClaw with Generative APIs",
+        "url": "https://www.scaleway.com/en/docs/generative-apis/reference-content/integrate-with-openclaw/"
+      },
+      "price": "DEV1-L $39.03 compute and block storage + $4.06 IPv4 = $43.09 a month, always on"
+    },
+    "coding-agent": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Create a DEV1-L (4 vCPU / 8 GiB) with a 40 GiB block volume, SSH in and install Claude Code or Codex. The repository survives between sessions because the volume persists, and powering the machine off between sessions stops the compute meter — unlike a VPS that bills while off — but the IPv4 and the disk keep billing.",
+      "link": {
+        "title": "Scaleway: connect to your Instance",
+        "url": "https://www.scaleway.com/en/docs/instances/how-to/connect-to-instance/"
+      },
+      "price": "DEV1-L 160 h + 40 GiB block volume + IPv4 = $15.92 a month at 8 h × 20 days"
+    },
+    "code-interpreter": {
+      "tier": "backend",
+      "noTerminal": "no",
+      "what": "There is no execution API. You would build the pool and the run endpoint yourself on the Instances API, and the 60-minute minimum makes a per-execution interpreter uneconomic: every one-minute run pays a full hour of compute, storage and IPv4.",
+      "link": {
+        "title": "Scaleway Instances API reference",
+        "url": "https://www.scaleway.com/en/developers/api/instance"
+      },
+      "price": "20,000 one-minute runs = 20,000 billed hours ≈ $590"
+    },
+    "browser-agent": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "No browser image or headless-browser service: install Chromium or Playwright on a DEV1-L, and budget 4 GiB of RAM as the floor. A fresh machine per session is possible but every ten-minute session bills a full hour of compute, disk and IPv4, so an always-on machine with a queue is usually cheaper.",
+      "link": {
+        "title": "Scaleway: OS images and InstantApps",
+        "url": "https://www.scaleway.com/en/docs/instances/reference-content/images-and-instantapps/"
+      },
+      "price": "30,000 ten-minute sessions = 30,000 billed hours ≈ $885; an always-on DEV1-L is $43.09 a month"
+    },
+    "workflow-automation": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Create a DEV1-M (3 vCPU / 4 GiB), install Docker, n8n and Postgres, and keep the machine on because webhooks and schedules stop when it is powered off. Neither Scaleway nor n8n publishes a Scaleway guide, so this is the generic Docker install plus a Caddy certificate for the editor URL.",
+      "link": {
+        "title": "Scaleway: create an Instance",
+        "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/"
+      },
+      "price": "DEV1-M $18.52 compute and block storage + $4.06 IPv4 = $22.59 a month"
+    },
+    "chat-bot": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Create a DEV1-S (2 vCPU / 2 GiB), install the bot and run it as a service. It must stay on: a Discord or Slack gateway connection needs an awake process, and there is no idle timer to fight, only the hourly bill.",
+      "link": {
+        "title": "Scaleway: create an Instance",
+        "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/"
+      },
+      "price": "DEV1-S $8.35 compute and block storage + $4.06 IPv4 = $12.41 a month"
+    },
+    "claude-code-team": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "One DEV1-L per developer in the same Organization and Project, each with its own credentials and its own disk. IAM gives each developer a scoped API key and the audit trail records who did what; powering a machine off between sessions stops its compute meter but not its disk or IPv4.",
+      "link": {
+        "title": "Scaleway IAM concepts",
+        "url": "https://www.scaleway.com/en/docs/iam/concepts/"
+      },
+      "price": "5 × DEV1-L at 160 h = $79.58 a month including five IPv4 addresses"
+    },
+    "scheduled-scraper": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run the schedule inside a small always-on DEV1-S with cron or a systemd timer, and write results to Object Storage so they outlive the machine. A fresh machine per run is possible but every ten-minute run bills a full hour of compute, disk and IPv4; at DEV1-S rates that is still cheap, but the machine must be created and deleted by your own code.",
+      "link": {
+        "title": "Scaleway Object Storage pricing",
+        "url": "https://www.scaleway.com/en/pricing/storage/"
+      },
+      "price": "120 ten-minute runs ≈ $2.04; an always-on DEV1-S is $12.41 a month"
+    },
+    "mcp-server": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Create a small Instance with a flexible IPv4, open the MCP port through a security group, and run the server as a service. It must stay up, because a powered-off Instance has released its hypervisor and cannot be woken by an incoming request.",
+      "link": {
+        "title": "Scaleway: security groups",
+        "url": "https://www.scaleway.com/en/docs/instances/how-to/use-security-groups/"
+      },
+      "price": "STARDUST1-S (1 vCPU / 1 GiB) $5.61 a month including IPv4 if it can be ordered; DEV1-S $12.41"
+    }
+  },
+  "picks": [],
+  "situationPicks": [
+    {
+      "situation": "eu-residency",
+      "why": "Four EU regions under French law, ISO 27001 and HDS certifications, a published DPA, and a stopped Instance that keeps its disk while the compute meter stops.",
+      "watch": "The cheap DEV1/GP1/PLAY2/PRO2 ranges have no SLA, and HDS applies only to services tagged for it, not to every Instance by default."
+    }
+  ],
+  "docs": {
+    "hermes-agent": {
+      "title": "Scaleway: create an Instance",
+      "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/"
+    },
+    "openclaw": {
+      "title": "Scaleway: OpenClaw with Generative APIs",
+      "url": "https://www.scaleway.com/en/docs/generative-apis/reference-content/integrate-with-openclaw/"
+    },
+    "coding-agent": {
+      "title": "Scaleway: connect to your Instance",
+      "url": "https://www.scaleway.com/en/docs/instances/how-to/connect-to-instance/"
+    },
+    "code-interpreter": {
+      "title": "Scaleway Instances API",
+      "url": "https://www.scaleway.com/en/developers/api/instance"
+    },
+    "browser-agent": {
+      "title": "Scaleway: OS images and InstantApps",
+      "url": "https://www.scaleway.com/en/docs/instances/reference-content/images-and-instantapps/"
+    },
+    "workflow-automation": {
+      "title": "Scaleway: create an Instance",
+      "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/"
+    },
+    "chat-bot": {
+      "title": "Scaleway: create an Instance",
+      "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/"
+    },
+    "claude-code-team": {
+      "title": "Scaleway IAM concepts",
+      "url": "https://www.scaleway.com/en/docs/iam/concepts/"
+    },
+    "scheduled-scraper": {
+      "title": "Scaleway Object Storage pricing",
+      "url": "https://www.scaleway.com/en/pricing/storage/"
+    },
+    "mcp-server": {
+      "title": "Scaleway: security groups",
+      "url": "https://www.scaleway.com/en/docs/instances/how-to/use-security-groups/"
+    }
+  },
+  "parentDecision": "Parent kept only the eu-residency situation pick on 2026-10-30: 'eu-residency' is a situation, not a use-case guide, and the use-case pick's CLOUD Act wording had no quoted source."
+}

@@ -1,0 +1,66 @@
+{
+  "isolation": {
+    "title": "Linodes: full virtual machines with root, Docker and SSH",
+    "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance"
+  },
+  "sizes-regions": {
+    "title": "Choose a compute plan: families, sizes and regions",
+    "url": "https://techdocs.akamai.com/cloud-computing/docs/how-to-choose-a-compute-instance-plan"
+  },
+  "lifecycle": {
+    "title": "Billing: a powered-off service still charges",
+    "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works"
+  },
+  "snapshots-forks": {
+    "title": "Images: capture, upload and deploy a disk",
+    "url": "https://techdocs.akamai.com/cloud-computing/docs/images"
+  },
+  "storage": {
+    "title": "Block Storage volumes: size, attach and price",
+    "url": "https://techdocs.akamai.com/cloud-computing/docs/block-storage"
+  },
+  "idle-timers": {
+    "title": "What happens to an unused or powered-off Linode",
+    "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works#will-i-be-billed-for-powered-off-or-unused-services"
+  },
+  "reaching-it": {
+    "title": "Networking on a Linode: public IPv4, IPv6 and ports",
+    "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance-networking"
+  },
+  "custom-domains": {
+    "title": "DNS Manager: point a domain at your Linode",
+    "url": "https://techdocs.akamai.com/cloud-computing/docs/dns-manager"
+  },
+  "outbound-network": {
+    "title": "Network transfer: allowances, pools and overage",
+    "url": "https://techdocs.akamai.com/cloud-computing/docs/network-transfer-usage-and-costs"
+  },
+  "keys-secrets": {
+    "title": "Personal access tokens: scope and revoke an API key",
+    "url": "https://techdocs.akamai.com/cloud-computing/docs/manage-personal-access-tokens"
+  },
+  "ways-to-drive": {
+    "title": "Linode API reference",
+    "url": "https://techdocs.akamai.com/linode-api/reference/api"
+  },
+  "built-in-agents": {
+    "title": "Deploy OpenClaw on Akamai Cloud",
+    "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/openclaw"
+  },
+  "teams-accounts": {
+    "title": "Identity and Access: users, roles and single sign-on",
+    "url": "https://techdocs.akamai.com/cloud-computing/docs/identity-and-access-cm"
+  },
+  "billing-models": {
+    "title": "Billing: hourly rates, monthly caps and invoices",
+    "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works"
+  },
+  "trials-free-tiers": {
+    "title": "Try Akamai Cloud with a $100 credit",
+    "url": "https://www.akamai.com/lp/free-credit-100"
+  },
+  "company": {
+    "title": "About Akamai: company, headquarters and listing",
+    "url": "https://www.akamai.com/company"
+  }
+}

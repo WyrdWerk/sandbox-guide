@@ -1,0 +1,464 @@
+{
+  "id": "contabo",
+  "name": "Contabo",
+  "url": "https://contabo.com/en-us/vps/",
+  "status": "researched",
+  "kind": "vps",
+  "checkedOn": "2026-10-30",
+  "oneLiner": "German VPS provider: fixed-size KVM servers from $6.60 a month for 4 vCPU and 8 GB on the 1-month term, with shared cores, unlimited traffic under a fair-use throttle, and no hourly meter.",
+  "whatItIs": [
+    "Contabo sells ordinary KVM virtual machines in fixed sizes. Core VPS is the cheap family: 4–18 vCPU, 8–96 GB of RAM and 100–600 GB of SSD, from $6.60 a month. Performance VPS adds current AMD EPYC cores and NVMe, Storage VPS trades CPU for up to 1.4 TB of disk, and Cloud VDS gives 6–24 dedicated vCores. There are also GPU VPS and bare-metal dedicated servers.",
+    "It is a plain server product, not a sandbox API. You get root, SSH, any TCP port, a static IPv4 and a /64 IPv6 subnet, and the machine exists until you cancel it. There is no prompt endpoint, no per-session microVM, no pause that keeps memory and no fork.",
+    "Billing is prepaid by term: 1, 3, 6, 12 or 24 months, one flat price per server. There is no hourly or per-second meter, so a powered-off server keeps billing until the paid period ends. The 1-month term is the ongoing monthly price; the heavily advertised 24-month rate is paid upfront for two years."
+  ],
+  "whoFor": "Readers who want the cheapest possible always-on Linux box for one agent, an n8n instance, a chat bot or an MCP server, are comfortable with a terminal, and accept shared CPU cores and a monthly prepayment. It is not a fit for per-task sandboxes, a team that needs SSO and a hard spend cap, or anyone who needs a vendor security report.",
+  "isolation": "A full KVM virtual machine with its own kernel, root, Docker and public IP. The vCPU cores are shared with other customers on the same host, and Contabo's own blog says performance can vary with neighbouring tenant load. Nested virtualisation is not supported on Core VPS; it is supported only on the dedicated-core Cloud VDS line, which has no snapshots or Auto Backup. The GPU product is a separate, single-configuration instance.",
+  "sizes": "Six fixed Core VPS shapes: 4 vCPU / 8 GB / 100 GB at $6.60; 6 / 12 / 200 at $9.00; 8 / 24 / 300 at $16.80; 12 / 48 / 400 at $30.00; 16 / 64 / 500 at $44.50; 18 / 96 / 600 at $58.80. CPU and RAM cannot be chosen independently. Performance VPS goes to 18 vCPU / 96 GB with NVMe; Cloud VDS to 24 dedicated vCores / 96 GB; Storage VPS to 1.4 TB. Upgrades are in place with a short reboot; there is no downgrade, and a plan-family change means a new server and a new IP.",
+  "billing": {
+    "model": "Prepaid term of 1, 3, 6, 12 or 24 months with one flat price per server. Add-ons are separate monthly charges: Auto Backup, Private Networking, an extra IPv4, a storage extension, Windows Server and control panels.",
+    "meter": "A flat price per server per month; no hourly or per-second meter. Cloud VPS 4 is $6.60 a month on the 1-month term and $5.28 a month on the 24-month term, paid upfront.",
+    "stopped": "Powering off keeps the disk and the bill. The contract is for the billing period, not for running time, and a cancellation leaves the service active until the end of the period already paid for.",
+    "planFee": "No platform fee. The plan price is the whole machine charge, and no setup fee was shown for any term at this check.",
+    "minimum": "One month of Cloud VPS 4 at $6.60. No free tier and no signup credit; payment is due before the server is provisioned."
+  },
+  "cost": {
+    "A": {
+      "headline": "$6.60 a month",
+      "shape": "Cloud VPS 4 (4 vCPU / 8 GB / 100 GB), one plan running all 1,000 tasks back to back",
+      "lines": [
+        {
+          "label": "One Cloud VPS 4 plan",
+          "arithmetic": "1 × $6.60 for the 1-month term",
+          "amount": "$6.60"
+        },
+        {
+          "label": "The 1,000 tasks",
+          "arithmetic": "1,000 × 10 min = 166.67 h, inside the 730 h month",
+          "amount": "$0.00"
+        }
+      ],
+      "total": "$6.60",
+      "notes": [
+        "Cloud VPS 4 is the smallest Core VPS plan: 4 vCPU / 8 GB / 100 GB, a superset of the 2 vCPU / 4 GiB / 10 GiB asked for.",
+        "There is no hourly meter, so the 1,000 tasks share one monthly plan. A fresh server per task would mean 1,000 plans, $6,600 for the month.",
+        "On the 24-month term the same plan is $5.28 a month, but $126.72 is paid upfront.",
+        "No setup fee was shown for the 1-month term."
+      ],
+      "flag": "This assumes the tasks run one after another on a single server. Contabo has no per-second billing, so even one ten-minute task costs a whole month."
+    },
+    "B": {
+      "headline": "$6.60 a month",
+      "shape": "Cloud VPS 4 (4 vCPU / 8 GB / 100 GB), 730 hours",
+      "lines": [
+        {
+          "label": "One Cloud VPS 4 plan",
+          "arithmetic": "1 × $6.60 for the 1-month term",
+          "amount": "$6.60"
+        },
+        {
+          "label": "Hours",
+          "arithmetic": "730 h included in the plan",
+          "amount": "$0.00"
+        }
+      ],
+      "total": "$6.60",
+      "notes": [
+        "The 4 vCPU and 8 GB are an exact fit; the 100 GB SSD is more than the 50 GB asked for.",
+        "The 24-month term is $5.28 a month, paid as $126.72 upfront; the card uses the 1-month price.",
+        "The vCPU cores are shared. Average CPU at 10% is far below a dedicated core, but a noisy neighbour can still affect a burst.",
+        "The 200 Mbit/s port and unlimited fair-use traffic cover an agent workload; Contabo may throttle exceptional use."
+      ]
+    },
+    "C": {
+      "headline": "$6.60 a month, even while stopped",
+      "shape": "Cloud VPS 4 (4 vCPU / 8 GB / 100 GB), 90 running + 640 powered-off hours",
+      "lines": [
+        {
+          "label": "One Cloud VPS 4 plan",
+          "arithmetic": "1 × $6.60 for the 1-month term",
+          "amount": "$6.60"
+        },
+        {
+          "label": "Stopped hours",
+          "arithmetic": "640 h at no extra charge, and no credit either",
+          "amount": "$0.00"
+        }
+      ],
+      "total": "$6.60",
+      "notes": [
+        "Stopping keeps the disk and the files, but it does not stop the plan: the month costs the same whether the machine runs 90 hours or 730.",
+        "There is no pause with memory. A stop powers the machine off, so a running REPL or dev server is gone.",
+        "The 100 GB plan disk covers the 20 GB asked for.",
+        "On the 24-month term the same plan is $5.28 a month, paid upfront."
+      ],
+      "flag": "Workload C's 640 idle hours look cheap on a per-hour sandbox and are not cheap here: the whole monthly plan bills through them."
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Contabo GmbH, Welfenstrasse 22, 81541 Munich, Germany; AG Munich HRB 180722; VAT DE267602842. Managing directors Stephan Wolfram and Mario Wilhelm.",
+        "source": {
+          "url": "https://contabo.com/en/legal/impressum/",
+          "quote": "Contabo GmbH",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded",
+        "value": "Launched in 2003.",
+        "source": {
+          "url": "https://contabo.com/en-us/about-us",
+          "quote": "Since launching in 2003",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "History",
+        "value": "Originally Giga-International; renamed Contabo in 2013.",
+        "source": {
+          "url": "https://contabo.com/en-us/about-us",
+          "quote": "Originally known as \"Giga-International,\" we rebranded to Contabo in 2013",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Customers",
+        "value": "275,000+ customers in 190 countries.",
+        "source": {
+          "url": "https://contabo.com/en-us/about-us",
+          "quote": "275,000+ Customers in 190 Countries",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Servers",
+        "value": "Over 450,000 servers running worldwide.",
+        "source": {
+          "url": "https://contabo.com/en-us/about-us",
+          "quote": "we're powering over 450,000 servers worldwide",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Footprint",
+        "value": "11 locations in 9 regions on 4 continents.",
+        "source": {
+          "url": "https://contabo.com/en-us/about-us",
+          "quote": "Operating across 11 locations in 9 regions on 4 continents",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Team",
+        "value": "About 300 staff.",
+        "source": {
+          "url": "https://contabo.com/en-us/about-us",
+          "quote": "about 300 dedicated professionals",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Ownership",
+        "value": "KKR agreed in June 2022 to acquire a majority stake; Oakley Capital kept a minority stake alongside management and the hosting entrepreneurs Thomas Strohe, Jochen Berger and Thomas Vollrath. No later change is stated on the pages checked.",
+        "source": {
+          "url": "https://www.kkr.com/content/dam/kkr/country-sites/de/press-release/20220608-pressemitteilung-kkr-erwirbt-mehrheitsbeteiligung-am-globalen-cloud-infrastruktur-und-hosting-anbieter-contabo.pdf",
+          "quote": "KKR, ein weltweit führender Investor, hat Vereinbarungen über den Erwerb einer Mehrheitsbeteiligung an Contabo",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Uptime promise",
+        "value": "99.9% annual average physical connectivity for VPS, VDS and dedicated servers, excluding maintenance and causes outside Contabo's control. No service credit or refund formula is published.",
+        "source": {
+          "url": "https://contabo.com/en/legal/terms-and-conditions/",
+          "quote": "The Provider will ensure that the physical connectivity of the object storage infrastructure, webspace packages, dedicated servers, virtual dedicated server and VPS is available at an annual average rate of 99.9%.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Data processing",
+        "value": "A standardised GDPR data processing agreement can be created in the control panel, covering VPS, VDS, dedicated servers and object storage, in English, German or Spanish.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/dpa/dpa/",
+          "quote": "A Data Processing Agreement (DPA) is a contract between Contabo and its customer that governs the processing of personal data by Contabo on behalf of the customer",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certifications",
+        "value": "The India location page lists ISO 27001, ISO 27017, ISO 27018, PCI DSS and SOC 1/SOC 2 Type 2 among the data centre's certifications. The page does not say whether Contabo or the facility holds them, and Contabo publishes no trust centre or route to request a SOC 2 report.",
+        "source": {
+          "url": "https://contabo.com/en-us/locations/india/",
+          "quote": "SOC 2 Type 2 Report",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Support response",
+        "value": "Ticket support, advertised at a two-hour average response time; no contractual response time is published.",
+        "source": {
+          "url": "https://contabo.com/en-us/support-experience",
+          "quote": "2 Hours Average Response Time",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Support scope",
+        "value": "Covers the VPS, network, hardware and the initial install of a 1-click app; maintaining the application is the customer's job.",
+        "source": {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "Contabo provides full technical assistance for the Contabo VPS itself - including the network, hardware, and initial setup of any 1-click Add-Ons.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "One always-on agent on a very cheap box: Cloud VPS 4 gives 4 vCPU, 8 GB, 100 GB and a static IPv4 for $6.60 a month.",
+      "n8n on the 1-click image: the server is installed for you and the editor opens at the server's IP, with no terminal step.",
+      "A predictable bill: one flat monthly price, unlimited traffic under fair use, and no per-GiB overage.",
+      "EU data residency in Germany, with a DPA you can create online, at the same price as the US regions.",
+      "A bigger box when needed: 18 vCPU / 96 GB for $58.80, or a VDS with 24 dedicated vCores.",
+      "Automation through the REST API, the open-source cntb CLI or Terraform, including cloud-init."
+    ],
+    "badly": [
+      "Many short runs or one machine per task: there is no hourly or per-second meter, so a ten-minute task costs a month.",
+      "Pause and resume: a stop powers the machine off, loses memory and still bills.",
+      "A team that needs SAML/OIDC single sign-on, a hard account spend cap, usage alerts or a SOC 2 report.",
+      "A workload that cannot tolerate a noisy neighbour: the vCPU cores are shared and Contabo says performance can vary.",
+      "Managed TLS, preview URLs, a file API, a PTY API or an MCP server: none is offered.",
+      "Nested virtualisation on the cheap Core VPS, Windows bring-your-own-licence, or a GPU today: nested virt needs the VDS line, and the GPU VPS was on a waitlist."
+    ]
+  },
+  "usability": {
+    "dashboard": "Yes: the Customer Control Panel creates and manages servers, start/stop/restart, reinstall, snapshots, a VNC console, the rescue system, firewall, private networking, storage extension, DNS and reverse DNS, upgrades and add-ons.",
+    "withoutCode": "Partly. Ordering, the OS or 1-click image and the first boot are click-through. n8n then opens in a browser at the server's IP. OpenClaw and Hermes still need SSH and their own onboarding wizard, and everything after the image is yours.",
+    "signup": "An email address and a payment method. There is no free tier or starting credit and the first invoice is due before provisioning; card, PayPal, bank transfer and SEPA are offered depending on currency, and non-card first payments are manual.",
+    "docs": "A product documentation site at docs.contabo.com, a large help centre, a Redoc API reference at api.contabo.com, an open-source cntb CLI, a Terraform provider and a status page. No official Python or TypeScript SDK and no MCP server.",
+    "tripsUp": [
+      "There is no hourly meter: a ten-minute task costs a whole month, and stopping the server does not stop the bill.",
+      "The advertised $5.28 is the 24-month rate paid upfront; the monthly price is $6.60.",
+      "The vCPU cores are shared, and Contabo's own blog says performance can vary with neighbouring tenants.",
+      "Snapshots are disk-only, limited to one slot on Cloud VPS 4, and deleted after 30 days.",
+      "There is no downgrade: a smaller plan means a new server, a new IP and a manual migration.",
+      "The Terms require four weeks' notice before the end of a term, while the VPS page says pre-paid contracts need no notice; check the panel before relying on either.",
+      "Support covers the server and the 1-click install, not the application: OpenClaw, Hermes and n8n maintenance is yours.",
+      "Contabo labels RAM in GB; if that is decimal, the 8 GB plan is 7.45 GiB and is short of an 8 GiB request."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "The cores are shared, not dedicated",
+      "detail": "Core VPS uses shared vCPU cores. Contabo's blog says a VPS shares physical cores with other customers and that performance can vary with neighbouring load, while the product docs call CPU and RAM \"dedicated allocations but shared at the hypervisor level\". The two statements describe the same thing: an allocation that is not a guaranteed physical core.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://contabo.com/blog/vps-to-vds-upgrade-path/",
+          "quote": "A VPS shares physical CPU cores across multiple customers on the same host",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "CPU and RAM are dedicated allocations but shared at the hypervisor level.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "A monthly plan is the smallest unit of billing",
+      "detail": "There is no hourly or per-second rate. One ten-minute task costs a whole month, and 1,000 tasks only become cheap if they share one server. This is the opposite of what a per-task agent workload needs.",
+      "status": "open"
+    },
+    {
+      "issue": "Stopping does not stop the bill",
+      "detail": "The plan is sold by term, not by running hour. Powering off keeps the disk but the period is already paid for, and a cancellation leaves the service active until the end of the current billing period. There is no cheaper stopped-storage rate.",
+      "status": "open"
+    },
+    {
+      "issue": "Two first-party statements on cancellation notice",
+      "detail": "The Terms say a contract extends for another term unless either party terminates with four weeks' notice before the end. The VPS page footnote says the minimum cancellation notice is \"None (pre-paid) or 4 weeks (post-paid)\". The model assumes a 1-month prepaid term that can be ended at the end of the paid month, but a buyer should confirm in the panel which rule applies to their contract.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://contabo.com/en/legal/terms-and-conditions/",
+          "quote": "The contractual term will be extended by an additional period equivalent to the one selected for the initial term",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "Minimum cancellation notice: None (pre-paid) or 4 weeks (post-paid)",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "The 24-month price is not the monthly price",
+      "detail": "The $5.28 headline is the effective monthly rate on a 24-month term, paid as $126.72 upfront. The 1-month term is $6.60. The card uses $6.60 because the site prices the cheapest monthly-billed term at its ongoing price.",
+      "status": "open"
+    },
+    {
+      "issue": "The USD list is a fixed multiple of the EUR list",
+      "detail": "Every USD figure on the en-US pages is 1.2× the EUR figure at this check (€5.50 → $6.60, €4.40 → $5.28), not a market exchange rate, with small rounding on Cloud VPS 16 ($44.50 vs €37.00 × 1.2 = $44.40). The account currency is fixed at order and EU consumers pay VAT on top. Add-on prices in the configurator are shown in EUR even on the en-US site.",
+      "status": "open"
+    },
+    {
+      "issue": "One snapshot slot, deleted after 30 days",
+      "detail": "Cloud VPS 4 includes one snapshot; larger plans include two or three. Every snapshot is deleted after 30 days, cannot be downloaded, and is a disk image, not a memory image. Auto Backup is a separate paid add-on with 10 daily off-server backups, and Contabo does not guarantee that a backup is recoverable.",
+      "status": "open"
+    },
+    {
+      "issue": "The support page still says 75 GB NVMe",
+      "detail": "The support page's product strip says Cloud VPS 4 starts with \"75 GB NVMe\", while the VPS page, pricing page and product docs all say 100 GB SSD. The model uses 100 GB SSD; the support line looks stale.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://contabo.com/en-us/support-experience",
+          "quote": "Starts with 4 vCPU cores, 8 GB RAM, and 75 GB NVMe.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "|Cloud VPS 4 |4 vCPUs |8 GB |100 GB SSD |200 |1 |Unlimited\\* |",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "SOC 2 is listed for the data centre, not clearly for Contabo",
+      "detail": "Location pages list SOC 1 and SOC 2 Type 2 among the facility's certifications. Contabo publishes no trust centre, no report-request route and no statement that the report covers its VPS platform. A procurement team should ask for the report and its scope before assuming either way.",
+      "status": "open"
+    },
+    {
+      "issue": "Support ends where the application begins",
+      "detail": "Contabo supports the VPS, network and hardware and the initial install of a 1-click app. It says maintenance, upgrading and troubleshooting of the application are the customer's responsibility, and the advertised two-hour response time is an average, not a promise.",
+      "status": "open"
+    },
+    {
+      "issue": "GB is not necessarily GiB",
+      "detail": "Contabo labels RAM and disk in GB. The card maps 8 GB to 8 GiB. If the figure is decimal, 8 GB is 7.45 GiB and workload B's 8 GiB request does not fit; the next plan (12 GB) would be needed. Contabo does not publish which unit it uses.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "The cheapest VPS listing in this comparison for an always-on 4 vCPU / 8 GB / 100 GB server: $6.60 a month.",
+    "A real KVM VM with root, Docker, SSH, any TCP port and a static IPv4 for the life of the server.",
+    "Unlimited inbound and outbound traffic under a fair-use policy, with no per-GiB bill.",
+    "Nine regions on four continents, including five data centres in Germany and a UK location.",
+    "A 1-click n8n image that opens in a browser, plus OpenClaw, Hermes Agent and Paperclip images.",
+    "A documented REST API, an open-source CLI, a Terraform provider, cloud-init and custom ISO/QCOW2 images.",
+    "A DPA created online and a 99.9% annual average connectivity promise."
+  ],
+  "sources": [
+    {
+      "label": "Core VPS plans and prices",
+      "url": "https://contabo.com/en-us/vps/"
+    },
+    {
+      "label": "All product prices",
+      "url": "https://contabo.com/en-us/pricing/"
+    },
+    {
+      "label": "Cloud VPS 4 configurator",
+      "url": "https://contabo.com/en-us/vps/cloud-vps-core-4"
+    },
+    {
+      "label": "Product documentation: VPS",
+      "url": "https://docs.contabo.com/docs/servers-hosting/vps/"
+    },
+    {
+      "label": "Product documentation: Images and 1-click apps",
+      "url": "https://docs.contabo.com/docs/servers-hosting/images/"
+    },
+    {
+      "label": "Product documentation: Auto Backup",
+      "url": "https://docs.contabo.com/docs/servers-hosting/vps-auto-backup/"
+    },
+    {
+      "label": "Product documentation: IP assignment",
+      "url": "https://docs.contabo.com/docs/network-services/ip-assignment/"
+    },
+    {
+      "label": "Product documentation: Firewall",
+      "url": "https://docs.contabo.com/docs/network-services/firewall/"
+    },
+    {
+      "label": "Product documentation: DNS management",
+      "url": "https://docs.contabo.com/docs/network-services/dns-management/"
+    },
+    {
+      "label": "Product documentation: Object Storage",
+      "url": "https://docs.contabo.com/docs/storage/object-storage/"
+    },
+    {
+      "label": "Product documentation: User management and roles",
+      "url": "https://docs.contabo.com/docs/account-management/user-management/"
+    },
+    {
+      "label": "Product documentation: DPA",
+      "url": "https://docs.contabo.com/docs/dpa/dpa/"
+    },
+    {
+      "label": "API reference",
+      "url": "https://api.contabo.com/"
+    },
+    {
+      "label": "Contabo API overview",
+      "url": "https://contabo.com/en/contabo-api/"
+    },
+    {
+      "label": "Contabo CLI",
+      "url": "https://contabo.com/en/contabo-cli/"
+    },
+    {
+      "label": "Help: snapshots and 30-day retention",
+      "url": "https://help.contabo.com/en/support/solutions/articles/103000270385-how-do-i-create-a-snapshot-of-my-server-"
+    },
+    {
+      "label": "Help: plan changes, upgrades and migration",
+      "url": "https://help.contabo.com/en/support/solutions/articles/103000269700-how-to-make-changes-to-your-vps-or-vds-plan"
+    },
+    {
+      "label": "Help: cancellation and the end of the billing period",
+      "url": "https://help.contabo.com/en/support/solutions/articles/103000387511-i-would-like-to-add-or-remove-a-service"
+    },
+    {
+      "label": "OpenClaw hosting",
+      "url": "https://contabo.com/en-us/openclaw-hosting"
+    },
+    {
+      "label": "Hermes Agent hosting",
+      "url": "https://contabo.com/en-us/hermes-ai-vps-hosting"
+    },
+    {
+      "label": "n8n hosting",
+      "url": "https://contabo.com/en-us/n8n-hosting"
+    },
+    {
+      "label": "Locations",
+      "url": "https://contabo.com/en-us/locations/"
+    },
+    {
+      "label": "About Contabo",
+      "url": "https://contabo.com/en-us/about-us"
+    },
+    {
+      "label": "Support experience",
+      "url": "https://contabo.com/en-us/support-experience"
+    },
+    {
+      "label": "Terms and conditions",
+      "url": "https://contabo.com/en/legal/terms-and-conditions/"
+    },
+    {
+      "label": "Legal notice",
+      "url": "https://contabo.com/en/legal/impressum/"
+    },
+    {
+      "label": "Status page",
+      "url": "https://contabo-status.com/"
+    }
+  ]
+}

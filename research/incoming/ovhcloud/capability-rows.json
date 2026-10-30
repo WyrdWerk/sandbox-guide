@@ -1,0 +1,1108 @@
+{
+  "provider": "ovhcloud",
+  "checkedOn": "2026-10-30",
+  "rows": [
+    {
+      "capability": "own-vm",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "Full VM, own kernel",
+        "note": "A virtual machine you administer, with its own OS and kernel, not a shared container. OVHcloud does not name the hypervisor on the VPS pages.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+          "quote": "Unlike shared hosting, a VPS offers an isolated environment, dedicated to the customer.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "root",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "Root over SSH",
+        "note": "The first login is a named sudo user, not root, and you switch or sudo from there.",
+        "source": {
+          "url": "https://us.ovhcloud.com/vps/vps-openclaw/",
+          "quote": "You are the root user.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "docker-inside",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "Docker via official repo",
+        "note": "A Docker image is also available as a preinstalled application at order.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-docker-on-vps",
+          "quote": "This guide explains how to install Docker Engine and Docker Compose on an OVHcloud VPS.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "nested-virt",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "not-published",
+        "figure": "Not documented",
+        "note": "OVHcloud says its templates do not include a virtualisation OS, but never says whether the CPU exposes vmx/svm. No VPS page answers the question, so QEMU/KVM, Firecracker or an Android emulator inside the VPS cannot be assumed.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+          "quote": "OVHcloud installation templates for VPS do not include the Proxmox Operating System or a similar OS for virtualization.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "custom-image",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "OVHcloud images only",
+        "note": "Reinstallation lists OVHcloud's images and the API exposes `images/available`; there is no ISO mount, image upload or BYOI path for VPS. Another system can only be installed by hand from rescue mode.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "List images available for this VPS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "any-size",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Four fixed models",
+        "note": "VPS-1 to VPS-4 are fixed bundles; CPU, RAM and disk cannot be chosen independently or changed at the hardware level.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+          "quote": "A VPS cannot be customized or modified at the hardware level.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "big-machines",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "8 vCores / 24 GB / 200 GB",
+        "note": "VPS-4 is the largest 2027 model: 8 vCores, 24 GB and 200 GB of NVMe.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US",
+          "quote": "\"description\": \"VPS 8 vCPU 24 GB RAM 200 GB disk\"",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "live-resize",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "partly",
+        "figure": "In-place upgrade; reboot",
+        "shortfall": "You can add vCores, RAM or storage in place, but the US product page says a reboot is required, a downgrade needs a new plan and a data migration, and OVHcloud's US support page says upgrades are only offered in its US regions.",
+        "note": "Data and the public IP survive an upgrade. Moving to a higher model is the only way to add vCores.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/upgrade-resources",
+          "quote": "The upgrade will be effective immediately, keeping all of your data.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "gpu",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "None on VPS",
+        "note": "No GPU option exists on the VPS range. GPUs are a separate Public Cloud product with its own price list.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+          "quote": "A VPS cannot be customized or modified at the hardware level.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "choose-region",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "28 locations; 15 Local Zones",
+        "note": "Standard regions plus Local Zones. VPS-2 is the model sold in Local Zones. A VPS cannot be moved between locations after order.",
+        "source": {
+          "url": "https://www.ovhcloud.com/en-gb/lp/vps-localzone/",
+          "quote": "Our virtual private servers are currently available in 28 global locations, including 15 with Local Zones already available.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "eu-region",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "France, Germany, Italy, PL, UK",
+        "note": "OVHcloud's European regions include Roubaix, Gravelines, Strasbourg, Paris, Limburg, Milan, Warsaw and London. EU hosting is marketed as outside the US CLOUD Act.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+          "quote": "Hosting your VPS with OVHcloud in France or generally within the EU offers advantages such as competitive pricing and reinforced data protection.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "pause-memory",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Power off only",
+        "note": "The API's only power control is start/stop; there is no pause, hibernate or memory-preserving suspend. Memory and processes are lost on stop.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "Stop the VPS (power off) and return an asynchronous task",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "warm-pool",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "None",
+        "note": "There is no pre-started pool or spare-capacity product; every VPS is ordered, installed and booted individually.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "List your VPS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "fast-start",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Full OS boot",
+        "note": "Starting is a power-on of a full operating system, not a sub-second sandbox restore. OVHcloud publishes no start-time figure.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "Start the VPS (power on) and return an asynchronous task",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "snapshot-files",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "One manual snapshot",
+        "note": "A snapshot is a paid option, one at a time, and can be downloaded as an image. Restoring it deletes it.",
+        "source": {
+          "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012573640-How-to-use-snapshots-on-a-VPS",
+          "quote": "Since you can only have one snapshot activated at a time, the existing snapshot has to be deleted before creating a new one.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "snapshot-memory",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Disk image only",
+        "note": "A snapshot captures the disk, using the QEMU guest agent to freeze the filesystem; running memory is not saved.",
+        "source": {
+          "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012573640-How-to-use-snapshots-on-a-VPS",
+          "quote": "Snapshots are instantaneous images of your running system (“live snapshot”).",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "fork-running",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Snapshot, not a clone",
+        "note": "A snapshot cannot be booted as a second VPS: `images/available` lists only OVHcloud's images, and there is no clone or fork endpoint.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "Create a snapshot of this VPS (requires the snapshot option and no existing snapshot)",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "older-snapshot",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "7 daily (premium add-on)",
+        "note": "The free daily backup is a single restore point; the paid Premium option keeps seven daily restore points. Both exclude additional disks.",
+        "source": {
+          "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012678619-How-to-use-automated-backups-on-a-VPS",
+          "quote": "Upgrading to Premium Automated Backup enhances your Automated backup option to a 7-day rolling daily backup.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "templates",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "OS + app images",
+        "note": "Linux, Windows and BSD images plus preinstalled applications such as n8n, Docker, Plesk and cPanel. A configured server cannot be saved as a reusable template.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/apps-first-steps",
+          "quote": "OVHcloud offers VPS customers pre-installed application images for quick and easy deployment of applications in just a few clicks.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "backups",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "Daily, included",
+        "note": "One daily automated backup is included free, with a click-to-restore and a mount option; the control-panel guide documents 24-hour retention. The order catalog also lists a standard-backup add-on; see the provider caveat.",
+        "source": {
+          "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012678619-How-to-use-automated-backups-on-a-VPS",
+          "quote": "When you order a VPS, a single daily Automated backup is included as a free service option.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "files-survive-stop",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "Disk and IP persist",
+        "note": "Stopping powers the machine off and leaves the system disk and IP attached; only a reinstall or cancellation removes the data.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/understand-vps-control-panel",
+          "quote": "A reinstallation will delete all data currently hosted on the VPS (except for additional disks).",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "volumes",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "50 GB–10 TB add-on disk",
+        "note": "An additional disk is separate storage attached to the VPS, sold in fixed sizes from 50 GB ($2.60 a month) to 10 TB ($512.90), and it survives a reinstall.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US",
+          "quote": "\"invoiceName\": \"Option Additional Disk 50GB\"",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "shared-volume",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "One server only",
+        "note": "The additional disk is reachable only from its own server's IP and cannot be attached to a second VPS.",
+        "source": {
+          "url": "https://support.us.ovhcloud.com/hc/en-us/articles/4410563713427-Configuring-an-additional-disk-on-a-VPS",
+          "quote": "The additional disk will only be accessible from the server’s IP address, and data stored on it will remain unaffected, even if the VPS is reinstalled or suffers data loss.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "mount-buckets",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "partly",
+        "figure": "S3 API, no native mount",
+        "shortfall": "Object Storage is S3-compatible, but OVHcloud documents no native mount on a VPS: you add s3fs, rclone or an application's own S3 client yourself.",
+        "note": "Three S3-compatible classes (High Performance, Standard, Infrequent Access) plus Cold Archive. Buckets are reached over the S3 API, not as a mounted folder.",
+        "source": {
+          "url": "https://support.us.ovhcloud.com/hc/en-us/articles/23896851215379-Object-Storage-FAQ",
+          "quote": "The Object Storage classes are largely compatible with the S3™ protocol and benefit from a recent, high-performance design and good bandwidth.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "big-disk",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "10 TB additional disk",
+        "note": "Plan disks reach 200 GB; the largest additional disk is 10 TB. One additional disk per VPS.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US",
+          "quote": "\"invoiceName\": \"Option Additional Disk 10000GB\"",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "stay-on",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "No session limit",
+        "note": "Nothing ends a session or forces a restart; the VPS runs until you stop it or cancel the service, under a 99.9% availability SLA.",
+        "source": {
+          "url": "https://us.ovhcloud.com/vps/",
+          "quote": "Get guaranteed availability with a 99.9% service level agreement (SLA).",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "choose-idle",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "No idle timer",
+        "note": "There is no idle timeout to configure and no automatic stop; idleness has no effect on the machine or the bill.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "Start the VPS (power on) and return an asynchronous task",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "wake-on-request",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "No sleep to wake",
+        "note": "A stopped VPS stays stopped until an explicit start call or a control-panel action; an HTTP request does not wake it.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "Start the VPS (power on) and return an asynchronous task",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "schedules",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "No provider scheduler",
+        "note": "No scheduled start, stop or run feature. Cron, systemd timers or an external scheduler inside or outside the guest are the only options.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "List your VPS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "public-url",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "Public IPv4 + IPv6",
+        "note": "Every VPS gets a dedicated public IPv4 and IPv6; any port can be opened, subject to the guest firewall.",
+        "source": {
+          "url": "https://us.ovhcloud.com/vps/",
+          "quote": "Get a unique IPv4 address, for more flexibility and network compatibility.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "private-url",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "No token links",
+        "note": "There is no preview URL, signed link or per-port proxy; access control is a firewall rule or an application login.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "List your VPS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "ssh",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "ssh user@IPv4",
+        "note": "A normal sshd on the public IPv4. The first login uses the OS-named user and a temporary password, then your own key or password.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps",
+          "quote": "ssh username@IPv4_VPS",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "web-terminal",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "KVM console in browser",
+        "note": "A keyboard-video-mouse console opened from the control panel, useful for boot problems and Windows setup. It is a screen, not a managed shell.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/using-kvm-for-vps",
+          "quote": "The KVM console for VPS available in your OVHcloud Control Panel allows you to open a connection to your VPS in your web browser",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "tunnel",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "ssh -L over real SSH",
+        "note": "Standard SSH port forwarding works because the server runs a normal sshd; there is no provider-side tunnel product.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps",
+          "quote": "ssh username@IPv4_VPS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "raw-tcp",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "Any TCP or UDP port",
+        "note": "No port restrictions on standard VPS; port 25 is open by default outside Local Zones, where all SMTP is blocked.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq",
+          "quote": "Port 25 is not blocked by default on OVHcloud VPS servers",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "custom-domain",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "Point DNS at the IP",
+        "note": "OVHcloud sells domains and DNS separately; point an A/AAAA record at the VPS address. No domain or email service is included with the VPS.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps",
+          "quote": "Putting your VPS online usually involves using and configuring a domain name.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "auto-https",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "partly",
+        "figure": "Certbot/Traefik yourself",
+        "shortfall": "OVHcloud does not issue or renew a certificate for a plain VPS: you install Certbot or Traefik and renew it yourself, or use a control panel that does.",
+        "note": "The documented route is a free Let's Encrypt certificate installed over SSH. There is no managed certificate on the VPS itself.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-ssl-certificate",
+          "quote": "This guide documents the use of Let's Encrypt, a free and automated service.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "egress-included",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "Unlimited traffic",
+        "note": "No per-GiB charge and no published fair-use threshold for standard VPS; bandwidth is 500 Mbps to 3 Gbps depending on the model.",
+        "source": {
+          "url": "https://us.ovhcloud.com/vps/",
+          "quote": "Unlimited traffic",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "egress-allowlist",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "partly",
+        "figure": "Guest iptables only",
+        "shortfall": "There is no provider-side outbound allowlist in the VPS API: filtering is iptables or ufw inside the guest, which an agent with root can change.",
+        "note": "OVHcloud's VPS firewall guide is a Linux iptables tutorial. The Edge Network Firewall linked from the FAQ is inbound anti-DDoS filtering.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/firewall-linux-iptable",
+          "quote": "Most of the rules outlined in this guide assume that your iptables is configured by default to DROP incoming traffic, and that you selectively authorize incoming traffic.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "no-internet",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "partly",
+        "figure": "Guest firewall only",
+        "shortfall": "There is no no-internet switch or private-only VPS: you drop outbound traffic with iptables inside the guest, and the VPS still has a public IP.",
+        "note": "A VPS always ships with a public IPv4 and IPv6. Cutting egress is an OS configuration the root user can undo.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/firewall-linux-iptable",
+          "quote": "Most of the rules outlined in this guide assume that your iptables is configured by default to DROP incoming traffic, and that you selectively authorize incoming traffic.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "static-ip",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "Dedicated IPv4 + IPv6",
+        "note": "The address is fixed for the life of the VPS and survives an upgrade. Additional IPs are a separate paid option.",
+        "source": {
+          "url": "https://us.ovhcloud.com/vps/",
+          "quote": "Get a unique IPv4 address, for more flexibility and network compatibility.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "secrets-store",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "No vault",
+        "note": "No secrets manager, encrypted variable store or injection API for VPS. Keys live in files, environment variables or the application's own configuration.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "List your VPS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "hidden-secrets",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "None",
+        "note": "No credential-brokering proxy or placeholder-key mechanism; anything the agent's user can read, the agent can read.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "List your VPS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "scoped-keys",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "API rights per route",
+        "note": "Application keys carry a Rights list that limits which API routes and HTTP methods they may call, and can have a validity period.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/manage-and-operate/api/first-steps",
+          "quote": "The `Rights` field allows you to restrict the use of the application to certain APIs.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "dashboard-create",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "Control Panel + configurator",
+        "note": "The 2027 range is ordered through a configurator: model, region, image, SSH key, options. The control panel then handles reinstall, reboot, snapshot, backup and disks.",
+        "source": {
+          "url": "https://us.ovhcloud.com/vps/",
+          "quote": "Choose the configuration that fits your needs—web hosting, gaming, VPN, development, and more.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "cli",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "ovhcloud vps",
+        "note": "The official OVHcloud CLI has a VPS command group, including `ovhcloud vps list` and `ovhcloud vps get`.",
+        "source": {
+          "url": "https://github.com/ovh/ovhcloud-cli",
+          "quote": "ovhcloud vps list",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "python-sdk",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "python-ovh (official)",
+        "note": "OVHcloud's official thin wrapper handles credential signing; it covers the whole API, VPS included.",
+        "source": {
+          "url": "https://github.com/ovh/python-ovh",
+          "quote": "Lightweight wrapper around OVHcloud's APIs.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "ts-sdk",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "node-ovh (official)",
+        "note": "OVHcloud publishes an official Node.js wrapper on npm as `ovh`.",
+        "source": {
+          "url": "https://github.com/ovh/node-ovh",
+          "quote": "The easiest way to use the OVHcloud.com APIs in your node.js applications.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "rest-api",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "REST API under /vps",
+        "note": "52 documented paths under `/vps`, covering order rules, service info, reboot, rebuild, start/stop, snapshots, backups, disks, IPs and tasks, plus a Terraform resource.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "List your VPS",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "mcp-server",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "partly",
+        "figure": "Official; no VPS section",
+        "shortfall": "OVHcloud runs an official MCP server, but it is split into product sections and no VPS section or VPS tool is documented, so an agent cannot manage these servers through it today.",
+        "note": "The MCP server uses OAuth2 and per-section URLs. The documented sections cover domains and other products; the VPS docs index has no MCP page.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/web-cloud/domains/mcp-domain-getting-started",
+          "quote": "You always connect to a specific section: there is no global URL exposing every tool at once.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "pty",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "No PTY endpoint",
+        "note": "The VPS API has no interactive shell or command endpoint; the KVM console URL is a screen, not a PTY over the API.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "List your VPS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "file-api",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "No file endpoint",
+        "note": "No upload or download API for files on the VPS; you use SFTP, rsync or the snapshot download.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "List your VPS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "agents-preinstalled",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "None",
+        "note": "Preinstalled images are panels and tools (n8n, Docker, Plesk, cPanel), not coding or personal agents. Hermes and OpenClaw have guides, not images.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/apps-first-steps",
+          "quote": "OVHcloud offers VPS customers pre-installed application images for quick and easy deployment of applications in just a few clicks.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "prompt-api",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "None",
+        "note": "No prompt or task endpoint. An agent is a process you install and run over SSH.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/vps.json",
+          "quote": "List your VPS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "one-click-hermes",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Guide, not an image",
+        "note": "OVHcloud publishes a full Hermes install guide with Telegram and scheduled tasks, but there is no Hermes image or dashboard deployment.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-hermes-agent",
+          "quote": "Find out how to deploy Hermes Agent in production on a VPS, connected to OVHcloud AI Endpoints, with a Telegram gateway and scheduled tasks",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "one-click-openclaw",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Guide, not an image",
+        "note": "A landing page and a Docker/Traefik guide; no preinstalled OpenClaw image at order.",
+        "source": {
+          "url": "https://us.ovhcloud.com/vps/vps-openclaw/",
+          "quote": "Follow our step-by-step guide to install OpenClaw using Docker on your OVHcloud VPS in less than 5 minutes",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "browser",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Install it yourself",
+        "note": "No browser image, headless-browser endpoint or computer-use API. Chromium and a driver are your install.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/apps-first-steps",
+          "quote": "OVHcloud offers VPS customers pre-installed application images for quick and easy deployment of applications in just a few clicks.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "desktop",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "partly",
+        "figure": "Windows + RDP",
+        "shortfall": "A Windows VPS gives a real desktop over RDP, but there is no computer-use image, streaming API or preinstalled agent, and Linux images have no desktop at all.",
+        "note": "Windows is offered on standard VPS (not Local Zones), and OVHcloud documents connecting with Remote Desktop. Nothing is set up for an agent to drive the screen.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps",
+          "quote": "On your local Windows device, you can use the \"Remote Desktop Connection\" client application to connect to the VPS.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "hosts-other-agents",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "Hermes and OpenClaw guides",
+        "note": "OVHcloud maintains first-party install guides for Hermes Agent and OpenClaw, plus a generic AI-agent guide, all on a VPS with root.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-hermes-agent",
+          "quote": "Find out how to deploy Hermes Agent in production on a VPS, connected to OVHcloud AI Endpoints, with a Telegram gateway and scheduled tasks",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "team-workspace",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "IAM users, groups, policies",
+        "note": "OVHcloud IAM gives the account users, groups and per-resource policies, free. Services are still owned by the account, not by a project workspace.",
+        "source": {
+          "url": "https://us.ovhcloud.com/identity-security-operations/identity-access-management/",
+          "quote": "Policies contain a list of identities, such as accounts, users, and user groups, a list of resources where the policies are applicable, and a list of actions that the identities are allowed to perform.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "roles",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "IAM policies per resource",
+        "note": "Policies grant actions on named resources to users and groups; there are no fixed Owner/Admin/Member roles, so the account owner defines each policy.",
+        "source": {
+          "url": "https://us.ovhcloud.com/identity-security-operations/identity-access-management/",
+          "quote": "Policies contain a list of identities, such as accounts, users, and user groups, a list of resources where the policies are applicable, and a list of actions that the identities are allowed to perform.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "sso",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "SAML 2.0 (Entra, Okta)",
+        "note": "Identity federation through ADFS, Azure AD/Entra ID, Google Workspace or Okta, at no extra charge.",
+        "source": {
+          "url": "https://us.ovhcloud.com/identity-security-operations/identity-access-management/",
+          "quote": "Leverage SAML 2.0 federation protocol to seamlessly connect your Identity Provider, such as ADFS, Azure AD, Google Workspace, and Okta.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "spend-cap",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "No hard cap",
+        "note": "No account-level spending limit. The fixed monthly price caps the machine itself, but upgrades, additional disks, IPs and licences add to the bill and nothing stops them.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/account-and-service-management/managing-billing-payments-and-services/faq-billing",
+          "quote": "By default, your services are renewed automatically when they reach their renewal date",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "usage-alerts",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "partly",
+        "figure": "Renewal emails only",
+        "shortfall": "OVHcloud emails before a service expires or renews, but there is no spend-threshold or budget alert for a VPS, whose price is fixed until you change it.",
+        "note": "Expiry and renewal notifications are documented. Public Cloud has budget alerts; the VPS pages do not.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/account-and-service-management/managing-billing-payments-and-services/best-practices",
+          "quote": "you will receive several notifications by email",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "audit-log",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "partly",
+        "figure": "Audit logs via paid LDP",
+        "shortfall": "Account audit, activity and access-policy logs exist, but you must forward them to Logs Data Platform, a separate paid service, to read or keep them.",
+        "note": "Log forwarding itself is free; the Logs Data Platform usage is charged at its standard price plan.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/manage-and-operate/iam/logs-forwarding",
+          "quote": "Audit Logs: Provide a security-relevant, chronological set of records documenting the sequence of actions in your OVHcloud account",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "per-second",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Monthly only",
+        "note": "There is no hourly or per-second rate for VPS; the recurring price is a monthly fee, and a part-month is prorated only for billing-date alignment.",
+        "source": {
+          "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360002306224-Overview-of-Billing-with-OVHcloud-US",
+          "quote": "You can choose to be billed monthly for a Virtual Private Server (VPS) regardless of whether you select a commitment that is month-to-month, 12 months, or 24 months.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "active-cpu",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Fixed monthly plan",
+        "note": "The vCores are reserved for the whole month whether the CPU works or waits; there is no active-CPU meter or floor.",
+        "source": {
+          "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360002306224-Overview-of-Billing-with-OVHcloud-US",
+          "quote": "A customer purchases a VPS and is charged the full monthly amount.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "cheap-pause",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Stop still bills",
+        "note": "Powering off keeps the full monthly charge; there is no stopped-storage rate and no suspended state that reduces the bill.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/account-and-service-management/managing-billing-payments-and-services/faq-billing",
+          "quote": "By default, your services are renewed automatically when they reach their renewal date",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "no-monthly-fee",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "No plan fee",
+        "note": "There is no separate platform or account fee; the VPS monthly price is the whole machine charge, and the installation fee is $0.",
+        "source": {
+          "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360002306224-Overview-of-Billing-with-OVHcloud-US",
+          "quote": "A customer purchases a VPS and is charged the full monthly amount.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "flat-price",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "$5.35–$27.50/mo",
+        "note": "A fixed monthly price per model on the no-commitment term: $5.35 for VPS-1 to $27.50 for VPS-4. 6- and 12-month commitments lower it, and the product page's \"Starting at\" figures are the 12-month prices.",
+        "source": {
+          "url": "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US",
+          "quote": "\"formattedPrice\": \"$5.35 USD\"",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "free-tier",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "None",
+        "note": "Every VPS is a paid monthly plan from the first invoice; no free tier or free machine is offered on the VPS pages.",
+        "source": {
+          "url": "https://us.ovhcloud.com/vps/",
+          "quote": "Starting at $4.54 /month",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "free-credit",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "No signup credit",
+        "note": "No VPS signup credit is published. Promotional offers exist from time to time but are not a standing credit.",
+        "source": {
+          "url": "https://us.ovhcloud.com/vps/",
+          "quote": "Starting at $4.54 /month",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "no-card",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Payment method required",
+        "note": "A bank card, PayPal or SEPA direct debit must be on the account before the service renews, and the first order is charged immediately.",
+        "source": {
+          "url": "https://docs.ovhcloud.com/en/guides/account-and-service-management/managing-billing-payments-and-services/faq-billing",
+          "quote": "To ensure that your services are renewed properly, you will need to set at least one payment method in the OVHcloud Control Panel.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "status-page",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "status-ovhcloud.com",
+        "note": "A public status page split by product family, with a separate Bare Metal Cloud status site for server incidents.",
+        "source": {
+          "url": "https://www.status-ovhcloud.com/",
+          "quote": "OVHcloud Status",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "sla",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "99.9% monthly",
+        "note": "A 99.9% monthly availability commitment for VPS, with service credits if it is missed. The SLA's tiers and 60-day claim window are in the research ledger.",
+        "source": {
+          "url": "https://us.ovhcloud.com/vps/",
+          "quote": "Get guaranteed availability with a 99.9% service level agreement (SLA).",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "soc2",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "partly",
+        "figure": "SOC 2; VPS not named",
+        "shortfall": "SOC 1/2/3 reports exist for OVHcloud Services and the US data centres, but the published scope names \"Bare Metal Cloud\" rather than VPS, and non-US services need a sales request.",
+        "note": "Security and availability are the two trust categories in scope for the SOC 2 Type 2 report.",
+        "source": {
+          "url": "https://us.ovhcloud.com/compliance/soc-1-2-3/",
+          "quote": "The scope of the SSAE 18 Type 2 SOC 1, 2, & 3 examinations is the OVHcloud Services and US Data Centers",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "dpa",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "yes",
+        "figure": "DPA + SCCs",
+        "note": "A Data Processing Agreement forms part of the Terms of Service and covers GDPR, CCPA and standard contractual clauses, with technical and organisational measures.",
+        "source": {
+          "url": "https://us.ovhcloud.com/legal/data-processing-agreement/",
+          "quote": "This Data Processing Agreement (“DPA”) forms part of the OVHcloud Terms of Service",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "open-source",
+      "row": {
+        "provider": "ovhcloud",
+        "verdict": "no",
+        "figure": "Proprietary platform",
+        "note": "A hosted service governed by OVHcloud's terms. The CLI, SDKs and Terraform provider are open source, but the VPS platform itself cannot be self-hosted.",
+        "source": {
+          "url": "https://us.ovhcloud.com/legal/terms-of-service/",
+          "quote": "This agreement between OVH US LLC dba OVHcloud®, a Delaware limited liability company (\"OVHcloud\"), and you (\"You,\" \"Your\" or \"Customer\")",
+          "confidence": "inferred"
+        }
+      }
+    }
+  ]
+}

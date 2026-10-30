@@ -1,0 +1,774 @@
+[
+  {
+    "useCase": "workflow-automation",
+    "provider": "tensorlake",
+    "tier": "manual",
+    "noTerminal": "no",
+    "what": "No n8n guide. n8n can run as a managed background process with its database and encryption key kept on a volume, but a named sandbox suspends after ten quiet minutes unless proxy traffic or a raised timeout keeps it awake, so a schedule inside it stops.",
+    "link": {
+      "title": "Tensorlake: commands and background processes",
+      "url": "https://docs.tensorlake.ai/sandboxes/commands"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.tensorlake.ai/sandboxes/commands",
+        "quote": "Use `start_process` for work that should keep running after the call returns: servers, watchers, and other long-lived jobs.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      },
+      {
+        "url": "https://docs.tensorlake.ai/sandboxes/lifecycle",
+        "quote": "`timeout_secs` is an **idle threshold**, not a wall-clock lifetime.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      },
+      {
+        "url": "https://docs.tensorlake.ai/sandboxes/lifecycle",
+        "quote": "If `timeout_secs` is not set, it goes with the default value which is `600` sec (10 minutes).",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "chat-bot",
+    "provider": "tensorlake",
+    "tier": "manual",
+    "noTerminal": "no",
+    "what": "No bot guide. A named sandbox can hold the bot as a managed process and expose its port, but it suspends after ten quiet minutes; an idle Discord gateway sends no proxied traffic to keep it awake.",
+    "link": {
+      "title": "Tensorlake: commands and background processes",
+      "url": "https://docs.tensorlake.ai/sandboxes/commands"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.tensorlake.ai/sandboxes/commands",
+        "quote": "Use `start_process` for work that should keep running after the call returns: servers, watchers, and other long-lived jobs.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      },
+      {
+        "url": "https://docs.tensorlake.ai/sandboxes/lifecycle",
+        "quote": "`timeout_secs` is an **idle threshold**, not a wall-clock lifetime.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "claude-code-team",
+    "provider": "tensorlake",
+    "tier": "manual",
+    "noTerminal": "no",
+    "what": "Each developer gets a named sandbox over SSH or VS Code Remote-SSH, with their own key and Claude login; it suspends when idle and resumes with the shell, packages and files intact. No team guide.",
+    "link": {
+      "title": "Tensorlake: remote development over SSH",
+      "url": "https://docs.tensorlake.ai/sandboxes/remote-dev"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.tensorlake.ai/sandboxes/remote-dev",
+        "quote": "It is also a real development environment you can SSH into from any machine.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      },
+      {
+        "url": "https://docs.tensorlake.ai/sandboxes/remote-dev",
+        "quote": "Open it in VS Code or any Remote-SSH client, work normally, walk away when you’re done.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "scheduled-scraper",
+    "provider": "tensorlake",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "A cron schedule invokes a deployed Tensorlake application, which can start a sandbox for each scrape; the schedule lives outside the sandbox, and results need a volume or your own storage.",
+    "link": {
+      "title": "Tensorlake: cron scheduler",
+      "url": "https://docs.tensorlake.ai/applications/cron-scheduler"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.tensorlake.ai/applications/cron-scheduler",
+        "quote": "Cron schedules trigger your deployed orchestration endpoints on a recurring basis.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "mcp-server",
+    "provider": "tensorlake",
+    "tier": "manual",
+    "noTerminal": "no",
+    "what": "No MCP guide or template. A named sandbox can run the server and expose its port at a public sandbox URL, but it suspends after ten quiet minutes, so an idle server wakes on the next call.",
+    "link": {
+      "title": "Tensorlake: sandbox networking",
+      "url": "https://docs.tensorlake.ai/sandboxes/networking"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.tensorlake.ai/sandboxes/networking",
+        "quote": "Every running sandbox is reachable through sandbox-specific ingress.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      },
+      {
+        "url": "https://docs.tensorlake.ai/sandboxes/lifecycle",
+        "quote": "`timeout_secs` is an **idle threshold**, not a wall-clock lifetime.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      },
+      {
+        "url": "https://docs.tensorlake.ai/sandboxes/networking",
+        "quote": "If a named sandbox is suspended, the proxy can resume it when a request arrives for an exposed port, provided `auto_resume` is `true` (the default).",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "coding-agent",
+    "provider": "blaxel",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "An official tutorial runs Claude Code in a sandbox against a codebase in a second sandbox, with a login on your own Anthropic account.",
+    "link": {
+      "title": "Blaxel: run Claude Code in a sandbox",
+      "url": "https://docs.blaxel.ai/Tutorials/Claude-Code"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.blaxel.ai/Tutorials/Claude-Code",
+        "quote": "This tutorial explains how to run Claude Code inside a Blaxel sandbox and have it execute coding tasks on a codebase hosted in a different sandbox.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "coding-agent",
+    "provider": "modal",
+    "tier": "manual",
+    "noTerminal": "no",
+    "what": "No Claude Code guide. Create a sandbox with a Volume mounted for the repository and `~/.claude`, install Claude Code, and terminate it after the session; a filesystem snapshot can keep the installed tools. A sandbox ends after at most 24 hours, so each session starts a new one.",
+    "link": {
+      "title": "Modal: sandbox files and Volumes",
+      "url": "https://modal.com/docs/guide/sandbox-files"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://modal.com/docs/guide/sandbox-files",
+        "quote": "Volumes and CloudBucketMounts allow you to upload data once and access that data efficiently from many sandboxes.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      },
+      {
+        "url": "https://modal.com/docs/guide/sandbox-files",
+        "quote": "To access a Volume from a Sandbox, you can use the `volumes` parameter of `Sandbox.create`",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      },
+      {
+        "url": "https://modal.com/docs/guide/sandbox-snapshots",
+        "quote": "Filesystem Snapshots are copies of the Sandbox’s root filesystem at a given point in time.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      },
+      {
+        "url": "https://modal.com/docs/guide/sandboxes",
+        "quote": "Sandboxes have a default maximum lifetime of 5 minutes. You can change this by passing a `timeout` of up to 24 hours to the `Sandbox.create(...)` function.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "coding-agent",
+    "provider": "morph",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "An official example installs Claude Code in a Devbox with one-click VS Code or Cursor access and SSH; nothing on teams or per-developer logins.",
+    "link": {
+      "title": "Morph: Claude Code on a Devbox",
+      "url": "https://cloud.morph.so/docs/examples/claude-code"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://cloud.morph.so/docs/examples/claude-code",
+        "quote": "Launch cloud development environments with Claude Code AI assistance.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "coding-agent",
+    "provider": "runtime",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "A first-party guide installs Claude Code from npm in a microVM, keeps the Anthropic key in a host-side secret and returns the diff; each task gets a fresh sandbox.",
+    "link": {
+      "title": "Runtime: run Claude Code in a sandbox",
+      "url": "https://withruntime.com/integrations/claude-code"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://withruntime.com/integrations/claude-code",
+        "quote": "Install it with npm in a Linux microVM. Store the API key as a secret, run `claude -p` on a cloned repo, and copy the diff back.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "coding-agent",
+    "provider": "sprites",
+    "tier": "manual",
+    "noTerminal": "no",
+    "what": "Install Claude Code yourself in a Sprite; the whole filesystem persists and the Sprite wakes on a command or request. No Claude Code guide.",
+    "link": {
+      "title": "Sprites: quickstart",
+      "url": "https://docs.fly.io/sprites/quickstart.md"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.fly.io/sprites/quickstart.md",
+        "quote": "Install the sprite CLI, sign in with sprite org auth, create a Sprite, run commands with sprite exec, and serve HTTP from its Fly.io URL on port 8080.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "code-interpreter",
+    "provider": "agent37",
+    "tier": "backend",
+    "noTerminal": "no",
+    "what": "An instance runs a shell command through `POST /v1/instances/{id}/exec`; your app creates the machine, runs the code and deletes it. The product is an agent host, not an interpreter service.",
+    "link": {
+      "title": "Agent 37: run commands",
+      "url": "https://www.agent37.com/docs/agents-api/exec"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://www.agent37.com/docs/agents-api/exec",
+        "quote": "`POST /v1/instances/{id}/exec` runs a shell command inside the instance, straight from your backend.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "code-interpreter",
+    "provider": "blaxel",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "The SDK runs shell commands in a sandbox and returns stdout, stderr and the exit code; your app creates the sandbox and reads the result.",
+    "link": {
+      "title": "Blaxel: process execution",
+      "url": "https://docs.blaxel.ai/Sandboxes/Processes"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.blaxel.ai/Sandboxes/Processes",
+        "quote": "Execute shell commands, retrieve process information, stream output, and control process lifecycle in Blaxel sandboxes using the SDK.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "code-interpreter",
+    "provider": "boat",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "The REST API runs a shell command and returns stdout, stderr and the exit code, with a 600-second maximum; your app creates and stops the sandbox.",
+    "link": {
+      "title": "Boat: run a command",
+      "url": "https://docs.boat.dev/api/reference/agent/execute-sandbox-command"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.boat.dev/api/reference/agent/execute-sandbox-command",
+        "quote": "Run a shell command in a sandbox and get stdout, stderr and the exit code.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "code-interpreter",
+    "provider": "boxd",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "The TypeScript SDK creates a machine, runs a command and reads the result; the documented path is the SDK or CLI, not a REST endpoint. Machines sleep between runs.",
+    "link": {
+      "title": "boxd: TypeScript SDK",
+      "url": "https://docs.boxd.sh/reference/typescript-sdk"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.boxd.sh/reference/typescript-sdk",
+        "quote": "Create and manage machines, run commands in them, stream output, move files, and manage proxies, snapshots, disks, domains, env vars, and secrets.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "code-interpreter",
+    "provider": "instabox",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "The SDK creates a machine from a template and runs a command with a timeout; your app collects the output and deletes it.",
+    "link": {
+      "title": "InstaBox: integrate with the SDK",
+      "url": "https://instabox.sh/docs/integrate"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://instabox.sh/docs/integrate",
+        "quote": "The calls an app needs: create, pause and resume, delete, a shell, the desktop, and usage.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "code-interpreter",
+    "provider": "lizard",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "An official code-interpreter page runs LLM-generated Python in the `interpreter` template, where a Jupyter kernel keeps variables between calls.",
+    "link": {
+      "title": "Lizard: code interpreter",
+      "url": "https://lizard.build/docs/sandboxes/code-interpreter"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://lizard.build/docs/sandboxes/code-interpreter",
+        "quote": "On Lizard, `CodeSandbox` from Lizard SDK does this inside a sandbox, a Firecracker microVM, which isolates the code from your app and computer.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "code-interpreter",
+    "provider": "morph",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "The Devbox API runs a shell command inside the VM and returns stdout, stderr and the exit code; your app creates and stops the instance.",
+    "link": {
+      "title": "Morph: exec",
+      "url": "https://cloud.morph.so/docs/api-reference/exec-instance-instance-id-exec-post"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://cloud.morph.so/docs/api-reference/exec-instance-instance-id-exec-post",
+        "quote": "Execute a shell command inside a VM via SSH (AsyncSSH backend).",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "code-interpreter",
+    "provider": "runtime",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "The SDK runs a command in a fresh microVM, streams stdout and returns the exit code; CPU is billed only while working.",
+    "link": {
+      "title": "Runtime: stream command output",
+      "url": "https://withruntime.com/how-to/stream-command-output"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://withruntime.com/how-to/stream-command-output",
+        "quote": "Pass `onStdout` to `exec` (`on_stdout` in Python), or loop over `execStream()`.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "code-interpreter",
+    "provider": "sandboxer",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "The SDK's `exec` runs a shell string or argv array with a timeout and returns stdout and the exit code; your app creates and stops the sandbox.",
+    "link": {
+      "title": "Sandboxer: TypeScript SDK",
+      "url": "https://sandboxer.com/docs/sdk-typescript"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://sandboxer.com/docs/sdk-typescript",
+        "quote": "`exec` takes a shell string or an argv array (quoted for you), plus `cwd`, `env` and `timeoutSeconds` (1–600, default 30).",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "code-interpreter",
+    "provider": "sprites",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "`sprite exec` runs a single command, waits for it to finish and returns stdout and stderr; the Sprite keeps its filesystem between runs.",
+    "link": {
+      "title": "Sprites: working with Sprites",
+      "url": "https://docs.fly.io/sprites/working-with-sprites.md"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.fly.io/sprites/working-with-sprites.md",
+        "quote": "Run a single command, wait for it to finish, get the output.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "agent37",
+    "tier": "preinstalled",
+    "noTerminal": "partly",
+    "what": "The `agent37-hermes` template ships Chromium and a browser tool, and a desktop build adds a screen you can watch and take over; other templates are not guaranteed a browser.",
+    "link": {
+      "title": "Agent 37: browser and desktop",
+      "url": "https://www.agent37.com/docs/agents-api/desktop"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://www.agent37.com/docs/agents-api/desktop",
+        "quote": "The stock `agent37-hermes` template includes a headless browser: the agent opens pages, clicks, fills forms, and reads what comes back.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "blaxel",
+    "tier": "preinstalled",
+    "noTerminal": "no",
+    "what": "Choose a prebuilt image: `playwright-chromium` or `chromium` for headless work, or `cua-xfce` and `xfce-vnc` for a desktop, with computer-use tooling on the first.",
+    "link": {
+      "title": "Blaxel: prebuilt images",
+      "url": "https://docs.blaxel.ai/Sandboxes/Templates"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.blaxel.ai/Sandboxes/Templates",
+        "quote": "Playwright + Chromium browser automation environment with Node.js 20",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "boat",
+    "tier": "preinstalled",
+    "noTerminal": "partly",
+    "what": "Every sandbox has a Linux desktop with Chrome; open the desktop or a browser-only view from the dashboard, or let the built-in computer tools drive it.",
+    "link": {
+      "title": "Boat: desktop streaming",
+      "url": "https://docs.boat.dev/desktop-streaming"
+    },
+    "price": "About $90 of usage at 30,000 ten-minute sessions; the $100 plan covers it",
+    "evidence": [
+      {
+        "url": "https://docs.boat.dev/desktop-streaming",
+        "quote": "Each sandbox has a Linux desktop that you open in your browser.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      },
+      {
+        "url": "https://docs.boat.dev/pricing",
+        "quote": "small | $0.018 | 2 vCPU | 4 GB | 51 GB",
+        "confidence": "pricing-page",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "boxd",
+    "tier": "preinstalled",
+    "noTerminal": "partly",
+    "what": "Every machine ships `agent-browser` and a Chromium build that opens on its desktop, so you can watch or take over; drive it with Playwright or the CLI.",
+    "link": {
+      "title": "boxd: launch a browser",
+      "url": "https://docs.boxd.sh/guides/launch-a-browser"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.boxd.sh/guides/launch-a-browser",
+        "quote": "Every machine ships its own browser, built for agents",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "cloudflare-sandbox",
+    "tier": "manual",
+    "noTerminal": "no",
+    "what": "No browser or desktop image: build Chromium and its dependencies into your own container. Cloudflare's browser product is Browser Run, a separate service from the Sandbox priced here.",
+    "link": {
+      "title": "Cloudflare Sandbox: get started",
+      "url": "https://developers.cloudflare.com/sandbox/get-started/"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://developers.cloudflare.com/sandbox/get-started/",
+        "quote": "You will POST `uname -a` to a Worker and read stdout that contains `Linux`.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      },
+      {
+        "url": "https://developers.cloudflare.com/browser-run/",
+        "quote": "Run headless Chrome on Cloudflare's global network for browser automation, web scraping, testing, and content generation.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "daytona",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "An official computer-use guide starts Xvfb, XFCE and VNC in a sandbox and drives the desktop with screenshots, clicks and keys through the SDK.",
+    "link": {
+      "title": "Daytona: computer use",
+      "url": "https://www.daytona.io/docs/en/computer-use"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://www.daytona.io/docs/en/computer-use",
+        "quote": "Computer Use enables programmatic control of desktop environments within sandboxes.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "e2b",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "An official computer-use guide runs an Ubuntu desktop with XFCE and VNC streaming, with mouse, keyboard and screenshot calls through the Desktop SDK.",
+    "link": {
+      "title": "E2B: computer use",
+      "url": "https://docs.e2b.dev/use-cases/computer-use"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://docs.e2b.dev/use-cases/computer-use",
+        "quote": "E2B provides the sandboxed desktop environment where these agents operate safely",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "instabox",
+    "tier": "preinstalled",
+    "noTerminal": "partly",
+    "what": "The default `agent-browser` template has a Linux desktop and Chromium; open the Computer tab to watch or take over, or let the agent drive it.",
+    "link": {
+      "title": "InstaBox: desktop",
+      "url": "https://instabox.sh/docs/desktop"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://instabox.sh/docs/desktop",
+        "quote": "Machines from the `agent-browser` template (shown as **standard**) have a Linux desktop with a browser.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "lizard",
+    "tier": "preinstalled",
+    "noTerminal": "partly",
+    "what": "The `desktop` template runs a Linux desktop with Chromium that an agent controls with screenshots, clicks and keys; `desktop-camoufox` adds Firefox for Playwright.",
+    "link": {
+      "title": "Lizard: sandboxes and templates",
+      "url": "https://lizard.build/docs/sandboxes/"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://lizard.build/docs/sandboxes/",
+        "quote": "The `desktop` template runs a graphical desktop that an agent controls with screenshots, clicks and keys.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "modal",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "An official example runs Browser Use against Chromium in a VM sandbox and embeds a noVNC desktop so you can watch it work in real time.",
+    "link": {
+      "title": "Modal: computer use over VNC",
+      "url": "https://modal.com/docs/examples/computer_use_vnc"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://modal.com/docs/examples/computer_use_vnc",
+        "quote": "The agent drives Chromium inside a Modal Sandbox running in a VM, while a small web UI embeds a noVNC desktop so you can watch it work in real-time.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "morph",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "An official example builds a full XFCE desktop with VNC and noVNC on a Devbox, opened in a browser tab; the machine can pause between sessions.",
+    "link": {
+      "title": "Morph: remote desktop",
+      "url": "https://cloud.morph.so/docs/examples/remote-desktop"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://cloud.morph.so/docs/examples/remote-desktop",
+        "quote": "Launch full Linux desktop environments in your browser.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "runtime",
+    "tier": "guide",
+    "noTerminal": "no",
+    "what": "A first-party guide installs Playwright and Chromium, runs the script and copies screenshots back; build an image once so later sandboxes start with the browser ready.",
+    "link": {
+      "title": "Runtime: run Playwright in a sandbox",
+      "url": "https://withruntime.com/integrations/playwright"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://withruntime.com/integrations/playwright",
+        "quote": "Install Playwright and Chromium in a Linux microVM, run your script there, and copy the screenshots or results back.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "sandboxer",
+    "tier": "preinstalled",
+    "noTerminal": "partly",
+    "what": "Every running sandbox has an XFCE desktop with Google Chrome, streamed to a browser tab for people and computer-use agents.",
+    "link": {
+      "title": "Sandboxer: desktop",
+      "url": "https://sandboxer.com/docs/desktop"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://sandboxer.com/docs/desktop",
+        "quote": "Every running sandbox has a graphical desktop (XFCE with Google Chrome) that you can open in a browser tab.",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "sprites",
+    "tier": "manual",
+    "noTerminal": "no",
+    "what": "No browser or desktop image. Install Playwright and Chromium with two commands, or run Xvfb and a VNC server yourself; the Sprite keeps the install between sessions.",
+    "link": {
+      "title": "Sprites: working with Sprites",
+      "url": "https://docs.fly.io/sprites/working-with-sprites.md"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://fly.io/sprites-blog/closing-the-loop/",
+        "quote": "One super powerful tool that doesn’t (currently) come preinstalled is Playwright.",
+        "confidence": "inferred",
+        "checkedOn": "2026-10-30"
+      },
+      {
+        "url": "https://docs.fly.io/sprites/index.md",
+        "quote": "Full Linux ✓ — install any tools",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  },
+  {
+    "useCase": "browser-agent",
+    "provider": "vercel-sandbox",
+    "tier": "manual",
+    "noTerminal": "no",
+    "what": "No browser image or guide. Install Chromium and its system dependencies in the sandbox, or build an image with them; Vercel Labs' agent-browser has an example that does this.",
+    "link": {
+      "title": "Vercel Sandbox: run commands",
+      "url": "https://vercel.com/docs/sandbox/run-commands-in-sandbox"
+    },
+    "price": null,
+    "evidence": [
+      {
+        "url": "https://vercel.com/docs/sandbox/run-commands-in-sandbox",
+        "quote": "sandbox exec --sudo <name> -- sh -c \"apt-get update && apt-get install -y jq\"",
+        "confidence": "docs-confirmed",
+        "checkedOn": "2026-10-30"
+      }
+    ]
+  }
+]

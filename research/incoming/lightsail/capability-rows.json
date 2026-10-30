@@ -1,0 +1,869 @@
+{
+  "provider": "lightsail",
+  "checkedOn": "2026-10-30",
+  "rows": {
+    "own-vm": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Full VM, own kernel",
+      "note": "Every instance is its own virtual machine with its own kernel, disk and public IP, so kernel modules, Docker and any TCP service work as on a normal Linux box.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
+        "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "root": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Root over SSH",
+      "note": "You get a Linux login over SSH or the browser terminal with sudo, and AWS documents installing extra software on the instance yourself.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "You can install additional software on your instances by using the in-browser SSH or your own SSH client.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "docker-inside": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Install on Ubuntu",
+      "note": "No Lightsail image ships Docker, but the Ubuntu, Debian and Amazon Linux blueprints are ordinary distributions with root, so Docker Engine installs from the normal package repository.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/compare-options-choose-lightsail-instance-image.html",
+        "quote": "You can install many additional software packages, such as Evolution, GIMP, Pidgin, and Synaptic by using the APT-based package management tool (`apt-get`).",
+        "confidence": "inferred"
+      }
+    },
+    "nested-virt": {
+      "provider": "lightsail",
+      "verdict": "not-published",
+      "figure": "Not documented",
+      "note": "No Lightsail page documents nested virtualisation, a hypervisor option or hardware-assisted virtualisation inside an instance. Treat it as unknown rather than supported.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
+        "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
+        "confidence": "not-published"
+      }
+    },
+    "custom-image": {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "Snapshots only",
+      "shortfall": "You can rebuild from a snapshot of your own configured instance, but you cannot import an image or build one from a Dockerfile made elsewhere.",
+      "note": "The documented image sources are AWS's blueprints and snapshots of Lightsail instances. A snapshot can only make a new resource on the same or a larger plan.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html",
+        "quote": "Use snapshots to create new Lightsail resources using the same plan, or larger plan, than the original resource.",
+        "confidence": "inferred"
+      }
+    },
+    "any-size": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "25 fixed bundles",
+      "note": "You pick from 25 fixed Linux bundles; CPU, memory and disk cannot be sized independently. The only way to change plan is to build a new instance from a snapshot.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
+        "quote": "Lightsail offers a variety of instance bundles (also known as instance plans) to meet different workload requirements.",
+        "confidence": "inferred"
+      }
+    },
+    "big-machines": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "64 vCPU / 256 GiB",
+      "note": "The largest general-purpose bundle is 64 vCPU / 256 GB / 1,280 GB SSD at $1,764 a month, and memory-optimised bundles reach 512 GB.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
+        "quote": "16Xlarge-256GB Linux with public IPv4 | $1,764.00 | 64 | 256 GB | 1,280 GB | 10 TB",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "live-resize": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "New instance from snapshot",
+      "note": "There is no in-place resize. Moving up or down means snapshotting, creating a new instance on the new plan, repointing DNS and the static IP, and deleting the old one.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-right-size-instance.html",
+        "quote": "Lightsail does not change the plan of an existing instance in place.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "gpu": {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "Research product only",
+      "shortfall": "GPUs are sold only in Lightsail for Research, a separate product for researchers; an ordinary Lightsail instance is CPU-only.",
+      "note": "The instance bundle tables contain no GPU shapes. Lightsail for Research offers GPU virtual computers with RStudio and similar applications, on its own prices and console.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "Lightsail for Research offers two types of virtual computers: non-GPU and GPU.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "choose-region": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "19 regions",
+      "note": "19 AWS regions, four of them opt-in and disabled by default (Hong Kong, Jakarta, Malaysia, Spain). DNS zones and CDN distributions are global resources created in us-east-1.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-regions-and-availability-zones-in-amazon-lightsail.html",
+        "quote": "Lightsail is available in the following Regions.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "eu-region": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "6 EU regions",
+      "note": "Frankfurt, Ireland, London, Paris and Stockholm, plus Spain as an opt-in region. Choosing an EU region keeps the machine there; AWS's DPA covers the account.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-regions-and-availability-zones-in-amazon-lightsail.html",
+        "quote": "EU (Ireland) (eu-west-1)",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "pause-memory": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Stop powers down",
+      "note": "Stopping powers the machine down, so memory and running processes are gone. Starting again boots the operating system from the kept disk.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "When you stop your instance, it is powered down at its current state and is available for you to start again at any time.",
+        "confidence": "inferred"
+      }
+    },
+    "warm-pool": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No pre-started pool",
+      "note": "Every instance is created on demand and goes through Pending before Running. There is no pool of pre-booted machines to draw from.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-start-stop-or-restart-your-instance-virtual-private-server.html",
+        "quote": "When Amazon Lightsail creates your instance, your machine goes into a Pending state before it starts Running.",
+        "confidence": "inferred"
+      }
+    },
+    "fast-start": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Minutes",
+      "note": "AWS says a new instance spins up within minutes, not under a second. Restoring from a snapshot is slower still.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "Once you choose Create, your new instance will spin up automatically within minutes.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "snapshot-files": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "$0.05/GB-month",
+      "note": "Manual snapshots of an instance or disk are kept until deleted and cost $0.05 per GB-month. Restoring makes a new instance or disk, not an in-place rollback.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html",
+        "quote": "A snapshot contains all of the data that is needed to restore your resource (from the moment when the snapshot was taken).",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "snapshot-memory": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Disk only",
+      "note": "Snapshots capture the disk. AWS recommends stopping the instance first so the data is consistent, which means nothing running survives in the snapshot.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "We recommend stopping your instance temporarily when taking a snapshot, to ensure your data is complete and not corrupted in any way.",
+        "confidence": "inferred"
+      }
+    },
+    "fork-running": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Snapshot only",
+      "note": "There is no copy of a live machine. You snapshot, then create a second instance from the snapshot while the first keeps running, so the copy starts from the snapshot moment.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "We recommend stopping your instance temporarily when taking a snapshot, to ensure your data is complete and not corrupted in any way.",
+        "confidence": "inferred"
+      }
+    },
+    "older-snapshot": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Manual, indefinitely",
+      "note": "Manual snapshots stay until you delete them, so any earlier one can be restored. Automatic snapshots are different: only the latest seven daily copies are kept.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html",
+        "quote": "Manual snapshots are stored indefinitely until you delete them.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "templates": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Snapshots as baselines",
+      "note": "A snapshot is the template: create as many instances from it as you like, on the same or a larger plan. AWS also ships blueprints for WordPress, LAMP, Node.js, Docker-free distros and more.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "You can use snapshots as baselines to create new resources or to back up your data.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "backups": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "7 daily automatic",
+      "note": "Automatic snapshots run daily and keep the latest seven. They are deleted with the instance unless you copy one to a manual snapshot first.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html",
+        "quote": "The latest seven daily automatic snapshots are stored before the oldest one is replaced with the newest one.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "files-survive-stop": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Disk kept",
+      "note": "The system disk and any attached disks stay in place while the instance is stopped, so files are there when it starts. The public IPv4 address is not, unless you attached a static IP.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "When you stop your instance, it is powered down at its current state and is available for you to start again at any time.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "volumes": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "$0.10/GB-month",
+      "note": "Block storage disks are separate from the instance and survive its deletion. They cost $0.10 per allocated GB-month, from 8 GB to 16 TB each, up to 15 per instance.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/elastic-block-storage-and-ssd-disks-in-amazon-lightsail.html",
+        "quote": "You can also add more storage to your virtual private server by creating additional block storage disks.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "shared-volume": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "One instance per disk",
+      "note": "Attaching a disk names a single instance, and Lightsail does not document multi-attach or a shared filesystem. Two machines needing the same files need a network share you run yourself.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_AttachDisk.html",
+        "quote": "Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.",
+        "confidence": "inferred"
+      }
+    },
+    "mount-buckets": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "S3 API, no mount",
+      "note": "Object storage buckets are built on S3 and reached over the S3 API or the console. AWS documents no way to mount one as a folder; a third-party FUSE client would be your own doing.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/buckets-in-amazon-lightsail.html",
+        "quote": "It is designed to make web-scale computing easier for developers, and is built using the Amazon Simple Storage Service (Amazon S3).",
+        "confidence": "inferred"
+      }
+    },
+    "big-disk": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "16 TB per disk",
+      "note": "Bundles include 20 GB to 1,280 GB of SSD, and extra disks go up to 16 TB each, with 20,000 GB attached per region by default.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/elastic-block-storage-and-ssd-disks-in-amazon-lightsail.html",
+        "quote": "16 TB per disk maximum, or 8 GB per disk minimum.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "stay-on": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Until deleted",
+      "note": "There is no idle timeout and no session limit: an instance runs until you stop or delete it, and AWS bills it the whole time.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "Lightsail instances and managed databases incur charges until they are deleted.",
+        "confidence": "inferred"
+      }
+    },
+    "choose-idle": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Manual stop only",
+      "note": "Nothing stops an idle instance for you and there is no timeout to configure; you stop it from the console, CLI or API.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-start-stop-or-restart-your-instance-virtual-private-server.html",
+        "quote": "After your instance is running, you can reboot it or stop and then start it.",
+        "confidence": "inferred"
+      }
+    },
+    "wake-on-request": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "A stopped instance does not wake on traffic; the request simply fails until you start it. There is no request-driven proxy in front of it.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-start-stop-or-restart-your-instance-virtual-private-server.html",
+        "quote": "To Start your instance, it must be in a Stopped state.",
+        "confidence": "inferred"
+      }
+    },
+    "schedules": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No scheduler",
+      "note": "Lightsail has no job or instance scheduler. You run cron or systemd timers inside the instance, which means the instance is already running and billing.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "Lightsail instances and managed databases incur charges until they are deleted.",
+        "confidence": "inferred"
+      }
+    },
+    "public-url": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Public IPv4 + firewall",
+      "note": "Every bundle with a public IPv4 address is reachable on it, and the instance firewall opens the ports you choose. A static IP keeps the address across stops.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "You can use the public IP to connect to your instance from the Internet, such as through a registered domain name or through an SSH or RDP connection from your local computer.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "private-url": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "There is no token-scoped preview link. Access control is the firewall, restricted by source IP, or a login you build into the application.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
+        "quote": "you can choose to restrict a firewall rule to an IPv4 or IPv6 address or range of IP addresses.",
+        "confidence": "inferred"
+      }
+    },
+    "ssh": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Standard SSH",
+      "note": "Lightsail creates a default key pair per region, and you can upload your own. Then it is ordinary OpenSSH from your terminal, with SFTP and port forwarding available.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-ssh-in-amazon-lightsail.html",
+        "quote": "In Lightsail, as soon as you create an instance in an AWS Region, we create a Default SSH key in that Region.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "web-terminal": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Browser SSH",
+      "note": "The console opens a browser SSH session in one click for Linux instances and RDP for Windows. No local SSH client is needed.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "Lightsail offers a 1-click secure connection to your instance's terminal right from your browser, supporting SSH access for Linux/Unix-based instances and RDP access for Windows-based instances.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "tunnel": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "SSH port forwarding",
+      "note": "Because it is a normal SSH server, ssh -L reaches any port on the instance as if it were local. There is no provider tunnel command or dashboard button for it.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-ssh-in-amazon-lightsail.html",
+        "quote": "In Lightsail, as soon as you create an instance in an AWS Region, we create a Default SSH key in that Region.",
+        "confidence": "inferred"
+      }
+    },
+    "raw-tcp": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Any TCP port",
+      "note": "The firewall takes custom protocol and port rules, so databases, game servers and MQTT work. SMTP on port 25 needs reverse DNS configured or mail may be limited.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-firewall-rules-reference.html",
+        "quote": "A database instance needs rules that allow access for the type of database, such as access over port 3306 for MySQL.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "custom-domain": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "6 DNS zones free",
+      "note": "Point an A or AAAA record at the instance's static IP, in a Lightsail DNS zone (six free per account) or at your own registrar. Domain registration is also sold, at cost.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-dns-in-amazon-lightsail.html",
+        "quote": "You can create up to six DNS zones in Lightsail.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "auto-https": {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "Load balancer only",
+      "shortfall": "Automatic certificates come only with the $18/month load balancer or the WordPress blueprint's guided Let's Encrypt setup; a plain instance has none.",
+      "note": "A Lightsail load balancer includes free certificate management and HTTP-to-HTTPS redirect. On a bare instance you install Caddy or Certbot and renew it yourself.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "Lightsail certificates and certificate management are free with use of a Lightsail load balancer.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "egress-included": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "1-10 TB a month",
+      "note": "Each bundle includes 1 TB to 10 TB, halved in Mumbai, Sydney, Jakarta, Malaysia, Hong Kong and Sao Paulo. Both directions count against it, but only outbound overage is charged.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-faq-data-transfer-allowance.html",
+        "quote": "Every Lightsail instance plan includes a data transfer allowance.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "egress-allowlist": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Outbound open",
+      "note": "The instance firewall filters inbound traffic only. Outbound traffic is unrestricted, so a compromised agent can reach any host; you would need a proxy or VPC egress control you run yourself.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
+        "quote": "they don't control the traffic that flows out of it—the firewalls allow all outbound traffic.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "no-internet": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "There is no no-internet mode. Outbound traffic is always allowed, and an IPv6-only bundle still has internet egress.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
+        "quote": "they don't control the traffic that flows out of it—the firewalls allow all outbound traffic.",
+        "confidence": "inferred"
+      }
+    },
+    "static-ip": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "$0.005/h unattached",
+      "note": "A static IPv4 address is free while attached and costs $0.005 an hour when detached for more than an hour. Five per region by default, adjustable. IPv6-only bundles cannot take one.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "we charge a small $0.005 USD/hour fee for static IPs not attached to an instance for more than 1 hour.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "secrets-store": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "There is no Lightsail secret store or environment-variable injection. Keys live in files or a service you install, readable by anything running as the same user.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
+        "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
+        "confidence": "inferred"
+      }
+    },
+    "hidden-secrets": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "Nothing sits between the machine and the internet to add credentials to requests, so an agent with shell access can read any key the application uses.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html",
+        "quote": "they don't control the traffic that flows out of it—the firewalls allow all outbound traffic.",
+        "confidence": "inferred"
+      }
+    },
+    "scoped-keys": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "IAM policies",
+      "note": "Every Lightsail action is an IAM action (lightsail:CreateInstances and so on), so a key can be limited to one region, resource or action set, and tags can gate creation.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/security_iam_service-with-iam.html",
+        "quote": "Policy actions in Lightsail use the following prefix before the action: `lightsail:`.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "dashboard-create": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Console, few clicks",
+      "note": "The console's Create instance page picks the image, bundle, region and name, then boots the machine. No terminal is needed for that step.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "The first time you log in to the console, choose Create Instance.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "cli": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "aws lightsail",
+      "note": "The AWS CLI includes a lightsail command group covering key pairs, instances, disks and snapshots, and AWS publishes a CLI tutorial for it.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/getstarted-awscli.html",
+        "quote": "This tutorial guides you through common Amazon Lightsail operations using the AWS Command Line Interface (AWS CLI).",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "python-sdk": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "boto3",
+      "note": "boto3 ships a Lightsail client generated from the same API, so scripts can create, start, stop and snapshot instances.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/boto3/latest/reference/services/lightsail.html",
+        "quote": "A low-level client representing Amazon Lightsail",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "ts-sdk": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "@aws-sdk/client-lightsail",
+      "note": "The AWS SDK for JavaScript v3 has a Lightsail client for Node.js, browsers and React Native.",
+      "source": {
+        "url": "https://github.com/aws/aws-sdk-js-v3/blob/main/clients/client-lightsail/README.md",
+        "quote": "AWS SDK for JavaScript Lightsail Client for Node.js, Browser and React Native.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "rest-api": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Lightsail API",
+      "note": "A documented JSON API (2016-11-28) covers instances, disks, static IPs, snapshots and DNS, with per-action reference pages and error types.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/Welcome.html",
+        "quote": "This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "mcp-server": {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "Generic AWS MCP",
+      "shortfall": "AWS's official MCP server is generic: it can call any AWS API, including Lightsail's, but has no Lightsail-specific tools or skills.",
+      "note": "The managed AWS MCP Server exposes call_aws, which executes AWS API operations with the caller's IAM credentials, so an assistant can create a Lightsail instance if its policy allows it.",
+      "source": {
+        "url": "https://aws.amazon.com/blogs/aws/the-aws-mcp-server-is-now-generally-available/",
+        "quote": "The `call_aws` tool executes any of the 15,000+ AWS API operations using your existing IAM credentials.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "pty": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "There is no terminal or PTY endpoint in the Lightsail API. You get a command line by SSH, or by running your own agent inside the instance.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/Welcome.html",
+        "quote": "This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service.",
+        "confidence": "inferred"
+      }
+    },
+    "file-api": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "Files move by SFTP or SCP over SSH, not through the API. The API manages the machine and its disks, not their contents.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-connecting-to-linux-unix-instance-using-sftp.html",
+        "quote": "You can transfer files between your local computer and your Linux or Unix instance in Amazon Lightsail by connecting to your instance using SFTP (SSH File Transfer Protocol).",
+        "confidence": "inferred"
+      }
+    },
+    "agents-preinstalled": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "Blueprints are operating systems and web stacks. AWS's own list of application templates is WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx, MEAN, Node.js and Django; no coding agent is installed, so you add Claude Code or Codex yourself.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "prompt-api": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "Lightsail runs machines, not agents. There is no prompt endpoint or hosted agent; any agent loop is software you install and run.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-instances-virtual-private-servers-in-amazon-lightsail.html",
+        "quote": "Your Lightsail instance is a virtual private server (also called a virtual machine).",
+        "confidence": "inferred"
+      }
+    },
+    "one-click-hermes": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "There is no Hermes blueprint or Marketplace listing; AWS's template list does not mention it. You install Hermes on an Ubuntu instance yourself, following its Docker or installer instructions.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "one-click-openclaw": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "No OpenClaw image is offered and AWS's template list does not mention it. The closest is a bare Ubuntu instance where you install it and configure TLS yourself.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "browser": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "No browser is preinstalled or exposed for an agent to drive. You can apt-install Chromium and run Playwright inside the instance, but nothing is set up for it.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "Application templates include WordPress, Drupal, Joomla!, Ghost, Magento, Redmine, LAMP, Nginx (LEMP), MEAN, Node.js, Django, and more.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "desktop": {
+      "provider": "lightsail",
+      "verdict": "partly",
+      "figure": "Windows RDP only",
+      "shortfall": "Only Windows bundles have a desktop, reached by RDP; Linux instances have no graphical desktop and there is no browser-streamed desktop or computer-use API.",
+      "note": "Windows Server bundles cost $9.50 to $4,204 a month and give an RDP desktop in the browser. A Linux agent machine has no desktop unless you install one and stream it yourself.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "Lightsail offers a 1-click secure connection to your instance's terminal right from your browser, supporting SSH access for Linux/Unix-based instances and RDP access for Windows-based instances.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "hosts-other-agents": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "No",
+      "note": "No provider documents Lightsail as the machine behind Cursor cloud agents, Devin, Claude Managed Agents or similar. It is a general-purpose VPS, not an agent backend.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/what-is-amazon-lightsail.html",
+        "quote": "If you're an individual developer or hobbyist working on a personal project, Lightsail can help you deploy and manage basic cloud resources.",
+        "confidence": "inferred"
+      }
+    },
+    "team-workspace": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "AWS account + IAM",
+      "note": "Everyone works inside one AWS account with IAM users, groups or roles. Lightsail itself has no separate team object; billing and resources are shared at the account level.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-managing-access-for-an-iam-user.html",
+        "quote": "you can create one or more IAM users in your AWS account, and those users can be configured with different levels of access to services offered by AWS.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "roles": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "IAM policies",
+      "note": "IAM policies and groups decide who can view, create, edit or delete Lightsail resources. There are no Lightsail-specific roles, so this is AWS IAM rather than a product feature.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-managing-access-for-an-iam-user.html",
+        "quote": "You do this when someone joins your team who requires access to view, create, edit, or delete Lightsail resources but doesn’t need access to other services offered by AWS.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "sso": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "IAM Identity Center",
+      "note": "AWS IAM Identity Center connects a SAML or OIDC identity provider and gives single sign-on to the AWS account, which covers the Lightsail console and API.",
+      "source": {
+        "url": "https://aws.amazon.com/iam/identity-center/",
+        "quote": "Give your workforce single sign-on access and a consistent experience across AWS services.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "spend-cap": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Alerts, no cap",
+      "note": "Lightsail has no hard spending limit. AWS Budgets can alert you and can apply an IAM policy that blocks new resources, but running instances keep billing.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+        "quote": "You can choose to be alerted for both actual (after accruing) and forecasted (before accruing) spends.",
+        "confidence": "inferred"
+      }
+    },
+    "usage-alerts": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "AWS Budgets",
+      "note": "AWS Budgets sends alerts on actual or forecast spend, and Lightsail's own alarms cover CPU, network and status checks rather than money.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+        "quote": "You can choose to be alerted for both actual (after accruing) and forecasted (before accruing) spends.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "audit-log": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "CloudTrail",
+      "note": "CloudTrail records every Lightsail API call, from the console or code, with the identity, source IP and time. It is on by default in Event history; a trail keeps it.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/logging-lightsail-api-calls-using-aws-cloudtrail.html",
+        "quote": "CloudTrail captures all API calls for Lightsail as events.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "per-second": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Hourly",
+      "note": "Billing is by the instance-hour at the bundle's hourly rate, capped at the monthly price. AWS does not publish a per-second meter or a rounding rule for partial hours.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html",
+        "quote": "Bundles are billed on an on-demand hourly rate, so you pay only for what you use.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "active-cpu": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Full rate while on",
+      "note": "You pay the bundle's hourly price whether the CPU is idle or busy. The vCPU is burstable, but there is no credit for leaving it idle.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "For every Lightsail plan you use, we charge you the fixed hourly price, up to the maximum monthly plan cost.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "cheap-pause": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Stopped still billed",
+      "note": "A stopped instance is charged at the same hourly rate as a running one until it is deleted. Only Lightsail for Research has a cheap stopped rate.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "These resources accrue charges even when they are in the stopped state.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "no-monthly-fee": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "No plan fee",
+      "note": "There is no account or platform fee: you pay for the bundles and add-ons you use, hourly, and the account itself costs nothing.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/faq/",
+        "quote": "Lightsail plans are billed on an on-demand hourly rate, so you pay only for what you use.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "flat-price": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "$5-$1,764 a month",
+      "note": "Each bundle has one monthly price covering CPU, memory, SSD and a transfer allowance, and that price is also the monthly cap on hourly billing.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/pricing/",
+        "quote": "Lightsail bundles resources like memory, vCPU, and solid-state drive (SSD) storage into one plan, so budgeting is easy and straightforward.",
+        "confidence": "pricing-page"
+      }
+    },
+    "free-tier": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Credits only",
+      "note": "There is no recurring free Lightsail allowance. The old short-term trials are gone, replaced by AWS Free Tier credits that run out or expire.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "Lightsail’s short-term free trial offers have been replaced by the AWS Free Tier.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "free-credit": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "Up to $200",
+      "note": "New AWS accounts get $100 of credits at sign-up and can earn up to $100 more, usable on Lightsail. The credits last six months at most.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+        "quote": "you can get started with Amazon Lightsail for free with the AWS Free Tier where you can get up to $200 USD in free AWS credits.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "no-card": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Card required",
+      "note": "An AWS account needs a payment method on file before it can be created. AWS's own guidance says sign-up requires a valid credit card; the current Free Tier page describes credits and a no-charge plan but does not remove that requirement.",
+      "source": {
+        "url": "https://aws.amazon.com/blogs/aws-cloud-financial-management/a-quick-overview-of-aws-payment-methods/",
+        "quote": "AWS sign-up requires that you have a valid credit card on file.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "status-page": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "AWS Health Dashboard",
+      "note": "The AWS Health Dashboard shows current and historical service health, including per-region events. Lightsail appears among AWS services rather than on a dedicated page.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/health/latest/ug/what-is-aws-health.html",
+        "quote": "All customers can use the AWS Health Dashboard, powered by the AWS Health API. The dashboard requires no setup, and it's ready to use for authenticated AWS users.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "sla": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "99.5% per instance",
+      "note": "The SLA promises 99.5% monthly uptime per instance and 99.99% at region level, with service credits below those figures. It is a commercially reasonable efforts commitment.",
+      "source": {
+        "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/",
+        "quote": "AWS will use commercially reasonable efforts to make the Single Lightsail Instance available with an Instance-Level Uptime Percentage, as shown in the table below during any monthly billing cycle",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "soc2": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "SOC 1/2/3 reports",
+      "note": "AWS publishes SOC 1, SOC 2 and SOC 3 reports covering the infrastructure Lightsail runs on. The SOC 2 report is available to customers through AWS Artifact.",
+      "source": {
+        "url": "https://aws.amazon.com/compliance/soc-faqs/",
+        "quote": "AWS SOC 2 Security, Availability, Confidentiality, & Privacy Report available to AWS customers from AWS Artifact.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "dpa": {
+      "provider": "lightsail",
+      "verdict": "yes",
+      "figure": "AWS DPA",
+      "note": "The AWS Service Terms incorporate the AWS Data Processing Addendum for customer data, and the Standard Contractual Clauses for transfers.",
+      "source": {
+        "url": "https://aws.amazon.com/service-terms/",
+        "quote": "These Service Terms incorporate the AWS Data Processing Addendum (“DPA”), when you use AWS Services to process Customer Data (as defined in the DPA).",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "open-source": {
+      "provider": "lightsail",
+      "verdict": "no",
+      "figure": "Proprietary",
+      "note": "Lightsail is a closed AWS service. You cannot run its control plane on your own hardware, and the instances are ordinary VMs rather than a self-hostable sandbox platform.",
+      "source": {
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/what-is-amazon-lightsail.html",
+        "quote": "Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for anyone who needs to build websites or web applications.",
+        "confidence": "inferred"
+      }
+    }
+  }
+}

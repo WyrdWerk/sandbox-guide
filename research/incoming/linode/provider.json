@@ -1,0 +1,317 @@
+{
+  "id": "linode",
+  "name": "Akamai Cloud (Linode)",
+  "url": "https://www.akamai.com/cloud/pricing/cpu",
+  "status": "researched",
+  "kind": "vps",
+  "checkedOn": "2026-10-30",
+  "oneLiner": "Ordinary Linux VMs still called Linodes, from $5 a month, billed hourly up to a monthly cap, with a powered-off server still billed in full and one-click Hermes and OpenClaw apps.",
+  "whatItIs": [
+    "Akamai Cloud sells Linux virtual machines it still calls Linodes: pick a region, a distribution or one-click app, and a fixed size, and the machine is yours to administer over SSH. It is the former Linode cloud, and the plan names, the API host (api.linode.com), the CLI and the console (cloud.linode.com) all still carry the Linode name.",
+    "Five CPU families matter to a reader: Shared CPU (1 GB to 192 GB, the cheap general-purpose plans), G6 and G7 Dedicated (reserved cores, 4 GB to 512 GB), G8 Dedicated (newer 1:2 and 1:4 shapes, hourly only) and High Memory (24 GB to 300 GB with few cores). GPU, Accelerated and Kubernetes plans are separate products and are not priced here.",
+    "On top of the machine sit the usual cloud extras, most of them free: DNS, Cloud Firewalls, VPC and VLAN networking, placement groups, metrics and StackScripts. Backups, Block Storage, Object Storage and extra IPv4 addresses are paid add-ons."
+  ],
+  "whoFor": "People who want a normal Linux server per agent at a flat monthly price, in a region near them, and who are happy to patch the operating system and the agent themselves. At $24 a month for 2 vCPU / 4 GiB it sits within a dollar of the other big VPS names, and it pairs one-click Hermes and OpenClaw apps with 33 regions.",
+  "isolation": "A full KVM virtual machine per Linode with its own kernel, root, disk and IP addresses. Docker runs inside, and the guest kernel is the machine's own. Shared plans share physical cores and should stay under 80% sustained CPU; G6, G7, G8 and High Memory reserve cores. Nested virtualisation is not documented anywhere in the current docs, and there is no GPU on the CPU plans.",
+  "sizes": "Fixed shapes only, with no custom CPU or RAM split. Shared CPU: 1-32 vCPU, 1-192 GiB, 25-3,840 GiB of SSD. G6 and G7 Dedicated: 2-56 vCPU, 4-256 GiB orderable, with a 512 GiB row advertised but absent from the live type list. G8 Dedicated: 2-256 vCPU, 4-512 GiB, in 1:2 and 1:4 shapes. High Memory: 2-16 vCPU, 24-300 GiB. Extra disk comes from Block Storage volumes (10 GB-16 TB each), not from the plan. 33 core compute regions at this check, seven of them in Europe and six in the EU.",
+  "billing": {
+    "model": "Pay-as-you-go per Linode, with no plan fee and no commitment. Shared, G6, G7 and High Memory plans have an hourly rate and a monthly cap; G8 plans have an hourly rate only.",
+    "meter": "Hourly, always rounded up to the nearest hour, up to the monthly cap. Linode 4 GB is $0.036/h and $24 a month, so the cap binds at 666.7 hours.",
+    "stopped": "Nothing changes when you power off: data and RAM stay reserved and the meter runs at the full hourly rate until the Linode is deleted. There is no pause and no cheaper stopped state.",
+    "planFee": "None. The monthly figure is a cap on hourly usage, not a subscription: a Linode deleted after 90 hours bills 90 hours.",
+    "minimum": "$5 a month for the smallest plan (Nanode 1 GB). A payment method is required at signup; new customers get a $100 credit that expires with the trial."
+  },
+  "cost": {
+    "A": {
+      "headline": "$36.00 a month",
+      "shape": "Linode 4 GB (2 vCPU / 4 GiB / 80 GB), created and deleted for each task",
+      "lines": [
+        {
+          "label": "Machine time",
+          "arithmetic": "1,000 runs × 10 min, each rounded up to 1 h = 1,000 h × $0.036",
+          "amount": "$36.00"
+        }
+      ],
+      "total": "$36.00",
+      "notes": [
+        "Linode 4 GB is the smallest plan with 2 vCPU and 4 GiB; its 80 GB of disk is more than the 10 GiB asked for.",
+        "Usage rounds up to the nearest hour per service, so a ten-minute Linode bills one hour: 1,000 separate VMs are 1,000 billable hours, not 167.",
+        "The $24 monthly cap is per service, so it never applies to a VM that exists for one hour.",
+        "A 2 vCPU / 4 GiB G6 Dedicated would be $0.054/h and so $54.00 for the same 1,000 hours."
+      ],
+      "flag": "The rounding is read per service. If Akamai rounded the month's total instead, A would be 167 h × $0.036 = $6.01. The published wording (\"Usage is always rounded up to the nearest hour\") and the per-service invoice line items point to $36.00."
+    },
+    "B": {
+      "headline": "$48.00 a month",
+      "shape": "Linode 8 GB (4 vCPU / 8 GiB / 160 GB), 730 hours",
+      "lines": [
+        {
+          "label": "Machine time",
+          "arithmetic": "730 h × $0.072",
+          "amount": "$52.56"
+        },
+        {
+          "label": "Monthly cap",
+          "arithmetic": "730 h would be $52.56, capped at the $48 monthly price",
+          "amount": "−$4.56"
+        }
+      ],
+      "total": "$48.00",
+      "notes": [
+        "Linode 8 GB is the cheapest plan with 4 vCPU and 8 GiB; its 160 GB disk covers the 50 GiB asked for.",
+        "The cap binds at 666.7 hours ($48 ÷ $0.072), so an always-on machine costs the flat $48.",
+        "A G6 Dedicated 8 GB with the same 4 vCPU / 8 GiB is $72 a month. The G8 8x4 is $0.14/h with no cap, or $102.20 for 730 hours."
+      ]
+    },
+    "C": {
+      "headline": "$24.00 a month, whether it runs or not",
+      "shape": "Linode 4 GB (2 vCPU / 4 GiB / 80 GB), 90 running + 640 powered-off hours",
+      "lines": [
+        {
+          "label": "Running",
+          "arithmetic": "90 h × $0.036",
+          "amount": "$3.24"
+        },
+        {
+          "label": "Powered off",
+          "arithmetic": "640 h × $0.036, still billed in full",
+          "amount": "$23.04"
+        },
+        {
+          "label": "Monthly cap",
+          "arithmetic": "730 h = $26.28, capped at the $24 monthly price",
+          "amount": "−$2.28"
+        }
+      ],
+      "total": "$24.00",
+      "notes": [
+        "Powering off keeps the disk and the files, but not memory or running processes, and the meter keeps running at the full hourly rate.",
+        "The 80 GB plan disk covers the 20 GiB asked for.",
+        "Deleting the Linode is the only way to stop the charge; the disk goes with it unless you captured an image or enabled backups."
+      ],
+      "flag": "A stopped Linode is not a cheap state: 640 powered-off hours cost $23.04, and the cap turns the whole month into the full $24."
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Linode is the contracting party named in the compute SLA and MSA; the same service is marketed as Akamai Cloud (formerly Linode).",
+        "source": {
+          "url": "https://www.akamai.com/legal/sla-compute",
+          "quote": "This Service Level Addendum (the “SLA”) is attached to, and incorporates in the entirety, the Master Services Agreement by and between you and Linode (the “MSA”)",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Brand",
+        "value": "The cloud is sold as Akamai Cloud; Linode is the former name and the name still used for plans, the API, the CLI and the console.",
+        "source": {
+          "url": "https://www.akamai.com/legal/msa",
+          "quote": "Akamai Cloud (formerly Linode)",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded and listed",
+        "value": "Akamai Technologies, Inc. was incorporated in 1998, is headquartered in Cambridge, Massachusetts, and is listed on NASDAQ as AKAM.",
+        "source": {
+          "url": "https://www.akamai.com/company",
+          "quote": "Akamai Technologies, Inc. is publicly traded: (NASDAQ: AKAM)",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Uptime promise",
+        "value": "99.99% monthly uptime for compute plans in general availability, 99% for plans in limited availability, claimed as a pro-rata service credit.",
+        "source": {
+          "url": "https://www.akamai.com/legal/sla-compute",
+          "quote": "We guarantee (i) 99.99% monthly uptime for Covered Services in general availability and (ii) 99% monthly uptime for Covered instances in limited availability",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "A SOC 2 Type 2 report is available to customers on request; the DPA names it as the audit document Akamai supplies.",
+        "source": {
+          "url": "https://www.akamai.com/site/en/documents/corporate/akamai-data-protection-addendum.pdf",
+          "quote": "Upon request, Akamai shall deliver to Customer relevant compliance documentation from such audit(s) (e.g., Akamai’s then-current SOC 2 Type 2 (or its successor) report)",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Data protection",
+        "value": "A Data Processing Agreement is published and incorporated into the terms; it covers sub-processors, audits and the customer's instructions.",
+        "source": {
+          "url": "https://www.akamai.com/site/en/documents/corporate/akamai-data-protection-addendum.pdf",
+          "quote": "This Data Processing Agreement (this “DPA”) is incorporated into and made a part of the most recent Terms & Conditions in effect between Akamai and a legal entity that has purchased Services from Akamai",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Status page",
+        "value": "status.linode.com carries per-data-centre status, incident history and email/SMS subscriptions.",
+        "source": {
+          "url": "https://techdocs.akamai.com/cloud-computing/docs/subscribe-to-status-updates",
+          "quote": "The Linode Status page provides real-time system status and maintenance updates via email.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "An always-on agent on a normal Linux box: 2 vCPU / 4 GiB / 80 GB for $24 a month, or 1 vCPU / 1 GB for $5.",
+      "A reader who wants a one-click Hermes Agent or OpenClaw deployment and then root on the same machine.",
+      "Teams that need a region near their users: 33 core regions, seven of them in Europe (six in the EU), at one flat price.",
+      "Anything that needs a real kernel, Docker, arbitrary TCP ports, a static IPv4 or extra Block Storage."
+    ],
+    "badly": [
+      "Anything that must pause and resume mid-process: powering off loses memory and keeps billing.",
+      "Many short runs: each Linode rounds up to a whole hour, so 1,000 ten-minute tasks cost 1,000 hours.",
+      "A reader who wants the provider to run the agent for them: a Linode has no prompt endpoint.",
+      "A copy of a running machine: cloning needs the source powered off first."
+    ]
+  },
+  "usability": {
+    "dashboard": "Yes. Cloud Manager creates Linodes, volumes, firewalls, domains, images, backups and NodeBalancers, with graphs, alerts, a browser console, a graphical console and a resize flow.",
+    "withoutCode": "Partly. Creating the machine and deploying a Quick Deploy App such as Hermes or OpenClaw is all clicking, but adding model keys, pairing WhatsApp or Telegram and running the agent are terminal work.",
+    "signup": "Email, Google or GitHub, plus a payment method before any service. New customers get a $100 credit; it expires at the end of the trial and GPU plans are excluded from it.",
+    "docs": "A large docs site with an llms.txt index, an OpenAPI reference, an official CLI, official Python and JavaScript clients, Terraform and Pulumi providers, a read-only MCP server and a community Q&A.",
+    "tripsUp": [
+      "Powering a Linode off does not stop the bill; only deleting it does.",
+      "Usage rounds up to the whole hour, which is brutal for short tasks.",
+      "G8 plans have no monthly cap: 730 hours bills 730 × the hourly rate.",
+      "A resize reboots the machine, and shrinking the disk is a separate manual step.",
+      "Outbound ports 25, 465 and 587 are blocked on some new accounts.",
+      "The $100 credit expires and needs a card at signup.",
+      "Backups only work on unencrypted ext3/ext4 disks and skip attached volumes.",
+      "Shared plans are meant to stay under 80% sustained CPU.",
+      "Planned maintenance can power a Linode off; Akamai announces it seven days ahead."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "A powered-off Linode bills in full",
+      "detail": "Akamai keeps the data and reserves RAM while the machine is off, so stopping changes nothing on the invoice. Workload C therefore costs the full $24 monthly price, not the $3.24 the running hours suggest.",
+      "status": "open"
+    },
+    {
+      "issue": "Hourly rounding punishes short runs",
+      "detail": "Usage is rounded up to the nearest hour per service, so a ten-minute task bills a whole hour. Workload A is 1,000 billable hours rather than 167.",
+      "status": "open"
+    },
+    {
+      "issue": "G8 plans have no monthly cap",
+      "detail": "Since 1 July 2026 G8 Dedicated Linodes, GPU Linodes and additional IPv4 addresses are billed for actual hours with no monthly price cap. The G8 8x4 at $0.14/h costs $102.20 for 730 hours, against $48 for the shared Linode 8 GB with the same 4 vCPU / 8 GiB.",
+      "status": "open"
+    },
+    {
+      "issue": "Nested virtualisation is not documented",
+      "detail": "No current Akamai page says whether a Linode can run KVM or another hypervisor inside it. The only first-party answers are 2018 and 2020 community posts saying it is not supported, which is too old to state as current fact; treat it as unpublished, not as supported.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "$24 a month for 2 vCPU / 4 GiB / 80 GB and $48 for 4 vCPU / 8 GiB / 160 GB, with the hourly rate capped at the monthly price.",
+    "One-click Hermes Agent and OpenClaw apps in Cloud Manager, deployed in 5-10 minutes with an HTTPS dashboard.",
+    "33 core regions, seven European countries among them, at the same flat price (Jakarta and São Paulo excepted).",
+    "A real server: own kernel, root, Docker, SSH, a static IPv4 and free inbound traffic.",
+    "A 99.99% uptime SLA, a SOC 2 Type 2 report and a published DPA.",
+    "Free DNS, firewalls, VPC/VLAN networking, placement groups and metrics; an official CLI, Python and JavaScript clients and a read-only MCP server."
+  ],
+  "sources": [
+    {
+      "label": "CPU plans and pricing",
+      "url": "https://www.akamai.com/cloud/pricing/cpu"
+    },
+    {
+      "label": "Docs: Linodes overview",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance"
+    },
+    {
+      "label": "Docs: choose a compute plan",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/how-to-choose-a-compute-instance-plan"
+    },
+    {
+      "label": "Docs: billing and monthly caps",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works"
+    },
+    {
+      "label": "Docs: network transfer usage and costs",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/network-transfer-usage-and-costs"
+    },
+    {
+      "label": "Docs: resize a Linode",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/resize-a-compute-instance"
+    },
+    {
+      "label": "Docs: Images",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/images"
+    },
+    {
+      "label": "Docs: Backups",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/backup-service"
+    },
+    {
+      "label": "Docs: Block Storage",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/block-storage"
+    },
+    {
+      "label": "Docs: Cloud Firewalls",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/cloud-firewall"
+    },
+    {
+      "label": "Docs: firewall rules and default policies",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/manage-firewall-rules"
+    },
+    {
+      "label": "Docs: DNS Manager",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/dns-manager"
+    },
+    {
+      "label": "Docs: Lish console",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/access-your-system-console-using-lish"
+    },
+    {
+      "label": "Docs: Glish desktop console",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/access-your-desktop-environment-using-glish"
+    },
+    {
+      "label": "Docs: personal access tokens",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/manage-personal-access-tokens"
+    },
+    {
+      "label": "Docs: Identity and Access",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/identity-and-access-cm"
+    },
+    {
+      "label": "Docs: single sign-on",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/single-sign-on-cm"
+    },
+    {
+      "label": "Docs: Linode audit logs",
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/linodes-audit-logs"
+    },
+    {
+      "label": "Quick Deploy App: Hermes",
+      "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/hermes"
+    },
+    {
+      "label": "Quick Deploy App: OpenClaw",
+      "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/openclaw"
+    },
+    {
+      "label": "Compute SLA",
+      "url": "https://www.akamai.com/legal/sla-compute"
+    },
+    {
+      "label": "Data Processing Agreement",
+      "url": "https://www.akamai.com/site/en/documents/corporate/akamai-data-protection-addendum.pdf"
+    },
+    {
+      "label": "Free credit terms",
+      "url": "https://www.akamai.com/lp/free-credit-100"
+    }
+  ]
+}

@@ -1,0 +1,1110 @@
+{
+  "provider": "contabo",
+  "checkedOn": "2026-10-30",
+  "rows": [
+    {
+      "capability": "own-vm",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "KVM VM, own kernel",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Contabo VPS are KVM-based virtual servers with shared vCPU cores and a fixed RAM allocation",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "root",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "root over SSH",
+        "source": {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "Reliable uptime, predictable resources, and full root access.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "docker-inside",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Docker on a KVM VM",
+        "note": "Docker is not the default image, but a KVM guest with root runs it normally; Docker is also listed among the images in the VPS configurator.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Contabo VPS are KVM-based virtual servers with shared vCPU cores and a fixed RAM allocation",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "nested-virt",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "Only the dedicated-core Cloud VDS line supports it; Core VPS, the plan this card prices, does not.",
+        "figure": "VDS only",
+        "note": "Contabo's VDS documentation lists nested virtualisation as supported (Proxmox VE, KVM, XenServer). The Core VPS documentation says it is not supported on any VPS plan family, and the VDS line has no snapshots or Auto Backup.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/max-performance-vps/",
+          "quote": "Nested virtualization | Supported — Proxmox VE, KVM, XenServer",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "custom-image",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "ISO or QCOW2",
+        "note": "Upload an ISO or uncompressed QCOW2 image in the panel or API. Custom Windows images are not permitted, and the image needs VirtIO drivers to boot.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+          "quote": "ISO (bootable installer) or QCOW2 (pre-installed disk image, uncompressed)",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "any-size",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Fixed shapes only",
+        "note": "CPU and RAM come in six fixed Core VPS ratios. There is no way to order, for example, 2 vCPU with 16 GB; the nearest is 8 vCPU / 24 GB.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "|Cloud VPS 4 |4 vCPUs |8 GB |100 GB SSD |200 |1 |Unlimited\\* |",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "big-machines",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "18 vCPU / 96 GB",
+        "note": "Core VPS tops out at 18 vCPU / 96 GB; Cloud VDS offers 24 dedicated vCores / 96 GB.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "|Cloud VPS 18 |18 vCPUs |96 GB |600 GB SSD |1,000 |3 |Unlimited\\* |",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "live-resize",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "An upgrade needs a short reboot and cannot shrink; a smaller plan means a new server, a new IP and a manual migration.",
+        "figure": "Upgrade in place; reboot",
+        "note": "You can upgrade to a larger plan in the same family from the panel, keeping the IP. Live Migration preserves the data but requires a short reboot. Downgrades and plan-family changes are not supported in place.",
+        "source": {
+          "url": "https://help.contabo.com/en/support/solutions/articles/103000269700-how-to-make-changes-to-your-vps-or-vds-plan",
+          "quote": "Data is transferred to the upgraded server with no data loss. Requires a short reboot once migration completes.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "gpu",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "GPU VPS is one fixed configuration in two locations, cannot be customised, and was on a waitlist at this check.",
+        "figure": "RTX 6000 PRO; waitlist",
+        "note": "One NVIDIA RTX 6000 PRO Blackwell instance on the Cloud VPS Plus 18 tier, in EU and US Central only. No vGPU, no multi-GPU, no custom image and no API provisioning.",
+        "source": {
+          "url": "https://contabo.com/en-us/pricing/",
+          "quote": "Leave your details here and we'll notify you when GPU VPS becomes available.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "choose-region",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "9 regions, 11 locations",
+        "note": "EU (Germany), UK, US East, US Central, US West, Singapore, Japan, India and Australia. Region is chosen at order; a later move changes the IP.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Deployed across 11 locations in 9 regions",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "eu-region",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Germany (EU)",
+        "note": "Five data centres in Germany serve the European Union region. The UK is a separate region outside the EU.",
+        "source": {
+          "url": "https://contabo.com/en-us/locations/",
+          "quote": "We serve Europe, Africa & Middle East from 5 Data Centers in Germany.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "pause-memory",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No pause",
+        "note": "Start, stop, restart and shutdown only. A stop is a power-off: the disk survives, memory and running processes do not.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Customer Control Panel: start/stop/restart, reinstall, snapshots, VNC console, rescue system, firewall, private networking, storage extension, DNS and reverse DNS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "warm-pool",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No pre-started pool",
+        "note": "Every server is provisioned on demand in minutes. There is no pool of ready machines and no pre-warmed capacity product.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Provisioning time is typically a few minutes; may vary by location.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "fast-start",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Minutes to provision",
+        "note": "Contabo documents provisioning in minutes, and the n8n image alone can take up to 30 minutes to install.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Provisioning time is typically a few minutes; may vary by location.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "snapshot-files",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Disk image, 30 days",
+        "note": "A snapshot is an image of the VPS disk, free to take and not counted against the disk. It cannot be downloaded and is deleted after 30 days.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Image of the VPS disk, retained for 30 days",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "snapshot-memory",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Disk only",
+        "note": "The snapshot is explicitly an image of the disk. No memory or process state is captured.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Image of the VPS disk, retained for 30 days",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "fork-running",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No fork",
+        "note": "There is no clone, fork or copy-on-write operation for a running server. A snapshot can be restored to the same server, not used to start a copy.",
+        "source": {
+          "url": "https://api.contabo.com/",
+          "quote": "Revert the instance to a particular snapshot based on its identifier",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "older-snapshot",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "Cloud VPS 4 holds one snapshot at a time, so there is no earlier point to return to once it is replaced; every snapshot expires after 30 days.",
+        "figure": "1 slot on VPS 4",
+        "note": "Larger plans hold two or three snapshots. Any snapshot you still hold can be restored, but the 30-day deletion is automatic and there is no archive.",
+        "source": {
+          "url": "https://help.contabo.com/en/support/solutions/articles/103000270385-how-do-i-create-a-snapshot-of-my-server-",
+          "quote": "After 30 days, the snapshots will be deleted.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "templates",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Custom images only",
+        "note": "You can deploy the same uploaded ISO or QCOW2 to many servers, and 1-click app images are reusable. There is no action that captures a configured server as a template, and snapshots are not documented as a source for new servers.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+          "quote": "ISO (bootable installer) or QCOW2 (pre-installed disk image, uncompressed)",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "backups",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Daily, 10 days (add-on)",
+        "note": "Auto Backup is a paid add-on: one backup a day, up to 10 kept for 10 days, stored off-server. Restores are whole-VPS and overwrite current data. Contabo does not guarantee recoverability.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps-auto-backup/",
+          "quote": "Auto Backup provides 10 days of daily off-server backups",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "files-survive-stop",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Whole disk kept",
+        "note": "A stop is a power-off, not a delete: the whole VM disk stays with the server. Only cancelling the contract ends the machine.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Existing partitions (Linux and NTFS) can be mounted to repair the installation or retrieve data",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "volumes",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No block volumes",
+        "note": "Storage Extension adds capacity of the plan's own type to the same server. There is no detachable block volume that outlives the machine or moves to another one. Object Storage is S3, not a disk.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/storage/object-storage/",
+          "quote": "Unlike Storage VPS, which provides a full virtual machine with a block disk, Object Storage is accessed entirely via the S3 API or a web UI — there is no server to manage.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "shared-volume",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No shared block volume",
+        "note": "There is no block-storage product to share. Private Networking connects machines, and Object Storage is shared through the S3 API, but neither is a shared filesystem volume.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Storage Extension: adds storage of the plan’s type",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "mount-buckets",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "Object Storage is S3-compatible, but there is no native mount; Contabo documents s3fs-fuse or goofys for filesystem access.",
+        "figure": "S3 + s3fs/goofys",
+        "note": "Buckets are reached through the S3 API or the web UI. Contabo lists s3fs-fuse and goofys as compatible FUSE clients, so a mount is possible but is software you run and maintain.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/storage/object-storage/",
+          "quote": "use a FUSE client (s3fs-fuse, goofys) for filesystem access",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "big-disk",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "1.4 TB Storage VPS",
+        "note": "Core VPS goes to 600 GB SSD and Storage VPS to 1.4 TB SSD; Storage Extension can double a Core plan's capacity up to 1.2 TB.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "|Storage VPS 50 |14 vCPUs |50 GB |1.4 TB SSD |1,000 |Unlimited\\* |",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "stay-on",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Runs until cancelled",
+        "note": "No idle timer, no session limit and no automatic stop. A server can run for weeks or years until you stop or cancel it.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Customer Control Panel: start/stop/restart, reinstall, snapshots, VNC console, rescue system, firewall, private networking, storage extension, DNS and reverse DNS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "choose-idle",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "There is no idle setting at all: the only behaviour is to run until you stop it, so you cannot choose a timeout or save money by letting it sleep.",
+        "figure": "Never; no timer",
+        "note": "The panel and API have no idle-timeout field. A VPS simply runs, and the monthly plan bills through the quiet hours.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Customer Control Panel: start/stop/restart, reinstall, snapshots, VNC console, rescue system, firewall, private networking, storage extension, DNS and reverse DNS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "wake-on-request",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No sleep to wake",
+        "note": "A VPS never sleeps, so there is no wake-on-request. A stopped server stays down until you start it from the panel or API.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Customer Control Panel: start/stop/restart, reinstall, snapshots, VNC console, rescue system, firewall, private networking, storage extension, DNS and reverse DNS",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "schedules",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No managed scheduler",
+        "note": "There is no provider-side cron or job scheduler. You can run cron or systemd timers inside the VM, but the machine has to be running and paid for.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Provisioning | Control Panel, API, or CLI",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "public-url",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Public IPv4, any port",
+        "note": "Every server gets a static public IPv4 and a /64 IPv6 subnet. A program on port 3000 is reachable at that address unless the firewall blocks it.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/network-services/ip-assignment/",
+          "quote": "Every server is assigned a public IPv4 address and an IPv6 subnet",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "private-url",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No private link",
+        "note": "There is no tokenised or authenticated preview URL. You restrict access with the firewall, a VPN or authentication in your own app.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/network-services/firewall/",
+          "quote": "Default policy: all inbound traffic is dropped by a permanent default rule; outbound traffic is unrestricted.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "ssh",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Real SSH",
+        "note": "Root SSH with a password or an injected key, on the standard port. SSH keys can be added at deployment or later in the panel.",
+        "source": {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "then access the server through SSH (Linux) or RDP (Windows).",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "web-terminal",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "The browser console is a VNC screen for emergencies, not a shell; day-to-day work needs SSH.",
+        "figure": "VNC console",
+        "note": "The Customer Control Panel opens a VNC console to the server. It shows the screen and keyboard, including the boot process, rather than a browser terminal multiplexer.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "VNC console",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "tunnel",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "ssh -L",
+        "note": "The server runs a normal sshd, so local port forwarding works without a provider product.",
+        "source": {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "then access the server through SSH (Linux) or RDP (Windows).",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "raw-tcp",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Any TCP/UDP port",
+        "note": "The firewall supports TCP, UDP and ICMP, so a database or game server can be exposed directly.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/network-services/firewall/",
+          "quote": "Protocols: TCP, UDP and ICMP.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "custom-domain",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "DNS zone + A record",
+        "note": "Host a DNS zone on Contabo's nameservers, including for a domain registered elsewhere, and point an A or AAAA record at the server.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/network-services/dns-management/",
+          "quote": "DNS zones for domains registered with Contabo or with a third-party registrar can be hosted on Contabo’s authoritative nameservers and managed self-service in the Control Panel.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "auto-https",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No managed certificate",
+        "note": "Contabo manages DNS records but not TLS certificates for a VPS. You install Caddy, Certbot or another proxy and renew the certificate yourself.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/network-services/dns-management/",
+          "quote": "Record types: A, AAAA, MX, TXT, SRV and CNAME records can be added and edited.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "egress-included",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Unlimited, fair use",
+        "note": "Inbound and outbound traffic are unmetered on every plan, with no per-GiB charge. The fair-use policy allows throttling of exceptional use.",
+        "source": {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "Outgoing Traffic: Unlimited — fair usage policy applies based on average server workloads.",
+          "confidence": "pricing-page"
+        }
+      }
+    },
+    {
+      "capability": "egress-allowlist",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Outbound unrestricted",
+        "note": "The network firewall only filters inbound traffic. Outbound filtering has to be done inside the guest OS.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/network-services/firewall/",
+          "quote": "Default policy: all inbound traffic is dropped by a permanent default rule; outbound traffic is unrestricted.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "no-internet",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No offline mode",
+        "note": "There is no provider switch that removes internet access. You can block traffic with the guest firewall or by not configuring a route, which is not a sandbox boundary.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/network-services/firewall/",
+          "quote": "Default policy: all inbound traffic is dropped by a permanent default rule; outbound traffic is unrestricted.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "static-ip",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Static IPv4 for life",
+        "note": "The primary IPv4 persists for the life of the server and survives upgrades and reinstalls. A region migration or a new server changes it.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/network-services/ip-assignment/",
+          "quote": "The primary IPv4 address persists for the lifetime of the server.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "secrets-store",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "The secret store holds provisioning passwords and SSH keys; it does not put API keys into the machine as environment variables.",
+        "figure": "Password/SSH only",
+        "note": "The API stores secrets of type password or ssh and can reuse them when creating servers. It is a provisioning convenience, not a runtime secret manager.",
+        "source": {
+          "url": "https://api.contabo.com/",
+          "quote": "You can optionally save your passwords or public ssh keys using the Secrets Management API.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "hidden-secrets",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No proxy",
+        "note": "Nothing sits between the agent and an API to add credentials. A key the agent needs must exist in the machine.",
+        "source": {
+          "url": "https://api.contabo.com/",
+          "quote": "You can optionally save your passwords or public ssh keys using the Secrets Management API.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "scoped-keys",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "API users can be limited by account role, but there are no per-key scopes or per-resource restrictions.",
+        "figure": "Role-scoped API users",
+        "note": "Each user, including an API user, holds one of eight roles that limits which areas and functions are reachable. There is no project-level or single-instance API key.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/account-management/user-management/",
+          "quote": "Each user holds a role that determines which areas of the account and which functions are accessible.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "dashboard-create",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Control panel",
+        "note": "The Customer Control Panel creates servers, chooses the image, region and add-ons, and manages the machine afterwards.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Provisioning | Control Panel, API, or CLI",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "cli",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "cntb, open source",
+        "note": "The cntb CLI is open source, uses the same OAuth2 credentials as the API, and can output JSON, YAML or CSV.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "CLI (cntb): open-source command-line client",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "python-sdk",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No official SDK",
+        "note": "Contabo documents the REST API, cntb and a Terraform provider. No official Python library is published.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Contabo API (api.contabo.com): RESTful; OAuth2 authentication with client ID, client secret and an API user password created in the Control Panel; no limit on the number of API users",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "ts-sdk",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No official SDK",
+        "note": "No official JavaScript or TypeScript client is published; the API is called directly or through Terraform.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Contabo API (api.contabo.com): RESTful; OAuth2 authentication with client ID, client secret and an API user password created in the Control Panel; no limit on the number of API users",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "rest-api",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Documented REST API",
+        "note": "OAuth2-authenticated REST API for instances, actions, snapshots, images, object storage, private networks, tags, users, secrets, DNS, firewalls and audits, with an OpenAPI specification.",
+        "source": {
+          "url": "https://api.contabo.com/",
+          "quote": "Contabo API allows you to manage your resources using HTTP requests.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "mcp-server",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No MCP server",
+        "note": "No official MCP server is documented. An assistant would need to call the REST API or cntb itself.",
+        "source": {
+          "url": "https://contabo.com/en/contabo-api/",
+          "quote": "Deploy and control all aspects of Cloud VPS & VDS via RESTful HTTP requests.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "pty",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No PTY API",
+        "note": "The API has no terminal or exec endpoint. Interactive work goes over SSH or the VNC console.",
+        "source": {
+          "url": "https://api.contabo.com/",
+          "quote": "Contabo API allows you to manage your resources using HTTP requests.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "file-api",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No file API",
+        "note": "There is no endpoint to read or write files inside the server. Files move over SSH, SCP or your own service.",
+        "source": {
+          "url": "https://api.contabo.com/",
+          "quote": "Contabo API allows you to manage your resources using HTTP requests.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "agents-preinstalled",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No coding agent image",
+        "note": "The 1-click list has OpenClaw, Hermes Agent, n8n, Paperclip AI and Ollama, but no Claude Code or Codex image. The default OS images have neither.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+          "quote": "OpenClaw · n8n · Nextcloud · WireGuard · GitLab CE · cPanel · Plesk · Dokploy · Paperclip AI · Hermes Agent · Ollama",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "prompt-api",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No prompt API",
+        "note": "There is no endpoint that runs an agent for you. You install the agent and supply the model key yourself.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Provisioning | Control Panel, API, or CLI",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "one-click-hermes",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "Hermes is installed from a 1-click image, but you must SSH in and point it at a model before it works.",
+        "figure": "Image + SSH setup",
+        "note": "The Hermes Agent image is in the 1-click list and can also be installed on an existing server from the panel. The guide's next step is to SSH in, choose a model and connect integrations.",
+        "source": {
+          "url": "https://contabo.com/en-us/hermes-ai-vps-hosting",
+          "quote": "SSH into the server and point the Agent at a model and connect the integrations you want.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "one-click-openclaw",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "OpenClaw is installed from a 1-click image, but onboarding needs SSH and the terminal wizard.",
+        "figure": "Image + SSH setup",
+        "note": "OpenClaw is in the 1-click list and has its own order links. The documented next step is to connect over SSH and run the onboarding wizard, then reach the Control UI through an SSH tunnel.",
+        "source": {
+          "url": "https://contabo.com/en-us/openclaw-hosting",
+          "quote": "Once your server is deployed with OpenClaw installed, connect via SSH and run the onboarding wizard.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "browser",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Not preinstalled",
+        "note": "No image includes Chrome or Chromium for an agent. You install a browser and its dependencies yourself.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+          "quote": "An OS image with an application preinstalled and configured at first boot.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "desktop",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No desktop",
+        "note": "Linux and Windows Server images are offered, but there is no managed graphical desktop for computer-use agents. A Windows RDP session is an OS feature, not a sandbox desktop product.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+          "quote": "Ubuntu, Debian, AlmaLinux, Rocky Linux, CentOS, openSUSE, FreeBSD",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "hosts-other-agents",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Not documented",
+        "note": "Contabo documents OpenClaw, Hermes, n8n and Paperclip hosting. It is not named as the machine for Cursor cloud agents, Devin or Claude Managed Agents.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/images/",
+          "quote": "OpenClaw · n8n · Nextcloud · WireGuard · GitLab CE · cPanel · Plesk · Dokploy · Paperclip AI · Hermes Agent · Ollama",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "team-workspace",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Several users",
+        "note": "One account can hold several users, each with a role, sharing the account's servers, billing and API credentials.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/account-management/user-management/",
+          "quote": "A Contabo account can have several users.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "roles",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "8 predefined roles",
+        "note": "Owner, Full Access, Technician, Billing Admin, Invoice, Abuse & Fraud, Object Storage and Object Storage r/w, each limited to named areas.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/account-management/user-management/",
+          "quote": "Each user holds a role that determines which areas of the account and which functions are accessible.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "sso",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No SAML/OIDC",
+        "note": "Users sign in with a Contabo account. The API's one-time SSO token signs a user into the control panel; it is not a company identity-provider login.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/account-management/user-management/",
+          "quote": "A Contabo account can have several users.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "spend-cap",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "The prepaid term caps the machine's own bill, but there is no account-level spending limit; add-ons and upgrades are separate purchases.",
+        "figure": "Prepaid plan only",
+        "note": "A server is paid for its term in advance, so it cannot run up an hourly bill. Nothing stops you ordering another server or add-on, and no account-wide cap is documented.",
+        "source": {
+          "url": "https://contabo.com/en/legal/terms-and-conditions/",
+          "quote": "If the customer selects a contractual term of one month for server services, then the total price will fall due immediately.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "usage-alerts",
+      "row": {
+        "provider": "contabo",
+        "verdict": "not-published",
+        "figure": "Not published",
+        "note": "The panel shows resource graphs and invoices, but no spending threshold or usage alert is documented. The question is unanswered, not a confirmed absence.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "Customer Control Panel: start/stop/restart, reinstall, snapshots, VNC console, rescue system, firewall, private networking, storage extension, DNS and reverse DNS",
+          "confidence": "not-published"
+        }
+      }
+    },
+    {
+      "capability": "audit-log",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "API audit endpoints record changes per resource, but no account-wide audit log with export or a retention period is published.",
+        "figure": "Per-resource API audits",
+        "note": "The API exposes audit lists for instances, instance actions, snapshots, images, object storage, private networks, tags, users, roles, secrets, domains, DNS and firewalls, with changedBy and timestamps.",
+        "source": {
+          "url": "https://api.contabo.com/",
+          "quote": "List history about your instances (audit)",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "per-second",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Monthly plans only",
+        "note": "There is no hourly or per-second rate. The smallest unit is a monthly plan, and the terms are prepaid.",
+        "source": {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "The price displayed is the effective monthly rate for a 24-month subscription including applicable taxes",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "active-cpu",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Allocated, not active",
+        "note": "The price is for the whole server for the month, not for the CPU time used. An idle machine costs the same as a busy one.",
+        "source": {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "One monthly price covers the resources, the network, and the platform.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "cheap-pause",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Stop still bills",
+        "note": "There is no cheaper stopped rate. The monthly plan is paid for the term, and a cancellation leaves the service active to the end of the paid period.",
+        "source": {
+          "url": "https://help.contabo.com/en/support/solutions/articles/103000387511-i-would-like-to-add-or-remove-a-service",
+          "quote": "The service will remain active until the end of its current billing period.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "no-monthly-fee",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Monthly plan only",
+        "note": "Every server is sold as a monthly plan. There is no pay-as-you-go option with no plan.",
+        "source": {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "One monthly price covers the resources, the network, and the platform.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "flat-price",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "$6.60/mo",
+        "note": "One flat price per fixed size. Cloud VPS 4 is $6.60 on the 1-month term; add-ons are separate.",
+        "source": {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "One monthly price covers the resources, the network, and the platform.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "free-tier",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No free tier",
+        "note": "No free plan or recurring free allowance is advertised. The cheapest machine is a paid monthly plan.",
+        "source": {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "Provisioning takes a few minutes after payment clears.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "free-credit",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "No signup credit",
+        "note": "No starting credit is advertised on the pricing, VPS or order pages.",
+        "source": {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "Provisioning takes a few minutes after payment clears.",
+          "confidence": "inferred"
+        }
+      }
+    },
+    {
+      "capability": "no-card",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Pay before provisioning",
+        "note": "There is no trial. The first invoice is due before the server is provisioned; payment can be card, PayPal or bank transfer, so a card is not the only method, but nothing runs for free.",
+        "source": {
+          "url": "https://contabo.com/en-us/vps/",
+          "quote": "Provisioning takes a few minutes after payment clears.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "status-page",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "contabo-status.com",
+        "note": "A public status page lists interruptions, running maintenance and scheduled maintenance across the data centres, with an RSS feed.",
+        "source": {
+          "url": "https://contabo-status.com/",
+          "quote": "On this page we will inform you about outages, interruptions and maintenances in our data centers.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "sla",
+      "row": {
+        "provider": "contabo",
+        "verdict": "partly",
+        "shortfall": "The promise is an annual average for physical connectivity and carries no service credit or refund.",
+        "figure": "99.9%, no credits",
+        "note": "The Terms promise 99.9% annual average physical connectivity for VPS, VDS and dedicated servers, excluding maintenance and events outside Contabo's control. No credit formula is published.",
+        "source": {
+          "url": "https://contabo.com/en/legal/terms-and-conditions/",
+          "quote": "available at an annual average rate of 99.9%",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "soc2",
+      "row": {
+        "provider": "contabo",
+        "verdict": "not-published",
+        "figure": "No report offered",
+        "note": "Location pages list SOC 1 and SOC 2 Type 2 among the data centre's certifications, but Contabo publishes no trust centre, no report-request route and no statement that the report covers its VPS platform. Ask for the report and its scope.",
+        "source": {
+          "url": "https://contabo.com/en-us/locations/india/",
+          "quote": "SOC 2 Type 2 Report",
+          "confidence": "not-published"
+        }
+      }
+    },
+    {
+      "capability": "dpa",
+      "row": {
+        "provider": "contabo",
+        "verdict": "yes",
+        "figure": "Online DPA",
+        "note": "A standardised GDPR DPA can be created in the control panel, in English, German or Spanish, covering VPS, VDS, dedicated servers and object storage.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/dpa/dpa/",
+          "quote": "A Data Processing Agreement (DPA) is a contract between Contabo and its customer that governs the processing of personal data by Contabo on behalf of the customer",
+          "confidence": "docs-confirmed"
+        }
+      }
+    },
+    {
+      "capability": "open-source",
+      "row": {
+        "provider": "contabo",
+        "verdict": "no",
+        "figure": "Proprietary platform",
+        "note": "The cntb CLI is open source, but the VPS platform and control panel are proprietary and cannot be self-hosted.",
+        "source": {
+          "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+          "quote": "CLI (cntb): open-source command-line client",
+          "confidence": "inferred"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "contabo": {
+    "isolation": {
+      "title": "VPS documentation: KVM, shared vCPU and limits",
+      "url": "https://docs.contabo.com/docs/servers-hosting/vps/"
+    },
+    "sizes-regions": {
+      "title": "Core VPS plans and prices",
+      "url": "https://contabo.com/en-us/vps/"
+    },
+    "billing-models": {
+      "title": "Pricing and contract terms",
+      "url": "https://contabo.com/en-us/pricing/"
+    },
+    "trials-free-tiers": {
+      "title": "How to order and pay",
+      "url": "https://help.contabo.com/en/support/solutions/articles/103000269311-which-currencies-are-accepted-by-contabo-"
+    },
+    "lifecycle": {
+      "title": "Starting, stopping and reinstalling a server",
+      "url": "https://docs.contabo.com/docs/servers-hosting/vps/"
+    },
+    "snapshots-forks": {
+      "title": "How to create a snapshot (30-day retention)",
+      "url": "https://help.contabo.com/en/support/solutions/articles/103000270385-how-do-i-create-a-snapshot-of-my-server-"
+    },
+    "storage": {
+      "title": "Storage Extension and plan disks",
+      "url": "https://docs.contabo.com/docs/servers-hosting/vps/"
+    },
+    "idle-timers": {
+      "title": "Server power states",
+      "url": "https://docs.contabo.com/docs/servers-hosting/vps/"
+    },
+    "reaching-it": {
+      "title": "IP assignment: IPv4, IPv6 and when addresses change",
+      "url": "https://docs.contabo.com/docs/network-services/ip-assignment/"
+    },
+    "custom-domains": {
+      "title": "DNS management and reverse DNS",
+      "url": "https://docs.contabo.com/docs/network-services/dns-management/"
+    },
+    "outbound-network": {
+      "title": "Traffic policy and fair use",
+      "url": "https://contabo.com/en-us/vps/"
+    },
+    "keys-secrets": {
+      "title": "Secrets Management API",
+      "url": "https://api.contabo.com/"
+    },
+    "ways-to-drive": {
+      "title": "Contabo API overview",
+      "url": "https://contabo.com/en/contabo-api/"
+    },
+    "built-in-agents": {
+      "title": "Images: operating systems and 1-click apps",
+      "url": "https://docs.contabo.com/docs/servers-hosting/images/"
+    },
+    "teams-accounts": {
+      "title": "User management and roles",
+      "url": "https://docs.contabo.com/docs/account-management/user-management/"
+    },
+    "company": {
+      "title": "Terms and conditions: availability and contract",
+      "url": "https://contabo.com/en/legal/terms-and-conditions/"
+    }
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "provider": "vultr",
+  "checkedOn": "2026-10-30",
+  "summary": "Two genuine Marketplace one-click routes (Hermes and OpenClaw) at the plan price, a documented guide for n8n, Discord bots and MCP servers, and a manual install for everything else. Vultr adds no picks: the one-click apps are cheaper elsewhere or ship a default password, and the always-on VPS case is already covered.",
+  "routes": {
+    "hermes-agent": {
+      "tier": "one-click",
+      "noTerminal": "partly",
+      "what": "The Marketplace HermesAgent app deploys Hermes on Ubuntu 24.04 with a Vultr Serverless Inference key you supply at launch, plus a web login. The listing prints a default password (hermes / Password) and channel setup is done in the app, so budget a first login and a password change.",
+      "link": {
+        "title": "HermesAgent 1-Click",
+        "url": "https://www.vultr.com/marketplace/apps/hermesagent/"
+      },
+      "price": "2 vCPU / 4 GiB plan $20/mo; no app surcharge"
+    },
+    "openclaw": {
+      "tier": "one-click",
+      "noTerminal": "partly",
+      "what": "The Marketplace OpenClaw app deploys the gateway on Ubuntu 24.04 with Homebrew, Docker and a browser VS Code terminal, and a default clawmine / Password login. Change the password and treat the Code Server terminal as root-equivalent access.",
+      "link": {
+        "title": "OpenClaw 1-Click",
+        "url": "https://www.vultr.com/marketplace/apps/openclaw/"
+      },
+      "price": "2 vCPU / 4 GiB plan $20/mo; no app surcharge"
+    },
+    "coding-agent": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Create a 4 vCPU / 8 GiB instance, SSH in and install Claude Code or Codex. Vultr's Codex guide uses Dokploy for the deploy half; the agent itself is a terminal install, and the disk survives a stop but the server bills through it.",
+      "link": {
+        "title": "Codex CLI with Dokploy",
+        "url": "https://docs.vultr.com/how-to-deploy-openai-codex-cli-projects-on-vultr-using-dokploy"
+      },
+      "price": "$40/mo for 4 vCPU / 8 GiB, on or stopped"
+    },
+    "code-interpreter": {
+      "tier": "backend",
+      "noTerminal": "no",
+      "what": "There is no execution API or sandbox pool. You would build the run endpoint and machine pool on the Vultr API, and the one-hour minimum makes 20,000 one-minute runs cost 20,000 server-hours.",
+      "link": {
+        "title": "Vultr API v2",
+        "url": "https://www.vultr.com/api/"
+      },
+      "price": "$0.02976 per server-hour: 20,000 one-minute runs ≈ $595"
+    },
+    "browser-agent": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "No browser or computer-use product. The Neko guide installs a virtual browser in Docker on a 4-core / 8 GB server; every ten-minute session still bills a whole hour, so 30,000 sessions are uneconomic.",
+      "link": {
+        "title": "Neko virtual browser guide",
+        "url": "https://docs.vultr.com/how-to-deploy-neko-self-hosted-virtual-browser-platform"
+      },
+      "price": "$0.02976 per server-hour, one hour minimum per session"
+    },
+    "workflow-automation": {
+      "tier": "guide",
+      "noTerminal": "no",
+      "what": "Vultr's n8n guide runs n8n and Traefik from Docker Compose on Ubuntu 24.04, with the database and encryption key on the instance disk. It is a terminal build, not a Marketplace app.",
+      "link": {
+        "title": "Deploy n8n on Vultr",
+        "url": "https://docs.vultr.com/how-to-deploy-n8n-workflow-automation-engine"
+      },
+      "price": "2 vCPU / 4 GiB $20/mo always on"
+    },
+    "chat-bot": {
+      "tier": "guide",
+      "noTerminal": "no",
+      "what": "Vultr's Discord guide deploys a Docker app and runs a Python bot inside it; keep it as a service and store the token on the disk. A gateway connection needs the machine awake, and Vultr has no idle stop.",
+      "link": {
+        "title": "Python Discord bot on Docker",
+        "url": "https://docs.vultr.com/how-to-run-a-python-discord-bot-on-a-docker-application"
+      },
+      "price": "1 vCPU / 2 GiB $10/mo"
+    },
+    "claude-code-team": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "One instance per developer in a shared IAM organization, each with its own SSH key and Claude login. Five 4 vCPU / 8 GiB machines cost $200 a month whether the developers work eight hours or twenty-four.",
+      "link": {
+        "title": "Vultr IAM organizations",
+        "url": "https://www.vultr.com/products/iam/"
+      },
+      "price": "5 × $40 = $200/mo"
+    },
+    "scheduled-scraper": {
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run cron or a systemd timer inside an always-on instance, or create a fresh instance per run through the API. A fresh 1 vCPU / 2 GiB instance is billed a whole hour per run, so 120 ten-minute runs cost about $1.79 against $10 for an always-on box; write results to Object Storage.",
+      "link": {
+        "title": "Vultr Object Storage",
+        "url": "https://www.vultr.com/products/object-storage/"
+      },
+      "price": "120 runs × 1 h × $0.01488 ≈ $1.79, or $10/mo always on"
+    },
+    "mcp-server": {
+      "tier": "guide",
+      "noTerminal": "no",
+      "what": "Vultr's MCP guide runs a FastMCP server on an Ubuntu instance and reaches it over HTTP; add TLS and authentication yourself. The instance needs a public IPv4 and must stay up.",
+      "link": {
+        "title": "Remote MCP server with mcp-proxy",
+        "url": "https://docs.vultr.com/how-to-create-remote-mcp-server-with-mcp-proxy"
+      },
+      "price": "1 vCPU / 1 GiB $5/mo"
+    }
+  },
+  "picks": [],
+  "notPicked": [
+    {
+      "useCase": "hermes-agent",
+      "reason": "A real one-click app at $20/mo, but DigitalOcean and Hostinger already make the one-click Hermes case, and Vultr's listing prints a default password."
+    },
+    {
+      "useCase": "openclaw",
+      "reason": "A one-click app at $20/mo, but DigitalOcean's hardened $12 image is cheaper and already a pick."
+    },
+    {
+      "useCase": "coding-agent",
+      "reason": "Manual install only; Vultr has no preinstalled coding agent."
+    },
+    {
+      "useCase": "code-interpreter",
+      "reason": "No execution API, and the one-hour minimum makes per-run interpreters uneconomic."
+    },
+    {
+      "useCase": "browser-agent",
+      "reason": "No browser or computer-use product; the Neko guide plus hourly billing is a poor fit."
+    },
+    {
+      "useCase": "workflow-automation",
+      "reason": "A good n8n guide, but n8n's own Hetzner guide is already a pick."
+    },
+    {
+      "useCase": "chat-bot",
+      "reason": "A solid always-on host, but Hetzner already makes the same case at a similar price."
+    },
+    {
+      "useCase": "claude-code-team",
+      "reason": "Five 4/8 machines cost $200/mo and add no team-specific advantage over the existing picks."
+    },
+    {
+      "useCase": "scheduled-scraper",
+      "reason": "Fresh-instance runs are cheap, but providers with a real scheduler already cover this case."
+    },
+    {
+      "useCase": "mcp-server",
+      "reason": "$5/mo is the cheapest VPS here, but DigitalOcean's $6 pick already covers a small always-on endpoint; a route row is enough."
+    }
+  ]
+}

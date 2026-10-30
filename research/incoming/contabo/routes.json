@@ -1,0 +1,132 @@
+{
+  "provider": "contabo",
+  "checkedOn": "2026-10-30",
+  "summary": "A cheap, always-on VPS with 1-click app images including n8n, OpenClaw and Hermes, and a manual route for everything else. It is a good fit for one agent, n8n, a bot or an MCP server that must stay up; it is the wrong product for per-task sandboxes, browser fleets or a team that needs SSO and a security report.",
+  "routes": [
+    {
+      "useCase": "hermes-agent",
+      "tier": "one-click",
+      "noTerminal": "no",
+      "what": "Order a Cloud VPS with the Hermes Agent image, or add it to an existing server from the panel. The agent is installed for you, but the next step in Contabo's own guide is to SSH in, point it at a model and connect integrations.",
+      "link": {
+        "title": "Hermes Agent hosting",
+        "url": "https://contabo.com/en-us/hermes-ai-vps-hosting"
+      },
+      "price": "$6.60/mo (Cloud VPS 4, 1-month term); model API costs separate",
+      "disposition": "Offer as a one-click route with a terminal step. Not a no-terminal route, and no pick: other providers already offer a no-terminal Hermes setup."
+    },
+    {
+      "useCase": "openclaw",
+      "tier": "one-click",
+      "noTerminal": "no",
+      "what": "The OpenClaw image is in the 1-click list and has dedicated order links. After deployment you connect over SSH, run the onboarding wizard, add model keys and messaging channels, then reach the Control UI through an SSH tunnel.",
+      "link": {
+        "title": "OpenClaw hosting",
+        "url": "https://contabo.com/en-us/openclaw-hosting"
+      },
+      "price": "$6.60/mo (Cloud VPS 4, 1-month term); model API costs separate",
+      "disposition": "Offer as a one-click route with a terminal step. No pick: it is not no-terminal and the agent is unmanaged after install."
+    },
+    {
+      "useCase": "coding-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Claude Code or Codex on a Cloud VPS 4 (4 vCPU / 8 GB / 100 GB) over SSH. The repository and login survive a stop, but the monthly plan bills whether the developer works or not.",
+      "link": {
+        "title": "Core VPS plans",
+        "url": "https://contabo.com/en-us/vps/"
+      },
+      "price": "$6.60/mo (Cloud VPS 4, 1-month term)",
+      "disposition": "Manual route. Cheap for a developer who works most days, poor value for occasional use because a stopped server still bills; no pick."
+    },
+    {
+      "useCase": "code-interpreter",
+      "tier": "none",
+      "noTerminal": "no",
+      "what": "Contabo has no per-run sandbox. The API creates whole servers on monthly plans, with no per-second meter and no cheap throwaway machine. 20,000 one-minute runs would mean either one always-on server doing them back to back or 20,000 monthly plans.",
+      "link": {
+        "title": "Contabo API",
+        "url": "https://contabo.com/en/contabo-api/"
+      },
+      "price": "Not a per-task product; the smallest plan is $6.60/mo",
+      "disposition": "No route. The use-case page should not present Contabo as a code-interpreter backend."
+    },
+    {
+      "useCase": "browser-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Chromium and the agent on Cloud VPS 4 over SSH. There is no hosted browser and no per-session isolation: every session shares one machine, one public IP and one disk, and the monthly plan bills all month.",
+      "link": {
+        "title": "Core VPS plans",
+        "url": "https://contabo.com/en-us/vps/"
+      },
+      "price": "$6.60/mo (Cloud VPS 4, 1-month term)",
+      "disposition": "Manual route with a clear warning about shared state and a single IP; no pick."
+    },
+    {
+      "useCase": "workflow-automation",
+      "tier": "one-click",
+      "noTerminal": "yes",
+      "what": "The n8n 1-click image installs n8n on a Cloud VPS and you open the visual editor at the server's IP, with no terminal step. It must stay awake for webhooks and schedules, which suits an always-on VPS. You keep the database and the encryption key on the same disk and back them up yourself.",
+      "link": {
+        "title": "n8n hosting",
+        "url": "https://contabo.com/en-us/n8n-hosting"
+      },
+      "price": "$6.60/mo (Cloud VPS 4, 1-month term)",
+      "disposition": "Recommend as the one justified pick: a genuine no-terminal n8n install on a full VM at $6.60. Agent37's one-click n8n is cheaper at $4.76 but is a sandbox product, so the comparison is not like for like. Watch the shared CPU, the up-to-30-minute install and the fact that support stops at installation."
+    },
+    {
+      "useCase": "chat-bot",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install the bot and its database on Cloud VPS 4 and keep it running. A Discord or Slack gateway needs an always-on process, which the VPS provides; there is no template and no managed update.",
+      "link": {
+        "title": "Core VPS plans",
+        "url": "https://contabo.com/en-us/vps/"
+      },
+      "price": "$6.60/mo (Cloud VPS 4, 1-month term)",
+      "disposition": "Manual route. A good price for an always-on bot, but no no-terminal path; no pick."
+    },
+    {
+      "useCase": "claude-code-team",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "One Cloud VPS 4 per developer, each with its own login and repository, installed over SSH. Five machines cost $33.00 a month and bill through nights and weekends unless cancelled.",
+      "link": {
+        "title": "Core VPS plans",
+        "url": "https://contabo.com/en-us/vps/"
+      },
+      "price": "5 × $6.60 = $33.00/mo (1-month term)",
+      "disposition": "Manual route. The per-developer isolation is right, but there is no SSO, no spend cap and no way to stop billing between sessions; no pick."
+    },
+    {
+      "useCase": "scheduled-scraper",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run cron or a systemd timer inside Cloud VPS 4. The schedule works because the machine never sleeps, but 20 hours of scraping a month costs the same as 730 because there is no hourly meter and a stopped server still bills.",
+      "link": {
+        "title": "Core VPS plans",
+        "url": "https://contabo.com/en-us/vps/"
+      },
+      "price": "$6.60/mo (Cloud VPS 4, 1-month term), not 20 hours",
+      "disposition": "Manual route with a cost warning. No pick: a per-run scheduler is cheaper for four short runs a day."
+    },
+    {
+      "useCase": "mcp-server",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run your MCP server on Cloud VPS 4 behind its public IPv4. The machine stays up, so the client always reaches it; TLS and authentication are yours to add, and there is no MCP-specific tooling from Contabo.",
+      "link": {
+        "title": "Core VPS plans",
+        "url": "https://contabo.com/en-us/vps/"
+      },
+      "price": "$6.60/mo (Cloud VPS 4, 1-month term)",
+      "disposition": "Manual route. Cheap and always-on, but no managed TLS or domain and no MCP product; no pick."
+    }
+  ],
+  "picks": [],
+  "pickReasoning": "Only n8n justifies a pick. It is the one route that is genuinely no-terminal, the price is the lowest of any n8n route in the comparison, and the always-on VPS matches what n8n needs. OpenClaw and Hermes are 1-click images but still require SSH onboarding, so they are route rows rather than picks. The other use cases are either manual (coding agent, chat bot, MCP server, team) or a product mismatch (code interpreter, browser fleet, scheduled scraper).",
+  "situationPicks": [],
+  "situationReasoning": "No situation pick is proposed. 'Stay available all day' and 'Keep data in the EU' both fit Contabo on price and location, but Hetzner already occupies those slots and Contabo's shared cores, 99.9% promise without credits and missing SOC 2 report make it a weaker default for a buyer who needs a recommendation. It is better presented as a cheap route row than as the pick for a situation. The parent can add it to 'stay-available' if it wants a budget option.",
+  "parentDecision": "Parent dropped the proposed n8n pick on 2026-10-30: OVHcloud already offers n8n preinstalled for less ($5.35 vs $6.60), and the owner asked for caution about Contabo's public reputation."
+}

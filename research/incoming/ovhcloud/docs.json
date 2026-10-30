@@ -1,0 +1,68 @@
+{
+  "ovhcloud": {
+    "isolation": {
+      "title": "Getting started with a VPS — root, SSH and your responsibilities",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps"
+    },
+    "sizes-regions": {
+      "title": "VPS 2027 models, specs and locations",
+      "url": "https://us.ovhcloud.com/vps/"
+    },
+    "lifecycle": {
+      "title": "VPS management in the Control Panel — reboot, reinstall, rescue",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/understand-vps-control-panel"
+    },
+    "snapshots-forks": {
+      "title": "How to use snapshots on a VPS",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012573640-How-to-use-snapshots-on-a-VPS"
+    },
+    "storage": {
+      "title": "Configuring an additional disk on a VPS",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/4410563713427-Configuring-an-additional-disk-on-a-VPS"
+    },
+    "idle-timers": {
+      "title": "VPS FAQ — no idle stop, no session limit",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq"
+    },
+    "reaching-it": {
+      "title": "How to use the KVM console to access a VPS",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/using-kvm-for-vps"
+    },
+    "custom-domains": {
+      "title": "How to install an SSL certificate on a VPS",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-ssl-certificate"
+    },
+    "outbound-network": {
+      "title": "Configuring the firewall on Linux with iptables",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/firewall-linux-iptable"
+    },
+    "keys-secrets": {
+      "title": "How to secure a VPS",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/secure-your-vps"
+    },
+    "ways-to-drive": {
+      "title": "First steps with the OVHcloud APIs",
+      "url": "https://docs.ovhcloud.com/en/guides/manage-and-operate/api/first-steps"
+    },
+    "built-in-agents": {
+      "title": "First steps with pre-installed applications (n8n, Docker, Plesk, cPanel)",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/apps-first-steps"
+    },
+    "teams-accounts": {
+      "title": "Identity and Access Management — users, groups, policies and SSO",
+      "url": "https://us.ovhcloud.com/identity-security-operations/identity-access-management/"
+    },
+    "billing-models": {
+      "title": "Overview of billing with OVHcloud US — monthly VPS billing and commitments",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360002306224-Overview-of-Billing-with-OVHcloud-US"
+    },
+    "trials-free-tiers": {
+      "title": "VPS FAQ — offers, billing and what is included",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq"
+    },
+    "company": {
+      "title": "Attestations and certifications — SOC 1, SOC 2 and SOC 3 scope",
+      "url": "https://us.ovhcloud.com/compliance/soc-1-2-3/"
+    }
+  }
+}

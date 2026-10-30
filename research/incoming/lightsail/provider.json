@@ -1,0 +1,289 @@
+{
+  "id": "lightsail",
+  "name": "Amazon Lightsail",
+  "url": "https://aws.amazon.com/lightsail/",
+  "status": "researched",
+  "kind": "vps",
+  "checkedOn": "2026-10-30",
+  "oneLiner": "Amazon's fixed-price Linux VPS: 25 bundles from $5 a month, billed hourly up to that cap, with a public IPv4, 1-10 TB of transfer and no pause.",
+  "whatItIs": [
+    "Lightsail is AWS's simplified virtual private server. You pick a fixed bundle, an operating-system or application blueprint and a region, and get an ordinary Linux machine with its own kernel, root, SSH, a public IPv4 address and a built-in inbound firewall. There is no sandbox API, no pause and no agent runtime.",
+    "The catalogue is 25 Linux bundles with a public IPv4 address: 2 vCPU / 0.5 GB / 20 GB for $5 a month up to 64 vCPU / 256 GB / 1,280 GB for $1,764, plus memory-optimised bundles to 512 GB and compute-optimised bundles to 72 vCPU. IPv6-only bundles are $1.50 to $4 cheaper; Windows bundles cost more because they include a licence.",
+    "Everything else in the console is a separate product with its own meter: container services, managed MySQL and PostgreSQL, object storage buckets, CDN distributions, load balancers, and Lightsail for Research (which has the GPU machines and a cheap stopped rate). Those are not priced by the Lightsail instance card and are easy to confuse with it."
+  ],
+  "whoFor": "People who want one small Linux server that stays up, has a fixed public address and a predictable monthly bill, and who are happy to install and patch the agent themselves.",
+  "isolation": "A full Linux virtual machine per instance with its own kernel, root and SSH, on a burstable shared vCPU. RAM, SSD and the public IP are dedicated. Nested virtualisation is not documented, there is no GPU on ordinary instances, and the hypervisor is never named.",
+  "sizes": "25 Linux bundles with a public IPv4 address, from 2 vCPU / 0.5 GB / 20 GB / 1 TB transfer at $5 a month to 64 vCPU / 256 GB / 1,280 GB / 10 TB at $1,764. Memory-optimised reaches 512 GB, compute-optimised 72 vCPU. Fixed shapes only: no independent CPU, memory or disk sizing, and no in-place resize. 19 regions, six of them in the EU, four opt-in.",
+  "billing": {
+    "model": "On-demand per instance, at the bundle's hourly rate, capped at its monthly price. No account fee and no commitment.",
+    "meter": "Per instance-hour. AWS's price list sets the hourly rate at the monthly price divided by 744, so a 730-hour month bills $23.54 on the $24 bundle and the cap only binds in a 31-day month.",
+    "stopped": "A stopped instance keeps billing at the full hourly rate: AWS says instances 'accrue charges even when they are in the stopped state'. Stopping powers the machine down and keeps the disk, but memory and processes are gone. Only deleting the instance ends the charge.",
+    "planFee": "None. Container services, managed databases, load balancers ($18 a month), object storage and CDN distributions are separate products with their own prices.",
+    "minimum": "$5 a month for the smallest public-IPv4 Linux bundle, or $3.50 for the IPv6-only one. A payment method is required to open the AWS account; new accounts get up to $200 of credits for six months."
+  },
+  "cost": {
+    "A": {
+      "headline": "$5.38 for the month",
+      "shape": "Medium-4GB 2 vCPU / 4 GiB / 80 GiB, 1,000 ten-minute runs, deleted after each",
+      "lines": [
+        {
+          "label": "Machine time",
+          "arithmetic": "1,000 × 10 min = 166.67 h × $0.03225",
+          "amount": "$5.38"
+        }
+      ],
+      "total": "$5.38",
+      "notes": [
+        "The 4 GB bundle is the smallest with 2 vCPU and 4 GiB; its 80 GiB SSD is more than the 10 GiB asked for and cannot be reduced.",
+        "There is no per-run minimum charge, so the bill is linear in hours. Each ten-minute run costs $0.0054.",
+        "The hourly rate is AWS's own price-list rate, $0.03225, which is the $24 monthly price divided by 744."
+      ],
+      "flag": "AWS publishes hourly billing but not whether a partial instance-hour rounds up. This total assumes pro-rata hours. If each of the 1,000 runs were billed a whole hour, A would be $32.25. That is an open question, not a modelled rule."
+    },
+    "B": {
+      "headline": "$82.42 a month",
+      "shape": "Xlarge-16GB 4 vCPU / 16 GiB / 320 GiB, 730 hours",
+      "lines": [
+        {
+          "label": "Machine time",
+          "arithmetic": "730 h × $0.11290",
+          "amount": "$82.42"
+        }
+      ],
+      "total": "$82.42",
+      "notes": [
+        "Four vCPU is the expensive step in the ladder: the cheapest bundle with 4 vCPU is $84 a month, so B costs more than three times A's shape.",
+        "The compute-optimised Xlarge-8GB is the same $84 with exactly 8 GiB and 320 GiB of disk; the general-purpose Xlarge-16GB is the same price with twice the memory, so the card picks it.",
+        "730 hours is below the 744 hours the monthly price is based on, so the $84 cap does not bind: the bill is $82.42, and a 31-day month would reach $84."
+      ]
+    },
+    "C": {
+      "headline": "$23.54 a month, running or stopped",
+      "shape": "Medium-4GB 2 vCPU / 4 GiB / 80 GiB, 90 running + 640 stopped hours",
+      "lines": [
+        {
+          "label": "Running",
+          "arithmetic": "90 h × $0.03225",
+          "amount": "$2.90"
+        },
+        {
+          "label": "Stopped, still billed",
+          "arithmetic": "640 h × $0.03225",
+          "amount": "$20.64"
+        }
+      ],
+      "total": "$23.54",
+      "notes": [
+        "Stopping keeps the disk, so the 20 GiB of files are there next session, but the meter keeps running at the full rate.",
+        "The bill is the same as leaving it on all month; there is no cheaper stopped state on ordinary Lightsail.",
+        "Deleting the instance ends the charge but destroys the disk, so a snapshot ($0.05 per GB-month) is the only way to keep the files without paying for the machine."
+      ],
+      "flag": "Workload C assumes idle hours are cheap. On Lightsail they cost exactly as much as running hours, so the honest total is the full $23.54, not the $2.90 of work."
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Amazon Web Services, Inc., an Amazon company. The Customer Agreement names the contracting party by account country, and AWS, Inc. is the default when the country cannot be determined.",
+        "source": {
+          "url": "https://aws.amazon.com/agreement/",
+          "quote": "If you have not provided AWS with location information to determine your Account Country, your AWS Contracting Party is Amazon Web Services, Inc.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Uptime promise",
+        "value": "99.5% monthly uptime per instance, and 99.99% at region level, with service credits below those figures. The SLA is a commercially reasonable efforts commitment.",
+        "source": {
+          "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/",
+          "quote": "AWS will use commercially reasonable efforts to make the Single Lightsail Instance available with an Instance-Level Uptime Percentage, as shown in the table below during any monthly billing cycle",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certification",
+        "value": "SOC 1, SOC 2 and SOC 3 reports cover the AWS infrastructure. The SOC 2 report is available to customers through AWS Artifact.",
+        "source": {
+          "url": "https://aws.amazon.com/compliance/soc-faqs/",
+          "quote": "AWS SOC 2 Security, Availability, Confidentiality, & Privacy Report available to AWS customers from AWS Artifact.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Data processing",
+        "value": "The AWS Service Terms incorporate the AWS Data Processing Addendum for customer data, plus the Standard Contractual Clauses for transfers.",
+        "source": {
+          "url": "https://aws.amazon.com/service-terms/",
+          "quote": "These Service Terms incorporate the AWS Data Processing Addendum (“DPA”), when you use AWS Services to process Customer Data (as defined in the DPA).",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Status page",
+        "value": "The AWS Health Dashboard shows service health for all AWS services; Lightsail has no dedicated status page.",
+        "source": {
+          "url": "https://docs.aws.amazon.com/health/latest/ug/what-is-aws-health.html",
+          "quote": "All customers can use the AWS Health Dashboard, powered by the AWS Health API. The dashboard requires no setup, and it's ready to use for authenticated AWS users.",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "A small always-on service that needs a fixed public IPv4 and a flat bill: $5 for 2 vCPU / 0.5 GB, $12 for 2 vCPU / 2 GB, $24 for 2 vCPU / 4 GB.",
+      "A bot, MCP server or webhook receiver that must stay awake: there is no idle timeout and no session cap.",
+      "Teams already on AWS that want the same IAM, CloudTrail, DPA, SOC reports and regional footprint for a small machine.",
+      "Cheap regional presence: 19 regions including six in the EU, with 1-10 TB of transfer included.",
+      "Disk-heavy but CPU-light work: 1,280 GB of SSD is included from $384 a month, and extra disks go to 16 TB."
+    ],
+    "badly": [
+      "Bursty, short-lived work: a ten-minute task pays for its hours, and there is no per-run sandbox API, so a code interpreter has no cheap path.",
+      "Anything that needs to stop and resume mid-process: stopping powers the machine down and keeps billing.",
+      "Four or more vCPU: the ladder jumps from $44 (2 vCPU) to $84 (4 vCPU), which is dear for a VPS.",
+      "A reader who wants the provider to install the agent: there is no Hermes or OpenClaw template, no coding agent and no prompt API.",
+      "A hard monthly ceiling: AWS Budgets can alert or block new resources, but nothing stops a running instance at a spend limit.",
+      "Automatic HTTPS on a bare instance: certificates come with the $18/month load balancer, or you run Caddy or Certbot yourself."
+    ]
+  },
+  "usability": {
+    "dashboard": "Yes. The Lightsail console creates an instance in a few clicks, shows CPU, network and status graphs, opens a browser SSH or RDP session, and manages static IPs, firewalls, disks, snapshots and DNS zones.",
+    "withoutCode": "Partly. Creating the machine and opening its terminal needs no local software, but installing any agent, TLS or Docker is terminal work, and there is no one-click agent template.",
+    "signup": "An AWS account, which requires a payment method. New accounts get $100 of credits at sign-up and can earn up to $100 more, on a Free plan that closes after six months or when the credits run out.",
+    "docs": "A large documentation set with Markdown versions, an API reference for every action, a CLI tutorial and blueprint guides. Support is AWS Support, which is paid beyond the basic plan.",
+    "tripsUp": [
+      "Stopping an instance does not stop the bill; only deleting it does.",
+      "Stopping releases the public IPv4 address unless a static IP is attached.",
+      "The monthly price is a cap, not a minimum: 730 hours on the $24 bundle is $23.54 because the hourly rate is the monthly price divided by 744.",
+      "There is no in-place resize; changing plan means snapshot, rebuild, repoint DNS and delete.",
+      "Snapshots restore only to the same or a larger plan, and automatic snapshots die with the instance.",
+      "Four vCPU costs $84 a month, so a coding-agent machine is far dearer than the $24 two-vCPU bundle.",
+      "The data-transfer allowance is halved in Mumbai, Sydney, Jakarta, Malaysia, Hong Kong and Sao Paulo.",
+      "Lightsail for Research has GPU machines and a $0.00685/hour stopped rate; ordinary Lightsail instances have neither.",
+      "Bundles created on or before 29 June 2023 have 1 vCPU where the current $5-$12 bundles list 2."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "A stopped instance bills in full",
+      "detail": "AWS says Lightsail instances 'accrue charges even when they are in the stopped state'. Workload C therefore costs $23.54 whether it runs for 90 hours or 730, and the only way to stop paying is to delete the machine and keep a snapshot.",
+      "status": "open"
+    },
+    {
+      "issue": "Partial instance-hours have no published rounding rule",
+      "detail": "The pricing page and FAQ say billing is hourly, and the price list bills in hours, but neither says whether a ten-minute run is charged ten minutes or a whole hour. This profile assumes pro-rata hours, which makes A $5.38; a whole-hour rule would make it $32.25.",
+      "status": "open"
+    },
+    {
+      "issue": "The billing FAQ's own example uses a stale rate",
+      "detail": "The billing FAQ says the cheapest plan is '$0.0067 USD/hour ($5 USD/month)' and then illustrates with '46 cents (100*0.0046)'. The $0.0046 figure matches neither the current $5 bundle ($0.00672) nor the $3.50 IPv6-only bundle ($0.00470) in AWS's price list. This profile uses the price list.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html",
+          "quote": "For example, if you use the least expensive Lightsail instance plan for 100 hours in a month, you will be charged 46 cents (100*0.0046).",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/us-east-1/index.json",
+          "quote": "$0.00470 / Hour of 0.5GB IPv6 bundle Instance",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "issue": "Lightsail for Research is a different product with different stopped billing",
+      "detail": "Research virtual computers bill $0.00685 an hour while stopped and are the only Lightsail machines with GPUs. Ordinary Lightsail instances bill their full hourly rate while stopped and have no GPU, so a reader comparing the two will draw the wrong conclusion about pausing.",
+      "status": "open"
+    },
+    {
+      "issue": "The cheap bundles changed shape without a launch date",
+      "detail": "The pricing page footnotes that virtual servers created on or before 29 June 2023 have 1 vCPU where the $5, $7 and $12 bundles now list 2. This profile prices a new instance; an older account's machine may be half the CPU for the same price.",
+      "status": "open"
+    },
+    {
+      "issue": "Nested virtualisation is undocumented",
+      "detail": "No Lightsail page says whether an instance can run KVM or another hypervisor inside it. Treat it as unknown rather than supported; Docker does not need it, Android emulators and Firecracker do.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "The cheapest fixed-price Linux VPS here with a public IPv4 address: $5 a month for 2 vCPU / 0.5 GB / 20 GB and 1 TB of transfer.",
+    "1-10 TB of transfer included per bundle, with outbound overage at $0.09-$0.17 a GB.",
+    "19 regions including Frankfurt, Ireland, London, Paris, Stockholm and Spain.",
+    "A static IPv4 address is free while attached and costs $0.005 an hour when detached.",
+    "Snapshots at $0.05 per GB-month, with seven daily automatic snapshots, and block storage at $0.10 per GB-month up to 16 TB per disk.",
+    "AWS IAM, CloudTrail, SOC 1/2/3 reports, a DPA and a 99.5% per-instance SLA come with the account."
+  ],
+  "sources": [
+    {
+      "label": "Lightsail pricing",
+      "url": "https://aws.amazon.com/lightsail/pricing/"
+    },
+    {
+      "label": "Lightsail instance bundles",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html"
+    },
+    {
+      "label": "Billing and account management FAQ",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html"
+    },
+    {
+      "label": "AWS Price List API, AmazonLightsail, us-east-1",
+      "url": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/us-east-1/index.json"
+    },
+    {
+      "label": "Regions and Availability Zones",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-regions-and-availability-zones-in-amazon-lightsail.html"
+    },
+    {
+      "label": "Start, stop, or reboot an instance",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-start-stop-or-restart-your-instance-virtual-private-server.html"
+    },
+    {
+      "label": "Snapshots",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-snapshots-in-amazon-lightsail.html"
+    },
+    {
+      "label": "Block storage",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/elastic-block-storage-and-ssd-disks-in-amazon-lightsail.html"
+    },
+    {
+      "label": "Instance firewalls",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html"
+    },
+    {
+      "label": "Data transfer allowances",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-faq-data-transfer-allowance.html"
+    },
+    {
+      "label": "Static IP addresses",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-static-ip-addresses-in-amazon-lightsail.html"
+    },
+    {
+      "label": "Choose the right plan (no in-place resize)",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-right-size-instance.html"
+    },
+    {
+      "label": "Blueprints",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/compare-options-choose-lightsail-instance-image.html"
+    },
+    {
+      "label": "CloudTrail logging",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/logging-lightsail-api-calls-using-aws-cloudtrail.html"
+    },
+    {
+      "label": "IAM policies for Lightsail",
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/security_iam_service-with-iam.html"
+    },
+    {
+      "label": "Lightsail SLA",
+      "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/"
+    },
+    {
+      "label": "AWS Free Tier",
+      "url": "https://aws.amazon.com/free/"
+    }
+  ]
+}

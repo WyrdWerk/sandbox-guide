@@ -1,0 +1,137 @@
+{
+  "provider": "ovhcloud",
+  "checkedOn": "2026-10-30",
+  "summary": "One preinstalled application route (n8n) and first-party guides for Hermes and OpenClaw; everything else is a manual install on a cheap monthly VPS. Good for one always-on agent, a bot or an MCP server, and poor for many short-lived tasks because the monthly plan bills whether the machine runs or not.",
+  "routes": [
+    {
+      "useCase": "hermes-agent",
+      "tier": "guide",
+      "noTerminal": "no",
+      "what": "OVHcloud publishes a full Hermes Agent guide for a VPS: Docker or a local install, OVHcloud AI Endpoints as the model provider, a Telegram gateway and scheduled tasks. It is a command-line walkthrough, not an image.",
+      "link": {
+        "title": "How to install Hermes Agent on a VPS",
+        "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-hermes-agent"
+      },
+      "price": "VPS-1 $5.35/mo monthly-billed; VPS-2 $10.00/mo if 4 vCores and 8 GB are wanted",
+      "disposition": "List as a guide route. Do not pick: Hostinger's one-click template is easier for a non-coder, and OVHcloud's advantage is price, not setup."
+    },
+    {
+      "useCase": "openclaw",
+      "tier": "guide",
+      "noTerminal": "no",
+      "what": "A landing page plus a Docker/Traefik guide: install Docker, create a proxy network, install Traefik, then OpenClaw, then configure the gateway token and a messaging channel. Root access and a public IPv4 are there; the setup is terminal work.",
+      "link": {
+        "title": "How to install OpenClaw on a VPS",
+        "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-openclaw"
+      },
+      "price": "VPS-1 $5.35/mo monthly-billed; VPS-2 $10.00/mo",
+      "disposition": "List as a guide route. Hostinger already owns the one-click OpenClaw case; OVHcloud is the cheaper root-controlled alternative."
+    },
+    {
+      "useCase": "coding-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Claude Code or Codex over SSH on Ubuntu. VPS-2 gives 4 vCores / 8 GB / 75 GB for $10.00 a month, or VPS-3 6 / 12 / 100 for $14.50. The disk survives a power-off, but the monthly plan bills through the stopped hours.",
+      "link": {
+        "title": "Getting started with a VPS",
+        "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps"
+      },
+      "price": "$10.00–$14.50/mo monthly-billed",
+      "disposition": "List as a manual route; no pick."
+    },
+    {
+      "useCase": "code-interpreter",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run your own interpreter service on a VPS. There is no sandbox API, no per-run machine and no per-second billing: one VPS-1 costs $5.35 whether it runs 20,000 one-minute jobs or none, and jobs share the same kernel and disk.",
+      "link": {
+        "title": "VPS product page",
+        "url": "https://us.ovhcloud.com/vps/"
+      },
+      "price": "$5.35/mo for VPS-1",
+      "disposition": "Do not recommend. A per-task sandbox is cheaper and safer for untrusted code."
+    },
+    {
+      "useCase": "browser-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Chromium and a browser driver on VPS-2 or VPS-3. There is no browser image and no desktop streaming; the plan bills for the month, so 30,000 short sessions are a poor fit.",
+      "link": {
+        "title": "VPS product page",
+        "url": "https://us.ovhcloud.com/vps/"
+      },
+      "price": "$10.00–$14.50/mo",
+      "disposition": "List as a manual route; no pick."
+    },
+    {
+      "useCase": "workflow-automation",
+      "tier": "preinstalled",
+      "noTerminal": "partly",
+      "what": "n8n is offered pre-installed on OVHcloud VPS plans: choose the n8n image at order and the application is running after delivery. You still configure the domain, TLS, the database and the encryption key, and scheduled workflows stop if the VPS is powered off.",
+      "link": {
+        "title": "VPS n8n",
+        "url": "https://us.ovhcloud.com/vps/vps-n8n/"
+      },
+      "price": "VPS-1 $5.35/mo monthly-billed; VPS-2 $10.00/mo",
+      "disposition": "Offer as the cheapest preinstalled n8n route in the comparison. State that domain, TLS and the encryption key are still manual."
+    },
+    {
+      "useCase": "chat-bot",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "One always-on VPS-1 at $5.35 with a dedicated IPv4 and unlimited traffic is enough for a Discord or Slack bot. Install the runtime and keep the bot as a systemd service; the plan bills all month, which is what an always-on gateway needs.",
+      "link": {
+        "title": "Getting started with a VPS",
+        "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps"
+      },
+      "price": "$5.35/mo",
+      "disposition": "List as a manual route; it is the cheapest always-on host in the set, but there is no bot template."
+    },
+    {
+      "useCase": "claude-code-team",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "One VPS per developer, each with its own IP and credentials, or one shared VPS-4 at 8 vCores / 24 GB for $27.50. There is no per-seat product, no shared workspace and no SSO-scoped machine access beyond OVHcloud IAM.",
+      "link": {
+        "title": "VPS product page",
+        "url": "https://us.ovhcloud.com/vps/"
+      },
+      "price": "$5.35–$27.50/mo per machine",
+      "disposition": "List as a manual route; no pick."
+    },
+    {
+      "useCase": "scheduled-scraper",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run the scraper from cron or a systemd timer inside the guest. The VPS bills all month, so a ten-minute nightly scrape still costs $5.35; store results in Object Storage or somewhere outside the machine if it may be rebuilt.",
+      "link": {
+        "title": "Getting started with a VPS",
+        "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps"
+      },
+      "price": "$5.35/mo",
+      "disposition": "List as a manual route; no pick. A scheduled task platform is cheaper for a ten-minute job."
+    },
+    {
+      "useCase": "mcp-server",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "A public IPv4, any TCP port and root make a VPS-1 a natural home for a remote MCP server. Install the server, put TLS in front with Caddy or Traefik, and add authentication yourself; there is no private URL or OAuth layer.",
+      "link": {
+        "title": "VPS product page",
+        "url": "https://us.ovhcloud.com/vps/"
+      },
+      "price": "$5.35/mo",
+      "disposition": "List as a manual route; no pick. Hostinger already covers the small remote MCP server case."
+    }
+  ],
+  "picks": [
+    {
+      "useCase": "workflow-automation",
+      "provider": "ovhcloud",
+      "for": "If you want n8n preinstalled on a plain server",
+      "why": "n8n is preinstalled on OVHcloud VPS plans, and VPS-1 gives 2 vCores, 4 GB, 40 GB and a dedicated IPv4 for $5.35 a month on the no-commitment term. The server is always on with unlimited traffic.",
+      "watch": "Domain, TLS, the database and the n8n encryption key are still your setup, and the plan bills whether the machine runs or not. The free daily backup is kept 24 hours; the 7-day history is a paid option. If the order funnel charges the $0.50 standard-backup line, the bill is $5.85.",
+      "link": "https://us.ovhcloud.com/vps/vps-n8n/"
+    }
+  ]
+}

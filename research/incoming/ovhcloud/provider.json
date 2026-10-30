@@ -1,0 +1,473 @@
+{
+  "id": "ovhcloud",
+  "name": "OVHcloud VPS",
+  "url": "https://us.ovhcloud.com/vps/",
+  "status": "researched",
+  "kind": "vps",
+  "checkedOn": "2026-10-30",
+  "oneLiner": "A French cloud provider's plain VPS: four fixed sizes from $5.35 a month on a monthly subscription, with root, a dedicated IPv4 and unlimited traffic, and a powered-off server still billed.",
+  "whatItIs": [
+    "OVHcloud VPS is an ordinary rented virtual machine from one of Europe's largest hosting companies: fixed vCores, RAM and NVMe disk in one bundle, root access, real SSH, any TCP port, a dedicated IPv4 and IPv6, and a monthly subscription. You choose Linux, Windows or BSD from OVHcloud's images and administer everything above the hypervisor yourself.",
+    "The current range is called VPS 2027 and has four models: VPS-1 (2 vCores / 4 GB / 40 GB), VPS-2 (4 / 8 / 75), VPS-3 (6 / 12 / 100) and VPS-4 (8 / 24 / 200). A daily backup, anti-DDoS protection and unlimited traffic are included; a manual snapshot and a 7-day premium backup are paid options, and an additional disk adds 50 GB to 10 TB.",
+    "It is not a sandbox product. There is no prompt endpoint, no pause or memory snapshot, no idle sleep, no per-second meter and no session limit. The machine exists from order until cancellation. OVHcloud's Public Cloud instances are the hourly, API-first alternative and are a different product with a different price list; this page prices only VPS."
+  ],
+  "whoFor": "Someone who wants a cheap always-on Linux or Windows server in Europe or North America and will run the operating system, the agent, the firewall and the backups themselves. It suits a personal Hermes or OpenClaw agent, n8n, a Discord bot, a scheduled scraper or a small MCP server. It is a poor fit for many short-lived tasks, untrusted code, or anyone who wants a dashboard that installs the agent for them.",
+  "isolation": "A full virtual machine per server with its own kernel, disk and public IP: root, Docker, real SSH and any port. OVHcloud does not name the hypervisor on the VPS pages, publishes no CPU-share or burst policy for its vCores, and does not document nested virtualisation. There is no GPU and no custom ISO or image upload: reinstallation offers only OVHcloud's own images.",
+  "sizes": "Four fixed 2027 models, 2 to 8 vCores and 4 to 24 GB of RAM, with 40 to 200 GB of NVMe. CPU, RAM and disk cannot be sized independently. RAM, vCPU and storage can be upgraded in place within the range, but a downgrade needs a new plan and a data migration, and OVHcloud's US support page says upgrades are only offered in its US regions. An additional disk adds 50 GB, 100 GB, 200 GB, 500 GB, 1 TB, 5 TB or 10 TB, attached to one server.",
+  "billing": {
+    "model": "A monthly subscription per VPS, renewed automatically until cancelled, plus optional monthly add-ons (snapshot, premium backup, additional disk, additional IP, Plesk or cPanel licence). A 6- or 12-month commitment lowers the monthly price but is not required. There is no hourly or per-second rate.",
+    "meter": "Calendar months, not machine-hours. The no-commitment price is $5.35 for VPS-1, $10.00 for VPS-2, $14.50 for VPS-3 and $27.50 for VPS-4; a 12-month commitment lowers those to $4.54, $8.50, $12.32 and $23.37. The installation fee is $0.",
+    "stopped": "Nothing changes. Stopping is a power-off: the disk and IP stay, the invoice renews, and the only way to stop paying is to cancel the service. There is no pause, hibernate or cheaper stopped-storage rate.",
+    "planFee": "No platform fee. The VPS price is the whole machine charge; the daily backup is described as free, though the order catalog also lists a $0.50–$1.20 standard-backup line.",
+    "minimum": "No free tier and no signup credit. A payment method (bank card, PayPal or SEPA direct debit) is required, and the first invoice is the full month, prorated to the first of the following month."
+  },
+  "cost": {
+    "A": {
+      "headline": "$5.35 a month",
+      "shape": "VPS-1 (2 vCores / 4 GB / 40 GB), one monthly plan covering all 1,000 tasks",
+      "lines": [
+        {
+          "label": "Monthly plan (VPS-1)",
+          "arithmetic": "1 × $5.35 a month, running 1,000 × 10 min = 166.67 h of tasks back to back",
+          "amount": "$5.35"
+        }
+      ],
+      "total": "$5.35",
+      "notes": [
+        "The size fits: VPS-1 has exactly 2 vCores and 4 GB, and 40 GB of disk against the 10 GB asked for.",
+        "OVHcloud sells whole months, not machine-hours. 166.67 hours of tasks fit inside one 730-hour month, so one plan covers every run; there is no per-task charge and no hourly rounding.",
+        "If the tasks must run at the same time, each concurrent task needs its own VPS-1 and the bill multiplies.",
+        "The order catalog also lists a standard-backup add-on at $0.50 a month for VPS-1. The product page says daily backup is free, so it is not in this total; if it is charged, the bill is $5.85."
+      ],
+      "flag": "This is a monthly plan doing a per-task job: 1,000 short runs cost the same as one. That is cheap here only because the whole month is $5.35."
+    },
+    "B": {
+      "headline": "$10.00 a month",
+      "shape": "VPS-2 (4 vCores / 8 GB / 75 GB), 730 hours",
+      "lines": [
+        {
+          "label": "Monthly plan (VPS-2)",
+          "arithmetic": "1 × $10.00 a month",
+          "amount": "$10.00"
+        }
+      ],
+      "total": "$10.00",
+      "notes": [
+        "VPS-1 has only 2 vCores, so VPS-2 is the smallest shape with 4 vCores and 8 GB; its 75 GB disk is more than the 50 GB asked for.",
+        "A 12-month commitment would be $8.50 a month, $102.00 paid upfront; a 6-month commitment $9.50 a month, $57.00 upfront. The card uses the no-commitment price.",
+        "The order catalog's standard-backup line for VPS-2 is $0.60 a month; the product page says backup is free, so it is excluded here."
+      ]
+    },
+    "C": {
+      "headline": "$5.35 a month",
+      "shape": "VPS-1 (2 vCores / 4 GB / 40 GB), 90 running and 640 powered-off hours",
+      "lines": [
+        {
+          "label": "Monthly plan (VPS-1)",
+          "arithmetic": "1 × $5.35 a month, covering 90 running + 640 powered-off hours",
+          "amount": "$5.35"
+        }
+      ],
+      "total": "$5.35",
+      "notes": [
+        "Powering off does not stop the subscription: the 640 stopped hours are already inside the month paid for, and the disk is still attached when the machine starts again.",
+        "Memory and running processes do not survive a power-off; this is a stop, not a pause.",
+        "The 20 GB of files fit on the 40 GB plan disk, so no additional disk is needed.",
+        "If the catalog's $0.50 standard-backup line is charged, the bill is $5.85."
+      ],
+      "flag": "A machine that runs three hours a day costs exactly the same as one that runs all month. The only cheaper pattern is to cancel and rebuild later, which loses the IP and the running setup."
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "OVH US LLC dba OVHcloud, a Delaware limited liability company.",
+        "source": {
+          "url": "https://us.ovhcloud.com/legal/terms-of-service/",
+          "quote": "OVH US LLC dba OVHcloud®, a Delaware limited liability company",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Registered address",
+        "value": "11950 Democracy Drive, Suite 300, Reston, VA 20190.",
+        "source": {
+          "url": "https://us.ovhcloud.com/legal/data-processing-agreement/",
+          "quote": "with its principal place of business at 11950 Democracy Drive, Suite 300, Reston, VA 20190",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Ownership",
+        "value": "OVH US is a wholly owned subsidiary of OVH Group.",
+        "source": {
+          "url": "https://us.ovhcloud.com/about/",
+          "quote": "OVH US, a wholly owned subsidiary of OVH Group",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Age",
+        "value": "Founded in 1999.",
+        "source": {
+          "url": "https://us.ovhcloud.com/about/",
+          "quote": "OVHcloud has been shaping the internet of today and tomorrow since 1999.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Scale",
+        "value": "46 data centres across four continents.",
+        "source": {
+          "url": "https://us.ovhcloud.com/about/",
+          "quote": "46 data centers  implemented across 4 continents",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Customers",
+        "value": "More than 1.6 million customers worldwide.",
+        "source": {
+          "url": "https://us.ovhcloud.com/about/",
+          "quote": "over 1.6 million customers worldwide",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Uptime promise",
+        "value": "A 99.9% service level agreement for VPS.",
+        "source": {
+          "url": "https://us.ovhcloud.com/vps/",
+          "quote": "Get guaranteed availability with a 99.9% service level agreement (SLA).",
+          "confidence": "pricing-page"
+        }
+      },
+      {
+        "label": "SLA remedy",
+        "value": "Missed availability is remedied with service credits calculated as a percentage of the total fees paid by the customer.",
+        "source": {
+          "url": "https://us.ovhcloud.com/legal/sla/vps/",
+          "quote": "Service Credits are calculated as a percentage of the total Fees paid by the Customer",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "SOC attestations",
+        "value": "SOC 1, SOC 2 + NIST and SOC 3 attestations; the published scope is OVHcloud Services and the US data centres.",
+        "source": {
+          "url": "https://us.ovhcloud.com/compliance/soc-1-2-3/",
+          "quote": "The scope of the SSAE 18 Type 2 SOC 1, 2, & 3 examinations is the OVHcloud Services and US Data Centers",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "ISO certifications",
+        "value": "ISO/IEC 27001, 27017 and 27018 certifications; the published scope is OVHcloud Services and the US data centres.",
+        "source": {
+          "url": "https://us.ovhcloud.com/compliance/iso-27001-27017-27018/",
+          "quote": "The scope of the ISO/IEC 27001, ISO/IEC 27017, and ISO/IEC 27018 certifications include all the OVHcloud Services and US Data Centers",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Data protection",
+        "value": "A Data Processing Agreement forms part of the Terms of Service.",
+        "source": {
+          "url": "https://us.ovhcloud.com/legal/data-processing-agreement/",
+          "quote": "This Data Processing Agreement (“DPA”) forms part of the OVHcloud Terms of Service",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "EU data protection",
+        "value": "OVHcloud says data hosted in its data centres is GDPR-compliant and protected from extraterritorial laws such as the CLOUD Act.",
+        "source": {
+          "url": "https://www.ovhcloud.com/en/vps/",
+          "quote": "Your data is hosted in certified datacentres compliant with the GDPR, and protected from extraterritorial laws such as the CLOUD Act.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Status page",
+        "value": "A public status page at status-ovhcloud.com.",
+        "source": {
+          "url": "https://www.status-ovhcloud.com/",
+          "quote": "OVHcloud Status",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "An always-on agent on the cheapest possible box: VPS-1 at $5.35 a month with 2 vCores, 4 GB and a dedicated IPv4 covers Hermes, OpenClaw, a chat bot or an MCP server.",
+      "n8n on a preinstalled image: OVHcloud sells n8n pre-installed on VPS plans, and VPS-1 at $5.35 is the cheapest supported n8n route in this comparison.",
+      "A real server: own kernel, root, Docker, SSH, any TCP port (port 25 is open by default outside Local Zones), a static IP and unlimited traffic.",
+      "European data residency: France, Germany, Italy, Poland and the UK, with a DPA and a 99.9% SLA with service credits.",
+      "Automation: a documented REST API, an official CLI that manages VPS, Python and Node SDKs, and a Terraform resource."
+    ],
+    "badly": [
+      "Many short runs: a monthly plan bills whether the machine runs 166 hours or none, so 1,000 ten-minute tasks cost the same as an idle month.",
+      "Bursty day-time use: powering off does not reduce the bill, so three hours a day costs the full month.",
+      "Untrusted code: there is no per-run sandbox, no snapshot rollback per task and no hard isolation between jobs on the same VPS.",
+      "Anything that needs a GPU, nested virtualisation, a memory snapshot, a pause, an idle sleep, a custom ISO or a provider-side egress allowlist.",
+      "Non-coders: OVHcloud says a VPS requires basic server-administration knowledge, and its own agent routes are terminal guides."
+    ]
+  },
+  "usability": {
+    "dashboard": "Yes: the OVHcloud Control Panel creates the VPS, reinstalls the OS, reboots, opens a KVM console, takes a snapshot, configures the automated backup, adds disks and IPs, and shows CPU, RAM and network graphs. The 2027 range is ordered through a configurator that needs an account.",
+    "withoutCode": "Partly. Choosing a model, a region, an image (including n8n, Docker, Plesk or cPanel) and an SSH key is clicking. Everything after delivery — the agent, the database, TLS, the firewall — is a terminal, and OVHcloud's own Hermes and OpenClaw guides are command-line tutorials.",
+    "signup": "An OVHcloud account, an email address and a payment method (bank card, PayPal or SEPA direct debit). No free tier and no signup credit; the first invoice is the full month, prorated to the first of the next month.",
+    "docs": "A large, current documentation set at docs.ovhcloud.com with a VPS section covering getting started, snapshots, backups, additional disks, rescue mode, KVM, iptables, TLS, Docker, n8n, Hermes and OpenClaw, plus a complete API console and an official CLI. Support is by ticket and email; phone support depends on the support level.",
+    "tripsUp": [
+      "The price shown on the product page (\"Starting at $4.54\") is the 12-month commitment price; month-to-month is $5.35.",
+      "Powering a VPS off does not stop the invoice; only cancelling does.",
+      "A snapshot is one at a time, and restoring it deletes the snapshot.",
+      "The free daily backup is kept for 24 hours; a 7-day history is the paid Premium option.",
+      "Additional disks are not included in snapshots or automated backups.",
+      "A VPS cannot be moved to another region, and a downgrade needs a new plan and a data migration.",
+      "Local Zone VPS plans lose anti-DDoS, additional IPs, Windows, cPanel/Plesk/Docker images, load balancing and managed databases.",
+      "There is no custom ISO or image upload; you choose from OVHcloud's images or install another system by hand from rescue mode."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "The daily backup is a priced add-on that the order waives",
+      "detail": "OVHcloud's order catalog makes a standard daily backup a mandatory option priced at $0.50 (VPS-1) to $1.20 (VPS-4) a month, while its product page and FAQ call daily backups free. The configurator settles it for now: the no-commitment VPS-1 order lists the backup at $0.50 struck through to $0.00 and totals $5.35 ex. taxes a month (checked 30 October 2026). If OVHcloud stops waiving it, the three shared workloads become $5.85, $10.60 and $5.85 a month instead of $5.35, $10.00 and $5.35.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://us.ovhcloud.com/vps/",
+          "quote": "Daily backups are a free feature of your VPS.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US",
+          "quote": "\"invoiceName\": \"Option Automated Backup Standard - VPS-1 2027\"",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "issue": "Upgrades: reboot or no disruption, US-only or global?",
+      "detail": "The US product page says an upgrade needs \"just a quick reboot\", the international page says \"no service disruption\", the upgrade guide says it is immediate, and the US support article says RAM, vCPU and storage upgrades are not offered outside US regions. In-place upgrade exists and keeps data and IP, but the reboot and the regional restriction are real catches; the capability is marked partly, not yes.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://us.ovhcloud.com/vps/",
+          "quote": "Upgrade your VPS resources with a single click -- just a quick reboot required, with no data migration or configuration changes needed.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/upgrade-resources",
+          "quote": "The upgrade will be effective immediately, keeping all of your data.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "A stopped VPS is not a paused VPS",
+      "detail": "There is no pause, hibernate or memory snapshot. Stopping powers the machine off, keeps the disk and the IP, and leaves the monthly subscription running; the only way to stop paying is to cancel, which deletes the service at the end of the term.",
+      "status": "open"
+    },
+    {
+      "issue": "Monthly plans make short work expensive",
+      "detail": "OVHcloud sells whole months. A 10-minute daily job, a three-hour-a-day coding box and an always-on agent all cost the same monthly price; there is no hourly rate to fall back to.",
+      "status": "open"
+    },
+    {
+      "issue": "No custom image and no documented nested virtualisation",
+      "detail": "Reinstallation offers only OVHcloud's images, and the API exposes an `images/available` list rather than an upload. Nested virtualisation is not documented either way, so QEMU/KVM inside the VPS, Firecracker or an Android emulator cannot be assumed to work.",
+      "status": "open"
+    },
+    {
+      "issue": "SOC 2 scope does not name VPS",
+      "detail": "The SOC 1/2/3 attestations cover \"OVHcloud Services\" and the VPS's two US data centres, with \"Bare Metal Cloud\" as the service family. VPS is not named, and non-US services need a sales request, so procurement should ask for the report and its scope before relying on it.",
+      "status": "open"
+    },
+    {
+      "issue": "The US hero says 1.5 Gbps, the plan cards say up to 3 Gbps",
+      "detail": "The US product page's banner reads \"Unlimited bandwidth, up to 1.5 Gbps\" while its own plan cards list 500 Mbps to 3 Gbps and the international page says up to 3 Gbps. This guide uses the plan cards.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://us.ovhcloud.com/vps/",
+          "quote": "Unlimited bandwidth, up to 1.5 Gbps*",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://www.ovhcloud.com/en/vps/",
+          "quote": "Unlimited bandwidth, up to 3 Gbps*",
+          "confidence": "pricing-page"
+        }
+      ]
+    }
+  ],
+  "strengths": [
+    "The cheapest always-on machine in this comparison: 2 vCores, 4 GB, 40 GB and a dedicated IPv4 for $5.35 a month.",
+    "A real server with root, Docker, SSH, any port, a static IP and unlimited traffic.",
+    "n8n can be ordered pre-installed, and OVHcloud publishes full Hermes and OpenClaw install guides.",
+    "European locations and a DPA, with a 99.9% SLA backed by service credits.",
+    "A documented REST API, an official CLI, Python and Node SDKs, and a Terraform resource.",
+    "Daily backup and anti-DDoS included, with a cheap 7-day premium backup option."
+  ],
+  "sources": [
+    {
+      "label": "VPS product page (US, USD)",
+      "url": "https://us.ovhcloud.com/vps/"
+    },
+    {
+      "label": "Public order catalog for VPS (US subsidiary, USD, live prices)",
+      "url": "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US"
+    },
+    {
+      "label": "VPS API definition (52 endpoints)",
+      "url": "https://api.us.ovhcloud.com/1.0/vps.json"
+    },
+    {
+      "label": "VPS FAQ",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/vps-faq"
+    },
+    {
+      "label": "Getting started with a VPS",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/starting-with-a-vps"
+    },
+    {
+      "label": "VPS management in the Control Panel",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/understand-vps-control-panel"
+    },
+    {
+      "label": "Upgrading VPS resources",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/upgrade-resources"
+    },
+    {
+      "label": "US support: upgrades limited to US regions",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/38299056076947-Upgrading-your-VPS-configuration"
+    },
+    {
+      "label": "US support: VPS billing and commitments",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360002306224-Overview-of-Billing-with-OVHcloud-US"
+    },
+    {
+      "label": "Snapshots on a VPS",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012573640-How-to-use-snapshots-on-a-VPS"
+    },
+    {
+      "label": "Automated backups on a VPS",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/360012678619-How-to-use-automated-backups-on-a-VPS"
+    },
+    {
+      "label": "Configuring an additional disk",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/4410563713427-Configuring-an-additional-disk-on-a-VPS"
+    },
+    {
+      "label": "KVM console",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/using-kvm-for-vps"
+    },
+    {
+      "label": "Rescue mode",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/rescue"
+    },
+    {
+      "label": "Linux firewall with iptables",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/firewall-linux-iptable"
+    },
+    {
+      "label": "SSL certificate on a VPS",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-ssl-certificate"
+    },
+    {
+      "label": "Pre-installed applications",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/apps-first-steps"
+    },
+    {
+      "label": "Install n8n on a VPS",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-n8n-on-vps"
+    },
+    {
+      "label": "n8n VPS offer",
+      "url": "https://us.ovhcloud.com/vps/vps-n8n/"
+    },
+    {
+      "label": "OpenClaw VPS landing page",
+      "url": "https://us.ovhcloud.com/vps/vps-openclaw/"
+    },
+    {
+      "label": "Install OpenClaw on a VPS",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-openclaw"
+    },
+    {
+      "label": "Install Hermes Agent on a VPS",
+      "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/install-hermes-agent"
+    },
+    {
+      "label": "VPS Local Zones",
+      "url": "https://www.ovhcloud.com/en-gb/lp/vps-localzone/"
+    },
+    {
+      "label": "Identity and Access Management",
+      "url": "https://us.ovhcloud.com/identity-security-operations/identity-access-management/"
+    },
+    {
+      "label": "Account audit logs with Logs Data Platform",
+      "url": "https://docs.ovhcloud.com/en/guides/manage-and-operate/iam/logs-forwarding"
+    },
+    {
+      "label": "First steps with the OVHcloud API",
+      "url": "https://docs.ovhcloud.com/en/guides/manage-and-operate/api/first-steps"
+    },
+    {
+      "label": "OVHcloud CLI (VPS commands)",
+      "url": "https://github.com/ovh/ovhcloud-cli"
+    },
+    {
+      "label": "Python SDK",
+      "url": "https://github.com/ovh/python-ovh"
+    },
+    {
+      "label": "Node SDK",
+      "url": "https://github.com/ovh/node-ovh"
+    },
+    {
+      "label": "Terraform: ovh_vps",
+      "url": "https://github.com/ovh/terraform-provider-ovh/blob/master/docs/resources/vps.md"
+    },
+    {
+      "label": "OVHcloud MCP server",
+      "url": "https://docs.ovhcloud.com/en/guides/web-cloud/domains/mcp-domain-getting-started"
+    },
+    {
+      "label": "Object Storage FAQ (S3 compatibility)",
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/23896851215379-Object-Storage-FAQ"
+    },
+    {
+      "label": "Billing FAQ",
+      "url": "https://docs.ovhcloud.com/en/guides/account-and-service-management/managing-billing-payments-and-services/faq-billing"
+    },
+    {
+      "label": "VPS Service Level Agreement",
+      "url": "https://us.ovhcloud.com/legal/sla/vps/"
+    },
+    {
+      "label": "SOC 1, SOC 2 + NIST and SOC 3",
+      "url": "https://us.ovhcloud.com/compliance/soc-1-2-3/"
+    },
+    {
+      "label": "Data Processing Agreement",
+      "url": "https://us.ovhcloud.com/legal/data-processing-agreement/"
+    },
+    {
+      "label": "Terms of Service",
+      "url": "https://us.ovhcloud.com/legal/terms-of-service/"
+    },
+    {
+      "label": "About OVHcloud US",
+      "url": "https://us.ovhcloud.com/about/"
+    },
+    {
+      "label": "OVHcloud status page",
+      "url": "https://www.status-ovhcloud.com/"
+    }
+  ]
+}

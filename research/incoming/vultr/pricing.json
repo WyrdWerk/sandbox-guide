@@ -1,0 +1,212 @@
+{
+  "provider": "vultr",
+  "checkedOn": "2026-10-30",
+  "summary": "A fixed-size server billed by the hour with a one-hour minimum and a 672-hour monthly cap; a stopped server bills at the running rate until it is destroyed.",
+  "shapes": [
+    {
+      "name": "High Performance 1 vCPU / 1 GB",
+      "vcpu": 1,
+      "ram": 1,
+      "disk": 25,
+      "hourly": 0.008928571,
+      "monthly": 6.0
+    },
+    {
+      "name": "High Performance 1 vCPU / 2 GB",
+      "vcpu": 1,
+      "ram": 2,
+      "disk": 50,
+      "hourly": 0.017857143,
+      "monthly": 12.0
+    },
+    {
+      "name": "High Performance 2 vCPU / 2 GB",
+      "vcpu": 2,
+      "ram": 2,
+      "disk": 60,
+      "hourly": 0.026785714,
+      "monthly": 18.0
+    },
+    {
+      "name": "High Performance 2 vCPU / 4 GB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 100,
+      "hourly": 0.035714286,
+      "monthly": 24.0
+    },
+    {
+      "name": "High Performance 4 vCPU / 8 GB",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 180,
+      "hourly": 0.071428571,
+      "monthly": 48.0
+    },
+    {
+      "name": "High Performance 4 vCPU / 12 GB",
+      "vcpu": 4,
+      "ram": 12,
+      "disk": 260,
+      "hourly": 0.107142857,
+      "monthly": 72.0
+    },
+    {
+      "name": "High Performance 8 vCPU / 16 GB",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 350,
+      "hourly": 0.142857143,
+      "monthly": 96.0
+    },
+    {
+      "name": "High Performance 12 vCPU / 24 GB",
+      "vcpu": 12,
+      "ram": 24,
+      "disk": 500,
+      "hourly": 0.214285714,
+      "monthly": 144.0
+    },
+    {
+      "name": "Regular Performance 1 vCPU / 0.5 GB",
+      "vcpu": 1,
+      "ram": 0.5,
+      "disk": 10,
+      "hourly": 0.005208333,
+      "monthly": 3.5
+    },
+    {
+      "name": "Regular Performance 1 vCPU / 1 GB",
+      "vcpu": 1,
+      "ram": 1,
+      "disk": 25,
+      "hourly": 0.007440476,
+      "monthly": 5.0
+    },
+    {
+      "name": "Regular Performance 1 vCPU / 2 GB",
+      "vcpu": 1,
+      "ram": 2,
+      "disk": 55,
+      "hourly": 0.014880952,
+      "monthly": 10.0
+    },
+    {
+      "name": "Regular Performance 2 vCPU / 2 GB",
+      "vcpu": 2,
+      "ram": 2,
+      "disk": 65,
+      "hourly": 0.022321429,
+      "monthly": 15.0
+    },
+    {
+      "name": "Regular Performance 2 vCPU / 4 GB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 80,
+      "hourly": 0.029761905,
+      "monthly": 20.0
+    },
+    {
+      "name": "Regular Performance 4 vCPU / 8 GB",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 160,
+      "hourly": 0.05952381,
+      "monthly": 40.0
+    },
+    {
+      "name": "Regular Performance 6 vCPU / 16 GB",
+      "vcpu": 6,
+      "ram": 16,
+      "disk": 320,
+      "hourly": 0.119047619,
+      "monthly": 80.0
+    },
+    {
+      "name": "Regular Performance 8 vCPU / 32 GB",
+      "vcpu": 8,
+      "ram": 32,
+      "disk": 640,
+      "hourly": 0.238095238,
+      "monthly": 160.0
+    },
+    {
+      "name": "Regular Performance 16 vCPU / 64 GB",
+      "vcpu": 16,
+      "ram": 64,
+      "disk": 1280,
+      "hourly": 0.476190476,
+      "monthly": 320.0
+    },
+    {
+      "name": "Regular Performance 24 vCPU / 96 GB",
+      "vcpu": 24,
+      "ram": 96,
+      "disk": 1600,
+      "hourly": 0.952380952,
+      "monthly": 640.0
+    }
+  ],
+  "billedWhileStopped": true,
+  "wholeHours": true,
+  "disk": {
+    "extraMonthly": 0.1
+  },
+  "between": "kept",
+  "maxDisk": 40960,
+  "egress": {
+    "perGiB": 0.01,
+    "included": "0.5–15 TB a month depending on the plan",
+    "note": "Egress beyond the plan allowance is $0.01/GB worldwide. Inbound traffic is free. Not priced by the calculator.",
+    "url": "https://www.vultr.com/products/regular-performance-compute/"
+  },
+  "plans": [
+    {
+      "name": "Pay as you go",
+      "fee": 0,
+      "note": "No plan and no fee: each server bills hourly from deployment until destroyed, capped at its monthly price."
+    }
+  ],
+  "notes": [
+    "Prices are Vultr's USD list. The FAQ says some locations can differ and the console shows the local price; the card uses the standard list.",
+    "Vultr's billing FAQ derives the hourly rate as monthly ÷ 672. The pricing page rounds some hourly figures (the $20 plan shows $0.03) and lists larger plans at roughly monthly ÷ 730 (the $160 plan shows $0.219); the API publishes a third figure for some plans ($0.027 for the $20 plan). The card uses monthly ÷ 672 so the 672-hour cap equals the monthly price. See research/vultr/research.md, contradiction 1.",
+    "The $2.50 1 vCPU / 0.5 GB plan is IPv6-only and is excluded. Its $3.50 twin includes IPv4 and is the smallest shape on the card.",
+    "One public IPv4 is included on paid plans; up to two additional addresses are available for an extra fee whose amount Vultr does not publish on the pages read.",
+    "Snapshots are $0.05/GB-month, automatic backups add 20%, Block Storage is $0.10/GB-month, Vultr File System is $100/TB-month and Object Storage starts at $18/TB-month. None of these is in the calculator.",
+    "Windows licences are extra: $16–$384 a month depending on the plan.",
+    "A stopped instance bills at the running rate until destroyed; there is no pause, sleep or cheaper stopped-storage rate.",
+    "Vultr labels memory in GB; the plan API returns MB (4096 MB for the 4 GB plan), so the card maps GB to GiB 1:1. Vultr labels disk in GB; the card maps it 1:1 to GiB too.",
+    "The card prices the shared Cloud Compute plans (Regular Performance and High Performance). Optimized Cloud Compute, VX1, Cloud GPU and Bare Metal are separate families and are not priced here."
+  ],
+  "sources": [
+    {
+      "label": "Pricing (Cloud Compute plans)",
+      "url": "https://www.vultr.com/pricing/"
+    },
+    {
+      "label": "Regular Performance plans and billing FAQ",
+      "url": "https://www.vultr.com/products/regular-performance-compute/"
+    },
+    {
+      "label": "Block Storage pricing and hourly-rate derivation",
+      "url": "https://www.vultr.com/products/block-storage/"
+    },
+    {
+      "label": "Docs: how am I billed for my servers",
+      "url": "https://docs.vultr.com/support/platform/billing/how-am-i-billed-for-my-servers"
+    },
+    {
+      "label": "Docs: stopped instances are still billed",
+      "url": "https://docs.vultr.com/support/platform/billing/are-stopped-instances-still-billed-on-vultr"
+    },
+    {
+      "label": "Docs: snapshot pricing",
+      "url": "https://docs.vultr.com/support/platform/billing/does-vultr-charge-for-stored-snapshots"
+    },
+    {
+      "label": "Docs: automatic backups",
+      "url": "https://docs.vultr.com/vps-automatic-backups"
+    }
+  ]
+}

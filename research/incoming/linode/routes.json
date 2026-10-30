@@ -1,0 +1,127 @@
+{
+  "provider": "linode",
+  "checkedOn": "2026-10-30",
+  "summary": "Two genuine one-click agent apps (Hermes Agent and OpenClaw) and a manual route for everything else. The Linode is a good fit for one always-on agent, a chat bot or an MCP server at a flat monthly price, and a poor fit for many short-lived tasks because each VM rounds up to a whole hour and a stopped VM bills in full.",
+  "routes": [
+    {
+      "useCase": "hermes-agent",
+      "tier": "one-click",
+      "noTerminal": "partly",
+      "what": "The Hermes Quick Deploy App installs Hermes Agent on Ubuntu 24.04 from Cloud Manager in 5-10 minutes, creates a limited sudo user and can create the DNS record through the Linode API. Model keys and the Telegram or Discord channel are still added on the machine.",
+      "link": {
+        "title": "Deploy Hermes Agent on Akamai Cloud",
+        "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/hermes"
+      },
+      "price": "Linode 4 GB $24/mo; Nanode 1 GB $5/mo",
+      "disposition": "Offer as a one-click route with the terminal caveat. No pick: the existing Hermes picks already run the agent for the reader without a server to patch."
+    },
+    {
+      "useCase": "openclaw",
+      "tier": "one-click",
+      "noTerminal": "partly",
+      "what": "The OpenClaw app deploys the gateway with a limited openclaw user and an HTTPS dashboard protected by HTPASSWD, with optional Let's Encrypt and DNS. Pairing WhatsApp or Slack and adding model keys are terminal work.",
+      "link": {
+        "title": "Deploy OpenClaw on Akamai Cloud",
+        "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/openclaw"
+      },
+      "price": "Linode 4 GB $24/mo; Linode 8 GB $48/mo",
+      "disposition": "Offer as a one-click route. No pick: DigitalOcean already holds the cheap-VPS pick for OpenClaw at $12 a month, and this app is the more expensive machine."
+    },
+    {
+      "useCase": "coding-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Claude Code or Codex on Ubuntu yourself. Linode 8 GB gives 4 vCPU / 8 GB / 160 GB for $48 a month; the repository survives a stop, but the meter runs through the stopped hours.",
+      "link": {
+        "title": "Set up and secure a Linode",
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/set-up-and-secure-a-compute-instance"
+      },
+      "price": "$48/mo for Linode 8 GB",
+      "disposition": "List as a manual route; no pick. The case is the same as every other VPS and the stopped hours make it a poor fit for an eight-hour day."
+    },
+    {
+      "useCase": "code-interpreter",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run your own interpreter service on a Linode. There is no sandbox API, no per-run machine and no per-second meter: one Linode 4 GB costs $24 whether it runs 20,000 one-minute jobs or none, and untrusted code shares the box with everything else on it.",
+      "link": {
+        "title": "Akamai Cloud CPU pricing",
+        "url": "https://www.akamai.com/cloud/pricing/cpu"
+      },
+      "price": "$24/mo for Linode 4 GB",
+      "disposition": "Do not recommend. A per-task sandbox is cheaper and isolates each run; a VPS puts every user's code on one kernel."
+    },
+    {
+      "useCase": "browser-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Chromium and a browser driver on Linode 8 GB. Nothing is preinstalled, Glish only shows a desktop you install yourself, and 30,000 short sessions are a bad fit for a monthly plan that bills whether the machine runs or not.",
+      "link": {
+        "title": "Access your desktop environment using Glish",
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/access-your-desktop-environment-using-glish"
+      },
+      "price": "$48/mo for Linode 8 GB",
+      "disposition": "Do not recommend; manual only."
+    },
+    {
+      "useCase": "workflow-automation",
+      "tier": "guide",
+      "noTerminal": "no",
+      "what": "n8n is not in the Quick Deploy catalogue: install it with Docker on Ubuntu following Akamai's own n8n guide, then point DNS at the Linode with DNS Manager and add TLS with Caddy or Certbot. The database and the encryption key live on the plan disk and survive a stop.",
+      "link": {
+        "title": "How to use n8n to automate business workflows",
+        "url": "https://www.akamai.com/cloud/guides/how-to-use-n8n-to-automate-workflows/"
+      },
+      "price": "Linode 4 GB $24/mo",
+      "disposition": "List as a guide route; no pick. Hetzner already holds a VPS pick for self-hosted n8n, and Linode offers no n8n template."
+    },
+    {
+      "useCase": "chat-bot",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "A Node or Python bot on the Nanode 1 GB at $5 a month, or Linode 2 GB at $12 if it keeps a history database. Nothing idles the machine, so the gateway connection stays up; the bot is installed and supervised by you.",
+      "link": {
+        "title": "Set up and secure a Linode",
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/set-up-and-secure-a-compute-instance"
+      },
+      "price": "$5-$12/mo",
+      "disposition": "List as a manual route. No pick: the cheapest chat-bot pick is already a VPS at a similar price."
+    },
+    {
+      "useCase": "claude-code-team",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "One Linode 8 GB per developer at $48 each, five logins under one account with RBAC roles and SAML SSO. Each developer still needs their own Claude credentials, and the machines bill through the hours they are stopped.",
+      "link": {
+        "title": "Identity and Access in Akamai Cloud",
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/identity-and-access-cm"
+      },
+      "price": "$240/mo for five Linode 8 GB machines",
+      "disposition": "List as a manual route; no pick. Good team controls, but the stopped hours cost the same as running ones."
+    },
+    {
+      "useCase": "scheduled-scraper",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Cron inside a Linode that stays up. Four ten-minute runs a day bill the full $24 month, because a powered-off Linode bills in full and a deleted one loses the cron and the disk.",
+      "link": {
+        "title": "Akamai Cloud CPU pricing",
+        "url": "https://www.akamai.com/cloud/pricing/cpu"
+      },
+      "price": "$24/mo for Linode 4 GB",
+      "disposition": "Do not recommend. A scraper that runs 20 machine-hours a month should not pay for 730."
+    },
+    {
+      "useCase": "mcp-server",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run the MCP server on the Nanode 1 GB ($5) or Linode 2 GB ($12), put Caddy in front for TLS, and use the free DNS Manager and Cloud Firewall. The server answers all month because nothing idles the machine.",
+      "link": {
+        "title": "Set up and secure a Linode",
+        "url": "https://techdocs.akamai.com/cloud-computing/docs/set-up-and-secure-a-compute-instance"
+      },
+      "price": "$5-$12/mo",
+      "disposition": "List as a manual route; no pick. It is a sound cheap host for an always-on MCP server, but Cloudflare's Workers route needs no server at all."
+    }
+  ]
+}

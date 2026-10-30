@@ -1,0 +1,182 @@
+{
+  "provider": "vultr",
+  "checkedOn": "2026-10-30",
+  "rows": {
+    "isolation": {
+      "verdict": "yes",
+      "figure": "Full VM; root, Docker, ISO",
+      "scenario": "Clone, build and load the module without a workaround: an ordinary virtual machine with its own kernel, root, Docker and SSH.",
+      "note": "A full VM per instance with root, Docker and real SSH. Nested virtualisation is documented only on VX1 plans, and a custom image is a mounted ISO (two per account, under 10 GB) rather than a disk-image upload.",
+      "source": {
+        "url": "https://www.vultr.com/products/cloud-compute/",
+        "quote": "Easily deploy and scale shared or dedicated virtual machines (VMs) and bare metal across six continents",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "sizes-regions": {
+      "verdict": "yes",
+      "figure": "24 vCPU / 96 GB; 34 regions",
+      "scenario": "A fixed plan fits the 4 vCPU / 8 GiB ask exactly, in any of 34 regions, and the plan can be upgraded later — but not downgraded.",
+      "note": "Shared Cloud Compute runs 1–24 vCPU and 0.5–96 GB with 10–1,600 GB of SSD or NVMe; dedicated Optimized plans reach 96 vCPU / 256 GB / 1,280 GB and VX1 reaches 192 vCPU / 768 GB. No custom CPU/RAM split, no downgrade on resize, and GPUs are a separate product.",
+      "source": {
+        "url": "https://www.vultr.com/products/cloud-compute/",
+        "quote": "34 cloud data center regions",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "lifecycle": {
+      "verdict": "no",
+      "figure": "No pause; stop still bills",
+      "scenario": "At 18:00 the server is stopped and keeps its disk and IP; at 09:00 its disk is as it was left, and the 640 stopped hours cost the same as running ones.",
+      "note": "Stop halts the operating system and all running processes and keeps billing; only destroy ends the charge, and destroying permanently deletes the data. There is no pause, hibernate or memory snapshot.",
+      "source": {
+        "url": "https://docs.vultr.com/products/compute/instances/cloud-compute/management/stop-instance.md",
+        "quote": "Stopping an instance shuts it down and disables network connectivity until it is restarted. The operating system and all running processes are halted, but billing continues unless the instance is deleted.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "snapshots-forks": {
+      "verdict": "partly",
+      "figure": "Disk snapshots $0.05/GB-mo",
+      "scenario": "Snapshot the configured server and boot copies from it; there is no memory snapshot, no live fork and automatic backups keep only two copies.",
+      "note": "Manual snapshots are disk images kept until deleted at $0.05/GB-month, and they double as the template mechanism. They never include RAM or attached block storage, and automatic backups keep only the two most recent.",
+      "source": {
+        "url": "https://docs.vultr.com/support/platform/billing/does-vultr-charge-for-stored-snapshots",
+        "quote": "Yes. Vultr charges $0.05 per GB per month for each stored snapshot.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "storage": {
+      "verdict": "yes",
+      "figure": "Disk kept; 40 TB volumes",
+      "scenario": "The 20 GiB the agent writes lives on the plan disk and is still there next session, because the disk is kept while the server exists.",
+      "note": "The plan disk persists across stops and is included in the plan price. Block Storage adds up to 16 volumes per instance, 40 TB HDD or 10 TB NVMe, at $0.10/GB-month and only in the same region. Vultr File System gives multi-instance shared storage at $100/TB-month; Object Storage is S3-compatible.",
+      "source": {
+        "url": "https://www.vultr.com/products/block-storage/",
+        "quote": "Attach up to 16 volumes per instance",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "idle-timers": {
+      "verdict": "yes",
+      "figure": "No idle timer; no session limit",
+      "scenario": "The agent is still awake at 00:20, because there is no idle timer and no lifetime limit to configure; nothing stops it but you.",
+      "note": "There is no idle timeout, auto-stop or maximum session length. The same absence means there is no wake path: a stopped instance stays stopped until the console, API or CLI starts it.",
+      "source": {
+        "url": "https://docs.vultr.com/products/compute/instances/cloud-compute/management/stop-instance.md",
+        "quote": "Stopping an instance shuts it down and disables network connectivity until it is restarted.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "reaching-it": {
+      "verdict": "yes",
+      "figure": "Public IPv4, any port, SSH",
+      "scenario": "The agent's web port is reachable at a static public address, SSH is a real port on the same host, and any other TCP or UDP service can be opened.",
+      "note": "One public IPv4 is included on paid plans, any inbound port can be opened, and SSH is a normal daemon. There is no provider-issued private or token-gated link, and the browser console is a VNC view rather than an API shell.",
+      "source": {
+        "url": "https://www.vultr.com/resources/faq/",
+        "quote": "Many of our plans come with one primary IPv4 address.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "custom-domains": {
+      "verdict": "partly",
+      "figure": "Your DNS, your proxy",
+      "scenario": "Point an A record at the server's static IP and run Caddy or Traefik for TLS; the certificate is yours to renew.",
+      "note": "Vultr DNS is free and anycast, so a custom domain is a DNS record. TLS is yours: the documented paths run Traefik or Caddy with Let's Encrypt, and Vultr does not issue a certificate for a compute instance.",
+      "source": {
+        "url": "https://docs.vultr.com/product-overviews/dns",
+        "quote": "Free domain record management for any domain you own",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "outbound-network": {
+      "verdict": "partly",
+      "figure": "0.5–15 TB out; inbound-only FW",
+      "scenario": "The agent browses freely inside its plan allowance from a static IPv4, but an outbound allowlist has to be enforced inside the VM.",
+      "note": "Each plan includes 0.5–15 TB of egress, overage is $0.01/GB, and a VPC-only instance can be deployed with no public IP. Vultr Firewall filters only incoming traffic, so outbound allowlisting is UFW, iptables or firewalld on the instance. Outbound 25, 137–139 and 445 are blocked by default and can be removed by ticket.",
+      "source": {
+        "url": "https://docs.vultr.com/support/products/network/does-vultr-firewall-filter-outgoing-traffic-from-my-instance",
+        "quote": "No, Vultr Firewall does not filter outgoing traffic from instances.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "keys-secrets": {
+      "verdict": "no",
+      "figure": "No secrets store",
+      "scenario": "Whatever key the agent needs is a file or an environment variable on the server, readable by anything running there.",
+      "note": "There is no vault, write-only environment store or request-signing proxy. Cloud-init user-data and startup scripts inject first-run configuration onto the disk. API keys are managed through IAM, but the portal's personal access token is account-wide.",
+      "source": {
+        "url": "https://www.vultr.com/api/",
+        "quote": "All functions of the Vultr customer portal are accessible via the API",
+        "confidence": "inferred"
+      }
+    },
+    "ways-to-drive": {
+      "verdict": "yes",
+      "figure": "Console, CLI, API, SDKs",
+      "scenario": "The first machine is clickable in the console; the agent is installed over SSH, and everything after that can be scripted through the API, CLI or Terraform.",
+      "note": "Console, REST API v2, official CLI, Terraform provider and official Go, Python, Node, PHP and Ruby clients. There is no PTY or file API, and the official MCP server is a read-only preview.",
+      "source": {
+        "url": "https://www.vultr.com/api/",
+        "quote": "All functions of the Vultr customer portal are accessible via the API",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "built-in-agents": {
+      "verdict": "partly",
+      "figure": "Hermes + OpenClaw one-click",
+      "scenario": "Hermes or OpenClaw can be running from the Marketplace in minutes, but a coding agent is still your install and the app's default password must be changed first.",
+      "note": "Marketplace one-click apps exist for Hermes Agent and OpenClaw, each printed with the default password \"Password\". There is no coding agent preinstalled, no prompt API and no built-in browser or computer-use desktop; coding agents arrive through guides such as Codex with Dokploy.",
+      "source": {
+        "url": "https://www.vultr.com/marketplace/apps/hermesagent/",
+        "quote": "Self improving AI Agent built by Nous Research.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "teams-accounts": {
+      "verdict": "yes",
+      "figure": "IAM orgs, roles, OIDC SSO",
+      "scenario": "Five developers share an organization with roles and scoped policies; the owner sees an audit log, but nothing sets a hard monthly budget.",
+      "note": "Organizations, IAM policies, roles, groups, service accounts, OIDC SSO and audit logs with up to 10 years of retention. SAML is not supported. Spend control is an account credit limit plus invoice and bandwidth emails, not a user-set monthly cap.",
+      "source": {
+        "url": "https://www.vultr.com/products/iam/",
+        "quote": "Organizations create environments with shared Vultr resources that are governed by IAM permission policies.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "billing-models": {
+      "verdict": "partly",
+      "figure": "Hourly, 1 h minimum, 672 h cap",
+      "scenario": "An always-on 4 vCPU machine costs the same as the cap every month, but a machine that stops between sessions is billed as if it never stopped.",
+      "note": "Hourly with a one-hour minimum and a 672-hour monthly cap (the monthly price); stopped hours bill at the same rate. Not per-second, not active-CPU, and there is no cheap paused state.",
+      "source": {
+        "url": "https://docs.vultr.com/support/platform/billing/how-am-i-billed-for-my-servers",
+        "quote": "The minimum billing unit is one hour, and hourly charges begin when a server is deployed, regardless of whether it is powered on or off.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "trials-free-tiers": {
+      "verdict": "partly",
+      "figure": "Free tier by application; deposit match",
+      "scenario": "A new account can apply for one small free instance in three regions, or use a promo code that matches a first deposit; a card is still needed for paid servers.",
+      "note": "The Free Tier Program offers 1 vCPU / 512 MB / 10 GB in Miami, Seattle and Frankfurt to eligible applicants, on a limited and randomized basis. Otherwise credit comes from promo codes or a dollar-for-dollar deposit match up to $100, not an automatic signup credit.",
+      "source": {
+        "url": "https://www.vultr.com/free-tier-program/",
+        "quote": "Vultr is offering free cloud compute instances to eligible applicants!",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "company": {
+      "verdict": "yes",
+      "figure": "SOC 2+, ISO 27001, 100% SLA",
+      "scenario": "The buyer can check a 2014-founded, privately held company, a 100% uptime SLA with credits, a DPA on request and audited certifications.",
+      "note": "The Constant Company, LLC (Vultr), founded 2014, privately held, 34 regions and 80m+ instances. SOC 2+ (HIPAA), ISO 27001/27017/27018/20000-1, PCI Merchant and CSA Star; a 100% uptime SLA with service credits; a DPA by request.",
+      "source": {
+        "url": "https://www.vultr.com/legal/compliance/",
+        "quote": "SOC 2+ (HIPAA)",
+        "confidence": "docs-confirmed"
+      }
+    }
+  }
+}

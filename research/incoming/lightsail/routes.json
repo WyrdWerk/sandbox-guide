@@ -1,0 +1,124 @@
+{
+  "provider": "lightsail",
+  "checkedOn": "2026-10-30",
+  "summary": "A plain VPS with no agent templates: every use case is a manual install on an Ubuntu instance, and the per-hour billing makes short-lived work a poor fit. No picks are proposed, because the always-on, fixed-address VPS case is already made by cheaper listings; Lightsail is a route row, not a recommendation.",
+  "routes": [
+    {
+      "useCase": "hermes-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Create an Ubuntu 24.04 instance, add a static IP, then install Hermes with its Docker or installer instructions and keep ~/.hermes on the instance disk. The 2 vCPU / 2 GB Small-2GB bundle is the smallest that meets Hermes's recommended memory; 4 GB is safer with a browser.",
+      "link": {
+        "title": "Get started with Linux instances in Lightsail",
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/getting-started-with-amazon-lightsail.html"
+      },
+      "price": "$12/month for 2 vCPU / 2 GB, $24 for 2 vCPU / 4 GB; no agent surcharge",
+      "disposition": "Manual route only. There is no Hermes blueprint, no Marketplace listing and no one-click path, so this does not change the use case's one-click count or its picks."
+    },
+    {
+      "useCase": "openclaw",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install OpenClaw on an Ubuntu instance yourself, then put Caddy or the $18/month load balancer in front for TLS. Nothing is hardened for you: no generated gateway token, no device pairing, no container isolation and no fail2ban unless you add them.",
+      "link": {
+        "title": "Lightsail instance blueprints",
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/compare-options-choose-lightsail-instance-image.html"
+      },
+      "price": "$24/month for 2 vCPU / 4 GB, plus $18/month if you want the managed certificate",
+      "disposition": "Manual route, no pick. DigitalOcean's $12 hardened OpenClaw image is cheaper and does the hardening, so a bare Lightsail instance adds nothing to this case."
+    },
+    {
+      "useCase": "coding-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Claude Code or Codex on an Ubuntu instance and sign in per developer. The 4 vCPU / 8 GiB ask lands on the $84 Xlarge-16GB or compute-optimised 8 GB bundle, because no cheaper bundle has four vCPUs.",
+      "link": {
+        "title": "Lightsail instance bundles",
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html"
+      },
+      "price": "$84/month for 4 vCPU / 8-16 GB, always on",
+      "disposition": "Manual route, no pick. The bundle ladder is expensive above 2 vCPU: $84 a month for a 4 vCPU machine is more than Hetzner's equivalent and more than several sandbox providers."
+    },
+    {
+      "useCase": "code-interpreter",
+      "tier": "none",
+      "noTerminal": "no",
+      "what": "Lightsail has no per-run sandbox API. The closest is scripting CreateInstances, but each instance takes minutes to boot, cannot pause, and bills by the hour, so a code interpreter inside a product has no cheap path here.",
+      "link": null,
+      "price": "Not a fit; the smallest useful bundle is $24/month and bills while idle",
+      "disposition": "No route. Do not offer Lightsail as a code-interpreter backend; its lifecycle and boot time contradict the workload."
+    },
+    {
+      "useCase": "browser-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Chromium and Playwright on a 2 vCPU / 4 GB instance and drive it headlessly over a remote debugging port or a small control service you write. There is no desktop stream, no VNC and no computer-use API.",
+      "link": {
+        "title": "Instance firewalls in Lightsail",
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html"
+      },
+      "price": "$24/month for 2 vCPU / 4 GB",
+      "disposition": "Manual route with a caveat: browser automation works, computer-use with a visible desktop does not, except on a Windows bundle over RDP."
+    },
+    {
+      "useCase": "workflow-automation",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run n8n and its database in Docker on one instance, keeping the encryption key yourself, and add block storage if the execution log grows. Webhooks reach it on the public IP; the firewall must open the port.",
+      "link": {
+        "title": "Create and attach block storage disks",
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/create-and-attach-additional-block-storage-disks-linux-unix.html"
+      },
+      "price": "$24/month for 2 vCPU / 4 GB, plus $0.10/GB-month for extra disk",
+      "disposition": "Route row only. Hetzner's pick is $23.59 and Runtime bills only working CPU; adding a fourth VPS pick would not change the recommendation."
+    },
+    {
+      "useCase": "chat-bot",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install the bot runtime on a Small-2GB instance, keep its history on the disk, and leave it running: a Discord or Slack gateway cannot sleep. A static IP is free while attached and keeps the address stable across reboots.",
+      "link": {
+        "title": "Create and attach a static IP",
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-create-static-ip.html"
+      },
+      "price": "$12/month for 2 vCPU / 2 GB; $7 for 1 GB if the bot is small",
+      "disposition": "Route row only. This is genuinely cheap for an always-on bot, but the same case is already covered by picks at a similar price, and the use case does not need another VPS recommendation."
+    },
+    {
+      "useCase": "claude-code-team",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "One 4 vCPU / 8 GiB instance per developer, each with its own login and repository, snapshotted for the next session. Five developers at the smallest four-vCPU bundle is $420 a month before model spend.",
+      "link": {
+        "title": "Lightsail instance bundles",
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html"
+      },
+      "price": "$84/month per developer, $420 for five",
+      "disposition": "Manual route, no pick. The per-seat cost is high for a VPS and the machines cannot pause, so a team pays for nights and weekends."
+    },
+    {
+      "useCase": "scheduled-scraper",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run cron or a systemd timer inside a Small-2GB instance. The machine has to exist all month, so four ten-minute runs a day cost the full monthly price rather than twenty minutes of compute; write results to object storage or an external database before the instance is replaced.",
+      "link": {
+        "title": "Lightsail object storage buckets",
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/buckets-in-amazon-lightsail.html"
+      },
+      "price": "$12/month, whether it scrapes or not",
+      "disposition": "Manual route with a warning: the workload's whole point is paying for twenty minutes, and Lightsail bills the month. No pick."
+    },
+    {
+      "useCase": "mcp-server",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run the MCP server on a Micro-1GB instance behind Caddy for TLS, with a static IP and a firewall rule for 443. This is a good fit: a small always-on process, a fixed address and 2 TB of transfer for $7 a month.",
+      "link": {
+        "title": "Instance firewalls in Lightsail",
+        "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-firewall-and-port-mappings-in-amazon-lightsail.html"
+      },
+      "price": "$7/month for 2 vCPU / 1 GB, plus $0 for a static IP while attached",
+      "disposition": "Route row only. It is a fair fit, but $7 is a dollar more than the DigitalOcean pick for the same memory, and that pick's advantages (a public IPv4, any TCP port, no idle stop) apply here too, so nothing justifies changing the picks."
+    }
+  ]
+}
