@@ -798,3 +798,18 @@ The practical reading: cancellation gives you 30 days before deletion, price cha
 | everydev.ai listing | https://www.everydev.ai/tools/boxd | 28 Oct 2026 | Independent description: "a real KVM virtual machine running Ubuntu" |
 | Hacker News | https://hn.algolia.com/api/v1/search?query=boxd.sh | 28 Oct 2026 | **No substantive discussion found**; only incidental mentions |
 | Internal skill notes | .agents/skills/using-boxd-api/SKILL.md | 2026-10-22 | Live gRPC verification; used only where marked `third-party` |
+
+## Price-check note, 2026-10-30
+
+`npm run check-rates` reported boxd.sh/pricing as CHANGED, but the rates did not change. The page's static HTML
+defaults to the EUR toggle, which is all the checker reads; the 2026-10-29 baseline was already EUR, so this was
+not a currency or location switch.
+
+- **Rates, re-read 2026-10-30:** EUR €0.039 / €0.012 / €0.00008 (vCPU-hour, GiB-hour of RAM, GiB-hour of disk).
+  The USD list is still "$0.047 per vCPU-hour, $0.014 per GiB-hour of RAM, and $0.000096" per GiB-hour of disk,
+  in both the page's FAQ text and its schema.org `Offer` data. The rate card is unchanged.
+- **What actually changed:** boxd added an example table per size, with running, always-on, standby and
+  hibernated prices (€0.10–€0.70/h, €69.35–€513.92/mo). The table is consistent with the rates: for 2 vCPU / 8 GiB
+  / 100 GiB, 2 × 0.039 + 8 × 0.012 + 100 × 0.00008 = €0.182/h, and × 730 h = €132.86/mo.
+- **Baseline:** refreshed. Besides this page, the refresh only added the DigitalOcean, Hetzner and Hostinger
+  pricing pages, which were reviewed when those providers were added.
