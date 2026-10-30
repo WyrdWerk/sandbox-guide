@@ -6,7 +6,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { price, presets, type RateCard } from "./cost.ts";
+import { price, presets, modelCost, type RateCard } from "./cost.ts";
 
 const card = (id: string): RateCard =>
   JSON.parse(readFileSync(new URL(`../data/pricing/${id}.json`, import.meta.url), "utf8"));
@@ -33,6 +33,13 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   // One VPS XS plan runs all 1,000 tasks; VPS SM for 4 vCPU / 8 GB / 100 GB; VPS XS billed for the month.
   ["hostup", "a", 5.72], ["hostup", "b", 11.55], ["hostup", "c", 5.72],
 ];
+
+test("the model line counts the days a month the machines work", () => {
+  const models = [{ id: "m", label: "M", kind: "", offerings: 1, lowest: { provider: "x", rate: 0.5 }, median: 1, url: "" }];
+  // Team: 100 requests × 300k tokens × 20 working days = 600M tokens; personal: 30 × 40k × 30 days = 36M.
+  assert.equal(modelCost({ ...presets.team.workload, model: "m" }, models)?.millions, 600);
+  assert.equal(modelCost({ ...presets.personal.workload, model: "m" }, models)?.millions, 36);
+});
 
 test("one storage allowance covers disk kept while stopped", () => {
   // Five 4 vCPU / 8 GiB / 40 GiB machines, 160 h each: 800 vCPU-h, 6,400 GiB-h memory, 146,000 GiB-h disk over the month.

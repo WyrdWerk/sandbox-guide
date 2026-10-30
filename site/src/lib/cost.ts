@@ -48,11 +48,12 @@ export interface ModelPrice {
   url: string;
 }
 
-/** Monthly model cost at the median and the lowest zero-retention price, over 30 days. */
+/** Monthly model cost at the median and the lowest zero-retention price, over the days the machines work (30 for tasks). */
 export function modelCost(w: Workload, models: ModelPrice[]) {
   const m = models.find((x) => x.id === w.model);
   if (!m || w.messagesPerDay <= 0 || w.kTokens <= 0) return null;
-  const millions = (w.messagesPerDay * 30 * w.kTokens) / 1000;
+  const days = w.mode === "machines" ? w.daysPerMonth : 30;
+  const millions = (w.messagesPerDay * days * w.kTokens) / 1000;
   return { model: m, millions, median: millions * m.median, lowest: millions * m.lowest.rate };
 }
 
@@ -451,12 +452,12 @@ export const presets: Record<string, { label: string; workload: Workload; why: s
   personal: {
     label: "A personal agent that stays on (Hermes, OpenClaw)",
     why: "One always-on 2 vCPU / 4 GiB / 20 GiB machine that keeps its files. It waits for messages most of the time: about 6% CPU on average, with peaks near 100% when it browses or runs a command.",
-    workload: { vcpu: 2, ram: 4, disk: 20, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.06, awake: 1, model: "glm-5.3", messagesPerDay: 30, kTokens: 40 },
+    workload: { vcpu: 2, ram: 4, disk: 20, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.06, awake: 1, model: "deepseek-v4.1-flash-1017", messagesPerDay: 30, kTokens: 40 },
   },
   coding: {
     label: "A coding agent for one developer",
     why: "One 4 vCPU / 8 GiB / 40 GiB machine for Claude Code or Codex, eight hours a day on 20 working days, stopped otherwise with the repository kept. The CPU works about 4% of the time on average.",
-    workload: { vcpu: 4, ram: 8, disk: 40, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 8, daysPerMonth: 20, keepDisk: true, busy: 0.04, awake: 1, model: "claude-sonnet-5", messagesPerDay: 20, kTokens: 300 },
+    workload: { vcpu: 4, ram: 8, disk: 40, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 8, daysPerMonth: 20, keepDisk: true, busy: 0.04, awake: 1, model: "deepseek-v4.1-flash-1017", messagesPerDay: 20, kTokens: 300 },
   },
   interpreter: {
     label: "A code interpreter inside your product",
@@ -471,17 +472,17 @@ export const presets: Record<string, { label: string; workload: Workload; why: s
   automation: {
     label: "Self-hosted n8n for a small team",
     why: "One always-on 2 vCPU / 4 GiB / 20 GiB machine that keeps its database and encryption key: 730 hours, because webhooks and schedules stop when it sleeps. About 6% CPU on average, with peaks near 100% when a big workflow runs. The model line assumes 50 workflow steps a day that ask a cheap model, 10,000 tokens each.",
-    workload: { vcpu: 2, ram: 4, disk: 20, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.058, awake: 1, model: "deepseek-v4.1-flash", messagesPerDay: 50, kTokens: 10 },
+    workload: { vcpu: 2, ram: 4, disk: 20, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.058, awake: 1, model: "deepseek-v4.1-flash-1017", messagesPerDay: 50, kTokens: 10 },
   },
   chatbot: {
     label: "A Discord or Slack bot for one server",
     why: "One always-on 1 vCPU / 2 GiB / 10 GiB machine that keeps its history: 730 hours, because a bot holding a Discord or Slack connection cannot sleep. About 3% CPU on average, since one community sees little traffic. The model line assumes 100 replies a day at 10,000 tokens each (instructions plus recent messages).",
-    workload: { vcpu: 1, ram: 2, disk: 10, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.03, awake: 1, model: "glm-5.3", messagesPerDay: 100, kTokens: 10 },
+    workload: { vcpu: 1, ram: 2, disk: 10, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 24, daysPerMonth: 30, keepDisk: true, busy: 0.03, awake: 1, model: "deepseek-v4.1-flash-1017", messagesPerDay: 100, kTokens: 10 },
   },
   team: {
     label: "Claude Code for a team of five",
-    why: "Five 4 vCPU / 8 GiB / 40 GiB machines, one per developer, eight hours a day on 20 working days (800 machine-hours), stopped otherwise with each repository and login kept. About 3% CPU on average. The model line is 20 requests a day per developer at 300,000 tokens each, at API prices; developers who sign in with Claude subscriptions pay per seat instead.",
-    workload: { vcpu: 4, ram: 8, disk: 40, mode: "machines", tasks: 0, taskMinutes: 0, machines: 5, hoursPerDay: 8, daysPerMonth: 20, keepDisk: true, busy: 0.034, awake: 1, model: "claude-sonnet-5", messagesPerDay: 100, kTokens: 300 },
+    why: "Five 4 vCPU / 8 GiB / 40 GiB machines, one per developer, eight hours a day on 20 working days (800 machine-hours), stopped otherwise with each repository and login kept. About 3% CPU on average. The model line is 20 requests a day per developer at 300,000 tokens each, priced at DeepSeek V4.1 Flash like every model line here; a frontier model costs many times more, and developers who sign in with Claude subscriptions pay per seat instead.",
+    workload: { vcpu: 4, ram: 8, disk: 40, mode: "machines", tasks: 0, taskMinutes: 0, machines: 5, hoursPerDay: 8, daysPerMonth: 20, keepDisk: true, busy: 0.034, awake: 1, model: "deepseek-v4.1-flash-1017", messagesPerDay: 100, kTokens: 300 },
   },
   scraper: {
     label: "A scraper that runs four times a day",

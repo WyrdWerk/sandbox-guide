@@ -140,7 +140,7 @@ const nav = [
       <div class="section__head"><h2 class="section__title">What is left out</h2></div>
       <div class="prose">
         <ul>
-          <li><strong>Model tokens, unless you add them.</strong> For most agents the language model costs more than the machine. The calculator can add an estimate: messages a day × thousands of tokens each × 30 days, priced at the median of the model hosts that keep no data (zero data retention), from <a href="https://tokenwatch.wyrdwerk.com" rel="noreferrer noopener">TokenWatch</a>. It assumes TokenWatch's agent mix of 5% new input, 90% cached input and 5% output, and it is the same on every sandbox provider, so it never changes the order.</li>
+          <li><strong>Model tokens, unless you add them.</strong> For most agents the language model costs more than the machine. The calculator can add an estimate: messages a day × thousands of tokens each × the days a month the machine works (30 for batches of tasks), priced at the median of the model hosts that keep no data (zero data retention), from <a href="https://tokenwatch.wyrdwerk.com" rel="noreferrer noopener">TokenWatch</a>. It assumes TokenWatch's agent mix of 5% new input, 90% cached input and 5% output, and it is the same on every sandbox provider, so it never changes the order.</li>
           <li><strong>Egress, public IP addresses, seats and taxes.</strong> Where a provider charges them, its notes say so.</li>
           <li><strong>Snapshots and backups whose size or price is not published.</strong></li>
           <li><strong>One-time sign-up credits.</strong> They are mentioned, not subtracted, because they run out. Recurring monthly credits are subtracted.</li>

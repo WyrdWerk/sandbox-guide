@@ -1,7 +1,7 @@
 {
   "source": "https://tokenwatch.wyrdwerk.com/pricing.json",
-  "generatedAt": "2026-10-29T01:21:40.216Z",
-  "fetchedOn": "2026-10-29",
+  "generatedAt": "2026-10-30T01:25:18.080Z",
+  "fetchedOn": "2026-10-30",
   "mix": {
     "inputPct": 5,
     "cacheReadPct": 90,
@@ -9,52 +9,16 @@
   },
   "models": [
     {
-      "id": "deepseek-v4.1-flash",
-      "label": "DeepSeek V4.1 Flash",
+      "id": "deepseek-v4.1-flash-1017",
+      "label": "DeepSeek V4.1 Flash (1017)",
       "kind": "Cheap open model",
-      "offerings": 32,
+      "offerings": 35,
       "lowest": {
         "provider": "engy",
         "rate": 0.0129
       },
-      "median": 0.059,
-      "url": "https://tokenwatch.wyrdwerk.com/?q=deepseek-v4.1-flash"
-    },
-    {
-      "id": "glm-5.3",
-      "label": "GLM 5.3",
-      "kind": "Strong open model",
-      "offerings": 36,
-      "lowest": {
-        "provider": "Morph",
-        "rate": 0.1901
-      },
-      "median": 0.4083,
-      "url": "https://tokenwatch.wyrdwerk.com/?q=glm-5.3"
-    },
-    {
-      "id": "gpt-6-luna",
-      "label": "GPT-6 Luna",
-      "kind": "Small closed model",
-      "offerings": 2,
-      "lowest": {
-        "provider": "singularity",
-        "rate": 0.034
-      },
-      "median": 0.0371,
-      "url": "https://tokenwatch.wyrdwerk.com/?q=gpt-6-luna"
-    },
-    {
-      "id": "claude-sonnet-5",
-      "label": "Claude Sonnet 5",
-      "kind": "Frontier closed model",
-      "offerings": 2,
-      "lowest": {
-        "provider": "Google",
-        "rate": 0.805
-      },
-      "median": 0.805,
-      "url": "https://tokenwatch.wyrdwerk.com/?q=claude-sonnet-5"
+      "median": 0.0523,
+      "url": "https://tokenwatch.wyrdwerk.com/?q=deepseek-v4.1-flash-1017"
     }
   ]
 }

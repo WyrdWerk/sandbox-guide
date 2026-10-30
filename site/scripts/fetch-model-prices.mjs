@@ -1,4 +1,4 @@
-// Fetch model prices from TokenWatch (WyrdWerk/tokenwatch) and keep a few models'
+// Fetch model prices from TokenWatch (WyrdWerk/tokenwatch) and keep one model's
 // zero-data-retention offerings. Writes src/data/models.json, which is committed so
 // the build never needs the network. Run: node scripts/fetch-model-prices.mjs
 import { writeFileSync } from "node:fs";
@@ -6,11 +6,10 @@ import { writeFileSync } from "node:fs";
 const SOURCE = "https://tokenwatch.wyrdwerk.com/pricing.json";
 // Same mix TokenWatch uses for tool-using agents: most input is a cached prompt.
 const MIX = { inputPct: 5, cacheReadPct: 90, outputPct: 5 };
+// Every model estimate on the site uses this one model: the median of its
+// zero-data-retention offerings.
 const MODELS = [
-  { id: "deepseek-v4.1-flash", label: "DeepSeek V4.1 Flash", kind: "Cheap open model" },
-  { id: "glm-5.3", label: "GLM 5.3", kind: "Strong open model" },
-  { id: "gpt-6-luna", label: "GPT-6 Luna", kind: "Small closed model" },
-  { id: "claude-sonnet-5", label: "Claude Sonnet 5", kind: "Frontier closed model" },
+  { id: "deepseek-v4.1-flash-1017", label: "DeepSeek V4.1 Flash (1017)", kind: "Cheap open model" },
 ];
 
 // TokenWatch's blendedRate (shared/cost.mjs): $/M tokens for a mix.
@@ -26,11 +25,14 @@ const median = (xs) => {
   return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
 };
 
+// Hosts spell one model several ways (DeepSeek-V4.1-Flash-1017, deepseek-v4-1-flash-1017).
+const norm = (id) => id.split("/").pop().toLowerCase().replace(/v(\d)-(\d)/, "v$1.$2");
+
 const data = await (await fetch(SOURCE)).json();
 const models = [];
 for (const want of MODELS) {
   const rows = data.models
-    .filter((m) => m.id.split("/").pop() === want.id && !m.id.includes(":") && m.zdr === true)
+    .filter((m) => norm(m.id) === want.id && !m.id.includes(":") && m.zdr === true)
     .map((m) => ({ provider: m.provider_display ?? m.provider, rate: blended(m.pricing), pricing: m.pricing }))
     .filter((r) => r.rate != null && r.rate > 0)
     .sort((a, b) => a.rate - b.rate);

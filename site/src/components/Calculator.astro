@@ -82,7 +82,7 @@ const field = (name: string) => `${id}-${name}`;
       <legend class="calc__legend">The AI model (optional)</legend>
       <select name="model" aria-label="Model">
         <option value="">Leave the model out</option>
-        {modelData.models.map((m) => <option value={m.id}>{m.label} ({m.kind.toLowerCase()})</option>)}
+        {modelData.models.map((m) => <option value={m.id}>{m.label}</option>)}
       </select>
       <div class="calc__row calc__row--two" data-model>
         <label>Messages a day <input type="number" name="messagesPerDay" min="0" max="100000" step="1" /></label>
