@@ -344,13 +344,13 @@
     {
       "provider": "linode",
       "verdict": "yes",
-      "figure": "No idle state; no session cap",
-      "scenario": "A bot that must answer at 03:00 is still running: no idle timeout or session limit exists, and only announced maintenance stops the machine.",
-      "note": "The status field has 14 values and none is a paused or idle state: running, offline, booting, busy, rebooting, shutting_down, provisioning, deleting, migrating, rebuilding, cloning, restoring, stopped, billing_suspension. The platform suspends a Linode on its own only for a past-due balance, and stops it for maintenance announced seven days ahead. There is no idle timer or lifetime cap to set, and the machine bills the whole time.",
+      "figure": "No documented idle timer",
+      "scenario": "A bot that must answer at 03:00 should still be running: Akamai documents no idle timeout or session limit, and only announced maintenance or a past-due balance is documented to stop the machine.",
+      "note": "Inferred, not stated: Akamai publishes no idle timer, session limit or lifetime cap, and the API's status field has no idle or paused value (running, offline, booting, busy, rebooting, shutting_down, provisioning, deleting, migrating, rebuilding, cloning, restoring, stopped, billing_suspension). A status list does not by itself rule out an automatic stop; the documented provider-initiated stops are a past-due balance and maintenance announced seven days ahead. The machine bills the whole time.",
       "source": {
         "url": "https://techdocs.akamai.com/linode-api/reference/get-linode-instance",
         "quote": "`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.",
-        "confidence": "docs-confirmed"
+        "confidence": "inferred"
       }
     },
     {

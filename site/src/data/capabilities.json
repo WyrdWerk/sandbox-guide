@@ -7715,11 +7715,11 @@
           "provider": "linode",
           "verdict": "yes",
           "figure": "No session or lifetime cap",
-          "note": "Nothing in the API or Cloud Manager sets a session length or a maximum lifetime. The status field's 14 values include no idle or paused state; the platform stops a Linode on its own only for announced maintenance, and suspends it for a past-due balance.",
+          "note": "Inferred: Akamai documents no session length or maximum lifetime, and the API's status values include no idle or paused state. That list does not prove nothing stops a Linode automatically; the documented stops are announced maintenance and suspension for a past-due balance.",
           "source": {
             "url": "https://techdocs.akamai.com/linode-api/reference/get-linode-instance",
             "quote": "`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.",
-            "confidence": "docs-confirmed"
+            "confidence": "inferred"
           }
         },
         {
@@ -8014,11 +8014,11 @@
           "provider": "linode",
           "verdict": "yes",
           "figure": "Nothing to set; it never idles",
-          "note": "There is no idle timeout to configure because there is no idle state: the status field has no paused value, so the only behaviour is the 'never' the capability asks about. A Linode stays up until you stop or delete it, or until announced maintenance stops it.",
+          "note": "Inferred: there is no documented idle timeout to configure, and the API's status values include no paused state, so 'never' appears to be the only behaviour. A status list does not prove it; the documented stops are announced maintenance and a past-due balance.",
           "source": {
             "url": "https://techdocs.akamai.com/linode-api/reference/get-linode-instance",
             "quote": "`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.",
-            "confidence": "docs-confirmed"
+            "confidence": "inferred"
           }
         },
         {

@@ -453,3 +453,8 @@ declared normalisation. The eight URLs not machine-checked, and how each was ver
 
 One quote needed the normaliser to drop zero-width characters: the Object Storage page embeds
 `\u200b` around the word "Akamai" in its description. The rendered sentence is unchanged.
+
+
+## Parent integration, 2026-10-30
+
+The idle-timers feature row and the stay-on and choose-idle capability rows keep `yes` but are tagged `inferred`: the API status enum lists states and does not, by itself, rule out an automatic stop. No Akamai page states that Linodes are never stopped for idleness.
