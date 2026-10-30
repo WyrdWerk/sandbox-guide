@@ -821,6 +821,27 @@ ul.prose, ol.prose { padding-left: 1.2em; }
   line-height: 1.45;
 }
 
+/* Catches: every recommendation closes with its trade-offs. */
+.pick-catches {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid color-mix(in srgb, var(--color-no) 30%, transparent);
+  border-radius: var(--radius-xs);
+  background: var(--color-no-bg);
+  color: var(--color-no);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+.pick-catches__title {
+  margin: 0 0 var(--space-1);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.6875rem;
+}
+.pick-catches__list { margin: 0; padding-left: 1.1em; display: grid; gap: 0.25em; list-style: disc; }
+.plain-list + .pick-catches { margin-top: var(--space-3); }
+
 /* ---------- state diagram ------------------------------------------------- */
 
 .states { display: grid; }

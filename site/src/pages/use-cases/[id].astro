@@ -1,4 +1,5 @@
 ---
+import Catches from "../../components/Catches.astro";
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import SectionNav from "../../components/SectionNav.astro";
@@ -134,7 +135,7 @@ const nav = [
     <section class="section" id="picks" aria-labelledby="picks-h">
       <div class="section__head">
         <h2 class="section__title" id="picks-h">Where to start</h2>
-        <p class="section__note">Three starting points for different people, each with its catch</p>
+        <p class="section__note">Starting points for different people, each with its catches</p>
       </div>
       <div class="picks">
         {useCase.picks.map((pick) => (
@@ -142,7 +143,7 @@ const nav = [
             <span class="pick__label">{pick.for}</span>
             <h3 class="pick__title"><a href={`/providers/${pick.provider}/`}>{providerById.get(pick.provider)?.name}</a></h3>
             <p class="pick__body">{pick.why}</p>
-            <p class="pick__catch"><strong>Catch:</strong> {pick.watch}</p>
+            <Catches provider={pick.provider} watch={pick.watch} />
             <p class="pick__more"><a href={pick.link} rel="noreferrer noopener">{cite(pick.link)} ↗</a></p>
           </article>
         ))}

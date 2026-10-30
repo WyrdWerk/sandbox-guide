@@ -1,0 +1,704 @@
+[
+  {
+    "provider": "all",
+    "field": "disclosure.research",
+    "botperch": "31 research files citing Battleships or declaring its use lack an explicit Boat-team disclosure. Three further files mention the name only to describe non-use or the absence of a card; those are not counted as undisclosed evidence citations.",
+    "battleships": "Its own llms.txt explicitly identifies the Boat team.",
+    "primarySource": {
+      "url": "https://battleships.dev/llms.txt",
+      "quote": "Built by the boat.dev team; boat.dev is held to the same rules as everyone.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Add a document-level Boat-team disclosure to the 31 citing files listed in report.md, including capabilities-NOTES-1-machine-money.md, which declares cross-check use. The seven already-disclosing research files need no duplicate disclaimer. Do not describe the three non-use/absence files as reliance."
+  },
+  {
+    "provider": "all",
+    "field": "disclosure.agent-exports",
+    "botperch": "Live /data/providers/agent37.md, boxd.md and modal.md mention Battleships without identifying its Boat connection. The corresponding JSON provider records also omit the HTML footer disclosure. Use-case Markdown includes a disclosed source-list label, but individual need citations do not repeat it.",
+    "battleships": "Discloses its ownership in llms.txt.",
+    "primarySource": {
+      "url": "https://battleships.dev/llms.txt",
+      "quote": "Built by the boat.dev team; boat.dev is held to the same rules as everyone.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Carry the disclosure into each standalone agent export that cites Battleships. HTML pages already have the global disclosure, and URL-based quote/use-case components add local disclosures."
+  },
+  {
+    "provider": "boxd",
+    "field": "source-policy.research-funding",
+    "botperch": "research/boxd.md:35 says the funding round rests on Battleships alone. This is a raw-research provenance failure, not the sourcing of the current published company record.",
+    "battleships": "Reports a EUR 2 million pre-seed led by BlueYard and supplies the company's announcement URL.",
+    "primarySource": {
+      "url": "https://boxd.sh/blog/we-raised-2m-to-kill-localhost/",
+      "quote": "boxd has raised €2 million in pre-seed funding led by BlueYard Capital, with participation from Antler, OVNI, s20, Script Capital and a group of angels who have built developer infrastructure before.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Replace the research note's sole-source claim with the now-readable first-party announcement. Keep the amount in EUR unless an explicit exchange-rate assumption is supplied."
+  },
+  {
+    "provider": "agent37",
+    "field": "source-policy.research-backup-limit",
+    "botperch": "research/agent37.md:1078 attributes the one-on-demand-backup-per-15-minutes limit only to Battleships.",
+    "battleships": "The limit is real, but Battleships need not be its only cited source.",
+    "primarySource": {
+      "url": "https://www.agent37.com/docs/agents-api/instances/create-backup.md",
+      "quote": "One on-demand backup per instance every 15 minutes; a second call inside the window returns `429 rate_limited` with a `Retry-After` header.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Cite the provider endpoint documentation. This is a source correction, not a change to the limit."
+  },
+  {
+    "provider": "lizard",
+    "field": "source-policy.research-unsupported-negatives",
+    "botperch": "research/lizard.md uses Battleships alone for categorical negatives including nested virtualization, raw TCP/public IPv4, secret proxy and HIPAA. Several other entries correctly say unverified or not published. These raw notes must not become affirmative published No verdicts without primary evidence.",
+    "battleships": "False feature flags are not primary evidence of impossibility.",
+    "primarySource": {
+      "url": "https://lizard.build/docs/sandboxes.md",
+      "quote": "The public CLI does not provide a custom-template upload flow.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "unclear",
+    "fix": "Replace unsupported negatives with not-published, or find explicit provider evidence for each. The quoted narrow CLI restriction cannot establish unrelated kernel, network or compliance negatives. No Battleships-only capability source URL was found in site/src/data."
+  },
+  {
+    "provider": "lizard",
+    "field": "attribution.pro-credit",
+    "botperch": "research/rates/lizard.json calls included_usd:0 a disagreement even while reproducing fee_is_credit:true.",
+    "battleships": "fee:19, fee_is_credit:true and included_usd:0 encode the same $19 of included usage, not zero included usage.",
+    "primarySource": {
+      "url": "https://lizard.build/docs/platform/billing.md",
+      "quote": "Each month includes usage equal to your plan's price: $19 on Pro, $99 on Pro 5x and $499 on Pro 20x. Usage above that is overage, charged at the same rates.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Remove this false disagreement. Botperch's executable fee:19, credit:19 is also correct; do not change it."
+  },
+  {
+    "provider": "morph",
+    "field": "attribution.one-MCU-floor",
+    "botperch": "research/rates/morph.json and SUMMARY-sprites-morph-blaxel.md say Battleships omits the one-MCU floor.",
+    "battleships": "Its on-demand mode has min_vcpu:1. Its shorthand formula lacks max(1,...), but that is not evidence of a missing floor for a supported workload. The separate disk-dominated pricing limitation is real.",
+    "primarySource": {
+      "url": "https://cloud.morph.so/docs/documentation/instances/resize-disk",
+      "quote": "max(1, vCPUs, ceil(memory_MiB / 4096), ceil(disk_size_MiB / 16384))",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Describe the formula shorthand accurately and distinguish it from the min_vcpu constraint. Do not claim a demonstrated floor undercharge without a valid sub-one-vCPU workload."
+  },
+  {
+    "provider": "boxd",
+    "field": "attribution.research-summary-of-old-rates",
+    "botperch": "research/rates/boxd.json and SUMMARY-boat-sandboxer-boxd.md say research/boxd.md incorrectly treats all Battleships pricing as stale. The current research/boxd.md already distinguishes the correct headline/card from the stale narrative table.",
+    "battleships": "The structured card has $0.047/$0.014/$0.000096. The Markdown running-PAYG table and worked examples retain $0.059/$0.018/$0.00012.",
+    "primarySource": {
+      "url": "https://boxd.sh/llms.txt",
+      "quote": "vCPU: EUR 0.039 / USD 0.047 per vCPU-hour, on the machine's full vCPU count, only while it runs.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Correct the summary's description of the current repository. Keep the accurate warning about Battleships' internally inconsistent narrative; do not accuse its current JSON rates of being stale."
+  },
+  {
+    "provider": "workloads",
+    "field": "attribution.use-case-source-targets",
+    "botperch": "OpenClaw, interpreter and browser utilization claims cite /data/presets.json, which has no cpuUtil or ramUtil fields. Other source links accompany Botperch-derived counts/sizes such as 20,000 interpreter runs and 160 coding hours; those are not the literal Battleships preset counts.",
+    "battleships": "Utilization is in the ranking workload objects. Its interpreter preset has 200,000 sessions, while the coding preset has 2,200 sessions of 480 minutes and concurrency 100. Botperch's smaller examples are legitimate adaptations, not quotations.",
+    "primarySource": {
+      "url": "https://battleships.dev/data/rankings/interp.json",
+      "quote": "\"cpuUtil\": 0.174,",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Point utilization claims to the relevant ranking JSON and label Botperch's counts, memory headroom and hours as its own assumptions. Say modelled utilization rather than implying independent provider measurements. Exact busy-share values and scope are in report.md."
+  },
+  {
+    "provider": "modal",
+    "field": "attribution.constant-total-cost-factor",
+    "botperch": "site/src/data/providers/modal.json says the two CPU-unit readings differ by 1.6x on every cost estimate.",
+    "battleships": "Its CPU label/rate corresponds to a whole Modal core. A 2x difference in a CPU line does not imply a constant 1.6x difference in totals containing RAM, credits and plan fees.",
+    "primarySource": {
+      "url": "https://modal.com/pricing",
+      "quote": "Physical core (2 vCPU equivalent)",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "State that the CPU line differs by 2x under the two definitions and that the total depends on the workload and plan. Keep guest-visible CPU count and throughput unverified."
+  },
+  {
+    "provider": "agent37",
+    "field": "pricing.minute-granularity",
+    "botperch": "The card says per-minute, but the executable engine multiplies by fractional hours without minute quantization. A one-second 4/8, 20-GB task produces $0.000004033485540334856 usage.",
+    "battleships": "standard/performance/vm modes specify min_billed_seconds:60 and granularity_s:60.",
+    "primarySource": {
+      "url": "https://www.agent37.com/docs/agents-api/billing.md",
+      "quote": "The monthly price is the rate; the wallet is metered per minute (the monthly price divided by 730 hours, divided by 60).",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Represent the documented minute meter rather than implying exact per-second charges. Verify treatment of a final partial minute before choosing a rounding rule. Standard monthly resource tariffs themselves match."
+  },
+  {
+    "provider": "boat",
+    "field": "pricing.disk-shapes",
+    "botperch": "small/default/large/xlarge disks: 51/51/111/251 GB.",
+    "battleships": "12/50/125/251 GB.",
+    "primarySource": {
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "small\n$0.018\n2 vCPU\n4 GB\n51 GB",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep Botperch's current shapes; update Battleships' first three disks. The full freshly read table also gives default 51 GB and large 111 GB."
+  },
+  {
+    "provider": "boat",
+    "field": "pricing.xlarge-plan-gate",
+    "botperch": "Only a $20 plan is encoded and xlarge is not excluded; price() returns feasible:true, $20 for one one-hour 16-vCPU/32-GiB run.",
+    "battleships": "Has a $100-or-higher gate, but also carries the obsolete operator-allocation requirement.",
+    "primarySource": {
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "xlarge needs the $100 plan or higher. Subscribe from Dashboard > Billing, then pass --type xlarge. You do not need to contact us.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "both-wrong",
+    "fix": "Encode the $100 plan and exclude xlarge from $20. Remove Battleships' contact/operator requirement. Botperch underquotes this example by $80 of required monthly payment."
+  },
+  {
+    "provider": "boat",
+    "field": "pricing.egress-cap",
+    "botperch": "Egress is not billed; no numerical cap claimed.",
+    "battleships": "2 TB per sandbox per month included; beyond-cap policy unknown.",
+    "primarySource": {
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "Network traffic. boat does not bill egress.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep the unbilled-egress statement. Do not turn absence of a published cap into a promise of unlimited bandwidth."
+  },
+  {
+    "provider": "boat",
+    "field": "pricing.stopped-disk-retention",
+    "botperch": "Stopped disk is free for 14 days, then deleted unless separately saved.",
+    "battleships": "Automatic snapshot retained for the life of the sandbox; zero snapshot storage rate.",
+    "primarySource": {
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "A stopped sandbox keeps its disk for 14 days. Then boat deletes the data, and the sandbox cannot resume.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep the retention warning. Do not interpret zero stopped-compute cost as indefinite free durability."
+  },
+  {
+    "provider": "boat",
+    "field": "pricing.saved-snapshot-overage",
+    "botperch": "The cost engine does not price separately retained saved snapshots; its normal stopped-disk example stays free within the retention window.",
+    "battleships": "snapshot_gib_month:0 does not represent the new per-snapshot overage meter.",
+    "primarySource": {
+      "url": "https://docs.boat.dev/pricing",
+      "quote": "Saved snapshots past the included count\n$0.056 per snapshot per day ($1.68 for 30 days)",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep ordinary stopped retention separate from saved snapshots. If saved snapshots are added to the calculator later, use the per-item/per-day meter and included count, not a per-GiB zero. This is presently an excluded product, not a zero tariff in Botperch."
+  },
+  {
+    "provider": "boat",
+    "field": "pricing.overage-wallet",
+    "botperch": "Overage draws from a dollar wallet without $20 pack rounding.",
+    "battleships": "Old $20 credit packs and auto-refill wording remain.",
+    "primarySource": {
+      "url": "https://docs.boat.dev/faq",
+      "quote": "One dollar wallet replaces them. Add any amount with Pay or boat wallet pay 50, or turn on auto top-up.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep the current wallet model. Remove mandatory $20-pack interpretations; unused paid wallet money does not expire."
+  },
+  {
+    "provider": "boat",
+    "field": "pricing.extra-seat-limits",
+    "botperch": "research/rates/boat.json records the 20% extra-seat limit increment below the $2000 plan; the simple executable calculator excludes seats.",
+    "battleships": "Describes limits scaling with seats without the current 20% rule.",
+    "primarySource": {
+      "url": "https://docs.boat.dev/organizations/seats-and-limits",
+      "quote": "20% of the plan limits. The total never goes above the limits of the next plan.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep the research correction. Preserve the exception for organizations with more than one seat on 2026-10-28 and the full increment on the $2000 plan. Seat cost is not part of Botperch's executable comparison."
+  },
+  {
+    "provider": "boxd",
+    "field": "pricing.named-snapshot-rate",
+    "botperch": "Standalone snapshot storage has no published price and is excluded.",
+    "battleships": "snapshot_gib_month:0.07008 reuses written machine disk at $0.000096 times 730; its own caveat says named snapshots/backups/volumes are unpriced.",
+    "primarySource": {
+      "url": "https://boxd.sh/faq/",
+      "quote": "A checkpoint is a save point on the same machine: roll it back to exactly where it was. A snapshot is a saved image you start new machines from.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "unclear",
+    "fix": "Do not present the written-machine-disk tariff as a confirmed standalone snapshot rate. Botperch's unknown is appropriate; the provider needs to publish the separate tariff."
+  },
+  {
+    "provider": "boxd",
+    "field": "pricing.eight-vCPU-access",
+    "botperch": "8 vCPU / 32 GiB is a selectable shape without an access warning; price() treats it as feasible.",
+    "battleships": "4/16 is self-serve; 8/32 has a raised-on-request plan.",
+    "primarySource": {
+      "url": "https://boxd.sh/faq/",
+      "quote": "For 8 vCPU / 32 GiB or larger, email contact@boxd.sh.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "unclear",
+    "fix": "Warn that 8/32 may require approval. The resources guide and pricing selector also show 8/32, so do not claim the provider's contradictory self-serve entitlement is conclusively resolved."
+  },
+  {
+    "provider": "boxd",
+    "field": "pricing.machine-quota-contradiction",
+    "botperch": "Research preserves pricing-page 100 versus FAQ/resources 50; executable prices omit concurrency.",
+    "battleships": "50 per organization.",
+    "primarySource": {
+      "url": "https://boxd.sh/pricing",
+      "quote": "Each organization starts with a quota of 100 machines; email contact@boxd.sh to raise it or to get larger shapes than the default 2 vCPU / 8 GiB.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "unclear",
+    "fix": "Keep both first-party statements. The freshly read FAQ still says 50 including hibernated machines; do not turn this into a definite stale-Battleships error."
+  },
+  {
+    "provider": "cloudflare-sandbox",
+    "field": "pricing.container-snapshot-tariff",
+    "botperch": "No separately confirmed container-snapshot rate; excluded from calculator.",
+    "battleships": "snapshot_gib_month:0.015 applies R2 Standard pricing to snapshots.",
+    "primarySource": {
+      "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
+      "quote": "Container snapshots are in public beta. The API and behavior may change.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "unclear",
+    "fix": "Keep native container snapshots separate from explicitly user-owned R2 directory backups. No fetched official page establishes $0.015 as the native snapshot tariff. Do not infer a free tariff either."
+  },
+  {
+    "provider": "cloudflare-sandbox",
+    "field": "pricing.disk-GB-versus-GiB",
+    "botperch": "The card/engine uses generic GiB disk inputs and shape.disk values 2/4/8/12/16/20 without converting Cloudflare's GB disk sizes; running rate is copied as $0.000252 per generic GiB-hour.",
+    "battleships": "disk_gib_month:0.18396 and disk_gib shape fields likewise normalize raw decimal-GB prices/capacities as if they were GiB.",
+    "primarySource": {
+      "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+      "quote": "200 GB-hours/month\n+$0.00000007 per additional GB-second",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "both-wrong",
+    "fix": "Preserve GB for disk and GiB for RAM, or convert both capacity, rate and allowance consistently. The maximum 20 GB disk is about 18.626 GiB, not 20 GiB. Charging a selected named shape at its native provisioned price is fine; its displayed capacity/unit and fit test are not."
+  },
+  {
+    "provider": "cloudflare-sandbox",
+    "field": "pricing.resource-allowances",
+    "botperch": "375 CPU-minutes, 25 GiB-hours RAM and 200 GB-hours disk are separate allowances.",
+    "battleships": "included_usd:0.7254 combines their list-price values into a fungible dollar allowance.",
+    "primarySource": {
+      "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+      "quote": "25 GiB-hours/month included\n+$0.0000025 per additional GiB-second\n375 vCPU-minutes/month\n+ $0.000020 per additional vCPU-second",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep resource-specific allowance buckets, subject to the disk-unit correction. $0.7254 is their summed value at list rates, not interchangeable credit."
+  },
+  {
+    "provider": "daytona",
+    "field": "pricing.research-B300",
+    "botperch": "research/rates/daytona.json reports on-demand B300 at $6.25/h. GPU is outside the executable Linux CPU card.",
+    "battleships": "$7.10/h for B300.",
+    "primarySource": {
+      "url": "https://www.daytona.io/pricing",
+      "quote": "Nvidia B300\n$6.25/h",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep the newer first-party figure. Do not report a CPU-card pricing error from this excluded GPU product."
+  },
+  {
+    "provider": "daytona",
+    "field": "pricing.Windows-rate-interpretation",
+    "botperch": "Research flags whether the OS line replaces or adds to Linux CPU pricing. The executable card only prices Linux CPU sandboxes.",
+    "battleships": "The daytona Windows mode stores $0.0504 CPU plus $0.0354 Windows, totaling $0.0858. The independently fetched daytona-windows record instead stores $0.0504 plus $0.0858, totaling $0.1362, and calls the latter an added surcharge.",
+    "primarySource": {
+      "url": "https://www.daytona.io/pricing",
+      "quote": "Windows\n$0.0858/vCPU/h",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "unclear",
+    "fix": "Do not promote either interpretation into a confirmed Windows total. Ask Daytona to clarify the OS line and reconcile the two Battleships cards. daytona-windows was read to verify the repository's attribution but is not a nineteenth overlapping Botperch provider."
+  },
+  {
+    "provider": "digitalocean",
+    "field": "pricing.minimum-charge",
+    "botperch": "Enforces a $0.01 per-task minimum, but not the 60-second minimum. A one-second CPU-Optimized 32/64 task at $1/h prices at $0.01 instead of $0.0166667.",
+    "battleships": "Enforces 60 seconds, but has no $0.01 minimum charge in the overlapping bundled modes; this underprices very short cheap Droplets.",
+    "primarySource": {
+      "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+      "quote": "Bundled-plan CPU Droplets are billed per second with a minimum charge of 60 seconds or $0.01, whichever is higher.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "both-wrong",
+    "fix": "Apply max(actual duration charge, 60 seconds at the selected rate, $0.01) per created Droplet. Keep per-second billing, the 672-hour monthly cap and billing while powered off."
+  },
+  {
+    "provider": "e2b",
+    "field": "pricing.sandbox-storage",
+    "botperch": "No disk charge, with 10-GiB Hobby/20-GiB Pro limits. Older research describes storage beyond the allowance as unpublished.",
+    "battleships": "disk_gib_month:null, snapshot_gib_month:0; disk null means no published per-GiB tariff, not an affirmative charge.",
+    "primarySource": {
+      "url": "https://e2b.dev/pricing.md",
+      "quote": "Sandbox storage is included with every plan at no extra cost.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep included sandbox storage within plan limits. Do not read null as evidence of a paid storage meter or infer permission to exceed size limits. Separate privately priced Volumes."
+  },
+  {
+    "provider": "e2b",
+    "field": "pricing.Hobby-disk-allowance",
+    "botperch": "10 GiB Hobby and 20 GiB Pro.",
+    "battleships": "storage.included_disk_gib:20 is global, though its Hobby note separately says 10 GiB.",
+    "primarySource": {
+      "url": "https://docs.e2b.dev/faq/calculate-sandbox-price.md",
+      "quote": "| Disk | Included (10 GiB Hobby / 20 GiB Pro) | Included |",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep plan-specific limits. Do not advertise the global 20-GiB field as Hobby's entitlement."
+  },
+  {
+    "provider": "e2b",
+    "field": "pricing.research-EU-plan-gate",
+    "botperch": "Research says EU is available on every plan after workspace verification.",
+    "battleships": "Some regional prose still says Pro+ via support; its feature list already includes EU/Asia, so the issue is the access gate, not a missing regional flag.",
+    "primarySource": {
+      "url": "https://docs.e2b.dev/faq/eu-region.md",
+      "quote": "on every plan, for workspaces verified by adding a payment method",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep the newer verification gate, not the old Pro-only gate. This does not change the base CPU/RAM tariffs."
+  },
+  {
+    "provider": "instabox",
+    "field": "pricing.published-rate-regime",
+    "botperch": "$0.004/vCPU-hour, $0.00225/GiB-hour RAM, $0.00011/GiB-hour extra disk, $0.02/GiB egress, with paid monthly plans.",
+    "battleships": "Invite-only beta, no published numeric rates, five free 4/8 machines.",
+    "primarySource": {
+      "url": "https://instabox.sh/docs/pricing.md",
+      "quote": "| vCPU | $0.004 | per vCPU-hour |\n| Memory | $0.00225 | per GiB-hour |\n| Storage | $0.00011 | per GiB-hour |\n| Egress | $0.02 | per GiB |",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep the current unit rates. Do not treat Battleships' unpriced historical beta as a cheaper current offer; the legacy five-machine grant is time-limited and not the new-account offer."
+  },
+  {
+    "provider": "instabox",
+    "field": "pricing.included-disk",
+    "botperch": "Charges all requested disk while running and stopped; disk.included is absent.",
+    "battleships": "storage.included_disk_gib:20, although its storage rate is unpublished/stale.",
+    "primarySource": {
+      "url": "https://instabox.sh/docs/billing.md",
+      "quote": "each paid sandbox's `/data` beyond its free 20 GiB, by the second while it exists (running, paused or stopped)",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Subtract the first 20 GiB per sandbox in every lifecycle state. At 730 hours, Botperch overstates pre-credit disk usage by $1.606 per kept machine. This may be hidden inside an otherwise unused plan allowance."
+  },
+  {
+    "provider": "instabox",
+    "field": "pricing.plan-names-and-size-gates",
+    "botperch": "Uses Pro $20, Max $100, Ultra $500 and no per-plan resource ceilings. price() returns Pro/$20/feasible for a one-hour 16-vCPU/32-GiB run.",
+    "battleships": "Only the historical free-beta 4/8 size, with no current paid plans.",
+    "primarySource": {
+      "url": "https://instabox.sh/docs/limits.md",
+      "quote": "Pro: 2/4, 4/8, 8/16. Builder: 2/4 up to 16/32. Team: 2/4 up to 32/64 (vCPUs/GiB).",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "both-wrong",
+    "fix": "Rename Max/Ultra to Builder/Team; encode allowed CPU/RAM pairs and disk ceilings (200/500/1024 GiB). The 16/32 example needs Builder at $100, not Pro at $20. Current fees do return as monthly usage."
+  },
+  {
+    "provider": "instabox",
+    "field": "pricing.egress-allowance-wording",
+    "botperch": "The card's included field lists allowances, but its note says egress is not included.",
+    "battleships": "No published egress rate or allowance in its old beta model.",
+    "primarySource": {
+      "url": "https://instabox.sh/docs/pricing.md",
+      "quote": "Each plan includes egress every month (100 GiB on Free, 1 TiB on Pro, 5 TiB on Builder, 50 TiB on Team), then $0.02 per GiB.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "both-wrong",
+    "fix": "Replace not included with beyond the included allowance and include Team's allowance. Egress is outside Botperch's price engine, so this is a displayed content contradiction rather than an executed total error."
+  },
+  {
+    "provider": "lizard",
+    "field": "pricing.current-plan-ladder-and-quota-units",
+    "botperch": "The rate card includes Pro $19, Pro 5x $99 and Pro 20x $499, each fully credited. The executable calculator deliberately omits pooled concurrency limits.",
+    "battleships": "Only the $19 self-serve Pro plan; old limits are expressed as sandbox counts rather than the current pooled vCPU limits.",
+    "primarySource": {
+      "url": "https://lizard.build/docs/platform/billing.md",
+      "quote": "Lizard has three self-serve plans: Pro at $19 a month, Pro 5x at $99 and Pro 20x at $499. Each plan includes usage equal to its price each month.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep the newer plan ladder. If concurrency is compared, use 40/220/1200 pooled vCPU on paid plans, not 100 arbitrary-size sandboxes. Current docs say contact Lizard beyond 2 TB egress; they do not repeat Battleships' definite network-cutoff claim."
+  },
+  {
+    "provider": "modal",
+    "field": "pricing.documented-CPU-equivalent",
+    "botperch": "$0.070956 per documented vCPU-equivalent-hour, half a physical core; RAM $0.024012/GiB-hour.",
+    "battleships": "$0.141912 per guest-visible CPU-hour, explicitly choosing a whole Modal core as its vCPU unit.",
+    "primarySource": {
+      "url": "https://modal.com/pricing",
+      "quote": "Physical core (2 vCPU equivalent)\n$0.00003942 0.00003942 / core / sec",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep the documented-unit arithmetic: 0.00003942 times 3600 divided by 2. Label it vCPU-equivalent and keep throughput/guest-count uncertainty explicit. This does not prove twice the performance for the same API cpu parameter."
+  },
+  {
+    "provider": "morph",
+    "field": "pricing.disk-dominated-MCU",
+    "botperch": "Charges max(1, vCPU, ceil(RAM/4), ceil(disk/16)) at $0.05 per MCU-hour.",
+    "battleships": "The card notes that its resource-mode encoding cannot capture disk above 16 GiB per billed MCU; disk_gib_month is null and a manual knob is needed.",
+    "primarySource": {
+      "url": "https://cloud.morph.so/docs/documentation/instances/resize-disk",
+      "quote": "max(1, vCPUs, ceil(memory_MiB / 4096), ceil(disk_size_MiB / 16384))",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep the disk term. For example, 2 vCPU/4 GiB/80 GiB requires 5 MCUs ($0.25/h), not 2 ($0.10/h). Battleships acknowledges this model limitation; do not present it as a new provider rate change."
+  },
+  {
+    "provider": "morph",
+    "field": "pricing.free-credit-contradiction",
+    "botperch": "No free credit subtracted; research preserves conflicting provider statements.",
+    "battleships": "Developer starts at zero MCUs; agrees with the subscribe page, but not all provider docs.",
+    "primarySource": {
+      "url": "https://cloud.morph.so/docs/documentation/setup/plans",
+      "quote": "Starting Credit Allocation: 300 MCUs free",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "unclear",
+    "fix": "Keep the contradiction rather than promising free credit. The freshly read subscribe page says Starting credit allocation 0 MCUs. The older research's separately cited 300-hours-per-month signup URL was not recovered at the initially tried path in this audit."
+  },
+  {
+    "provider": "morph",
+    "field": "pricing.EFS-versus-Volumes",
+    "botperch": "No EFS charge in the executable card; research names Volumes at $0.0054794/GiB-hour, a separate S3-compatible product.",
+    "battleships": "Its plan notes price EFS at $0.12/$0.15/$0.18 per GiB-month on Developer/Team/Scale.",
+    "primarySource": {
+      "url": "https://cloud.morph.so/docs/volumes/getting-started",
+      "quote": "Morph Volumes are billed from stored GiB-hours rather than compute MCUs.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "unclear",
+    "fix": "Do not substitute EFS tariffs for the separately documented Volumes service. No fetched current official tariff established the EFS plan-note amounts. Exclude or mark unknown pending an official price."
+  },
+  {
+    "provider": "runtime",
+    "field": "pricing.active-CPU-floor",
+    "botperch": "Absolute floor 0.05 vCPU, at $0.025 per active vCPU-hour.",
+    "battleships": "active_floor:0; its note admits that the absolute 0.05-vCPU floor is not encoded.",
+    "primarySource": {
+      "url": "https://withruntime.com/pricing",
+      "quote": "the default CPU floor of 50 millicores, a twentieth of a vCPU",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep the absolute floor, rather than treating it as a percentage of allocated vCPUs. Reserved-CPU mode is a separate product choice, excluded by Botperch's active-CPU card."
+  },
+  {
+    "provider": "runtime",
+    "field": "pricing.storage-month-denominator",
+    "botperch": "disk.running/stopped = 0.08/730 per decimal GB-hour.",
+    "battleships": "Stores $0.08589934592 per GiB-month, which equals the nominal $0.08 per decimal GB-month. This correct monthly card value does not prove its own downstream engine uses the right month length.",
+    "primarySource": {
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "$0.08 per decimal GB per 30-day month, 119 microdollars per GiB-hour",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Use the quoted per-GiB-hour tariff, including its whole-microdollar rounding, or nominal 0.08/720 per decimal GB-hour with an explicit rounding caveat. Botperch's 730 denominator understates the nominal rate by 1.37%; versus the provider's rounded 119-microdollar tariff it is about 1.10% low."
+  },
+  {
+    "provider": "runtime",
+    "field": "pricing.recurring-compute-allowance",
+    "botperch": "The prepaid-credit plan has no recurring CPU/RAM allowance.",
+    "battleships": "Its free.conditions explicitly describes 100 GiB-hours memory and 25 vCPU-hours active CPU, once for a new account and then every month after payment. Its paid-account included_usd:0 is not a denial of these non-dollar resource buckets. Whether its engine implements the prose was not executed or established here.",
+    "primarySource": {
+      "url": "https://withruntime.com/docs/included-usage",
+      "quote": "account that has paid (bought credit) gets it every calendar month.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Apply 25 vCPU-hours active CPU plus 100 GiB-hours memory per paid account per month before credits. At current rates the maximum compute deduction is $1.375/month when both buckets are used. The new-account one-time grant and recurring paid-account allowance must remain distinct."
+  },
+  {
+    "provider": "runtime",
+    "field": "pricing.storage-billable-quantity",
+    "botperch": "Uses requested disk capacity for running/paused storage, while the note says stopped storage includes saved memory; memory blocks are not added by the engine.",
+    "battleships": "Likewise provides generic disk/snapshot size rates rather than the provider's measured private-block allocation.",
+    "primarySource": {
+      "url": "https://withruntime.com/docs/pricing",
+      "quote": "What counts: disk and memory-snapshot blocks the sandbox alone owns. Shared base-image blocks and snapshot safety overhead are left out.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "unclear",
+    "fix": "Label capacity-based storage as an estimate and ask for stored unique bytes if exact costs are needed. Requested disk may overcount unused/shared blocks; omitted memory snapshots may undercount. Their net effect cannot be established by desk research. The running first-10-GiB allowance is already converted correctly by Botperch."
+  },
+  {
+    "provider": "tensorlake",
+    "field": "pricing.Pro-resource-rates",
+    "botperch": "The executable card applies Usage Credits CPU/RAM/disk rates $0.07/$0.015/$0.0002 to Pro too; a note openly acknowledges the overstatement.",
+    "battleships": "Separate Pro mode uses $0.042/$0.009/$0.0001, and a separate Usage Credits mode uses the higher rates.",
+    "primarySource": {
+      "url": "https://docs.tensorlake.ai/platform/billing.md",
+      "quote": "| Active CPU per core-hour | \\$0.07 | \\$0.042 | Custom |\n| RAM per GB-hour | \\$0.015 | \\$0.009 | Custom |\n| Root disk per GB-hour | \\$0.0002 | \\$0.0001 | Custom |",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Use plan-specific resource rates. Disclosure of the limitation does not make an overstated Pro estimate correct. Preserve the first-party wording conflict about Pro's included 25,000 CUs versus plus usage; both datasets choose the included-credit interpretation."
+  },
+  {
+    "provider": "tensorlake",
+    "field": "pricing.snapshot-month-denominator",
+    "botperch": "disk.stopped = 0.07/730 per displayed GB-hour.",
+    "battleships": "snapshot_gib_month:0.07 quotes the monthly tariff; a 730-hour downstream conversion would have the same problem as Botperch.",
+    "primarySource": {
+      "url": "https://www.tensorlake.ai/pricing",
+      "quote": "Snapshot storage uses a fixed 30-day month.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Divide by 720 for the hourly stopped rate, not 730. Botperch understates that nominal storage rate by 1.37%. Keep unique stored bytes separate from provisioned disk capacity."
+  },
+  {
+    "provider": "vercel-sandbox",
+    "field": "pricing.memory-only-minimum",
+    "botperch": "Prices RAM for the exact task duration; no one-minute minimum.",
+    "battleships": "min_billed_seconds:60 applies to CPU too, although its own note admits the CPU overestimate for short tasks.",
+    "primarySource": {
+      "url": "https://vercel.com/docs/sandbox/pricing",
+      "quote": "Provisioned memory is billed in 1 minute minimum increments to account for sandbox lifecycle management.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "both-wrong",
+    "fix": "Enforce the documented memory minimum/increment without inventing a corresponding active-CPU minimum. A one-second 4-GB run has at least $0.001413333 of RAM usage, not Botperch's $0.0000235556, before allowances."
+  },
+  {
+    "provider": "vercel-sandbox",
+    "field": "pricing.fixed-memory-per-vCPU",
+    "botperch": "Independent CPU and RAM inputs can price impossible combinations, without rounding up to a supported CPU/RAM shape.",
+    "battleships": "ram_fixed_per_vcpu:2 and supported vCPU counts 1 or even counts thereafter.",
+    "primarySource": {
+      "url": "https://vercel.com/docs/sandbox/pricing",
+      "quote": "Each vCPU includes 2 GB of memory.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Round requests to a supported shape or report a feasibility catch, enforcing plan-specific maximums. For example, 2 vCPU/1 GB cannot be billed as only 1 GB; the 2-vCPU shape has 4 GB. The same page permits 1 or an even number of vCPUs."
+  },
+  {
+    "provider": "sprites",
+    "field": "pricing.active-CPU-floor",
+    "botperch": "Absolute 0.0625 CPU floor while awake, CPU $0.0385/hour and RAM $0.021875/GB-hour.",
+    "battleships": "Current numeric rates match, but active_floor:0 omits the product-page floor; the older Markdown regime table still contains $0.07/$0.04375.",
+    "primarySource": {
+      "url": "https://fly.io/sprites/checkpoint-restore/",
+      "quote": "Minimum 0.0625 CPU while running.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep the CPU floor and current numeric rates. Do not describe Battleships' entire current card as using the old rates; only its narrative sections do. The same product page publishes a 256-MB RAM floor."
+  },
+  {
+    "provider": "sprites",
+    "field": "pricing.Mythic-plan-price",
+    "botperch": "site/src/data/changes.json says the FAQ describes a ladder up to Mythic at $100/month.",
+    "battleships": "Hero $100; Mythic $2000. The executable Botperch card only models pay-as-you-go, which remains a valid offer despite the conflicting no-plans headline.",
+    "primarySource": {
+      "url": "https://fly.io/sprites/",
+      "quote": "One customer's usage was close to Mythic's 28,000 included RAM GB-hours, but at $2,000/mo the plan cost more than the overage it saved.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Correct Mythic to $2000 and identify Hero as the $100 plan. Keep the provider contradiction: fly.io/pricing says No plans and no tiers, while its own FAQ documents optional plans and unit allowances. Other tier prices remain historical, not freshly confirmed here."
+  },
+  {
+    "provider": "sprites",
+    "field": "pricing.checkpoint-storage-rate",
+    "botperch": "Does not quote a separate checkpoint tariff; ordinary written-disk rates are hot $0.000683 plus cold $0.000027 while awake, cold only while stopped.",
+    "battleships": "snapshot_gib_month:0.02 explicitly assumes checkpoints are billed at cold-storage prices; this is marked unverified in its caveats.",
+    "primarySource": {
+      "url": "https://docs.fly.io/sprites/concepts/checkpoints.md",
+      "quote": "You're billed for the blocks actually kept, and deleting a checkpoint frees that space right away.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "unclear",
+    "fix": "Keep the assumed checkpoint rate distinct from confirmed ordinary disk rates. $0.00071 while awake is correctly hot plus cold, not an erroneous hot-only rate. $0.02/month is a rounded expression of the cold hourly rate, not a material new price disagreement."
+  },
+  {
+    "provider": "cloudflare-sandbox",
+    "field": "pricing.egress-allowance-and-unit",
+    "botperch": "egress.included correctly says 1 TB in North America/Europe, but notes says egress is not included. perGiB:0.025 copies a decimal-GB rate without conversion.",
+    "battleships": "network.egress_free_gib:1000 and egress_gib:0.025 likewise relabel decimal GB as GiB. The included amount itself agrees with the provider's native-unit table.",
+    "primarySource": {
+      "url": "https://developers.cloudflare.com/containers/platform/pricing/",
+      "quote": "Price per GB\nIncluded Allotment per month\nNorth America & Europe\n$0.025\n1 TB",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "both-wrong",
+    "fix": "Say beyond the included allowance, and preserve native GB/TB or consistently convert to GiB. $0.025/GB equals about $0.0268435/GiB. This field is displayed but not added by Botperch's cost engine. Other regions retain their $0.04/$0.05 per GB and 500-GB allowance."
+  },
+  {
+    "provider": "agent37",
+    "field": "pricing.shape-CPU-ceiling",
+    "botperch": "Correctly encodes 2/4, 4/8, 4/16 and 4/32, with disk ceilings 12/20/40/80 GB.",
+    "battleships": "Resource modes have max_vcpu:16 and vcpu_options 2/4/8/16; VM notes, plan notes and fleet disk limits describe 8/16 and 16/32 instead of 4/16 and 4/32. It also acknowledges its missing per-shape disk-cap constraint.",
+    "primarySource": {
+      "url": "https://www.agent37.com/docs/agents-api/instance-sizing.md",
+      "quote": "4 vCPU is the ceiling on every instance type.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "botperch-right",
+    "fix": "Keep Botperch's current shapes. Do not mistake its variable disk range for arbitrary CPU/RAM sizes. Update Battleships' CPU options, related prose and disk-cap fit logic."
+  },
+  {
+    "provider": "boxd",
+    "field": "attribution.research-operator-summary",
+    "botperch": "research/boxd.md:35 repeats Battleships' Azin Tech Holding operator statement, although the later section and published company record correctly name Azin Tech Operating Company B.V.",
+    "battleships": "Its Markdown company summary still says Azin Tech Holding.",
+    "primarySource": {
+      "url": "https://boxd.sh/terms/",
+      "quote": "“Boxd”, “we”, “us” or “our” means Azin Tech Operating Company B.V.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "both-wrong",
+    "fix": "Correct the stale opening research summary, preserving the already-correct later analysis and published company record. This verifies the contracting entity's name, not the ownership structure of every affiliated holding company."
+  },
+  {
+    "provider": "blaxel",
+    "field": "pricing.CPU-derived-from-memory",
+    "botperch": "The rate card has no shapes or CPU-to-memory constraint, so price() accepts six requested vCPUs with 8 GiB RAM and bills only the 8 GiB of RAM, with no feasibility warning.",
+    "battleships": "Its fixed choices correctly associate 8 GB with 4 CPU cores and 16 GB with 6 CPU cores. The provider has not independently confirmed every smaller mapping in that card through the pages read here.",
+    "primarySource": {
+      "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
+      "quote": "a sandbox with 8 GB memory is allocated 4 CPU cores, while one with 16 GB memory is allocated 6 CPU cores.",
+      "checkedOn": "2026-10-30"
+    },
+    "verdict": "battleships-right",
+    "fix": "Enforce documented CPU-to-memory shapes or warn that CPU is determined by memory, not independently selectable. Do not claim the 6-CPU/8-GB request is feasible. The documented 16-GB/6-core option costs $0.6624/hour; the complete standard-size table remains unverified."
+  }
+]

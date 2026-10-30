@@ -1,0 +1,22 @@
+---
+import Inline from "./Inline.astro";
+import { providerCatches } from "../lib/data";
+
+interface Props {
+  provider: string;
+  /** The recommendation's own catch, shown first. */
+  watch?: string;
+}
+
+const { provider, watch } = Astro.props;
+const items = providerCatches(provider, watch);
+---
+
+{items.length > 0 && (
+  <div class="pick-catches">
+    <p class="pick-catches__title">Catches</p>
+    <ul class="pick-catches__list">
+      {items.map((item) => <li><Inline text={item} /></li>)}
+    </ul>
+  </div>
+)}

@@ -13,7 +13,7 @@ import type {
   Verdict,
 } from "../data/schema";
 import { plainText } from "./plain";
-import { presets, price, formatMoney, type RateCard } from "./cost";
+import { presets, price, formatMoney, catches, type RateCard } from "./cost";
 import glossaryData from "../data/glossary.json";
 import capabilityData from "../data/capabilities.json";
 
@@ -117,6 +117,22 @@ export const changes: Change[] = cleanDeep(
 export const pricing: RateCard[] = Object.values(pricingModules).sort((a, b) =>
   (providerById.get(a.provider)?.name ?? a.provider).localeCompare(providerById.get(b.provider)?.name ?? b.provider),
 );
+
+/**
+ * The catches shown under every recommendation of a provider: the recommendation's own
+ * catch first, then up to two billing catches from its rate card and its first
+ * "fits badly" item, so a pick never appears without its trade-offs.
+ */
+export function providerCatches(id: string, watch?: string): string[] {
+  const card = pricing.find((c) => c.provider === id);
+  const badly = providerById.get(id)?.fits?.badly?.[0];
+  const items = [
+    watch,
+    ...(card ? catches(card).slice(0, 2).map((c) => `${c.label}: ${c.detail.charAt(0).toLowerCase()}${c.detail.slice(1)}`) : []),
+    badly ? `Not for: ${badly.charAt(0).toLowerCase()}${badly.slice(1)}` : undefined,
+  ];
+  return items.filter((s): s is string => Boolean(s?.trim()));
+}
 
 /**
  * Use cases keep their [text](url) links and **bold**: the page renders them as

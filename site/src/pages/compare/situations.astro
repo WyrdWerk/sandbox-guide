@@ -1,4 +1,5 @@
 ---
+import Catches from "../../components/Catches.astro";
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import Quote from "../../components/Quote.astro";
@@ -63,7 +64,7 @@ const cite = (url: string) => new URL(url).hostname.replace(/^www\./, "");
                     <a href={`/providers/${pick.provider}/`}>{provider?.name ?? pick.provider}</a>
                   </h3>
                   <p class="pick__body">{pick.why}</p>
-                  <p class="pick__catch"><strong>Catch:</strong> {pick.watch}</p>
+                  <Catches provider={pick.provider} watch={pick.watch} />
                 </article>
               );
             })}

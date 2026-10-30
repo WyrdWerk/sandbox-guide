@@ -1,4 +1,5 @@
 ---
+import Catches from "../../components/Catches.astro";
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import CostCard from "../../components/CostCard.astro";
@@ -86,11 +87,14 @@ const statusLabel = {
             <th scope="row">Recommended in</th>
             <td>
               {goodFor.length ? (
+                <>
                 <ul class="plain-list">
                   {goodFor.map(({ useCase, pick }) => (
                     <li><a href={`/use-cases/${useCase.id}/`}>{useCase.title}</a>: {pick.for.charAt(0).toLowerCase() + pick.for.slice(1)}</li>
                   ))}
                 </ul>
+                <Catches provider={provider.id} />
+                </>
               ) : (
                 <>Not one of the picks in any <a href="/use-cases/">use-case guide</a>.</>
               )}

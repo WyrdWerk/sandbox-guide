@@ -1,13 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
 import PageHeader from "../components/PageHeader.astro";
-import { pricing, providers, useCases } from "../lib/data";
+import { pricing, providers, useCases, providerCatches } from "../lib/data";
 import modelData from "../data/models.json";
 
 // Everything the chooser needs, computed in the browser with the calculator's own engine.
 const payload = {
   cards: pricing,
   names: Object.fromEntries(providers.map((p) => [p.id, p.name])),
+  catches: Object.fromEntries(providers.map((p) => [p.id, providerCatches(p.id)])),
   models: modelData.models,
   useCases: useCases.map((u) => ({ id: u.id, title: u.title, preset: u.preset, routes: u.routes })),
 };
@@ -160,6 +161,14 @@ const jobs = [
         else li.append(el("p", "chooser__why", k.reason));
         if (!k.route?.price) li.append(el("p", "chooser__shape", k.shape));
         if (k.over) li.append(el("p", "chooser__warn", `Over your budget of ${formatMoney(budget)}; it is here because nothing in budget fits better.`));
+        const caught: string[] = data.catches[k.id] ?? [];
+        if (caught.length) {
+          const box = el("div", "pick-catches");
+          const list = el("ul", "pick-catches__list");
+          for (const c of caught) list.append(el("li", "", c));
+          box.append(el("p", "pick-catches__title", "Catches"), list);
+          li.append(box);
+        }
         if (k.route?.link) {
           const a = el("a", "chooser__link", `${k.route.link.title} ↗`) as HTMLAnchorElement;
           a.href = k.route.link.url;
