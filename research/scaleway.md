@@ -5,6 +5,8 @@ Repository revision at start: `df4cd0c` (`main`, 2026-10-30), clean worktree; th
 Research date: **2026-10-30**. Desk research only: no Scaleway account was created, no Instance was ordered, started or billed.
 Scope: general-purpose Instances — the shared-CPU **Development** (STARDUST1, DEV1, PLAY2) and **General Purpose** (BASIC3, BASIC2-A, PRO2, GP1) ranges. GPU Instances, dedicated STANDARD3/POP2, the compute/memory-optimised ranges and Elastic Metal are out of scope except where a capability row needs them (GPUs, big machines).
 
+**Integration status (reported 2026-10-30, after this research).** The integrating thread applied this card in local commit `06aae74` — not pushed, and not visible in this checkout, which is still at `df4cd0c`. That commit uses the one-plan block-storage card and adds `perMachine {hourly: 0.005565, monthly: 4.0625}` for the flexible IPv4. It also changed `cost.ts` so a per-machine fee bills through kept stopped hours, and so `minimumSeconds` applies to disk and per-machine fees on short tasks. With those changes the engine prints the hand-worked **$29.49 / $44.15 / $8.20**. Every "engine prints" figure below, and the limitations marked *superseded*, describe `df4cd0c` and are kept as the pre-integration record; they are not statements about current `main`. I have not run the fixed engine in this checkout.
+
 **Tag legend**
 
 | Tag | Meaning |
@@ -238,15 +240,13 @@ Default quotas are small and per offer type `docs-confirmed` — [Organization q
 
 Worked in full in [`abc.md`](abc.md). Summary, USD, before VAT, at 1.1130 USD/EUR:
 
-| Case | Shape | Compute | Block disk | IPv4 | Total | Engine prints | Local-SSD total |
+| Case | Shape | Compute | Block disk | IPv4 | Total | Engine at `df4cd0c` | Local-SSD total |
 |---|---|---:|---:|---:|---:|---:|---:|
 | A | DEV1-M, 1,000 × 10 min | $22.48 | $1.45 | $5.57 | **$29.49** | $22.72 | $28.59 |
 | B | DEV1-L, 730 h | $34.81 | $5.28 | $4.06 | **$44.15** | $40.09 | $40.86 |
 | C | DEV1-M, 90 + 640 h | $2.02 | $2.11 | $4.06 | **$8.20** | $4.14 | $6.88 |
 
-The engine matches the hand-worked compute and block storage for B and C exactly, including C's stopped hours. It differs on:
-- **IPv4**, which the card excludes because `perMachine` follows billed machine hours and would drop a stopped machine's address. Add $4.06 per machine-month, or $5.57 per 1,000 one-hour tasks.
-- **A's disk**, because the engine applies the 60-minute floor to compute only, not to storage ($0.24 printed against $1.45 worked).
+At `df4cd0c` the engine matched the hand-worked compute and block storage for B and C exactly, including C's stopped hours, and differed on two points: the **IPv4**, which the research card excluded because `perMachine` then followed billed machine hours; and **A's disk**, because the 60-minute floor applied to compute only ($0.24 printed against $1.45 worked). Both were closed in `06aae74` (reported): the integrated card adds the IPv4 as `perMachine`, and the engine now applies `minimumSeconds` to disk and per-machine fees, so the integrated calculator prints the hand-worked totals.
 
 ## 10. Use-case dispositions
 
@@ -263,7 +263,7 @@ The engine matches the hand-worked compute and block storage for B and C exactly
 | `scheduled-scraper` | manual | no | Cron inside a DEV1-S and results in Object Storage; per-run machines bill a full hour. |
 | `mcp-server` | manual | no | Small always-on Instance with a security group; STARDUST1-S if orderable, else DEV1-S. |
 
-**Picks.** One: `eu-residency`, for French-law residency with HDS. No `stay-available` pick, because Hetzner already makes the cheap always-on VPS case and Scaleway's differentiator there is the stopped-compute meter, which is a route-level detail. No `build-and-test` pick: the 60-minute minimum makes it the wrong tool. Situation picks: `eu-residency` only.
+**Picks.** None of the ten use-case guides: `eu-residency` is a situation, not a guide, so the recommendation lives in `situationPicks` for French-law residency with HDS. No `stay-available` pick, because Hetzner already makes the cheap always-on VPS case and Scaleway's differentiator there is the stopped-compute meter, a route-level detail. No `build-and-test` pick: the 60-minute minimum makes it the wrong tool.
 
 ## 11. Contradictions
 
@@ -297,9 +297,9 @@ The Block Storage FAQ says the maximum local storage is 600 GB (GP1-XL); the pro
 
 ## 13. Model limitations in the card
 
-1. **IPv4 is excluded.** `perMachine` counts only billed machine hours, so a stopped machine's reserved address would disappear. Proposed one-line fix in `cost.ts`: `const perMachineHours = (h.run + h.stopped) / Math.max(1, h.machines);` and, for tasks mode, bill `Math.max(h.session, (card.minimumSeconds ?? 0) / 3600)` hours per run. A regression test with a stopped machine and a per-machine fee would cover it.
+1. **IPv4 was excluded (superseded).** In the `df4cd0c` card, `perMachine` counted only billed machine hours, so a stopped machine's reserved address would have disappeared. The proposed fix — `const perMachineHours = (h.run + h.stopped) / Math.max(1, h.machines);` plus `Math.max(h.session, (card.minimumSeconds ?? 0) / 3600)` per run in tasks mode — was applied in `06aae74`, which also added `perMachine {hourly: 0.005565, monthly: 4.0625}`. The integrating thread reports that reverting each of the three engine changes fails a Scaleway A or C test.
 2. **One storage class is priced.** The card prices Block Storage 5K (€0.000130/GB/hour) on every shape, because it is the only option on BASIC3, PLAY2, PRO2 and BASIC2-A and a valid option on DEV1, GP1 and STARDUST1. `Plan.rates` can override `diskRunning` but not the stopped rate, so a card holding both block and local SSD would price stopped block volumes at the local rate, understating them by 2.65×. Pricing one class keeps every printed number valid; the local-SSD totals are shown as alternatives in §9 and `abc.md`. Expressing both needs a plan-level `rates.diskStopped`.
-3. **The 60-minute minimum is applied to compute only.** Storage and IPv4 minimums are added by hand in `provider.json` and `abc.md`.
+3. **The 60-minute minimum applied to compute only (superseded).** In `df4cd0c`, storage and IPv4 minimums were added by hand in `provider.json` and `abc.md`; `06aae74` extends `minimumSeconds` to disk and per-machine fees.
 4. **No monthly cap and no Savings Plans** are modelled; neither changes A/B/C.
 
 ## 14. Quote verification
