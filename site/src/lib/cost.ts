@@ -143,6 +143,8 @@ export interface RateCard {
   perMachine?: { label: string; hourly: number; monthly: number };
   /** Whether the CPU is shared or burstable on the plans priced, with the provider's own words. */
   cpuSharing?: { label: string; detail: string; source: { url: string; quote: string; confidence: string } };
+  /** What the customer must maintain (OS updates, security, backups), in the provider's own words. */
+  upkeep?: { label: string; detail: string; source: { url: string; quote: string; confidence: string } };
   /** How the provider puts an idle machine to sleep and wakes it. Omit when it does not. */
   sleeps?: string;
   /** What happens to the files when a machine stops between sessions. */

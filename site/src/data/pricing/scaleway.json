@@ -395,5 +395,14 @@
       "quote": "This means that while each Instance gets its own vCPUs, these vCPUs are scheduled on physical cores that are shared across multiple Instances.",
       "confidence": "docs-confirmed"
     }
+  },
+  "upkeep": {
+    "label": "You run the server",
+    "detail": "Scaleway's shared-responsibility page makes the operating system, patches, firewalls and backups yours; it patches only its own infrastructure.",
+    "source": {
+      "url": "https://www.scaleway.com/en/docs/instances/reference-content/instances-shared-responsibility-model/",
+      "quote": "Instance management: Operating system configuration, applications, middleware, patches, and software updates for your Instances.",
+      "confidence": "docs-confirmed"
+    }
   }
 }

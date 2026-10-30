@@ -99,5 +99,14 @@
       "quote": "",
       "confidence": "not-published"
     }
+  },
+  "upkeep": {
+    "label": "You run the server",
+    "detail": "OVHcloud makes the server's configuration, security and running your responsibility. A daily backup is included free.",
+    "source": {
+      "url": "https://support.us.ovhcloud.com/hc/en-us/articles/4412351365139-How-to-secure-a-VPS",
+      "quote": "OVHcloud provides services for which you are responsible for their configuration and management. You are therefore responsible for their proper functioning.",
+      "confidence": "docs-confirmed"
+    }
   }
 }

@@ -110,5 +110,14 @@
       "quote": "Core VPS is the entry plan family: shared vCPU cores on infrastructure spanning multiple CPU generations, with SSD storage.",
       "confidence": "docs-confirmed"
     }
+  },
+  "upkeep": {
+    "label": "You run the server",
+    "detail": "Contabo is unmanaged: once you have root access, configuration and security are yours. A network firewall is included; daily backups are a paid add-on.",
+    "source": {
+      "url": "https://help.contabo.com/en/support/solutions/articles/103000347171-how-can-i-improve-the-security-of-my-server-",
+      "quote": "Once root access to the server is granted, further configuration and security measures are your responsibility.",
+      "confidence": "docs-confirmed"
+    }
   }
 }

@@ -128,5 +128,14 @@
       "quote": "In plans (CX, CPX, CAX) with shared resources the compute resources are distributed among all instances on the same physical server.",
       "confidence": "docs-confirmed"
     }
+  },
+  "upkeep": {
+    "label": "You run the server",
+    "detail": "Hetzner's terms make managing and securing the server, and keeping backups, your job. Firewalls are free; Hetzner's daily backups are paid and off until you switch them on.",
+    "source": {
+      "url": "https://www.hetzner.com/legal/terms-and-conditions/",
+      "quote": "The Customer is responsible for managing and securing these products at their own expense and risk.",
+      "confidence": "docs-confirmed"
+    }
   }
 }

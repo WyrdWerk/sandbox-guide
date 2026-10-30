@@ -140,5 +140,14 @@
       "quote": "The CPU limited to 50 % notice appears when the server has run at full load for several days.",
       "confidence": "docs-confirmed"
     }
+  },
+  "upkeep": {
+    "label": "You run the server",
+    "detail": "HostUp's terms make keeping your own copies of your data your job, though it includes seven backup slots on a weekly schedule. It does not say who keeps the operating system updated.",
+    "source": {
+      "url": "https://hostup.se/legal/terms-of-service-en.pdf",
+      "quote": "Although we take regular backups, you are responsible for securing your data. Hostup is not liable for lost or corrupted data.",
+      "confidence": "docs-confirmed"
+    }
   }
 }

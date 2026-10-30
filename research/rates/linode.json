@@ -438,5 +438,14 @@
       "quote": "Shared CPU Linodes use shared cores, making them suited to workloads that don't require sustained compute availability.",
       "confidence": "docs-confirmed"
     }
+  },
+  "upkeep": {
+    "label": "You run the server",
+    "detail": "System updates and Linux setup are yours; Akamai's support does not cover the server's configuration. Cloud Firewalls are free; Backups are a paid add-on.",
+    "source": {
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/update-software",
+      "quote": "To take advantage of the new packages and patches, you'll need to remember to perform system updates every once in a while.",
+      "confidence": "docs-confirmed"
+    }
   }
 }

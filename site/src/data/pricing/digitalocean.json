@@ -305,5 +305,14 @@
       "quote": "In practice, this means that shared CPU Droplets can have access to full hyper-threads, but it’s not guaranteed.",
       "confidence": "docs-confirmed"
     }
+  },
+  "upkeep": {
+    "label": "You run the server",
+    "detail": "You secure the operating system and decide who can get in; DigitalOcean secures the hardware underneath. Cloud Firewalls are free; backups add a percentage to the bill.",
+    "source": {
+      "url": "https://www.digitalocean.com/security/shared-responsibility-model",
+      "quote": "For example, you secure the operating system (OS) you install on your droplet and maintain who has access to your instance and your content.",
+      "confidence": "docs-confirmed"
+    }
   }
 }

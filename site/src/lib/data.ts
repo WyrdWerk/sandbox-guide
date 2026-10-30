@@ -132,7 +132,11 @@ export const pricing: RateCard[] = Object.values(pricingModules).sort((a, b) =>
  * "fits badly" item, so a pick never appears without its trade-offs.
  */
 // Lowercase the first letter to follow a "Label:", but leave names such as OVHcloud or SSH alone.
-const lower = (s: string) => (/^.[A-Z]/.test(s) ? s : s.charAt(0).toLowerCase() + s.slice(1));
+const brandWords = ["AWS", "Amazon", "Akamai", "Scaleway", "Hetzner", "HostUp", "Hostinger", "Contabo", "Vultr", "DigitalOcean", "OVHcloud"];
+const lower = (s: string) =>
+  /^.[A-Z]/.test(s) || brandWords.some((b) => s.startsWith(b + " ") || s.startsWith(b + "'")) || providers.some((p) => s.startsWith(p.name + " "))
+    ? s
+    : s.charAt(0).toLowerCase() + s.slice(1);
 
 /** One line from the dated public reviews: the first complaint, or the sample's own warning. */
 function reviewCatch(id: string): string | undefined {
@@ -147,17 +151,14 @@ function reviewCatch(id: string): string | undefined {
 
 export function providerCatches(id: string, watch?: string): string[] {
   const card = pricing.find((c) => c.provider === id);
-  const provider = providerById.get(id);
-  const badly = provider?.fits?.badly?.[0];
+  const badly = providerById.get(id)?.fits?.badly?.[0];
   const line = (c: { label: string; detail: string }) => `${c.label}: ${lower(c.detail)}`;
   const items = [
     watch,
     reviewCatch(id),
     ...(card ? catches(card).filter((c) => c.label !== card.cpuSharing?.label).slice(0, 2).map(line) : []),
     card?.cpuSharing ? line(card.cpuSharing) : undefined,
-    provider?.kind === "vps"
-      ? "You run the server: operating-system updates, security patches, the firewall, SSH access and backups are yours to set up and keep up."
-      : undefined,
+    card?.upkeep ? line(card.upkeep) : undefined,
     badly ? `Not for: ${lower(badly)}` : undefined,
   ];
   return items.filter((s): s is string => Boolean(s?.trim()));

@@ -269,5 +269,14 @@
       "quote": "Lightsail uses burstable performance instances that provide a baseline level of CPU performance with the additional ability to burst above the baseline.",
       "confidence": "docs-confirmed"
     }
+  },
+  "upkeep": {
+    "label": "You run the server",
+    "detail": "AWS does not update or patch the operating system after you create an instance, so that is yours. Automatic snapshots are opt-in and billed.",
+    "source": {
+      "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-update-management.html",
+      "quote": "AWS and Lightsail do not update or patch the operating system or applications on instances after you create them.",
+      "confidence": "docs-confirmed"
+    }
   }
 }

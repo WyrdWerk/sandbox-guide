@@ -108,5 +108,14 @@
       "quote": "The baseline is 60% on every plan.",
       "confidence": "docs-confirmed"
     }
+  },
+  "upkeep": {
+    "label": "You run the server",
+    "detail": "You look after the software on the server, with Hostinger's AI tools to help; Hostinger looks after the hardware and network. Weekly backups are on by default; daily ones cost extra.",
+    "source": {
+      "url": "https://www.hostinger.com/support/8852150-what-is-a-self-managed-vps-at-hostinger/",
+      "quote": "While you handle the internal software with support from the available AI tools, you do not need to manage the physical and connectivity aspects.",
+      "confidence": "docs-confirmed"
+    }
   }
 }

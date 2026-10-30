@@ -222,5 +222,14 @@
       "quote": "Vultr Regular Performance plans are powered by previous-generation Intel shared CPU resources and regular SSDs.",
       "confidence": "docs-confirmed"
     }
+  },
+  "upkeep": {
+    "label": "You run the server",
+    "detail": "Servers are entirely self-managed: updates and security are yours. Vultr Firewalls are free to use; automatic backups raise the price by 20%.",
+    "source": {
+      "url": "https://www.vultr.com/resources/faq/",
+      "quote": "No, your instances grant you full root access and are entirely self-managed.",
+      "confidence": "docs-confirmed"
+    }
   }
 }
