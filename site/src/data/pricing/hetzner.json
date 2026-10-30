@@ -88,7 +88,7 @@
     "A powered-off server is billed in full until it is deleted: there is no pause, sleep or cheaper stopped-storage rate. billedWhileStopped applies the running hourly rate to stopped hours.",
     "The bill is capped at each server's monthly price, which binds at about 624 hours at these rates. shape.monthly applies that cap to machines mode.",
     "Snapshots, backups, volumes, Floating IPs and load balancers are separate products and are not priced by this card. Hetzner no longer publishes a snapshot rate on its live pricing pages: the API exposes an image price per GB-month (and a 20% backup surcharge) but needs a token to read, and the last figure visible on a legacy page variant was €0.011/$0.0130 per GB-month, unverified today.",
-    "Cost-Optimized plans (CX23 at €5.99 and up) are listed but marked not available for ordering at this check, so they are not modelled here."
+    "Out of stock: the cheaper Cost-Optimized plans are listed at CX23 2 vCPU / 4 GB / 40 GB €5.99; CAX11 (Arm) 2 / 4 / 40 €6.49; CX33 4 / 8 / 80 €8.99; CAX21 (Arm) 4 / 8 / 80 €10.99; CX43 8 / 16 / 160 €16.49; CAX31 (Arm) 8 / 16 / 160 €21.49; CX53 16 / 32 / 320 €29.99; CAX41 (Arm) 16 / 32 / 320 €41.49 a month (EU prices before VAT and the separate IPv4 charge), but every one is marked 'not available' with 'This product is currently unavailable. Please check back later.' (checked 30 October 2026). They are not priced by the calculator until Hetzner sells them again; when it does, a 2 vCPU / 4 GB server costs about a third of the CPX22 used here."
   ],
   "sources": [
     {
@@ -114,6 +114,10 @@
     {
       "label": "Cloud API reference: pricing fields (image, volume, backup)",
       "url": "https://docs.hetzner.cloud/cloud.spec.json"
+    },
+    {
+      "label": "Cost-Optimized plans (listed, not available)",
+      "url": "https://www.hetzner.com/cloud/cost-optimized/"
     }
   ]
 }

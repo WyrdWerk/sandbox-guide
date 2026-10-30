@@ -197,7 +197,7 @@
     },
     {
       "issue": "The cheapest family is out of stock",
-      "detail": "Every Cost-Optimized plan (CX23 at €5.99 and up) carries a 'not available' badge and the overview says 'Currently not available', while the price API still reports active: true. The guide should treat Regular Performance as the buyable entry point until a recheck says otherwise.",
+      "detail": "Every Cost-Optimized plan carries a 'not available' badge, and each order button says 'This product is currently unavailable. Please check back later.' (rechecked 30 October 2026), while the price API still reports active: true. The listed monthly prices are CX23 2 vCPU / 4 GB / 40 GB €5.99; CAX11 (Arm) 2 / 4 / 40 €6.49; CX33 4 / 8 / 80 €8.99; CAX21 (Arm) 4 / 8 / 80 €10.99; CX43 8 / 16 / 160 €16.49; CAX31 (Arm) 8 / 16 / 160 €21.49; CX53 16 / 32 / 320 €29.99; CAX41 (Arm) 16 / 32 / 320 €41.49, before VAT. Until they can be ordered, this guide prices the Regular Performance plans, which cost about three to four times as much for the same size.",
       "status": "open"
     },
     {
