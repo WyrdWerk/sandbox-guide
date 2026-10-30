@@ -352,6 +352,18 @@
         "quote": "`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "yes",
+      "figure": "No idle timer or session limit",
+      "scenario": "At 00:20 the machine is still running and still billing, with the queued test run intact; nothing in the product will stop it for being quiet.",
+      "note": "There is no idle timeout, auto-stop or maximum session length, so an always-on agent is safe from the provider but pays for every idle hour. The same absence means there is no wake path: a stopped Instance stays stopped until something calls the API, and standby mode bills in full.",
+      "source": {
+        "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/",
+        "quote": "The Instance is fully active and consumes compute resources.",
+        "confidence": "inferred"
+      }
     }
   ],
   "figureLabel": "Idle or lifetime limit",

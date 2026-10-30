@@ -361,6 +361,18 @@
         "quote": "Within the DNS Manager, you can add your registered domain names and manage DNS records for each of them.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "partly",
+      "figure": "Your DNS; TLS via LB or Caddy",
+      "scenario": "Point an A record at the static IP and run Caddy on the machine for a certificate; there is no per-Instance domain mapping or managed certificate.",
+      "note": "A fixed public IP makes a custom domain a DNS record, and Scaleway sells Domains and DNS. Managed Let's Encrypt certificates belong to the Load Balancer and Edge Services, which front a Load Balancer, Object Storage or a Serverless Container, not an Instance directly. On a plain Instance you install and renew the certificate yourself.",
+      "source": {
+        "url": "https://www.scaleway.com/en/docs/edge-services/concepts/",
+        "quote": "You can choose between uploading your own certificate held in Scaleway Secret Manager, or letting Edge Services generate a fully-managed Let's Encrypt certificate.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Path to your domain",

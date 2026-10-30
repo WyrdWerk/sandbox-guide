@@ -284,6 +284,17 @@
             "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Full VM, own kernel",
+          "note": "Every Instance is a full virtual machine with its own kernel, so Docker, kernel modules and any TCP service behave as on a physical server. The hypervisor is not named in the docs.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/",
+            "quote": "An Instance is a virtual machine in the cloud. Like a physical machine, it provides resources such as virtualized CPU, RAM, and storage.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -563,6 +574,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/faqs-for-compute-instances",
             "quote": "Since you have full root access to your Linode's system, you're free to choose between a number of popular web servers to host your websites.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Root by SSH key",
+          "note": "You connect as root with the SSH key you upload at creation; there is also a browser serial console and a rescue/boot-mode path if the install breaks.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/connect-to-instance/",
+            "quote": "you can use a terminal application on your local computer to remotely connect to your Instance as root.",
             "confidence": "docs-confirmed"
           }
         }
@@ -851,6 +873,17 @@
             "quote": "Deploy Docker, a tool that enables you to create, deploy, and manage containers.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Docker InstantApp",
+          "note": "Docker is a one-click InstantApp, and root means any container runtime can be installed instead.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/images-and-instantapps/",
+            "quote": "Docker, the famous container manager encapsulated in a Scaleway image, allows you to deploy your applications within seconds, eliminating concerns about compatibility and dependencies.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -1133,6 +1166,17 @@
           "source": {
             "url": "https://www.linode.com/community/questions/17491/how-do-i-enable-nested-virtualization-for-my-linode",
             "quote": "At present, there is no option to enable nested virtualization for a Linode.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "not-published",
+          "figure": "Not documented",
+          "note": "No Scaleway page states whether nested virtualisation works inside an Instance, and the datasheet lists CPU, RAM and storage without a virtualisation flag. Treat it as unavailable until support confirms; QEMU/KVM or an Android emulator inside an Instance is not a documented use case.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/instances-datasheet/",
+            "quote": "This datasheet provides a concise overview of the performance, technical features, components, materials, and associated documentation for different Instance offers.",
             "confidence": "not-published"
           }
         }
@@ -1424,6 +1468,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/images",
             "quote": "A custom image is an image of a Linode you created in Akamai Cloud or an image of an external disk uploaded to Akamai Cloud.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "QCOW2 import/export",
+          "note": "Snapshots can be exported to and imported from Object Storage as QCOW2 files, so a VM built elsewhere can be brought in and an Instance can be moved between Availability Zones. You can also snapshot a configured Instance and boot copies from it.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/api-cli/snapshot-import-export-feature/",
+            "quote": "The snapshot transfer feature allows you to export or import Instances snapshots.",
             "confidence": "docs-confirmed"
           }
         }
@@ -1721,6 +1776,17 @@
             "quote": "No, RAM and local disk storage are bundled into the specific VM size. You cannot purchase extra RAM or local disk space individually for an existing instance plan.",
             "confidence": "pricing-page"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Fixed offers only",
+          "note": "CPU and RAM come only in the published offer sizes; the console's resize flow picks from a list of offers rather than letting you set vCPU and RAM independently. Disk is the flexible dimension, through block volumes.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/resize-instances/",
+            "quote": "Select a new Instance configuration from the list of available offers.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -2017,6 +2083,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/how-to-choose-a-compute-instance-plan",
             "quote": "4 GB - 512 GB Memory, 2 - 256 Dedicated vCPUs, 40 GB - 7200 GB Storage",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "48 vCPU / 256 GiB",
+          "note": "Within the shared and development ranges the largest is GP1-XL at 48 vCPU / 256 GiB; dedicated STANDARD3 and POP2 reach 64 vCPU / 256 GiB, and 96 vCPU on COMPUTE3. They are outside this card but orderable on the same platform.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/instances-datasheet/",
+            "quote": "vCPUs 48 vCPU type Shared RAM size 256 GiB",
             "confidence": "docs-confirmed"
           }
         }
@@ -2323,6 +2400,18 @@
             "quote": "Warm resize. Your Linode remains up during the migration and it's rebooted once the migration completes.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "partly",
+          "figure": "Change offer; reboot, 5 min",
+          "shortfall": "Resizing is a change of offer that reboots the Instance with up to five minutes of downtime, and it needs block storage rather than a local volume.",
+          "note": "You can move up or down the offer list, including to a newer generation, without recreating the machine. The disk cannot shrink and the machine reboots, so it is not a live resize.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/resize-instances/",
+            "quote": "This upgrades your Instance, which reboots in the process, resulting in up to five minutes of downtime.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -2621,6 +2710,17 @@
             "quote": "Akamai offers Graphical Processing Unit (GPU)-optimized virtual machines designed to accelerate compute-intensive workloads, specifically AI inference, big data processing, and video encoding.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "L4, L40S, H100, B300",
+          "note": "GPU Instances are sold from the same console and API, from an L4 at €0.79/hour to eight B300-SXM. They are outside this general-purpose card and cost many times more.",
+          "source": {
+            "url": "https://www.scaleway.com/en/pricing/gpu/",
+            "quote": "A flexible, cost-effective GPU instance designed for AI and accelerated workloads",
+            "confidence": "pricing-page"
+          }
         }
       ]
     },
@@ -2912,6 +3012,17 @@
             "quote": "Linodes are available across all regions.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Paris, Amsterdam, Warsaw, Milan",
+          "note": "Four EU regions, each with three Availability Zones; not every offer is available in every zone, and the pricing page's zone selector is the authoritative list.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/faq/",
+            "quote": "Scaleway offers different Instance ranges in all regions: Paris (France), Amsterdam (Netherlands), and Warsaw (Poland).",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -3200,6 +3311,17 @@
             "quote": "All European data centers, located at: Frankfurt DE, London UK, Milan IT, Paris FR, Amsterdam NL, Stockholm SE, Madrid ES",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "France, Netherlands, Poland, Italy",
+          "note": "All four regions are in the EU, operated by a French company that markets itself as free of US CLOUD Act exposure. EU location is not by itself a residency guarantee: the customer still chooses the zone and configures backups.",
+          "source": {
+            "url": "https://www.scaleway.com/en/about-us/",
+            "quote": "A subsidiary of the iliad Group, Scaleway currently operates in France, Poland, Italy, and the Netherlands, with upcoming deployments in Sweden and Germany.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -3485,6 +3607,17 @@
             "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Standby bills in full",
+          "note": "Standby mode keeps the Instance allocated and its data on local storage, but Scaleway bills it in full while it sits there, so it is not a cheaper pause. Powering off is the only way to stop the compute meter, and that loses RAM and running processes.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/use-standby-mode/",
+            "quote": "You are still billed for an Instance in standby mode, as well as for its storage and any flexible IPs attached to it.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -3761,6 +3894,18 @@
             "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
             "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "partly",
+          "figure": "Fixed-size autoscaling group",
+          "shortfall": "An autoscaling group can hold a fixed number of identical Instances behind a load balancer, but there is no way to claim one of them for a single task.",
+          "note": "Groups can run at a fixed size or scale on CPU/RAM metrics, and autohealing replaces failed Instances. That is a pool of running servers for a service, not a warm pool that hands a machine to a job.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/create-manage-instance-groups/",
+            "quote": "A group can run at a fixed size for predictable workloads, or scale automatically between a minimum and maximum number of Instances based on usage metrics.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -4052,6 +4197,17 @@
             "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Seconds, not under one",
+          "note": "Scaleway says its Instances are delivered in seconds. Provisioning includes cloning the image onto a volume and booting a kernel, so this is not a sub-second sandbox start.",
+          "source": {
+            "url": "https://www.scaleway.com/en/scaleway-vs-aws/",
+            "quote": "Our Virtual Instances range is delivered in seconds and is made to meet all your workload needs, from personal projects to business-critical apps.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -4336,6 +4492,17 @@
             "quote": "The Images service lets you retain complete disk images in the cloud for quick access in the future or recover a deleted Linode.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Volume snapshots, kept",
+          "note": "A snapshot copies one volume, and an image snapshots every volume of an Instance. Snapshots are independent billed resources kept until deleted, and can be exported as QCOW2.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/create-a-backup/",
+            "quote": "Creating an image makes a complete backup of your Instance, including all of its volumes.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -4614,6 +4781,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/images",
             "quote": "An image is a file containing exact content and structure of a data storage device.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Disk only",
+          "note": "A snapshot is a picture of a volume, not of RAM. Restoring one boots a fresh kernel, and anything the agent held in memory is gone.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/block-storage/concepts/",
+            "quote": "A snapshot takes a picture of a specific volume at one point in time.",
             "confidence": "docs-confirmed"
           }
         }
@@ -4897,6 +5075,17 @@
             "quote": "Before continuing, you should power off the Linode you want to clone.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Snapshot, then new Instance",
+          "note": "There is no copy-on-write fork of a running machine. The closest is a crash-consistent snapshot of a running volume followed by creating a new Instance from it.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/block-storage/concepts/",
+            "quote": "A snapshot takes a picture of a specific volume at one point in time.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -5179,6 +5368,17 @@
             "quote": "The Backups service does not keep automated backups older than 14 days, though there are no restrictions on the age of a manual snapshot.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Kept until deleted",
+          "note": "Snapshots are not rotated automatically and survive the deletion of their source volume, Instance or image, so any age is available until you delete it.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/block-storage/concepts/",
+            "quote": "In both cases, the snapshot exists as an independent, billed resource and is not deleted when its source volume, Instance, or image is deleted.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -5456,6 +5656,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/images",
             "quote": "You can quickly deploy that custom image to a new or existing Linode in the future.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Immutable Instance templates",
+          "note": "A template stores the offer, image, network, security group, tags and cloud-init for repeatable creation. It cannot be edited after creation; you create a new one or override fields at deploy time.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/create-manage-instance-templates/",
+            "quote": "An Instance template saves a predefined, immutable server configuration",
             "confidence": "docs-confirmed"
           }
         }
@@ -5740,6 +5951,17 @@
             "quote": "Safeguard your data with the Backups service by enabling automatic backups of the disks on your Linodes.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Manual images and snapshots",
+          "note": "There is no automatic backup product for Instances: images and snapshots are manual, and Scaleway documents a do-it-yourself schedule built on Serverless Jobs. Snapshots bill at €0.000049/GB/hour.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/create-a-backup/",
+            "quote": "Creating an image is free. However, the image feature creates snapshots of your volumes, and snapshots are billed separately.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -6020,6 +6242,17 @@
             "url": "https://www.akamai.com/cloud/pricing/cpu",
             "quote": "We maintain your saved data and reserve your ability to use other resources like RAM, transfer, etc., even when your VM is powered off.",
             "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Disk kept or archived",
+          "note": "When stopping you choose to keep local storage attached (billed as storage) or archive it to the volume store, from which it is restored on the next start. Block volumes are persistent independently of the Instance.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/",
+            "quote": "Stopped (keep local storage): storage + IP (no compute).",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -6303,6 +6536,17 @@
             "quote": "Since volumes are managed independently of Linodes, your data persists even if you delete your attached Linode.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "15 volumes, to 15 TB each",
+          "note": "Block volumes attach and detach like a virtual hard drive, up to 16 volumes per Instance including the boot volume, and 15 TB each. They persist without an Instance and are billed by provisioned size.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/block-storage/concepts/",
+            "quote": "Block volumes provide network-attached storage you can plug in/out of Instances like a virtual hard drive.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -6581,6 +6825,17 @@
             "url": "https://techdocs.akamai.com/cloud-computing/docs/block-storage",
             "quote": "A Linode can have multiple volumes attached to it, but a volume can only be attached to one Linode at a time.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "One Instance at a time",
+          "note": "A block volume is attached to an Instance, and Scaleway documents no multi-attach mode that would let two Instances mount the same volume. Sharing files between machines means Object Storage, File Storage or a network service.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/block-storage/how-to/attach-a-volume/",
+            "quote": "Scaleway Block Storage volumes must be attached to an Instance before being used.",
+            "confidence": "inferred"
           }
         }
       ]
@@ -6864,6 +7119,18 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/object-storage",
             "quote": "Akamai's Object Storage is a globally-available, Amazon S3-compatible method you can use to store and access data.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "partly",
+          "figure": "S3 API, no native mount",
+          "shortfall": "Object Storage speaks the S3 API, but Scaleway offers no native mount: you add s3fs, rclone or a similar client yourself, with the latency and consistency that implies.",
+          "note": "Object Storage is S3-compatible and priced separately (75 GB of egress free a month, then €0.01/GB). File Storage is a managed NFS-style file system, also a separate product.",
+          "source": {
+            "url": "https://www.scaleway.com/en/pricing/storage/",
+            "quote": "Scalable, fast and reliable Amazon S3-compatible storage platform for your data.",
             "confidence": "docs-confirmed"
           }
         }
@@ -7156,6 +7423,17 @@
             "quote": "Minimum size for a volume is 10 GB and the maximum size is 16 TB.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "15 TB per volume",
+          "note": "A single block volume can be 15 TB, and up to 15 of them attach to one Instance. Local storage is capped at 600 GB on GP1-XL.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/block-storage/faq/",
+            "quote": "The maximum size of a block volume is 15 TB.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -7442,6 +7720,17 @@
             "url": "https://techdocs.akamai.com/linode-api/reference/get-linode-instance",
             "quote": "`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "No timer or session limit",
+          "note": "Nothing in the product stops a running Instance for idleness and there is no maximum session length. An always-on agent stays up until you stop or delete the machine.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/",
+            "quote": "The Instance is fully active and consumes compute resources.",
+            "confidence": "inferred"
           }
         }
       ]
@@ -7731,6 +8020,17 @@
             "quote": "`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "No idle timeout",
+          "note": "There is no idle timeout, auto-stop or sleep setting to configure. Stopping is a manual or API action, and standby mode bills in full.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/",
+            "quote": "The Instance is halted and the underlying hypervisor is released.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -8009,6 +8309,17 @@
             "quote": "`billing_suspension` indicates that payment is past due on the Linode, so we've suspended its use.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "No wake path",
+          "note": "A stopped Instance has released its hypervisor and cannot be woken by an incoming request; something must call the API to start it. There is no request-triggered cold start.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/",
+            "quote": "The Instance is halted and the underlying hypervisor is released.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -8285,6 +8596,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
             "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "No provider scheduler",
+          "note": "Scaleway has no cron or scheduled start/stop for Instances. Autoscaling groups scale on metrics, not on a timetable; scheduling means cron or a systemd timer inside the machine, or Serverless Jobs calling the API.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/create-manage-instance-groups/",
+            "quote": "A group can run at a fixed size for predictable workloads, or scale automatically between a minimum and maximum number of Instances based on usage metrics.",
             "confidence": "inferred"
           }
         }
@@ -8576,6 +8898,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
             "quote": "Dedicated IPv4 and IPv6 addresses (additional addresses available on request)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Public IPv4/IPv6, any port",
+          "note": "A flexible IPv4 is routed directly to the Instance and any port can be opened through the security group; a free flexible IPv6 is also available. There is no provider-issued preview URL.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/use-flexips/",
+            "quote": "Flexible routed IPv4 addresses: public IPv4 addresses routed directly to your Instance.",
             "confidence": "docs-confirmed"
           }
         }
@@ -8870,6 +9203,17 @@
             "quote": "Defend your apps and services from malicious attackers by creating rules to only allow traffic from trusted sources.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "No token links",
+          "note": "There is no private or token-gated URL for a port. Access control is the security group plus whatever authentication you run, or a private network with no public address.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/use-flexips/",
+            "quote": "Detaching your Instance's flexible (public) IP address cuts any ongoing public connection to the Instance.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -9161,6 +9505,17 @@
             "quote": "All Linodes can be accessed through Lish and SSH (if properly configured).",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "ssh root@IPv4 or IPv6",
+          "note": "SSH is a normal daemon on a public address, with the key you uploaded at creation. There is no provider-only shell requirement.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/connect-to-instance/",
+            "quote": "you can use a terminal application on your local computer to remotely connect to your Instance as root.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -9450,6 +9805,17 @@
             "quote": "You can use a terminal application to connect to a Lish SSH gateway, or you can log in to the Cloud Manager and use the Lish console in your web browser.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Browser serial console",
+          "note": "The console opens a serial TTY in a pop-up where you can run commands like an SSH shell, useful when the network is broken. You must set a Linux user password over SSH first.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/use-serial-console/",
+            "quote": "You can now run all Linux commands like in an SSH shell.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -9737,6 +10103,17 @@
             "quote": "All Linodes can be accessed through Lish and SSH (if properly configured).",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "ssh -L over real SSH",
+          "note": "Because SSH is a real port, local port forwarding works for reaching a dashboard or an agent UI without exposing it. No provider tunnel client is needed.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/connect-to-instance/",
+            "quote": "you can use a terminal application on your local computer to remotely connect to your Instance as root.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -10020,6 +10397,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/faqs-for-compute-instances",
             "quote": "In an effort to fight spam originating from our platform, outbound connections on ports 25, 465, and 587 are blocked by default on Linodes for some new accounts.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Any TCP or UDP port",
+          "note": "The security group filters inbound and outbound traffic by protocol and port, so non-web services, game servers and custom protocols work. SMTP is blocked by default until enabled.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/use-security-groups/",
+            "quote": "Define the inbound and outbound rules of the security group",
             "confidence": "docs-confirmed"
           }
         }
@@ -10307,6 +10695,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/dns-manager",
             "quote": "Within the DNS Manager, you can add your registered domain names and manage DNS records for each of them.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Point DNS at the IP",
+          "note": "A fixed public IP means an A or AAAA record is enough; Scaleway also sells Domains and DNS. There is no managed per-Instance hostname or domain mapping.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/use-flexips/",
+            "quote": "public IPv4 addresses routed directly to your Instance.",
             "confidence": "docs-confirmed"
           }
         }
@@ -10600,6 +10999,18 @@
             "quote": "The email address you want to use for generating the SSL certificates via Let’s Encrypt.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "partly",
+          "figure": "Load Balancer or Caddy",
+          "shortfall": "Automatic HTTPS is not a property of an Instance: you either run Caddy or certbot on the server or put a paid Load Balancer (optionally with Edge Services) in front for a managed Let's Encrypt certificate.",
+          "note": "Edge Services terminates TLS with an uploaded certificate or a managed Let's Encrypt certificate, but only for an Object Storage bucket, a Load Balancer or a Serverless Container backend, not directly for an Instance.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/edge-services/concepts/",
+            "quote": "You can choose between uploading your own certificate held in Scaleway Secret Manager, or letting Edge Services generate a fully-managed Let's Encrypt certificate.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -10888,6 +11299,17 @@
             "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
             "quote": "Metered outbound network transfer (egress) that includes 1 TB - 20 TB of prorated network transfer allowance",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "No egress fees",
+          "note": "Scaleway states that Instance list prices include egress and that there are no egress fees; the meter is the shape's public bandwidth, from 100 Mbps to 16 Gbps. Object Storage egress is a separate product.",
+          "source": {
+            "url": "https://www.scaleway.com/en/pricing/virtual-instances/",
+            "quote": "List prices include egress and IPv6 addresses.",
+            "confidence": "pricing-page"
           }
         }
       ]
@@ -11178,6 +11600,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/manage-firewall-rules",
             "quote": "Outbound rules limit the outgoing network connections coming from a Akamai Cloud service based on the port(s) and destinations you configure.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Security group outbound rules",
+          "note": "Security groups are stateful or stateless firewalls with inbound and outbound rules, applied to the Instance's public traffic and to private-network interfaces.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/use-security-groups/",
+            "quote": "Define the inbound and outbound rules of the security group",
             "confidence": "docs-confirmed"
           }
         }
@@ -11471,6 +11904,17 @@
             "quote": "Accept allows all traffic except for those defined in the listed rules, and Drop denies all traffic except for those defined in the rules.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "No public IP, private only",
+          "note": "An Instance can be created without a flexible IPv4 and attached only to a Private Network, giving it no internet path at all.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/understanding-instance-pricing/",
+            "quote": "You can create an Instance without a flexible IPv4 by unticking the corresponding checkbox.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -11751,6 +12195,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
             "quote": "Dedicated IPv4 and IPv6 addresses (additional addresses available on request)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Flexible IPv4, reserved",
+          "note": "A flexible IPv4 stays reserved to the account while the Instance is powered off and can be moved between Instances; it is billed until deleted. IPv6 is free.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/understanding-instance-pricing/",
+            "quote": "Billing for an Instance stops when it is powered off, but its flexible IPv4 remains reserved and continues to be billed unless deleted.",
             "confidence": "docs-confirmed"
           }
         }
@@ -12045,6 +12500,17 @@
             "quote": "User data can be provided to the Metadata service, which is then consumed by cloud-init when your Linode boots up for the first time.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Secret Manager",
+          "note": "Secret Manager is a separate Scaleway product with versioned secrets, paths, ephemeral policies, single-access secrets and a time to live of up to a year. It is not wired into Instance creation; the agent reads it with an API key or you inject the value yourself.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/secret-manager/concepts/",
+            "quote": "An ephemeral secret is a secret that has a limited lifetime, enforced by an ephemeral policy.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -12332,6 +12798,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/add-user-data-when-deploying-a-compute-instance",
             "quote": "User data can be provided to the Metadata service, which is then consumed by cloud-init when your Linode boots up for the first time.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "No injection the agent can't read",
+          "note": "Secrets are readable by any principal with the permission set that covers them. There is no write-only environment store or proxy that lets an agent use a key it cannot read, so a key on the machine is a key the agent can exfiltrate.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/secret-manager/concepts/",
+            "quote": "Disabling a version is the action of temporarily revoking access to the data contained within a specific version.",
             "confidence": "inferred"
           }
         }
@@ -12628,6 +13105,17 @@
             "quote": "For each product or service on the list, select the level of access the token should have.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "IAM policies, per application",
+          "note": "API keys belong to an IAM user or application and permissions come from policies with permission sets, resource scopes and CEL conditions, so a key can be limited to one project or one action.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/iam/concepts/",
+            "quote": "This allows fine-grained access to be defined for the IAM user bearing the API key across different Organizations, Projects, and resources.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -12902,6 +13390,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/create-a-compute-instance",
             "quote": "Log in to Cloud Manager, click the Create dropdown menu on the top bar, and select Linode.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Console wizard",
+          "note": "The console creates an Instance from an image or a template, with offer, zone, volumes, security group and cloud-init in one flow. It also shows an estimated cost before you confirm.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/",
+            "quote": "You can create an Instance from scratch or from an Instance template.",
             "confidence": "docs-confirmed"
           }
         }
@@ -13181,6 +13680,17 @@
             "quote": "Linode CLI is a wrapper around the Linode API that lets you manage your Akamai Cloud account and resources from the command line.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "scw CLI",
+          "note": "The official `scw` CLI covers Instances, volumes, snapshots, IPs and the rest of the platform, and is the same tool the docs use for scripted creation.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/api-cli/cli-cheatsheet/",
+            "quote": "This page shows the most common Scaleway CLI commands for creating and managing Scaleway Instances.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -13458,6 +13968,17 @@
             "quote": "The official python library for the Linode API v4 in python.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "scaleway-sdk-python",
+          "note": "An official Python SDK is documented and published, in synchronous and asynchronous flavours. Scaleway labels it beta.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/scaleway-sdk/python-sdk/",
+            "quote": "The Scaleway Python SDK offers an efficient way for developers to interact with Scaleway's cloud services programmatically.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -13733,6 +14254,17 @@
           "source": {
             "url": "https://github.com/linode/manager/tree/develop/packages/api-v4",
             "quote": "JavaScript client for the Linode APIv4",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "@scaleway/sdk",
+          "note": "An official JavaScript/TypeScript SDK is documented and published on npm as @scaleway/sdk, but it is designed for Node.js only: browser-based requests are not supported. Go is also supported.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/scaleway-sdk/js-sdk/",
+            "quote": "The Scaleway JS SDK is a dynamic tool for developers who use JavaScript to interact with Scaleway's cloud services.",
             "confidence": "docs-confirmed"
           }
         }
@@ -14013,6 +14545,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
             "quote": "Linode API provides the ability to programmatically manage the full range of services on Akamai Cloud.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Documented REST API",
+          "note": "Every resource is available over the REST API with per-product OpenAPI specifications, and the API is what the console and CLI call.",
+          "source": {
+            "url": "https://www.scaleway.com/en/developers",
+            "quote": "Manage your resources with the Scaleway API using simple HTTP requests.",
             "confidence": "docs-confirmed"
           }
         }
@@ -14302,6 +14845,17 @@
             "quote": "A read-only Model Context Protocol server for Akamai Cloud (Linode).",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "None official",
+          "note": "Scaleway publishes no official MCP server for its control plane; the developer site lists API, SDKs, CLI and third-party integrations. Community servers such as scaleway-mcp exist but are third-party and were not evaluated.",
+          "source": {
+            "url": "https://www.scaleway.com/en/developers",
+            "quote": "Manage your resources with the Scaleway API using simple HTTP requests.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -14582,6 +15136,17 @@
             "quote": "You can use a terminal application to connect to a Lish SSH gateway, or you can log in to the Cloud Manager and use the Lish console in your web browser.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "No PTY endpoint",
+          "note": "There is no API that opens an interactive shell in an Instance. Automation runs over SSH or cloud-init; the browser serial console is a human troubleshooting tool, not an API.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/how-to/use-serial-console/",
+            "quote": "You can now run all Linux commands like in an SSH shell.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -14858,6 +15423,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/manage-disks-on-a-compute-instance",
             "quote": "The storage space on a Linode can be allocated to individual disks. Disks can be used to store any data, including the operating system, applications, and files.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "No file endpoint",
+          "note": "Files move over SSH, SCP/SFTP or Object Storage. There is no per-Instance file read/write API.",
+          "source": {
+            "url": "https://www.scaleway.com/en/developers",
+            "quote": "Manage your resources with the Scaleway API using simple HTTP requests.",
             "confidence": "inferred"
           }
         }
@@ -15147,6 +15723,17 @@
             "quote": "Deploy Hermes Agent, an open source AI agent platform that executes tasks through a persistent gateway connecting communication channels, tools, and AI models.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "None",
+          "note": "The InstantApps are infrastructure and web apps (Docker, GitLab, Nextcloud, WordPress, OpenVPN). No coding agent, no Hermes and no OpenClaw image.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/images-and-instantapps/",
+            "quote": "An InstantApp allows you to deploy pre-configured applications quickly on CPU Instances.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -15424,6 +16011,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
             "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "None",
+          "note": "There is no prompt endpoint for an Instance. Scaleway's Generative APIs are a separate model service, not a way to prompt a machine.",
+          "source": {
+            "url": "https://www.scaleway.com/en/developers",
+            "quote": "Manage your resources with the Scaleway API using simple HTTP requests.",
             "confidence": "inferred"
           }
         }
@@ -15705,6 +16303,17 @@
             "quote": "Deploy Hermes Agent, an open source AI agent platform that executes tasks through a persistent gateway connecting communication channels, tools, and AI models.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Not an InstantApp",
+          "note": "Hermes is not in Scaleway's InstantApp list and Scaleway publishes no Hermes guide. You install it over SSH like any other service.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/images-and-instantapps/",
+            "quote": "An InstantApp allows you to deploy pre-configured applications quickly on CPU Instances.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -15982,6 +16591,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/quick-deploy-apps/docs/openclaw",
             "quote": "This app allows you to connect to the OpenClaw dashboard via a secure HTTPS endpoint protected by HTPASSWD and creates a limited user on the system named openclaw.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Model API only, not an app",
+          "note": "Scaleway documents OpenClaw as a client of its Generative APIs on a local machine or Mac mini, not as an Instance image. Hosting the Gateway on an Instance is a manual install.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/generative-apis/reference-content/integrate-with-openclaw/",
+            "quote": "You can integrate Openclaw with Generative APIs models to build a personal AI assistant",
             "confidence": "docs-confirmed"
           }
         }
@@ -16263,6 +16883,17 @@
             "url": "https://techdocs.akamai.com/cloud-computing/docs/access-your-desktop-environment-using-glish",
             "quote": "Distribution images do not have any desktop environments pre-installed.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Install it yourself",
+          "note": "No browser image or headless-browser service. You install Chromium or Playwright on the Instance, and memory is the constraint: 4 GiB is a practical floor for a browser agent.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/images-and-instantapps/",
+            "quote": "An InstantApp allows you to deploy pre-configured applications quickly on CPU Instances.",
+            "confidence": "inferred"
           }
         }
       ]
@@ -16549,6 +17180,18 @@
             "quote": "It lets you run a desktop environment on your Linode and access it through Cloud Manager.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "partly",
+          "figure": "Windows + RDP only",
+          "shortfall": "There is a Windows Server image with Remote Desktop, but no managed desktop for computer-use agents; a Linux desktop means installing X, VNC or a remote-desktop stack yourself.",
+          "note": "Scaleway's Windows golden-image guide enables Remote Desktop and the RDP firewall rule, so a Windows Instance gives a GUI over RDP. GPU remote-desktop images exist for Linux but are outside this card.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/creating-a-windows-golden-image/",
+            "quote": "Enables Remote Desktop",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -16827,6 +17470,18 @@
             "quote": "- [DigitalOcean](https://docs.openclaw.ai/install/digitalocean): Host OpenClaw on a DigitalOcean Droplet",
             "confidence": "not-published"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "partly",
+          "figure": "OpenClaw as API client only",
+          "shortfall": "Scaleway documents OpenClaw only as a client of its model API on a local machine, and publishes no Instance guide for OpenClaw or Hermes; a third-party guide recommends DEV1-M.",
+          "note": "Any Linux VPS can host these agents, and a third-party deployment guide (DeployClaw) picks DEV1-M for OpenClaw. Scaleway's own content covers the model endpoint, not the Gateway host.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/generative-apis/reference-content/integrate-with-openclaw/",
+            "quote": "You can integrate Openclaw with Generative APIs models to build a personal AI assistant",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -17103,6 +17758,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/identity-and-access-cm",
             "quote": "You can use Identity and Access in Akamai Cloud to manage identities within an account and manage operations that those identities may perform.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Organizations and Projects",
+          "note": "An Organization holds Projects and Members; resources live in a Project and access is granted per principal. A billing contact can be added separately.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/iam/concepts/",
+            "quote": "An Organization is made of one or several Projects.",
             "confidence": "docs-confirmed"
           }
         }
@@ -17385,6 +18051,17 @@
             "quote": "Identity and Access uses the role-based access control (RBAC) model to authorize operations on entities.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Permission sets and policies",
+          "note": "Predefined permission sets (InstancesFullAccess, InstancesReadOnly, BillingManager and dozens more) are attached to users, groups or applications through policies, with resource and CEL conditions.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/iam/policies-permissions/permission-sets/",
+            "quote": "Permissions sets and their scope make up IAM rules, which define the access rights that a principal (user, group or application) should have.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -17661,6 +18338,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/single-sign-on-cm",
             "quote": "Use Linode API to configure single sign-on (SSO) with federated identity providers through SAML 2.0.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "SAML SSO; OAuth2 for Owner",
+          "note": "Identity Federation supports SAML single sign-on and SCIM user/group provisioning. The Organization Owner cannot use SAML and logs in with OAuth2; members must exist in the Organization first.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/iam/user-provisioning/set-up-sso-with-authentik/",
+            "quote": "Scaleway supports Identity Federation to provide your teams with secure access to their accounts via SAML Single Sign-On.",
             "confidence": "docs-confirmed"
           }
         }
@@ -17943,6 +18631,17 @@
             "quote": "You pay for any service on your account, even if it's inactive or powered off. To stop additional charges, delete the service.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Alerts only, no cap",
+          "note": "Billing alerts notify at a percentage of a monthly budget by SMS, email or webhook, but nothing blocks or stops a resource when the budget is reached. Quotas limit how many machines exist, not what they spend.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/billing/how-to/use-billing-alerts/",
+            "quote": "This feature allows you to create alerts that notify you when predefined budget thresholds are met.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -18221,6 +18920,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/configure-email-alerts-for-resource-usage-on-compute-instances",
             "quote": "Cloud Manager allows you to configure alerts that automatically notify you through email if certain performance thresholds are reached.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Budget alerts, 10 per account",
+          "note": "Up to ten alerts per monthly budget, at chosen percentages, by SMS, email or API webhook, plus a consumption view by product. Alerts are based on the amount charged after tax and discounts.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/billing/how-to/use-billing-alerts/",
+            "quote": "This feature allows you to create alerts that notify you when predefined budget thresholds are met.",
             "confidence": "docs-confirmed"
           }
         }
@@ -18505,6 +19215,17 @@
             "quote": "Audit logs are time-stamped records that document events, actions, and changes within a service. They show what happened, who initiated the action, when it occurred",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Audit Trail, 90-day export",
+          "note": "Audit Trail records successful, attempted and failed actions with the principal, API method, outcome and source IP, and can export the last 90 days to Object Storage daily.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/audit-trail/concepts/",
+            "quote": "Audit Trail is a tool that holds a record of events and changes performed within a Scaleway Organization.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -18783,6 +19504,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
             "quote": "Usage is always rounded up to the nearest hour.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "60-minute minimum",
+          "note": "Each resource is billed for a minimum of 60 minutes per start and stop event, so a ten-minute run pays a full hour of compute. This is the single biggest difference from a sandbox provider.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/billing/faq/",
+            "quote": "Each of these resources is billed separately for a minimum of 60 minutes.",
             "confidence": "docs-confirmed"
           }
         }
@@ -19079,6 +19811,17 @@
             "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Allocated while it runs",
+          "note": "CPU is allocated to the Instance for as long as it is powered on, and billed per hour of uptime whether the agent is busy or idle. Only powering off stops the compute meter.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/faq/",
+            "quote": "CPU Instances: Billed per hour of uptime (including startup and standby time).",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -19364,6 +20107,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
             "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "Off: storage + IP only",
+          "note": "Powering off stops compute billing and keeps the disk; you still pay for attached storage and any reserved flexible IPv4. That is a genuine cheap idle state, unlike a VPS that bills while powered off.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/",
+            "quote": "Compute billing stops, but you continue to pay for any attached storage (local volumes that you chose to keep or Block Storage volumes) and for any Flexible IPs.",
             "confidence": "docs-confirmed"
           }
         }
@@ -19657,6 +20411,17 @@
             "quote": "If you use a service for part of a month, you're charged only for the time it remains on your account.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "No plan, no commitment",
+          "note": "There is no subscription or plan fee: usage is invoiced monthly at the hourly rates, with no minimum commitment or notice period. Savings Plans are optional.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/reference-content/understanding-instance-pricing/",
+            "quote": "You can power off or delete your Instance at any time—no minimum commitment or notice period is required.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -19947,6 +20712,18 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works",
             "quote": "You're never billed more than the monthly rate for each service, excluding network transfer overages.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "partly",
+          "figure": "Hourly × 730, no cap",
+          "shortfall": "There is no monthly price cap: the 'approx. per month' figure is simply the hourly rate multiplied by 730, so an always-on month costs exactly that and a partial month costs the hours used.",
+          "note": "Billing is by the hour of uptime, so the monthly figure is an estimate rather than a cap. A powered-off month costs only storage and IP.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/instances/faq/",
+            "quote": "CPU Instances: Billed per hour of uptime (including startup and standby time).",
             "confidence": "docs-confirmed"
           }
         }
@@ -20245,6 +21022,17 @@
             "quote": "You must spend your service credits during the trial period.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "None for Instances",
+          "note": "Scaleway has free tiers for some products, but no Instance size is free and the pricing page lists a price for every offer. The cheapest listed offer is STARDUST1-S at €0.0006/hour.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/billing/concepts/",
+            "quote": "Scaleway offers free tiers for certain products.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -20539,6 +21327,17 @@
             "quote": "Try Akamai Cloud with a US$100 Credit",
             "confidence": "pricing-page"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "€100 Business trial",
+          "note": "New Business customers with a valid payment method and no previous Scaleway invoice get €100 of credit through a voucher emailed within 24 hours, which must be redeemed. It is a one-off trial, not a recurring allowance.",
+          "source": {
+            "url": "https://www.scaleway.com/en/scaleway-vs-aws/",
+            "quote": "Create a Business account and get started with €100 free credit.",
+            "confidence": "pricing-page"
+          }
         }
       ]
     },
@@ -20827,6 +21626,17 @@
             "quote": "A valid payment method is required to confirm your identity, but we will not charge you during your trial.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Card required",
+          "note": "A credit or debit card is required at signup, and must stay on the account even when SEPA is the payment method. Prepaid and virtual cards are refused.",
+          "source": {
+            "url": "https://www.scaleway.com/en/docs/billing/faq/",
+            "quote": "Note that you must add a credit card to your account before setting up a SEPA mandate.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -21101,6 +21911,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/subscribe-to-status-updates",
             "quote": "The Linode Status page provides real-time system status and maintenance updates via email.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "status.scaleway.com",
+          "note": "A public status page lists incidents and scheduled maintenance per product and region, and the account docs describe subscribing to status updates.",
+          "source": {
+            "url": "https://status.scaleway.com/",
+            "quote": "Scheduled maintenance is still in progress.",
             "confidence": "docs-confirmed"
           }
         }
@@ -21383,6 +22204,18 @@
           "source": {
             "url": "https://www.akamai.com/legal/sla-compute",
             "quote": "We guarantee (i) 99.99% monthly uptime for Covered Services in general availability and (ii) 99% monthly uptime for Covered instances in limited availability",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "partly",
+          "figure": "99% BASIC3 only; none on DEV1",
+          "shortfall": "The cheap ranges have no service-level objective at all: DEV1, GP1, PLAY2 and PRO2 are listed as 'No SLO', and only BASIC3-X among the shared ranges carries 99%.",
+          "note": "Covered Shared Instances (BASIC2-A, BASIC3-X) get 99%, dedicated and specialized ranges 99.5%. Unavailability means at least four continuous minutes without external connectivity, and credits are a percentage of the monthly bill.",
+          "source": {
+            "url": "https://www.scaleway.com/en/virtual-instances/sla/",
+            "quote": "No SLO",
             "confidence": "docs-confirmed"
           }
         }
@@ -21669,6 +22502,17 @@
             "quote": "Upon request, Akamai shall deliver to Customer relevant compliance documentation from such audit(s) (e.g., Akamai’s then-current SOC 2 Type 2 (or its successor) report)",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "ISO 27001 and HDS instead",
+          "note": "Scaleway advertises ISO/IEC 27001:2022 and HDS, with SecNumCloud under assessment. No SOC 2 report is listed on its security and compliance page; buyers who need SOC 2 must ask sales.",
+          "source": {
+            "url": "https://www.scaleway.com/en/security-and-compliance/",
+            "quote": "Scaleway is committed to obtaining the most stringent certifications (ISO 27001, HDS, SecNumCloud – currently undergoing assessment)",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -21942,6 +22786,17 @@
           "source": {
             "url": "https://www.akamai.com/site/en/documents/corporate/akamai-data-protection-addendum.pdf",
             "quote": "This Data Processing Agreement (this “DPA”) is incorporated into and made a part of the most recent Terms & Conditions in effect between Akamai and a legal entity that has purchased Services from Akamai",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "yes",
+          "figure": "DPA in the contracts page",
+          "note": "A Data Processing Agreement is published alongside the General Terms and can be downloaded from the contracts page; the privacy policy states that processor data is governed by it.",
+          "source": {
+            "url": "https://www.scaleway.com/en/privacy-policy/",
+            "quote": "The data collected for the operation of our services, where Scaleway acts as a processor, is governed by our General Conditions of Services as well as our Data Processing Agreement (DPA).",
             "confidence": "docs-confirmed"
           }
         }
@@ -22224,6 +23079,17 @@
           "source": {
             "url": "https://techdocs.akamai.com/cloud-computing/docs/compute-instance",
             "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "scaleway",
+          "verdict": "no",
+          "figure": "Proprietary platform",
+          "note": "The platform is proprietary. The CLI, SDKs and Terraform provider are open source, and Scaleway markets open standards and no vendor lock-in, but there is no self-hostable version of the cloud.",
+          "source": {
+            "url": "https://www.scaleway.com/en/security-and-compliance/",
+            "quote": "Built on leading open-source technologies such as Kubernetes",
             "confidence": "inferred"
           }
         }

@@ -400,6 +400,11 @@
           "provider": "hetzner",
           "why": "Three EU locations under German law, ISO 27001 and BSI C5, with a DPA created online and EU traffic allowances.",
           "watch": "The US and Singapore locations are outside the EU and are priced differently."
+        },
+        {
+          "provider": "scaleway",
+          "why": "Four EU regions under French law, ISO 27001 and HDS certifications, a published DPA, and a stopped Instance that keeps its disk while the compute meter stops.",
+          "watch": "The cheap DEV1/GP1/PLAY2/PRO2 ranges have no SLA, and HDS applies only to services tagged for it, not to every Instance by default."
         }
       ],
       "sources": [

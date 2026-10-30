@@ -1,0 +1,388 @@
+{
+  "id": "scaleway",
+  "name": "Scaleway Instances",
+  "url": "https://www.scaleway.com/en/virtual-instances/",
+  "status": "researched",
+  "kind": "vps",
+  "checkedOn": "2026-10-30",
+  "oneLiner": "French cloud provider: fixed-size virtual machines from €6.55 a month for a 2 vCPU DEV1-S before storage and IPv4, billed hourly with a 60-minute minimum, where powering off stops the compute meter but storage and the IPv4 keep billing.",
+  "whatItIs": [
+    "Scaleway Instances are fixed-size virtual machines (vCPU, RAM and a bandwidth cap in one offer) sold by the hour from data centres in Paris, Amsterdam, Warsaw and Milan. Storage is not part of the offer: you attach a block volume or, on DEV1 and GP1, a local SSD, and pay for the provisioned size.",
+    "It is an ordinary Linux server product rather than a sandbox service. You get root, SSH, your own kernel, Docker if you install it, a flexible public IPv4 and a security group. There is no prompt endpoint, no memory snapshot, no idle sleep and no session limit.",
+    "The ranges in this card are the shared-CPU ones a reader would actually rent: Development (STARDUST1, DEV1, PLAY2) and General Purpose (BASIC3, BASIC2-A on Arm, PRO2, GP1). Dedicated STANDARD3 and POP2, the compute- and memory-optimised ranges, GPU Instances and Elastic Metal are outside it.",
+    "The billing shape is the interesting part. Unlike most VPS providers, powering an Instance off stops compute billing: you keep paying for storage and for any reserved flexible IPv4, but not for the vCPUs. Short tasks are the opposite problem, because every resource is billed for at least 60 minutes."
+  ],
+  "whoFor": "People who want an ordinary always-on Linux server in the EU, priced in euros, from a French provider with ISO 27001 and HDS, and who value a cheap idle state: a machine that is powered off between sessions costs storage and its IP rather than a full monthly plan. It suits a personal agent, a chat bot, n8n, a small MCP server or a coding box. It is a poor fit for many short runs, because the 60-minute minimum makes a ten-minute task cost a full hour.",
+  "isolation": "A full virtual machine per Instance with its own kernel, disk and public IP: root, Docker inside, real SSH, any TCP port. The hypervisor is never named and nested virtualisation is not documented. GPU Instances are a separate, much more expensive range on the same platform.",
+  "sizes": "Fixed offers only, no custom CPU/RAM split. Shared and development ranges run from 1 vCPU / 1 GiB (STARDUST1-S) to 48 vCPU / 256 GiB (GP1-XL), with 100 Mbps to 10 Gbps of public bandwidth. Disk is separate: block volumes from 5 GB to 15 TB, up to 16 per Instance, or local SSD up to 600 GB on GP1. The boot volume must be at least 10 GB. Resizing means changing offer with a reboot of up to five minutes.",
+  "billing": {
+    "model": "Pay-as-you-go per resource: the Instance by the hour, the volume by provisioned GB-hour, and the flexible IPv4 by the hour. No plan fee, no commitment, no monthly cap. Prices are published in EUR before tax and invoiced monthly.",
+    "meter": "Hourly, with a minimum of 60 minutes per resource per start and stop event. DEV1-M is €0.0202/hour (about $0.0225), so an always-on month is 730 hours; the pricing page's 'approx. per month' is exactly the hourly rate × 730, not a cap.",
+    "stopped": "Powering off releases the hypervisor and stops compute billing. Attached storage (local kept or archived, or block volumes) and any reserved flexible IPv4 keep billing. Standby mode is different: the Instance stays allocated and is billed in full.",
+    "planFee": "None. There is no subscription and no minimum commitment; Savings Plans are an optional discount for an hourly spend commitment, not a fee.",
+    "minimum": "A credit or debit card is required at signup. New Business customers with a valid payment method and no prior invoice get a €100 voucher, redeemable once. No Instance size is free, and default per-type quotas are small (DEV1-M 8 with a validated payment method, 15 with identity validated)."
+  },
+  "cost": {
+    "A": {
+      "headline": "$29.49 a month",
+      "shape": "DEV1-M (3 vCPU / 4 GiB), 10 GiB block volume, created and deleted for each task",
+      "lines": [
+        {
+          "label": "Compute",
+          "arithmetic": "1,000 runs × 1 h minimum (10 min rounds up to the 60-minute floor) × $0.022483",
+          "amount": "$22.48"
+        },
+        {
+          "label": "Block Storage 5K",
+          "arithmetic": "1,000 h × 10 GiB × $0.00014469",
+          "amount": "$1.45"
+        },
+        {
+          "label": "Flexible IPv4",
+          "arithmetic": "1,000 × 1 h × $0.005565",
+          "amount": "$5.57"
+        }
+      ],
+      "total": "$29.49",
+      "notes": [
+        "The size fits: DEV1-M is 3 vCPU / 4 GiB; the 10 GiB volume is the minimum boot size.",
+        "The 60-minute minimum is the whole cost: 1,000 ten-minute tasks are billed as 1,000 hours, not 166.7. On a per-second sandbox the same compute is about $3.75.",
+        "On DEV1 local SSD instead of block storage the disk line falls from $1.45 to $0.55 and the total to $28.59; the card prices block storage on every shape (see the caveats).",
+        "IPv6-only would save the $5.57 of IPv4, but many agent endpoints still need IPv4.",
+        "Default quota is 8 DEV1-M Instances with a validated payment method (15 with identity validated), so the 1,000 tasks must run in sequence or be spread across offer types.",
+        "The engine prints $22.72: it applies the 60-minute floor to compute but not to storage, and the card excludes the IPv4.",
+        "Line amounts are rounded to the cent and add to $29.50; the precise total is $29.495."
+      ],
+      "flag": "This is the workload Scaleway is worst at: a per-second sandbox bills the ten minutes used, while the 60-minute minimum makes every task cost a full hour of compute, disk and IP."
+    },
+    "B": {
+      "headline": "$44.15 a month",
+      "shape": "DEV1-L (4 vCPU / 8 GiB), 50 GiB block volume, 730 hours",
+      "lines": [
+        {
+          "label": "Compute",
+          "arithmetic": "730 h × $0.047681",
+          "amount": "$34.81"
+        },
+        {
+          "label": "Block Storage 5K",
+          "arithmetic": "730 h × 50 GiB × $0.00014469",
+          "amount": "$5.28"
+        },
+        {
+          "label": "Flexible IPv4",
+          "arithmetic": "730 h × $0.005565",
+          "amount": "$4.06"
+        }
+      ],
+      "total": "$44.15",
+      "notes": [
+        "DEV1-L is the cheapest offer that fits 4 vCPU / 8 GiB.",
+        "DEV1-L can use local SSD at €0.000049/GB/hour instead of block storage: the disk line falls from $5.28 to $1.99 and the total to $40.86. The card prices block storage on every shape (see the caveats).",
+        "It is old hardware: AMD EPYC 7281 at 2.1 GHz, shared vCPUs, and DEV1 has no SLA at all. The current-generation BASIC3-X4C-8G with 50 GiB of block storage is $73.53 a month, nearly twice as much, with a 99% SLO.",
+        "There is no monthly cap, so the 730-hour figure is the bill, not a discount.",
+        "IPv6-only would be $40.09; snapshots or backups would add storage at €0.000049/GB/hour."
+      ]
+    },
+    "C": {
+      "headline": "$8.20 a month",
+      "shape": "DEV1-M (3 vCPU / 4 GiB), 20 GiB block volume, 90 running and 640 powered-off hours",
+      "lines": [
+        {
+          "label": "Compute",
+          "arithmetic": "90 h × $0.022483",
+          "amount": "$2.02"
+        },
+        {
+          "label": "Block Storage 5K",
+          "arithmetic": "730 h × 20 GiB × $0.00014469",
+          "amount": "$2.11"
+        },
+        {
+          "label": "Flexible IPv4",
+          "arithmetic": "730 h × $0.005565 (reserved while the Instance is off)",
+          "amount": "$4.06"
+        }
+      ],
+      "total": "$8.20",
+      "notes": [
+        "This is where Scaleway beats most VPS providers: the 640 powered-off hours cost no compute, only storage and the reserved IP.",
+        "On DEV1 local SSD the disk line falls from $2.11 to $0.80 and the total to $6.88; the card prices block storage on every shape (see the caveats).",
+        "Archiving local storage on stop does not save money: the archive is snapshot storage at the same €0.000049/GB/hour.",
+        "Deleting the Instance and rebuilding from an image would drop the storage and IP bills but also the address and the boot time; the IPv4 is the largest line here, so an IPv6-only machine is $4.14.",
+        "The engine prints $4.14: it models compute and block storage correctly and excludes the IPv4, which bills for 730 hours rather than the 90 running ones.",
+        "Line amounts are rounded to the cent and add to $8.19; the precise total is $8.198."
+      ],
+      "flag": "The saving depends on powering the machine off. Standby mode keeps it allocated and bills it in full."
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "Scaleway SAS, 8 rue de la Ville-l'Évêque, 75008 Paris, France; SIREN 433 115 904 RCS Paris; VAT FR 35 433115904; share capital €142,050.",
+        "source": {
+          "url": "https://www.scaleway.com/en/legal-notice/",
+          "quote": "SIREN: 433 115 904 RCS Paris",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Ownership",
+        "value": "A subsidiary of the iliad Group (the French telecoms group founded by Xavier Niel); no separate stock listing or venture round is published for Scaleway.",
+        "source": {
+          "url": "https://www.scaleway.com/en/about-us/",
+          "quote": "A subsidiary of the iliad Group, Scaleway currently operates in France, Poland, Italy, and the Netherlands, with upcoming deployments in Sweden and Germany.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Regions",
+        "value": "Four multi-AZ EU regions: Paris (fr-par, three AZ), Amsterdam (nl-ams), Warsaw (pl-waw) and Milan (it-mil), with Sweden and Germany announced.",
+        "source": {
+          "url": "https://www.scaleway.com/en/about-us/",
+          "quote": "Scaleway currently operates in France, Poland, Italy, and the Netherlands",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Certifications",
+        "value": "ISO/IEC 27001:2022 and HDS (French health-data hosting); SecNumCloud qualification is under assessment. No SOC 2 report is listed.",
+        "source": {
+          "url": "https://www.scaleway.com/en/security-and-compliance/",
+          "quote": "Scaleway is committed to obtaining the most stringent certifications (ISO 27001, HDS, SecNumCloud – currently undergoing assessment)",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Status and SLA",
+        "value": "A public status page, and an Instance SLA that gives 99% to BASIC2-A/BASIC3-X, 99.5% to dedicated and specialised ranges, and no SLO at all to DEV1, GP1, PLAY2 and PRO2.",
+        "source": {
+          "url": "https://www.scaleway.com/en/virtual-instances/sla/",
+          "quote": "No SLO",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Data protection",
+        "value": "A Data Processing Agreement is published with the contracts and governs data processed on the customer's behalf; the privacy policy names it explicitly.",
+        "source": {
+          "url": "https://www.scaleway.com/en/privacy-policy/",
+          "quote": "The data collected for the operation of our services, where Scaleway acts as a processor, is governed by our General Conditions of Services as well as our Data Processing Agreement (DPA).",
+          "confidence": "docs-confirmed"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "An agent that is idle most of the day: a powered-off DEV1-M costs $2.11 of block storage (or $0.80 of local SSD) and $4.06 of IPv4 a month, not the $17.21 of compute.",
+      "An always-on small agent: DEV1-M at $22.59 a month including block storage and IPv4, or DEV1-S at $12.41 for a chat bot or MCP server.",
+      "EU residency with a French legal flavour: four EU regions, ISO 27001, HDS, a published DPA and no US CLOUD Act exposure.",
+      "No egress bill: Instance prices include egress and there is no per-GB charge, only the shape bandwidth cap.",
+      "A coding box that is used eight hours a day: DEV1-L costs $15.92 a month at 160 hours plus disk and IP, because the stopped hours do not bill compute."
+    ],
+    "badly": [
+      "Many short runs: every task under an hour pays a full hour of compute, disk and IPv4, so 1,000 ten-minute tasks cost $29.49 instead of about $5.",
+      "Bursty parallel fan-out: default quotas are single-digit per offer type, so hundreds of simultaneous machines need a support request.",
+      "Anything that needs a memory-preserving pause, an idle sleep, a wake-on-request, a preview URL or a sandbox API.",
+      "Workloads that need a written SLA: DEV1, GP1, PLAY2 and PRO2 have no SLO at all.",
+      "Arm-averse software: the BASIC2-A offers are arm64 and the calculator may pick one for large sizes."
+    ]
+  },
+  "usability": {
+    "dashboard": "Yes: the console creates Instances, volumes, snapshots, images, flexible IPs, security groups, private networks and templates, with an estimated cost before you confirm, a consumption view and billing alerts.",
+    "withoutCode": "Partly. Creating the machine is clicking, and Docker or WordPress can be preselected as an InstantApp, but everything that makes it an agent host — the agent, the database, the certificate, the service unit — is a terminal.",
+    "signup": "A Scaleway account with a validated payment method; a credit or debit card is required, prepaid and virtual cards are refused, and identity validation raises the default quotas. Business accounts can claim a €100 voucher.",
+    "docs": "Extensive: docs.scaleway.com covers Instances, Block Storage, IAM, billing and troubleshooting, with OpenAPI specifications, an official CLI, Python/Go/JS SDKs and a Terraform provider. The billing pages contradict each other on the IPv4 price and the old per-second wording survives in third-party guides.",
+    "tripsUp": [
+      "Every resource is billed for a minimum of 60 minutes, so a ten-minute task pays a full hour of compute, storage and IP.",
+      "A powered-off Instance still bills its disk and its flexible IPv4; only deleting them ends those charges.",
+      "Standby mode sounds like a pause but is billed in full.",
+      "The Instance price excludes storage and the IPv4, which together can be a third of a small machine's bill.",
+      "The cheap DEV1, GP1, PLAY2 and PRO2 ranges have no SLA.",
+      "The first-party pages disagree on the flexible IPv4 price: the FAQ says €0.004/hour, the pricing page and the June 2026 price update say €0.005/hour.",
+      "The console's 'approx. per month' is hourly × 730, not a cap.",
+      "Arm (BASIC2-A) offers can be the cheapest fit for large sizes."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "The 60-minute minimum decides the cost of short work",
+      "detail": "Scaleway's billing FAQ says each resource is billed for a minimum of 60 minutes per start and stop event. A ten-minute task therefore pays a full hour of compute, a full hour of volume and a full hour of IPv4. Some third-party guides still describe per-second billing; no current first-party page does, and the Instances FAQ says CPU Instances are billed per hour of uptime. If the older per-second behaviour were still in force, workload A would fall from $29.49 to about $4.90.",
+      "status": "open"
+    },
+    {
+      "issue": "Two first-party prices for the flexible IPv4",
+      "detail": "The Instances FAQ says each Instance's flexible IPv4 costs €0.004/hour, while the network pricing page lists an Instance IPv4 at €0.005/hour and the 1 June 2026 price update moved Zonal Flexible IPv4 from €0.004 to €0.005. This guide uses €0.005/hour (€3.65 a month), the newer figure confirmed by two pages.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.scaleway.com/en/docs/instances/faq/",
+          "quote": "Each Instance’s flexible IPv4 costs €0.004/hour, excl. VAT.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.scaleway.com/en/blog/a-transparent-update-on-scaleway-pricing/",
+          "quote": "Zonal Flexible IPv4 | €0.004 /hour | €0.005 /hour",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "issue": "A stopped Instance is cheap, not free",
+      "detail": "Compute billing stops on power-off, which is unusual for a VPS and makes idle time cheap. Storage and any reserved flexible IPv4 continue, so a small stopped machine still costs about $4.86 a month, most of it the IPv4. Standby mode is worse: it keeps the machine allocated and bills it in full.",
+      "status": "open"
+    },
+    {
+      "issue": "The engine cannot bill a per-machine IPv4 through stopped hours",
+      "detail": "RateCard.perMachine follows billed machine hours, so with billedWhileStopped false it would charge the IPv4 only for the 90 running hours of workload C, not the 730 hours the address is reserved. The card therefore leaves the IPv4 out and the provider cost adds it by hand. The smallest fix is one line in cost.ts: compute perMachineHours from run + stopped rather than run + stoppedBilled, and apply minimumSeconds to the tasks branch. A regression test on a stopped machine with a per-machine fee would cover it.",
+      "status": "open"
+    },
+    {
+      "issue": "No SLA on the ranges this card prices cheapest",
+      "detail": "The Instance SLA lists DEV1, GP1, PLAY2 and PRO2 as 'No SLO'; only BASIC2-A and BASIC3-X get 99%. A buyer who needs a contractual availability promise has to move up to a dedicated range or accept the risk.",
+      "status": "open"
+    },
+    {
+      "issue": "STARDUST1-S is priced but missing from the default quota table",
+      "detail": "STARDUST1-S is listed at €0.0006/hour (about €0.44 a month) on the pricing page and appears in the zone's product API, but it is absent from the default Organization quota table read on 2026-10-30, which lists DEV1, PLAY2, GP1, PRO2, BASIC2-A and POP2. Its orderability on a new account is unconfirmed, so the MCP route quotes it with that caveat and offers DEV1-S as the safe alternative.",
+      "status": "open"
+    },
+    {
+      "issue": "One storage class is priced for every shape",
+      "detail": "The card prices Block Storage 5K at €0.000130/GB/hour on every shape, because it is the only option on BASIC3, PLAY2, PRO2 and BASIC2-A and a valid option on DEV1, GP1 and STARDUST1. Local SSD on those three ranges costs €0.000049/GB/hour, 2.65× less: on local storage B is 0.86 instead of 4.15 and C is .88 instead of .20. The engine has one disk rate per plan and one stopped rate for the whole card, so a two-class card would misprice stopped block volumes; pricing one class keeps every printed number valid.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "A cheap idle state: powering off stops compute billing, so a machine used three hours a day costs $8.20 rather than a full monthly plan ($6.88 on local SSD).",
+    "No egress fees and a real public IPv4/IPv6 with any port open and a security group in front.",
+    "EU-only footprint under French law, with ISO 27001, HDS and a published DPA.",
+    "Block volumes to 15 TB and local SSD up to 600 GB, both persistent without the machine.",
+    "A complete API with OpenAPI specs, an official CLI and Python, Go and TypeScript SDKs.",
+    "Fine-grained IAM with SAML SSO, SCIM, audit trail and scoped API keys."
+  ],
+  "sources": [
+    {
+      "label": "Virtual Instances (product)",
+      "url": "https://www.scaleway.com/en/virtual-instances/"
+    },
+    {
+      "label": "Virtual Instances pricing (EUR, PAR-1)",
+      "url": "https://www.scaleway.com/en/pricing/virtual-instances/"
+    },
+    {
+      "label": "Storage pricing (block 5K/15K, snapshots)",
+      "url": "https://www.scaleway.com/en/pricing/storage/"
+    },
+    {
+      "label": "Network pricing (Additional IP)",
+      "url": "https://www.scaleway.com/en/pricing/network/"
+    },
+    {
+      "label": "GPU Instances pricing",
+      "url": "https://www.scaleway.com/en/pricing/gpu/"
+    },
+    {
+      "label": "Price update effective 1 June 2026",
+      "url": "https://www.scaleway.com/en/blog/a-transparent-update-on-scaleway-pricing/"
+    },
+    {
+      "label": "Instances FAQ",
+      "url": "https://www.scaleway.com/en/docs/instances/faq/"
+    },
+    {
+      "label": "Understanding Instance pricing",
+      "url": "https://www.scaleway.com/en/docs/instances/reference-content/understanding-instance-pricing/"
+    },
+    {
+      "label": "Instance states",
+      "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/"
+    },
+    {
+      "label": "Standby mode",
+      "url": "https://www.scaleway.com/en/docs/instances/how-to/use-standby-mode/"
+    },
+    {
+      "label": "Instances datasheet",
+      "url": "https://www.scaleway.com/en/docs/instances/reference-content/instances-datasheet/"
+    },
+    {
+      "label": "Block Storage FAQ",
+      "url": "https://www.scaleway.com/en/docs/block-storage/faq/"
+    },
+    {
+      "label": "Block Storage concepts",
+      "url": "https://www.scaleway.com/en/docs/block-storage/concepts/"
+    },
+    {
+      "label": "Security groups",
+      "url": "https://www.scaleway.com/en/docs/instances/how-to/use-security-groups/"
+    },
+    {
+      "label": "Flexible IPs",
+      "url": "https://www.scaleway.com/en/docs/instances/how-to/use-flexips/"
+    },
+    {
+      "label": "Billing FAQ",
+      "url": "https://www.scaleway.com/en/docs/billing/faq/"
+    },
+    {
+      "label": "Default Organization quotas",
+      "url": "https://www.scaleway.com/en/docs/organizations-and-projects/organization/organization-quotas/"
+    },
+    {
+      "label": "IAM concepts",
+      "url": "https://www.scaleway.com/en/docs/iam/concepts/"
+    },
+    {
+      "label": "IAM permission sets",
+      "url": "https://www.scaleway.com/en/docs/iam/policies-permissions/permission-sets/"
+    },
+    {
+      "label": "SAML SSO with Authentik",
+      "url": "https://www.scaleway.com/en/docs/iam/user-provisioning/set-up-sso-with-authentik/"
+    },
+    {
+      "label": "Audit Trail concepts",
+      "url": "https://www.scaleway.com/en/docs/audit-trail/concepts/"
+    },
+    {
+      "label": "Secret Manager concepts",
+      "url": "https://www.scaleway.com/en/docs/secret-manager/concepts/"
+    },
+    {
+      "label": "Edge Services concepts",
+      "url": "https://www.scaleway.com/en/docs/edge-services/concepts/"
+    },
+    {
+      "label": "Instance SLA",
+      "url": "https://www.scaleway.com/en/virtual-instances/sla/"
+    },
+    {
+      "label": "Security and compliance",
+      "url": "https://www.scaleway.com/en/security-and-compliance/"
+    },
+    {
+      "label": "Legal notice",
+      "url": "https://www.scaleway.com/en/legal-notice/"
+    },
+    {
+      "label": "About Scaleway",
+      "url": "https://www.scaleway.com/en/about-us/"
+    },
+    {
+      "label": "Free trial terms",
+      "url": "https://www.scaleway.com/en/scaleway-vs-aws/"
+    },
+    {
+      "label": "Status page",
+      "url": "https://status.scaleway.com/"
+    },
+    {
+      "label": "ECB euro reference rate",
+      "url": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
+    }
+  ]
+}

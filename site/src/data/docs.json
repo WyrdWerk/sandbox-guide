@@ -1762,5 +1762,71 @@
       "title": "Terms and conditions: availability and contract",
       "url": "https://contabo.com/en/legal/terms-and-conditions/"
     }
+  },
+  "scaleway": {
+    "isolation": {
+      "title": "Instances concepts: what an Instance is",
+      "url": "https://www.scaleway.com/en/docs/instances/concepts/"
+    },
+    "sizes-regions": {
+      "title": "Instances datasheet: every range and its vCPU type",
+      "url": "https://www.scaleway.com/en/docs/instances/reference-content/instances-datasheet/"
+    },
+    "lifecycle": {
+      "title": "Instance states: what running, stopped and deleted bill",
+      "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/"
+    },
+    "snapshots-forks": {
+      "title": "Create a backup: images, snapshots and what they contain",
+      "url": "https://www.scaleway.com/en/docs/instances/how-to/create-a-backup/"
+    },
+    "storage": {
+      "title": "Block Storage concepts: volumes, local volumes and snapshots",
+      "url": "https://www.scaleway.com/en/docs/block-storage/concepts/"
+    },
+    "idle-timers": {
+      "title": "Power off an Instance, and what standby mode does",
+      "url": "https://www.scaleway.com/en/docs/instances/how-to/use-standby-mode/"
+    },
+    "reaching-it": {
+      "title": "Connect to your Instance over SSH",
+      "url": "https://www.scaleway.com/en/docs/instances/how-to/connect-to-instance/"
+    },
+    "custom-domains": {
+      "title": "Edge Services: custom domains and managed certificates",
+      "url": "https://www.scaleway.com/en/docs/edge-services/how-to/configure-custom-domain/"
+    },
+    "outbound-network": {
+      "title": "Security groups: inbound and outbound firewall rules",
+      "url": "https://www.scaleway.com/en/docs/instances/how-to/use-security-groups/"
+    },
+    "keys-secrets": {
+      "title": "Secret Manager concepts: versions, ephemeral secrets and TTL",
+      "url": "https://www.scaleway.com/en/docs/secret-manager/concepts/"
+    },
+    "ways-to-drive": {
+      "title": "Scaleway developers: API, SDKs, CLI and integrations",
+      "url": "https://www.scaleway.com/en/developers"
+    },
+    "built-in-agents": {
+      "title": "OS images and InstantApps for Instances",
+      "url": "https://www.scaleway.com/en/docs/instances/reference-content/images-and-instantapps/"
+    },
+    "teams-accounts": {
+      "title": "IAM concepts: Organizations, Projects, policies and API keys",
+      "url": "https://www.scaleway.com/en/docs/iam/concepts/"
+    },
+    "billing-models": {
+      "title": "Billing FAQ: the 60-minute minimum and what stops billing",
+      "url": "https://www.scaleway.com/en/docs/billing/faq/"
+    },
+    "trials-free-tiers": {
+      "title": "Free trial: €100 for a new Business account",
+      "url": "https://www.scaleway.com/en/scaleway-vs-aws/"
+    },
+    "company": {
+      "title": "Security and compliance: certifications and trust center",
+      "url": "https://www.scaleway.com/en/security-and-compliance/"
+    }
   }
 }

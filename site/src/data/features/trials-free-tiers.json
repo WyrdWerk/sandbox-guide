@@ -352,6 +352,18 @@
         "quote": "Promotional credits are available only to new customers who have not yet signed up for a free trial.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "partly",
+      "figure": "€100 Business trial; card required",
+      "scenario": "A new Business account with a card can start with €100 of credit, but there is no free Instance size and the card stays on the account afterwards.",
+      "note": "New Business customers with a valid payment method and no prior Scaleway invoice receive a €100 voucher by email within 24 hours, which must be redeemed. No ongoing free tier covers Instances, prepaid cards are refused, and a card is required even when SEPA is used.",
+      "source": {
+        "url": "https://www.scaleway.com/en/scaleway-vs-aws/",
+        "quote": "Create a Business account and get started with €100 free credit.",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "What you get, and what ends it",

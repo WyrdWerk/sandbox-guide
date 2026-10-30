@@ -41,6 +41,7 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["linode", "a", 36], ["linode", "b", 48], ["linode", "c", 24],
   ["vultr", "a", 29.76], ["vultr", "b", 40], ["vultr", "c", 20],
   ["contabo", "a", 6.6], ["contabo", "b", 6.6], ["contabo", "c", 6.6],
+  ["scaleway", "a", 29.49], ["scaleway", "b", 44.15], ["scaleway", "c", 8.2],
 ];
 
 const task = (vcpu: number, ram: number, minutes: number) =>

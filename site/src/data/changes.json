@@ -2,6 +2,19 @@
   "changes": [
     {
       "date": "2026-10-30",
+      "title": "Scaleway added: French hourly servers whose compute stops billing when off",
+      "provider": "scaleway",
+      "what": "This guide now lists Scaleway Instances, priced in euros and shown in US dollars at the ECB rate. Each resource bills by the hour with a 60-minute minimum. Powering off stops the compute meter, but the block volume and a flexible IPv4 keep billing. The date is when this guide checked it, not a launch date.",
+      "sources": [
+        {
+          "url": "https://www.scaleway.com/en/docs/billing/faq/",
+          "quote": "Each of these resources is billed separately for a minimum of 60 minutes.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
       "title": "Contabo added: low monthly VPS prices, with a reputation to weigh",
       "provider": "contabo",
       "what": "This guide now lists Contabo. Its headline price is the 24-month rate; month-to-month Cloud VPS 4 is $6.60. CPU cores are shared, there is no hourly meter and a stopped server still bills. See the What users say section before buying. The date is when this guide checked it, not a launch date.",

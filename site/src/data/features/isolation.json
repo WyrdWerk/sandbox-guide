@@ -345,6 +345,18 @@
         "quote": "Linodes (also referred to as compute instances) are virtual machines that run on Akamai's secure and reliable global infrastructure.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "yes",
+      "figure": "Full VM; root, Docker, SSH",
+      "scenario": "Build the kernel module and load it: this is an ordinary virtual machine with its own kernel, root, Docker and a real SSH port, not a shared user-space sandbox.",
+      "note": "A full KVM virtual machine per Instance with its own kernel, disk and public IP. Docker is a one-click InstantApp and any container runtime can be installed. Nested virtualisation is not documented either way, the hypervisor is never named, and GPU Instances are a separate, much more expensive range.",
+      "source": {
+        "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/",
+        "quote": "An Instance is a virtual machine in the cloud. Like a physical machine, it provides resources such as virtualized CPU, RAM, and storage.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Boundary, and what it allows",

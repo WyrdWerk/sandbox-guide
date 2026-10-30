@@ -351,6 +351,18 @@
         "quote": "Linode CLI is a wrapper around the Linode API that lets you manage your Akamai Cloud account and resources from the command line.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "yes",
+      "figure": "Console, CLI, API, SDKs",
+      "scenario": "The first machine is clickable in the console; everything after that is scriptable through the API, the scw CLI or the Python, Go and TypeScript SDKs.",
+      "note": "Console wizard, documented REST API with OpenAPI specs, official CLI and SDKs for Python, Go and JavaScript/TypeScript, plus a Terraform provider. No official MCP server, no PTY endpoint and no file API, so an agent driving the platform uses HTTP or SSH.",
+      "source": {
+        "url": "https://www.scaleway.com/en/developers",
+        "quote": "Manage your resources with the Scaleway API using simple HTTP requests.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "First machine without a terminal?",

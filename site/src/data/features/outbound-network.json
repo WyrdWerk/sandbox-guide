@@ -352,6 +352,18 @@
         "quote": "Metered outbound network transfer (egress) that includes 1 TB - 20 TB of prorated network transfer allowance",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "yes",
+      "figure": "No egress fees; SG allowlist",
+      "scenario": "The agent browses freely with no per-GB bill, inside the shape's bandwidth, and outbound security-group rules can restrict where it goes.",
+      "note": "Instance list prices include egress and Scaleway states there are no egress fees; the meter is the shape's public bandwidth, 100 Mbps to 16 Gbps. Security groups filter outbound traffic as well as inbound, an Instance can be created without a public IPv4, and a private network gives it no internet path.",
+      "source": {
+        "url": "https://www.scaleway.com/en/pricing/virtual-instances/",
+        "quote": "List prices include egress and IPv6 addresses.",
+        "confidence": "pricing-page"
+      }
     }
   ],
   "figureLabel": "Egress price",

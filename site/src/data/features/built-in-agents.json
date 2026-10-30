@@ -352,6 +352,18 @@
         "quote": "Deploy OpenClaw, an open source AI agent platform that runs locally and executes tasks through a persistent gateway service connecting communication channels, tools, and AI models.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "no",
+      "figure": "None; Docker and web apps only",
+      "scenario": "Nothing is preinstalled: the agent is your install, your systemd unit and your updates.",
+      "note": "InstantApps are Docker, GitLab, Nextcloud, WordPress and OpenVPN, and the Marketplace adds more infrastructure images. No coding agent, no Hermes, no OpenClaw, no prompt API and no browser image. Scaleway's OpenClaw content is about pointing OpenClaw at its Generative APIs from a local machine or Mac mini, not hosting the Gateway on an Instance.",
+      "source": {
+        "url": "https://www.scaleway.com/en/docs/instances/reference-content/images-and-instantapps/",
+        "quote": "An InstantApp allows you to deploy pre-configured applications quickly on CPU Instances.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Agents installed, and promptable?",

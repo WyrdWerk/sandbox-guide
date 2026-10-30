@@ -333,10 +333,11 @@ function priceOnPlan(base: RateCard, w: Workload, plan: Plan): Quote {
     const pm = card.perMachine;
     if (pm) {
       if (w.mode === "tasks") {
-        const each = card.wholeHours ? runHours : h.session;
+        const each = card.wholeHours ? runHours : Math.max(h.session, (card.minimumSeconds ?? 0) / 3600);
         lines.push({ label: pm.label, math: `${num(w.tasks)} runs × ${num(each)} h × ${rate(pm.hourly)}`, amount: w.tasks * each * pm.hourly });
       } else {
-        const perMachineHours = (h.run + stoppedBilled) / Math.max(1, h.machines);
+        // An address is held, and billed, for as long as the machine exists, running or stopped.
+        const perMachineHours = (h.run + (h.keep ? h.stopped : 0)) / Math.max(1, h.machines);
         const each = Math.min(pm.monthly, perMachineHours * pm.hourly);
         lines.push({
           label: pm.label,
@@ -390,11 +391,14 @@ function priceOnPlan(base: RateCard, w: Workload, plan: Plan): Quote {
     } else {
       if (d.running) {
         const billed = Math.max(0, size - (d.included ?? 0) * unit);
+        // A per-resource minimum (Scaleway's 60 minutes) also applies to each short task's disk.
+        const minH = (card.minimumSeconds ?? 0) / 3600;
+        const diskH = w.mode === "tasks" && minH > h.session ? w.tasks * minH : h.run;
         if (billed > 0) {
           lines.push({
             label: "Disk while running",
-            math: `${runH} h × ${num(billed)}${d.decimalGB ? " GB" : " GiB"}${d.included ? ` (after ${d.included} free)` : ""} × ${rate(d.running)}`,
-            amount: h.run * billed * d.running,
+            math: `${num(diskH)} h${diskH > h.run + 1e-9 ? " (minimum per run)" : ""} × ${num(billed)}${d.decimalGB ? " GB" : " GiB"}${d.included ? ` (after ${d.included} free)` : ""} × ${rate(d.running)}`,
+            amount: diskH * billed * d.running,
           });
         }
       }

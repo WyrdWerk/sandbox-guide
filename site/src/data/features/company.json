@@ -397,6 +397,18 @@
         "quote": "We guarantee (i) 99.99% monthly uptime for Covered Services in general availability and (ii) 99% monthly uptime for Covered instances in limited availability",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "yes",
+      "figure": "ISO 27001, HDS; 99% on BASIC3 only",
+      "scenario": "The buyer can check a French company with a published legal notice, ISO 27001 and HDS certifications, an online DPA and a 99% SLO on BASIC3, but gets no SLA at all on the cheap ranges.",
+      "note": "Scaleway SAS of Paris, a subsidiary of the iliad Group, operating four EU regions. ISO/IEC 27001:2022 and HDS certified, SecNumCloud under assessment, DPA published with the contracts, public status page. The Instance SLA gives 99% to BASIC3-X and BASIC2-A, 99.5% to dedicated ranges, and no SLO to DEV1, GP1, PLAY2 or PRO2. No SOC 2 is listed.",
+      "source": {
+        "url": "https://www.scaleway.com/en/security-and-compliance/",
+        "quote": "Scaleway is committed to obtaining the most stringent certifications (ISO 27001, HDS, SecNumCloud – currently undergoing assessment)",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Contracting entity; promise",

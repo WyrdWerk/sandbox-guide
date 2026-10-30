@@ -352,6 +352,18 @@
         "quote": "4 GB - 512 GB Memory, 2 - 256 Dedicated vCPUs, 40 GB - 7200 GB Storage",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "yes",
+      "figure": "48 vCPU / 256 GiB; 4 EU countries",
+      "scenario": "The 4 vCPU / 8 GiB ask fits DEV1-L, PLAY2-MICRO or BASIC3-X4C-8G exactly, in Paris, Amsterdam, Warsaw or Milan, and the machine can be moved to another offer later with a reboot.",
+      "note": "Fixed offers only: shared and development ranges run from 1 vCPU / 1 GiB to 48 vCPU / 256 GiB, with dedicated STANDARD3 and POP2 up to 64 vCPU outside this card. Disk is separate, up to 15 TB per block volume and 600 GB of local SSD. No custom CPU/RAM split, no live resize, and not every offer exists in every zone.",
+      "source": {
+        "url": "https://www.scaleway.com/en/docs/instances/reference-content/instances-datasheet/",
+        "quote": "vCPUs 48 vCPU type Shared RAM size 256 GiB",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Largest shape; regions",

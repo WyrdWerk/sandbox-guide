@@ -352,6 +352,18 @@
         "quote": "The Images service lets you retain complete disk images in the cloud for quick access in the future or recover a deleted Linode.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "partly",
+      "figure": "Disk snapshots; no memory, no fork",
+      "scenario": "Snapshot the volume before the risky refactor and boot a new Instance from it if the change goes wrong; the half-written files are there, the queued test run in memory is not.",
+      "note": "Volume snapshots and whole-Instance images are manual, kept until deleted, and can be exported or imported as QCOW2. They never include RAM, there is no copy-on-write fork of a running machine, and there is no automatic backup schedule: Scaleway documents a do-it-yourself one built on Serverless Jobs. Snapshots bill at €0.000049/GB/hour.",
+      "source": {
+        "url": "https://www.scaleway.com/en/docs/instances/how-to/create-a-backup/",
+        "quote": "Creating an image makes a complete backup of your Instance, including all of its volumes.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a snapshot keeps",

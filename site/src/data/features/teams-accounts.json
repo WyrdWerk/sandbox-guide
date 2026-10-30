@@ -352,6 +352,18 @@
         "quote": "You can use Identity and Access in Akamai Cloud to manage identities within an account and manage operations that those identities may perform.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "partly",
+      "figure": "IAM, SAML SSO, audit; alerts not caps",
+      "scenario": "Five developers share an Organization with projects, permission sets, SAML SSO and an audit trail, but nothing stops a runaway machine when the budget is reached.",
+      "note": "Organizations, Projects, Members, groups, applications, fine-grained permission sets with CEL conditions, SAML SSO with SCIM, and Audit Trail with a 90-day export. Billing alerts only notify: there is no hard spending cap, and default per-type Instance quotas are small rather than spend-based.",
+      "source": {
+        "url": "https://www.scaleway.com/en/docs/iam/policies-permissions/permission-sets/",
+        "quote": "Permissions sets and their scope make up IAM rules, which define the access rights that a principal (user, group or application) should have.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Hard spend cap?",

@@ -1,0 +1,390 @@
+{
+  "provider": "scaleway",
+  "checkedOn": "2026-10-30",
+  "summary": "Fixed-size Instances billed by the hour with a 60-minute minimum, where powering off stops the compute meter but block storage and a flexible IPv4 keep billing; disk is a separate block volume, not part of the shape.",
+  "shapes": [
+    {
+      "name": "DEV1-S",
+      "vcpu": 2,
+      "ram": 2,
+      "disk": 20,
+      "hourly": 0.00999474
+    },
+    {
+      "name": "DEV1-M",
+      "vcpu": 3,
+      "ram": 4,
+      "disk": 40,
+      "hourly": 0.0224826
+    },
+    {
+      "name": "DEV1-L",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 80,
+      "hourly": 0.04768092
+    },
+    {
+      "name": "DEV1-XL",
+      "vcpu": 4,
+      "ram": 12,
+      "disk": 120,
+      "hourly": 0.07243404
+    },
+    {
+      "name": "PLAY2-PICO",
+      "vcpu": 1,
+      "ram": 2,
+      "disk": 15000,
+      "hourly": 0.01589364
+    },
+    {
+      "name": "PLAY2-NANO",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 15000,
+      "hourly": 0.03065202
+    },
+    {
+      "name": "PLAY2-MICRO",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 15000,
+      "hourly": 0.06130404
+    },
+    {
+      "name": "STARDUST1-S",
+      "vcpu": 1,
+      "ram": 1,
+      "disk": 10,
+      "hourly": 0.0006678
+    },
+    {
+      "name": "BASIC3-X2C-4G",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 15000,
+      "hourly": 0.04390785
+    },
+    {
+      "name": "BASIC3-X2C-8G",
+      "vcpu": 2,
+      "ram": 8,
+      "disk": 15000,
+      "hourly": 0.06592299
+    },
+    {
+      "name": "BASIC3-X4C-8G",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 15000,
+      "hourly": 0.087927
+    },
+    {
+      "name": "BASIC3-X4C-16G",
+      "vcpu": 4,
+      "ram": 16,
+      "disk": 15000,
+      "hourly": 0.13183485
+    },
+    {
+      "name": "BASIC3-X6C-12G",
+      "vcpu": 6,
+      "ram": 12,
+      "disk": 15000,
+      "hourly": 0.1509228
+    },
+    {
+      "name": "BASIC3-X6C-24G",
+      "vcpu": 6,
+      "ram": 24,
+      "disk": 15000,
+      "hourly": 0.1728489
+    },
+    {
+      "name": "BASIC3-X8C-16G",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 15000,
+      "hourly": 0.19775784
+    },
+    {
+      "name": "BASIC3-X8C-32G",
+      "vcpu": 8,
+      "ram": 32,
+      "disk": 15000,
+      "hourly": 0.2635584
+    },
+    {
+      "name": "BASIC3-X12C-24G",
+      "vcpu": 12,
+      "ram": 24,
+      "disk": 15000,
+      "hourly": 0.3017343
+    },
+    {
+      "name": "BASIC3-X12C-48G",
+      "vcpu": 12,
+      "ram": 48,
+      "disk": 15000,
+      "hourly": 0.3454752
+    },
+    {
+      "name": "BASIC3-X16C-32G",
+      "vcpu": 16,
+      "ram": 32,
+      "disk": 15000,
+      "hourly": 0.39539325
+    },
+    {
+      "name": "BASIC3-X16C-64G",
+      "vcpu": 16,
+      "ram": 64,
+      "disk": 15000,
+      "hourly": 0.52677177
+    },
+    {
+      "name": "BASIC2-A2C-4G",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 15000,
+      "hourly": 0.025599
+    },
+    {
+      "name": "BASIC2-A2C-8G",
+      "vcpu": 2,
+      "ram": 8,
+      "disk": 15000,
+      "hourly": 0.0383985
+    },
+    {
+      "name": "BASIC2-A4C-8G",
+      "vcpu": 4,
+      "ram": 8,
+      "disk": 15000,
+      "hourly": 0.0575421
+    },
+    {
+      "name": "BASIC2-A4C-16G",
+      "vcpu": 4,
+      "ram": 16,
+      "disk": 15000,
+      "hourly": 0.0766857
+    },
+    {
+      "name": "BASIC2-A6C-12G",
+      "vcpu": 6,
+      "ram": 12,
+      "disk": 15000,
+      "hourly": 0.0878157
+    },
+    {
+      "name": "BASIC2-A6C-24G",
+      "vcpu": 6,
+      "ram": 24,
+      "disk": 15000,
+      "hourly": 0.1005039
+    },
+    {
+      "name": "BASIC2-A8C-16G",
+      "vcpu": 8,
+      "ram": 16,
+      "disk": 15000,
+      "hourly": 0.1150842
+    },
+    {
+      "name": "BASIC2-A8C-32G",
+      "vcpu": 8,
+      "ram": 32,
+      "disk": 15000,
+      "hourly": 0.1533714
+    },
+    {
+      "name": "BASIC2-A12C-24G",
+      "vcpu": 12,
+      "ram": 24,
+      "disk": 15000,
+      "hourly": 0.1756314
+    },
+    {
+      "name": "BASIC2-A12C-48G",
+      "vcpu": 12,
+      "ram": 48,
+      "disk": 15000,
+      "hourly": 0.2011191
+    },
+    {
+      "name": "BASIC2-A16C-32G",
+      "vcpu": 16,
+      "ram": 32,
+      "disk": 15000,
+      "hourly": 0.2300571
+    },
+    {
+      "name": "BASIC2-A16C-64G",
+      "vcpu": 16,
+      "ram": 64,
+      "disk": 15000,
+      "hourly": 0.3067428
+    },
+    {
+      "name": "PRO2-XXS",
+      "vcpu": 2,
+      "ram": 8,
+      "disk": 15000,
+      "hourly": 0.0624393
+    },
+    {
+      "name": "PRO2-XS",
+      "vcpu": 4,
+      "ram": 16,
+      "disk": 15000,
+      "hourly": 0.1248786
+    },
+    {
+      "name": "PRO2-S",
+      "vcpu": 8,
+      "ram": 32,
+      "disk": 15000,
+      "hourly": 0.24862194
+    },
+    {
+      "name": "PRO2-M",
+      "vcpu": 16,
+      "ram": 64,
+      "disk": 15000,
+      "hourly": 0.49724388
+    },
+    {
+      "name": "PRO2-L",
+      "vcpu": 32,
+      "ram": 128,
+      "disk": 15000,
+      "hourly": 0.99562302
+    },
+    {
+      "name": "GP1-XS",
+      "vcpu": 4,
+      "ram": 16,
+      "disk": 150,
+      "hourly": 0.10330866
+    },
+    {
+      "name": "GP1-S",
+      "vcpu": 8,
+      "ram": 32,
+      "disk": 300,
+      "hourly": 0.21229362
+    },
+    {
+      "name": "GP1-M",
+      "vcpu": 16,
+      "ram": 64,
+      "disk": 600,
+      "hourly": 0.42685776
+    },
+    {
+      "name": "GP1-L",
+      "vcpu": 32,
+      "ram": 128,
+      "disk": 600,
+      "hourly": 0.86166234
+    },
+    {
+      "name": "GP1-XL",
+      "vcpu": 48,
+      "ram": 256,
+      "disk": 600,
+      "hourly": 1.86296166
+    }
+  ],
+  "disk": {
+    "running": 0.00014469,
+    "stopped": 0.00014469
+  },
+  "minimumSeconds": 3600,
+  "billedWhileStopped": false,
+  "between": "kept",
+  "maxDisk": 15000,
+  "maxVcpu": 48,
+  "maxRam": 256,
+  "egress": {
+    "perGiB": 0,
+    "included": "No per-GB charge; traffic shares the shape's public bandwidth",
+    "note": "Scaleway says its Instance list prices include egress and that there are no egress fees; the meter is the shape's public bandwidth (100 Mbps to 16 Gbps). Object Storage egress is a separate product with 75 GB free a month and €0.01/GB after. Not priced by the calculator.",
+    "url": "https://www.scaleway.com/en/pricing/virtual-instances/"
+  },
+  "plans": [
+    {
+      "name": "Pay as you go",
+      "fee": 0,
+      "note": "No plan fee and no commitment: the Instance bills by the hour, the block volume by provisioned GB-hour, and the IPv4 by the hour until deleted."
+    }
+  ],
+  "notes": [
+    "Currency: Scaleway publishes EUR only and bills in euros; no USD list was found. These USD rates are the EUR list multiplied by the ECB reference rate for 29 October 2026, 1 EUR = 1.1130 USD. Prices are before tax; French VAT at 20% (or the EU customer's local rate) is added on the invoice.",
+    "The Instance price excludes storage and the public IPv4. A flexible IPv4 is €0.005/hour (€3.65 a month) and is billed while it is reserved, including while the Instance is powered off; IPv6 is free. The card does not include it: the engine's perMachine field follows billed machine hours, so it would drop the IPv4 for a stopped machine. Add $4.06 per machine-month, or $5.57 for 1,000 one-hour tasks.",
+    "Each resource is billed for a minimum of 60 minutes per start/stop event, so a 10-minute task pays a full hour of compute, storage and IPv4. minimumSeconds applies that floor to compute only; the calculator's storage and IPv4 lines for tasks mode are understated by the same minimum (see the provider notes).",
+    "There is no monthly cap: the 'approx. per month' on the pricing page is the hourly rate × 730. An always-on month therefore costs 730 hours at the hourly rate.",
+    "Powering an Instance off stops compute billing; attached storage and any reserved flexible IPv4 keep billing. Standby mode is different: the Instance stays allocated and is billed in full.",
+    "Disk is a separate volume and the card prices Block Storage 5K for every shape at €0.000130/GB/hour. That is the only storage option on BASIC3, PLAY2, PRO2 and BASIC2-A, and a valid option on DEV1, GP1 and STARDUST1. Those three ranges can attach local SSD instead at €0.000049/GB/hour, which is 2.65× cheaper: the engine has one disk rate per plan and one stopped rate for the whole card, so pricing both classes in one card would misprice stopped block volumes. On local SSD, B would be 0.86 instead of 4.15 and C .88 instead of .20.",
+    "Snapshots, images and Object Storage are separate products and are not in the calculator. Snapshots and unified snapshots are €0.000049/GB/hour; creating an image is free but its snapshots bill.",
+    "STARDUST1-S is included at its list price (€0.0006/hour, about €0.44 a month) although it is absent from the default Instance quota table read on 2026-10-30; its availability on a new account is unconfirmed.",
+    "The 15K block tier, GPU Instances, dedicated-vCPU STANDARD3/POP2 ranges, Elastic Metal and Savings Plans (up to 25% off for an hourly commitment) are outside this card.",
+    "BASIC2-A shapes are arm64 (Ampere); the calculator may pick one for large workloads, so check that the agent binaries exist for Arm.",
+    "Default per-type quotas are small (DEV1-M 8 Instances with a validated payment method, 15 with identity validated; PLAY2-NANO 5/10; GP1-XS 1/4), so a fan-out of hundreds of simultaneous machines is not available without a quota increase.",
+    "Savings Plans cut up to 25% for an hourly spend commitment but are not modelled.",
+    "Parent integration, 2026-10-30: the flexible IPv4 is priced as perMachine at €0.005/h (US$0.005565 at the card's ECB rate), capped at €3.65 (US$4.0625) a month, and the engine now bills it, and the 60-minute minimum on block storage for short tasks, through stopped hours as Scaleway's billing FAQ describes."
+  ],
+  "sources": [
+    {
+      "label": "Virtual Instances pricing (EUR, PAR-1)",
+      "url": "https://www.scaleway.com/en/pricing/virtual-instances/"
+    },
+    {
+      "label": "Storage pricing (block 5K/15K, snapshots)",
+      "url": "https://www.scaleway.com/en/pricing/storage/"
+    },
+    {
+      "label": "Network pricing (Additional IP, €0.005/hour)",
+      "url": "https://www.scaleway.com/en/pricing/network/"
+    },
+    {
+      "label": "Pricing update effective 1 June 2026 (local storage, flexible IPv4)",
+      "url": "https://www.scaleway.com/en/blog/a-transparent-update-on-scaleway-pricing/"
+    },
+    {
+      "label": "Billing FAQ (60-minute minimum, what stops billing)",
+      "url": "https://www.scaleway.com/en/docs/billing/faq/"
+    },
+    {
+      "label": "Understanding Instance pricing",
+      "url": "https://www.scaleway.com/en/docs/instances/reference-content/understanding-instance-pricing/"
+    },
+    {
+      "label": "Instance states and stopped-instance billing",
+      "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/"
+    },
+    {
+      "label": "Block Storage FAQ (volume sizes, 16 volumes)",
+      "url": "https://www.scaleway.com/en/docs/block-storage/faq/"
+    },
+    {
+      "label": "Instances datasheet (ranges, shared vs dedicated, local vs block)",
+      "url": "https://www.scaleway.com/en/docs/instances/reference-content/instances-datasheet/"
+    },
+    {
+      "label": "Default Organization quotas",
+      "url": "https://www.scaleway.com/en/docs/organizations-and-projects/organization/organization-quotas/"
+    },
+    {
+      "label": "ECB euro reference rate, 29 October 2026",
+      "url": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
+    }
+  ],
+  "perMachine": {
+    "label": "Flexible IPv4",
+    "hourly": 0.005565,
+    "monthly": 4.0625
+  }
+}

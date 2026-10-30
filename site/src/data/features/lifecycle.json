@@ -379,6 +379,18 @@
         "quote": "Charges accrue for any service present on an account, even if it's powered off or otherwise not actively being used.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "partly",
+      "figure": "Off stops compute; disk and IP stay",
+      "scenario": "At 18:00 the Instance is powered off: the REPL, the dev server and the cron job are gone, but the disk and the IP address are still there at 09:00, and only the 90 running hours are billed for compute.",
+      "note": "Powering off releases the hypervisor and stops compute billing; attached storage and any reserved flexible IPv4 keep billing. Local storage can be kept or archived on stop. There is no memory-preserving pause, and standby mode keeps the machine allocated but is billed in full, so it saves nothing.",
+      "source": {
+        "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/",
+        "quote": "Compute billing stops, but you continue to pay for any attached storage (local volumes that you chose to keep or Block Storage volumes) and for any Flexible IPs.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a pause keeps",

@@ -352,6 +352,18 @@
         "quote": "Most paid services offered on Akamai Cloud have predictable monthly rates, also called the monthly caps, alongside flexible hourly rates.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "partly",
+      "figure": "Hourly, 60-min minimum; off = storage",
+      "scenario": "A machine that mostly waits still pays for every hour it is powered on, but a machine that is switched off between sessions pays only storage and its IPv4, not the reserved shape.",
+      "note": "The meter is the allocated shape by the hour of uptime, with a 60-minute minimum per resource per start and stop, and no monthly cap. Powering off stops compute billing while storage and a reserved flexible IPv4 continue. That makes idle time cheap compared with a VPS that bills while off, but short tasks expensive compared with per-second sandboxes.",
+      "source": {
+        "url": "https://www.scaleway.com/en/docs/billing/faq/",
+        "quote": "Each of these resources is billed separately for a minimum of 60 minutes.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "The meter",

@@ -352,6 +352,18 @@
         "quote": "Since volumes are managed independently of Linodes, your data persists even if you delete your attached Linode.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "yes",
+      "figure": "Volumes to 15 TB; disk kept",
+      "scenario": "Postgres writes to /var/lib and is still there at 08:00, because the whole volume is persistent and billed by its provisioned size whether the machine runs or not.",
+      "note": "Two storage designs: block volumes (network-attached, 5 GB to 15 TB, up to 16 per Instance, persistent without the machine) and local SSD on DEV1, GP1 and STARDUST1 (up to 600 GB, tied to the host, kept or archived on stop). The boot volume must be at least 10 GB. Object Storage is S3-compatible but has no native mount.",
+      "source": {
+        "url": "https://www.scaleway.com/en/docs/block-storage/concepts/",
+        "quote": "Block volumes provide network-attached storage you can plug in/out of Instances like a virtual hard drive.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Disk, and how long it is kept",

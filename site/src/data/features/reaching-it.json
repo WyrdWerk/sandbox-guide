@@ -352,6 +352,18 @@
         "quote": "Dedicated IPv4 and IPv6 addresses (additional addresses available on request)",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "scaleway",
+      "verdict": "yes",
+      "figure": "Public IPv4/IPv6, any port, SSH",
+      "scenario": "The demo on port 3000 is reachable at a static public address with no token in front of it, so anyone with the link gets through and the security group is the only filter.",
+      "note": "A flexible IPv4 routed to the Instance, a free flexible IPv6, any port opened through a stateful or stateless security group, and a real SSH daemon. There is no provider-issued preview or private token URL, and the browser console is a serial TTY for troubleshooting rather than a day-to-day shell.",
+      "source": {
+        "url": "https://www.scaleway.com/en/docs/instances/how-to/use-flexips/",
+        "quote": "Flexible routed IPv4 addresses: public IPv4 addresses routed directly to your Instance.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Who can open the link",
