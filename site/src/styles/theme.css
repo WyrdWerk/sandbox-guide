@@ -1577,7 +1577,24 @@ details[open] > .calc__head .calc__name::before { transform: rotate(90deg); }
 .calc__total { grid-area: total; font-family: var(--font-mono); font-size: 1.1875rem; text-align: right; color: var(--color-text); }
 .calc__per { grid-area: per; font-size: var(--text-xs); text-align: right; color: var(--color-text-muted); }
 .calc__sub { grid-area: sub; font-size: var(--text-sm); color: var(--color-text-muted); padding-left: 1.1em; }
-.calc__head .badge { grid-area: status; justify-self: start; margin: var(--space-1) 0 0 1.1em; }
+.calc__flags { grid-area: status; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-2); align-items: center; margin: var(--space-1) 0 0 1.1em; }
+.catch {
+  display: inline-flex; align-items: center; padding: 1px var(--space-2); border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border); font-size: var(--text-xs); color: var(--color-text-secondary); white-space: nowrap;
+}
+.catches { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0 0 var(--space-4); padding: 0; list-style: none; }
+.catches li { display: grid; gap: 2px; max-width: 22rem; }
+.catches .catch { justify-self: start; }
+.catches__detail { font-size: var(--text-sm); color: var(--color-text-muted); }
+.receipt { border: 1px dashed var(--color-border); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); display: grid; gap: var(--space-2); }
+.receipt__title { margin: 0; font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); }
+.receipt dl { margin: 0; display: grid; gap: 2px; }
+.receipt dl > div { display: flex; justify-content: space-between; gap: var(--space-4); font-size: var(--text-sm); }
+.receipt dt { color: var(--color-text-secondary); }
+.receipt dd { margin: 0; font-family: var(--font-mono); white-space: nowrap; }
+.receipt__total { border-top: 1px solid var(--color-border); padding-top: var(--space-1); }
+.receipt__total dt, .receipt__total dd { color: var(--color-text); font-weight: var(--weight-bold); }
+.receipt__catch { margin: 0; font-size: var(--text-sm); color: var(--color-partly); }
 .calc__body { padding: 0 0 var(--space-5) 1.1em; display: grid; gap: var(--space-3); max-width: 70ch; }
 .calc__how { margin: 0; color: var(--color-text-secondary); font-size: var(--text-base); }
 .calc__problems { margin: 0; padding: var(--space-3) var(--space-4); list-style: none; background: var(--color-partly-bg); color: var(--color-partly); border-radius: var(--radius-sm); font-size: var(--text-sm); display: grid; gap: var(--space-1); }

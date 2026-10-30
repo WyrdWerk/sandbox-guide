@@ -109,7 +109,7 @@ const field = (name: string) => `${id}-${name}`;
 <script type="application/json" data-calc-data={id} set:html={JSON.stringify(payload)}></script>
 
 <script>
-  import { price, presets, formatMoney, modelCost, type Workload, type RateCard } from "../lib/cost";
+  import { price, presets, formatMoney, modelCost, catches, hoursOf, type Workload, type RateCard, type Quote } from "../lib/cost";
 
   const NUMBER_FIELDS = ["vcpu", "ram", "disk", "machines", "hoursPerDay", "daysPerMonth", "tasks", "taskMinutes", "messagesPerDay", "kTokens"] as const;
 
@@ -164,6 +164,45 @@ const field = (name: string) => `${id}-${name}`;
       return node;
     }
 
+    // One plain sentence on the catch that matters for this workload, if any.
+    function plainCatch(card: RateCard, q: Quote, w: Workload): string {
+      if (!q.feasible) return `It cannot run this exactly as asked: ${q.problems[0]}`;
+      const h = hoursOf(w);
+      if (w.mode === "machines" && h.stopped > 0 && (card.billedWhileStopped || card.monthlyPlans))
+        return "Switching it off between sessions saves nothing: it bills until you delete it.";
+      if (w.mode === "tasks" && card.monthlyPlans) return "One plan runs the tasks one after another; running them side by side needs a plan per machine.";
+      if (w.mode === "tasks" && card.wholeHours && w.taskMinutes < 60) return `Each ${w.taskMinutes}-minute task is billed as a full hour.`;
+      if (w.mode === "tasks" && card.minimumPerRun) return `Each run costs at least ${formatMoney(card.minimumPerRun)}.`;
+      const plan = card.plans.find((p) => p.name === q.plan);
+      if (plan && (plan.credit ?? 0) > 0 && q.usage < plan.fee) return `You would use ${formatMoney(q.usage)} of the ${formatMoney(plan.fee)} the plan includes; the rest is unused.`;
+      if (card.sleeps && w.mode === "machines" && w.awake < 1) return "The figure assumes it sleeps when idle; a machine that must stay awake costs more.";
+      return "";
+    }
+
+    function receipt(card: RateCard, q: Quote, w: Workload, ai: ReturnType<typeof modelCost>) {
+      const box = document.createElement("div");
+      box.className = "receipt";
+      box.append(text("p", "receipt__title", "Your month, in short"));
+      const dl = document.createElement("dl");
+      const row = (label: string, amount: number) => {
+        const r = document.createElement("div");
+        r.append(text("dt", "", label), text("dd", "", formatMoney(amount)));
+        dl.append(r);
+      };
+      const extra = card.perMachine ? q.lines.filter((l) => l.label === card.perMachine!.label).reduce((s, l) => s + l.amount, 0) : 0;
+      row(`Machine: ${q.shape.split(":")[0]}`, q.total - extra);
+      if (extra > 0) row(card.perMachine!.label, extra);
+      if (ai) row(`AI model: ${ai.model.label}`, ai.median);
+      const total = document.createElement("div");
+      total.className = "receipt__total";
+      total.append(text("dt", "", "About a month"), text("dd", "", formatMoney(q.total + (ai ? ai.median : 0))));
+      dl.append(total);
+      box.append(dl);
+      const note = plainCatch(card, q, w);
+      if (note) box.append(text("p", "receipt__catch", note));
+      return box;
+    }
+
     function render() {
       const w = read();
       const mode = w.mode;
@@ -198,11 +237,20 @@ const field = (name: string) => `${id}-${name}`;
         const per = text("span", "calc__per", "a month");
         const sub = text("span", "calc__sub", `${q.plan} · ${q.shape}${ai ? ` · ${formatMoney(q.total + ai.median)} with the model` : ""}`);
         const status = text("span", q.feasible ? "badge badge--yes" : "badge badge--partly", q.feasible ? "Runs as asked" : "Needs a change");
-        head.append(name, status, total, per, sub);
+        const flags = document.createElement("span");
+        flags.className = "calc__flags";
+        flags.append(status);
+        for (const c of catches(card)) {
+          const tag = text("span", "catch", c.label);
+          tag.title = c.detail;
+          flags.append(tag);
+        }
+        head.append(name, flags, total, per, sub);
         details.append(head);
 
         const body = document.createElement("div");
         body.className = "calc__body";
+        body.append(receipt(card, q, w, ai));
         body.append(text("p", "calc__how", card.summary));
         if (q.problems.length) {
           const ul = document.createElement("ul");

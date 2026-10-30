@@ -509,3 +509,31 @@ export const presets: Record<string, { label: string; workload: Workload; why: s
     workload: { vcpu: 2, ram: 4, disk: 20, mode: "machines", tasks: 0, taskMinutes: 0, machines: 1, hoursPerDay: 3, daysPerMonth: 30, keepDisk: true, busy: 0.1, awake: 1, model: "", messagesPerDay: 0, kTokens: 0 },
   },
 };
+
+/** The billing catches a buyer should know, read from the rate card's own fields. */
+export function catches(card: RateCard): { label: string; detail: string }[] {
+  const out: { label: string; detail: string }[] = [];
+  if (card.billedWhileStopped || card.monthlyPlans) {
+    out.push({ label: "Bills while switched off", detail: "A stopped machine is charged like a running one; only deleting it ends the bill." });
+  }
+  if (card.monthlyPlans) out.push({ label: "Whole months only", detail: "Sold as monthly plans, with no hourly price." });
+  if (card.wholeHours) out.push({ label: "Billed in whole hours", detail: "Each server costs at least an hour, so a ten-minute task pays for sixty." });
+  if (card.minimumPerRun) out.push({ label: `Minimum ${money(card.minimumPerRun)} a run`, detail: `Each short run is charged at least ${money(card.minimumPerRun)}.` });
+  if (card.perMachine) {
+    out.push({ label: `${card.perMachine.label} extra`, detail: `${money(card.perMachine.monthly)} a month per machine on top of the machine price.` });
+  }
+  if (card.plans.length && card.plans.every((p) => p.fee > 0)) {
+    const cheapest = card.plans.reduce((a, b) => (b.fee < a.fee ? b : a));
+    const fee = money(cheapest.fee);
+    out.push((cheapest.credit ?? 0) >= cheapest.fee
+      ? { label: `Minimum spend ${fee} a month`, detail: `The cheapest plan is ${fee} a month; it comes back as usage, but a quiet month still costs ${fee}.` }
+      : { label: `Monthly fee from ${fee}`, detail: `Every plan has a fee, from ${fee} a month, on top of usage.` });
+  }
+  if (card.plans.some((p) => p.pack)) out.push({ label: "Usage bought in packs", detail: "Usage beyond what a plan includes is bought in fixed packs, not billed to the cent." });
+  if (card.sleeps) out.push({ label: "Sleeps when idle", detail: card.sleeps });
+  if (card.between === "lost") {
+    out.push({ label: "Files lost when stopped", detail: card.lostNote ?? "Stopping deletes the machine's files; keeping them needs a snapshot or separate storage." });
+  }
+  if (card.egress && card.egress.perGiB === null) out.push({ label: "Data out price unpublished", detail: card.egress.note });
+  return out;
+}
