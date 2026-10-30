@@ -141,6 +141,8 @@ export interface RateCard {
   monthlyPlans?: boolean;
   /** A fee for every machine for as long as it exists, such as a public IPv4, capped at a monthly price. */
   perMachine?: { label: string; hourly: number; monthly: number };
+  /** Whether the CPU is shared or burstable on the plans priced, with the provider's own words. */
+  cpuSharing?: { label: string; detail: string; source: { url: string; quote: string; confidence: string } };
   /** How the provider puts an idle machine to sleep and wakes it. Omit when it does not. */
   sleeps?: string;
   /** What happens to the files when a machine stops between sessions. */
@@ -573,5 +575,6 @@ export function catches(card: RateCard): { label: string; detail: string }[] {
     out.push({ label: "Files lost when stopped", detail: card.lostNote ?? "Stopping deletes the machine's files; keeping them needs a snapshot or separate storage." });
   }
   if (card.egress && card.egress.perGiB === null) out.push({ label: "Data out price unpublished", detail: card.egress.note });
+  if (card.cpuSharing) out.push({ label: card.cpuSharing.label, detail: card.cpuSharing.detail });
   return out;
 }

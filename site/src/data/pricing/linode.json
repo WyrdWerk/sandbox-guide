@@ -429,5 +429,14 @@
       "label": "Live type list (public API)",
       "url": "https://api.linode.com/v4/linode/types"
     }
-  ]
+  ],
+  "cpuSharing": {
+    "label": "Shared CPU",
+    "detail": "The cheapest plans share cores and suit work that does not need sustained CPU; Dedicated CPU plans cost more.",
+    "source": {
+      "url": "https://techdocs.akamai.com/cloud-computing/docs/how-to-choose-a-compute-instance-plan",
+      "quote": "Shared CPU Linodes use shared cores, making them suited to workloads that don't require sustained compute availability.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

@@ -386,5 +386,14 @@
     "label": "Flexible IPv4",
     "hourly": 0.005565,
     "monthly": 4.0625
+  },
+  "cpuSharing": {
+    "label": "Shared CPU",
+    "detail": "Every plan priced here runs its vCPUs on physical cores shared with other Instances; dedicated-CPU ranges cost more and are not priced here.",
+    "source": {
+      "url": "https://www.scaleway.com/en/docs/instances/reference-content/choosing-shared-vs-dedicated-cpus/",
+      "quote": "This means that while each Instance gets its own vCPUs, these vCPUs are scheduled on physical cores that are shared across multiple Instances.",
+      "confidence": "docs-confirmed"
+    }
   }
 }

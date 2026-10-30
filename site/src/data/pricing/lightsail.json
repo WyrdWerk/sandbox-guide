@@ -260,5 +260,14 @@
       "label": "Block storage",
       "url": "https://docs.aws.amazon.com/lightsail/latest/userguide/elastic-block-storage-and-ssd-disks-in-amazon-lightsail.html"
     }
-  ]
+  ],
+  "cpuSharing": {
+    "label": "Burstable CPU",
+    "detail": "Instances get a baseline share of CPU and can burst above it for a while; AWS points sustained heavy CPU work to EC2.",
+    "source": {
+      "url": "https://aws.amazon.com/lightsail/faq/",
+      "quote": "Lightsail uses burstable performance instances that provide a baseline level of CPU performance with the additional ability to burst above the baseline.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

@@ -4,7 +4,7 @@
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import Catches from "../../components/Catches.astro";
-import { pricing, providers, reviews } from "../../lib/data";
+import { pricing, providers } from "../../lib/data";
 import { price, presets, formatMoney, catches, type Workload } from "../../lib/cost";
 
 const isVps = new Set(providers.filter((p) => p.kind === "vps").map((p) => p.id));
@@ -24,18 +24,6 @@ const workloads = [
   },
 ];
 
-// A reader-facing line from the dated public reviews, so a recommendation carries it too.
-function reviewWatch(id: string): string | undefined {
-  const r = reviews.byProvider.get(id);
-  if (!r) return undefined;
-  const bad = r.themes.find((t) => t.sentiment === "negative");
-  if (bad) return `Users say: ${bad.theme.charAt(0).toLowerCase()}${bad.theme.slice(1)} ([reviews](/providers/${id}/#users)).`;
-  // No complaints yet: pass on the sample's own warning (too few, or solicited-looking).
-  const first = r.caveats.split(/(?<=\.)\s/)[0];
-  if (r.sample.verdict === "too-few" || r.sample.verdict === "small") return `Users say: ${first.charAt(0).toLowerCase()}${first.slice(1)} ([reviews](/providers/${id}/#users))`;
-  return undefined;
-}
-
 function study(base: Workload) {
   const at = (h: number): Workload => ({ ...base, hoursPerDay: h, daysPerMonth: 30, machines: 1 });
   const ranked = (cards: typeof pricing, h: number) =>
@@ -46,7 +34,7 @@ function study(base: Workload) {
   const rows = hours.map((h) => ({ h, sandbox: ranked(sandboxes, h)[0], server: ranked(servers, h)[0] }));
   // Every server, at a couple of hours a day and left on, cheapest left-on first.
   const everyServer = servers
-    .map((c) => ({ id: c.provider, short: price(c, at(2)), on: price(c, at(24)), how: catches(c)[0]?.label }))
+    .map((c) => ({ id: c.provider, short: price(c, at(2)), on: price(c, at(24)), how: catches(c)[0]?.label, cpu: c.cpuSharing?.label }))
     .sort((a, b) => Number(b.on.feasible) - Number(a.on.feasible) || a.on.total - b.on.total);
   // For each sandbox: the first hours a day at which the cheapest server costs less.
   const crossings = sandboxes
@@ -115,7 +103,7 @@ const answer = `For a 2 vCPU / 4 GiB agent, the cheapest server is ${name(p.on.s
         <h3 class="section__title">Every server we list</h3>
         <p class="section__note">The plan the calculator picks for this size on each provider, so no single server stands in for all of them.</p>
         <div class="table-scroll"><table class="data-table">
-          <thead><tr><th scope="col">Server</th><th scope="col">Plan</th><th scope="col">2 hours a day</th><th scope="col">Left on</th><th scope="col">How it bills</th></tr></thead>
+          <thead><tr><th scope="col">Server</th><th scope="col">Plan</th><th scope="col">2 hours a day</th><th scope="col">Left on</th><th scope="col">How it bills</th><th scope="col">CPU</th></tr></thead>
           <tbody>
             {s.everyServer.map((v) => (
               <tr>
@@ -124,6 +112,7 @@ const answer = `For a 2 vCPU / 4 GiB agent, the cheapest server is ${name(p.on.s
                 <td>{v.short.feasible ? formatMoney(v.short.total) : "Does not sell this size"}</td>
                 <td>{v.on.feasible ? formatMoney(v.on.total) : "Does not sell this size"}</td>
                 <td>{v.how ?? "—"}</td>
+                <td>{v.cpu ?? "—"}</td>
               </tr>
             ))}
           </tbody>
@@ -148,7 +137,7 @@ const answer = `For a 2 vCPU / 4 GiB agent, the cheapest server is ${name(p.on.s
           {s.winners.map((id) => (
             <li class="sos-winners__item">
               <p class="sos-winners__name"><a href={`/providers/${id}/`}>{name(id)}</a> · {isVps.has(id) ? "server" : "sandbox"}</p>
-              <Catches provider={id} watch={reviewWatch(id)} />
+              <Catches provider={id} />
             </li>
           ))}
         </ul>

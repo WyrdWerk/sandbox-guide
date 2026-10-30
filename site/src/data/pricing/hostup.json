@@ -131,5 +131,14 @@
       "label": "CPU and disk throttling",
       "url": "https://hostup.se/en/support/vps-warnings/"
     }
-  ]
+  ],
+  "cpuSharing": {
+    "label": "CPU capped under heavy load",
+    "detail": "After several days at full load, a server is limited to half its vCPUs until the limit is lifted.",
+    "source": {
+      "url": "https://hostup.se/en/support/vps-warnings/",
+      "quote": "The CPU limited to 50 % notice appears when the server has run at full load for several days.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

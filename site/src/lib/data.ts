@@ -131,13 +131,34 @@ export const pricing: RateCard[] = Object.values(pricingModules).sort((a, b) =>
  * catch first, then up to two billing catches from its rate card and its first
  * "fits badly" item, so a pick never appears without its trade-offs.
  */
+// Lowercase the first letter to follow a "Label:", but leave names such as OVHcloud or SSH alone.
+const lower = (s: string) => (/^.[A-Z]/.test(s) ? s : s.charAt(0).toLowerCase() + s.slice(1));
+
+/** One line from the dated public reviews: the first complaint, or the sample's own warning. */
+function reviewCatch(id: string): string | undefined {
+  const r = reviews.byProvider.get(id);
+  if (!r) return undefined;
+  const link = ` ([reviews](/providers/${id}/#users))`;
+  const bad = r.themes.find((t) => t.sentiment === "negative");
+  if (bad) return `Users say: ${lower(bad.theme)}${link}.`;
+  if (r.sample.verdict === "too-few" || r.sample.verdict === "small") return `Users say: too few public reviews to judge${link}.`;
+  return undefined;
+}
+
 export function providerCatches(id: string, watch?: string): string[] {
   const card = pricing.find((c) => c.provider === id);
-  const badly = providerById.get(id)?.fits?.badly?.[0];
+  const provider = providerById.get(id);
+  const badly = provider?.fits?.badly?.[0];
+  const line = (c: { label: string; detail: string }) => `${c.label}: ${lower(c.detail)}`;
   const items = [
     watch,
-    ...(card ? catches(card).slice(0, 2).map((c) => `${c.label}: ${c.detail.charAt(0).toLowerCase()}${c.detail.slice(1)}`) : []),
-    badly ? `Not for: ${badly.charAt(0).toLowerCase()}${badly.slice(1)}` : undefined,
+    reviewCatch(id),
+    ...(card ? catches(card).filter((c) => c.label !== card.cpuSharing?.label).slice(0, 2).map(line) : []),
+    card?.cpuSharing ? line(card.cpuSharing) : undefined,
+    provider?.kind === "vps"
+      ? "You run the server: operating-system updates, security patches, the firewall, SSH access and backups are yours to set up and keep up."
+      : undefined,
+    badly ? `Not for: ${lower(badly)}` : undefined,
   ];
   return items.filter((s): s is string => Boolean(s?.trim()));
 }

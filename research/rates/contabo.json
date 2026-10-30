@@ -101,5 +101,14 @@
       "label": "Help: cancellation leaves the service active to the end of the billing period",
       "url": "https://help.contabo.com/en/support/solutions/articles/103000387511-i-would-like-to-add-or-remove-a-service"
     }
-  ]
+  ],
+  "cpuSharing": {
+    "label": "Shared CPU",
+    "detail": "Shared vCPU cores on mixed CPU generations, so speed depends on what else runs on the host.",
+    "source": {
+      "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
+      "quote": "Core VPS is the entry plan family: shared vCPU cores on infrastructure spanning multiple CPU generations, with SSD storage.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

@@ -76,5 +76,14 @@
     "CPX42": "CLOUD_128",
     "CPX52": "CLOUD_130",
     "CPX62": "CLOUD_131"
+  },
+  "cpuSharing": {
+    "label": "Shared CPU",
+    "detail": "The CPX plans priced here share physical cores with the other servers on the same host; dedicated-core CCX plans cost more.",
+    "source": {
+      "url": "https://docs.hetzner.com/cloud/servers/faq",
+      "quote": "In plans (CX, CPX, CAX) with shared resources the compute resources are distributed among all instances on the same physical server.",
+      "confidence": "docs-confirmed"
+    }
   }
 }

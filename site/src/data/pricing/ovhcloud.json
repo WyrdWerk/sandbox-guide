@@ -90,5 +90,14 @@
       "label": "Terms of Service: fees exclude tax",
       "url": "https://us.ovhcloud.com/legal/terms-of-service/"
     }
-  ]
+  ],
+  "cpuSharing": {
+    "label": "CPU sharing unpublished",
+    "detail": "OVHcloud publishes no CPU-sharing, burst or contention policy for its VPS vCores, so whether a core is shared is not stated.",
+    "source": {
+      "url": "https://us.ovhcloud.com/vps/",
+      "quote": "",
+      "confidence": "not-published"
+    }
+  }
 }

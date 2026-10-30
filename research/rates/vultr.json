@@ -213,5 +213,14 @@
       "label": "Vultr plans API (public, USD)",
       "url": "https://api.vultr.com/v2/plans?per_page=500"
     }
-  ]
+  ],
+  "cpuSharing": {
+    "label": "Shared CPU",
+    "detail": "Regular Performance plans run on previous-generation, shared Intel CPUs; dedicated-vCPU plans cost more.",
+    "source": {
+      "url": "https://www.vultr.com/products/regular-performance-compute/",
+      "quote": "Vultr Regular Performance plans are powered by previous-generation Intel shared CPU resources and regular SSDs.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

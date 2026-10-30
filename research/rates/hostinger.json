@@ -99,5 +99,14 @@
       "label": "Snapshots and backups",
       "url": "https://www.hostinger.com/support/1583232-how-to-back-up-or-restore-a-vps-at-hostinger/"
     }
-  ]
+  ],
+  "cpuSharing": {
+    "label": "Burstable CPU",
+    "detail": "Above 60% of its CPU a server spends credits and is slowed when they run out; the physical server is shared with other customers.",
+    "source": {
+      "url": "https://www.hostinger.com/support/how-cpu-credits-work-on-hostinger-vps/",
+      "quote": "The baseline is 60% on every plan.",
+      "confidence": "docs-confirmed"
+    }
+  }
 }

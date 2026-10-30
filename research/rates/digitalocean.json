@@ -282,5 +282,14 @@
     "disk": "GiB SSD",
     "hourly": "USD per hour",
     "monthly": "USD per month"
+  },
+  "cpuSharing": {
+    "label": "Shared CPU",
+    "detail": "Basic Droplets may share their CPU thread with other Droplets: a full thread is possible but not guaranteed. Dedicated-CPU plans cost more.",
+    "source": {
+      "url": "https://docs.digitalocean.com/products/droplets/concepts/choosing-a-plan/",
+      "quote": "In practice, this means that shared CPU Droplets can have access to full hyper-threads, but it’s not guaranteed.",
+      "confidence": "docs-confirmed"
+    }
   }
 }
