@@ -1050,7 +1050,7 @@
             "title": "Hetzner Cloud API reference",
             "url": "https://docs.hetzner.cloud/reference/cloud"
           },
-          "price": "$0.0368 per server-hour: 20,000 one-minute runs is about $736 a month"
+          "price": "$0.0368 per server-hour: 20,000 one-minute runs is about $756 a month: $736 of servers plus $20 of IPv4"
         }
       ],
       "picks": [
