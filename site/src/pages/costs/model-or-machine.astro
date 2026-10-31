@@ -1,0 +1,136 @@
+---
+// For each ready-made workload: what the machine costs across providers, and what
+// the model costs across the priced models. Every figure comes from the same engine,
+// rate cards and models.json as the calculator, at build time.
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { pricing, providerName, checked, formatDate } from "../../lib/data";
+import { price, presets, formatMoney, modelCostRange, type ModelKind } from "../../lib/cost";
+import modelData from "../../data/models.json";
+
+const span = (a: number, b: number) => (Math.abs(b - a) < 0.005 ? formatMoney(a) : `${formatMoney(a)} – ${formatMoney(b)}`);
+const times = (a: number, b: number) => (b > 0 ? `${Math.round(a / b).toLocaleString("en-US")}×` : "—");
+
+const rows = Object.entries(presets).map(([key, p]) => {
+  const w = p.workload;
+  const machines = pricing
+    .map((card) => ({ card, q: price(card, w) }))
+    .filter((x) => x.q.feasible)
+    .sort((a, b) => a.q.total - b.q.total);
+  const lo = machines[0];
+  const hi = machines[machines.length - 1];
+  const model = modelCostRange(w, modelData.models);
+  const tier = (k: ModelKind) => model?.byKind[k];
+  let read: string;
+  if (!model) {
+    read = `No model in this workload, so the machine is the whole bill: ${span(lo.q.total, hi.q.total)} depending on the provider.`;
+  } else if (tier("cheap")!.low.cost < lo.q.total) {
+    read = `On a cheap model the machine is still the bigger half. On a frontier model, the model costs ${times(tier("frontier")!.low.cost, lo.q.total)} to ${times(tier("frontier")!.high.cost, lo.q.total)} as much as the cheapest machine: the model is the decision.`;
+  } else {
+    read = `Even the cheapest model costs more than the cheapest machine; a frontier model costs ${times(tier("frontier")!.low.cost, lo.q.total)} to ${times(tier("frontier")!.high.cost, lo.q.total)} as much. The model is the decision.`;
+  }
+  return { key, p, w, machines, lo, hi, model, tier, read };
+});
+const withModel = rows.filter((r) => r.model);
+const personal = rows.find((r) => r.key === "personal")!;
+const leastFrontier = Math.min(...withModel.map((r) => r.tier("frontier")!.low.cost / r.lo.q.total));
+const answer = `For a personal agent that stays on, the machine costs ${span(personal.lo.q.total, personal.hi.q.total)} a month depending on the provider, and the model ${span(personal.model!.min.cost, personal.model!.max.cost)} depending on the model. For every workload here that calls a model, a frontier model costs at least ${Math.floor(leastFrontier)} times the cheapest machine that runs it.`;
+---
+
+<Base title="Model or machine? Which half of an agent's bill matters" description="For each ready-made workload, the machine's monthly cost across providers beside the model's cost across cheap, mid-priced and frontier models, from list prices.">
+  <PageHeader
+    parent={{ href: "/costs/", label: "Costs" }}
+    kicker="Costs"
+    title="Model or machine?"
+    standfirst="An agent's monthly bill has two parts: the computer it lives on, and the language model it calls. Most comparisons price only the computer. This page puts both side by side for every ready-made workload, so you can see which choice moves your bill."
+    answer={answer}
+    meta={[`${pricing.length} providers, ${modelData.models.length} models`, "Same engine as the calculator", "Token volumes are our assumption"]}
+  />
+
+  <div class="wrap">
+    <section class="section section--flush" aria-labelledby="table-h">
+      <div class="section__head">
+        <h2 class="section__title" id="table-h">Every workload, both halves</h2>
+        <p class="section__note">A month at list prices. Machine: cheapest to dearest provider that runs it as asked. Model: median price of hosts that keep no data.</p>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table">
+          <caption class="visually-hidden">Monthly machine and model cost for each workload</caption>
+          <thead>
+            <tr>
+              <th scope="col">Workload</th>
+              <th scope="col">Machine</th>
+              <th scope="col">Tokens a month</th>
+              <th scope="col">Cheap models</th>
+              <th scope="col">Mid-priced</th>
+              <th scope="col">Frontier</th>
+              <th scope="col">Frontier ÷ cheapest machine</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr>
+                <th scope="row">{r.p.label}</th>
+                <td>{span(r.lo.q.total, r.hi.q.total)}</td>
+                {r.model ? (
+                  <>
+                    <td>{Math.round(r.model.millions).toLocaleString("en-US")}M</td>
+                    <td>{span(r.tier("cheap")!.low.cost, r.tier("cheap")!.high.cost)}</td>
+                    <td>{span(r.tier("mid")!.low.cost, r.tier("mid")!.high.cost)}</td>
+                    <td>{span(r.tier("frontier")!.low.cost, r.tier("frontier")!.high.cost)}</td>
+                    <td>{times(r.tier("frontier")!.low.cost, r.lo.q.total)} – {times(r.tier("frontier")!.high.cost, r.lo.q.total)}</td>
+                  </>
+                ) : (
+                  <td colspan="5">No model</td>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="read-h">
+      <div class="section__head">
+        <h2 class="section__title" id="read-h">What each row says</h2>
+      </div>
+      <div class="prose">
+        <ul>
+          {rows.map((r) => (
+            <li>
+              <strong>{r.p.label}.</strong> Machine {span(r.lo.q.total, r.hi.q.total)} ({providerName(r.lo.card.provider)} to {providerName(r.hi.card.provider)}{r.machines.length > 1 ? `, ${r.machines.length} providers` : ""}){r.model ? `; model ${span(r.model.min.cost, r.model.max.cost)} (${r.model.min.model.label} to ${r.model.max.model.label})` : ""}. {r.read}{" "}
+              <a href={`/costs/?preset=${r.key}`}>Price it yourself</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="assume-h">
+      <div class="section__head">
+        <h2 class="section__title" id="assume-h">The assumptions</h2>
+      </div>
+      <div class="prose">
+        <p>
+          <strong>Token volumes are our assumptions, not measurements.</strong> Each is messages a day × thousands of tokens
+          per message × the days a month the machine works. An agent re-sends its instructions and history on every model
+          call, and one message can take several calls.
+        </p>
+        <ul>
+          {withModel.map((r) => (
+            <li>{r.p.label}: {r.w.messagesPerDay} × {r.w.kTokens.toLocaleString("en-US")}k × {r.w.mode === "machines" ? r.w.daysPerMonth : 30} days = {Math.round(r.model!.millions).toLocaleString("en-US")} million tokens.</li>
+          ))}
+        </ul>
+        <p>
+          <strong>The mix</strong> is {modelData.mix.outputPct}% output and 95% of input read from cache ({modelData.mix.inputPct}%
+          new input, {modelData.mix.cacheReadPct}% cached input). <strong>Model prices</strong> are list prices from{" "}
+          <a href={modelData.source} rel="noreferrer noopener">TokenWatch</a>, read {modelData.fetchedOn}, at the median of
+          the hosts that keep no data. <strong>Machine prices</strong> are each provider's list prices, checked{" "}
+          {formatDate(checked.prices)}, counting only providers that run the workload as asked. Taxes, egress and anything a
+          provider does not publish are left out. A plan you already pay for can replace the model line; the{" "}
+          <a href="/costs/">calculator</a> shows that case. <a href="/costs/how-it-works/#model-line">How the model line works</a>.
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>
