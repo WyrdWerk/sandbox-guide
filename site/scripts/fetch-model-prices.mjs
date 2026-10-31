@@ -5,8 +5,8 @@
 import { writeFileSync } from "node:fs";
 
 const SOURCE = "https://tokenwatch.wyrdwerk.com/pricing.json";
-// Same mix TokenWatch uses for tool-using agents: most input is a cached prompt.
-const MIX = { inputPct: 5, cacheReadPct: 90, outputPct: 5 };
+// Agent mix: 5% of tokens are output, and 95% of input tokens are cache reads.
+const MIX = { inputPct: 4.75, cacheReadPct: 90.25, outputPct: 5 };
 // The models the site prices, each at the median of its zero-data-retention
 // offerings. kind is the price tier: "cheap", "mid" or "frontier".
 const MODELS = [

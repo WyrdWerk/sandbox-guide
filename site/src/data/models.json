@@ -3,8 +3,8 @@
   "generatedAt": "2026-10-31T13:59:44.618Z",
   "fetchedOn": "2026-10-31",
   "mix": {
-    "inputPct": 5,
-    "cacheReadPct": 90,
+    "inputPct": 4.75,
+    "cacheReadPct": 90.25,
     "outputPct": 5
   },
   "models": [
@@ -15,7 +15,7 @@
       "offerings": 35,
       "lowest": {
         "provider": "engy",
-        "rate": 0.0129,
+        "rate": 0.0128,
         "pricing": {
           "input": 0.03,
           "output": 0.12,
@@ -23,7 +23,7 @@
           "cache_write": null
         }
       },
-      "median": 0.0523,
+      "median": 0.0518,
       "url": "https://tokenwatch.wyrdwerk.com/?q=deepseek-v4.1-flash-1017"
     },
     {
@@ -33,7 +33,7 @@
       "offerings": 10,
       "lowest": {
         "provider": "Tenstorrent",
-        "rate": 0.017,
+        "rate": 0.0169,
         "pricing": {
           "input": 0.049999999999999996,
           "output": 0.19999999999999998,
@@ -41,7 +41,7 @@
           "cache_write": null
         }
       },
-      "median": 0.051,
+      "median": 0.0507,
       "url": "https://tokenwatch.wyrdwerk.com/?q=minimax-m3.1-flash"
     },
     {
@@ -51,7 +51,7 @@
       "offerings": 1,
       "lowest": {
         "provider": "Azure",
-        "rate": 0.429,
+        "rate": 0.4254,
         "pricing": {
           "input": 1.2,
           "output": 6,
@@ -59,7 +59,7 @@
           "cache_write": 1.5
         }
       },
-      "median": 0.429,
+      "median": 0.4254,
       "url": "https://tokenwatch.wyrdwerk.com/?q=gpt-6.1-terra"
     },
     {
@@ -69,7 +69,7 @@
       "offerings": 3,
       "lowest": {
         "provider": "singularity",
-        "rate": 0.708,
+        "rate": 0.7033,
         "pricing": {
           "input": 2,
           "output": 10,
@@ -77,7 +77,7 @@
           "cache_write": 1.5
         }
       },
-      "median": 0.715,
+      "median": 0.709,
       "url": "https://tokenwatch.wyrdwerk.com/?q=claude-sonnet-5.5"
     },
     {
@@ -87,7 +87,7 @@
       "offerings": 1,
       "lowest": {
         "provider": "Moonshot AI",
-        "rate": 0.78,
+        "rate": 0.7755,
         "pricing": {
           "input": 2,
           "output": 10,
@@ -95,7 +95,7 @@
           "cache_write": 2
         }
       },
-      "median": 0.78,
+      "median": 0.7755,
       "url": "https://tokenwatch.wyrdwerk.com/?q=kimi-k3.1-pro"
     },
     {
@@ -105,7 +105,7 @@
       "offerings": 1,
       "lowest": {
         "provider": "xAI",
-        "rate": 0.85,
+        "rate": 0.8463,
         "pricing": {
           "input": 2,
           "output": 6,
@@ -113,7 +113,7 @@
           "cache_write": null
         }
       },
-      "median": 0.85,
+      "median": 0.8463,
       "url": "https://tokenwatch.wyrdwerk.com/?q=grok-4.7"
     },
     {
@@ -123,7 +123,7 @@
       "offerings": 27,
       "lowest": {
         "provider": "Sail Research",
-        "rate": 0.4323,
+        "rate": 0.4321,
         "pricing": {
           "input": 0.14950000000000002,
           "output": 7.15,
@@ -131,7 +131,7 @@
           "cache_write": null
         }
       },
-      "median": 1.1192,
+      "median": 1.1169,
       "url": "https://tokenwatch.wyrdwerk.com/?q=kimi-k3"
     },
     {
@@ -141,7 +141,7 @@
       "offerings": 3,
       "lowest": {
         "provider": "singularity",
-        "rate": 1.058,
+        "rate": 1.0508,
         "pricing": {
           "input": 3,
           "output": 16,
@@ -149,7 +149,7 @@
           "cache_write": 3
         }
       },
-      "median": 1.43,
+      "median": 1.418,
       "url": "https://tokenwatch.wyrdwerk.com/?q=claude-opus-5.5"
     },
     {
@@ -159,7 +159,7 @@
       "offerings": 1,
       "lowest": {
         "provider": "singularity",
-        "rate": 3.135,
+        "rate": 3.1104,
         "pricing": {
           "input": 10,
           "output": 50,
@@ -167,7 +167,7 @@
           "cache_write": 7.5
         }
       },
-      "median": 3.135,
+      "median": 3.1104,
       "url": "https://tokenwatch.wyrdwerk.com/?q=claude-fable-5.1"
     },
     {
@@ -177,7 +177,7 @@
       "offerings": 2,
       "lowest": {
         "provider": "singularity",
-        "rate": 2.8,
+        "rate": 2.7825,
         "pricing": {
           "input": 8,
           "output": 30,
@@ -185,7 +185,7 @@
           "cache_write": null
         }
       },
-      "median": 3.4125,
+      "median": 3.3894,
       "url": "https://tokenwatch.wyrdwerk.com/?q=gpt-6-astra"
     }
   ]
