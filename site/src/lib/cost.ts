@@ -43,7 +43,8 @@ export interface ModelPrice {
   label: string;
   kind: string;
   offerings: number;
-  lowest: { provider: string; rate: number };
+  /** The cheapest offering's blended rate, with its raw $/M list prices. */
+  lowest: { provider: string; rate: number; pricing?: { input: number; output: number; cache_read: number | null; cache_write: number | null } };
   median: number;
   url: string;
 }

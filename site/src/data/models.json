@@ -1,7 +1,7 @@
 {
   "source": "https://tokenwatch.wyrdwerk.com/pricing.json",
-  "generatedAt": "2026-10-30T01:25:18.080Z",
-  "fetchedOn": "2026-10-30",
+  "generatedAt": "2026-10-31T13:59:44.618Z",
+  "fetchedOn": "2026-10-31",
   "mix": {
     "inputPct": 5,
     "cacheReadPct": 90,
@@ -11,14 +11,182 @@
     {
       "id": "deepseek-v4.1-flash-1017",
       "label": "DeepSeek V4.1 Flash (1017)",
-      "kind": "Cheap open model",
+      "kind": "cheap",
       "offerings": 35,
       "lowest": {
         "provider": "engy",
-        "rate": 0.0129
+        "rate": 0.0129,
+        "pricing": {
+          "input": 0.03,
+          "output": 0.12,
+          "cache_read": 0.006,
+          "cache_write": null
+        }
       },
       "median": 0.0523,
       "url": "https://tokenwatch.wyrdwerk.com/?q=deepseek-v4.1-flash-1017"
+    },
+    {
+      "id": "minimax-m3.1-flash",
+      "label": "MiniMax M3.1 Flash",
+      "kind": "cheap",
+      "offerings": 10,
+      "lowest": {
+        "provider": "Tenstorrent",
+        "rate": 0.017,
+        "pricing": {
+          "input": 0.049999999999999996,
+          "output": 0.19999999999999998,
+          "cache_read": 0.005,
+          "cache_write": null
+        }
+      },
+      "median": 0.051,
+      "url": "https://tokenwatch.wyrdwerk.com/?q=minimax-m3.1-flash"
+    },
+    {
+      "id": "gpt-6.1-terra",
+      "label": "GPT-6.1 Terra",
+      "kind": "mid",
+      "offerings": 1,
+      "lowest": {
+        "provider": "Azure",
+        "rate": 0.429,
+        "pricing": {
+          "input": 1.2,
+          "output": 6,
+          "cache_read": 0.06,
+          "cache_write": 1.5
+        }
+      },
+      "median": 0.429,
+      "url": "https://tokenwatch.wyrdwerk.com/?q=gpt-6.1-terra"
+    },
+    {
+      "id": "claude-sonnet-5.5",
+      "label": "Claude Sonnet 5.5",
+      "kind": "mid",
+      "offerings": 3,
+      "lowest": {
+        "provider": "singularity",
+        "rate": 0.708,
+        "pricing": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.12,
+          "cache_write": 1.5
+        }
+      },
+      "median": 0.715,
+      "url": "https://tokenwatch.wyrdwerk.com/?q=claude-sonnet-5.5"
+    },
+    {
+      "id": "kimi-k3.1-pro",
+      "label": "Kimi K3.1 Pro",
+      "kind": "mid",
+      "offerings": 1,
+      "lowest": {
+        "provider": "Moonshot AI",
+        "rate": 0.78,
+        "pricing": {
+          "input": 2,
+          "output": 10,
+          "cache_read": 0.19999999999999998,
+          "cache_write": 2
+        }
+      },
+      "median": 0.78,
+      "url": "https://tokenwatch.wyrdwerk.com/?q=kimi-k3.1-pro"
+    },
+    {
+      "id": "grok-4.7",
+      "label": "Grok 4.7",
+      "kind": "mid",
+      "offerings": 1,
+      "lowest": {
+        "provider": "xAI",
+        "rate": 0.85,
+        "pricing": {
+          "input": 2,
+          "output": 6,
+          "cache_read": 0.5,
+          "cache_write": null
+        }
+      },
+      "median": 0.85,
+      "url": "https://tokenwatch.wyrdwerk.com/?q=grok-4.7"
+    },
+    {
+      "id": "kimi-k3",
+      "label": "Kimi K3",
+      "kind": "mid",
+      "offerings": 27,
+      "lowest": {
+        "provider": "Sail Research",
+        "rate": 0.4323,
+        "pricing": {
+          "input": 0.14950000000000002,
+          "output": 7.15,
+          "cache_read": 0.07475000000000001,
+          "cache_write": null
+        }
+      },
+      "median": 1.1192,
+      "url": "https://tokenwatch.wyrdwerk.com/?q=kimi-k3"
+    },
+    {
+      "id": "claude-opus-5.5",
+      "label": "Claude Opus 5.5",
+      "kind": "frontier",
+      "offerings": 3,
+      "lowest": {
+        "provider": "singularity",
+        "rate": 1.058,
+        "pricing": {
+          "input": 3,
+          "output": 16,
+          "cache_read": 0.12,
+          "cache_write": 3
+        }
+      },
+      "median": 1.43,
+      "url": "https://tokenwatch.wyrdwerk.com/?q=claude-opus-5.5"
+    },
+    {
+      "id": "claude-fable-5.1",
+      "label": "Claude Fable 5.1",
+      "kind": "frontier",
+      "offerings": 1,
+      "lowest": {
+        "provider": "singularity",
+        "rate": 3.135,
+        "pricing": {
+          "input": 10,
+          "output": 50,
+          "cache_read": 0.15,
+          "cache_write": 7.5
+        }
+      },
+      "median": 3.135,
+      "url": "https://tokenwatch.wyrdwerk.com/?q=claude-fable-5.1"
+    },
+    {
+      "id": "gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "kind": "frontier",
+      "offerings": 2,
+      "lowest": {
+        "provider": "singularity",
+        "rate": 2.8,
+        "pricing": {
+          "input": 8,
+          "output": 30,
+          "cache_read": 1,
+          "cache_write": null
+        }
+      },
+      "median": 3.4125,
+      "url": "https://tokenwatch.wyrdwerk.com/?q=gpt-6-astra"
     }
   ]
 }
