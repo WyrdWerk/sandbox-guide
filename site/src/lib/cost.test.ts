@@ -6,7 +6,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { price, presets, modelCost, modelCostRange, type RateCard } from "./cost.ts";
+import { price, presets, modelCost, modelCostRange, subscriptionUse, type RateCard } from "./cost.ts";
 
 const card = (id: string): RateCard =>
   JSON.parse(readFileSync(new URL(`../data/pricing/${id}.json`, import.meta.url), "utf8"));
@@ -96,6 +96,19 @@ test("the model range prices one workload at every model, cheapest to dearest", 
   assert.equal(r.byKind.cheap, undefined);
   // No model line for a workload without tokens.
   assert.equal(modelCostRange(presets.browser.workload, models), null);
+});
+
+test("a plan already paid adds nothing per token, and counts against its allowance", () => {
+  // ChatGPT Plus serves about 159M GPT-6 Astra tokens a month (Real API Pricing, measured 2026-09-11).
+  const subs = [{ id: "plus", plan: "ChatGPT Plus", model: "GPT-6 Astra", fee: 20, allowance: 159, confidence: "high", measured: "", catch: "" }];
+  const use = subscriptionUse({ ...presets.personal.workload, model: "plus" }, subs)!;
+  // 144M of 159M = 90.6%: inside the plan, but close to its limit. Extra is $0, not null.
+  assert.equal(use.extra, 0);
+  assert.ok(Math.abs(use.share - 144 / 159) < 1e-12);
+  // The team's 1,800M tokens are over eleven times the allowance.
+  assert.ok(subscriptionUse({ ...presets.team.workload, model: "plus" }, subs)!.share > 11);
+  // A per-token model id is not a plan.
+  assert.equal(subscriptionUse(presets.personal.workload, subs), null);
 });
 
 test("one storage allowance covers disk kept while stopped", () => {

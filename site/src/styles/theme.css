@@ -1656,6 +1656,26 @@ details[open] > .calc__head .calc__name::before { transform: rotate(90deg); }
 .calc__notes { margin: 0; padding-left: var(--space-4); font-size: var(--text-sm); color: var(--color-text-secondary); display: grid; gap: var(--space-1); }
 .calc__links { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); font-size: var(--text-sm); margin: 0; }
 .calc__checked { color: var(--color-text-muted); font-family: var(--font-mono); font-size: var(--text-xs); align-self: center; }
+.bill { border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); padding: var(--space-4) var(--space-5); margin: 0 0 var(--space-5); display: grid; gap: var(--space-4); }
+.bill__title { margin: 0; font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); }
+.bill__row { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); column-gap: var(--space-4); row-gap: var(--space-1); align-items: baseline; }
+.bill__label { margin: 0; font-family: var(--font-display); font-size: var(--text-xl); color: var(--color-text); }
+.bill__figure { margin: 0; font-family: var(--font-mono); font-size: var(--text-xl); color: var(--color-text); }
+.bill__track { grid-column: 2; position: relative; height: 8px; border-radius: var(--radius-pill); background: var(--color-surface-muted); margin: var(--space-1) 0; }
+.bill__bar { position: absolute; top: 0; bottom: 0; border-radius: var(--radius-pill); background: var(--color-accent); }
+.bill__note, .bill__catch { grid-column: 2; margin: 0; font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--color-text-secondary); }
+.bill__catch { color: var(--color-text); border-left: 2px solid var(--color-border-strong); padding-left: var(--space-3); margin-top: var(--space-1); }
+.bill__tiers { margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); font-size: var(--text-sm); color: var(--color-text-muted); padding-left: calc(6.5rem + var(--space-4)); }
+.bill__tiers span { white-space: nowrap; }
+.bill__tiers b { font-weight: var(--weight-semibold); color: var(--color-text-secondary); }
+.calc__assume strong { color: var(--color-text); font-weight: var(--weight-semibold); }
+@media (max-width: 640px) {
+  .bill { padding: var(--space-4); }
+  .bill__row { grid-template-columns: minmax(0, 1fr); }
+  .bill__label { font-size: var(--text-lg); }
+  .bill__track, .bill__note, .bill__catch { grid-column: 1; }
+  .bill__tiers { padding-left: 0; }
+}
 .calc__foot { font-size: var(--text-sm); color: var(--color-text-muted); margin-top: var(--space-4); }
 
 @media (max-width: 900px) {

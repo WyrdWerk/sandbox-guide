@@ -5,6 +5,8 @@ import PageHeader from "../../components/PageHeader.astro";
 import SectionNav from "../../components/SectionNav.astro";
 import { pricing, providerName } from "../../lib/data";
 import { MONTH_HOURS, price, presets, formatMoney, type RateCard } from "../../lib/cost";
+import modelData from "../../data/models.json";
+import subscriptionData from "../../data/subscriptions.json";
 
 const usd = (n: number) => `$${+n.toPrecision(4)}`;
 function rates(card: RateCard): string[] {
@@ -29,11 +31,16 @@ const example = presets.personal;
 const exampleCards = ["runtime", "boat", "e2b"].map((id) => pricing.find((c) => c.provider === id)!);
 const exampleQuotes = exampleCards.map((card) => ({ card, q: price(card, example.workload) }));
 
+const mix = modelData.mix;
+const tierName: Record<string, string> = { cheap: "Cheap", mid: "Mid-priced", frontier: "Frontier" };
+const withTokens = Object.values(presets).filter((p) => p.workload.messagesPerDay > 0 && p.workload.kTokens > 0);
+
 const nav = [
   { href: "#inputs", label: "What goes in" },
   { href: "#models", label: "Four ways to bill" },
   { href: "#rules", label: "The rules" },
   { href: "#example", label: "A worked example" },
+  { href: "#model-line", label: "The model line" },
   { href: "#left-out", label: "What is left out" },
   { href: "#battleships", label: "Battleships" },
   { href: "#cards", label: "Every rate card" },
@@ -136,11 +143,74 @@ const nav = [
       </p>
     </section>
 
+    <section class="section" id="model-line">
+      <div class="section__head"><h2 class="section__title">The model line</h2></div>
+      <div class="prose">
+        <p>
+          For most agents the language model is the larger half of the bill. The calculator shows it beside the machine, as a
+          range from the cheapest model to the dearest, because the choice of model moves the total far more than the choice
+          of provider.
+        </p>
+        <p>
+          <strong>Tokens a month</strong> = messages a day × thousands of tokens per message × the days a month the machine
+          works (30 for batches of tasks). <strong>These volumes are our assumptions, not measurements.</strong> An agent
+          re-sends its instructions, tools and conversation history on every call to the model, and one message can take
+          several calls, so a message often costs 100,000 tokens or more. The ready-made workloads assume:
+        </p>
+        <ul>
+          {withTokens.map((p) => {
+            const w = p.workload;
+            const days = w.mode === "machines" ? w.daysPerMonth : 30;
+            return <li>{p.label}: {w.messagesPerDay} messages a day × {w.kTokens.toLocaleString("en-US")}k tokens × {days} days = {((w.messagesPerDay * w.kTokens * days) / 1000).toLocaleString("en-US")} million tokens a month.</li>;
+          })}
+        </ul>
+        <p>
+          <strong>The mix.</strong> Because so much of each call is the same prompt sent again, model hosts keep it in a
+          cache and charge a fraction of the normal input price to read it back. The estimate assumes {mix.outputPct}% of
+          tokens are the model's output and 95% of the input is read from cache: {mix.inputPct}% new input,{" "}
+          {mix.cacheReadPct}% cached input, {mix.outputPct}% output. Where a host charges more to write the cache than to
+          read plain input, new input is priced at the cache-write rate. Output usually costs several times input, so an
+          agent that writes more than this costs more.
+        </p>
+        <p>
+          <strong>The prices</strong> are list prices from <a href={modelData.source} rel="noreferrer noopener">TokenWatch</a>,
+          read {modelData.fetchedOn} (feed generated {modelData.generatedAt.slice(0, 10)}). Each model is priced at the median
+          of the hosts that promise to keep no data (zero data retention); hosts that may keep your prompts are left out.
+          Several models have only one such host, so their median is that host's price. The table gives the median in dollars per million tokens at this mix.
+        </p>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table">
+          <caption class="visually-hidden">Model prices used by the calculator</caption>
+          <thead><tr><th scope="col">Model</th><th scope="col">Tier</th><th scope="col">No-retention hosts</th><th scope="col">Median $/M</th></tr></thead>
+          <tbody>
+            {modelData.models.map((m) => (
+              <tr><th scope="row"><a href={m.url} rel="noreferrer noopener">{m.label}</a></th><td>{tierName[m.kind]}</td><td>{m.offerings}</td><td>${m.median}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          <strong>Plans you already pay for.</strong> If you choose a subscription, the model adds nothing per token, but a
+          plan has limits. The calculator compares your tokens with an estimate of how many the plan allows a month at full
+          use, from <a href={subscriptionData.allowances.url} rel="noreferrer noopener">{subscriptionData.allowances.label}</a>{" "}
+          (snapshot {subscriptionData.allowances.snapshot}). Its figures are mostly measured from usage dashboards, carry
+          their own confidence rating, and assume a lighter mix than ours (97% cache reads, 2.5% new input, 0.5% output), so
+          treat them as approximate, and as amounts you only reach by using the whole plan. Plan fees come from each
+          vendor's pricing page. Vendors also differ on whether a plan may power an agent other than their own: xAI allows
+          OpenClaw and Hermes on any plan; OpenAI allows them through Sign in with ChatGPT, with conditions; Anthropic's
+          terms reserve plan sign-ins for Claude Code and its own apps. The calculator shows each plan's terms.{" "}
+          {subscriptionData.allowances.label} is MIT-licensed software; its data includes material under CC BY 4.0.
+        </p>
+      </div>
+    </section>
+
     <section class="section" id="left-out">
       <div class="section__head"><h2 class="section__title">What is left out</h2></div>
       <div class="prose">
         <ul>
-          <li><strong>Model tokens, unless you add them.</strong> For most agents the language model costs more than the machine. The calculator can add an estimate: messages a day × thousands of tokens each × the days a month the machine works (30 for batches of tasks), priced at the median of the model hosts that keep no data (zero data retention), from <a href="https://tokenwatch.wyrdwerk.com" rel="noreferrer noopener">TokenWatch</a>. It assumes an agent mix of 5% output, with 95% of the input read from the model host's cache (4.75% new input, 90.25% cached input), and it is the same on every sandbox provider, so it never changes the order.</li>
+          <li><strong>The model, from each provider total.</strong> Each provider total is the machine alone. The model costs the same on every provider, so it never changes the order; it is shown beside the machine instead. See <a href="#model-line">the model line</a>.</li>
           <li><strong>Egress, public IP addresses, seats and taxes.</strong> Where a provider charges them, its notes say so.</li>
           <li><strong>Snapshots and backups whose size or price is not published.</strong></li>
           <li><strong>One-time sign-up credits.</strong> They are mentioned, not subtracted, because they run out. Recurring monthly credits are subtracted.</li>

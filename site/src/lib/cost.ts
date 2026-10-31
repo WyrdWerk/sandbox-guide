@@ -29,7 +29,7 @@ export interface Workload {
    * only this share; the rest is billed as stopped time.
    */
   awake: number;
-  /** Optional model estimate: a model id from data/models.json, or "" for none. */
+  /** The reader's model: a model id from data/models.json, a plan id from data/subscriptions.json, or "" for none. */
   model: string;
   /** Messages or tasks a day that call the model. */
   messagesPerDay: number;
@@ -50,13 +50,46 @@ export interface ModelPrice {
   url: string;
 }
 
+/** Millions of model tokens a month, over the days the machines work (30 for tasks). */
+function tokenMillions(w: Workload) {
+  return (w.messagesPerDay * (w.mode === "machines" ? w.daysPerMonth : 30) * w.kTokens) / 1000;
+}
+
 /** Monthly model cost at the median and the lowest zero-retention price, over the days the machines work (30 for tasks). */
 export function modelCost(w: Workload, models: ModelPrice[]) {
   const m = models.find((x) => x.id === w.model);
   if (!m || w.messagesPerDay <= 0 || w.kTokens <= 0) return null;
-  const days = w.mode === "machines" ? w.daysPerMonth : 30;
-  const millions = (w.messagesPerDay * days * w.kTokens) / 1000;
+  const millions = tokenMillions(w);
   return { model: m, millions, median: millions * m.median, lowest: millions * m.lowest.rate };
+}
+
+/** A monthly plan that serves a model, with an estimate of how many tokens it allows a month. */
+export interface Subscription {
+  id: string;
+  plan: string;
+  model: string;
+  /** The plan's monthly fee in USD, from the vendor's pricing page. */
+  fee: number;
+  /** Estimated millions of tokens of this model the plan allows a month at full use. */
+  allowance: number;
+  confidence: string;
+  /** When the allowance was measured. */
+  measured: string;
+  /** Anything that qualifies the allowance, such as a renamed plan. */
+  note?: string;
+  /** Whether the vendor lets the plan power a third-party agent, in one plain sentence. */
+  catch: string;
+}
+
+/**
+ * The model line for a reader who already pays a plan: nothing extra per token,
+ * and the share of the plan's estimated allowance the workload would use.
+ */
+export function subscriptionUse(w: Workload, subs: Subscription[]) {
+  const s = subs.find((x) => x.id === w.model);
+  if (!s || w.messagesPerDay <= 0 || w.kTokens <= 0) return null;
+  const millions = tokenMillions(w);
+  return { sub: s, millions, extra: 0, share: millions / s.allowance };
 }
 
 export type ModelKind = "cheap" | "mid" | "frontier";
@@ -69,8 +102,7 @@ type Priced = { model: ModelPrice; cost: number };
  */
 export function modelCostRange(w: Workload, models: ModelPrice[]) {
   if (!models.length || w.messagesPerDay <= 0 || w.kTokens <= 0) return null;
-  const days = w.mode === "machines" ? w.daysPerMonth : 30;
-  const millions = (w.messagesPerDay * days * w.kTokens) / 1000;
+  const millions = tokenMillions(w);
   const priced = models.map((m) => ({ model: m, cost: millions * m.median })).sort((a, b) => a.cost - b.cost);
   const byKind: Partial<Record<ModelKind, { low: Priced; high: Priced }>> = {};
   for (const p of priced) {
