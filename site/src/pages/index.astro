@@ -2,7 +2,22 @@
 import Base from "../layouts/Base.astro";
 import site from "../data/site.json";
 import SituationIcon from "../components/SituationIcon.astro";
-import { features, groups, providers, situations, useCases, checked, formatDate } from "../lib/data";
+import { features, groups, providers, situations, useCases, checked, formatDate, pricing, providerName } from "../lib/data";
+import { formatMoney, modelCostRange, presets, price } from "../lib/cost";
+import modelData from "../data/models.json";
+
+// The headline finding, priced live by the calculator's engine: a personal agent's
+// cheapest machine against its model bill across the priced models.
+const personal = presets.personal.workload;
+const machines = pricing.map((card) => ({ card, q: price(card, personal) })).filter((x) => x.q.feasible).sort((a, b) => a.q.total - b.q.total);
+const cheapest = machines[0];
+const dearestMachine = machines[machines.length - 1];
+const model = modelCostRange(personal, modelData.models)!;
+const frontier = model.byKind.frontier!;
+const times = (cost: number) => Math.round(cost / cheapest.q.total);
+const scale = Math.max(dearestMachine.q.total, model.max.cost);
+const bar = (a: number, b: number) => `left: ${(a / scale) * 100}%; width: max(4px, ${((b - a) / scale) * 100}%)`;
+const span = (a: number, b: number) => `${formatMoney(a)} – ${formatMoney(b)}`;
 ---
 
 <Base title={site.title}>
@@ -17,9 +32,10 @@ import { features, groups, providers, situations, useCases, checked, formatDate 
       </p>
       <p class="hero-actions">
         <a class="button" href="/choose/">Help me choose</a>
+        <a class="button button--quiet" href="/do-you-need-a-sandbox/">Do you even need a sandbox?</a>
         <a class="button button--quiet" href="/costs/">Price my own workload</a>
       </p>
-      <p class="hero-aside">New to this? <a href="/do-you-need-a-sandbox/">Do you even need a sandbox?</a></p>
+      <p class="hero-aside">New to this? Start with whether you need a sandbox at all: a laptop, a plain server and a managed service, priced side by side.</p>
       <p class="page-meta">
         <span class="page-meta__item"><span class="page-meta__dot" aria-hidden="true"></span>{providers.length} providers</span>
         <span class="page-meta__item">Prices checked {formatDate(checked.prices)}</span>
@@ -27,7 +43,41 @@ import { features, groups, providers, situations, useCases, checked, formatDate 
       </p>
     </header>
 
-    <section class="section section--flush" aria-labelledby="usecases-h">
+    <section class="section section--flush" aria-labelledby="finding-h">
+      <div class="section__head">
+        <h2 class="section__title" id="finding-h">The computer is not your bill. The model is.</h2>
+        <p class="section__note">A personal agent that stays on, like OpenClaw or Hermes, priced from list rates</p>
+      </div>
+      <div class="bill">
+        <div class="bill__row">
+          <p class="bill__label">Machine</p>
+          <p class="bill__figure">{span(cheapest.q.total, dearestMachine.q.total)}</p>
+          <div class="bill__track" aria-hidden="true"><span class="bill__bar" style={bar(cheapest.q.total, dearestMachine.q.total)}></span></div>
+          <p class="bill__note">A month on the {machines.length} providers that run it as asked: cheapest {providerName(cheapest.card.provider)}, dearest {providerName(dearestMachine.card.provider)}.</p>
+        </div>
+        <div class="bill__row">
+          <p class="bill__label">Model</p>
+          <p class="bill__figure">{span(model.min.cost, model.max.cost)}</p>
+          <div class="bill__track" aria-hidden="true"><span class="bill__bar" style={bar(model.min.cost, model.max.cost)}></span></div>
+          <p class="bill__note">The same month's model, from {model.min.model.label} to {model.max.model.label}; {formatMoney(frontier.low.cost)} or more on any frontier model.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <p>
+          The cheapest machine that keeps this agent running costs {formatMoney(cheapest.q.total)} a month. On a frontier model,
+          its model costs {times(frontier.low.cost)} to {times(frontier.high.cost)} times that. Choosing the model moves the bill
+          far more than choosing where the agent lives.
+        </p>
+      </div>
+      <p class="section__note">
+          Machine prices checked {formatDate(checked.prices)}. Model prices are the median of hosts that keep no data, from
+          TokenWatch, read {modelData.fetchedOn}, at {Math.round(model.millions)} million tokens a month, which is our
+          assumption. <a href="/costs/how-it-works/#model-line">How the model line works</a> ·{" "}
+          <a href="/costs/">Price your own agent</a>
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="usecases-h">
       <div class="section__head">
         <h2 class="section__title" id="usecases-h">Start from what you want to run</h2>
         <p class="section__note">What it needs, how hard it is to set up on each provider, and what it costs</p>
