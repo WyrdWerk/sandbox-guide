@@ -17,7 +17,7 @@ import {
   providers,
   useCases,
 } from "./data";
-import { formatMoney, modelCost, presets, price, type ModelPrice } from "./cost";
+import { formatMoney, modelCostRange, presets, price, type ModelPrice } from "./cost";
 import modelData from "../data/models.json";
 import type { Capability, Provider, UseCase } from "../data/schema";
 
@@ -94,12 +94,14 @@ export function useCaseAnswer(u: UseCase): string {
   return `The cheapest machine that runs it as described is ${fit[0].name} at ${formatMoney(fit[0].monthlyUsd)} a month${next.length ? `, then ${names(next)}` : ""}. ${fit.length} of ${all.length} providers run it without a catch. ${ai ?? "Any AI model is billed separately and not priced here."} List prices checked ${formatDate(checked.prices)}.`;
 }
 
-/** The model estimate the calculator adds for a preset, as one sentence, or null when the preset has no model. */
+/** The model range the calculator shows for a preset, as one sentence, or null when the preset has no model. */
 export function modelAnswer(preset: string): string | null {
   const w = presets[preset].workload;
-  const ai = modelCost(w, (modelData as { models: ModelPrice[] }).models);
-  if (!ai) return null;
-  return `The AI model adds about ${formatMoney(ai.median)} a month on top (${ai.model.label}, ${w.messagesPerDay.toLocaleString("en-US")} requests a day at ${w.kTokens.toLocaleString("en-US")}k tokens each, median zero-retention price${ai.lowest < ai.median - 0.005 ? `; from ${formatMoney(ai.lowest)} at the cheapest host` : ""}).`;
+  const r = modelCostRange(w, (modelData as { models: ModelPrice[] }).models);
+  if (!r) return null;
+  const f = r.byKind.frontier;
+  const days = w.mode === "machines" ? w.daysPerMonth : 30;
+  return `The AI model adds ${formatMoney(r.min.cost)} to ${formatMoney(r.max.cost)} a month on top, depending on the model: ${r.min.model.label} at the low end${f ? `, ${formatMoney(f.low.cost)} or more on a frontier model such as ${f.low.model.label}` : ""}, up to ${r.max.model.label}. That assumes ${Math.round(r.millions).toLocaleString("en-US")} million tokens a month (${w.messagesPerDay.toLocaleString("en-US")} requests a day × ${w.kTokens.toLocaleString("en-US")}k tokens × ${days} days, our assumption) at the median zero-retention price of each model.`;
 }
 
 /** What one always-on personal agent costs on this provider, and where that ranks. */

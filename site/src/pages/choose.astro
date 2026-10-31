@@ -76,7 +76,7 @@ const jobs = [
 
   <script type="application/json" id="chooser-data" set:html={JSON.stringify(payload)}></script>
   <script>
-    import { price, presets, formatMoney, modelCost, type RateCard, type Workload } from "../lib/cost";
+    import { price, presets, formatMoney, modelCostRange, type RateCard, type Workload } from "../lib/cost";
 
     type Route = { provider: string; tier: string; noTerminal: "yes" | "partly" | "no"; what: string; price?: string; link: { title: string; url: string } | null };
     const data = JSON.parse(document.getElementById("chooser-data")!.textContent!);
@@ -144,7 +144,7 @@ const jobs = [
         return Number(a.over) - Number(b.over) || ease || (isNaN(a.total) ? 0 : a.total) - (isNaN(b.total) ? 0 : b.total);
       });
       const top = kept.slice(0, 3);
-      const ai = modelCost(w, data.models);
+      const ai = modelCostRange(w, data.models);
 
       const picks = document.getElementById("picks")!;
       picks.replaceChildren();
@@ -180,7 +180,7 @@ const jobs = [
 
       const lead = document.getElementById("lead")!;
       lead.textContent = top.length
-        ? `${top.length === 1 ? "One provider fits" : `${top.length} providers fit best`}, out of ${kept.length} that can do this.` + (ai ? ` Add about ${formatMoney(ai.median)} a month for the AI model itself (${ai.model.label}).` : "")
+        ? `${top.length === 1 ? "One provider fits" : `${top.length} providers fit best`}, out of ${kept.length} that can do this.` + (ai ? ` Add ${formatMoney(ai.min.cost)} to ${formatMoney(ai.max.cost)} a month for the AI model itself, depending on the model: ${ai.min.model.label} at the low end, ${ai.max.model.label} at the top (${Math.round(ai.millions).toLocaleString("en-US")} million tokens a month, our assumption).` : "")
         : "Nothing fits every answer. Try “I can copy and paste instructions”, or a larger budget.";
 
       const leftList = document.getElementById("left")!;
