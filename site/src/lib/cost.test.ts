@@ -6,7 +6,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { price, presets, modelCost, type RateCard } from "./cost.ts";
+import { price, presets, modelCost, modelCostRange, subscriptionUse, type RateCard } from "./cost.ts";
 
 const card = (id: string): RateCard =>
   JSON.parse(readFileSync(new URL(`../data/pricing/${id}.json`, import.meta.url), "utf8"));
@@ -67,9 +67,48 @@ test("plan gates, minimums and fixed shapes from the providers' own pages", () =
 
 test("the model line counts the days a month the machines work", () => {
   const models = [{ id: "m", label: "M", kind: "", offerings: 1, lowest: { provider: "x", rate: 0.5 }, median: 1, url: "" }];
-  // Team: 100 requests × 300k tokens × 20 working days = 600M tokens; personal: 30 × 40k × 30 days = 36M.
-  assert.equal(modelCost({ ...presets.team.workload, model: "m" }, models)?.millions, 600);
-  assert.equal(modelCost({ ...presets.personal.workload, model: "m" }, models)?.millions, 36);
+  // Team: 100 requests × 900k tokens × 20 working days = 1,800M tokens; personal: 30 × 160k × 30 days = 144M.
+  assert.equal(modelCost({ ...presets.team.workload, model: "m" }, models)?.millions, 1800);
+  assert.equal(modelCost({ ...presets.personal.workload, model: "m" }, models)?.millions, 144);
+});
+
+test("the model range prices one workload at every model, cheapest to dearest", () => {
+  // Blended $/M at 4.75% fresh input / 90.25% cache read / 5% output, from TokenWatch's
+  // zero-retention list prices on 2026-10-31 (fresh input billed at cache write when that is dearer):
+  // Grok 4.7 (xAI):          2 × 0.0475 + 0.5 × 0.9025 + 6 × 0.05 = 0.84625 → 0.8463
+  // Kimi K3.1 Pro (Moonshot): 2 × 0.0475 + 0.2 × 0.9025 + 10 × 0.05 = 0.7755
+  // GPT-6.1 Terra (Azure):   1.5 × 0.0475 + 0.06 × 0.9025 + 6 × 0.05 = 0.4254
+  // Claude Fable 5.1 (one zero-retention host): 10 × 0.0475 + 0.15 × 0.9025 + 50 × 0.05 = 3.1104
+  const m = (id: string, kind: string, median: number) => ({ id, label: id, kind, offerings: 1, lowest: { provider: "x", rate: median }, median, url: "" });
+  const models = [m("grok", "mid", 0.8463), m("fable", "frontier", 3.1104), m("kimi", "mid", 0.7755), m("terra", "mid", 0.4254)];
+  const r = modelCostRange(presets.personal.workload, models)!;
+  // Personal agent: 30 messages × 160k tokens × 30 days = 144M tokens.
+  assert.equal(r.millions, 144);
+  // 144 × 0.4254 = $61.26 (Terra) up to 144 × 3.1104 = $447.90 (Fable); mid tops out at 144 × 0.8463 = $121.87 (Grok).
+  assert.equal(r.min.model.id, "terra");
+  assert.ok(Math.abs(r.min.cost - 61.2576) < 1e-9);
+  assert.equal(r.max.model.id, "fable");
+  assert.ok(Math.abs(r.max.cost - 447.8976) < 1e-9);
+  assert.equal(r.byKind.mid?.low.model.id, "terra");
+  assert.equal(r.byKind.mid?.high.model.id, "grok");
+  assert.ok(Math.abs(r.byKind.mid!.high.cost - 121.8672) < 1e-9);
+  assert.equal(r.byKind.frontier?.low.model.id, "fable");
+  assert.equal(r.byKind.cheap, undefined);
+  // No model line for a workload without tokens.
+  assert.equal(modelCostRange(presets.browser.workload, models), null);
+});
+
+test("a plan already paid adds nothing per token, and counts against its allowance", () => {
+  // ChatGPT Plus serves about 159M GPT-6 Astra tokens a month (Real API Pricing, measured 2026-09-11).
+  const subs = [{ id: "plus", plan: "ChatGPT Plus", model: "GPT-6 Astra", fee: 20, allowance: 159, confidence: "high", measured: "", catch: "" }];
+  const use = subscriptionUse({ ...presets.personal.workload, model: "plus" }, subs)!;
+  // 144M of 159M = 90.6%: inside the plan, but close to its limit. Extra is $0, not null.
+  assert.equal(use.extra, 0);
+  assert.ok(Math.abs(use.share - 144 / 159) < 1e-12);
+  // The team's 1,800M tokens are over eleven times the allowance.
+  assert.ok(subscriptionUse({ ...presets.team.workload, model: "plus" }, subs)!.share > 11);
+  // A per-token model id is not a plan.
+  assert.equal(subscriptionUse(presets.personal.workload, subs), null);
 });
 
 test("one storage allowance covers disk kept while stopped", () => {

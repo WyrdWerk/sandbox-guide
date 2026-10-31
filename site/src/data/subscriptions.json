@@ -1,0 +1,226 @@
+{
+  "allowances": {
+    "label": "Real API Pricing",
+    "url": "https://realapipricing.com/",
+    "repo": "https://github.com/Fei2411/real-api-pricing",
+    "snapshot": "2026-10-27",
+    "method": "Tokens a month at full use of the plan, mostly measured from usage dashboards; dollar pools are converted at 97% cache reads, 2.5% fresh input and 0.5% output. Lower bounds: they assume you use the whole allowance.",
+    "licence": "Software MIT; data includes Awesome Coding Plan material under CC BY 4.0. See the repository's SOURCES.md."
+  },
+  "plans": [
+    {
+      "id": "claude-pro-opus-5.5",
+      "plan": "Claude Pro",
+      "model": "Claude Opus 5.5",
+      "fee": 20,
+      "allowance": 3054,
+      "confidence": "high",
+      "measured": "2026-09-22~2026-09-27",
+      "catch": "Anthropic says a plan sign-in is for Claude Code and its own apps, and its consumer terms bar automated access without an API key. Running unmodified Claude Code on your own machine is allowed; powering OpenClaw or Hermes with the plan may not be.",
+      "sources": {
+        "fee": {
+          "url": "https://claude.com/pricing",
+          "quote": "$17 Per month with annual subscription discount ($200 billed up front). $20 if billed monthly.",
+          "confidence": "pricing-page",
+          "checkedOn": "2026-10-31"
+        },
+        "allowance": {
+          "url": "https://github.com/Fei2411/real-api-pricing/blob/main/data/adopted.csv",
+          "quote": "claude_pro,Claude Pro,,subscription,20,USD,20,claude-opus-5.5,3054000000",
+          "confidence": "third-party",
+          "checkedOn": "2026-10-31"
+        },
+        "terms": {
+          "url": "https://code.claude.com/docs/en/legal-and-compliance",
+          "quote": "OAuth authentication is intended exclusively for purchasers of Claude Free, Pro, Max, Ultra, Team, and Enterprise subscription plans and is designed to support ordinary use of Claude Code and other native Anthropic applications.",
+          "confidence": "docs-confirmed",
+          "checkedOn": "2026-10-31"
+        }
+      }
+    },
+    {
+      "id": "claude-max-opus-5.5",
+      "plan": "Claude Max",
+      "model": "Claude Opus 5.5",
+      "fee": 100,
+      "allowance": 18334,
+      "confidence": "medium",
+      "measured": "2026-09-29~2026-10-03",
+      "catch": "Anthropic says a plan sign-in is for Claude Code and its own apps, and its consumer terms bar automated access without an API key. Running unmodified Claude Code on your own machine is allowed; powering OpenClaw or Hermes with the plan may not be.",
+      "sources": {
+        "fee": {
+          "url": "https://claude.com/pricing",
+          "quote": "Max For all-day work $100 Per month",
+          "confidence": "pricing-page",
+          "checkedOn": "2026-10-31"
+        },
+        "allowance": {
+          "url": "https://github.com/Fei2411/real-api-pricing/blob/main/data/adopted.csv",
+          "quote": "claude_max_5x,Claude Max 5x (9/14+),,subscription,100,USD,100,claude-opus-5.5,18334000000",
+          "confidence": "third-party",
+          "checkedOn": "2026-10-31"
+        },
+        "terms": {
+          "url": "https://code.claude.com/docs/en/legal-and-compliance",
+          "quote": "OAuth authentication is intended exclusively for purchasers of Claude Free, Pro, Max, Ultra, Team, and Enterprise subscription plans and is designed to support ordinary use of Claude Code and other native Anthropic applications.",
+          "confidence": "docs-confirmed",
+          "checkedOn": "2026-10-31"
+        }
+      }
+    },
+    {
+      "id": "claude-ultra-opus-5.5",
+      "plan": "Claude Ultra",
+      "model": "Claude Opus 5.5",
+      "fee": 200,
+      "allowance": 31538,
+      "confidence": "medium",
+      "measured": "2026-09-22~2026-09-27",
+      "note": "Measured as Max 20x, which Anthropic renamed Ultra at the same price. Anthropic now describes Ultra as 10x Pro usage a week.",
+      "catch": "Anthropic says a plan sign-in is for Claude Code and its own apps, and its consumer terms bar automated access without an API key. Running unmodified Claude Code on your own machine is allowed; powering OpenClaw or Hermes with the plan may not be.",
+      "sources": {
+        "fee": {
+          "url": "https://claude.com/pricing",
+          "quote": "Ultra For your longest tasks $200 Per month",
+          "confidence": "pricing-page",
+          "checkedOn": "2026-10-31"
+        },
+        "allowance": {
+          "url": "https://github.com/Fei2411/real-api-pricing/blob/main/data/adopted.csv",
+          "quote": "claude_max_20x,Claude Max 20x (9/14+),,subscription,200,USD,200,claude-opus-5.5,31538000000",
+          "confidence": "third-party",
+          "checkedOn": "2026-10-31"
+        },
+        "terms": {
+          "url": "https://code.claude.com/docs/en/legal-and-compliance",
+          "quote": "OAuth authentication is intended exclusively for purchasers of Claude Free, Pro, Max, Ultra, Team, and Enterprise subscription plans and is designed to support ordinary use of Claude Code and other native Anthropic applications.",
+          "confidence": "docs-confirmed",
+          "checkedOn": "2026-10-31"
+        }
+      }
+    },
+    {
+      "id": "claude-ultra-fable-5.1",
+      "plan": "Claude Ultra",
+      "model": "Claude Fable 5.1",
+      "fee": 200,
+      "allowance": 1728,
+      "confidence": "medium",
+      "measured": "2026-09-04~2026-09-05",
+      "note": "Measured as Max 20x, which Anthropic renamed Ultra at the same price. Anthropic now describes Ultra as 10x Pro usage a week.",
+      "catch": "Anthropic says a plan sign-in is for Claude Code and its own apps, and its consumer terms bar automated access without an API key. Running unmodified Claude Code on your own machine is allowed; powering OpenClaw or Hermes with the plan may not be.",
+      "sources": {
+        "fee": {
+          "url": "https://claude.com/pricing",
+          "quote": "Ultra For your longest tasks $200 Per month",
+          "confidence": "pricing-page",
+          "checkedOn": "2026-10-31"
+        },
+        "allowance": {
+          "url": "https://github.com/Fei2411/real-api-pricing/blob/main/data/adopted.csv",
+          "quote": "claude_max_20x,Claude Max 20x (9/14+),,subscription,200,USD,200,claude-fable-5.1,1728000000",
+          "confidence": "third-party",
+          "checkedOn": "2026-10-31"
+        },
+        "terms": {
+          "url": "https://code.claude.com/docs/en/legal-and-compliance",
+          "quote": "OAuth authentication is intended exclusively for purchasers of Claude Free, Pro, Max, Ultra, Team, and Enterprise subscription plans and is designed to support ordinary use of Claude Code and other native Anthropic applications.",
+          "confidence": "docs-confirmed",
+          "checkedOn": "2026-10-31"
+        }
+      }
+    },
+    {
+      "id": "chatgpt-plus-gpt-6-astra",
+      "plan": "ChatGPT Plus",
+      "model": "GPT-6 Astra",
+      "fee": 20,
+      "allowance": 159,
+      "confidence": "high",
+      "measured": "2026-09-11",
+      "catch": "Allowed through Sign in with ChatGPT, which lists Hermes Agent and OpenClaw, if the machine is yours and you agree to background use. OpenAI also says stored sign-in tokens must stay under your control, not in a managed environment, which a rented cloud machine may not meet.",
+      "sources": {
+        "fee": {
+          "url": "https://chatgpt.com/pricing",
+          "quote": "Plus Do more with advanced intelligence $20 / month",
+          "confidence": "pricing-page",
+          "checkedOn": "2026-10-31"
+        },
+        "allowance": {
+          "url": "https://github.com/Fei2411/real-api-pricing/blob/main/data/adopted.csv",
+          "quote": "chatgpt_plus,ChatGPT Plus,,subscription,20,USD,20,gpt-6-astra,159000000",
+          "confidence": "third-party",
+          "checkedOn": "2026-10-31"
+        },
+        "terms": {
+          "url": "https://help.openai.com/en/articles/20001542-using-your-chatgpt-plan-in-other-apps-and-sites",
+          "quote": "If you have a Go, Plus, or Pro plan, you can also choose to use your ChatGPT plan for AI requests in participating commercial apps and sites that support this feature.",
+          "confidence": "docs-confirmed",
+          "checkedOn": "2026-10-31"
+        }
+      }
+    },
+    {
+      "id": "chatgpt-pro-200-gpt-6-astra",
+      "plan": "ChatGPT Pro 200",
+      "model": "GPT-6 Astra",
+      "fee": 200,
+      "allowance": 3812,
+      "confidence": "medium",
+      "measured": "2026-09-07~2026-09-21",
+      "note": "Measured as \"ChatGPT Pro 20x\" at $200; matched to OpenAI's Pro 200 by price (inferred).",
+      "catch": "Allowed through Sign in with ChatGPT, which lists Hermes Agent and OpenClaw, if the machine is yours and you agree to background use. OpenAI also says stored sign-in tokens must stay under your control, not in a managed environment, which a rented cloud machine may not meet.",
+      "sources": {
+        "fee": {
+          "url": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
+          "quote": "Pro 200 | $200",
+          "confidence": "docs-confirmed",
+          "checkedOn": "2026-10-31"
+        },
+        "allowance": {
+          "url": "https://github.com/Fei2411/real-api-pricing/blob/main/data/adopted.csv",
+          "quote": "chatgpt_pro_20x,ChatGPT Pro 20x,,subscription,200,USD,200,gpt-6-astra,3812000000",
+          "confidence": "third-party",
+          "checkedOn": "2026-10-31"
+        },
+        "terms": {
+          "url": "https://help.openai.com/en/articles/20001542-using-your-chatgpt-plan-in-other-apps-and-sites",
+          "quote": "If you have a Go, Plus, or Pro plan, you can also choose to use your ChatGPT plan for AI requests in participating commercial apps and sites that support this feature.",
+          "confidence": "docs-confirmed",
+          "checkedOn": "2026-10-31"
+        }
+      }
+    },
+    {
+      "id": "grok-premium-grok-4.7",
+      "plan": "Grok Premium",
+      "model": "Grok 4.7",
+      "fee": 30,
+      "allowance": 572,
+      "confidence": "medium",
+      "measured": "2026-09-22",
+      "note": "Measured as SuperGrok at $30; matched to today's $30 Premium plan by price (inferred: xAI does not say which plan replaced SuperGrok).",
+      "catch": "xAI explicitly lets every Grok plan power OpenClaw or Hermes, on any computer including a VPS.",
+      "sources": {
+        "fee": {
+          "url": "https://grok.com/plans",
+          "quote": "50% off for 1 month, then $30 monthly",
+          "confidence": "pricing-page",
+          "checkedOn": "2026-10-31"
+        },
+        "allowance": {
+          "url": "https://github.com/Fei2411/real-api-pricing/blob/main/data/adopted.csv",
+          "quote": "supergrok,SuperGrok,,subscription,30,USD,30,grok-4.7,572000000",
+          "confidence": "third-party",
+          "checkedOn": "2026-10-31"
+        },
+        "terms": {
+          "url": "https://x.ai/news/grok-openclaw",
+          "quote": "Starting today, log in and use your SuperGrok or X Premium subscription inside OpenClaw.",
+          "confidence": "docs-confirmed",
+          "checkedOn": "2026-10-31"
+        }
+      }
+    }
+  ]
+}

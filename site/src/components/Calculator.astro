@@ -5,6 +5,7 @@ import Term from "./Term.astro";
 import { pricing, providers } from "../lib/data";
 import { presets } from "../lib/cost";
 import modelData from "../data/models.json";
+import subscriptionData from "../data/subscriptions.json";
 
 interface Props {
   /** Preset to open with. */
@@ -21,7 +22,9 @@ const payload = {
   preset,
   only: only ?? null,
   models: modelData.models,
+  subs: subscriptionData.plans,
 };
+const tiers = [["cheap", "cheap models"], ["mid", "mid-priced models"], ["frontier", "frontier models"]] as const;
 const field = (name: string) => `${id}-${name}`;
 ---
 
@@ -79,28 +82,43 @@ const field = (name: string) => `${id}-${name}`;
       <p class="calc__hint" data-when="machines">For providers that put an idle machine to sleep and wake it on a request: the share of its hours it has to be awake. An agent that only answers webhooks can sleep; one that holds a chat connection open cannot.</p>
     </fieldset>
     <fieldset class="calc__group">
-      <legend class="calc__legend">The AI model (optional)</legend>
+      <legend class="calc__legend">The AI model</legend>
       <select name="model" aria-label="Model">
         <option value="">Leave the model out</option>
-        {modelData.models.map((m) => <option value={m.id}>{m.label}</option>)}
+        {tiers.map(([kind, label]) => (
+          <optgroup label={`Pay per token: ${label}`}>
+            {modelData.models.filter((m) => m.kind === kind).map((m) => <option value={m.id}>{m.label}</option>)}
+          </optgroup>
+        ))}
+        <optgroup label="A plan you already pay for">
+          {subscriptionData.plans.map((s) => <option value={s.id}>{s.plan} ({s.model})</option>)}
+        </optgroup>
       </select>
       <div class="calc__row calc__row--two" data-model>
         <label>Messages a day <input type="number" name="messagesPerDay" min="0" max="100000" step="1" /></label>
-        <label>Thousand <Term id="token">tokens</Term> each <input type="number" name="kTokens" min="0" max="2000" step="1" /></label>
+        <label>Thousand <Term id="token">tokens</Term> each <input type="number" name="kTokens" min="0" max="5000" step="1" /></label>
       </div>
+      <p class="calc__hint calc__assume" data-model>
+        <strong>These two numbers are our assumptions, not measurements.</strong> An agent re-sends its instructions and history on
+        every call to the model, and one message can take several calls, so 100,000 tokens or more per message is normal. Change
+        them to match your agent.
+      </p>
       <p class="calc__hint">
-        For most agents the model costs more than the machine. Each message re-sends the agent's instructions and history,
-        so tens of thousands of tokens is normal. Prices are the median of the providers that keep no data, from{" "}
-        <a href="https://tokenwatch.wyrdwerk.com" rel="noreferrer noopener">TokenWatch</a>, read {modelData.fetchedOn}.
+        Per-token prices are the median of the model hosts that keep no data, from{" "}
+        <a href="https://tokenwatch.wyrdwerk.com" rel="noreferrer noopener">TokenWatch</a>, read {modelData.fetchedOn}. Plan
+        allowances are estimates from{" "}
+        <a href={subscriptionData.allowances.url} rel="noreferrer noopener">{subscriptionData.allowances.label}</a>.{" "}
+        <a href="/costs/how-it-works/#model-line">How the model line works</a>.
       </p>
     </fieldset>
   </form>
 
   <div class="calc__results">
+    <div class="bill" data-bill aria-live="polite"></div>
     <p class="calc__summary" data-summary aria-live="polite"></p>
     <ol class="calc__list" data-list></ol>
     <p class="calc__foot">
-      List prices only, excluding model tokens, <Term id="egress">egress</Term>, taxes and anything a provider does not publish.{" "}
+      Machine prices per provider: list prices only, excluding the model, <Term id="egress">egress</Term>, taxes and anything a provider does not publish.{" "}
       <a href="/costs/how-it-works/">How the numbers are made</a>.
     </p>
   </div>
@@ -109,7 +127,7 @@ const field = (name: string) => `${id}-${name}`;
 <script type="application/json" data-calc-data={id} set:html={JSON.stringify(payload)}></script>
 
 <script>
-  import { price, presets, formatMoney, modelCost, catches, hoursOf, type Workload, type RateCard, type Quote } from "../lib/cost";
+  import { price, presets, formatMoney, modelCost, modelCostRange, subscriptionUse, catches, hoursOf, type Workload, type RateCard, type Quote, type Subscription } from "../lib/cost";
 
   const NUMBER_FIELDS = ["vcpu", "ram", "disk", "machines", "hoursPerDay", "daysPerMonth", "tasks", "taskMinutes", "messagesPerDay", "kTokens"] as const;
 
@@ -122,6 +140,8 @@ const field = (name: string) => `${id}-${name}`;
     const list = root.querySelector<HTMLElement>("[data-list]")!;
     const summary = root.querySelector<HTMLElement>("[data-summary]")!;
     const why = root.querySelector<HTMLElement>("[data-why]")!;
+    const bill = root.querySelector<HTMLElement>("[data-bill]")!;
+    const subs: Subscription[] = data.subs;
     const el = (name: string) => form.elements.namedItem(name) as HTMLInputElement;
 
     // One calculator per page keeps its workload in the address bar, so a link shares it.
@@ -179,7 +199,10 @@ const field = (name: string) => `${id}-${name}`;
       return "";
     }
 
-    function receipt(card: RateCard, q: Quote, w: Workload, ai: ReturnType<typeof modelCost>) {
+    // The model line for one provider: a per-token estimate, or a plan the reader already pays.
+    type ModelLine = { label: string; amount: number } | null;
+
+    function receipt(card: RateCard, q: Quote, w: Workload, ai: ModelLine) {
       const box = document.createElement("div");
       box.className = "receipt";
       box.append(text("p", "receipt__title", "Your month, in short"));
@@ -192,15 +215,87 @@ const field = (name: string) => `${id}-${name}`;
       const extra = card.perMachine ? q.lines.filter((l) => l.label === card.perMachine!.label).reduce((s, l) => s + l.amount, 0) : 0;
       row(`Machine: ${q.shape.split(":")[0]}`, q.total - extra);
       if (extra > 0) row(card.perMachine!.label, extra);
-      if (ai) row(`AI model: ${ai.model.label}`, ai.median);
+      if (ai) row(ai.label, ai.amount);
       const total = document.createElement("div");
       total.className = "receipt__total";
-      total.append(text("dt", "", "About a month"), text("dd", "", formatMoney(q.total + (ai ? ai.median : 0))));
+      total.append(text("dt", "", "About a month"), text("dd", "", formatMoney(q.total + (ai ? ai.amount : 0))));
       dl.append(total);
       box.append(dl);
       const note = plainCatch(card, q, w);
       if (note) box.append(text("p", "receipt__catch", note));
       return box;
+    }
+
+    // The month in two parts, machine and model, as ranges on one shared scale so the
+    // bigger part looks bigger.
+    function renderBill(w: Workload, priced: { card: RateCard; q: Quote }[], api: ReturnType<typeof modelCost>, plan: ReturnType<typeof subscriptionUse>) {
+      bill.replaceChildren();
+      const range = modelCostRange(w, data.models);
+      if (!w.model || !range || !priced.length) {
+        bill.hidden = true;
+        return;
+      }
+      bill.hidden = false;
+      const lo = priced[0], hi = priced[priced.length - 1];
+      const money = (a: number, b: number) => (Math.abs(b - a) < 0.005 ? formatMoney(a) : `${formatMoney(a)} – ${formatMoney(b)}`);
+      const scale = Math.max(hi.q.total, plan ? 0 : range.max.cost) || 1;
+
+      bill.append(text("p", "bill__title", "Your month, in two parts"));
+      const line = (label: string, figure: string, from: number, to: number, notes: string[], extra?: string) => {
+        const row = document.createElement("div");
+        row.className = "bill__row";
+        row.append(text("p", "bill__label", label), text("p", "bill__figure", figure));
+        const track = document.createElement("div");
+        track.className = "bill__track";
+        track.setAttribute("aria-hidden", "true");
+        const bar = document.createElement("span");
+        bar.className = "bill__bar";
+        bar.style.left = `${(from / scale) * 100}%`;
+        bar.style.width = `max(4px, ${((to - from) / scale) * 100}%)`;
+        track.append(bar);
+        row.append(track);
+        for (const n of notes) row.append(text("p", "bill__note", n));
+        if (extra) row.append(text("p", "bill__catch", extra));
+        bill.append(row);
+      };
+
+      line("Machine", money(lo.q.total, hi.q.total), lo.q.total, hi.q.total, [
+        priced.length > 1
+          ? `Depends on the provider: cheapest ${names[lo.card.provider]}, dearest ${names[hi.card.provider]}.`
+          : `${names[lo.card.provider]}.`,
+      ]);
+
+      const tokens = `${Math.round(range.millions).toLocaleString("en-US")} million tokens a month: ${w.messagesPerDay.toLocaleString("en-US")} messages a day × ${w.kTokens.toLocaleString("en-US")}k tokens × ${w.mode === "machines" ? w.daysPerMonth : 30} days. These volumes are our assumption.`;
+      const perToken = `Depends on the model: cheapest ${range.min.model.label}, dearest ${range.max.model.label}.`;
+      if (plan) {
+        const s = plan.sub;
+        const pct = plan.share * 100;
+        const fit = plan.share > 1
+          ? `That is more than the plan allows: about ${Math.round(pct).toLocaleString("en-US")}% of`
+          : plan.share > 0.5 ? `That is close to the limit: about ${Math.round(pct)}% of` : `That fits: about ${pct < 1 ? "under 1" : Math.round(pct)}% of`;
+        line("Model", "$0 extra", 0, 0, [
+          `You already pay ${formatMoney(s.fee)} a month for ${s.plan}, so the model adds nothing per token until you hit the plan's limits.`,
+          `${tokens}`,
+          `${fit} the roughly ${s.allowance.toLocaleString("en-US")} million ${s.model} tokens ${s.plan} allows a month (estimate, ${s.confidence} confidence, measured ${s.measured}).${s.note ? ` ${s.note}` : ""}`,
+          `Paying per token instead: ${money(range.min.cost, range.max.cost)}.`,
+        ], `Terms: ${s.catch}`);
+        return;
+      }
+      line("Model", money(range.min.cost, range.max.cost), range.min.cost, range.max.cost, [
+        perToken,
+        ...(api ? [`Your pick, ${api.model.label}: ${formatMoney(api.median)}${api.lowest < api.median - 0.005 ? ` (${formatMoney(api.lowest)} from the cheapest host, ${api.model.lowest.provider})` : ""}.`] : []),
+        tokens,
+      ]);
+      const tiers = document.createElement("p");
+      tiers.className = "bill__tiers";
+      for (const [k, label] of [["cheap", "Cheap models"], ["mid", "Mid-priced"], ["frontier", "Frontier"]] as const) {
+        const t = range.byKind[k];
+        if (!t) continue;
+        const span = document.createElement("span");
+        span.append(text("b", "", label), ` ${money(t.low.cost, t.high.cost)}`);
+        tiers.append(span);
+      }
+      bill.append(tiers);
     }
 
     function render() {
@@ -214,16 +309,18 @@ const field = (name: string) => `${id}-${name}`;
       const quotes = chosen.map((c) => ({ card: c, q: price(c, w) }));
       quotes.sort((a, b) => Number(b.q.feasible) - Number(a.q.feasible) || a.q.total - b.q.total);
       const runs = quotes.filter((x) => x.q.feasible);
-      const ai = modelCost(w, data.models);
-      root.querySelector<HTMLElement>("[data-model]")!.hidden = !w.model;
+      const api = modelCost(w, data.models);
+      const plan = subscriptionUse(w, subs);
+      const ai: ModelLine = api
+        ? { label: `AI model: ${api.model.label}`, amount: api.median }
+        : plan ? { label: `AI model: ${plan.sub.plan}, already paid`, amount: 0 } : null;
+      root.querySelectorAll<HTMLElement>("[data-model]").forEach((node) => (node.hidden = !w.model));
       summary.textContent = quotes.length === 0
         ? "Choose providers to price."
         : runs.length
         ? `${runs.length} of ${quotes.length} providers can run this as asked. Cheapest: ${names[runs[0].card.provider]} at ${formatMoney(runs[0].q.total)} a month.`
         : `None of these providers can run this exactly as asked. The figures show the nearest they offer.`;
-      if (ai && quotes.length) {
-        summary.textContent += ` The model adds about ${formatMoney(ai.median)} a month on any of them: ${ai.model.label}, ${Math.round(ai.millions).toLocaleString("en-US")} million tokens at the median zero-retention price${ai.lowest < ai.median - 0.005 ? ` (${formatMoney(ai.lowest)} from the cheapest model host, ${ai.model.lowest.provider})` : ""}.`;
-      }
+      renderBill(w, runs.length ? runs : quotes, api, plan);
 
       list.replaceChildren();
       for (const { card, q } of quotes) {
@@ -235,7 +332,7 @@ const field = (name: string) => `${id}-${name}`;
         const name = text("span", "calc__name", names[card.provider] ?? card.provider);
         const total = text("span", "calc__total", formatMoney(q.total));
         const per = text("span", "calc__per", "a month");
-        const sub = text("span", "calc__sub", `${q.plan} · ${q.shape}${ai ? ` · ${formatMoney(q.total + ai.median)} with the model` : ""}`);
+        const sub = text("span", "calc__sub", `${q.plan} · ${q.shape}${ai ? ` · ${formatMoney(q.total + ai.amount)} with the model` : ""}`);
         const status = text("span", q.feasible ? "badge badge--yes" : "badge badge--partly", q.feasible ? "Runs as asked" : "Needs a change");
         const flags = document.createElement("span");
         flags.className = "calc__flags";
