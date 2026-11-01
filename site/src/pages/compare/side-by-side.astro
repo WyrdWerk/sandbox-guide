@@ -1,6 +1,5 @@
 ---
 import Base from "../../layouts/Base.astro";
-import PageHeader from "../../components/PageHeader.astro";
 import Calculator from "../../components/Calculator.astro";
 import { features, providers } from "../../lib/data";
 
@@ -56,34 +55,58 @@ const payload = {
 ---
 
 <Base title="Side by side" description="Pick two or three providers and compare them head to head: sixteen features, then the monthly cost of your workload.">
-  <PageHeader
-    parent={{ href: "/compare/", label: "Compare" }}
-    kicker="Side by side"
-    title="Two or three providers, head to head"
-    standfirst="Choose the providers you are deciding between. The table compares what they do across sixteen features; below it, the same providers are priced for a workload you can change. The link in the address bar keeps your choice."
-    meta={[`${providers.length} providers`, "16 features", "Plus a cost for your workload"]}
-  />
-
   <div class="wrap">
-    <section class="section section--flush" aria-labelledby="picker-h">
-      <div class="section__head">
-        <h2 class="section__title" id="picker-h">Choose providers</h2>
-        <p class="section__note">Up to three. The first three are selected by default.</p>
+    <header class="h2h-top">
+      <div>
+        <p class="kicker">
+          <a class="kicker__parent" href="/compare/">Compare</a>
+          <span class="kicker__sep" aria-hidden="true">/</span>
+          Side by side
+        </p>
+        <h1 class="page-title h2h-top__title">Two or three providers, head to head</h1>
       </div>
-      <div class="picker" id="picker">
-        {
-          providers.map((provider) => (
-            <label>
-              <input
-                type="checkbox"
-                name="provider"
-                value={provider.id}
-                checked={defaults.includes(provider.id)}
-              />
-              {provider.name}
-            </label>
-          ))
-        }
+      <p class="h2h-top__note">
+        Sixteen features first, then each provider priced for a workload you can change. The link in
+        the address bar keeps your choice.
+      </p>
+    </header>
+
+    <section class="h2h" aria-label="Choose providers and compare">
+      <div class="h2h-bar">
+        <span class="h2h-bar__label" aria-hidden="true">Comparing</span>
+        <div class="h2h-bar__chips" id="chips">
+          <ul class="h2h-chips" id="chip-list" aria-label="Providers being compared"></ul>
+          <button type="button" class="h2h-add" id="add-toggle" aria-expanded="false" aria-controls="picker-panel">
+            <span aria-hidden="true">+</span> Add or swap…
+          </button>
+        </div>
+        <div class="h2h-bar__tools">
+          <label class="h2h-switch">
+            <input type="checkbox" role="switch" id="only-diff" />
+            <span class="h2h-switch__track" aria-hidden="true"></span>
+            Only differences
+          </label>
+          <a class="button button--quiet h2h-cost" href="#h2h-cost-h">Cost <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+
+      <div class="h2h-panel" id="picker-panel" hidden>
+        <p class="h2h-panel__note">Choose up to three. A fourth replaces the one you picked first.</p>
+        <div class="picker" id="picker">
+          {
+            providers.map((provider) => (
+              <label>
+                <input
+                  type="checkbox"
+                  name="provider"
+                  value={provider.id}
+                  checked={defaults.includes(provider.id)}
+                />
+                {provider.name}
+              </label>
+            ))
+          }
+        </div>
       </div>
       <p class="picker__hint" id="picker-hint" aria-live="polite"></p>
 
@@ -113,6 +136,10 @@ const payload = {
     const boxes = Array.from(document.querySelectorAll("#picker input"));
     const target = document.getElementById("matrix");
     const hint = document.getElementById("picker-hint");
+    const chipList = document.getElementById("chip-list");
+    const addToggle = document.getElementById("add-toggle");
+    const panel = document.getElementById("picker-panel");
+    const onlyDiff = document.getElementById("only-diff");
     // ?p=e2b,daytona opens a chosen head-to-head.
     const requested = (new URLSearchParams(location.search).get("p") ?? "")
       .split(",")
@@ -121,6 +148,11 @@ const payload = {
     const order = requested.length ? requested : data.defaults.slice();
     for (const box of boxes) box.checked = order.includes(box.value);
     const calc = document.querySelector('[data-calc="h2h"]');
+    // ?d=1 or ?d=0 keeps the "Only differences" choice; without it, phones show one feature per
+    // screen, so they start with the rows that set providers apart.
+    const savedDiff = new URLSearchParams(location.search).get("d");
+    onlyDiff.checked =
+      savedDiff === "1" || (savedDiff !== "0" && window.matchMedia("(max-width: 640px)").matches);
 
     const labels = {
       yes: ["badge badge--yes", "Yes"],
@@ -130,45 +162,82 @@ const payload = {
       pending: ["badge badge--unknown", "Pending"],
     };
 
+    function el(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text != null) node.textContent = text;
+      return node;
+    }
+
     function badge(verdict) {
-      const span = document.createElement("span");
       const [className, label] = labels[verdict] ?? labels["not-published"];
-      span.className = className;
-      const mark = document.createElement("span");
-      mark.className = "badge__mark";
+      const span = el("span", className);
+      const mark = el("span", "badge__mark");
       mark.setAttribute("aria-hidden", "true");
       span.append(mark, document.createTextNode(label));
       return span;
     }
 
+    function verdictOf(feature, id) {
+      return feature.rows.find((item) => item.provider === id)?.verdict ?? "not-published";
+    }
+
+    // Only show "More" where the two-line clamp actually hides text.
+    function updateMore() {
+      for (const note of target.querySelectorAll(".cell-note")) {
+        const more = note.nextElementSibling;
+        if (note.classList.contains("is-open")) continue;
+        more.hidden = note.scrollHeight <= note.clientHeight + 1;
+      }
+    }
+
+    function renderChips(chosen) {
+      chipList.replaceChildren();
+      for (const provider of chosen) {
+        const item = el("li", "h2h-chip");
+        item.append(el("span", "h2h-chip__name", provider.name));
+        const remove = el("button", "h2h-chip__x", "×");
+        remove.type = "button";
+        remove.setAttribute("aria-label", `Remove ${provider.name}`);
+        remove.addEventListener("click", () => {
+          const box = boxes.find((item) => item.value === provider.id);
+          box.checked = false;
+          box.dispatchEvent(new Event("change"));
+          addToggle.focus();
+        });
+        item.append(remove);
+        chipList.append(item);
+      }
+    }
+
     function render() {
       const selected = order.filter((id) => boxes.find((box) => box.value === id)?.checked);
       const chosen = data.providers.filter((provider) => selected.includes(provider.id));
+      renderChips(chosen);
       target.replaceChildren();
 
-      const table = document.createElement("table");
-      table.className = "compare-columns";
+      const agreed =
+        chosen.length < 2
+          ? []
+          : data.features.filter((feature) => {
+              const first = verdictOf(feature, chosen[0].id);
+              return chosen.every((provider) => verdictOf(feature, provider.id) === first);
+            });
+      const hideAgreed = onlyDiff.checked && agreed.length < data.features.length;
 
-      const caption = document.createElement("caption");
-      caption.textContent = "Behaviour across sixteen features. Read from provider documentation on 28 October 2026.";
-      table.append(caption);
+      const table = el("table", "compare-columns");
+      table.append(el("caption", null, "Behaviour across sixteen features. Read from provider documentation on 28 October 2026."));
 
       const thead = document.createElement("thead");
       const headRow = document.createElement("tr");
-      const blank = document.createElement("th");
+      const blank = el("th");
       blank.scope = "col";
-      blank.innerHTML = '<span class="visually-hidden">Feature</span>';
+      blank.append(el("span", "visually-hidden", "Feature"));
       headRow.append(blank);
       for (const provider of chosen) {
-        const th = document.createElement("th");
+        const th = el("th");
         th.scope = "col";
-        const title = document.createElement("span");
-        title.className = "col-title";
-        title.textContent = provider.name;
-        const sub = document.createElement("span");
-        sub.className = "col-sub";
-        sub.textContent = provider.kind;
-        th.append(title, sub);
+        th.append(el("span", "col-title", provider.name), el("span", "col-sub", provider.kind));
         headRow.append(th);
       }
       thead.append(headRow);
@@ -176,29 +245,32 @@ const payload = {
 
       const tbody = document.createElement("tbody");
       for (const feature of data.features) {
-        const row = document.createElement("tr");
-        const th = document.createElement("th");
+        if (hideAgreed && agreed.includes(feature)) continue;
+        const row = el("tr");
+        const th = el("th");
         th.scope = "row";
-        const link = document.createElement("a");
+        const link = el("a", null, feature.title);
         link.href = `/features/${feature.id}/`;
-        link.textContent = feature.title;
         th.append(link);
         row.append(th);
 
         for (const provider of chosen) {
-          const cell = document.createElement("td");
-          const cellProv = document.createElement("span");
-          cellProv.className = "cell-prov";
-          cellProv.textContent = provider.name;
+          const cell = el("td");
           const value = feature.rows.find((item) => item.provider === provider.id);
-          cell.append(cellProv, badge(value?.verdict ?? "not-published"));
-          if (value?.figure) {
-            const figure = document.createElement("span");
-            figure.className = "cell-figure";
-            figure.textContent = value.figure;
-            cell.append(figure);
+          cell.append(el("span", "cell-prov", provider.name), badge(value?.verdict ?? "not-published"));
+          if (value?.figure) cell.append(el("span", "cell-figure", value.figure));
+          if (value?.note) {
+            const note = el("p", "cell-note", value.note);
+            const more = el("button", "cell-more", "More");
+            more.type = "button";
+            more.setAttribute("aria-expanded", "false");
+            more.addEventListener("click", () => {
+              const open = note.classList.toggle("is-open");
+              more.textContent = open ? "Less" : "More";
+              more.setAttribute("aria-expanded", String(open));
+            });
+            cell.append(note, more);
           }
-          if (value?.note) cell.append(document.createTextNode(" " + value.note));
           row.append(cell);
         }
         tbody.append(row);
@@ -206,11 +278,30 @@ const payload = {
       table.append(tbody);
       target.append(table);
 
+      if (hideAgreed && agreed.length) {
+        const fold = el("p", "h2h-fold");
+        const strong = el("strong", null, `${agreed.length} of ${data.features.length} features hidden`);
+        const who = chosen.length === 2 ? "both" : "all three";
+        fold.append(strong, ` because ${who} give the same verdict: ${agreed.map((f) => f.title).join("; ")}. `);
+        const show = el("button", "h2h-fold__show", "Show all features");
+        show.type = "button";
+        show.addEventListener("click", () => {
+          onlyDiff.checked = false;
+          render();
+        });
+        fold.append(show);
+        target.append(fold);
+      }
+      updateMore();
+
       calc?.dispatchEvent(new CustomEvent("calc:only", { detail: selected }));
       const url = new URL(location.href);
       url.searchParams.set("p", selected.join(","));
+      url.searchParams.set("d", onlyDiff.checked ? "1" : "0");
       history.replaceState(null, "", url);
 
+      // The chips already say who is compared; the line is only seen when a choice is needed.
+      hint.classList.toggle("visually-hidden", chosen.length >= 2);
       hint.textContent =
         chosen.length < 2
           ? "Select at least two providers to compare."
@@ -233,6 +324,18 @@ const payload = {
         render();
       });
     }
+
+    addToggle.addEventListener("click", () => {
+      const open = panel.hidden;
+      panel.hidden = !open;
+      addToggle.setAttribute("aria-expanded", String(open));
+    });
+    onlyDiff.addEventListener("change", render);
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updateMore, 150);
+    });
 
     render();
   </script>
