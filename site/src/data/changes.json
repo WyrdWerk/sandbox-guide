@@ -1,6 +1,24 @@
 {
   "changes": [
     {
+      "date": "2026-11-02",
+      "title": "E2B's HTML pricing page now starts Enterprise at $2,000 a month",
+      "provider": "e2b",
+      "what": "The HTML pricing page now says Enterprise starts at a $2,000 a month commit, with 500 concurrent sandboxes included. The Markdown pricing file still says a $3,000 monthly minimum, and the billing docs still say Custom. Hobby and Pro rates did not change, so no calculator total moves. This guide reports the HTML figure and keeps both quotes.",
+      "sources": [
+        {
+          "url": "https://e2b.dev/pricing",
+          "quote": "Enterprise starts at a $2,000/mo commit, 500 concurrent included.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://e2b.dev/pricing.md",
+          "quote": "A $3,000 monthly minimum applies to Enterprise usage.",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
       "date": "2026-10-30",
       "title": "Scaleway added: French hourly servers whose compute stops billing when off",
       "provider": "scaleway",
