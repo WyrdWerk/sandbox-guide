@@ -16,7 +16,7 @@
     "model": "Per-second usage against a credit balance; Pro adds a monthly plan fee.",
     "meter": "$0.000014 per vCPU-second and $0.0000045 per GiB-second of allocated resources while running. Paused and killed sandboxes are not billed.",
     "stopped": "Nothing for compute. Volumes and snapshots are separate objects with their own storage.",
-    "planFee": "Hobby has no fee; Pro is $150 a month plus usage; Enterprise has a $3,000 monthly minimum.",
+    "planFee": "Hobby has no fee; Pro is $150 a month plus usage. The HTML pricing page says Enterprise starts at a $2,000 a month commit; the Markdown pricing file still says a $3,000 monthly minimum. This guide reports the HTML figure.",
     "minimum": "No published per-sandbox minimum. Hobby starts with a one-time $100 credit and no card."
   },
   "cost": {
@@ -154,6 +154,7 @@
       "The default timeout is 5 minutes and the default action is to kill the sandbox.",
       "Public URLs are reachable by anyone who knows them.",
       "The pricing page and billing docs disagree on the default sandbox size.",
+      "The HTML pricing page and the Markdown pricing file disagree on the Enterprise monthly floor.",
       "Volumes are in private beta and cannot be snapshotted."
     ]
   },
@@ -162,6 +163,23 @@
       "issue": "The default timeout destroys the sandbox",
       "detail": "Every sandbox has a timeout defaulting to five minutes, and `onTimeout: 'kill'` is the default. Pausing instead is opt-in.",
       "status": "open"
+    },
+    {
+      "issue": "The Enterprise monthly floor is stated two ways",
+      "detail": "The HTML pricing page says Enterprise starts at a $2,000 a month commit with 500 concurrent sandboxes included. The Markdown pricing file still says a $3,000 monthly minimum. Billing docs only say Custom. This guide reports the HTML figure; Hobby and Pro rates are unchanged.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://e2b.dev/pricing",
+          "quote": "Enterprise starts at a $2,000/mo commit, 500 concurrent included.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://e2b.dev/pricing.md",
+          "quote": "A $3,000 monthly minimum applies to Enterprise usage.",
+          "confidence": "pricing-page"
+        }
+      ]
     },
     {
       "issue": "The default sandbox size is stated two ways",

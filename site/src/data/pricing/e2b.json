@@ -1,6 +1,6 @@
 {
   "provider": "e2b",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-02",
   "summary": "Per second on allocated vCPU and memory while running; paused sandboxes cost nothing.",
   "cpu": {
     "rate": 0.0504,
@@ -32,12 +32,17 @@
   ],
   "notes": [
     "Pausing keeps memory and files at no charge; volumes and snapshots are separate.",
-    "Sandbox storage is included at no extra cost, up to 10 GiB on Hobby and 20 GiB on Pro."
+    "Sandbox storage is included at no extra cost, up to 10 GiB on Hobby and 20 GiB on Pro.",
+    "The HTML pricing page says Enterprise starts at a $2,000 a month commit with 500 concurrent included. The Markdown pricing file still says a $3,000 monthly minimum. Neither is in the calculator, which prices Hobby and Pro only."
   ],
   "sources": [
     {
       "label": "Pricing",
       "url": "https://e2b.dev/pricing"
+    },
+    {
+      "label": "Pricing Markdown",
+      "url": "https://e2b.dev/pricing.md"
     }
   ],
   "upkeep": {
