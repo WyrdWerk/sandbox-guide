@@ -1,0 +1,124 @@
+{
+  "provider": "tierhive",
+  "checkedOn": "2026-11-04",
+  "summary": "A build-your-own NAT server billed by the hour from three published resource rates (RAM per MB-hour, NVMe per GB-hour, optional priority tiers), with a one-hour minimum per server and, per the operator, only storage billed while it is powered off.",
+  "shapes": [
+    {
+      "name": "512 MB / 5 GB",
+      "vcpu": 1,
+      "ram": 0.5,
+      "disk": 5,
+      "hourly": 0.0005608
+    },
+    {
+      "name": "1 GiB / 10 GB",
+      "vcpu": 1,
+      "ram": 1,
+      "disk": 10,
+      "hourly": 0.0011216
+    },
+    {
+      "name": "2 GiB / 25 GB",
+      "vcpu": 1,
+      "ram": 2,
+      "disk": 25,
+      "hourly": 0.0023432
+    },
+    {
+      "name": "4 GiB / 10 GB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 10,
+      "hourly": 0.0038864
+    },
+    {
+      "name": "4 GiB / 20 GB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 20,
+      "hourly": 0.0040864
+    },
+    {
+      "name": "4 GiB / 50 GB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 50,
+      "hourly": 0.0046864
+    },
+    {
+      "name": "8 GiB / 50 GB",
+      "vcpu": 2,
+      "ram": 8,
+      "disk": 50,
+      "hourly": 0.0083728
+    }
+  ],
+  "disk": {
+    "shapeSize": true,
+    "stopped": 2e-05
+  },
+  "wholeHours": true,
+  "between": "kept",
+  "maxDisk": 50,
+  "maxRam": 8,
+  "egress": {
+    "perGiB": 0,
+    "included": "No volume allowance: bandwidth is sold as a speed tier (50–300 Mbit/s per location) and throttled by fair use, not metered per GB",
+    "note": "TierHive charges nothing per GB out and publishes no GB or TB allowance: \"We do not give any specific arbitrary GB or TB number, it is simply not practical with the TierHive model.\" Instead the network tier sets a speed (Low 10, Medium 50, High 100 Mbit/s before per-location limits) and sustained use steps the cap down by 10 Mbit/s an hour to a floor of 10 Mbit/s. Email is blocked except through approved relays on port 587.",
+    "url": "https://tierhive.com/about.php"
+  },
+  "cpuSharing": {
+    "label": "Shared CPU, 2 vCPU at most",
+    "detail": "CPU is weighted between customers rather than dedicated, and a server that averages a full core for two hours is cut to half a core until it is rebooted.",
+    "source": {
+      "url": "https://tierhive.com/about.php",
+      "quote": "If you need dedicated cores, please do not use TierHive. We allow access to 1 vCPU for 2GB and under, anything over 2GB gets access to 2 vCPU.",
+      "confidence": "docs-confirmed"
+    }
+  },
+  "plans": [
+    {
+      "name": "Pay as you go",
+      "fee": 0,
+      "note": "Prepaid tokens at $1 each, $3 minimum top-up. No subscription, no monthly cap: a server left running bills its hourly rate for as long as it exists."
+    }
+  ],
+  "notes": [
+    "Rates come from the calculator's own data feed, https://tierhive.com/api/pricing.php: RAM 0.00000090 tokens per MB-hour, NVMe 0.00002000 per GB-hour, HDD 0.00000700 per GB-hour, backup storage 0.00000500 per GB-hour, snapshots 0.00002000 per GB-hour, and a DHCP charge of 0.00000100 per hour plus a one-off activation. One token is $1.",
+    "Each shape's hourly price is those rates applied to its RAM and NVMe with low-priority CPU, IOPS and network, and reproduces the provider's own cards (128 MB / 1 GB = 0.000135, 2 GB / 25 GB = 0.002343, 4 GB / 50 GB = 0.004686). The card lists seven representative points because TierHive is build-your-own: RAM is any 128 MB step from 128 MB to 8 GB, NVMe any GB from 1 to 50. Priority tiers add 0.00002/h each for Medium and 0.00003/h for High, which is not included here.",
+    "Units: TierHive's calculator runs its RAM slider in MB and the site calls 8 GB what the feed calls 8,192 MB, so its MB and GB are binary and a per-GB-hour rate is treated here as per GiB-hour, with each shape's disk size mapped 1:1 to the engine's GiB. That mapping is an inference for disk, since no page defines the unit in bytes. If the disk GB is decimal, every disk charge rises by 7.37% (A $3.90, B $6.17, C $0.65); disk.decimalGB is deliberately not set, because the provider's own 8 GB = 8,192 MB labelling points to binary units.",
+    "vCPU is not a control: it is 1 up to 2 GiB of RAM and 2 above that, so a 4 vCPU machine cannot be bought at any price. Workload B is therefore priced on the 8 GiB shape the provider would sell, and the engine flags the shortfall.",
+    "A one-hour minimum per server is modelled with wholeHours. The operator states it in its offer post: \"You can create a VPS or 253 VPS with a 1-hour minimum and you are only billed for that hour\". Whether a 90-minute server bills 1.5 or 2 hours is not published; A, B and C are unaffected.",
+    "While powered off the card bills disk only, at the same NVMe rate as when running. That follows the operator's offer posts (\"You only pay for storage when the VPS is powered off\") rather than any page on tierhive.com, and the exact stopped-state charges — backup storage, the DHCP fee, whether RAM is really dropped — are not published. If stopped hours were billed at the running rate, C would cost $2.98 instead of $0.62; B is unaffected.",
+    "Nothing caps a month: there is no monthly price, so an always-on server costs 730 hours of its hourly rate. The provider's own monthly estimates use 720 hours (24 × 30), which is why its cards read a little lower than 730 hours here.",
+    "Not priced: the DHCP charge (about $0.0007 a month), backup creation and restore fees ($0.00002 each), backup and snapshot storage, HDD at 0.000007/GB-h in London, Singapore, Sydney and Vint Hill, and a network-backed storage rate in the feed with no documented product.",
+    "The price feed lists 19 locations with per-location RAM ceilings (8 GB in Amsterdam, Beauharnois, Frankfurt, Gravelines, London, New York, Sydney and Vancouver; 1 GB in Tokyo) and speed limits from 50 to 300 Mbit/s. Only one region is modelled here, since price does not vary by location.",
+    "This is an Alpha service: the operator's own policy says data loss can occur without warning and that there is no SLA. The price is real, the durability is not promised."
+  ],
+  "sources": [
+    {
+      "label": "Homepage: calculator, cards, features",
+      "url": "https://tierhive.com/"
+    },
+    {
+      "label": "Calculator rate feed (RAM, disk, tiers, DHCP, backups)",
+      "url": "https://tierhive.com/api/pricing.php"
+    },
+    {
+      "label": "About: CPU rule, nesting, network tiers, fair use",
+      "url": "https://tierhive.com/about.php"
+    },
+    {
+      "label": "Acceptable use: Alpha status, data loss, no SLA",
+      "url": "https://tierhive.com/acceptable-use.php"
+    },
+    {
+      "label": "Operator offer post: storage-only while powered off, one-hour minimum",
+      "url": "https://lowendspirit.com/discussion/11534/tierhive-19-locations-build-your-own-vps-plan-from-0-10-p-month-or-0-000135-per-hour"
+    },
+    {
+      "label": "Hourly VPS explainer: billing stops when the server is deleted",
+      "url": "https://tierhive.com/blog/general/what-is-an-hourly-vps-and-why-you-might-want-one"
+    }
+  ]
+}

@@ -1,0 +1,1096 @@
+[
+  {
+    "capability": "own-vm",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Full VM, own kernel",
+      "note": "A full virtual machine with its own kernel, not a container. HostHatch calls them VMs and lets you boot your own ISO; the hypervisor is not named on its site or in the docs.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "You can also upload your own ISO image using our control panel, and deploy it on your VMs with us, just like you would on a bare-metal or a physical server.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "root",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Root over SSH",
+      "note": "Full root inside the guest, with a root-password reset action in the API and panel.",
+      "source": {
+        "url": "https://hosthatch.com/",
+        "quote": "You have full root-level access to your VMs.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "docker-inside",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Root + own kernel",
+      "note": "No Docker guide or image is published, but a full VM with root and its own kernel runs Docker normally; you install it yourself.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "You can also upload your own ISO image using our control panel, and deploy it on your VMs with us, just like you would on a bare-metal or a physical server.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "nested-virt",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "not-published",
+      "figure": "Not published",
+      "note": "Nothing in the product page, the features page, the full documentation bundle or the API mentions nested virtualisation, a KVM-inside-KVM flag or a hypervisor inside the guest. Ask before planning a hypervisor on one of these servers.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
+        "confidence": "not-published"
+      }
+    }
+  },
+  {
+    "capability": "custom-image",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Own ISO, 1 per project",
+      "note": "Upload an ISO in the panel, mount it and install anything. A project holds one custom ISO at a time, and ISO upload through the API is not available yet.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "You can also upload your own ISO image using our control panel, and deploy it on your VMs with us, just like you would on a bare-metal or a physical server.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "any-size",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "10 fixed plans",
+      "note": "CPU and memory come in ten fixed ratios from 1 core / 2 GB to 16 cores / 96 GB. There is no way to order, for example, 2 cores with 16 GB; the nearest plan is 4 cores / 16 GB.",
+      "source": {
+        "url": "https://hosthatch.com/products",
+        "quote": "1 AMD EPYC core ( fair share )",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "big-machines",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "16 cores / 96 GB / 250 GB",
+      "note": "The top compute plan is 16 cores / 96 GB / 250 GB for $69 a month; the storage line reaches 10 TB of HDD.",
+      "source": {
+        "url": "https://hosthatch.com/products",
+        "quote": "16 AMD EPYC cores ( 8 dedicated, 8 fair-shared cores )",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "live-resize",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Reboot applies the upgrade",
+      "note": "An upgrade moves the server to another plan and can grow the disk, but the new plan is applied by the next reboot through the API. There is no resize while running.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/servers/",
+        "quote": "The server has changes, such as a new plan, that its next reboot through the API applies.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "gpu",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No GPU plan",
+      "note": "The company sells two product lines, Compute and Storage, and neither carries a GPU. No GPU appears in the plan table, the API catalogue or the order flow.",
+      "source": {
+        "url": "https://hosthatch.com/company",
+        "quote": "We sell only two types of no-frills IaaS - Compute and Storage",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "choose-region",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "16 advertised locations",
+      "note": "The location is chosen at order. The product page advertises 16 edge locations, the docs matrix lists 14 cities and the status page monitors 13; Madrid, Milan, Warsaw and Seoul differ between those lists, so confirm stock for your city.",
+      "source": {
+        "url": "https://hosthatch.com/products",
+        "quote": "Deploy in 16 edge locations",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "eu-region",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Amsterdam, Stockholm, Vienna…",
+      "note": "EU locations include Amsterdam, Stockholm, Vienna, Madrid and Milan, with Zurich, London and Oslo outside the EU. EU residency is a location choice, not a contractual guarantee.",
+      "source": {
+        "url": "https://docs.hosthatch.com/features/",
+        "quote": "Digital Realty AMS18",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "pause-memory",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Stop = power off",
+      "note": "The only server states are running, stopped and suspended. A stop is a power-off: the disk survives, memory and running processes do not, and there is no hibernate or pause.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/servers/",
+        "quote": "`status` | string | `running`, `stopped` or `suspended`",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "warm-pool",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Provisioned at order",
+      "note": "Every server is created when its order is paid; there is no pool of pre-started machines and no pre-warmed capacity product.",
+      "source": {
+        "url": "https://hosthatch.com/",
+        "quote": "Get online within 60 seconds.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "fast-start",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "About 60 seconds",
+      "note": "HostHatch advertises getting online within 60 seconds. That is fast for a VPS, but it is a booted virtual machine, not a sub-second sandbox.",
+      "source": {
+        "url": "https://hosthatch.com/",
+        "quote": "Get online within 60 seconds.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "snapshot-files",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Disk snapshots",
+      "note": "A snapshot copies the server's disk and can be restored onto the same or another server in the project. It is taken on demand and kept until deleted; the account's limit and any charge are not published.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/snapshots/",
+        "quote": "A snapshot is a copy of a server's disk at one moment.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "snapshot-memory",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Disk only",
+      "note": "The snapshot is explicitly a copy of the disk. No memory, process state or open connection is captured, so a restore is always a cold boot.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/snapshots/",
+        "quote": "A snapshot is a copy of a server's disk at one moment.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "fork-running",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Snapshot, then new server",
+      "note": "A snapshot can be used to order a new server, but the original is not copied live and the snapshot is crash-consistent at best. There is no fork or copy-on-write of a running machine.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/snapshots/",
+        "quote": "To create a new server from a snapshot, order a server with its `snapshot_id` instead of an `image`.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "older-snapshot",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Kept until deleted",
+      "note": "Snapshots are not rotated automatically: each one stays until you delete it, and the account's total is capped by an unpublished limit.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/snapshots/",
+        "quote": "A snapshot belongs to the project: you can restore it onto any of the project's servers, and it stays when the server it was taken from is gone.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "templates",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Snapshot → many servers",
+      "note": "A completed snapshot can stand in for an image when ordering, so a configured server can be reused to start as many identical servers as the account's snapshot limit allows. There is no separate template object.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/snapshots/",
+        "quote": "To create a new server from a snapshot, order a server with its `snapshot_id` instead of an `image`.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "backups",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "not-published",
+      "figure": "Not published",
+      "note": "No automated backup product appears in the current product list, the API, the documentation bundle or the panel. The only mention is a 2023 'Upcoming Features' block promising daily, weekly or monthly backups at 20% of the VM price; that block is stale and the feature is not sold today. Ask support.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "Daily, weekly or monthly backups - similar to snapshots but fully automated and configurable for 20% of the monthly cost of your VM.",
+        "confidence": "not-published"
+      }
+    }
+  },
+  {
+    "capability": "files-survive-stop",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Disk kept when stopped",
+      "note": "A stop is a power-off, not a delete: the disk and its files stay with the server, which keeps billing until the term ends.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/servers/",
+        "quote": "`end_of_term`: the server runs until the end of the period you paid for, then it is deleted.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "volumes",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No block volumes",
+      "note": "There is no detachable block-storage product: disk belongs to the server and can only grow with an upgrade. The 2023 features page lists block storage as 'upcoming'; it is absent from the current API, docs and product list.",
+      "source": {
+        "url": "https://hosthatch.com/company",
+        "quote": "We sell only two types of no-frills IaaS - Compute and Storage",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "shared-volume",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No shared volume",
+      "note": "With no block-storage product there is nothing to share. Private networking connects machines in one location, but it is a VLAN, not a shared filesystem.",
+      "source": {
+        "url": "https://docs.hosthatch.com/networking/",
+        "quote": "If you enable Private Networking on your VM you will get an additional network interface that you can use for traffic between your own VMs in the same region.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "mount-buckets",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No object storage",
+      "note": "HostHatch sells compute and storage VMs only; there is no S3-compatible product to mount. Outside storage would be a bucket at another provider, mounted with software you run.",
+      "source": {
+        "url": "https://hosthatch.com/company",
+        "quote": "We sell only two types of no-frills IaaS - Compute and Storage",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "big-disk",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "10 TB storage VM; 250 GB plan",
+      "note": "Compute plans reach 250 GB of NVMe and the separate storage line reaches 10 TB of RAID-10 HDD for $38 a month. The storage line is advertised in 8 locations but listed in only 4 in the site data.",
+      "source": {
+        "url": "https://hosthatch.com/products",
+        "quote": "our storage VMs are designed for massive storage capacity, scalable up to hundreds of terabytes",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "stay-on",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Runs until the term ends",
+      "note": "No idle timer, session limit or automatic stop exists. A server runs for the whole paid term until you stop it or cancel, and the bill continues either way.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/servers/",
+        "quote": "`end_of_term`: the server runs until the end of the period you paid for, then it is deleted.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "choose-idle",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No idle timer",
+      "note": "There is no idle setting to configure because nothing sleeps the machine. The only states are running, stopped and suspended, and stopping is a manual action.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/servers/",
+        "quote": "`status` | string | `running`, `stopped` or `suspended`",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "wake-on-request",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No sleep to wake",
+      "note": "A server never sleeps, so there is no wake step. A powered-off server stays down until you start it from the panel or API.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/actions/",
+        "quote": "Power on",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "schedules",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Cron in the guest",
+      "note": "There is no provider-side scheduler. Recurring work runs from cron or a systemd timer inside the server, and it stops when the server is powered off.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/",
+        "quote": "The HostHatch API lets your code, scripts and AI agents do what you do in the console: order servers and pay for them with account credit, power and reinstall them, take snapshots, set up firewalls, mount ISOs, and manage SSH keys and reverse DNS.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "public-url",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Public IPv4, any port",
+      "note": "Every server gets a public IPv4 and can enable a routed /64 of IPv6. Any TCP or UDP port is reachable once the firewall allows it.",
+      "source": {
+        "url": "https://docs.hosthatch.com/networking/",
+        "quote": "We support both dynamic (DHCP) and static IPv4 configuration.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "private-url",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No private link",
+      "note": "There is no tokenised or authenticated preview URL. Private networking is a VLAN between your own servers, and the service itself still listens on the public address.",
+      "source": {
+        "url": "https://docs.hosthatch.com/networking/",
+        "quote": "You cannot access any external networks through this interface.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "ssh",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Real SSH",
+      "note": "SSH is a normal daemon on the guest, with keys installed at order or a root password reset from the panel and API. There is no provider-only terminal.",
+      "source": {
+        "url": "https://hosthatch.com/",
+        "quote": "You have full root-level access to your VMs.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "web-terminal",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "partly",
+      "figure": "VNC / serial console",
+      "shortfall": "The browser console is a VNC or serial screen rather than a terminal multiplexer, and HostHatch does not document it publicly.",
+      "note": "The Peregrine panel ships VNC and serial console sessions for a server, which is how you get in when SSH or a firewall rule locks you out. There is no documented web terminal in the API or the docs site.",
+      "source": {
+        "url": "https://cloud.hosthatch.com/build/assets/vendor.7380af1b.js",
+        "quote": "Peregrine.Servers.Console.VncSession",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "tunnel",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "ssh -L",
+      "note": "The server runs a normal sshd, so local port forwarding works without a provider product. There is no managed tunnel service.",
+      "source": {
+        "url": "https://hosthatch.com/",
+        "quote": "You have full root-level access to your VMs.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "raw-tcp",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Any TCP/UDP port",
+      "note": "Firewall rules take a protocol and a port or range, so a database, game server or mail relay is reachable directly. Outbound port 25 is blocked by default and needs a justification to unblock.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/firewalls/",
+        "quote": "A group has a direction, chosen when you create it: `ingress` rules allow traffic to the servers, and `egress` rules allow traffic from them.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "custom-domain",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "A record to your IP",
+      "note": "Point an A or AAAA record at the server's static address from any DNS provider. HostHatch does not host DNS zones; the API only manages reverse DNS.",
+      "source": {
+        "url": "https://docs.hosthatch.com/networking/",
+        "quote": "We support both dynamic (DHCP) and static IPv4 configuration.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "auto-https",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No managed certificate",
+      "note": "Nothing in the panel, the API or the product list issues or renews a TLS certificate for a server. You run Caddy, Certbot or another proxy inside the guest.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/",
+        "quote": "The OpenAPI document is at `/api/openapi.json`",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "egress-included",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "1–20 TB/mo",
+      "note": "Each plan includes 1–20 TB a month with inbound and outbound counted together, and APAC allowances are lower. When it is used the server is rate-limited to 5 Mbps; more is $4 per TB through support.",
+      "source": {
+        "url": "https://hosthatch.com/terms-of-service",
+        "quote": "Additional bandwidth can be added for $4 per TB by contacting our support.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "egress-allowlist",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Egress firewall groups",
+      "note": "A firewall group is created with an ingress or egress direction. Once an egress group is attached, outbound traffic that no rule allows is refused, so you can allow only named destinations.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/firewalls/",
+        "quote": "Once it has an egress group, it also refuses outbound traffic that no egress rule allows.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "no-internet",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Empty firewall groups",
+      "note": "Attach an egress group with no rules and all outbound traffic is refused; attach an ingress group with no rules and new inbound connections are refused too. Both groups can be empty, so a server can be cut off in both directions without touching the guest.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/firewalls/",
+        "quote": "A server without groups allows all traffic. Once it has any group attached, it refuses new inbound connections that no ingress rule allows. Once it has an egress group, it also refuses outbound traffic that no egress rule allows.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "static-ip",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Static primary IPv4",
+      "note": "The primary IPv4 is a static address on the server and stays for its life; extra addresses can be ordered. BYOIP with BGP is available for your own prefixes, with a $10 setup fee per location.",
+      "source": {
+        "url": "https://docs.hosthatch.com/networking/",
+        "quote": "We support both dynamic (DHCP) and static IPv4 configuration.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "secrets-store",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "None",
+      "note": "The only stored credentials are API keys and SSH keys. There is no secret vault and no way to inject environment variables at boot: cloud-init user data is documented but answers feature_unavailable.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/orders-and-payment/",
+        "quote": "Not available yet: sending it answers `400 feature_unavailable`.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "hidden-secrets",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Root reads everything",
+      "note": "Nothing sits between the agent and an API to add credentials. An agent running as root can read every file on the server, including its own model key.",
+      "source": {
+        "url": "https://hosthatch.com/",
+        "quote": "You have full root-level access to your VMs.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "scoped-keys",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "partly",
+      "figure": "Read-only + expiry",
+      "shortfall": "A key cannot be limited to one project: it carries your access to every project you belong to, though it can be read-only and can expire.",
+      "note": "Keys are created on the profile page with a name, an optional expiry and a read-only switch; project roles decide what a key may do in each project. There is no per-project or per-server key.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/authentication/",
+        "quote": "A key carries your access to every project you belong to.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "dashboard-create",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Peregrine panel",
+      "note": "The console orders a server by plan, location, image, SSH key, IPv4 count, IPv6 and billing cycle, then manages power, reinstall, snapshots, firewalls and ISOs.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/",
+        "quote": "The HostHatch API lets your code, scripts and AI agents do what you do in the console: order servers and pay for them with account credit, power and reinstall them, take snapshots, set up firewalls, mount ISOs, and manage SSH keys and reverse DNS.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "cli",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No CLI",
+      "note": "The documented routes are the panel, the REST API and its OpenAPI document. No official command-line tool is published or mentioned in the docs.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/",
+        "quote": "The OpenAPI document is at `/api/openapi.json`",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "python-sdk",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No official SDK",
+      "note": "There is an OpenAPI document to generate a client from, but no official Python package is published. The quickstart uses plain HTTP requests.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/quickstart/",
+        "quote": "import requests",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "ts-sdk",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No official SDK",
+      "note": "No official JavaScript or TypeScript client is published; the API is called directly or from a generated client.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/",
+        "quote": "The OpenAPI document is at `/api/openapi.json`",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "rest-api",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Full REST API + OpenAPI",
+      "note": "A versioned REST API at console.hosthatch.com/api/v1 covers projects, servers, actions, snapshots, firewalls, ISOs, SSH keys, reverse DNS and orders, with idempotency keys, stable error codes, pagination and an OpenAPI document.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/",
+        "quote": "The OpenAPI document is at `/api/openapi.json`",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "mcp-server",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "None",
+      "note": "The docs are written for agents and publish an `llms.txt` and an OpenAPI document, but no MCP server or MCP endpoint is documented. An assistant would call the REST API itself.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/",
+        "quote": "These docs are written for people and for agents alike.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "pty",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No PTY endpoint",
+      "note": "The API has no terminal or exec endpoint. Interactive work goes over SSH, or through the panel's VNC and serial console.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/",
+        "quote": "The HostHatch API lets your code, scripts and AI agents do what you do in the console: order servers and pay for them with account credit, power and reinstall them, take snapshots, set up firewalls, mount ISOs, and manage SSH keys and reverse DNS.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "file-api",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No file endpoint",
+      "note": "There is no endpoint to read or write files inside the server. Files move over SSH or SCP, or through your own service.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/",
+        "quote": "The HostHatch API lets your code, scripts and AI agents do what you do in the console: order servers and pay for them with account credit, power and reinstall them, take snapshots, set up firewalls, mount ISOs, and manage SSH keys and reverse DNS.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "agents-preinstalled",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "None",
+      "note": "The order flow offers Linux distribution images and your own ISO. No Claude Code, Codex or other coding agent ships in any image.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "prompt-api",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "None",
+      "note": "No endpoint runs an agent for you. The API manages machines, disks, networks and orders; you install the agent and supply the model key.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/",
+        "quote": "The HostHatch API lets your code, scripts and AI agents do what you do in the console: order servers and pay for them with account credit, power and reinstall them, take snapshots, set up firewalls, mount ISOs, and manage SSH keys and reverse DNS.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "one-click-hermes",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "None",
+      "note": "There is no Hermes template, application catalogue or marketplace, so Hermes is an SSH install.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "one-click-openclaw",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "None",
+      "note": "There is no OpenClaw template or one-click path; the product is a bare OS or your own ISO.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "browser",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Install it yourself",
+      "note": "No image includes Chrome or Chromium for an agent, and there is no hosted browser or per-session browser isolation. You install the browser and its dependencies on the server.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "desktop",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Install it; view via VNC",
+      "note": "No desktop is provided. You can install a graphical OS from an ISO and watch it through the panel's VNC console, but there is no streaming desktop or computer-use API.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "You can also upload your own ISO image using our control panel, and deploy it on your VMs with us, just like you would on a bare-metal or a physical server.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "hosts-other-agents",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Not documented",
+      "note": "HostHatch runs no agent platform of its own and is not named as the machine for Cursor cloud agents, Devin, Claude Managed Agents, OpenClaw or Hermes. It is a generic VPS.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "team-workspace",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Projects + members",
+      "note": "Servers, snapshots, keys, firewalls and orders live in projects, members are invited to a project, and the project owner's account credit pays for every order.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/projects-and-roles/",
+        "quote": "A project holds servers, SSH keys, firewall groups, snapshots, ISOs, actions and orders, and the people who manage them.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "roles",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Owner, admin, member",
+      "note": "Each person has one role per project. A member can read and operate servers but not order, upgrade, buy bandwidth or cancel; admin and owner can, and only the owner manages members and billing.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/projects-and-roles/",
+        "quote": "Your role in it: `owner`, `admin` or `member`.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "sso",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "not-published",
+      "figure": "Not published",
+      "note": "Sign-in is an email address and password with optional two-factor authentication. No SAML or OIDC single sign-on is documented in the docs, the privacy policy or the panel's public assets.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/authentication/",
+        "quote": "Keys are created on your profile page, under **API Keys**.",
+        "confidence": "not-published"
+      }
+    }
+  },
+  {
+    "capability": "spend-cap",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No cap",
+      "note": "A server is paid for its term in advance, so it cannot run up an hourly bill, but nothing stops an admin ordering another server, upgrade or extra bandwidth. No account-wide cap is documented.",
+      "source": {
+        "url": "https://hosthatch.com/terms-of-service",
+        "quote": "HostHatch will invoice Customer for Fees and Expenses monthly, quarterly, semi-annually or annually.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "usage-alerts",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "not-published",
+      "figure": "Not published",
+      "note": "The panel shows bandwidth use and invoices, but no spending threshold, usage alert or notification setting is documented. The question is unanswered, not a confirmed absence.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/servers/",
+        "quote": "This month's traffic: `allocated_gb`, `extra_gb` bought on top, and `used_gb`",
+        "confidence": "not-published"
+      }
+    }
+  },
+  {
+    "capability": "audit-log",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "not-published",
+      "figure": "Not published",
+      "note": "The API lists actions and orders per project, which shows what happened to servers, but no account-wide audit log with the person behind each change is documented.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/actions/",
+        "quote": "List actions",
+        "confidence": "not-published"
+      }
+    }
+  },
+  {
+    "capability": "per-second",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Monthly plans only",
+      "note": "There is no hourly or per-second rate. The smallest unit is a monthly plan, with quarterly, semi-annual and annual terms also invoiced.",
+      "source": {
+        "url": "https://hosthatch.com/terms-of-service",
+        "quote": "HostHatch will invoice Customer for Fees and Expenses monthly, quarterly, semi-annually or annually.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "active-cpu",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Whole plan, not CPU time",
+      "note": "The price is for the whole server for the month, not for the CPU time used. An idle machine costs exactly the same as a busy one.",
+      "source": {
+        "url": "https://hosthatch.com/products",
+        "quote": "from $4.00 / month",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "cheap-pause",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Stop still bills",
+      "note": "There is no cheaper stopped rate. A powered-off server keeps its disk and its full plan charge until the paid term ends or it is cancelled.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/servers/",
+        "quote": "`end_of_term`: the server runs until the end of the period you paid for, then it is deleted.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "no-monthly-fee",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Monthly plan only",
+      "note": "Every server is sold as a monthly or longer plan. There is no pay-as-you-go option without a plan.",
+      "source": {
+        "url": "https://hosthatch.com/",
+        "quote": "Our smallest plan costs $4 per month",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "flat-price",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "$4–$69/mo",
+      "note": "One flat price per fixed size, from $4.00 for 1 core / 2 GB to $69.00 for 16 cores / 96 GB. Add-ons such as extra IPv4 are separate.",
+      "source": {
+        "url": "https://hosthatch.com/",
+        "quote": "Our smallest plan costs $4 per month",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "free-tier",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "None",
+      "note": "No free plan, trial or recurring free allowance is advertised. The cheapest machine is a paid $4 monthly plan.",
+      "source": {
+        "url": "https://hosthatch.com/terms-of-service",
+        "quote": "Our virtual private servers (VPS) carry a 7-day money back guarantee with a valid reason requirement.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "free-credit",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "None",
+      "note": "Account credit exists, but it is money you pay in, not a signup gift. No starting credit is advertised on the product, signup or terms pages.",
+      "source": {
+        "url": "https://hosthatch.com/terms-of-service",
+        "quote": "Our virtual private servers (VPS) carry a 7-day money back guarantee with a valid reason requirement.",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "capability": "no-card",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "not-published",
+      "figure": "Not published",
+      "note": "The signup page asks only for an email address and password; the accepted payment methods are not shown before an account exists. The privacy policy says card data is held by Stripe, but it does not say a card is the only option.",
+      "source": {
+        "url": "https://hosthatch.com/privacy-policy",
+        "quote": "any credit card and related information that you provide to us is stored at Stripe, Inc",
+        "confidence": "not-published"
+      }
+    }
+  },
+  {
+    "capability": "status-page",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "status.hosthatch.com",
+      "note": "A public UptimeRobot status page lists each regional network, recent outages and a 90-day overall figure: 99.994% on 2026-11-04, with New York down for 31 minutes on 30 October. It monitors regions, not individual nodes.",
+      "source": {
+        "url": "https://status.hosthatch.com",
+        "quote": "All systems Operational",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "sla",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "No SLA",
+      "note": "The terms contain no uptime percentage and no service-credit schedule. The only remedy is a pro-rata refund of the monthly fee for an interruption caused solely by HostHatch's breach of its warranty, calculated against a 720-hour month.",
+      "source": {
+        "url": "https://hosthatch.com/terms-of-service",
+        "quote": "Customer shall also be entitled to a pro-rata refund of any Fees attributable to the interrupted or inoperable Service(s)",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "soc2",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "not-published",
+      "figure": "Not published",
+      "note": "No SOC 2 report, ISO 27001 certificate or trust centre is mentioned on the site, the terms or the privacy policy. A GDPR DPA is offered; ask support for any audit report before a procurement review.",
+      "source": {
+        "url": "https://hosthatch.com/privacy-policy",
+        "quote": "Our GDPR Data Processing Agreement is available here.",
+        "confidence": "not-published"
+      }
+    }
+  },
+  {
+    "capability": "dpa",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "GDPR DPA (PDF)",
+      "note": "A GDPR data processing addendum is published as a PDF and is agreed as part of the privacy policy; a signed copy can be requested by email.",
+      "source": {
+        "url": "https://hosthatch.com/privacy-policy",
+        "quote": "Our GDPR Data Processing Agreement is available here.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "capability": "open-source",
+    "row": {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "Proprietary platform",
+      "note": "The control panel is HostHatch's own closed software and the service runs on its own hardware; there is no self-hosted edition.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "In 2017, we launched our own control panel",
+        "confidence": "docs-confirmed"
+      }
+    }
+  }
+]

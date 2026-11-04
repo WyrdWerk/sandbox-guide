@@ -391,6 +391,30 @@
         "quote": "Compute billing stops, but you continue to pay for any attached storage (local volumes that you chose to keep or Block Storage volumes) and for any Flexible IPs.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "Stop = power off, disk kept",
+      "scenario": "You can stop a server and stop paying for its CPU and memory, but nothing keeps running and nothing resumes where it was.",
+      "note": "A stop is a power-off, so memory and processes are gone; the files stay and, per the operator, only storage bills until you start it again. Deleting the server ends the charge immediately. There is no pause that keeps memory, no hibernation, no fork and no snapshot of a running process, and the stopped-state billing is stated in the operator's forum offers rather than on tierhive.com.",
+      "source": {
+        "url": "https://lowendspirit.com/discussion/11534/tierhive-19-locations-build-your-own-vps-plan-from-0-10-p-month-or-0-000135-per-hour",
+        "quote": "You only pay for storage when the VPS is powered off.",
+        "confidence": "third-party"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "partly",
+      "figure": "Stop = power off, still billed",
+      "scenario": "You can stop, start, reboot and reinstall the server, but a stop is a power-off: memory and running processes are gone and the paid term still bills.",
+      "note": "The API has power-on, shutdown, power-off, reboot and reinstall actions. A stop keeps the disk and its files but loses RAM and every running process; there is no pause, hibernate or fork. The contract is a monthly or longer term that renews until cancelled, and a cancellation set to end_of_term keeps the server 'until the end of the period you paid for', so powering off never reduces the bill.",
+      "source": {
+        "url": "https://hosthatch.com/terms-of-service",
+        "quote": "The term of this Agreement shall begin upon the date the server is installed and made available to customer and shall be for 1 month (or any other billing period selected by the customer) and shall renew for the same successive terms until terminated",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a pause keeps",

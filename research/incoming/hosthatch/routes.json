@@ -1,0 +1,127 @@
+{
+  "provider": "hosthatch",
+  "checkedOn": "2026-11-04",
+  "summary": "A plain monthly VPS with no application templates, so every route is a terminal install. It is cheap, always-on and gives 1–20 TB of transfer, which suits one agent, a bot, n8n, an MCP server or a scraper host; it is a poor fit for per-task sandboxes, a no-terminal user or a team that needs SSO. No route earns a pick.",
+  "routes": [
+    {
+      "useCase": "hermes-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Hermes on an Ubuntu VM over SSH. NVMe 4 GB gives 2 cores / 4 GB / 20 GB for $6 a month, always on, with the disk and the process surviving a reboot and the memory files staying in ~/.hermes. There is no Hermes template and no managed update.",
+      "link": {
+        "title": "HostHatch compute plans",
+        "url": "https://hosthatch.com/products"
+      },
+      "price": "$6/mo (NVMe 4 GB, 2 cores / 4 GB / 20 GB)",
+      "disposition": "List as a manual route. Cheap and always-on, but no template and no no-terminal path, so no pick."
+    },
+    {
+      "useCase": "openclaw",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install OpenClaw on a VM over SSH and pair WhatsApp, Telegram or Discord from the terminal. NVMe 4 GB is enough for one or two channels; NVMe 8 GB at $9 adds memory for browsing.",
+      "link": {
+        "title": "HostHatch compute plans",
+        "url": "https://hosthatch.com/products"
+      },
+      "price": "$6–$9/mo (NVMe 4 GB or 8 GB)",
+      "disposition": "Manual route only; HostHatch has no OpenClaw template. No pick."
+    },
+    {
+      "useCase": "coding-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Claude Code or Codex on NVMe 12 GB (4 cores, one dedicated / 12 GB / 50 GB, $12 a month). Stopping the server between sessions keeps the repository but still bills the month, so it suits someone who works most days rather than occasionally.",
+      "link": {
+        "title": "HostHatch compute plans",
+        "url": "https://hosthatch.com/products"
+      },
+      "price": "$12/mo (NVMe 12 GB)",
+      "disposition": "Manual route. The monthly plan makes an occasional-use coding box poor value; no pick."
+    },
+    {
+      "useCase": "code-interpreter",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Possible only as a build-it-yourself backend: the API orders whole monthly servers, with no per-run sandbox, no memory snapshot and no cheap throwaway machine. 20,000 one-minute runs are 333 hours back to back, which fits one $6 plan, but every concurrent run needs another plan.",
+      "link": {
+        "title": "HostHatch API documentation",
+        "url": "https://docs.hosthatch.com/api/"
+      },
+      "price": "Not a per-task product; one NVMe 4 GB plan is $6/mo",
+      "disposition": "Record the route but state the mismatch. No pick, and the use-case page should not imply HostHatch is a sandbox API."
+    },
+    {
+      "useCase": "browser-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install headless Chromium and your agent on NVMe 8 GB or 12 GB. There is no hosted browser, no desktop stream and no per-session isolation: all sessions share one machine and one public IP, and the disk is local NVMe rather than a disposable snapshot.",
+      "link": {
+        "title": "HostHatch compute plans",
+        "url": "https://hosthatch.com/products"
+      },
+      "price": "$9–$12/mo (NVMe 8 GB or 12 GB)",
+      "disposition": "Manual route with a clear warning about shared state and one IP; no pick."
+    },
+    {
+      "useCase": "workflow-automation",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run n8n in Docker on NVMe 4 GB or 8 GB. It must stay awake for webhooks and scheduled workflows, which a monthly plan does well: nothing sleeps the machine and 1–2 TB of transfer is included. You keep the database and the encryption key on the same disk and back them up yourself.",
+      "link": {
+        "title": "HostHatch compute plans",
+        "url": "https://hosthatch.com/products"
+      },
+      "price": "$6–$9/mo (NVMe 4 GB or 8 GB)",
+      "disposition": "One of the better fits for this provider, but still a terminal install and with no managed backup. No pick."
+    },
+    {
+      "useCase": "chat-bot",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run a Discord or Slack bot on NVMe 2 GB: 1 core / 2 GB / 10 GB for $4 a month, always on, with 1 TB of transfer. The gateway connection stays up because nothing sleeps the server; 10 GB is enough for history but not for media.",
+      "link": {
+        "title": "HostHatch compute plans",
+        "url": "https://hosthatch.com/products"
+      },
+      "price": "$4/mo (NVMe 2 GB)",
+      "disposition": "Manual route. The cheapest always-on option in this listing, but no template; no pick."
+    },
+    {
+      "useCase": "claude-code-team",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Five NVMe 12 GB servers, one per developer, at $12 each: 4 cores / 12 GB / 50 GB per person, with separate credentials on separate machines. Projects and roles can group them, but there is no SSO and no audit log.",
+      "link": {
+        "title": "HostHatch compute plans",
+        "url": "https://hosthatch.com/products"
+      },
+      "price": "$60/mo for five NVMe 12 GB servers",
+      "disposition": "Manual route. Separate machines give per-developer isolation, but no SSO or admin console for a team; no pick."
+    },
+    {
+      "useCase": "scheduled-scraper",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run the scraper from cron on NVMe 2 GB and write results to your own storage. The server is always on, so the schedule cannot be missed, but it bills the whole month: 120 ten-minute runs are 20 hours of a 730-hour plan.",
+      "link": {
+        "title": "HostHatch compute plans",
+        "url": "https://hosthatch.com/products"
+      },
+      "price": "$4/mo (NVMe 2 GB)",
+      "disposition": "Manual route. Cheap if the results go elsewhere and the machine is kept; no pick, because a per-run sandbox is cheaper for 20 hours of work."
+    },
+    {
+      "useCase": "mcp-server",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run your own MCP server on NVMe 2 GB at a fixed public IPv4 with a routed /64 of IPv6, open only the port you need with an ingress firewall group, and keep it awake all month. 1 TB of transfer is plenty for tool calls.",
+      "link": {
+        "title": "HostHatch compute plans",
+        "url": "https://hosthatch.com/products"
+      },
+      "price": "$4/mo (NVMe 2 GB)",
+      "disposition": "Manual route and a good shape for the workload, but no template or managed TLS; no pick."
+    }
+  ]
+}

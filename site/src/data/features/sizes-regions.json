@@ -364,6 +364,30 @@
         "quote": "vCPUs 48 vCPU type Shared RAM size 256 GiB",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "128 MB–8 GiB, 1–2 vCPU",
+      "scenario": "You build a size from sliders rather than a plan list, but the CPU stops at two cores and the memory at 8 GB.",
+      "note": "RAM is any 128 MB step from 128 MB to 8 GB and NVMe any GB from 1 to 50, with HDD to 4,000 GB in four locations — a genuinely build-your-own machine. The catch is the CPU: one vCPU up to 2 GB of RAM and two above it, never more, so the 4 vCPU in workload B cannot be bought. 8 GB is also location-dependent (Tokyo tops out at 1 GB), and there are 19 locations across Europe, the Americas, Asia-Pacific and Africa.",
+      "source": {
+        "url": "https://tierhive.com/",
+        "quote": "Up to 8GB RAM per VPS (not all locations support 8GB)",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "partly",
+      "figure": "16 cores / 96 GB; 16 sites claimed",
+      "scenario": "You pick one of ten fixed plans in one of the advertised locations; CPU and memory only change by moving to another plan.",
+      "note": "Ten compute plans from 1 core / 2 GB / 10 GB to 16 cores / 96 GB / 250 GB, plus storage VMs to 10 TB. CPU and memory are fixed bundles, so there is no 3-core / 6 GB machine; an upgrade moves the server to another plan and a reboot applies it. The location count is inconsistent: the product page says 16, the documentation matrix lists 14 cities, and the status page monitors 13. Madrid, Milan and Warsaw appear in the site's product data but not in the docs; Seoul appears in the docs but not in the product data.",
+      "source": {
+        "url": "https://hosthatch.com/products",
+        "quote": "Deploy in 16 edge locations",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Largest shape; regions",

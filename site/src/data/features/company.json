@@ -409,6 +409,30 @@
         "quote": "Scaleway is committed to obtaining the most stringent certifications (ISO 27001, HDS, SecNumCloud – currently undergoing assessment)",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "UK LTD, 2025, Alpha",
+      "scenario": "A twenty-month-old English company running a service it calls Alpha, with a public status page and a written admission that there is no SLA.",
+      "note": "Kernel Keepers LTD (16294246) was incorporated on 5 March 2025 at a Covent Garden address, and TierHive was announced on Hacker News on 8 January 2026. The status page shows per-location 90-day uptime, which read 99.91–100% on 2026-11-04. Against that: the acceptable-use policy declares Alpha status, says data loss can occur at any time, and states there is no SLA; no SOC 2 report, ISO 27001 certificate or data processing agreement is published, and headcount and funding are unknown.",
+      "source": {
+        "url": "https://tierhive.com/acceptable-use.php",
+        "quote": "TierHive is currently in Alpha status",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "partly",
+      "figure": "LLC since 2011; no SLA",
+      "scenario": "A long-running independent host with its own network and hardware, but no uptime promise and a thin public paper trail for a cautious buyer.",
+      "note": "HostHatch LLC has traded since around 2011, is privately funded, runs its own equipment and its own ARIN-registered network (AS63473), and publishes a status page (99.994% over 90 days on 2026-11-04) and a GDPR DPA. It publishes no SLA: the terms contain no uptime percentage or credit schedule, only a pro-rata refund for an interruption caused solely by its breach of warranty. Support is by ticket, its own promotional post warns that replies can take days on promotional plans, Trustpilot showed 2.7 from 93 reviews, and there is no SOC 2 report or ISO 27001 certificate on the site.",
+      "source": {
+        "url": "https://hosthatch.com/terms-of-service",
+        "quote": "HostHatch warrants that the Service(s) shall be provided in a workmanlike and professional manner.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Contracting entity; promise",

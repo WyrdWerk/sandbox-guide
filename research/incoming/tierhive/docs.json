@@ -1,0 +1,50 @@
+{
+  "isolation": {
+    "title": "About TierHive: the KVM stack, CPU rule and nesting",
+    "url": "https://tierhive.com/about.php"
+  },
+  "sizes-regions": {
+    "title": "Pricing calculator: RAM, disk and location",
+    "url": "https://tierhive.com/#calculator"
+  },
+  "lifecycle": {
+    "title": "What an hourly VPS is: start, delete, stop paying",
+    "url": "https://tierhive.com/blog/general/what-is-an-hourly-vps-and-why-you-might-want-one"
+  },
+  "snapshots-forks": {
+    "title": "Chroot a backup instead of restoring it",
+    "url": "https://tierhive.com/blog/tierhive-howto/tierhive-backup-chroot"
+  },
+  "storage": {
+    "title": "Extend a VPS disk",
+    "url": "https://tierhive.com/blog/tierhive-howto/extend-a-vps-disk"
+  },
+  "reaching-it": {
+    "title": "Locate your VPS's public ports",
+    "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports"
+  },
+  "custom-domains": {
+    "title": "HAProxy load balancing and SSL termination",
+    "url": "https://tierhive.com/blog/general/haproxy"
+  },
+  "outbound-network": {
+    "title": "Network tiers, fair use and email rules",
+    "url": "https://tierhive.com/about.php"
+  },
+  "built-in-agents": {
+    "title": "Recipe marketplace",
+    "url": "https://tierhive.com/"
+  },
+  "billing-models": {
+    "title": "Hourly billing, explained",
+    "url": "https://tierhive.com/blog/general/what-is-an-hourly-vps-and-why-you-might-want-one"
+  },
+  "trials-free-tiers": {
+    "title": "Refund policy: 14 days if barely used",
+    "url": "https://tierhive.com/refund.php"
+  },
+  "company": {
+    "title": "About TierHive and Kernel Keepers",
+    "url": "https://tierhive.com/about.php"
+  }
+}

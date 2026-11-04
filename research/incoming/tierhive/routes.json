@@ -1,0 +1,130 @@
+{
+  "provider": "tierhive",
+  "checkedOn": "2026-11-04",
+  "summary": "A cheap NAT VPS with no agent templates, no API and two forwarded TCP ports, so every route is a manual terminal install. It is a genuinely good price for one always-on small agent, a bot or an MCP server, and a poor fit for per-task sandboxes, browser fleets and anything that needs a public IPv4. Its own policy also forbids scraping without prior written approval.",
+  "routes": [
+    {
+      "useCase": "hermes-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install Hermes on a 4 GiB / 20 GB server over SSH on a forwarded port. The machine stays up until you stop it, and while stopped it is said to bill storage only, so an agent used a few hours a day costs cents. There is no Hermes recipe and no managed update, and the web UI would need the shared HAProxy or the spare TCP port.",
+      "link": {
+        "title": "TierHive pricing calculator",
+        "url": "https://tierhive.com/#calculator"
+      },
+      "price": "About $2.98/mo at 4 GiB / 20 GB running continuously ($0.004086/h)",
+      "disposition": "List as a manual route with the port and Alpha caveats. No pick: it is the cheapest host here for this job, but it is in Alpha with a written data-loss warning, which disqualifies it from a recommendation card."
+    },
+    {
+      "useCase": "openclaw",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install OpenClaw over SSH and pair WhatsApp, Telegram or Discord from the terminal. A channel gateway needs a process that never sleeps, which this host does well; the catch is that only two TCP ports are forwarded and SSH already holds one, so a web control panel needs HAProxy or IPv6.",
+      "link": {
+        "title": "How to find your forwarded ports",
+        "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports"
+      },
+      "price": "$2.98–$6.11/mo (4 GiB / 20 GB to 8 GiB / 50 GB, always on)",
+      "disposition": "Manual route. No OpenClaw recipe, no pick."
+    },
+    {
+      "useCase": "coding-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run Claude Code or Codex on the largest machine sold, 8 GiB with 2 vCPU. Stopping it between sessions is cheap if the storage-only claim holds, which suits a developer who works a few hours a day far better than a monthly VPS does. The two-core ceiling and shared CPU are the limit on compile-heavy work.",
+      "link": {
+        "title": "TierHive pricing calculator",
+        "url": "https://tierhive.com/#calculator"
+      },
+      "price": "$6.11/mo at 8 GiB / 50 GB always on; less if stopped between sessions",
+      "disposition": "Manual route with a clear warning about 2 vCPU and shared CPU. No pick."
+    },
+    {
+      "useCase": "code-interpreter",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Only as a build-it-yourself backend, and a poor one: each one-minute run is a whole server billed a one-hour minimum, so 20,000 one-minute runs would cost 20,000 hours. There is no API to create those servers with, so the orchestration would be a person or a screen-scraper.",
+      "link": {
+        "title": "TierHive pricing calculator",
+        "url": "https://tierhive.com/#calculator"
+      },
+      "price": "Not a per-task product: 20,000 one-minute runs would cost $77.73 in billed hours at 4 GiB / 10 GB",
+      "disposition": "Record the mismatch explicitly. No pick, and the page should not imply TierHive is a sandbox API."
+    },
+    {
+      "useCase": "browser-agent",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Install headless Chromium and the agent on one 4 GiB server. Every session shares that machine, its two cores and one shared IPv4, so there is no per-session isolation. At 30,000 ten-minute sessions the one-hour minimum alone comes to $116.59, and the acceptable-use policy forbids automated scraping of external sites without prior written approval.",
+      "link": {
+        "title": "Acceptable use: scraping needs prior approval",
+        "url": "https://tierhive.com/acceptable-use.php"
+      },
+      "price": "About $116.59 for 30,000 ten-minute sessions (30,000 billed hours at $0.003886)",
+      "disposition": "Manual route with two warnings: no isolation and a policy that treats scraping as prohibited unless approved. No pick."
+    },
+    {
+      "useCase": "workflow-automation",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run n8n in Docker on 4 GiB / 20 GB. It must stay awake for webhooks and schedules, which suits this host: nothing sleeps it and there is no bandwidth volume cap. Put it behind the shared HAProxy for HTTPS, keep the database and encryption key on the same disk, and take your own backups — the operator's policy makes backups your responsibility.",
+      "link": {
+        "title": "TierHive pricing calculator",
+        "url": "https://tierhive.com/#calculator"
+      },
+      "price": "About $2.98/mo at 4 GiB / 20 GB always on",
+      "disposition": "One of the better fits on price, but still a terminal install on an Alpha host with no SLA. No pick, because other providers offer a one-click n8n template at a similar price."
+    },
+    {
+      "useCase": "chat-bot",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Run the bot on the preset's 2 GiB server, or drop to 1 GiB for less. A Discord or Slack gateway needs a process that never sleeps and this host does not sleep it; bandwidth is capped by speed rather than volume, which a small community will not reach. Email is banned, so a bot that sends mail needs an outside relay.",
+      "link": {
+        "title": "TierHive pricing calculator",
+        "url": "https://tierhive.com/#calculator"
+      },
+      "price": "About $1.71/mo at 2 GiB / 25 GB always on, or $0.82 at 1 GiB / 10 GB",
+      "disposition": "A strong budget option for an always-on bot. No pick, because the Alpha warning and the shared IPv4 matter more to a reader than the last dollar."
+    },
+    {
+      "useCase": "claude-code-team",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "One 8 GiB server per developer, or one larger box with separate Linux users. There is no documented sub-user model, no SSO, no role separation and no audit log, and the terms permit one account per customer. Prepaid tokens do cap the bill, but they are account-wide.",
+      "link": {
+        "title": "Terms of service: one account per customer",
+        "url": "https://tierhive.com/terms.php"
+      },
+      "price": "About $6.70/mo for five developers at 8 GiB / 50 GB each, 8 h × 20 days",
+      "disposition": "Manual route; the missing team features and the two-core ceiling are why it is not a team pick."
+    },
+    {
+      "useCase": "scheduled-scraper",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "Cron inside the VM runs the scraper four times a day, and a stopped server between runs costs storage only, so 120 ten-minute runs come to about 28 cents. Two catches: the acceptable-use policy forbids automated scraping without prior written approval, and a stopped server runs nothing, so the schedule has to start it or it has to stay awake.",
+      "link": {
+        "title": "Acceptable use: scraping and crawling",
+        "url": "https://tierhive.com/acceptable-use.php"
+      },
+      "price": "About $0.28/mo for 120 ten-minute runs (120 billed hours), or $1.71/mo if it stays awake",
+      "disposition": "Record the route and the policy catch. No pick: a provider whose terms require written permission before scraping is the wrong default recommendation for a scraper guide."
+    },
+    {
+      "useCase": "mcp-server",
+      "tier": "manual",
+      "noTerminal": "no",
+      "what": "1 GiB / 10 GB is the cheapest always-on public endpoint here at about 82 cents a month. Put it behind the shared HAProxy with a domain and automatic HTTPS, or use a dedicated IPv6, because the raw IPv4 route is a shared address with a random high port. Nothing sleeps it, so a tool call never waits for a wake.",
+      "link": {
+        "title": "HAProxy and automatic HTTPS",
+        "url": "https://tierhive.com/blog/general/haproxy"
+      },
+      "price": "About $0.82/mo at 1 GiB / 10 GB always on",
+      "disposition": "A genuinely cheap fit for one always-on MCP server. No pick, because the Alpha status and lack of an SLA make it a poor default recommendation."
+    }
+  ],
+  "picks": [],
+  "situationPicks": [],
+  "pickReasoning": "No picks and no situation picks. On price TierHive wins several of these cases outright — 82 cents a month for an always-on MCP server or chat bot, $2.98 for n8n — but three published facts disqualify it from a recommendation card: the operator's own policy says the service is in Alpha and that data loss can occur at any time without warning; there is no SLA; and every server shares a public IPv4 with two forwarded TCP ports, one of which SSH takes. Its terms also forbid scraping without prior written approval, which rules it out as a default for the scraper guide. The honest treatment is a route row on each use-case page, plus prose in the cheap-always-on and EU-residency discussions. Revisit if it leaves Alpha, publishes a stopped-state billing rule on its own site, and ships the API it currently lacks."
+}

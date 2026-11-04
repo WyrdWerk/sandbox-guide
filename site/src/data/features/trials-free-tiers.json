@@ -364,6 +364,30 @@
         "quote": "Create a Business account and get started with €100 free credit.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "$0.01 credit, $3 top-up",
+      "scenario": "Registration needs no card and grants a cent of credit, but the homepage says $3 must be added before the service can be used.",
+      "note": "A free account is created with a username and email, no card, and the price feed grants $0.01 of sign-up credit — about 74 hours on the smallest 128 MB server. The homepage also says a $3 minimum top-up is required to use the service, so whether that cent is spendable before you pay is unclear. There is no ongoing free VPS tier; the free static hosting is a separate product. A 14-day refund exists only if the service was barely used.",
+      "source": {
+        "url": "https://tierhive.com/",
+        "quote": "A $3 minimum top up is required after registration to use this service.",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "None; 7-day refund",
+      "scenario": "There is no free tier and no starting credit; you pay the first invoice before the server exists and can ask for the money back within seven days only if the fault is HostHatch's.",
+      "note": "No free plan, trial credit or free sandbox hours appear on the product page, the signup page or the terms. The only safety net is a 7-day money-back guarantee that requires a valid reason caused by HostHatch and evidence in a ticket; used resources may be deducted, and upgrades, setup fees and all non-VPS services are excluded. The payment methods accepted at signup are not published.",
+      "source": {
+        "url": "https://hosthatch.com/terms-of-service",
+        "quote": "Our virtual private servers (VPS) carry a 7-day money back guarantee with a valid reason requirement.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What you get, and what ends it",

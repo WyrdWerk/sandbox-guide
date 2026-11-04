@@ -1,0 +1,139 @@
+{
+  "provider": "hosthatch",
+  "checkedOn": "2026-11-04",
+  "summary": "One prepaid monthly plan per fixed-size VM: the price is quoted per month, the terms invoice monthly, quarterly, semi-annually or annually, and a powered-off server keeps billing until the paid term ends. There is no hourly or per-second meter.",
+  "shapes": [
+    {
+      "name": "NVMe 2 GB",
+      "vcpu": 1,
+      "ram": 2,
+      "disk": 10,
+      "monthly": 4
+    },
+    {
+      "name": "NVMe 4 GB",
+      "vcpu": 2,
+      "ram": 4,
+      "disk": 20,
+      "monthly": 6
+    },
+    {
+      "name": "NVMe 8 GB",
+      "vcpu": 2,
+      "ram": 8,
+      "disk": 35,
+      "monthly": 9
+    },
+    {
+      "name": "NVMe 12 GB",
+      "vcpu": 4,
+      "ram": 12,
+      "disk": 50,
+      "monthly": 12
+    },
+    {
+      "name": "NVMe 16 GB",
+      "vcpu": 4,
+      "ram": 16,
+      "disk": 75,
+      "monthly": 15
+    },
+    {
+      "name": "NVMe 24 GB",
+      "vcpu": 6,
+      "ram": 24,
+      "disk": 100,
+      "monthly": 22
+    },
+    {
+      "name": "NVMe 32 GB",
+      "vcpu": 8,
+      "ram": 32,
+      "disk": 125,
+      "monthly": 29
+    },
+    {
+      "name": "NVMe 48 GB",
+      "vcpu": 8,
+      "ram": 48,
+      "disk": 150,
+      "monthly": 39
+    },
+    {
+      "name": "NVMe 64 GB",
+      "vcpu": 12,
+      "ram": 64,
+      "disk": 200,
+      "monthly": 49
+    },
+    {
+      "name": "NVMe 96 GB",
+      "vcpu": 16,
+      "ram": 96,
+      "disk": 250,
+      "monthly": 69
+    }
+  ],
+  "monthlyPlans": true,
+  "between": "kept",
+  "maxDisk": 250,
+  "maxVcpu": 16,
+  "maxRam": 96,
+  "egress": {
+    "perGiB": 0.0039,
+    "included": "1 TB on the 2 GB and 4 GB plans, 2 TB on 8 GB, 3 TB on 12 GB, 4 TB on 16 GB, 6 TB on 24 GB, 8 TB on 32 GB, 12 TB on 48 GB, 15 TB on 64 GB and 20 TB on 96 GB, per month, inbound and outbound counted together; APAC allowances are lower",
+    "note": "Extra bandwidth is $4 per TB, bought by contacting support, not metered to the gigabyte; the per-GiB figure is that block price converted for comparison. When the allowance is used up the server is rate-limited to 5 Mbps until the next calendar month or an extra block is bought. APAC plans carry less: the 2 GB plan's tooltip says 500 GB in Hong Kong, Tokyo, Sydney and Singapore. Not priced by the calculator.",
+    "url": "https://hosthatch.com/terms-of-service"
+  },
+  "plans": [
+    {
+      "name": "Monthly plan",
+      "fee": 0,
+      "note": "One plan per server per billing term. The product page quotes a monthly price and the terms invoice monthly, quarterly, semi-annually or annually; the checkout's prices for the longer cycles are behind the login and are not published, so this card uses the monthly list price."
+    }
+  ],
+  "notes": [
+    "Prices are HostHatch's own USD list on hosthatch.com/products, read fresh on 2026-11-04 twice (TinyFish and Context). Every compute price is shown as 'from $X.00 / month' with no annual qualifier, and the homepage says 'Our smallest plan costs $4 per month'. The terms say HostHatch invoices 'monthly, quarterly, semi-annually or annually', so monthly billing exists. What is not public is the price of each longer cycle: the order form is behind cloud.hosthatch.com's login. If the $4-$69 figures are annual-equivalent prices, a monthly-billed server costs more than this card shows; treat the card as the published monthly list price, not a verified checkout total.",
+    "No hourly or per-second rate is documented anywhere: the product page sells monthly plans, the API's product object carries `billing_cycles` such as monthly, quarterly and annually, and the terms invoice by period. A ten-minute task therefore costs a whole month unless it shares one plan with other tasks.",
+    "A powered-off server keeps billing: the contract is a term that renews until cancelled, and cancellation with `end_of_term` runs the server 'until the end of the period you paid for'. Powering off is an action on the server, not a change to the subscription. Workload C's 640 stopped hours therefore cost the same as running hours.",
+    "The card uses `monthlyPlans` rather than `billedWhileStopped`: the whole-month charge already covers stopped hours, and setting both would double-count the catch in the engine. `minimumPerRun`, `wholeHours` and `perMachine` do not apply because there is no hourly meter, no per-run floor and no separate per-server fee; the monthly plan is itself the minimum.",
+    "The 10 compute plans are 1-16 AMD EPYC cores, 2-96 GB DDR4, 10-250 GB NVMe and 1-20 TB of bandwidth. Only the 12 GB plan and larger carry any dedicated cores; the 2, 4 and 8 GB plans are labelled '( fair share )'.",
+    "Fixed shapes only: CPU and memory cannot be chosen independently, and an upgrade moves the server to another plan. The API's upgrade call can also grow the disk (`upgrade_disk`), and a reboot applies the new plan; there is no live resize.",
+    "Storage VMs are a separate product line: 1-10 TB of RAID-10 HDD with 1-2 vCPU and 1-2 GB RAM, $5-$38 a month, advertised in 8 locations but listed in only 4 in the site data (Amsterdam, Stockholm, Los Angeles, Chicago). They are not in this card because A, B and C fit compute plans, but they are what makes a 10 TB disk available.",
+    "Extra IPv4 addresses are priced per order and are not in the card. The API documentation's example shows $2.00 a month for one extra address, but it labels its prices as illustrations, so that figure is not used as a rate.",
+    "Bandwidth: the allowance counts inbound and outbound together, resets on the 1st of the calendar month regardless of the billing date, and overage is $4 per TB bought through support. Reaching the limit rate-limits the server to 5 Mbps rather than billing automatically.",
+    "Snapshots are included with no published price or storage charge; the account has an unpublished snapshot limit. Backups are not sold on the current site, docs or API, although a 2023 'upcoming features' block promised them at 20% of the monthly VM cost. That block is stale and is not priced.",
+    "Promotional plans sold through LowEndTalk are separate and much cheaper: in April 2026 a 4 GB / 50 GB NVMe plan was $35 a year and an 8 GB / 100 GB plan $65 a year, annual or three-year prepay only, limited stock, 10 working days to set up, no refunds and a slower support queue. They are not the standard product and are not in the card.",
+    "Currency is USD. HostHatch bills in USD; VAT treatment is not stated on the product page. The company is HostHatch LLC in Tampa, Florida, and the terms are governed by United States law."
+  ],
+  "sources": [
+    {
+      "label": "Compute and storage plans with monthly prices",
+      "url": "https://hosthatch.com/products"
+    },
+    {
+      "label": "Homepage: smallest plan $4 per month",
+      "url": "https://hosthatch.com/"
+    },
+    {
+      "label": "Terms: billing cycles, bandwidth, refunds, term and cancellation",
+      "url": "https://hosthatch.com/terms-of-service"
+    },
+    {
+      "label": "API: products, billing cycles and orders",
+      "url": "https://docs.hosthatch.com/api/orders-and-payment/"
+    },
+    {
+      "label": "API: server object and cancellation at end of term",
+      "url": "https://docs.hosthatch.com/api/servers/"
+    },
+    {
+      "label": "Networking: bandwidth counting and reset",
+      "url": "https://docs.hosthatch.com/networking/"
+    },
+    {
+      "label": "April 2026 promotional prices (provider's own post)",
+      "url": "https://lowendtalk.com/discussion/216524/calmly-celebrating-15-years-in-business"
+    }
+  ]
+}

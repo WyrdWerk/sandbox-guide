@@ -42,6 +42,11 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["vultr", "a", 29.76], ["vultr", "b", 40], ["vultr", "c", 20],
   ["contabo", "a", 6.6], ["contabo", "b", 6.6], ["contabo", "c", 6.6],
   ["scaleway", "a", 29.49], ["scaleway", "b", 44.15], ["scaleway", "c", 8.2],
+  // 1,000 one-hour minimums × (4,096 MB × $0.0000009 + 10 GB × $0.00002); 8 GiB / 50 GB × 730 h (infeasible: 2 vCPU max);
+  // 90 h × $0.0040864 + 640 stopped h × 20 GB × $0.00002 (storage only).
+  ["tierhive", "a", 3.89], ["tierhive", "b", 6.11], ["tierhive", "c", 0.62],
+  // One NVMe 4 GB plan runs all 1,000 tasks; NVMe 12 GB is the cheapest with 4 cores; NVMe 4 GB billed for the month, on or off.
+  ["hosthatch", "a", 6], ["hosthatch", "b", 12], ["hosthatch", "c", 6],
 ];
 
 const task = (vcpu: number, ram: number, minutes: number) =>
@@ -59,6 +64,8 @@ test("plan gates, minimums and fixed shapes from the providers' own pages", () =
   // Blaxel: 6 cores come with 16 GB ($0.6624 an hour); 7 cores are not documented.
   assert.ok(Math.abs(price(card("blaxel"), task(6, 8, 60)).total - 0.6624) < 1e-9);
   assert.equal(price(card("blaxel"), task(7, 8, 60)).feasible, false);
+  // TierHive sells at most 2 vCPU, so workload B's 4 vCPU cannot be bought at any price.
+  assert.equal(price(card("tierhive"), presets.b.workload).feasible, false);
   // Tensorlake's Pro rates: the browser preset is $197.60 of Pro usage, inside its $250 fee, against $331 on prepaid credits.
   const tl = price(card("tensorlake"), presets.browser.workload);
   assert.equal(tl.plan, "Pro");

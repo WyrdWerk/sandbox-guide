@@ -364,6 +364,30 @@
         "quote": "Creating an image makes a complete backup of your Instance, including all of its volumes.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "Scheduled backups, paid storage",
+      "scenario": "Backups and snapshots of the disk exist and can be attached to another server, but nothing captures a running process.",
+      "note": "The panel offers scheduled and one-off backups plus snapshots, both billed by the gigabyte-hour, and a backup can be attached to a different VPS and mounted or chrooted instead of restored. That is the closest thing to a clone. What is missing is any memory snapshot or fork of a running machine, and the retention — how many backups are kept and for how long — is not published anywhere.",
+      "source": {
+        "url": "https://tierhive.com/",
+        "quote": "Automated backups with flexible scheduling. Instant restore capabilities.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "partly",
+      "figure": "Disk snapshots; no memory",
+      "scenario": "You can snapshot a server's disk, restore it onto any server in the project, or order a new server from it — but not capture a running process or fork a live machine.",
+      "note": "A snapshot is a copy of the disk, taken on demand, kept until deleted and owned by the project rather than the server. It can be restored onto another server in the project, or used instead of an image when ordering a new one, which is the closest thing to a template. There is no memory snapshot and no live fork. The account's snapshot limit is not published, snapshots have no published price, and automated backups are not sold: a 2023 'upcoming features' block promised them but they appear nowhere in the current docs, API or panel.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/snapshots/",
+        "quote": "A snapshot is a copy of a server's disk at one moment.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "What a snapshot keeps",

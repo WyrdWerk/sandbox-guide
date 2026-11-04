@@ -2,6 +2,37 @@
   "changes": [
     {
       "date": "2026-11-04",
+      "title": "TierHive added: near-free hourly servers that are still in Alpha",
+      "provider": "tierhive",
+      "what": "This guide now lists TierHive, a build-your-own NAT server billed by the hour with a one-hour minimum per server and at most 2 vCPU. Its own policy says it is in Alpha, that data loss can happen without warning and that there is no uptime promise, so it carries no recommendations here. The date is when this guide checked it, not a launch date.",
+      "sources": [
+        {
+          "url": "https://tierhive.com/acceptable-use.php",
+          "quote": "Data loss can occur at any time without warning",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://tierhive.com/acceptable-use.php",
+          "quote": "We do not guarantee any specific uptime or Service Level Agreement (SLA)",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
+      "title": "HostHatch added: fixed monthly servers on its own hardware, with no SLA",
+      "provider": "hosthatch",
+      "what": "This guide now lists HostHatch, sold in fixed monthly plans from $4. A stopped server still bills for the month, and its terms have no uptime promise. Prices here are the published monthly list prices; the checkout prices for longer terms are behind a login. The date is when this guide checked it, not a launch date.",
+      "sources": [
+        {
+          "url": "https://hosthatch.com/",
+          "quote": "Our smallest plan costs $4 per month",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
       "title": "Correction: Tensorlake does promise 99.9% uptime on paid plans",
       "provider": "tensorlake",
       "what": "This guide's capability checklist said Tensorlake had no uptime promise. Its Terms promise 99.9% monthly availability for the control plane on paid plans, with service credits applied automatically. The Terms also set a 4-hour first response for critical tickets, while the pricing page says 24 hours on Pro. The date is when this guide corrected it, not a change by Tensorlake.",
