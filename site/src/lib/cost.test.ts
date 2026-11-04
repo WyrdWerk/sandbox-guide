@@ -20,7 +20,10 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["lizard", "a", 19], ["lizard", "b", 27.85], ["lizard", "c", 19],
   ["morph", "a", 16.67], ["morph", "c", 9.15],
   ["sandboxer", "a", 20], ["sandboxer", "b", 40], ["sandboxer", "c", 20],
-  ["boxd", "b", 222.5],
+  // Active vCPU only (vCPU × busy share), resident RAM, written disk, all at $0.047 / $0.014 / $0.000096 an hour:
+  // A 166.67 h × (2 × 0.5 × 0.047 + 4 × 0.014 + 10 × 0.000096); B 730 h × (4 × 0.1 × 0.047 + 8 × 0.014 + 50 × 0.000096);
+  // C 90 h × (2 × 0.1 × 0.047 + 4 × 0.014 + 20 × 0.000096) + 640 h × 20 × 0.000096.
+  ["boxd", "a", 17.33], ["boxd", "b", 98.99], ["boxd", "c", 7.29],
   ["agent37", "b", 30.1],
   // C: 0.2 core × $0.07 × 90 + 4 × $0.015 × 90 + 20 × $0.0002 × 90 + 640 h × 20 GB × $0.07 / 720.
   ["tensorlake", "a", 22], ["tensorlake", "b", 250], ["tensorlake", "c", 8.26],

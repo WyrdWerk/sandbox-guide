@@ -2,6 +2,24 @@
   "changes": [
     {
       "date": "2026-11-04",
+      "title": "boxd now bills only active vCPU",
+      "provider": "boxd",
+      "what": "boxd's pricing page and docs now bill vCPU on active use rather than on the machine's size: a 2 vCPU machine that is 10% active pays for 0.2 vCPU-hours. The rates did not change ($0.047 per vCPU-hour, $0.014 per GiB-hour of RAM, $0.000096 per GiB-hour of disk). On 29 October 2026 the page billed the full vCPU count while running. In this guide's workloads, B falls from $222.50 to $98.99 a month at 8 GiB resident. The same rewrite dropped the pricing page's mention of audit logs. boxd gives no effective date; this guide recorded the change on 4 November 2026.",
+      "sources": [
+        {
+          "url": "https://docs.boxd.sh/guides/resources",
+          "quote": "A 2 vCPU machine that is active 10% of an hour pays for 0.2 vCPU-hours",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://boxd.sh/pricing",
+          "quote": "Active vCPU only not the vCPUs reserved",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
       "title": "TierHive added: near-free hourly servers that are still in Alpha",
       "provider": "tierhive",
       "what": "This guide now lists TierHive, a build-your-own NAT server billed by the hour with a one-hour minimum per server and at most 2 vCPU. Its own policy says it is in Alpha, that data loss can happen without warning and that there is no uptime promise, so it carries no recommendations here. The date is when this guide checked it, not a launch date.",

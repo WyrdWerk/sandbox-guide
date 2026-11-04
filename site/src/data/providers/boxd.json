@@ -15,20 +15,20 @@
   "sizes": "Four sizes named by either dimension: 1 vCPU / 4 GiB, 2 / 8 (the default), 4 / 16, 8 / 32. Disk is fixed at 100 GB and is not a size choice.",
   "billing": {
     "model": "Prepaid credits, no plan and no per-seat fee.",
-    "meter": "Per second, settled every 15 minutes, on three meters: vCPU on the machine's size while running, RAM on resident memory while running or in standby, disk on bytes written in every state.",
+    "meter": "Per second, settled every 15 minutes, on three meters: vCPU only while it is active, RAM on resident memory while running or in standby, disk on bytes written in every state.",
     "stopped": "Disk only. Hibernated and stopped machines pay for written disk; a machine in standby keeps paying for RAM.",
     "planFee": "None. Custom and self-hosted are contracts with unpublished prices.",
     "minimum": "No minimum charge per machine. There is no free plan: $30 of credit requires a card, and an account without one is capped at two machines."
   },
   "cost": {
     "A": {
-      "headline": "≈ $25.03 or $34.37 a month",
-      "shape": "2 vCPU / 8 GiB (the nearest size), 4 GiB resident, 2 GiB written, deleted after each task",
+      "headline": "≈ $17.20 or $26.53 a month",
+      "shape": "2 vCPU / 8 GiB (the nearest size), 50% busy, 4 GiB resident, 2 GiB written, deleted after each task",
       "lines": [
         {
-          "label": "vCPU",
-          "arithmetic": "2 × $0.047 × 166.67 h",
-          "amount": "$15.67"
+          "label": "vCPU, active share",
+          "arithmetic": "2 × 50% × $0.047 × 166.67 h",
+          "amount": "$7.83"
         },
         {
           "label": "RAM at 4 GiB resident",
@@ -41,20 +41,21 @@
           "amount": "$0.03"
         }
       ],
-      "total": "$25.03 at 4 GiB, $34.37 at 8 GiB",
+      "total": "$17.20 at 4 GiB, $26.53 at 8 GiB",
       "notes": [
-        "If a task fills the shape at 8 GiB resident, the same work costs $34.37.",
+        "If a task fills the shape at 8 GiB resident, the same work costs $26.53.",
+        "Only active vCPU is billed, so the 50% busy share halves the vCPU line; a task that keeps both vCPUs busy pays $15.67 for vCPU instead.",
         "RAM is billed on what the machine holds, so the 8 GiB size does not force an 8 GiB bill."
       ]
     },
     "B": {
-      "headline": "≈ $222.50 or $304.26 a month",
-      "shape": "4 vCPU / 16 GiB (the only 4 vCPU size), 8 GiB or 16 GiB resident, 50 GiB written",
+      "headline": "≈ $98.99 or $180.75 a month",
+      "shape": "4 vCPU / 16 GiB (the only 4 vCPU size), 10% busy, 8 GiB or 16 GiB resident, 50 GiB written",
       "lines": [
         {
-          "label": "vCPU",
-          "arithmetic": "4 × $0.047 × 730",
-          "amount": "$137.24"
+          "label": "vCPU, active share",
+          "arithmetic": "4 × 10% × $0.047 × 730",
+          "amount": "$13.72"
         },
         {
           "label": "RAM at 8 GiB resident",
@@ -72,37 +73,37 @@
           "amount": "$3.50"
         }
       ],
-      "total": "$222.50 at 8 GiB, $304.26 at 16 GiB",
+      "total": "$98.99 at 8 GiB, $180.75 at 16 GiB",
       "notes": [
         "8 GiB is a working set, not a purchase: the 4 vCPU shape comes with 16 GiB and bills what it holds.",
-        "Sleeping 8 hours a day instead of running always: about $149.60 at 8 GiB resident."
+        "Memory is now most of the bill. A box that kept all four vCPUs busy would pay $137.24 for vCPU instead of $13.72.",
+        "Hibernating 8 hours a day instead of running always: about $67.16 at 8 GiB resident."
       ]
     },
     "C": {
-      "headline": "≈ $14.88 or $19.92 a month",
-      "shape": "2 vCPU / 8 GiB, 4 GiB or 8 GiB resident, 20 GiB written, 90 running hours in a 720-hour month",
+      "headline": "≈ $7.29 or $12.33 a month",
+      "shape": "2 vCPU / 8 GiB, 10% busy, 4 GiB or 8 GiB resident, 20 GiB written, 90 running hours and 640 stopped",
       "lines": [
         {
           "label": "Running, 90 h at 4 GiB",
-          "arithmetic": "90 × (2 × $0.047 + 4 × $0.014 + 20 × $0.000096)",
-          "amount": "$13.67"
+          "arithmetic": "90 × (2 × 10% × $0.047 + 4 × $0.014 + 20 × $0.000096)",
+          "amount": "$6.06"
         },
         {
           "label": "Running, 90 h at 8 GiB",
-          "arithmetic": "90 × (2 × $0.047 + 8 × $0.014 + 20 × $0.000096)",
-          "amount": "$18.71"
+          "arithmetic": "90 × (2 × 10% × $0.047 + 8 × $0.014 + 20 × $0.000096)",
+          "amount": "$11.10"
         },
         {
-          "label": "Stopped, 630 h",
-          "arithmetic": "630 × 20 × $0.000096",
-          "amount": "$1.21"
+          "label": "Stopped, 640 h",
+          "arithmetic": "640 × 20 × $0.000096",
+          "amount": "$1.23"
         }
       ],
-      "total": "$14.88 at 4 GiB, $19.92 at 8 GiB",
+      "total": "$7.29 at 4 GiB, $12.33 at 8 GiB",
       "notes": [
-        "A 30-day month is 720 hours, so 630 hours are stopped.",
-        "Leaving it in standby instead of stopping is the expensive mistake: about $50.16 at 4 GiB, because RAM keeps billing.",
-        "Relying on the 4-hour idle hibernate instead of stopping: about $32.88."
+        "Leaving it in standby instead of stopping is the expensive mistake: about $43.13 at 4 GiB, because RAM keeps billing.",
+        "Relying on the 4-hour idle hibernate instead of stopping: about $14.01 at 4 GiB, counting the idle hours as memory and disk with no active vCPU."
       ]
     }
   },
@@ -187,7 +188,7 @@
   "caveats": [
     {
       "issue": "The bill follows resident RAM, not the shape",
-      "detail": "A 4 vCPU machine is 16 GiB, but boxd bills the memory it actually holds: $222.50 a month at 8 GiB resident and $304.26 at 16 GiB. boxd's own calculator assumes 2 GiB on an 8 GiB machine, which is a best case rather than a typical one.",
+      "detail": "A 4 vCPU machine is 16 GiB, but boxd bills the memory it actually holds: $98.99 a month at 8 GiB resident and $180.75 at 16 GiB, with 10% of the vCPU active. boxd's own calculator assumes 2 GiB active on an 8 GiB machine, which is a best case rather than a typical one.",
       "status": "open"
     },
     {
@@ -197,7 +198,7 @@
     },
     {
       "issue": "The machine quota is stated as both 50 and 100",
-      "detail": "Docs and FAQ say 50 machines per organisation; the pricing page says 100 included, raiseable on request.",
+      "detail": "Docs say 50 machines per organisation; the pricing page says pay as you go goes up to 100 machines, with more on the Scale plan.",
       "status": "contradiction",
       "evidence": [
         {
@@ -207,7 +208,7 @@
         },
         {
           "url": "https://boxd.sh/pricing",
-          "quote": "100 machines included, raiseable on request",
+          "quote": "Machines Up to 100",
           "confidence": "pricing-page"
         }
       ]
