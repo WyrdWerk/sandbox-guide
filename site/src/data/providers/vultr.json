@@ -126,6 +126,15 @@
         }
       },
       {
+        "label": "Recent incidents",
+        "value": "The status page shows only current outages, alerts and upcoming maintenance, with no incident history, so past incidents cannot be looked up there.",
+        "source": {
+          "url": "https://status.vultr.com/",
+          "quote": "This endpoint includes all current outages, alerts, and upcoming scheduled maintenance.",
+          "confidence": "inferred"
+        }
+      },
+      {
         "label": "SLA claims",
         "value": "Credits are not automatic: you must open a ticket and ask for a credit.",
         "source": {

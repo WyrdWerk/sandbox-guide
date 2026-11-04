@@ -198,3 +198,13 @@ Research date: 2026-10-28. Desk research only; no account was created and no ser
 - **docs-confirmed** — “Unused Service Credits expire one year after the date of purchase or issuance, unless otherwise specified at the time of purchase or when the applicable Service Credits are issued.” [Standard terms PDF, §10.2](https://blaxel.ai/legal/terms/2025-12-10-blaxel-terms-and-conditions.pdf).
 - **docs-confirmed** — Blaxel's security page advertises “Up to $200 in credits, no credit card required.” This is an advertised offer; signup was not tested. [Security](https://blaxel.ai/company/security).
 - **inferred** — These are vendor standard terms, not legal advice or a substitute for the actual signed order, data processing agreement, SLA, or counsel's review. Evidence: [standard terms PDF](https://blaxel.ai/legal/terms/2025-12-10-blaxel-terms-and-conditions.pdf), [pricing](https://blaxel.ai/pricing).
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-1/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: By this guide's count, the status page lists 25 incidents from 6 August to 4 November 2026, 22 of them affecting sandboxes. The longest was about 16 hours of unreachable workloads in us-was-1 on 1 September.
+- Source: https://status.blaxel.ai/api/v2/incidents.json — ""name":"Some workloads unreachable in us-was-1","status":"resolved","created_at":"2026-09-01T00:24:47Z","updated_at":"2026-09-01T16:24:46Z","resolved_at":"2026-09-01T16:24:46Z"" (docs-confirmed)

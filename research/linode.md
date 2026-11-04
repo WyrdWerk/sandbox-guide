@@ -454,3 +454,13 @@ One quote needed the normaliser to drop zero-width characters: the Object Storag
 ## Parent integration, 2026-10-30
 
 The idle-timers feature row and the stay-on and choose-idle capability rows keep `yes` but are tagged `inferred`: the API status enum lists states and does not, by itself, rule out an automatic stop. No Akamai page states that Linodes are never stopped for idleness.
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-2/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: By this guide's count, Akamai's status page lists 16 incidents touching compute, block or object storage or LKE from 6 August to 4 November 2026. The longest was a Cloud Manager and API problem lasting about 34 hours, from 21 to 23 September.
+- Source: https://status.linode.com/api/v2/incidents/q9mz44p279ds.json — ""name":"Emerging Service Issue - Cloud Manager and API","status":"resolved","created_at":"2026-09-21T17:13:35.218Z","updated_at":"2026-09-23T03:26:27.174Z","monitoring_at":null,"resolved_at":"2026-09-23T03:26:27.158Z"" (docs-confirmed)

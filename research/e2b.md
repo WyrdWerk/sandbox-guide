@@ -195,3 +195,13 @@ Company and terms research checked 2026-10-28; the status figures are a point-in
 ## Research method and limits
 
 **inferred** — Sources were public provider pages and the requested Battleships JSON and Markdown, retrieved live on the research date. Context.dev MCP scrape and search succeeded; Context's site-restricted search returned no results. TinyFish search through Composio succeeded. Composio discovery succeeded for Exa and Firecrawl but neither was called for retrieval. Direct HTTPS fetched provider-published Markdown and Battleships. No native Amp web search was needed. No signup, sandbox, account change or paid E2B usage was performed. Pricing and capabilities are time-sensitive; this is not a guarantee of product availability or a tested deployment.
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-2/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: By this guide's count, the status page lists 14 sandbox incidents from 6 August to 4 November 2026, 13 of them touching US-West-1. The longest was about 4¾ hours of errors creating sandboxes from snapshots on 15 September.
+- Source: https://status.e2b.dev/api/v2/incidents.json — ""name":"Elevated error rates when creating sandboxes from snapshots","status":"resolved","created_at":"2026-09-15T16:53:22Z","updated_at":"2026-09-15T21:38:12Z","resolved_at":"2026-09-15T21:38:12Z"" (docs-confirmed)

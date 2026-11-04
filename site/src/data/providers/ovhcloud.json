@@ -196,6 +196,15 @@
           "quote": "OVHcloud Status",
           "confidence": "docs-confirmed"
         }
+      },
+      {
+        "label": "Recent incidents",
+        "value": "By this guide's count, OVHcloud's two status pages list 18 VPS incidents and 72 Public Cloud incidents from 6 August to 4 November 2026. The longest VPS one left some VPS in the Madrid local zone (EU-SOUTH-LZ-MAD) unavailable for just over four days from 14 August.",
+        "source": {
+          "url": "https://bare-metal-servers.status-ovhcloud.com/incidents/3mjshm15tvzc",
+          "quote": "Start time : 14/08/2026 08:45 UTC End time : 18/08/2026 10:15 UTC",
+          "confidence": "docs-confirmed"
+        }
       }
     ]
   },

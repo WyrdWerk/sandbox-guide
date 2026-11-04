@@ -685,3 +685,13 @@ Integrated by the primary thread (https://ampcode.com/threads/T-01a188d2-e3f1-73
 - **Price baseline.** Not updated in this pass: `check-rates --update` rewrites every provider and
   the same run showed an unrelated, unreviewed boxd change (EUR figures where the baseline was
   empty). DigitalOcean's three pricing URLs print as NEW until the baseline is refreshed.
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-1/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: By this guide's count, the status page lists 15 incidents from 6 August to 4 November 2026. The most severe, on 24 August, gave control-panel and API users errors peaking at 25% for 3.5 hours within a 6-hour span.
+- Source: https://status.digitalocean.com/incidents/4qwm6pzlx1z3 — "Between 16:56 UTC and 23:09 UTC on August 24, 2026, customers using DigitalOcean’s Cloud Control Panel, Public API, and dependent product management systems experienced elevated request error rates, peaking at 25%, in two distinct windows totaling 3.5 hours of active degradation within a 6-hour span." (docs-confirmed)

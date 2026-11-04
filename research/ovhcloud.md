@@ -485,3 +485,13 @@ Added a caveat and a change entry for the July 2026 CVE-2026-53359 patch campaig
 | https://blog.ovhcloud.com/fr/posts/cve-2026-53359-kvm-patching-lessons-learned/ | "environ un million de machines virtuelles" | docs-confirmed |
 | https://blog.ovhcloud.com/fr/posts/cve-2026-53359-kvm-patching-lessons-learned/ | "Les premières vagues de patch + reboot sont appliquées sur les hôtes VPS en Australie." | docs-confirmed |
 | https://blog.ovhcloud.com/fr/posts/cve-2026-53359-kvm-patching-lessons-learned/ | "données corrompues sur plusieurs VMs réparties sur 3 clusters" | docs-confirmed |
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-2/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: By this guide's count, OVHcloud's two status pages list 18 VPS incidents and 72 Public Cloud incidents from 6 August to 4 November 2026. The longest VPS one left some VPS in the Madrid local zone (EU-SOUTH-LZ-MAD) unavailable for just over four days from 14 August.
+- Source: https://bare-metal-servers.status-ovhcloud.com/incidents/3mjshm15tvzc — "Start time : 14/08/2026 08:45 UTC End time : 18/08/2026 10:15 UTC" (docs-confirmed)

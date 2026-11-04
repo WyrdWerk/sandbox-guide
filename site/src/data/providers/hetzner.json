@@ -140,6 +140,15 @@
         }
       },
       {
+        "label": "Recent incidents",
+        "value": "The status page keeps only its 15 most recent resolved entries, so it shows three Cloud or network outages, all between 28 October and 3 November 2026, rather than a full quarter. The longest was a 58-minute Cloud DNS API fault on 3 November.",
+        "source": {
+          "url": "https://status.hetzner.com/incident/ca26bc3c-8872-43eb-8215-69e85ee23081",
+          "quote": "Start: 2026-11-03 08:58 UTC+0 – Ends on: 2026-11-03 09:55 UTC+0",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
         "label": "Data protection",
         "value": "A Data Processing Agreement can be created online, with technical and organisational measures in Appendix 2; the audit protocol is available in the customer account.",
         "source": {

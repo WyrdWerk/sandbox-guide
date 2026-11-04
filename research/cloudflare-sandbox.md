@@ -718,3 +718,13 @@ The self-serve contract is the Cloudflare Self-Serve Subscription Agreement. Ter
 | battleships.dev record | https://battleships.dev/data/providers/cloudflare-sandbox.md | 28 Oct 2026 | Cross-check only, §14 |
 
 **Method.** Discovery used Context.dev search, and page content was read through Context.dev scrape; every page was then fetched directly over HTTPS as its `.md` variant (Cloudflare publishes one per docs page), and the `llms.txt` index was used to confirm the page inventory rather than a crawl. Quotes were verified by a local script that maps each cited URL to the fetched file, normalises whitespace, HTML tags and Markdown emphasis, and requires the quoted string to appear verbatim; it covered 225 quotations. Four more, on the investor-relations leadership page, were checked against a live Context.dev scrape because that host serves a bot challenge to direct fetches. No native Amp web search was needed and no Composio tool was used. No account, signup, deployment, container or billable action was performed. Prices and lifecycle behaviour are time-sensitive, and the 0.x/1.0 split means any figure needs a version stamp as well as a date.
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-1/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: By this guide's count, 58 status-page incidents from 6 August to 4 November 2026 name Workers, Containers or Durable Objects, most of them other Workers products. Two were about Containers, which Sandbox runs on; the longer lasted 1 hour 11 minutes on 3 November.
+- Source: https://www.cloudflarestatus.com/incidents/n5mvqjs26jg9 — "Cloudflare Container Issues Started Nov 3, 2026, 04:12 UTC Resolved Nov 3, 2026, 05:23 UTC" (docs-confirmed)

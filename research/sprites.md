@@ -229,3 +229,13 @@ Company and buyer-term research checked 2026-10-28. Legal information below summ
 **inferred** — Context.dev search returned no results for the initial query; Context.dev scrape successfully returned lifecycle, checkpoint and networking docs. TinyFish Search and Fetch through Composio succeeded; Parallel Search through Composio succeeded. Fresh direct HTTPS reads checked 82 of 82 quoted evidence fragments in the direct-evidence bullets against the live source text; two initially failed and were corrected before that final check. Battleships' JSON and Markdown were read only as secondary checks. Findings represent published claims, not tests of security, performance, billing or signup. No Sprites resources were provisioned.
 
 **inferred** — The company-info pass used successful Context.dev searches and scrapes, TinyFish Search and Fetch through Composio, Parallel Search through Composio, and fresh direct HTTPS reads. Its final live check matched 47 of 47 newly added quoted fragments and field excerpts; one earlier outage quote omitted a word and was corrected. No account or Sprite was created, and no legal, compliance or billing claim was independently tested.
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-2/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: By this guide's count, the status page lists 5 Sprites incidents from 6 August to 4 November 2026, including a 75-minute outage on 11–12 October when hosted sprites were unreachable because of a certificate error.
+- Source: https://status.flyio.net/incidents/01M4PS8CZW07R4EMEJK22H23NY — "From approximately 2026-10-11 23:30 UTC through 2026-10-12 00:45 UTC some or all hosted sprites on the *.sprites.app subdomain were unavailable due to a certificate error." (docs-confirmed)

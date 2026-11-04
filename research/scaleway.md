@@ -320,3 +320,13 @@ Added claim-window and voucher facts from the Instance SLA (fresh Context.dev sc
 | https://www.scaleway.com/en/virtual-instances/sla/ | "No SLO" | docs-confirmed |
 | https://www.scaleway.com/en/virtual-instances/sla/ | "Client’s request for compensation must be issued no later than thirty (30) days following the month during which the applicable Resources did not comply with the SLO." | docs-confirmed |
 | https://www.scaleway.com/en/virtual-instances/sla/ | "The compensation shall take the form of a voucher which shall be applied by Scaleway on the invoice issued for the Covered Service" | docs-confirmed |
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-1/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: By this guide's count, 8 status-page incidents from 6 August to 4 November 2026 affected Instances or Block Storage. The longest-running, a block-storage latency problem affecting Block Storage, Databases and Instances, was posted on 29 October and had no resolution posted by 4 November.
+- Source: https://status.scaleway.com/incidents/l35th3qpv30h — "Posted Oct 29 , 2026 - 12:01 CET This incident affects: Elements - Products (Block Storage, Databases, Instances)" (docs-confirmed)

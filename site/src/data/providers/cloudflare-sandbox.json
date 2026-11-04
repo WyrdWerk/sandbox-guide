@@ -155,6 +155,15 @@
         }
       },
       {
+        "label": "Recent incidents",
+        "value": "By this guide's count, 58 status-page incidents from 6 August to 4 November 2026 name Workers, Containers or Durable Objects, most of them other Workers products. Two were about Containers, which Sandbox runs on; the longer lasted 1 hour 11 minutes on 3 November.",
+        "source": {
+          "url": "https://www.cloudflarestatus.com/incidents/n5mvqjs26jg9",
+          "quote": "Cloudflare Container Issues Started Nov 3, 2026, 04:12 UTC Resolved Nov 3, 2026, 05:23 UTC",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
         "label": "SLA",
         "value": "No sandbox SLA on any plan. The Workers SLA covers Workers only and does not extend to Containers or Sandboxes.",
         "source": {
