@@ -2,6 +2,19 @@
   "changes": [
     {
       "date": "2026-11-04",
+      "title": "Contabo added a €2 setup fee to the 1-month Cloud VPS 4",
+      "provider": "contabo",
+      "what": "Contabo's Cloud VPS 4 configurator now shows a one-off €2.00 setup fee on the 1-month term. The 3-, 6-, 12- and 24-month terms, and every term of Cloud VPS 6 to 18, still show no setup fee. When this guide read the configurator on 30 October 2026, no term had one. Monthly prices did not change. Contabo gives no effective date; this guide recorded the change on 4 November 2026.",
+      "sources": [
+        {
+          "url": "https://contabo.com/en-us/vps/cloud-vps-core-4",
+          "quote": "€2.00 Setup fee",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
       "title": "boxd now bills only active vCPU",
       "provider": "boxd",
       "what": "boxd's pricing page and docs now bill vCPU on active use rather than on the machine's size: a 2 vCPU machine that is 10% active pays for 0.2 vCPU-hours. The rates did not change ($0.047 per vCPU-hour, $0.014 per GiB-hour of RAM, $0.000096 per GiB-hour of disk). On 29 October 2026 the page billed the full vCPU count while running. In this guide's workloads, B falls from $222.50 to $98.99 a month at 8 GiB resident. The same rewrite dropped the pricing page's mention of audit logs. boxd gives no effective date; this guide recorded the change on 4 November 2026.",
