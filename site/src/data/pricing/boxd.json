@@ -1,10 +1,10 @@
 {
   "provider": "boxd",
-  "checkedOn": "2026-10-29",
-  "summary": "Per second on three meters: vCPU on the machine's size while running, memory on what is actually resident, disk on bytes written in every state.",
+  "checkedOn": "2026-11-04",
+  "summary": "Per second on three meters: vCPU only while it is active, memory on what is actually resident, disk on bytes written in every state.",
   "cpu": {
     "rate": 0.047,
-    "billing": "allocated"
+    "billing": "active"
   },
   "ram": {
     "rate": 0.014,
@@ -53,6 +53,7 @@
     }
   ],
   "notes": [
+    "vCPU is billed on active use, not on the machine's size: boxd says a 2 vCPU machine that is 10% active pays for 0.2 vCPU-hours. The calculator uses the workload's busy share as the active vCPU. On 29 October 2026 the pricing page still billed the full vCPU count while running.",
     "Memory is billed on resident memory; the calculator uses the memory you entered as the resident figure, up to the size's full allocation.",
     "$30 of credit needs a card; without one an account is capped at two machines.",
     "Egress and snapshot storage prices are not published, so neither is included."

@@ -16,7 +16,7 @@
     "model": "Per-second usage against a credit balance; Pro adds a monthly plan fee.",
     "meter": "$0.000014 per vCPU-second and $0.0000045 per GiB-second of allocated resources while running. Paused and killed sandboxes are not billed.",
     "stopped": "Nothing for compute. Volumes and snapshots are separate objects with their own storage.",
-    "planFee": "Hobby has no fee; Pro is $150 a month plus usage; Enterprise has a $3,000 monthly minimum.",
+    "planFee": "Hobby has no fee; Pro is $150 a month plus usage; Enterprise starts at a $2,000 monthly commit with 500 concurrent sandboxes included.",
     "minimum": "No published per-sandbox minimum. Hobby starts with a one-time $100 credit and no card."
   },
   "cost": {

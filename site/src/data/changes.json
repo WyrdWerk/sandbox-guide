@@ -2,6 +2,63 @@
   "changes": [
     {
       "date": "2026-11-04",
+      "title": "Contabo added a €2 setup fee to the 1-month Cloud VPS 4",
+      "provider": "contabo",
+      "what": "Contabo's Cloud VPS 4 configurator now shows a one-off €2.00 setup fee on the 1-month term. The 3-, 6-, 12- and 24-month terms, and every term of Cloud VPS 6 to 18, still show no setup fee. When this guide read the configurator on 30 October 2026, no term had one. Monthly prices did not change. Contabo gives no effective date; this guide recorded the change on 4 November 2026.",
+      "sources": [
+        {
+          "url": "https://contabo.com/en-us/vps/cloud-vps-core-4",
+          "quote": "€2.00 Setup fee",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
+      "title": "boxd now bills only active vCPU",
+      "provider": "boxd",
+      "what": "boxd's pricing page and docs now bill vCPU on active use rather than on the machine's size: a 2 vCPU machine that is 10% active pays for 0.2 vCPU-hours. The rates did not change ($0.047 per vCPU-hour, $0.014 per GiB-hour of RAM, $0.000096 per GiB-hour of disk). On 29 October 2026 the page billed the full vCPU count while running. In this guide's workloads, B falls from $222.50 to $98.99 a month at 8 GiB resident. The same rewrite dropped the pricing page's mention of audit logs. boxd gives no effective date; this guide recorded the change on 4 November 2026.",
+      "sources": [
+        {
+          "url": "https://docs.boxd.sh/guides/resources",
+          "quote": "A 2 vCPU machine that is active 10% of an hour pays for 0.2 vCPU-hours",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://boxd.sh/pricing",
+          "quote": "Active vCPU only not the vCPUs reserved",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
+      "title": "Boat repriced extra starts and raised the daily maximum",
+      "provider": "boat",
+      "what": "Boat's limits page now charges $0.03 a start up to 1.5 times the included number, $0.05 up to 2 times and $0.07 up to 6 times; starts above 6 times fail. On the $20 plan that is starts 201–300, 301–400 and 401–1,200, with start 1,201 refused. When this guide last read the pricing page on 30 October 2026, the top tier stopped at 3 times (start 601 failed). Boat gives no effective date; this guide recorded the change on 4 November 2026.",
+      "sources": [
+        {
+          "url": "https://docs.boat.dev/limits",
+          "quote": "Up to 6 times $0.07 401 to 1,200 Above 6 times Fails 1,201 and up",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
+      "title": "E2B lowered the Enterprise starting commit to $2,000 a month",
+      "provider": "e2b",
+      "what": "E2B's pricing page now says Enterprise starts at a $2,000 monthly commit with 500 concurrent sandboxes included. It read $3,000 when this guide's price baseline was last recorded on 30 October 2026. E2B gives no effective date; this guide recorded the change on 4 November 2026.",
+      "sources": [
+        {
+          "url": "https://e2b.dev/pricing",
+          "quote": "Enterprise starts at a $2,000/mo commit, 500 concurrent included.",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
       "title": "TierHive added: near-free hourly servers that are still in Alpha",
       "provider": "tierhive",
       "what": "This guide now lists TierHive, a build-your-own NAT server billed by the hour with a one-hour minimum per server and at most 2 vCPU. Its own policy says it is in Alpha, that data loss can happen without warning and that there is no uptime promise, so it carries no recommendations here. The date is when this guide checked it, not a launch date.",

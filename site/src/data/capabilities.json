@@ -20390,12 +20390,12 @@
         },
         {
           "provider": "boxd",
-          "verdict": "partly",
-          "shortfall": "Audit logs are sold with SSO on the Custom/Enterprise line; on self-serve plans the only record is the SSH command history.",
+          "verdict": "not-published",
+          "note": "Neither the pricing page, the FAQ nor the docs mention an audit log. Until late October 2026 the pricing page listed \"SSO + audit logs\" on its Enterprise line; the current Scale plan offers only paperwork for a security review. On self-serve plans the only record is the SSH command history.",
           "source": {
             "url": "https://boxd.sh/pricing",
-            "quote": "SSO + audit logs",
-            "confidence": "pricing-page"
+            "quote": "Same rates as pay as you go, with higher limits and the paperwork for your security review",
+            "confidence": "not-published"
           }
         },
         {
@@ -21021,13 +21021,13 @@
         },
         {
           "provider": "boxd",
-          "verdict": "no",
-          "figure": "full cores while running",
-          "shortfall": "The processor is charged at the machine's full size for as long as it runs.",
+          "verdict": "yes",
+          "figure": "active vCPU only",
+          "note": "Memory is billed on what the machine holds and disk on what is written, so a waiting box still pays for those. Until late October 2026 boxd billed the full vCPU count while running.",
           "source": {
-            "url": "https://boxd.sh/pricing",
-            "quote": "vCPU is the one component billed on the machine's size: its full vCPU count while it runs",
-            "confidence": "inferred"
+            "url": "https://docs.boxd.sh/guides/resources",
+            "quote": "A 2 vCPU machine that is active 10% of an hour pays for 0.2 vCPU-hours",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -21351,7 +21351,7 @@
           "shortfall": "Pausing keeps the memory in place and you keep paying for it; only hibernating or stopping brings the bill down to disk alone.",
           "source": {
             "url": "https://boxd.sh/pricing",
-            "quote": "a machine in standby pays for RAM and disk",
+            "quote": "Paused with memory kept warm, so memory and disk are billed.",
             "confidence": "pricing-page"
           }
         },

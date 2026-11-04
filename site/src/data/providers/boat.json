@@ -41,7 +41,7 @@
         "The size exists exactly, so no substitution is needed.",
         "The binding constraint is starts, not money: 33 creates a day is inside the 200-a-day limit."
       ],
-      "flag": "All 1,000 tasks in one day would hit the start limit: starts 201–600 cost $22 from the wallet, and 601 fails."
+      "flag": "All 1,000 tasks in one day would go past the 200 included starts: starts 201–300 cost $0.03, 301–400 $0.05 and 401–1,000 $0.07, so $50 from the wallet; the daily maximum is 1,200. Bursts can cost more, because each start pays the highest of its minute, hour and day rates."
     },
     "B": {
       "headline": "$26.28 a month",
