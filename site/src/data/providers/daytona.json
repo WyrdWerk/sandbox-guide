@@ -130,6 +130,24 @@
         }
       },
       {
+        "label": "SLA claims",
+        "value": "Credits are not automatic: you email a claim within 30 days of the incident.",
+        "source": {
+          "url": "https://www.daytona.io/sla",
+          "quote": "Credit eligibility requires submitting a claim within 30 days of the incident",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "SLA credits",
+        "value": "Approved credits go toward future usage, not cash, and are capped at 50% of the month's fees for the affected service.",
+        "source": {
+          "url": "https://www.daytona.io/sla",
+          "quote": "Approved credits will be applied toward future usage and issued within 60 days of approval. The maximum monthly credit is 50% of the applicable fees for the impacted Services.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
         "label": "Certification",
         "value": "A SOC 2 Type II report covering December 2025 to March 2026 is available from the trust centre (checked 29 October 2026; earlier only a bridge letter was published). ISO 27001 is marked in progress while the badge is displayed.",
         "source": {

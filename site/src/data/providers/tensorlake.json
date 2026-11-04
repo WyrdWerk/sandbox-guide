@@ -330,8 +330,25 @@
     },
     {
       "issue": "A malicious npm release shipped in October 2026",
-      "detail": "The Trust Center records a malicious `tensorlake@0.5.144` published to npm on 8 October 2026 with a GitHub advisory. Pin a version and check the advisory before installing the JavaScript SDK.",
-      "status": "open"
+      "detail": "A compromised maintainer account published `tensorlake@0.5.144` to npm on 8 October 2026 through Tensorlake's own release workflow, so it carried valid provenance. It was live for about 1 hour 40 minutes and affected only the npm package, not the Python package or the CLI. Installing it ran a credential stealer that also leaves a service which deletes your home directory if the stolen GitHub token is revoked. Tensorlake's advisory says 0.5.143 and earlier are safe. Pin SDK versions, and follow the advisory's clean-up order if 0.5.144 ever ran on your machine or CI.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2",
+          "quote": "The package was live on npm for approximately 1 hour 40 minutes (01:12–02:54 UTC). Only the npm package was affected, the PyPI and crates.io `tensorlake` packages and the `tensorlake` CLI were not.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2",
+          "quote": "deletes the user's home directory if the stolen GitHub token is revoked",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2",
+          "quote": "Version 0.5.143 and all prior versions are unaffected.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     },
     {
       "issue": "HIPAA is claimed but not badged",

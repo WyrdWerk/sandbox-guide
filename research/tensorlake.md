@@ -344,3 +344,16 @@ Docs: https://docs.tensorlake.ai/sandboxes/cicd-build and https://docs.tensorlak
 **SSO.** OIDC or SAML 2.0 for an organisation, configured by an org admin, gated on SSO being
 enabled for that organisation.
 Docs: https://docs.tensorlake.ai/platform/sso
+
+
+---
+
+## Dossier reconciliation, 2026-11-04
+
+npm caveat expanded from Tensorlake's own GitHub advisory (read with `gh api /repos/tensorlakeai/tensorlake/security-advisories/GHSA-8g63-53c9-65j2`; the global advisory endpoint returns 404). The dossier said the fix shipped as 0.5.145; the advisory says only "Downgrade to 0.5.143 immediately, or upgrade to 0.5.145 once it is published", so the site names 0.5.143 as safe. The Register (third-party) reports detection 11 minutes after publication; not used on the site.
+
+| URL | Quote | Confidence |
+|---|---|---|
+| https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2 | "The package was live on npm for approximately 1 hour 40 minutes (01:12–02:54 UTC). Only the npm package was affected, the PyPI and crates.io `tensorlake` packages and the `tensorlake` CLI were not." | docs-confirmed |
+| https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2 | "deletes the user's home directory if the stolen GitHub token is revoked" | docs-confirmed |
+| https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2 | "Version 0.5.143 and all prior versions are unaffected." | docs-confirmed |

@@ -614,3 +614,10 @@ Integrated by https://ampcode.com/threads/T-01a188d2-e3f1-734f-8aed-80041812cbe2
 - **Free persistence:** `https://www.freestyle.sh/pricing` (Firecrawl, fresh) still shows "Persistent VMs | ✗ | ✓ | ✓", while the docs table shows "✓ ✓ ✓". The site follows the stricter pricing page. A new `Plan.noKeep` flag makes Free infeasible for workloads that keep a stopped disk, so C is $50.00 on Hobby. The worker's $0.00-on-Free reading is kept as the alternative in the profile and caveat.
 - **Engine:** the plan's `diskHours` allowance now offsets disk billed while running and disk billed while stopped together, as one storage budget. This fixes the team preset (now $205.76, hand-worked) and changes no other provider: Cloudflare Sandbox is the only other card with `diskHours`, and it has no stopped-disk rate.
 - **Picks:** the worker's two use-case picks (coding agent, Claude Code team) and three situation picks (long jobs, build and test, one per customer) were integrated as proposed.
+
+
+---
+
+## Dossier reconciliation, 2026-11-04
+
+Added a sourceless "Terms of service: not published" fact. `curl -L` on 4 Nov 2026: freestyle.sh/terms, /legal/terms, /legal/tos and /terms-of-service all redirect to www.freestyle.sh and return 404.

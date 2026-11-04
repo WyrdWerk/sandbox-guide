@@ -23803,7 +23803,7 @@
           "provider": "lightsail",
           "verdict": "yes",
           "figure": "99.5% per instance",
-          "note": "The SLA promises 99.5% monthly uptime per instance and 99.99% at region level, with service credits below those figures. It is a commercially reasonable efforts commitment.",
+          "note": "The SLA promises 99.5% monthly uptime per instance and 99.99% at region level only across two or more availability zones, with service credits below those figures. It is a commercially reasonable efforts commitment.",
           "source": {
             "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/",
             "quote": "AWS will use commercially reasonable efforts to make the Single Lightsail Instance available with an Instance-Level Uptime Percentage, as shown in the table below during any monthly billing cycle",

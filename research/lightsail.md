@@ -404,3 +404,16 @@ Nothing outside `research/incoming/lightsail/` was edited, committed or pushed.
   pro-rata hours and that AWS does not publish the rounding rule.
 - **Docs:** merge `docs.json` into `site/src/data/docs.json` under the `lightsail` key; all 16 URLs
   were checked for 200 and the intended title on 2026-10-30.
+
+
+---
+
+## Dossier reconciliation, 2026-11-04
+
+Added region-level and claim facts from the Lightsail SLA (fresh Context.dev scrape). The capability note now says the 99.99% region figure needs two or more availability zones. Credit tiers (10%/30%/100%) are in table rows and were not quoted on the site.
+
+| URL | Quote | Confidence |
+|---|---|---|
+| https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/ | "AWS will use commercially reasonable efforts to make the Single Lightsail Instance available with an Instance-Level Uptime Percentage, as shown in the table below during any monthly billing cycle" | docs-confirmed |
+| https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/ | "When an Included Service is deployed concurrently across two or more AZ’s in the same region" | docs-confirmed |
+| https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/ | "To receive a Service Credit, you must submit a claim by opening a case in the AWS Support Center." | docs-confirmed |

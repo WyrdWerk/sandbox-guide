@@ -340,6 +340,23 @@
       "issue": "GB is not necessarily GiB",
       "detail": "Contabo labels RAM and disk in GB. The card maps 8 GB to 8 GiB. If the figure is decimal, 8 GB is 7.45 GiB and workload B's 8 GiB request does not fit; the next plan (12 GB) would be needed. Contabo does not publish which unit it uses.",
       "status": "open"
+    },
+    {
+      "issue": "Emergency host patching rebooted servers without individual notice",
+      "detail": "In October 2026 Contabo patched every VPS and VDS host for a critical Linux kernel flaw (its notice names it CVE-2026-99999), which restarted customers' servers. Its help article says the patching could not wait for a maintenance window and that it could not warn customers one by one. Set your services to start on boot and check them after an unplanned restart.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://help.contabo.com/en/support/solutions/articles/103000420825-important-security-update-urgent-patching-of-all-vps-vds-hosts-cve-2026-99999-",
+          "quote": "Applying the patch requires a reboot of the host, so please expect a temporary restart of your VPS or VDS.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://help.contabo.com/en/support/solutions/articles/103000420825-important-security-update-urgent-patching-of-all-vps-vds-hosts-cve-2026-99999-",
+          "quote": "patching can’t wait for a regular maintenance window, and we can’t send individual advance notices",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [

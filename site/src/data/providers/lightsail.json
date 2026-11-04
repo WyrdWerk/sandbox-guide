@@ -102,6 +102,24 @@
         }
       },
       {
+        "label": "Region-level SLA",
+        "value": "The higher 99.99% region-level figure applies only when you run the service across two or more availability zones; a single instance gets 99.5%.",
+        "source": {
+          "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/",
+          "quote": "When an Included Service is deployed concurrently across two or more AZ’s in the same region",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "SLA claims",
+        "value": "Credits are not automatic: you open a case in the AWS Support Center.",
+        "source": {
+          "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/",
+          "quote": "To receive a Service Credit, you must submit a claim by opening a case in the AWS Support Center.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
         "label": "Certification",
         "value": "SOC 1, SOC 2 and SOC 3 reports cover the AWS infrastructure. The SOC 2 report is available to customers through AWS Artifact.",
         "source": {

@@ -275,6 +275,37 @@
       ]
     },
     {
+      "date": "2026-10-08",
+      "title": "Tensorlake's npm SDK release 0.5.144 was malicious for about 100 minutes",
+      "provider": "tensorlake",
+      "what": "A compromised maintainer account published a credential-stealing version of the JavaScript SDK through Tensorlake's own release workflow. Only the npm package was affected; 0.5.143 and earlier are safe. The date is the one in Tensorlake's advisory.",
+      "sources": [
+        {
+          "url": "https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2",
+          "quote": "The package was live on npm for approximately 1 hour 40 minutes (01:12–02:54 UTC). Only the npm package was affected, the PyPI and crates.io `tensorlake` packages and the `tensorlake` CLI were not.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-08",
+      "title": "OVHcloud rebooted about a million VMs to patch a KVM flaw",
+      "provider": "ovhcloud",
+      "what": "OVHcloud patched the CVE-2026-53359 KVM vulnerability across tens of thousands of hosts, starting with VPS hosts on 8 July, and its own write-up records corrupted data on several VMs in 3 clusters. The date is the start of patching in OVHcloud's post.",
+      "sources": [
+        {
+          "url": "https://blog.ovhcloud.com/fr/posts/cve-2026-53359-kvm-patching-lessons-learned/",
+          "quote": "environ un million de machines virtuelles",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://blog.ovhcloud.com/fr/posts/cve-2026-53359-kvm-patching-lessons-learned/",
+          "quote": "données corrompues sur plusieurs VMs réparties sur 3 clusters",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
       "date": "2026-09-15",
       "title": "Box became Boat",
       "provider": "boat",

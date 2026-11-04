@@ -307,3 +307,16 @@ The Block Storage FAQ says the maximum local storage is 600 GB (GP1-XL); the pro
 Every quote in this ledger, `provider.json`, `feature-rows.json`, `capability-rows.json` and `routes.json` — 134 quote/URL pairs across 49 pages — was re-fetched and machine-checked against the live page after the final edit. Text was lowercased, Markdown emphasis (`**`), escapes and table pipes were stripped, whitespace was collapsed, and the quote was matched as a substring. Nothing else was normalised; the stored quotes keep their original wording and typography (`’`, `–`, `€`).
 
 The check ran through TinyFish `fetch_content` for the docs and marketing pages and through Firecrawl's rendered DOM for the four pages whose content only exists after client-side rendering: `/pricing/virtual-instances/`, `/pricing/storage/`, `/pricing/network/` and `/security-and-compliance/`. Direct `curl` was used during the research but started returning Bunny Shield's 403 challenge after roughly twenty requests, so it was not used for the final check. Four quotes failed the first pass and were corrected against the page rather than kept: the CLI sentence (the page inserts "(External link)" between clauses), the SDK sentences (the search snippets were meta descriptions, not body text), the security-group sentence ("the security group", not "your security group"), and the billing-alert sentence ("notify you", not "notify users"). Two source URLs were also corrected: the open-source quote belongs to the security and compliance page, and the per-hour uptime sentence to the Instances FAQ rather than the Billing FAQ.
+
+
+---
+
+## Dossier reconciliation, 2026-11-04
+
+Added claim-window and voucher facts from the Instance SLA (fresh Context.dev scrape). The dossier's "your own log files" requirement was not found in the fetched text and is not stated.
+
+| URL | Quote | Confidence |
+|---|---|---|
+| https://www.scaleway.com/en/virtual-instances/sla/ | "No SLO" | docs-confirmed |
+| https://www.scaleway.com/en/virtual-instances/sla/ | "Client’s request for compensation must be issued no later than thirty (30) days following the month during which the applicable Resources did not comply with the SLO." | docs-confirmed |
+| https://www.scaleway.com/en/virtual-instances/sla/ | "The compensation shall take the form of a voucher which shall be applied by Scaleway on the invoice issued for the Covered Service" | docs-confirmed |

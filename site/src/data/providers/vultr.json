@@ -126,6 +126,33 @@
         }
       },
       {
+        "label": "SLA claims",
+        "value": "Credits are not automatic: you must open a ticket and ask for a credit.",
+        "source": {
+          "url": "https://www.vultr.com/legal/sla/",
+          "quote": "you must initiate a support ticket and request that a credit be applied to your account",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "SLA scope",
+        "value": "The 100% promise is credited per server, not against your whole invoice.",
+        "source": {
+          "url": "https://www.vultr.com/legal/sla/",
+          "quote": "This uptime guarantee is applicable on a per-service-item basis and is not applied to Your entire invoice.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "GPU servers",
+        "value": "GPU instances are outside the SLA; Vultr promises only a best effort to restore them.",
+        "source": {
+          "url": "https://www.vultr.com/legal/sla/",
+          "quote": "Due to this limitation, GPU instances are not included in the Vultr SLA.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
         "label": "Data protection",
         "value": "A GDPR DPA is available by request through an account manager or support ticket; Vultr acts as processor for customer content.",
         "source": {

@@ -1769,3 +1769,14 @@ Everything below could not be established from primary sources, and is left open
 - **Price-change notice period.** A notice is promised; its length is not stated.
 - **Data residency commitment in the contract.** Stated in docs, absent from the terms.
 
+
+
+---
+
+## Dossier reconciliation, 2026-11-04
+
+The profile's "100% over 30, 60 and 90 days" was split into a Status page fact and an SLA fact. Re-read https://status.agent37.com/ live (HTTP 200): component headlines still read "100% uptime" while the page lists "Temporary interruption to US sandboxes Degraded for 21 minutes" (Oct 20, 2026) and "Some sandbox creations failed Degraded for 1 hour and 5 minutes" (Oct 29, 2026).
+
+| URL | Quote | Confidence |
+|---|---|---|
+| https://status.agent37.com/ | "Temporary interruption to US sandboxes Degraded for 21 minutes" | docs-confirmed |

@@ -472,3 +472,16 @@ ledger.
 this account's rate card; the wallet showed $12.968 available at the end. curl and GitHub raw
 fetches are free. No Exa, Tavily, Parallel, Firecrawl, Context or Amp native web call was
 used, and no paid research run was started.
+
+
+---
+
+## Dossier reconciliation, 2026-11-04
+
+Added a caveat and a change entry for the July 2026 CVE-2026-53359 patch campaign from OVHcloud's own blog post dated 20/07/2026 (Context.dev scrape, cached 36 min). The post says VPS hosts were patched first (from 8 July), so it applies to this VPS listing. The 2021 SBG fire from the dossier was not re-verified and is not stated.
+
+| URL | Quote | Confidence |
+|---|---|---|
+| https://blog.ovhcloud.com/fr/posts/cve-2026-53359-kvm-patching-lessons-learned/ | "environ un million de machines virtuelles" | docs-confirmed |
+| https://blog.ovhcloud.com/fr/posts/cve-2026-53359-kvm-patching-lessons-learned/ | "Les premières vagues de patch + reboot sont appliquées sur les hôtes VPS en Australie." | docs-confirmed |
+| https://blog.ovhcloud.com/fr/posts/cve-2026-53359-kvm-patching-lessons-learned/ | "données corrompues sur plusieurs VMs réparties sur 3 clusters" | docs-confirmed |

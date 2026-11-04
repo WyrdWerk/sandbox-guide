@@ -302,6 +302,28 @@
           "confidence": "pricing-page"
         }
       ]
+    },
+    {
+      "issue": "A July 2026 security patch rebooted about a million virtual machines, and some data was corrupted",
+      "detail": "OVHcloud's own write-up (in French) of patching the CVE-2026-53359 KVM flaw says tens of thousands of hypervisor hosts, carrying about a million virtual machines, were patched and rebooted, starting with VPS hosts on 8 July. On the second day forced reboots during disk writes corrupted data on several VMs across 3 clusters. Keep backups off the server and expect provider-forced restarts.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://blog.ovhcloud.com/fr/posts/cve-2026-53359-kvm-patching-lessons-learned/",
+          "quote": "environ un million de machines virtuelles",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://blog.ovhcloud.com/fr/posts/cve-2026-53359-kvm-patching-lessons-learned/",
+          "quote": "Les premières vagues de patch + reboot sont appliquées sur les hôtes VPS en Australie.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://blog.ovhcloud.com/fr/posts/cve-2026-53359-kvm-patching-lessons-learned/",
+          "quote": "données corrompues sur plusieurs VMs réparties sur 3 clusters",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [

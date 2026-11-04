@@ -504,3 +504,17 @@ Counts after integration would be **22 providers (17 sandboxes and 5 VPS), 16 fe
 skill's introduction or the 16 still printed in `site/README.md`; the root `README.md` already says 21.
 Both READMEs, the provider-list prose and any static counts need updating to 22 when this is integrated.
 No shared JSON was edited, nothing was committed, and nothing was pushed.
+
+
+---
+
+## Dossier reconciliation, 2026-11-04
+
+Added claim, per-item scope and GPU-exclusion facts from https://www.vultr.com/legal/sla/ (fresh Context.dev scrape). Credit ladder: 12 h (<9 min) up to 672 h (420+ min), in a table, not quoted. The dossier's 3-day claim window and 1-year expiry are in the ToS, which was not re-read; not stated.
+
+| URL | Quote | Confidence |
+|---|---|---|
+| https://www.vultr.com/legal/sla/ | "Vultr offers a 100% uptime guarantee via this Service Level Agreement based on network and host node availability." | docs-confirmed |
+| https://www.vultr.com/legal/sla/ | "you must initiate a support ticket and request that a credit be applied to your account" | docs-confirmed |
+| https://www.vultr.com/legal/sla/ | "This uptime guarantee is applicable on a per-service-item basis and is not applied to Your entire invoice." | docs-confirmed |
+| https://www.vultr.com/legal/sla/ | "Due to this limitation, GPU instances are not included in the Vultr SLA." | docs-confirmed |

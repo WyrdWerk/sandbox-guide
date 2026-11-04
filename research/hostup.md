@@ -610,3 +610,15 @@ Integrated by https://ampcode.com/threads/T-01a188d2-e3f1-734f-8aed-80041812cbe2
 - **VAT:** settled in favour of the ex-VAT reading. HostUp's "Costs and VAT" support page (Firecrawl, fresh, 2026-10-30) says that companies and customers outside the EU always see prices without VAT, with no switch. The price calculator's "Subtotal (excl. VAT)" says the same. The cart's "inc. VAT" label is the display a private EU customer sees. The card keeps HostUp's own USD display, ex-VAT, and the caveat says what a private EU buyer adds.
 - **Engine:** no change needed. `price()` returns A $5.72, B $11.55, C $5.72, matching the hand-worked totals.
 - **Picks:** none, per the worker's reasoning; HostUp appears in every use-case route table as a manual route.
+
+
+---
+
+## Dossier reconciliation, 2026-11-04
+
+Added paid critical-ticket facts from https://hostup.se/en/support/support-tickets/ (fresh Context.dev scrape).
+
+| URL | Quote | Confidence |
+|---|---|---|
+| https://hostup.se/en/support/support-tickets/ | "Each critical ticket uses one prepaid support credit." | docs-confirmed |
+| https://hostup.se/en/support/support-tickets/ | "The credit is refunded if the fault turns out to be ours." | docs-confirmed |
