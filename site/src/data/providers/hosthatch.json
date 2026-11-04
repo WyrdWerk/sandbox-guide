@@ -1,0 +1,367 @@
+{
+  "id": "hosthatch",
+  "name": "HostHatch",
+  "url": "https://hosthatch.com",
+  "status": "researched",
+  "kind": "vps",
+  "checkedOn": "2026-11-04",
+  "oneLiner": "Cheap fixed-size virtual servers on HostHatch's own hardware in up to 16 locations, sold by the month with 1–20 TB of transfer and an unusually complete new REST API for the price.",
+  "whatItIs": [
+    "HostHatch sells two products: Compute VMs and Storage VMs. The compute line is ten fixed plans from NVMe 2 GB (1 core / 2 GB / 10 GB, $4 a month) to NVMe 96 GB (16 cores / 96 GB / 250 GB, $69 a month), each with a public IPv4, a routed /64 of IPv6 and 1–20 TB of monthly transfer. The storage line is eight plans from 1 TB to 10 TB of RAID-10 HDD, $5–$38 a month.",
+    "It is a plain virtual server, not a sandbox API. You get root, your own kernel, an ISO installer and a public address; you run the operating system, the updates, the firewall rules inside the guest and any TLS. HostHatch's own pages describe the machines as VMs and let you boot your own ISO 'just like you would on a bare-metal or a physical server'; the hypervisor is not named on the site.",
+    "The billing unit is a monthly plan. The terms invoice monthly, quarterly, semi-annually or annually, there is no hourly or per-second meter, and a powered-off server keeps billing until the paid term ends. The cheapest entry is $4 a month; there is no free tier and no trial.",
+    "The surprise is the control surface. A new API at console.hosthatch.com documents projects, roles, servers, power actions, snapshots, firewalls, ISOs, SSH keys and orders, with an OpenAPI document, read-only keys and an `llms.txt`. The panel (Peregrine) adds a VNC and serial console. There is no official CLI, SDK or MCP server, and cloud-init user data is not available yet."
+  ],
+  "whoFor": "Readers who want one cheap, always-on Linux box with a lot of transfer, in Europe, North America or Asia, and who are comfortable with a terminal and with running their own backups. A good fit for a personal agent, a Discord or Slack bot, n8n, an MCP server or a storage box. A poor fit for per-task sandboxes, anyone who needs a written uptime promise, managed backups or a no-terminal install.",
+  "isolation": "A full virtual machine with its own kernel and disk, root access and a public IPv4. You can install any of the Linux templates or boot your own ISO, enable a routed /64 of IPv6 and join a private VLAN with other servers in the same location. HostHatch never names the hypervisor; the ISO install and own-kernel wording show a full VM rather than a container. The cheapest three plans (2, 4 and 8 GB) are labelled 'fair share' CPU, and the 12 GB plan and above mix dedicated and fair-shared cores, so a sustained CPU-heavy workload is not buying dedicated cores at the entry price.",
+  "sizes": "Ten fixed compute plans: 1–16 AMD EPYC cores, 2–96 GB DDR4, 10–250 GB NVMe and 1–20 TB of transfer, $4–$69 a month. CPU and memory cannot be chosen independently; an upgrade moves the server to another plan, optionally growing the disk, and a reboot applies it. The separate storage line reaches 10 TB of HDD with 1–2 cores and 1–2 GB of RAM. No GPU plan. HostHatch advertises 16 locations on its product and company pages, its documentation matrix lists 14, and its status page monitors 13 — see the caveat.",
+  "billing": {
+    "model": "A prepaid monthly plan per server. The terms allow monthly, quarterly, semi-annual or annual invoicing, and the product page quotes every plan per month.",
+    "meter": "A flat price per plan per month. There is no hourly or per-second meter on the standard product, so a ten-minute task costs a whole plan unless it shares one with other work.",
+    "stopped": "A stopped server keeps billing. The contract is a term that renews until cancelled, and powering off is an action on the server rather than a change to the subscription. The disk and its files survive the stop.",
+    "planFee": "The plan price is the whole charge for the machine. The primary IPv4, IPv6, private networking, snapshots and the panel are not separately priced in public. Extra IPv4 addresses are charged per order but their current price is only visible in the checkout.",
+    "minimum": "One month of NVMe 2 GB at $4.00. There is no free tier and no starting credit; the first invoice is paid before the server is provisioned, and the exit is a 7-day money-back guarantee that requires a fault on HostHatch's side."
+  },
+  "cost": {
+    "A": {
+      "headline": "$6.00 a month (one NVMe 4 GB plan)",
+      "shape": "NVMe 4 GB (2 cores / 4 GB / 20 GB), one plan for the whole month",
+      "lines": [
+        {
+          "label": "One NVMe 4 GB plan",
+          "arithmetic": "1 × $6.00 a month",
+          "amount": "$6.00"
+        },
+        {
+          "label": "The 1,000 tasks",
+          "arithmetic": "1,000 × 10 min = 166.67 h, inside the 730 h month",
+          "amount": "$0.00"
+        }
+      ],
+      "total": "$6.00",
+      "notes": [
+        "NVMe 4 GB is the smallest plan with 2 cores and 4 GB. Its 20 GB disk is more than the task's 10 GB.",
+        "One machine runs the tasks one after another. 166.67 hours is well inside the month, so one plan covers the work.",
+        "A fresh server per task would mean 1,000 monthly plans: $6,000. That is why A is not a HostHatch-shaped workload.",
+        "The 2, 4 and 8 GB plans are 'fair share' CPU, not dedicated cores. 50% average busy is within ordinary use, but HostHatch does not publish a fair-share threshold.",
+        "The monthly list price is used. Any discount for a quarterly or annual term is behind the login and is not published."
+      ],
+      "flag": "This assumes one plan running the tasks one after another. Running them in parallel, or a fresh server per task, needs one monthly plan per machine."
+    },
+    "B": {
+      "headline": "$12.00 a month",
+      "shape": "NVMe 12 GB (4 cores: 1 dedicated, 3 fair-shared / 12 GB / 50 GB), 730 h",
+      "lines": [
+        {
+          "label": "One NVMe 12 GB plan",
+          "arithmetic": "1 × $12.00 a month",
+          "amount": "$12.00"
+        },
+        {
+          "label": "Hours",
+          "arithmetic": "730 h included in the plan",
+          "amount": "$0.00"
+        }
+      ],
+      "total": "$12.00",
+      "notes": [
+        "NVMe 12 GB is the cheapest plan with 4 cores, and its 50 GB disk matches the ask exactly. The 12 GB of RAM is 4 GB more than B needs.",
+        "NVMe 8 GB is cheaper at $9.00 but has only 2 cores, so it fails the 4 vCPU request. The next fit is NVMe 16 GB at $15.00.",
+        "Average CPU is 10%, far below anything that would meet the fair-use rules, and only one of the four cores is dedicated.",
+        "The monthly list price is used; longer terms may be cheaper per month but are not published."
+      ]
+    },
+    "C": {
+      "headline": "$6.00 a month, even while stopped",
+      "shape": "NVMe 4 GB (2 cores / 4 GB / 20 GB), 90 running + 640 stopped hours",
+      "lines": [
+        {
+          "label": "One NVMe 4 GB plan",
+          "arithmetic": "1 × $6.00 a month",
+          "amount": "$6.00"
+        },
+        {
+          "label": "Stopped hours",
+          "arithmetic": "640 h at no extra charge, and no credit either",
+          "amount": "$0.00"
+        }
+      ],
+      "total": "$6.00",
+      "notes": [
+        "Stopping keeps the disk and the files but not the bill: the month costs the same whether the server runs 90 hours or 730.",
+        "There is no pause with memory. A stop powers the machine off, so a running process is lost.",
+        "The 20 GB disk is an exact fit for C's 20 GiB.",
+        "The monthly list price is used; longer terms may be cheaper per month but are not published."
+      ],
+      "flag": "Workload C's 640 idle hours look cheap on a per-hour sandbox and are not cheap here: the full plan bills through them."
+    }
+  },
+  "company": {
+    "facts": [
+      {
+        "label": "Legal entity",
+        "value": "HostHatch LLC, 4830 West Kennedy Blvd, Tampa, FL 33609, United States. The terms are governed by United States law.",
+        "source": {
+          "url": "https://hosthatch.com/contact",
+          "quote": "HostHatch LLC 4830 West Kennedy Blvd Tampa, FL 33609, United States",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Founded",
+        "value": "2011, according to VPSBenchmarks; the company marked 15 years in business in April 2026 and its own copy says it started 'over a decade ago'.",
+        "source": {
+          "url": "https://www.vpsbenchmarks.com/hosters/hosthatch",
+          "quote": "HostHatch was founded as a VPS provider in 2011.",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Own hardware and network",
+        "value": "Own equipment in 16 data centres, with its own ARIN-allocated network AS63473.",
+        "source": {
+          "url": "https://hosthatch.com/company",
+          "quote": "We have our own equipment in 16 data centers around the world",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Funding",
+        "value": "Privately funded, with no external investors, according to its homepage.",
+        "source": {
+          "url": "https://hosthatch.com/",
+          "quote": "We're privately funded without external investors",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Network registration",
+        "value": "AS63473 is registered to HostHatch, LLC under ARIN (registered 14 April 2015) and originates 86 IPv4 and 19 IPv6 prefixes.",
+        "source": {
+          "url": "https://bgp.tools/as/63473",
+          "quote": "Registered to: ARIN-HOSTH-2 (arin)",
+          "confidence": "third-party"
+        }
+      },
+      {
+        "label": "Support",
+        "value": "Tickets in the client area for existing customers, with department email addresses for sales, billing, abuse and support; no phone or live chat.",
+        "source": {
+          "url": "https://hosthatch.com/contact",
+          "quote": "If you are already a customer, we kindly ask you to please submit a ticket by logging in to the client area.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Uptime promise",
+        "value": "No SLA and no uptime percentage in the terms. The only remedy is a pro-rata refund of the monthly fee for an interruption caused solely by HostHatch's breach of its warranty, calculated against a 720-hour month.",
+        "source": {
+          "url": "https://hosthatch.com/terms-of-service",
+          "quote": "the ratio that the number of consecutive hours of inoperability bears to 720 hours (for the purpose of this computation, each month is deemed to have 720 hours)",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Public status",
+        "value": "A public status page (UptimeRobot) showed 99.994% overall over the last 90 days on 2026-11-04, with New York down for 31 minutes on 30 October and 6 minutes on 31 October.",
+        "source": {
+          "url": "https://status.hosthatch.com",
+          "quote": "99.994%",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Public rating",
+        "value": "Trustpilot showed a 2.7 average from 93 reviews on 2026-11-04, a small and self-selected sample.",
+        "source": {
+          "url": "https://www.trustpilot.com/review/hosthatch.com",
+          "quote": "HostHatch Reviews 93 • 2.7",
+          "confidence": "third-party"
+        }
+      }
+    ]
+  },
+  "fits": {
+    "well": [
+      "One always-on personal agent, Discord or Slack bot, n8n instance or remote MCP server that must keep a process and a public address.",
+      "A cheap development or build box where the work is bursty and a whole month is cheaper than metered hours.",
+      "A large secondary copy of data: a 10 TB storage VM for $38 a month, or 20 TB of transfer on the $69 compute plan.",
+      "Presence in Europe, North America and Asia-Pacific from one account, with several EU countries among the advertised locations.",
+      "Readers who want to script the account: a documented REST API with an OpenAPI document, read-only keys and project roles."
+    ],
+    "badly": [
+      "Per-task or per-session sandboxes: every task needs a monthly plan unless it shares one machine.",
+      "Work that runs a few hours a day and then waits: a stopped server bills exactly like a running one.",
+      "Anyone who needs a written uptime promise, a credit-backed SLA or a SOC 2 report.",
+      "A team that needs single sign-on, an audit log or a hard spending cap.",
+      "Managed backups or a detachable block volume: neither is sold on the current product, docs or API.",
+      "A reader who does not want a terminal: there are no application templates, no one-click agent and no prompt API."
+    ]
+  },
+  "usability": {
+    "dashboard": "The in-house Peregrine panel at console.hosthatch.com covers ordering, power, reinstall, snapshots, firewalls, ISO upload and mount, SSH keys, reverse DNS and a VNC or serial console. Projects group servers and people, and the owner's account credit pays for orders.",
+    "withoutCode": "No. The panel removes the API, not the terminal: there is no Hermes, OpenClaw, n8n or Docker template, no application catalogue and no prompt box, so every workload is an SSH install.",
+    "signup": "An email address and a password of at least 12 characters, with the terms accepted, at console.hosthatch.com/signup. The payment method and any identity check are not shown before the account exists.",
+    "docs": "docs.hosthatch.com is new and genuinely useful: every API endpoint, an OpenAPI document, a quickstart, an `llms.txt` and network configuration guides. The marketing site is less reliable — location pages still contain lorem ipsum, the benchmarks page is dated July 2017, and the features page still lists snapshots, backups, block storage and the API as 'upcoming' in 2023.",
+    "tripsUp": [
+      "The product page says 'dedicated CPU allocations', but the 2, 4 and 8 GB plans are labelled 'fair share' and only the 12 GB plan and above include a dedicated core.",
+      "A stopped server keeps billing; there is no pause and no cheaper stopped rate.",
+      "The bandwidth allowance is a hard ceiling with a 5 Mbps throttle, not an automatic overage; extra transfer is $4 per TB through support.",
+      "Outbound TCP port 25 is blocked by default and needs a justification to unblock.",
+      "The acceptable-use policy bans cryptocurrency mining and 'any CPU, disk or network abusing software', with exceptions only for plans with dedicated CPU.",
+      "An unpaid invoice is suspended two days after the due date and terminated with data wiped after five; a chargeback suspends the whole account.",
+      "Promotional plans bought through LowEndTalk are annual-only, non-refundable, can take 10 working days to set up and sit in a slower support queue."
+    ]
+  },
+  "caveats": [
+    {
+      "issue": "The price cycle behind the monthly figure is not public",
+      "detail": "The product page labels every plan '/ month' and the terms allow monthly, quarterly, semi-annual and annual invoicing, but the checkout's price for each cycle is behind the login. This listing uses the published monthly list price. If that figure is an annual-equivalent, a monthly-billed server costs more than the A/B/C totals here.",
+      "status": "open"
+    },
+    {
+      "issue": "The number of locations is stated three ways",
+      "detail": "The product page says '16 edge locations', the company page says equipment in '16 data centers', the documentation matrix lists 14 cities, and the status page monitors 13 networks. Madrid, Milan and Warsaw appear in the site's own product data but not in the docs matrix; Seoul appears in the docs matrix but not in the product data. Check the order form for the location you need.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://hosthatch.com/products",
+          "quote": "Deploy in 16 edge locations",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.hosthatch.com/features/",
+          "quote": "Seoul",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://status.hosthatch.com",
+          "quote": "Network: New York",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "No SLA",
+      "detail": "The terms contain no uptime percentage and no service-credit schedule. The only remedy is a pro-rata refund for an interruption caused solely by HostHatch's breach of warranty, and the status page measures regional network reachability rather than individual nodes.",
+      "status": "open"
+    },
+    {
+      "issue": "The features page is years out of date",
+      "detail": "It still presents snapshots, backups, block storage and a user API as 'Upcoming Features' with 2023 dates. Snapshots and the API now exist and are documented; backups and block storage appear nowhere in the current docs, API or panel. Do not read that page as a product list.",
+      "status": "open"
+    },
+    {
+      "issue": "Support is ticket-only and third parties report slow replies",
+      "detail": "HostHatch's contact page routes customers to tickets, and its own April 2026 promotional post says support on promotional plans 'can take several days to resolve issues'. Treat responsiveness as a risk for production work; this listing did not test it.",
+      "status": "open"
+    },
+    {
+      "issue": "Fair-share CPU on the cheap plans",
+      "detail": "The entry plans are 'fair share' and the acceptable-use policy bans 'any CPU, disk or network abusing software'. A sustained 50%-busy agent on the $4 or $6 plan is not a dedicated-core workload, and HostHatch does not publish where the fair-share line is.",
+      "status": "open"
+    },
+    {
+      "issue": "VAT and payment methods are not stated",
+      "detail": "Prices are shown in USD with no tax note. The privacy policy says card data is held by Stripe, but the signup page does not list accepted methods or whether VAT is added, so a private EU buyer should confirm the gross price before ordering.",
+      "status": "open"
+    }
+  ],
+  "strengths": [
+    "$4 a month for a 1-core / 2 GB / 10 GB VM, and $12 for 4 cores / 12 GB / 50 GB — among the cheapest per-core prices in this guide.",
+    "1–20 TB of monthly transfer included, with extra at $4 per TB.",
+    "Ten compute plans up to 16 cores / 96 GB and a storage line up to 10 TB.",
+    "A modern, documented REST API with an OpenAPI document, read-only keys, project roles, idempotency keys and stable error codes.",
+    "Disk snapshots that can be restored to another server or used to order a new one.",
+    "Ingress and egress firewall groups, a routed /64 of IPv6, private VLANs and BYOIP with BGP.",
+    "A real VNC and serial console in the panel, plus real SSH.",
+    "No idle stop and no session limit: an always-on process can run for the whole term.",
+    "Its own ARIN-registered network (AS63473) and its own hardware, rather than a reseller."
+  ],
+  "sources": [
+    {
+      "label": "Compute and storage plans, specs and monthly prices",
+      "url": "https://hosthatch.com/products"
+    },
+    {
+      "label": "Homepage: locations, own hardware, $4 entry plan",
+      "url": "https://hosthatch.com/"
+    },
+    {
+      "label": "Features: ISO install, control panel, network, data centres",
+      "url": "https://hosthatch.com/features"
+    },
+    {
+      "label": "Company and team",
+      "url": "https://hosthatch.com/company"
+    },
+    {
+      "label": "Contact and legal address",
+      "url": "https://hosthatch.com/contact"
+    },
+    {
+      "label": "Terms of service: billing, refunds, bandwidth, term, liability",
+      "url": "https://hosthatch.com/terms-of-service"
+    },
+    {
+      "label": "Acceptable use policy",
+      "url": "https://hosthatch.com/acceptable-use-policy"
+    },
+    {
+      "label": "Privacy policy and GDPR DPA",
+      "url": "https://hosthatch.com/privacy-policy"
+    },
+    {
+      "label": "GDPR data processing addendum",
+      "url": "https://hosthatch.com/hosthatch-gdpr-dpa.pdf"
+    },
+    {
+      "label": "API documentation",
+      "url": "https://docs.hosthatch.com/api/"
+    },
+    {
+      "label": "API: servers, plans and cancellation",
+      "url": "https://docs.hosthatch.com/api/servers/"
+    },
+    {
+      "label": "API: orders, billing cycles and pricing",
+      "url": "https://docs.hosthatch.com/api/orders-and-payment/"
+    },
+    {
+      "label": "API: snapshots",
+      "url": "https://docs.hosthatch.com/api/snapshots/"
+    },
+    {
+      "label": "API: firewalls and direction",
+      "url": "https://docs.hosthatch.com/api/firewalls/"
+    },
+    {
+      "label": "Networking: IPv6, private network, bandwidth",
+      "url": "https://docs.hosthatch.com/networking/"
+    },
+    {
+      "label": "Data centres and features matrix",
+      "url": "https://docs.hosthatch.com/features/"
+    },
+    {
+      "label": "Public status page",
+      "url": "https://status.hosthatch.com"
+    },
+    {
+      "label": "Network registration AS63473",
+      "url": "https://bgp.tools/as/63473"
+    },
+    {
+      "label": "Independent listing: founded 2011, US-headquartered",
+      "url": "https://www.vpsbenchmarks.com/hosters/hosthatch"
+    },
+    {
+      "label": "Trustpilot rating",
+      "url": "https://www.trustpilot.com/review/hosthatch.com"
+    },
+    {
+      "label": "April 2026 promotional offer and support caveat (provider's own post)",
+      "url": "https://lowendtalk.com/discussion/216524/calmly-celebrating-15-years-in-business"
+    }
+  ]
+}

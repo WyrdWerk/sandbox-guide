@@ -582,3 +582,13 @@ Integrated by https://ampcode.com/threads/T-01a188d2-e3f1-734f-8aed-80041812cbe2
   went on (stay available, EU residency); `build-and-test` was marked "not recommended" by the worker itself, and
   `answer-when-asked` was not used.
 - **Price baseline:** not refreshed, for the same reason as DigitalOcean.
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-2/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: The status page keeps only its 15 most recent resolved entries, so it shows three Cloud or network outages, all between 28 October and 3 November 2026, rather than a full quarter. The longest was a 58-minute Cloud DNS API fault on 3 November.
+- Source: https://status.hetzner.com/incident/ca26bc3c-8872-43eb-8215-69e85ee23081 — "Start: 2026-11-03 08:58 UTC+0 – Ends on: 2026-11-03 09:55 UTC+0" (docs-confirmed)

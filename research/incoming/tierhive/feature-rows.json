@@ -1,0 +1,242 @@
+[
+  {
+    "feature": "isolation",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "yes",
+      "figure": "KVM, root, nesting on",
+      "scenario": "Your agent gets a full KVM virtual machine with its own kernel and root, on a host shared with other customers.",
+      "note": "A real KVM guest built on the operator's own QEMU/KVM/libvirt stack, with root, Docker recipes and CPU passthrough and nesting enabled. What is not dedicated is the CPU: cores are shared and weighted by the priority tier you buy, the provider warns that steal will be higher than on an enterprise host, and a server that averages a full core for two hours is cut to half a core until it reboots.",
+      "source": {
+        "url": "https://tierhive.com/about.php",
+        "quote": "Everything in TierHive is custom, we designed and wrote it on top of an absolute minimal, cut-to-the-bone QEMU/KVM/libvirt stack.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "sizes-regions",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "128 MB–8 GiB, 1–2 vCPU",
+      "scenario": "You build a size from sliders rather than a plan list, but the CPU stops at two cores and the memory at 8 GB.",
+      "note": "RAM is any 128 MB step from 128 MB to 8 GB and NVMe any GB from 1 to 50, with HDD to 4,000 GB in four locations — a genuinely build-your-own machine. The catch is the CPU: one vCPU up to 2 GB of RAM and two above it, never more, so the 4 vCPU in workload B cannot be bought. 8 GB is also location-dependent (Tokyo tops out at 1 GB), and there are 19 locations across Europe, the Americas, Asia-Pacific and Africa.",
+      "source": {
+        "url": "https://tierhive.com/",
+        "quote": "Up to 8GB RAM per VPS (not all locations support 8GB)",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "lifecycle",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "Stop = power off, disk kept",
+      "scenario": "You can stop a server and stop paying for its CPU and memory, but nothing keeps running and nothing resumes where it was.",
+      "note": "A stop is a power-off, so memory and processes are gone; the files stay and, per the operator, only storage bills until you start it again. Deleting the server ends the charge immediately. There is no pause that keeps memory, no hibernation, no fork and no snapshot of a running process, and the stopped-state billing is stated in the operator's forum offers rather than on tierhive.com.",
+      "source": {
+        "url": "https://lowendspirit.com/discussion/11534/tierhive-19-locations-build-your-own-vps-plan-from-0-10-p-month-or-0-000135-per-hour",
+        "quote": "You only pay for storage when the VPS is powered off.",
+        "confidence": "third-party"
+      }
+    }
+  },
+  {
+    "feature": "snapshots-forks",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "Scheduled backups, paid storage",
+      "scenario": "Backups and snapshots of the disk exist and can be attached to another server, but nothing captures a running process.",
+      "note": "The panel offers scheduled and one-off backups plus snapshots, both billed by the gigabyte-hour, and a backup can be attached to a different VPS and mounted or chrooted instead of restored. That is the closest thing to a clone. What is missing is any memory snapshot or fork of a running machine, and the retention — how many backups are kept and for how long — is not published anywhere.",
+      "source": {
+        "url": "https://tierhive.com/",
+        "quote": "Automated backups with flexible scheduling. Instant restore capabilities.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "storage",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "50 GB NVMe, 4 TB HDD",
+      "scenario": "The disk is a slider that grows with the machine, but the fast disk stops at 50 GB and big disks mean slow HDD in four locations.",
+      "note": "NVMe runs from 1 to 50 GB and HDD to 4,000 GB, but HDD is offered only in London, Singapore, Sydney and Vint Hill. Disks grow from the panel and the guest needs a reboot before the filesystem sees the new size; nothing says a disk can shrink. Backup and snapshot storage are separate, billed per GB-hour. A network-storage rate appears in the price feed with no documented product, so there is no honest claim of a detachable volume.",
+      "source": {
+        "url": "https://tierhive.com/api/pricing.php",
+        "quote": "\"slow_disk_max_gb\": 4000",
+        "confidence": "pricing-page"
+      }
+    }
+  },
+  {
+    "feature": "idle-timers",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "yes",
+      "figure": "No idle stop",
+      "scenario": "Nothing puts the server to sleep: an agent that waits all day keeps its process and its forwarded port.",
+      "note": "There is no idle timer, no automatic sleep and no session limit — the server runs until you stop or delete it, which is what a Discord gateway or an always-on agent needs. The trade is that idle hours bill like busy ones. The only automatic intervention is the CPU watchdog, which halves a core after two hours at 100%, and the only provider-side schedule is the backup one.",
+      "source": {
+        "url": "https://tierhive.com/blog/general/what-is-an-hourly-vps-and-why-you-might-want-one",
+        "quote": "Billing stops the second you delete the server",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "feature": "reaching-it",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "2 TCP + 2 UDP ports",
+      "scenario": "SSH arrives on a high port of a shared address, you get one spare TCP port, and web traffic goes through the shared HAProxy.",
+      "note": "There is no public IPv4 of your own. Each server gets two forwarded TCP and two UDP ports on its host's address, and the first TCP port is always port 22, so SSH works with a standard client on a non-standard port. That leaves one TCP port for everything else — the provider's own HAProxy how-to uses a second VPS as a bastion to work around it. An IPv6 /64 per location, up to ten addresses per server, opens nearly all ports; the shared HAProxy does not serve IPv6. A noVNC console gets you in when SSH fails.",
+      "source": {
+        "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+        "quote": "Your nat VPS is provided with 2 open TCP ports and 2 UDP port. By design the 1st TCP port is mapped to your VPS port 22/TCP.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "custom-domains",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "yes",
+      "figure": "HAProxy + Let's Encrypt",
+      "scenario": "Add your domain in the panel, point DNS at TierHive, and the shared HAProxy terminates HTTPS for it.",
+      "note": "Domains and subdomains are added to the shared HAProxy in the control panel, with Let's Encrypt certificates issued and renewed automatically and load balancing or failover across backends in your private subnet. Two catches: the backend is a private IP in your own /24, and a domain left pointing at TierHive for more than 90 days after you close the account may be redirected by the provider. IPv6 is served directly, not through HAProxy.",
+      "source": {
+        "url": "https://tierhive.com/blog/general/haproxy",
+        "quote": "Automatic SSL/TLS certificates - Let's Encrypt integration with auto-renewal",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "outbound-network",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "No per-GB fee, speed throttle",
+      "scenario": "Outbound data costs nothing per gigabyte, but sustained use steps your speed down and your IPv4 is shared.",
+      "note": "There is no egress price and no GB or TB allowance: bandwidth is a speed tier (Low 10, Medium 50, High 100 Mbit/s, capped per location at 50–300 Mbit/s) and a fair-use system that drops the cap by 10 Mbit/s for each hour at the limit, to a floor of 10 Mbit/s. Outgoing mail is blocked except through approved relays on port 587. The public IPv4 belongs to the host and is shared; a dedicated IPv6 is available.",
+      "source": {
+        "url": "https://tierhive.com/about.php",
+        "quote": "We do not give any specific arbitrary GB or TB number, it is simply not practical with the TierHive model.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "keys-secrets",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "no",
+      "figure": "No secret store",
+      "scenario": "The only credential the platform plants is a plain deploy token on the guest, which anything running as root can read.",
+      "note": "No secrets manager, no environment-variable store and no scoped API keys are documented. SSH keys are added at build time, and a recipe writes a deploy token to /opt/th-simple-token on the server, readable by anything running as root. An agent's model key therefore lives in a file the agent can read, as on any plain VPS.",
+      "source": {
+        "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+        "quote": "a token in /opt/th-simple-token is created and the information are ready to get downloaded",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "feature": "ways-to-drive",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "Panel only; no API",
+      "scenario": "You create the server in the panel without a terminal, but there is no API, CLI or MCP server to create the next hundred.",
+      "note": "Everything runs through a custom control panel: create, rebuild, resize, start and stop, map ports, allocate IPv6, schedule backups, add HAProxy domains, and open a noVNC console. No API reference, CLI, SDK or MCP server is published — the site's complete sitemap has no developer page and every panel path is behind the login. The only public JSON is the marketing calculator's rate feed and the recipe ticker, which are not a customer API. Recipes automate a first deploy; they are not an interface.",
+      "source": {
+        "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+        "quote": "In the panel, the page Subnet Config reveal your mapped ports",
+        "confidence": "inferred"
+      }
+    }
+  },
+  {
+    "feature": "built-in-agents",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "no",
+      "figure": "No agent recipes",
+      "scenario": "You get an OS or a community recipe for Docker, WordPress or WireGuard, then install the agent yourself over SSH.",
+      "note": "The recipe marketplace is broad — Docker, LAMP, PostgreSQL, Caddy, Vaultwarden, Tailscale, WireGuard, Xray and around thirty more — but there is no Hermes, OpenClaw, Claude Code or Codex recipe, no prompt endpoint, no hosted browser and no managed desktop. The noVNC console is a view of your own machine. Agent setup is a terminal install like any other VPS.",
+      "source": {
+        "url": "https://tierhive.com/",
+        "quote": "Deploy complex applications with community recipes. Earn tokens by creating and maintaining popular recipes.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "teams-accounts",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "not-published",
+      "figure": "Not published",
+      "scenario": "One login per customer with a six-digit code at sign-in; whether colleagues can be added is not documented.",
+      "note": "The terms allow one account per customer and invite companies to ask about more, which suggests no team model. Sub-users, roles, SSO and an audit log are not described on any public page. What does exist is prepaid credit: you cannot spend more than the tokens you have bought, although nothing says what happens to a running server when the balance reaches zero.",
+      "source": {
+        "url": "https://tierhive.com/terms.php",
+        "quote": "One Account Per Customer: You are permitted one Account per customer.",
+        "confidence": "docs-confirmed"
+      }
+    }
+  },
+  {
+    "feature": "billing-models",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "yes",
+      "figure": "$0.000135–$0.008373/h",
+      "scenario": "The meter is genuinely hourly: a server costs its RAM and disk rate for each hour it exists, with a one-hour minimum and no monthly plan.",
+      "note": "A per-hour price built from published resource rates — RAM $0.0009216 per GiB-hour, NVMe $0.00002 per GB-hour — plus optional priority tiers. Prepaid tokens at $1 each, a $3 first top-up, a one-hour minimum per server, and no monthly price or cap. A stopped server is said to bill storage only, which is what makes part-time use cheap. The catch is the minimum: 1,000 ten-minute servers cost 1,000 hours.",
+      "source": {
+        "url": "https://tierhive.com/",
+        "quote": "True hourly billing - pay only for hours used, no monthly commitments",
+        "confidence": "pricing-page"
+      }
+    }
+  },
+  {
+    "feature": "trials-free-tiers",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "$0.01 credit, $3 top-up",
+      "scenario": "Registration needs no card and grants a cent of credit, but the homepage says $3 must be added before the service can be used.",
+      "note": "A free account is created with a username and email, no card, and the price feed grants $0.01 of sign-up credit — about 74 hours on the smallest 128 MB server. The homepage also says a $3 minimum top-up is required to use the service, so whether that cent is spendable before you pay is unclear. There is no ongoing free VPS tier; the free static hosting is a separate product. A 14-day refund exists only if the service was barely used.",
+      "source": {
+        "url": "https://tierhive.com/",
+        "quote": "A $3 minimum top up is required after registration to use this service.",
+        "confidence": "pricing-page"
+      }
+    }
+  },
+  {
+    "feature": "company",
+    "row": {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "UK LTD, 2025, Alpha",
+      "scenario": "A twenty-month-old English company running a service it calls Alpha, with a public status page and a written admission that there is no SLA.",
+      "note": "Kernel Keepers LTD (16294246) was incorporated on 5 March 2025 at a Covent Garden address, and TierHive was announced on Hacker News on 8 January 2026. The status page shows per-location 90-day uptime, which read 99.91–100% on 2026-11-04. Against that: the acceptable-use policy declares Alpha status, says data loss can occur at any time, and states there is no SLA; no SOC 2 report, ISO 27001 certificate or data processing agreement is published, and headcount and funding are unknown.",
+      "source": {
+        "url": "https://tierhive.com/acceptable-use.php",
+        "quote": "TierHive is currently in Alpha status",
+        "confidence": "docs-confirmed"
+      }
+    }
+  }
+]

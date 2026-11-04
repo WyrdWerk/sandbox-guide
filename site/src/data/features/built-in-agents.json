@@ -364,6 +364,30 @@
         "quote": "An InstantApp allows you to deploy pre-configured applications quickly on CPU Instances.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "no",
+      "figure": "No agent recipes",
+      "scenario": "You get an OS or a community recipe for Docker, WordPress or WireGuard, then install the agent yourself over SSH.",
+      "note": "The recipe marketplace is broad — Docker, LAMP, PostgreSQL, Caddy, Vaultwarden, Tailscale, WireGuard, Xray and around thirty more — but there is no Hermes, OpenClaw, Claude Code or Codex recipe, no prompt endpoint, no hosted browser and no managed desktop. The noVNC console is a view of your own machine. Agent setup is a terminal install like any other VPS.",
+      "source": {
+        "url": "https://tierhive.com/",
+        "quote": "Deploy complex applications with community recipes. Earn tokens by creating and maintaining popular recipes.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "no",
+      "figure": "None",
+      "scenario": "You get a bare operating system and install the agent yourself; there is no template, no prompt API and no built-in browser.",
+      "note": "The order flow offers Linux distribution images and your own ISO, nothing else. There is no Hermes, OpenClaw, n8n or Docker template, no coding agent in any image, no prompt endpoint, no hosted browser and no managed desktop. A graphical desktop can be installed from an ISO and watched through the VNC console, but that is your install, not a product.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Agents installed, and promptable?",

@@ -364,6 +364,30 @@
         "quote": "List prices include egress and IPv6 addresses.",
         "confidence": "pricing-page"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "No per-GB fee, speed throttle",
+      "scenario": "Outbound data costs nothing per gigabyte, but sustained use steps your speed down and your IPv4 is shared.",
+      "note": "There is no egress price and no GB or TB allowance: bandwidth is a speed tier (Low 10, Medium 50, High 100 Mbit/s, capped per location at 50–300 Mbit/s) and a fair-use system that drops the cap by 10 Mbit/s for each hour at the limit, to a floor of 10 Mbit/s. Outgoing mail is blocked except through approved relays on port 587. The public IPv4 belongs to the host and is shared; a dedicated IPv6 is available.",
+      "source": {
+        "url": "https://tierhive.com/about.php",
+        "quote": "We do not give any specific arbitrary GB or TB number, it is simply not practical with the TierHive model.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "1–20 TB, then 5 Mbps",
+      "scenario": "Outbound data is included up to the plan's monthly allowance, extra is $4 a TB, and egress can be restricted with firewall rules.",
+      "note": "Each plan includes 1–20 TB a month with inbound and outbound counted together, reset on the 1st of the calendar month; APAC allowances are lower (500 GB on the 2 GB plan in Hong Kong, Tokyo, Sydney and Singapore). When the allowance is used the server is rate-limited to 5 Mbps rather than billed automatically; more transfer is $4 per TB through support. Firewall groups can be created with an egress direction, so you can allow only named destinations or block outbound entirely. The primary IPv4 is static for the life of the server, and BYOIP with BGP is available.",
+      "source": {
+        "url": "https://hosthatch.com/terms-of-service",
+        "quote": "Additional bandwidth can be added for $4 per TB by contacting our support.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Egress price",

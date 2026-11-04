@@ -143,6 +143,24 @@
         }
       },
       {
+        "label": "Critical tickets",
+        "value": "Paging the on-call technician with a critical ticket uses one prepaid support credit, which you buy first; an established or ID-verified account is required.",
+        "source": {
+          "url": "https://hostup.se/en/support/support-tickets/",
+          "quote": "Each critical ticket uses one prepaid support credit.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Critical-ticket refund",
+        "value": "The support credit comes back only if the fault turns out to be HostUp's.",
+        "source": {
+          "url": "https://hostup.se/en/support/support-tickets/",
+          "quote": "The credit is refunded if the fault turns out to be ours.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
         "label": "Status page",
         "value": "A public status page with incidents, maintenance and a 90-day uptime figure, which read 99.992% on 2026-10-30.",
         "source": {

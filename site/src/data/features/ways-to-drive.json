@@ -363,6 +363,30 @@
         "quote": "Manage your resources with the Scaleway API using simple HTTP requests.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "Panel only; no API",
+      "scenario": "You create the server in the panel without a terminal, but there is no API, CLI or MCP server to create the next hundred.",
+      "note": "Everything runs through a custom control panel: create, rebuild, resize, start and stop, map ports, allocate IPv6, schedule backups, add HAProxy domains, and open a noVNC console. No API reference, CLI, SDK or MCP server is published — the site's complete sitemap has no developer page and every panel path is behind the login. The only public JSON is the marketing calculator's rate feed and the recipe ticker, which are not a customer API. Recipes automate a first deploy; they are not an interface.",
+      "source": {
+        "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+        "quote": "In the panel, the page Subnet Config reveal your mapped ports",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Panel + REST API",
+      "scenario": "You can create, power, reinstall, snapshot and firewall servers from the panel or from a documented REST API with an OpenAPI document.",
+      "note": "The API at console.hosthatch.com/api/v1 covers projects, servers, power actions, reinstall, root-password reset, snapshots, ISOs, firewalls, SSH keys, reverse DNS and orders, with idempotency keys, stable error codes, read-only keys and an OpenAPI document. There is no official CLI, Python or TypeScript SDK, no MCP server, and no PTY or file-transfer endpoint. Cloud-init user data is documented but answers feature_unavailable, and ISO upload through the API is not available yet (the panel can upload one).",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/",
+        "quote": "The HostHatch API lets your code, scripts and AI agents do what you do in the console: order servers and pay for them with account credit, power and reinstall them, take snapshots, set up firewalls, mount ISOs, and manage SSH keys and reverse DNS.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "First machine without a terminal?",

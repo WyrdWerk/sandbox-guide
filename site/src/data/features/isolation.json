@@ -357,6 +357,30 @@
         "quote": "An Instance is a virtual machine in the cloud. Like a physical machine, it provides resources such as virtualized CPU, RAM, and storage.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "yes",
+      "figure": "KVM, root, nesting on",
+      "scenario": "Your agent gets a full KVM virtual machine with its own kernel and root, on a host shared with other customers.",
+      "note": "A real KVM guest built on the operator's own QEMU/KVM/libvirt stack, with root, Docker recipes and CPU passthrough and nesting enabled. What is not dedicated is the CPU: cores are shared and weighted by the priority tier you buy, the provider warns that steal will be higher than on an enterprise host, and a server that averages a full core for two hours is cut to half a core until it reboots.",
+      "source": {
+        "url": "https://tierhive.com/about.php",
+        "quote": "Everything in TierHive is custom, we designed and wrote it on top of an absolute minimal, cut-to-the-bone QEMU/KVM/libvirt stack.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "Full VM, root, own ISO",
+      "scenario": "Your agent gets a full virtual machine with its own kernel, root and a public address, and can be reinstalled from your own ISO.",
+      "note": "A real virtual machine, not a container: you can install any of the Linux templates or boot your own ISO, enable a routed /64 of IPv6, join a private VLAN and reboot without touching anyone else. HostHatch's pages call them VMs and never name the hypervisor, here or in the docs. The 2, 4 and 8 GB plans are fair-share CPU, so the entry price does not buy dedicated cores.",
+      "source": {
+        "url": "https://hosthatch.com/features",
+        "quote": "You can also upload your own ISO image using our control panel, and deploy it on your VMs with us, just like you would on a bare-metal or a physical server.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Boundary, and what it allows",

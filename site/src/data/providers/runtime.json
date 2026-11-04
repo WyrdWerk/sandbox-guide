@@ -161,6 +161,24 @@
         }
       },
       {
+        "label": "Recent incidents",
+        "value": "The status page records no incidents, though its record only begins on 23 September 2026, so roughly the first half of the 6 August to 4 November window is not covered.",
+        "source": {
+          "url": "https://withruntime.com/status.md",
+          "quote": "The record begins 2026-09-23. Each reading is kept for 30 days and each day's totals for good, so the record reaches back to its first day. Incidents No incidents recorded.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Sandbox starts",
+        "value": "Its own checks show sandbox starts succeeding 98.42% of the time over the last 30 days (4,317 readings), measured on 4 November 2026.",
+        "source": {
+          "url": "https://withruntime.com/status.md",
+          "quote": "| Last 30 days | 98.42% | 4317 | 272 ms | 1.1 s |",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
         "label": "Certification",
         "value": "The certificates on its trust page belong to suppliers, including its Virginia data centre. No Runtime-owned SOC 2 is claimed.",
         "source": {

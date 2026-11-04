@@ -1,0 +1,290 @@
+[
+  {
+    "provider": "e2b",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "The status page lists 14 sandbox incidents from 6 August to 4 November 2026, nearly all in US-West-1; the longest was 4 hours 45 minutes of errors creating sandboxes from snapshots on 15 September.",
+      "source": {
+        "url": "https://status.e2b.dev/incidents/01M2JZSJDQC2YEP6VPMWNFGD5X",
+        "quote": "Elevated error rates when creating sandboxes from snapshots",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [
+      {
+        "title": "Elevated error rates when creating sandboxes from snapshots",
+        "start": "2026-09-15T16:53:00Z",
+        "end": "2026-09-15T21:38:00Z",
+        "duration": "4h 45m",
+        "component": "US-West-1 / Sandbox Pause/Resume/Create",
+        "url": "https://status.e2b.dev/incidents/01M2JZSJDQC2YEP6VPMWNFGD5X"
+      },
+      {
+        "title": "Elevated error rates for sandbox operations",
+        "start": "2026-08-20T16:25:00Z",
+        "end": "2026-08-20T20:27:00Z",
+        "duration": "4h 2m",
+        "component": "US-West-1 / Sandbox Pause/Resume/Create",
+        "url": "https://status.e2b.dev/incidents/01M0FZV59HVG6G9D8BEP0ZRW4P"
+      },
+      {
+        "title": "Template builds failing",
+        "start": "2026-10-21T14:03:00Z",
+        "end": "2026-10-21T14:06:00Z",
+        "duration": "3m",
+        "component": "Template Builds in US-West-1, US-West-2, EU-West-1 and AP-Southeast-1 (widest in the window)",
+        "url": "https://status.e2b.dev/incidents/01M5FEGC218X1EEYP1V962EMQW"
+      }
+    ],
+    "count": 14,
+    "countBasis": "All 14 incidents in /api/v2/incidents.json whose start falls between 6 August and 4 November 2026; the API holds every incident back to 15 June 2026, so the window is complete.",
+    "window": {
+      "from": "2026-08-06",
+      "to": "2026-11-04",
+      "statusPageUptimeWindow": "Aug 5, 2026 to Nov 3, 2026"
+    },
+    "uptime": {
+      "window": "Aug 5, 2026 to Nov 3, 2026",
+      "US-East-1": "100%",
+      "US-West-1": "99.79%",
+      "US-West-2": "99.98%",
+      "EU-West-1": "99.98%",
+      "AP-Southeast-1": "99.997%",
+      "note": "Region-level figures as shown on status.e2b.dev; the page also shows per-component figures (Sandbox Pause/Resume/Create, Sandbox Network Traffic, Persistent Volumes, Template Builds) per region."
+    },
+    "method": "Instatus JSON at https://status.e2b.dev/api/v2/incidents.json plus the rendered https://status.e2b.dev/ page for per-region uptime. Start and end are the earliest and latest display_at timestamps in each incident's updates (created_at is a backfill time for some records and can post-date the real start). Components and regions read from each incident page's 'Affected components' block.",
+    "gaps": [
+      "The incidents API carries no component list, so regions/components were read from the individual incident pages.",
+      "Uptime figures are the page's rolling window ending 3 November 2026, one day short of the requested 4 November end date."
+    ]
+  },
+  {
+    "provider": "hetzner",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "Hetzner's status page publishes only its 15 most recent resolved entries, so it shows three outages affecting Cloud servers or their network between 28 October and 3 November 2026 rather than a full quarter; the longest was a 58-minute Cloud DNS API fault on 3 November.",
+      "source": {
+        "url": "https://status.hetzner.com/incident/ca26bc3c-8872-43eb-8215-69e85ee23081",
+        "quote": "Fault report for Cloud DNS API and reverse DNS APIs (Primary IP, Floating IPs, Cloud Server, Load Balancer)",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [
+      {
+        "title": "Fault report for Cloud DNS API and reverse DNS APIs (Primary IP, Floating IPs, Cloud Server, Load Balancer)",
+        "start": "2026-11-03T08:58:00Z",
+        "end": "2026-11-03T09:55:47Z",
+        "duration": "57m 47s",
+        "component": "Cloud",
+        "url": "https://status.hetzner.com/incident/ca26bc3c-8872-43eb-8215-69e85ee23081"
+      },
+      {
+        "title": "Cloud Resource Creation Delay",
+        "start": "2026-11-03T12:03:26Z",
+        "end": "2026-11-03T12:48:31Z",
+        "duration": "45m 5s",
+        "component": "Cloud",
+        "url": "https://status.hetzner.com/incident/9906f1c5-ce28-48dd-b4e5-967b3cfda8f0"
+      },
+      {
+        "title": "DHCP degraded in FSN1 and NBG1",
+        "start": "2026-10-28T20:06:00Z",
+        "end": "2026-10-28T20:32:00Z",
+        "duration": "26m",
+        "component": "Datacenter-Infrastructure / DHCP (FSN1, NBG1)",
+        "url": "https://status.hetzner.com/incident/ae84c63f-67de-4239-84f4-97e2301c930f"
+      }
+    ],
+    "count": 3,
+    "countBasis": "Outages (incidentType 'outage' or 'warning') affecting Cloud or the network of Cloud servers among the 15 resolved entries the page lists. The page also lists 11 planned-maintenance entries dated inside the window; those are not counted.",
+    "window": {
+      "from": "2026-08-06",
+      "to": "2026-11-04"
+    },
+    "listedEntries": {
+      "total": 15,
+      "inWindow": 14,
+      "oldestListed": "2026-08-05T07:29:16Z",
+      "breakdown": "3 outages, 11 planned maintenance"
+    },
+    "method": "https://status.hetzner.com/ renders its incident list into the Next.js __NEXT_DATA__ payload; each of the 15 listed incidents was fetched from its /incident/<uuid> page for startTime, endTime, incidentType and affected system. The Atom feed at /en.atom carries announcements, not the incident history, and /api/v2/incidents.json returns 404.",
+    "gaps": [
+      "The page shows a fixed list of the 15 most recent resolved entries (oldest 5 August 2026) with no archive or pagination, so a complete 6 August to 4 November count cannot be read. Everything between 6 August and 26 October is missing from the page.",
+      "The one entry dated 5 August (Outage of DENIC services) falls outside the window and is excluded."
+    ]
+  },
+  {
+    "provider": "hostinger",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "No VPS incident history is published: the status page has no VPS component group and exposes only its 50 most recent incidents (22 October to 4 November 2026), one of which, an emergency maintenance on server BOS-1335, was tagged to the Hostinger VPS API.",
+      "source": {
+        "url": "https://statuspage.hostinger.com/incidents/4361g2mpp2s2",
+        "quote": "This incident affected: Core Services (Hostinger VPS API).",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [
+      {
+        "title": "Emergency Server BOS-1335 Maintenance",
+        "start": "2026-11-01T21:24:03Z",
+        "end": "2026-11-01T22:27:55Z",
+        "duration": "1h 4m",
+        "component": "Core Services / Hostinger VPS API (server BOS-1335, United States)",
+        "url": "https://statuspage.hostinger.com/incidents/4361g2mpp2s2"
+      }
+    ],
+    "count": null,
+    "countBasis": "Not readable. The Statuspage API returns only the 50 most recent incidents (22 October to 4 November 2026) and the /history and /uptime pages render no incident list, so neither a 90-day count nor a VPS-only count can be established.",
+    "window": {
+      "from": "2026-08-06",
+      "to": "2026-11-04"
+    },
+    "listedEntries": {
+      "total": 50,
+      "oldestListed": "2026-10-22T10:21:38Z",
+      "newestListed": "2026-11-04T04:05:10Z",
+      "taggedToVpsApi": 1,
+      "note": "43 of the 50 entries carry no component at all; the rest are tagged to hPanel, mail, agencies or a datacenter. The page's 97 components include no VPS group; the only VPS-labelled component is 'Hostinger VPS API'."
+    },
+    "method": "https://statuspage.hostinger.com/api/v2/incidents.json and /api/v2/components.json, plus the rendered /history, /history?page=1..2 and /uptime pages (all empty of incident data) and the individual incident page for the VPS-tagged entry.",
+    "gaps": [
+      "90-day incident count unavailable: the API caps at 50 records covering 13 days and the history page publishes no list.",
+      "Hostinger does not model VPS nodes or regions as status components, so VPS-affecting incidents cannot be separated from shared-hosting ones by component; most entries are per-server maintenance notices with no component tag.",
+      "The single 'Hostinger VPS API' tag is on a server maintenance notice whose text talks about 'client services hosted there', so the tag's meaning is uncertain."
+    ]
+  },
+  {
+    "provider": "linode",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "Akamai's status page lists 16 incidents touching compute, block or object storage or LKE from 6 August to 4 November 2026; the longest was a 34-hour Cloud Manager and API outage from 21 September that marked every region affected.",
+      "source": {
+        "url": "https://status.linode.com/incidents/q9mz44p279ds",
+        "quote": "Emerging Service Issue - Cloud Manager and API",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [
+      {
+        "title": "Emerging Service Issue - Cloud Manager and API",
+        "start": "2026-09-21T17:13:35Z",
+        "end": "2026-09-23T03:26:27Z",
+        "duration": "1d 10h 12m",
+        "component": "Cloud Manager and API; all 43 region components marked affected",
+        "url": "https://status.linode.com/incidents/q9mz44p279ds"
+      },
+      {
+        "title": "Connectivity Issue - Dallas Data Center (IPv6 Traffic to Google)",
+        "start": "2026-10-23T09:21:06Z",
+        "end": "2026-10-23T20:38:09Z",
+        "duration": "11h 17m",
+        "component": "US-Central (Dallas)",
+        "url": "https://status.linode.com/incidents/cyh1lcmr1y3f"
+      },
+      {
+        "title": "Issue in creating new LKE Enterprise cluster across regions",
+        "start": "2026-10-20T12:29:25Z",
+        "end": "2026-10-20T21:42:59Z",
+        "duration": "9h 13m",
+        "component": "Linode Kubernetes Engine, 31 regional components",
+        "url": "https://status.linode.com/incidents/jy76zdym8jb4"
+      }
+    ],
+    "count": 16,
+    "countBasis": "Incidents whose affected components include a region (compute), Block Storage, Object Storage or Linode Kubernetes Engine. The page lists 28 incidents in the window in total; the other 12 are Cloud Manager-only, DNS, security advisories or platform notices with no compute/storage/LKE component.",
+    "window": {
+      "from": "2026-08-06",
+      "to": "2026-11-04"
+    },
+    "listedEntries": {
+      "totalInWindow": 28,
+      "oldestOnPage": "2025-12-03T15:15:27Z",
+      "note": "The 50-record API reaches back to December 2025, so the window is complete."
+    },
+    "method": "Atlassian Statuspage JSON at https://status.linode.com/api/v2/incidents.json and /api/v2/components.json; /history?page=1..2 used as a cross-check on the incident list. Durations from started_at/resolved_at.",
+    "gaps": [
+      "Two incidents in the set are still listed as 'monitoring' with no resolved_at: Block Storage (BR-GRU) opened 28 October and connectivity between ID-CGK and SG-SIN-2 opened 25 October, so no duration can be stated for them.",
+      "Postmortem-style entries can carry a started_at equal to the posting time; the 22 October LKE incident is such a case (its text gives an impact window of about 11:10-12:50 UTC). It is not among the three longest either way.",
+      "Security advisories with no affected component (CVE-2026-99999 PwnEscape, PHP RCE, F5/NGINX) are listed on the page but excluded from the 16."
+    ]
+  },
+  {
+    "provider": "ovhcloud",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "OVHcloud runs separate status pages: 18 VPS incidents and 72 Public Cloud incidents from 6 August to 4 November 2026. The longest VPS one left some VPS in the EU-SOUTH-LZ-MAD region unavailable for just over four days from 14 August.",
+      "source": {
+        "url": "https://bare-metal-servers.status-ovhcloud.com/incidents/3mjshm15tvzc",
+        "quote": "[EU-SOUTH-LZ-MAD][Virtual Private Servers] - Some VPS incident notification",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [
+      {
+        "title": "[EU-SOUTH-LZ-MAD][Virtual Private Servers] - Some VPS incident notification",
+        "start": "2026-08-14T08:45:00Z",
+        "end": "2026-08-18T10:15:00Z",
+        "duration": "4d 1h 30m",
+        "component": "Virtual Private Servers, EU-SOUTH-LZ-MAD",
+        "url": "https://bare-metal-servers.status-ovhcloud.com/incidents/3mjshm15tvzc"
+      },
+      {
+        "title": "[Global][Dedicated Servers/Virtual Private Servers] - Delivery incident notification",
+        "start": "2026-09-28T18:00:00Z",
+        "end": "2026-09-29T08:13:00Z",
+        "duration": "14h 13m",
+        "component": "Virtual Private Servers / Delivery, global",
+        "url": "https://bare-metal-servers.status-ovhcloud.com/incidents/wkfw32fl7flj"
+      },
+      {
+        "title": "[GRA][Virtual Private Servers] - VPS incident notification",
+        "start": "2026-10-24T14:54:00Z",
+        "end": "2026-10-25T00:45:00Z",
+        "duration": "9h 51m",
+        "component": "Virtual Private Servers, GRA",
+        "url": "https://bare-metal-servers.status-ovhcloud.com/incidents/jqqkp50j9snr"
+      },
+      {
+        "title": "[EU-SOUTH-MIL][Containers & Orchestration] -  Managed Private Registry incident notification",
+        "start": "2026-08-26T15:00:00Z",
+        "end": "2026-10-06T07:00:00Z",
+        "duration": "40d 16h",
+        "component": "Public Cloud / Managed Private Registry, EU-SOUTH-MIL",
+        "url": "https://public-cloud.status-ovhcloud.com/incidents/fj5dnqrjhxzc"
+      },
+      {
+        "title": "[GLOBAL][Databases] - MongoDB incident notification",
+        "start": "2026-08-25T00:00:00Z",
+        "end": "2026-09-03T13:00:00Z",
+        "duration": "9d 13h",
+        "component": "Public Cloud / MongoDB, global",
+        "url": "https://public-cloud.status-ovhcloud.com/incidents/x71k4zrxnwx7"
+      },
+      {
+        "title": "[EU-WEST-PAR][Storage] - Object Storage incident notification",
+        "start": "2026-10-27T20:00:00Z",
+        "end": "2026-11-03T09:43:00Z",
+        "duration": "6d 13h 43m",
+        "component": "Public Cloud / Object Storage, EU-WEST-PAR",
+        "url": "https://public-cloud.status-ovhcloud.com/incidents/nxz30l2l2g1q"
+      }
+    ],
+    "count": {
+      "vps": 18,
+      "publicCloud": 72,
+      "note": "Two separate status pages. Counts exclude planned maintenance (impact 'maintenance' or titles starting '[Scheduled]')."
+    },
+    "countBasis": "VPS: every non-maintenance entry on bare-metal-servers.status-ovhcloud.com whose title names Virtual Private Servers or VPS. Public Cloud: every non-maintenance entry on public-cloud.status-ovhcloud.com in the window (compute 18, storage 22, network 10, Public Cloud 8, containers/Kubernetes 6, AI/databases/analytics/identity 8).",
+    "window": {
+      "from": "2026-08-06",
+      "to": "2026-11-04"
+    },
+    "method": "Atlassian Statuspage history pages (/history?page=1..2) on public-cloud.status-ovhcloud.com and bare-metal-servers.status-ovhcloud.com; each page embeds a JSON blob with month-by-month incidents. Start and end times are taken from the 'Start time :'/'End time :' fields inside each incident's final message, not the list timestamp, which is the update-posting window (they differ by hours or weeks on long incidents).",
+    "gaps": [
+      "VPS has no status page of its own: incidents appear on the Bare Metal Cloud page, filtered here by title. VPS incidents that do not name VPS in the title cannot be separated out.",
+      "The Public Cloud page mixes compute, storage, network, Kubernetes, AI, databases, analytics and identity services; the 72 is the whole page, not just compute.",
+      "OVHcloud's main status-ovhcloud.com page is a JavaScript shell with no incident data of its own, and vms.status-ovhcloud.com only shows per-datacenter real-time state, not incident history."
+    ]
+  }
+]

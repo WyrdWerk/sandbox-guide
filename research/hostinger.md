@@ -655,3 +655,13 @@ Integrated by https://ampcode.com/threads/T-01a188d2-e3f1-734f-8aed-80041812cbe2
   with the same argument. Hostinger appears in every route table, with one-click tiers for Hermes, OpenClaw and
   n8n, and the one-click counts in those three standfirsts were updated.
 - **Price baseline:** not refreshed (see DigitalOcean).
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-2/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: No VPS incident history can be read: the status page has no VPS component group, and its incident feed reaches back only to 22 October 2026. One entry, emergency maintenance on server BOS-1335 on 1 November, was tagged to the Hostinger VPS API.
+- Source: https://statuspage.hostinger.com/incidents/4361g2mpp2s2 — "This incident affected: Core Services (Hostinger VPS API)." (inferred)

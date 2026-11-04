@@ -123,6 +123,15 @@
         }
       },
       {
+        "label": "Recent incidents",
+        "value": "By this guide's count, the status page lists 14 sandbox incidents from 6 August to 4 November 2026, 13 of them touching US-West-1. The longest was about 4¾ hours of errors creating sandboxes from snapshots on 15 September.",
+        "source": {
+          "url": "https://status.e2b.dev/api/v2/incidents.json",
+          "quote": "\"name\":\"Elevated error rates when creating sandboxes from snapshots\",\"status\":\"resolved\",\"created_at\":\"2026-09-15T16:53:22Z\",\"updated_at\":\"2026-09-15T21:38:12Z\",\"resolved_at\":\"2026-09-15T21:38:12Z\"",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
         "label": "Certification",
         "value": "SOC 2 Type II report and a HIPAA BAA path, both by request through the Trust Center.",
         "source": {

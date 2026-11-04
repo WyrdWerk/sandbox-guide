@@ -364,6 +364,30 @@
         "quote": "The Instance is fully active and consumes compute resources.",
         "confidence": "inferred"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "yes",
+      "figure": "No idle stop",
+      "scenario": "Nothing puts the server to sleep: an agent that waits all day keeps its process and its forwarded port.",
+      "note": "There is no idle timer, no automatic sleep and no session limit — the server runs until you stop or delete it, which is what a Discord gateway or an always-on agent needs. The trade is that idle hours bill like busy ones. The only automatic intervention is the CPU watchdog, which halves a core after two hours at 100%, and the only provider-side schedule is the backup one.",
+      "source": {
+        "url": "https://tierhive.com/blog/general/what-is-an-hourly-vps-and-why-you-might-want-one",
+        "quote": "Billing stops the second you delete the server",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "No idle stop or session cap",
+      "scenario": "Nothing puts the server to sleep: an agent that waits all day keeps its process, its connection and its address.",
+      "note": "The only server states are running, stopped and suspended, and the only power actions are on, shutdown, power off, reboot and reinstall. No idle timer, automatic sleep, wake trigger or maximum session length appears in the API, the documentation or the panel, so an always-on Hermes agent, bot gateway or MCP server can run for the whole term. The trade is that idle hours bill like busy ones, and there is no provider-side scheduler: recurring work runs from cron inside the guest.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/servers/",
+        "quote": "`status` | string | `running`, `stopped` or `suspended`",
+        "confidence": "inferred"
+      }
     }
   ],
   "figureLabel": "Idle or lifetime limit",

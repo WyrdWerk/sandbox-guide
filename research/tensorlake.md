@@ -32,6 +32,34 @@ was checked against the page it cites.
    forbid storing protected health information unless a written agreement is in place. Treat HIPAA
    as a contract term, not a product property.
 
+6. **P1 response time: 24 hours or 4 hours?** (Checked 2026-11-04.) The pricing page's Pro column
+   says "P1 SLA: 24 hours" (pricing-page). Terms §5.7 apply to "Customers on a paid Plan" and give
+   P1 — Critical a target initial response of "4 hours, 24×7" (docs-confirmed); §5.8 lets an Order
+   Form override Section 5. The site shows both and tells readers to get the figure in writing.
+
+## Correction, 2026-11-04: the `sla` capability row
+
+The row said `no`, quoting the pricing page's "P1 SLA: 24 hours" as the only SLA. That was wrong:
+the same profile's company facts already cited Terms §5.1, and a reliability dossier
+(Notion, Nov 2026) flagged the mismatch. Re-read https://www.tensorlake.ai/terms on 2026-11-04
+through Context.dev Scrape (served from a 10-minute-old cache, `cache_metadata.status: hit`) and
+cross-checked with a direct live fetch (HTTP 200, same URL); every quote below matched the live
+HTML after stripping tags, collapsing whitespace and decoding HTML entities.
+
+| Claim | Quote | Confidence |
+|---|---|---|
+| 99.9% monthly control-plane availability | "TensorLake will use commercially reasonable efforts to make the Control Plane available 99.9% of the time in each calendar month" | docs-confirmed |
+| Credit tiers | "99.50% to 99.89% \| 10%" … "Below 95.00% \| 50%" (table rows; 20% at 99.00–99.49%, 35% at 95.00–98.99%) | docs-confirmed |
+| Automatic, capped, no cash | "applies them automatically to Customer’s next invoice; Customer is not required to submit a claim"; "capped at 50% of the total Fees for that month"; "Service Credits are not refundable in cash" | docs-confirmed |
+| Chronic-failure exit | "If Monthly Availability falls below 99.5% in two (2) consecutive months, or in any three (3) months within a rolling six-month period" | docs-confirmed |
+| Durability credit | "is treated as a P1 incident and earns an additional Service Credit of 50% of that month’s Fees for the affected Service" | docs-confirmed |
+| Scope | "This Section 5 applies to paid Plans and does not apply to Free Offerings (Section 12)." | docs-confirmed |
+
+New verdict: `yes`. Scope caveat: the measure is the control plane (create, resume, orchestrate);
+§5.1 says already-running sandboxes keep executing during a control-plane outage. Whether the
+prepaid "Usage Credits" tier counts as a "paid Plan" is not stated (see contradiction 3); the row
+treats it as paid.
+
 ## Open questions
 
 1. **The "5M-per-project ceiling."** The pricing page says every tier runs on "the same Firecracker
@@ -316,3 +344,16 @@ Docs: https://docs.tensorlake.ai/sandboxes/cicd-build and https://docs.tensorlak
 **SSO.** OIDC or SAML 2.0 for an organisation, configured by an org admin, gated on SSO being
 enabled for that organisation.
 Docs: https://docs.tensorlake.ai/platform/sso
+
+
+---
+
+## Dossier reconciliation, 2026-11-04
+
+npm caveat expanded from Tensorlake's own GitHub advisory (read with `gh api /repos/tensorlakeai/tensorlake/security-advisories/GHSA-8g63-53c9-65j2`; the global advisory endpoint returns 404). The dossier said the fix shipped as 0.5.145; the advisory says only "Downgrade to 0.5.143 immediately, or upgrade to 0.5.145 once it is published", so the site names 0.5.143 as safe. The Register (third-party) reports detection 11 minutes after publication; not used on the site.
+
+| URL | Quote | Confidence |
+|---|---|---|
+| https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2 | "The package was live on npm for approximately 1 hour 40 minutes (01:12–02:54 UTC). Only the npm package was affected, the PyPI and crates.io `tensorlake` packages and the `tensorlake` CLI were not." | docs-confirmed |
+| https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2 | "deletes the user's home directory if the stolen GitHub token is revoked" | docs-confirmed |
+| https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2 | "Version 0.5.143 and all prior versions are unaffected." | docs-confirmed |

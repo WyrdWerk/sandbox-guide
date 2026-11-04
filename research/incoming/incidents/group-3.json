@@ -1,0 +1,210 @@
+[
+  {
+    "provider": "runtime",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "Its status page records no incidents, though its record only begins on 23 September 2026.",
+      "source": {
+        "url": "https://withruntime.com/status.md",
+        "quote": "No incidents recorded.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [],
+    "count": 0,
+    "window": "2026-08-06 to 2026-11-04 (UTC); status record begins 2026-09-23",
+    "method": "curl GET https://withruntime.com/status.json (HTTP 200), https://withruntime.com/status (HTTP 200) and https://withruntime.com/status.md (HTTP 200). status.json has an empty incidents array; the HTML page renders 'None recorded since September 23, 2026.' and the Markdown page 'No incidents recorded.' Measured uptime at 2026-11-04 06:51 UTC: API 99.58% over the last 7 days and 98.84% over 30 days; sandbox starts 98.80% and 98.42% over the same windows.",
+    "gaps": "The record only starts on 23 September 2026, so the page says nothing about 6 August to 22 September. Uptime figures are a point-in-time snapshot (generated 2026-11-04 06:51 UTC) and move as checks run; at fetch time the API check had just failed at 06:48 UTC and the sandbox-start check was mid-run."
+  },
+  {
+    "provider": "scaleway",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "The status page lists 8 incidents affecting Instances or Block Storage from 6 August to 4 November 2026; the longest-running is a block-storage latency problem reported on 29 October that was still open on 4 November, affecting Block Storage, Databases and Instances.",
+      "source": {
+        "url": "https://status.scaleway.com/incidents/l35th3qpv30h",
+        "quote": "[fr-par-1] Latencies spikes during the day following capacity increase in one of block storage cluster",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [
+      {
+        "title": "[fr-par-1] Latencies spikes during the day following capacity increase in one of block storage cluster",
+        "start": "2026-10-29T11:01:00Z",
+        "end": null,
+        "duration": "still open at 2026-11-04; last update 2026-10-30 21:32 UTC (6 days 10 h so far)",
+        "component": "Block Storage, Databases, Instances (fr-par-1)",
+        "url": "https://status.scaleway.com/incidents/l35th3qpv30h"
+      },
+      {
+        "title": "[INSTANCE][FR-PAR-2] Outbound connectivity issues",
+        "start": "2026-09-15T16:00:00Z",
+        "end": "2026-09-16T07:57:00Z",
+        "duration": "about 15 h 57 min as published (page says it began 15 September at 5:00 p.m. UTC+1; first status update 16 September 08:22 CEST)",
+        "component": "Instances (fr-par-2)",
+        "url": "https://status.scaleway.com/incidents/7f4txhwpnhjv"
+      },
+      {
+        "title": "[FR-PAR-1] - Failure in cooling system",
+        "start": "2026-10-16T17:22:00Z",
+        "end": "2026-10-16T18:24:00Z",
+        "duration": "1 h 2 min",
+        "component": "Instances (fr-par-1), room 108",
+        "url": "https://status.scaleway.com/incidents/wnnrzjjcvt0h"
+      },
+      {
+        "title": "Temporary Traffic Loss on partial FR-PAR-2 instances",
+        "start": "2026-08-27T13:47:00Z",
+        "end": "2026-08-27T13:56:00Z",
+        "duration": "9 min",
+        "component": "Instances, Network (fr-par-2)",
+        "url": "https://status.scaleway.com/incidents/cd27sczj5tyc"
+      },
+      {
+        "title": "[Block Storage] [fr-par-2] - Block Storage control plane issue during upgrade",
+        "start": "2026-10-21T12:23:00Z",
+        "end": "2026-10-21T12:28:00Z",
+        "duration": "5 min",
+        "component": "Block Storage (fr-par-2)",
+        "url": "https://status.scaleway.com/incidents/7858gtrpwpmh"
+      },
+      {
+        "title": "[Instances] - AMS1 / Room Hall6 / Rack 6.12.32 - ams1dc1-net-f02lf75.ams1 crashes multiple time",
+        "start": "2026-10-19T07:27:00Z",
+        "end": "2026-10-19T07:29:00Z",
+        "duration": "2 min",
+        "component": "Instances (AMS1)",
+        "url": "https://status.scaleway.com/incidents/j7870qbwptpq"
+      },
+      {
+        "title": "[VPCL] - [WAW2] - Some Instances were not reachable using VPC on PL-WAW-2",
+        "start": "2026-08-17T14:08:00Z",
+        "end": null,
+        "duration": "single update; no end time published",
+        "component": "Instances, VPC (pl-waw-2)",
+        "url": "https://status.scaleway.com/incidents/6my9pd3v4m41"
+      },
+      {
+        "title": "[Instances] - not all resolvers updated with new subnet  78.232.0.0/21",
+        "start": "2026-09-16T13:52:00Z",
+        "end": null,
+        "duration": "single update; no end time published",
+        "component": "Instances",
+        "url": "https://status.scaleway.com/incidents/y1v9ymbcr0f5"
+      }
+    ],
+    "count": 8,
+    "window": "2026-08-06 to 2026-11-04 (UTC)",
+    "method": "curl GET https://status.scaleway.com/api/v2/incidents.json (HTTP 200, 50 most recent only) and https://status.scaleway.com/history.json (HTTP 200, November/October/September 2026) plus ?page=2 (HTTP 200, August/July/June 2026). Every Scaleway incident code in August-November (175 codes) was fetched from https://status.scaleway.com/incidents/<code> (all HTTP 200) and parsed for the title, 'This incident affected:' line, status labels and data-datetime-unix timestamps. https://status.scaleway.com/api/v2/incidents/unresolved.json (HTTP 200) confirmed the 29 October incident was still open.",
+    "gaps": "Scaleway attaches a component list to only some incidents, so the count is 'incidents whose title or published affected-components list names Instances or Block Storage'; a network or datacentre incident that degraded Instances without naming them would be missed. Scheduled maintenance is excluded (for example '[Scheduled] Scheduled Maintenance - Instances Control Plane (Milan)', 14 October, 11:08-12:40 CEST). The 21 October Block Storage page gives the outage as 12:23-12:28 UTC but stamps its only update 14:00 CEST (12:00 UTC); the body text was used. Durations for incidents with a single update are unknown, not zero. Timestamps are CET/CEST on the page and were converted to UTC."
+  },
+  {
+    "provider": "sprites",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "The status page lists 5 Sprites incidents from 6 August to 4 November 2026, including a 75-minute hosting outage on 11-12 October that made hosted sprites unavailable because of a certificate error.",
+      "source": {
+        "url": "https://status.flyio.net/incidents/01M4PS8CZW07R4EMEJK22H23NY",
+        "quote": "From approximately 2026-10-11 23:30 UTC through 2026-10-12 00:45 UTC some or all hosted sprites on the *.sprites.app subdomain were unavailable due to a certificate error.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [
+      {
+        "title": "Partial Sprites outage",
+        "start": "2026-09-23T18:44:21Z",
+        "end": "2026-09-24T02:12:43Z",
+        "duration": "7 h 28 min",
+        "component": "Sprites",
+        "url": "https://status.flyio.net/incidents/01M37TXDN856S591W41YPEB22M"
+      },
+      {
+        "title": "Sprites API Partial Outage",
+        "start": "2026-09-02T23:03:57Z",
+        "end": "2026-09-03T00:41:41Z",
+        "duration": "1 h 38 min",
+        "component": "Sprites",
+        "url": "https://status.flyio.net/incidents/01M1J5TSVGA1QX4GJGW9QA85J7"
+      },
+      {
+        "title": "Sprite hosting outage",
+        "start": "2026-10-11T23:30:00Z",
+        "end": "2026-10-12T00:45:00Z",
+        "duration": "75 min",
+        "component": "Sprites (hosted *.sprites.app; no component marked on the page)",
+        "url": "https://status.flyio.net/incidents/01M4PS8CZW07R4EMEJK22H23NY"
+      },
+      {
+        "title": "Sprite deletion jobs failing",
+        "start": "2026-08-30T21:18:00Z",
+        "end": "2026-08-30T22:05:00Z",
+        "duration": "47 min (as stated in the update)",
+        "component": "Sprites (no component marked on the page)",
+        "url": "https://status.flyio.net/incidents/01M1AEVPBJ66ACN7Y4NJM8JE2Y"
+      },
+      {
+        "title": "Sprite creates failing",
+        "start": "2026-10-08T21:23:15Z",
+        "end": "2026-10-08T21:51:56Z",
+        "duration": "28 min 41 s",
+        "component": "Sprites",
+        "url": "https://status.flyio.net/incidents/01M4EPC94XF097RBMJ5S35XMMN"
+      }
+    ],
+    "count": 5,
+    "window": "2026-08-06 to 2026-11-04 (UTC)",
+    "method": "curl GET https://status.flyio.net/history (HTTP 200): the page is a Next.js app whose history payload embeds every incident with id, name, status, affected component ids and status_summaries start/end times; the payload was parsed and component ids resolved to names (Sprites = 01KZSP42XPHFN5EEJMRJ433Y83). Cross-checked against https://status.flyio.net/feed.atom (HTTP 200, 60 entries back to 2026-08-09) and two incident pages (HTTP 200).",
+    "gaps": "The history payload's oldest incident is 2026-08-05T20:26Z, just before the window, so the window is covered but earlier history is not loaded on the page. 'Sprite hosting outage' and 'Sprite deletion jobs failing' carry no component on the page and were counted because their titles name Sprites. Fly platform incidents that degraded Sprites without naming it in the title are not counted. The page renders times in the viewer's local timezone; UTC values here come from the embedded payload."
+  },
+  {
+    "provider": "vercel-sandbox",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "The status page lists 2 Sandbox incidents from 6 August to 4 November 2026; the longest, 'Elevated latency in VCR, Blob, and Sandbox API', ran from 19:11 to 20:27 UTC on 4 September.",
+      "source": {
+        "url": "https://www.vercel-status.com/history.json",
+        "quote": "Sep 4, 19:11 - 20:27 UTC",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [
+      {
+        "title": "Elevated latency in VCR, Blob, and Sandbox API",
+        "start": "2026-09-04T19:11:44Z",
+        "end": "2026-09-04T20:27:26Z",
+        "duration": "1 h 16 min",
+        "component": "Sandbox, Blob",
+        "url": "https://www.vercel-status.com/incidents/b6s5qz7tj35w"
+      },
+      {
+        "title": "Elevated Sandbox error rates in Paris (cdg1)",
+        "start": "2026-10-06T09:12:06Z",
+        "end": "2026-10-06T09:36:55Z",
+        "duration": "24 min 49 s",
+        "component": "Sandbox (cdg1)",
+        "url": "https://www.vercel-status.com/incidents/xr8lx0kncx0g"
+      }
+    ],
+    "count": 2,
+    "window": "2026-08-06 to 2026-11-04 (UTC)",
+    "method": "curl GET https://www.vercel-status.com/api/v2/incidents.json (HTTP 200, 50 incidents back to 2026-05-25, so the window is fully covered); filtered on the 'Sandbox' component. Cross-checked against https://www.vercel-status.com/history (HTTP 200) and https://www.vercel-status.com/history.rss (HTTP 200, 25 entries only). Incident pages fetched via their stspg.io shortlinks (HTTP 200).",
+    "gaps": "The JSON endpoint returns only the 50 most recent incidents; that reaches back to 25 May 2026, so nothing in the window is missing. Only incidents with Sandbox listed as a component are counted; an incident that degraded Sandbox without tagging the component would be missed."
+  },
+  {
+    "provider": "vultr",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "Its status page publishes only current outages, alerts and upcoming maintenance, with no incident history, so no 90-day incident count can be read from it.",
+      "source": {
+        "url": "https://status.vultr.com/",
+        "quote": "This endpoint includes all current outages, alerts, and upcoming scheduled maintenance.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [],
+    "count": null,
+    "window": "2026-08-06 to 2026-11-04 (UTC)",
+    "method": "curl GET https://status.vultr.com/status.json (HTTP 200), https://status.vultr.com/alerts.json (HTTP 200) and https://status.vultr.com/alerts.rss (HTTP 200); the HTML page itself returns HTTP 403 to curl (Cloudflare), so it was read through Context.dev web_scrape (HTTP 200, cache miss) and Context.dev web_crawl (70 of 71 URLs fetched).",
+    "gaps": "No incident history is published: status.json and alerts.json carry 48 alerts, all dated 24 September to 2 November 2026, 47 marked ongoing and one resolved, and the HTML page has no history or archive section. The count is therefore unreadable, not zero. Any incident that started and resolved before 24 September is invisible here."
+  }
+]

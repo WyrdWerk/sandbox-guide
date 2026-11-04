@@ -245,3 +245,13 @@ Research date: 2026-10-28. Scope: public information, not a product test. No acc
 - **inferred** — Context.dev live search and fresh scrapes, TinyFish Fetch through Composio, and Parallel Search through Composio succeeded. No native Amp web fallback was used. Battleships JSON and Markdown were read as secondary references. The changing regional selector, signup flow, and the exact trial exit were not exercised; no paid Sandbox was started.
 - **inferred** — Quote audit after the claim-level revision: 81 evidence quotations were rechecked against freshly fetched live sources; 80 matched the provider's Markdown or third-party source after removing Markdown formatting, and the remaining trial quote matched the freshly rendered Hobby page via Context.dev, for 81 of 81 matches. This checks quotation text, not product behavior.
 - **inferred** — Company-info pass: 38 newly added quote excerpts were checked against fresh public pages on 2026-10-28; direct HTML matched 31, and the remaining 7 were matched against fresh Context.dev Markdown, including the custom-domain port evidence and the model-training clause. No account or paid resource was created.
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-1/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: By this guide's count, the status page lists 2 Sandbox incidents from 6 August to 4 November 2026. The larger was slow VCR, Blob and Sandbox APIs on 4 September, resolved at 20:27 UTC.
+- Source: https://www.vercel-status.com/incidents/b6s5qz7tj35w — "Elevated latency in VCR, Blob, and Sandbox API Incident Report for Vercel Resolved Blob has fully recovered. This incident has been resolved. Posted Sep 04 , 2026 - 20:27 UTC" (docs-confirmed)

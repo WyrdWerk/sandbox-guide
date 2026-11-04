@@ -123,8 +123,17 @@
         "value": "Not published. The sole named founder is also the sales and escalation contact."
       },
       {
-        "label": "Status and SLA",
-        "value": "Status components reported 100% over 30, 60 and 90 days at check. No SLA unless agreed in writing.",
+        "label": "Status page",
+        "value": "Every component headline reads 100% uptime, but the same page lists two incidents: US sandboxes degraded for 21 minutes on 20 October 2026, and some sandbox creations failing for 1 hour 5 minutes on 29 October.",
+        "source": {
+          "url": "https://status.agent37.com/",
+          "quote": "Temporary interruption to US sandboxes Degraded for 21 minutes",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "SLA",
+        "value": "No SLA unless agreed in writing.",
         "source": {
           "url": "https://www.agent37.com/terms",
           "quote": "we do not promise a specific uptime level unless we have agreed to one with you in writing.",

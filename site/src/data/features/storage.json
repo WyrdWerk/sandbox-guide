@@ -364,6 +364,30 @@
         "quote": "Block volumes provide network-attached storage you can plug in/out of Instances like a virtual hard drive.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "50 GB NVMe, 4 TB HDD",
+      "scenario": "The disk is a slider that grows with the machine, but the fast disk stops at 50 GB and big disks mean slow HDD in four locations.",
+      "note": "NVMe runs from 1 to 50 GB and HDD to 4,000 GB, but HDD is offered only in London, Singapore, Sydney and Vint Hill. Disks grow from the panel and the guest needs a reboot before the filesystem sees the new size; nothing says a disk can shrink. Backup and snapshot storage are separate, billed per GB-hour. A network-storage rate appears in the price feed with no documented product, so there is no honest claim of a detachable volume.",
+      "source": {
+        "url": "https://tierhive.com/api/pricing.php",
+        "quote": "\"slow_disk_max_gb\": 4000",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "partly",
+      "figure": "10–250 GB NVMe; 10 TB storage VM",
+      "scenario": "Files sit on local NVMe and survive a stop; a separate storage line goes to 10 TB, but nothing detaches from the server or outlives it.",
+      "note": "Compute plans carry 10–250 GB of local NVMe and storage plans 1–10 TB of RAID-10 HDD with 1–2 cores and 1–2 GB of RAM. Disk survives a stop and can grow on an upgrade, but it is tied to the server: there is no detachable block volume, no shared volume and no object storage. The 2023 features page still lists block storage as 'upcoming'; it does not exist in the current API or product list. Backups are not sold, so the copy that outlives the server is your own.",
+      "source": {
+        "url": "https://hosthatch.com/products",
+        "quote": "our storage VMs are designed for massive storage capacity, scalable up to hundreds of terabytes",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Disk, and how long it is kept",

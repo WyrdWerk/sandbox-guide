@@ -373,6 +373,30 @@
         "quote": "You can choose between uploading your own certificate held in Scaleway Secret Manager, or letting Edge Services generate a fully-managed Let's Encrypt certificate.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "yes",
+      "figure": "HAProxy + Let's Encrypt",
+      "scenario": "Add your domain in the panel, point DNS at TierHive, and the shared HAProxy terminates HTTPS for it.",
+      "note": "Domains and subdomains are added to the shared HAProxy in the control panel, with Let's Encrypt certificates issued and renewed automatically and load balancing or failover across backends in your private subnet. Two catches: the backend is a private IP in your own /24, and a domain left pointing at TierHive for more than 90 days after you close the account may be redirected by the provider. IPv6 is served directly, not through HAProxy.",
+      "source": {
+        "url": "https://tierhive.com/blog/general/haproxy",
+        "quote": "Automatic SSL/TLS certificates - Let's Encrypt integration with auto-renewal",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "partly",
+      "figure": "Your DNS, your TLS",
+      "scenario": "Point an A record at the server and you are reachable; the certificate and its renewal are yours to run.",
+      "note": "HostHatch does not sell DNS hosting or certificates for a VPS. The API manages reverse DNS only, so a custom domain means an A or AAAA record at your own DNS provider plus a reverse proxy and certificate inside the guest. The fixed public IPv4 makes the record easy to keep pointed at the machine, and the routed /64 gives you IPv6 for free.",
+      "source": {
+        "url": "https://docs.hosthatch.com/networking/",
+        "quote": "We support both dynamic (DHCP) and static IPv4 configuration.",
+        "confidence": "inferred"
+      }
     }
   ],
   "figureLabel": "Path to your domain",

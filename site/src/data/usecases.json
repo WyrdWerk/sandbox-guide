@@ -327,6 +327,28 @@
             "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/"
           },
           "price": "DEV1-M $18.52 compute and block storage + $4.06 IPv4 = $22.59 a month, always on"
+        },
+        {
+          "provider": "tierhive",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Hermes on a 4 GiB / 20 GB server over SSH on a forwarded port. The machine stays up until you stop it, and while stopped it is said to bill storage only, so an agent used a few hours a day costs cents. There is no Hermes recipe and no managed update, and the web UI would need the shared HAProxy or the spare TCP port.",
+          "link": {
+            "title": "TierHive pricing calculator",
+            "url": "https://tierhive.com/#calculator"
+          },
+          "price": "About $2.98/mo at 4 GiB / 20 GB running continuously ($0.004086/h)"
+        },
+        {
+          "provider": "hosthatch",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Hermes on an Ubuntu VM over SSH. NVMe 4 GB gives 2 cores / 4 GB / 20 GB for $6 a month, always on, with the disk and the process surviving a reboot and the memory files staying in ~/.hermes. There is no Hermes template and no managed update.",
+          "link": {
+            "title": "HostHatch compute plans",
+            "url": "https://hosthatch.com/products"
+          },
+          "price": "$6/mo (NVMe 4 GB, 2 cores / 4 GB / 20 GB)"
         }
       ],
       "picks": [
@@ -761,6 +783,28 @@
             "url": "https://www.scaleway.com/en/docs/generative-apis/reference-content/integrate-with-openclaw/"
           },
           "price": "DEV1-L $39.03 compute and block storage + $4.06 IPv4 = $43.09 a month, always on"
+        },
+        {
+          "provider": "tierhive",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install OpenClaw over SSH and pair WhatsApp, Telegram or Discord from the terminal. A channel gateway needs a process that never sleeps, which this host does well; the catch is that only two TCP ports are forwarded and SSH already holds one, so a web control panel needs HAProxy or IPv6.",
+          "link": {
+            "title": "How to find your forwarded ports",
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports"
+          },
+          "price": "$2.98–$6.11/mo (4 GiB / 20 GB to 8 GiB / 50 GB, always on)"
+        },
+        {
+          "provider": "hosthatch",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install OpenClaw on a VM over SSH and pair WhatsApp, Telegram or Discord from the terminal. NVMe 4 GB is enough for one or two channels; NVMe 8 GB at $9 adds memory for browsing.",
+          "link": {
+            "title": "HostHatch compute plans",
+            "url": "https://hosthatch.com/products"
+          },
+          "price": "$6–$9/mo (NVMe 4 GB or 8 GB)"
         }
       ],
       "picks": [
@@ -1242,6 +1286,28 @@
             "url": "https://www.scaleway.com/en/docs/instances/how-to/connect-to-instance/"
           },
           "price": "DEV1-L 160 h + 40 GiB block volume + IPv4 = $15.92 a month at 8 h × 20 days"
+        },
+        {
+          "provider": "tierhive",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run Claude Code or Codex on the largest machine sold, 8 GiB with 2 vCPU. Stopping it between sessions is cheap if the storage-only claim holds, which suits a developer who works a few hours a day far better than a monthly VPS does. The two-core ceiling and shared CPU are the limit on compile-heavy work.",
+          "link": {
+            "title": "TierHive pricing calculator",
+            "url": "https://tierhive.com/#calculator"
+          },
+          "price": "$6.11/mo at 8 GiB / 50 GB always on; less if stopped between sessions"
+        },
+        {
+          "provider": "hosthatch",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install Claude Code or Codex on NVMe 12 GB (4 cores, one dedicated / 12 GB / 50 GB, $12 a month). Stopping the server between sessions keeps the repository but still bills the month, so it suits someone who works most days rather than occasionally.",
+          "link": {
+            "title": "HostHatch compute plans",
+            "url": "https://hosthatch.com/products"
+          },
+          "price": "$12/mo (NVMe 12 GB)"
         }
       ],
       "picks": [
@@ -1623,6 +1689,28 @@
             "url": "https://www.scaleway.com/en/developers/api/instance"
           },
           "price": "20,000 one-minute runs = 20,000 billed hours ≈ $590"
+        },
+        {
+          "provider": "tierhive",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Only as a build-it-yourself backend, and a poor one: each one-minute run is a whole server billed a one-hour minimum, so 20,000 one-minute runs would cost 20,000 hours. There is no API to create those servers with, so the orchestration would be a person or a screen-scraper.",
+          "link": {
+            "title": "TierHive pricing calculator",
+            "url": "https://tierhive.com/#calculator"
+          },
+          "price": "Not a per-task product: 20,000 one-minute runs would cost $77.73 in billed hours at 4 GiB / 10 GB"
+        },
+        {
+          "provider": "hosthatch",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Possible only as a build-it-yourself backend: the API orders whole monthly servers, with no per-run sandbox, no memory snapshot and no cheap throwaway machine. 20,000 one-minute runs are 333 hours back to back, which fits one $6 plan, but every concurrent run needs another plan.",
+          "link": {
+            "title": "HostHatch API documentation",
+            "url": "https://docs.hosthatch.com/api/"
+          },
+          "price": "Not a per-task product; one NVMe 4 GB plan is $6/mo"
         }
       ],
       "picks": [
@@ -1999,6 +2087,28 @@
             "url": "https://www.scaleway.com/en/docs/instances/reference-content/images-and-instantapps/"
           },
           "price": "30,000 ten-minute sessions = 30,000 billed hours ≈ $885; an always-on DEV1-L is $43.09 a month"
+        },
+        {
+          "provider": "tierhive",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install headless Chromium and the agent on one 4 GiB server. Every session shares that machine, its two cores and one shared IPv4, so there is no per-session isolation. At 30,000 ten-minute sessions the one-hour minimum alone comes to $116.59, and the acceptable-use policy forbids automated scraping of external sites without prior written approval.",
+          "link": {
+            "title": "Acceptable use: scraping needs prior approval",
+            "url": "https://tierhive.com/acceptable-use.php"
+          },
+          "price": "About $116.59 for 30,000 ten-minute sessions (30,000 billed hours at $0.003886)"
+        },
+        {
+          "provider": "hosthatch",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Install headless Chromium and your agent on NVMe 8 GB or 12 GB. There is no hosted browser, no desktop stream and no per-session isolation: all sessions share one machine and one public IP, and the disk is local NVMe rather than a disposable snapshot.",
+          "link": {
+            "title": "HostHatch compute plans",
+            "url": "https://hosthatch.com/products"
+          },
+          "price": "$9–$12/mo (NVMe 8 GB or 12 GB)"
         }
       ],
       "picks": [
@@ -2369,6 +2479,28 @@
             "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/"
           },
           "price": "DEV1-M $18.52 compute and block storage + $4.06 IPv4 = $22.59 a month"
+        },
+        {
+          "provider": "tierhive",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run n8n in Docker on 4 GiB / 20 GB. It must stay awake for webhooks and schedules, which suits this host: nothing sleeps it and there is no bandwidth volume cap. Put it behind the shared HAProxy for HTTPS, keep the database and encryption key on the same disk, and take your own backups — the operator's policy makes backups your responsibility.",
+          "link": {
+            "title": "TierHive pricing calculator",
+            "url": "https://tierhive.com/#calculator"
+          },
+          "price": "About $2.98/mo at 4 GiB / 20 GB always on"
+        },
+        {
+          "provider": "hosthatch",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run n8n in Docker on NVMe 4 GB or 8 GB. It must stay awake for webhooks and scheduled workflows, which a monthly plan does well: nothing sleeps the machine and 1–2 TB of transfer is included. You keep the database and the encryption key on the same disk and back them up yourself.",
+          "link": {
+            "title": "HostHatch compute plans",
+            "url": "https://hosthatch.com/products"
+          },
+          "price": "$6–$9/mo (NVMe 4 GB or 8 GB)"
         }
       ],
       "picks": [
@@ -2839,6 +2971,28 @@
             "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/"
           },
           "price": "DEV1-S $8.35 compute and block storage + $4.06 IPv4 = $12.41 a month"
+        },
+        {
+          "provider": "tierhive",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run the bot on the preset's 2 GiB server, or drop to 1 GiB for less. A Discord or Slack gateway needs a process that never sleeps and this host does not sleep it; bandwidth is capped by speed rather than volume, which a small community will not reach. Email is banned, so a bot that sends mail needs an outside relay.",
+          "link": {
+            "title": "TierHive pricing calculator",
+            "url": "https://tierhive.com/#calculator"
+          },
+          "price": "About $1.71/mo at 2 GiB / 25 GB always on, or $0.82 at 1 GiB / 10 GB"
+        },
+        {
+          "provider": "hosthatch",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run a Discord or Slack bot on NVMe 2 GB: 1 core / 2 GB / 10 GB for $4 a month, always on, with 1 TB of transfer. The gateway connection stays up because nothing sleeps the server; 10 GB is enough for history but not for media.",
+          "link": {
+            "title": "HostHatch compute plans",
+            "url": "https://hosthatch.com/products"
+          },
+          "price": "$4/mo (NVMe 2 GB)"
         }
       ],
       "picks": [
@@ -3230,6 +3384,28 @@
             "url": "https://www.scaleway.com/en/docs/iam/concepts/"
           },
           "price": "5 × DEV1-L at 160 h = $79.58 a month including five IPv4 addresses"
+        },
+        {
+          "provider": "tierhive",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "One 8 GiB server per developer, or one larger box with separate Linux users. There is no documented sub-user model, no SSO, no role separation and no audit log, and the terms permit one account per customer. Prepaid tokens do cap the bill, but they are account-wide.",
+          "link": {
+            "title": "Terms of service: one account per customer",
+            "url": "https://tierhive.com/terms.php"
+          },
+          "price": "About $6.70/mo for five developers at 8 GiB / 50 GB each, 8 h × 20 days"
+        },
+        {
+          "provider": "hosthatch",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Five NVMe 12 GB servers, one per developer, at $12 each: 4 cores / 12 GB / 50 GB per person, with separate credentials on separate machines. Projects and roles can group them, but there is no SSO and no audit log.",
+          "link": {
+            "title": "HostHatch compute plans",
+            "url": "https://hosthatch.com/products"
+          },
+          "price": "$60/mo for five NVMe 12 GB servers"
         }
       ],
       "picks": [
@@ -3628,6 +3804,28 @@
             "url": "https://www.scaleway.com/en/pricing/storage/"
           },
           "price": "120 ten-minute runs ≈ $2.04; an always-on DEV1-S is $12.41 a month"
+        },
+        {
+          "provider": "tierhive",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Cron inside the VM runs the scraper four times a day, and a stopped server between runs costs storage only, so 120 ten-minute runs come to about 28 cents. Two catches: the acceptable-use policy forbids automated scraping without prior written approval, and a stopped server runs nothing, so the schedule has to start it or it has to stay awake.",
+          "link": {
+            "title": "Acceptable use: scraping and crawling",
+            "url": "https://tierhive.com/acceptable-use.php"
+          },
+          "price": "About $0.28/mo for 120 ten-minute runs (120 billed hours), or $1.71/mo if it stays awake"
+        },
+        {
+          "provider": "hosthatch",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run the scraper from cron on NVMe 2 GB and write results to your own storage. The server is always on, so the schedule cannot be missed, but it bills the whole month: 120 ten-minute runs are 20 hours of a 730-hour plan.",
+          "link": {
+            "title": "HostHatch compute plans",
+            "url": "https://hosthatch.com/products"
+          },
+          "price": "$4/mo (NVMe 2 GB)"
         }
       ],
       "picks": [
@@ -4015,6 +4213,28 @@
             "url": "https://www.scaleway.com/en/docs/instances/how-to/use-security-groups/"
           },
           "price": "STARDUST1-S (1 vCPU / 1 GiB) $5.61 a month including IPv4 if it can be ordered; DEV1-S $12.41"
+        },
+        {
+          "provider": "tierhive",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "1 GiB / 10 GB is the cheapest always-on public endpoint here at about 82 cents a month. Put it behind the shared HAProxy with a domain and automatic HTTPS, or use a dedicated IPv6, because the raw IPv4 route is a shared address with a random high port. Nothing sleeps it, so a tool call never waits for a wake.",
+          "link": {
+            "title": "HAProxy and automatic HTTPS",
+            "url": "https://tierhive.com/blog/general/haproxy"
+          },
+          "price": "About $0.82/mo at 1 GiB / 10 GB always on"
+        },
+        {
+          "provider": "hosthatch",
+          "tier": "manual",
+          "noTerminal": "no",
+          "what": "Run your own MCP server on NVMe 2 GB at a fixed public IPv4 with a routed /64 of IPv6, open only the port you need with an ingress firewall group, and keep it awake all month. 1 TB of transfer is plenty for tool calls.",
+          "link": {
+            "title": "HostHatch compute plans",
+            "url": "https://hosthatch.com/products"
+          },
+          "price": "$4/mo (NVMe 2 GB)"
         }
       ],
       "picks": [

@@ -364,6 +364,30 @@
         "quote": "Flexible routed IPv4 addresses: public IPv4 addresses routed directly to your Instance.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "partly",
+      "figure": "2 TCP + 2 UDP ports",
+      "scenario": "SSH arrives on a high port of a shared address, you get one spare TCP port, and web traffic goes through the shared HAProxy.",
+      "note": "There is no public IPv4 of your own. Each server gets two forwarded TCP and two UDP ports on its host's address, and the first TCP port is always port 22, so SSH works with a standard client on a non-standard port. That leaves one TCP port for everything else — the provider's own HAProxy how-to uses a second VPS as a bastion to work around it. An IPv6 /64 per location, up to ten addresses per server, opens nearly all ports; the shared HAProxy does not serve IPv6. A noVNC console gets you in when SSH fails.",
+      "source": {
+        "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+        "quote": "Your nat VPS is provided with 2 open TCP ports and 2 UDP port. By design the 1st TCP port is mapped to your VPS port 22/TCP.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "yes",
+      "figure": "IPv4, SSH, VNC, any port",
+      "scenario": "The server answers on its own public IPv4 with real SSH, a VNC or serial console in the panel, a routed /64 of IPv6 and any TCP port you open.",
+      "note": "Every server gets a primary public IPv4 and can enable a routed /64 of IPv6; SSH is a normal daemon, so any TCP or UDP service is reachable once the firewall allows it. The panel has a VNC and a serial console for when SSH fails. There is no private or tokenised URL, no provider tunnel and no managed reverse proxy — those are yours to build.",
+      "source": {
+        "url": "https://docs.hosthatch.com/networking/",
+        "quote": "We support both dynamic (DHCP) and static IPv4 configuration.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Who can open the link",

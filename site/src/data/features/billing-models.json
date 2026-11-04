@@ -364,6 +364,30 @@
         "quote": "Each of these resources is billed separately for a minimum of 60 minutes.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "yes",
+      "figure": "$0.000135–$0.008373/h",
+      "scenario": "The meter is genuinely hourly: a server costs its RAM and disk rate for each hour it exists, with a one-hour minimum and no monthly plan.",
+      "note": "A per-hour price built from published resource rates — RAM $0.0009216 per GiB-hour, NVMe $0.00002 per GB-hour — plus optional priority tiers. Prepaid tokens at $1 each, a $3 first top-up, a one-hour minimum per server, and no monthly price or cap. A stopped server is said to bill storage only, which is what makes part-time use cheap. The catch is the minimum: 1,000 ten-minute servers cost 1,000 hours.",
+      "source": {
+        "url": "https://tierhive.com/",
+        "quote": "True hourly billing - pay only for hours used, no monthly commitments",
+        "confidence": "pricing-page"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "partly",
+      "figure": "$4–$69 a month",
+      "scenario": "A flat monthly plan is the only meter: a box that mostly waits costs the same as one that works, and a short task costs a whole month.",
+      "note": "One prepaid plan per server, $4 to $69 a month for compute and $5 to $38 for storage. The terms invoice monthly, quarterly, semi-annually or annually, but there is no hourly or per-second rate and no cheaper stopped rate. The published monthly price is used in this guide because the checkout's longer-term prices are behind the login. Promotional plans sold through LowEndTalk are annual or three-year prepay only, limited stock, non-refundable and slower to set up.",
+      "source": {
+        "url": "https://hosthatch.com/terms-of-service",
+        "quote": "HostHatch will invoice Customer for Fees and Expenses monthly, quarterly, semi-annually or annually.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "The meter",

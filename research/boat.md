@@ -1417,3 +1417,13 @@ agent claims; the marketing homepage, the Terms, and both battleships files were
 
 **Not verified by execution:** nothing was created, started, resumed or billed. Dashboard contents,
 actual start latency, and real-world snapshot restore behaviour are documented only.
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-1/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: No incident history is published: the status page shows per-component uptime and latency over a rolling 90-day window, but no list of dated outages.
+- Source: https://status.ascii.dev/history.json — ""windowDays": 90, "blockHours": 1" (inferred)

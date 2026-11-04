@@ -173,11 +173,56 @@
       },
       {
         "label": "Support",
-        "value": "Slack community and email on every tier, 24×7 Slack and email on Pro with a 24-hour P1, and a 1-hour P1 plus a resident SA on Enterprise.",
+        "value": "Slack community and email on every tier, 24×7 Slack and email on Pro, and a 1-hour P1 plus a resident SA on Enterprise.",
         "source": {
           "url": "https://www.tensorlake.ai/pricing",
           "quote": "24×7 Slack + email",
           "confidence": "pricing-page"
+        }
+      },
+      {
+        "label": "SLA scope",
+        "value": "Paid plans only; the free tier has no uptime promise, and an order form can change the terms.",
+        "source": {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "This Section 5 applies to paid Plans and does not apply to Free Offerings (Section 12). An Order Form may modify this Section 5",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "SLA credits",
+        "value": "Credits are added to your next invoice automatically; you don't have to file a claim.",
+        "source": {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "applies them automatically to Customer’s next invoice; Customer is not required to submit a claim",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Leaving after bad months",
+        "value": "If availability is below 99.5% for two months in a row, or three months in six, you can cancel without penalty on 30 days' notice.",
+        "source": {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "If Monthly Availability falls below 99.5% in two (2) consecutive months, or in any three (3) months within a rolling six-month period, Customer may, on thirty (30) days’ written notice, elect either (a) to terminate the affected Plan or Order Form without penalty",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "P1 response (pricing page)",
+        "value": "The pricing page promises a first reply to a critical (P1) ticket within 24 hours on Pro.",
+        "source": {
+          "url": "https://www.tensorlake.ai/pricing",
+          "quote": "P1 SLA: 24 hours",
+          "confidence": "pricing-page"
+        }
+      },
+      {
+        "label": "P1 response (Terms)",
+        "value": "The Terms set a 4-hour target for the first reply to a critical ticket, around the clock, which disagrees with the pricing page's 24 hours. Get the figure in your order form.",
+        "source": {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "4 hours, 24×7",
+          "confidence": "docs-confirmed"
         }
       },
       {
@@ -285,8 +330,25 @@
     },
     {
       "issue": "A malicious npm release shipped in October 2026",
-      "detail": "The Trust Center records a malicious `tensorlake@0.5.144` published to npm on 8 October 2026 with a GitHub advisory. Pin a version and check the advisory before installing the JavaScript SDK.",
-      "status": "open"
+      "detail": "A compromised maintainer account published `tensorlake@0.5.144` to npm on 8 October 2026 through Tensorlake's own release workflow, so it carried valid provenance. It was live for about 1 hour 40 minutes and affected only the npm package, not the Python package or the CLI. Installing it ran a credential stealer that also leaves a service which deletes your home directory if the stolen GitHub token is revoked. Tensorlake's advisory says 0.5.143 and earlier are safe. Pin SDK versions, and follow the advisory's clean-up order if 0.5.144 ever ran on your machine or CI.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2",
+          "quote": "The package was live on npm for approximately 1 hour 40 minutes (01:12–02:54 UTC). Only the npm package was affected, the PyPI and crates.io `tensorlake` packages and the `tensorlake` CLI were not.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2",
+          "quote": "deletes the user's home directory if the stolen GitHub token is revoked",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://github.com/tensorlakeai/tensorlake/security/advisories/GHSA-8g63-53c9-65j2",
+          "quote": "Version 0.5.143 and all prior versions are unaffected.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     },
     {
       "issue": "HIPAA is claimed but not badged",

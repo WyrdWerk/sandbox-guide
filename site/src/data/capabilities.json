@@ -295,6 +295,28 @@
             "quote": "An Instance is a virtual machine in the cloud. Like a physical machine, it provides resources such as virtualized CPU, RAM, and storage.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "KVM guest, own kernel",
+          "note": "A full KVM guest built on the operator's own QEMU/KVM/libvirt stack, not a container or a shared namespace.",
+          "source": {
+            "url": "https://tierhive.com/about.php",
+            "quote": "Everything in TierHive is custom, we designed and wrote it on top of an absolute minimal, cut-to-the-bone QEMU/KVM/libvirt stack.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Full VM, own kernel",
+          "note": "A full virtual machine with its own kernel, not a container. HostHatch calls them VMs and lets you boot your own ISO; the hypervisor is not named on its site or in the docs.",
+          "source": {
+            "url": "https://hosthatch.com/features",
+            "quote": "You can also upload your own ISO image using our control panel, and deploy it on your VMs with us, just like you would on a bare-metal or a physical server.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -585,6 +607,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/how-to/connect-to-instance/",
             "quote": "you can use a terminal application on your local computer to remotely connect to your Instance as root.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "Root",
+          "note": "Full root inside the guest: the guides install operating systems, mount disks and edit sshd, none of which a locked-down account could do.",
+          "source": {
+            "url": "https://tierhive.com/blog",
+            "quote": "Installing OpenBSD on a KVM VPS via ipxe/VNC console, no template required.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Root over SSH",
+          "note": "Full root inside the guest, with a root-password reset action in the API and panel.",
+          "source": {
+            "url": "https://hosthatch.com/",
+            "quote": "You have full root-level access to your VMs.",
             "confidence": "docs-confirmed"
           }
         }
@@ -884,6 +928,28 @@
             "quote": "Docker, the famous container manager encapsulated in a Scaleway image, allows you to deploy your applications within seconds, eliminating concerns about compatibility and dependencies.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "Docker recipes",
+          "note": "Two first-party recipes install Docker — one on Debian, one on Alpine — so containers are an expected workload.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Alpine Linux with Docker installed and a script to easily add an IPV6 and setup a SWAP partition if necessary.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Root + own kernel",
+          "note": "No Docker guide or image is published, but a full VM with root and its own kernel runs Docker normally; you install it yourself.",
+          "source": {
+            "url": "https://hosthatch.com/features",
+            "quote": "You can also upload your own ISO image using our control panel, and deploy it on your VMs with us, just like you would on a bare-metal or a physical server.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -1177,6 +1243,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/reference-content/instances-datasheet/",
             "quote": "This datasheet provides a concise overview of the performance, technical features, components, materials, and associated documentation for different Instance offers.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "Passthrough + nesting",
+          "note": "Nesting and CPU passthrough are on, so a guest can run its own VMs or something that needs hardware features.",
+          "source": {
+            "url": "https://tierhive.com/about.php",
+            "quote": "we do have passthrough and nesting enabled for you, in case you want to run anything that requires it",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "Nothing in the product page, the features page, the full documentation bundle or the API mentions nested virtualisation, a KVM-inside-KVM flag or a hypervisor inside the guest. Ask before planning a hypervisor on one of these servers.",
+          "source": {
+            "url": "https://hosthatch.com/features",
+            "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
             "confidence": "not-published"
           }
         }
@@ -1479,6 +1567,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/api-cli/snapshot-import-export-feature/",
             "quote": "The snapshot transfer feature allows you to export or import Instances snapshots.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "ISO from URL, PXE/iPXE",
+          "note": "Mount one or more ISOs from URLs, boot over PXE/iPXE, set your own DHCP options, or reimage to Windows with a recipe.",
+          "source": {
+            "url": "https://lowendspirit.com/discussion/11534/tierhive-19-locations-build-your-own-vps-plan-from-0-10-p-month-or-0-000135-per-hour",
+            "quote": "You can mount ISO's from URLs (plural)",
+            "confidence": "third-party"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Own ISO, 1 per project",
+          "note": "Upload an ISO in the panel, mount it and install anything. A project holds one custom ISO at a time, and ISO upload through the API is not available yet.",
+          "source": {
+            "url": "https://hosthatch.com/features",
+            "quote": "You can also upload your own ISO image using our control panel, and deploy it on your VMs with us, just like you would on a bare-metal or a physical server.",
             "confidence": "docs-confirmed"
           }
         }
@@ -1785,6 +1895,29 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/how-to/resize-instances/",
             "quote": "Select a new Instance configuration from the list of available offers.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "partly",
+          "figure": "RAM/disk free, CPU fixed",
+          "shortfall": "RAM and disk are free-form sliders, but CPU is not a choice — one core up to 2 GB and two above that — so the machine is only half build-your-own.",
+          "note": "RAM is any 128 MB step from 128 MB to 8 GB, NVMe any GB from 1 to 50, HDD to 4,000 GB in four locations. The vCPU count follows the RAM instead of being picked.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Up to 8GB RAM per VPS (not all locations support 8GB)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "10 fixed plans",
+          "note": "CPU and memory come in ten fixed ratios from 1 core / 2 GB to 16 cores / 96 GB. There is no way to order, for example, 2 cores with 16 GB; the nearest plan is 4 cores / 16 GB.",
+          "source": {
+            "url": "https://hosthatch.com/products",
+            "quote": "1 AMD EPYC core ( fair share )",
             "confidence": "inferred"
           }
         }
@@ -2094,6 +2227,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/reference-content/instances-datasheet/",
             "quote": "vCPUs 48 vCPU type Shared RAM size 256 GiB",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "8 GiB / 2 vCPU max",
+          "note": "The largest machine is 8 GB of RAM with two vCPU. Nothing on the site, the calculator or the price feed offers 16 vCPU or 32 GiB.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Up to 8GB RAM per VPS (not all locations support 8GB)",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "16 cores / 96 GB / 250 GB",
+          "note": "The top compute plan is 16 cores / 96 GB / 250 GB for $69 a month; the storage line reaches 10 TB of HDD.",
+          "source": {
+            "url": "https://hosthatch.com/products",
+            "quote": "16 AMD EPYC cores ( 8 dedicated, 8 fair-shared cores )",
             "confidence": "docs-confirmed"
           }
         }
@@ -2412,6 +2567,29 @@
             "quote": "This upgrades your Instance, which reboots in the process, resulting in up to five minutes of downtime.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "partly",
+          "figure": "Panel resize, reboot for disk",
+          "shortfall": "The panel changes RAM and disk while the server runs, but the guest only sees a bigger disk after a reboot, and vCPU cannot be changed at all.",
+          "note": "The homepage advertises adjusting CPU, RAM and disk without downtime. The provider's own disk guide puts the filesystem step after a reboot, and CPU follows RAM rather than being a separate control.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Real-time upgrades and downgrades. Adjust CPU, RAM, and disk without downtime.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Reboot applies the upgrade",
+          "note": "An upgrade moves the server to another plan and can grow the disk, but the new plan is applied by the next reboot through the API. There is no resize while running.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/servers/",
+            "quote": "The server has changes, such as a new plan, that its next reboot through the API applies.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -2721,6 +2899,28 @@
             "quote": "A flexible, cost-effective GPU instance designed for AI and accelerated workloads",
             "confidence": "pricing-page"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "No GPU",
+          "note": "The calculator exposes RAM, NVMe, HDD, backup storage, CPU priority, IOPS and network tiers only. No GPU appears on the site or in the price feed.",
+          "source": {
+            "url": "https://tierhive.com/api/pricing.php",
+            "quote": "\"max_disk_gb\": 50",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No GPU plan",
+          "note": "The company sells two product lines, Compute and Storage, and neither carries a GPU. No GPU appears in the plan table, the API catalogue or the order flow.",
+          "source": {
+            "url": "https://hosthatch.com/company",
+            "quote": "We sell only two types of no-frills IaaS - Compute and Storage",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -3023,6 +3223,28 @@
             "quote": "Scaleway offers different Instance ranges in all regions: Paris (France), Amsterdam (Netherlands), and Warsaw (Poland).",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "19 locations",
+          "note": "The price feed lists 19 locations: Amsterdam, Beauharnois, Frankfurt, Gravelines, Hillsboro, Jacksonville, Johannesburg, Kansas City, London, New York, Paris, Roubaix, Sao Paulo, Singapore, Sydney, Tokyo, Vancouver, Vint Hill and Warsaw. A server can be migrated between them yourself.",
+          "source": {
+            "url": "https://tierhive.com/api/pricing.php",
+            "quote": "\"network_bw_limit\": 225",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "16 advertised locations",
+          "note": "The location is chosen at order. The product page advertises 16 edge locations, the docs matrix lists 14 cities and the status page monitors 13; Madrid, Milan, Warsaw and Seoul differ between those lists, so confirm stock for your city.",
+          "source": {
+            "url": "https://hosthatch.com/products",
+            "quote": "Deploy in 16 edge locations",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -3322,6 +3544,28 @@
             "quote": "A subsidiary of the iliad Group, Scaleway currently operates in France, Poland, Italy, and the Netherlands, with upcoming deployments in Sweden and Germany.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "DE, FR ×3, NL, PL",
+          "note": "Six EU locations (Frankfurt, Gravelines, Paris, Roubaix, Amsterdam, Warsaw) plus London. The company itself is in the United Kingdom, which is not in the EU.",
+          "source": {
+            "url": "https://tierhive.com/api/pricing.php",
+            "quote": "\"name\": \"Frankfurt, DE\"",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Amsterdam, Stockholm, Vienna…",
+          "note": "EU locations include Amsterdam, Stockholm, Vienna, Madrid and Milan, with Zurich, London and Oslo outside the EU. EU residency is a location choice, not a contractual guarantee.",
+          "source": {
+            "url": "https://docs.hosthatch.com/features/",
+            "quote": "Digital Realty AMS18",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -3618,6 +3862,28 @@
             "quote": "You are still billed for an Instance in standby mode, as well as for its storage and any flexible IPs attached to it.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "Stop = power off",
+          "note": "A stopped server loses memory and running processes. No page offers hibernation, a memory snapshot or resume-in-place; the only saved state is a disk backup or snapshot.",
+          "source": {
+            "url": "https://lowendspirit.com/discussion/11534/tierhive-19-locations-build-your-own-vps-plan-from-0-10-p-month-or-0-000135-per-hour",
+            "quote": "You only pay for storage when the VPS is powered off.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Stop = power off",
+          "note": "The only server states are running, stopped and suspended. A stop is a power-off: the disk survives, memory and running processes do not, and there is no hibernate or pause.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/servers/",
+            "quote": "`status` | string | `running`, `stopped` or `suspended`",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -3906,6 +4172,28 @@
             "url": "https://www.scaleway.com/en/docs/instances/how-to/create-manage-instance-groups/",
             "quote": "A group can run at a fixed size for predictable workloads, or scale automatically between a minimum and maximum number of Instances based on usage metrics.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "Created on demand",
+          "note": "Servers are created when you ask for one. Nothing describes a pool of pre-started machines or a reserved capacity buffer.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Instant deployment in under 60 seconds",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Provisioned at order",
+          "note": "Every server is created when its order is paid; there is no pool of pre-started machines and no pre-warmed capacity product.",
+          "source": {
+            "url": "https://hosthatch.com/",
+            "quote": "Get online within 60 seconds.",
+            "confidence": "inferred"
           }
         }
       ]
@@ -4208,6 +4496,28 @@
             "quote": "Our Virtual Instances range is delivered in seconds and is made to meet all your workload needs, from personal projects to business-critical apps.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "Under 60 s",
+          "note": "Fast for a VPS, but it is a booted virtual machine, not a sub-second sandbox.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Instant deployment in under 60 seconds",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "About 60 seconds",
+          "note": "HostHatch advertises getting online within 60 seconds. That is fast for a VPS, but it is a booted virtual machine, not a sub-second sandbox.",
+          "source": {
+            "url": "https://hosthatch.com/",
+            "quote": "Get online within 60 seconds.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -4503,6 +4813,28 @@
             "quote": "Creating an image makes a complete backup of your Instance, including all of its volumes.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "Backups + snapshots",
+          "note": "The panel schedules backups and takes snapshots, both billed by the gigabyte-hour, and a backup can be attached to another server and mounted instead of restored.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Automated backups and snapshots",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Disk snapshots",
+          "note": "A snapshot copies the server's disk and can be restored onto the same or another server in the project. It is taken on demand and kept until deleted; the account's limit and any charge are not published.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/snapshots/",
+            "quote": "A snapshot is a copy of a server's disk at one moment.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -4794,6 +5126,28 @@
             "quote": "A snapshot takes a picture of a specific volume at one point in time.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "Disk only",
+          "note": "Every saved state described is a disk image that is restored or mounted. Nothing captures RAM, so a running process cannot be resumed from one.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-backup-chroot",
+            "quote": "Attach the backup to the VPS you want to chroot.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Disk only",
+          "note": "The snapshot is explicitly a copy of the disk. No memory, process state or open connection is captured, so a restore is always a cold boot.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/snapshots/",
+            "quote": "A snapshot is a copy of a server's disk at one moment.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -5084,6 +5438,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/block-storage/concepts/",
             "quote": "A snapshot takes a picture of a specific volume at one point in time.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "Cold restore only",
+          "note": "You can attach a backup to a second server and boot from it, which is a cold copy of a past disk, not a fork of a running machine.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-backup-chroot",
+            "quote": "Attach the backup to the VPS you want to chroot.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Snapshot, then new server",
+          "note": "A snapshot can be used to order a new server, but the original is not copied live and the snapshot is crash-consistent at best. There is no fork or copy-on-write of a running machine.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/snapshots/",
+            "quote": "To create a new server from a snapshot, order a server with its `snapshot_id` instead of an `image`.",
             "confidence": "inferred"
           }
         }
@@ -5379,6 +5755,28 @@
             "quote": "In both cases, the snapshot exists as an independent, billed resource and is not deleted when its source volume, Instance, or image is deleted.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "not-published",
+          "figure": "Retention unknown",
+          "note": "Backups can be scheduled and taken once, so more than one can exist, but how many are kept and for how long is not published anywhere on the site or in the price feed.",
+          "source": {
+            "url": "https://lowendspirit.com/discussion/11534/tierhive-19-locations-build-your-own-vps-plan-from-0-10-p-month-or-0-000135-per-hour",
+            "quote": "Scheduled or one time backups",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Kept until deleted",
+          "note": "Snapshots are not rotated automatically: each one stays until you delete it, and the account's total is capped by an unpublished limit.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/snapshots/",
+            "quote": "A snapshot belongs to the project: you can restore it onto any of the project's servers, and it stays when the server it was taken from is gone.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -5667,6 +6065,29 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/how-to/create-manage-instance-templates/",
             "quote": "An Instance template saves a predefined, immutable server configuration",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "partly",
+          "figure": "OS images + recipes",
+          "shortfall": "You can rebuild from the OS list or run a community recipe, but a configured server cannot be saved as your own template.",
+          "note": "Recipes are deploy scripts with your own script injection, and there are around forty of them plus 14 OS images including FreeBSD, OpenBSD and FreeDOS. That covers a repeatable build, not a saved snapshot of a machine you set up by hand.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "One-click OS deployments: Ubuntu, Debian, AlmaLinux, Rocky Linux, CentOS Stream, Alpine, Fedora, Arch, SUSE, OpenSUSE, FreeBSD, OpenBSD, FreeDOS",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Snapshot → many servers",
+          "note": "A completed snapshot can stand in for an image when ordering, so a configured server can be reused to start as many identical servers as the account's snapshot limit allows. There is no separate template object.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/snapshots/",
+            "quote": "To create a new server from a snapshot, order a server with its `snapshot_id` instead of an `image`.",
             "confidence": "docs-confirmed"
           }
         }
@@ -5962,6 +6383,28 @@
             "quote": "Creating an image is free. However, the image feature creates snapshots of your volumes, and snapshots are billed separately.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "Scheduled, billed storage",
+          "note": "Scheduled and one-off backups with restore, billed as backup storage per GB-hour plus a small creation and restore fee. The retention policy is not published.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Automated backups with flexible scheduling. Instant restore capabilities.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "No automated backup product appears in the current product list, the API, the documentation bundle or the panel. The only mention is a 2023 'Upcoming Features' block promising daily, weekly or monthly backups at 20% of the VM price; that block is stale and the feature is not sold today. Ask support.",
+          "source": {
+            "url": "https://hosthatch.com/features",
+            "quote": "Daily, weekly or monthly backups - similar to snapshots but fully automated and configurable for 20% of the monthly cost of your VM.",
+            "confidence": "not-published"
+          }
         }
       ]
     },
@@ -6252,6 +6695,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/",
             "quote": "Stopped (keep local storage): storage + IP (no compute).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "Disk kept, storage billed",
+          "note": "The disk stays when the server is powered off and keeps billing by the gigabyte-hour, so the files are there when it starts again.",
+          "source": {
+            "url": "https://lowendspirit.com/discussion/11534/tierhive-19-locations-build-your-own-vps-plan-from-0-10-p-month-or-0-000135-per-hour",
+            "quote": "You only pay for storage when the VPS is powered off.",
+            "confidence": "third-party"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Disk kept when stopped",
+          "note": "A stop is a power-off, not a delete: the disk and its files stay with the server, which keeps billing until the term ends.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/servers/",
+            "quote": "`end_of_term`: the server runs until the end of the period you paid for, then it is deleted.",
             "confidence": "docs-confirmed"
           }
         }
@@ -6547,6 +7012,28 @@
             "quote": "Block volumes provide network-attached storage you can plug in/out of Instances like a virtual hard drive.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "not-published",
+          "figure": "No volume product",
+          "note": "A server has one NVMe disk that is grown from the panel. The price feed also carries a network-backed storage rate, but no page describes a volume you can detach from one server and attach to another.",
+          "source": {
+            "url": "https://tierhive.com/api/pricing.php",
+            "quote": "\"resource_name\": \"nbd_network_storage\"",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No block volumes",
+          "note": "There is no detachable block-storage product: disk belongs to the server and can only grow with an upgrade. The 2023 features page lists block storage as 'upcoming'; it is absent from the current API, docs and product list.",
+          "source": {
+            "url": "https://hosthatch.com/company",
+            "quote": "We sell only two types of no-frills IaaS - Compute and Storage",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -6835,6 +7322,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/block-storage/how-to/attach-a-volume/",
             "quote": "Scaleway Block Storage volumes must be attached to an Instance before being used.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "One disk per server",
+          "note": "The documented storage surface is one NVMe disk per server plus backup and snapshot storage. No shared or multi-attach filesystem is offered.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Fast Storage",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No shared volume",
+          "note": "With no block-storage product there is nothing to share. Private networking connects machines in one location, but it is a VLAN, not a shared filesystem.",
+          "source": {
+            "url": "https://docs.hosthatch.com/networking/",
+            "quote": "If you enable Private Networking on your VM you will get an additional network interface that you can use for traffic between your own VMs in the same region.",
             "confidence": "inferred"
           }
         }
@@ -7132,6 +7641,28 @@
             "url": "https://www.scaleway.com/en/pricing/storage/",
             "quote": "Scalable, fast and reliable Amazon S3-compatible storage platform for your data.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "No object storage",
+          "note": "There is no S3-compatible product and nothing about mounting outside storage. The static hosting product serves files; it is not a bucket you can mount.",
+          "source": {
+            "url": "https://tierhive.com/static-hosting",
+            "quote": "25 MB storage included free.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No object storage",
+          "note": "HostHatch sells compute and storage VMs only; there is no S3-compatible product to mount. Outside storage would be a bucket at another provider, mounted with software you run.",
+          "source": {
+            "url": "https://hosthatch.com/company",
+            "quote": "We sell only two types of no-frills IaaS - Compute and Storage",
+            "confidence": "inferred"
           }
         }
       ]
@@ -7434,6 +7965,28 @@
             "quote": "The maximum size of a block volume is 15 TB.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "4,000 GB HDD",
+          "note": "HDD goes to 4,000 GB, but only in London, Singapore, Sydney and Vint Hill, and at a seventh of the NVMe rate. NVMe stops at 50 GB.",
+          "source": {
+            "url": "https://tierhive.com/api/pricing.php",
+            "quote": "\"slow_disk_max_gb\": 4000",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "10 TB storage VM; 250 GB plan",
+          "note": "Compute plans reach 250 GB of NVMe and the separate storage line reaches 10 TB of RAID-10 HDD for $38 a month. The storage line is advertised in 8 locations but listed in only 4 in the site data.",
+          "source": {
+            "url": "https://hosthatch.com/products",
+            "quote": "our storage VMs are designed for massive storage capacity, scalable up to hundreds of terabytes",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -7731,6 +8284,28 @@
             "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/",
             "quote": "The Instance is fully active and consumes compute resources.",
             "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "No idle stop",
+          "note": "Nothing sleeps the server. It runs until you stop or delete it; the only automatic intervention is the CPU watchdog after two hours at a full core.",
+          "source": {
+            "url": "https://tierhive.com/blog/general/what-is-an-hourly-vps-and-why-you-might-want-one",
+            "quote": "Billing stops the second you delete the server",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Runs until the term ends",
+          "note": "No idle timer, session limit or automatic stop exists. A server runs for the whole paid term until you stop it or cancel, and the bill continues either way.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/servers/",
+            "quote": "`end_of_term`: the server runs until the end of the period you paid for, then it is deleted.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -8031,6 +8606,28 @@
             "quote": "The Instance is halted and the underlying hypervisor is released.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "No idle timer",
+          "note": "There is no idle timer to configure because nothing pauses the machine for being idle.",
+          "source": {
+            "url": "https://tierhive.com/blog/general/what-is-an-hourly-vps-and-why-you-might-want-one",
+            "quote": "Billing stops the second you delete the server",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No idle timer",
+          "note": "There is no idle setting to configure because nothing sleeps the machine. The only states are running, stopped and suspended, and stopping is a manual action.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/servers/",
+            "quote": "`status` | string | `running`, `stopped` or `suspended`",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -8320,6 +8917,28 @@
             "quote": "The Instance is halted and the underlying hypervisor is released.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "Never sleeps",
+          "note": "A running server answers directly; a stopped one stays stopped until you start it from the panel. There is no request-triggered wake.",
+          "source": {
+            "url": "https://tierhive.com/blog/general/what-is-an-hourly-vps-and-why-you-might-want-one",
+            "quote": "Billing stops the second you delete the server",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No sleep to wake",
+          "note": "A server never sleeps, so there is no wake step. A powered-off server stays down until you start it from the panel or API.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/actions/",
+            "quote": "Power on",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -8607,6 +9226,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/how-to/create-manage-instance-groups/",
             "quote": "A group can run at a fixed size for predictable workloads, or scale automatically between a minimum and maximum number of Instances based on usage metrics.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "Cron in the guest",
+          "note": "TierHive schedules backups, not your jobs. Recurring work runs from cron or systemd inside the server, and a stopped server runs nothing.",
+          "source": {
+            "url": "https://lowendspirit.com/discussion/11534/tierhive-19-locations-build-your-own-vps-plan-from-0-10-p-month-or-0-000135-per-hour",
+            "quote": "Scheduled or one time backups",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Cron in the guest",
+          "note": "There is no provider-side scheduler. Recurring work runs from cron or a systemd timer inside the server, and it stops when the server is powered off.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/",
+            "quote": "The HostHatch API lets your code, scripts and AI agents do what you do in the console: order servers and pay for them with account credit, power and reinstall them, take snapshots, set up firewalls, mount ISOs, and manage SSH keys and reverse DNS.",
             "confidence": "inferred"
           }
         }
@@ -8909,6 +9550,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/how-to/use-flexips/",
             "quote": "Flexible routed IPv4 addresses: public IPv4 addresses routed directly to your Instance.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "HAProxy domain + TLS",
+          "note": "Add a domain in the panel and the shared HAProxy serves your backend in the private /24 over HTTPS. It is web traffic only; anything else goes through a forwarded port or IPv6.",
+          "source": {
+            "url": "https://tierhive.com/acceptable-use.php",
+            "quote": "We allow you to add your domains and subdomains to our HAProxy service within the control panel.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Public IPv4, any port",
+          "note": "Every server gets a public IPv4 and can enable a routed /64 of IPv6. Any TCP or UDP port is reachable once the firewall allows it.",
+          "source": {
+            "url": "https://docs.hosthatch.com/networking/",
+            "quote": "We support both dynamic (DHCP) and static IPv4 configuration.",
             "confidence": "docs-confirmed"
           }
         }
@@ -9214,6 +9877,28 @@
             "quote": "Detaching your Instance's flexible (public) IP address cuts any ongoing public connection to the Instance.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "No private link",
+          "note": "There is no authenticated or tokenised URL in front of a port. The private /24 is server-to-server networking, not a link you can share.",
+          "source": {
+            "url": "https://tierhive.com/about.php",
+            "quote": "TierHive gives you a global meshed /24, and a subnet from 10.0.0.0/8",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No private link",
+          "note": "There is no tokenised or authenticated preview URL. Private networking is a VLAN between your own servers, and the service itself still listens on the public address.",
+          "source": {
+            "url": "https://docs.hosthatch.com/networking/",
+            "quote": "You cannot access any external networks through this interface.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -9516,6 +10201,28 @@
             "quote": "you can use a terminal application on your local computer to remotely connect to your Instance as root.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "SSH on a forwarded port",
+          "note": "A standard SSH client works, but the address is the host's shared IPv4 and the port is a random high one, because the first forwarded TCP port is mapped to the server's 22.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+            "quote": "By design the 1st TCP port is mapped to your VPS port 22/TCP.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Real SSH",
+          "note": "SSH is a normal daemon on the guest, with keys installed at order or a root password reset from the panel and API. There is no provider-only terminal.",
+          "source": {
+            "url": "https://hosthatch.com/",
+            "quote": "You have full root-level access to your VMs.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -9816,6 +10523,29 @@
             "quote": "You can now run all Linux commands like in an SSH shell.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "noVNC console",
+          "note": "A browser VNC console in the panel gets you in when SSH is unreachable or a bad network change locks you out.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Browser-based noVNC console access",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "partly",
+          "figure": "VNC / serial console",
+          "shortfall": "The browser console is a VNC or serial screen rather than a terminal multiplexer, and HostHatch does not document it publicly.",
+          "note": "The Peregrine panel ships VNC and serial console sessions for a server, which is how you get in when SSH or a firewall rule locks you out. There is no documented web terminal in the API or the docs site.",
+          "source": {
+            "url": "https://cloud.hosthatch.com/build/assets/vendor.7380af1b.js",
+            "quote": "Peregrine.Servers.Console.VncSession",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -10114,6 +10844,28 @@
             "quote": "you can use a terminal application on your local computer to remotely connect to your Instance as root.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "No provider tunnel",
+          "note": "Nothing in the panel forwards a local port to your laptop. Recipes for Tailscale, Netbird and cloudflared let you build your own overlay, which is a different thing.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Make accessing resources within your TierHive CIDR easy as 1-2-3 using Cloudflare Tunnel.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "ssh -L",
+          "note": "The server runs a normal sshd, so local port forwarding works without a provider product. There is no managed tunnel service.",
+          "source": {
+            "url": "https://hosthatch.com/",
+            "quote": "You have full root-level access to your VMs.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -10408,6 +11160,29 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/how-to/use-security-groups/",
             "quote": "Define the inbound and outbound rules of the security group",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "partly",
+          "figure": "1 spare TCP + 2 UDP",
+          "shortfall": "Each server gets two forwarded TCP ports and SSH takes one, so only one TCP service is reachable from outside unless you use IPv6.",
+          "note": "Ports are mapped in the panel, external to internal, so a database or game server does work on the spare port or on a dedicated IPv6 address, where nearly the full range is open.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+            "quote": "Your nat VPS is provided with 2 open TCP ports and 2 UDP port.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Any TCP/UDP port",
+          "note": "Firewall rules take a protocol and a port or range, so a database, game server or mail relay is reachable directly. Outbound port 25 is blocked by default and needs a justification to unblock.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/firewalls/",
+            "quote": "A group has a direction, chosen when you create it: `ingress` rules allow traffic to the servers, and `egress` rules allow traffic from them.",
             "confidence": "docs-confirmed"
           }
         }
@@ -10706,6 +11481,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/how-to/use-flexips/",
             "quote": "public IPv4 addresses routed directly to your Instance.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "HAProxy or AAAA",
+          "note": "Point DNS at the HAProxy endpoint for web traffic with a managed certificate, or an AAAA record at a dedicated IPv6 for anything else.",
+          "source": {
+            "url": "https://tierhive.com/blog/general/haproxy",
+            "quote": "Point your domain's DNS to TierHive's HAProxy endpoints",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "A record to your IP",
+          "note": "Point an A or AAAA record at the server's static address from any DNS provider. HostHatch does not host DNS zones; the API only manages reverse DNS.",
+          "source": {
+            "url": "https://docs.hosthatch.com/networking/",
+            "quote": "We support both dynamic (DHCP) and static IPv4 configuration.",
             "confidence": "docs-confirmed"
           }
         }
@@ -11011,6 +11808,28 @@
             "quote": "You can choose between uploading your own certificate held in Scaleway Secret Manager, or letting Edge Services generate a fully-managed Let's Encrypt certificate.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "Let's Encrypt, auto-renewed",
+          "note": "The shared HAProxy gets and renews a Let's Encrypt certificate for each domain you add. IPv6-only serving is not covered by it, so a direct HTTPS endpoint is yours to manage.",
+          "source": {
+            "url": "https://tierhive.com/blog/general/haproxy",
+            "quote": "Automatic SSL/TLS certificates - Let's Encrypt integration with auto-renewal",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No managed certificate",
+          "note": "Nothing in the panel, the API or the product list issues or renews a TLS certificate for a server. You run Caddy, Certbot or another proxy inside the guest.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/",
+            "quote": "The OpenAPI document is at `/api/openapi.json`",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -11310,6 +12129,28 @@
             "url": "https://www.scaleway.com/en/pricing/virtual-instances/",
             "quote": "List prices include egress and IPv6 addresses.",
             "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "No per-GB charge",
+          "note": "Nothing is charged per gigabyte out and no volume allowance is published. What limits you is speed: a tier of 10, 50 or 100 Mbit/s, capped per location and stepped down under sustained use.",
+          "source": {
+            "url": "https://tierhive.com/about.php",
+            "quote": "We do not give any specific arbitrary GB or TB number, it is simply not practical with the TierHive model.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "1–20 TB/mo",
+          "note": "Each plan includes 1–20 TB a month with inbound and outbound counted together, and APAC allowances are lower. When it is used the server is rate-limited to 5 Mbps; more is $4 per TB through support.",
+          "source": {
+            "url": "https://hosthatch.com/terms-of-service",
+            "quote": "Additional bandwidth can be added for $4 per TB by contacting our support.",
+            "confidence": "docs-confirmed"
           }
         }
       ]
@@ -11611,6 +12452,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/how-to/use-security-groups/",
             "quote": "Define the inbound and outbound rules of the security group",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "not-published",
+          "figure": "No firewall documented",
+          "note": "No panel firewall, security group or egress policy is described on the site. Outbound filtering, if you want it, is iptables inside the guest.",
+          "source": {
+            "url": "https://tierhive.com/about.php",
+            "quote": "We limit disk IOPS, CPU, and network.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Egress firewall groups",
+          "note": "A firewall group is created with an ingress or egress direction. Once an egress group is attached, outbound traffic that no rule allows is refused, so you can allow only named destinations.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/firewalls/",
+            "quote": "Once it has an egress group, it also refuses outbound traffic that no egress rule allows.",
             "confidence": "docs-confirmed"
           }
         }
@@ -11915,6 +12778,28 @@
             "quote": "You can create an Instance without a flexible IPv4 by unticking the corresponding checkbox.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "not-published",
+          "figure": "No off switch",
+          "note": "Nothing documents a network-level kill switch. Removing the default route inside the guest is the only described way to isolate a machine.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "NAT architecture with full IPv4 connectivity",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Empty firewall groups",
+          "note": "Attach an egress group with no rules and all outbound traffic is refused; attach an ingress group with no rules and new inbound connections are refused too. Both groups can be empty, so a server can be cut off in both directions without touching the guest.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/firewalls/",
+            "quote": "A server without groups allows all traffic. Once it has any group attached, it refuses new inbound connections that no ingress rule allows. Once it has an egress group, it also refuses outbound traffic that no egress rule allows.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -12206,6 +13091,29 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/reference-content/understanding-instance-pricing/",
             "quote": "Billing for an Instance stops when it is powered off, but its flexible IPv4 remains reserved and continues to be billed unless deleted.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "partly",
+          "figure": "Shared IPv4, own IPv6",
+          "shortfall": "Outbound IPv4 leaves from the host's address, shared with every other server on that machine; only the IPv6 addresses are yours.",
+          "note": "The address is stable for as long as the server stays on its host, and the private /24 never changes when you rebuild, but another customer's traffic leaves from the same IPv4, so an allowlist on that address is not exclusive.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+            "quote": "The HV related public IP is found in the VPS Instances page",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Static primary IPv4",
+          "note": "The primary IPv4 is a static address on the server and stays for its life; extra addresses can be ordered. BYOIP with BGP is available for your own prefixes, with a $10 setup fee per location.",
+          "source": {
+            "url": "https://docs.hosthatch.com/networking/",
+            "quote": "We support both dynamic (DHCP) and static IPv4 configuration.",
             "confidence": "docs-confirmed"
           }
         }
@@ -12511,6 +13419,28 @@
             "quote": "An ephemeral secret is a secret that has a limited lifetime, enforced by an ephemeral policy.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "None",
+          "note": "There is no vault or environment-variable store. SSH keys are added at build time and a recipe writes a deploy token to a file on the guest; everything else lives in the machine.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+            "quote": "a token in /opt/th-simple-token is created",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "None",
+          "note": "The only stored credentials are API keys and SSH keys. There is no secret vault and no way to inject environment variables at boot: cloud-init user data is documented but answers feature_unavailable.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/orders-and-payment/",
+            "quote": "Not available yet: sending it answers `400 feature_unavailable`.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -12809,6 +13739,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/secret-manager/concepts/",
             "quote": "Disabling a version is the action of temporarily revoking access to the data contained within a specific version.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "Root reads everything",
+          "note": "An agent running as root can read every file on the server, including its own model key. Hiding a secret from the agent needs a proxy you run yourself.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+            "quote": "a token in /opt/th-simple-token is created",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Root reads everything",
+          "note": "Nothing sits between the agent and an API to add credentials. An agent running as root can read every file on the server, including its own model key.",
+          "source": {
+            "url": "https://hosthatch.com/",
+            "quote": "You have full root-level access to your VMs.",
             "confidence": "inferred"
           }
         }
@@ -13116,6 +14068,29 @@
             "quote": "This allows fine-grained access to be defined for the IAM user bearing the API key across different Organizations, Projects, and resources.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "not-published",
+          "figure": "No API keys documented",
+          "note": "No API key model, scopes or project separation are documented, because no customer API is documented. Whether the panel issues keys at all is unknown.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+            "quote": "a token in /opt/th-simple-token is created",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "partly",
+          "figure": "Read-only + expiry",
+          "shortfall": "A key cannot be limited to one project: it carries your access to every project you belong to, though it can be read-only and can expire.",
+          "note": "Keys are created on the profile page with a name, an optional expiry and a read-only switch; project roles decide what a key may do in each project. There is no per-project or per-server key.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/authentication/",
+            "quote": "A key carries your access to every project you belong to.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -13401,6 +14376,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/how-to/create-an-instance/",
             "quote": "You can create an Instance from scratch or from an Instance template.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "Custom control panel",
+          "note": "Servers are created in the control panel with sliders for RAM and disk and a choice of OS or recipe. No terminal is needed to create one.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Configure your VPS and see real-time hourly pricing",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Peregrine panel",
+          "note": "The console orders a server by plan, location, image, SSH key, IPv4 count, IPv6 and billing cycle, then manages power, reinstall, snapshots, firewalls and ISOs.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/",
+            "quote": "The HostHatch API lets your code, scripts and AI agents do what you do in the console: order servers and pay for them with account credit, power and reinstall them, take snapshots, set up firewalls, mount ISOs, and manage SSH keys and reverse DNS.",
             "confidence": "docs-confirmed"
           }
         }
@@ -13691,6 +14688,28 @@
             "quote": "This page shows the most common Scaleway CLI commands for creating and managing Scaleway Instances.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "No CLI",
+          "note": "No command-line tool is published or documented anywhere on the site.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+            "quote": "curl \"https://control.tierhive.com/simple/netinfo?token=$(cat /opt/th-simple-token)\" -o /tmp/ports",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No CLI",
+          "note": "The documented routes are the panel, the REST API and its OpenAPI document. No official command-line tool is published or mentioned in the docs.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/",
+            "quote": "The OpenAPI document is at `/api/openapi.json`",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -13979,6 +14998,28 @@
             "quote": "The Scaleway Python SDK offers an efficient way for developers to interact with Scaleway's cloud services programmatically.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "No SDK",
+          "note": "No Python package is published or documented; there is no API for one to wrap.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+            "quote": "curl \"https://control.tierhive.com/simple/netinfo?token=$(cat /opt/th-simple-token)\" -o /tmp/ports",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No official SDK",
+          "note": "There is an OpenAPI document to generate a client from, but no official Python package is published. The quickstart uses plain HTTP requests.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/quickstart/",
+            "quote": "import requests",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -14266,6 +15307,28 @@
             "url": "https://www.scaleway.com/en/docs/scaleway-sdk/js-sdk/",
             "quote": "The Scaleway JS SDK is a dynamic tool for developers who use JavaScript to interact with Scaleway's cloud services.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "No SDK",
+          "note": "No TypeScript or JavaScript package is published or documented.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+            "quote": "curl \"https://control.tierhive.com/simple/netinfo?token=$(cat /opt/th-simple-token)\" -o /tmp/ports",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No official SDK",
+          "note": "No official JavaScript or TypeScript client is published; the API is called directly or from a generated client.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/",
+            "quote": "The OpenAPI document is at `/api/openapi.json`",
+            "confidence": "inferred"
           }
         }
       ]
@@ -14556,6 +15619,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/developers",
             "quote": "Manage your resources with the Scaleway API using simple HTTP requests.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "No documented API",
+          "note": "The complete sitemap has no developer or API page and every guessed panel path returns 401. The only public JSON endpoints are the marketing calculator's rate feed and the recipe ticker, which are not a customer API. A third-party dossier reports the same.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+            "quote": "curl \"https://control.tierhive.com/simple/netinfo?token=$(cat /opt/th-simple-token)\" -o /tmp/ports",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Full REST API + OpenAPI",
+          "note": "A versioned REST API at console.hosthatch.com/api/v1 covers projects, servers, actions, snapshots, firewalls, ISOs, SSH keys, reverse DNS and orders, with idempotency keys, stable error codes, pagination and an OpenAPI document.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/",
+            "quote": "The OpenAPI document is at `/api/openapi.json`",
             "confidence": "docs-confirmed"
           }
         }
@@ -14856,6 +15941,28 @@
             "quote": "Manage your resources with the Scaleway API using simple HTTP requests.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "No MCP server",
+          "note": "Nothing on the site or in the panel's public pages offers an MCP endpoint.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-vps-ports",
+            "quote": "curl \"https://control.tierhive.com/simple/netinfo?token=$(cat /opt/th-simple-token)\" -o /tmp/ports",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "None",
+          "note": "The docs are written for agents and publish an `llms.txt` and an OpenAPI document, but no MCP server or MCP endpoint is documented. An assistant would call the REST API itself.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/",
+            "quote": "These docs are written for people and for agents alike.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -15147,6 +16254,28 @@
             "quote": "You can now run all Linux commands like in an SSH shell.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "SSH or noVNC only",
+          "note": "There is no API to open a terminal session over. Interactive access is SSH or the browser VNC console.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Browser-based noVNC console access",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No PTY endpoint",
+          "note": "The API has no terminal or exec endpoint. Interactive work goes over SSH, or through the panel's VNC and serial console.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/",
+            "quote": "The HostHatch API lets your code, scripts and AI agents do what you do in the console: order servers and pay for them with account credit, power and reinstall them, take snapshots, set up firewalls, mount ISOs, and manage SSH keys and reverse DNS.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -15434,6 +16563,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/developers",
             "quote": "Manage your resources with the Scaleway API using simple HTTP requests.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "SSH/SFTP only",
+          "note": "Files move over SSH or SFTP inside the guest. There are no file endpoints because there is no customer API.",
+          "source": {
+            "url": "https://tierhive.com/blog/tierhive-howto/tierhive-backup-chroot",
+            "quote": "Mount the target partition.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No file endpoint",
+          "note": "There is no endpoint to read or write files inside the server. Files move over SSH or SCP, or through your own service.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/",
+            "quote": "The HostHatch API lets your code, scripts and AI agents do what you do in the console: order servers and pay for them with account credit, power and reinstall them, take snapshots, set up firewalls, mount ISOs, and manage SSH keys and reverse DNS.",
             "confidence": "inferred"
           }
         }
@@ -15734,6 +16885,28 @@
             "quote": "An InstantApp allows you to deploy pre-configured applications quickly on CPU Instances.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "None",
+          "note": "The images are plain operating systems and the recipes install servers and tools. No coding agent is preinstalled in any of them.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "One-click OS deployments: Ubuntu, Debian, AlmaLinux, Rocky Linux, CentOS Stream, Alpine, Fedora, Arch, SUSE, OpenSUSE, FreeBSD, OpenBSD, FreeDOS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "None",
+          "note": "The order flow offers Linux distribution images and your own ISO. No Claude Code, Codex or other coding agent ships in any image.",
+          "source": {
+            "url": "https://hosthatch.com/features",
+            "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -16022,6 +17195,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/developers",
             "quote": "Manage your resources with the Scaleway API using simple HTTP requests.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "None",
+          "note": "There is no endpoint that sends a prompt to an agent. TierHive sells the machine, not an agent runtime.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Deploy complex applications with community recipes.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "None",
+          "note": "No endpoint runs an agent for you. The API manages machines, disks, networks and orders; you install the agent and supply the model key.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/",
+            "quote": "The HostHatch API lets your code, scripts and AI agents do what you do in the console: order servers and pay for them with account credit, power and reinstall them, take snapshots, set up firewalls, mount ISOs, and manage SSH keys and reverse DNS.",
             "confidence": "inferred"
           }
         }
@@ -16314,6 +17509,28 @@
             "quote": "An InstantApp allows you to deploy pre-configured applications quickly on CPU Instances.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "No Hermes recipe",
+          "note": "The recipe marketplace has around forty entries, from Docker to WireGuard and WordPress, and none of them is Hermes. Installation is a terminal job over SSH.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Deploy complex applications with community recipes.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "None",
+          "note": "There is no Hermes template, application catalogue or marketplace, so Hermes is an SSH install.",
+          "source": {
+            "url": "https://hosthatch.com/features",
+            "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -16604,6 +17821,28 @@
             "quote": "You can integrate Openclaw with Generative APIs models to build a personal AI assistant",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "No OpenClaw recipe",
+          "note": "No OpenClaw recipe or template exists in the marketplace. You would install it yourself and then map a port for whatever channel it listens on.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Deploy complex applications with community recipes.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "None",
+          "note": "There is no OpenClaw template or one-click path; the product is a bare OS or your own ISO.",
+          "source": {
+            "url": "https://hosthatch.com/features",
+            "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -16893,6 +18132,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/reference-content/images-and-instantapps/",
             "quote": "An InstantApp allows you to deploy pre-configured applications quickly on CPU Instances.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "None",
+          "note": "You can install Chromium yourself, but there is no hosted browser, no browser API and no per-session isolation. Every session shares one machine and one shared IPv4.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Browser-based noVNC console access",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Install it yourself",
+          "note": "No image includes Chrome or Chromium for an agent, and there is no hosted browser or per-session browser isolation. You install the browser and its dependencies on the server.",
+          "source": {
+            "url": "https://hosthatch.com/features",
+            "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
             "confidence": "inferred"
           }
         }
@@ -17192,6 +18453,28 @@
             "quote": "Enables Remote Desktop",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "DIY only",
+          "note": "There is no managed desktop. Blog guides show how to put a minimal desktop on a 128 MB or 256 MB server, and the noVNC console can show it, but that is a hand-built setup on a machine with one or two shared cores.",
+          "source": {
+            "url": "https://tierhive.com/blog",
+            "quote": "Alpine minimal remote desktop on a 128mb VPS",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Install it; view via VNC",
+          "note": "No desktop is provided. You can install a graphical OS from an ISO and watch it through the panel's VNC console, but there is no streaming desktop or computer-use API.",
+          "source": {
+            "url": "https://hosthatch.com/features",
+            "quote": "You can also upload your own ISO image using our control panel, and deploy it on your VMs with us, just like you would on a bare-metal or a physical server.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -17482,6 +18765,28 @@
             "quote": "You can integrate Openclaw with Generative APIs models to build a personal AI assistant",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "None",
+          "note": "TierHive runs no agent platform of its own and has no documented integration that hosts another vendor's cloud agent.",
+          "source": {
+            "url": "https://tierhive.com/about.php",
+            "quote": "It is aimed at development, tinkering, homelab, hobby, and self-hosting, not always-on, perfect uptime.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Not documented",
+          "note": "HostHatch runs no agent platform of its own and is not named as the machine for Cursor cloud agents, Devin, Claude Managed Agents, OpenClaw or Hermes. It is a generic VPS.",
+          "source": {
+            "url": "https://hosthatch.com/features",
+            "quote": "We offer pre-ready cloud templates for the major Linux distributions.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -17769,6 +19074,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/iam/concepts/",
             "quote": "An Organization is made of one or several Projects.",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "not-published",
+          "figure": "One account",
+          "note": "The terms permit one account per customer and invite companies to ask about more, but no page describes adding colleagues to an account.",
+          "source": {
+            "url": "https://tierhive.com/terms.php",
+            "quote": "One Account Per Customer: You are permitted one Account per customer.",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Projects + members",
+          "note": "Servers, snapshots, keys, firewalls and orders live in projects, members are invited to a project, and the project owner's account credit pays for every order.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/projects-and-roles/",
+            "quote": "A project holds servers, SSH keys, firewall groups, snapshots, ISOs, actions and orders, and the people who manage them.",
             "confidence": "docs-confirmed"
           }
         }
@@ -18062,6 +19389,28 @@
             "quote": "Permissions sets and their scope make up IAM rules, which define the access rights that a principal (user, group or application) should have.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "No permission model is described on any public page.",
+          "source": {
+            "url": "https://tierhive.com/terms.php",
+            "quote": "If you require multiple Accounts for your company or organization, please contact us after signing up with your first Account so we can evaluate your request",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "Owner, admin, member",
+          "note": "Each person has one role per project. A member can read and operate servers but not order, upgrade, buy bandwidth or cancel; admin and owner can, and only the owner manages members and billing.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/projects-and-roles/",
+            "quote": "Your role in it: `owner`, `admin` or `member`.",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -18350,6 +19699,28 @@
             "url": "https://www.scaleway.com/en/docs/iam/user-provisioning/set-up-sso-with-authentik/",
             "quote": "Scaleway supports Identity Federation to provide your teams with secure access to their accounts via SAML Single Sign-On.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "not-published",
+          "figure": "Password + 6-digit code",
+          "note": "Sign-in is a username or email, a password and a six-digit code. No SAML or OIDC single sign-on is mentioned.",
+          "source": {
+            "url": "https://control.tierhive.com/login",
+            "quote": "6-digit authentication code",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "Sign-in is an email address and password with optional two-factor authentication. No SAML or OIDC single sign-on is documented in the docs, the privacy policy or the panel's public assets.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/authentication/",
+            "quote": "Keys are created on your profile page, under **API Keys**.",
+            "confidence": "not-published"
           }
         }
       ]
@@ -18642,6 +20013,29 @@
             "quote": "This feature allows you to create alerts that notify you when predefined budget thresholds are met.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "partly",
+          "figure": "Prepaid tokens",
+          "shortfall": "Spending is limited by the prepaid token balance rather than a limit you set, and nothing says what happens to a running server when the balance reaches zero.",
+          "note": "There is no postpaid invoice to run up: you buy tokens at $1 each with a $3 minimum, so the ceiling is what you have paid in. A configurable cap with an automatic stop is not documented.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "1 Token = $1 USD",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No cap",
+          "note": "A server is paid for its term in advance, so it cannot run up an hourly bill, but nothing stops an admin ordering another server, upgrade or extra bandwidth. No account-wide cap is documented.",
+          "source": {
+            "url": "https://hosthatch.com/terms-of-service",
+            "quote": "HostHatch will invoice Customer for Fees and Expenses monthly, quarterly, semi-annually or annually.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -18932,6 +20326,28 @@
             "url": "https://www.scaleway.com/en/docs/billing/how-to/use-billing-alerts/",
             "quote": "This feature allows you to create alerts that notify you when predefined budget thresholds are met.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "No spend or usage alerting is described. The panel shows an hourly price for a configuration, which is not the same as a threshold alert.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Configure your VPS and see real-time hourly pricing",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "The panel shows bandwidth use and invoices, but no spending threshold, usage alert or notification setting is documented. The question is unanswered, not a confirmed absence.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/servers/",
+            "quote": "This month's traffic: `allocated_gb`, `extra_gb` bought on top, and `used_gb`",
+            "confidence": "not-published"
           }
         }
       ]
@@ -19226,6 +20642,28 @@
             "quote": "Audit Trail is a tool that holds a record of events and changes performed within a Scaleway Organization.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "No activity or audit log is described on any public page.",
+          "source": {
+            "url": "https://tierhive.com/acceptable-use.php",
+            "quote": "We may monitor resource usage, network traffic patterns, and system logs to ensure compliance with this policy",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "The API lists actions and orders per project, which shows what happened to servers, but no account-wide audit log with the person behind each change is documented.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/actions/",
+            "quote": "List actions",
+            "confidence": "not-published"
+          }
         }
       ]
     },
@@ -19516,6 +20954,28 @@
             "url": "https://www.scaleway.com/en/docs/billing/faq/",
             "quote": "Each of these resources is billed separately for a minimum of 60 minutes.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "Hourly, 1-hour minimum",
+          "note": "The meter is hourly with a one-hour minimum per server. A ten-minute server pays for an hour.",
+          "source": {
+            "url": "https://lowendspirit.com/discussion/11534/tierhive-19-locations-build-your-own-vps-plan-from-0-10-p-month-or-0-000135-per-hour",
+            "quote": "You can create a VPS or 253 VPS with a 1-hour minimum and you are only billed for that hour",
+            "confidence": "third-party"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Monthly plans only",
+          "note": "There is no hourly or per-second rate. The smallest unit is a monthly plan, with quarterly, semi-annual and annual terms also invoiced.",
+          "source": {
+            "url": "https://hosthatch.com/terms-of-service",
+            "quote": "HostHatch will invoice Customer for Fees and Expenses monthly, quarterly, semi-annually or annually.",
+            "confidence": "inferred"
           }
         }
       ]
@@ -19822,6 +21282,28 @@
             "quote": "CPU Instances: Billed per hour of uptime (including startup and standby time).",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "Bundled with RAM",
+          "note": "CPU has no meter of its own: the vCPU count follows the RAM you buy, and the server bills by the hour for as long as it exists, busy or not.",
+          "source": {
+            "url": "https://tierhive.com/about.php",
+            "quote": "We allow access to 1 vCPU for 2GB and under, anything over 2GB gets access to 2 vCPU.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Whole plan, not CPU time",
+          "note": "The price is for the whole server for the month, not for the CPU time used. An idle machine costs exactly the same as a busy one.",
+          "source": {
+            "url": "https://hosthatch.com/products",
+            "quote": "from $4.00 / month",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -20119,6 +21601,28 @@
             "url": "https://www.scaleway.com/en/docs/instances/reference-content/instance-states/",
             "quote": "Compute billing stops, but you continue to pay for any attached storage (local volumes that you chose to keep or Block Storage volumes) and for any Flexible IPs.",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "Storage only while off",
+          "note": "A powered-off server is billed for its storage and not for its RAM or CPU, which is what makes a few hours a day cost cents. The statement comes from the operator's forum offers rather than the website.",
+          "source": {
+            "url": "https://lowendspirit.com/discussion/11534/tierhive-19-locations-build-your-own-vps-plan-from-0-10-p-month-or-0-000135-per-hour",
+            "quote": "You only pay for storage when the VPS is powered off.",
+            "confidence": "third-party"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Stop still bills",
+          "note": "There is no cheaper stopped rate. A powered-off server keeps its disk and its full plan charge until the paid term ends or it is cancelled.",
+          "source": {
+            "url": "https://docs.hosthatch.com/api/servers/",
+            "quote": "`end_of_term`: the server runs until the end of the period you paid for, then it is deleted.",
+            "confidence": "inferred"
           }
         }
       ]
@@ -20422,6 +21926,28 @@
             "quote": "You can power off or delete your Instance at any time—no minimum commitment or notice period is required.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "No plan fee",
+          "note": "There is no subscription and no platform fee. The only fixed cost is the $3 minimum token top-up.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "True hourly billing - pay only for hours used, no monthly commitments",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Monthly plan only",
+          "note": "Every server is sold as a monthly or longer plan. There is no pay-as-you-go option without a plan.",
+          "source": {
+            "url": "https://hosthatch.com/",
+            "quote": "Our smallest plan costs $4 per month",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -20724,6 +22250,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/docs/instances/faq/",
             "quote": "CPU Instances: Billed per hour of uptime (including startup and standby time).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "Hourly only",
+          "note": "There is no monthly price for a machine. An always-on server costs 730 hours of its hourly rate.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "no monthly commitments",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "$4–$69/mo",
+          "note": "One flat price per fixed size, from $4.00 for 1 core / 2 GB to $69.00 for 16 cores / 96 GB. Add-ons such as extra IPv4 are separate.",
+          "source": {
+            "url": "https://hosthatch.com/",
+            "quote": "Our smallest plan costs $4 per month",
             "confidence": "docs-confirmed"
           }
         }
@@ -21033,6 +22581,28 @@
             "quote": "Scaleway offers free tiers for certain products.",
             "confidence": "inferred"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "None",
+          "note": "No free VPS plan or monthly free hours. The free static hosting is a separate product for files, not a server.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "A $3 minimum top up is required after registration to use this service.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "None",
+          "note": "No free plan, trial or recurring free allowance is advertised. The cheapest machine is a paid $4 monthly plan.",
+          "source": {
+            "url": "https://hosthatch.com/terms-of-service",
+            "quote": "Our virtual private servers (VPS) carry a 7-day money back guarantee with a valid reason requirement.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -21338,6 +22908,28 @@
             "quote": "Create a Business account and get started with €100 free credit.",
             "confidence": "pricing-page"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "$0.01 at signup",
+          "note": "The price feed grants 0.01 tokens at sign-up — about 74 hours on the smallest server. The homepage separately says a $3 top-up is needed to use the service, so how far that cent goes is unclear.",
+          "source": {
+            "url": "https://tierhive.com/api/pricing.php",
+            "quote": "\"signup_bonus_tokens\": 0.01",
+            "confidence": "pricing-page"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "None",
+          "note": "Account credit exists, but it is money you pay in, not a signup gift. No starting credit is advertised on the product, signup or terms pages.",
+          "source": {
+            "url": "https://hosthatch.com/terms-of-service",
+            "quote": "Our virtual private servers (VPS) carry a 7-day money back guarantee with a valid reason requirement.",
+            "confidence": "inferred"
+          }
         }
       ]
     },
@@ -21637,6 +23229,28 @@
             "quote": "Note that you must add a credit card to your account before setting up a SEPA mandate.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "No card to register",
+          "note": "An account is created with a username, email and password. Tokens are then bought through FastSpring, where a card or another payment method is needed for the $3 minimum.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "No credit card required",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "The signup page asks only for an email address and password; the accepted payment methods are not shown before an account exists. The privacy policy says card data is held by Stripe, but it does not say a card is the only option.",
+          "source": {
+            "url": "https://hosthatch.com/privacy-policy",
+            "quote": "any credit card and related information that you provide to us is stored at Stripe, Inc",
+            "confidence": "not-published"
+          }
         }
       ]
     },
@@ -21924,6 +23538,28 @@
             "quote": "Scheduled maintenance is still in progress.",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "yes",
+          "figure": "Per-location 90-day uptime",
+          "note": "A public status page with each location's state and 90-day uptime, stamped 4 Nov 2026 05:15 UTC. No incident history is shown, only the current state and the percentage.",
+          "source": {
+            "url": "https://tierhive.com/status",
+            "quote": "Uptime by location",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "status.hosthatch.com",
+          "note": "A public UptimeRobot status page lists each regional network, recent outages and a 90-day overall figure: 99.994% on 2026-11-04, with New York down for 31 minutes on 30 October. It monitors regions, not individual nodes.",
+          "source": {
+            "url": "https://status.hosthatch.com",
+            "quote": "All systems Operational",
+            "confidence": "docs-confirmed"
+          }
         }
       ]
     },
@@ -22089,12 +23725,13 @@
         },
         {
           "provider": "tensorlake",
-          "verdict": "no",
-          "shortfall": "The only published SLA is a 24-hour response to a P1 support ticket, not an uptime promise.",
+          "verdict": "yes",
+          "figure": "99.9% monthly, control plane",
+          "note": "A monthly availability promise for the control plane, the part of Tensorlake that runs the service. Who it covers, the credits and the exit terms are listed under the company facts on Tensorlake's page.",
           "source": {
-            "url": "https://www.tensorlake.ai/pricing",
-            "quote": "P1 SLA: 24 hours",
-            "confidence": "pricing-page"
+            "url": "https://www.tensorlake.ai/terms",
+            "quote": "TensorLake will use commercially reasonable efforts to make the Control Plane available 99.9% of the time in each calendar month",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -22166,7 +23803,7 @@
           "provider": "lightsail",
           "verdict": "yes",
           "figure": "99.5% per instance",
-          "note": "The SLA promises 99.5% monthly uptime per instance and 99.99% at region level, with service credits below those figures. It is a commercially reasonable efforts commitment.",
+          "note": "The SLA promises 99.5% monthly uptime per instance and 99.99% at region level only across two or more availability zones, with service credits below those figures. It is a commercially reasonable efforts commitment.",
           "source": {
             "url": "https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/",
             "quote": "AWS will use commercially reasonable efforts to make the Single Lightsail Instance available with an Instance-Level Uptime Percentage, as shown in the table below during any monthly billing cycle",
@@ -22217,6 +23854,28 @@
             "url": "https://www.scaleway.com/en/virtual-instances/sla/",
             "quote": "No SLO",
             "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "None",
+          "note": "The acceptable-use policy states plainly that no uptime or service level is guaranteed, and the About page calls the product a no-SLA service.",
+          "source": {
+            "url": "https://tierhive.com/acceptable-use.php",
+            "quote": "We do not guarantee any specific uptime or Service Level Agreement (SLA)",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "No SLA",
+          "note": "The terms contain no uptime percentage and no service-credit schedule. The only remedy is a pro-rata refund of the monthly fee for an interruption caused solely by HostHatch's breach of its warranty, calculated against a 720-hour month.",
+          "source": {
+            "url": "https://hosthatch.com/terms-of-service",
+            "quote": "Customer shall also be entitled to a pro-rata refund of any Fees attributable to the interrupted or inoperable Service(s)",
+            "confidence": "inferred"
           }
         }
       ]
@@ -22513,6 +24172,28 @@
             "quote": "Scaleway is committed to obtaining the most stringent certifications (ISO 27001, HDS, SecNumCloud – currently undergoing assessment)",
             "confidence": "docs-confirmed"
           }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "No SOC 2 report, ISO 27001 certificate or third-party audit is claimed anywhere on the site or the company site.",
+          "source": {
+            "url": "https://tierhive.com/acceptable-use.php",
+            "quote": "This is not an enterprise-grade service and should never be considered as such.",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "not-published",
+          "figure": "Not published",
+          "note": "No SOC 2 report, ISO 27001 certificate or trust centre is mentioned on the site, the terms or the privacy policy. A GDPR DPA is offered; ask support for any audit report before a procurement review.",
+          "source": {
+            "url": "https://hosthatch.com/privacy-policy",
+            "quote": "Our GDPR Data Processing Agreement is available here.",
+            "confidence": "not-published"
+          }
         }
       ]
     },
@@ -22797,6 +24478,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/privacy-policy/",
             "quote": "The data collected for the operation of our services, where Scaleway acts as a processor, is governed by our General Conditions of Services as well as our Data Processing Agreement (DPA).",
+            "confidence": "docs-confirmed"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "not-published",
+          "figure": "No DPA",
+          "note": "No data processing agreement, sub-processor list or GDPR annex is published. The privacy policy names FastSpring as the controller for billing data and says nothing about a DPA for customer data.",
+          "source": {
+            "url": "https://tierhive.com/privacy.php",
+            "quote": "FastSpring is the data controller for all payment and billing data",
+            "confidence": "not-published"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "yes",
+          "figure": "GDPR DPA (PDF)",
+          "note": "A GDPR data processing addendum is published as a PDF and is agreed as part of the privacy policy; a signed copy can be requested by email.",
+          "source": {
+            "url": "https://hosthatch.com/privacy-policy",
+            "quote": "Our GDPR Data Processing Agreement is available here.",
             "confidence": "docs-confirmed"
           }
         }
@@ -23090,6 +24793,28 @@
           "source": {
             "url": "https://www.scaleway.com/en/security-and-compliance/",
             "quote": "Built on leading open-source technologies such as Kubernetes",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "tierhive",
+          "verdict": "no",
+          "figure": "Closed platform",
+          "note": "The panel and platform are the operator's own closed software with no self-hosted edition. Some recipe scripts are on GitHub, which is not the platform.",
+          "source": {
+            "url": "https://tierhive.com/",
+            "quote": "Open source, view the scripts running at https://github.com/matthewgall/tierhive",
+            "confidence": "inferred"
+          }
+        },
+        {
+          "provider": "hosthatch",
+          "verdict": "no",
+          "figure": "Proprietary platform",
+          "note": "The control panel is HostHatch's own closed software and the service runs on its own hardware; there is no self-hosted edition.",
+          "source": {
+            "url": "https://hosthatch.com/features",
+            "quote": "In 2017, we launched our own control panel",
             "confidence": "inferred"
           }
         }

@@ -192,6 +192,15 @@
           "quote": "Scheduled maintenance is currently in progress. We will provide updates as necessary.",
           "confidence": "docs-confirmed"
         }
+      },
+      {
+        "label": "Recent incidents",
+        "value": "No VPS incident history can be read: the status page has no VPS component group, and its incident feed reaches back only to 22 October 2026. One entry, emergency maintenance on server BOS-1335 on 1 November, was tagged to the Hostinger VPS API.",
+        "source": {
+          "url": "https://statuspage.hostinger.com/incidents/4361g2mpp2s2",
+          "quote": "This incident affected: Core Services (Hostinger VPS API).",
+          "confidence": "inferred"
+        }
       }
     ]
   },

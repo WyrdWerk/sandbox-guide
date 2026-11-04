@@ -269,3 +269,16 @@ Company and terms research checked 2026-10-28; status figures are a point-in-tim
 ## Research method and limits
 
 **inferred** — Sources were provider pages, the provider's `llms.txt` and `llms-full.txt` docs bundle (generated 2026-10-27), its Terms, DPA, SLA, Trust Center, status-page JSON, GitHub metadata, and the requested Battleships Markdown. Context.dev search and scrape worked; Exa fetched two pages that block direct requests (Fortune and a reseller's terms). No signup, sandbox, account change or paid usage was performed, and no runtime claim here is tested. Pricing and capabilities are time-sensitive: the rate card, tier table and feature gates should be re-read before quoting them to a buyer.
+
+
+---
+
+## Dossier reconciliation, 2026-11-04
+
+Added SLA claim and credit facts from https://www.daytona.io/sla (fresh Context.dev scrape, cache miss).
+
+| URL | Quote | Confidence |
+|---|---|---|
+| https://www.daytona.io/sla | "Daytona will use commercially reasonable efforts to make the Services available 99.95% of the time in any given calendar month" | docs-confirmed |
+| https://www.daytona.io/sla | "Credit eligibility requires submitting a claim within 30 days of the incident" | docs-confirmed |
+| https://www.daytona.io/sla | "Approved credits will be applied toward future usage and issued within 60 days of approval. The maximum monthly credit is 50% of the applicable fees for the impacted Services." | docs-confirmed |

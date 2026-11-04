@@ -205,6 +205,17 @@ const ld = {
       </div>
     </footer>
     <script is:inline>
+      // The site header stays on screen; publish its real height (it wraps on narrow screens) so sticky elements sit below it.
+      (function () {
+        var header = document.querySelector(".site-header");
+        var root = document.documentElement;
+        function set() { root.style.setProperty("--site-header-offset", header.offsetHeight + "px"); }
+        set();
+        if ("ResizeObserver" in window) new ResizeObserver(set).observe(header);
+        else window.addEventListener("resize", set);
+      })();
+    </script>
+    <script is:inline>
       (function () {
         var button = document.querySelector("[data-theme-toggle]");
         var root = document.documentElement;

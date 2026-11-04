@@ -1,0 +1,226 @@
+[
+  {
+    "provider": "blaxel",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "The status page lists 25 incidents from 6 August to 4 November 2026, 22 of them affecting Sandboxes; the longest was 16 hours of unreachable workloads in us-was-1 on 1 September.",
+      "source": {
+        "url": "https://status.blaxel.ai/api/v2/incidents.json",
+        "quote": "\"name\":\"Some workloads unreachable in us-was-1\",\"status\":\"resolved\",\"created_at\":\"2026-09-01T00:24:47Z\",\"updated_at\":\"2026-09-01T16:24:46Z\",\"resolved_at\":\"2026-09-01T16:24:46Z\"",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [
+      {
+        "title": "Some workloads unreachable in us-was-1",
+        "start": "2026-09-01T00:24:47Z",
+        "end": "2026-09-01T16:24:46Z",
+        "duration": "15h 59m",
+        "component": "Sandboxes; Previews",
+        "url": "https://status.blaxel.ai/incidents/01M1D5NBHMTGZKRHEAJD94CP7D"
+      },
+      {
+        "title": "Some sandboxes are unavailable in us-was-1",
+        "start": "2026-10-29T05:03:00Z",
+        "end": "2026-10-29T17:01:46Z",
+        "duration": "11h 58m",
+        "component": "Sandboxes",
+        "url": "https://status.blaxel.ai/incidents/01M630MEXHGA4J5505K026WJ76"
+      },
+      {
+        "title": "Increase in volume errors",
+        "start": "2026-10-28T17:45:59Z",
+        "end": "2026-10-29T00:25:52Z",
+        "duration": "6h 39m",
+        "component": "Sandboxes",
+        "url": "https://status.blaxel.ai/incidents/01M61SWT8R9HYR75TJBF34N9WR"
+      }
+    ],
+    "count": 25,
+    "window": {
+      "start": "2026-08-06",
+      "end": "2026-11-04"
+    },
+    "method": "Atlassian Statuspage v2 /api/v2/incidents.json on status.blaxel.ai (25 records, 2026-08-25 to 2026-11-03, all inside the window). Affected components read from each incident page /incidents/<id> (embedded RSC payload, matched to /api/v2/components.json names). Durations = resolved_at minus created_at.",
+    "gaps": [
+      "Incident pages are client-rendered; titles and affected components were read from the server HTML (<title> and the embedded payload), not from rendered text.",
+      "One incident (10 Oct 2026, \"Elevated sandbox creation failures in us-was-1\") lists no affected component.",
+      "Regions appear only in titles; there is no region component, so the us-was-1/us-pdx-1 split comes from incident names."
+    ]
+  },
+  {
+    "provider": "boat",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "No incident history is published: the status page shows per-component uptime and latency over a rolling 90-day window, so individual outages cannot be looked up.",
+      "source": {
+        "url": "https://status.ascii.dev/history.json",
+        "quote": "\"windowDays\": 90, \"blockHours\": 1",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [],
+    "count": null,
+    "countNote": "No dated incident list exists to count. The separate machine-readable /incidents.json holds 344 automatic probe-failure records in the window (41 outage, 303 degraded), all on Box Stop + Resume, Box Fork, Box Creation, Ascii API, Box Dashboard, Box Desktop Streaming and Box SSH; the page does not render them and they have no titles.",
+    "window": {
+      "start": "2026-08-06",
+      "end": "2026-11-04"
+    },
+    "method": "status.ascii.dev rendered HTML plus its script.js (which loads only status.json and history.json), then /history.json and /incidents.json read directly. Count of curated incidents: none published.",
+    "gaps": [
+      "The page shows uptime blocks and latency metrics per component; it has no incident list, no incident titles and no dated outage entries.",
+      "/incidents.json is served but not linked or rendered by the page; its entries are probe failures (e.g. a 174-hour run of the 'Box Stop + Resume (extreme edge cases suite)' probe from 6 to 13 August), not customer-facing incident reports, so they are not reported as incidents.",
+      "Retention is 90 days (retentionDays: 90), so nothing older than the window exists to compare against."
+    ]
+  },
+  {
+    "provider": "cloudflare-sandbox",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "The status page lists 58 incidents naming Workers, Containers or Durable Objects from 6 August to 4 November 2026; the longest was a 56-hour Workers Cron Triggers degradation from 9 to 12 September.",
+      "source": {
+        "url": "https://www.cloudflarestatus.com/incidents/sjs8s0q2x4hw",
+        "quote": "Workers Cron Triggers degraded Started Sep 9, 2026, 19:17 UTC Resolved Sep 12, 2026, 03:34 UTC",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [
+      {
+        "title": "Workers Cron Triggers degraded",
+        "start": "2026-09-09T19:17:26Z",
+        "end": "2026-09-12T03:34:16Z",
+        "duration": "56h 16m",
+        "component": "Workers",
+        "url": "https://www.cloudflarestatus.com/incidents/sjs8s0q2x4hw"
+      },
+      {
+        "title": "Issues with Workers Build failing to start",
+        "start": "2026-10-03T05:54:59Z",
+        "end": "2026-10-05T07:28:10Z",
+        "duration": "49h 33m",
+        "component": "Workers Builds",
+        "url": "https://www.cloudflarestatus.com/incidents/q2bck6r39bzk"
+      },
+      {
+        "title": "Cloudflare Workers build delays",
+        "start": "2026-09-30T15:33:06Z",
+        "end": "2026-10-01T21:27:12Z",
+        "duration": "29h 54m",
+        "component": "Workers Builds",
+        "url": "https://www.cloudflarestatus.com/incidents/4m03612lprhr"
+      }
+    ],
+    "count": 58,
+    "window": {
+      "start": "2026-08-06",
+      "end": "2026-11-04"
+    },
+    "method": "Cloudflare Status API v3 /api/v3/history?type=incident&per_page=25, paged by cursor from 2026-11-04 back to 2026-07-31 (11 pages, 275 records, no duplicates). 258 incidents start in the window; 58 of those name Workers, Containers, Sandbox or Durable Objects. Scheduled maintenance (type=maintenance) excluded. Durations = resolved_at minus starts_at.",
+    "gaps": [
+      "The documented v2 /api/v2/incidents.json returns only the 50 most recent incidents, which reaches back only to 19 October; the v3 history endpoint used here is the one the status page's own History view calls.",
+      "There is no 'Sandbox' component or incident; the sandbox-relevant entries are the two Containers incidents ('Cloudflare Container Issues', 3 Nov, 1h 11m; 'Unable to start containers in Asia-Pacific', 21 Sep, 41m) plus any incident whose affected components include Containers.",
+      "Counts by component are component appearances across those 58 incidents (Durable Objects 25, Workers 11, Workers Builds 9, Containers 8), not incident totals.",
+      "All times are UTC as published."
+    ]
+  },
+  {
+    "provider": "contabo",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "The status page lists six incident notices from 6 August to 4 November 2026; the oldest is a CEPH storage degradation posted on 8 September with a published estimate of 900 minutes.",
+      "source": {
+        "url": "https://contabo-status.com/",
+        "quote": "08.09.2026 11:00 am (UTC+1) Degraded Performance - CEPH Cluster: non-critical Estimated duration: 900 minutes",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [
+      {
+        "title": "Degraded Performance - CEPH Cluster: non-critical",
+        "start": "2026-09-08T10:00:00Z",
+        "end": null,
+        "duration": "not published; estimate 900 minutes; last update 2026-10-14T12:28Z",
+        "component": "Object Storage / CEPH cluster (APAC after 14 Oct)",
+        "url": "https://contabo-status.com/#213"
+      },
+      {
+        "title": "Object Storage (EU region) – Service Disruption",
+        "start": "2026-10-26T14:00:00Z",
+        "end": null,
+        "duration": "not published; last update 2026-11-02T16:03:00Z",
+        "component": "Object Storage, EU region",
+        "url": "https://contabo-status.com/#223"
+      },
+      {
+        "title": "Patching of internal systems (CVE-2026-98432)",
+        "start": "2026-11-02T23:00:00Z",
+        "end": null,
+        "duration": "in progress as of 2026-11-04",
+        "component": "Webspace, network boot, DNS resolvers, blog, backup servers",
+        "url": "https://contabo-status.com/#226"
+      }
+    ],
+    "count": 6,
+    "window": {
+      "start": "2026-08-06",
+      "end": "2026-11-04"
+    },
+    "method": "Single-page status list at contabo-status.com read with Context.dev web_scrape (markdown) and curl, cross-checked against its Atom feed /rss (rss.php). Six entries with ids 226, 225, 224, 223, 221, 213. Start times converted from the page's (UTC+1) labels; update times taken from the feed's timestamps.",
+    "gaps": [
+      "No incident archive and no end times: entries are edited in place and only the six current ones are published, so an incident that was closed and removed before 4 November would not appear. The count is what the page lists today, not a guaranteed 90-day total.",
+      "The 26 October 'unauthorized access' notice named in the brief is not on the status page; the 26 October entry is an Object Storage disruption and is counted. Nothing was excluded.",
+      "Per-incident URLs (/226 etc.) return a domain-parking 404; permalinks are the #id anchors on the main page.",
+      "Durations are only published for one entry, as an estimate (900 minutes); the rest have start times and update times but no end.",
+      "Times are the page's local labels marked (UTC+1), while the feed's <updated> stamps carry +02:00 for October, so late-October starts may be an hour off in UTC. Durations are unaffected: no end times exist."
+    ]
+  },
+  {
+    "provider": "digitalocean",
+    "fact": {
+      "label": "Recent incidents",
+      "value": "The status page lists 15 incidents from 6 August to 4 November 2026; the most severe was the Cloud Control Panel and API case on 24 August, whose postmortem counts 3.5 hours of elevated errors across the API and control panel.",
+      "source": {
+        "url": "https://status.digitalocean.com/incidents/4qwm6pzlx1z3",
+        "quote": "Between 16:56 UTC and 23:09 UTC on August 24, 2026, customers using DigitalOcean’s Cloud Control Panel, Public API, and dependent product management systems experienced elevated request error rates, peaking at 25%, in two distinct windows totaling 3.5 hours of active degradation within a 6-hour span.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    "incidents": [
+      {
+        "title": "Cloud Control Panel and API",
+        "start": "2026-08-24T17:14:43Z",
+        "end": "2026-08-25T19:04:33Z",
+        "duration": "25h 49m open; postmortem counts 3.5h of active degradation",
+        "component": "API; Cloud Control Panel",
+        "url": "https://status.digitalocean.com/incidents/4qwm6pzlx1z3"
+      },
+      {
+        "title": "Support Portal Service Disruption",
+        "start": "2026-09-16T09:48:19Z",
+        "end": "2026-09-16T21:09:31Z",
+        "duration": "11h 21m",
+        "component": "Support Center",
+        "url": "https://status.digitalocean.com/incidents/grb2v0td1nq5"
+      },
+      {
+        "title": "Managed Databases Creation",
+        "start": "2026-08-23T05:11:37Z",
+        "end": "2026-08-23T14:33:31Z",
+        "duration": "9h 21m",
+        "component": "NYC1; NYC3",
+        "url": "https://status.digitalocean.com/incidents/r96y45y5sx59"
+      }
+    ],
+    "count": 15,
+    "window": {
+      "start": "2026-08-06",
+      "end": "2026-11-04"
+    },
+    "method": "Atlassian Statuspage v2 /api/v2/incidents.json on status.digitalocean.com (50 most recent, 2026-04-28 to 2026-11-03, so the window is fully covered); filtered to created_at between 2026-08-06 and 2026-11-04. Components and durations from the same JSON.",
+    "gaps": [
+      "Four of the 15 resolved within the same second they started (0m), which looks like imported or backfilled entries rather than live incidents: 'Multiple Services Availability' (6 Aug), 'Volume Attach/Detach events in FRA1' (13 Aug), 'A Network Disruption in BLR1 Region Impacted Multiple Products' (3 Oct) and 'App Platform Deployments' (13 Oct). They are counted as listed.",
+      "The 50-record API cap is not reached inside the window, so no pagination gap.",
+      "The widest incident was 'Major Service Interruption in MKC1' (19 Aug, critical, 8h 24m), which affected more components than the two 9-11 hour entries above but was shorter."
+    ]
+  }
+]

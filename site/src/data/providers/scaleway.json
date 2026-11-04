@@ -164,6 +164,33 @@
         }
       },
       {
+        "label": "Recent incidents",
+        "value": "By this guide's count, 8 status-page incidents from 6 August to 4 November 2026 affected Instances or Block Storage. The longest-running, a block-storage latency problem affecting Block Storage, Databases and Instances, was posted on 29 October and had no resolution posted by 4 November.",
+        "source": {
+          "url": "https://status.scaleway.com/incidents/l35th3qpv30h",
+          "quote": "Posted Oct 29 , 2026 - 12:01 CET This incident affects: Elements - Products (Block Storage, Databases, Instances)",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "SLA claims",
+        "value": "You must ask for compensation within 30 days after the month the target was missed, or nothing is owed.",
+        "source": {
+          "url": "https://www.scaleway.com/en/virtual-instances/sla/",
+          "quote": "Client’s request for compensation must be issued no later than thirty (30) days following the month during which the applicable Resources did not comply with the SLO.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "SLA compensation",
+        "value": "Compensation is a voucher on a later invoice, not a cash refund.",
+        "source": {
+          "url": "https://www.scaleway.com/en/virtual-instances/sla/",
+          "quote": "The compensation shall take the form of a voucher which shall be applied by Scaleway on the invoice issued for the Covered Service",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
         "label": "Data protection",
         "value": "A Data Processing Agreement is published with the contracts and governs data processed on the customer's behalf; the privacy policy names it explicitly.",
         "source": {

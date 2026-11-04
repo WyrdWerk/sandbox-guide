@@ -1289,3 +1289,17 @@ Third-party: <https://battleships.dev/data/providers/withruntime.json> ·
 <https://readassay.com/articles/agent-sandboxes-are-turning-into-a-fork-and-snapshot-price-war/> ·
 <https://github.com/withruntime/runtime> · <https://api.github.com/repos/withruntime/runtime> ·
 <https://hn.algolia.com/api/v1/search_by_date?query=withruntime.com&restrictSearchableAttributes=url>
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-1/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: The status page lists no incidents at all.
+- Source: https://withruntime.com/status.md — "No incidents recorded." (docs-confirmed)
+
+- Also added a "Sandbox starts" fact: "| Last 30 days | 98.42% | 4317 | 272 ms | 1.1 s |", the row under "## Sandbox starts: Starting" on https://withruntime.com/status.md (fetched 4 Nov 2026, raw text match).
+
+- Correction (same day): the fact now says the record only begins on 23 September 2026. Quote spans the record-start sentence and the "## Incidents" section; matched after removing Markdown heading markers and collapsing whitespace.

@@ -176,6 +176,10 @@
         }
       },
       {
+        "label": "Terms of service",
+        "value": "Not published. freestyle.sh/terms, /legal/terms, /legal/tos and /terms-of-service all returned 404 on 4 November 2026, so the rules for suspension, deletion and refunds cannot be checked."
+      },
+      {
         "label": "Certification",
         "value": "No SOC 2 report, trust centre or DPA page is published. The Enterprise list names SSO, audit logs and an SLA but no audit report."
       }

@@ -1,0 +1,1019 @@
+[
+  {
+    "provider": "tensorlake",
+    "kind": "contradiction",
+    "claim": "Site says there is no uptime SLA (\"no \u2014 The only published SLA is a 24-hour response to a P1 support ticket, not an uptime promise\"), while the same profile and the Terms both give 99.9% with credits.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281a7aaf3e2aeb935375f; https://www.tensorlake.ai/terms \u00a75.1-5.2 (verified live)",
+    "siteLocation": "site/src/data/capabilities.json#sla (tensorlake); site/src/data/providers/tensorlake.json#company.facts[SLA]",
+    "suggestedField": "capabilities.sla: verdict yes, figure '99.9% control plane'",
+    "priority": "high"
+  },
+  {
+    "provider": "tensorlake",
+    "kind": "contradiction",
+    "claim": "Dossier and Terms give a P1 initial-response target of \"4 hours, 24\u00d77\"; the site says \"24-hour P1\".",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281a7aaf3e2aeb935375f; https://www.tensorlake.ai/terms \u00a75.7 (verified live)",
+    "siteLocation": "site/src/data/providers/tensorlake.json#company.facts[Support]",
+    "suggestedField": "company.facts[Support]",
+    "priority": "high"
+  },
+  {
+    "provider": "tensorlake",
+    "kind": "gap",
+    "claim": "Credit schedule is 10% at 99.50\u201399.89%, 20% at 99.00\u201399.49%, 35% at 95.00\u201398.99%, 50% below 95%, applied automatically, capped at 50% of the month's fees, unused credits carry forward, and a P2/P3 response ladder follows.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281a7aaf3e2aeb935375f; https://www.tensorlake.ai/terms \u00a75.2-5.4 (verified live)",
+    "siteLocation": "site/src/data/providers/tensorlake.json#company.facts[SLA]",
+    "suggestedField": "company.facts[SLA] or capabilities.sla note",
+    "priority": "high"
+  },
+  {
+    "provider": "tensorlake",
+    "kind": "gap",
+    "claim": "Loss or corruption of a sealed Cloud Volume, sandbox snapshot or promoted Git commit is treated as a P1 and earns an additional 50% credit, with a written RCA within 10 business days.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281a7aaf3e2aeb935375f; https://www.tensorlake.ai/terms \u00a75.3 (verified live)",
+    "siteLocation": "site/src/data/providers/tensorlake.json#company.facts[SLA]",
+    "suggestedField": "company.facts[SLA]",
+    "priority": "high"
+  },
+  {
+    "provider": "tensorlake",
+    "kind": "gap",
+    "claim": "Chronic failure (below 99.5% in two consecutive months, or three in six) lets the customer terminate without penalty or halve a minimum commitment; maintenance with 72h notice and max 4h a month is excluded.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281a7aaf3e2aeb935375f; https://www.tensorlake.ai/terms \u00a75.5-5.6 (verified live)",
+    "siteLocation": "site/src/data/providers/tensorlake.json#caveats[]",
+    "suggestedField": "caveats[] new entry or company.facts[SLA]",
+    "priority": "medium"
+  },
+  {
+    "provider": "tensorlake",
+    "kind": "gap",
+    "claim": "npm compromise detail: malicious version published through Tensorlake's own release workflow with valid provenance, live about 1h40m (01:12\u201302:54 UTC on 8 Oct), npm only, fixed in 0.5.145; payload was a preinstall credential stealer with a gh-token-monitor that deletes the home directory if the stolen token is revoked.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281a7aaf3e2aeb935375f; GHSA-8g63-53c9-65j2; https://www.theregister.com/security/2026/10/08/shai-hulud-worm-makes-jump-to-ai-infrastructure-with-tensorlake-compromise/5302054",
+    "siteLocation": "site/src/data/providers/tensorlake.json#caveats[A malicious npm release shipped in October 2026]; site/src/data/reviews.json#themes ; research/tensorlake.md (records the one-line advisory)",
+    "suggestedField": "caveats[] existing entry (expand detail); reviews.themes evidence",
+    "priority": "high"
+  },
+  {
+    "provider": "tensorlake",
+    "kind": "gap",
+    "claim": "Sandboxes showed 99.90% over the 90 days to 4 Nov 2026; the site quotes 99.89% to 29 Oct.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281a7aaf3e2aeb935375f; https://status.tensorlake.ai/",
+    "siteLocation": "site/src/data/providers/tensorlake.json#company.facts[Status page]",
+    "suggestedField": "company.facts[Status page] (refresh)",
+    "priority": "low"
+  },
+  {
+    "provider": "agent37",
+    "kind": "contradiction",
+    "claim": "Site profile says \"Status components reported 100% over 30, 60 and 90 days at check\"; research/agent37.md already records the 20 Oct 2026 21-minute US sandbox degradation and calls the 100% figure internally inconsistent. The dossier adds a 29 Oct creation degradation.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42819b9e66fcf0252c3c33; https://status.agent37.com/incident/1096741; https://status.agent37.com/incident/1108102",
+    "siteLocation": "site/src/data/providers/agent37.json#company.facts[Status and SLA]; research/agent37.md \u00a717.7 (already records the Oct 20 incident)",
+    "suggestedField": "company.facts[Status and SLA] (re-read with component named)",
+    "priority": "high"
+  },
+  {
+    "provider": "agent37",
+    "kind": "gap",
+    "claim": "Founder on HN: \"If a host reaches critical memory, then it will start restarting memory heavy sandboxes\" \u2014 memory-heavy sandboxes can be evicted on a full host.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42819b9e66fcf0252c3c33; https://news.ycombinator.com/item?id=50067766",
+    "siteLocation": "site/src/data/providers/agent37.json#caveats[]",
+    "suggestedField": "caveats[] or fits.badly[]",
+    "priority": "medium"
+  },
+  {
+    "provider": "agent37",
+    "kind": "gap",
+    "claim": "Terms allow suspension for material breach, past-due accounts or risky workloads, service is 'as is', and data is deleted after termination per the privacy policy.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42819b9e66fcf0252c3c33; https://www.agent37.com/terms",
+    "siteLocation": "site/src/data/providers/agent37.json#company.facts",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "medium"
+  },
+  {
+    "provider": "agent37",
+    "kind": "weak",
+    "claim": "The 3 Nov viral X comparison of $4.76 against Vercel's $249 was community-noted and disputed by Vercel's CEO; a price-match refund is offered on X.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42819b9e66fcf0252c3c33; https://x.com/an_engineer_log/status/2117618029697618135; https://x.com/yyjarsy/status/2117836741545771191",
+    "siteLocation": "(not used by the site)",
+    "suggestedField": "do not add",
+    "priority": "low"
+  },
+  {
+    "provider": "blaxel",
+    "kind": "gap",
+    "claim": "Site quotes Sandboxes 99.33% for Jul\u2013Oct, which research/blaxel.md records alongside Platform 99.30%; the dossier reports Platform 98.54% over the 90 days to 3 Nov. The site number stands; what is missing is the Platform figure, the window and the 32-incident record.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281f38a08d50cd375454c; https://status.blaxel.ai/",
+    "siteLocation": "site/src/data/providers/blaxel.json#company.facts[Status and SLA]; research/blaxel.md (records Sandboxes 99.33% and Platform 99.30%)",
+    "suggestedField": "company.facts[Status and SLA] (name the component and window)",
+    "priority": "high"
+  },
+  {
+    "provider": "blaxel",
+    "kind": "gap",
+    "claim": "32 incidents plus 2 maintenances between 7 Aug and 3 Nov 2026, 16 naming us-was-1 and 8 us-pdx-1; longest was 16h in us-was-1 on 1 Sep; about 12h on 29 Oct; recurring Drive mount/write failures on 30 Oct and 3 Nov.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281f38a08d50cd375454c; https://status.blaxel.ai/ (incident feed)",
+    "siteLocation": "site/src/data/providers/blaxel.json#company.facts[Status and SLA]",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "high"
+  },
+  {
+    "provider": "blaxel",
+    "kind": "gap",
+    "claim": "Terms \u00a72.6(f) forbids publishing benchmarks or performance information about the service.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281f38a08d50cd375454c; https://blaxel.ai/terms",
+    "siteLocation": "site/src/data/providers/blaxel.json#company.facts",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "medium"
+  },
+  {
+    "provider": "blaxel",
+    "kind": "gap",
+    "claim": "Blaxel may suspend immediately for AUP breach, 30+ days overdue, legal change or risk to other customers, with notice only 'where practicable'.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281f38a08d50cd375454c; https://blaxel.ai/terms",
+    "siteLocation": "site/src/data/providers/blaxel.json#company.facts",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "medium"
+  },
+  {
+    "provider": "blaxel",
+    "kind": "weak",
+    "claim": "The Baseten acquisition is sourced only to X posts and the dossier admits no press release was confirmed; the site already cites Baseten's own blog as docs-confirmed.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281f38a08d50cd375454c; https://x.com/GJarrosson/status/2115828849439019067",
+    "siteLocation": "site/src/data/providers/blaxel.json#company.facts[Ownership]",
+    "suggestedField": "keep the site's stronger source; do not downgrade",
+    "priority": "low"
+  },
+  {
+    "provider": "boat",
+    "kind": "gap",
+    "claim": "Dated outages: user reports on 29, 30 and 31 Oct 2026; Boat replied on 30 Oct, \"~10 minute downtime tonight due to scaling too fast, no data was lost\".",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281329adbc7b7a4a45f89; https://x.com/i/status/2116214138922013068; https://x.com/M4XW3LLR/status/2116485281062797328",
+    "siteLocation": "site/src/data/providers/boat.json#company.facts",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "high"
+  },
+  {
+    "provider": "boat",
+    "kind": "gap",
+    "claim": "The status page publishes performance metrics: stop on the 15 GB suite averaged 292s on 4 Nov (p99 634s) and restore read speed averaged 46 MB/s.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281329adbc7b7a4a45f89; https://status.ascii.dev/",
+    "siteLocation": "site/src/data/capabilities.json#status-page (boat) ; research/boat.md (records the 90-day component table)",
+    "suggestedField": "capabilities.status-page note",
+    "priority": "medium"
+  },
+  {
+    "provider": "boat",
+    "kind": "gap",
+    "claim": "Terms let Boat \"modify, rate limit, throttle, queue, migrate, archive, delete, stop, suspend\" resources and suspend or terminate accounts.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281329adbc7b7a4a45f89; https://boat.dev/terms",
+    "siteLocation": "site/src/data/providers/boat.json#company.facts",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "medium"
+  },
+  {
+    "provider": "boat",
+    "kind": "gap",
+    "claim": "Site quotes seven components at 98.83%\u2013100% pooled to 99.74% over 90 days; the dossier quotes a 14-day window (22 Oct\u20134 Nov) with fork at 99.96% and dashboard at 99.61%.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281329adbc7b7a4a45f89; https://status.ascii.dev/",
+    "siteLocation": "site/src/data/features/company.json#splits[What the status number measures]",
+    "suggestedField": "keep the 90-day figure; add the 14-day window as a second reading",
+    "priority": "low"
+  },
+  {
+    "provider": "boat",
+    "kind": "weak",
+    "claim": "The 3 Nov CI I/O regression (cache restore 78s to 160s, builds 111s to 397s, no support reply) is one user; Lizard's pause criticism is a competitor's; the founder's '7 figures run rate' is vendor marketing.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281329adbc7b7a4a45f89; https://x.com/NaufalFaza1/status/2117664305596559655",
+    "siteLocation": "(not used by the site)",
+    "suggestedField": "do not add as a pattern",
+    "priority": "low"
+  },
+  {
+    "provider": "boxd",
+    "kind": "gap",
+    "claim": "Terms allow suspension of a VM \"immediately and without prior notice\" for operational, security or legal reasons, with liability capped.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281f89db8dd9b57e6d4f5; https://boxd.sh/terms",
+    "siteLocation": "site/src/data/providers/boxd.json#company.facts",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "medium"
+  },
+  {
+    "provider": "boxd",
+    "kind": "weak",
+    "claim": "Founder count and the \u20ac2M pre-seed are recycled from the site's own research file rather than new evidence; the 'peak larp' X critique is an opinion.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281f89db8dd9b57e6d4f5; repo research/boxd.md",
+    "siteLocation": "(no site change)",
+    "suggestedField": "no action",
+    "priority": "low"
+  },
+  {
+    "provider": "cloudflare-sandbox",
+    "kind": "contradiction",
+    "claim": "Trustpilot: site says \"1.5 stars from 1,331 reviews\"; the dossier says \"1.4/5 Bad\".",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428199b325d44f48df038a; https://www.trustpilot.com/review/cloudflare.com",
+    "siteLocation": "site/src/data/reviews.json#providers.cloudflare-sandbox.trustpilot.rating",
+    "suggestedField": "reviews.trustpilot.rating (refresh)",
+    "priority": "low"
+  },
+  {
+    "provider": "cloudflare-sandbox",
+    "kind": "gap",
+    "claim": "Dated platform incidents that would hit sandboxes: Cloudflare Container Issues 30 min on 3 Nov, Worker deployments delayed 50 min on 2 Nov, Gateway DNS-over-TLS 2h20m on 2 Nov, APJC network performance on 3 Nov.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428199b325d44f48df038a; https://statusgator.com/services/cloudflare",
+    "siteLocation": "site/src/data/providers/cloudflare-sandbox.json#company.facts[Status]",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "high"
+  },
+  {
+    "provider": "cloudflare-sandbox",
+    "kind": "gap",
+    "claim": "Site cites only \"The 99.99% Workers SLA covers Workers only\"; Cloudflare also publishes an Enterprise Subscription SLA \u00a72.2 saying \"The Service will serve Customer Content globally 100% of the time\", which also does not name Containers or Sandbox.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428199b325d44f48df038a; https://www.cloudflare.com/enterprise-support-sla/ (verified live)",
+    "siteLocation": "site/src/data/capabilities.json#sla (cloudflare-sandbox); site/src/data/providers/cloudflare-sandbox.json#caveats ; research/cloudflare-sandbox.md (records the Workers-only scope)",
+    "suggestedField": "capabilities.sla note: name both documents",
+    "priority": "medium"
+  },
+  {
+    "provider": "cloudflare-sandbox",
+    "kind": "gap",
+    "claim": "HostAdvice has 47 reviews (mostly 2021\u201322 CDN) and whtop 4/10 from 3 users; neither is in the site's review record.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428199b325d44f48df038a; https://hostadvice.com/hosting-company/cloudflare-reviews/; https://www.whtop.com/review/cloudflare.com",
+    "siteLocation": "site/src/data/reviews.json#providers.cloudflare-sandbox",
+    "suggestedField": "reviews.caveats",
+    "priority": "low"
+  },
+  {
+    "provider": "contabo",
+    "kind": "gap",
+    "claim": "Status notice 26 Oct 2026 12:30 UTC: \"We detected unauthorized access to systems hosting VDS\u2026 rotate SSH keys, passwords, and API tokens\", resolved after 3h11m; customers reported 24h to 4+ days down.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42815eb069dc4521d57d6d; https://pingoru.io/providers/contabo/incidents/12441110 (archive of contabo-status.com#222)",
+    "siteLocation": "site/src/data/providers/contabo.json (absent); research/contabo.md (absent)",
+    "suggestedField": "caveats[] new entry, third-party confidence",
+    "priority": "high"
+  },
+  {
+    "provider": "contabo",
+    "kind": "gap",
+    "claim": "Confirmed first-party: urgent patching of all VPS/VDS hosts for CVE-2026-99999 (CVSS 9.3, disclosed 15 Oct 2026) required host reboots and Contabo said \"patching can't wait for a regular maintenance window, and we can't send individual advance notices\".",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42815eb069dc4521d57d6d; https://help.contabo.com/en/support/solutions/articles/103000420825-important-security-update-urgent-patching-of-all-vps-vds-hosts-cve-2026-99999- (verified live)",
+    "siteLocation": "site/src/data/providers/contabo.json#caveats[]",
+    "suggestedField": "caveats[] new entry, docs-confirmed",
+    "priority": "high"
+  },
+  {
+    "provider": "contabo",
+    "kind": "gap",
+    "claim": "CEPH cluster degraded 49 days from 8 Sep 2026; Auto-Backup delays 96 days from 23 Apr 2026; control panel down 13h45m on 4 Sep; Object Storage EU disruption from 26 Oct still being stabilised on 2 Nov.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42815eb069dc4521d57d6d; https://statusgator.com/services/contabo; https://contabo-status.com/ (verified live)",
+    "siteLocation": "site/src/data/providers/contabo.json#company.facts",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "high"
+  },
+  {
+    "provider": "contabo",
+    "kind": "gap",
+    "claim": "Status page under-reports single-host outages: a dedicated server down 125h+ in Mar 2026 with zero incidents posted, and a 2022 object-storage outage with the page showing all good.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42815eb069dc4521d57d6d; https://www.reddit.com/r/sysadmin/comments/1s3nf99/; https://news.ycombinator.com/item?id=31351669",
+    "siteLocation": "site/src/data/providers/contabo.json#company.facts[Status page]",
+    "suggestedField": "company.facts[Status page] note or caveats[]",
+    "priority": "medium"
+  },
+  {
+    "provider": "contabo",
+    "kind": "gap",
+    "claim": "Support pattern during incidents: tickets auto-closed, AI-only replies, no ETA; terms allow suspension for payment default, re-allocation of resources, and blocking servers on third-party complaints if the customer does not respond by the deadline.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42815eb069dc4521d57d6d; https://contabo.com/en/legal/terms-and-conditions/",
+    "siteLocation": "site/src/data/providers/contabo.json#company.facts[Support response]",
+    "suggestedField": "company.facts[Support] and [Terms]",
+    "priority": "medium"
+  },
+  {
+    "provider": "contabo",
+    "kind": "weak",
+    "claim": "The 26 Oct 'unauthorized access' text survives only in a third-party archive, and a reader quoted in the dossier claims the entry was fabricated by an extractor; it must not be stated as a confirmed breach.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42815eb069dc4521d57d6d; https://pingoru.io/providers/contabo/incidents/12441110",
+    "siteLocation": "(absent from site)",
+    "suggestedField": "caveats[] with third-party tag and explicit uncertainty",
+    "priority": "high"
+  },
+  {
+    "provider": "contabo",
+    "kind": "gap",
+    "claim": "Trustpilot 4.6 aggregate against negative reviews from 31 Oct\u20132 Nov, HostAdvice 4.4\u20135.0 cluster Jul\u2013Oct 2026 that looks solicited, and whtop 2.6/10 from 47 users.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42815eb069dc4521d57d6d; https://www.trustpilot.com/review/contabo.com; https://hostadvice.com/hosting-company/contabo-reviews/; https://www.whtop.com/review/contabo.com",
+    "siteLocation": "site/src/data/reviews.json#providers.contabo",
+    "suggestedField": "reviews.caveats (add whtop/HostAdvice)",
+    "priority": "medium"
+  },
+  {
+    "provider": "daytona",
+    "kind": "gap",
+    "claim": "SLA mechanics: 'commercially reasonable efforts', claim within 30 days, credit capped at 50% of monthly fees and applied to future usage, Tier 4 and above only.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281f2bcd5e1b863785bec; https://www.daytona.io/sla",
+    "siteLocation": "site/src/data/capabilities.json#sla (daytona); providers/daytona.json#company.facts[Status and SLA] ; research/daytona.md (records the same SLA mechanics)",
+    "suggestedField": "capabilities.sla note",
+    "priority": "high"
+  },
+  {
+    "provider": "daytona",
+    "kind": "gap",
+    "claim": "Dated incidents: US runner degradation 29 Oct 2026, degraded performance for a subset of US runners 30 Oct, Windows runners down 3h50m on 31 Jul 2026.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281f2bcd5e1b863785bec; https://status.app.daytona.io/",
+    "siteLocation": "site/src/data/providers/daytona.json#company.facts[Status and SLA]",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "medium"
+  },
+  {
+    "provider": "daytona",
+    "kind": "gap",
+    "claim": "Webhooks require a support request to enable.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281f2bcd5e1b863785bec; https://www.daytona.io/docs",
+    "siteLocation": "site/src/data/providers/daytona.json#fits.badly[]",
+    "suggestedField": "fits.badly[] or usability.tripsUp[]",
+    "priority": "medium"
+  },
+  {
+    "provider": "daytona",
+    "kind": "weak",
+    "claim": "The site says Trustpilot has no profile; the dossier hit a captcha and says it is unknown whether one exists.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281f2bcd5e1b863785bec; https://www.trustpilot.com/review/daytona.io",
+    "siteLocation": "site/src/data/reviews.json#providers.daytona.trustpilot.status",
+    "suggestedField": "reviews.trustpilot.status: unknown, not none",
+    "priority": "low"
+  },
+  {
+    "provider": "digitalocean",
+    "kind": "gap",
+    "claim": "Dated incidents: DOKS down 2h29m on 27 Oct 2026, support portal disrupted 11h20m on 16 Sep, VPC networking 25 min on 5 Oct, DOKS DNS on 11 Oct, console outage 24 Aug.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281a289cefc67f1e925df; https://statusgator.com/services/digitalocean",
+    "siteLocation": "site/src/data/providers/digitalocean.json#company.facts",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "high"
+  },
+  {
+    "provider": "digitalocean",
+    "kind": "gap",
+    "claim": "Site says \"100% service credit if missed\"; the dossier says credits apply only to the affected Droplet's charges and go toward future bills, which is a narrower remedy than the site implies.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281a289cefc67f1e925df; https://www.digitalocean.com/sla/cpu-droplets",
+    "siteLocation": "site/src/data/providers/digitalocean.json#company.facts[Uptime promise]",
+    "suggestedField": "company.facts[Uptime promise] wording",
+    "priority": "medium"
+  },
+  {
+    "provider": "digitalocean",
+    "kind": "gap",
+    "claim": "HostAdvice has 106 reviews skewing negative and whtop 2/10 from 2 users; neither is in the site's review record.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281a289cefc67f1e925df; https://hostadvice.com/hosting-company/digital-ocean-reviews/; https://www.whtop.com/review/digitalocean.com",
+    "siteLocation": "site/src/data/reviews.json#providers.digitalocean",
+    "suggestedField": "reviews.caveats",
+    "priority": "low"
+  },
+  {
+    "provider": "e2b",
+    "kind": "gap",
+    "claim": "Per-region uptime Aug\u2013Nov 2026: US-West-1 99.78%, US-West-2 99.98%, EU-West-1 99.98%, US-East-1 100%, AP-Southeast-1 99.997%.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42810d915cfa19534e9442; https://status.e2b.dev/",
+    "siteLocation": "site/src/data/providers/e2b.json#company.facts[Status and SLA]",
+    "suggestedField": "company.facts[Status and SLA]",
+    "priority": "high"
+  },
+  {
+    "provider": "e2b",
+    "kind": "gap",
+    "claim": "Five dated incidents: 3 Sep (30 min), 15 Sep (4h15m plus 35m), 2 Oct (25 min), 27 Oct (3 min), 29 Oct (1h20m).",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42810d915cfa19534e9442; https://status.e2b.dev/",
+    "siteLocation": "site/src/data/providers/e2b.json#company.facts",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "medium"
+  },
+  {
+    "provider": "e2b",
+    "kind": "gap",
+    "claim": "Terms: services are \"AS IS\" and \"AS AVAILABLE\"; E2B may suspend or terminate access \"for any or no reason\" with or without notice.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42810d915cfa19534e9442; https://e2b.dev/terms",
+    "siteLocation": "site/src/data/providers/e2b.json#company.facts ; research/e2b.md (records the suspend-without-notice disclaimer)",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "medium"
+  },
+  {
+    "provider": "e2b",
+    "kind": "weak",
+    "claim": "The five-provider comparison is authored by the Ascii Box/Boat team and the state/lifetime thread is a search extract.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42810d915cfa19534e9442; https://www.reddit.com/r/AI_Agents/comments/1ve5y68/",
+    "siteLocation": "(not used by the site)",
+    "suggestedField": "do not add",
+    "priority": "low"
+  },
+  {
+    "provider": "freestyle",
+    "kind": "gap",
+    "claim": "No Terms of Service is published: freestyle.sh/terms, /legal/terms, /legal/tos and /terms-of-service all returned 404 on 4 Nov 2026, so suspension and deletion rules cannot be checked.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281dfa58ed2853837e362; https://freestyle.sh/terms (404)",
+    "siteLocation": "site/src/data/providers/freestyle.json#company.facts ; research/freestyle.md (records that no /terms page exists)",
+    "suggestedField": "caveats[] 'No published Terms of Service'",
+    "priority": "high"
+  },
+  {
+    "provider": "freestyle",
+    "kind": "gap",
+    "claim": "Capacity failure mode from the founder: forks either succeed or fail fully, and \"We can run out of space on a Node and just say no\".",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281dfa58ed2853837e362; https://news.ycombinator.com/item?id=47670788",
+    "siteLocation": "site/src/data/providers/freestyle.json#caveats[]",
+    "suggestedField": "caveats[] or fits.badly[]",
+    "priority": "medium"
+  },
+  {
+    "provider": "freestyle",
+    "kind": "weak",
+    "claim": "The founder's 3 Nov X claim \"We're now doing SLAs as good as AWS\" is not reflected on the pricing page beyond the Enterprise tier.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281dfa58ed2853837e362; https://x.com/benswerd/status/2117675128851235042",
+    "siteLocation": "(not used by the site)",
+    "suggestedField": "do not add",
+    "priority": "low"
+  },
+  {
+    "provider": "hetzner",
+    "kind": "gap",
+    "claim": "HEL1 Object Storage was partially degraded from 9 Sep 12:00 UTC to 22 Oct 13:34 UTC, about six weeks, fixed by bucket migrations.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281928ed7ed542b7f726b; https://status.hetzner.com/incident/382ed0e5-f1c4-45ec-a7a3-326d3970d6b3",
+    "siteLocation": "site/src/data/providers/hetzner.json#company.facts",
+    "suggestedField": "company.facts[Recent incidents]; caveats[] for Object Storage",
+    "priority": "high"
+  },
+  {
+    "provider": "hetzner",
+    "kind": "gap",
+    "claim": "An FSN outage on 21 Oct 2026 12:24\u201312:42 was reported on HN with nothing on the status page at the time.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281928ed7ed542b7f726b; https://news.ycombinator.com/item?id=50178645",
+    "siteLocation": "site/src/data/providers/hetzner.json#company.facts[Status and SLA]",
+    "suggestedField": "company.facts[Status and SLA] note",
+    "priority": "medium"
+  },
+  {
+    "provider": "hetzner",
+    "kind": "gap",
+    "claim": "The SLA is \"commercially reasonable efforts\" and excludes DDoS; credits are paid as Cloud Credits.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281928ed7ed542b7f726b; https://www.hetzner.com/legal/cloud-server/",
+    "siteLocation": "site/src/data/providers/hetzner.json#company.facts[Status and SLA] ; research/hetzner.md \u00a714 (records the SLA wording)",
+    "suggestedField": "company.facts[Status and SLA]",
+    "priority": "medium"
+  },
+  {
+    "provider": "hetzner",
+    "kind": "gap",
+    "claim": "Account verification and deactivation is a pattern: passport checks, country-risk rejections and a digital-nomad ban, across r/hetzner, r/selfhosted, HostAdvice and Trustpilot.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281928ed7ed542b7f726b; https://www.reddit.com/r/hetzner/comments/1lo4svk/; https://www.reddit.com/r/selfhosted/comments/1pjyep0/",
+    "siteLocation": "site/src/data/providers/hetzner.json#company.facts; reviews.json#themes",
+    "suggestedField": "features/company.json split or company.facts[Account risk]",
+    "priority": "medium"
+  },
+  {
+    "provider": "hetzner",
+    "kind": "weak",
+    "claim": "The 3 Nov FSN1 X alert was unconfirmed and is correctly rejected by the dossier; Reddit text comes from search extracts and LET threads carry affiliate links.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281928ed7ed542b7f726b; https://x.com/downtimy/status/2117505146502484057",
+    "siteLocation": "(not used by the site)",
+    "suggestedField": "do not add",
+    "priority": "low"
+  },
+  {
+    "provider": "hostinger",
+    "kind": "gap",
+    "claim": "About 25 emergency or degraded server-maintenance entries between 30 Oct and 4 Nov 2026 across US, IN, DE, FR, BR, MY/SG and ID.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281ad89ece5afe9f956d7; https://statuspage.hostinger.com/",
+    "siteLocation": "site/src/data/providers/hostinger.json#company.facts",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "high"
+  },
+  {
+    "provider": "hostinger",
+    "kind": "gap",
+    "claim": "StatusGator detected outages Hostinger never acknowledged: 20 Oct 2026 3h18m, 27 Oct 56m, 30 Aug 3h6m.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281ad89ece5afe9f956d7; https://statusgator.com/services/hostinger",
+    "siteLocation": "site/src/data/providers/hostinger.json#company.facts[Status page]",
+    "suggestedField": "company.facts[Status page] note",
+    "priority": "high"
+  },
+  {
+    "provider": "hostinger",
+    "kind": "gap",
+    "claim": "Abuse-suspension pattern: six r/Hostinger threads, an HN report of a $200k loss in Mar 2025, a Feb 2026 permanent suspension, and X reports in Oct\u2013Nov 2026; reviews take 1\u20133 days.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281ad89ece5afe9f956d7; https://news.ycombinator.com/item?id=43512951; https://www.reddit.com/r/Hostinger/comments/1oj5r7g/",
+    "siteLocation": "site/src/data/providers/hostinger.json (word 'abuse' absent); reviews.json#themes",
+    "suggestedField": "caveats[] 'Abuse suspensions take the whole VPS offline'; reviews.themes",
+    "priority": "high"
+  },
+  {
+    "provider": "hostinger",
+    "kind": "gap",
+    "claim": "SLA fine print: 5% credit \"as solely determined by us\", future purchases only, claim within 30 days, 11 exclusions including DDoS, GPU service excluded.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281ad89ece5afe9f956d7; https://www.hostinger.com/legal/hosting-agreement \u00a77",
+    "siteLocation": "site/src/data/capabilities.json#sla (hostinger) ; research/hostinger.md \u00a79 (records the 5% credit and maintenance exclusion)",
+    "suggestedField": "capabilities.sla note; company.facts[Uptime promise]",
+    "priority": "medium"
+  },
+  {
+    "provider": "hostup",
+    "kind": "gap",
+    "claim": "Critical on-call tickets cost a prepaid support credit, refunded only if HostUp is at fault.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281acadd4d820514091a2; https://hostup.se/en/support/support-tickets/",
+    "siteLocation": "site/src/data/providers/hostup.json#company.facts",
+    "suggestedField": "company.facts[Support]",
+    "priority": "high"
+  },
+  {
+    "provider": "hostup",
+    "kind": "gap",
+    "claim": "SLA \u00a720.1 covers only Business Customers' paid VPS and web hosting, not object storage (beta) or domains; credits 10/25/50% capped at 50% of the base fee; maintenance announced 7 days ahead excluded; \u00a71.5 disclaims liability outside the SLA; \u00a719.5 puts backups on the customer.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281acadd4d820514091a2; https://hostup.se/legal/terms-of-service-en.pdf \u00a720",
+    "siteLocation": "site/src/data/providers/hostup.json#company.facts[Uptime promise] ; research/hostup.md \u00a79 (records business-only scope and 10/25/50% credits)",
+    "suggestedField": "company.facts[Uptime promise]",
+    "priority": "medium"
+  },
+  {
+    "provider": "hostup",
+    "kind": "gap",
+    "claim": "14-day money-back guarantee, or 2 days for customers outside the EU/EEA.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281acadd4d820514091a2; https://hostup.se/legal/terms-of-service-en.pdf \u00a72.2",
+    "siteLocation": "site/src/data/providers/hostup.json#company.facts",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "low"
+  },
+  {
+    "provider": "hostup",
+    "kind": "contradiction",
+    "claim": "Status figure: site says \"99.992% on 2026-10-30\"; the dossier read 99.993% over 90 days on 3 Nov.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281acadd4d820514091a2; https://status.hostup.se/",
+    "siteLocation": "site/src/data/providers/hostup.json#company.facts[Status page]",
+    "suggestedField": "company.facts[Status page] (refresh)",
+    "priority": "low"
+  },
+  {
+    "provider": "hostup",
+    "kind": "weak",
+    "claim": "The silent plan change from Ryzen 9 9950X to EPYC 7B13 is one Swedish user from a search extract.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281acadd4d820514091a2; https://www.reddit.com/r/VPS/ (Jul 2026)",
+    "siteLocation": "(not used by the site)",
+    "suggestedField": "do not add as a pattern",
+    "priority": "low"
+  },
+  {
+    "provider": "instabox",
+    "kind": "gap",
+    "claim": "Free-tier \"cooling down\" pauses: 31 Oct user \"Cooling down until XYZ. Waking is unavailable until then.\"; 3 Nov Korean user whose VM is \"stopped for 1\u20132 hours a day in the name of cool down\".",
+    "dossierSource": "https://app.notion.com/p/40e6e471db428162bc78c533467b9e94; https://x.com/AkshatK_17/status/2116530582150930432; https://x.com/ntntnlty/status/2117448810767229421",
+    "siteLocation": "site/src/data/reviews.json#providers.instabox (themes); providers/instabox.json#fits.badly[]",
+    "suggestedField": "reviews.themes or caveats[]",
+    "priority": "high"
+  },
+  {
+    "provider": "instabox",
+    "kind": "gap",
+    "claim": "Terms (updated 3 Nov 2026) let InsForge suspend or limit the service including \"stopping or pausing a Sandbox\", blocking traffic or lowering limits; deleting a sandbox or snapshot is irreversible; liability capped at fees paid.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db428162bc78c533467b9e94; https://instabox.sh/terms",
+    "siteLocation": "site/src/data/providers/instabox.json#company.facts",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "medium"
+  },
+  {
+    "provider": "instabox",
+    "kind": "weak",
+    "claim": "The oversubscription explanation is the dossier's inference from a pricing blog; X volume is inflated by invite and referral links.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db428162bc78c533467b9e94; repo research/instabox.md",
+    "siteLocation": "(no site change)",
+    "suggestedField": "label as inferred if used",
+    "priority": "low"
+  },
+  {
+    "provider": "lightsail",
+    "kind": "gap",
+    "claim": "SLA credit tiers: 10% below 99.5%, 30% below 99%, 100% below 95%; the 99.99% region figure applies only with deployment across 2+ availability zones; block storage 99.9%.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db428169a6cbd5b2590299d5; https://aws.amazon.com/lightsail/sla-lightsail-instances-and-block-storage/",
+    "siteLocation": "site/src/data/capabilities.json#sla (lightsail); providers/lightsail.json#company.facts[Uptime promise] ; research/lightsail.md \u00a712 (records 'commercially reasonable efforts' and credits below 99.5%)",
+    "suggestedField": "capabilities.sla note",
+    "priority": "high"
+  },
+  {
+    "provider": "lightsail",
+    "kind": "gap",
+    "claim": "Service Terms \u00a751.3 lets AWS throttle or suspend an instance used to avoid data-transfer fees, such as proxying traffic.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db428169a6cbd5b2590299d5; https://aws.amazon.com/service-terms/ \u00a751.3",
+    "siteLocation": "site/src/data/providers/lightsail.json#caveats[]",
+    "suggestedField": "caveats[] new entry",
+    "priority": "medium"
+  },
+  {
+    "provider": "lightsail",
+    "kind": "gap",
+    "claim": "Burst-credit exhaustion, not host failure, explains most reported downtime: three Reddit threads between Nov 2025 and Mar 2026 where an instance became unresponsive after a CPU burst.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db428169a6cbd5b2590299d5; https://www.reddit.com/r/aws/comments/1oxlu95/; https://www.reddit.com/r/aws/comments/1rnx6ej/",
+    "siteLocation": "site/src/data/providers/lightsail.json#fits.badly[]",
+    "suggestedField": "fits.badly[] or caveats[]",
+    "priority": "medium"
+  },
+  {
+    "provider": "lightsail",
+    "kind": "weak",
+    "claim": "The PHP2Shell blueprint complaint is a single HN comment; 'no renewal price jumps' comes from a comparison site with an affiliate motive.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db428169a6cbd5b2590299d5; https://news.ycombinator.com/item?id=50196703",
+    "siteLocation": "(not used by the site)",
+    "suggestedField": "do not add",
+    "priority": "low"
+  },
+  {
+    "provider": "linode",
+    "kind": "gap",
+    "claim": "July 2025 Newark/LKE outage spread to Dallas, Fremont, Sydney, Tokyo 2, Toronto and Washington, with 27h+ down for at least one user and credits called insufficient.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281ffabb2f703b8c2cd7d; https://lowendtalk.com/discussion/207985/holy-smokes-linode-akamai; https://www.reddit.com/r/linode/comments/1mapmmf/",
+    "siteLocation": "site/src/data/providers/linode.json#company.facts",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "high"
+  },
+  {
+    "provider": "linode",
+    "kind": "gap",
+    "claim": "Oct\u2013Nov 2026 incidents: FR-PAR-2 connectivity 2 Nov, IN-MAA 1 Nov, BR-GRU Block Storage 28 Oct, LKE Enterprise provisioning failures in all regions 20 Oct, Cloud Manager/API problems 9\u201313 Oct, and a PwnEscape guest-to-host KVM escape advisory 15\u201330 Oct.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281ffabb2f703b8c2cd7d; https://status.linode.com/history",
+    "siteLocation": "site/src/data/providers/linode.json#caveats[]",
+    "suggestedField": "company.facts[Recent incidents]; caveats[] for the advisory",
+    "priority": "high"
+  },
+  {
+    "provider": "linode",
+    "kind": "gap",
+    "claim": "SLA: pro-rata credit with no published formula; claim by ticket within 30 days with dates and durations; maintenance with 24h notice excluded; 99% for limited-availability plans.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281ffabb2f703b8c2cd7d; https://www.akamai.com/legal/sla-compute v1.2",
+    "siteLocation": "site/src/data/providers/linode.json#company.facts[Uptime promise] ; research/linode.md \u00a78 (records 99.99%/99%)",
+    "suggestedField": "company.facts[Uptime promise]",
+    "priority": "medium"
+  },
+  {
+    "provider": "linode",
+    "kind": "gap",
+    "claim": "LKE and Object Storage are repeatedly described as less stable than plain compute.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281ffabb2f703b8c2cd7d; https://lowendtalk.com/discussion/188928/",
+    "siteLocation": "site/src/data/providers/linode.json#fits.badly[]",
+    "suggestedField": "fits.badly[]",
+    "priority": "medium"
+  },
+  {
+    "provider": "linode",
+    "kind": "weak",
+    "claim": "vendorwatch's 'most incident-prone in October' ranking is an outage-monitoring vendor's marketing; the @uptimeprj monitor is one sample.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281ffabb2f703b8c2cd7d; https://x.com/vendorwatch/status/2116832817455812896",
+    "siteLocation": "(not used by the site)",
+    "suggestedField": "do not add",
+    "priority": "low"
+  },
+  {
+    "provider": "lizard",
+    "kind": "contradiction",
+    "claim": "Platform uptime: site says 99.95%; the dossier read 99.96% on 4 Nov.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42810a849cd615d2e5b7f1; https://status.lizard.build/",
+    "siteLocation": "site/src/data/providers/lizard.json#company.facts[Status and SLA]",
+    "suggestedField": "company.facts[Status and SLA] (refresh)",
+    "priority": "low"
+  },
+  {
+    "provider": "lizard",
+    "kind": "gap",
+    "claim": "Regional figures: EU West 99.88% and US East 99.88% with \"No incidents reported\" every day listed, implying about 1% unposted downtime; no sandbox-specific component.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42810a849cd615d2e5b7f1; https://status.lizard.build/",
+    "siteLocation": "site/src/data/providers/lizard.json#company.facts[Status and SLA]",
+    "suggestedField": "company.facts[Status and SLA]",
+    "priority": "medium"
+  },
+  {
+    "provider": "lizard",
+    "kind": "gap",
+    "claim": "Terms: no re-registration after termination; aggregated usage data may be used for \"benchmarking\"; \"We do not delete data because of a pause\".",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42810a849cd615d2e5b7f1; https://lizard.build/terms",
+    "siteLocation": "site/src/data/providers/lizard.json#company.facts",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "low"
+  },
+  {
+    "provider": "lizard",
+    "kind": "weak",
+    "claim": "A cluster of near-identical promotional X posts looks coordinated; the site should keep saying 'astroturf-like' and not quote them as evidence.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42810a849cd615d2e5b7f1; https://x.com/sheemamoto/status/2113624318571601969",
+    "siteLocation": "site/src/data/reviews.json#providers.lizard",
+    "suggestedField": "keep as caveat, no new evidence",
+    "priority": "low"
+  },
+  {
+    "provider": "modal",
+    "kind": "gap",
+    "claim": "Dated incidents: 5 Oct 2026 Function and Sandbox execution degraded (worker networking), 15 Jan Volumes access intermittent ~21h, 8 Sep 2025 GPU scheduling degraded ~4h, 8 Feb 2026 Redis saturation ~45min.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42816bba10db04574df905; https://status.modal.com/incidents",
+    "siteLocation": "site/src/data/providers/modal.json#company.facts[Status and SLA]",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "medium"
+  },
+  {
+    "provider": "modal",
+    "kind": "gap",
+    "claim": "29 Jul 2026: a Hugging Face agent intrusion used a customer's unauthenticated public Sandbox endpoint; Modal says isolation was not breached.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42816bba10db04574df905; https://modal.com/blog/a-note-on-the-hugging-face-agent-incident",
+    "siteLocation": "site/src/data/providers/modal.json#caveats[]",
+    "suggestedField": "caveats[] 'A public endpoint is the exposure surface'",
+    "priority": "medium"
+  },
+  {
+    "provider": "modal",
+    "kind": "gap",
+    "claim": "Terms have no uptime percentage and allow suspension when \"reasonably necessary\", with prior notice.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42816bba10db04574df905; https://modal.com/legal/terms",
+    "siteLocation": "site/src/data/providers/modal.json#company.facts",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "low"
+  },
+  {
+    "provider": "modal",
+    "kind": "weak",
+    "claim": "The 3 Nov X claim that Modal \"announced hourly price increases\" was not verified on the pricing page.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db42816bba10db04574df905; https://x.com/SamEhrlich/status/2117475951819047359",
+    "siteLocation": "(not used by the site)",
+    "suggestedField": "do not add",
+    "priority": "low"
+  },
+  {
+    "provider": "morph",
+    "kind": "gap",
+    "claim": "Status page shows one incident (4 Dec 2025) and none since, while X users reported downtime in mid-Aug 2026 and one said it did not work two weeks earlier.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281d6a024ef59a0b98939; https://status.cloud.morph.so/incidents",
+    "siteLocation": "site/src/data/providers/morph.json#company.facts[Status and SLA]",
+    "suggestedField": "caveats[] with unverified label",
+    "priority": "medium"
+  },
+  {
+    "provider": "morph",
+    "kind": "gap",
+    "claim": "Buyer-friendly terms absent from the site: suspension with notice and restoration; 30 days' price-change notice (60 days above a 15% increase in 12 months); no material reduction of core functionality without a workaround or pro-rata refund; Morph does not monitor instance contents.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281d6a024ef59a0b98939; https://cloud.morph.so/web/legal/terms-of-service",
+    "siteLocation": "site/src/data/providers/morph.json#company.facts ; research/morph.md (records the 30/60-day price notice and the benchmark ban)",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "medium"
+  },
+  {
+    "provider": "morph",
+    "kind": "weak",
+    "claim": "The August downtime reports are single X users, one a repeat enthusiast, and the links were not re-found.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281d6a024ef59a0b98939; https://x.com/search?q=morph.so",
+    "siteLocation": "(absent from site)",
+    "suggestedField": "keep unverified; do not state as fact",
+    "priority": "low"
+  },
+  {
+    "provider": "ovhcloud",
+    "kind": "gap",
+    "claim": "July 2026 CVE-2026-53359 (\"Januscape\"): tens of thousands of hypervisor hosts carrying \"environ un million de machines virtuelles\" rebooted without individual agreement; some VMs did not return; data corrupted on VMs across 3 clusters; Paris Nova/Neutron HTTP 503 for ~2h; campaign ran about 11 days.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428193b8e9c8e94a397d0e; https://blog.ovhcloud.com/fr/posts/cve-2026-53359-kvm-patching-lessons-learned/ (verified live)",
+    "siteLocation": "site/src/data/providers/ovhcloud.json#caveats[]",
+    "suggestedField": "caveats[] new entry; company.facts[Recent incidents]",
+    "priority": "high"
+  },
+  {
+    "provider": "ovhcloud",
+    "kind": "gap",
+    "claim": "Incident volume: 47 incidents in Oct 2026 and 28 in Sep; VPS host outage 3 Nov (5h); automated-backup freezes 15 Apr and 19 Jun 2026 with a ticket open two months and an acknowledged SLA breach.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428193b8e9c8e94a397d0e; https://public-cloud.status-ovhcloud.com/history; https://lowendtalk.com/discussion/218363",
+    "siteLocation": "site/src/data/providers/ovhcloud.json#company.facts",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "high"
+  },
+  {
+    "provider": "ovhcloud",
+    "kind": "gap",
+    "claim": "The March 2021 SBG2 fire destroyed a datacentre; backups held in the same site were lost.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428193b8e9c8e94a397d0e; https://news.ycombinator.com/item?id=26417192",
+    "siteLocation": "site/src/data/providers/ovhcloud.json#caveats[]",
+    "suggestedField": "caveats[] or features/company.json backup lesson",
+    "priority": "medium"
+  },
+  {
+    "provider": "ovhcloud",
+    "kind": "gap",
+    "claim": "SLA is on \"commercially reasonable efforts\" with credit tiers starting at 10% for 99.0\u201399.9%.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428193b8e9c8e94a397d0e; https://us.ovhcloud.com/legal/sla/vps/",
+    "siteLocation": "site/src/data/providers/ovhcloud.json#company.facts[Uptime promise]",
+    "suggestedField": "company.facts[Uptime promise]",
+    "priority": "low"
+  },
+  {
+    "provider": "ovhcloud",
+    "kind": "weak",
+    "claim": "The 11-day duration and some customer counts come from French trade-press search extracts; the vendor blog is the right primary source for the reboot, corruption and API numbers.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428193b8e9c8e94a397d0e; https://www.clubic.com/actualite-622141-januscape-ovhcloud-raconte-11-jours-de-crise-pour-patcher-son-parc-mondial.html",
+    "siteLocation": "(absent from site)",
+    "suggestedField": "cite the blog, not the trade press",
+    "priority": "low"
+  },
+  {
+    "provider": "runtime",
+    "kind": "gap",
+    "claim": "Measured record: API 98.91% over 30 days (21,349 of 21,584 checks), sandbox starts 98.42% (4,249 of 4,317), 25 Oct at 75% (about 6h of failures), 8 Oct at 93.47%, median start 495 ms.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42816ab6c8f27927eb261c; https://withruntime.com/status",
+    "siteLocation": "site/src/data/providers/runtime.json#caveats[Uptime was below the published promise] ; research/withruntime.md (records 96.37%/98.87% and zero listed incidents)",
+    "suggestedField": "caveats[] detail; company.facts[Status and SLA]",
+    "priority": "high"
+  },
+  {
+    "provider": "runtime",
+    "kind": "gap",
+    "claim": "Dossier-computed October figure of about 98.97% (22,313 checks, 230 failed) sits below the 99% promise, so the automatic 10% credit should apply; it is inferred, not published.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42816ab6c8f27927eb261c; https://withruntime.com/status; https://withruntime.com/legal/sla",
+    "siteLocation": "site/src/data/providers/runtime.json#company.facts[Status and SLA]",
+    "suggestedField": "company.facts[Status and SLA], tag inferred",
+    "priority": "medium"
+  },
+  {
+    "provider": "runtime",
+    "kind": "contradiction",
+    "claim": "API 30-day uptime: site says 98.87%; the dossier read 98.91% on 4 Nov.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42816ab6c8f27927eb261c; https://withruntime.com/status",
+    "siteLocation": "site/src/data/providers/runtime.json#company.facts[Status and SLA]",
+    "suggestedField": "company.facts[Status and SLA] (refresh)",
+    "priority": "low"
+  },
+  {
+    "provider": "runtime",
+    "kind": "gap",
+    "claim": "Terms: may suspend \"immediately and without notice\" on reasonable belief of abuse; \"Deleted data cannot be recovered\".",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42816ab6c8f27927eb261c; https://withruntime.com/terms",
+    "siteLocation": "site/src/data/providers/runtime.json#company.facts",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "medium"
+  },
+  {
+    "provider": "sandboxer",
+    "kind": "gap",
+    "claim": "Status detail: website/dashboard 99.93%, sandboxes 99.80% (create, run, pause, resume) and preview/SSH 99.80% over 90 days with \"No incidents in the last 90 days\", implying about 4.3h of unposted sandbox failures.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42818dbeabf6598dbd5b84; https://status.sandboxer.com/",
+    "siteLocation": "site/src/data/providers/sandboxer.json#company.facts[Status and SLA] ; research/sandboxer.md (records 99.45% over 30 days and 99.79% for the dashboard)",
+    "suggestedField": "company.facts[Status and SLA]",
+    "priority": "medium"
+  },
+  {
+    "provider": "sandboxer",
+    "kind": "gap",
+    "claim": "Sandbox uptime: site says 99.45% over 30 days; the dossier says 99.80% over 90 days.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42818dbeabf6598dbd5b84; https://status.sandboxer.com/",
+    "siteLocation": "site/src/data/providers/sandboxer.json#company.facts[Status and SLA]",
+    "suggestedField": "keep both windows",
+    "priority": "low"
+  },
+  {
+    "provider": "sandboxer",
+    "kind": "gap",
+    "claim": "Terms: suspend immediately on reasonable belief of abuse, auto-stop and suspend on detected abuse, and expired sandboxes are deleted and cannot be resumed.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db42818dbeabf6598dbd5b84; https://sandboxer.com/terms",
+    "siteLocation": "site/src/data/providers/sandboxer.json#company.facts",
+    "suggestedField": "company.facts[Terms]",
+    "priority": "medium"
+  },
+  {
+    "provider": "scaleway",
+    "kind": "gap",
+    "claim": "SLA remedy: voucher of 10%, 25% or 100% of the month's fee, claimed within 30 days with your own log files; no SLO for DEV1, GP1, PLAY2, PRO2, COPARM1, ENT1 or Development instances.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281fbbebdd71a7623c2f0; https://www.scaleway.com/en/virtual-instances/sla/",
+    "siteLocation": "site/src/data/capabilities.json#sla (scaleway); providers/scaleway.json#company.facts[Status and SLA] ; research/scaleway.md (records 99%/99.5% and no SLO for four ranges)",
+    "suggestedField": "capabilities.sla note",
+    "priority": "high"
+  },
+  {
+    "provider": "scaleway",
+    "kind": "gap",
+    "claim": "Dated incidents: Serverless SQL all databases unavailable in fr-par 29\u201330 Oct, Kapsule nodes failing 26\u201328 Oct, block-storage latency 29 Oct, support ticket delays logged 8\u201326 Oct, VPC Metadata API slowdown 3 Nov.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281fbbebdd71a7623c2f0; https://status.scaleway.com/",
+    "siteLocation": "site/src/data/providers/scaleway.json#company.facts",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "high"
+  },
+  {
+    "provider": "scaleway",
+    "kind": "gap",
+    "claim": "Price increases from 1 Jun 2026 and VC1/START1/X64 forced onto DEV1 on 31 May 2026.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281fbbebdd71a7623c2f0; https://lowendtalk.com/discussion/216684/scaleway-price-increase-notice",
+    "siteLocation": "site/src/data/providers/scaleway.json#caveats[]",
+    "suggestedField": "caveats[] 'Forced migration and price rises'",
+    "priority": "medium"
+  },
+  {
+    "provider": "scaleway",
+    "kind": "contradiction",
+    "claim": "Trustpilot: site 1.5 (360 reviews); dossier 1.4.",
+    "dossierSource": "https://app.notion.com/p/40e6e471db4281fbbebdd71a7623c2f0; https://www.trustpilot.com/review/scaleway.com",
+    "siteLocation": "site/src/data/reviews.json#providers.scaleway.trustpilot.rating",
+    "suggestedField": "reviews.trustpilot.rating (refresh)",
+    "priority": "low"
+  },
+  {
+    "provider": "sprites",
+    "kind": "gap",
+    "claim": "Sprite-specific incidents: hosting outage 11 Oct 23:30 to 12 Oct 00:45 UTC, \"Sprite creates failing\" on 8 Oct, and a 29 Oct report where a Sprite returned \"503 Storage not ready\" and exec, checkpoint listing and snapshots all failed.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428116b041f926d6a1d80a; https://status.flyio.net/history; https://gist.github.com/acmerfight/c57f6d0cb9ad776e934f88307e7ec64c",
+    "siteLocation": "site/src/data/providers/sprites.json#company.facts[Status and SLA] ; research/sprites.md (records the 11\u201312 Oct outage)",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "high"
+  },
+  {
+    "provider": "sprites",
+    "kind": "gap",
+    "claim": "Fly platform incidents in Nov 2026: ARN machine-start failures (50 min and 10 min), IAD emergency maintenance 35 min, outbound IPv4 failures 2h10m; 23 Sep showed 12h50m down.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428116b041f926d6a1d80a; https://statusgator.com/services/flyio",
+    "siteLocation": "site/src/data/providers/sprites.json#company.facts",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "medium"
+  },
+  {
+    "provider": "sprites",
+    "kind": "gap",
+    "claim": "SLA: 99.9% \"Actual Availability\" with credits from 10% once reported, Enterprise only; ToS says \"AS IS\", \"AS AVAILABLE\", \"WITH ALL FAULTS\".",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428116b041f926d6a1d80a; https://fly.io/legal/sla-uptime/; https://fly.io/legal/terms-of-service/",
+    "siteLocation": "site/src/data/providers/sprites.json#company.facts",
+    "suggestedField": "company.facts[Uptime promise] and [Terms]",
+    "priority": "medium"
+  },
+  {
+    "provider": "sprites",
+    "kind": "weak",
+    "claim": "The 29 Oct write-up is one user's gist and does not establish data loss; 'auto-sleep prevents scheduled jobs' is one Reddit user from a search extract.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428116b041f926d6a1d80a; https://gist.github.com/acmerfight/c57f6d0cb9ad776e934f88307e7ec64c",
+    "siteLocation": "(absent from site)",
+    "suggestedField": "keep as anecdote",
+    "priority": "low"
+  },
+  {
+    "provider": "vercel-sandbox",
+    "kind": "gap",
+    "claim": "Dated incidents: 6 Oct 2026 elevated Sandbox error rates in Paris (cdg1) for 25 min; 12 Oct build/deploy failures for 6h40m; 10 Oct iad1 observability delays.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428141b5a5e39f9ce87029; https://statusgator.com/services/vercel",
+    "siteLocation": "site/src/data/providers/vercel-sandbox.json#company.facts[Status and SLA]",
+    "suggestedField": "company.facts[Recent incidents]",
+    "priority": "high"
+  },
+  {
+    "provider": "vercel-sandbox",
+    "kind": "gap",
+    "claim": "SLA is \"commercially reasonable efforts\" toward 99.99%, excluding Excused Downtime, credits as a percentage of monthly fees once claimed, and Sandbox is not named.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428141b5a5e39f9ce87029; https://vercel.com/legal/sla",
+    "siteLocation": "site/src/data/providers/vercel-sandbox.json#company.facts[Status and SLA] ; research/vercel-sandbox.md \u00a7Status and SLA (records the same wording)",
+    "suggestedField": "company.facts[Status and SLA]",
+    "priority": "medium"
+  },
+  {
+    "provider": "vercel-sandbox",
+    "kind": "gap",
+    "claim": "A $1M public hacker challenge for Sandbox security ran in Aug 2026, with findings in Oct 2026.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428141b5a5e39f9ce87029; https://news.ycombinator.com/item?id=49363160",
+    "siteLocation": "site/src/data/providers/vercel-sandbox.json#strengths[]",
+    "suggestedField": "strengths[]",
+    "priority": "low"
+  },
+  {
+    "provider": "vercel-sandbox",
+    "kind": "weak",
+    "claim": "The CEO's 2 Nov X post that Sandbox is \"beautifully delivering on SLOs\" is vendor messaging; the 0.7s median start is a third-party X post.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db428141b5a5e39f9ce87029; https://x.com/rauchg (Nov 2026)",
+    "siteLocation": "(not used by the site)",
+    "suggestedField": "do not add",
+    "priority": "low"
+  },
+  {
+    "provider": "vultr",
+    "kind": "gap",
+    "claim": "SLA scope and mechanics: 100% applies per item to network and host node only (not API, panel or DNS), GPU excluded; credits run from 12h (under 9 min) to 672h (420+ min); claim by ticket within 3 days under ToS \u00a718; credits expire after 1 year.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281839a5cf48b3941de88; https://www.vultr.com/legal/sla/; https://www.vultr.com/legal/tos/",
+    "siteLocation": "site/src/data/capabilities.json#sla (vultr); providers/vultr.json#company.facts[Status and SLA]",
+    "suggestedField": "capabilities.sla note",
+    "priority": "high"
+  },
+  {
+    "provider": "vultr",
+    "kind": "gap",
+    "claim": "Repeated 'status page green while down' in 2026: Tokyo 6 Sep 03:53\u201307:53 UTC, Dallas 17 Aug, Tokyo 4\u20135 May 18.5h, four Amsterdam incidents in 45 days.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281839a5cf48b3941de88; https://www.reddit.com/r/Vultr/comments/1w9b4jt/; https://www.reddit.com/r/Vultr/comments/1vr7l5v/",
+    "siteLocation": "site/src/data/providers/vultr.json#company.facts[Status and SLA]",
+    "suggestedField": "company.facts[Status and SLA] note",
+    "priority": "high"
+  },
+  {
+    "provider": "vultr",
+    "kind": "gap",
+    "claim": "Terms: \"AS IS\", no refunds on cancellation, liability capped at six months of fees, suspension for undue resource stress (\u00a716.2).",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281839a5cf48b3941de88; https://www.vultr.com/legal/tos/ \u00a716.2",
+    "siteLocation": "site/src/data/providers/vultr.json#caveats[]",
+    "suggestedField": "caveats[] 'Suspension for resource stress'",
+    "priority": "medium"
+  },
+  {
+    "provider": "vultr",
+    "kind": "gap",
+    "claim": "The March 2024 ToS controversy over perpetual commercial rights to hosted content (HN 363 points), later removed.",
+    "dossierSource": "https://app.notion.com/p/40d6e471db4281839a5cf48b3941de88; https://news.ycombinator.com/item?id=39836495",
+    "siteLocation": "site/src/data/providers/vultr.json#company.facts",
+    "suggestedField": "company.facts[Terms history]",
+    "priority": "low"
+  }
+]

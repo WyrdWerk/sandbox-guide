@@ -741,3 +741,25 @@ matched, one after correcting which page it belonged to.
 - `price-baseline.json`: new money-bearing sources are the VPS page, the pricing page and the
   configurator. Run `npm run check-rates` after integration; the configurator is JavaScript-rendered
   and may be unreadable to the checker, so record that rather than blessing an empty result.
+
+
+---
+
+## Dossier reconciliation, 2026-11-04
+
+Added a caveat for the October 2026 emergency host patching from Contabo's help article (Context.dev scrape, cached 36 min). The article itself names the flaw "CVE-2026-99999" and says it was disclosed on 15 October 2026. The separate 26 October "unauthorized access to systems hosting VDS" notice survives only in a third-party archive and is deliberately not on the site (owner decision: hold).
+
+| URL | Quote | Confidence |
+|---|---|---|
+| https://help.contabo.com/en/support/solutions/articles/103000420825-important-security-update-urgent-patching-of-all-vps-vds-hosts-cve-2026-99999- | "Applying the patch requires a reboot of the host, so please expect a temporary restart of your VPS or VDS." | docs-confirmed |
+| https://help.contabo.com/en/support/solutions/articles/103000420825-important-security-update-urgent-patching-of-all-vps-vds-hosts-cve-2026-99999- | "patching can’t wait for a regular maintenance window, and we can’t send individual advance notices" | docs-confirmed |
+
+
+---
+
+## Recent incidents, checked 2026-11-04
+
+Window 6 August to 4 November 2026, provider's own status page only (see `research/incoming/incidents/group-1/group-3.md` for the incident list, fetch log and counting method). Counts and durations are this guide's tally from the status page's own timestamps, not a figure the provider publishes. Quote re-fetched by the parent thread and matched after stripping tags, unescaping entities and collapsing whitespace.
+
+- Site fact: The status page currently shows six notices for 6 August to 4 November 2026. The oldest is a CEPH storage slowdown posted on 8 September with a published estimate of 900 minutes.
+- Source: https://contabo-status.com/ — "08.09.2026 11:00 am (UTC+1) Degraded Performance - CEPH Cluster: non-critical Estimated duration: 900 minutes" (docs-confirmed)

@@ -20,7 +20,7 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem; /* clears the sticky section nav on anchor jumps */
+  scroll-padding-top: calc(var(--site-header-offset) + 5rem); /* clears the sticky site header and section nav on anchor jumps */
 }
 
 body {
@@ -116,7 +116,12 @@ code {
 
 /* ---------- site header --------------------------------------------------- */
 
+:root { --site-header-offset: calc(var(--layout-header-height) + 1px); } /* Base.astro sets the measured height */
+
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-bg);
 }
@@ -185,7 +190,7 @@ code {
 
 .section-nav {
   position: sticky;
-  top: 0;
+  top: var(--site-header-offset);
   z-index: 20;
   background: color-mix(in srgb, var(--color-bg) 92%, transparent);
   backdrop-filter: blur(8px);
@@ -547,7 +552,7 @@ ul.prose, ol.prose { padding-left: 1.2em; }
 /* Column headings stay in view under the sticky section nav while the 15 rows scroll. */
 .compare thead th {
   position: sticky;
-  top: var(--section-nav-height);
+  top: calc(var(--site-header-offset) + var(--section-nav-height));
   z-index: 5;
   padding-top: var(--space-3);
   background: var(--color-bg);
@@ -1570,7 +1575,7 @@ h1 a:hover, h2 a:hover, h3 a:hover { color: var(--color-accent); }
 }
 .calc__inputs {
   position: sticky;
-  top: var(--space-6);
+  top: calc(var(--site-header-offset) + var(--space-6));
   display: grid;
   gap: var(--space-5);
   padding: var(--space-5);
@@ -1734,7 +1739,7 @@ details[open] > .calc__head .calc__name::before { transform: rotate(90deg); }
 .chooser__q label { display: flex; gap: var(--space-2); align-items: flex-start; font-size: var(--text-base); color: var(--color-text-secondary); cursor: pointer; }
 .chooser__q input { margin-top: 0.3em; accent-color: var(--color-accent); }
 .chooser__n { display: inline-grid; place-items: center; width: 1.6rem; height: 1.6rem; margin-right: var(--space-2); border-radius: 50%; background: var(--color-accent-soft); color: var(--color-accent-strong); font-family: var(--font-mono); font-size: var(--text-sm); }
-.chooser__answer { position: sticky; top: var(--space-6); padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+.chooser__answer { position: sticky; top: calc(var(--site-header-offset) + var(--space-6)); padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
 .chooser__lead { font-size: var(--text-lg); line-height: var(--leading-normal); margin: 0 0 var(--space-4); }
 .chooser__picks { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-4); }
 .chooser__pick { padding-top: var(--space-4); border-top: 1px solid var(--color-border); display: grid; gap: var(--space-2); }

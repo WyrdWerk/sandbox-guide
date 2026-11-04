@@ -1,0 +1,66 @@
+{
+  "isolation": {
+    "title": "Features: boot your own ISO on a full VM",
+    "url": "https://hosthatch.com/features"
+  },
+  "sizes-regions": {
+    "title": "Compute and storage plans, specs and prices",
+    "url": "https://hosthatch.com/products"
+  },
+  "lifecycle": {
+    "title": "API: power, reboot and reinstall actions",
+    "url": "https://docs.hosthatch.com/api/actions/"
+  },
+  "snapshots-forks": {
+    "title": "API: take, restore and delete snapshots",
+    "url": "https://docs.hosthatch.com/api/snapshots/"
+  },
+  "storage": {
+    "title": "Compute and storage VMs",
+    "url": "https://hosthatch.com/products"
+  },
+  "idle-timers": {
+    "title": "API: server states and cancellation",
+    "url": "https://docs.hosthatch.com/api/servers/"
+  },
+  "reaching-it": {
+    "title": "Networking: IPv4, IPv6 and private networks",
+    "url": "https://docs.hosthatch.com/networking/"
+  },
+  "custom-domains": {
+    "title": "Networking: the public addresses to point DNS at",
+    "url": "https://docs.hosthatch.com/networking/"
+  },
+  "outbound-network": {
+    "title": "Networking: how bandwidth is counted",
+    "url": "https://docs.hosthatch.com/networking/#bandwidth-usage"
+  },
+  "keys-secrets": {
+    "title": "API: authentication and API keys",
+    "url": "https://docs.hosthatch.com/api/authentication/"
+  },
+  "ways-to-drive": {
+    "title": "HostHatch API documentation",
+    "url": "https://docs.hosthatch.com/api/"
+  },
+  "built-in-agents": {
+    "title": "Features: Linux templates or your own ISO",
+    "url": "https://hosthatch.com/features#deployment"
+  },
+  "teams-accounts": {
+    "title": "API: projects and roles",
+    "url": "https://docs.hosthatch.com/api/projects-and-roles/"
+  },
+  "company": {
+    "title": "About HostHatch",
+    "url": "https://hosthatch.com/company"
+  },
+  "billing-models": {
+    "title": "Terms: billing cycles and term",
+    "url": "https://hosthatch.com/terms-of-service"
+  },
+  "trials-free-tiers": {
+    "title": "Terms: refund policy",
+    "url": "https://hosthatch.com/terms-of-service#refund-policy"
+  }
+}

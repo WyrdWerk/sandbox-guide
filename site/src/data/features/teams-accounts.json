@@ -364,6 +364,30 @@
         "quote": "Permissions sets and their scope make up IAM rules, which define the access rights that a principal (user, group or application) should have.",
         "confidence": "docs-confirmed"
       }
+    },
+    {
+      "provider": "tierhive",
+      "verdict": "not-published",
+      "figure": "Not published",
+      "scenario": "One login per customer with a six-digit code at sign-in; whether colleagues can be added is not documented.",
+      "note": "The terms allow one account per customer and invite companies to ask about more, which suggests no team model. Sub-users, roles, SSO and an audit log are not described on any public page. What does exist is prepaid credit: you cannot spend more than the tokens you have bought, although nothing says what happens to a running server when the balance reaches zero.",
+      "source": {
+        "url": "https://tierhive.com/terms.php",
+        "quote": "One Account Per Customer: You are permitted one Account per customer.",
+        "confidence": "docs-confirmed"
+      }
+    },
+    {
+      "provider": "hosthatch",
+      "verdict": "partly",
+      "figure": "Projects, 3 roles; no SSO",
+      "scenario": "A small team can share projects with owner, admin and member roles, but there is no single sign-on, no audit log and no hard spending cap.",
+      "note": "Servers, snapshots, keys, firewalls, ISOs and orders live in projects, and each person has one of three roles in each project; the project owner's account credit pays for every order. Read-only API keys and password-plus-2FA sign-in exist. What is missing for a company: SAML or OIDC single sign-on, an audit log of who changed what, and any account-wide cap that stops another server being ordered.",
+      "source": {
+        "url": "https://docs.hosthatch.com/api/projects-and-roles/",
+        "quote": "A project holds servers, SSH keys, firewall groups, snapshots, ISOs, actions and orders, and the people who manage them.",
+        "confidence": "docs-confirmed"
+      }
     }
   ],
   "figureLabel": "Hard spend cap?",
