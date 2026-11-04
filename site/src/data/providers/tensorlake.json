@@ -173,11 +173,56 @@
       },
       {
         "label": "Support",
-        "value": "Slack community and email on every tier, 24×7 Slack and email on Pro with a 24-hour P1, and a 1-hour P1 plus a resident SA on Enterprise.",
+        "value": "Slack community and email on every tier, 24×7 Slack and email on Pro, and a 1-hour P1 plus a resident SA on Enterprise.",
         "source": {
           "url": "https://www.tensorlake.ai/pricing",
           "quote": "24×7 Slack + email",
           "confidence": "pricing-page"
+        }
+      },
+      {
+        "label": "SLA scope",
+        "value": "Paid plans only; the free tier has no uptime promise, and an order form can change the terms.",
+        "source": {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "This Section 5 applies to paid Plans and does not apply to Free Offerings (Section 12). An Order Form may modify this Section 5",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "SLA credits",
+        "value": "Credits are added to your next invoice automatically; you don't have to file a claim.",
+        "source": {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "applies them automatically to Customer’s next invoice; Customer is not required to submit a claim",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Leaving after bad months",
+        "value": "If availability is below 99.5% for two months in a row, or three months in six, you can cancel without penalty on 30 days' notice.",
+        "source": {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "If Monthly Availability falls below 99.5% in two (2) consecutive months, or in any three (3) months within a rolling six-month period, Customer may, on thirty (30) days’ written notice, elect either (a) to terminate the affected Plan or Order Form without penalty",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "P1 response (pricing page)",
+        "value": "The pricing page promises a first reply to a critical (P1) ticket within 24 hours on Pro.",
+        "source": {
+          "url": "https://www.tensorlake.ai/pricing",
+          "quote": "P1 SLA: 24 hours",
+          "confidence": "pricing-page"
+        }
+      },
+      {
+        "label": "P1 response (Terms)",
+        "value": "The Terms set a 4-hour target for the first reply to a critical ticket, around the clock, which disagrees with the pricing page's 24 hours. Get the figure in your order form.",
+        "source": {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "4 hours, 24×7",
+          "confidence": "docs-confirmed"
         }
       },
       {

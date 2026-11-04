@@ -1,6 +1,39 @@
 {
   "changes": [
     {
+      "date": "2026-11-04",
+      "title": "Correction: Tensorlake does promise 99.9% uptime on paid plans",
+      "provider": "tensorlake",
+      "what": "This guide's capability checklist said Tensorlake had no uptime promise. Its Terms promise 99.9% monthly availability for the control plane on paid plans, with service credits applied automatically. The Terms also set a 4-hour first response for critical tickets, while the pricing page says 24 hours on Pro. The date is when this guide corrected it, not a change by Tensorlake.",
+      "sources": [
+        {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "TensorLake will use commercially reasonable efforts to make the Control Plane available 99.9% of the time in each calendar month",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "This Section 5 applies to paid Plans and does not apply to Free Offerings (Section 12).",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "applies them automatically to Customer’s next invoice; Customer is not required to submit a claim",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.tensorlake.ai/terms",
+          "quote": "4 hours, 24×7",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.tensorlake.ai/pricing",
+          "quote": "P1 SLA: 24 hours",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
       "date": "2026-10-30",
       "title": "Scaleway added: French hourly servers whose compute stops billing when off",
       "provider": "scaleway",

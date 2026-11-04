@@ -22089,12 +22089,13 @@
         },
         {
           "provider": "tensorlake",
-          "verdict": "no",
-          "shortfall": "The only published SLA is a 24-hour response to a P1 support ticket, not an uptime promise.",
+          "verdict": "yes",
+          "figure": "99.9% monthly, control plane",
+          "note": "A monthly availability promise for the control plane, the part of Tensorlake that runs the service. Who it covers, the credits and the exit terms are listed under the company facts on Tensorlake's page.",
           "source": {
-            "url": "https://www.tensorlake.ai/pricing",
-            "quote": "P1 SLA: 24 hours",
-            "confidence": "pricing-page"
+            "url": "https://www.tensorlake.ai/terms",
+            "quote": "TensorLake will use commercially reasonable efforts to make the Control Plane available 99.9% of the time in each calendar month",
+            "confidence": "docs-confirmed"
           }
         },
         {
