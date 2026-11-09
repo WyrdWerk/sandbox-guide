@@ -11,8 +11,7 @@
         "$0.36",
         "$0.70",
         "$0.80",
-        "$1",
-        "$100",
+        "$1000",
         "$10000",
         "$12.50",
         "$15.48",
@@ -22,9 +21,10 @@
         "$3",
         "$4.76",
         "$5",
+        "$50",
         "$9.34"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://blaxel.ai/pricing": {
       "figures": [
@@ -44,116 +44,112 @@
         "$50",
         "$800"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://docs.boat.dev/pricing": {
       "figures": [
+        "$0",
         "$0.012",
         "$0.018",
+        "$0.026",
         "$0.03",
         "$0.036",
         "$0.046",
-        "$0.05",
-        "$0.053",
+        "$0.047",
         "$0.056",
         "$0.057",
         "$0.07",
         "$0.072",
         "$0.073",
         "$0.083",
-        "$0.091",
         "$0.097",
         "$0.104",
-        "$0.112",
+        "$0.105",
         "$0.117",
         "$0.129",
         "$0.132",
-        "$0.140",
         "$0.158",
+        "$0.164",
         "$0.166",
         "$0.171",
         "$0.180",
         "$0.200",
-        "$0.201",
+        "$0.205",
+        "$0.210",
         "$0.215",
         "$0.217",
         "$0.226",
         "$0.233",
-        "$0.235",
-        "$0.244",
+        "$0.238",
         "$0.264",
-        "$0.280",
         "$0.300",
-        "$0.315",
         "$0.317",
+        "$0.329",
         "$0.331",
         "$0.337",
         "$0.341",
         "$0.357",
         "$0.36",
         "$0.360",
-        "$0.380",
-        "$0.384",
         "$0.417",
+        "$0.420",
         "$0.434",
         "$0.456",
         "$0.467",
+        "$0.476",
+        "$0.48",
         "$0.529",
-        "$0.560",
-        "$0.568",
         "$0.600",
-        "$0.630",
         "$0.634",
         "$0.641",
+        "$0.658",
         "$0.662",
         "$0.682",
         "$0.720",
+        "$0.76",
         "$0.760",
         "$0.833",
+        "$0.840",
         "$0.867",
         "$0.933",
+        "$0.952",
         "$1",
         "$1.06",
-        "$1.12",
         "$1.20",
-        "$1.26",
         "$1.27",
         "$1.32",
         "$1.36",
         "$1.44",
-        "$1.52",
         "$1.67",
         "$1.68",
         "$1.73",
+        "$1.90",
         "$100",
-        "$14.61",
+        "$13.63",
+        "$14.96",
         "$158",
-        "$184.80",
+        "$16.75",
+        "$19.71",
         "$2.40",
-        "$2.52",
         "$2.53",
         "$2.73",
         "$20",
         "$200",
         "$2000",
-        "$22",
-        "$22.07",
         "$26",
-        "$264",
-        "$3",
-        "$3.04",
+        "$3.21",
         "$3.33",
         "$3.60",
-        "$4.95",
+        "$4.28",
+        "$5.10",
         "$500",
         "$58",
         "$6",
         "$6.34",
-        "$7.62",
-        "$8.19",
-        "$92.40"
+        "$7.19",
+        "$8.30"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://boxd.sh/pricing": {
       "figures": [
@@ -161,36 +157,31 @@
         "€0.0016",
         "€0.008",
         "€0.012",
-        "€0.024",
+        "€0.03",
         "€0.039",
         "€0.06",
-        "€0.078",
-        "€0.1",
         "€0.10",
-        "€0.1036",
         "€0.17",
         "€0.18",
         "€0.20",
         "€0.36",
         "€0.39",
         "€0.70",
-        "€0.78",
-        "€10.29",
+        "€1.17",
+        "€1.90",
         "€132.86",
-        "€19.78",
+        "€18.69",
         "€20",
-        "€25.21",
-        "€25.99",
+        "€24.38",
         "€259.88",
         "€30",
-        "€4.27",
+        "€48.18",
+        "€5.84",
         "€513.92",
         "€69.35",
-        "€7.19",
-        "€7.37",
-        "€75.63"
+        "€8.91"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://developers.cloudflare.com/containers/platform/pricing/": {
       "figures": [
@@ -202,7 +193,7 @@
         "$0.05",
         "$5"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.daytona.io/docs/en/limits.md": {
       "figures": [
@@ -210,7 +201,7 @@
         "$25",
         "$500"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://e2b.dev/pricing": {
       "figures": [
@@ -228,11 +219,11 @@
         "$1000",
         "$150",
         "$166",
-        "$3000",
+        "$2000",
         "$316",
         "$500"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://instabox.sh/pricing": {
       "figures": [
@@ -245,7 +236,7 @@
         "$20",
         "$500"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://lizard.build/docs/platform/limits": {
       "figures": [
@@ -253,7 +244,7 @@
         "$0.0324",
         "$0.0648"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://lizard.build/pricing": {
       "figures": [
@@ -272,7 +263,7 @@
         "$9.13",
         "$99"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://modal.com/pricing": {
       "figures": [
@@ -286,7 +277,6 @@
         "$0.02565",
         "$0.491",
         "$0.77",
-        "$1",
         "$10",
         "$100",
         "$250",
@@ -296,7 +286,7 @@
         "$4740",
         "$5400"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://cloud.morph.so/web/subscribe": {
       "figures": [
@@ -308,7 +298,7 @@
         "$40",
         "$50"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://withruntime.com/docs/pricing": {
       "figures": [
@@ -374,25 +364,33 @@
         "$80",
         "$800"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://sandboxer.com/pricing": {
       "figures": [
         "$0.018",
+        "$0.03",
         "$0.036",
+        "$0.05",
+        "$0.07",
         "$0.072",
         "$0.20",
         "$100",
         "$13",
         "$146",
+        "$184.80",
         "$20",
         "$2000",
+        "$22",
         "$26",
+        "$264",
+        "$3",
         "$31.68",
         "$500",
-        "$53"
+        "$53",
+        "$92.40"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://fly.io/pricing/": {
       "figures": [
@@ -421,6 +419,7 @@
         "$0.5500",
         "$0.6417",
         "$0.7334",
+        "$1",
         "$13.16",
         "$132.01",
         "$15000",
@@ -441,6 +440,7 @@
         "$396.02",
         "$4.39",
         "$462.02",
+        "$5",
         "$528.02",
         "$6.00",
         "$66.00",
@@ -449,7 +449,7 @@
         "$962",
         "$99"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://vercel.com/docs/sandbox/pricing": {
       "figures": [
@@ -475,7 +475,7 @@
         "$0.8832",
         "$20"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.daytona.io/pricing": {
       "figures": [
@@ -486,8 +486,10 @@
         "$0.57",
         "$0.74",
         "$0.99",
+        "$1.14",
         "$1.29",
         "$1.74",
+        "$1.99",
         "$2.27",
         "$2.61",
         "$200",
@@ -501,7 +503,7 @@
         "$50",
         "$6.25"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.tensorlake.ai/pricing": {
       "figures": [
@@ -523,6 +525,7 @@
         "$20",
         "$250",
         "$250.00",
+        "$3.95",
         "$31.50",
         "$45.00",
         "$5",
@@ -530,7 +533,7 @@
         "$52.50",
         "$75.00"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://docs.tensorlake.ai/platform/billing": {
       "figures": [
@@ -547,7 +550,7 @@
         "$250",
         "$5"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://docs.tensorlake.ai/faqs/pricing-limits-faq": {
       "figures": [
@@ -564,7 +567,7 @@
         "$250",
         "$5"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.digitalocean.com/pricing/droplets": {
       "figures": [
@@ -631,7 +634,7 @@
         "$84.00",
         "$96.00"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://docs.digitalocean.com/products/droplets/details/pricing/": {
       "figures": [
@@ -662,13 +665,13 @@
         "$49.36",
         "$6.17"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://docs.digitalocean.com/products/volumes/details/pricing/": {
       "figures": [
         "$0.10"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.hetzner.com/cloud/regular-performance/": {
       "figures": [
@@ -704,14 +707,14 @@
         "€49.49",
         "€5.99",
         "€6.49",
+        "€61.70",
         "€62.99",
         "€69.99",
         "€7.40",
         "€7.99",
-        "€72.70",
         "€93.99"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://docs.hetzner.com/cloud/billing/faq": {
       "figures": [
@@ -722,7 +725,7 @@
         "€0.658",
         "€3.29"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://docs.hetzner.com/cloud/servers/primary-ips/overview": {
       "figures": [
@@ -731,7 +734,7 @@
         "€0.0008",
         "€0.50"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.hostinger.com/vps-hosting": {
       "figures": [
@@ -749,7 +752,7 @@
         "$623.76",
         "$8.79"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.freestyle.sh/docs/vms/pricing-and-limits": {
       "figures": [
@@ -762,7 +765,7 @@
         "$50",
         "$500"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.freestyle.sh/pricing.md": {
       "figures": [
@@ -775,7 +778,7 @@
         "$50",
         "$500"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.freestyle.sh/pricing": {
       "figures": [
@@ -787,7 +790,7 @@
         "$50",
         "$500"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://hostup.se/legal/terms-of-service-en.pdf": {
       "figures": [
@@ -796,10 +799,9 @@
         "$2",
         "$6",
         "$78",
-        "$8",
-        "$9"
+        "$8"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.hetzner.com/cloud/cost-optimized/": {
       "figures": [
@@ -822,10 +824,10 @@
         "€43.49",
         "€5.99",
         "€6.49",
-        "€72.70",
+        "€61.70",
         "€8.99"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://website-price-api.hetzner.com/api/v1/products/CLOUD_124": {
       "figures": [
@@ -846,7 +848,7 @@
         "SIN1:prices.monthly=26.49EUR",
         "SIN1:prices.monthly=30.99USD"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://cart.hostinger.com/api/v1/catalog/hostingercom-vps-kvm1?brand_name=hostinger.com&currency_code=USD": {
       "figures": [
@@ -1029,7 +1031,7 @@
         "hostingercom-vpslicense-webuzopersonal-usd-5y:price=12000USD",
         "hostingercom-vpslicense-webuzopersonal-usd-6m:price=1200USD"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://cart.hostinger.com/api/v1/catalog/hostingercom-vps-kvm2?brand_name=hostinger.com&currency_code=USD": {
       "figures": [
@@ -1212,7 +1214,7 @@
         "hostingercom-vpslicense-webuzopersonal-usd-5y:price=12000USD",
         "hostingercom-vpslicense-webuzopersonal-usd-6m:price=1200USD"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://cart.hostinger.com/api/v1/catalog/hostingercom-vps-kvm4?brand_name=hostinger.com&currency_code=USD": {
       "figures": [
@@ -1395,7 +1397,7 @@
         "hostingercom-vpslicense-webuzopersonal-usd-5y:price=12000USD",
         "hostingercom-vpslicense-webuzopersonal-usd-6m:price=1200USD"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://cart.hostinger.com/api/v1/catalog/hostingercom-vps-kvm8?brand_name=hostinger.com&currency_code=USD": {
       "figures": [
@@ -1578,7 +1580,7 @@
         "hostingercom-vpslicense-webuzopersonal-usd-5y:price=12000USD",
         "hostingercom-vpslicense-webuzopersonal-usd-6m:price=1200USD"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://cloud.hostup.se/api/v2/products/vps": {
       "figures": [
@@ -1653,7 +1655,7 @@
         "vps-xxl:configurableOptions.pricing.amount=1SEK",
         "vps-xxl:configurableOptions.pricing.amount=5.94SEK"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://aws.amazon.com/lightsail/pricing/": {
       "figures": [
@@ -1784,7 +1786,7 @@
         "$96",
         "$980"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-bundles.html": {
       "figures": [
@@ -1876,7 +1878,7 @@
         "$9.50",
         "$96.00"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-frequently-asked-questions-faq-billing-and-account-management.html": {
       "figures": [
@@ -1894,7 +1896,7 @@
         "$5",
         "$9.50"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonLightsail/current/us-east-1/index.json": {
       "figures": [
@@ -2020,7 +2022,7 @@
         "$5.64516",
         "$5.65054"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-faq-data-transfer-allowance.html": {
       "figures": [
@@ -2037,7 +2039,7 @@
         "$5",
         "$7"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://us.ovhcloud.com/vps/": {
       "figures": [
@@ -2048,7 +2050,7 @@
         "$4.54",
         "$8.50"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://api.us.ovhcloud.com/1.0/order/catalog/public/vps?ovhSubsidiary=US": {
       "figures": [
@@ -2400,14 +2402,14 @@
         "$980.63",
         "$99.00"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://techdocs.akamai.com/cloud-computing/docs/understanding-how-billing-works": {
       "figures": [
         "$5",
         "$50.00"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://api.linode.com/v4/linode/types": {
       "figures": [
@@ -2933,22 +2935,18 @@
         "id-cgk:monthly=94.39",
         "id-cgk:monthly=96"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://docs.vultr.com/support/platform/billing/does-vultr-charge-for-stored-snapshots": {
       "figures": [
         "$0.05"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://api.vultr.com/v2/plans?per_page=500": {
       "figures": [
         "vc2-16c-64gb:hourly_cost=0.438",
         "vc2-16c-64gb:hourly_cost_preemptible=0.438",
-        "vc2-16c-64gb:location_cost.sao.hourly_cost=0.658",
-        "vc2-16c-64gb:location_cost.sao.hourly_cost_preemptible=0.658",
-        "vc2-16c-64gb:location_cost.sao.monthly_cost=480",
-        "vc2-16c-64gb:location_cost.sao.monthly_cost_preemptible=480",
         "vc2-16c-64gb:monthly_cost=320",
         "vc2-16c-64gb:monthly_cost_preemptible=320",
         "vc2-1c-0.5gb-free:hourly_cost=0",
@@ -3051,6 +3049,10 @@
         "vcg-a40-96c-480g-192vram:hourly_cost_preemptible=6.849",
         "vcg-a40-96c-480g-192vram:monthly_cost=5000",
         "vcg-a40-96c-480g-192vram:monthly_cost_preemptible=5000",
+        "vcg-b200-248c-2826g-1536vram-roce:hourly_cost=68",
+        "vcg-b200-248c-2826g-1536vram-roce:hourly_cost_preemptible=25.6",
+        "vcg-b200-248c-2826g-1536vram-roce:monthly_cost=45696",
+        "vcg-b200-248c-2826g-1536vram-roce:monthly_cost_preemptible=17203.2",
         "vcg-b200-248c-2826g-1536vram:hourly_cost=68",
         "vcg-b200-248c-2826g-1536vram:hourly_cost_preemptible=25.6",
         "vcg-b200-248c-2826g-1536vram:monthly_cost=45696",
@@ -3165,10 +3167,6 @@
         "vhp-1c-1gb-amd:monthly_cost_preemptible=6",
         "vhp-1c-1gb-intel:hourly_cost=0.008",
         "vhp-1c-1gb-intel:hourly_cost_preemptible=0.008",
-        "vhp-1c-1gb-intel:location_cost.sao.hourly_cost=0.012",
-        "vhp-1c-1gb-intel:location_cost.sao.hourly_cost_preemptible=0.012",
-        "vhp-1c-1gb-intel:location_cost.sao.monthly_cost=9",
-        "vhp-1c-1gb-intel:location_cost.sao.monthly_cost_preemptible=9",
         "vhp-1c-1gb-intel:monthly_cost=6",
         "vhp-1c-1gb-intel:monthly_cost_preemptible=6",
         "vhp-1c-2gb-amd:hourly_cost=0.016",
@@ -3325,10 +3323,18 @@
         "voc-c-4c-8gb-75s-amd:monthly_cost_preemptible=80",
         "voc-c-8c-16gb-150s-amd:hourly_cost=0.219",
         "voc-c-8c-16gb-150s-amd:hourly_cost_preemptible=0.219",
+        "voc-c-8c-16gb-150s-amd:location_cost.sao.hourly_cost=0.329",
+        "voc-c-8c-16gb-150s-amd:location_cost.sao.hourly_cost_preemptible=0.329",
+        "voc-c-8c-16gb-150s-amd:location_cost.sao.monthly_cost=240",
+        "voc-c-8c-16gb-150s-amd:location_cost.sao.monthly_cost_preemptible=240",
         "voc-c-8c-16gb-150s-amd:monthly_cost=160",
         "voc-c-8c-16gb-150s-amd:monthly_cost_preemptible=160",
         "voc-c-8c-16gb-300s-amd:hourly_cost=0.247",
         "voc-c-8c-16gb-300s-amd:hourly_cost_preemptible=0.247",
+        "voc-c-8c-16gb-300s-amd:location_cost.sao.hourly_cost=0.37",
+        "voc-c-8c-16gb-300s-amd:location_cost.sao.hourly_cost_preemptible=0.37",
+        "voc-c-8c-16gb-300s-amd:location_cost.sao.monthly_cost=270",
+        "voc-c-8c-16gb-300s-amd:location_cost.sao.monthly_cost_preemptible=270",
         "voc-c-8c-16gb-300s-amd:monthly_cost=180",
         "voc-c-8c-16gb-300s-amd:monthly_cost_preemptible=180",
         "voc-g-16c-64gb-320s-amd:hourly_cost=0.658",
@@ -3377,6 +3383,10 @@
         "voc-g-64c-192gb-960s-amd:monthly_cost_preemptible=1920",
         "voc-g-8c-32gb-160s-amd:hourly_cost=0.329",
         "voc-g-8c-32gb-160s-amd:hourly_cost_preemptible=0.329",
+        "voc-g-8c-32gb-160s-amd:location_cost.sao.hourly_cost=0.493",
+        "voc-g-8c-32gb-160s-amd:location_cost.sao.hourly_cost_preemptible=0.493",
+        "voc-g-8c-32gb-160s-amd:location_cost.sao.monthly_cost=360",
+        "voc-g-8c-32gb-160s-amd:location_cost.sao.monthly_cost_preemptible=360",
         "voc-g-8c-32gb-160s-amd:monthly_cost=240",
         "voc-g-8c-32gb-160s-amd:monthly_cost_preemptible=240",
         "voc-g-96c-256gb-1280s-amd:hourly_cost=5.26",
@@ -3473,14 +3483,26 @@
         "voc-m-4c-32gb-800s-amd:monthly_cost_preemptible=250",
         "voc-m-8c-64gb-1600s-amd:hourly_cost=0.685",
         "voc-m-8c-64gb-1600s-amd:hourly_cost_preemptible=0.685",
+        "voc-m-8c-64gb-1600s-amd:location_cost.sao.hourly_cost=1.027",
+        "voc-m-8c-64gb-1600s-amd:location_cost.sao.hourly_cost_preemptible=1.027",
+        "voc-m-8c-64gb-1600s-amd:location_cost.sao.monthly_cost=750",
+        "voc-m-8c-64gb-1600s-amd:location_cost.sao.monthly_cost_preemptible=750",
         "voc-m-8c-64gb-1600s-amd:monthly_cost=500",
         "voc-m-8c-64gb-1600s-amd:monthly_cost_preemptible=500",
         "voc-m-8c-64gb-400s-amd:hourly_cost=0.438",
         "voc-m-8c-64gb-400s-amd:hourly_cost_preemptible=0.438",
+        "voc-m-8c-64gb-400s-amd:location_cost.sao.hourly_cost=0.658",
+        "voc-m-8c-64gb-400s-amd:location_cost.sao.hourly_cost_preemptible=0.658",
+        "voc-m-8c-64gb-400s-amd:location_cost.sao.monthly_cost=480",
+        "voc-m-8c-64gb-400s-amd:location_cost.sao.monthly_cost_preemptible=480",
         "voc-m-8c-64gb-400s-amd:monthly_cost=320",
         "voc-m-8c-64gb-400s-amd:monthly_cost_preemptible=320",
         "voc-m-8c-64gb-800s-amd:hourly_cost=0.534",
         "voc-m-8c-64gb-800s-amd:hourly_cost_preemptible=0.534",
+        "voc-m-8c-64gb-800s-amd:location_cost.sao.hourly_cost=0.801",
+        "voc-m-8c-64gb-800s-amd:location_cost.sao.hourly_cost_preemptible=0.801",
+        "voc-m-8c-64gb-800s-amd:location_cost.sao.monthly_cost=585",
+        "voc-m-8c-64gb-800s-amd:location_cost.sao.monthly_cost_preemptible=585",
         "voc-m-8c-64gb-800s-amd:monthly_cost=390",
         "voc-m-8c-64gb-800s-amd:monthly_cost_preemptible=390",
         "voc-s-16c-128gb-2560s-amd:hourly_cost=1.37",
@@ -3545,10 +3567,18 @@
         "voc-s-4c-32gb-960s-amd:monthly_cost_preemptible=310",
         "voc-s-8c-64gb-1280s-amd:hourly_cost=0.685",
         "voc-s-8c-64gb-1280s-amd:hourly_cost_preemptible=0.685",
+        "voc-s-8c-64gb-1280s-amd:location_cost.sao.hourly_cost=1.027",
+        "voc-s-8c-64gb-1280s-amd:location_cost.sao.hourly_cost_preemptible=1.027",
+        "voc-s-8c-64gb-1280s-amd:location_cost.sao.monthly_cost=750",
+        "voc-s-8c-64gb-1280s-amd:location_cost.sao.monthly_cost_preemptible=750",
         "voc-s-8c-64gb-1280s-amd:monthly_cost=500",
         "voc-s-8c-64gb-1280s-amd:monthly_cost_preemptible=500",
         "voc-s-8c-64gb-1920s-amd:hourly_cost=0.849",
         "voc-s-8c-64gb-1920s-amd:hourly_cost_preemptible=0.849",
+        "voc-s-8c-64gb-1920s-amd:location_cost.sao.hourly_cost=1.274",
+        "voc-s-8c-64gb-1920s-amd:location_cost.sao.hourly_cost_preemptible=1.274",
+        "voc-s-8c-64gb-1920s-amd:location_cost.sao.monthly_cost=930",
+        "voc-s-8c-64gb-1920s-amd:location_cost.sao.monthly_cost_preemptible=930",
         "voc-s-8c-64gb-1920s-amd:monthly_cost=620",
         "voc-s-8c-64gb-1920s-amd:monthly_cost_preemptible=620",
         "vx1-g-16c-64g-960s:hourly_cost=0.612",
@@ -3696,7 +3726,7 @@
         "vx1-m-96c-768gb:monthly_cost=2803.2",
         "vx1-m-96c-768gb:monthly_cost_preemptible=2803.2"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.scaleway.com/en/pricing/virtual-instances/": {
       "figures": [
@@ -3984,18 +4014,18 @@
         "€98.98",
         "€992.50"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.scaleway.com/en/pricing/storage/": {
       "figures": [
-        "€0.0000035",
+        "€0.0000034",
         "€0.000011",
         "€0.000022",
         "€0.000049",
         "€0.000130",
         "€0.000177",
         "€0.000221",
-        "€0.00254",
+        "€0.00246",
         "€0.00803",
         "€0.009",
         "€0.01",
@@ -4008,7 +4038,7 @@
         "€499",
         "€9000"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.scaleway.com/en/pricing/network/": {
       "figures": [
@@ -4065,7 +4095,7 @@
         "€9000",
         "€99"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.scaleway.com/en/blog/a-transparent-update-on-scaleway-pricing/": {
       "figures": [
@@ -4205,13 +4235,90 @@
         "€679.99",
         "€739.99"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
     },
     "https://www.scaleway.com/en/docs/billing/faq/": {
       "figures": [
         "€0"
       ],
-      "seen": "2026-10-30"
+      "seen": "2026-11-09"
+    },
+    "https://tierhive.com/": {
+      "figures": [
+        "$0",
+        "$0.001122",
+        "$0.004486",
+        "$0.10",
+        "$0.81",
+        "$1",
+        "$1.69",
+        "$3",
+        "$3.23",
+        "$3.37",
+        "$5.44"
+      ],
+      "seen": "2026-11-09"
+    },
+    "https://tierhive.com/api/pricing.php": {
+      "figures": [
+        ":base_costs.token_cost_id=1",
+        ":base_costs.token_cost_id=11",
+        ":base_costs.token_cost_id=12",
+        ":base_costs.token_cost_id=13",
+        ":base_costs.token_cost_id=14",
+        ":base_costs.token_cost_id=15",
+        ":base_costs.token_cost_id=16",
+        ":base_costs.token_cost_id=2",
+        ":base_costs.token_cost_id=3",
+        ":base_costs.token_cost_id=4",
+        ":base_costs.token_cost_per_unit_hour=0.00000090",
+        ":base_costs.token_cost_per_unit_hour=0.00000100",
+        ":base_costs.token_cost_per_unit_hour=0.00000500",
+        ":base_costs.token_cost_per_unit_hour=0.00000700",
+        ":base_costs.token_cost_per_unit_hour=0.00002000",
+        ":cpu_tiers.token_cost_per_hour=0.000000",
+        ":cpu_tiers.token_cost_per_hour=0.000020",
+        ":cpu_tiers.token_cost_per_hour=0.000030",
+        ":iops_tiers.token_cost_per_hour=0.000000",
+        ":iops_tiers.token_cost_per_hour=0.000020",
+        ":iops_tiers.token_cost_per_hour=0.000030",
+        ":mail_tiers.token_cost_per_hour=0.00000000",
+        ":mail_tiers.token_cost_per_hour=0.00001000",
+        ":mail_tiers.token_cost_per_hour=0.00002000",
+        ":mail_tiers.token_cost_per_hour=0.00004000",
+        ":network_tiers.token_cost_per_hour=0.000000",
+        ":network_tiers.token_cost_per_hour=0.000020",
+        ":network_tiers.token_cost_per_hour=0.000030"
+      ],
+      "seen": "2026-11-09"
+    },
+    "https://lowendspirit.com/discussion/11534/tierhive-19-locations-build-your-own-vps-plan-from-0-10-p-month-or-0-000135-per-hour": {
+      "figures": [
+        "$0.000135",
+        "$0.10",
+        "$0.50",
+        "$3.89",
+        "$30.57",
+        "$5"
+      ],
+      "seen": "2026-11-09"
+    },
+    "https://tierhive.com/blog/general/what-is-an-hourly-vps-and-why-you-might-want-one": {
+      "figures": [
+        "$0.000135",
+        "$0.002343",
+        "$0.004061",
+        "$0.004686",
+        "$0.008122",
+        "$0.01",
+        "$0.68",
+        "$10",
+        "$2.92",
+        "$20",
+        "$5",
+        "$5.00"
+      ],
+      "seen": "2026-11-09"
     }
   }
 }
