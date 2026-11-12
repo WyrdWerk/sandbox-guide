@@ -21,7 +21,7 @@
     {
       "heading": "Volumes are a separate product",
       "body": [
-        "Runtime attaches up to four volumes per sandbox, and a volume can also be mounted read-only as a snapshot. Blaxel allows one volume per sandbox, attached to one sandbox at a time, and sells Agent Drive for shared access. Vercel's drives allow one read-write mount at a time. Morph's volumes are S3-compatible object storage, not an attached block disk.",
+        "Runtime attaches up to four volumes per sandbox, and a volume can also be mounted read-only as a snapshot. Blaxel allows one volume per sandbox, attached to one sandbox at a time, and sells Agent Drive for shared access. Vercel's drives allow one read-write mount at a time. Morph's Volumes are S3-compatible object storage and its EFS is a shared FUSE filesystem; neither is an attached block disk.",
         "Several providers have no volume product at all: Agent 37, Boat, Sandboxer and InstaBox. E2B's volumes exist but are in private beta."
       ]
     },

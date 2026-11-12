@@ -2044,14 +2044,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "partly",
-          "figure": "ceiling not published",
-          "shortfall": "The plan allows up to 1024 cores across the account, but the largest single machine is not published.",
+          "verdict": "yes",
+          "figure": "16 vCPU / 32 GiB",
           "source": {
-            "url": "https://cloud.morph.so/web/subscribe",
-            "quote": "Up to 1024 vCPU",
-            "confidence": "pricing-page"
-          }
+            "url": "https://cloud.morph.so/docs/examples/configurable-reboot",
+            "quote": "Scale UP for builds (16 vCPU, 32 GiB RAM, 64 GiB disk)",
+            "confidence": "docs-confirmed"
+          },
+          "note": "A 16 vCPU / 32 GiB / 64 GiB shape is documented. The Scale plan lists up to 1,024 vCPU, but not whether that is per machine or account-wide."
         },
         {
           "provider": "runtime",
@@ -4320,13 +4320,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "not-published",
-          "note": "No start or resume time is published.",
+          "verdict": "yes",
+          "note": "A first-party claim on Morph's developer page, not a measurement.",
           "source": {
-            "url": "https://cloud.morph.so/docs/documentation/instances/basic-lifecycle",
-            "quote": "Each instance runs from a saved snapshot.",
-            "confidence": "not-published"
-          }
+            "url": "https://cloud.morph.so/docs/blog/developers",
+            "quote": "<250 ms startup times",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "<250 ms claim"
         },
         {
           "provider": "runtime",
@@ -6844,13 +6845,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "partly",
-          "shortfall": "The volume is object storage reached over S3, not a disk attached to the machine.",
+          "verdict": "yes",
           "source": {
-            "url": "https://cloud.morph.so/docs/volumes/getting-started",
-            "quote": "Morph Volumes are persistent S3-compatible storage for build caches, release artifacts, checkpoints, and shared datasets.",
+            "url": "http://web.archive.org/web/20260718091200/https://cloud.morph.so/docs/efs/concepts",
+            "quote": "The durable EFS identity you create by name.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "EFS + S3",
+          "note": "Morph EFS is a named FUSE filesystem with an identity separate from any machine; Morph Volumes is separate S3-compatible object storage. EFS docs currently 404, so this cites an archived copy."
         },
         {
           "provider": "runtime",
@@ -7157,13 +7159,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "partly",
-          "shortfall": "Sharing happens through an S3 bucket, not a disk several machines mount.",
+          "verdict": "yes",
           "source": {
-            "url": "https://cloud.morph.so/docs/volumes/getting-started",
-            "quote": "Morph Volumes are persistent S3-compatible storage for build caches, release artifacts, checkpoints, and shared datasets.",
+            "url": "http://web.archive.org/web/20260718091200/https://cloud.morph.so/docs/efs/concepts",
+            "quote": "The same EFS filesystem can be mounted from more than one supported host in the same Morph context.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "EFS multi-mount",
+          "note": "The same EFS filesystem can be mounted read-write from several machines; concurrent writers must coordinate."
         },
         {
           "provider": "runtime",
@@ -7468,13 +7471,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "no",
-          "note": "Volumes are reached with an S3 client; mounting an outside bucket is not documented.",
+          "verdict": "partly",
           "source": {
-            "url": "https://cloud.morph.so/docs/volumes/getting-started",
-            "quote": "They use your existing Morph API key, so you can use the web console, the `morphcloud volumes` CLI, the Python `MorphCloudClient().volumes` helpers, or any standard S3 client against the same gateway.",
-            "confidence": "inferred"
-          }
+            "url": "http://web.archive.org/web/20260718091200/https://cloud.morph.so/docs/efs/getting-started",
+            "quote": "Use EFS when a workload needs a mounted path such as `~/morph-efs/shared-files` rather than an object-storage API.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "EFS mount",
+          "shortfall": "Morph EFS mounts as a folder, but an outside S3 bucket is not mounted natively; you add s3fs or rclone."
         },
         {
           "provider": "runtime",
@@ -7798,13 +7802,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "not-published",
-          "note": "No maximum disk size is published.",
+          "verdict": "partly",
           "source": {
-            "url": "https://cloud.morph.so/docs/documentation/instances/creating-snapshot",
-            "quote": "To create a new snapshot, specify the resource specifications like `vcpus`, `memory`, and `disk_size`.",
-            "confidence": "not-published"
-          }
+            "url": "https://cloud.morph.so/docs/documentation/instances/resize-disk",
+            "quote": "The target must be an integer from 256 through 1,048,576 MiB",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "1 TiB resize",
+          "shortfall": "The 1 TiB ceiling is documented only for live resize, a limited preview for enabled organisations; the size at creation is unpublished."
         },
         {
           "provider": "runtime",
@@ -9386,13 +9391,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "not-published",
-          "note": "An HTTP service can be exposed, but whether the link is open or locked by default is not published.",
+          "verdict": "yes",
+          "note": "HTTP services are public by default; auth can be switched to the account API key.",
           "source": {
-            "url": "https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post",
-            "quote": "Expose Http Service",
-            "confidence": "inferred"
-          }
+            "url": "https://cloud.morph.so/docs/documentation/instances/http-services",
+            "quote": "Morph Cloud allows you to expose HTTP services running within your instances to the public internet.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Anyone with link"
         },
         {
           "provider": "runtime",
@@ -9712,13 +9718,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "not-published",
-          "note": "An HTTP service can be exposed, but whether the link is locked by default is not published.",
+          "verdict": "yes",
+          "note": "auth_mode api_key requires the account-wide Morph API key, not a per-service token.",
           "source": {
-            "url": "https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post",
-            "quote": "Expose Http Service",
-            "confidence": "inferred"
-          }
+            "url": "https://cloud.morph.so/docs/documentation/instances/http-services",
+            "quote": "You can enable API key authentication for your exposed services for enhanced security.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Account API key"
         },
         {
           "provider": "runtime",
@@ -10363,13 +10370,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "not-published",
-          "note": "No command line on the provider's website is documented; the documented access is SSH, an editor and a programming interface.",
+          "verdict": "yes",
+          "note": "The devbox web UI has a browser terminal, separate from SSH.",
           "source": {
-            "url": "https://cloud.morph.so/docs/devboxes/development",
-            "quote": "one-click connect from the Devboxes UI",
-            "confidence": "inferred"
-          }
+            "url": "https://cloud.morph.so/docs/api-reference/revoke-managed-ssh-key",
+            "quote": "Browser terminal access and Morph-generated instance credentials are separate and unchanged.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Browser terminal"
         },
         {
           "provider": "runtime",
@@ -11326,13 +11334,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "not-published",
-          "note": "No custom-domain feature appears in the documentation for exposed services.",
+          "verdict": "no",
+          "note": "Apps answer only on a Morph-generated hostname.",
           "source": {
-            "url": "https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post",
-            "quote": "Expose Http Service",
-            "confidence": "inferred"
-          }
+            "url": "https://cloud.morph.so/web/product/devboxes",
+            "quote": "Custom domains aren’t supported yet.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Not supported"
         },
         {
           "provider": "runtime",
@@ -11645,13 +11654,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "not-published",
-          "note": "No custom domain is published, so there is no certificate feature to describe.",
+          "verdict": "no",
+          "note": "The Morph-generated URL has HTTPS, but your own domain cannot be attached, so no certificate is issued for it.",
           "source": {
-            "url": "https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post",
-            "quote": "Expose Http Service",
-            "confidence": "inferred"
-          }
+            "url": "https://cloud.morph.so/web/product/devboxes",
+            "quote": "Custom domains aren’t supported yet.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Provider URL only"
         },
         {
           "provider": "runtime",
@@ -13589,13 +13599,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "not-published",
-          "note": "A secrets manager exists, but whether a service keeps values out of the machine is not published.",
+          "verdict": "partly",
           "source": {
-            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
-            "quote": "Every devbox is created from a template that integrates with our secrets manager",
-            "confidence": "inferred"
-          }
+            "url": "http://web.archive.org/web/20260718093544/https://cloud.morph.so/docs/responses-proxy/getting-started",
+            "quote": "the proxy injects the selected provider credential after resolving the model alias.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Model keys only",
+          "shortfall": "The Responses Proxy injects model-provider credentials, so Codex or Claude Code can run on a Morph proxy key; other API keys are ordinary secrets inside the VM. Its docs currently 404."
         },
         {
           "provider": "runtime",
@@ -15163,13 +15174,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "yes",
-          "note": "`npm install morphcloud`.",
+          "verdict": "partly",
           "source": {
-            "url": "https://cloud.morph.so/docs/documentation/setup/installation-guide",
-            "quote": "npm install morphcloud",
-            "confidence": "docs-confirmed"
-          }
+            "url": "https://registry.npmjs.org/morphcloud",
+            "quote": "\"0.0.20\":\"2025-10-06T18:59:53.028Z\"",
+            "confidence": "third-party"
+          },
+          "figure": "0.0.20 (2025)",
+          "shortfall": "The official TypeScript SDK exists, but its last npm release is 0.0.20 from October 2025, while the Python SDK is current, so newer APIs may be Python or CLI only."
         },
         {
           "provider": "runtime",
@@ -19259,13 +19271,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "not-published",
-          "note": "No role list or permission table is published; sharing is per devbox.",
+          "verdict": "yes",
+          "note": "Organisations have admin and member roles; no finer permission table is published.",
           "source": {
-            "url": "https://cloud.morph.so/docs/devboxes/getting-started",
-            "quote": "devboxes are shareable live via URL to anyone in your Morph Cloud organization",
+            "url": "https://cloud.morph.so/docs/api-reference/update-member-role",
+            "quote": "Update a member's role in an organization.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "admin / member"
         },
         {
           "provider": "runtime",
@@ -20514,13 +20527,14 @@
         },
         {
           "provider": "morph",
-          "verdict": "not-published",
-          "note": "The terms promise audit logging as a security control, but no customer-facing log is published.",
+          "verdict": "partly",
           "source": {
-            "url": "https://cloud.morph.so/web/legal/terms-of-service",
-            "quote": "audit logging / monitoring",
+            "url": "https://cloud.morph.so/docs/api-reference/list-organization-managed-ssh-keys",
+            "quote": "Owner/admin-only metadata view of active and expired user-owned keys for current organization members.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "SSH keys only",
+          "shortfall": "The only customer-facing audit view is SSH public-key metadata; there is no record of devbox, snapshot or billing actions."
         },
         {
           "provider": "runtime",

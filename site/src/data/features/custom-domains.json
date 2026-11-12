@@ -38,7 +38,7 @@
     {
       "heading": "Not published is not the same as no",
       "body": [
-        "InstaBox, Morph, Sprites and Vercel Sandbox publish no sandbox custom-domain feature. InstaBox's API has no customDomain or cname field and its URL is a fixed vendor subdomain; a community report says Sprites lack custom domains the way regular Fly VMs have them; Vercel's domains apply to deployments, not Sandbox ports. For these, the honest answer is that no native path is published."
+        "InstaBox, Sprites and Vercel Sandbox publish no sandbox custom-domain feature, and Morph says plainly that custom domains are not supported yet. InstaBox's API has no customDomain or cname field and its URL is a fixed vendor subdomain; a community report says Sprites lack custom domains the way regular Fly VMs have them; Vercel's domains apply to deployments, not Sandbox ports. For these, the honest answer is that no native path is published."
       ]
     }
   ],
@@ -172,13 +172,13 @@
     },
     {
       "provider": "morph",
-      "verdict": "not-published",
-      "figure": "Not published",
-      "scenario": "No custom-domain feature appears in the documentation, API or terms; an HTTP service is served on a provider hostname.",
-      "note": "No custom-domain feature appears in the documentation, API or terms. An HTTP service can be exposed, but it is served on a provider hostname.",
+      "verdict": "no",
+      "figure": "Morph hostname only",
+      "scenario": "Apps are served over HTTPS on a Morph-generated hostname; a customer-owned domain cannot be attached yet.",
+      "note": "The Devboxes FAQ says custom domains are not supported yet.",
       "source": {
-        "url": "https://cloud.morph.so/docs/documentation/instances/http-services",
-        "quote": "Expose Http Service",
+        "url": "https://cloud.morph.so/web/product/devboxes",
+        "quote": "Custom domains aren’t supported yet.",
         "confidence": "docs-confirmed"
       }
     },

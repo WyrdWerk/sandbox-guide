@@ -883,6 +883,10 @@
     "pricing": {
       "title": "Subscribe / pricing",
       "url": "https://cloud.morph.so/web/subscribe"
+    },
+    "custom-domains": {
+      "title": "Devboxes FAQ: custom domains",
+      "url": "https://cloud.morph.so/web/product/devboxes"
     }
   },
   "runtime": {

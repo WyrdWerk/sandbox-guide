@@ -2,6 +2,24 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Morph: public HTTP services, a browser terminal and a shared filesystem; no custom domains",
+      "provider": "morph",
+      "what": "A recheck found Morph documents public-by-default HTTP services with an API-key option, a browser terminal, organisation roles, a 16 vCPU shape and a shared EFS filesystem, and its FAQ says custom domains are not supported yet. Its TypeScript SDK has not been released since October 2025. Rates and A/B/C are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://cloud.morph.so/docs/documentation/instances/http-services",
+          "quote": "Morph Cloud allows you to expose HTTP services running within your instances to the public internet.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://cloud.morph.so/web/product/devboxes",
+          "quote": "Custom domains aren’t supported yet.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "OVHcloud and Scaleway: official MCP servers that reach their servers",
       "provider": "ovhcloud",
       "what": "OVHcloud's official MCP server now has a VPS section that can start, stop, rebuild and snapshot an existing VPS, though not order one. Scaleway's official CLI runs a local MCP server exposing every command, including creating Instances. Prices are unchanged. The date is when this guide checked.",

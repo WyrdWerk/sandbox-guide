@@ -163,13 +163,13 @@
     },
     {
       "provider": "morph",
-      "verdict": "partly",
-      "figure": "Not published",
-      "scenario": "An HTTP service can be exposed through the API, but default authentication is not published.",
-      "note": "An instance can expose an HTTP service through the API. Default authentication and raw TCP support are not published.",
+      "verdict": "yes",
+      "figure": "Public by default; API-key option",
+      "scenario": "An HTTP service is reachable on the public internet by default; auth_mode api_key puts the account's Morph API key in front, and SSH and a browser terminal are also available.",
+      "note": "HTTP services default to public and can require the account API key. SSH is a real daemon, ssh -L and ssh -R work, and the devbox web UI has a browser terminal. Raw non-web TCP ports are not documented.",
       "source": {
-        "url": "https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post",
-        "quote": "Expose Http Service",
+        "url": "https://cloud.morph.so/docs/documentation/instances/http-services",
+        "quote": "Morph Cloud allows you to expose HTTP services running within your instances to the public internet.",
         "confidence": "docs-confirmed"
       }
     },

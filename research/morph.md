@@ -220,3 +220,13 @@ All three are **inferred**, not invoices. Evidence: the pricing-page MCU formula
 Context.dev search returned no results for the first query; Context.dev live scrapes succeeded for the pricing page, Battleships Markdown and several documentation pages. TinyFish search through the active Composio connection succeeded. Direct public `curl` fetched Morph's complete documentation export and Battleships JSON for detailed inspection and live quote checking. No Morph signup, sandbox launch or billing action was performed. No assertion that an endpoint was tested with a Morph account is implied.
 
 For the 2026-10-28 company and policy pass, Context search and fresh scrapes, TinyFish search via Composio, and direct public HTTP retrieval succeeded. All 35 newly added quote occurrences matched live sources: 29 prose quotations in §17, five prose quotations in §§5–6 and 10, and one code excerpt in §6. Some required Context's fresh rendered Markdown because direct HTML extraction was inaccessible or split formatting. The status figure is time-sensitive. No Morph account or service was used.
+
+## Recheck, 12 November 2026
+
+Full recheck of all 16 features and 78 capabilities: [morph-recheck-2026-11-12.md](morph-recheck-2026-11-12.md). The earlier ledger is kept as written; numbers below supersede it where they differ.
+
+- No rate change: $0.05/MCU, 1 vCPU + 4 GB RAM + 16 GB disk per MCU, 5 TB snapshot-hours, Team $40 / 1,000 MCU, Scale $250 / 7,500 MCU. check-rates clean.
+- Features: reaching-it now yes (public HTTP default, API-key option, real SSH, browser terminal); custom-domains now no ("Custom domains aren’t supported yet.", Devboxes FAQ, read in a rendered browser on 12 Nov).
+- 15 capability changes, including EFS (shared FUSE filesystem, docs 404, archived July 2026 copy), Responses Proxy model-key injection (docs 404), TypeScript SDK stale at 0.0.20 (2025-10-06).
+- Free-tier statements now disagree across four first-party pages (0 MCU, 300 MCU, 300 compute hours).
+- Cost C label fixed to 640 paused hours; total stays $9.15.

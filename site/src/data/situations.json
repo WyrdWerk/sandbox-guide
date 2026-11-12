@@ -166,7 +166,7 @@
         {
           "provider": "morph",
           "why": "Snapshots capture memory and disk and can branch into many running instances, which is built for parallel test fan-out.",
-          "watch": "Stop deletes the instance; volumes are S3-compatible object storage, not an attached disk."
+          "watch": "Stop deletes the instance; Volumes is S3-compatible object storage and EFS a shared FUSE filesystem, not an attached block disk."
         },
         {
           "provider": "e2b",
