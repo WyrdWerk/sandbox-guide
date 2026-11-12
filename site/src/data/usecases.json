@@ -1085,7 +1085,7 @@
           "provider": "cloudflare-sandbox",
           "tier": "guide",
           "noTerminal": "no",
-          "what": "An official guide: Claude Code edits a GitHub repository in a sandbox and returns a diff.",
+          "what": "An official guide: Claude Code edits a GitHub repository in a sandbox and returns a diff. An experimental Agents SDK harness also runs Claude Code or Codex with no Dockerfile.",
           "link": {
             "title": "Cloudflare: Claude Code",
             "url": "https://developers.cloudflare.com/sandbox/coding-agents/claude-code/"
@@ -1732,7 +1732,7 @@
           "provider": "cloudflare-sandbox",
           "for": "If your app already runs on Cloudflare",
           "why": "Started from a Worker next to your code, with CPU billed only while working.",
-          "watch": "The smallest size that has 2 vCPU also has 8 GiB of memory, which you pay for. There is a $5 monthly account minimum.",
+          "watch": "The smallest preset with 2 vCPU also has 8 GiB of memory, which you pay for; a custom shape with less memory is documented, but Cloudflare’s pages disagree on the minimum. There is a $5 monthly account minimum.",
           "link": "https://developers.cloudflare.com/containers/platform/pricing/"
         }
       ],

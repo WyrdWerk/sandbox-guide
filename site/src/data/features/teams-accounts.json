@@ -93,8 +93,8 @@
       "provider": "cloudflare-sandbox",
       "verdict": "partly",
       "figure": "Alerts only",
-      "scenario": "Budget alerts email you after the loop; they do not pause or cap anything, and the account ceiling is 1,500 concurrent vCPU.",
-      "note": "Budget alerts are informational and do not cap usage. Concurrency is account-wide: 1,500 vCPU, 6 TiB and 30 TB. No per-sandbox IAM; the account audit log records control-plane actions only.",
+      "scenario": "Budget alerts email you after the loop; they do not pause or cap anything, and the account ceiling is 15,000 concurrent vCPU.",
+      "note": "Budget alerts are informational and do not cap usage. Concurrency is account-wide: 15,000 vCPU, 60 TiB and 300 TB by default. No per-sandbox IAM; the account audit log records control-plane actions only.",
       "source": {
         "url": "https://developers.cloudflare.com/billing/manage/budget-alerts/",
         "quote": "Budget alerts are informational only. They do not pause or cap usage.",

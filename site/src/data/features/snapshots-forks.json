@@ -94,7 +94,7 @@
       "verdict": "partly",
       "figure": "Filesystem only; 30 days",
       "scenario": "The snapshot saves the root filesystem only: files come back in a new instance, processes do not, and there is no fork.",
-      "note": "`snapshotContainer()` saves the writable root filesystem of a running instance, 20 GB maximum, and expires 30 days after creation or last restore. No memory and no fork. Directory backups to R2 have no expiry.",
+      "note": "`snapshotContainer()` saves the writable root filesystem of a running instance, 20 GB maximum, and expires 30 days after creation or last restore. One snapshot can start many sandboxes, but there is no memory and no fork of a running machine. Directory backups to R2 have no expiry.",
       "source": {
         "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
         "quote": "A snapshot expires 30 days after it is created or last restored.",

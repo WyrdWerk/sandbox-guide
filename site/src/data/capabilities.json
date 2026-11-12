@@ -1006,7 +1006,7 @@
           "note": "Neither the container docs, the FAQ nor the limits page mention nested virtual machines.",
           "source": {
             "url": "https://developers.cloudflare.com/containers/platform/limits/",
-            "quote": "Maximum vCPU",
+            "quote": "| vCPU per instance | 4 |",
             "confidence": "not-published"
           }
         },
@@ -1648,11 +1648,11 @@
         {
           "provider": "cloudflare-sandbox",
           "verdict": "partly",
-          "figure": "custom within 4 cores / 12 GiB",
-          "shortfall": "You can set your own cores and memory, but only inside a ceiling of 4 cores and 12 GB, and each core needs at least 3 GB.",
+          "figure": "custom from 1/16 to 4 cores",
+          "shortfall": "You can set your own cores, memory and disk, from 1/16 of a core up to 4 cores and 12 GB by default. Whether each core still needs at least 3 GB of memory is disputed: the limits page dropped the rule, a September changelog still states it.",
           "source": {
             "url": "https://developers.cloudflare.com/containers/platform/limits/",
-            "quote": "Minimum 3 GiB memory per vCPU",
+            "quote": "Custom instance types using the `durable_object` scheduling policy have the following minimums:",
             "confidence": "docs-confirmed"
           }
         },
@@ -1980,10 +1980,10 @@
           "provider": "cloudflare-sandbox",
           "verdict": "no",
           "figure": "4 cores / 12 GiB",
-          "shortfall": "The largest machine is 4 cores and 12 GB of memory, so a 16-core or 32 GB machine is not available.",
+          "shortfall": "The default ceiling is 4 cores and 12 GB of memory; the limits page says it can be raised through your account team or support, with no published size or price.",
           "source": {
             "url": "https://developers.cloudflare.com/containers/platform/limits/",
-            "quote": "Maximum vCPU",
+            "quote": "| Memory per instance | 12 GiB |",
             "confidence": "docs-confirmed"
           }
         },
@@ -2309,11 +2309,11 @@
           "provider": "cloudflare-sandbox",
           "verdict": "no",
           "figure": "no resize",
-          "shortfall": "The size is fixed when the sandbox is deployed; changing it means deploying again.",
-          "note": "Inferred from the instance type being set at deploy time.",
+          "shortfall": "The size is fixed when an instance starts; a different size needs a stop and a new start.",
+          "note": "Inferred: the instance type is a start option and the API has no resize call.",
           "source": {
             "url": "https://developers.cloudflare.com/containers/platform/limits/",
-            "quote": "Maximum vCPU",
+            "quote": "| vCPU per instance | 4 |",
             "confidence": "inferred"
           }
         },
@@ -2653,7 +2653,7 @@
           "note": "Inferred: no GPU instance type or price in the docs.",
           "source": {
             "url": "https://developers.cloudflare.com/containers/platform/limits/",
-            "quote": "Maximum vCPU",
+            "quote": "| vCPU per instance | 4 |",
             "confidence": "inferred"
           }
         },
@@ -3937,13 +3937,14 @@
         },
         {
           "provider": "cloudflare-sandbox",
-          "verdict": "no",
-          "note": "No pool of pre-started machines; a start creates a new instance.",
+          "verdict": "partly",
           "source": {
-            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
-            "quote": "When work arrives, the Durable Object calls [`this.ctx.container.start()`](/containers/api/durable-object-container/#start), which starts a container instance",
-            "confidence": "inferred"
-          }
+            "url": "https://blog.cloudflare.com/faster-agent-sandboxes/",
+            "quote": "the new runtime restores a prepared virtual machine that isn’t yet assigned.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Prepared VMs, not yours",
+          "shortfall": "You cannot size, warm or drain a pool; Cloudflare restores an unassigned prepared VM on start, so a start is fast but not instant."
         },
         {
           "provider": "daytona",
@@ -4251,13 +4252,14 @@
         },
         {
           "provider": "cloudflare-sandbox",
-          "verdict": "not-published",
-          "note": "No start or resume time is published.",
+          "verdict": "partly",
           "source": {
-            "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
-            "quote": "An instance runs only until something stops it, and its processes and the files on its disk end with it. The next `start()` creates a new instance.",
-            "confidence": "not-published"
-          }
+            "url": "https://blog.cloudflare.com/faster-agent-sandboxes/",
+            "quote": "median startup fell from just over four seconds to 648 milliseconds",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "648 ms median",
+          "shortfall": "The median start is under a second in the benchmark Cloudflare cites (p99 about 1.1 s), but the Containers FAQ still says cold starts are often 1–3 seconds."
         },
         {
           "provider": "daytona",
@@ -5832,10 +5834,10 @@
           "provider": "cloudflare-sandbox",
           "verdict": "partly",
           "shortfall": "You can start any number of machines from an image you build, but saving a running machine as a reusable template only works through snapshots, which are in beta, keep files only, and expire after 30 days.",
-          "note": "The docs describe a snapshot being restored into the next instance, not starting several machines from one.",
+          "note": "Cloudflare says one snapshot can start many sandboxes, since snapshots are immutable and reusable.",
           "source": {
-            "url": "https://developers.cloudflare.com/sandbox/files/save-and-restore-a-workspace/",
-            "quote": "A Durable Object saves the filesystem of a sandbox as a Container snapshot, stores the snapshot ID, and starts the next instance from the snapshot.",
+            "url": "https://blog.cloudflare.com/faster-agent-sandboxes/",
+            "quote": "Since snapshots are immutable and reusable, multiple Containers can start independently of the same prepared environment",
             "confidence": "docs-confirmed"
           }
         },
@@ -7725,7 +7727,7 @@
           "shortfall": "The largest disk is 20 GB, short of 100 GB.",
           "source": {
             "url": "https://developers.cloudflare.com/containers/platform/limits/",
-            "quote": "Maximum Disk | 20 GB",
+            "quote": "| Disk per instance | 20 GB |",
             "confidence": "docs-confirmed"
           }
         },
@@ -12215,11 +12217,11 @@
         {
           "provider": "cloudflare-sandbox",
           "verdict": "yes",
-          "figure": "Hosts or handler",
-          "note": "Only listed hosts, or what your own small program lets through, can leave the machine.",
+          "figure": "Hosts via intercepts",
+          "note": "With internet off, only HTTP and HTTPS hosts you intercept can be reached, up to 128 entries per container; each storage mount uses one.",
           "source": {
             "url": "https://developers.cloudflare.com/containers/configuration/outbound-traffic/",
-            "quote": "Use enableInternet = false to block public internet access by default",
+            "quote": "To allow only specific hosts, start the container with `enableInternet: false`.",
             "confidence": "docs-confirmed"
           }
         },
@@ -15705,11 +15707,11 @@
         {
           "provider": "cloudflare-sandbox",
           "verdict": "no",
-          "shortfall": "The MCP material is a separate Cloudflare code-mode project, not a server that starts sandboxes.",
+          "shortfall": "The MCP material is Code Mode using MCP tools inside an agent, not a server that starts sandboxes.",
           "note": "Sandbox control is Worker code.",
           "source": {
-            "url": "https://developers.cloudflare.com/sandbox/commands/open-a-terminal-in-the-browser/",
-            "quote": "Code Mode MCP Server",
+            "url": "https://developers.cloudflare.com/agents/tools/codemode/mcp/",
+            "quote": "Expose tools from an existing MCP connection to models through a durable Code Mode runtime.",
             "confidence": "docs-confirmed"
           }
         },
@@ -16020,14 +16022,14 @@
         },
         {
           "provider": "cloudflare-sandbox",
-          "verdict": "partly",
-          "shortfall": "A live shell exists only inside a web page you build; there is no call that opens a terminal session for a script.",
-          "note": "The documented terminal is xterm.js over a WebSocket into tmux.",
+          "verdict": "yes",
+          "note": "`exec()` can attach a pseudo-terminal, take piped input and resize, so a script gets an interactive shell.",
           "source": {
-            "url": "https://developers.cloudflare.com/sandbox/commands/open-a-terminal-in-the-browser/",
-            "quote": "Expose a live shell in a Linux sandbox on a web page.",
+            "url": "https://developers.cloudflare.com/containers/api/durable-object-container/",
+            "quote": "Runs the process attached to a pseudo-terminal. `true` uses 80 columns and 24 rows.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "exec with pty"
         },
         {
           "provider": "daytona",
@@ -16648,13 +16650,14 @@
         },
         {
           "provider": "cloudflare-sandbox",
-          "verdict": "no",
-          "shortfall": "The current base images ship no coding agent; you add one in your own Dockerfile, as the guides do.",
+          "verdict": "partly",
+          "shortfall": "The base images ship no agent; the experimental Agents SDK harness installs Claude Code or Codex on first use, which needs network access and slows the first prompt.",
           "source": {
-            "url": "https://developers.cloudflare.com/sandbox/sdk/migrate/changes-in-1-0/",
-            "quote": "include none of them.",
+            "url": "https://developers.cloudflare.com/agents/harnesses/container/",
+            "quote": "The harness starts the `cloudflare/debian-trixie` image, installs Claude Code on first use, and snapshots the filesystem for later starts.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "Harness installs on first use"
         },
         {
           "provider": "daytona",
@@ -16972,7 +16975,8 @@
             "url": "https://developers.cloudflare.com/sandbox/coding-agents/",
             "quote": "Your Worker starts the sandbox, holds the credentials, and decides which hostnames the sandbox can reach.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "note": "The experimental harness has prompt() and submit() methods, but they are an Agents SDK class in your Worker, not a hosted API."
         },
         {
           "provider": "daytona",

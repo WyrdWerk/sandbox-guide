@@ -94,7 +94,7 @@
       "verdict": "partly",
       "figure": "No default; 6 h max",
       "scenario": "Still running at 20 minutes if the Durable Object stays active; if it goes inactive the instance stops shortly after, unless a timeout of up to 6 hours was set.",
-      "note": "No default inactivity timeout in Sandboxes 1.0, a 6-hour maximum, and the value is lost on a Durable Object restart. Code inside does not count as activity. The 10-minute default belongs to the legacy 0.x SDK.",
+      "note": "No default inactivity timeout in Sandboxes 1.0, a 6-hour maximum, and the value is lost on a Durable Object restart. Code inside does not count as activity. The 10-minute default belongs to the legacy 0.x SDK. The experimental Agents SDK harness adds its own default: it snapshots and stops the container after five idle minutes.",
       "source": {
         "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
         "quote": "After the Durable Object becomes inactive, the instance keeps running for the time set with `setInactivityTimeout()`, up to 6 hours.",

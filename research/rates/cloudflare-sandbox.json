@@ -1,7 +1,7 @@
 {
   "id": "cloudflare-sandbox",
   "provider": "Cloudflare Sandbox SDK on Containers",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "currency": "USD",
   "headline": "A $5/month Workers Paid plan fee, then per-10ms container billing: CPU on active use only ($0.072/vCPU-hour), memory and disk on the provisioned instance type while it runs. Sandboxes are capped at 4 vCPU / 12 GiB / 20 GB and have no published region pinning. The Workers Free plan cannot run Containers.",
@@ -42,7 +42,7 @@
         }
       },
       "limits": {
-        "maxConcurrent": "account-wide 1,500 concurrent vCPU / 6 TiB memory / 30 TB disk; the durable_object policy has no per-app max_instances",
+        "maxConcurrent": "account-wide 15,000 concurrent vCPU / 60 TiB memory / 300 TB disk (defaults, raisable); the durable_object policy has no per-app max_instances",
         "maxSession": "no published cap; the inactivity timeout can be set up to 6 hours",
         "maxSize": "4 vCPU / 12 GiB / 20 GB per instance"
       },
@@ -69,7 +69,7 @@
         },
         {
           "url": "https://developers.cloudflare.com/containers/platform/limits/",
-          "quote": "Concurrent vCPU 1,500"
+          "quote": "| Concurrent vCPU | 15,000 |"
         },
         {
           "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
@@ -81,7 +81,7 @@
         },
         {
           "url": "https://developers.cloudflare.com/containers/platform/limits/",
-          "quote": "Minimum vCPU 1 Maximum vCPU 4 Maximum Memory 12 GiB Maximum Disk 20 GB Memory to vCPU ratio Minimum 3 GiB memory per vCPU"
+          "quote": "| vCPU per instance | 4 | ... | Memory per instance | 12 GiB | ... | Disk per instance | 20 GB | (custom minimums 1/16 vCPU, 256 MiB, 2 GB; no memory-to-vCPU ratio on the 12 Nov page, though the 29 Sep changelog still states 3 GiB per vCPU)"
         }
       ]
     },
@@ -250,7 +250,7 @@
       "evidence": [
         {
           "url": "https://developers.cloudflare.com/containers/platform/limits/",
-          "quote": "Minimum vCPU 1 Maximum vCPU 4 Maximum Memory 12 GiB Maximum Disk 20 GB Memory to vCPU ratio Minimum 3 GiB memory per vCPU"
+          "quote": "| vCPU per instance | 4 | ... | Memory per instance | 12 GiB | ... | Disk per instance | 20 GB | (custom minimums 1/16 vCPU, 256 MiB, 2 GB; no memory-to-vCPU ratio on the 12 Nov page, though the 29 Sep changelog still states 3 GiB per vCPU)"
         }
       ]
     },
@@ -616,6 +616,6 @@
     "No account, Worker, container or deployment was created; all behaviour is from documentation.",
     "Snapshot storage is billed somewhere but no rate is published, so it cannot be costed.",
     "The docs conflict on whether outbound internet is on by default; treat it as an explicit per-start setting.",
-    "Whether support will raise the 4 vCPU / 12 GiB / 20 GB per-instance ceilings is not published."
+    "Support can raise the 4 vCPU / 12 GiB / 20 GB per-instance defaults (limits page, 12 Nov 2026), but no raised size or price is published."
   ]
 }

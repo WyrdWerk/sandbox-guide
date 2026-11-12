@@ -94,10 +94,10 @@
       "verdict": "partly",
       "figure": "4 vCPU / 12 GiB / 20 GB",
       "scenario": "16 GB of memory does not fit: the ceiling is 12 GiB, disk stops at 20 GB, and the sandbox cannot be pinned to the EU.",
-      "note": "Six presets from `lite` to `standard-4`; custom sizes are capped at 4 vCPU / 12 GiB / 20 GB with at least 3 GiB of memory per vCPU. No GPU, `linux/amd64` only, and placement is chosen by Cloudflare near the request.",
+      "note": "Five startable presets from `lite` to `standard-4` (`basic` is listed but the runtime rejects it). Custom sizes run from 1/16 vCPU, 256 MiB and 2 GB up to a default ceiling of 4 vCPU / 12 GiB / 20 GB; a September changelog still says each vCPU needs 3 GiB, which the limits page no longer states. No GPU, `linux/amd64` only, and placement is chosen by Cloudflare near the request.",
       "source": {
         "url": "https://developers.cloudflare.com/containers/platform/limits/",
-        "quote": "Maximum vCPU | 4",
+        "quote": "| Memory per instance | 12 GiB |",
         "confidence": "docs-confirmed"
       }
     },

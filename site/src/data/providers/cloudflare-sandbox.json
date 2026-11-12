@@ -3,7 +3,7 @@
   "name": "Cloudflare Sandbox",
   "url": "https://developers.cloudflare.com/sandbox/",
   "status": "researched",
-  "checkedOn": "2026-10-28",
+  "checkedOn": "2026-11-12",
   "oneLiner": "A Worker that starts a Firecracker microVM, with no public port, no region pinning, and a disk that is wiped when the instance stops.",
   "whatItIs": [
     "Cloudflare Sandboxes are a feature of the Workers platform: you write a Worker, its Durable Object starts a Linux container on Cloudflare's network, and that container runs untrusted or generated code with its own kernel.",
@@ -12,7 +12,7 @@
   ],
   "whoFor": "Teams already running a Worker who want untrusted code execution next to their application, with the Worker holding the credentials and deciding reachability.",
   "isolation": "A Firecracker microVM per container, with its own kernel and network. Your image runs as a Linux container inside it, and every process has root capabilities, so there is no privilege boundary between users inside one sandbox. No memory snapshot, no pause, no fork. Docker-in-Docker works with iptables and IP forwarding off; `linux/amd64` only.",
-  "sizes": "Six presets from `lite` (1/16 vCPU, 256 MiB, 2 GB) to `standard-4` (4 vCPU, 12 GiB, 20 GB). Custom sizes are capped at 4 vCPU / 12 GiB / 20 GB, with at least 3 GiB of memory per vCPU. No GPU and no ARM. Placement is chosen by Cloudflare near the request, and a sandbox cannot be pinned to a region.",
+  "sizes": "Five startable presets from `lite` (1/16 vCPU, 256 MiB, 2 GB) to `standard-4` (4 vCPU, 12 GiB, 20 GB); a sixth, `basic`, is listed but the runtime rejects it. Custom sizes run from 1/16 vCPU, 256 MiB and 2 GB to a default ceiling of 4 vCPU / 12 GiB / 20 GB, raisable through support. A September changelog says each vCPU needs at least 3 GiB of memory; the current limits page no longer says so. No GPU and no ARM. Placement is chosen by Cloudflare near the request, and a sandbox cannot be pinned to a region.",
   "billing": {
     "model": "Per-10-millisecond Containers usage on the account's Workers Paid bill, plus Workers, Durable Objects, egress, R2 and optionally Logs.",
     "meter": "Active CPU $0.072 per vCPU-hour, provisioned memory $0.009 per GiB-hour and provisioned disk $0.000252 per GB-hour while the instance runs. Egress is $0.025 per GB in North America and Europe.",
@@ -48,7 +48,7 @@
       ],
       "total": "$17.40 to $40.95",
       "notes": [
-        "The 2 vCPU / 4 GiB brief is not buyable: 2 vCPU needs at least 6 GiB, so standard-3 is the nearest shape.",
+        "Priced on the standard-3 preset. A custom 2 vCPU / 6 GiB / 10 GB shape is allowed under either reading of the memory rule and costs less; 2 vCPU / 4 GiB is allowed only if the 3 GiB-per-vCPU rule is gone, which Cloudflare's pages disagree on.",
         "The floor assumes CPU stays inside the monthly allowance; the ceiling saturates both vCPUs for every run."
       ]
     },
@@ -112,7 +112,7 @@
       "total": "$11.57 to $24.08",
       "notes": [
         "Stopped hours cost nothing, but the disk is recreated from the image unless a snapshot or R2 backup restores it.",
-        "The 20 GiB brief would need standard-4, which costs more at the floor."
+        "Priced on the standard-3 preset. Since 29 September any custom shape can have 20 GB of disk, so a 2 vCPU / 6 GiB / 20 GB shape fits the brief exactly and costs less."
       ]
     }
   },
@@ -214,7 +214,7 @@
     "tripsUp": [
       "The 10-minute idle stop belongs to the deprecated 0.x SDK, not to Sandboxes 1.0.",
       "Stopping the instance deletes the files on its disk.",
-      "The 2 vCPU / 4 GiB and 4 vCPU / 8 GiB shapes do not exist.",
+      "Whether a 2 vCPU / 4 GiB custom shape is allowed is disputed: the limits page dropped the 3 GiB-per-vCPU rule, a September changelog still states it.",
       "Sandbox names are routing keys, not authentication.",
       "A deploy does not update a running sandbox."
     ]
@@ -238,8 +238,8 @@
       ]
     },
     {
-      "issue": "Start time is milliseconds on the product page and 1–3 seconds in the docs",
-      "detail": "The product page promises milliseconds; the Containers FAQ says a cold start is often 1–3 seconds depending on image size and execution time.",
+      "issue": "Start time is milliseconds, 648 ms or 1–3 seconds depending on the page",
+      "detail": "The product page promises milliseconds; a September Cloudflare blog cites a 648 ms median start (p99 about 1.1 s) on the new runtime; the Containers FAQ still says a cold start is often 1–3 seconds depending on image size and execution time.",
       "status": "contradiction",
       "evidence": [
         {
@@ -251,12 +251,17 @@
           "url": "https://developers.cloudflare.com/containers/faq/",
           "quote": "Container cold starts can often be in the 1-3 second range, but this is dependent on image size and code execution time, among other factors.",
           "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://blog.cloudflare.com/faster-agent-sandboxes/",
+          "quote": "median startup fell from just over four seconds to 648 milliseconds",
+          "confidence": "docs-confirmed"
         }
       ]
     },
     {
-      "issue": "Outbound internet is off by default, required, or on by default depending on the page",
-      "detail": "The sandbox security guide says `enableInternet: false` is the default; the API reference says the field is required when options are passed; the Containers guide says the other API allows internet by default. Treat egress as an explicit per-start decision.",
+      "issue": "Outbound internet is off by default on one page and required on another",
+      "detail": "The sandbox security guide says `enableInternet: false` is the default; the API reference says the field is required when options are passed. Treat egress as an explicit per-start decision.",
       "status": "contradiction",
       "evidence": [
         {
@@ -265,16 +270,16 @@
           "confidence": "docs-confirmed"
         },
         {
-          "url": "https://developers.cloudflare.com/containers/configuration/outbound-traffic/",
-          "quote": "By default, a Container will allow internet access",
+          "url": "https://developers.cloudflare.com/containers/api/durable-object-container/",
+          "quote": "Whether to allow outbound Internet access. Required when you pass `options`.",
           "confidence": "docs-confirmed"
         }
       ]
     },
     {
-      "issue": "Instance maximums are called defaults that can be increased, and a hard table",
-      "detail": "The limits page says all maximums can be increased, directly above a custom-instance table that states 4 vCPU, 12 GiB and 20 GB as constraints. Whether support can lift them is not published.",
-      "status": "contradiction",
+      "issue": "Instance maximums are defaults that support can raise",
+      "detail": "The limits page says every maximum, including 4 vCPU, 12 GiB and 20 GB per instance, is a default that your account team or Cloudflare Support can increase. No raised size or price is published.",
+      "status": "open",
       "evidence": [
         {
           "url": "https://developers.cloudflare.com/containers/platform/limits/",
@@ -283,7 +288,7 @@
         },
         {
           "url": "https://developers.cloudflare.com/containers/platform/limits/",
-          "quote": "Maximum vCPU | 4",
+          "quote": "| vCPU per instance | 4 |",
           "confidence": "docs-confirmed"
         }
       ]
@@ -324,6 +329,35 @@
       "issue": "Compliance scope for this product is unpublished",
       "detail": "Cloudflare holds SOC 2 Type II, ISO 27001, PCI DSS L1 and a HIPAA AoC company-wide. No public statement says the audit boundary includes Containers or Sandboxes, and the reports sit behind the dashboard.",
       "status": "open"
+    },
+    {
+      "issue": "The 3 GiB-per-vCPU memory rule is stated on one page and gone from another",
+      "detail": "The current limits page lists custom-instance minimums of 1/16 vCPU, 256 MiB and 2 GB with no memory-to-vCPU ratio; a 29 September changelog says the 3 GiB-per-vCPU minimum still applies. This guide prices the standard presets, which satisfy both readings.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/limits/",
+          "quote": "Custom instance types using the `durable_object` scheduling policy have the following minimums:",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://developers.cloudflare.com/changelog/post/2026-09-29-remove-disk-to-memory-ratio/",
+          "quote": "The other custom instance type constraints do not change, including the minimum of 3 GiB of memory per vCPU.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "A shared storage pool leaked old disk blocks between customers until September",
+      "detail": "Cloudflare disclosed on 24 September 2026 that a Workers Paid customer could recover leftover disk blocks another customer's container had used on the same host. The runtime fix rolled out 4–7 September and old cached snapshots were cleared by 19 September. The VM and kernel boundary was not crossed.",
+      "status": "resolved",
+      "evidence": [
+        {
+          "url": "https://blog.cloudflare.com/containers-cross-tenant-vulnerability/",
+          "quote": "a customer with a Workers Paid account could recover residual disk blocks previously used by Containers on the same host.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [
@@ -365,6 +399,10 @@
     {
       "label": "Workers SLA",
       "url": "https://www.cloudflare.com/workers-service-level-agreement/"
+    },
+    {
+      "label": "Agent harnesses",
+      "url": "https://developers.cloudflare.com/agents/harnesses/"
     }
   ]
 }

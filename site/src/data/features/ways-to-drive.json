@@ -93,7 +93,7 @@
       "verdict": "partly",
       "figure": "No; Worker code",
       "scenario": "The first sandbox needs a Worker, a Durable Object and a Docker build; the dashboard only shows what already exists.",
-      "note": "TypeScript in a Worker is the only first-class surface, with a Durable Object container API and the Wrangler CLI. No hosted REST API, no Python or Go SDK, no control-plane MCP and no webhooks.",
+      "note": "TypeScript in a Worker is the only first-class surface, with a Durable Object container API, the Wrangler CLI, a `create cloudflare` sandbox scaffold and the new `cf` CLI. No hosted REST API, no Python or Go SDK, no control-plane MCP and no webhooks.",
       "source": {
         "url": "https://developers.cloudflare.com/sandbox/previews/",
         "quote": "A Worker with a Durable Object that starts a container with the Durable Object scheduling policy.",

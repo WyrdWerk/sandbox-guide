@@ -93,8 +93,8 @@
       "provider": "cloudflare-sandbox",
       "verdict": "partly",
       "figure": "1 TB a month, then $0.025/GB",
-      "scenario": "Outbound is off unless `enableInternet` is true; with it off, only allowedHosts or an outbound handler on ports 80 and 443 can leave.",
-      "note": "Off by default; only ports 80 and 443 through allowedHosts or an outbound handler. No static egress IP or private network. 1 TB a month is included in North America and Europe, then $0.025/GB; 500 GB elsewhere, then $0.04–$0.05.",
+      "scenario": "Outbound is off unless `enableInternet` is true; with it off, only HTTP and HTTPS requests your intercepts handle can leave.",
+      "note": "Off by default; with internet off, only HTTP and HTTPS hosts you intercept can be reached, up to 128 intercept entries per container, and each forwarded request body is capped at 100 MiB by default. No static egress IP or private network. 1 TB a month is included in North America and Europe, then $0.025/GB; 500 GB elsewhere, then $0.04–$0.05.",
       "source": {
         "url": "https://developers.cloudflare.com/sandbox/concepts/security/",
         "quote": "A Container starts with `enableInternet: false` by default, so it cannot reach the Internet.",

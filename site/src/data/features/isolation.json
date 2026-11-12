@@ -87,7 +87,7 @@
       "verdict": "yes",
       "figure": "Firecracker; all root",
       "scenario": "The build runs in the microVM's own kernel with Docker-in-Docker, but every process is root and nothing separates two users inside it.",
-      "note": "One Firecracker microVM per container with its own kernel and network; the image runs as a Linux container inside it. Every process has root capabilities, so there is no privilege boundary between users. No memory snapshot, pause or fork.",
+      "note": "One Firecracker microVM per container with its own kernel and network; the image runs as a Linux container inside it. Every process has root capabilities, so there is no privilege boundary between users. No memory snapshot, pause or fork. In September Cloudflare disclosed that a shared storage pool let one customer recover another's leftover disk blocks; it was fixed by 19 September, and the VM boundary was not crossed.",
       "source": {
         "url": "https://developers.cloudflare.com/containers/concepts/architecture/",
         "quote": "Each container instance runs in a Firecracker microVM with its own kernel and network.",
