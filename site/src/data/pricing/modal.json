@@ -1,6 +1,6 @@
 {
   "provider": "modal",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "summary": "Per second on the higher of requested and used CPU and memory, at 3× list for sandboxes; there is no stopped state.",
   "cpu": {
     "rate": 0.070956,
@@ -35,7 +35,8 @@
   "notes": [
     "Modal bills per physical core and documents one core as 2 vCPUs, so a vCPU here is half a core. Battleships prices a whole core as one vCPU, twice this figure. How many CPUs the machine itself reports per core was not tested.",
     "A payment method is required.",
-    "Egress beyond the plan's included amount is $0.04 per GiB and is not included."
+    "Egress beyond the plan's included amount is $0.04 per GiB and is not included.",
+    "GPU sandboxes can be preempted and GPU time is at standard rates, not the 3× sandbox rate; the calculator does not price GPUs."
   ],
   "sources": [
     {

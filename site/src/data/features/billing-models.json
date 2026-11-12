@@ -154,10 +154,10 @@
       "verdict": "partly",
       "figure": "$0.141912/core-hour",
       "scenario": "The waiting box pays max(request, actual), so idle time inside the request bills at full rate; only termination stops the meter.",
-      "note": "Per second on the higher of request and actual use: CPU $0.141912/core-hour and memory $0.024012/GiB-hour at the non-preemptible sandbox rate, 3× list. Disk is billed as memory at 20:1.",
+      "note": "Per second on the higher of request and actual use: CPU $0.141912/core-hour and memory $0.024012/GiB-hour at the non-preemptible sandbox rate, 3× list. Disk is billed as memory at 20:1. Requested resources bill for the sandbox's whole lifetime, even when idle. GPU time is at standard rates.",
       "source": {
         "url": "https://modal.com/docs/guide/sandbox-resources",
-        "quote": "Modal Sandboxes are billed by the second based on whichever is higher: your resource request or your actual usage.",
+        "quote": "You're charged max(request, actual) for both CPU and memory.",
         "confidence": "docs-confirmed"
       }
     },

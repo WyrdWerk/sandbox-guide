@@ -153,11 +153,11 @@
       "provider": "modal",
       "verdict": "partly",
       "figure": "Environment budgets",
-      "scenario": "An environment budget on Team stops the workload at the limit; Starter has no budgets and only three seats.",
-      "note": "Environment budgets on Team and Enterprise stop workloads at the limit. RBAC is Team+, SSO and audit logs are Enterprise. Starter has 3 seats and 100 containers.",
+      "scenario": "An environment budget on Team stops the workload at the limit; Starter has only a workspace-wide spend limit and three seats.",
+      "note": "A workspace budget and spend limit stop workloads; Environment budgets, RBAC and service users are Team+, and SSO and audit logs are Enterprise. Starter has 3 seats and 100 containers.",
       "source": {
         "url": "https://modal.com/docs/guide/budgets",
-        "quote": "When the spend limit is reached, Modal stops workloads that would incur additional out-of-pocket charges.",
+        "quote": "Modal budgets let you cap usage at both the Workspace and Environment level",
         "confidence": "docs-confirmed"
       }
     },

@@ -154,7 +154,7 @@
       "verdict": "partly",
       "figure": "$30/month credits",
       "scenario": "Starter gives $30 of compute a month, but a payment method is required before anything runs.",
-      "note": "Starter is $0 plus compute with $30 a month of credits; Team is $250 plus compute with $100. A payment method is required to use Modal.",
+      "note": "Starter is $0 plus compute with $30 a month of credits; Team is $250 plus compute with $100. A payment method is required to use Modal. The credits cover Functions and Sandboxes, not Shared Endpoints model tokens.",
       "source": {
         "url": "https://modal.com/pricing",
         "quote": "$30 / month free credits",

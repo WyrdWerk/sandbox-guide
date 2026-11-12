@@ -2,6 +2,24 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Modal: a computer-use example, Slack budget alerts and scoped service-user tokens",
+      "provider": "modal",
+      "what": "Modal now documents a computer-use example that runs Chromium and a VNC desktop in a VM sandbox, beta Slack alerts when a workspace or environment nears its budget, and service-user tokens limited to chosen environments on Team plans. GPU sandboxes can be preempted. Rates and A/B/C are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://modal.com/docs/examples/computer_use_vnc",
+          "quote": "The agent drives Chromium inside a Modal Sandbox running in a VM",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://modal.com/docs/guide/slack-notifications",
+          "quote": "Alerts when your Workspace approaches or reaches its usage limit or budget.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Boat keeps a stopped machine for ten minutes, and allows more paid starts",
       "provider": "boat",
       "what": "A stop now keeps the machine for ten minutes unbilled, so a quick resume usually returns memory, running programs and the same IP; creates, forks and resumes use machines that are already running. A stopped disk is promised for at least 14 days, and the cleanup only reports candidates in production. Paid starts now run to 6 times the hourly and daily limit, so the $20 plan allows 1,200 starts a day, and an invoice option joins the wallet. Rates and A/B/C totals are unchanged. The date is when this guide checked.",
