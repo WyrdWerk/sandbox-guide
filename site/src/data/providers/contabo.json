@@ -18,7 +18,7 @@
     "model": "Prepaid term of 1, 3, 6, 12 or 24 months with one flat price per server. Add-ons are separate monthly charges: Auto Backup, Private Networking, an extra IPv4, a storage extension, Windows Server and control panels.",
     "meter": "A flat price per server per month; no hourly or per-second meter. Cloud VPS 4 is $6.60 a month on the 1-month term and $5.28 a month on the 24-month term, paid upfront.",
     "stopped": "Powering off keeps the disk and the bill. The contract is for the billing period, not for running time, and a cancellation leaves the service active until the end of the period already paid for.",
-    "planFee": "No platform fee. The plan price is the whole machine charge, and no setup fee was shown for any term at this check.",
+    "planFee": "No platform fee. The plan price is the whole machine charge. Cloud VPS 4 on the 1-month term adds a one-off €2.00 setup fee; the 3- to 24-month terms show none.",
     "minimum": "One month of Cloud VPS 4 at $6.60. No free tier and no signup credit; payment is due before the server is provisioned."
   },
   "cost": {
@@ -42,7 +42,7 @@
         "Cloud VPS 4 is the smallest Core VPS plan: 4 vCPU / 8 GB / 100 GB, a superset of the 2 vCPU / 4 GiB / 10 GiB asked for.",
         "There is no hourly meter, so the 1,000 tasks share one monthly plan. A fresh server per task would mean 1,000 plans, $6,600 for the month.",
         "On the 24-month term the same plan is $5.28 a month, but $126.72 is paid upfront.",
-        "No setup fee was shown for the 1-month term."
+        "The 1-month term adds a one-off €2.00 (about $2.40) setup fee, which is not in the monthly total."
       ],
       "flag": "This assumes the tasks run one after another on a single server. Contabo has no per-second billing, so even one ten-minute task costs a whole month."
     },

@@ -58,7 +58,7 @@
   ],
   "notes": [
     "A stopped machine's disk is kept free for 14 days; after that it is gone unless saved as a snapshot.",
-    "Many starts in one day can hit the start limit; paid starts draw from the wallet.",
+    "Starts past the plan's included number cost $0.03 (to 1.5x), $0.05 (to 2x) and $0.07 (to 6x) from the wallet, and fail above 6x in an hour or a day (3x in a minute): on the $20 plan, start 1,201 in a day fails. Each start pays the highest of its minute, hour and day rate.",
     "No free tier; the 7-day trial needs a card.",
     "Boat says it does not bill egress.",
     "The xlarge size needs the $100 plan or higher; the $20 plan cannot run it."

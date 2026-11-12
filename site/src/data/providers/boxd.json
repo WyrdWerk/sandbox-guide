@@ -79,8 +79,8 @@
       ]
     },
     "C": {
-      "headline": "≈ $7.27 or $12.31 a month",
-      "shape": "2 vCPU / 8 GiB, 10% busy, 4 GiB or 8 GiB resident, 20 GiB written, 90 running hours in a 720-hour month",
+      "headline": "≈ $7.29 or $12.33 a month",
+      "shape": "2 vCPU / 8 GiB, 10% busy, 4 GiB or 8 GiB resident, 20 GiB written, 90 running hours and 640 stopped",
       "lines": [
         {
           "label": "Running, 90 h at 4 GiB",
@@ -93,15 +93,14 @@
           "amount": "$11.10"
         },
         {
-          "label": "Stopped, 630 h",
-          "arithmetic": "630 × 20 × $0.000096",
-          "amount": "$1.21"
+          "label": "Stopped, 640 h",
+          "arithmetic": "640 × 20 × $0.000096",
+          "amount": "$1.23"
         }
       ],
-      "total": "$7.27 at 4 GiB, $12.31 at 8 GiB",
+      "total": "$7.29 at 4 GiB, $12.33 at 8 GiB",
       "notes": [
-        "A 30-day month is 720 hours, so 630 hours are stopped.",
-        "Leaving it in standby instead of stopping is the expensive mistake: RAM keeps billing, about $35.28 more at 4 GiB (630 × 4 × $0.014)."
+        "Leaving it in standby instead of stopping is the expensive mistake: RAM keeps billing, about $35.84 more at 4 GiB (640 × 4 × $0.014)."
       ]
     }
   },
@@ -196,7 +195,7 @@
   "caveats": [
     {
       "issue": "The bill follows resident RAM, not the shape",
-      "detail": "A 4 vCPU machine is 16 GiB, but boxd bills the memory it actually holds: $222.50 a month at 8 GiB resident and $304.26 at 16 GiB. boxd's own calculator assumes 2 GiB on an 8 GiB machine, which is a best case rather than a typical one.",
+      "detail": "A 4 vCPU machine is 16 GiB, but boxd bills the memory it actually holds: $98.99 a month at 8 GiB resident and $180.75 at 16 GiB, with 10% of the vCPU active. boxd's own calculator assumes 2 GiB active on an 8 GiB machine, which is a best case rather than a typical one.",
       "status": "open"
     },
     {

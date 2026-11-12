@@ -20495,11 +20495,11 @@
         {
           "provider": "boxd",
           "verdict": "partly",
-          "shortfall": "Audit logs are sold with SSO on the Custom/Enterprise line; on self-serve plans the only record is the SSH command history.",
+          "shortfall": "Audit logs are named only on the Custom (self-hosted or BYOC) offer, with no schema, retention or export documented; the pricing page no longer lists them, and self-serve plans have none.",
           "source": {
-            "url": "https://boxd.sh/pricing",
+            "url": "https://boxd.sh/llms-full.txt",
             "quote": "SSO + audit logs",
-            "confidence": "pricing-page"
+            "confidence": "docs-confirmed"
           }
         },
         {
