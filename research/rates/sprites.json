@@ -1,6 +1,6 @@
 {
   "id": "sprites",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "provider": "Sprites by Fly.io",
   "pricingUrl": "https://fly.io/pricing/",
@@ -142,7 +142,7 @@
         "figureQuote": "$0.000683 / GB-hour"
       },
       "cold": {
-        "usdPerGiBHour": 2.7e-05,
+        "usdPerGiBHour": 0.000027,
         "usdPerGiBMonth": 0.02,
         "url": "https://fly.io/pricing/",
         "quote": "Cold Bills for as long as you keep it",
@@ -369,5 +369,8 @@
       }
     ],
     "notes": "No official Hermes or OpenClaw hosting template or one-click deploy was found. A non-coder cannot install and supervise the agent from the dashboard alone; the documented path is CLI plus shell. An always-on agent also has to defeat the ~30 second idle pause with a service or the Tasks API, and a task hold is capped at 1 hour and must be renewed."
-  }
+  },
+  "notes": [
+    "12 Nov 2026: unit rates unchanged. Trial is $1 for 7 days with no card; personal-org bills under $5 are waived; every org gets 20 GB of cold storage free each month (https://fly.io/changelog/sprites-free-cold-storage.md), not modelled in the site card. Plan ladder Adventurer $20 to Mythic $2,000."
+  ]
 }

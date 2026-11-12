@@ -2,6 +2,29 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Sprites: coding agents installed, a hosted MCP server and a $1 trial",
+      "provider": "sprites",
+      "what": "New Sprites ship the Claude, Codex, Gemini and Cursor CLIs, a hosted MCP server creates and drives them, and there are official Python, Go and Elixir SDKs. Checkpoints are now automatic, connectors cover any token API, and API tokens can be restricted. The trial is now $1 for 7 days with no card, and every org gets 20 GB of cold storage free each month. Rates and A/B/C are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://docs.fly.io/sprites/working-with-sprites.md",
+          "quote": "AI/CLI Tools: Claude CLI, Gemini CLI, OpenAI Codex, Cursor",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.fly.io/sprites/integrations/remote-mcp.md",
+          "quote": "Sprites runs a hosted MCP server.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.fly.io/about/free-trial.md",
+          "quote": "New accounts get $1 of free credit, with no credit card required.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Freestyle: an official MCP server, a dashboard terminal and published Terms",
       "provider": "freestyle",
       "what": "Freestyle now runs an official MCP server at mcp.freestyle.sh, described in its 5 November privacy policy, and its dashboard has a terminal and Owner/Member team roles. Terms of service are published at dash.freestyle.sh/terms; they say Freestyle is not a backup service. The scheduled-trigger API was deprecated in September, and outbound mail ports are blocked. Rates and A/B/C are unchanged. The date is when this guide checked.",

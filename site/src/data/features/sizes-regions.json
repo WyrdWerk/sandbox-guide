@@ -201,8 +201,8 @@
       "provider": "sprites",
       "verdict": "partly",
       "figure": "8 vCPU; no choice",
-      "scenario": "One shape, 8 vCPU and a 100 GB storage ceiling, with memory assigned automatically and no region choice.",
-      "note": "One shape: 8 vCPUs and 100 GB of storage, with memory assigned and autoscaled. GPU is explicitly not offered; region selection is unavailable and placement is automatic; CPU architecture is not published.",
+      "scenario": "One shape, 8 vCPU and a 100 GB storage ceiling, with 2–16 GB of memory assigned automatically and no region choice.",
+      "note": "One shape: 8 vCPUs and 100 GB of storage, with memory starting at 2 GB and autoscaling to 16 GB. GPU is explicitly not offered; region selection is unavailable and placement is automatic; CPU architecture is not published.",
       "source": {
         "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
         "quote": "8 vCPUs",

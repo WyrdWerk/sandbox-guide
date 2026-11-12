@@ -198,13 +198,13 @@
     },
     {
       "provider": "sprites",
-      "verdict": "partly",
-      "figure": "No; CLI",
-      "scenario": "A CLI and an interactive console; SSH needs a server installed inside and proxied.",
-      "note": "A CLI and interactive console, SDKs and agent integrations, and SSH only after installing a server and proxying it. No managed desktop or browser-control product.",
+      "verdict": "yes",
+      "figure": "Dashboard, CLI, 4 SDKs, MCP",
+      "scenario": "A dashboard, CLI, REST API, SDKs for four languages and a hosted MCP server; SSH needs a server installed inside and proxied.",
+      "note": "A dashboard, CLI, REST API, official JavaScript, Python, Go and Elixir SDKs, a hosted MCP server and plugins for agent clients. SSH works only after installing a server and proxying it, and no browser terminal is documented.",
       "source": {
-        "url": "https://docs.fly.io/sprites/quickstart",
-        "quote": "Open an interactive shell",
+        "url": "https://docs.fly.io/sprites/integrations/index.md",
+        "quote": "Sprites can be used through the hosted MCP server, a client plugin, an SDK adapter, or a platform's sandbox backend.",
         "confidence": "docs-confirmed"
       }
     },

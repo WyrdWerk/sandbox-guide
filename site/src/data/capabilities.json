@@ -6241,13 +6241,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "no",
-          "note": "No backup schedule; persistence covers pauses, and checkpoints are manual.",
+          "verdict": "partly",
           "source": {
-            "url": "https://docs.fly.io/sprites/concepts/checkpoints.md",
-            "quote": "Persistence keeps your filesystem across pauses on its own",
-            "confidence": "inferred"
-          }
+            "url": "https://fly.io/sprites/",
+            "quote": "A Sprite checkpoints itself after a stretch of continuous work, when it goes idle, and on graceful shutdown, keeping a tiered history rather than every snapshot forever.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Automatic checkpoints",
+          "shortfall": "A Sprite checkpoints itself as it works and goes idle, but older checkpoints are thinned out and no schedule, retention period or off-machine copy is published."
         },
         {
           "provider": "vercel-sandbox",
@@ -13610,14 +13611,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "partly",
-          "figure": "Catalogue only",
-          "shortfall": "Only the services in its catalogue are covered; any other key has to go into the machine.",
+          "verdict": "yes",
+          "figure": "Any token API",
           "source": {
-            "url": "https://docs.fly.io/sprites/concepts/connectors",
-            "quote": "Connectors solve this by storing the credential once, in your organization, and routing API calls through the Sprites gateway. Sprites never see the token.",
+            "url": "https://docs.fly.io/sprites/concepts/connectors.md",
+            "quote": "Custom API is the fallback for anything without a dedicated connector: give it a base URL, a token, and where the token goes, and it wraps any token-authenticated HTTP API.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "note": "Dedicated connectors plus a Custom API connector that wraps any token-authenticated HTTP API, so the key stays in the gateway."
         },
         {
           "provider": "tensorlake",
@@ -13936,13 +13937,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "not-published",
-          "note": "No key scopes are published.",
+          "verdict": "yes",
+          "note": "API tokens can be limited by Sprite count, name prefix and label, and can expire.",
           "source": {
-            "url": "https://docs.fly.io/sprites/cli/authentication.md",
-            "quote": "CLI Authentication",
-            "confidence": "inferred"
-          }
+            "url": "https://fly.io/sprites/release-notes/",
+            "quote": "You can now create API tokens with restrictions like maximum sprite count, required name prefixes, and label-based access control. Tokens can also have expiration dates.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Count, prefix, label, expiry"
         },
         {
           "provider": "tensorlake",
@@ -14252,13 +14254,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "no",
-          "note": "Sprites are created from the command line; there is no browser console for creating one.",
+          "verdict": "yes",
+          "note": "The documented dashboard flow creates a Sprite as a Cursor self-hosted machine; a plain Sprite is still created from the CLI or API.",
           "source": {
-            "url": "https://docs.fly.io/sprites/cli/commands.md",
-            "quote": "sprite create - Create a new sprite",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.fly.io/sprites/integrations/cursor-cloud-agents.md",
+            "quote": "The dashboard creates the Sprite, installs the worker service, starts it",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Dashboard form"
         },
         {
           "provider": "vercel-sandbox",
@@ -14871,13 +14874,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "no",
-          "note": "The documented SDK is JavaScript only.",
+          "verdict": "yes",
+          "note": "Official SDKs for JavaScript, Python, Go and Elixir.",
           "source": {
-            "url": "https://docs.fly.io/sprites/quickstart.md",
-            "quote": "import { SpritesClient } from '@fly/sprites';",
-            "confidence": "inferred"
-          }
+            "url": "https://fly.io/sprites.md",
+            "quote": "pip install sprites-py",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "sprites-py"
         },
         {
           "provider": "vercel-sandbox",
@@ -15809,13 +15813,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "no",
-          "note": "Sprites are a place to run MCP servers, not a server that manages Sprites.",
+          "verdict": "yes",
+          "note": "A hosted MCP server creates and drives Sprites; hosting your own MCP server is a separate use.",
           "source": {
-            "url": "https://fly.io/sprites/",
-            "quote": "Run every MCP server in its own Sprite",
+            "url": "https://docs.fly.io/sprites/integrations/remote-mcp.md",
+            "quote": "Sprites runs a hosted MCP server.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "sprites.dev/mcp"
         },
         {
           "provider": "vercel-sandbox",
@@ -16758,13 +16763,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "no",
-          "shortfall": "Sprites provide plugins and integrations for agents, but no agent is in the image.",
+          "verdict": "yes",
           "source": {
-            "url": "https://fly.io/sprites/",
-            "quote": "Official plugins for every serious coding agent, plus SDKs and native integrations.",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.fly.io/sprites/working-with-sprites.md",
+            "quote": "AI/CLI Tools: Claude CLI, Gemini CLI, OpenAI Codex, Cursor",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Claude, Codex, Gemini, Cursor",
+          "note": "The default image ships the Claude, Codex, Gemini and Cursor CLIs; you sign in with your own accounts."
         },
         {
           "provider": "vercel-sandbox",
@@ -18013,13 +18019,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "no",
-          "shortfall": "No browser is installed or offered; a browser is something you run and reach through a proxy.",
+          "verdict": "partly",
+          "shortfall": "Chrome is installed only when you tick Computer use on a Cursor Cloud Agents machine; the default image has no browser.",
           "source": {
-            "url": "https://docs.fly.io/sprites/cli/commands.md",
-            "quote": "sprite proxy - Forward local ports through the remote server proxy",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.fly.io/sprites/integrations/cursor-cloud-agents.md",
+            "quote": "the dashboard installs an Xfce desktop, Google Chrome",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Chrome via Cursor"
         },
         {
           "provider": "vercel-sandbox",
@@ -18325,13 +18332,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "no",
-          "shortfall": "No desktop is documented; interactive access is a terminal console.",
+          "verdict": "partly",
+          "shortfall": "The Xfce desktop exists only inside the Cursor computer-use setup; there is no documented VNC address or general desktop for other agents.",
           "source": {
-            "url": "https://docs.fly.io/sprites/cli/commands.md",
-            "quote": "Opens an interactive shell with a TTY allocated.",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.fly.io/sprites/integrations/cursor-cloud-agents.md",
+            "quote": "the dashboard installs an Xfce desktop, Google Chrome",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Xfce via Cursor"
         },
         {
           "provider": "vercel-sandbox",
@@ -18645,13 +18653,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "no",
-          "shortfall": "Its ecosystem lists coding tools, not another platform's cloud agents.",
+          "verdict": "yes",
           "source": {
-            "url": "https://fly.io/sprites/",
-            "quote": "Official plugins for every serious coding agent",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.fly.io/sprites/integrations/cursor-cloud-agents.md",
+            "quote": "Turn a Sprite into a Cursor self-hosted machine",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Cursor, Claude, Gemini",
+          "note": "A Sprite can be a Cursor self-hosted machine or the tool sandbox for Claude Managed Agents and Gemini Managed Agents."
         },
         {
           "provider": "vercel-sandbox",
@@ -19582,13 +19591,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "not-published",
-          "note": "No Sprites-specific SSO page is published; the Fly.io account may offer it, but that is not stated for Sprites.",
+          "verdict": "partly",
           "source": {
-            "url": "https://docs.fly.io/sprites/cli/authentication.md",
-            "quote": "Sprites uses your Fly.io account for authentication",
+            "url": "https://docs.fly.io/security/sso.md",
+            "quote": "Fly.io supports Google and GitHub as Identity Providers, and you can use one or both.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "Google or GitHub",
+          "shortfall": "SSO is Google Workspace or GitHub only, through the Fly.io account; there is no SAML or generic identity-provider option."
         },
         {
           "provider": "vercel-sandbox",
@@ -20208,13 +20218,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "not-published",
-          "note": "No usage alert or threshold feature is published for Sprites.",
+          "verdict": "no",
+          "note": "Fly says billing alerts are not supported yet.",
           "source": {
-            "url": "https://fly.io/sprites/",
-            "quote": "Pay only for the tool calls you use.",
+            "url": "https://docs.fly.io/about/cost-management.md",
+            "quote": "We don't support billing alerts (yet), so budget accordingly.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "None"
         },
         {
           "provider": "vercel-sandbox",
@@ -21809,10 +21820,10 @@
           "provider": "sprites",
           "verdict": "yes",
           "figure": "none",
-          "note": "A separate product page describes optional monthly plans, which contradicts the pricing page.",
+          "note": "The pricing page's Markdown version says no plan is picked up front, while the Sprites FAQ and changelog sell eight optional tiers from $20 to $2,000.",
           "source": {
-            "url": "https://fly.io/pricing/",
-            "quote": "No plans and no tiers, and nothing charged per Sprite.",
+            "url": "https://fly.io/pricing.md",
+            "quote": "No plans to pick up front on Machines or Sprites",
             "confidence": "pricing-page"
           }
         },
@@ -22462,12 +22473,12 @@
         },
         {
           "provider": "sprites",
-          "verdict": "no",
-          "figure": "one-off $30",
-          "shortfall": "Free usage is a one-time $30 credit, not a monthly allowance.",
+          "verdict": "partly",
+          "figure": "20 GB cold; under-$5 waiver",
+          "shortfall": "There is no free compute tier: a personal org's bill is waived only while the whole bill stays under $5, and team orgs get no waiver. Every org does get 20 GB of cold storage free each month.",
           "source": {
-            "url": "https://fly.io/sprites/",
-            "quote": "Each user can grant one $30 trial credit, and each org can receive at most one.",
+            "url": "https://docs.fly.io/about/free-waiver.md",
+            "quote": "Fly.io doesn't have a free tier, but if your monthly bill comes to less than $5, we waive it.",
             "confidence": "docs-confirmed"
           }
         },
@@ -22791,11 +22802,11 @@
         {
           "provider": "sprites",
           "verdict": "yes",
-          "figure": "$30",
-          "note": "One credit per person and one per organisation, and it cannot pay a subscription fee.",
+          "figure": "$1, 7 days",
+          "note": "New accounts get $1 for 7 days, personal org only, with at most 3 Sprites at a time.",
           "source": {
-            "url": "https://fly.io/sprites/",
-            "quote": "Each user can grant one $30 trial credit, and each org can receive at most one.",
+            "url": "https://docs.fly.io/about/free-trial.md",
+            "quote": "New accounts get $1 of free credit, with no credit card required.",
             "confidence": "docs-confirmed"
           }
         },
@@ -23112,13 +23123,14 @@
         },
         {
           "provider": "sprites",
-          "verdict": "not-published",
-          "note": "No page says whether a card is required to start.",
+          "verdict": "yes",
+          "note": "The $1 trial needs no card; without one, Fly may delete trial resources.",
           "source": {
-            "url": "https://fly.io/sprites/",
-            "quote": "Each user can grant one $30 trial credit, and each org can receive at most one.",
-            "confidence": "not-published"
-          }
+            "url": "https://docs.fly.io/about/free-trial.md",
+            "quote": "New accounts get $1 of free credit, with no credit card required.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "$1 trial, no card"
         },
         {
           "provider": "vercel-sandbox",

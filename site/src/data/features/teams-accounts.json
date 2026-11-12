@@ -28,7 +28,7 @@
     {
       "heading": "SSO, audit and residency",
       "body": [
-        "Runtime includes SSO, SCIM and a 400-day audit log free. InstaBox and Lizard put SSO and audit on Enterprise. Vercel sells SAML at $300 a month. Agent 37, Boat, boxd, Sandboxer and Sprites publish no SSO or audit log on the tiers described here.",
+        "Runtime includes SSO, SCIM and a 400-day audit log free. InstaBox and Lizard put SSO and audit on Enterprise. Vercel sells SAML at $300 a month. Agent 37, Boat, boxd and Sandboxer publish no SSO or audit log on the tiers described here, and Sprites has Google or GitHub SSO but no audit log.",
         "Residency is separate. Boat and boxd are EU-only. Agent 37 keeps compute in the chosen region but stores backups in the US. InstaBox and Runtime are US-only."
       ]
     }
@@ -200,12 +200,12 @@
     {
       "provider": "sprites",
       "verdict": "partly",
-      "figure": "Not published",
-      "scenario": "Fly organisations and connector management; spend caps, key scopes and audit retention are not published.",
-      "note": "Fly.io organisations and connector management in a dashboard. SSO is claimed by a third party; spend caps, key scopes, audit retention and residency are not published.",
+      "figure": "Google or GitHub SSO",
+      "scenario": "Fly organisations, Google or GitHub SSO and restricted API tokens; no audit log, spend cap or billing alert.",
+      "note": "Fly.io organisations with admins and members, SSO through Google or GitHub only, and API tokens restricted by count, name prefix, label and expiry. There is no audit log, and spend caps and billing alerts are not offered.",
       "source": {
-        "url": "https://docs.fly.io/sprites/quickstart",
-        "quote": "Sprites uses your Fly.io account for authentication",
+        "url": "https://docs.fly.io/security/sso.md",
+        "quote": "Fly.io supports Google and GitHub as Identity Providers, and you can use one or both.",
         "confidence": "docs-confirmed"
       }
     },

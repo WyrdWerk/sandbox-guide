@@ -21,14 +21,14 @@
     {
       "heading": "Installed, not managed",
       "body": [
-        "InstaBox and Vercel put coding agents in their default images but publish no agent-run API: you open a terminal and use them. E2B ships ready-made claude, codex and amp templates, but none of them is the default image.",
+        "InstaBox, Vercel and Sprites put coding agents in their default images but publish no agent-run API: you open a terminal and use them. E2B ships ready-made claude, codex and amp templates, but none of them is the default image.",
         "That is enough for a technical user and not enough for a product that wants to start an agent on demand."
       ]
     },
     {
       "heading": "Bring your own",
       "body": [
-        "Runtime does not preinstall agents, and its own docs say no bridge harness has run on it yet. Sprites offers plugins and SDK integrations rather than a hosted agent. Morph exposes a tmux API so an agent can be driven programmatically, but the agent is yours.",
+        "Runtime does not preinstall agents, and its own docs say no bridge harness has run on it yet. Morph exposes a tmux API so an agent can be driven programmatically, but the agent is yours.",
         "At these providers the sandbox is the product and the agent is an application you install."
       ]
     }
@@ -199,13 +199,13 @@
     },
     {
       "provider": "sprites",
-      "verdict": "no",
-      "figure": "None; plugins only",
-      "scenario": "Plugins and SDK integrations, but no preinstalled agent and no managed agent API.",
-      "note": "Plugins for coding agents and SDK integrations, but no preinstalled agent or provider-managed agent API is documented.",
+      "verdict": "partly",
+      "figure": "Agents in image; no API",
+      "scenario": "Claude, Codex, Gemini and Cursor CLIs are in the default image, but you drive them yourself; there is no prompt endpoint.",
+      "note": "The default image ships the Claude, Codex, Gemini and Cursor CLIs, and a Sprite can host Cursor, Claude or Gemini managed agents. Sprites runs no agent loop and has no prompt API.",
       "source": {
-        "url": "https://fly.io/sprites/",
-        "quote": "Official plugins for every serious coding agent, plus SDKs and native integrations.",
+        "url": "https://docs.fly.io/sprites/working-with-sprites.md",
+        "quote": "AI/CLI Tools: Claude CLI, Gemini CLI, OpenAI Codex, Cursor",
         "confidence": "docs-confirmed"
       }
     },

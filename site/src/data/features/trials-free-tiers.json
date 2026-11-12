@@ -15,7 +15,7 @@
       "heading": "The one that converts itself",
       "body": [
         "Sandboxer's seven-day trial becomes $20 a month on day eight. Boat's trial ends by charging the plan chosen at checkout. Lizard's trial ends and you either subscribe to Pro at $19 or stop creating things. Those are the three that end at a paid plan.",
-        "Everything else is spent, not converted: E2B's $100 credit, boxd's $30, Agent 37's $5, Blaxel's credits, Sprites' $30, Morph's disputed 300 hours, Runtime's allowance and InstaBox's free plan."
+        "Everything else is spent, not converted: E2B's $100 credit, boxd's $30, Agent 37's $5, Blaxel's credits, Sprites' $1, Morph's disputed 300 hours, Runtime's allowance and InstaBox's free plan."
       ]
     },
     {
@@ -200,12 +200,12 @@
     {
       "provider": "sprites",
       "verdict": "partly",
-      "figure": "$30 one-off",
-      "scenario": "A one-time $30 trial credit per user and per organisation; credits cannot pay a subscription fee.",
-      "note": "A one-time $30 trial credit per user and per organisation. Credits cannot pay a subscription fee. Card requirement and expiry are not published.",
+      "figure": "$1, 7 days",
+      "scenario": "New accounts get $1 for 7 days with no card; after that, a personal org's bill under $5 is waived.",
+      "note": "$1 of credit for 7 days with no card, personal org only and at most 3 Sprites at a time. After that there is no free compute, but a personal org's monthly bill under $5 is waived and every org gets 20 GB of cold storage free each month.",
       "source": {
-        "url": "https://fly.io/sprites/",
-        "quote": "Each user can grant one $30 trial credit, and each org can receive at most one.",
+        "url": "https://docs.fly.io/about/free-trial.md",
+        "quote": "New accounts get $1 of free credit, with no credit card required.",
         "confidence": "docs-confirmed"
       }
     },

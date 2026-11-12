@@ -202,7 +202,7 @@
       "verdict": "partly",
       "figure": "Filesystem only",
       "scenario": "Checkpoints snapshot the writable filesystem copy-on-write and restore in place, overwriting current files; there is no live fork.",
-      "note": "Checkpoints snapshot the writable filesystem, copy-on-write and without interrupting work; they restore in place and overwrite current files. A live fork or create-from-checkpoint is not documented.",
+      "note": "Checkpoints snapshot the writable filesystem, copy-on-write and without interrupting work, and are also taken automatically as a Sprite works and idles. They restore in place and overwrite current files. A live fork or create-from-checkpoint is not documented.",
       "source": {
         "url": "https://docs.fly.io/sprites/concepts/checkpoints",
         "quote": "A checkpoint snapshots the writable filesystem overlay: everything you've added on top of the base image.",

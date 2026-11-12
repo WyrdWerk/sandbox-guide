@@ -1234,12 +1234,12 @@
         },
         {
           "provider": "sprites",
-          "tier": "manual",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "Install Claude Code yourself in a Sprite; the whole filesystem persists and the Sprite wakes on a command or request. No Claude Code guide.",
+          "what": "Claude Code, Codex, Gemini CLI and Cursor are in the default image; sign in with your own account. The whole filesystem persists and the Sprite wakes on a command or request.",
           "link": {
-            "title": "Sprites: quickstart",
-            "url": "https://docs.fly.io/sprites/quickstart.md"
+            "title": "Sprites: working with Sprites",
+            "url": "https://docs.fly.io/sprites/working-with-sprites.md"
           },
           "price": null
         },
@@ -2026,7 +2026,7 @@
           "provider": "sprites",
           "tier": "manual",
           "noTerminal": "no",
-          "what": "No browser or desktop image. Install Playwright and Chromium with two commands, or run Xvfb and a VNC server yourself; the Sprite keeps the install between sessions.",
+          "what": "No browser in the default image. Ticking Computer use on a Cursor Cloud Agents machine installs Xfce and Chrome; otherwise install Playwright and Chromium yourself, and the Sprite keeps the install between sessions.",
           "link": {
             "title": "Sprites: working with Sprites",
             "url": "https://docs.fly.io/sprites/working-with-sprites.md"
@@ -3070,7 +3070,7 @@
       "seoTitle": "Claude Code in the cloud for a team: setup and costs",
       "kicker": "Coding team",
       "question": "Three to five of us want Claude Code running on cloud machines, each with our own login, without sharing one account.",
-      "standfirst": "Claude Code is built for one person on one machine. For a team that means one machine per developer, each signed in with that developer's own account. Six providers ship it preinstalled and one sets it up in one click; the catch is how logins are kept.",
+      "standfirst": "Claude Code is built for one person on one machine. For a team that means one machine per developer, each signed in with that developer's own account. Nine providers ship it preinstalled and one sets it up in one click; the catch is how logins are kept.",
       "preset": "team",
       "whatItIs": [
         "[Claude Code](https://code.claude.com/docs/en/overview) is Anthropic's coding agent. A developer starts it in a repository and asks for a change; it reads and edits files and runs commands and tests on the machine where it runs.",
@@ -3238,12 +3238,12 @@
         },
         {
           "provider": "sprites",
-          "tier": "manual",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "Sprites documents Claude Managed Agents, a different Anthropic product, not Claude Code. Installing it in a Sprite is by hand.",
+          "what": "Claude Code is in the default image. One Sprite per developer and each developer's sign-in are set up by hand; the Claude Managed Agents page is a different Anthropic product.",
           "link": {
-            "title": "Sprites: Claude Managed Agents",
-            "url": "https://docs.fly.io/sprites/integrations/claude-managed-agents.md"
+            "title": "Sprites: working with Sprites",
+            "url": "https://docs.fly.io/sprites/working-with-sprites.md"
           }
         },
         {

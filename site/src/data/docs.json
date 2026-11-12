@@ -957,7 +957,7 @@
       "url": "https://docs.fly.io/sprites/index.md"
     },
     "sizes-regions": {
-      "title": "Lifecycle and Persistence (fixed 8 vCPU, 100 GB; no region selection documented)",
+      "title": "Lifecycle and Persistence (8 vCPU, 100 GB, 2–16 GB memory; no region selection)",
       "url": "https://docs.fly.io/sprites/concepts/lifecycle.md"
     },
     "lifecycle": {
@@ -989,20 +989,20 @@
       "url": "https://docs.fly.io/sprites/concepts/connectors.md"
     },
     "ways-to-drive": {
-      "title": "CLI Commands Reference",
-      "url": "https://docs.fly.io/sprites/cli/commands.md"
+      "title": "Integrations: CLI, SDKs, plugins, hosted MCP",
+      "url": "https://docs.fly.io/sprites/integrations/index.md"
     },
     "teams-accounts": {
-      "title": "CLI Authentication (Fly.io account and org switching)",
-      "url": "https://docs.fly.io/sprites/cli/authentication.md"
+      "title": "Fly.io SSO (Google or GitHub)",
+      "url": "https://docs.fly.io/security/sso.md"
     },
     "billing-models": {
       "title": "Fly.io Pricing — Sprites",
       "url": "https://fly.io/pricing/"
     },
     "trials-free-tiers": {
-      "title": "Sprites FAQ — trial credits",
-      "url": "https://fly.io/sprites/"
+      "title": "Fly.io free trial ($1, 7 days, 3 Sprites)",
+      "url": "https://docs.fly.io/about/free-trial.md"
     },
     "quickstart": {
       "title": "Quickstart",
@@ -1011,6 +1011,10 @@
     "pricing": {
       "title": "Fly.io Pricing — Sprites",
       "url": "https://fly.io/pricing/"
+    },
+    "built-in-agents": {
+      "title": "Working with Sprites: Claude, Gemini, Codex and Cursor CLIs",
+      "url": "https://docs.fly.io/sprites/working-with-sprites.md"
     }
   },
   "tensorlake": {
