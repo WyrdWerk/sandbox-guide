@@ -72,8 +72,8 @@
       "scenario": "Snapshots are automatic and disk-only every minute, and only the newest is usable, so there is no older point to rewind to.",
       "note": "Snapshots are automatic, disk-only and taken every minute, but only the newest is usable: there is no point-in-time restore. Saved snapshots are named and never expire.",
       "source": {
-        "url": "https://docs.boat.dev/snapshots/resume-and-fork",
-        "quote": "Resume and fork always use the newest snapshot. You cannot go back to an older one.",
+        "url": "https://docs.boat.dev/snapshots/resume-and-fork.md",
+        "quote": "Resume and fork always use the newest snapshot.",
         "confidence": "docs-confirmed"
       }
     },

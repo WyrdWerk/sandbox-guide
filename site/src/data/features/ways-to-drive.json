@@ -71,8 +71,8 @@
       "scenario": "The first step is a shell command: boat new, then boat prompt. The dashboard is a viewer for machines you already made.",
       "note": "REST, Python and TypeScript SDKs, a CLI, SSH and SCP, a 60 fps desktop and a dashboard. The MCP server is for documentation, not for managing sandboxes.",
       "source": {
-        "url": "https://docs.boat.dev/quickstart",
-        "quote": "`boat new`, then `boat prompt bx_23456789 \"add tests\"`",
+        "url": "https://docs.boat.dev/quickstart.md",
+        "quote": "boat prompt bx_23456789 \"add tests\"",
         "confidence": "docs-confirmed"
       }
     },

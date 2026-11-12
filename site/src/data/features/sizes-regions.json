@@ -21,7 +21,7 @@
     {
       "heading": "Disk is part of the shape, or it is not",
       "body": [
-        "Boat attaches 51 GB to its smallest three sizes and 111 or 251 GB to the larger ones. boxd gives every machine 100 GB and does not let you choose. Vercel gives 64 GB of ephemeral NVMe. E2B includes 10 GiB on Hobby and 20 GiB on Pro, and asks you to contact support beyond that.",
+        "Boat attaches 51 GB to small and default, 111 GB to large and 251 GB to xlarge. boxd gives every machine 100 GB and does not let you choose. Vercel gives 64 GB of ephemeral NVMe. E2B includes 10 GiB on Hobby and 20 GiB on Pro, and asks you to contact support beyond that.",
         "Where disk is a separate meter, the capacity you see is not the storage you pay for: Vercel's drives bill on logical used size, and boxd's disk bills on bytes written."
       ]
     },

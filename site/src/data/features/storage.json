@@ -28,7 +28,7 @@
     {
       "heading": "Retention is where “persistent” ends",
       "body": [
-        "Boat keeps a stopped sandbox's disk for 14 days, then deletes it. Lizard's volumes are node-local, and there is no trash: deleting a sandbox or a project removes its data at once. Vercel's snapshots expire after 30 days by default unless you remove the expiry.",
+        "Boat promises a stopped sandbox's disk for at least 14 days; the automated cleanup only reports candidates in production today, so 14 days is a floor rather than an observed deletion date. Lizard's volumes are node-local, and there is no trash: deleting a sandbox or a project removes its data at once. Vercel's snapshots expire after 30 days by default unless you remove the expiry.",
         "Agent 37 keeps the disk until you delete the instance, and charges $0.09 per GB-month for it. Sprites caps storage at 100 GB per Sprite and bills the bytes you write."
       ]
     }
@@ -68,12 +68,12 @@
     {
       "provider": "boat",
       "verdict": "partly",
-      "figure": "14 days after stop",
-      "scenario": "The whole disk persists, including /var/lib, and is kept free for 14 days after a stop.",
-      "note": "The whole disk persists, with 51 GB on the smaller sizes and no volume product. A stopped sandbox's disk is kept free for 14 days, then deleted.",
+      "figure": "At least 14 days",
+      "scenario": "The whole disk persists, including /var/lib, and is kept free for at least 14 days after a stop.",
+      "note": "The whole disk persists, with 51 GB on the two smallest sizes and no volume product. A stopped sandbox's disk is promised for at least 14 days; the cleanup after that only reports candidates in production today.",
       "source": {
-        "url": "https://docs.boat.dev/faq",
-        "quote": "boat keeps the disk for 14 days after the stop",
+        "url": "https://docs.boat.dev/snapshots/stop.md",
+        "quote": "boat keeps the disk of a stopped sandbox for at least 14 days.",
         "confidence": "docs-confirmed"
       }
     },

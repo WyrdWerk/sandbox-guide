@@ -1,6 +1,6 @@
 {
   "provider": "boat",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "A flat hourly price per size, per second while the machine exists; the $20 plan is prepaid machine time.",
   "shapes": [
     {
@@ -67,6 +67,10 @@
     {
       "label": "Pricing",
       "url": "https://docs.boat.dev/pricing"
+    },
+    {
+      "label": "Limits",
+      "url": "https://docs.boat.dev/limits"
     }
   ],
   "upkeep": {

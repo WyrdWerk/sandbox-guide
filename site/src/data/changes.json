@@ -2,6 +2,24 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Boat keeps a stopped machine for ten minutes, and allows more paid starts",
+      "provider": "boat",
+      "what": "A stop now keeps the machine for ten minutes unbilled, so a quick resume usually returns memory, running programs and the same IP; creates, forks and resumes use machines that are already running. A stopped disk is promised for at least 14 days, and the cleanup only reports candidates in production. Paid starts now run to 6 times the hourly and daily limit, so the $20 plan allows 1,200 starts a day, and an invoice option joins the wallet. Rates and A/B/C totals are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://docs.boat.dev/snapshots/stop.md",
+          "quote": "A stop keeps the disk. A resume within 10 minutes usually gets the same machine back, with memory and running programs. Do not count on it.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.boat.dev/data-retention.md",
+          "quote": "It currently reports eligible stopped sandboxes without deleting them in production. The 14-day rule does not yet trigger deletion there.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Blaxel: ready-made agent, browser and desktop images, and lower uptime",
       "provider": "blaxel",
       "what": "A recheck found that Blaxel already documents images with Claude Code, Codex, Chromium, Playwright and an XFCE desktop, SSH through a Tailscale image, a call that cuts all outbound internet, and an MIT-licensed sandbox API; this guide had missed them. Its status page now shows 98.45% for sandboxes over 14 August–12 November. Prices and A/B/C are unchanged. The date is when this guide checked.",

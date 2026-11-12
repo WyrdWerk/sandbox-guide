@@ -3,12 +3,12 @@
   "name": "Boat",
   "url": "https://boat.dev",
   "status": "researched",
-  "checkedOn": "2026-10-28",
-  "oneLiner": "Ubuntu VMs in the EU, billed per second, with seven coding agents preinstalled and no pause at all.",
+  "checkedOn": "2026-11-12",
+  "oneLiner": "Ubuntu VMs in the EU, billed per second, with seven promptable coding agents preinstalled and no true pause: a stop keeps the machine for ten minutes.",
   "whatItIs": [
     "Boat sells whole Ubuntu virtual machines, one per sandbox, priced per second, aimed at running coding agents and agent-generated code. Each has its own kernel, a dedicated IPv6 (sometimes IPv4), Docker, SSH, SCP and a 60 fps virtual desktop.",
     "It is built around three audiences: people running agents on their own work, platforms giving each end user a machine, and teams that want a cheap always-available dev box.",
-    "Seven coding-agent harnesses are preinstalled on every machine and can be prompted by name through one API call. Boat also runs an AI credentials proxy so sandboxes hold placeholder model keys."
+    "Ten agent CLIs are preinstalled on every machine; seven of them, Claude Code, Codex, Pi, OpenCode, Prime Agent, Kimi Code and Mistral Vibe, can be prompted by name through one API call. Boat also runs an AI credentials proxy so sandboxes hold placeholder model keys."
   ],
   "whoFor": "People who want a normal Ubuntu server per agent, cheap always-on capacity in the EU, and preinstalled coding agents without building an image.",
   "isolation": "Full Ubuntu 24.04 KVM virtual machine with its own kernel, root, Docker and SSH. Shared vCPUs on a dedicated host. No GPU and no ARM: x86-64 only.",
@@ -16,9 +16,9 @@
   "billing": {
     "model": "Monthly plan that is prepaid machine time plus limits, with a separate dollar wallet for overage.",
     "meter": "Per second while the machine exists, at a flat hourly rate per size: $0.018, $0.036, $0.072 or $0.200.",
-    "stopped": "Zero machine time, and the disk is kept free for 14 days. After that the data is gone unless you saved a snapshot.",
+    "stopped": "Zero machine time. The machine is held for 10 minutes unbilled, so a quick resume usually keeps memory, processes, terminals and the IP. The disk is promised for at least 14 days; the cleanup after that only reports candidates in production today. Saved snapshots are the durable copy.",
     "planFee": "The plan is not a fee: $20 buys $20 of VM time, but unused plan time expires monthly. Overages, extra saved snapshots and paid starts draw from the wallet.",
-    "minimum": "$20 a month, and there is no free tier. The 7-day trial needs a card and is capped at 25 hours of compute."
+    "minimum": "$20 a month, and there is no free tier. The 7-day trial needs a card and is capped at 25 hours of compute, one per person; organisations get no trial."
   },
   "cost": {
     "A": {
@@ -41,7 +41,7 @@
         "The size exists exactly, so no substitution is needed.",
         "The binding constraint is starts, not money: 33 creates a day is inside the 200-a-day limit."
       ],
-      "flag": "All 1,000 tasks in one day would hit the start limit: starts 201–600 cost $22 from the wallet, and 601 fails."
+      "flag": "All 1,000 tasks in one day now fit: the $20 plan allows 1,200 starts a day. The 800 starts above the 200 included cost about $50 (100 × $0.03 + 100 × $0.05 + 600 × $0.07), so that day bills about $70; 1,201 fails."
     },
     "B": {
       "headline": "$26.28 a month",
@@ -82,7 +82,7 @@
       "total": "$1.62 of usage",
       "notes": [
         "The 51 GB disk covers the 20 GB ask, so this is an exact fit.",
-        "The disk is kept free for 14 days after a stop; a longer gap needs a saved snapshot."
+        "The disk is promised for at least 14 days after a stop; the cleanup only reports candidates today, so a longer gap survives in practice but is not guaranteed. A saved snapshot is the only guarantee."
       ]
     }
   },
@@ -117,11 +117,11 @@
       },
       {
         "label": "History",
-        "value": "Launched as box in July 2026 and renamed boat on 15 September 2026; box surfaces still answer.",
+        "value": "YC lists it as founded 2024; box launched publicly in 2026 and was renamed boat on 15 September 2026. Box surfaces still answer.",
         "source": {
-          "url": "https://docs.boat.dev/migrating-from-box",
-          "quote": "Box became **boat** on September 15, 2026.",
-          "confidence": "docs-confirmed"
+          "url": "https://www.ycombinator.com/companies/boat",
+          "quote": "Founded in 2024 by Kirill and Anicet",
+          "confidence": "third-party"
         }
       },
       {
@@ -135,10 +135,10 @@
       },
       {
         "label": "Recent incidents",
-        "value": "No incident history is published: the status page shows per-component uptime and latency over a rolling 90-day window, but no list of dated outages.",
+        "value": "The status page shows uptime bars and metrics, not a dated incident list; a separate incidents.json feed publishes 315 probe entries over 90 days, 33 of them customer-facing outages. Customer-facing 90-day uptime is 99.45%–100%, 99.84% pooled, counting outage time only.",
         "source": {
-          "url": "https://status.ascii.dev/history.json",
-          "quote": "\"windowDays\": 90, \"blockHours\": 1",
+          "url": "https://status.ascii.dev/incidents.json",
+          "quote": "\"retentionDays\": 90",
           "confidence": "inferred"
         }
       },
@@ -160,7 +160,7 @@
       "EU hosting with no egress bill and free automatic disk snapshots."
     ],
     "badly": [
-      "A workload that needs to resume mid-process: there is no pause, and every resume is a reboot with a new IP.",
+      "A workload that needs to resume mid-process after more than ten minutes: there is no pause, and after the ten-minute grace every resume is a reboot with a new IP.",
       "Point-in-time recovery: snapshots are newest-only and disk-only.",
       "Anything that needs a custom domain, a region choice, a GPU or an ARM machine."
     ]
@@ -173,8 +173,8 @@
     "tripsUp": [
       "The first step is a shell command.",
       "The default 1-hour auto-stop kills work mid-session.",
-      "Persistent means 14 days, not forever.",
-      "Stop is not off: it saves the disk, destroys the machine, and changes the IP.",
+      "Persistent means at least 14 days, not forever; the cleanup job is not deleting yet, so day 14 is a promise rather than an observed expiry.",
+      "Stop is not off: it saves the disk and destroys the machine. A resume within ten minutes usually gets the same machine, memory and IP back; after that it is a reboot.",
       "The plan is not a cheap idle subscription: $20 buys time that expires.",
       "Money lives in two places, plan credit and wallet, with different expiry rules."
     ]
@@ -182,8 +182,15 @@
   "caveats": [
     {
       "issue": "There is no pause",
-      "detail": "Stop saves the disk, removes the machine, and loses memory and hand-started processes. Every resume is a reboot with a new IP, although Docker containers and enabled systemd units come back.",
-      "status": "open"
+      "detail": "There is no pause state. A stop keeps the machine for ten minutes unbilled, so a quick resume usually keeps memory, open terminals, running programs and the IP; Boat can release it early, and after ten minutes every resume is a reboot with a new IP.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://docs.boat.dev/snapshots/stop.md",
+          "quote": "A stop keeps the disk. A resume within 10 minutes usually gets the same machine back, with memory and running programs. Do not count on it.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     },
     {
       "issue": "Snapshots are disk-only and newest-only",
@@ -192,34 +199,39 @@
     },
     {
       "issue": "The disk expires 14 days after a stop",
-      "detail": "Docs and FAQ say 14 days; the Terms say up to about 30 days. A box untouched for two weeks returns `409 snapshot_data_expired`.",
-      "status": "contradiction",
+      "detail": "The disk is promised for at least 14 days; the automated cleanup only reports candidates in production today, so a box untouched for two weeks still resumes. The Terms now say the same 14 days; once cleanup is enabled, resume and fork will fail with 409 snapshot_data_expired.",
+      "status": "open",
       "evidence": [
         {
-          "url": "https://docs.boat.dev/faq",
-          "quote": "boat keeps the disk for 14 days after the stop",
+          "url": "https://docs.boat.dev/snapshots/stop.md",
+          "quote": "boat keeps the disk of a stopped sandbox for at least 14 days.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.boat.dev/data-retention.md",
+          "quote": "It currently reports eligible stopped sandboxes without deleting them in production. The 14-day rule does not yet trigger deletion there.",
           "confidence": "docs-confirmed"
         },
         {
           "url": "https://boat.dev/terms",
-          "quote": "generally retained for a limited period, currently up to approximately 30 days",
+          "quote": "That job currently reports candidates without deleting them in production.",
           "confidence": "docs-confirmed"
         }
       ]
     },
     {
       "issue": "Its docs and marketing disagree on stop and on the number of sizes",
-      "detail": "The homepage still says three sizes and pause billing; the docs list four sizes and state there is no pause.",
+      "detail": "The homepage says memory and running programs are not saved, while the stop page says a resume within 10 minutes usually returns the same machine with memory and running programs. The old three-sizes line is gone; the homepage now lists four.",
       "status": "contradiction",
       "evidence": [
         {
           "url": "https://boat.dev/",
-          "quote": "sandboxes come in three sizes",
-          "confidence": "docs-confirmed"
+          "quote": "Memory and running programs are not saved",
+          "confidence": "pricing-page"
         },
         {
-          "url": "https://docs.boat.dev/machines",
-          "quote": "These four sizes are the only sizes.",
+          "url": "https://docs.boat.dev/snapshots/stop.md",
+          "quote": "A stop keeps the disk. A resume within 10 minutes usually gets the same machine back, with memory and running programs. Do not count on it.",
           "confidence": "docs-confirmed"
         }
       ]
@@ -232,7 +244,7 @@
   ],
   "strengths": [
     "Exact-size fits for all three shared workloads, and the cheapest always-on 4 vCPU box with 50 GB of disk at $26.28.",
-    "Seven coding agents preinstalled and promptable over the API.",
+    "Ten agent CLIs preinstalled; seven promptable over the API.",
     "An AI credentials proxy so sandboxes hold placeholders, not model keys.",
     "No egress bill and free automatic snapshots.",
     "A 60 fps desktop, SSH and Docker on a normal Ubuntu VM."
@@ -265,6 +277,14 @@
     {
       "label": "Pricing",
       "url": "https://docs.boat.dev/pricing"
+    },
+    {
+      "label": "Limits",
+      "url": "https://docs.boat.dev/limits"
+    },
+    {
+      "label": "Data retention",
+      "url": "https://docs.boat.dev/data-retention"
     }
   ]
 }

@@ -7,7 +7,7 @@
   "standfirst": "Providers use seven words for four behaviours. The only question that matters is what is still running when the machine comes back.",
   "idea": [
     "Every provider offers a way to make a machine cheaper while you are not using it. They fall into four behaviours. Disk only: the machine is destroyed and its disk is kept, so files survive and processes do not. Disk and memory: RAM is saved, so the agent's process tree can resume mid-task. Warm memory: the machine is frozen in the host's RAM, which resumes fastest and usually keeps billing for memory. Delete: the disk goes too.",
-    "The vocabulary is not standardised. InstaBox calls a memory-preserving freeze “pause” and a power-off “stop”. Agent 37 has both, as sleep and stop. boxd has three parked states plus destroy. Lizard's stop deletes the disk. Boat's API calls a stopped sandbox archived, and its homepage still says “pause billing” even though the docs state there is no pause.",
+    "The vocabulary is not standardised. InstaBox calls a memory-preserving freeze “pause” and a power-off “stop”. Agent 37 has both, as sleep and stop. boxd has three parked states plus destroy. Lizard's stop deletes the disk. Boat's API calls a stopped sandbox archived, its homepage still says “pause billing”, and the docs say there is no pause, but a stop keeps the machine for ten minutes, so a quick resume usually keeps memory.",
     "Memory-preserving resume is usually best-effort. Sandboxer restores memory only if a matching machine is free within two minutes; InstaBox reports processesPreserved false when it cold-boots instead; Agent 37 says memory usually survives a wake but not always. Anything that must outlive a pause belongs in a file."
   ],
   "splits": [
@@ -94,13 +94,13 @@
     },
     {
       "provider": "boat",
-      "verdict": "no",
-      "figure": "No pause; disk only",
-      "scenario": "Stop saves the disk and destroys the machine, so tomorrow is a reboot with a new IP and no running process.",
-      "note": "There is no pause. Stop saves the disk, removes the machine and loses memory and hand-started processes; resume boots a new machine from the disk with a new IP.",
+      "verdict": "partly",
+      "figure": "10 min, best effort",
+      "scenario": "Stop saves the disk; overnight, the 10-minute grace is long gone, so tomorrow is a reboot with a new IP and no running process.",
+      "note": "There is no pause, but a stop keeps the machine for 10 minutes unbilled, so a quick resume usually keeps memory, running programs, open terminals and the IP. Boat can release it sooner, and after 10 minutes the disk is all that survives.",
       "source": {
-        "url": "https://docs.boat.dev/snapshots/stop",
-        "quote": "There is no pause. A stop removes the virtual machine and keeps a copy of the disk.",
+        "url": "https://docs.boat.dev/snapshots/stop.md",
+        "quote": "A stop keeps the disk. A resume within 10 minutes usually gets the same machine back, with memory and running programs. Do not count on it.",
         "confidence": "docs-confirmed"
       }
     },
@@ -435,7 +435,7 @@
         "what": "You check the dev server, the cron job and the IP address the agent had written down."
       }
     ],
-    "turn": "Twelve of the sixteen sandbox providers can restore memory in at least one mode, but not all make it the default. Boat and Cloudflare keep nothing, Lizard's stop deletes the disk, and a VPS keeps its disk but loses memory when it powers off."
+    "turn": "Twelve of the sixteen sandbox providers can restore memory in at least one mode, but not all make it the default. Cloudflare keeps nothing, and Boat keeps memory only for a ten-minute, best-effort window, Lizard's stop deletes the disk, and a VPS keeps its disk but loses memory when it powers off."
   },
   "questions": [
     "Does your pause keep RAM, keep only files, or destroy the machine — and what does your documentation call each state?",

@@ -62,7 +62,7 @@
         {
           "provider": "boat",
           "why": "A full Ubuntu VM with Docker and 51 GB of disk for $26.28 a month, and no idle detection at all.",
-          "watch": "Auto-stop counts from creation and defaults to one hour; turn it off. The disk is deleted 14 days after a stop."
+          "watch": "Auto-stop counts from creation and defaults to one hour; turn it off. The disk is promised for at least 14 days after a stop."
         },
         {
           "provider": "boxd",
@@ -224,7 +224,7 @@
         {
           "provider": "boat",
           "why": "A 1920×1080 desktop at 60 fps over WebRTC, or VNC over HTTPS, on a full Ubuntu VM with Docker and root.",
-          "watch": "Fixed shapes only, 8 GB or 16 GB; a browser profile held in memory is lost on stop, and the disk is kept 14 days."
+          "watch": "Fixed shapes only, 8 GB or 16 GB; a browser profile held in memory is lost on stop, and the disk is kept for at least 14 days."
         },
         {
           "provider": "sandboxer",
@@ -276,7 +276,7 @@
         {
           "provider": "boat",
           "why": "A whole Ubuntu VM per customer, with its own kernel, IPv6 and disk, for $26.28 a month on the default size; the docs name platforms giving each end user a machine as one of its three audiences.",
-          "watch": "Custom domains are explicitly unsupported, there is no region choice, and a stop destroys the machine, so each customer's address is an on.boat.dev name."
+          "watch": "Custom domains are explicitly unsupported, there is no region choice, and a stop destroys the machine after a ten-minute grace, so each customer's address is an on.boat.dev name."
         },
         {
           "provider": "boxd",

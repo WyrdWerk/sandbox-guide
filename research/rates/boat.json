@@ -2,7 +2,7 @@
   "id": "boat",
   "provider": "Boat",
   "site": "https://boat.dev",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "currency": "USD",
   "battleships": {
@@ -217,9 +217,10 @@
     },
     {
       "item": "Starts above a plan's start limit",
-      "priceUsd": "0.03 up to 1.5x, 0.05 up to 2x, 0.07 up to 3x",
-      "url": "https://docs.boat.dev/pricing",
-      "quote": "Starts past a start limit | Per start, by how far past the limit: $0.03 up to 1.5x the limit, $0.05 up to 2x, $0.07 up to 3x. Paid starts stop at 3x"
+      "priceUsd": "0.03 up to 1.5x, 0.05 up to 2x, 0.07 up to 6x per hour and day (3x per minute); paid by wallet, then by invoice if turned on",
+      "url": "https://docs.boat.dev/limits",
+      "quote": "| Up to 6 times | $0.07 | 401 to 1,200 |",
+      "checkedOn": "2026-11-12"
     },
     {
       "item": "AI credentials proxy (off by default)",
@@ -446,5 +447,8 @@
         "quote": "**Dashboard** | one-off work, and the things that must not be automatable"
       }
     }
-  }
+  },
+  "notes": [
+    "12 Nov 2026: no unit rate, plan price, included hour, snapshot fee or egress change. Extra starts now run to 6x the hourly and daily limit (3x per minute); the invoice option caps at $80/$400/$1,500 per seat a month. Stopped disk kept at least 14 days; cleanup is report-only in production."
+  ]
 }

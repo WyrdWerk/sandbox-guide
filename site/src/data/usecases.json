@@ -3120,7 +3120,7 @@
           "provider": "boat",
           "tier": "preinstalled",
           "noTerminal": "partly",
-          "what": "Claude Code is one of seven coding agents on every sandbox. Create one per developer from the dashboard or command line, then run claude.",
+          "what": "Claude Code is one of seven coding agents on every sandbox. Create one per developer from the command line or API, then run claude.",
           "link": {
             "title": "Boat: harnesses and models",
             "url": "https://docs.boat.dev/integrated-agents/harnesses-and-models"

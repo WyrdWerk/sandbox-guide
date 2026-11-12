@@ -14,7 +14,7 @@
     {
       "heading": "Installed and promptable",
       "body": [
-        "Boat installs seven harnesses and exposes a prompt endpoint with steering, interrupts and multiple conversations. Sandboxer installs six and has a prompt API with an event stream. Agent 37 has six agent templates plus a separate managed-hosting product where the agent is the product.",
+        "Boat installs ten agent CLIs, prompts seven of them through one endpoint with steering, interrupts and multiple conversations. Sandboxer installs six and has a prompt API with an event stream. Agent 37 has six agent templates plus a separate managed-hosting product where the agent is the product.",
         "Lizard installs five and prompts them from the CLI only; the SDK has no prompt method. boxd installs three and relies on the in-VM CLI."
       ]
     },

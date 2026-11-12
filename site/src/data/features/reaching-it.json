@@ -29,7 +29,7 @@
       "heading": "A sleeping machine changes the answer",
       "body": [
         "A URL that wakes a machine is a different product from a URL that returns an error. Sprites, Runtime and InstaBox document wake on request. boxd's bot protection gates the wake: a webhook, API client or uptime monitor gets a 503 check page and the machine does not wake.",
-        "Boat cannot wake on a URL at all, because a stop removed the machine."
+        "Boat cannot wake on a URL at all: a stop has no wake path, and after ten minutes the machine is gone."
       ]
     }
   ],

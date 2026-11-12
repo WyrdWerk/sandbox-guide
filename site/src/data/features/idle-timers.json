@@ -22,13 +22,13 @@
       "heading": "Sleep can be automatic and invisible",
       "body": [
         "Sprites pauses after about 30 seconds without activity, then stops the VM and drops memory after a longer idle period that is not published. Blaxel's docs say standby about 15 seconds after the last connection, with a 15-minute limit for an idle open connection; its pricing page says about five seconds. Morph's devboxes sleep after inactivity, and Runtime pauses after five minutes by default.",
-        "The wake path matters as much as the timer. Sprites wakes on a request to its URL, Runtime on the next command or request, InstaBox on a public-port visit, and Agent 37 on any request to any URL. Boat cannot wake on a URL at all, because a stop destroyed the machine."
+        "The wake path matters as much as the timer. Sprites wakes on a request to its URL, Runtime on the next command or request, InstaBox on a public-port visit, and Agent 37 on any request to any URL. Boat cannot wake on a URL at all: a stop has no wake path, and after ten minutes the machine is gone."
       ]
     },
     {
       "heading": "The idle hour is where the bill lives",
       "body": [
-        "An idle hour can cost full compute, memory only, storage only, or nothing. boxd's standby bills RAM. Runtime bills memory and disk blocks. Agent 37, InstaBox and Lizard bill storage only. Boat charges nothing while stopped and keeps the disk for 14 days.",
+        "An idle hour can cost full compute, memory only, storage only, or nothing. boxd's standby bills RAM. Runtime bills memory and disk blocks. Agent 37, InstaBox and Lizard bill storage only. Boat charges nothing while stopped and keeps the disk for at least 14 days.",
         "That is why two providers with similar hourly rates differ by a factor of ten on an always-on box. A 4 vCPU / 8 GiB machine costs about $10.60 a month at Agent 37, $26.28 at Boat, $27.23 at InstaBox and about $222 at boxd once memory is billed on a 4 vCPU machine."
       ]
     }

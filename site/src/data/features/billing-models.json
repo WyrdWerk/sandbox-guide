@@ -28,7 +28,7 @@
     {
       "heading": "What is still charged while stopped",
       "body": [
-        "Agent 37, InstaBox and Runtime charge storage. Sandboxer counts stopped storage against a free quota. Boat charges nothing and keeps the disk for 14 days. boxd charges for written disk in every state and for memory in standby. Lizard's stop deletes the sandbox. E2B does not bill paused or killed sandboxes, but volumes and snapshots are separate.",
+        "Agent 37, InstaBox and Runtime charge storage. Sandboxer counts stopped storage against a free quota. Boat charges nothing and keeps the disk for at least 14 days. boxd charges for written disk in every state and for memory in standby. Lizard's stop deletes the sandbox. E2B does not bill paused or killed sandboxes, but volumes and snapshots are separate.",
         "Vercel is the one to read carefully: persistent sandboxes save a snapshot on stop, and snapshot storage bills separately from compute."
       ]
     }

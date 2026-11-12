@@ -27,7 +27,7 @@
     {
       "heading": "What the status number measures",
       "body": [
-        "Boat's FAQ claims 99.95% measured over the history of all sandboxes. Its status page, read over 90 days, gives a different picture: seven customer-facing components range from 98.83% (Sandbox Fork) to 100%, and pooled across the seven the figure is 99.74%. One further component is an internal edge-case test suite, not customer uptime, and Stop + Resume covers only about a third of the window.",
+        "Boat's FAQ claims 99.95% measured over the history of all sandboxes. Its status page, read over 90 days, gives a different picture: seven customer-facing components range from 99.45% (Sandbox Fork) to 100%, and pooled across the seven the figure is 99.84%, counting outage time only. One further component is an internal edge-case test suite, not customer uptime, and Stop + Resume covers only about a third of the window.",
         "Runtime checks the API every two minutes and starts a real sandbox every ten; its API passed 100% of checks over seven days and 97.85% over 30, though 4 November passed only 61.38%. Lizard's status page reports a platform figure but has no sandbox component. Vercel lists Sandbox as operational without a Sandbox-specific percentage, and Sprites has a component on Fly's page but no numeric figure."
       ],
       "quote": {
@@ -115,7 +115,7 @@
       "verdict": "partly",
       "figure": "Dedale AI, Corp.; no SLA",
       "scenario": "Dedale AI, Corp. in Delaware, no SLA, and the terms disclaim uptime; no compliance certification is published.",
-      "note": "Dedale AI, Corp., Delaware, Dover address. Founded 2026 by Anicet Nougaret (CEO) and Kirill Makarov (CTO), YC Fall 2026; no priced round published. Seven customer-facing status components range 98.83%–100% over 90 days, pooled 99.74%; Sandbox Fork is lowest and Stop + Resume covers about a third of the window. No SLA; the terms disclaim uptime. SOC 2 in progress; no ISO, HIPAA or SSO. No price-change notice; closing the account cancels immediately and forfeits prepaid value.",
+      "note": "Dedale AI, Corp., Delaware, Dover address. Anicet Nougaret (CEO) and Kirill Makarov (CTO); YC lists it as founded 2024, Fall 2026 batch, three people in Paris; no priced round published. Seven customer-facing status components range 99.45%–100% over 90 days, pooled 99.84%; Sandbox Fork is lowest and Stop + Resume covers about a third of the window. No SLA; the terms disclaim uptime. SOC 2 in progress; no ISO, HIPAA or SSO. No price-change notice; closing the account cancels immediately and forfeits prepaid value.",
       "source": {
         "url": "https://boat.dev/terms",
         "quote": "We do not guarantee that sandbox will be uninterrupted",

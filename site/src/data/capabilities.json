@@ -1955,8 +1955,8 @@
         {
           "provider": "boat",
           "verdict": "yes",
-          "figure": "16 cores / 32 GB",
-          "note": "The 16-core size needs the $100-a-month plan.",
+          "figure": "16 vCPU / 32 GB",
+          "note": "The 16-vCPU size needs the $100-a-month plan; vCPUs are shared, not dedicated cores.",
           "source": {
             "url": "https://docs.boat.dev/pricing",
             "quote": "xlarge needs the $100 plan or higher.",
@@ -3600,13 +3600,14 @@
         },
         {
           "provider": "boat",
-          "verdict": "no",
-          "note": "There is no pause; a stop removes the machine and keeps a copy of the disk.",
+          "verdict": "partly",
           "source": {
-            "url": "https://docs.boat.dev/snapshots/stop",
-            "quote": "There is no pause. A stop removes the virtual machine and keeps a copy of the disk.",
+            "url": "https://docs.boat.dev/snapshots/stop.md",
+            "quote": "A stop keeps the disk. A resume within 10 minutes usually gets the same machine back, with memory and running programs. Do not count on it.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "10 min window",
+          "shortfall": "There is no pause state. A stop keeps the machine for 10 minutes unbilled, so a quick resume usually returns memory and running programs; Boat can release it early, and after 10 minutes it boots fresh from the disk."
         },
         {
           "provider": "boxd",
@@ -3917,13 +3918,14 @@
         },
         {
           "provider": "boat",
-          "verdict": "no",
-          "note": "No pool of pre-started machines.",
+          "verdict": "partly",
           "source": {
-            "url": "https://docs.boat.dev/readiness",
-            "quote": "A resume, a fork or a deploy is ready in **a few seconds, whatever the size of the disk**.",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.boat.dev/machines/fail-fast.md",
+            "quote": "These four calls put the sandbox on a machine that is already running and waiting:",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Usually <1 s",
+          "shortfall": "Boat keeps the ready machines itself; you cannot size the pool, and a burst can use all the ready machines of one size."
         },
         {
           "provider": "boxd",
@@ -4238,7 +4240,8 @@
             "url": "https://docs.boat.dev/readiness",
             "quote": "A resume, a fork or a deploy is ready in **a few seconds, whatever the size of the disk**.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "note": "A machine is usually assigned in under a second from a ready pool, but it is ready for commands in a few seconds."
         },
         {
           "provider": "boxd",
@@ -6445,11 +6448,11 @@
         {
           "provider": "boat",
           "verdict": "yes",
-          "figure": "14 days",
-          "shortfall": "The disk is deleted 14 days after a stop unless you saved it.",
+          "figure": "At least 14 days",
+          "shortfall": "After 14 days the disk is eligible for automated cleanup; in production that job only reports candidates today. A saved snapshot is the only durable copy.",
           "source": {
-            "url": "https://docs.boat.dev/snapshots/resume-and-fork",
-            "quote": "Boat keeps the snapshot of a stopped sandbox for 14 days.",
+            "url": "https://docs.boat.dev/snapshots/resume-and-fork.md",
+            "quote": "boat keeps the snapshot of a stopped sandbox for at least 14 days.",
             "confidence": "docs-confirmed"
           }
         },
@@ -9949,11 +9952,11 @@
         {
           "provider": "boat",
           "verdict": "yes",
-          "figure": "Port 22",
-          "note": "A standard ssh client connects to the machine on port 22 with your key.",
+          "figure": "Port 22 or proxy",
+          "note": "A standard ssh client connects on port 22, or through a provider SSH endpoint when the sandbox has no public IPv4.",
           "source": {
-            "url": "https://docs.boat.dev/ssh-access",
-            "quote": "Run `boat ssh <id>` for a shell.",
+            "url": "https://docs.boat.dev/ssh-access.md",
+            "quote": "Connect to `sshEndpoint` when it is set. Else connect to `machineIp` on port 22.",
             "confidence": "docs-confirmed"
           }
         },
@@ -10273,13 +10276,14 @@
         },
         {
           "provider": "boat",
-          "verdict": "not-published",
-          "note": "No command line on the provider's website is documented; the desktop and the command-line tool are the documented ways in.",
+          "verdict": "partly",
           "source": {
-            "url": "https://docs.boat.dev/ssh-access",
-            "quote": "Run `boat ssh <id>` for a shell.",
+            "url": "https://boat.dev/",
+            "quote": "Docker, VS Code, Chrome, Ghostty, the GitHub CLI, Rust, Node.js, and Bun come pre-installed.",
             "confidence": "inferred"
-          }
+          },
+          "figure": "In the desktop",
+          "shortfall": "No dedicated browser terminal; you open the browser-streamed desktop and use its preinstalled Ghostty terminal."
         },
         {
           "provider": "boxd",
@@ -10596,12 +10600,12 @@
         {
           "provider": "boat",
           "verdict": "yes",
-          "figure": "ssh -L",
-          "note": "A standard SSH connection can carry a local port forward.",
+          "figure": "boat forward",
+          "note": "boat forward reaches a sandbox port from your computer without making it public, and reconnects after a network drop; ssh -L also works.",
           "source": {
-            "url": "https://docs.boat.dev/ssh-access",
-            "quote": "Run `boat ssh <id>` for a shell.",
-            "confidence": "inferred"
+            "url": "https://docs.boat.dev/ssh-access.md",
+            "quote": "Use `boat forward` to reach a port of the sandbox on your own computer. Nothing becomes public.",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -16650,8 +16654,8 @@
         {
           "provider": "boat",
           "verdict": "yes",
-          "figure": "7 harnesses",
-          "note": "Claude Code, Codex, Pi, OpenCode, Prime Agent, Kimi Code and Mistral Vibe.",
+          "figure": "10 agents; 7 promptable",
+          "note": "Claude Code, Codex, Pi, OpenCode, Prime Agent, Kimi Code and Mistral Vibe can be prompted; Hermes, OpenClaw and Cursor CLI are also installed.",
           "source": {
             "url": "https://docs.boat.dev/integrated-agents.md",
             "quote": "Every sandbox has seven coding-agent harnesses, installed and ready",
@@ -18549,7 +18553,7 @@
           "provider": "boat",
           "verdict": "no",
           "shortfall": "No page documents another platform's cloud agents using Boat as their machine.",
-          "note": "Its integrations are Harbor and Eve adapters, which are evaluation frameworks.",
+          "note": "Its integrations are Harbor (an evaluation harness), Eve (an agent framework) and AgentEnv, which use Boat as a sandbox, not hosted agent platforms.",
           "source": {
             "url": "https://docs.boat.dev/integrations/harbor.md",
             "quote": "Run Harbor agent trials and evals on Boat sandboxes",
@@ -19801,7 +19805,7 @@
         {
           "provider": "boat",
           "verdict": "partly",
-          "shortfall": "A personal account has no dollar cap; organisations can cap a member's machine time, which stops their new sandboxes.",
+          "shortfall": "A personal account has no dollar cap; an organisation can cap a member's usage, and Boat then snapshots and stops that member's organisation sandboxes within about a minute.",
           "source": {
             "url": "https://docs.boat.dev/billing.md",
             "quote": "A personal account has no dollar cap.",
@@ -20115,7 +20119,7 @@
         {
           "provider": "boat",
           "verdict": "not-published",
-          "note": "No usage alert or threshold feature appears in the billing or organisation pages.",
+          "note": "No spend alert you can set; Boat emails at 85% and 95% disk use and can send a plan nudge.",
           "source": {
             "url": "https://docs.boat.dev/billing.md",
             "quote": "A personal account has no dollar cap.",
@@ -20428,7 +20432,7 @@
         {
           "provider": "boat",
           "verdict": "not-published",
-          "note": "No audit-log page or feature appears in the docs; the dashboard keeps webhook delivery history.",
+          "note": "No customer-facing audit log; Boat keeps internal security audit events, and the dashboard keeps webhook delivery history.",
           "source": {
             "url": "https://docs.boat.dev/account.md",
             "quote": "Webhook delivery history",
@@ -21384,11 +21388,11 @@
         {
           "provider": "boat",
           "verdict": "yes",
-          "figure": "nothing for 14 days",
-          "note": "After 14 days the disk is deleted unless you saved a snapshot.",
+          "figure": "nothing while stopped",
+          "note": "A stopped sandbox costs no machine time, and its disk is free for at least 14 days; saved snapshots above the included count still charge.",
           "source": {
-            "url": "https://docs.boat.dev/faq",
-            "quote": "A stopped sandbox keeps its disk for free for 14 days.",
+            "url": "https://docs.boat.dev/faq.md",
+            "quote": "A stopped sandbox keeps its disk for free for at least 14 days.",
             "confidence": "docs-confirmed"
           }
         },
@@ -24288,7 +24292,7 @@
           "shortfall": "You have to email support to get a data processing agreement.",
           "source": {
             "url": "https://boat.dev/terms",
-            "quote": "To request a data processing agreement, contact support@ascii.dev.",
+            "quote": "we process that data on your instructions. To request a data processing agreement, contact",
             "confidence": "docs-confirmed"
           }
         },
