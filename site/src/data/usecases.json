@@ -4119,7 +4119,7 @@
           "provider": "freestyle",
           "tier": "manual",
           "noTerminal": "no",
-          "what": "Run your MCP server in a VM and route a style.dev domain to its port; forward auth can gate it. There is no MCP template and no MCP server for controlling Freestyle.",
+          "what": "Run your MCP server in a VM and route a style.dev domain to its port; forward auth can gate it. There is no MCP template; Freestyle's own MCP server controls VMs rather than hosting yours.",
           "link": {
             "title": "Inbound TLS",
             "url": "https://www.freestyle.sh/docs/vms/network/tls-inbound"

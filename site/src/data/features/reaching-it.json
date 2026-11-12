@@ -273,8 +273,8 @@
       "provider": "freestyle",
       "verdict": "yes",
       "figure": "HTTPS domain, SSH, PTY",
-      "scenario": "Open the app: route a style.dev name to port 3000, SSH in with a scoped token, or stream a PTY to a browser you build.",
-      "note": "Public HTTPS with managed certificates, TLS passthrough for non-HTTP, SSH through beta-ssh.freestyle.sh, and a PTY API. There is no hosted browser terminal.",
+      "scenario": "Open the app: route a style.dev name to port 3000, SSH in with a scoped token, or open the VM's terminal in the dashboard.",
+      "note": "Public HTTPS with managed certificates, TLS passthrough for non-HTTP, SSH through beta-ssh.freestyle.sh, a PTY API and a terminal in the dashboard's VM page. Each VM also has a stable public IPv6.",
       "source": {
         "url": "https://www.freestyle.sh/docs/vms/network/tls-inbound",
         "quote": "Use inbound rules to give services on your VM a public domain.",

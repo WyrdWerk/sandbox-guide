@@ -6304,13 +6304,14 @@
         },
         {
           "provider": "freestyle",
-          "verdict": "not-published",
-          "note": "Snapshots are taken when you ask; no scheduled backup feature is documented.",
+          "verdict": "no",
+          "note": "Snapshots are taken when you ask, and the Terms say Freestyle is not a backup service.",
           "source": {
-            "url": "https://www.freestyle.sh/docs/vms/base-snapshots",
-            "quote": "New snapshots are private, and snapshot() returns once the snapshot is fully materialized and ready to boot.",
+            "url": "https://dash.freestyle.sh/terms",
+            "quote": "Nothing here is a backup service.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "Manual snapshots"
         },
         {
           "provider": "hostup",
@@ -9153,13 +9154,14 @@
         },
         {
           "provider": "freestyle",
-          "verdict": "not-published",
-          "note": "No scheduler resource in the API; cron inside a running VM is your own and stops when the VM pauses.",
+          "verdict": "no",
+          "note": "The old scheduled-trigger API was deprecated in September 2026; cron inside a VM stops when the VM pauses.",
           "source": {
-            "url": "https://www.freestyle.sh/docs/vms/lifecycle",
-            "quote": "Delete after this many seconds from createdAt, including time spent paused or stopped",
+            "url": "https://www.freestyle.sh/changelog",
+            "quote": "We've deprecated the standalone Git, code execution, web deployment, and scheduled trigger APIs.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "No scheduler"
         },
         {
           "provider": "hostup",
@@ -10447,14 +10449,14 @@
         },
         {
           "provider": "freestyle",
-          "verdict": "partly",
-          "shortfall": "No hosted terminal: you build one with the PTY API and xterm.js or ttyd.",
-          "note": "The dashboard shows VM state but does not host a terminal page.",
+          "verdict": "yes",
+          "note": "Inferred from the dashboard code: a VM page has a Terminal tab connected to the VM's PTY. The docs describe only building your own with the PTY API.",
           "source": {
-            "url": "https://www.freestyle.sh/docs/guides/run-a-web-terminal-in-a-sandbox",
-            "quote": "Stream a VM's PTY to the browser with xterm.js or ttyd.",
-            "confidence": "docs-confirmed"
-          }
+            "url": "https://dash.freestyle.sh/assets/accounts._accountId.vms._vmId-Bxu2tT9k.js",
+            "quote": "Terminal is offline",
+            "confidence": "inferred"
+          },
+          "figure": "Dashboard terminal"
         },
         {
           "provider": "hostup",
@@ -13026,7 +13028,7 @@
         {
           "provider": "freestyle",
           "verdict": "partly",
-          "shortfall": "Every VM shares one account-level outbound IPv4 that survives restarts, but Freestyle does not promise it stays fixed.",
+          "shortfall": "Each VM keeps a stable public IPv6, but outbound IPv4 is one shared account address that Freestyle does not promise stays fixed.",
           "note": "The API exposes egressIpv4 but calls it optional and not guaranteed.",
           "source": {
             "url": "https://www.freestyle.sh/openapi.json",
@@ -15870,13 +15872,14 @@
         },
         {
           "provider": "freestyle",
-          "verdict": "not-published",
-          "note": "No MCP server that controls Freestyle is published; the docs suggest running your own MCP server inside a VM.",
+          "verdict": "yes",
+          "note": "An official remote MCP server at mcp.freestyle.sh uses OAuth with read and write scopes. It is described in the privacy policy, not in the docs, and its tool list needs sign-in.",
           "source": {
-            "url": "https://www.freestyle.sh/docs/guides/migrate-from-e2b",
-            "quote": "Run the server or Jupyter in the VM and route a domain to it",
+            "url": "https://www.freestyle.sh/privacy",
+            "quote": "connect an AI assistant to Freestyle through our Model Context Protocol (MCP) integration",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "mcp.freestyle.sh"
         },
         {
           "provider": "hostup",
@@ -19330,13 +19333,14 @@
         },
         {
           "provider": "freestyle",
-          "verdict": "not-published",
-          "note": "Teams exist, but no role names or permissions are documented; identities scope VM access, not account administration.",
+          "verdict": "partly",
           "source": {
-            "url": "https://www.freestyle.sh/docs/vms/client-sessions",
-            "quote": "An identity-token client is limited to the VM permissions granted to that identity.",
-            "confidence": "docs-confirmed"
-          }
+            "url": "https://dash.freestyle.sh/assets/accounts._accountId.team-DqfbRWf0.js",
+            "quote": "will be able to manage members, invitations and team settings",
+            "confidence": "inferred"
+          },
+          "figure": "Owner and member",
+          "shortfall": "The dashboard has only two team roles: an owner manages members and settings, while a member keeps full access to resources. There is no read-only role, and the docs do not describe roles."
         },
         {
           "provider": "hostup",

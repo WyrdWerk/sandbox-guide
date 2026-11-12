@@ -2,6 +2,24 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Freestyle: an official MCP server, a dashboard terminal and published Terms",
+      "provider": "freestyle",
+      "what": "Freestyle now runs an official MCP server at mcp.freestyle.sh, described in its 5 November privacy policy, and its dashboard has a terminal and Owner/Member team roles. Terms of service are published at dash.freestyle.sh/terms; they say Freestyle is not a backup service. The scheduled-trigger API was deprecated in September, and outbound mail ports are blocked. Rates and A/B/C are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://www.freestyle.sh/privacy",
+          "quote": "connect an AI assistant to Freestyle through our Model Context Protocol (MCP) integration",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://dash.freestyle.sh/terms",
+          "quote": "Nothing here is a backup service.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Sandboxer drops its free trial and deletes stopped data after 14 days",
       "provider": "sandboxer",
       "what": "Sandboxer removed its seven-day trial for new accounts on 2 November: choosing a plan now charges the first month immediately. Stopped sandboxes keep their data for 14 days after the last stop, then it is deleted unless saved as a named snapshot. Starts above the plan limits now cost $0.03 to $0.07 each from prepaid credit. Rates, plans and the A/B/C costs are unchanged. The date is when this guide checked.",

@@ -274,7 +274,7 @@
       "verdict": "partly",
       "figure": "50/500 GB free; $0.02/GB",
       "scenario": "Call the API: outbound is denied until a firewall rule allows it, and the first 50 GB (Free) or 500 GB (paid) of transfer is included.",
-      "note": "Allowlist by domain, CIDR or identity. Default deny, so no internet until a rule allows it. Every VM shares one account-level outbound IPv4, but Freestyle does not promise it stays fixed.",
+      "note": "Allowlist by domain, CIDR or identity. Default deny, so no internet until a rule allows it. Every VM shares one account-level outbound IPv4, but Freestyle does not promise it stays fixed. Outbound mail ports 25, 465 and 587 are blocked; mail goes through an SMTP rule.",
       "source": {
         "url": "https://www.freestyle.sh/openapi.json",
         "quote": "A VM gets nothing implicitly — no outbound Internet, no inbound",

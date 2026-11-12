@@ -274,7 +274,7 @@
       "verdict": "partly",
       "figure": "Teams; SSO/audit Enterprise",
       "scenario": "Add a developer: create a team identity, grant one VM and one Linux user, and hand over a scoped token.",
-      "note": "Teams, per-VM identities and tokens exist. Named roles, a dollar spend cap and usage alerts are not documented; SAML SSO, SCIM and audit logs are Enterprise-only.",
+      "note": "Teams, per-VM identities and tokens exist. The dashboard has Owner and Member roles but no read-only role; a dollar spend cap and usage alerts are not documented; SAML SSO, SCIM and audit logs are Enterprise-only.",
       "source": {
         "url": "https://www.freestyle.sh/docs/vms/client-sessions",
         "quote": "Freestyle identities let an end user or agent operate an existing VM without receiving your team API key.",

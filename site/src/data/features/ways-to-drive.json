@@ -273,7 +273,7 @@
       "verdict": "yes",
       "figure": "Dashboard, CLI, TS SDK, API",
       "scenario": "Drive it from your product: create a VM in the dashboard, from the CLI, or through the TypeScript SDK and REST API.",
-      "note": "Dashboard, CLI, TypeScript SDK, OpenAPI and a PTY/file API. No MCP server. The PyPI package is the older Sandboxes SDK, not the current VM client.",
+      "note": "Dashboard, CLI, TypeScript SDK, OpenAPI and a PTY/file API, plus an official remote MCP server at mcp.freestyle.sh that the docs do not yet describe. The PyPI package is the older Sandboxes SDK, not the current VM client.",
       "source": {
         "url": "https://www.freestyle.sh/docs/cli",
         "quote": "Use the freestyle CLI for interactive administration, debugging, and automation scripts.",

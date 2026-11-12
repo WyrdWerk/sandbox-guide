@@ -621,3 +621,7 @@ Integrated by https://ampcode.com/threads/T-01a188d2-e3f1-734f-8aed-80041812cbe2
 ## Dossier reconciliation, 2026-11-04
 
 Added a sourceless "Terms of service: not published" fact. `curl -L` on 4 Nov 2026: freestyle.sh/terms, /legal/terms, /legal/tos and /terms-of-service all redirect to www.freestyle.sh and return 404.
+
+## Recheck, 12 November 2026
+
+See [freestyle-recheck-2026-11-12.md](freestyle-recheck-2026-11-12.md). mcp-server yes (mcp.freestyle.sh, privacy policy 5 November), web-terminal yes (dashboard Terminal tab, inferred from the dashboard code), roles partly (Owner/Member), backups no (Terms), schedules no (scheduled-trigger API deprecated 9 September). Terms are published at dash.freestyle.sh/terms (effective 30 August 2026; verified through Context, as the page is client-rendered). Rates unchanged.
