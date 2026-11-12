@@ -103,7 +103,7 @@
       "verdict": "partly",
       "figure": "Blaxel, Inc.; acquired",
       "scenario": "The linked terms still name Blaxel, Inc. and predate the Baseten acquisition, so the counterparty after the deal is worth confirming in writing.",
-      "note": "Blaxel, Inc. (formerly Beamlit), Delaware, acquired by Baseten on 10 September 2026; the linked terms still name Blaxel and predate the deal. Six founders including CEO Paul Sinaï and CTO Christophe Ploujoux; founded 2024; $7.3M seed. Status reports Sandboxes 99.33% and Platform 99.30% for Jul–Oct 2026, provider-reported. No standard numeric SLA; Custom lists custom SLAs. Claims SOC 2, HIPAA and ISO 27001; HIPAA add-on $250/month. On termination it may delete data at its discretion, with a 90-day maximum retention.",
+      "note": "Blaxel, Inc. (formerly Beamlit), Delaware, acquired by Baseten on 10 September 2026; the linked terms still name Blaxel and predate the deal. Six founders including CEO Paul Sinaï and CTO Christophe Ploujoux; founded 2024; $7.3M seed. Status reports Sandboxes 98.45% and Platform 98.42% for 14 August–12 November 2026, provider-reported. No standard numeric SLA; Custom lists custom SLAs. Claims SOC 2, HIPAA and ISO 27001; HIPAA add-on $250/month. On termination it may delete data at its discretion, with a 90-day maximum retention.",
       "source": {
         "url": "https://www.baseten.co/blog/blaxel-is-joining-baseten-to-build-the-future-of-agentic-cloud/",
         "quote": "Baseten has acquired Blaxel.",

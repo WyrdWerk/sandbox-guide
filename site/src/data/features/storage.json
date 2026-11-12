@@ -58,7 +58,7 @@
       "verdict": "yes",
       "figure": "1 volume; survives delete",
       "scenario": "The sandbox disk goes with the sandbox; only a volume survives deletion, and one volume attaches at a time.",
-      "note": "A volume survives sandbox deletion, but only one volume attaches to a sandbox and a volume attaches to one sandbox at a time. Agent Drive is the shared filesystem, priced separately.",
+      "note": "A volume survives sandbox deletion, but only one volume attaches to a sandbox and a volume attaches to one sandbox at a time. Agent Drive is the shared filesystem, priced separately. Volumes cannot be detached and can only grow.",
       "source": {
         "url": "https://docs.blaxel.ai/Sandboxes/Volumes.md",
         "quote": "you can only attach one volume to a sandbox. A volume can also only be attached to one sandbox at a time.",

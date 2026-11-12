@@ -184,7 +184,7 @@
           "provider": "blaxel",
           "tier": "manual",
           "noTerminal": "no",
-          "what": "Possible in a sandbox with a volume for its files, installed by hand. Blaxel's agent hosting caps a run at 15 minutes, so it is not the place for an always-on assistant.",
+          "what": "Possible in a sandbox with a volume for its files, installed by hand; there is no Hermes template.",
           "link": {
             "title": "Blaxel: get started",
             "url": "https://docs.blaxel.ai/Get-started.md"
@@ -1190,12 +1190,12 @@
         },
         {
           "provider": "blaxel",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "An official tutorial runs Claude Code in a sandbox against a codebase in a second sandbox, with a login on your own Anthropic account.",
+          "what": "Choose the claude-code or codex image when creating a sandbox and sign in with your own account; an official tutorial also runs Claude Code against a codebase in a second sandbox.",
           "link": {
-            "title": "Blaxel: run Claude Code in a sandbox",
-            "url": "https://docs.blaxel.ai/Tutorials/Claude-Code"
+            "title": "Blaxel: prebuilt images",
+            "url": "https://docs.blaxel.ai/Sandboxes/Templates.md"
           },
           "price": null
         },
@@ -3070,7 +3070,7 @@
       "seoTitle": "Claude Code in the cloud for a team: setup and costs",
       "kicker": "Coding team",
       "question": "Three to five of us want Claude Code running on cloud machines, each with our own login, without sharing one account.",
-      "standfirst": "Claude Code is built for one person on one machine. For a team that means one machine per developer, each signed in with that developer's own account. Nine providers ship it preinstalled and one sets it up in one click; the catch is how logins are kept.",
+      "standfirst": "Claude Code is built for one person on one machine. For a team that means one machine per developer, each signed in with that developer's own account. Ten providers ship it preinstalled and one sets it up in one click; the catch is how logins are kept.",
       "preset": "team",
       "whatItIs": [
         "[Claude Code](https://code.claude.com/docs/en/overview) is Anthropic's coding agent. A developer starts it in a repository and asks for a change; it reads and edits files and runs commands and tests on the machine where it runs.",
@@ -3208,12 +3208,12 @@
         },
         {
           "provider": "blaxel",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "A written tutorial for running Claude Code in a Blaxel sandbox against a codebase, with command-line and code steps.",
+          "what": "The claude-code image ships the CLI, and each developer signs in to their own sandbox; there is no team-specific guide.",
           "link": {
-            "title": "Blaxel: Claude Code",
-            "url": "https://docs.blaxel.ai/Tutorials/Claude-Code"
+            "title": "Blaxel: prebuilt images",
+            "url": "https://docs.blaxel.ai/Sandboxes/Templates.md"
           }
         },
         {

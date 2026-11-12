@@ -3906,13 +3906,14 @@
         },
         {
           "provider": "blaxel",
-          "verdict": "no",
-          "note": "No pool to size or fill; machines you already made wait in standby, and a new one boots or resumes from its own snapshot.",
+          "verdict": "partly",
           "source": {
-            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
-            "quote": "Sandboxes resume from standby in under 25 milliseconds and automatically scale to zero after a few seconds of inactivity.",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.blaxel.ai/Sandboxes/best-practices.md",
+            "quote": "For workloads with heavy images, you can maintain a pool of pre-warmed sandboxes to serve requests with near-zero latency.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Pool you keep",
+          "shortfall": "You keep and refill the spare sandboxes yourself; there is no pool setting or API."
         },
         {
           "provider": "boat",
@@ -7695,13 +7696,14 @@
         },
         {
           "provider": "blaxel",
-          "verdict": "not-published",
-          "note": "No maximum disk or volume size is published.",
+          "verdict": "partly",
           "source": {
-            "url": "https://docs.blaxel.ai/Volumes/Overview.md",
-            "quote": "To create a standalone volume, you must provide a unique `name` and specify its `size` in megabytes (MB).",
-            "confidence": "not-published"
-          }
+            "url": "https://docs.blaxel.ai/api-reference/compute/create-sandbox.md",
+            "quote": "Maximum share of the sandbox memory its filesystem can use, in percent (10-95).",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Share of RAM; volumes",
+          "shortfall": "Local disk is 10–95% of memory, so 100 GiB needs a large custom machine or a volume above your quota tier; no disk or volume maximum is published."
         },
         {
           "provider": "boat",
@@ -9935,13 +9937,14 @@
         },
         {
           "provider": "blaxel",
-          "verdict": "no",
-          "shortfall": "There is no SSH address or SSH server; the only shell is the provider's own terminal.",
+          "verdict": "partly",
+          "shortfall": "No SSH address or keys from Blaxel; SSH comes only from the blaxel/tailscale image, which joins your own tailnet and needs a Tailscale auth key.",
           "source": {
-            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
-            "quote": "You can explore the contents of a sandbox with an interactive terminal.",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.blaxel.ai/Tutorials/Tailscale.md",
+            "quote": "Once authenticated, the sandbox is reachable via SSH from any device on your Tailscale network:",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Via Tailscale image"
         },
         {
           "provider": "boat",
@@ -12515,13 +12518,14 @@
         },
         {
           "provider": "blaxel",
-          "verdict": "not-published",
-          "note": "No setting that removes internet access entirely is documented; the proxy can filter but not necessarily cut it off.",
+          "verdict": "yes",
+          "note": "A sandbox API call removes all outbound internet while inbound keeps working, and another call restores it; there is no console switch.",
           "source": {
-            "url": "https://docs.blaxel.ai/Sandboxes/Proxy-domains.md",
-            "quote": "Restrict which external domains, HTTP methods, and URL paths a Blaxel sandbox can reach",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.blaxel.ai/api-reference/network/disconnect-tunnel.md",
+            "quote": "After disconnecting, the sandbox will lose all outbound internet connectivity (no egress). Inbound connections to the sandbox will still work.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "API: disconnect tunnel"
         },
         {
           "provider": "boat",
@@ -16634,14 +16638,14 @@
         },
         {
           "provider": "blaxel",
-          "verdict": "no",
-          "shortfall": "The default image is a bare sandbox; agents are code you deploy or an MCP server you connect.",
-          "note": "Agents Hosting is a separate product for your own Python or TypeScript agent.",
+          "verdict": "yes",
+          "note": "First-party claude-code and codex images ship the CLIs; the bare base image has none. Agents Hosting is a separate product for your own agent.",
           "source": {
-            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
-            "quote": "Sandboxes are instant-launching virtual machines",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.blaxel.ai/Sandboxes/Templates.md",
+            "quote": "Claude Code CLI environment with Node.js 24 (slim)",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Claude Code / Codex images"
         },
         {
           "provider": "boat",
@@ -17897,14 +17901,14 @@
         },
         {
           "provider": "blaxel",
-          "verdict": "no",
-          "shortfall": "No browser is installed or offered; you would add Chrome to your own image.",
-          "note": "Tutorials show code-server in a browser, not a browser in the sandbox.",
+          "verdict": "yes",
+          "note": "First-party images ship headless Chromium, Playwright with Chromium or Firefox, and Lightpanda; the bare base image has no browser.",
           "source": {
-            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
-            "quote": "Sandboxes are instant-launching virtual machines",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.blaxel.ai/Sandboxes/Templates.md",
+            "quote": "Headless Chromium environment with Chrome 124 (Alpine)",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Chromium, Playwright images"
         },
         {
           "provider": "boat",
@@ -18212,13 +18216,14 @@
         },
         {
           "provider": "blaxel",
-          "verdict": "no",
-          "shortfall": "No graphical desktop is documented; the browser surfaces are a terminal and preview URLs.",
+          "verdict": "yes",
           "source": {
-            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
-            "quote": "You can explore the contents of a sandbox with an interactive terminal.",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.blaxel.ai/Sandboxes/Templates.md",
+            "quote": "XFCE desktop environment with CUA",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "XFCE + VNC images",
+          "note": "First-party XFCE images with VNC and noVNC, one with a computer-use server for screenshots, mouse and keyboard."
         },
         {
           "provider": "boat",
@@ -23321,10 +23326,10 @@
         {
           "provider": "blaxel",
           "verdict": "yes",
-          "note": "Sandboxes and Platform are separate components with their own uptime figures.",
+          "note": "status.blaxel.ai shows 90-day uptime per component; its incident feed holds only the latest 25 incidents.",
           "source": {
-            "url": "https://blaxel.ai/company/security",
-            "quote": "https://status.blaxel.ai",
+            "url": "https://status.blaxel.ai/",
+            "quote": "Sandboxes uptime from Aug 14, 2026 to Nov 12, 2026: 98.45%.",
             "confidence": "docs-confirmed"
           }
         },
@@ -24577,13 +24582,14 @@
         },
         {
           "provider": "blaxel",
-          "verdict": "no",
-          "shortfall": "The sandbox platform is hosted only; there is no self-hosted or open-source edition.",
+          "verdict": "partly",
+          "shortfall": "Only the in-VM sandbox API is MIT open source; the scheduler and console are not, so you still cannot run the service yourself.",
           "source": {
-            "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
-            "quote": "Sandboxes are instant-launching virtual machines",
-            "confidence": "inferred"
-          }
+            "url": "https://blaxel.ai/platform/sandboxes",
+            "quote": "sandbox API is fully open-source.",
+            "confidence": "pricing-page"
+          },
+          "figure": "Sandbox API (MIT)"
         },
         {
           "provider": "boat",

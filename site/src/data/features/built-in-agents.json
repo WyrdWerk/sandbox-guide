@@ -57,8 +57,8 @@
       "provider": "blaxel",
       "verdict": "partly",
       "figure": "MCP server; runtime soon",
-      "scenario": "Every sandbox exposes an MCP server agents use to operate it, but Agent Runtime is labelled coming soon.",
-      "note": "Every sandbox exposes an MCP server that agents use to operate it, and agent hosting is a separate product line, but Agent Runtime is labelled coming soon.",
+      "scenario": "Claude Code and Codex images, and every sandbox exposes an MCP server, but Agent Runtime is labelled coming soon.",
+      "note": "First-party claude-code and codex images ship the CLIs, every sandbox exposes an MCP server agents use to operate it, and agent hosting is a separate product line. Agent Runtime is still a waitlist, labelled coming soon.",
       "source": {
         "url": "https://docs.blaxel.ai/llms.txt",
         "quote": "Every Blaxel sandbox exposes a built-in MCP server so agents can operate the sandbox using tool calls for files, processes, ports, and previews.",

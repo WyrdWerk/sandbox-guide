@@ -1,6 +1,6 @@
 {
   "provider": "blaxel",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "Per second on allocated memory while active, CPU included; standby bills storage only.",
   "ram": {
     "rate": 0.0414

@@ -21,7 +21,7 @@
     {
       "heading": "Sleep can be automatic and invisible",
       "body": [
-        "Sprites pauses after about 30 seconds without activity, then stops the VM and drops memory after a longer idle period that is not published. Blaxel's docs say standby after 15 minutes of idle connection; its pricing page says scale-to-zero after about five seconds. Morph's devboxes sleep after inactivity, and Runtime pauses after five minutes by default.",
+        "Sprites pauses after about 30 seconds without activity, then stops the VM and drops memory after a longer idle period that is not published. Blaxel's docs say standby about 15 seconds after the last connection, with a 15-minute limit for an idle open connection; its pricing page says about five seconds. Morph's devboxes sleep after inactivity, and Runtime pauses after five minutes by default.",
         "The wake path matters as much as the timer. Sprites wakes on a request to its URL, Runtime on the next command or request, InstaBox on a public-port visit, and Agent 37 on any request to any URL. Boat cannot wake on a URL at all, because a stop destroyed the machine."
       ]
     },
@@ -56,12 +56,12 @@
     {
       "provider": "blaxel",
       "verdict": "partly",
-      "figure": "15 min idle (docs); 5 s (pricing)",
-      "scenario": "Asleep after 15 minutes of idle connection, or about five seconds if the pricing page is right; the next request resumes it.",
-      "note": "Standby after 15 minutes of idle WebSocket or TCP activity according to the docs, or about 5 seconds according to the pricing page. Resume from standby is claimed under 25 ms.",
+      "figure": "~15 s (docs); ~5 s (pricing)",
+      "scenario": "Asleep about 15 seconds after the last connection closes, or about five seconds if the pricing page is right; the next request resumes it.",
+      "note": "Standby about 15 seconds after the last active connection, according to the docs, or about 5 seconds according to the pricing page. An open but idle WebSocket or TCP connection keeps it awake for up to 15 minutes. Resume from standby is claimed under 25 ms.",
       "source": {
         "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
-        "quote": "if the WebSocket/TCP connection remains idle for 15 minutes with no activity, the sandbox will automatically transition to standby mode.",
+        "quote": "This transition happens in approximately 15 seconds.",
         "confidence": "docs-confirmed"
       }
     },

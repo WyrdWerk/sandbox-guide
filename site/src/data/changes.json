@@ -2,6 +2,24 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Blaxel: ready-made agent, browser and desktop images, and lower uptime",
+      "provider": "blaxel",
+      "what": "A recheck found that Blaxel already documents images with Claude Code, Codex, Chromium, Playwright and an XFCE desktop, SSH through a Tailscale image, a call that cuts all outbound internet, and an MIT-licensed sandbox API; this guide had missed them. Its status page now shows 98.45% for sandboxes over 14 August–12 November. Prices and A/B/C are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://docs.blaxel.ai/Sandboxes/Templates.md",
+          "quote": "Claude Code CLI environment with Node.js 24 (slim)",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://status.blaxel.ai/",
+          "quote": "Sandboxes uptime from Aug 14, 2026 to Nov 12, 2026: 98.45%.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Runtime now charges before the first sandbox, and its free hours need a purchase",
       "provider": "runtime",
       "what": "Runtime became pay first on 10 November 2026: a new account adds credit from $10 before its first sandbox, and the first $10 is matched, so it starts with $20. The 100 free hours of a 1 GB machine still return every month, but only after the account has bought credit. SSH now works with any OpenSSH client, and a private-beta Agents product runs Claude Code, Codex or Gemini CLI per session. Sandbox rates and A/B/C are unchanged. The date is when this guide checked.",

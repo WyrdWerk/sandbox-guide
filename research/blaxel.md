@@ -208,3 +208,13 @@ Window 6 August to 4 November 2026, provider's own status page only (see `resear
 
 - Site fact: By this guide's count, the status page lists 25 incidents from 6 August to 4 November 2026, 22 of them affecting sandboxes. The longest was about 16 hours of unreachable workloads in us-was-1 on 1 September.
 - Source: https://status.blaxel.ai/api/v2/incidents.json — ""name":"Some workloads unreachable in us-was-1","status":"resolved","created_at":"2026-09-01T00:24:47Z","updated_at":"2026-09-01T16:24:46Z","resolved_at":"2026-09-01T16:24:46Z"" (docs-confirmed)
+
+## Recheck, 12 November 2026
+
+Full recheck of all 16 features and 78 capabilities: [blaxel-recheck-2026-11-12.md](blaxel-recheck-2026-11-12.md). Most changes correct the October listing rather than record a launch; the docs-repo dates in that report show they were already true on 28 October.
+
+- No plan, rate, allowance or free-tier change (fresh Context `web_scrape`, `maxAgeMs: 0`, cache miss; `check-rates` silent).
+- Capabilities now yes: browser, desktop, agents-preinstalled (first-party images), no-internet (disconnect-tunnel API). Now partly: ssh (Tailscale image), warm-pool (self-kept pool), big-disk (10–95% of RAM; volumes), open-source (MIT in-VM API only).
+- Idle: docs give ~15 s standby with no connection and 15 min for an idle open socket; pricing gives ~5 s.
+- Status: Sandboxes 98.45%, Platform 98.42%, 14 Aug–12 Nov 2026. The incident API returns the latest 25 only (4 Sep–11 Nov on 12 Nov), so it cannot give a 90-day count; the earlier note's 50-record cap was wrong.
+- Cost C label fixed to 2 vCPU / 4 GiB and 640 standby hours; totals unchanged.

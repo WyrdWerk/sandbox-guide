@@ -58,7 +58,7 @@
       "verdict": "partly",
       "figure": "Included in plan",
       "scenario": "Egress is included, and the proxy can filter domains, but tools that ignore proxy variables are not filtered unless enforcement is on.",
-      "note": "A proxy can filter domains, but tools that ignore proxy environment variables are not filtered unless domain filter enforcement is enabled. Egress is included in the plan.",
+      "note": "A proxy can filter domains, but tools that ignore proxy environment variables are not filtered unless domain filter enforcement is enabled. Egress is included in the plan. The networking page says every workload starts closed, but the docs say an empty allowlist allows everything; the guide follows the docs.",
       "source": {
         "url": "https://docs.blaxel.ai/Sandboxes/Proxy-domains.md",
         "quote": "Traffic from tools that ignore proxy environment variables will not be filtered unless",

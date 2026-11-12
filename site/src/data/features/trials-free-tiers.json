@@ -57,8 +57,8 @@
       "provider": "blaxel",
       "verdict": "partly",
       "figure": "Up to $200 credits",
-      "scenario": "Up to $200 in promotional credits advertised; the actual grant, expiry and card requirement are not published.",
-      "note": "Up to $200 in promotional credits advertised on pay-as-you-go. The actual grant, expiry and card requirement are not published. Quota tiers are wallet top-ups, not fees.",
+      "scenario": "Up to $200 in promotional credits and no card advertised; the actual grant and expiry are not published.",
+      "note": "Up to $200 in promotional credits advertised on pay-as-you-go, with no card required. The actual grant and whether the one-year credit expiry applies to it are not published. Quota tiers are rolling 30-day top-ups, not fees, and Tier 0 needs a card before it can ask for more quota.",
       "source": {
         "url": "https://blaxel.ai/pricing",
         "quote": "Up to $200 in free credits",
