@@ -15552,7 +15552,7 @@
           "note": "The panel is built on the same public v2 API, documented endpoint by endpoint with typed IDs, stable error codes, an OpenAPI spec and an llms.txt.",
           "source": {
             "url": "https://developer.hostup.se/",
-            "quote": "383 documented endpoints cover the things you manage in the HostUp dashboard.",
+            "quote": "All 386 endpoints, each with its fields, scopes, examples and errors.",
             "confidence": "docs-confirmed"
           }
         },
@@ -23466,10 +23466,10 @@
           "provider": "hostup",
           "verdict": "yes",
           "figure": "status.hostup.se",
-          "note": "Public incidents, maintenance and a 90-day uptime figure; 99.992% on 2026-10-30.",
+          "note": "Public incidents, maintenance and a 90-day uptime figure; 99.995% on 2026-11-12.",
           "source": {
             "url": "https://status.hostup.se/",
-            "quote": "99.992% uptime over 90 days",
+            "quote": "99.995% uptime over 90 days",
             "confidence": "docs-confirmed"
           }
         },

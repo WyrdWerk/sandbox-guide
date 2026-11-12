@@ -288,7 +288,7 @@
       "note": "The client area is built on the same public API, which is documented endpoint by endpoint with an OpenAPI spec and an llms.txt. A hosted MCP server lets Claude, ChatGPT, Cursor, Claude Code or Codex drive the account, with purchases, reinstalls, restores and cancellations confirmed by you in the browser. There is no official CLI and no Python or TypeScript SDK, and the API has a VNC console session and a one-shot guest-agent command but no streaming PTY and no file-transfer endpoints.",
       "source": {
         "url": "https://developer.hostup.se/",
-        "quote": "383 documented endpoints cover the things you manage in the HostUp dashboard.",
+        "quote": "All 386 endpoints, each with its fields, scopes, examples and errors.",
         "confidence": "docs-confirmed"
       }
     },

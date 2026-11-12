@@ -330,7 +330,7 @@
       "provider": "hostup",
       "verdict": "yes",
       "figure": "Hostup AB, 2019, Sweden",
-      "note": "A small Swedish company, not a reseller: Hostup AB (reg. no. 559290-1325) was founded in 2019 by David Berndtsson, is 100% Swedish-owned with no venture capital, and runs its own hardware and network in a data hall in Älvsjö, Stockholm. There is a public status page (99.992% over 90 days on 2026-10-30), a DPA that applies automatically, and a 99.9% SLA with credits — but only for Business Customers. No SOC 2 report or ISO 27001 certificate is claimed, and headcount and revenue are not published.",
+      "note": "A small Swedish company, not a reseller: Hostup AB (reg. no. 559290-1325) was founded in 2019 by David Berndtsson, is 100% Swedish-owned with no venture capital, and runs its own hardware and network in a data hall in Älvsjö, Stockholm. There is a public status page (99.995% over 90 days on 2026-11-12), a DPA that applies automatically, and a 99.9% SLA with credits — but only for Business Customers. No SOC 2 report or ISO 27001 certificate is claimed, and headcount and revenue are not published.",
       "scenario": "A Swedish owner-operator with its own servers in Stockholm: good for EU residency and for asking a human a question, thin on the audit paperwork a large buyer may want.",
       "source": {
         "url": "https://hostup.se/en/about-us/",

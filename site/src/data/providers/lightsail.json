@@ -4,7 +4,7 @@
   "url": "https://aws.amazon.com/lightsail/",
   "status": "researched",
   "kind": "vps",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Amazon's fixed-price Linux VPS: 25 bundles from $5 a month, billed hourly up to that cap, with a public IPv4, 1-10 TB of transfer and no pause.",
   "whatItIs": [
     "Lightsail is AWS's simplified virtual private server. You pick a fixed bundle, an operating-system or application blueprint and a region, and get an ordinary Linux machine with its own kernel, root, SSH, a public IPv4 address and a built-in inbound firewall. There is no sandbox API, no pause and no agent runtime.",

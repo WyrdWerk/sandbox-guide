@@ -1,6 +1,6 @@
 {
   "provider": "linode",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "Fixed-size VMs billed by the hour, rounded up, up to a monthly price cap; a powered-off Linode keeps billing in full, and G8 plans have an hourly price with no cap.",
   "shapes": [
     {
