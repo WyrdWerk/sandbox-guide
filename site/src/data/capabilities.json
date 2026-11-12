@@ -2427,7 +2427,7 @@
           "note": "Resource changes apply to the next session, not the running machine.",
           "source": {
             "url": "https://vercel.com/docs/sandbox/sdk-reference",
-            "quote": "Secure Compute network changes apply to later sessions; they don't resize or move the running VM.",
+            "quote": "Resource, mount, region, and Secure Compute network changes apply to later sessions; they don't resize or move the running VM.",
             "confidence": "docs-confirmed"
           }
         },
