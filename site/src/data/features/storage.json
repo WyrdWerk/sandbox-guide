@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "10 GiB cap; volumes free",
-      "scenario": "Postgres in /var/lib survives a stop because the whole disk persists, but it bills while stopped and cannot exceed 10 GiB.",
-      "note": "The whole disk persists and bills in stopped and paused states at $0.000108/GiB-hour. Volumes are S3-backed FUSE mounts, 100 per organisation, free, and not usable for block storage such as database tables.",
+      "figure": "NVMe free; volume $0.000108",
+      "scenario": "Postgres in `/var/lib` survives only if `/var/lib` is on a volume; the sandbox's own NVMe is free but goes when the sandbox does, and the volume commits in the background.",
+      "note": "Ephemeral NVMe is free and dies with the sandbox. A volume is project storage mounted at a path: 1–1000 GiB, up to 8 per sandbox, $0.000108/GiB-hour, attachable to several sandboxes at once. A disk volume is an ext4 private copy committed in the background at most every 5 s and only after ~1 s of no writes, merged per path with the newest modification time winning; a bucket volume is a live S3 bucket, and read-only mounts are bucket-only. Volume traffic bills per uploaded GiB, downloaded GiB and 1,000 requests at unpublished rates. Windows and GPU sandboxes attach no volumes.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/volumes.md",
-        "quote": "Daytona volumes are included at no additional cost. Each organization can create up to 100 volumes, and volume data does not count against your storage quota.",
+        "url": "https://www.daytona.com/docs/persistence.md",
+        "quote": "The writable filesystem of a Daytona sandbox exists only while the sandbox does.",
         "confidence": "docs-confirmed"
       }
     },

@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "Hot: RAM (VM); cold: disk",
-      "scenario": "A hot snapshot on the VM class keeps memory; on a container only a cold filesystem snapshot exists, and fork is VM-only.",
-      "note": "Cold snapshots capture the filesystem from a stopped sandbox; hot snapshots capture filesystem and memory from a started VM. Containers support cold only. Fork duplicates a Linux VM's filesystem and memory. Snapshots go inactive after 14 days unused.",
+      "figure": "Memory: persistent/warm only",
+      "scenario": "Capturing a running Python server with its memory works on a persistent sandbox or one served from a warm template; from an ordinary ephemeral sandbox you can capture only the filesystem as an image.",
+      "note": "A full snapshot saves memory and disk and restores with the processes still running. Only a persistent Linux sandbox or one served from a warm template can be captured; a sandbox created from a filesystem snapshot or with a volume attached is refused with 409, and the docs never define persistent or warm template for Linux. GPU checkpoints add GPU memory. macOS snapshots are disk-only images of a stopped persistent sandbox, and macOS fork copies the disk, not memory. Windows supports neither. Snapshots are named, kept until deleted, restore any number of times, and outlive the source.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/sandboxes.md",
-        "quote": "Forking creates a duplicate of a Linux VM sandbox's filesystem and memory state in a new sandbox.",
+        "url": "https://www.daytona.com/docs/snapshots.md",
+        "quote": "A snapshot is a capture of the memory and disk of a running sandbox, saved under a name.",
         "confidence": "docs-confirmed"
       }
     },

@@ -131,12 +131,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "VM pause: RAM; container stop",
-      "scenario": "The container stops: files kept, REPL gone. The VM class would pause with memory intact, and either way the disk keeps billing.",
-      "note": "Pause exists only on Linux VM and Windows sandboxes; a container stop keeps the filesystem and loses memory. Stopped and paused sandboxes bill reserved disk only, and archive is container-only.",
+      "figure": "No Linux stop; 24/48 h",
+      "scenario": "Stopping the box to save money is not an option on Linux: there is no stop or pause, and at 24 hours (Starter) the sandbox is deleted, memory and all.",
+      "note": "Linux only runs or is deleted. Windows keeps its disk across stop and start. A persistent macOS sandbox stops, starts, pauses with memory and forks. Every sandbox is deleted when its wall-clock timeout fires; the organisation maximum is 86,400 s (24 h) on Starter and 48 h on Team, and a timeout once set cannot be cleared. This is the single biggest buyer-facing change from 1.x, where containers stopped and archived and VMs paused.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/sandboxes.md",
-        "quote": "The filesystem and memory state are preserved, and CPU is no longer consumed.",
+        "url": "https://www.daytona.com/docs/sandboxes.md",
+        "quote": "| **Stop and start**         | ✗               | ✓ persistent     | ✓ persistent     | ✗            |",
         "confidence": "docs-confirmed"
       }
     },

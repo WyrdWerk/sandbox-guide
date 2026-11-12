@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "Tier 3 for internet",
-      "scenario": "Package installs fail on Tier 1: outbound is restricted and cannot be overridden per sandbox; full internet needs a $500 top-up.",
-      "note": "Tier 1 and 2 are restricted and cannot be overridden per sandbox; Tier 3 and 4 get full internet. Per-sandbox controls are block-all, CIDR, domain or an upstream proxy. No static egress IP or egress price is published.",
+      "figure": "Open egress; static IP Beta",
+      "scenario": "`pip install` works on any plan because egress is open by default; a vendor that whitelists IPs needs the Team beta, and a secret's host allowlist is a separate control.",
+      "note": "Egress is open by default. A per-sandbox policy can block everything or allow up to 128 domains and IPv4 CIDRs combined, with DNS filtered to the allowlist; IPv6, private ranges and nested entries are rejected, and Windows/GPU sandboxes accept no policy. Static egress IPs are a Team/Enterprise beta with no documentation, count or price. No egress price or allowance is published; bucket-volume traffic is metered per uploaded GiB, downloaded GiB and 1,000 requests.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/network-limits.md",
-        "quote": "**Tier 1 & Tier 2**: Network access is restricted and cannot be overridden at the sandbox level.",
+        "url": "https://www.daytona.com/docs/network-limits.md",
+        "quote": "Egress is open by default.",
         "confidence": "docs-confirmed"
       }
     },

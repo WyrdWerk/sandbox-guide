@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "4 vCPU / 8 GiB / 10 GiB",
-      "scenario": "16 GB of memory does not fit: the ceiling is 4 vCPU / 8 GiB, disk stops at 10 GiB, and `us` or `eu` are the only regions.",
-      "note": "Default 1 vCPU / 1 GB / 3 GiB; the organisation ceiling is 4 vCPU / 8 GB / 10 GiB, with `daytona-large` at 4/8/10. Windows presets reach 4/16/50 and GPU sandboxes attach up to 8 GPUs. Two shared regions, `us` and `eu`.",
+      "figure": "16 cores / 32 GiB (docs)",
+      "scenario": "A 16 GB agent fits on Team (8 cores / 32 GiB) but not on Starter (4 cores / 16 GiB), and the pricing page's 64 cores / 128 GiB describes a machine neither plan's own limits page allows.",
+      "note": "Sizes are custom, not presets: 0.125–16 cores, 0.5–32 GiB memory and 10–256 GiB disk, with CPU raised to at least 1 core per 8 GiB of memory. The limits page caps Starter at 4 cores / 16 GiB and Team at 8 / 32; the pricing page's plan table says 64 cores / 128 GiB for both and 512 GiB–3 TiB disk (see §4.1). Regions are priced by multiplier: `earth` 1.0×, `us` 1.15×, `us-east` 1.75×, Ashburn and Boston 2.0×; macOS has its own `macos-1`. No EU region is documented.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/sandboxes.md",
-        "quote": "Organizations get a maximum sandbox resource limit of **4 vCPUs**, **8GB RAM**, and **10GB disk**.",
+        "url": "https://www.daytona.com/docs/sandboxes.md",
+        "quote": "A Linux sandbox may guarantee at most 16 cores, 32GiB memory, and 256GiB disk.",
         "confidence": "docs-confirmed"
       }
     },

@@ -144,7 +144,7 @@
           "provider": "daytona",
           "tier": "backend",
           "noTerminal": "partly",
-          "what": "A built-in Hermes backend: Hermes on your own machine starts, stops and resumes a Daytona sandbox for its commands. Daytona's dashboard Playground opens a browser terminal if you want to host it there instead.",
+          "what": "Hermes has a built-in Daytona terminal backend, but it is written for the 1.x API (the 2.0 docs call it v0), with stop and resume. A 2.0 Linux sandbox has no stop, so the backend as documented does not map onto 2.0; host Hermes inside a 2.0 sandbox only if you can live without resume.",
           "link": {
             "title": "Hermes: Daytona backend",
             "url": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
@@ -530,10 +530,10 @@
           "provider": "daytona",
           "tier": "preinstalled",
           "noTerminal": "partly",
-          "what": "OpenClaw publishes a Daytona guide, and OpenClaw is preinstalled in Daytona's default image. Create the sandbox with auto-stop off, connect over SSH and run onboarding.",
+          "what": "Daytona says OpenClaw is preinstalled in the default image. Create a sandbox, connect over SSH, run onboarding, keep the gateway on loopback and open the dashboard through a signed preview link. The guide still uses 1.x flags, and the sandbox is deleted at the 24-hour session cap.",
           "link": {
-            "title": "OpenClaw on Daytona",
-            "url": "https://docs.openclaw.ai/install/daytona"
+            "title": "Daytona: run OpenClaw in a sandbox",
+            "url": "https://www.daytona.com/docs/guides/openclaw/openclaw-run-secure-sandbox"
           }
         },
         {
@@ -825,9 +825,9 @@
         {
           "provider": "daytona",
           "for": "If you want OpenClaw's own guide",
-          "why": "OpenClaw documents Daytona itself, and the default image already has it installed. $200 of free compute covers the first month or so.",
-          "watch": "Each sandbox's disk is capped at 10 GiB, and a 2 vCPU / 4 GiB machine on all month is about $122.",
-          "link": "https://docs.openclaw.ai/install/daytona"
+          "why": "Daytona says OpenClaw is preinstalled in its default image, and $200 of free credit covers about seven weeks of a 2 vCPU / 4 GiB box left running.",
+          "watch": "The sandbox is deleted at the 24-hour session cap, so the setup must be recreated or kept on a volume; the guide still uses 1.x flags. Running all month is about $121 before the volume.",
+          "link": "https://www.daytona.com/docs/guides/openclaw/openclaw-run-secure-sandbox"
         },
         {
           "provider": "digitalocean",
@@ -1075,10 +1075,10 @@
           "provider": "daytona",
           "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "Claude Code, Codex and OpenCode are preinstalled in the default snapshot; an official guide runs Claude Code from the Daytona command line.",
+          "what": "Daytona says Claude Code is in the default image, and Codex, Gemini CLI, Amp, Kiro and OpenCode each have a first-party guide. The repository and agent login need a volume, because the sandbox disk is wiped and each session ends at 24 hours.",
           "link": {
             "title": "Daytona: Claude Code",
-            "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox"
+            "url": "https://www.daytona.com/docs/guides/claude/claude-code-run-cli-sandbox"
           }
         },
         {
@@ -1416,10 +1416,10 @@
           "provider": "daytona",
           "tier": "guide",
           "noTerminal": "no",
-          "what": "Sandboxes started from an SDK, billed per second, with $200 of free compute.",
+          "what": "Sandboxes started from an SDK with Python, TypeScript and JavaScript kernels, billed per second, with $200 of free credit. Each run is a fresh VM, so results must leave the sandbox before it is deleted.",
           "link": {
-            "title": "Daytona docs",
-            "url": "https://www.daytona.io/docs/en/"
+            "title": "Daytona: code execution",
+            "url": "https://www.daytona.com/docs/code-execution"
           }
         },
         {
@@ -1938,10 +1938,10 @@
           "provider": "daytona",
           "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "Chromium ships in the standard image, and an official computer-use guide starts Xvfb, XFCE and VNC and drives the desktop with screenshots, clicks and keys through the SDK.",
+          "what": "Chromium is in the standard image and a 1280x720 desktop ships with the runtime, so computer use works on a default sandbox through the SDK. The desktop is Linux-only and the sandbox is deleted at the session cap.",
           "link": {
             "title": "Daytona: computer use",
-            "url": "https://www.daytona.io/docs/en/computer-use"
+            "url": "https://www.daytona.com/docs/computer-use"
           },
           "price": null
         },
@@ -2129,9 +2129,9 @@
         {
           "provider": "daytona",
           "for": "Computer use from code",
-          "why": "Documents computer use, with sandboxes started from an SDK and per-second billing.",
-          "watch": "Each sandbox's disk is capped at 10 GiB.",
-          "link": "https://www.daytona.io/docs/en/"
+          "why": "Chromium is in the standard image, the desktop ships with the runtime, and computer use is an SDK API with per-second billing.",
+          "watch": "The desktop is 1280x720 and Linux-only, there is no GPU desktop, and the sandbox is deleted at the session cap.",
+          "link": "https://www.daytona.com/docs/computer-use"
         },
         {
           "provider": "freestyle",
@@ -2245,10 +2245,10 @@
           "provider": "daytona",
           "tier": "manual",
           "noTerminal": "partly",
-          "what": "Create a sandbox with auto-stop turned off (it stops after 15 idle minutes by default), install n8n with npm and make its port public. n8n names Daytona as the sandbox for its own AI Assistant feature, which is not the same as hosting n8n there.",
+          "what": "Create a Linux sandbox with an explicit timeout, install n8n with npm and make its port public. The sandbox is deleted at 24 hours on Starter, so the database and encryption key must live on a volume and something outside Daytona must recreate the machine.",
           "link": {
-            "title": "Daytona: auto-stop",
-            "url": "https://www.daytona.io/docs/en/sandboxes#auto-stop-interval"
+            "title": "Daytona: timeouts",
+            "url": "https://www.daytona.com/docs/linux-sandboxes#timeouts"
           }
         },
         {
@@ -2747,10 +2747,10 @@
           "provider": "daytona",
           "tier": "manual",
           "noTerminal": "partly",
-          "what": "Create a sandbox with auto-stop off (the default is 15 idle minutes), install the bot and keep it running under a process manager. No bot guide.",
+          "what": "Create a sandbox with an explicit timeout, install the bot under a process manager and keep its token and history on a volume. The sandbox is deleted at 24 hours and the bot must reconnect in a new one. No bot guide.",
           "link": {
-            "title": "Daytona: auto-stop",
-            "url": "https://www.daytona.io/docs/en/sandboxes#auto-stop-interval"
+            "title": "Daytona: timeouts",
+            "url": "https://www.daytona.com/docs/linux-sandboxes#timeouts"
           }
         },
         {
@@ -3170,10 +3170,10 @@
           "provider": "daytona",
           "tier": "preinstalled",
           "noTerminal": "partly",
-          "what": "Claude Code is preinstalled in the default snapshot. The dashboard Playground opens a terminal in the browser, so nothing is installed locally, but setup is typed commands.",
+          "what": "Daytona says Claude Code is in the default image. One sandbox per developer, each signed in with their own account. Five people need the Team plan, because Starter allows three members, and each sandbox needs a volume for the repository and ~/.claude.",
           "link": {
             "title": "Daytona: Claude Code",
-            "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox"
+            "url": "https://www.daytona.com/docs/guides/claude/claude-code-run-cli-sandbox"
           }
         },
         {
@@ -3617,10 +3617,10 @@
           "provider": "daytona",
           "tier": "manual",
           "noTerminal": "no",
-          "what": "No scheduler found. A scheduler of your own calls Daytona's API to create a sandbox for each run.",
+          "what": "No scheduler. A scheduler of your own calls the API to create a sandbox for each run, writes results to a volume or your own storage, and lets the timeout delete it.",
           "link": {
-            "title": "Daytona docs",
-            "url": "https://www.daytona.io/docs/en/"
+            "title": "Daytona: quickstart",
+            "url": "https://www.daytona.com/docs/quickstart"
           }
         },
         {
@@ -4046,10 +4046,10 @@
           "provider": "daytona",
           "tier": "manual",
           "noTerminal": "no",
-          "what": "Daytona's own MCP server lets an AI agent control Daytona sandboxes. Hosting your own server is a manual install with no guide.",
+          "what": "Daytona's own MCP server lets an AI agent control Daytona sandboxes. Hosting your own server is manual: there is no wake-on-request, the sandbox is recreated at the 24-hour cap and its preview URL changes, so you need your own proxy or a Team custom domain in front.",
           "link": {
-            "title": "Daytona: its MCP server",
-            "url": "https://www.daytona.io/docs/en/mcp"
+            "title": "Daytona: preview URLs",
+            "url": "https://www.daytona.com/docs/preview"
           }
         },
         {

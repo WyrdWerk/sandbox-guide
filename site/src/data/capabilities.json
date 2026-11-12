@@ -63,12 +63,12 @@
         },
         {
           "provider": "daytona",
-          "verdict": "partly",
-          "figure": "containers by default",
-          "shortfall": "By default each sandbox is a container sharing the host's kernel; a real virtual machine is a separate kind you have to choose.",
+          "verdict": "yes",
+          "figure": "Firecracker microVM",
+          "note": "Every sandbox is a VM with its own kernel. Linux is Firecracker, Windows and GPU are Cloud Hypervisor, macOS is Apple's Virtualization framework; there is no container class left.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sandboxes",
-            "quote": "Sandboxes run as Linux containers by default.",
+            "url": "https://www.daytona.com/docs/sandboxes.md",
+            "quote": "A sandbox is a hardware-isolated virtual machine with its own kernel, filesystem, network stack, and allocated vCPU, RAM, and disk, with isolation enforced by the hypervisor.",
             "confidence": "docs-confirmed"
           }
         },
@@ -381,11 +381,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "root in the sandbox",
-          "note": "The default shell user is daytona, but code runs as root inside the container.",
+          "figure": "root or image user",
+          "note": "The default OS user is the image's `USER`, or `root` when the image sets none, sets root, or sets a numeric ID; a command can also name any user that exists in the image. Root is available but not forced.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/isolation",
-            "quote": "Code runs as root inside the sandbox without affecting the runner.",
+            "url": "https://www.daytona.com/docs/linux-sandboxes.md",
+            "quote": "The default is the image's `USER`, or `root` if the image sets none, sets root, or sets a numeric user ID.",
             "confidence": "docs-confirmed"
           }
         },
@@ -695,10 +695,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "Docker-in-Docker",
+          "figure": "engine in the image",
+          "note": "A full Docker Engine, not a shim. Daytona does not install it: the sandbox image must ship it, and the documented `docker-dind` image does. Docker data lives on the sandbox disk and is kept by captured images and snapshots.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/snapshots",
-            "quote": "Sandboxes can run Docker containers inside them (Docker-in-Docker)",
+            "url": "https://www.daytona.com/docs/docker.md",
+            "quote": "Docker runs inside a sandbox as a full Docker Engine, so workloads can build images and run containers the same way they do on a regular Linux machine.",
             "confidence": "docs-confirmed"
           }
         },
@@ -1013,12 +1014,12 @@
         {
           "provider": "daytona",
           "verdict": "partly",
-          "figure": "Linux VM class only",
-          "shortfall": "Nested virtual machines only work on the Linux VM class, and the feature has to be switched on for your organisation.",
+          "figure": "Enterprise KVM only",
+          "shortfall": "Nested virtualisation is a single line in the Enterprise plan — KVM access — and no page says how to enable it, whether `/dev/kvm` is exposed to every sandbox on the plan, or what it costs beyond the plan.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sandboxes",
-            "quote": "Nested virtualization exposes KVM (/dev/kvm) inside the guest",
-            "confidence": "docs-confirmed"
+            "url": "https://www.daytona.com/pricing.md",
+            "quote": "KVM access (nested virtualization)",
+            "confidence": "pricing-page"
           }
         },
         {
@@ -1332,11 +1333,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "Dockerfile or OCI image",
-          "note": "Virtual-machine sandboxes cannot be built from a Dockerfile; containers and GPU sandboxes can.",
+          "figure": "OCI, Dockerfile, capture",
+          "note": "Standard OCI images, inline Dockerfile builds, declarative Dockerfile builds, private registries with stored credentials, and capture of a running Linux or Windows sandbox as a named image. Anonymous images are deleted after 7 days unused.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/declarative-builder",
-            "quote": "VM snapshots (Linux VM and Windows) cannot be built from a Dockerfile.",
+            "url": "https://www.daytona.com/docs/images.md",
+            "quote": "Daytona accepts standard OCI images, the same ones you build and push with Docker",
             "confidence": "docs-confirmed"
           }
         },
@@ -1658,12 +1659,12 @@
         },
         {
           "provider": "daytona",
-          "verdict": "partly",
-          "figure": "presets, custom on request",
-          "shortfall": "You pick from fixed sizes, and anything different needs a custom limit arranged through support.",
+          "verdict": "yes",
+          "figure": "0.125–16 cores",
+          "note": "Sizes are arbitrary within limits: CPU from 0.125 core (0.5 default), memory from 512 MiB (1 GiB default), disk from 10 GiB to 256 GiB when set (512 MiB default). The guarantee is raised to at least 1 core per 8 GiB of memory. Plan caps still apply.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sandboxes",
-            "quote": "Sandboxes have 1 vCPU, 1GB RAM, and 3GiB disk by default.",
+            "url": "https://www.daytona.com/docs/limits.md",
+            "quote": "Requests below the minimum are raised to the minimum.",
             "confidence": "docs-confirmed"
           }
         },
@@ -1988,12 +1989,12 @@
         },
         {
           "provider": "daytona",
-          "verdict": "partly",
-          "figure": "4 cores / 8 GiB; more with GPUs",
-          "shortfall": "A normal sandbox stops at 4 cores and 8 GB; larger machines only come attached to graphics cards.",
+          "verdict": "yes",
+          "figure": "16 vCPU / 32 GiB",
+          "note": "Team allows 8 cores = 16 vCPUs and 32 GiB, which meets the 16 vCPU / 32 GiB bar; Starter stops at 4 cores / 16 GiB. The pricing page advertises 64 cores / 128 GiB for both plans (see §4.1), and Enterprise can reach the 16-core platform ceiling.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sandboxes",
-            "quote": "Organizations get a maximum sandbox resource limit of 4 vCPUs, 8GB RAM, and 10GB disk.",
+            "url": "https://www.daytona.com/docs/limits.md",
+            "quote": "Starter | 4 | 16384",
             "confidence": "docs-confirmed"
           }
         },
@@ -2318,12 +2319,11 @@
         },
         {
           "provider": "daytona",
-          "verdict": "partly",
-          "figure": "grow only, support must enable",
-          "shortfall": "You can add cores and memory while it runs, but you cannot shrink them, and the feature has to be switched on by support first.",
+          "verdict": "no",
+          "figure": "fixed at create",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sandboxes",
-            "quote": "On a running sandbox, you can increase CPU and memory without interruption.",
+            "url": "https://www.daytona.com/docs/scale.md",
+            "quote": "The resource envelope is fixed when the sandbox is created; there is no resize operation.",
             "confidence": "docs-confirmed"
           }
         },
@@ -2658,12 +2658,12 @@
         },
         {
           "provider": "daytona",
-          "verdict": "yes",
-          "figure": "up to 8 GPUs",
-          "note": "Nine GPU types, including the L40S added in November. On-demand GPU sandboxes are reserved; spot ones are preemptible. On shared capacity they ignore your region choice, and they cannot use the free credit.",
+          "verdict": "partly",
+          "figure": "priced; page says soon",
+          "shortfall": "The 2.0 GPU page is a stub that says GPU sandboxes are coming soon, while the price list already sells nine models from $0.99 to $8.99 per GPU-hour and the plans allow 7 to 50 cards; only checkpoints, the no-spot rule and the plan limits are documented.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/gpu-sandboxes.md",
-            "quote": "Spot GPU sandboxes are preemptible",
+            "url": "https://www.daytona.com/docs/gpu-sandboxes.md",
+            "quote": "GPU sandboxes for Daytona v2 are coming soon.",
             "confidence": "docs-confirmed"
           }
         },
@@ -2988,11 +2988,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "US or EU",
-          "note": "Graphics sandboxes on shared capacity ignore the region you pick; dedicated and custom regions keep it.",
+          "figure": "US regions, 1.15–2×",
+          "note": "A create names a region; the region list is a flat tree of Earth → United States → US East → Ashburn and Boston, plus `macos-1` for Mac reservations. The only named country is the United States (`earth` is a global default that can land anywhere), and each region carries its own price multiplier.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/regions",
-            "quote": "When creating a sandbox, you can target a specific region, and Daytona schedules the workload on available capacity within that region.",
+            "url": "https://www.daytona.com/docs/sandboxes.md",
+            "quote": "A create request can name a region, and Daytona places the sandbox on available capacity inside it.",
             "confidence": "docs-confirmed"
           }
         },
@@ -3309,12 +3309,13 @@
         },
         {
           "provider": "daytona",
-          "verdict": "yes",
-          "figure": "eu region",
+          "verdict": "not-published",
+          "figure": "none documented",
+          "note": "1.x documented `us` and `eu`. The 2.0 shared-region tree names Earth, United States, US East, Ashburn and Boston, plus `macos-1`; no European region ID or multiplier appears in the docs, the pricing page or the changelog. The generic line \"a sandbox created in Earth can land in any geography\" is the only hint, and it is not a region.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/regions",
-            "quote": "Europe",
-            "confidence": "docs-confirmed"
+            "url": "https://www.daytona.com/docs/regions",
+            "quote": "United States us · 1.15× US East (Ashburn) us-east · 1.75× Ashburn us-east-ash-1 · 2.0× Boston us-east-bos-1 · 2.0×",
+            "confidence": "not-published"
           }
         },
         {
@@ -3632,10 +3633,11 @@
         {
           "provider": "daytona",
           "verdict": "partly",
-          "shortfall": "Only the full virtual machine can be paused with memory; a container sandbox loses what was running.",
+          "figure": "macOS only",
+          "shortfall": "Only a persistent macOS sandbox pauses with memory; Linux has no pause at all, and its memory snapshot restores into a new sandbox with a new IP and new port mappings rather than resuming the same one.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sandboxes.md",
-            "quote": "Pause is not supported for container sandboxes. The filesystem can be preserved on stop, but memory state is not.",
+            "url": "https://www.daytona.com/docs/macos-sandboxes.md",
+            "quote": "The Mac saves the memory of the sandbox.",
             "confidence": "docs-confirmed"
           }
         },
@@ -3950,10 +3952,11 @@
         {
           "provider": "daytona",
           "verdict": "partly",
-          "shortfall": "Pools exist, but they must be switched on for your organisation by asking support.",
+          "figure": "snapshot restore",
+          "shortfall": "A sandbox restored from a full snapshot comes back with its processes already running, which is the warm-pool benefit, but no page documents a pool you can pre-start and draw from, how a warm template is created, or what idle pool capacity costs.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/warm-pools",
-            "quote": "Warm pools must be enabled for your organization. Contact [support@daytona.io](mailto:support@daytona.io).",
+            "url": "https://www.daytona.com/docs/snapshots.md",
+            "quote": "A sandbox restored from a snapshot resumes the captured processes and memory instead of booting.",
             "confidence": "docs-confirmed"
           }
         },
@@ -4267,11 +4270,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "Under 90 ms",
-          "note": "The claim is for creating a sandbox from code to execution.",
+          "figure": "under 90 ms claimed",
+          "note": "Vendor claim, not a measurement: creation from code to execution in under 90 ms, repeated as under 100 ms on the site footer. A snapshot restore skips boot entirely, so a pre-warmed state is faster still.",
           "source": {
-            "url": "https://www.daytona.io/",
-            "quote": "Sub 90ms sandbox creation from code to execution",
+            "url": "https://www.daytona.com/docs/quickstart.md",
+            "quote": "spinning up in under 90ms from code to execution",
             "confidence": "docs-confirmed"
           }
         },
@@ -4593,10 +4596,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "A cold snapshot captures the filesystem of a stopped sandbox.",
+          "figure": "image capture",
+          "note": "Capture the filesystem of a running Linux or Windows sandbox as a named image; new sandboxes boot from it. The source keeps running during the capture. A macOS filesystem snapshot is the disk of a stopped persistent sandbox.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/snapshots.md",
-            "quote": "container sandboxes capture filesystem state only (**cold snapshots**), VM sandboxes capture filesystem and memory state (**hot snapshots**)",
+            "url": "https://www.daytona.com/docs/images.md",
+            "quote": "Capture the filesystem of a sandbox as an image, and boot new sandboxes from the image.",
             "confidence": "docs-confirmed"
           }
         },
@@ -4906,10 +4910,11 @@
         {
           "provider": "daytona",
           "verdict": "partly",
-          "shortfall": "Memory snapshots are only for full virtual machines; container sandboxes get files only.",
+          "figure": "persistent/warm only",
+          "shortfall": "A full snapshot keeps memory and disk, but only a persistent Linux sandbox or one served from a warm template can be captured; a sandbox created from a filesystem snapshot or with a volume attached is refused with 409, and the docs never define persistent or warm template for Linux.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/snapshots.md",
-            "quote": "container sandboxes capture filesystem state only (**cold snapshots**), VM sandboxes capture filesystem and memory state (**hot snapshots**)",
+            "url": "https://www.daytona.com/docs/snapshots.md",
+            "quote": "A snapshot is a capture of the memory and disk of a running sandbox, saved under a name.",
             "confidence": "docs-confirmed"
           }
         },
@@ -5218,11 +5223,12 @@
         },
         {
           "provider": "daytona",
-          "verdict": "yes",
-          "note": "The fork is independent, but the parent cannot be deleted while forks exist.",
+          "verdict": "partly",
+          "figure": "macOS fork; Linux restore",
+          "shortfall": "A persistent macOS sandbox forks in place but copies only its disk, not memory; on Linux a copy is a full-snapshot restore into a new sandbox, which needs a persistent or warm-template source and gives the copy a new IP.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sandboxes.md",
-            "quote": "Forking creates a duplicate of a Linux VM sandbox’s filesystem and memory state in a new sandbox.",
+            "url": "https://www.daytona.com/docs/macos-sandboxes.md",
+            "quote": "Fork a persistent macOS sandbox to copy its disk into a new sandbox. A fork does not copy memory, and a fork that asks for memory fails.",
             "confidence": "docs-confirmed"
           }
         },
@@ -5535,10 +5541,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "Any number of sandboxes can start from the same snapshot.",
+          "figure": "named, any number",
+          "note": "Snapshots are named objects kept until deleted, not a rolling latest-only slot. Deleting the source sandbox does not delete its snapshots, and any number of sandboxes can restore from the same one.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/snapshots.md",
-            "quote": "any number of new sandboxes can start from the same snapshot",
+            "url": "https://www.daytona.com/docs/snapshots.md",
+            "quote": "Deleting the source sandbox does not affect its snapshots.",
             "confidence": "docs-confirmed"
           }
         },
@@ -5848,10 +5855,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "Build a snapshot from an image or Dockerfile, then create sandboxes from it.",
+          "figure": "images + snapshots",
+          "note": "Two template objects: an image is the filesystem a sandbox boots from (OCI, Dockerfile build, or capture); a snapshot is memory plus disk of a running sandbox that new sandboxes resume from.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/snapshots.md",
-            "quote": "define the base operating system, language runtimes, packages, and project-level setup in an image or Dockerfile, and Daytona builds it into a snapshot you can use to create sandboxes",
+            "url": "https://www.daytona.com/docs/images.md",
+            "quote": "A sandbox set up by hand or by an agent is captured, and new sandboxes start from its filesystem.",
             "confidence": "docs-confirmed"
           }
         },
@@ -6162,14 +6170,14 @@
         },
         {
           "provider": "daytona",
-          "verdict": "partly",
+          "verdict": "not-published",
+          "figure": "v0 only",
+          "note": "The only \"backup\" in the 2.0 docs is the Daytona v0 backup used when importing an archived sandbox: the migration page reports `last_backup_at` and refuses an import whose backup is incomplete. No v2 schedule, retention window, export path or restore-to-new-machine flow is documented.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/troubleshooting.md",
-            "quote": "Daytona can restore the sandbox from its last successful backup",
+            "url": "https://www.daytona.com/docs/migrate-from-v0.md",
+            "quote": "When Daytona v0 last completed a backup of the sandbox, or `null`.",
             "confidence": "docs-confirmed"
-          },
-          "figure": "One rolling recovery copy",
-          "shortfall": "Daytona keeps a recovery backup it can restore a failed sandbox from, but its schedule, retention and export are not published and you cannot take or name one yourself."
+          }
         },
         {
           "provider": "e2b",
@@ -6478,11 +6486,12 @@
         },
         {
           "provider": "daytona",
-          "verdict": "yes",
-          "note": "The whole disk persists and bills while stopped.",
+          "verdict": "partly",
+          "figure": "Windows/macOS only",
+          "shortfall": "A Linux sandbox has no stop at all — it runs until it is deleted and then loses its disk — so files survive a stop only on Windows or a persistent macOS sandbox, and survive a Linux delete only on a volume or a captured image.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sandboxes.md",
-            "quote": "The filesystem and memory state are preserved, and CPU is no longer consumed.",
+            "url": "https://www.daytona.com/docs/windows-sandboxes.md",
+            "quote": "A persistent Windows sandbox keeps its disk across stop and start.",
             "confidence": "docs-confirmed"
           }
         },
@@ -6794,10 +6803,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "shortfall": "Volumes are network filesystems, not block disks, so a database table store is a poor fit.",
+          "figure": "$0.000108/GiB-h",
+          "note": "Project-scoped storage mounted at a path, 1–1000 GiB, surviving the sandbox and reattachable to a later one. Disk volumes are ext4 with background commits; bucket volumes are S3. Billed per GiB-hour, not free (a change from 1.x).",
           "source": {
-            "url": "https://www.daytona.io/docs/en/volumes.md",
-            "quote": "Volumes are FUSE-based mounts that provide shared file access across Daytona sandboxes.",
+            "url": "https://www.daytona.com/docs/volumes.md",
+            "quote": "A volume is persistent, project-scoped storage that a sandbox mounts as a directory.",
             "confidence": "docs-confirmed"
           }
         },
@@ -7109,10 +7119,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "shortfall": "Writes are not transactional, so two machines writing one file means the last write wins.",
+          "figure": "8 per sandbox",
+          "note": "Up to 8 volumes per sandbox, and several sandboxes can attach the same volume at once. Writes are merged per path with the newest modification time winning, so a shared volume is last-writer-wins per file, not transactional; a bucket volume is live and supports read-only mounts.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/volumes.md",
-            "quote": "a single volume can be mounted to multiple sandboxes",
+            "url": "https://www.daytona.com/docs/volumes.md",
+            "quote": "A sandbox attaches up to 8 volumes, and several sandboxes can attach the same volume at once.",
             "confidence": "docs-confirmed"
           }
         },
@@ -7422,10 +7433,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "The docs cover S3, R2, Tigris, Supabase Storage, Google Cloud Storage and Azure Blob, among others.",
+          "figure": "S3 and S3-compatible",
+          "note": "A bucket volume mounts an S3 bucket live inside the sandbox; Daytona can own a managed bucket, or you bring an external one on AWS S3 or an S3-compatible service with credentials stored as project secrets. Read-only mounts are supported for bucket volumes only.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/mount-external-storage.md",
-            "quote": "Google Cloud Storage",
+            "url": "https://www.daytona.com/docs/volumes.md",
+            "quote": "an external bucket volume mounts a bucket you own",
             "confidence": "docs-confirmed"
           }
         },
@@ -7746,12 +7758,12 @@
         },
         {
           "provider": "daytona",
-          "verdict": "no",
-          "figure": "10 GiB cap",
-          "shortfall": "The organisation ceiling is 10 GiB of disk per sandbox, though some Windows presets list 50 GiB.",
+          "verdict": "yes",
+          "figure": "256 GiB; 1 TiB volume",
+          "note": "A Linux sandbox's writable disk goes to 256 GiB (the 1.x cap was 10 GiB), and a single volume to 1000 GiB. The pricing page claims 512 GiB–3 TiB per plan, which the limits page does not support.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sandboxes.md",
-            "quote": "Organizations get a maximum sandbox resource limit of **4 vCPUs**, **8GB RAM**, and **10GB disk**.",
+            "url": "https://www.daytona.com/docs/sandboxes.md",
+            "quote": "A Linux sandbox may guarantee at most 16 cores, 32GiB memory, and 256GiB disk.",
             "confidence": "docs-confirmed"
           }
         },
@@ -8070,11 +8082,12 @@
         },
         {
           "provider": "daytona",
-          "verdict": "yes",
-          "note": "Set the auto-stop interval to 0 and the sandbox runs indefinitely.",
+          "verdict": "partly",
+          "figure": "24 h Starter / 48 h Team",
+          "shortfall": "Nothing stays up for a week: every sandbox is deleted when its wall-clock timeout fires, and the organisation maximum is 24 hours on Starter and 48 on Team (Enterprise custom), so a long-lived agent must recreate itself and its disk from a volume or image.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sandboxes.md",
-            "quote": "**`0`**: disables the auto-stop functionality, allowing the sandbox to run indefinitely",
+            "url": "https://www.daytona.com/docs/linux-sandboxes.md",
+            "quote": "An explicit timeout must not exceed the organization maximum, 86,400 seconds (24 hours) unless the organization sets a different maximum.",
             "confidence": "docs-confirmed"
           }
         },
@@ -8392,11 +8405,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "Minutes, or 0",
-          "note": "Separate settings exist for stop, pause, archive and delete.",
+          "figure": "60 s+, off by default",
+          "note": "You set the idle interval per sandbox or as a project default; it is off unless set, has a 60-second minimum, accepts any larger value, and fires within about two minutes. The action on Linux is delete. The wall-clock timeout is a separate setting and cannot be cleared once set.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sandboxes.md",
-            "quote": "The auto-stop interval sets the amount of time after which a running sandbox is automatically stopped.",
+            "url": "https://www.daytona.com/docs/linux-sandboxes.md",
+            "quote": "The idle timeout is off by default unless the project sets one, has a minimum of 60 seconds, and requires an action.",
             "confidence": "docs-confirmed"
           }
         },
@@ -8709,11 +8722,12 @@
         {
           "provider": "daytona",
           "verdict": "no",
-          "note": "A paused or stopped sandbox has to be started; a request to its preview URL does not start it.",
+          "figure": "409, no wake",
+          "note": "A request to a sandbox that is not running returns 409; nothing starts it. A stopped Windows or persistent macOS sandbox must be started by an API call, and a deleted Linux sandbox cannot be reached at all.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sandboxes.md",
-            "quote": "Paused            | The VM sandbox is paused with filesystem and memory state preserved. State is offloaded to nearby storage.",
-            "confidence": "inferred"
+            "url": "https://www.daytona.com/docs/preview.md",
+            "quote": "Any request to a sandbox that is not running receives 409.",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -9021,12 +9035,13 @@
         },
         {
           "provider": "daytona",
-          "verdict": "no",
-          "note": "No scheduler that starts sandboxes; the only scheduling is where a sandbox is placed.",
+          "verdict": "not-published",
+          "figure": "no scheduler",
+          "note": "The docs describe two timers, both of which delete or stop the sandbox, and a reset call; no cron, job or scheduled-create object appears in the API reference, CLI reference or docs index. A schedule has to live in your own code calling the API.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/regions",
-            "quote": "Every Daytona sandbox runs in a **region**",
-            "confidence": "inferred"
+            "url": "https://www.daytona.com/docs/linux-sandboxes.md",
+            "quote": "Daytona deletes a Linux sandbox automatically when one of its two timers elapses.",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -9338,11 +9353,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "public flag",
-          "note": "A preview link is open to anyone when the machine is marked public.",
+          "figure": "per-port public",
+          "note": "Any HTTP listener on ports 1–65535 gets a preview URL; visibility is per port, and a port can be made public so no credential is needed.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/preview.md",
-            "quote": "If a sandbox has its `public` property set to `true`, preview links are publicly accessible without authentication.",
+            "url": "https://www.daytona.com/docs/preview.md",
+            "quote": "Private endpoints require authentication; public ones do not.",
             "confidence": "docs-confirmed"
           }
         },
@@ -9664,11 +9679,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "Token or signed link",
-          "note": "The link needs a token unless the machine is marked public; signed links can be limited to one port and one hour.",
+          "figure": "token or signed link",
+          "note": "Private is the default. Two credentials: a standard preview token in `x-daytona-preview-token`, or a signed URL with the token in the hostname. Signed links are per port, revocable individually, and expire from 1 second to 7 days.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/preview.md",
-            "quote": "Otherwise, authentication is required.",
+            "url": "https://www.daytona.com/docs/preview.md",
+            "quote": "Each call mints a new token that is valid for a single port and can be revoked individually before it expires.",
             "confidence": "docs-confirmed"
           }
         },
@@ -9992,11 +10007,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "Token, 60 min",
-          "note": "You connect with a standard client using a short-lived token.",
+          "figure": "gateway on 2222",
+          "note": "A real SSH client against a per-region gateway on port 2222; the credential travels in the username as `sandboxId#token` and can be a sandbox access token or a project API key. `scp`/`sftp` work; the gateway presents one stable ed25519 host key per region.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/ssh-access.md",
-            "quote": "SSH access tokens expire automatically after 60 minutes.",
+            "url": "https://www.daytona.com/docs/ssh-access.md",
+            "quote": "Daytona provides SSH access to sandboxes through an SSH gateway",
             "confidence": "docs-confirmed"
           }
         },
@@ -10318,11 +10333,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "Dashboard",
-          "note": "The dashboard opens a full terminal session on the machine.",
+          "figure": "dashboard PTY",
+          "note": "A full terminal in the dashboard, backed by a PTY, with multiple sessions, scrollback, and `Open terminal here` from the file browser. Gated by the project key's sandbox-write permission; it is not exposed by making a preview public.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/web-terminal.md",
-            "quote": "full terminal session connected to your sandbox",
+            "url": "https://www.daytona.com/docs/web-terminal.md",
+            "quote": "Daytona provides a browser-based web terminal for your sandboxes.",
             "confidence": "docs-confirmed"
           }
         },
@@ -10640,12 +10655,13 @@
         },
         {
           "provider": "daytona",
-          "verdict": "not-published",
-          "note": "No local port forwarding is documented.",
+          "verdict": "yes",
+          "figure": "ssh -L",
+          "note": "Local port forwarding works through the SSH gateway (`-L 8080:localhost:8080`), including from the CLI's SSH command. Remote forwarding (`-R`), Unix-socket forwarding and agent forwarding are refused.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/ssh-access.md",
-            "quote": "SSH access tokens expire automatically after 60 minutes.",
-            "confidence": "inferred"
+            "url": "https://www.daytona.com/docs/ssh-access.md",
+            "quote": "Local forwarding uses the `-L` flag.",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -10959,12 +10975,13 @@
         },
         {
           "provider": "daytona",
-          "verdict": "not-published",
-          "note": "No public non-web port is documented; preview links carry web traffic.",
+          "verdict": "partly",
+          "figure": "SSH -L only",
+          "shortfall": "A non-HTTP service is reachable only through an SSH local forward; the public preview URLs carry HTTP and WebSocket, and although a port mapping can declare UDP there is no documented public address or protocol for a raw TCP or UDP service.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/preview.md",
-            "quote": "Otherwise, authentication is required.",
-            "confidence": "inferred"
+            "url": "https://www.daytona.com/docs/preview.md",
+            "quote": "Any process listening for HTTP traffic on ports 1 to 65535 can be previewed through a generated URL.",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -11281,12 +11298,12 @@
         {
           "provider": "daytona",
           "verdict": "partly",
-          "figure": "Own proxy",
-          "shortfall": "You have to run your own forwarding service under your domain; the provider does not attach the domain for you.",
+          "figure": "Team beta / own proxy",
+          "shortfall": "Custom domains are a Team and Enterprise beta with no documentation of how to attach one or what certificate is used, so on Starter the only route is your own proxy under your domain forwarding to a Daytona preview URL.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/custom-preview-proxy.md",
-            "quote": "host your proxy under your own domain",
-            "confidence": "docs-confirmed"
+            "url": "https://www.daytona.com/pricing.md",
+            "quote": "Custom domains (Beta)",
+            "confidence": "pricing-page"
           }
         },
         {
@@ -11602,12 +11619,13 @@
         },
         {
           "provider": "daytona",
-          "verdict": "no",
-          "shortfall": "You run the forwarding service, so you also get and renew the certificate.",
+          "verdict": "not-published",
+          "figure": "certificate unstated",
+          "note": "The documented own-proxy route leaves certificate issuance and renewal to you. The Team beta presumably terminates TLS at Daytona, but no page says so, names the issuer, or covers renewal, so the answer is unpublished rather than a documented no.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/custom-preview-proxy.md",
-            "quote": "host your proxy under your own domain",
-            "confidence": "docs-confirmed"
+            "url": "https://www.daytona.com/docs/preview.md",
+            "quote": "Place your own proxy in front of preview URLs to serve previews on a custom domain",
+            "confidence": "not-published"
           }
         },
         {
@@ -11930,11 +11948,12 @@
         {
           "provider": "daytona",
           "verdict": "not-published",
-          "note": "No outbound price or allowance is published.",
+          "figure": "no rate or allowance",
+          "note": "No outbound byte price or monthly allowance appears on the pricing page, the billing page or the network page. Bucket-volume traffic is explicitly billable (uploaded GiB, downloaded GiB, 1,000 requests) but its rate is not published either. Usage reports count network bytes, which suggests metering without a published tariff.",
           "source": {
-            "url": "https://www.daytona.io/pricing",
-            "quote": "Pricing",
-            "confidence": "inferred"
+            "url": "https://www.daytona.com/docs/billing.md",
+            "quote": "Bucket volume traffic is billed per uploaded GiB, downloaded GiB, and 1,000 requests",
+            "confidence": "not-published"
           }
         },
         {
@@ -12254,11 +12273,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "Domain or address list",
-          "note": "A machine can be limited to a list of domains or addresses, or to an upstream gateway.",
+          "figure": "128 domains/CIDRs",
+          "note": "A per-sandbox default-deny policy with domain and IPv4 CIDR allow lists, capped at 128 entries combined; DNS is filtered too, wildcards cover subdomains only, and the policy can be changed while the sandbox runs.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/network-limits.md",
-            "quote": "On Tier 3 and Tier 4, setting an allow list or `networkBlockAll` at create time applies that policy for the sandbox.",
+            "url": "https://www.daytona.com/docs/network-limits.md",
+            "quote": "Each sandbox runs behind a firewall that restricts which external IP addresses and domains it can reach",
             "confidence": "docs-confirmed"
           }
         },
@@ -12578,11 +12597,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "block-all",
-          "note": "A machine can be set to block every outbound connection.",
+          "figure": "block_all",
+          "note": "`block_all` with empty lists reaches no external address and resolves no DNS names.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/network-limits.md",
-            "quote": "setting an allow list or `networkBlockAll` at create time applies that policy for the sandbox",
+            "url": "https://www.daytona.com/docs/network-limits.md",
+            "quote": "Create a sandbox with no outbound access, for code that needs no network.",
             "confidence": "docs-confirmed"
           }
         },
@@ -12898,12 +12917,13 @@
         },
         {
           "provider": "daytona",
-          "verdict": "not-published",
-          "note": "No fixed outbound address is published.",
+          "verdict": "partly",
+          "figure": "Team beta",
+          "shortfall": "Static egress IPs exist only as a Team and Enterprise beta on the price list; no page says how many you get, whether they are per sandbox or per project, what they cost, or how to attach one.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/network-limits.md",
-            "quote": "block-all",
-            "confidence": "inferred"
+            "url": "https://www.daytona.com/pricing.md",
+            "quote": "Static egress IPs (Beta)",
+            "confidence": "pricing-page"
           }
         },
         {
@@ -13222,11 +13242,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "Stored secrets",
-          "note": "Values are saved with the account and substituted by the provider, so the machine holds only a stand-in.",
+          "figure": "project secrets",
+          "note": "Secrets are project-scoped, encrypted at rest, never returned by the API after creation, attached to a sandbox by name, and injected into outbound HTTPS by a proxy. The sandbox sees an opaque placeholder, not the value.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/secrets.md",
-            "quote": "Secrets are a secure way to store and use sensitive values such as API keys, tokens, and passwords across your Daytona sandboxes",
+            "url": "https://www.daytona.com/docs/secrets.md",
+            "quote": "Secrets store sensitive values such as API keys, tokens, and passwords for use across your Daytona sandboxes.",
             "confidence": "docs-confirmed"
           }
         },
@@ -13546,11 +13566,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "Header only",
-          "note": "The real value is added only in one fixed part of the request, so a service that wants it in the body or the address cannot be called this way.",
+          "figure": "TLS proxy",
+          "note": "The proxy replaces the placeholder in the request line, query string, every header and the body, only for hosts on the secret's allowlist, and dials the destination itself. Catches: HTTPS only, 1 MiB body limit, HTTP/1.1 only, certificate-pinned clients fail, and an echoing host returns the value.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/secrets.md",
-            "quote": "The proxy substitutes placeholders in HTTPS request headers only.",
+            "url": "https://www.daytona.com/docs/secrets.md",
+            "quote": "without ever placing the plaintext inside the sandbox",
             "confidence": "docs-confirmed"
           }
         },
@@ -13870,11 +13890,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "Permission scopes",
-          "note": "A key can be limited to specific actions, though it can still reach every running machine in the organisation.",
+          "figure": "project + scopes",
+          "note": "Every project API key belongs to exactly one project, carries an explicit permission list and an optional expiry; requests are confined to both. Revocation applies to new requests, with up to 30 s of grace at a regional proxy. Organization keys are a separate, narrower type.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/api-keys.md",
-            "quote": "Sandbox runtime access is not a grantable scope. Any API key valid for an organization can address that organization's running sandboxes through the toolbox",
+            "url": "https://www.daytona.com/docs/api-keys.md",
+            "quote": "Every project API key belongs to exactly one project and carries an explicit list of [permissions](#scopes); its requests are confined to both.",
             "confidence": "docs-confirmed"
           }
         },
@@ -14195,10 +14215,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "The Playground creates sandboxes in the browser and opens terminal and desktop tabs.",
+          "figure": "dashboard",
+          "note": "The dashboard creates Linux, Windows, GPU and macOS sandboxes, and opens Terminal, Files, Desktop and SSH tabs on a running one. The Playground inside it runs TypeScript against the SDK in the browser with no key and no install.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/playground.md",
-            "quote": "Daytona provides an interactive environment (\"Playground\") for creating sandboxes",
+            "url": "https://www.daytona.com/docs/sandboxes.md",
+            "quote": "Daytona provides methods to create sandboxes from the dashboard or programmatically.",
             "confidence": "docs-confirmed"
           }
         },
@@ -14506,10 +14527,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "The CLI covers sandbox create, exec, SSH, snapshots and MCP setup.",
+          "figure": "alpha CLI",
+          "note": "An official `daytona` CLI covers login, sandbox create/exec/ssh/stop/start, snapshots, images, volumes, secrets, registries, keys, orgs, projects, billing and regions. The 2.0 build is published as `2.0.0-alpha.N` from the `daytona-alpha` Homebrew formula; the plain `daytona` formula still installs the 1.x CLI.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/mcp.md",
-            "quote": "Install the Daytona CLI to manage the MCP server.",
+            "url": "https://www.daytona.com/docs/cli.md",
+            "quote": "The v2 CLI is released as `2.0.0-alpha.N` versions.",
             "confidence": "docs-confirmed"
           }
         },
@@ -14815,10 +14837,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "Five SDKs including Python.",
+          "figure": "2.0.0a10",
+          "note": "Official Python SDK with sync and async clients, `daytona.v2` and `daytona.v0` namespaces. The 2.0 build is a pre-release: `pip install daytona==2.0.0a10`, Python 3.10+.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/architecture.md",
-            "quote": "SDKs for programmatic access",
+            "url": "https://www.daytona.com/docs/python-sdk.md",
+            "quote": "The Daytona Python SDK provides two root clients for interacting with Daytona Sandboxes",
             "confidence": "docs-confirmed"
           }
         },
@@ -15125,10 +15148,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "One of five official SDKs.",
+          "figure": "2.0.0-alpha.10",
+          "note": "Official TypeScript SDK with the same two namespaces, ESM and CJS builds, Node 22.4+ or a browser with WebSocket. The 2.0 build is `npm install @daytona/sdk@2.0.0-alpha.10`.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/architecture.md",
-            "quote": "SDKs for programmatic access",
+            "url": "https://www.daytona.com/docs/typescript-sdk.md",
+            "quote": "The Daytona TypeScript SDK provides the `Daytona` root client for interacting with Daytona Sandboxes.",
             "confidence": "docs-confirmed"
           }
         },
@@ -15438,10 +15462,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "A REST service is the entry point for every SDK and the CLI.",
+          "figure": "api.daytona.com",
+          "note": "A documented REST service at `https://api.daytona.com` with an OpenAPI reference covering sandboxes, images, snapshots, volumes, secrets, registries, reservations, previews, regions, catalog, usage, users, organisations, projects, roles, API keys, service accounts, billing, audit, system and auth.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/architecture.md",
-            "quote": "The API is a NestJS-based RESTful service that serves as the primary entry point for all platform operations",
+            "url": "https://www.daytona.com/docs/architecture.md",
+            "quote": "The API is a Rust-based RESTful service that serves as the primary entry point for all platform operations.",
             "confidence": "docs-confirmed"
           }
         },
@@ -15753,10 +15778,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "A first-party MCP server with sandbox, file, git, execution and computer-use tools.",
+          "figure": "first-party",
+          "note": "A first-party MCP server, installed through the CLI, exposing sandbox management, file system, git, process, code execution, computer use and preview tools to an MCP client.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/mcp.md",
-            "quote": "daytona mcp init claude",
+            "url": "https://www.daytona.com/docs/mcp.md",
+            "quote": "Daytona's Model Context Protocol (MCP) server connects AI agents to sandboxes.",
             "confidence": "docs-confirmed"
           }
         },
@@ -16071,10 +16097,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "A PTY API plus a web terminal and a desktop.",
+          "figure": "PTY process",
+          "note": "A PTY is a first-class process kind with terminal size, line discipline, interactive prompts, a handle API, output replay from a cursor, resize, send-input and read-output. The web terminal is a PTY client.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/pty.md",
-            "quote": "Connect to PTY session",
+            "url": "https://www.daytona.com/docs/pty.md",
+            "quote": "Daytona provides pseudo terminal (PTY) capabilities through the process module in sandboxes.",
             "confidence": "docs-confirmed"
           }
         },
@@ -16383,10 +16410,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "An `fs` module for listing, reading, writing, uploading and downloading.",
+          "figure": "fs module",
+          "note": "List, stat, mkdir, upload, download, delete, chmod, search by pattern, find-and-replace, move, rename, watch for changes, and presigned URLs for large transfers. Uploads stream to disk, so size is bounded by storage, not memory.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/file-system-operations.md",
-            "quote": "The `fs` module covers listing directories, reading file metadata, creating directories, uploading and downloading files",
+            "url": "https://www.daytona.com/docs/file-system-operations.md",
+            "quote": "File system operations are available through the file system module of a sandbox.",
             "confidence": "docs-confirmed"
           }
         },
@@ -16698,14 +16726,14 @@
         },
         {
           "provider": "daytona",
-          "verdict": "yes",
+          "verdict": "partly",
+          "figure": "claimed, unpublished",
+          "shortfall": "Two CLI guides say Claude Code and OpenClaw are in the default snapshot, but the 2.0 images page lists no contents or versions, the guides still use 1.x `--snapshot` flags, and every other agent guide starts by installing the agent.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/snapshots.md",
-            "quote": "Default snapshots include pre-installed Python and Node.js packages.",
+            "url": "https://www.daytona.com/docs/guides/claude/claude-code-run-cli-sandbox.md",
+            "quote": "The default Daytona snapshot includes Claude Code, so the command above is all you need.",
             "confidence": "docs-confirmed"
-          },
-          "figure": "Claude Code, Codex, OpenClaw, OpenCode",
-          "note": "The default snapshots list Claude Code, Codex, OpenClaw and OpenCode as preinstalled npm packages; some guides still run an install step."
+          }
         },
         {
           "provider": "e2b",
@@ -17021,11 +17049,12 @@
         {
           "provider": "daytona",
           "verdict": "no",
-          "shortfall": "No agent is hosted and there is no prompt call; you install and drive the agent.",
+          "figure": "no endpoint",
+          "note": "No endpoint takes a prompt and runs an agent. The API reference has sandboxes, images, snapshots, volumes, secrets, registries, reservations, previews, regions, catalog, usage, users, organisations, projects, roles, keys, service accounts, billing, audit, system and auth — no agent or prompt resource — and the guides tell you to start the agent in a shell yourself.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox.md",
-            "quote": "Run Claude Code in a Daytona Sandbox via CLI",
-            "confidence": "docs-confirmed"
+            "url": "https://www.daytona.com/docs/guides/claude/claude-code-run-cli-sandbox.md",
+            "quote": "Inside the SSH session, start Claude Code:",
+            "confidence": "inferred"
           }
         },
         {
@@ -17334,11 +17363,12 @@
         {
           "provider": "daytona",
           "verdict": "no",
-          "shortfall": "Daytona documents OpenClaw but not Hermes, so there is no one-click route.",
+          "figure": "v0 config backend",
+          "note": "Hermes ships a `daytona` terminal backend, not a one-click deploy: you set `terminal.backend: daytona`, provide a Daytona API key, and Hermes creates a container through the 1.x API with `container_disk` capped at 10 GiB and stop/resume persistence. Those are 1.x semantics, and Hermes is absent from Daytona's own 2.0 guide index.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/guides/openclaw/openclaw-run-secure-sandbox.md",
-            "quote": "OpenClaw comes preinstalled in the default Daytona snapshot",
-            "confidence": "inferred"
+            "url": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration",
+            "quote": "Runs commands in a Daytona managed workspace. Supports stop/resume for persistence.",
+            "confidence": "third-party"
           }
         },
         {
@@ -17646,10 +17676,11 @@
         {
           "provider": "daytona",
           "verdict": "partly",
-          "shortfall": "OpenClaw is in the default snapshot, but you still run a command to start and configure it.",
+          "figure": "preinstalled, CLI setup",
+          "shortfall": "OpenClaw is said to be in the default snapshot, but the documented route still creates a sandbox from the command line, SSHs in, runs onboarding, starts the gateway by hand and opens a signed preview URL; the Daytona guide and OpenClaw's own guide both still use 1.x `--snapshot daytona-medium` and `--auto-stop 0` flags.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/guides/openclaw/openclaw-run-secure-sandbox.md",
-            "quote": "OpenClaw comes preinstalled in the default Daytona snapshot, so the command above is all you need.",
+            "url": "https://www.daytona.com/docs/guides/openclaw/openclaw-run-secure-sandbox.md",
+            "quote": "daytona sandbox create --name openclaw --snapshot daytona-medium --auto-stop 0",
             "confidence": "docs-confirmed"
           }
         },
@@ -17960,13 +17991,13 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "The standard sandbox image carries Chromium and ffmpeg, and the computer-use desktop drives it.",
+          "figure": "Chromium in image",
+          "note": "Chromium is in Daytona's standard sandbox image, according to the Devin Outposts guide, and the Claude-draws guide launches it in `--app` mode on a default sandbox desktop without an install step.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/guides/devin/devin-outposts.md",
-            "quote": "already carries Chromium and ffmpeg",
+            "url": "https://www.daytona.com/docs/guides/devin/devin-outposts.md",
+            "quote": "It builds on Daytona's standard sandbox image, which already carries Chromium and ffmpeg for Devin's browser and screen tooling",
             "confidence": "docs-confirmed"
-          },
-          "figure": "Chromium"
+          }
         },
         {
           "provider": "e2b",
@@ -18276,10 +18307,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "A VNC desktop plus a computer-use API for screenshots, clicks and typing.",
+          "figure": "VNC + computer use",
+          "note": "A 1280×720 X11 desktop (D-Bus, Xvfb, XFCE, x11vnc) ships with the sandbox runtime and works on any Linux image, including images with no desktop packages; the dashboard opens it in a browser tab and Computer Use drives it through an API with mouse, keyboard, screenshot, screen recording, accessibility and display calls.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/computer-use.md",
-            "quote": "Computer Use enables programmatic control of desktop environments within sandboxes.",
+            "url": "https://www.daytona.com/docs/vnc-access.md",
+            "quote": "The desktop stack (D-Bus, Xvfb, the XFCE window manager, and the x11vnc server) ships with the sandbox runtime as a self-contained add-on",
             "confidence": "docs-confirmed"
           }
         },
@@ -18596,10 +18628,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "First-party guides cover Claude Code and Claude managed agents, Codex and the OpenAI Agents API, Gemini, Cursor self-hosted machines, Devin Outposts, OpenCode, Amp, Kiro and more.",
+          "figure": "12+ first-party guides",
+          "note": "First-party 2.0 guides cover Claude Code and Claude Managed Agents, Codex and the OpenAI Agents API self-hosted, Gemini CLI, Cursor self-hosted machines, Devin Outposts and the Devin CLI, OpenCode, Amp, Kiro, Kimi, Letta Code, Pi, Flue and Brainbase.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox.md",
-            "quote": "Run Claude Code in a Daytona Sandbox via CLI",
+            "url": "https://www.daytona.com/docs/guides/devin/devin-outposts.md",
+            "quote": "Set up Devin Outposts so that every Devin session in your org does its work inside a Daytona sandbox you own.",
             "confidence": "docs-confirmed"
           }
         },
@@ -18909,10 +18942,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "A collaborative organisation holds members and shared sandboxes.",
+          "figure": "orgs + projects",
+          "note": "Personal and collaborative organisations; a collaborative organisation holds members, invitations, roles, billing and any number of projects. Every resource belongs to a project, and project membership controls who sees it.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/organizations.md",
-            "quote": "Every member of an organization can address that organization's running sandboxes",
+            "url": "https://www.daytona.com/docs/organizations.md",
+            "quote": "Users can work individually in their personal organization or together in a collaborative organization.",
             "confidence": "docs-confirmed"
           }
         },
@@ -19218,11 +19252,11 @@
         },
         {
           "provider": "daytona",
-          "verdict": "partly",
-          "shortfall": "Roles decide who can manage the organisation, but any member or key can still run commands in any running sandbox.",
+          "verdict": "yes",
+          "figure": "17 roles",
           "source": {
-            "url": "https://www.daytona.io/docs/en/organizations.md",
-            "quote": "Every member of an organization can address that organization's running sandboxes",
+            "url": "https://www.daytona.com/docs/organizations.md",
+            "quote": "Each member of an organization holds one or more roles.",
             "confidence": "docs-confirmed"
           }
         },
@@ -19535,9 +19569,10 @@
         {
           "provider": "daytona",
           "verdict": "partly",
-          "shortfall": "SSO is available only on the Enterprise plan for collaborative organisations.",
+          "figure": "Enterprise only",
+          "shortfall": "SAML/OIDC single sign-on and SCIM directory sync are configured through an Admin Portal setup link, but only on the Enterprise plan for a collaborative organisation; Starter and Team have no SSO.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/sso.md",
+            "url": "https://www.daytona.com/docs/sso.md",
             "quote": "SSO is available on the Enterprise plan for collaborative organizations.",
             "confidence": "docs-confirmed"
           }
@@ -19848,11 +19883,12 @@
         },
         {
           "provider": "daytona",
-          "verdict": "partly",
-          "shortfall": "The ceiling is a prepaid pool of computing resources rather than a dollar amount, and running sandboxes are not stopped when it runs out.",
+          "verdict": "yes",
+          "figure": "project budgets",
+          "note": "A project budget is a dollar cap per calendar month at list price, before credits. Reaching it refuses new sandboxes, forks, starts, resumes and restores; after the organisation's grace period it stops persistent sandboxes and deletes ephemeral ones, while macOS runs to the end of its paid reservation. Catches: spend lags by minutes, the cap is monthly rather than per sandbox, and it is Team+.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/billing.md",
-            "quote": "Daytona uses a pay-as-you-go billing model where you are charged based on the resources reserved for your sandboxes.",
+            "url": "https://www.daytona.com/docs/projects.md",
+            "quote": "A project budget caps the project's spend in each calendar month, in UTC, at list price and before credits.",
             "confidence": "docs-confirmed"
           }
         },
@@ -20163,11 +20199,12 @@
         },
         {
           "provider": "daytona",
-          "verdict": "not-published",
-          "note": "No usage alert or budget threshold is published.",
+          "verdict": "partly",
+          "figure": "balance email only",
+          "shortfall": "The only threshold alert is a balance-notification email when the wallet falls below an amount you set; there is no alert as spend approaches a project budget, and the budget itself acts by refusing or stopping rather than by notifying.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/billing.md",
-            "quote": "Sandboxes are billed for the resources reserved",
+            "url": "https://www.daytona.com/docs/billing.md",
+            "quote": "Balance notification emails the organization's billing contact when the wallet balance drops below a threshold",
             "confidence": "docs-confirmed"
           }
         },
@@ -20478,10 +20515,11 @@
         {
           "provider": "daytona",
           "verdict": "partly",
-          "shortfall": "The log exists, but exporting it for an audit is not shipped yet.",
+          "figure": "Enterprise to read",
+          "shortfall": "Daytona records audit entries for every organisation and keeps them 365 days, but querying the log requires the Enterprise plan, so Starter and Team customers are recorded without being able to read the record.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/audit-logs.md",
-            "quote": "**Compliance Export**: export logs for internal or external audits (coming soon)",
+            "url": "https://www.daytona.com/docs/audit-logs.md",
+            "quote": "Audit logs are retained for 365 days.",
             "confidence": "docs-confirmed"
           }
         },
@@ -20797,9 +20835,10 @@
           "provider": "daytona",
           "verdict": "yes",
           "figure": "per second",
+          "note": "Three resources metered per second from start to stop, pause or delete, each priced per hour. No minimum billed duration is published; the minimum top-up is $10 but that is a wallet rule, not a billing increment.",
           "source": {
-            "url": "https://www.daytona.io/pricing",
-            "quote": "All billing is calculated per second.",
+            "url": "https://www.daytona.com/docs/billing.md",
+            "quote": "Daytona meters each sandbox per second for three resources, from the moment the sandbox starts until it is stopped, paused, or deleted.",
             "confidence": "docs-confirmed"
           }
         },
@@ -21112,11 +21151,11 @@
         {
           "provider": "daytona",
           "verdict": "no",
-          "figure": "reserved size",
-          "shortfall": "You pay for the cores and memory you reserved, not the ones the work used.",
+          "figure": "guarantee floor",
+          "note": "You pay for the guaranteed cores whether or not the work uses them: usage within the guarantee is billed at the guarantee. Above the guarantee the meter follows measured use, so a burst is billed for what it uses, but an idle sandbox still pays its floor.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/billing",
-            "quote": "Sandboxes are billed for the resources reserved: vCPU, RAM, and disk",
+            "url": "https://www.daytona.com/docs/billing.md",
+            "quote": "CPU and memory usage within the guarantee is billed at the guarantee",
             "confidence": "docs-confirmed"
           }
         },
@@ -21437,11 +21476,12 @@
         },
         {
           "provider": "daytona",
-          "verdict": "yes",
-          "figure": "disk only",
+          "verdict": "partly",
+          "figure": "Linux cannot stop",
+          "shortfall": "A stopped Windows sandbox bills nothing, but a Linux sandbox cannot stop or pause at all — it bills its guarantee until deleted — and a paused macOS sandbox keeps paying its $60.08-a-day Mac reservation.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/billing",
-            "quote": "Billed for reserved disk only. The preserved memory state is not billed.",
+            "url": "https://www.daytona.com/docs/billing.md",
+            "quote": "Stopped, paused, and deleted sandboxes are not metered for CPU, memory, or disk.",
             "confidence": "docs-confirmed"
           }
         },
@@ -21760,10 +21800,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "none",
+          "figure": "Starter $0",
+          "note": "Starter is $0 a month plus compute; there is no minimum spend and no plan fee to start. Team is $250 a month, so the statement is true only of the entry plan.",
           "source": {
-            "url": "https://www.daytona.io/pricing",
-            "quote": "Build for free, pay as you scale.",
+            "url": "https://www.daytona.com/pricing.md",
+            "quote": "**$0** + compute / month · $200 one-time free credits",
             "confidence": "pricing-page"
           }
         },
@@ -22087,10 +22128,10 @@
           "provider": "daytona",
           "verdict": "no",
           "figure": "metered parts",
-          "shortfall": "The bill is cores plus memory plus disk per second.",
+          "note": "The bill is the sum of core-hours, GiB-hours and disk GiB-hours, multiplied by CPU-type, region and spot factors, plus any plan fee. No flat per-machine price exists.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/billing",
-            "quote": "Sandboxes are billed for the resources reserved: vCPU, RAM, and disk",
+            "url": "https://www.daytona.com/docs/billing.md",
+            "quote": "Each resource is priced per hour.",
             "confidence": "docs-confirmed"
           }
         },
@@ -22412,12 +22453,12 @@
         {
           "provider": "daytona",
           "verdict": "no",
-          "figure": "one-off $200",
-          "shortfall": "The $200 is a one-time credit, not something that returns every month.",
+          "figure": "one-time $200",
+          "note": "Nothing recurs for free: the Starter credit is a single $200 grant, and Team's $100 a month is a rebate on a $250 monthly fee, not a free allowance.",
           "source": {
-            "url": "https://www.daytona.io/pricing",
-            "quote": "$200 in free compute included.",
-            "confidence": "inferred"
+            "url": "https://www.daytona.com/pricing.md",
+            "quote": "| Included compute | $200 one time | $100 / month | Custom |",
+            "confidence": "pricing-page"
           }
         },
         {
@@ -22741,10 +22782,10 @@
           "provider": "daytona",
           "verdict": "yes",
           "figure": "$200",
-          "note": "The credit cannot be spent on graphics machines.",
+          "note": "$200 of free compute on Starter, no card, applied to Linux, Windows and macOS; GPU sandboxes cannot spend it (1.x rule; 2.0's GPU page is a stub, so the exclusion is carried over as unverified).",
           "source": {
-            "url": "https://www.daytona.io/pricing",
-            "quote": "$200 in free compute included.",
+            "url": "https://www.daytona.com/pricing.md",
+            "quote": "$200 in free compute included",
             "confidence": "pricing-page"
           }
         },
@@ -23068,9 +23109,10 @@
           "provider": "daytona",
           "verdict": "yes",
           "figure": "no card",
+          "note": "Sign-up advertises no credit card, and the wallet page describes a one-time free-credit grant when the first card is connected and another when the creator verifies their email, which implies the card is optional rather than required to start.",
           "source": {
-            "url": "https://www.daytona.io/pricing",
-            "quote": "Sign up for a free trial - no credit card required",
+            "url": "https://www.daytona.com/pricing.md",
+            "quote": "no credit card required",
             "confidence": "pricing-page"
           }
         },
@@ -23388,7 +23430,8 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "Components are grouped into Global (API) and Sandbox (creation and execution).",
+          "figure": "Better Stack",
+          "note": "A public Better Stack status page with Global, app.daytona.io API endpoint, Sandbox, Sandbox creation and Creating Sandboxes with exec code components, each with a 90-day uptime bar. All services were online at the check. It is shared with 1.x and does not separate the two platforms.",
           "source": {
             "url": "https://status.app.daytona.io/",
             "quote": "All services are online",
@@ -23699,10 +23742,10 @@
         {
           "provider": "daytona",
           "verdict": "partly",
-          "figure": "99.95%, Tier 4+",
-          "shortfall": "The 99.95% target exists, but service credits go only to Tier 4 and above.",
+          "figure": "Tier 4+ credits",
+          "shortfall": "The SLA promises 99.95% monthly availability, but service credits are available only to Tier 4 and above customers, by a claim within 30 days, capped at 50% of the month's fee and paid as future usage; the 2.0 price list sells Starter, Team and Enterprise, so which plan is Tier 4 is unpublished.",
           "source": {
-            "url": "https://www.daytona.io/sla",
+            "url": "https://www.daytona.com/sla",
             "quote": "Daytona will use commercially reasonable efforts to make the Services available 99.95% of the time in any given calendar month",
             "confidence": "docs-confirmed"
           }
@@ -24019,11 +24062,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "figure": "Type II",
-          "note": "A SOC 2 Type II report covering December 2025 to March 2026 is available from the trust centre.",
+          "figure": "Type I + II",
+          "note": "The trust centre publishes SOC 2 Type 1 and Type 2 reports, plus a HIPAA attestation, GDPR, an ISO/IEC 27001 category, a pentest report and cyber insurance. SOC 2 is listed as included on every plan.",
           "source": {
             "url": "https://trust.daytona.io/",
-            "quote": "on July 28, 2026 with an unqualified opinion covering the period December 16, 2025",
+            "quote": "SOC 2 Type 1",
             "confidence": "docs-confirmed"
           }
         },
@@ -24336,10 +24379,11 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "A public DPA names the supervisory authority and the subprocessor notice period.",
+          "figure": "public DPA, SCCs",
+          "note": "A public data processing agreement with EU standard contractual clauses, an Irish governing-law choice for the SCCs, a subprocessor list and email notice of changes. It names Daytona Platforms Inc. at the New York address as processor.",
           "source": {
-            "url": "https://www.daytona.io/dpa",
-            "quote": "Data Processing Agreement",
+            "url": "https://www.daytona.com/dpa",
+            "quote": "This Data Processing Agreement",
             "confidence": "docs-confirmed"
           }
         },
@@ -24646,13 +24690,13 @@
         {
           "provider": "daytona",
           "verdict": "partly",
-          "figure": "BYOC, Enterprise",
-          "shortfall": "Only the sandbox compute runs on your own machines, only after Daytona enables it, and the control plane stays Daytona's.",
-          "note": "The public repository is archived, so there is no open-source route either.",
+          "figure": "BYOC Enterprise",
+          "shortfall": "The managed platform is closed source and the old public repository is archived; the only self-hosting is BYOC on Enterprise, which runs sandboxes in your own cloud account while Daytona keeps the control plane, and it is sales-scoped rather than a downloadable licence.",
+          "note": "---",
           "source": {
-            "url": "https://www.daytona.io/docs/en/bring-your-own-compute.md",
-            "quote": "Bring Your Own Compute enables you to run sandbox workloads on your own infrastructure while using Daytona's control plane to manage them.",
-            "confidence": "docs-confirmed"
+            "url": "https://www.daytona.com/pricing.md",
+            "quote": "Yes. Enterprise plans support BYOC, running Daytona sandboxes on compute in your own cloud account.",
+            "confidence": "pricing-page"
           }
         },
         {

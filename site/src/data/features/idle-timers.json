@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "15 min container; 60 min VM",
-      "scenario": "Stops at 15 minutes even mid-build, because only external calls reset the timer; the VM class would pause at 60 minutes instead.",
-      "note": "Container and GPU auto-stop after 15 idle minutes by default; VM classes auto-pause after 60. Only lifecycle calls, preview requests, SSH and Toolbox calls reset it. An optional TTL destroys in any state; a stopped container archives after 7 days.",
+      "figure": "Idle delete; 24/48 h cap",
+      "scenario": "Set a one-hour idle timeout and the box is deleted, not paused; leave it unset and the wall-clock timeout still deletes it at 24 hours.",
+      "note": "The idle timeout is off by default, has a 60 s minimum, and its only Linux action is delete (stop on Windows, stop on persistent macOS); it fires within about 2 minutes of the interval. Activity is any toolbox request, preview request, VNC or SSH traffic, a running toolbox command, create/start, or a manual reset. A wall-clock timeout starts at boot, is not extended by activity, cannot be cleared once set, and is capped by the organisation maximum: 24 h on Starter, 48 h on Team. The docs also mention a platform default of 300 s if the platform default is enabled, which no page confirms for a new organisation.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/sandboxes.md",
-        "quote": "if not set, the default interval of 15 minutes is used",
+        "url": "https://www.daytona.com/docs/linux-sandboxes.md",
+        "quote": "The idle timeout is off by default unless the project sets one, has a minimum of 60 seconds, and requires an action.",
         "confidence": "docs-confirmed"
       }
     },

@@ -113,13 +113,13 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "Own proxy",
-      "scenario": "Not native: you host a preview proxy under demo.acme.com, and it starts stopped sandboxes before forwarding.",
-      "note": "No native custom domain. The documented route is your own preview proxy, which can also start stopped sandboxes before forwarding.",
+      "figure": "Beta on Team; own proxy",
+      "scenario": "On Team you attach demo.acme.com as a beta; on Starter you run your own proxy under the domain and forward to the preview URL.",
+      "note": "Custom domains (Beta) is listed for Team and Enterprise only. No page documents how to attach one, what certificate is used, whether it survives a recreate, or how it authenticates. The preview page documents the other route: your own proxy, forwarding to the standard preview URL with a credential, which Daytona strips before the request reaches the sandbox. The default host is a Daytona subdomain containing the sandbox ID, so a recreated sandbox changes URL unless the beta or your proxy hides it.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/custom-preview-proxy.md",
-        "quote": "host your proxy under your own domain",
-        "confidence": "docs-confirmed"
+        "url": "https://www.daytona.com/pricing.md",
+        "quote": "Custom domains (Beta)",
+        "confidence": "pricing-page"
       }
     },
     {

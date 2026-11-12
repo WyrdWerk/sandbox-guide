@@ -104,13 +104,13 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "$0.0504/vCPU-hour",
-      "scenario": "The waiting box pays for its reserved 2 vCPU and 4 GiB every second; stopped, it pays disk only.",
-      "note": "Reserved vCPU at $0.0504/hour, memory at $0.0162/GiB-hour and disk at $0.000108/GiB-hour, billed per second with no plan fee. Windows adds $0.0858/vCPU-hour, which may replace or add to the Linux rate.",
+      "figure": "$0.101/core-h + floor",
+      "scenario": "The waiting box pays for its 1-core guarantee every second even at 2% CPU; above it Daytona bills measured use up to the limit, and a Team plan adds $250 before the first sandbox.",
+      "note": "Per-second, three meters: CPU core-hours (greater of measured and guarantee), memory GiB-hours (same), disk GiB-hours (measured; ephemeral is free). Spot is 0.7× and reclaimable. CPU types multiply 1.0 / 1.667 / 2.331 and regions 1.15–2×, and the multipliers compound. Team is $250/month with $100 of credits that expire at the end of the period. Egress, bucket-volume traffic, snapshot storage and image storage have no published price. The meter is a measured-with-a-floor shape the feature's four-way taxonomy does not name; the guarantee behaves like reserved billing for an idle box and the burst like measured billing.",
       "source": {
-        "url": "https://www.daytona.io/pricing",
-        "quote": "vCPU $0.0504/h",
-        "confidence": "pricing-page"
+        "url": "https://www.daytona.com/docs/billing.md",
+        "quote": "Daytona meters each sandbox per second for three resources, from the moment the sandbox starts until it is stopped, paused, or deleted.",
+        "confidence": "docs-confirmed"
       }
     },
     {

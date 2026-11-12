@@ -103,12 +103,12 @@
     {
       "provider": "daytona",
       "verdict": "yes",
-      "figure": "Yes, playground",
-      "scenario": "A non-coder creates a sandbox in the browser Playground, opens the terminal or VNC tab, and never installs the CLI.",
-      "note": "A dashboard Playground, web terminal, VNC desktop, five SDKs, a REST API, a CLI, a first-party MCP server, and webhooks that need support to enable.",
+      "figure": "2 SDKs, CLI, API, MCP",
+      "scenario": "A TypeScript agent uses the SDK, a shell script the CLI, a Python service the SDK, and an MCP client the first-party server; the dashboard Playground runs TypeScript in the browser with no key.",
+      "note": "Dashboard, browser Playground (TypeScript only, no key, no install), CLI, Python and TypeScript SDKs, REST API, first-party MCP server, SSH, web terminal and VNC. The 2.0 clients are alpha: the CLI is `2.0.0-alpha.N` (`brew install daytonaio/cli/daytona-alpha`), Python is `2.0.0a10`, TypeScript is `2.0.0-alpha.10`. Ruby, Go and Java SDKs exist only for 1.x. The Playground is an SDK runner, not a sandbox manager: you write TypeScript against the SDK and press Run.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/playground.md",
-        "quote": "Daytona provides an interactive environment (\"Playground\") for creating sandboxes, running SDK operations, and exploring Daytona features directly from your browser",
+        "url": "https://www.daytona.com/docs/cli.md",
+        "quote": "The v2 CLI is released as `2.0.0-alpha.N` versions.",
         "confidence": "docs-confirmed"
       }
     },

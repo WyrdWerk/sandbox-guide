@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "yes",
-      "figure": "$200 credit, no card",
-      "scenario": "The trial is $200 of compute with no card and no published expiry; GPU sandboxes cannot spend it.",
-      "note": "A $200 free compute credit with no card, and Tier 1 access by email verification. The credit is not available for GPU sandboxes; its expiry is not published.",
+      "figure": "$200 one-time; no card",
+      "scenario": "A new account runs $200 of compute with no card, about seven months of workload A; when it runs out the card is the only way to continue, and Team's $100 a month is a rebate on a $250 fee, not a free tier.",
+      "note": "Starter: $200 one-time credit, no card, 3 members, 100 sandboxes, 24 h sessions, 7 GPUs, 10 Windows core licences, 10 Mac reservations. Team: $250/month with $100/month credits that expire at the end of the period, so the credit never covers the fee. No recurring free allowance on either plan. The startup programme offers up to $100k ($10k to start) and academic research gets credits; both are applications, not a free tier.",
       "source": {
-        "url": "https://www.daytona.io/pricing",
-        "quote": "$200 in free compute included",
+        "url": "https://www.daytona.com/pricing.md",
+        "quote": "Build for free, pay as you scale. $200 in free compute included, no credit card required.",
         "confidence": "pricing-page"
       }
     },

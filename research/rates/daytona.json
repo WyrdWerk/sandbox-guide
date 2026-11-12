@@ -2,387 +2,263 @@
   "id": "daytona",
   "name": "Daytona",
   "checkedOn": "2026-11-12",
+  "product": "Daytona 2.0 at daytona.com (docs v2.0, launched 1 November 2026). Daytona 1.x at daytona.io, which the 2.0 docs call v0, is still sold but no longer described here.",
   "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "regions": {
-    "value": "Shared regions us (United States) and eu (Europe).",
-    "url": "https://www.daytona.io/docs/en/regions",
-    "quote": "| United States | **`us`**   |\n| Europe        | **`eu`**   |"
+    "value": "earth (1.0x), us (1.15x), us-east (1.75x), us-east-ash-1 and us-east-bos-1 (2.0x), plus macos-1. No European region is documented.",
+    "url": "https://www.daytona.com/docs/regions",
+    "quote": "United States us · 1.15× US East (Ashburn) us-east · 1.75× Ashburn us-east-ash-1 · 2.0× Boston us-east-bos-1 · 2.0×"
   },
   "plans": [
     {
-      "name": "Tier 1 (email verified)",
+      "name": "Starter",
       "monthlyFeeUsd": 0,
-      "includedUsage": "No included credit. Pay-as-you-go usage against prepaid credit; $200 free compute on sign-up.",
+      "includedUsage": "$200 one-time free credit, no card.",
       "limits": {
-        "maxConcurrent": null,
-        "maxConcurrentNote": "No sandbox count: an org-wide pool of 10 vCPU / 10 GiB RAM / 30 GiB disk (the same page's Limits table says 20 GiB RAM).",
-        "maxSessionLength": "No maximum published. Container sandboxes auto-stop after 15 minutes idle by default; VM sandboxes auto-pause after 60 minutes.",
-        "maxSize": "4 vCPU / 8 GiB RAM / 10 GiB disk"
+        "maxConcurrent": 100,
+        "maxSessionLength": "24 hours",
+        "maxSize": "4 cores (8 vCPU) / 16 GiB per sandbox (limits page); the pricing table says 64 cores / 128 GiB",
+        "members": 3
       },
-      "url": "https://www.daytona.io/docs/en/limits",
-      "quote": "| Tier 1   | 10 / 10GiB / 30GiB                   | Email verified                                          |"
+      "url": "https://www.daytona.com/pricing.md",
+      "quote": "**$0** + compute / month · $200 one-time free credits"
     },
     {
-      "name": "Tier 2 (card linked, $25 top-up)",
-      "monthlyFeeUsd": 0,
-      "includedUsage": "$25 prepaid top-up, spent as credit.",
+      "name": "Team",
+      "monthlyFeeUsd": 250,
+      "includedUsage": "$100 of credits a month, expiring at the end of the billing period.",
       "limits": {
-        "maxConcurrent": null,
-        "maxConcurrentNote": "Org-wide pool of 100 vCPU / 200 GiB RAM / 300 GiB disk.",
-        "maxSessionLength": "No maximum published; same idle rules as Tier 1.",
-        "maxSize": "4 vCPU / 8 GiB RAM / 10 GiB disk"
+        "maxConcurrent": 5000,
+        "maxSessionLength": "48 hours",
+        "maxSize": "8 cores (16 vCPU) / 32 GiB per sandbox (limits page)",
+        "members": "unlimited"
       },
-      "url": "https://www.daytona.io/docs/en/limits",
-      "quote": "| Tier 2   | 100 / 200GiB / 300GiB                | Credit card linked, $25 top-up                          |"
+      "url": "https://www.daytona.com/docs/billing.md",
+      "quote": "The Team plan has a monthly fee of $250, billed in advance, and includes $100 of credits each month that expire at the end of the billing period."
     },
     {
-      "name": "Tier 3 ($500 top-up)",
-      "monthlyFeeUsd": 0,
-      "includedUsage": "$500 prepaid top-up, spent as credit. Full internet access from this tier.",
-      "limits": {
-        "maxConcurrent": null,
-        "maxConcurrentNote": "Org-wide pool of 250 vCPU / 500 GiB RAM / 2,000 GiB disk.",
-        "maxSessionLength": "No maximum published; same idle rules as Tier 1.",
-        "maxSize": "4 vCPU / 8 GiB RAM / 10 GiB disk"
-      },
-      "url": "https://www.daytona.io/docs/en/limits",
-      "quote": "| Tier 3   | 250 / 500GiB / 2000GiB               | $500 top-up                                             |"
-    },
-    {
-      "name": "Tier 4 ($2,000 top-up every 30 days)",
-      "monthlyFeeUsd": 2000,
-      "includedUsage": "$2,000 prepaid top-up every 30 days, spent as credit; a de facto recurring minimum.",
-      "limits": {
-        "maxConcurrent": null,
-        "maxConcurrentNote": "Org-wide pool of 500 vCPU / 1,000 GiB RAM / 5,000 GiB disk.",
-        "maxSessionLength": "No maximum published; same idle rules as Tier 1.",
-        "maxSize": "4 vCPU / 8 GiB RAM / 10 GiB disk"
-      },
-      "url": "https://www.daytona.io/docs/en/limits",
-      "quote": "| Tier 4   | 500 / 1000GiB / 5000GiB              | $2000 top-up every 30 days                              |"
-    },
-    {
-      "name": "Enterprise / BYOC",
+      "name": "Enterprise",
       "monthlyFeeUsd": null,
-      "includedUsage": "Custom limits, SSO/SCIM, audit logs, dedicated regions and BYOC; price not published.",
+      "includedUsage": "Custom; BYOC, SSO, audit logs, HIPAA, KVM.",
       "limits": {
-        "maxConcurrent": null,
-        "maxSessionLength": "Custom",
-        "maxSize": "Custom"
+        "maxSize": "64 cores / 256 GiB plan caps, above the 16-core platform maximum"
       },
-      "url": "https://www.daytona.io/pricing",
-      "quote": "Designed for businesses that need larger limits, SSO, audit logs, or BYOC"
+      "url": "https://www.daytona.com/pricing.md",
+      "quote": "Audit logs, SSO, HIPAA, Trust Center access"
     }
   ],
   "compute": {
     "model": "per-resource",
     "rates": [
       {
-        "resource": "vCPU",
-        "usdPerVcpuHour": 0.0504,
+        "resource": "CPU core",
+        "usdPerVcpuHour": 0.0505,
         "original": {
-          "value": 0.0504,
-          "unit": "USD per vCPU-hour"
+          "value": 0.101,
+          "unit": "USD per core-hour, on demand"
         },
-        "basis": "allocated",
-        "url": "https://www.daytona.io/pricing",
-        "quote": "Compute\nvCPU\n$0.0504/h"
+        "basis": "allocated (guarantee)",
+        "url": "https://www.daytona.com/pricing.md",
+        "quote": "| AMD Zen 3 · Intel Ice Lake · AWS Graviton 4 · Apple M4 | $0.0706 | $0.101 |"
       },
       {
         "resource": "RAM",
         "usdPerGibRamHour": 0.0162,
         "original": {
           "value": 0.0162,
-          "unit": "USD per GiB-hour"
+          "unit": "USD per GiB-hour, on demand"
         },
-        "basis": "allocated",
-        "url": "https://www.daytona.io/pricing",
-        "quote": "Memory\nGiB\n$0.0162/h"
+        "basis": "allocated (guarantee)",
+        "url": "https://www.daytona.com/pricing.md",
+        "quote": "| RAM | $0.0113 | $0.0162 |"
       }
     ],
+    "coreToVcpu": {
+      "value": "1 core = 2 vCPU where SMT is on, 1 vCPU otherwise (Graviton, Apple). The per-vCPU rate above assumes SMT.",
+      "url": "https://www.daytona.com/pricing.md",
+      "quote": "One core is equivalent to 2 vCPUs where SMT (simultaneous multithreading, also called hyperthreading) is available and enabled, and 1 vCPU otherwise."
+    },
     "cpuBasis": "allocated",
     "cpuBasisNote": {
-      "value": "Billed on the vCPU, RAM and disk reserved for the sandbox, not on measured use. Transitions (creating, starting, stopping, pausing) bill the same as started.",
-      "url": "https://www.daytona.io/docs/en/billing",
-      "quote": "Sandboxes are billed for the resources reserved: vCPU, RAM, and disk"
-    },
-    "floor": {
-      "value": "None: there is no measured-CPU floor because the full reservation is billed.",
-      "url": "https://www.daytona.io/docs/en/billing",
-      "quote": "Sandboxes are billed for the resources reserved: vCPU, RAM, and disk"
+      "value": "The guarantee is billed whether used or not; usage above it, up to the limit, is billed as measured.",
+      "url": "https://www.daytona.com/docs/billing.md",
+      "quote": "CPU and memory usage within the guarantee is billed at the guarantee; usage above it, up to the sandbox's resource limits, is billed as measured."
     },
     "billingIncrement": {
-      "value": "Per second.",
-      "url": "https://www.daytona.io/pricing",
-      "quote": "All billing is calculated per second."
+      "value": "Per second from start until stop, pause or delete.",
+      "url": "https://www.daytona.com/docs/billing.md",
+      "quote": "Daytona meters each sandbox per second for three resources, from the moment the sandbox starts until it is stopped, paused, or deleted."
     },
-    "minimum": {
-      "value": "Not published. No minimum billed seconds or minimum spend beyond the tier top-ups is stated.",
-      "url": "https://www.daytona.io/pricing",
-      "quote": "All billing is calculated per second."
+    "multipliers": {
+      "value": "Spot 0.7x; CPU type 1.0 / 1.6667 / 2.3313 ($0.101 / $0.168 / $0.235 a core-hour); region 1.0-2.0x. They compound.",
+      "url": "https://www.daytona.com/docs/billing.md",
+      "quote": "Each dimension applies a multiplier to the base price; the multipliers compound."
     },
-    "perPlanDifferences": {
-      "value": "Daytona publishes one rate card rather than per-tier rates; the tier tables change the resource pool and network access, not the vCPU, memory or storage price. Windows bills a separate OS rate; GPU bills per GPU-hour.",
-      "url": "https://www.daytona.io/docs/en/limits",
-      "quote": "Daytona uses a ... system where organizations are placed into tiers based on verification status, with each tier providing access to a specific compute pool and rate limits."
+    "spot": {
+      "value": "0.7x CPU, memory and disk; reclaimable; GPU sandboxes cannot be spot.",
+      "url": "https://www.daytona.com/docs/preemption.md",
+      "quote": "Spot multiplies the CPU, memory, and disk price by 0.7"
     },
     "classes": [
       {
-        "name": "Linux container (default) and Linux VM",
-        "rates": "Same vCPU $0.0504/h and RAM $0.0162/h; per-sandbox max 4 vCPU / 8 GiB / 10 GiB disk.",
-        "url": "https://www.daytona.io/docs/en/sandboxes",
-        "quote": "Sandboxes have 1 vCPU, 1GB RAM, and 3GiB disk by default. Organizations get a maximum sandbox resource limit of 4 vCPUs, 8GB RAM, and 10GB disk."
+        "name": "Linux (Firecracker)",
+        "rates": "$0.101/core-hour + $0.0162/GiB-hour; 0.125-16 cores, 0.5-32 GiB, 10-256 GiB.",
+        "url": "https://www.daytona.com/docs/sandboxes.md",
+        "quote": "A Linux sandbox may guarantee at most 16 cores, 32GiB memory, and 256GiB disk."
       },
       {
         "name": "Windows",
-        "rates": "$0.0858 per vCPU-hour listed as a separate OS line, on top of or instead of the $0.0504 compute rate (unresolved).",
-        "url": "https://www.daytona.io/pricing",
-        "quote": "OS\nWindows\n$0.0858/vCPU/h"
+        "rates": "$0.172 per core-hour OS rate on demand. Its own docs page says coming soon.",
+        "url": "https://www.daytona.com/docs/windows-sandboxes.md",
+        "quote": "Windows sandboxes for Daytona v2 are coming soon."
       },
       {
-        "name": "GPU on-demand (per GPU-hour)",
-        "rates": "B300 $6.25, B200 $6.25, MI355X $5.99, H200 $4.54, H100 $3.95, RTX PRO 6000 $3.03, RTX 5090 $1.29, RTX 4090 $0.99; vCPU/RAM/disk metered on top at standard rates.",
-        "url": "https://www.daytona.io/pricing",
-        "quote": "On-demand ($/hour)\nNvidia B300\n$6.25/h\nNvidia B200\n$6.25/h\nAMD MI355X\n$5.99/h\nNvidia H200\n$4.54/h\nNvidia H100\n$3.95/h\nNvidia RTX PRO 6000\n$3.03/h\nNvidia RTX 5090\n$1.29/h\nNvidia RTX 4090\n$0.99/h"
+        "name": "macOS",
+        "rates": "$2.5032 per Mac-hour reservation, $60.08 per 24-hour period, instead of the meter.",
+        "url": "https://www.daytona.com/docs/macos-sandboxes.md",
+        "quote": "The price of one reservation of this model is **$2.5032 per Mac-hour, $60.08 per 24-hour period**."
       },
       {
-        "name": "GPU preemptible (per GPU-hour)",
-        "rates": "B300 $4.08, B200 $3.59, MI355X $3.44, H200 $2.61, H100 $2.27, RTX PRO 6000 $1.74, RTX 5090 $0.74, RTX 4090 $0.57.",
-        "url": "https://www.daytona.io/pricing",
-        "quote": "Preemptible ($/hour)\nNvidia B300\n$4.08/h\nNvidia B200\n$3.59/h\nAMD MI355X\n$3.44/h\nNvidia H200\n$2.61/h\nNvidia H100\n$2.27/h\nNvidia RTX PRO 6000\n$1.74/h\nNvidia RTX 5090\n$0.74/h\nNvidia RTX 4090\n$0.57/h"
+        "name": "GPU on demand (per GPU-hour)",
+        "rates": "RTX 4090 $0.99, RTX 5090 $1.29, L40S $1.99, RTX PRO 6000 $3.39, H100 $4.29, H200 $4.99, MI355X $6.20, B200 $7.49, B300 $8.99. Its docs page says coming soon.",
+        "url": "https://www.daytona.com/pricing.md",
+        "quote": "| Nvidia B300 | $5.17 | $8.99 |"
       }
     ],
-    "notes": "A container sandbox auto-stops after 15 minutes with no external activity; a background process does not reset the timer. VM sandboxes auto-pause after 60 minutes by default. Neither is a maximum session length.",
     "idle": {
-      "value": "Container sandboxes auto-stop after 15 minutes with no external activity by default; VM sandboxes auto-pause after 60 minutes. A background process does not reset the timer.",
-      "url": "https://www.daytona.io/docs/en/sandboxes",
-      "quote": "if not set, the default interval of 15 minutes is used"
+      "value": "Idle timeout off by default, minimum 60 s, deletes a Linux sandbox. Wall-clock timeout capped at 24 h (Starter) / 48 h (Team).",
+      "url": "https://www.daytona.com/docs/linux-sandboxes.md",
+      "quote": "The idle timeout is off by default unless the project sets one, has a minimum of 60 seconds, and requires an action."
     }
   },
   "storage": {
     "disk": {
-      "usdPerGibMonth": 0.07776,
+      "usdPerGibMonth": 0,
+      "original": {
+        "value": 0,
+        "unit": "USD per GiB-hour, ephemeral NVMe"
+      },
+      "included": "All ephemeral disk is free; it is deleted with the sandbox.",
+      "url": "https://www.daytona.com/pricing.md",
+      "quote": "No. CPU and memory are billed only while a sandbox is running, and ephemeral NVMe disk is free. A stopped or paused sandbox keeps its state and is not metered. Volumes are billed separately."
+    },
+    "volume": {
+      "usdPerGibMonth": 0.07884,
       "original": {
         "value": 0.000108,
         "unit": "USD per GiB-hour"
       },
-      "included": "First 5 GiB free per the pricing footnote; the footnote does not say whether that allowance is per sandbox or per organization.",
-      "url": "https://www.daytona.io/pricing",
-      "quote": "Storage\nGiB\n$0.000108/h\n*Price per GiB after first 5 free"
+      "value": "1-1000 GiB, up to 8 per sandbox. Whether size or used bytes is billed is not published; modelled on size.",
+      "url": "https://www.daytona.com/docs/volumes.md",
+      "quote": "A sandbox attaches up to 8 volumes, and several sandboxes can attach the same volume at once."
     },
     "billedWhenStopped": {
-      "value": "Yes, disk only. Stopped and paused sandboxes bill reserved disk; CPU and RAM are not billed. Archived container sandboxes and deleted sandboxes bill nothing.",
-      "url": "https://www.daytona.io/docs/en/billing",
-      "quote": "Billed for reserved disk only. The preserved memory state is not billed."
+      "value": "A Linux sandbox cannot stop or pause; a deleted sandbox bills only its volumes. Stopped Windows bills nothing.",
+      "url": "https://www.daytona.com/docs/billing.md",
+      "quote": "Stopped, paused, and deleted sandboxes are not metered for CPU, memory, or disk."
     },
     "snapshot": {
       "usdPerGibMonth": null,
-      "value": "Snapshots remain billed for storage after the sandbox is deleted, but no separate snapshot rate is published; the only storage rate is $0.000108/GiB-hour.",
-      "url": "https://www.daytona.io/docs/en/billing",
-      "quote": "remain billed for storage."
-    },
-    "retention": {
-      "value": "Stopped container sandboxes auto-archive after 7 days by default (30 days is the maximum interval) and stop billing; they are not deleted automatically unless an auto-delete interval or TTL is set. How long archived data is kept is not published.",
-      "url": "https://www.daytona.io/docs/en/sandboxes",
-      "quote": "if not set, the default interval of 7 days is used"
-    },
-    "snapshotRetention": {
-      "value": "Snapshots become inactive after 2 weeks of not being used; inactivity deactivates rather than deletes.",
-      "url": "https://www.daytona.io/docs/en/snapshots",
-      "quote": "Snapshots automatically become inactive after 2 weeks of not being used."
-    },
-    "autoDelete": {
-      "value": "Not set by default: a stopped sandbox is not deleted automatically.",
-      "url": "https://www.daytona.io/docs/en/sandboxes",
-      "quote": "if not set, the sandbox is not deleted automatically"
+      "value": "No snapshot or image storage price is published."
     }
   },
   "egress": {
     "published": false,
-    "value": "Not published. The pricing page lists compute, memory, storage, OS and GPU only; no egress, ingress or bandwidth rate appears.",
-    "url": "https://www.daytona.io/pricing",
-    "quote": "Compute\nvCPU\n$0.0504/h\nMemory\nGiB\n$0.0162/h\nStorage\nGiB\n$0.000108/h"
+    "value": "No outbound byte price or allowance. Bucket-volume traffic bills per uploaded GiB, downloaded GiB and 1,000 requests at unpublished rates.",
+    "url": "https://www.daytona.com/docs/billing.md",
+    "quote": "Bucket volume traffic is billed per uploaded GiB, downloaded GiB, and 1,000 requests"
   },
-  "other": [
-    {
-      "name": "Windows OS rate",
-      "price": "$0.0858 per vCPU-hour",
-      "url": "https://www.daytona.io/pricing",
-      "quote": "OS\nWindows\n$0.0858/vCPU/h"
-    },
-    {
-      "name": "Tier 4 recurring top-up",
-      "price": "$2,000 every 30 days, consumed as credit",
-      "url": "https://www.daytona.io/docs/en/limits",
-      "quote": "| Tier 4   | 500 / 1000GiB / 5000GiB              | $2000 top-up every 30 days                              |"
-    },
-    {
-      "name": "Plan fee",
-      "price": "None; usage-based only",
-      "url": "https://www.daytona.io/pricing",
-      "quote": "Pay as you go with usage-based pricing"
-    },
-    {
-      "name": "Volume discounts",
-      "price": "Not published",
-      "url": "https://www.daytona.io/pricing",
-      "quote": "Unlock volume discounts as you scale"
-    }
-  ],
   "freeTier": {
-    "what": "$200 in free compute, no credit card required.",
-    "limits": "Tier 1 pool: 10 vCPU / 10 GiB RAM / 30 GiB disk; per sandbox 4 vCPU / 8 GiB / 10 GiB disk; restricted egress. Free credit cannot be used for GPU sandboxes.",
-    "url": "https://www.daytona.io/pricing",
-    "quote": "$200 in free compute included.",
-    "signup": {
-      "value": "No credit card required.",
-      "url": "https://www.daytona.io/pricing",
-      "quote": "Sign up for a free trial - no credit card required"
-    },
-    "creditNote": {
-      "value": "Free credit cannot be used for GPU sandboxes.",
-      "url": "https://www.daytona.io/docs/en/billing",
-      "quote": "Free credit balance: the amount of free credits; not available for GPU sandboxes"
-    },
-    "networkNote": {
-      "value": "Tier 1 egress is restricted to an allowlist of essential services.",
-      "url": "https://www.daytona.io/docs/en/network-limits",
-      "quote": "Network access is restricted and cannot be overridden at the sandbox level."
-    }
+    "what": "$200 one-time credit on Starter, no card. No recurring free allowance.",
+    "url": "https://www.daytona.com/pricing.md",
+    "quote": "Build for free, pay as you scale. $200 in free compute included, no credit card required.",
+    "creditNote": "Billing describes one grant on connecting a card and another on verifying email; pricing says one-time $200. Unresolved."
   },
-  "diffs": [
-    {
-      "field": "compute.gpu.onDemand.B300",
-      "ours": "not stated in the profile",
-      "battleships": "7.10",
-      "live": "6.25",
-      "url": "https://www.daytona.io/pricing",
-      "quote": "On-demand ($/hour)\nNvidia B300\n$6.25/h"
+  "cases": {
+    "A": 27.63,
+    "B": 246.01,
+    "C": 16.5,
+    "spot": {
+      "A": 19.34,
+      "B": 172.21,
+      "C": 11.55
     },
-    {
-      "field": "plans.tier1.memoryGiB",
-      "ours": "10 GiB, with the same page's 20 GiB contradiction noted",
-      "battleships": "10",
-      "live": "10 GiB in the Tiers table and 20 GiB in the Limits table on the same page",
-      "url": "https://www.daytona.io/docs/en/limits",
-      "quote": "| Tier 1   | 10 / 10GiB / 30GiB                   | Email verified                                          |"
-    },
-    {
-      "field": "compute.windowsVcpuHour",
-      "ours": "ambiguous: $0.0858/vCPU/h reads as either a replacement rate or a surcharge",
-      "battleships": "$0.0858 replacement on the daytona card; $0.0858 surcharge added to $0.0504 = $0.1362 on the daytona-windows card",
-      "live": "$0.0858/vCPU/h as a separate OS line",
-      "url": "https://www.daytona.io/pricing",
-      "quote": "OS\nWindows\n$0.0858/vCPU/h"
-    }
-  ],
+    "note": "Starter, on demand, earth region; worked in research/daytona2-2026-11-12.md section 3.5."
+  },
   "docs": {
     "isolation": {
-      "title": "Isolation (container, Linux VM, Windows and GPU classes)",
-      "url": "https://www.daytona.io/docs/en/isolation"
+      "title": "Isolation (Firecracker, Cloud Hypervisor, Apple Virtualization)",
+      "url": "https://www.daytona.com/docs/isolation"
     },
     "sizes-regions": {
-      "title": "Regions (us, eu, earth for GPU)",
-      "url": "https://www.daytona.io/docs/en/regions"
+      "title": "Limits (sandbox and plan caps)",
+      "url": "https://www.daytona.com/docs/limits"
     },
     "lifecycle": {
       "title": "Sandboxes: lifecycle states",
-      "url": "https://www.daytona.io/docs/en/sandboxes#sandbox-lifecycle"
+      "url": "https://www.daytona.com/docs/sandboxes#sandbox-lifecycle"
     },
     "snapshots-forks": {
       "title": "Snapshots",
-      "url": "https://www.daytona.io/docs/en/snapshots"
+      "url": "https://www.daytona.com/docs/snapshots"
     },
     "storage": {
       "title": "Volumes",
-      "url": "https://www.daytona.io/docs/en/volumes"
+      "url": "https://www.daytona.com/docs/volumes"
     },
     "idle-timers": {
-      "title": "Auto-stop sandboxes (default 15 minutes)",
-      "url": "https://www.daytona.io/docs/en/sandboxes#auto-stop-interval"
+      "title": "Linux sandboxes: timeouts and idle timeout",
+      "url": "https://www.daytona.com/docs/linux-sandboxes#timeouts"
     },
     "reaching-it": {
-      "title": "Preview (preview URLs and tokens)",
-      "url": "https://www.daytona.io/docs/en/preview"
+      "title": "Preview URLs",
+      "url": "https://www.daytona.com/docs/preview"
     },
     "custom-domains": {
-      "title": "Custom Preview Proxy",
-      "url": "https://www.daytona.io/docs/en/custom-preview-proxy"
+      "title": "Preview URLs: using your own proxy",
+      "url": "https://www.daytona.com/docs/preview#using-your-own-proxy"
     },
     "outbound-network": {
-      "title": "Network Limits (Firewall)",
-      "url": "https://www.daytona.io/docs/en/network-limits"
+      "title": "Network limits",
+      "url": "https://www.daytona.com/docs/network-limits"
     },
     "keys-secrets": {
       "title": "Secrets",
-      "url": "https://www.daytona.io/docs/en/secrets"
+      "url": "https://www.daytona.com/docs/secrets"
     },
     "ways-to-drive": {
-      "title": "CLI",
-      "url": "https://www.daytona.io/docs/en/tools/cli"
+      "title": "Architecture: interface plane",
+      "url": "https://www.daytona.com/docs/architecture"
     },
     "built-in-agents": {
-      "title": "OpenClaw Guides (preinstalled in the default snapshot)",
-      "url": "https://www.daytona.io/docs/en/guides/openclaw"
+      "title": "Guides",
+      "url": "https://www.daytona.com/docs/guides"
     },
     "teams-accounts": {
-      "title": "Organizations",
-      "url": "https://www.daytona.io/docs/en/organizations"
+      "title": "Projects (the unit of isolation)",
+      "url": "https://www.daytona.com/docs/projects"
     },
     "billing-models": {
-      "title": "Billing (what each state bills)",
-      "url": "https://www.daytona.io/docs/en/billing"
+      "title": "Billing: what each state bills",
+      "url": "https://www.daytona.com/docs/billing"
     },
     "trials-free-tiers": {
-      "title": "Limits: tiers and access requirements",
-      "url": "https://www.daytona.io/docs/en/limits#tiers"
+      "title": "Pricing: plans and credits",
+      "url": "https://www.daytona.com/pricing"
     },
     "quickstart": {
-      "title": "Daytona Documentation: Get started",
-      "url": "https://www.daytona.io/docs/en/#get-started"
+      "title": "Daytona documentation: get started",
+      "url": "https://www.daytona.com/docs/quickstart"
     },
     "pricing": {
       "title": "Daytona pricing",
-      "url": "https://www.daytona.io/pricing"
+      "url": "https://www.daytona.com/pricing"
     }
   },
-  "deploy": {
-    "oneClickOrManaged": "Not found. No one-click or managed Hermes/OpenClaw hosting; Daytona supplies the sandbox and the preinstalled binary.",
-    "officialTemplateOrGuide": "Yes for OpenClaw: a Daytona guide says OpenClaw is preinstalled in the default snapshot. Hermes is supported as a Hermes terminal backend, not as a Daytona guide.",
-    "manualRoute": "OpenClaw: install the Daytona CLI, log in with an API key, run `daytona sandbox create --name openclaw --snapshot daytona-medium --auto-stop 0`, SSH in with `daytona ssh openclaw`, then run OpenClaw onboarding. Hermes: install Hermes on a local machine, set terminal.backend: daytona plus DAYTONA_API_KEY, and Hermes creates and stops/resumes the Daytona sandbox itself.",
-    "nonCoderDashboardOnly": "Partly. The dashboard Playground creates a sandbox and opens a web terminal in the browser, so no local install is needed, but the OpenClaw and Hermes setup still requires typed commands and an API key.",
-    "urls": [
-      {
-        "url": "https://www.daytona.io/docs/en/guides/openclaw/openclaw-run-secure-sandbox",
-        "quote": "OpenClaw comes preinstalled in the default Daytona snapshot, so the command above is all you need."
-      },
-      {
-        "url": "https://www.daytona.io/docs/en/guides/openclaw/openclaw-run-secure-sandbox",
-        "quote": "daytona sandbox create --name openclaw --snapshot daytona-medium --auto-stop 0"
-      },
-      {
-        "url": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration",
-        "quote": "Runs commands in a Daytona managed workspace. Supports stop/resume for persistence."
-      },
-      {
-        "url": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration",
-        "quote": "Required: DAYTONA_API_KEY environment variable."
-      },
-      {
-        "url": "https://www.daytona.io/docs/en/web-terminal",
-        "quote": "Daytona provides a browser-based web terminal for interacting with your sandboxes."
-      }
-    ]
-  },
-  "limitsSource": {
-    "url": "https://www.daytona.io/docs/en/sandboxes",
-    "quote": "Sandboxes have 1 vCPU, 1GB RAM, and 3GiB disk by default. Organizations get a maximum sandbox resource limit of 4 vCPUs, 8GB RAM, and 10GB disk."
-  },
-  "battleships": {
-    "id": "daytona",
-    "url": "https://battleships.dev/data/providers/daytona.json",
-    "index": "https://battleships.dev/data/index.json",
-    "generated": "2026-10-14",
-    "role": "secondary cross-check, not proof"
+  "previousCard": {
+    "product": "Daytona 1.x (daytona.io), checked 2026-11-12 before the switch",
+    "rates": "$0.0504/vCPU-hour, $0.0162/GiB-hour, $0.000108/GiB-hour storage after 5 free GiB",
+    "url": "https://www.daytona.io/pricing",
+    "quote": "Compute vCPU $0.0504/h Memory GiB $0.0162/h Storage GiB $0.000108/h"
   }
 }

@@ -15,6 +15,10 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["blaxel", "a", 27.6], ["blaxel", "b", 247.78], ["blaxel", "c", 17.3],
   ["boat", "a", 20], ["boat", "b", 26.28],
   ["e2b", "a", 27.6], ["e2b", "c", 164.9],
+  // Daytona 2.0 on Starter, on demand (pricing page, 2026-11-12): $0.101 a core-hour = $0.0505 a vCPU-hour, $0.0162 a GiB-hour, ephemeral disk free.
+  // A: 166.67 h × (1 core × $0.101 + 4 × $0.0162); B: 730 h × (2 × $0.101 + 8 × $0.0162) + 50 GiB volume × 730 h × $0.000108;
+  // C: 90 h × ($0.101 + 4 × $0.0162) + 20 GiB volume × 730 h × $0.000108.
+  ["daytona", "a", 27.63], ["daytona", "b", 246.01], ["daytona", "c", 16.5],
   // Pro includes 200 GiB of disk (pricing docs, 2026-11-12), so only CPU and memory bill.
   // A: 2 × $0.004 × 166.67 + 4 × $0.00225 × 166.67 = $2.83, under the $20 credit; C: $0.72 + $0.81 = $1.53, also under it.
   // B: 4 × $0.004 × 730 + 8 × $0.00225 × 730 = $24.82, over the credit.
@@ -142,6 +146,13 @@ test("limits a workload breaks are reported, not silently priced", () => {
   const q = price(card("e2b"), presets.b.workload);
   assert.equal(q.feasible, false);
   assert.ok(q.problems.some((p) => p.includes("10 GiB")));
+});
+
+test("Daytona 2.0 ends an always-on sandbox at the plan's session cap", () => {
+  // Starter sessions end at 24 hours and Team's at 48; a 730-hour box has to be recreated.
+  const q = price(card("daytona"), presets.b.workload);
+  assert.equal(q.feasible, false);
+  assert.ok(q.problems.some((p) => p.includes("24 hours")));
 });
 
 test("Modal is priced per vCPU at half its per-core rate", () => {

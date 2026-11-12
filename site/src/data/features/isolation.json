@@ -96,13 +96,13 @@
     },
     {
       "provider": "daytona",
-      "verdict": "partly",
-      "figure": "Containers; VM on request",
-      "scenario": "Docker runs on the default container through Docker-in-Docker, but loading a kernel module needs the Linux VM class.",
-      "note": "Linux containers by default: dedicated namespaces, enforced resource limits and root inside, sharing the runner's kernel. Linux VM and Windows classes have their own kernel. Docker-in-Docker is documented; nested virtualisation is Linux-VM only and must be enabled.",
+      "verdict": "yes",
+      "figure": "microVM, own kernel",
+      "scenario": "Docker runs because the image ships the engine, and `modprobe` works because every sandbox is its own Firecracker VM with its own kernel, not a namespace on a shared host.",
+      "note": "Every sandbox is a VM: Linux on Firecracker, Windows and GPU on Cloud Hypervisor, macOS on Apple's Virtualization framework. The hypervisor, not the guest, draws the boundary, and the guest sees only its own vCPU, memory and disk. Docker is not installed by Daytona, so it works only when the image ships it. Nested virtualisation (`/dev/kvm`) is Enterprise-only. `nproc` inside reports the burst limit, not the guarantee, so size tooling by the guarantee.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/isolation.md",
-        "quote": "Full virtual machine with its own kernel.",
+        "url": "https://www.daytona.com/docs/sandboxes.md",
+        "quote": "A sandbox is a hardware-isolated virtual machine with its own kernel, filesystem, network stack, and allocated vCPU, RAM, and disk, with isolation enforced by the hypervisor.",
         "confidence": "docs-confirmed"
       }
     },

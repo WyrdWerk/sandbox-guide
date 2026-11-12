@@ -175,8 +175,8 @@
         },
         {
           "provider": "daytona",
-          "why": "Containers are fast to create, snapshots and forks cover the VM classes, and $200 of free compute pays for the first tests.",
-          "watch": "Fork is VM-only; on the default container it is snapshot-then-create. A container stops after 15 idle minutes even during a build."
+          "why": "Every sandbox is a Firecracker VM with its own kernel, sized from 0.125 to 16 cores, and $200 of free credit pays for the first tests.",
+          "watch": "Linux has no stop or pause: a sandbox is deleted at 24 hours on Starter or 48 on Team, and its disk goes with it, so a kept repository needs a volume."
         },
         {
           "provider": "freestyle",
@@ -233,8 +233,8 @@
         },
         {
           "provider": "daytona",
-          "why": "Computer use is a first-class API with mouse, keyboard, screenshots and screen recording, plus a VNC desktop and a web terminal in the Playground.",
-          "watch": "No GPU desktop, a 15-minute idle stop on containers, and the standard preview token cannot be revoked."
+          "why": "Chromium is in the standard image, a 1280x720 desktop ships with the runtime, and computer use exposes mouse, keyboard, screenshots and recording as an API.",
+          "watch": "The desktop is Linux-only, there is no GPU desktop, the sandbox is deleted at the session cap, and the standard preview token opens every private port and never expires."
         }
       ],
       "sources": [
@@ -336,8 +336,8 @@
         },
         {
           "provider": "daytona",
-          "why": "GPU sandboxes attach up to 8 GPUs, each adding up to 16 vCPU / 192 GB / 512 GB, across H100, H200, B200, B300, RTX PRO 6000, RTX 4090, RTX 5090 and AMD MI355X.",
-          "watch": "Shared GPU capacity ignores your region choice, GPU sandboxes vanish on stop, spot GPUs can be killed without notice, and the $200 free credit cannot be spent on them."
+          "why": "The price list sells nine GPU models, from an RTX 4090 at $0.99 to a B300 at $8.99 an hour on demand.",
+          "watch": "The 2.0 GPU page still says GPU sandboxes are coming soon, GPU sandboxes cannot be spot, and the cheaper preemptible column on the price list does not apply to them."
         },
         {
           "provider": "sprites",
@@ -390,11 +390,6 @@
           "provider": "lizard",
           "why": "Two regions, EU West in Limburg and US East in Virginia, and you pick one per resource.",
           "watch": "Nothing promises backups stay in the chosen region, there is no SLA outside Enterprise, and the company publishes no SOC 2."
-        },
-        {
-          "provider": "daytona",
-          "why": "Two shared regions, `us` and `eu`, plus dedicated and bring-your-own-compute regions, with a DPA that names the Irish Data Protection Commission.",
-          "watch": "Region choice does not guarantee where control-plane metadata lives, and the company's Delaware incorporation is unconfirmed."
         },
         {
           "provider": "hetzner",

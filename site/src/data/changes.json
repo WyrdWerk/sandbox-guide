@@ -2,6 +2,29 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Daytona 2.0 replaces the container platform with VMs and a 24-hour session cap",
+      "provider": "daytona",
+      "what": "Daytona launched 2.0 on daytona.com on 1 November 2026 and the guide now describes it instead of 1.x at daytona.io. Sandboxes are Firecracker, Cloud Hypervisor or Apple VMs with custom sizes from 0.125 to 16 cores; Linux has no stop, pause or fork, the disk is ephemeral, and every sandbox is deleted at a 24-hour (Starter) or 48-hour (Team) timeout, so persistence means a volume. Prices are per core-hour ($0.101 on demand, $0.0706 spot) with memory at $0.0162/GiB-hour and free ephemeral disk. The 1.x platform (the 2.0 docs call it v0) is still live, still sold at $0.0504/vCPU-hour and shipped v0.231.0 on 7 November; no retirement date is published.",
+      "sources": [
+        {
+          "url": "https://www.daytona.com/pricing",
+          "quote": "Sessions up to 24 hours",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://www.daytona.com/changelog/daytona-2-0.md",
+          "quote": "Published: 2026-11-01 · Version: v2.0.0",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.daytona.io/changelog",
+          "quote": "Daytona 0.231.0 adds the NVIDIA L40S GPU type to the API client.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Morph: public HTTP services, a browser terminal and a shared filesystem; no custom domains",
       "provider": "morph",
       "what": "A recheck found Morph documents public-by-default HTTP services with an API-key option, a browser terminal, organisation roles, a 16 vCPU shape and a shared EFS filesystem, and its FAQ says custom domains are not supported yet. Its TypeScript SDK has not been released since October 2025. Rates and A/B/C are unchanged. The date is when this guide checked.",

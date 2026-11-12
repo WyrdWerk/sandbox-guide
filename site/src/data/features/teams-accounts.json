@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "Org-wide resource pool",
-      "scenario": "The runaway agent is capped only by the prepaid pool, and every member of the organisation can exec in every running sandbox.",
-      "note": "Tiers are prepaid top-ups that set an org-wide vCPU, memory and disk pool. Any member or API key can address any running sandbox. SSO is Enterprise; audit logs are role-gated and export is coming soon.",
+      "figure": "3 members; SSO Enterprise",
+      "scenario": "A five-person team needs Team ($250) for the member count, gets projects and dollar budgets there, but procurement's SSO and readable audit log wait for Enterprise.",
+      "note": "Team buys the org model: projects as the isolation unit (every sandbox, image, snapshot, volume, secret, registry credential and API key belongs to exactly one), 17 built-in roles including a true read-only and an auditor, and monthly project budgets that refuse new sandboxes and, after a grace period, stop persistent and delete ephemeral ones. It does not buy the compliance model: SSO with SCIM, readable audit logs (recorded for everyone, 365-day retention) and HIPAA are Enterprise-only, and Starter stops at three members. Any member with sandbox write can still run commands in every sandbox of a project — the project is the boundary, not the sandbox.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/organizations.md",
-        "quote": "Every member of an organization can address that organization's running sandboxes",
+        "url": "https://www.daytona.com/docs/projects.md",
+        "quote": "Projects group resources and credentials inside an organization.",
         "confidence": "docs-confirmed"
       }
     },

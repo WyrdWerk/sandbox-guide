@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "Preinstalled; no prompt API",
-      "scenario": "Claude Code, Codex, OpenClaw and OpenCode come in the default snapshot; you open a terminal or run commands, since there is no prompt endpoint.",
-      "note": "The default snapshots preinstall Claude Code, Codex, OpenClaw and OpenCode, but there is no hosted agent loop or prompt API, and you bring the model keys. First-party guides also cover Cursor, Devin, Gemini CLI, Amp and Kiro; computer use is a first-class API.",
+      "figure": "Claude Code, OpenClaw claimed",
+      "scenario": "The default image is said to include Claude Code and OpenClaw, so the first step is a prompt; but the 2.0 images page never lists what is inside, and every other agent guide starts with an install.",
+      "note": "No hosted agent and no prompt endpoint: you install and drive the agent, and you pay the model provider. First-party guides cover Claude Code, Codex, Gemini CLI, Cursor, Devin, OpenCode, Amp, Kiro, Kimi, Letta Code, Pi, Flue and Brainbase, plus Claude Managed Agents and the OpenAI Agents API as self-hosted backends. Two CLI guides say Claude Code and OpenClaw ship in the default snapshot, but they still use 1.x `--snapshot` flags and the 2.0 images page publishes no contents list; every other guide installs the agent itself. No managed model credentials.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/snapshots.md",
-        "quote": "Default snapshots include pre-installed Python and Node.js packages.",
+        "url": "https://www.daytona.com/docs/guides/claude/claude-code-run-cli-sandbox.md",
+        "quote": "The default Daytona snapshot includes Claude Code, so the command above is all you need.",
         "confidence": "docs-confirmed"
       }
     },

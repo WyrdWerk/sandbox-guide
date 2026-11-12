@@ -103,13 +103,13 @@
     },
     {
       "provider": "daytona",
-      "verdict": "partly",
-      "figure": "Token, or signed URL",
-      "scenario": "The preview URL needs authentication unless the sandbox is public; the standard token opens the whole sandbox and cannot be revoked.",
-      "note": "Preview links are authenticated unless `public` is true. The standard token is sandbox-wide, opens the terminal and toolbox, and cannot be revoked; signed URLs are per port, 60 seconds by default and 24 hours maximum.",
+      "verdict": "yes",
+      "figure": "Preview, SSH, terminal",
+      "scenario": "A dev server gets a public or signed preview link, a colleague opens the same box over SSH or the browser terminal, and a local port forward reaches the database.",
+      "note": "Preview URLs are per port, private by default and public on request; a signed URL is per port, revocable, 1 s to 7 days (60 s default). The API's standard token is sandbox-wide, never expires and survives restarts; the SDK's port token lasts 1 hour. SSH is a gateway on 2222 with `-L` forwarding (no `-R`, no agent forwarding) and a stable ed25519 host key per region; there is a web terminal and a VNC desktop. A request to a non-running sandbox returns 409, so nothing wakes on a request. The URL is built from the sandbox ID, so a recreated sandbox gets a new URL.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/preview.md",
-        "quote": "If a sandbox has its `public` property set to `true`, preview links are publicly accessible without authentication. Otherwise, authentication is required.",
+        "url": "https://www.daytona.com/docs/preview.md",
+        "quote": "Daytona provides preview URLs for accessing services running in your sandboxes.",
         "confidence": "docs-confirmed"
       }
     },
