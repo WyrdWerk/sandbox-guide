@@ -81,7 +81,7 @@
         },
         {
           "url": "https://developers.cloudflare.com/containers/platform/limits/",
-          "quote": "| vCPU per instance | 4 | ... | Memory per instance | 12 GiB | ... | Disk per instance | 20 GB | (custom minimums 1/16 vCPU, 256 MiB, 2 GB; no memory-to-vCPU ratio on the 12 Nov page, though the 29 Sep changelog still states 3 GiB per vCPU)"
+          "quote": "| vCPU per instance | 4 | ... | Memory per instance | 12 GiB | ... | Disk per instance | 20 GB |"
         }
       ]
     },
@@ -119,7 +119,7 @@
         "usdPerGibRamHour": null,
         "derivation": "0.000020 per vCPU-second x 3600 = 0.072 per vCPU-hour.",
         "original": {
-          "value": 2e-05,
+          "value": 0.00002,
           "unit": "USD per vCPU-second, active use"
         },
         "url": "https://developers.cloudflare.com/containers/platform/pricing/",
@@ -131,7 +131,7 @@
         "usdPerGibRamHour": 0.009,
         "derivation": "0.0000025 per GiB-second x 3600 = 0.009 per GiB-hour.",
         "original": {
-          "value": 2.5e-06,
+          "value": 0.0000025,
           "unit": "USD per GiB-second, provisioned"
         },
         "url": "https://developers.cloudflare.com/containers/platform/pricing/",
@@ -144,7 +144,7 @@
         "usdPerGbHour": 0.000252,
         "derivation": "0.00000007 per GB-second x 3600 = 0.000252 per GB-hour.",
         "original": {
-          "value": 7e-08,
+          "value": 7e-8,
           "unit": "USD per GB-second, provisioned"
         },
         "url": "https://developers.cloudflare.com/containers/platform/pricing/",
@@ -242,23 +242,34 @@
       }
     ],
     "customSizes": {
-      "minVcpu": 1,
+      "minVcpu": 0.0625,
       "maxVcpu": 4,
       "maxRamGiB": 12,
       "maxDiskGB": 20,
-      "ramPerVcpuMinimumGiB": 3,
+      "ramPerVcpuMinimumGiB": null,
       "evidence": [
         {
           "url": "https://developers.cloudflare.com/containers/platform/limits/",
-          "quote": "| vCPU per instance | 4 | ... | Memory per instance | 12 GiB | ... | Disk per instance | 20 GB | (custom minimums 1/16 vCPU, 256 MiB, 2 GB; no memory-to-vCPU ratio on the 12 Nov page, though the 29 Sep changelog still states 3 GiB per vCPU)"
+          "quote": "Custom instance types using the `durable_object` scheduling policy have the following minimums:"
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/limits/",
+          "quote": "| vCPU per instance | 4 |"
+        },
+        {
+          "url": "https://developers.cloudflare.com/changelog/post/2026-09-29-remove-disk-to-memory-ratio/",
+          "quote": "The other custom instance type constraints do not change, including the minimum of 3 GiB of memory per vCPU."
         }
-      ]
+      ],
+      "minRamGiB": 0.25,
+      "minDiskGB": 2,
+      "ramPerVcpuMinimumNote": "Disputed. The limits page (dateModified 2026-11-12) lists custom minimums of 1/16 vCPU, 256 MiB and 2 GB and no memory-to-vCPU ratio; the 29 September 2026 changelog says the 3 GiB-per-vCPU minimum still applies. Neither statement is treated as settled; the site prices the standard presets, which satisfy both."
     },
     "classDifferences": [
       {
-        "note": "The six instance types are the only fixed shapes; a custom size must keep at least 3 GiB of RAM per vCPU, so 2 vCPU / 4 GiB and 4 vCPU / 8 GiB cannot be bought.",
-        "url": "https://developers.cloudflare.com/containers/platform/limits/",
-        "quote": "For workloads requiring less than 1 vCPU, use the predefined instance types such as lite or basic."
+        "note": "Five instance types can be started under the durable_object policy (the runtime rejects basic). Whether a custom size must keep at least 3 GiB of RAM per vCPU is disputed: the 12 Nov limits page no longer states it, the 29 Sep changelog does. So 2 vCPU / 4 GiB and 4 vCPU / 8 GiB are documented on one page and ruled out on the other.",
+        "url": "https://developers.cloudflare.com/containers/configuration/scheduling-policy/",
+        "quote": "The runtime does not accept `basic` or the legacy `dev` and `standard` aliases."
       },
       {
         "note": "The instance type is chosen per start on the durable_object policy used by Sandboxes, so one Worker can run mixed sizes.",
