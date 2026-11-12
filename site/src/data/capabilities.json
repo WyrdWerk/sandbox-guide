@@ -9393,8 +9393,8 @@
         {
           "provider": "runtime",
           "verdict": "yes",
-          "figure": "Paid top-up",
-          "note": "A public preview needs a paid top-up; the default preview carries a token.",
+          "figure": "Kept top-up",
+          "note": "A public preview needs a top-up that is paid and not refunded; granted credit does not count. The default preview carries a token.",
           "source": {
             "url": "https://withruntime.com/docs/included-usage",
             "quote": "Public previews need a kept top-up",
@@ -10044,14 +10044,14 @@
         },
         {
           "provider": "runtime",
-          "verdict": "partly",
-          "figure": "Through the CLI",
-          "shortfall": "The connection goes through the provider's own command rather than a plain SSH address.",
+          "verdict": "yes",
+          "figure": "<id>.runtime",
           "source": {
-            "url": "https://withruntime.com/docs/editors",
-            "quote": "All of it goes through Runtime's API, authenticated with your key, over one WebSocket per connection.",
+            "url": "https://withruntime.com/docs/editors.md",
+            "quote": "every sandbox is the host `<id>.runtime`, or `<name>.runtime`, to anything that uses OpenSSH",
             "confidence": "docs-confirmed"
-          }
+          },
+          "note": "After a one-time `runtime sandboxes ssh config --install`, any OpenSSH client, scp, rsync, VS Code Remote-SSH or JetBrains Gateway reaches a sandbox by name; the connection travels over Runtime's API rather than a public port."
         },
         {
           "provider": "sandboxer",
@@ -13592,7 +13592,7 @@
           "provider": "runtime",
           "verdict": "yes",
           "figure": "Placeholder",
-          "note": "The machine holds a stand-in and the real value is added only for the hosts you named.",
+          "note": "By default the machine holds a stand-in and the real value is added only for the hosts you named. An opt-in exposed secret gives the machine the real value.",
           "source": {
             "url": "https://withruntime.com/docs/security",
             "quote": "The machine sees a placeholder. The value is added only to HTTPS requests to the hosts you name.",
@@ -14235,10 +14235,10 @@
         {
           "provider": "runtime",
           "verdict": "yes",
-          "note": "The console's Search or create box starts a sandbox from the browser.",
+          "note": "The console's Search or create box starts a sandbox from the browser once you have added credit.",
           "source": {
-            "url": "https://withruntime.com/docs/products",
-            "quote": "**Search or create** , or ⌘K (Ctrl+K), opens one search box. It goes to any page or resource and starts anything.",
+            "url": "https://withruntime.com/docs/products.md",
+            "quote": "Search or create, or ⌘K (Ctrl+K), opens one search box.",
             "confidence": "docs-confirmed"
           }
         },
@@ -14855,7 +14855,7 @@
         {
           "provider": "runtime",
           "verdict": "yes",
-          "note": "Python and JavaScript SDKs.",
+          "note": "SDKs for JavaScript, Python, Go, Ruby and Java.",
           "source": {
             "url": "https://withruntime.com/docs/start",
             "quote": "One API, one CLI, one MCP server and SDKs for JavaScript, Python, Go, Ruby and Java cover every Runtime product.",
@@ -16743,10 +16743,10 @@
         {
           "provider": "runtime",
           "verdict": "no",
-          "shortfall": "The default image ships languages and tools but no coding agent; you install the agent yourself.",
+          "shortfall": "The default image ships languages and tools but no coding agent; you install one with npm. The private-beta Agents product is separate.",
           "source": {
-            "url": "https://withruntime.com/docs/vercel-ai-sdk",
-            "quote": "No bridge harness (Claude Code, Codex) has run on Runtime yet.",
+            "url": "https://withruntime.com/llms.txt",
+            "quote": "npm install -g @anthropic-ai/claude-code",
             "confidence": "docs-confirmed"
           }
         },
@@ -17061,13 +17061,14 @@
         },
         {
           "provider": "runtime",
-          "verdict": "no",
-          "shortfall": "Runtime has no agent-run API; its own docs say no bridge harness has run on it yet.",
+          "verdict": "partly",
+          "shortfall": "A hosted Agents API starts Claude Code, Codex or Gemini CLI sessions, but it is a private beta: outside it every call is refused, and there is no public guide or price-page entry.",
           "source": {
-            "url": "https://withruntime.com/docs/vercel-ai-sdk",
-            "quote": "No bridge harness (Claude Code, Codex) has run on Runtime yet.",
+            "url": "https://unpkg.com/withruntime@0.50.0/dist/products/agents.d.ts",
+            "quote": "In a private beta: outside it every call is refused with `product_in_beta`.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "Agents beta"
         },
         {
           "provider": "sandboxer",
@@ -22451,14 +22452,14 @@
         },
         {
           "provider": "runtime",
-          "verdict": "yes",
-          "figure": "100 hours a month",
-          "note": "An account that never pays gets the free hours once, across its first 30 days.",
+          "verdict": "partly",
+          "figure": "100 h/mo after $10",
           "source": {
-            "url": "https://withruntime.com/docs/pricing",
-            "quote": "100 free hours of a 1 GB machine",
-            "confidence": "docs-confirmed"
-          }
+            "url": "https://withruntime.com/pricing",
+            "quote": "Once an account has paid, 100 free hours of a 1 GB machine is included every month, renewed on the 1st: 100 GiB-hours of memory and 25 vCPU-hours of active CPU.",
+            "confidence": "pricing-page"
+          },
+          "shortfall": "The 100 free hours return every month, but only after you have bought at least $10 of credit; a new account gets nothing before it pays. Accounts opened before 10 November 2026 keep any free hours they had left."
         },
         {
           "provider": "sandboxer",
@@ -22781,7 +22782,7 @@
           "provider": "runtime",
           "verdict": "partly",
           "figure": "matched credit",
-          "shortfall": "There is no plain signup credit; whatever you add in your first 30 days is doubled, up to $1,000.",
+          "shortfall": "There is no plain signup credit; whatever you add in your first 30 days is doubled, up to $1,000, so the required first $10 becomes $20.",
           "source": {
             "url": "https://withruntime.com/docs/pricing",
             "quote": "Credit your organization adds within 30 days of signing up is matched with credit, up to $1,000 in total.",
@@ -23102,13 +23103,14 @@
         },
         {
           "provider": "runtime",
-          "verdict": "yes",
-          "figure": "no card",
+          "verdict": "partly",
+          "figure": "Credit first; USDC",
           "source": {
-            "url": "https://withruntime.com/docs/pricing",
-            "quote": "with no card",
+            "url": "https://withruntime.com/docs/pricing.md",
+            "quote": "There is no sign-in, no browser and no card, and no free trial.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "shortfall": "A new account must add credit, from $10, before its first sandbox; the only card-free route pays in USDC, with no free trial and no welcome match until a person takes the account over."
         },
         {
           "provider": "sandboxer",
@@ -23421,7 +23423,7 @@
         {
           "provider": "runtime",
           "verdict": "yes",
-          "note": "The status page checks the API every two minutes and starts a real sandbox every ten.",
+          "note": "The status page checks the API every two minutes and starts a real sandbox every ten. Its incident list said \"No incidents recorded\" on 12 November 2026 while its daily table showed 4 November at 61.38%.",
           "source": {
             "url": "https://withruntime.com/docs/trust",
             "quote": "The status page publishes the API's uptime, checked from outside every two minutes",
@@ -24680,7 +24682,7 @@
         {
           "provider": "runtime",
           "verdict": "no",
-          "shortfall": "Runtime runs everything in its own Virginia region and publishes no self-hosted edition.",
+          "shortfall": "The service is hosted only, in one Virginia region, with no self-hosted edition; the SDK, CLI and MCP package is Apache-2.0.",
           "source": {
             "url": "https://withruntime.com/docs/trust",
             "quote": "Everything runs in one region, in Virginia, United States",

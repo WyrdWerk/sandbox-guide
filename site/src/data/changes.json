@@ -2,6 +2,29 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Runtime now charges before the first sandbox, and its free hours need a purchase",
+      "provider": "runtime",
+      "what": "Runtime became pay first on 10 November 2026: a new account adds credit from $10 before its first sandbox, and the first $10 is matched, so it starts with $20. The 100 free hours of a 1 GB machine still return every month, but only after the account has bought credit. SSH now works with any OpenSSH client, and a private-beta Agents product runs Claude Code, Codex or Gemini CLI per session. Sandbox rates and A/B/C are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://withruntime.com/pricing",
+          "quote": "No free usage before you pay. You add credit by card from $10",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://withruntime.com/docs/changelog.md",
+          "quote": "New accounts add credit before their first sandbox.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://withruntime.com/docs/included-usage.md",
+          "quote": "An account given free hours or free usage before 10 November 2026 keeps what is left of them.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Sprites: coding agents installed, a hosted MCP server and a $1 trial",
       "provider": "sprites",
       "what": "New Sprites ship the Claude, Codex, Gemini and Cursor CLIs, a hosted MCP server creates and drives them, and there are official Python, Go and Elixir SDKs. Checkpoints are now automatic, connectors cover any token API, and API tokens can be restricted. The trial is now $1 for 7 days with no card, and every org gets 20 GB of cold storage free each month. Rates and A/B/C are unchanged. The date is when this guide checked.",

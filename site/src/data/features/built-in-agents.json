@@ -28,7 +28,7 @@
     {
       "heading": "Bring your own",
       "body": [
-        "Runtime does not preinstall agents, and its own docs say no bridge harness has run on it yet. Morph exposes a tmux API so an agent can be driven programmatically, but the agent is yours.",
+        "Runtime does not preinstall an agent in its default image, but its private-beta Agents product runs Claude Code, Codex or Gemini CLI in a sandbox of its own per session. Morph exposes a tmux API so an agent can be driven programmatically, but the agent is yours.",
         "At these providers the sandbox is the product and the agent is an application you install."
       ]
     }
@@ -175,13 +175,13 @@
     },
     {
       "provider": "runtime",
-      "verdict": "no",
-      "figure": "None preinstalled",
-      "scenario": "No coding agents in the default image, and the vendor says no bridge harness has run on Runtime yet.",
-      "note": "No preinstalled coding agents: the default image ships Python, Node, Bun, git, compilers and sudo, and agents are installed by you. The vendor says no bridge harness has run on Runtime yet.",
+      "verdict": "partly",
+      "figure": "Agents beta",
+      "scenario": "The default image has no coding agent, but Runtime's private-beta Agents product runs Claude Code, Codex or Gemini CLI in a sandbox per session.",
+      "note": "The default image ships Python, Node, Bun, git, compilers and sudo but no coding agent. A separate hosted Agents product runs Claude Code, Codex or Gemini CLI in a sandbox of its own per session, on your model key, with triggers, memory and budgets; it is a private beta that refuses other accounts.",
       "source": {
-        "url": "https://withruntime.com/docs/vercel-ai-sdk",
-        "quote": "No bridge harness (Claude Code, Codex) has run on Runtime yet.",
+        "url": "https://unpkg.com/withruntime@0.50.0/dist/products/agents.d.ts",
+        "quote": "Agents: a coding or support agent's harness (Claude Code, Codex, Gemini CLI, or your own code on an agents SDK) in a sandbox of its own per session, on your own model key.",
         "confidence": "docs-confirmed"
       }
     },

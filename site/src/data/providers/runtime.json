@@ -3,7 +3,7 @@
   "name": "Runtime",
   "url": "https://withruntime.com",
   "status": "researched",
-  "checkedOn": "2026-10-28",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Firecracker microVMs billed on measured CPU, with the strongest secret handling in this set.",
   "whatItIs": [
     "Runtime Cloud is a hosted fleet of Firecracker microVMs that an agent, or the program driving it, creates, runs commands in, pauses, forks and deletes over an API.",
@@ -14,11 +14,11 @@
   "isolation": "Firecracker microVM on servers Runtime operates, with its own kernel; not a container and not gVisor. New sandboxes expose `/dev/kvm`, so nested virtualisation works. No GPU and no ARM: x86-64 only.",
   "sizes": "No fixed size menu: any vCPU / memory / disk combination inside the bounds, which are 16 vCPU, 64 GiB of memory and 400 GiB of disk on a paid account. CPU is shared by default; reserved guarantees every vCPU at full price.",
   "billing": {
-    "model": "Prepaid credit, no plan fee, no seats and no commitment.",
-    "meter": "Per second: $0.025 per active vCPU-hour measured, with a 50-millicore floor per sandbox, plus $0.0075 per reserved GiB-hour of memory. Storage while paused or stopped is $0.08 per decimal GB per 30-day month.",
+    "model": "Prepaid credit, no plan fee, no seats and no commitment. Pay first: credit from $10 before the first sandbox; the first $10 is matched.",
+    "meter": "Per second: $0.025 per active vCPU-hour measured, with a 50-millicore floor per sandbox, plus $0.0075 per reserved GiB-hour of memory. Storage while paused or stopped is $0.08 per decimal GB per 30-day month. Hosted Agents sessions (private beta) bill separately at $0.03 per active vCPU-hour and $0.01 per GiB-hour.",
     "stopped": "Disk and saved memory blocks keep billing at the storage rate. Only delete ends the charge.",
     "planFee": "None publicly. Plans exist in a private beta with no published prices.",
-    "minimum": "No minimum billing period. Top-ups are $10 to $10,000, and an automatic top-up earns 5% extra credit."
+    "minimum": "No minimum billing period. A new account must buy at least $10 of credit before its first sandbox; the first $10 is matched, so it starts with $20. Top-ups are $10 to $10,000, and an automatic top-up earns 5% extra credit."
   },
   "cost": {
     "A": {
@@ -153,28 +153,28 @@
       },
       {
         "label": "Status and SLA",
-        "value": "API checks passed 96.37% over 7 days and 98.87% over 30, against a 99% monthly promise with a 10% credit for paid accounts.",
+        "value": "On 12 November 2026 API checks had passed 100% over 7 days and 97.85% over 30, against a 99% monthly promise with a 10% credit for paid accounts.",
         "source": {
-          "url": "https://withruntime.com/status.json",
-          "quote": "Last 7 days 96.37%",
+          "url": "https://withruntime.com/status.md",
+          "quote": "| Last 30 days | 97.85% |",
           "confidence": "docs-confirmed"
         }
       },
       {
         "label": "Recent incidents",
-        "value": "The status page records no incidents, though its record only begins on 23 September 2026, so roughly the first half of the 6 August to 4 November window is not covered.",
+        "value": "The status page records no incidents, but its daily table shows 4 November 2026 passing only 61.38% of API checks (about 9.3 hours of failures). Its record begins on 23 September 2026.",
         "source": {
           "url": "https://withruntime.com/status.md",
-          "quote": "The record begins 2026-09-23. Each reading is kept for 30 days and each day's totals for good, so the record reaches back to its first day. Incidents No incidents recorded.",
+          "quote": "| 2026-11-04 | 61.38% |",
           "confidence": "docs-confirmed"
         }
       },
       {
         "label": "Sandbox starts",
-        "value": "Its own checks show sandbox starts succeeding 98.42% of the time over the last 30 days (4,317 readings), measured on 4 November 2026.",
+        "value": "Its own checks show sandbox starts succeeding 96.89% of the time over the last 30 days, with a 325 ms median, measured on 12 November 2026.",
         "source": {
           "url": "https://withruntime.com/status.md",
-          "quote": "| Last 30 days | 98.42% | 4317 | 272 ms | 1.1 s |",
+          "quote": "| Last 30 days | 96.89% |",
           "confidence": "docs-confirmed"
         }
       },
@@ -198,13 +198,14 @@
     "badly": [
       "A buyer who needs a named founder, a funding history or a company older than a few months.",
       "Multi-region or EU data residency: there is one region, in Virginia.",
-      "A workload that needs a Runtime-owned SOC 2 report."
+      "A workload that needs a Runtime-owned SOC 2 report.",
+      "A buyer who wants to try before paying: there is no free trial, and the first sandbox needs $10 of credit, matched to $20."
     ]
   },
   "usability": {
     "dashboard": "Yes, a detailed console: a Home report with a Needs you section, sandboxes with Overview, Terminal, Files, Activity and Settings tabs, a limits page, and usage and billing with daily spend by product.",
-    "withoutCode": "Partly, and only for the first step: one click starts a sandbox with a shell in the page on free hours. There are no app templates and no hosted agent, and the documented no-code path is pasting its `llms.txt` link into Claude Code, Codex or Cursor.",
-    "signup": "A Google sign-in, no card and no waitlist. Free usage needs a verified sign-in and is withheld from data-centre or VPN addresses until credit is added.",
+    "withoutCode": "Partly, and only for the first step: once you have added credit, one click on Home starts a sandbox with a shell in the page. There are no app templates; the documented no-code path is pasting its `llms.txt` link into Claude Code, Codex or Cursor, and a private-beta Agents product runs a coding agent for you.",
+    "signup": "Google or email sign-in and no waitlist, but credit from $10 before the first sandbox. A card is the normal route; an agent can open a wallet account and pay in USDC.",
     "docs": "Extensive, every page dated, with `llms.txt` bundles. Support is an AI agent in the same call, with humans for billing, security and data loss. The status page is public and specific.",
     "tripsUp": [
       "A sandbox is not a website host: nothing is reachable until you open a preview, domain or TCP port.",
@@ -212,7 +213,8 @@
       "Pause, stop and delete are three different things with three different bills.",
       "The first useful step still needs a command or an agent.",
       "Memory is measured in GiB and disk in decimal GB, a 7.4% difference that shows up in quotes.",
-      "There is no EU region, and uptime was below the promised 99% during research."
+      "There is no EU region, and uptime was below the promised 99% during research.",
+      "Nothing runs until you have paid: the first sandbox needs $10 of credit, matched to $20."
     ]
   },
   "caveats": [
@@ -223,23 +225,40 @@
     },
     {
       "issue": "Uptime was below the published promise",
-      "detail": "The status page showed 96.37% over 7 days and 98.87% over 30 days against a 99% monthly promise at the time of research.",
-      "status": "open"
-    },
-    {
-      "issue": "Free hours: every month or once?",
-      "detail": "The start page says 100 free hours every month; the pricing and included-usage pages say an account that has never paid gets them once, across its first 30 days.",
-      "status": "contradiction",
+      "detail": "On 12 November 2026 the API had passed 97.85% of checks over 30 days, below the 99% monthly promise, and 4 November passed only 61.38%; the last 7 days were 100%.",
+      "status": "open",
       "evidence": [
         {
-          "url": "https://withruntime.com/docs/start",
-          "quote": "New accounts get 100 free hours of a 1 GB machine every month, no card",
+          "url": "https://withruntime.com/status.md",
+          "quote": "| Last 30 days | 97.85% |",
           "confidence": "docs-confirmed"
         },
         {
-          "url": "https://withruntime.com/docs/pricing",
-          "quote": "An account that has never paid gets the machine time once, across its first 30 days.",
+          "url": "https://withruntime.com/status.md",
+          "quote": "| 2026-11-04 | 61.38% |",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Free usage needs a purchase",
+      "detail": "Since 10 November 2026 a new account runs nothing until it buys credit from $10. The 100 GiB-hours and 25 vCPU-hours return every month only after that. Accounts opened before 10 November keep any free hours they had left.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://withruntime.com/pricing",
+          "quote": "No free usage before you pay. You add credit by card from $10",
           "confidence": "pricing-page"
+        },
+        {
+          "url": "https://withruntime.com/docs/changelog.md",
+          "quote": "New accounts add credit before their first sandbox.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://withruntime.com/docs/included-usage.md",
+          "quote": "An account given free hours or free usage before 10 November 2026 keeps what is left of them.",
+          "confidence": "docs-confirmed"
         }
       ]
     },
@@ -257,6 +276,35 @@
       "issue": "Very young",
       "detail": "A one-month-old repository, near-zero community discussion, and daily changelog entries including breaking changes. No preinstalled coding agents, and the vendor says no bridge harness has run on Runtime yet.",
       "status": "open"
+    },
+    {
+      "issue": "The status page says no incidents while 4 November was 61.38%",
+      "detail": "The incident list says no incidents are recorded, while the same page's daily table shows 4 November 2026 passing only 61.38% of API checks.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://withruntime.com/status.md",
+          "quote": "No incidents recorded.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://withruntime.com/status.md",
+          "quote": "| 2026-11-04 | 61.38% |",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Private-beta products have no public price",
+      "detail": "Hosted Agents, Apps, Functions, CI/CD, Containers and standalone Desktops appear in the SDK but not in the public docs index or price page, and refuse non-beta accounts. Agents rates ($0.03 per active vCPU-hour, $0.01 per GiB-hour) come only from the SDK types.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://unpkg.com/withruntime@0.50.0/dist/products/agents.d.ts",
+          "quote": "In a private beta: outside it every call is refused with `product_in_beta`.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [
@@ -264,7 +312,8 @@
     "OIDC workload identity that AWS and GCP can trust.",
     "Pause with memory, and snapshots that keep memory by default.",
     "SSO, SCIM, audit logs and roles free on every account.",
-    "Billed on measured CPU, so a box waiting on a model costs the floor, about $0.03 an hour."
+    "Billed on measured CPU, so a box waiting on a model costs the floor, about $0.03 an hour.",
+    "The first $10 is matched, so the entry cost buys $20 of usage."
   ],
   "sources": [
     {
@@ -290,6 +339,14 @@
     {
       "label": "Pricing",
       "url": "https://withruntime.com/pricing"
+    },
+    {
+      "label": "Pricing (pay first)",
+      "url": "https://withruntime.com/pricing"
+    },
+    {
+      "label": "Docs: changelog",
+      "url": "https://withruntime.com/docs/changelog"
     }
   ]
 }

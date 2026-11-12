@@ -28,7 +28,7 @@
       "heading": "What the status number measures",
       "body": [
         "Boat's FAQ claims 99.95% measured over the history of all sandboxes. Its status page, read over 90 days, gives a different picture: seven customer-facing components range from 98.83% (Sandbox Fork) to 100%, and pooled across the seven the figure is 99.74%. One further component is an internal edge-case test suite, not customer uptime, and Stop + Resume covers only about a third of the window.",
-        "Runtime checks the API every two minutes and starts a real sandbox every ten; its API passed 96.37% of checks over seven days and 98.87% over 30. Lizard's status page reports a platform figure but has no sandbox component. Vercel lists Sandbox as operational without a Sandbox-specific percentage, and Sprites has a component on Fly's page but no numeric figure."
+        "Runtime checks the API every two minutes and starts a real sandbox every ten; its API passed 100% of checks over seven days and 97.85% over 30, though 4 November passed only 61.38%. Lizard's status page reports a platform figure but has no sandbox component. Vercel lists Sandbox as operational without a Sandbox-specific percentage, and Sprites has a component on Fly's page but no numeric figure."
       ],
       "quote": {
         "text": "Sandboxes have an uptime of 99.95%. boat measures this over the history of all sandboxes.",
@@ -223,7 +223,7 @@
       "verdict": "partly",
       "figure": "Runtime LLC; 99% API credit",
       "scenario": "A 99% API promise with service credit for paid accounts, but its certificates belong to its data centre rather than to Runtime.",
-      "note": "Runtime LLC, Denver; state of formation not published. No founder or executive named; launched September 2026; funding not published. Status checks the API every 2 minutes and a real sandbox every 10; the API passed 96.37% over 7 days and 98.87% over 30. The 99% promise is credit-based: 10% of the month's charges for any account that has bought credit, not tied to a plan. SOC 2 and ISO certificates belong to its data centre in Virginia, not Runtime. New usage can be repriced as soon as posted; cancellation deletes content without a notice promise.",
+      "note": "Runtime LLC, Denver; state of formation not published. No founder or executive named; launched September 2026; funding not published. Status checks the API every 2 minutes and a real sandbox every 10; on 12 November 2026 the API had passed 100% over 7 days and 97.85% over 30, though 4 November passed only 61.38% while the incident list stayed empty. The 99% promise is credit-based: 10% of the month's charges for any account that has bought credit, not tied to a plan. SOC 2 and ISO certificates belong to its data centre in Virginia, not Runtime. New usage can be repriced as soon as posted; cancellation deletes content without a notice promise.",
       "source": {
         "url": "https://withruntime.com/docs/pricing",
         "quote": "Paid accounts are promised 99% API uptime every calendar month.",

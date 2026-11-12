@@ -3228,12 +3228,12 @@
         },
         {
           "provider": "runtime",
-          "tier": "manual",
+          "tier": "guide",
           "noTerminal": "no",
-          "what": "A sandbox opens with a shell in the browser and can run it, but there is no Claude Code guide or template.",
+          "what": "A first-party guide installs Claude Code from npm in a microVM, keeps the key in a host-side secret and returns the diff; each developer needs their own sandbox and credentials. A private-beta Agents product can also run a Claude Code session per prompt.",
           "link": {
-            "title": "Runtime: getting started",
-            "url": "https://withruntime.com/docs/start"
+            "title": "Runtime: run Claude Code in a sandbox",
+            "url": "https://withruntime.com/integrations/claude-code"
           }
         },
         {

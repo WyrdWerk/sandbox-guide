@@ -15,7 +15,7 @@
       "heading": "Reserved size versus measured use",
       "body": [
         "A flat rate bills the shape you reserved. A measured meter bills what the machine used, which can be much less or much more than the shape suggests. Runtime bills measured active CPU with a 50-millicore floor plus reserved memory. Sprites bills actual CPU and actual memory. Vercel bills active CPU excluding I/O wait, plus provisioned memory.",
-        "The difference is largest for an agent waiting on a model. Runtime's floor makes an idle-but-running box cost about $0.03 an hour; a flat 2 vCPU / 4 GiB shape costs its full hourly rate whether it waits or not."
+        "The difference is largest for an agent waiting on a model. At Runtime an idle-but-running 4 GiB box costs about $0.03 an hour, nearly all of it reserved memory, since the CPU floor is a fraction of a cent; a flat 2 vCPU / 4 GiB shape costs its full hourly rate whether it waits or not."
       ]
     },
     {
@@ -177,12 +177,12 @@
       "provider": "runtime",
       "verdict": "partly",
       "figure": "50-millicore CPU floor",
-      "scenario": "Measured active CPU above a 50-millicore floor plus reserved memory, so waiting costs about $0.03 an hour.",
-      "note": "Prepaid credit, per second: measured active CPU above a 50-millicore floor, plus reserved memory, plus storage while paused or stopped. No plan fee; plans are in a private beta.",
+      "scenario": "Measured active CPU above a 50-millicore floor plus reserved memory, so a waiting 4 GiB sandbox costs about $0.03 an hour, almost all of it memory.",
+      "note": "Prepaid credit, per second: measured active CPU above a 50-millicore floor, plus reserved memory, plus storage while paused or stopped. Pay first: credit from $10 before the first sandbox. No plan fee; plans are in a private beta. Hosted Agents sessions (private beta) bill at their own rates.",
       "source": {
-        "url": "https://withruntime.com/docs/pricing",
-        "quote": "Measured CPU use above a 50-millicore floor",
-        "confidence": "inferred"
+        "url": "https://withruntime.com/pricing.md",
+        "quote": "A 2 vCPU, 4 GiB sandbox waiting on a model costs $0.03125 an hour, memory plus that floor",
+        "confidence": "pricing-page"
       }
     },
     {

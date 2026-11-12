@@ -178,7 +178,7 @@
       "verdict": "partly",
       "figure": "64 GiB; 1 region",
       "scenario": "Any combination inside 16 vCPU and 64 GiB, so 2 vCPU / 16 GB is exact, in one Virginia region.",
-      "note": "Any vCPU, memory and disk combination inside 16 vCPU, 64 GiB and 400 GiB. One region in Virginia; shared CPU by default, reserved on request.",
+      "note": "Any vCPU, memory and disk combination inside 16 vCPU, 64 GiB and 400 GiB on a paid account, or 2 vCPU, 4 GiB and 10 GiB without credit. One region in Virginia; shared CPU by default, reserved on request.",
       "source": {
         "url": "https://withruntime.com/docs/api",
         "quote": "At least 128; at most 65,536 (64 GiB) on a paid sandbox, 4,096 without credit",

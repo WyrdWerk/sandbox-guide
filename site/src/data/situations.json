@@ -24,7 +24,7 @@
         },
         {
           "provider": "runtime",
-          "why": "`persistent: true` disables the idle pause, and measured CPU with a 50-millicore floor makes a waiting agent cost about $0.03 an hour in CPU.",
+          "why": "`persistent: true` disables the idle pause, and a waiting 4 GiB agent costs about $0.03 an hour, almost all of it reserved memory, since measured CPU has only a 50-millicore floor.",
           "watch": "A stopped box still bills storage, there is one US region, and there is no preinstalled agent."
         },
         {
@@ -118,7 +118,7 @@
       "providers": [
         {
           "provider": "runtime",
-          "why": "CPU is measured with a 50-millicore floor, so an idle-but-running box costs about $0.03 an hour, and a paused box costs storage only.",
+          "why": "CPU is measured with a 50-millicore floor, so an idle-but-running 4 GiB box costs about $0.03 an hour, mostly memory, and a paused box costs storage only.",
           "watch": "An open terminal or SSH session counts as activity and keeps billing; a stopped box still bills storage."
         },
         {

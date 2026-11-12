@@ -178,7 +178,7 @@
       "verdict": "yes",
       "figure": "Per-key daily + lifetime",
       "scenario": "Per-key daily spend limits and a per-sandbox lifetime cap, with SSO, SCIM and a 400-day audit log free.",
-      "note": "Roles, compartments that wall off key groups, per-key daily spend limits and a per-sandbox lifetime cap. SSO, SCIM and a 400-day audit log are free.",
+      "note": "Roles, compartments that wall off key groups, per-key daily spend limits and a per-sandbox lifetime cap. SSO, SCIM and a 400-day audit log are free. The plans page says a plan turns these on, which contradicts the pricing and security pages; this guide follows the pricing page.",
       "source": {
         "url": "https://withruntime.com/docs/pricing",
         "quote": "read-only keys, a daily spending limit per key, and compartments",

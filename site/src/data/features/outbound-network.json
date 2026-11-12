@@ -180,8 +180,8 @@
       "scenario": "A dedicated outbound address costs $5 a month; without it the sandbox can be set to refuse everything or to an allowlist.",
       "note": "`internet: false` refuses everything, an allow list is allow-list only, and deny always wins. A dedicated outbound address costs $5 a month, and sandboxes reach each other over a private name.",
       "source": {
-        "url": "https://withruntime.com/pricing",
-        "quote": "Dedicated IPv4 | $5 | per 30-day month",
+        "url": "https://withruntime.com/pricing.md",
+        "quote": "Dedicated IPv4 address | $5 per 30-day month",
         "confidence": "pricing-page"
       }
     },
