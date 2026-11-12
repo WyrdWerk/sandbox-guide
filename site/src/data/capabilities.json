@@ -23329,7 +23329,7 @@
             "quote": "The [status page](https://status-boxd.com) shows each region's uptime and incidents.",
             "confidence": "docs-confirmed"
           },
-          "figure": "90-day uptime"
+          "figure": "Public status page; since 28 Oct"
         },
         {
           "provider": "cloudflare-sandbox",
