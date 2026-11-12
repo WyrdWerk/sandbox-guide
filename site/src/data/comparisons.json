@@ -231,6 +231,72 @@
         "edge": "tradeoff",
         "why": "Cloudflare is a large public company with company-wide certificates that do not name Sandboxes; E2B is a young startup whose SOC 2 Type II covers its own service. Neither publishes a sandbox SLA."
       }
+    },
+    "e2b-vs-modal": {
+      "isolation": {
+        "edge": "e2b",
+        "why": "E2B runs every sandbox as a Firecracker microVM; Modal defaults to gVisor and offers a VM only on request, and its GPU sandboxes are gVisor-only."
+      },
+      "sizes-regions": {
+        "edge": "modal",
+        "why": "Modal sizes CPU and memory freely, offers up to 8 GPUs and lets you pick a region at a surcharge; E2B stops at 8 vCPU and 8 GiB self-serve with no GPU."
+      },
+      "lifecycle": {
+        "edge": "e2b",
+        "why": "E2B pauses with memory and resumes the same sandbox; Modal has no pause, only terminate and restore a copy from a snapshot."
+      },
+      "snapshots-forks": {
+        "edge": "e2b",
+        "why": "E2B snapshots memory without stopping the source and forks up to 20 live copies; a Modal memory snapshot ends the source and lasts seven days."
+      },
+      "storage": {
+        "edge": "modal",
+        "why": "Modal gives a fixed 512 GiB disk plus volumes that outlive a sandbox; E2B includes 10–20 GiB, and its volumes are a private beta."
+      },
+      "idle-timers": {
+        "edge": "e2b",
+        "why": "Both default to five minutes and cap at 24 hours, but E2B can pause an idle sandbox while Modal only terminates it."
+      },
+      "reaching-it": {
+        "edge": "tradeoff",
+        "why": "New E2B projects get token-protected links and SSH through a proxy; Modal tunnels can expose raw TCP and use connect tokens for HTTP, but have no SSH."
+      },
+      "custom-domains": {
+        "edge": "modal",
+        "why": "Modal attaches your domain to sandbox tunnels on Team plans; E2B needs a proxy server you run yourself."
+      },
+      "outbound-network": {
+        "edge": "tradeoff",
+        "why": "E2B has no egress charge but no static IP at any price; Modal charges $0.04/GiB past a large allowance and sells static IPs on Team."
+      },
+      "keys-secrets": {
+        "edge": "e2b",
+        "why": "E2B keeps keys outside the sandbox with a proxy by default; Modal passes them in as environment variables unless you use its beta outbound policy."
+      },
+      "ways-to-drive": {
+        "edge": "e2b",
+        "why": "E2B has Python and JavaScript SDKs, a CLI and SSH; Modal has Python, JavaScript and Go SDKs and a CLI but no SSH, REST API or management MCP server."
+      },
+      "built-in-agents": {
+        "edge": "e2b",
+        "why": "E2B has ten ready-made agent templates; Modal has none and leaves agents, browsers and desktops to your own code."
+      },
+      "teams-accounts": {
+        "edge": "modal",
+        "why": "Modal has workspace and environment budgets that stop spending, roles and service users on Team; E2B has per-project limits but every member has the same permissions."
+      },
+      "billing-models": {
+        "edge": "e2b",
+        "why": "Both bill allocated resources per second, but E2B charges about $0.05 a vCPU-hour and $0.016 a GiB-hour against Modal's $0.07 and $0.024."
+      },
+      "trials-free-tiers": {
+        "edge": "tradeoff",
+        "why": "E2B gives $100 once with no card; Modal gives $30 every month but needs a payment method."
+      },
+      "company": {
+        "edge": "modal",
+        "why": "Modal is a large, well-funded company with a SOC 2 Type II report; E2B is a younger startup with its own SOC 2 Type II. Neither publishes an SLA below Enterprise."
+      }
     }
   }
 }
