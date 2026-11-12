@@ -2,6 +2,37 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "OVHcloud and Scaleway: official MCP servers that reach their servers",
+      "provider": "ovhcloud",
+      "what": "OVHcloud's official MCP server now has a VPS section that can start, stop, rebuild and snapshot an existing VPS, though not order one. Scaleway's official CLI runs a local MCP server exposing every command, including creating Instances. Prices are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://mcp.us.ovhcloud.com/api/mcp/sections",
+          "quote": "MCP tools to manage V1 Vps resources via the OVHcloud API.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://github.com/scaleway/scaleway-cli/blob/master/docs/commands/mcp.md",
+          "quote": "Runs the MCP server, exposing all CLI commands as MCP tools for AI assistants.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Correction: TierHive offers HDD in three locations, not four",
+      "provider": "tierhive",
+      "what": "TierHive's price feed lists large HDD storage in Singapore, Sydney and Vint Hill only; London no longer has it. Prices are unchanged.",
+      "sources": [
+        {
+          "url": "https://tierhive.com/api/pricing.php",
+          "quote": "\"slow_disk_max_gb\": 4000",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Contabo: a setup fee on monthly terms, and the GPU machine is orderable",
       "provider": "contabo",
       "what": "Contabo's 1-month Cloud VPS 4 now carries a €2.00 one-time setup fee; longer terms stay fee-free. The single RTX PRO 6000 GPU machine can now be ordered rather than waitlisted. The date is when this guide checked.",

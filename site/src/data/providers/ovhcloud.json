@@ -4,7 +4,7 @@
   "url": "https://us.ovhcloud.com/vps/",
   "status": "researched",
   "kind": "vps",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "oneLiner": "A French cloud provider's plain VPS: four fixed sizes from $5.35 a month on a monthly subscription, with root, a dedicated IPv4 and unlimited traffic, and a powered-off server still billed.",
   "whatItIs": [
     "OVHcloud VPS is an ordinary rented virtual machine from one of Europe's largest hosting companies: fixed vCores, RAM and NVMe disk in one bundle, root access, real SSH, any TCP port, a dedicated IPv4 and IPv6, and a monthly subscription. You choose Linux, Windows or BSD from OVHcloud's images and administer everything above the hypervisor yourself.",

@@ -4212,7 +4212,7 @@
             "title": "Scaleway: security groups",
             "url": "https://www.scaleway.com/en/docs/instances/how-to/use-security-groups/"
           },
-          "price": "STARDUST1-S (1 vCPU / 1 GiB) $5.61 a month including IPv4 if it can be ordered; DEV1-S $12.41"
+          "price": "STARDUST1-S (1 vCPU / 1 GiB) $5.61 a month including IPv4, one per Organization; DEV1-S $12.41"
         },
         {
           "provider": "tierhive",

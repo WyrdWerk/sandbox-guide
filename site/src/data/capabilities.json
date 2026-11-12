@@ -7984,7 +7984,7 @@
           "provider": "tierhive",
           "verdict": "yes",
           "figure": "4,000 GB HDD",
-          "note": "HDD goes to 4,000 GB, but only in London, Singapore, Sydney and Vint Hill, and at a seventh of the NVMe rate. NVMe stops at 50 GB.",
+          "note": "HDD goes to 4,000 GB, but only in Singapore, Sydney and Vint Hill, and at a seventh of the NVMe rate. NVMe stops at 50 GB.",
           "source": {
             "url": "https://tierhive.com/api/pricing.php",
             "quote": "\"slow_disk_max_gb\": 4000",
@@ -12094,10 +12094,10 @@
           "provider": "ovhcloud",
           "verdict": "yes",
           "figure": "Unlimited traffic",
-          "note": "No per-GiB charge and no published fair-use threshold for standard VPS; bandwidth is 500 Mbps to 3 Gbps depending on the model.",
+          "note": "No per-GiB charge. Asia-Pacific plans have a monthly quota, 1 TB on VPS-1 and VPS-2 and 3 TB on VPS-3 and VPS-4, then 10 Mbps; other regions have no published threshold.",
           "source": {
             "url": "https://us.ovhcloud.com/vps/",
-            "quote": "Unlimited traffic",
+            "quote": "VPSs in Asia-Pacific (Mumbai, Singapore, Sydney) have a monthly traffic quota: 1 TB for VPS-1 and VPS-2, 3 TB for VPS-3 and VPS-4",
             "confidence": "pricing-page"
           }
         },
@@ -15908,13 +15908,12 @@
         },
         {
           "provider": "ovhcloud",
-          "verdict": "partly",
-          "figure": "Official; no VPS section",
-          "shortfall": "OVHcloud runs an official MCP server, but it is split into product sections and no VPS section or VPS tool is documented, so an agent cannot manage these servers through it today.",
-          "note": "The MCP server uses OAuth2 and per-section URLs. The documented sections cover domains and other products; the VPS docs index has no MCP page.",
+          "verdict": "yes",
+          "figure": "Official; VPS section",
+          "note": "The official MCP server now has a VPS section with 65 tools in the US hub (87 in EU and Canada) to list, start, stop, reboot, rebuild, snapshot and open the console of an existing VPS. It cannot order a new one; that still needs the panel or the order API.",
           "source": {
-            "url": "https://docs.ovhcloud.com/en/guides/web-cloud/domains/mcp-domain-getting-started",
-            "quote": "You always connect to a specific section: there is no global URL exposing every tool at once.",
+            "url": "https://mcp.us.ovhcloud.com/api/mcp/sections",
+            "quote": "MCP tools to manage V1 Vps resources via the OVHcloud API.",
             "confidence": "docs-confirmed"
           }
         },
@@ -15967,13 +15966,13 @@
         },
         {
           "provider": "scaleway",
-          "verdict": "no",
-          "figure": "None official",
-          "note": "Scaleway publishes no official MCP server for its control plane; the developer site lists API, SDKs, CLI and third-party integrations. Community servers such as scaleway-mcp exist but are third-party and were not evaluated.",
+          "verdict": "yes",
+          "figure": "scw mcp server (official)",
+          "note": "The official scw CLI runs a local MCP server over stdio or streamable HTTP that exposes every CLI command as a tool, including Instance create, start, stop and delete.",
           "source": {
-            "url": "https://www.scaleway.com/en/developers",
-            "quote": "Manage your resources with the Scaleway API using simple HTTP requests.",
-            "confidence": "inferred"
+            "url": "https://github.com/scaleway/scaleway-cli/blob/master/docs/commands/mcp.md",
+            "quote": "Runs the MCP server, exposing all CLI commands as MCP tools for AI assistants.",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -23607,7 +23606,7 @@
           "provider": "tierhive",
           "verdict": "yes",
           "figure": "Per-location 90-day uptime",
-          "note": "A public status page with each location's state and 90-day uptime, stamped 4 Nov 2026 05:15 UTC. No incident history is shown, only the current state and the percentage.",
+          "note": "A public status page with each location's state and 90-day uptime, 99.93–100% when stamped 12 Nov 2026 11:30 UTC. No incident history is shown, only the current state and the percentage.",
           "source": {
             "url": "https://tierhive.com/status",
             "quote": "Uptime by location",
@@ -23911,8 +23910,8 @@
         {
           "provider": "scaleway",
           "verdict": "partly",
-          "figure": "99% BASIC3 only; none on DEV1",
-          "shortfall": "The cheap ranges have no service-level objective at all: DEV1, GP1, PLAY2 and PRO2 are listed as 'No SLO', and only BASIC3-X among the shared ranges carries 99%.",
+          "figure": "99% BASIC2-A and BASIC3-X; none on DEV1",
+          "shortfall": "The cheap ranges have no service-level objective at all: DEV1, GP1, PLAY2 and PRO2 are listed as 'No SLO'; only BASIC2-A and BASIC3-X among the shared ranges carry 99%.",
           "note": "Covered Shared Instances (BASIC2-A, BASIC3-X) get 99%, dedicated and specialized ranges 99.5%. Unavailability means at least four continuous minutes without external connectivity, and credits are a percentage of the monthly bill.",
           "source": {
             "url": "https://www.scaleway.com/en/virtual-instances/sla/",

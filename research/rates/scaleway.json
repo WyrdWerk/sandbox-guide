@@ -1,6 +1,6 @@
 {
   "provider": "scaleway",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "Fixed-size Instances billed by the hour with a 60-minute minimum, where powering off stops the compute meter but block storage and a flexible IPv4 keep billing; disk is a separate block volume, not part of the shape.",
   "shapes": [
     {

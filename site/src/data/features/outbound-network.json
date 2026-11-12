@@ -298,7 +298,7 @@
       "verdict": "partly",
       "figure": "Unlimited traffic; guest firewall",
       "scenario": "The agent browses freely from a static IPv4 with no per-GiB bill, but restricting where it can go means iptables or ufw inside the guest, which a root agent can change.",
-      "note": "Unlimited traffic at 500 Mbps to 3 Gbps, a dedicated IPv4 and IPv6, and no published overage rate or fair-use threshold. There is no provider-side egress allowlist or no-internet switch in the VPS API; the firewall guide is iptables in the guest, and the Edge Network Firewall is inbound.",
+      "note": "Unlimited traffic at 500 Mbps to 3 Gbps, a dedicated IPv4 and IPv6, and no published overage rate or fair-use threshold. There is no provider-side egress allowlist or no-internet switch in the VPS API; the firewall guide is iptables in the guest, and the Edge Network Firewall is inbound. Asia-Pacific plans have a 1–3 TB monthly quota, then 10 Mbps.",
       "source": {
         "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/firewall-linux-iptable",
         "quote": "Most of the rules outlined in this guide assume that your iptables is configured by default to DROP incoming traffic, and that you selectively authorize incoming traffic.",

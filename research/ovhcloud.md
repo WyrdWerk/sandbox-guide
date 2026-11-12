@@ -495,3 +495,8 @@ Window 6 August to 4 November 2026, provider's own status page only (see `resear
 
 - Site fact: By this guide's count, OVHcloud's two status pages list 18 VPS incidents and 72 Public Cloud incidents from 6 August to 4 November 2026. The longest VPS one left some VPS in the Madrid local zone (EU-SOUTH-LZ-MAD) unavailable for just over four days from 14 August.
 - Source: https://bare-metal-servers.status-ovhcloud.com/incidents/3mjshm15tvzc — "Start time : 14/08/2026 08:45 UTC End time : 18/08/2026 10:15 UTC" (docs-confirmed)
+
+## Recheck, 12 November 2026
+
+Rechecked with the rest of VPS group 3: [vps-group3-recheck-2026-11-12.md](vps-group3-recheck-2026-11-12.md). No price or shape changed. The earlier ledger is kept as written.
+- `mcp-server` now yes: the US MCP hub has a V1 Vps section (65 tools) that manages an existing VPS but cannot order one. Asia-Pacific plans have a 1–3 TB monthly traffic quota, then 10 Mbps.

@@ -1,6 +1,6 @@
 {
   "provider": "vultr",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "A fixed-size server billed by the hour with a one-hour minimum and a 672-hour monthly cap; a stopped server bills at the running rate until it is destroyed.",
   "shapes": [
     {

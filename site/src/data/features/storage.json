@@ -369,8 +369,8 @@
       "provider": "tierhive",
       "verdict": "partly",
       "figure": "50 GB NVMe, 4 TB HDD",
-      "scenario": "The disk is a slider that grows with the machine, but the fast disk stops at 50 GB and big disks mean slow HDD in four locations.",
-      "note": "NVMe runs from 1 to 50 GB and HDD to 4,000 GB, but HDD is offered only in London, Singapore, Sydney and Vint Hill. Disks grow from the panel and the guest needs a reboot before the filesystem sees the new size; nothing says a disk can shrink. Backup and snapshot storage are separate, billed per GB-hour. A network-storage rate appears in the price feed with no documented product, so there is no honest claim of a detachable volume.",
+      "scenario": "The disk is a slider that grows with the machine, but the fast disk stops at 50 GB and big disks mean slow HDD in three locations.",
+      "note": "NVMe runs from 1 to 50 GB and HDD to 4,000 GB, but HDD is offered only in Singapore, Sydney and Vint Hill. Disks grow from the panel and the guest needs a reboot before the filesystem sees the new size; nothing says a disk can shrink. Backup and snapshot storage are separate, billed per GB-hour. A network-storage rate appears in the price feed with no documented product, so there is no honest claim of a detachable volume.",
       "source": {
         "url": "https://tierhive.com/api/pricing.php",
         "quote": "\"slow_disk_max_gb\": 4000",
