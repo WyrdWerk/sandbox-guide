@@ -124,7 +124,7 @@
         {
           "provider": "sandboxer",
           "why": "Stopped time is free and a resume can restore the running processes, so a request can find the session as it was.",
-          "watch": "The default TTL is one hour and the trial converts to $20 a month; memory restore needs a matching machine within two minutes."
+          "watch": "The default TTL is one hour, there is no trial (the first month is charged when you subscribe), stopped data is deleted after 14 days, and memory restore needs a matching machine within two minutes."
         },
         {
           "provider": "agent37",

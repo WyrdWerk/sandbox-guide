@@ -217,7 +217,7 @@
       "verdict": "partly",
       "figure": "RAM to disk; 2 min window",
       "scenario": "Stop writes memory and device state to disk; the resume restores processes only on a matching CPU within two minutes.",
-      "note": "A stop writes memory and device state to disk, so a resume can restore running processes — but only on a machine of the same CPU type within two minutes, otherwise it cold-boots.",
+      "note": "A stop writes memory and device state to disk, so a resume can restore running processes — but only on a machine of the same CPU type within two minutes, otherwise it cold-boots. A stopped sandbox's data is deleted 14 days after its last stop unless saved as a named snapshot.",
       "source": {
         "url": "https://sandboxer.com/docs/snapshots",
         "quote": "If a machine with that CPU type is online but busy, the resume waits up to 2 minutes for it",

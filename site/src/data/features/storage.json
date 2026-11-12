@@ -190,7 +190,7 @@
       "verdict": "partly",
       "figure": "Whole disk; quota, not bill",
       "scenario": "The whole disk persists while stopped, free within a storage quota; going over blocks new sandboxes rather than charging.",
-      "note": "The whole disk persists while stopped, free within a storage quota, and there is no separate volume or image registry. Going over quota blocks new sandboxes rather than charging.",
+      "note": "The whole disk persists while stopped, free within a storage quota, and there is no separate volume or image registry. Going over quota blocks new sandboxes rather than charging. Stopped data is kept for 14 days after the last stop, then deleted.",
       "source": {
         "url": "https://sandboxer.com/docs/machines",
         "quote": "is space for your files, added on top of the OS image",

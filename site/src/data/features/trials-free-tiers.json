@@ -187,13 +187,13 @@
     },
     {
       "provider": "sandboxer",
-      "verdict": "partly",
-      "figure": "7 days / 25 h, then a plan",
-      "scenario": "Seven days with 25 hours of machine time and a card up front; it becomes $20 a month on day eight.",
-      "note": "A seven-day trial with 25 hours of machine time, two sandboxes, small and default sizes, and a card up front. It becomes $20 a month on day eight.",
+      "verdict": "no",
+      "figure": "None; $20 from day one",
+      "scenario": "No free tier and no trial: choosing a plan charges the first month immediately, and a card is needed before the first sandbox.",
+      "note": "No free tier or trial for new accounts since 2 November 2026; $20 a month is the floor. Signup, docs, CLI and dashboard need no card, but creating a sandbox needs a plan and a card. Trials started earlier keep their limits until they end.",
       "source": {
         "url": "https://sandboxer.com/pricing",
-        "quote": "7 days, 25 hours of machine time, up to 2 sandboxes at once on the small and default sizes",
+        "quote": "the first month is charged when you subscribe",
         "confidence": "pricing-page"
       }
     },

@@ -192,8 +192,8 @@
       "scenario": "Outbound is open with no allowlist, and traffic shares the node's IPv4 with other sandboxes.",
       "note": "Outbound is open by default with no allowlist product. Traffic shares the node's IPv4 and IPv6 with other sandboxes, so external rate limits are shared.",
       "source": {
-        "url": "https://sandboxer.com/docs/security",
-        "quote": "outbound internet is open by default",
+        "url": "https://sandboxer.com/guides/what-can-reach-a-sandbox-and-what-it-can-reach",
+        "quote": "There is no egress allowlist, domain filter or outbound firewall setting in Sandboxer.",
         "confidence": "docs-confirmed"
       }
     },

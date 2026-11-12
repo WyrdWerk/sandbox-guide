@@ -6543,12 +6543,13 @@
         {
           "provider": "sandboxer",
           "verdict": "yes",
-          "note": "A stopped sandbox costs nothing and keeps everything.",
+          "note": "A stop keeps the whole disk, but stopped data is deleted 14 days after the last stop unless saved as a named snapshot; sandboxes created before 29 October 2026 are exempt.",
           "source": {
             "url": "https://sandboxer.com/docs/snapshots",
-            "quote": "A stopped sandbox costs nothing and keeps everything.",
+            "quote": "A stopped sandbox keeps its disk, memory and automatic snapshots for **14 days** after it last stopped, at no charge.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "14 days"
         },
         {
           "provider": "sprites",
@@ -15797,10 +15798,10 @@
         {
           "provider": "sandboxer",
           "verdict": "yes",
-          "note": "Hosted and local servers, with 18 tools and session handoff.",
+          "note": "Hosted and local servers with 20 tools, including create_task and task_status for a coding agent that opens a pull request.",
           "source": {
             "url": "https://sandboxer.com/docs/mcp",
-            "quote": "Hosted at `https://sandboxer.com/mcp` (Streamable HTTP). Nothing to install.",
+            "quote": "It has the same 20 tools plus `handoff_session`",
             "confidence": "docs-confirmed"
           }
         },
@@ -21474,7 +21475,8 @@
             "url": "https://sandboxer.com/docs/billing",
             "quote": "Time while stopped is never counted.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "note": "Stopped data is free for 14 days within the storage quota, then deleted rather than billed."
         },
         {
           "provider": "sprites",
@@ -22446,12 +22448,12 @@
         {
           "provider": "sandboxer",
           "verdict": "no",
-          "figure": "trial only",
-          "shortfall": "There is no free tier, only a seven-day trial that becomes a $20 plan.",
+          "figure": "none",
+          "shortfall": "There is no free tier or trial for new accounts; plans start at $20 a month.",
           "source": {
-            "url": "https://sandboxer.com/docs/billing",
-            "quote": "When the 7 days end, the trial becomes the $20/month plan and your card is charged.",
-            "confidence": "docs-confirmed"
+            "url": "https://sandboxer.com/pricing",
+            "quote": "No. Plans start at $20/month",
+            "confidence": "pricing-page"
           }
         },
         {
@@ -22775,11 +22777,11 @@
           "provider": "sandboxer",
           "verdict": "no",
           "figure": "none",
-          "shortfall": "There is no credit; the trial is 25 hours of machine time that becomes a paid plan.",
+          "shortfall": "There is no signup credit, and the trial was removed: the first month is charged when you subscribe.",
           "source": {
-            "url": "https://sandboxer.com/pricing.md",
-            "quote": "7 days, 25 hours of machine time, up to 2 sandboxes at once on the small and default sizes",
-            "confidence": "inferred"
+            "url": "https://sandboxer.com/pricing",
+            "quote": "the first month is charged when you subscribe",
+            "confidence": "pricing-page"
           }
         },
         {
@@ -23096,12 +23098,12 @@
         {
           "provider": "sandboxer",
           "verdict": "no",
-          "figure": "card for the trial",
-          "shortfall": "The trial needs a card up front and becomes a paid plan after seven days.",
+          "figure": "card before the first sandbox",
+          "shortfall": "You can sign up and look around without a card, but creating a sandbox needs a card and a paid plan.",
           "source": {
-            "url": "https://sandboxer.com/pricing.md",
-            "quote": "7 days, 25 hours of machine time, up to 2 sandboxes at once on the small and default sizes",
-            "confidence": "inferred"
+            "url": "https://sandboxer.com/docs/billing",
+            "quote": "Creating, forking or restoring a sandbox answers `402 payment_method_required` until you add one.",
+            "confidence": "docs-confirmed"
           }
         },
         {
