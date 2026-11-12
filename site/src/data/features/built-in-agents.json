@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "None; guides",
-      "scenario": "No agent is preinstalled; you follow a first-party guide to install Claude Code or Codex, or drive the desktop through the computer-use API.",
-      "note": "No hosted agent or preinstalled harness. First-party guides cover Claude Code, Codex, Cursor, Devin, Gemini CLI, OpenCode, Amp and Kiro; computer use is a first-class API.",
+      "figure": "Preinstalled; no prompt API",
+      "scenario": "Claude Code, Codex, OpenClaw and OpenCode come in the default snapshot; you open a terminal or run commands, since there is no prompt endpoint.",
+      "note": "The default snapshots preinstall Claude Code, Codex, OpenClaw and OpenCode, but there is no hosted agent loop or prompt API, and you bring the model keys. First-party guides also cover Cursor, Devin, Gemini CLI, Amp and Kiro; computer use is a first-class API.",
       "source": {
-        "url": "https://trust.daytona.io/",
-        "quote": "Daytona does not ship AI-assisted features inside the product",
+        "url": "https://www.daytona.io/docs/en/snapshots.md",
+        "quote": "Default snapshots include pre-installed Python and Node.js packages.",
         "confidence": "docs-confirmed"
       }
     },

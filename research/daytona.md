@@ -282,3 +282,7 @@ Added SLA claim and credit facts from https://www.daytona.io/sla (fresh Context.
 | https://www.daytona.io/sla | "Daytona will use commercially reasonable efforts to make the Services available 99.95% of the time in any given calendar month" | docs-confirmed |
 | https://www.daytona.io/sla | "Credit eligibility requires submitting a claim within 30 days of the incident" | docs-confirmed |
 | https://www.daytona.io/sla | "Approved credits will be applied toward future usage and issued within 60 days of approval. The maximum monthly credit is 50% of the applicable fees for the impacted Services." | docs-confirmed |
+
+## Recheck, 12 November 2026
+
+See [daytona-recheck-2026-11-12.md](daytona-recheck-2026-11-12.md). daytona.io rates are unchanged. agents-preinstalled is now yes (Claude Code, Codex, OpenClaw and OpenCode in the default snapshots), browser yes (Chromium in the standard image), backups partly (one rolling recovery backup). Daytona 2.0 launched at daytona.com on 1 November as a separate VM-first platform with per-core prices and a $250 Team plan; this guide still models daytona.io.

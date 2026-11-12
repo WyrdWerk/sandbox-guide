@@ -1,6 +1,6 @@
 {
   "provider": "daytona",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "summary": "Per second on reserved vCPU, memory and disk; stopped sandboxes bill disk only.",
   "cpu": {
     "rate": 0.0504,

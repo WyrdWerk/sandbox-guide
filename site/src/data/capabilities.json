@@ -2661,10 +2661,10 @@
           "provider": "daytona",
           "verdict": "yes",
           "figure": "up to 8 GPUs",
-          "note": "Graphics machines are preemptible, ignore your region choice and cannot use the free credit.",
+          "note": "Nine GPU types, including the L40S added in November. On-demand GPU sandboxes are reserved; spot ones are preemptible. On shared capacity they ignore your region choice, and they cannot use the free credit.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/gpu-sandboxes",
-            "quote": "each GPU adds up to 16 vCPUs, 192GB RAM, and 512GB disk",
+            "url": "https://www.daytona.io/docs/en/gpu-sandboxes.md",
+            "quote": "Spot GPU sandboxes are preemptible",
             "confidence": "docs-confirmed"
           }
         },
@@ -2991,7 +2991,7 @@
           "provider": "daytona",
           "verdict": "yes",
           "figure": "US or EU",
-          "note": "Graphics sandboxes ignore the region you pick.",
+          "note": "Graphics sandboxes on shared capacity ignore the region you pick; dedicated and custom regions keep it.",
           "source": {
             "url": "https://www.daytona.io/docs/en/regions",
             "quote": "When creating a sandbox, you can target a specific region, and Daytona schedules the workload on available capacity within that region.",
@@ -6158,13 +6158,14 @@
         },
         {
           "provider": "daytona",
-          "verdict": "no",
-          "note": "Snapshots are taken when you ask; there is no backup schedule.",
+          "verdict": "partly",
           "source": {
-            "url": "https://www.daytona.io/docs/en/snapshots.md",
-            "quote": "Snapshots are persistent, point-in-time captures of sandbox state",
-            "confidence": "inferred"
-          }
+            "url": "https://www.daytona.io/docs/en/troubleshooting.md",
+            "quote": "Daytona can restore the sandbox from its last successful backup",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "One rolling recovery copy",
+          "shortfall": "Daytona keeps a recovery backup it can restore a failed sandbox from, but its schedule, retention and export are not published and you cannot take or name one yourself."
         },
         {
           "provider": "e2b",
@@ -7412,10 +7413,10 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "The docs walk through mounting an S3, R2 or Tigris bucket.",
+          "note": "The docs cover S3, R2, Tigris, Supabase Storage, Google Cloud Storage and Azure Blob, among others.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/mount-external-storage",
-            "quote": "Mount an Amazon S3 bucket",
+            "url": "https://www.daytona.io/docs/en/mount-external-storage.md",
+            "quote": "Google Cloud Storage",
             "confidence": "docs-confirmed"
           }
         },
@@ -16661,13 +16662,14 @@
         },
         {
           "provider": "daytona",
-          "verdict": "partly",
-          "shortfall": "OpenClaw is in the default snapshot, but Claude Code and Codex are not; those need an install step.",
+          "verdict": "yes",
           "source": {
-            "url": "https://www.daytona.io/docs/en/guides/openclaw/openclaw-run-secure-sandbox.md",
-            "quote": "OpenClaw comes preinstalled in the default Daytona snapshot, so the command above is all you need.",
+            "url": "https://www.daytona.io/docs/en/snapshots.md",
+            "quote": "Default snapshots include pre-installed Python and Node.js packages.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "Claude Code, Codex, OpenClaw, OpenCode",
+          "note": "The default snapshots list Claude Code, Codex, OpenClaw and OpenCode as preinstalled npm packages; some guides still run an install step."
         },
         {
           "provider": "e2b",
@@ -17918,13 +17920,14 @@
         },
         {
           "provider": "daytona",
-          "verdict": "not-published",
-          "note": "No browser is documented in the default image or the computer-use desktop; the docs describe the desktop, not what is installed in it.",
+          "verdict": "yes",
+          "note": "The standard sandbox image carries Chromium and ffmpeg, and the computer-use desktop drives it.",
           "source": {
-            "url": "https://www.daytona.io/docs/en/computer-use.md",
-            "quote": "Computer Use enables programmatic control of desktop environments within sandboxes.",
+            "url": "https://www.daytona.io/docs/en/guides/devin/devin-outposts.md",
+            "quote": "already carries Chromium and ffmpeg",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "Chromium"
         },
         {
           "provider": "e2b",
@@ -18550,7 +18553,7 @@
         {
           "provider": "daytona",
           "verdict": "yes",
-          "note": "First-party guides cover Cursor and Devin alongside Claude Code and others.",
+          "note": "First-party guides cover Claude Code and Claude managed agents, Codex and the OpenAI Agents API, Gemini, Cursor self-hosted machines, Devin Outposts, OpenCode, Amp, Kiro and more.",
           "source": {
             "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox.md",
             "quote": "Run Claude Code in a Daytona Sandbox via CLI",

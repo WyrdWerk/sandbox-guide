@@ -528,7 +528,7 @@
         },
         {
           "provider": "daytona",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "partly",
           "what": "OpenClaw publishes a Daytona guide, and OpenClaw is preinstalled in Daytona's default image. Create the sandbox with auto-stop off, connect over SSH and run onboarding.",
           "link": {
@@ -1073,9 +1073,9 @@
         },
         {
           "provider": "daytona",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "An official guide for running Claude Code in a sandbox from the Daytona command line.",
+          "what": "Claude Code, Codex and OpenCode are preinstalled in the default snapshot; an official guide runs Claude Code from the Daytona command line.",
           "link": {
             "title": "Daytona: Claude Code",
             "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox"
@@ -1936,9 +1936,9 @@
         },
         {
           "provider": "daytona",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "An official computer-use guide starts Xvfb, XFCE and VNC in a sandbox and drives the desktop with screenshots, clicks and keys through the SDK.",
+          "what": "Chromium ships in the standard image, and an official computer-use guide starts Xvfb, XFCE and VNC and drives the desktop with screenshots, clicks and keys through the SDK.",
           "link": {
             "title": "Daytona: computer use",
             "url": "https://www.daytona.io/docs/en/computer-use"
@@ -3168,9 +3168,9 @@
         },
         {
           "provider": "daytona",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "partly",
-          "what": "An official command-line guide. The dashboard Playground opens a terminal in the browser, so nothing is installed locally, but setup is typed commands.",
+          "what": "Claude Code is preinstalled in the default snapshot. The dashboard Playground opens a terminal in the browser, so nothing is installed locally, but setup is typed commands.",
           "link": {
             "title": "Daytona: Claude Code",
             "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox"

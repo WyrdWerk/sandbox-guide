@@ -3,7 +3,7 @@
   "name": "Daytona",
   "url": "https://www.daytona.io",
   "status": "researched",
-  "checkedOn": "2026-10-28",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Linux containers by default and real VMs on request, with a 15-minute idle stop, a 10 GiB disk cap and two regions.",
   "whatItIs": [
     "Daytona sells sandboxes for AI-generated code: a Linux container by default, or a Linux VM, Windows, GPU or macOS sandbox when the workload needs one. The unit is created and driven through five SDKs, a CLI, a REST API and an MCP server.",
@@ -284,9 +284,21 @@
       "status": "open"
     },
     {
-      "issue": "Two documentation trees describe different products",
-      "detail": "The default docs are v0.226; `/docs/en/v2/` documents an alpha with different API hosts and a different macOS model, including Daytona-managed Mac reservations.",
-      "status": "open"
+      "issue": "Daytona now sells two platforms, and this guide models the older one",
+      "detail": "Daytona 2.0 launched on 1 November 2026 at daytona.com with its own docs and prices: VMs by default, native macOS, per-core rates and a $250 monthly Team plan. This guide still models daytona.io, the container-first product with per-vCPU rates and no plan fee, which is still sold and updated.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://www.daytona.com/docs/sandboxes.md",
+          "quote": "A sandbox is a hardware-isolated virtual machine with its own kernel, filesystem, network stack, and allocated vCPU, RAM, and disk",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.daytona.io/docs/en/sandboxes.md",
+          "quote": "Sandboxes run as **Linux containers** by default.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [
@@ -294,7 +306,8 @@
     "Reserved-resource billing per second with no plan fee and $200 of free compute.",
     "Free S3-backed volumes, 100 per organisation, that do not count against storage.",
     "Five SDKs, a REST API, a CLI, a first-party MCP server and a browser Playground.",
-    "A VNC desktop and a computer-use API for browser agents."
+    "A VNC desktop and a computer-use API for browser agents.",
+    "Claude Code, Codex, OpenClaw and OpenCode preinstalled in the default snapshot, with Chromium for browser work."
   ],
   "sources": [
     {

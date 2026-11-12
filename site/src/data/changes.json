@@ -2,6 +2,24 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Daytona preinstalls coding agents, and Daytona 2.0 launches separately",
+      "provider": "daytona",
+      "what": "Daytona's default snapshots now list Claude Code, Codex, OpenClaw and OpenCode as preinstalled, the standard image carries Chromium, and a failed sandbox can be restored from Daytona's own recovery backup. Nine GPU types are listed, including the L40S. Separately, Daytona 2.0 launched at daytona.com on 1 November with VMs by default, native macOS, per-core prices and a $250 monthly Team plan; this guide still models the daytona.io product, whose rates did not change. The date is when this guide checked, not when Daytona made each change.",
+      "sources": [
+        {
+          "url": "https://www.daytona.io/docs/en/snapshots.md",
+          "quote": "Default snapshots include pre-installed Python and Node.js packages.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.daytona.com/docs/sandboxes.md",
+          "quote": "A sandbox is a hardware-isolated virtual machine with its own kernel, filesystem, network stack, and allocated vCPU, RAM, and disk",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Cloudflare Sandbox: an agent harness, faster starts and smaller custom sizes",
       "provider": "cloudflare-sandbox",
       "what": "Cloudflare now documents an experimental Agents SDK harness that runs Claude Code or Codex in a container with no Dockerfile, a 648 ms median start on its new runtime, an interactive terminal through exec(), and custom sizes from 1/16 of a vCPU. Account concurrency rose tenfold to 15,000 vCPU. Its limits page dropped the 3 GiB-per-vCPU memory rule that a September changelog still states; this guide keeps pricing the standard presets, so the A/B/C costs are unchanged. It also adds a 24 September disclosure that a shared storage pool let customers recover each other’s leftover disk blocks, fixed by 19 September. The date is when this guide checked, not when Cloudflare made each change.",
