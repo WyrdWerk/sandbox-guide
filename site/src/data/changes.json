@@ -2,6 +2,24 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Tensorlake now bills at least 20% of allocated CPU",
+      "provider": "tensorlake",
+      "what": "Tensorlake's pricing page now bills CPU at a minimum of 20% of the vCPU you allocate, so a mostly idle sandbox costs more: workload C rises from $8.26 to $9.52. It also publishes a reserved NVIDIA H100 at $3.95 per GPU-hour, says egress is free, and reported a 7 November security incident in which customer email addresses were read. The date is when this guide checked, not when Tensorlake made each change.",
+      "sources": [
+        {
+          "url": "https://www.tensorlake.ai/pricing",
+          "quote": "CPU is billed on active execution, with a minimum of 20% of allocated vCPU.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://trust.tensorlake.ai/updates",
+          "quote": "Based on what we know, customer email information was accessed.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "InstaBox recheck: GPUs, a hosted MCP server and included disk",
       "provider": "instabox",
       "what": "A full recheck found NVIDIA L4 GPU machines at $0.80 per GPU-hour on paid plans, a Python SDK, a hosted MCP server, Docker and OCI image import, copy-on-write forks, a public status page and a SOC 2 Type II report on request. Paid plans now include 200 GiB to 5 TiB of disk, so the always-on workload drops from $27.23 to $24.82 a month. Free runs are capped at 480 minutes. The date is when this guide checked, not when InstaBox launched each change.",

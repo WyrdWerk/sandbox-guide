@@ -25,8 +25,9 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["sandboxer", "a", 20], ["sandboxer", "b", 40], ["sandboxer", "c", 20],
   ["boxd", "b", 222.5],
   ["agent37", "b", 30.1],
-  // C: 0.2 core × $0.07 × 90 + 4 × $0.015 × 90 + 20 × $0.0002 × 90 + 640 h × 20 GB × $0.07 / 720.
-  ["tensorlake", "a", 22], ["tensorlake", "b", 250], ["tensorlake", "c", 8.26],
+  // C: CPU bills at least 20% of 2 vCPU (pricing page, 2026-11-12), so 0.4 core × $0.07 × 90 + 4 × $0.015 × 90
+  // + 20 × $0.0002 × 90 + 640 h × 20 GB × $0.07 / 720 = $9.52.
+  ["tensorlake", "a", 22], ["tensorlake", "b", 250], ["tensorlake", "c", 9.52],
   // Active CPU + memory + decimal-GB disk at $0.08 / 720 (first 10 GiB free while running), less 25 vCPU-h and 100 GiB-h a month.
   ["runtime", "a", 7.79], ["runtime", "b", 53.21], ["runtime", "c", 3.58],
   // 1,000 runs at the $0.01 minimum; 730 h capped at $48; 90 on + 640 powered off, capped at $24.
@@ -69,10 +70,12 @@ test("plan gates, minimums and fixed shapes from the providers' own pages", () =
   assert.equal(price(card("blaxel"), task(7, 8, 60)).feasible, false);
   // TierHive sells at most 2 vCPU, so workload B's 4 vCPU cannot be bought at any price.
   assert.equal(price(card("tierhive"), presets.b.workload).feasible, false);
-  // Tensorlake's Pro rates: the browser preset is $197.60 of Pro usage, inside its $250 fee, against $331 on prepaid credits.
+  // Tensorlake bills at least 20% of allocated vCPU, so the 3%-busy browser preset bills 0.4 of its 2 vCPU:
+  // 5,000 h × (0.4 × $0.042 + 4 × $0.009 + 10 × $0.0001) = $269 on Pro, over the $250 fee (prepaid credits: $450).
   const tl = price(card("tensorlake"), presets.browser.workload);
   assert.equal(tl.plan, "Pro");
-  assert.ok(Math.abs(tl.usage - 197.6) < 0.01);
+  assert.ok(Math.abs(tl.usage - 269) < 0.01);
+  assert.ok(Math.abs(tl.total - 269) < 0.01);
 });
 
 test("the model line counts the days a month the machines work", () => {

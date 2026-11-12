@@ -271,7 +271,7 @@
       "verdict": "partly",
       "figure": "Tensorlake, Inc.; 99.9% SLA",
       "scenario": "SOC 2 Type 2 on every tier, HIPAA with a BAA from Pro up, a 99.9% control-plane SLA with credits, and a public status page.",
-      "note": "Tensorlake, Inc., San Francisco, founded 2023, 11–50 people, $8M seed from Artisanal Ventures, Plug and Play and Hawk Hill per third-party records with conflicting dates. SOC 2 Type 2 everywhere; HIPAA with a BAA on Pro and above but no HIPAA badge in the Trust Center. 99.9% control-plane availability, service credits capped at 50% of the month's fees and no cash refund, paid plans only. Public Datadog status page. California law, San Francisco courts.",
+      "note": "Tensorlake, Inc., San Francisco, founded 2023, 11–50 people, $8M seed from Artisanal Ventures, Plug and Play and Hawk Hill per third-party records with conflicting dates. SOC 2 Type 2 everywhere; HIPAA with a BAA on Pro and above but no HIPAA badge in the Trust Center. 99.9% control-plane availability, service credits capped at 50% of the month's fees and no cash refund, paid plans only. Public Datadog status page. California law, San Francisco courts. A security incident on 7 November 2026 exposed customer email addresses but, Tensorlake says, not sandboxes or snapshots.",
       "source": {
         "url": "https://www.tensorlake.ai/terms",
         "quote": "TensorLake will use commercially reasonable efforts to make the Control Plane available 99.9% of the time in each calendar month",

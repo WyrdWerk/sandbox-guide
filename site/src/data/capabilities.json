@@ -2770,13 +2770,14 @@
         {
           "provider": "tensorlake",
           "verdict": "partly",
-          "figure": "by request",
+          "figure": "H100 by request, $3.95/h",
           "shortfall": "Graphics machines exist but you have to ask on Slack to be given access, and they cannot be resized or run virtual machines inside.",
           "source": {
             "url": "https://docs.tensorlake.ai/sandboxes/gpu",
             "quote": "GPU sandboxes are available by request.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "note": "A reserved H100 is $3.95 per GPU-hour on its own invoice."
         },
         {
           "provider": "digitalocean",
@@ -3097,14 +3098,15 @@
         },
         {
           "provider": "tensorlake",
-          "verdict": "yes",
-          "figure": "US or EU",
-          "note": "The choice is a separate EU web address, not a per-machine setting.",
+          "verdict": "partly",
+          "figure": "US or EU, undocumented",
+          "note": "The EU endpoint still answers; only BYOC documents pinning compute to a country.",
           "source": {
-            "url": "https://docs.tensorlake.ai/platform/eu-data-residency",
-            "quote": "Tensorlake APIs are available in the EU region to provide data residency and compute in Europe.",
+            "url": "https://docs.tensorlake.ai/sandboxes/introduction",
+            "quote": "supports EU data residency",
             "confidence": "docs-confirmed"
-          }
+          },
+          "shortfall": "Tensorlake still says it supports EU data residency, but the page explaining how to use the EU region has been removed."
         },
         {
           "provider": "digitalocean",
@@ -3416,14 +3418,14 @@
         },
         {
           "provider": "tensorlake",
-          "verdict": "yes",
-          "figure": "EU endpoint",
-          "note": "EU residency is chosen by using a separate EU web address for the whole account.",
+          "verdict": "partly",
+          "figure": "EU endpoint, undocumented",
           "source": {
-            "url": "https://docs.tensorlake.ai/platform/eu-data-residency",
-            "quote": "Use Tensorlake's EU endpoints for data residency and compute in Europe.",
+            "url": "https://docs.tensorlake.ai/sandboxes/introduction",
+            "quote": "supports EU data residency",
             "confidence": "docs-confirmed"
-          }
+          },
+          "shortfall": "EU residency is claimed in one sentence, and the page explaining how to use it has been removed."
         },
         {
           "provider": "digitalocean",
@@ -9102,13 +9104,13 @@
         },
         {
           "provider": "tensorlake",
-          "verdict": "no",
-          "note": "No cron scheduler; an application is called over HTTP.",
+          "verdict": "partly",
           "source": {
-            "url": "https://docs.tensorlake.ai/applications/concepts.md",
-            "quote": "Each one of them will be assigned a unique HTTP entry point based on the name of the Python function.",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.tensorlake.ai/applications/cron-scheduler",
+            "quote": "Cron schedules trigger your deployed orchestration endpoints on a recurring basis.",
+            "confidence": "docs-confirmed"
+          },
+          "shortfall": "Cron schedules trigger orchestration endpoints, not sandboxes, so a sandbox job needs an orchestration function to start it."
         },
         {
           "provider": "digitalocean",
@@ -11347,13 +11349,14 @@
         },
         {
           "provider": "tensorlake",
-          "verdict": "not-published",
-          "note": "No custom-domain feature is published; addresses are on the provider's own name.",
+          "verdict": "partly",
           "source": {
-            "url": "https://docs.tensorlake.ai/sandboxes/networking.md",
-            "quote": "`https://<port>-<sandbox-id-or-name>.sandbox.tensorlake.ai` routes to a user service listening on `<port>` inside the sandbox",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.tensorlake.ai/platform/self-hosted-compute/aws",
+            "quote": "You own the endpoint and its domain",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "BYOC ingress only",
+          "shortfall": "Your own domain works only when you run Tensorlake on your own cloud and manage its ingress, not on Tensorlake Cloud."
         },
         {
           "provider": "vercel-sandbox",
@@ -11664,13 +11667,14 @@
         },
         {
           "provider": "tensorlake",
-          "verdict": "not-published",
-          "note": "No custom domain is published, so there is no certificate feature to describe.",
+          "verdict": "partly",
           "source": {
-            "url": "https://docs.tensorlake.ai/sandboxes/networking.md",
-            "quote": "`https://<port>-<sandbox-id-or-name>.sandbox.tensorlake.ai` routes to a user service listening on `<port>` inside the sandbox",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.tensorlake.ai/platform/self-hosted-compute/aws",
+            "quote": "Request an ACM certificate in the same AWS account and Region as the NLB.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Your ACM cert in BYOC",
+          "shortfall": "On your own domain you supply the certificate yourself in your AWS account; nothing is issued for you."
         },
         {
           "provider": "vercel-sandbox",
@@ -11993,13 +11997,14 @@
         },
         {
           "provider": "tensorlake",
-          "verdict": "not-published",
-          "note": "The price card has no outbound line, so no allowance or rate is published.",
+          "verdict": "yes",
+          "note": "Tensorlake lists network egress as free.",
           "source": {
-            "url": "https://docs.tensorlake.ai/platform/billing.md",
-            "quote": "Metered resource rates",
-            "confidence": "inferred"
-          }
+            "url": "https://www.tensorlake.ai/pricing",
+            "quote": "Network egress is free.",
+            "confidence": "pricing-page"
+          },
+          "figure": "Not billed"
         },
         {
           "provider": "vercel-sandbox",
@@ -12956,13 +12961,14 @@
         },
         {
           "provider": "tensorlake",
-          "verdict": "not-published",
-          "note": "No fixed outbound address is published.",
+          "verdict": "partly",
           "source": {
-            "url": "https://docs.tensorlake.ai/sandboxes/networking.md",
-            "quote": "By default, sandboxes have outbound internet access enabled.",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.tensorlake.ai/sandboxes/networking",
+            "quote": "These addresses are shared across customers.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "10 shared NAT IPs",
+          "shortfall": "Ten published outbound addresses can be allowlisted, but they are shared with other customers."
         },
         {
           "provider": "vercel-sandbox",
@@ -18638,7 +18644,7 @@
         {
           "provider": "tensorlake",
           "verdict": "yes",
-          "note": "Pages for Cursor Cloud Agents, Claude Managed Agents and Devin Outposts.",
+          "note": "Pages for Cursor Cloud Agents, Claude Managed Agents and Devin Outposts, plus a DeepSeek Harness bundle.",
           "source": {
             "url": "https://docs.tensorlake.ai/sandboxes/cursor-cloud-agents.md",
             "quote": "Use Tensorlake sandboxes as the self-hosted machines for Cursor Cloud Agents.",
@@ -21152,14 +21158,15 @@
         },
         {
           "provider": "tensorlake",
-          "verdict": "yes",
-          "figure": "active CPU only",
-          "note": "Memory and disk are charged on the full allocation while it runs.",
+          "verdict": "partly",
+          "figure": "active CPU, 20% minimum",
+          "note": "Memory and disk are charged on the full allocation while it runs. The billing docs still say active CPU only; the pricing page states the 20% minimum.",
           "source": {
-            "url": "https://docs.tensorlake.ai/platform/billing",
-            "quote": "CPU tracks active runtime execution, not allocated vCPU time is used.",
-            "confidence": "docs-confirmed"
-          }
+            "url": "https://www.tensorlake.ai/pricing",
+            "quote": "CPU is billed on active execution, with a minimum of 20% of allocated vCPU.",
+            "confidence": "pricing-page"
+          },
+          "shortfall": "An idle sandbox still bills 20% of its allocated vCPU, so waiting is not close to free."
         },
         {
           "provider": "digitalocean",
@@ -23415,10 +23422,11 @@
           "verdict": "yes",
           "note": "A public status page shows real-time and historical system health.",
           "source": {
-            "url": "https://status.tensorlake.ai",
-            "quote": "Welcome to tensorlake. See real-time and historical system health.",
+            "url": "https://status.tensorlake.ai/",
+            "quote": "99.90% uptime",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "99.90% sandboxes"
         },
         {
           "provider": "digitalocean",
@@ -24670,7 +24678,7 @@
           "provider": "tensorlake",
           "verdict": "partly",
           "figure": "BYOC, Enterprise",
-          "shortfall": "Self-hosting is offered only on the Enterprise plan and only in your own AWS account; the software is not open source.",
+          "shortfall": "Self-hosting is offered only on the Enterprise plan, on compute you own; the docs cover only AWS, and the software is not open source.",
           "source": {
             "url": "https://docs.tensorlake.ai/platform/self-hosted-compute/aws.md",
             "quote": "Run Tensorlake sandboxes in your AWS account",

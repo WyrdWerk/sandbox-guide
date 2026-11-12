@@ -1,10 +1,11 @@
 {
   "provider": "tensorlake",
-  "checkedOn": "2026-10-30",
-  "summary": "Per second on active CPU, allocated RAM and disk, drawn from prepaid credits or a $250 Pro plan; a suspended sandbox bills snapshot storage only.",
+  "checkedOn": "2026-11-12",
+  "summary": "Per second on active CPU (at least 20% of allocated vCPU), allocated RAM and disk, drawn from prepaid credits or a $250 Pro plan; a suspended sandbox bills snapshot storage only.",
   "cpu": {
     "rate": 0.07,
-    "billing": "active"
+    "billing": "active",
+    "floorShare": 0.2
   },
   "ram": {
     "rate": 0.015,
@@ -61,10 +62,11 @@
   "notes": [
     "Rates shown are the Usage Credits rates. Pro bills $0.042 per active core-hour, $0.009 per GB-hour of RAM and $0.0001 per GB-hour of disk, and the calculator uses those on Pro; snapshot storage is $0.07 per GB-month on both.",
     "Tensorlake's own pages word Pro differently: the pricing page says the fee includes 25,000 CU ($250 of usage); the billing docs and FAQ say \"$250 per month plus metered usage\". This guide reads them together as $250 that includes $250 of usage, with usage beyond it billed. Get it in writing before relying on it.",
-    "CPU bills only while it executes, so the engine applies the workload's busy share. When Tensorlake cannot sample active CPU it falls back to allocated vCPU time, which costs more.",
+    "CPU bills on active execution with a minimum of 20% of the allocated vCPU, so the engine bills the larger of the workload's busy share and 20%. When Tensorlake cannot sample active CPU it falls back to full allocated vCPU time, which costs more. The billing docs do not yet mention the 20% minimum; the pricing page and its calculator do.",
     "Snapshot storage is $0.07 per GB-month while a sandbox is suspended, modelled here as a per-GB-hour stopped rate (0.07 ÷ 720, a fixed 30-day month) on the sandbox's disk size. Tensorlake says only unique bytes are billed, so the real figure can be lower.",
     "Billing is by the second in whole compute units, pooled per organization. Egress is free.",
-    "Memory must be 1–8 GB per vCPU, so a 1 vCPU sandbox cannot exceed 8 GB of RAM."
+    "Memory must be 1–8 GB per vCPU, so a 1 vCPU sandbox cannot exceed 8 GB of RAM.",
+    "A reserved NVIDIA H100 is $3.95 per GPU-hour, by request and on its own invoice; the calculator does not price GPUs."
   ],
   "sources": [
     {
