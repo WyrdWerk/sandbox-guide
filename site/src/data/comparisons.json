@@ -279,7 +279,7 @@
       },
       "built-in-agents": {
         "edge": "e2b",
-        "why": "E2B has ten ready-made agent templates; Modal has none and leaves agents, browsers and desktops to your own code."
+        "why": "E2B has ten ready-made agent templates; Modal ships no agent, and its browser and desktop are a documented Computer Use example (Chromium over VNC) you build and run yourself, not a ready template."
       },
       "teams-accounts": {
         "edge": "modal",
