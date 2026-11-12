@@ -1,11 +1,104 @@
 {
-  "note": "Head-to-head and alternatives pages, chosen from US search demand (treg keyword data, 2026-10-29): e2b, daytona, modal, vercel sandbox and cloudflare sandbox are the provider names people search for.",
+  "note": "Head-to-head and alternatives pages. The first five pairs were chosen from US search demand (treg keyword data, 2026-10-29): e2b, daytona, modal, vercel sandbox and cloudflare sandbox are the provider names people search for. InstaBox vs Lizard is an editorial pick (2026-11-12): two Firecracker providers at almost the same price that suit different jobs. Edges are our reading of the sourced feature rows, written by hand per pair.",
   "pairs": [
-    ["e2b", "daytona"],
-    ["e2b", "modal"],
-    ["daytona", "modal"],
-    ["e2b", "vercel-sandbox"],
-    ["e2b", "cloudflare-sandbox"]
+    [
+      "e2b",
+      "daytona"
+    ],
+    [
+      "e2b",
+      "modal"
+    ],
+    [
+      "daytona",
+      "modal"
+    ],
+    [
+      "e2b",
+      "vercel-sandbox"
+    ],
+    [
+      "e2b",
+      "cloudflare-sandbox"
+    ],
+    [
+      "instabox",
+      "lizard"
+    ]
   ],
-  "alternatives": ["e2b", "daytona", "modal", "vercel-sandbox", "cloudflare-sandbox"]
+  "alternatives": [
+    "e2b",
+    "daytona",
+    "modal",
+    "vercel-sandbox",
+    "cloudflare-sandbox"
+  ],
+  "edges": {
+    "instabox-vs-lizard": {
+      "isolation": {
+        "edge": "instabox",
+        "why": "Same Firecracker isolation and root on both, but only InstaBox documents Docker inside the machine."
+      },
+      "sizes-regions": {
+        "edge": "tradeoff",
+        "why": "InstaBox goes to 32 vCPU and has L4 GPUs; Lizard stops at 8 vCPU but lets you pick US East or EU West."
+      },
+      "lifecycle": {
+        "edge": "instabox",
+        "why": "Both pause with memory, but a stopped InstaBox machine keeps its disk, while a stopped Lizard sandbox is deleted."
+      },
+      "snapshots-forks": {
+        "edge": "lizard",
+        "why": "Lizard snapshots and forks keep memory and running programs, up to 100 copies; InstaBox copies files only, up to 5."
+      },
+      "storage": {
+        "edge": "instabox",
+        "why": "InstaBox includes 200 GiB of disk on Pro and keeps it on stop; Lizard keeps only a 1–50 GB volume on one node."
+      },
+      "idle-timers": {
+        "edge": "instabox",
+        "why": "InstaBox pauses an idle machine by itself; Lizard has no idle timer and bills idle time until you pause or kill it."
+      },
+      "reaching-it": {
+        "edge": "instabox",
+        "why": "InstaBox has public or private links, real SSH and a raw TCP preview; Lizard has private links only and no SSH protocol."
+      },
+      "custom-domains": {
+        "edge": "lizard",
+        "why": "Neither puts your domain on a sandbox link, but Lizard supports custom domains for apps you deploy on it."
+      },
+      "outbound-network": {
+        "edge": "lizard",
+        "why": "Lizard includes 2 TB per 30 days at no per-GB charge; InstaBox Pro includes 1 TiB and caps sending at about 50 Mbit/s."
+      },
+      "keys-secrets": {
+        "edge": "instabox",
+        "why": "InstaBox can keep the real key outside the machine behind a placeholder; Lizard passes keys as variables any code can read."
+      },
+      "ways-to-drive": {
+        "edge": "even",
+        "why": "Both have a dashboard, REST, TypeScript and Python SDKs, a CLI and a hosted MCP server; InstaBox adds real SSH."
+      },
+      "built-in-agents": {
+        "edge": "even",
+        "why": "Both ship Claude Code, Codex and OpenCode (Lizard as one template each) and prompt them from the CLI; neither has a prompt API."
+      },
+      "teams-accounts": {
+        "edge": "instabox",
+        "why": "InstaBox has a hard spend cap that stops machines; Lizard says there is no spending cap at all."
+      },
+      "billing-models": {
+        "edge": "even",
+        "why": "Mirror-image plans ($20 vs $19) that come back as usage; Lizard is about 5% cheaper per hour, InstaBox stops billing when idle."
+      },
+      "trials-free-tiers": {
+        "edge": "instabox",
+        "why": "InstaBox has a free machine that never expires; Lizard has a 7-day, $5 trial that needs a card."
+      },
+      "company": {
+        "edge": "instabox",
+        "why": "InstaBox has a status page and a SOC 2 Type II report on request; Lizard lists SOC 2 as coming soon but offers a signed DPA."
+      }
+    }
+  }
 }
