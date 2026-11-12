@@ -1,10 +1,10 @@
 {
   "id": "e2b",
   "name": "E2B",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "disclosure": "Disclosure: battleships.dev, cited in this document, is built by the Boat team; Boat is one of the providers compared here. It is used as a cross-check, never as the sole source of a rate or verdict.",
   "regions": {
-    "value": "US (Google Cloud us-west1) default; US West (AWS us-west-2) all plans via support; EU (europe-west1) and APAC (asia-southeast1) on all plans for workspaces verified by adding a payment method.",
+    "value": "US (Google Cloud us-west1) default; US West (AWS us-west-2) and US East (AWS us-east-1) all plans via support; EU (europe-west1) and APAC (asia-southeast1) on all plans for workspaces verified by adding a payment method.",
     "url": "https://docs.e2b.dev/faq/egress-ip-ranges",
     "quote": "| US | Google Cloud `us-west1` | All plans | Default - no action needed | ... | EU | Google Cloud `europe-west1` | All plans, workspace verified by adding a payment method | ... | ... | APAC | Google Cloud `asia-southeast1` | All plans, workspace verified by adding a payment method | ... |"
   },
@@ -14,12 +14,12 @@
       "monthlyFeeUsd": 0,
       "includedUsage": "One-time $100 in usage credits. Usage charged separately.",
       "limits": {
-        "maxConcurrent": 20,
+        "maxConcurrent": 10,
         "maxSessionLength": "1 hour of continuous runtime; pausing and resuming resets it.",
         "maxSize": "8 vCPU / 8 GiB RAM / 10 GiB disk"
       },
       "url": "https://e2b.dev/pricing.md",
-      "quote": "$0 monthly plan fee. ... One-time $100 in usage credits. ... Up to 20 concurrently running sandboxes. ... Up to 1 hour per sandbox session. ... 10 GiB of sandbox storage, included."
+      "quote": "$0 monthly plan fee. ... One-time $100 in usage credits. ... Up to 10 concurrently running sandboxes. ... Up to 1 hour per sandbox session. ... 10 GiB of sandbox storage, included."
     },
     {
       "name": "Pro",
@@ -60,14 +60,14 @@
     {
       "name": "Enterprise",
       "monthlyFeeUsd": null,
-      "includedUsage": "Custom deployment, pricing and billing; a $3,000 monthly minimum applies.",
+      "includedUsage": "Custom deployment; the rendered pricing page says Enterprise starts at a $2,000/mo commit with 500 concurrent included, while pricing.md still says a $3,000 monthly minimum.",
       "limits": {
         "maxConcurrent": null,
         "maxSessionLength": "Custom",
         "maxSize": "Custom"
       },
       "url": "https://e2b.dev/pricing.md",
-      "quote": "Custom deployment, pricing, billing, support, and limits. ... A $3,000 monthly minimum applies to Enterprise usage."
+      "quote": "Custom deployment, pricing, billing, support, and limits. ... A $3,000 monthly minimum applies to Enterprise usage. (rendered https://e2b.dev/pricing, 2026-11-12: \"Enterprise starts at a $2,000/mo commit, 500 concurrent included.\")"
     }
   ],
   "compute": {
@@ -191,7 +191,7 @@
   ],
   "freeTier": {
     "what": "One-time $100 in usage credits, no credit card required.",
-    "limits": "20 concurrent sandboxes, 1 hour continuous runtime per sandbox, 10 GiB disk, default sandbox CPU and RAM.",
+    "limits": "10 concurrent sandboxes, 1 hour continuous runtime per sandbox, 10 GiB disk, default sandbox CPU and RAM.",
     "url": "https://e2b.dev/pricing.md",
     "quote": "One-time $100 in usage credits. ... Up to 20 concurrently running sandboxes. ... Up to 1 hour per sandbox session.",
     "signup": {

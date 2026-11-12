@@ -804,7 +804,7 @@
     },
     "built-in-agents": {
       "title": "Hermes Agent (pre-built template)",
-      "url": "https://docs.e2b.dev/agents/hermes"
+      "url": "https://docs.e2b.dev/use-cases/coding-agents"
     },
     "teams-accounts": {
       "title": "Workspaces",

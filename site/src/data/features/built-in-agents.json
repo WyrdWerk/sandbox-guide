@@ -21,7 +21,7 @@
     {
       "heading": "Installed, not managed",
       "body": [
-        "InstaBox and Vercel put coding agents in their default images but publish no agent-run API: you open a terminal and use them. E2B documents how to run Claude Code, Codex and Amp, but does not claim to preinstall them.",
+        "InstaBox and Vercel put coding agents in their default images but publish no agent-run API: you open a terminal and use them. E2B ships ready-made claude, codex and amp templates, but none of them is the default image.",
         "That is enough for a technical user and not enough for a product that wants to start an agent on demand."
       ]
     },
@@ -116,12 +116,12 @@
     {
       "provider": "e2b",
       "verdict": "partly",
-      "figure": "None preinstalled; guides",
-      "scenario": "Guides show Claude Code, Codex and Amp running, but preinstallation is not claimed and there is no agent-run API.",
-      "note": "Guides show Claude Code, Codex and Amp running in a sandbox, but preinstallation is not claimed and there is no hosted agent-run API.",
+      "figure": "10 templates; no API",
+      "scenario": "Start a sandbox from the claude, codex, amp or openclaw template and the agent is installed; there is still no agent-run API and the keys are yours.",
+      "note": "Ten ready-made templates install an agent, including Claude Code, Codex, Amp, OpenCode, Hermes and OpenClaw. The default image has none, there is no hosted prompt or agent-run API, and you supply the model keys.",
       "source": {
-        "url": "https://docs.e2b.dev/use-cases/coding-agents",
-        "quote": "Run AI coding agents like Claude Code, Codex, and Amp in secure E2B sandboxes",
+        "url": "https://docs.e2b.dev/use-cases/coding-agents.md",
+        "quote": "Pre-built templates mean you can go from zero to a running agent in a single API call.",
         "confidence": "docs-confirmed"
       }
     },

@@ -118,7 +118,7 @@
       "verdict": "partly",
       "figure": "$0.000014/vCPU-s",
       "scenario": "Per second of allocated vCPU and RAM while running, so the reserved shape sets the bill even when the agent waits.",
-      "note": "Per second of allocated vCPU and RAM while running, against a credit balance. Paused and killed sandboxes are not billed. Pro adds a $150 monthly fee; Hobby has a one-time $100 credit.",
+      "note": "Per second of allocated vCPU and RAM while running, against a credit balance. Paused and killed sandboxes are not billed. Pro adds a $150 monthly fee; Hobby has a one-time $100 credit and 10 concurrent sandboxes. Enterprise starts at a $2,000 monthly commit with 500 concurrent sandboxes.",
       "source": {
         "url": "https://e2b.dev/pricing.md",
         "quote": "$0.000014 per vCPU-second",

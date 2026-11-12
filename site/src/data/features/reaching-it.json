@@ -116,12 +116,12 @@
     {
       "provider": "e2b",
       "verdict": "partly",
-      "figure": "No auth",
-      "scenario": "Anyone who has the URL gets in; there is no authentication by default.",
-      "note": "Public URLs are reachable by anyone who knows them, with no authentication by default. SSH runs through a WebSocket proxy rather than a native port.",
+      "figure": "Token by default",
+      "scenario": "Projects created since 30 October 2026 put every sandbox URL behind a traffic token; older projects stay open to anyone with the link.",
+      "note": "New projects default to private sandbox traffic: requests without the e2b-traffic-access-token header get 403. Older projects stay public until an owner changes the setting, and the token is a header, so a pasted browser link needs a proxy. SSH runs through a WebSocket proxy rather than a native port.",
       "source": {
-        "url": "https://docs.e2b.dev/network/public-url",
-        "quote": "By default, a sandbox's public URLs are reachable by anyone who knows them.",
+        "url": "https://docs.e2b.dev/network/restrict-public-access.md",
+        "quote": "**New projects:** since October 30, 2026, newly created projects default to private sandbox traffic.",
         "confidence": "docs-confirmed"
       }
     },

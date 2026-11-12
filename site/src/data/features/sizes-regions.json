@@ -28,7 +28,7 @@
     {
       "heading": "Regions and hardware",
       "body": [
-        "Vercel is the outlier with 19 regions. E2B and Blaxel list four, Sandboxer and Lizard two, Agent 37 three, and Runtime one. Boat and boxd are EU-only; InstaBox publishes no region selector and its terms say the United States. Sprites does not let you choose a region: placement is automatic near you, according to a community answer.",
+        "Vercel is the outlier with 19 regions. E2B lists five and Blaxel four, Sandboxer and Lizard two, Agent 37 three, and Runtime one. Boat and boxd are EU-only; InstaBox publishes no region selector and its terms say the United States. Sprites does not let you choose a region: placement is automatic near you, according to a community answer.",
         "No provider in this set publishes a GPU for sandboxes. Several say so explicitly: E2B, Boat, Lizard and Sprites. ARM is not offered either, and only Runtime, Sandboxer, Morph and Vercel document nested virtualisation or /dev/kvm. Morph publishes no region or GPU statement at all."
       ]
     }
@@ -117,11 +117,11 @@
       "provider": "e2b",
       "verdict": "partly",
       "figure": "8 vCPU / 8 GiB; no GPU",
-      "scenario": "Memory tops out at 8 GiB, so a 16 GB workload does not fit at any price.",
-      "note": "Up to 8 vCPU and 8 GiB, with 10 GiB of disk on Hobby and 20 GiB on Pro. Four regions, no GPU on any plan.",
+      "scenario": "Memory tops out at 8 GiB without a support conversation, so a 16 GB workload is not self-serve.",
+      "note": "Up to 8 vCPU and 8 GiB self-serve, more by support request, with 10 GiB of disk on Hobby and 20 GiB on Pro. Five regions (US, US West and US East on AWS, EU, APAC), no GPU on any plan.",
       "source": {
         "url": "https://docs.e2b.dev/billing.md",
-        "quote": "| **Max memory** | 8 GiB | 8+ GiB |",
+        "quote": "| **Max memory** | 8 GiB | 8+ GiB (Contact [support@e2b.dev](mailto:support@e2b.dev) if you need more memory.) | Custom |",
         "confidence": "docs-confirmed"
       }
     },

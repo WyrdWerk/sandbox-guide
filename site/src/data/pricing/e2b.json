@@ -1,6 +1,6 @@
 {
   "provider": "e2b",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "summary": "Per second on allocated vCPU and memory while running; paused sandboxes cost nothing.",
   "cpu": {
     "rate": 0.0504,
@@ -21,7 +21,7 @@
       "fee": 0,
       "maxSessionHours": 1,
       "maxDisk": 10,
-      "note": "Hobby starts with a one-time $100 credit, not subtracted here."
+      "note": "Hobby starts with a one-time $100 credit, not subtracted here, and allows 10 concurrent sandboxes."
     },
     {
       "name": "Pro",
@@ -32,7 +32,8 @@
   ],
   "notes": [
     "Pausing keeps memory and files at no charge; volumes and snapshots are separate.",
-    "Sandbox storage is included at no extra cost, up to 10 GiB on Hobby and 20 GiB on Pro."
+    "Sandbox storage is included at no extra cost, up to 10 GiB on Hobby and 20 GiB on Pro.",
+    "Pro allows 100 concurrent sandboxes, or 600 and 1,100 with $500 and $1,000 monthly add-ons. Enterprise starts at a $2,000 monthly commit with 500 concurrent included; the Markdown pricing page still says $3,000."
   ],
   "sources": [
     {

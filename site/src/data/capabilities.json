@@ -77,8 +77,8 @@
           "verdict": "yes",
           "figure": "Firecracker microVM",
           "source": {
-            "url": "https://docs.e2b.dev/security",
-            "quote": "Every sandbox is a Firecracker microVM, not a container.",
+            "url": "https://docs.e2b.dev/faq/security-and-compliance.md",
+            "quote": "Every sandbox is a [Firecracker](https://firecracker-microvm.github.io/) microVM, not a container.",
             "confidence": "docs-confirmed"
           }
         },
@@ -2000,12 +2000,12 @@
         },
         {
           "provider": "e2b",
-          "verdict": "no",
-          "figure": "8 cores / 8 GiB",
-          "shortfall": "The ceiling is 8 cores and 8 GB of memory, so a 32 GB machine cannot be bought.",
+          "verdict": "partly",
+          "figure": "8 self-serve; more by request",
+          "shortfall": "The published ceiling is 8 vCPU and 8 GiB; anything larger is a support conversation with no published size or ceiling.",
           "source": {
-            "url": "https://docs.e2b.dev/billing",
-            "quote": "Max vCPUs",
+            "url": "https://docs.e2b.dev/billing.md",
+            "quote": "| **Max memory** | 8 GiB | 8+ GiB (Contact [support@e2b.dev](mailto:support@e2b.dev) if you need more memory.) | Custom |",
             "confidence": "docs-confirmed"
           }
         },
@@ -3001,11 +3001,11 @@
         {
           "provider": "e2b",
           "verdict": "partly",
-          "figure": "4 regions, support needed",
-          "shortfall": "Four regions exist, but outside the United States you have to contact support to be switched on.",
+          "figure": "5 regions, support needed",
+          "shortfall": "Five regions exist (US, US West and US East on AWS, EU, APAC), but only US-West-1 is on by default; the others need a support request.",
           "source": {
-            "url": "https://docs.e2b.dev/faq/eu-region",
-            "quote": "To get access, contact support",
+            "url": "https://docs.e2b.dev/faq/egress-ip-ranges.md",
+            "quote": "| US East (AWS) | AWS `us-east-1` | All plans | [Contact support](https://console.e2b.dev/?support=true) |",
             "confidence": "docs-confirmed"
           }
         },
@@ -7742,12 +7742,12 @@
         },
         {
           "provider": "e2b",
-          "verdict": "no",
-          "figure": "20 GiB max",
-          "shortfall": "The largest included disk is 20 GiB, short of 100 GB.",
+          "verdict": "partly",
+          "figure": "20 GiB; more by request",
+          "shortfall": "The included disk is 10 GiB on Hobby and 20 GiB on Pro; more is a support request with no published size, so 100 GB is not self-serve.",
           "source": {
-            "url": "https://docs.e2b.dev/billing",
-            "quote": "**Disk size**|  10 GiB| 20+ GiB| Custom",
+            "url": "https://docs.e2b.dev/billing.md",
+            "quote": "| **Disk size** | 10 GiB | 20+ GiB (Contact [support@e2b.dev](mailto:support@e2b.dev) if you need more disk space.) | Custom |",
             "confidence": "docs-confirmed"
           }
         },
@@ -8068,8 +8068,8 @@
           "figure": "1 h Hobby, 24 h Pro",
           "shortfall": "A sandbox cannot run longer than an hour on the free plan or 24 hours on Pro, whether or not it is busy.",
           "source": {
-            "url": "https://docs.e2b.dev/billing",
-            "quote": "**Max continuous runtime**|  1 hour| 24 hours| Custom",
+            "url": "https://docs.e2b.dev/billing.md",
+            "quote": "| **Max continuous runtime (Time a sandbox can run without being paused.)** | 1 hour | 24 hours | Custom |",
             "confidence": "docs-confirmed"
           }
         },
@@ -9331,8 +9331,8 @@
         {
           "provider": "e2b",
           "verdict": "yes",
-          "figure": "Anyone with the link",
-          "note": "No token or login sits in front of the link.",
+          "figure": "Port URL",
+          "note": "Older projects are public by default; projects created since 30 October 2026 default to private traffic behind a token.",
           "source": {
             "url": "https://docs.e2b.dev/network/public-url.md",
             "quote": "By default, a sandbox's public URLs are reachable by anyone who knows them.",
@@ -9653,13 +9653,14 @@
         },
         {
           "provider": "e2b",
-          "verdict": "no",
-          "shortfall": "There is no built-in lock: anyone who has the link can open it.",
+          "verdict": "yes",
           "source": {
-            "url": "https://docs.e2b.dev/network/public-url.md",
-            "quote": "By default, a sandbox's public URLs are reachable by anyone who knows them.",
+            "url": "https://docs.e2b.dev/network/restrict-public-access.md",
+            "quote": "A sandbox's [public URL](https://docs.e2b.dev/network/public-url.md) is either public (anyone with the URL can reach it) or private (every request needs the sandbox's traffic access token).",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "Per-sandbox token",
+          "note": "A private sandbox answers only requests carrying its traffic access token. New projects default private; older projects stay public until an owner changes the setting. The token is a header, so a plain browser link needs a proxy or client that adds it."
         },
         {
           "provider": "instabox",
@@ -16668,12 +16669,13 @@
         {
           "provider": "e2b",
           "verdict": "partly",
-          "shortfall": "A prebuilt Hermes template exists, but the default image has no agent and there is no Claude Code or Codex template.",
+          "shortfall": "Claude Code, Codex, Amp, OpenClaw and six more come in named templates, not the default image, so you create the sandbox from that template and bring your own model keys.",
           "source": {
-            "url": "https://docs.e2b.dev/agents/hermes.md",
-            "quote": "E2B provides a pre-built `hermes` template with the Hermes CLI and bundled skills already installed.",
+            "url": "https://docs.e2b.dev/agents/claude-code.md",
+            "quote": "E2B provides a pre-built `claude` template with Claude Code already installed.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "10 agent templates"
         },
         {
           "provider": "instabox",
@@ -17608,13 +17610,14 @@
         },
         {
           "provider": "e2b",
-          "verdict": "no",
-          "shortfall": "No OpenClaw template or guide is published.",
+          "verdict": "partly",
+          "shortfall": "A ready-made `openclaw` template and gateway guide exist, but you still start it from code or the CLI and set the token and model yourself.",
           "source": {
-            "url": "https://docs.e2b.dev/use-cases/coding-agents.md",
-            "quote": "Run AI coding agents like Claude Code, Codex, and Amp",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.e2b.dev/agents/openclaw/openclaw-gateway.md",
+            "quote": "const sandbox = await Sandbox.create('openclaw', {",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "openclaw template"
         },
         {
           "provider": "instabox",
@@ -19174,13 +19177,14 @@
         },
         {
           "provider": "e2b",
-          "verdict": "not-published",
-          "note": "The workspace page covers who has access but does not describe named roles or their powers.",
+          "verdict": "partly",
           "source": {
             "url": "https://docs.e2b.dev/workspaces.md",
-            "quote": "who has access to them",
+            "quote": "Inside a project, all members have the same permissions.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "Owner and member",
+          "shortfall": "Workspace and project owners and members exist, with per-project access lists, but inside a project every member has the same permissions."
         },
         {
           "provider": "instabox",
@@ -19487,13 +19491,14 @@
         },
         {
           "provider": "e2b",
-          "verdict": "not-published",
-          "note": "No SSO or SAML page appears in the docs, pricing or security pages.",
+          "verdict": "partly",
           "source": {
             "url": "https://docs.e2b.dev/workspaces.md",
-            "quote": "who has access to them",
+            "quote": "**Workspaces with SSO or SCIM** have invites disabled. Members join through your identity provider instead.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "SSO and SCIM, undocumented",
+          "shortfall": "The workspace docs describe how SSO and SCIM workspaces behave, but no setup page, protocol, plan gate or price is published, and the enterprise page still calls them planned."
         },
         {
           "provider": "instabox",
@@ -21388,8 +21393,8 @@
           "figure": "nothing while paused",
           "note": "Separately kept volumes and snapshots are billed on their own.",
           "source": {
-            "url": "https://docs.e2b.dev/faq/calculate-sandbox-price",
-            "quote": "Paused and killed sandboxes are not billed.",
+            "url": "https://docs.e2b.dev/faq/calculate-sandbox-price.md",
+            "quote": "Compute is not billed for paused or killed sandboxes.",
             "confidence": "docs-confirmed"
           }
         },
@@ -23330,12 +23335,13 @@
         {
           "provider": "e2b",
           "verdict": "yes",
-          "note": "A public status page reports per-region uptime.",
+          "note": "A public status page reports per-region uptime; US-West-1 showed 99.79% over 14 August to 12 November 2026.",
           "source": {
-            "url": "https://e2b.dev/pricing",
-            "quote": "status.e2b.dev",
-            "confidence": "pricing-page"
-          }
+            "url": "https://status.e2b.dev/",
+            "quote": "US-West-1 uptime from Aug 14, 2026 to Nov 12, 2026: 99.79%",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "US-West-1 99.79%"
         },
         {
           "provider": "instabox",

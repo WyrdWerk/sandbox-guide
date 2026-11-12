@@ -132,7 +132,7 @@
         },
         {
           "provider": "e2b",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
           "what": "E2B ships a ready-made hermes template you start from its command line. Sessions end after 24 hours on Pro and one hour on the free plan, so it suits Hermes doing tasks better than an assistant that never stops.",
           "link": {
@@ -548,7 +548,7 @@
         },
         {
           "provider": "e2b",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
           "what": "A ready-made openclaw template and a gateway guide. Sessions end after 24 hours on Pro, so staying on needs your own restart logic.",
           "link": {
@@ -1063,12 +1063,12 @@
         },
         {
           "provider": "e2b",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "An official guide for running Claude Code, Codex and Amp in E2B sandboxes from code.",
+          "what": "Ready-made claude, codex and amp templates; choose one when creating a sandbox from code.",
           "link": {
             "title": "E2B: coding agents",
-            "url": "https://e2b.dev/docs/use-cases/coding-agents"
+            "url": "https://docs.e2b.dev/use-cases/coding-agents"
           }
         },
         {
@@ -3178,7 +3178,7 @@
         },
         {
           "provider": "e2b",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
           "what": "A prebuilt claude template and a guide, made for a fresh sandbox per task started from code rather than each developer's own machine.",
           "link": {

@@ -3,7 +3,7 @@
   "name": "E2B",
   "url": "https://e2b.dev",
   "status": "researched",
-  "checkedOn": "2026-10-28",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Firecracker microVMs and templates for agent code, sold per running second.",
   "whatItIs": [
     "E2B sells isolated sandboxes for agents: a Linux VM created on demand from a template, driven through Python and JavaScript SDKs. It is infrastructure for a product rather than a finished assistant.",
@@ -11,12 +11,12 @@
   ],
   "whoFor": "Developers integrating code execution, data analysis or computer use into an agent product.",
   "isolation": "Firecracker microVM with its own kernel, not a container. The default template user is `user`, not root; root can be set in a template. Docker is documented, but kernel features are not unlimited: the sandbox kernel does not ship `xt_owner`.",
-  "sizes": "Sized by vCPU and RAM: up to 8 vCPU, 8 GiB memory on Hobby and Pro, and 10 or 20 GiB of included disk. No GPU on any plan. Regions: US (GCP), US West (AWS), EU and APAC.",
+  "sizes": "Sized by vCPU and RAM: up to 8 vCPU and 8 GiB self-serve (Pro is listed as 8+ by support request), and 10 or 20 GiB of included disk. No GPU on any plan. Regions: US (GCP), US West and US East (AWS), EU and APAC.",
   "billing": {
     "model": "Per-second usage against a credit balance; Pro adds a monthly plan fee.",
     "meter": "$0.000014 per vCPU-second and $0.0000045 per GiB-second of allocated resources while running. Paused and killed sandboxes are not billed.",
     "stopped": "Nothing for compute. Volumes and snapshots are separate objects with their own storage.",
-    "planFee": "Hobby has no fee; Pro is $150 a month plus usage; Enterprise has a $3,000 monthly minimum.",
+    "planFee": "Hobby has no fee; Pro is $150 a month plus usage; Enterprise starts at a $2,000 monthly commit including 500 concurrent sandboxes (the Markdown pricing page still says a $3,000 minimum).",
     "minimum": "No published per-sandbox minimum. Hobby starts with a one-time $100 credit and no card."
   },
   "cost": {
@@ -115,16 +115,16 @@
       },
       {
         "label": "Status and SLA",
-        "value": "99.78% for US-West-1 over July–October 2026. Uptime and support terms are set in the enterprise agreement.",
+        "value": "99.79% for US-West-1 over 14 August–12 November 2026 (rolling 90-day window). Uptime and support terms are set in the enterprise agreement.",
         "source": {
           "url": "https://status.e2b.dev/",
-          "quote": "99.78% uptime",
+          "quote": "US-West-1 uptime from Aug 14, 2026 to Nov 12, 2026: 99.79%",
           "confidence": "docs-confirmed"
         }
       },
       {
         "label": "Recent incidents",
-        "value": "By this guide's count, the status page lists 14 sandbox incidents from 6 August to 4 November 2026, 13 of them touching US-West-1. The longest was about 4¾ hours of errors creating sandboxes from snapshots on 15 September.",
+        "value": "By this guide's count, the status page lists 16 incidents from 6 August to 12 November 2026 (the first on 20 August, the last on 11 November). The longest was about 4¾ hours of errors creating sandboxes from snapshots on 15 September.",
         "source": {
           "url": "https://status.e2b.dev/api/v2/incidents.json",
           "quote": "\"name\":\"Elevated error rates when creating sandboxes from snapshots\",\"status\":\"resolved\",\"created_at\":\"2026-09-15T16:53:22Z\",\"updated_at\":\"2026-09-15T21:38:12Z\",\"resolved_at\":\"2026-09-15T21:38:12Z\"",
@@ -133,10 +133,10 @@
       },
       {
         "label": "Certification",
-        "value": "SOC 2 Type II report and a HIPAA BAA path, both by request through the Trust Center.",
+        "value": "SOC 2 Type II report through the Trust Center; a HIPAA BAA on Enterprise plans only.",
         "source": {
-          "url": "https://docs.e2b.dev/security.md",
-          "quote": "E2B has a **SOC 2 Type II** report.",
+          "url": "https://e2b.dev/security.md",
+          "quote": "E2B signs HIPAA Business Associate Agreements on Enterprise plans.",
           "confidence": "docs-confirmed"
         }
       }
@@ -146,23 +146,23 @@
     "well": [
       "A microVM with its own kernel, Docker, snapshots that keep memory, and up to 20 forks from a running sandbox.",
       "An agent that needs a real API and SDKs, plus templates built from any Docker image.",
-      "A team that needs a SOC 2 report and a HIPAA path without an enterprise contract."
+      "A team that needs a SOC 2 report, with a HIPAA BAA on Enterprise plans."
     ],
     "badly": [
       "A long-running agent: the default timeout kills the sandbox after five minutes and commands do not reset it.",
-      "Memory above 8 GiB, or any GPU workload.",
-      "A client-facing link that must be private: public URLs have no authentication by default."
+      "Memory above 8 GiB without asking support, or any GPU workload.",
+      "A client-facing link you can paste into a browser: private URLs need a header token, so sharing one still needs a proxy or a public sandbox."
     ]
   },
   "usability": {
     "dashboard": "A console exists for support and API keys, but the documented path is SDKs, a CLI and API keys.",
     "withoutCode": "No documented no-code path. Examples are SDK calls, terminals and templates; the desktop SDK still needs code to drive it.",
     "signup": "No credit card to start, and a one-time $100 credit. When a workspace without a payment method runs out, every project in it is blocked shortly afterwards.",
-    "docs": "Extensive docs with per-page Markdown. Support is through the console. SOC 2 Type II is reported, and a HIPAA BAA can be requested.",
+    "docs": "Extensive docs with per-page Markdown. Support is through the console. SOC 2 Type II is reported, and a HIPAA BAA is available on Enterprise plans.",
     "tripsUp": [
       "The default timeout is 5 minutes and the default action is to kill the sandbox.",
-      "Public URLs are reachable by anyone who knows them.",
-      "The pricing page and billing docs disagree on the default sandbox size.",
+      "New projects are private by URL, but older projects stay public until an owner changes the setting, and the token is a header rather than part of the link.",
+      "Three pages give three different default sandbox sizes.",
       "Volumes are in private beta and cannot be snapshotted."
     ]
   },
@@ -173,8 +173,8 @@
       "status": "open"
     },
     {
-      "issue": "The default sandbox size is stated two ways",
-      "detail": "The pricing page says the default is 2 vCPU / 4 GiB; the billing docs say 2 vCPU / 512 MiB. Both are current provider statements.",
+      "issue": "The default sandbox size is stated three ways",
+      "detail": "The pricing page says the default is 2 vCPU / 4 GiB; the billing docs say 2 vCPU / 512 MiB; the template build limits say a rebuilt template gets 2 vCPU / 1024 MiB. All three are current provider statements; this guide prices explicit shapes, so only the default prose is affected.",
       "status": "contradiction",
       "evidence": [
         {
@@ -186,23 +186,62 @@
           "url": "https://docs.e2b.dev/billing.md",
           "quote": "Start with default resources (2 vCPU, 512 MiB RAM)",
           "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.e2b.dev/faq/build-limits.md",
+          "quote": "Rebuilding without them writes the defaults of 2 vCPU and 1024 MiB",
+          "confidence": "docs-confirmed"
         }
       ]
     },
     {
       "issue": "Volumes are in private beta",
-      "detail": "Volumes persist across sandboxes but file locking can hang, metadata caching is disabled and snapshots are not supported.",
+      "detail": "Volumes persist across sandboxes but file locking can hang, handles can go stale, mounts are fixed at creation, and snapshots and read-only mounts are not supported.",
       "status": "open"
     },
     {
       "issue": "No static egress IP on any plan",
-      "detail": "There are no dedicated or static egress addresses, including Enterprise; a customer-operated proxy is the documented workaround.",
+      "detail": "There are no dedicated or static egress addresses, including Enterprise. BYOP, which routes egress through a SOCKS5 proxy you run, is the documented way to get a stable address.",
       "status": "open"
     },
     {
-      "issue": "Public URLs have no authentication by default",
-      "detail": "A sandbox's public URLs are reachable by anyone who knows them.",
-      "status": "open"
+      "issue": "Older projects keep public URLs by default",
+      "detail": "Since 30 October 2026 new projects default to private sandbox traffic behind a per-sandbox e2b-traffic-access-token header. Existing projects stay public until an owner changes the setting, and the token is a header, so a plain browser link still needs a proxy.",
+      "status": "resolved"
+    },
+    {
+      "issue": "Enterprise floor stated two ways",
+      "detail": "The rendered pricing page says Enterprise starts at a $2,000 monthly commit with 500 concurrent sandboxes; the Markdown twin of the same page still says a $3,000 monthly minimum. This guide uses the rendered page, which changed most recently.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://e2b.dev/pricing",
+          "quote": "Enterprise starts at a $2,000/mo commit, 500 concurrent included.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://e2b.dev/pricing.md",
+          "quote": "A $3,000 monthly minimum applies to Enterprise usage.",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "issue": "SSO and SCIM: described, and also called planned",
+      "detail": "The workspace docs describe how workspaces with SSO or SCIM behave, while the enterprise page says SSO, SCIM and RBAC are planned. This guide treats SSO and SCIM as existing but undocumented.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://docs.e2b.dev/workspaces.md",
+          "quote": "**Workspaces with SSO or SCIM** have invites disabled.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://e2b.dev/enterprise.md",
+          "quote": "SSO, SCIM, and RBAC are planned; ask E2B about timelines.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [
@@ -210,7 +249,9 @@
     "Fork up to 20 sandboxes from a running VM, with a documented pause.",
     "Templates can start from any Docker image.",
     "Secrets can be injected outside the VM by an egress proxy.",
-    "SOC 2 Type II and a HIPAA BAA path."
+    "SOC 2 Type II, with a HIPAA BAA on Enterprise plans.",
+    "Private-by-default sandbox URLs with a per-sandbox traffic token for new projects.",
+    "Ready-made templates for Claude Code, Codex, Amp, OpenCode, Hermes, OpenClaw and four more agents."
   ],
   "sources": [
     {
@@ -236,6 +277,18 @@
     {
       "label": "Security",
       "url": "https://docs.e2b.dev/security"
+    },
+    {
+      "label": "Private sandbox traffic",
+      "url": "https://docs.e2b.dev/network/restrict-public-access"
+    },
+    {
+      "label": "Regions",
+      "url": "https://docs.e2b.dev/faq/egress-ip-ranges"
+    },
+    {
+      "label": "Agent templates",
+      "url": "https://docs.e2b.dev/use-cases/coding-agents"
     }
   ]
 }

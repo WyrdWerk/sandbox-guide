@@ -118,7 +118,7 @@
       "verdict": "yes",
       "figure": "No rate; no static IP",
       "scenario": "Domain and IP allow and deny rules are documented, but there is no dedicated egress address on any plan.",
-      "note": "Outbound is open by default with documented domain and IP allow and deny rules. No dedicated or static egress IP on any plan, including Enterprise.",
+      "note": "Outbound is open by default with documented domain and IP allow and deny rules. No dedicated or static egress IP on any plan, including Enterprise. BYOP routes egress through a SOCKS5 proxy you run, the documented way to get a stable address.",
       "source": {
         "url": "https://docs.e2b.dev/faq/egress-ip-ranges",
         "quote": "there are no dedicated or static egress IP addresses on any plan (including Enterprise).",

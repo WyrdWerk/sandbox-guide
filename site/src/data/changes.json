@@ -2,6 +2,29 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "E2B: private sandbox URLs by default, agent templates and a lower Enterprise floor",
+      "provider": "e2b",
+      "what": "Projects created since 30 October 2026 put sandbox URLs behind a per-sandbox traffic token, and E2B now ships ready-made templates for Claude Code, Codex, Amp, OpenClaw and six other agents. A fifth region, US East on AWS, can be enabled through support. The free Hobby plan now allows 10 concurrent sandboxes instead of 20, and Enterprise starts at a $2,000 monthly commit instead of a $3,000 minimum. Per-second rates did not change, so the A/B/C costs stand. The date is when this guide checked, not when E2B made each change.",
+      "sources": [
+        {
+          "url": "https://docs.e2b.dev/network/restrict-public-access.md",
+          "quote": "**New projects:** since October 30, 2026, newly created projects default to private sandbox traffic.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://e2b.dev/pricing.md",
+          "quote": "Up to 10 concurrently running sandboxes.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://e2b.dev/pricing",
+          "quote": "Enterprise starts at a $2,000/mo commit, 500 concurrent included.",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Tensorlake now bills at least 20% of allocated CPU",
       "provider": "tensorlake",
       "what": "Tensorlake's pricing page now bills CPU at a minimum of 20% of the vCPU you allocate, so a mostly idle sandbox costs more: workload C rises from $8.26 to $9.52. It also publishes a reserved NVIDIA H100 at $3.95 per GPU-hour, says egress is free, and reported a 7 November security incident in which customer email addresses were read. The date is when this guide checked, not when Tensorlake made each change.",

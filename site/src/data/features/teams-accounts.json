@@ -117,8 +117,8 @@
       "provider": "e2b",
       "verdict": "partly",
       "figure": "Per-project limit",
-      "scenario": "The workspace shares payment and credits while each project has its own spending limit; SSO and audit coverage are not published.",
-      "note": "A workspace shares payment, credits and invoice; each project has its own plan and spending limit. SOC 2 Type II and a HIPAA BAA path. SSO and audit coverage are not published.",
+      "scenario": "The workspace shares payment and credits while each project has its own spending limit; roles are owner or member, and SSO and SCIM are mentioned but not documented.",
+      "note": "A workspace shares payment, credits and invoice; each project has its own plan and spending limit. Owners and members, with per-project access lists, but every member of a project has the same permissions. SSO and SCIM workspaces are described, with no setup page or plan gate; the enterprise page still calls them planned. No audit log is published. HIPAA BAA on Enterprise plans.",
       "source": {
         "url": "https://docs.e2b.dev/workspaces",
         "quote": "When a project reaches its spending limit, only that project is blocked.",

@@ -162,8 +162,8 @@
       "provider": "e2b",
       "verdict": "partly",
       "figure": "FoundryLabs, Inc.; SOC 2 II",
-      "scenario": "FoundryLabs, Inc. in Delaware, a SOC 2 Type II report and a HIPAA BAA path; uptime and support terms live in the enterprise agreement.",
-      "note": "FoundryLabs, Inc., Delaware. Founded 2023 by Vasek Mlejnsky (CEO) and Tomas Valenta (CTO); $21M Series A in July 2025, $32M total. Status page shows 99.78% for US-West-1 over Jul–Oct 2026, a regional aggregate rather than an SLA. Enterprise terms set uptime and support in the agreement; no public numeric SLA for Hobby or Pro. SOC 2 Type II report on request and a HIPAA BAA path. Fees can change with 30 days' notice, but general terms changes take effect immediately; deletion after cancellation has no published deadline.",
+      "scenario": "FoundryLabs, Inc. in Delaware, a SOC 2 Type II report and a HIPAA BAA on Enterprise plans; uptime and support terms live in the enterprise agreement.",
+      "note": "FoundryLabs, Inc., Delaware. Founded 2023 by Vasek Mlejnsky (CEO) and Tomas Valenta (CTO); $21M Series A in July 2025, $32M total. Status page shows 99.79% for US-West-1 over 14 August–12 November 2026, a regional aggregate rather than an SLA. Enterprise terms set uptime and support in the agreement; no public numeric SLA for Hobby or Pro. SOC 2 Type II report through the Trust Center; HIPAA BAA on Enterprise plans only. Fees can change with 30 days' notice, but general terms changes take effect immediately; deletion after cancellation has no published deadline.",
       "source": {
         "url": "https://docs.e2b.dev/security.md",
         "quote": "E2B has a **SOC 2 Type II** report.",

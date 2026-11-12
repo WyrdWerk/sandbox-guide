@@ -205,3 +205,7 @@ Window 6 August to 4 November 2026, provider's own status page only (see `resear
 
 - Site fact: By this guide's count, the status page lists 14 sandbox incidents from 6 August to 4 November 2026, 13 of them touching US-West-1. The longest was about 4¾ hours of errors creating sandboxes from snapshots on 15 September.
 - Source: https://status.e2b.dev/api/v2/incidents.json — ""name":"Elevated error rates when creating sandboxes from snapshots","status":"resolved","created_at":"2026-09-15T16:53:22Z","updated_at":"2026-09-15T21:38:12Z","resolved_at":"2026-09-15T21:38:12Z"" (docs-confirmed)
+
+## Recheck, 12 November 2026
+
+Superseded by [e2b-recheck-2026-11-12.md](e2b-recheck-2026-11-12.md): five regions (US East on AWS added), private sandbox traffic by default for projects created since 30 October 2026, ten ready-made agent templates, owner/member roles with SSO and SCIM described but undocumented, Hobby 10 concurrent sandboxes, Enterprise from a $2,000 monthly commit, and a HIPAA BAA on Enterprise plans only. Rates are unchanged.
