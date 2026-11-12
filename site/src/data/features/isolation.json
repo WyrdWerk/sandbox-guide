@@ -87,7 +87,7 @@
       "verdict": "yes",
       "figure": "Firecracker; all root",
       "scenario": "The build runs in the microVM's own kernel with Docker-in-Docker, but every process is root and nothing separates two users inside it.",
-      "note": "One Firecracker microVM per container with its own kernel and network; the image runs as a Linux container inside it. Every process has root capabilities, so there is no privilege boundary between users. No memory snapshot, pause or fork.",
+      "note": "One Firecracker microVM per container with its own kernel and network; the image runs as a Linux container inside it. Every process has root capabilities, so there is no privilege boundary between users. No memory snapshot, pause or fork. In September Cloudflare disclosed that a shared storage pool let one customer recover another's leftover disk blocks; it was fixed by 19 September, and the VM boundary was not crossed.",
       "source": {
         "url": "https://developers.cloudflare.com/containers/concepts/architecture/",
         "quote": "Each container instance runs in a Firecracker microVM with its own kernel and network.",
@@ -96,13 +96,13 @@
     },
     {
       "provider": "daytona",
-      "verdict": "partly",
-      "figure": "Containers; VM on request",
-      "scenario": "Docker runs on the default container through Docker-in-Docker, but loading a kernel module needs the Linux VM class.",
-      "note": "Linux containers by default: dedicated namespaces, enforced resource limits and root inside, sharing the runner's kernel. Linux VM and Windows classes have their own kernel. Docker-in-Docker is documented; nested virtualisation is Linux-VM only and must be enabled.",
+      "verdict": "yes",
+      "figure": "microVM, own kernel",
+      "scenario": "Docker runs because the image ships the engine, and `modprobe` works because every sandbox is its own Firecracker VM with its own kernel, not a namespace on a shared host.",
+      "note": "Every sandbox is a VM: Linux on Firecracker, Windows and GPU on Cloud Hypervisor, macOS on Apple's Virtualization framework. The hypervisor, not the guest, draws the boundary, and the guest sees only its own vCPU, memory and disk. Docker is not installed by Daytona, so it works only when the image ships it. Nested virtualisation (`/dev/kvm`) is Enterprise-only. `nproc` inside reports the burst limit, not the guarantee, so size tooling by the guarantee.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/isolation.md",
-        "quote": "Full virtual machine with its own kernel.",
+        "url": "https://www.daytona.com/docs/sandboxes.md",
+        "quote": "A sandbox is a hardware-isolated virtual machine with its own kernel, filesystem, network stack, and allocated vCPU, RAM, and disk, with isolation enforced by the hypervisor.",
         "confidence": "docs-confirmed"
       }
     },
@@ -123,10 +123,10 @@
       "verdict": "yes",
       "figure": "Firecracker; root + Docker",
       "scenario": "Root, passwordless sudo and Docker are in the default image, so both steps work unchanged.",
-      "note": "A Firecracker microVM running Debian 13 with its own kernel, root, passwordless sudo and Docker.",
+      "note": "A Firecracker microVM running Debian 13 with its own kernel, root, passwordless sudo and Docker. There is no /dev/kvm, so nested virtual machines cannot run.",
       "source": {
-        "url": "https://instabox.sh/",
-        "quote": "A whole machine, with its own kernel.",
+        "url": "https://instabox.sh/docs/account/limits.md",
+        "quote": "passwordless `sudo` with apt",
         "confidence": "docs-confirmed"
       }
     },

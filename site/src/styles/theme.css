@@ -1166,6 +1166,22 @@ ul.prose, ol.prose { padding-left: 1.2em; }
   color: var(--color-text-muted);
 }
 
+/* Pair pages: our hand-written edge per feature. Text only, so it never reads as a verdict badge. */
+.data-table td.edge { min-width: 14rem; }
+.edge__who {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+.edge__who--even,
+.edge__who--tradeoff { color: var(--color-text-muted); font-weight: 500; }
+.edge__why {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
 .picker {
   display: flex;
   flex-wrap: wrap;

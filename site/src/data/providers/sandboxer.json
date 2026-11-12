@@ -3,7 +3,7 @@
   "name": "Sandboxer",
   "url": "https://sandboxer.com",
   "status": "researched",
-  "checkedOn": "2026-10-28",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Whole Ubuntu microVMs billed per second, sold through monthly plans whose dollars come back as machine time.",
   "whatItIs": [
     "Sandboxer rents whole Linux virtual machines to agents and to the people running them. Each sandbox is an Ubuntu 24.04 microVM on Cloud Hypervisor with its own kernel, root, systemd, Docker and `/dev/kvm`, reachable over an HTTP API, a CLI, two SDKs and an MCP server.",
@@ -16,9 +16,9 @@
   "billing": {
     "model": "Monthly plan whose dollars return as machine time, plus optional time packs.",
     "meter": "Per second while running, at a fixed multiplier per size: small 0.5×, default 1×, large 2×, xlarge about 5.56×. One dollar buys 100,000 default-seconds.",
-    "stopped": "Nothing for compute. Storage is counted against an included quota but not billed, and going over the quota blocks new sandboxes rather than charging.",
-    "planFee": "$20, $100, $500 or $2,000 a month, per seat in an organisation. The plan price comes back as machine time, and unused plan time expires monthly.",
-    "minimum": "The $20 plan is the floor: there is no free tier, and the 7-day trial converts into it automatically."
+    "stopped": "Nothing for compute. Storage is counted against an included quota but not billed. Stopped data (disk, memory image and automatic snapshots) is kept for 14 days after the last stop, then deleted; going over the quota blocks new sandboxes rather than charging.",
+    "planFee": "$20, $100, $500 or $2,000 a month, per seat in an organisation. The plan price comes back as machine time, and unused plan time expires monthly. Starts above the plan's per-minute, hour or day limits cost $0.03 to $0.07 each, up to 3×, from prepaid credit.",
+    "minimum": "The $20 plan is the floor: there is no free tier and no trial for new accounts, and choosing a plan charges the first month immediately."
   },
   "cost": {
     "A": {
@@ -147,7 +147,7 @@
     "well": [
       "A microVM with systemd, Docker with BuildKit and Compose, and /dev/kvm.",
       "Six agent harnesses in every sandbox and a prompt API that returns an id.",
-      "Stopped time that is free, with the whole disk kept while the sandbox is stopped."
+      "Stopped time that is free, with the whole disk and memory image kept for 14 days while the sandbox is stopped."
     ],
     "badly": [
       "A procurement review: no SLA, no SSO, no audit log and no certification.",
@@ -158,21 +158,22 @@
   "usability": {
     "dashboard": "Yes, at sandboxer.com/app: a sandbox list with a stop countdown and an Extend button, an Open desktop button, a browser terminal, billing, environments, agents, API keys, webhooks and alerts.",
     "withoutCode": "Not really. Every documented workflow is a `sbx` command, and templates are created from the CLI or API. The one genuinely no-code route is adding its hosted MCP server as a connector in Claude or ChatGPT and asking in chat.",
-    "signup": "GitHub, Google, email code or email and password, plus a card before the first sandbox. The card starts a 7-day trial with 25 hours of machine time, which becomes the $20 plan on day 8.",
+    "signup": "GitHub, Google, email code or email and password. Signing up needs no card, but a card and a plan are needed before the first sandbox, and the first month is charged at subscribe. No trial for new accounts.",
     "docs": "About 30 pages with a Markdown mirror, an OpenAPI file, a 50-term glossary and published benchmark method. Support is email only. The status page is public with 90-day uptime.",
     "tripsUp": [
       "The card comes first: you cannot see a sandbox without payment details.",
-      "The trial becomes a subscription on day 8 unless cancelled.",
+      "There is no trial: the first month is charged the moment you pick a plan.",
       "Nothing is one-click: hosting a port is a CLI step.",
       "The default 1-hour auto-stop stops a sandbox you forgot about, and a running job does not hold it off.",
       "A private preview URL is a password, and anyone with the link is in.",
-      "Resume may not restore your session, which is the promise you will remember."
+      "Resume may not restore your session, which is the promise you will remember.",
+      "Stopped data is deleted 14 days after the last stop unless you save a named snapshot."
     ]
   },
   "caveats": [
     {
       "issue": "Its sizes and prices exactly match Boat's",
-      "detail": "small, default, large and xlarge at $0.018 / $0.036 / $0.072 / $0.20 an hour, and the same $20 / $100 / $500 / $2,000 plan tiers. But the disk sizes differ (12/50/125/251 GB here against 51/51/111/251 GB at Boat), the regions differ (US East and Helsinki here, EU-only at Boat), Boat deletes a stopped sandbox's disk after 14 days while Sandboxer keeps it, and the legal entities are unrelated. No public source explains the relationship. This is an open question, not evidence of a reseller or a copy.",
+      "detail": "small, default, large and xlarge at $0.018 / $0.036 / $0.072 / $0.20 an hour, and the same $20 / $100 / $500 / $2,000 plan tiers. But the disk sizes differ (12/50/125/251 GB here against 51/51/111/251 GB at Boat), the regions differ (US East and Helsinki here, EU-only at Boat), both now state a 14-day limit on a stopped disk, Boat still offers a trial while Sandboxer removed its own on 2 November, and the legal entities are unrelated. No public source explains the relationship. This is an open question, not evidence of a reseller or a copy.",
       "status": "open"
     },
     {
@@ -206,14 +207,31 @@
           "confidence": "docs-confirmed"
         }
       ]
+    },
+    {
+      "issue": "Stopped data expires after 14 days",
+      "detail": "A stopped sandbox keeps its disk, memory and automatic snapshots for 14 days after its last stop, then the data is deleted and the sandbox is listed as expired. Resuming resets the clock; named snapshots are kept until deleted, and sandboxes created before 29 October 2026 are exempt. The same page still opens by saying a stopped sandbox keeps everything.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://sandboxer.com/docs/snapshots",
+          "quote": "A stopped sandbox keeps its disk, memory and automatic snapshots for **14 days** after it last stopped, at no charge.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://sandboxer.com/docs/snapshots",
+          "quote": "On day 14 the data is deleted: the sandbox stays in your list as expired",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [
     "A stop that writes memory to disk, so a resume can restore running processes.",
     "Three distinct snapshot kinds, including continuous disk snapshots every ten minutes.",
     "Named snapshots double as templates, with share codes and credentials scrubbed.",
-    "Whole VMs with Docker, systemd and /dev/kvm, created in about 0.7 seconds.",
-    "Free stopped storage within a generous quota, and no egress bill."
+    "Whole VMs with Docker, systemd and /dev/kvm.",
+    "Free stopped storage for 14 days within a generous quota, and no egress bill."
   ],
   "sources": [
     {

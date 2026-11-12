@@ -72,8 +72,8 @@
       "scenario": "Snapshots are automatic and disk-only every minute, and only the newest is usable, so there is no older point to rewind to.",
       "note": "Snapshots are automatic, disk-only and taken every minute, but only the newest is usable: there is no point-in-time restore. Saved snapshots are named and never expire.",
       "source": {
-        "url": "https://docs.boat.dev/snapshots/resume-and-fork",
-        "quote": "Resume and fork always use the newest snapshot. You cannot go back to an older one.",
+        "url": "https://docs.boat.dev/snapshots/resume-and-fork.md",
+        "quote": "Resume and fork always use the newest snapshot.",
         "confidence": "docs-confirmed"
       }
     },
@@ -94,7 +94,7 @@
       "verdict": "partly",
       "figure": "Filesystem only; 30 days",
       "scenario": "The snapshot saves the root filesystem only: files come back in a new instance, processes do not, and there is no fork.",
-      "note": "`snapshotContainer()` saves the writable root filesystem of a running instance, 20 GB maximum, and expires 30 days after creation or last restore. No memory and no fork. Directory backups to R2 have no expiry.",
+      "note": "`snapshotContainer()` saves the writable root filesystem of a running instance, 20 GB maximum, and expires 30 days after creation or last restore. One snapshot can start many sandboxes, but there is no memory and no fork of a running machine. Directory backups to R2 have no expiry.",
       "source": {
         "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
         "quote": "A snapshot expires 30 days after it is created or last restored.",
@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "Hot: RAM (VM); cold: disk",
-      "scenario": "A hot snapshot on the VM class keeps memory; on a container only a cold filesystem snapshot exists, and fork is VM-only.",
-      "note": "Cold snapshots capture the filesystem from a stopped sandbox; hot snapshots capture filesystem and memory from a started VM. Containers support cold only. Fork duplicates a Linux VM's filesystem and memory. Snapshots go inactive after 14 days unused.",
+      "figure": "Memory: persistent/warm only",
+      "scenario": "Capturing a running Python server with its memory works on a persistent sandbox or one served from a warm template; from an ordinary ephemeral sandbox you can capture only the filesystem as an image.",
+      "note": "A full snapshot saves memory and disk and restores with the processes still running. Only a persistent Linux sandbox or one served from a warm template can be captured; a sandbox created from a filesystem snapshot or with a volume attached is refused with 409, and the docs never define persistent or warm template for Linux. GPU checkpoints add GPU memory. macOS snapshots are disk-only images of a stopped persistent sandbox, and macOS fork copies the disk, not memory. Windows supports neither. Snapshots are named, kept until deleted, restore any number of times, and outlive the source.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/sandboxes.md",
-        "quote": "Forking creates a duplicate of a Linux VM sandbox's filesystem and memory state in a new sandbox.",
+        "url": "https://www.daytona.com/docs/snapshots.md",
+        "quote": "A snapshot is a capture of the memory and disk of a running sandbox, saved under a name.",
         "confidence": "docs-confirmed"
       }
     },
@@ -128,12 +128,12 @@
     {
       "provider": "instabox",
       "verdict": "partly",
-      "figure": "Disk only; may stop source",
-      "scenario": "Snapshots are disk-only and may stop the machine to take them; a fork is snapshot-save plus create, not an instant clone.",
-      "note": "Snapshots are disk-only and may stop the machine to take them; a fork is snapshot-save plus create, not an instant clone; snapshots survive deleting the machine and include saved logins.",
+      "figure": "Disk only; fork up to 5",
+      "scenario": "Snapshots and forks keep files but not running programs; a fork is a copy-on-write copy made in seconds, up to five at once.",
+      "note": "Snapshots are disk-only, can be taken of a running machine, are free and survive deleting the machine. A fork is a copy-on-write copy of the disks on the same host, up to five at once, without memory or processes. A Docker or OCI image can be imported as a snapshot.",
       "source": {
-        "url": "https://instabox.sh/docs/snapshots",
-        "quote": "It is snapshot save plus create, so it takes about as long as those two.",
+        "url": "https://instabox.sh/docs/machines/fork.md",
+        "quote": "Memory and running programs are not copied",
         "confidence": "docs-confirmed"
       }
     },
@@ -202,7 +202,7 @@
       "verdict": "partly",
       "figure": "Filesystem only",
       "scenario": "Checkpoints snapshot the writable filesystem copy-on-write and restore in place, overwriting current files; there is no live fork.",
-      "note": "Checkpoints snapshot the writable filesystem, copy-on-write and without interrupting work; they restore in place and overwrite current files. A live fork or create-from-checkpoint is not documented.",
+      "note": "Checkpoints snapshot the writable filesystem, copy-on-write and without interrupting work, and are also taken automatically as a Sprite works and idles. They restore in place and overwrite current files. A live fork or create-from-checkpoint is not documented.",
       "source": {
         "url": "https://docs.fly.io/sprites/concepts/checkpoints",
         "quote": "A checkpoint snapshots the writable filesystem overlay: everything you've added on top of the base image.",

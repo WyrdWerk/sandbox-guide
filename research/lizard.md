@@ -652,3 +652,14 @@ Company and legal (section 17): `/terms`, `/privacy`, `/dpa`, `/subprocessors`, 
 Dated archives used for the September-to-October comparison (section 17.12), all Wayback captures of Lizard's own pages: `web.archive.org/web/20260930084615/https://lizard.build/docs/platform/limits.md`, `web.archive.org/web/20260930084612/https://lizard.build/docs/sandboxes.md`, `web.archive.org/web/20261013193324/https://lizard.build/pricing`.
 Registries and directories (section 17, all third-party): `api.github.com/orgs/lizard-build`, `registry.npmjs.org/@lizard-build/sdk`, `f4.fund/startups/lizard-build`, `f4.fund/portfolio`, `linkedin.com/company/lizard-build`, `crunchbase.com/organization/lizard-lizard-build`, `hn.algolia.com` (zero results for the domain).
 Third party: `https://battleships.dev/data/providers/lizard.json`, `https://battleships.dev/data/providers/lizard.md`, `https://www.crunchbase.com/organization/lizard-lizard-build` (profile text mirrors Lizard's own copy; no funding data).
+
+## Recheck 2026-11-12
+
+Rechecked by the primary thread from Lizard's own Markdown docs (sandboxes, platform/limits, platform/billing, preview-urls, volumes, sdk-reference, cli/sandbox, agents, known-issues, storage-and-recovery; dated 2026-11-05 to 2026-11-11) and a fresh Context web_scrape of /pricing (maxAgeMs: 0). The delegated research thread stalled and wrote no report.
+
+- Sizes now Mini 1/2/5 GB ($0.0081/h), Small 2/4/20 GB, Medium 4/8/40 GB, Large 8/16/80 GB. Mini is left off the rate card: four templates only, no volume.
+- Limits count vCPU: 40 (Pro), 220 (Pro 5x), 1,200 (Pro 20x); paid plans have unlimited starts.
+- Trial: 1 Small + 2 Mini at a time, US only, each sandbox deleted 1 hour after it starts.
+- Contradictions kept: the pricing page lists Nano (0.5 vCPU / 1 GB, $0.00405/h), Mini with 10 GB and volumes up to 100 GB; the docs list no Nano, Mini 5 GB and volumes 1–50 GB. The guide follows the docs.
+- B re-derived: Medium (40 GB) + 10 GB volume = 0.0324 × 730 + 0.14 × 10 = $25.05.
+- Not rechecked this pass: company facts, custom domains and keys rows (from 2026-10-28).

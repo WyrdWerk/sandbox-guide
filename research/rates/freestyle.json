@@ -1,6 +1,6 @@
 {
   "provider": "freestyle",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "Per second on allocated vCPU, memory and disk, with free monthly allowances on every plan; Hobby is a $50 monthly minimum that is usable as usage.",
   "cpu": {
     "rate": 0.04032,

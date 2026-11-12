@@ -2,7 +2,7 @@
   "id": "digitalocean",
   "provider": "DigitalOcean Droplets",
   "site": "https://www.digitalocean.com",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "currency": "USD",
   "quoteNote": "Prices read from https://www.digitalocean.com/pricing/droplets as rendered by Firecrawl on 2026-10-29 (the static HTML carries no figures). Hourly prices are the page's $/hr column; monthly prices are its $/mo column, equal to hourly × 672.",
   "rules": [

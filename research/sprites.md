@@ -239,3 +239,13 @@ Window 6 August to 4 November 2026, provider's own status page only (see `resear
 
 - Site fact: By this guide's count, the status page lists 5 Sprites incidents from 6 August to 4 November 2026, including a 75-minute outage on 11–12 October when hosted sprites were unreachable because of a certificate error.
 - Source: https://status.flyio.net/incidents/01M4PS8CZW07R4EMEJK22H23NY — "From approximately 2026-10-11 23:30 UTC through 2026-10-12 00:45 UTC some or all hosted sprites on the *.sprites.app subdomain were unavailable due to a certificate error." (docs-confirmed)
+
+## Recheck, 12 November 2026
+
+Full recheck of all 16 features and 78 capabilities: [sprites-recheck-2026-11-12.md](sprites-recheck-2026-11-12.md). This supersedes the plan quotes in section 10, the checkpoint bullets in section 3, the memory statement in section 5, the SDK list in section 7 and the signup unknowns in section 15; the 28 October ledger above is kept as written.
+
+- Unit rates unchanged: $0.0385/CPU-hour, $0.021875/GB-hour, $0.000683/GB-hour hot, $0.000027/GB-hour cold; 8 vCPU, 2–16 GB autoscaled memory, 100 GB.
+- Trial is now $1 for 7 days, no card, at most 3 Sprites (https://docs.fly.io/about/free-trial.md). A personal org's bill under $5 is waived (https://docs.fly.io/about/free-waiver.md).
+- Every org gets 20 GB of cold storage free each month: "Every org now gets 20GB of Sprites cold storage free each month." (https://fly.io/changelog/sprites-free-cold-storage.md, 2026-03-09). Not modelled: `RateCard.disk.included` cannot target cold storage alone; effect about $0.39 on B and C.
+- Plan ladder Adventurer $20 to Mythic $2,000 plus Guild; the calculator keeps pay as you go.
+- Default image ships Claude, Codex, Gemini and Cursor CLIs; hosted MCP server; Python, Go and Elixir SDKs; automatic checkpoints; Custom API connector; restricted tokens; Google/GitHub SSO; billing alerts explicitly unsupported.

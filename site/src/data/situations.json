@@ -24,7 +24,7 @@
         },
         {
           "provider": "runtime",
-          "why": "`persistent: true` disables the idle pause, and measured CPU with a 50-millicore floor makes a waiting agent cost about $0.03 an hour in CPU.",
+          "why": "`persistent: true` disables the idle pause, and a waiting 4 GiB agent costs about $0.03 an hour, almost all of it reserved memory, since measured CPU has only a 50-millicore floor.",
           "watch": "A stopped box still bills storage, there is one US region, and there is no preinstalled agent."
         },
         {
@@ -62,7 +62,7 @@
         {
           "provider": "boat",
           "why": "A full Ubuntu VM with Docker and 51 GB of disk for $26.28 a month, and no idle detection at all.",
-          "watch": "Auto-stop counts from creation and defaults to one hour; turn it off. The disk is deleted 14 days after a stop."
+          "watch": "Auto-stop counts from creation and defaults to one hour; turn it off. The disk is promised for at least 14 days after a stop."
         },
         {
           "provider": "boxd",
@@ -118,13 +118,13 @@
       "providers": [
         {
           "provider": "runtime",
-          "why": "CPU is measured with a 50-millicore floor, so an idle-but-running box costs about $0.03 an hour, and a paused box costs storage only.",
+          "why": "CPU is measured with a 50-millicore floor, so an idle-but-running 4 GiB box costs about $0.03 an hour, mostly memory, and a paused box costs storage only.",
           "watch": "An open terminal or SSH session counts as activity and keeps billing; a stopped box still bills storage."
         },
         {
           "provider": "sandboxer",
           "why": "Stopped time is free and a resume can restore the running processes, so a request can find the session as it was.",
-          "watch": "The default TTL is one hour and the trial converts to $20 a month; memory restore needs a matching machine within two minutes."
+          "watch": "The default TTL is one hour, there is no trial (the first month is charged when you subscribe), stopped data is deleted after 14 days, and memory restore needs a matching machine within two minutes."
         },
         {
           "provider": "agent37",
@@ -166,7 +166,7 @@
         {
           "provider": "morph",
           "why": "Snapshots capture memory and disk and can branch into many running instances, which is built for parallel test fan-out.",
-          "watch": "Stop deletes the instance; volumes are S3-compatible object storage, not an attached disk."
+          "watch": "Stop deletes the instance; Volumes is S3-compatible object storage and EFS a shared FUSE filesystem, not an attached block disk."
         },
         {
           "provider": "e2b",
@@ -175,8 +175,8 @@
         },
         {
           "provider": "daytona",
-          "why": "Containers are fast to create, snapshots and forks cover the VM classes, and $200 of free compute pays for the first tests.",
-          "watch": "Fork is VM-only; on the default container it is snapshot-then-create. A container stops after 15 idle minutes even during a build."
+          "why": "Every sandbox is a Firecracker VM with its own kernel, sized from 0.125 to 16 cores, and $200 of free credit pays for the first tests.",
+          "watch": "Linux has no stop or pause: a sandbox is deleted at 24 hours on Starter or 48 on Team, and its disk goes with it, so a kept repository needs a volume."
         },
         {
           "provider": "freestyle",
@@ -224,7 +224,7 @@
         {
           "provider": "boat",
           "why": "A 1920×1080 desktop at 60 fps over WebRTC, or VNC over HTTPS, on a full Ubuntu VM with Docker and root.",
-          "watch": "Fixed shapes only, 8 GB or 16 GB; a browser profile held in memory is lost on stop, and the disk is kept 14 days."
+          "watch": "Fixed shapes only, 8 GB or 16 GB; a browser profile held in memory is lost on stop, and the disk is kept for at least 14 days."
         },
         {
           "provider": "sandboxer",
@@ -233,8 +233,8 @@
         },
         {
           "provider": "daytona",
-          "why": "Computer use is a first-class API with mouse, keyboard, screenshots and screen recording, plus a VNC desktop and a web terminal in the Playground.",
-          "watch": "No GPU desktop, a 15-minute idle stop on containers, and the standard preview token cannot be revoked."
+          "why": "Chromium is in the standard image, a 1280x720 desktop ships with the runtime, and computer use exposes mouse, keyboard, screenshots and recording as an API.",
+          "watch": "The desktop is Linux-only, there is no GPU desktop, the sandbox is deleted at the session cap, and the standard preview token opens every private port and never expires."
         }
       ],
       "sources": [
@@ -276,12 +276,12 @@
         {
           "provider": "boat",
           "why": "A whole Ubuntu VM per customer, with its own kernel, IPv6 and disk, for $26.28 a month on the default size; the docs name platforms giving each end user a machine as one of its three audiences.",
-          "watch": "Custom domains are explicitly unsupported, there is no region choice, and a stop destroys the machine, so each customer's address is an on.boat.dev name."
+          "watch": "Custom domains are explicitly unsupported, there is no region choice, and a stop destroys the machine after a ten-minute grace, so each customer's address is an on.boat.dev name."
         },
         {
           "provider": "boxd",
           "why": "A fork copies disk, memory and processes in under 200 ms, so a customer's working environment can be branched per session, and keys are fenced to one organisation.",
-          "watch": "One EU region, a fixed 100 GB disk per machine and RAM billed on resident use, so a fleet of small idle machines still pays for memory."
+          "watch": "Two regions (Frankfurt and New York), a fixed 100 GB disk per machine and RAM billed on resident use, so a fleet of small idle machines still pays for memory."
         },
         {
           "provider": "runtime",
@@ -336,8 +336,8 @@
         },
         {
           "provider": "daytona",
-          "why": "GPU sandboxes attach up to 8 GPUs, each adding up to 16 vCPU / 192 GB / 512 GB, across H100, H200, B200, B300, RTX PRO 6000, RTX 4090, RTX 5090 and AMD MI355X.",
-          "watch": "Shared GPU capacity ignores your region choice, GPU sandboxes vanish on stop, spot GPUs can be killed without notice, and the $200 free credit cannot be spent on them."
+          "why": "The price list sells nine GPU models, from an RTX 4090 at $0.99 to a B300 at $8.99 an hour on demand.",
+          "watch": "The 2.0 GPU page still says GPU sandboxes are coming soon, GPU sandboxes cannot be spot, and the cheaper preemptible column on the price list does not apply to them."
         },
         {
           "provider": "sprites",
@@ -383,18 +383,13 @@
         },
         {
           "provider": "boxd",
-          "why": "Marketed as EU-only on German bare metal, with an allowlist enforced outside the machine and a Dutch contracting entity.",
-          "watch": "Its privacy notice describes EU and US clusters on a Delaware infrastructure vendor, which contradicts the FAQ's no-US-dependency line."
+          "why": "Frankfurt machines and their data stay in the EU, on German bare metal, with an allowlist enforced outside the machine and a Dutch contracting entity.",
+          "watch": "Account data (members, keys, secrets) is kept in every region the org uses, and the privacy notice names a Delaware infrastructure vendor for both the Frankfurt and New York clusters."
         },
         {
           "provider": "lizard",
           "why": "Two regions, EU West in Limburg and US East in Virginia, and you pick one per resource.",
           "watch": "Nothing promises backups stay in the chosen region, there is no SLA outside Enterprise, and the company publishes no SOC 2."
-        },
-        {
-          "provider": "daytona",
-          "why": "Two shared regions, `us` and `eu`, plus dedicated and bring-your-own-compute regions, with a DPA that names the Irish Data Protection Commission.",
-          "watch": "Region choice does not guarantee where control-plane metadata lives, and the company's Delaware incorporation is unconfirmed."
         },
         {
           "provider": "hetzner",

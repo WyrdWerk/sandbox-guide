@@ -4,7 +4,7 @@
   "url": "https://www.scaleway.com/en/virtual-instances/",
   "status": "researched",
   "kind": "vps",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "oneLiner": "French cloud provider: fixed-size virtual machines from €6.55 a month for a 2 vCPU DEV1-S before storage and IPv4, billed hourly with a 60-minute minimum, where powering off stops the compute meter but storage and the IPv4 keep billing.",
   "whatItIs": [
     "Scaleway Instances are fixed-size virtual machines (vCPU, RAM and a bandwidth cap in one offer) sold by the hour from data centres in Paris, Amsterdam, Warsaw and Milan. Storage is not part of the offer: you attach a block volume or, on DEV1 and GP1, a local SSD, and pay for the provisioned size.",
@@ -228,7 +228,6 @@
       "Standby mode sounds like a pause but is billed in full.",
       "The Instance price excludes storage and the IPv4, which together can be a third of a small machine's bill.",
       "The cheap DEV1, GP1, PLAY2 and PRO2 ranges have no SLA.",
-      "The first-party pages disagree on the flexible IPv4 price: the FAQ says €0.004/hour, the pricing page and the June 2026 price update say €0.005/hour.",
       "The console's 'approx. per month' is hourly × 730, not a cap.",
       "Arm (BASIC2-A) offers can be the cheapest fit for large sizes."
     ]
@@ -238,23 +237,6 @@
       "issue": "The 60-minute minimum decides the cost of short work",
       "detail": "Scaleway's billing FAQ says each resource is billed for a minimum of 60 minutes per start and stop event. A ten-minute task therefore pays a full hour of compute, a full hour of volume and a full hour of IPv4. Some third-party guides still describe per-second billing; no current first-party page does, and the Instances FAQ says CPU Instances are billed per hour of uptime. If the older per-second behaviour were still in force, workload A would fall from $29.49 to about $4.90.",
       "status": "open"
-    },
-    {
-      "issue": "Two first-party prices for the flexible IPv4",
-      "detail": "The Instances FAQ says each Instance's flexible IPv4 costs €0.004/hour, while the network pricing page lists an Instance IPv4 at €0.005/hour and the 1 June 2026 price update moved Zonal Flexible IPv4 from €0.004 to €0.005. This guide uses €0.005/hour (€3.65 a month), the newer figure confirmed by two pages.",
-      "status": "contradiction",
-      "evidence": [
-        {
-          "url": "https://www.scaleway.com/en/docs/instances/faq/",
-          "quote": "Each Instance’s flexible IPv4 costs €0.004/hour, excl. VAT.",
-          "confidence": "docs-confirmed"
-        },
-        {
-          "url": "https://www.scaleway.com/en/blog/a-transparent-update-on-scaleway-pricing/",
-          "quote": "Zonal Flexible IPv4 | €0.004 /hour | €0.005 /hour",
-          "confidence": "pricing-page"
-        }
-      ]
     },
     {
       "issue": "A stopped Instance is cheap, not free",
@@ -269,11 +251,6 @@
     {
       "issue": "No SLA on the ranges this card prices cheapest",
       "detail": "The Instance SLA lists DEV1, GP1, PLAY2 and PRO2 as 'No SLO'; only BASIC2-A and BASIC3-X get 99%. A buyer who needs a contractual availability promise has to move up to a dedicated range or accept the risk.",
-      "status": "open"
-    },
-    {
-      "issue": "STARDUST1-S is priced but missing from the default quota table",
-      "detail": "STARDUST1-S is listed at €0.0006/hour (about €0.44 a month) on the pricing page and appears in the zone's product API, but it is absent from the default Organization quota table read on 2026-10-30, which lists DEV1, PLAY2, GP1, PRO2, BASIC2-A and POP2. Its orderability on a new account is unconfirmed, so the MCP route quotes it with that caveat and offers DEV1-S as the safe alternative.",
       "status": "open"
     },
     {

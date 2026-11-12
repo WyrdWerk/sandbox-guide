@@ -15,7 +15,7 @@
       "heading": "Reserved size versus measured use",
       "body": [
         "A flat rate bills the shape you reserved. A measured meter bills what the machine used, which can be much less or much more than the shape suggests. Runtime bills measured active CPU with a 50-millicore floor plus reserved memory. Sprites bills actual CPU and actual memory. Vercel bills active CPU excluding I/O wait, plus provisioned memory.",
-        "The difference is largest for an agent waiting on a model. Runtime's floor makes an idle-but-running box cost about $0.03 an hour; a flat 2 vCPU / 4 GiB shape costs its full hourly rate whether it waits or not."
+        "The difference is largest for an agent waiting on a model. At Runtime an idle-but-running 4 GiB box costs about $0.03 an hour, nearly all of it reserved memory, since the CPU floor is a fraction of a cent; a flat 2 vCPU / 4 GiB shape costs its full hourly rate whether it waits or not."
       ]
     },
     {
@@ -28,7 +28,7 @@
     {
       "heading": "What is still charged while stopped",
       "body": [
-        "Agent 37, InstaBox and Runtime charge storage. Sandboxer counts stopped storage against a free quota. Boat charges nothing and keeps the disk for 14 days. boxd charges for written disk in every state and for memory in standby. Lizard's stop deletes the sandbox. E2B does not bill paused or killed sandboxes, but volumes and snapshots are separate.",
+        "Agent 37, InstaBox and Runtime charge storage. Sandboxer counts stopped storage against a free quota. Boat charges nothing and keeps the disk for at least 14 days. boxd charges for written disk in every state and for memory in standby. Lizard's stop deletes the sandbox. E2B does not bill paused or killed sandboxes, but volumes and snapshots are separate.",
         "Vercel is the one to read carefully: persistent sandboxes save a snapshot on stop, and snapshot storage bills separately from compute."
       ]
     }
@@ -80,9 +80,9 @@
     {
       "provider": "boxd",
       "verdict": "partly",
-      "figure": "Three meters",
-      "scenario": "vCPU on the size while running, RAM on resident memory, disk on bytes written, so a waiting box pays for what it holds.",
-      "note": "Prepaid credits and three meters: vCPU on the size while running, RAM on resident memory (also in standby), disk on bytes written in every state. No plan fee; storage prices are unpublished.",
+      "figure": "Three meters, active CPU",
+      "scenario": "Active vCPU while running, RAM on resident memory, disk on bytes written, so an idle box pays for the memory it holds, not the cores it reserves.",
+      "note": "Prepaid credits and three meters: active vCPU while running (sampled every second), RAM on resident memory (also in standby), disk on bytes written in every state. No plan fee; storage and egress prices are unpublished.",
       "source": {
         "url": "https://boxd.sh/pricing",
         "quote": "RAM bills on the memory a machine actually has resident, sampled every second, while it is running or in standby",
@@ -104,13 +104,13 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "$0.0504/vCPU-hour",
-      "scenario": "The waiting box pays for its reserved 2 vCPU and 4 GiB every second; stopped, it pays disk only.",
-      "note": "Reserved vCPU at $0.0504/hour, memory at $0.0162/GiB-hour and disk at $0.000108/GiB-hour, billed per second with no plan fee. Windows adds $0.0858/vCPU-hour, which may replace or add to the Linux rate.",
+      "figure": "$0.101/core-h + floor",
+      "scenario": "The waiting box pays for its 1-core guarantee every second even at 2% CPU; above it Daytona bills measured use up to the limit, and a Team plan adds $250 before the first sandbox.",
+      "note": "Per-second, three meters: CPU core-hours (greater of measured and guarantee), memory GiB-hours (same), disk GiB-hours (measured; ephemeral is free). Spot is 0.7× and reclaimable. CPU types multiply 1.0 / 1.667 / 2.331 and regions 1.15–2×, and the multipliers compound. Team is $250/month with $100 of credits that expire at the end of the period. Egress, bucket-volume traffic, snapshot storage and image storage have no published price. The meter is a measured-with-a-floor shape the feature's four-way taxonomy does not name; the guarantee behaves like reserved billing for an idle box and the burst like measured billing.",
       "source": {
-        "url": "https://www.daytona.io/pricing",
-        "quote": "vCPU $0.0504/h",
-        "confidence": "pricing-page"
+        "url": "https://www.daytona.com/docs/billing.md",
+        "quote": "Daytona meters each sandbox per second for three resources, from the moment the sandbox starts until it is stopped, paused, or deleted.",
+        "confidence": "docs-confirmed"
       }
     },
     {
@@ -118,7 +118,7 @@
       "verdict": "partly",
       "figure": "$0.000014/vCPU-s",
       "scenario": "Per second of allocated vCPU and RAM while running, so the reserved shape sets the bill even when the agent waits.",
-      "note": "Per second of allocated vCPU and RAM while running, against a credit balance. Paused and killed sandboxes are not billed. Pro adds a $150 monthly fee; Hobby has a one-time $100 credit.",
+      "note": "Per second of allocated vCPU and RAM while running, against a credit balance. Paused and killed sandboxes are not billed. Pro adds a $150 monthly fee; Hobby has a one-time $100 credit and 10 concurrent sandboxes. Enterprise starts at a $2,000 monthly commit with 500 concurrent sandboxes.",
       "source": {
         "url": "https://e2b.dev/pricing.md",
         "quote": "$0.000014 per vCPU-second",
@@ -130,10 +130,10 @@
       "verdict": "yes",
       "figure": "$20 plan, then usage",
       "scenario": "A plan that is also credit, then per-second vCPU and RAM; a light month still costs the plan.",
-      "note": "A subscription that is also credit: $20, $100 or $500 a month, then per-second vCPU and RAM, GiB-hour storage and $0.02 per GiB of egress. Paused and stopped machines pay storage only.",
+      "note": "A subscription that is also credit: $20, $100 or $500 a month, then per-second vCPU and RAM, and $0.02 per GiB of egress beyond the allowance. Paid plans include 200 GiB to 5 TiB of disk; snapshots and paused memory are free. NVIDIA L4 GPUs are $0.80 per GPU-hour.",
       "source": {
-        "url": "https://instabox.sh/pricing",
-        "quote": "$20 / month free credits",
+        "url": "https://instabox.sh/docs/account/pricing.md",
+        "quote": "Runtime is metered by the second, only while a machine is running.",
         "confidence": "pricing-page"
       }
     },
@@ -154,10 +154,10 @@
       "verdict": "partly",
       "figure": "$0.141912/core-hour",
       "scenario": "The waiting box pays max(request, actual), so idle time inside the request bills at full rate; only termination stops the meter.",
-      "note": "Per second on the higher of request and actual use: CPU $0.141912/core-hour and memory $0.024012/GiB-hour at the non-preemptible sandbox rate, 3× list. Disk is billed as memory at 20:1.",
+      "note": "Per second on the higher of request and actual use: CPU $0.141912/core-hour and memory $0.024012/GiB-hour at the non-preemptible sandbox rate, 3× list. Disk is billed as memory at 20:1. Requested resources bill for the sandbox's whole lifetime, even when idle. GPU time is at standard rates.",
       "source": {
         "url": "https://modal.com/docs/guide/sandbox-resources",
-        "quote": "Modal Sandboxes are billed by the second based on whichever is higher: your resource request or your actual usage.",
+        "quote": "You're charged max(request, actual) for both CPU and memory.",
         "confidence": "docs-confirmed"
       }
     },
@@ -177,12 +177,12 @@
       "provider": "runtime",
       "verdict": "partly",
       "figure": "50-millicore CPU floor",
-      "scenario": "Measured active CPU above a 50-millicore floor plus reserved memory, so waiting costs about $0.03 an hour.",
-      "note": "Prepaid credit, per second: measured active CPU above a 50-millicore floor, plus reserved memory, plus storage while paused or stopped. No plan fee; plans are in a private beta.",
+      "scenario": "Measured active CPU above a 50-millicore floor plus reserved memory, so a waiting 4 GiB sandbox costs about $0.03 an hour, almost all of it memory.",
+      "note": "Prepaid credit, per second: measured active CPU above a 50-millicore floor, plus reserved memory, plus storage while paused or stopped. Pay first: credit from $10 before the first sandbox. No plan fee; plans are in a private beta. Hosted Agents sessions (private beta) bill at their own rates.",
       "source": {
-        "url": "https://withruntime.com/docs/pricing",
-        "quote": "Measured CPU use above a 50-millicore floor",
-        "confidence": "inferred"
+        "url": "https://withruntime.com/pricing.md",
+        "quote": "A 2 vCPU, 4 GiB sandbox waiting on a model costs $0.03125 an hour, memory plus that floor",
+        "confidence": "pricing-page"
       }
     },
     {
@@ -224,12 +224,12 @@
     {
       "provider": "tensorlake",
       "verdict": "yes",
-      "figure": "Active CPU; $250 Pro",
+      "figure": "Active CPU, 20% min; $250 Pro",
       "scenario": "Per-second metering at $0.07 per active core-hour, $0.015 per GB-hour of RAM and $0.0002 per GB-hour of disk, or 40% less on Pro.",
-      "note": "Prepaid Usage Credits in $5–$20 packs (1 CU = $0.01) or Pro at $250 including 25,000 CU. CPU bills only while it executes, falling back to allocated vCPU time when sampling fails; RAM and disk bill on allocation while running; a suspended sandbox bills snapshot storage at $0.07 per GB-month; egress is free.",
+      "note": "Prepaid Usage Credits in $5–$20 packs (1 CU = $0.01) or Pro at $250 including 25,000 CU. CPU bills on active execution with a minimum of 20% of the allocated vCPU, falling back to allocated vCPU time when sampling fails; RAM and disk bill on allocation while running; a suspended sandbox bills snapshot storage at $0.07 per GB-month; egress is free. A reserved H100 is $3.95 per GPU-hour on its own invoice.",
       "source": {
         "url": "https://www.tensorlake.ai/pricing",
-        "quote": "CPU tracks active runtime execution when metering is available, rather than reserved vCPU time.",
+        "quote": "CPU is billed on active execution, with a minimum of 20% of allocated vCPU.",
         "confidence": "pricing-page"
       }
     },
@@ -250,7 +250,7 @@
       "verdict": "partly",
       "figure": "Hourly, rounded up; monthly cap",
       "scenario": "An always-on 4 vCPU machine costs the same as the cap every month, but a machine that stops between sessions is billed as if it never stopped.",
-      "note": "The meter is hourly, rounded up to a whole hour per server, with the bill capped at the monthly price — so always-on is cheap and predictable (about 624 hours to reach the cap) while bursty use is expensive. A powered-off server is billed in full, and there is no pause or cheaper stopped-storage rate.",
+      "note": "The meter is hourly, rounded up to a whole hour per server, with the bill capped at the monthly price — so always-on is cheap and predictable (about 624 hours to reach the cap) while bursty use is expensive. A powered-off server is billed in full, and there is no pause or cheaper stopped-storage rate. Prices here are the Falkenstein and Nuremberg tier; Helsinki is now about 15% cheaper for the same plans.",
       "source": {
         "url": "https://docs.hetzner.com/cloud/billing/faq",
         "quote": "Mathematically speaking, we will bill you for the minimum amount, whether that is the monthly price cap OR the hourly price multiplied by the number of hours you used the server.",
@@ -332,9 +332,9 @@
     {
       "provider": "contabo",
       "verdict": "partly",
-      "figure": "$6.60/mo, monthly only",
+      "figure": "$6.60/mo + setup, monthly only",
       "scenario": "One flat $6.60 for 4 vCPU / 8 GB whether the box is busy 5% or 100% of the month; the meter never follows the work.",
-      "note": "Prepaid terms of 1, 3, 6, 12 or 24 months with one flat price per server. The 1-month term is $6.60 and the 24-month rate is $5.28, paid upfront. There is no hourly or per-second meter, so a ten-minute task costs a month and a powered-off server keeps billing.",
+      "note": "Prepaid terms of 1, 3, 6, 12 or 24 months with one flat price per server. The 1-month term is $6.60 and the 24-month rate is $5.28, paid upfront. There is no hourly or per-second meter, so a ten-minute task costs a month and a powered-off server keeps billing. The 1-month term now adds a €2.00 one-time setup fee; the 3-, 6-, 12- and 24-month terms have none.",
       "source": {
         "url": "https://contabo.com/en-us/vps/",
         "quote": "The price displayed is the effective monthly rate for a 24-month subscription including applicable taxes",

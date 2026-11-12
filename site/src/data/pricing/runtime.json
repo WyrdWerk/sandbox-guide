@@ -1,6 +1,6 @@
 {
   "provider": "runtime",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "Per second on measured CPU with a 50-millicore floor, reserved memory, and stored disk in decimal GB.",
   "cpu": {
     "rate": 0.025,
@@ -32,13 +32,15 @@
         "cpuHours": 25,
         "ramHours": 100
       },
-      "note": "An account that has bought credit gets 25 active vCPU-hours and 100 GiB-hours of memory free every calendar month; the calculator takes them off first. A new account's one-time free hours are separate and not counted here."
+      "note": "A new account must buy at least $10 of credit before it runs; the monthly 25 vCPU-hours and 100 GiB-hours apply only after that purchase. The $10 is prepaid usage, not a fee, so it is not added to totals."
     }
   ],
   "notes": [
     "A stopped box keeps billing storage, including saved memory; only delete ends the charge.",
     "Automatic top-ups earn 5% extra credit, not subtracted here.",
-    "Storage is $0.08 per decimal GB per 30-day month, so the hourly rate divides by 720 hours. Runtime rounds its own per-GiB-hour figure to 119 microdollars, which this model does not reproduce exactly."
+    "Storage is $0.08 per decimal GB per 30-day month, so the hourly rate divides by 720 hours. Runtime rounds its own per-GiB-hour figure to 119 microdollars, which this model does not reproduce exactly.",
+    "Pay first: nothing runs before the first $10 purchase; the first $10 is matched, so the practical opening balance is $20.",
+    "Hosted Agents (private beta) bill at $0.03 per active vCPU-hour and $0.01 per GiB-hour; that is a separate product, not this card."
   ],
   "sources": [
     {

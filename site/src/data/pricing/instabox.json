@@ -1,7 +1,7 @@
 {
   "provider": "instabox",
-  "checkedOn": "2026-10-30",
-  "summary": "Per second on the size you asked for, out of a monthly plan that is also a credit; storage bills in every state.",
+  "checkedOn": "2026-11-12",
+  "summary": "Per second on the size you asked for, out of a monthly plan that is also a credit; paid plans include a pool of disk, and only disk beyond it bills.",
   "cpu": {
     "rate": 0.004,
     "billing": "allocated"
@@ -11,8 +11,7 @@
   },
   "disk": {
     "running": 0.00011,
-    "stopped": 0.00011,
-    "included": 20
+    "stopped": 0.00011
   },
   "between": "kept",
   "egress": {
@@ -32,7 +31,10 @@
       "excludesShapes": [
         "16/32",
         "32/64"
-      ]
+      ],
+      "allowance": {
+        "diskHours": 146000
+      }
     },
     {
       "name": "Builder",
@@ -43,7 +45,10 @@
       "maxDisk": 500,
       "excludesShapes": [
         "32/64"
-      ]
+      ],
+      "allowance": {
+        "diskHours": 747520
+      }
     },
     {
       "name": "Team",
@@ -51,19 +56,28 @@
       "credit": 500,
       "maxVcpu": 32,
       "maxRam": 64,
-      "maxDisk": 1024
+      "maxDisk": 1024,
+      "allowance": {
+        "diskHours": 3737600
+      }
     }
   ],
   "notes": [
-    "The free plan is one 4 vCPU / 8 GiB machine that pauses after 30 idle minutes; it is not priced here.",
+    "The free plan is one 4 vCPU / 8 GiB machine that pauses after 30 idle minutes and runs at most 480 minutes at a time; it is not priced here.",
     "Egress is $0.02 per GiB beyond each plan's included allowance.",
-    "The first 20 GiB of each paid machine's /data disk is free in every state; only disk beyond it bills.",
+    "Paid plans include disk across all machines: 200 GiB on Pro, 1 TiB on Builder and 5 TiB on Team, then $0.08 per GiB-month. The card models each pool as that many GiB held all month (GiB × 730 hours), which matches a pool only when the disk stays allocated all month.",
+    "Snapshots and a paused machine's saved memory are free.",
+    "NVIDIA L4 GPU machines cost $0.80 per GPU-hour on top of the 11 vCPU / 36 GiB each GPU brings ($0.925 an hour all in), paid plans only; the calculator does not price GPUs.",
     "Sizes are 2 GiB of memory per vCPU: Pro allows 2/4, 4/8 and 8/16, Builder up to 16/32 and Team up to 32/64, with disk up to 200, 500 and 1,024 GiB."
   ],
   "sources": [
     {
       "label": "Pricing",
       "url": "https://instabox.sh/pricing"
+    },
+    {
+      "label": "Pricing docs",
+      "url": "https://instabox.sh/docs/account/pricing"
     }
   ],
   "sleeps": "An idle machine pauses itself and wakes when its preview link is used; paused time bills storage only. A manual pause does not wake on use.",

@@ -3,21 +3,22 @@
   "name": "Sprites",
   "url": "https://fly.io/sprites",
   "status": "researched",
-  "checkedOn": "2026-10-28",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Persistent Fly.io microVMs that suspend after about 30 seconds idle and bill measured CPU and memory.",
   "whatItIs": [
     "Sprites are persistent Linux environments on Fly.io for agents, development and user-submitted code. Each is a dedicated microVM with a whole filesystem that survives between sessions.",
-    "The design assumes a computer that sleeps: a short idle window suspends it with memory frozen, and a longer idle period stops it and drops memory, keeping the disk."
+    "The design assumes a computer that sleeps: a short idle window suspends it with memory frozen, and a longer idle period stops it and drops memory, keeping the disk.",
+    "New Sprites boot Ubuntu 26.04 with the Claude, Codex, Gemini and Cursor CLIs already installed."
   ],
   "whoFor": "Developers who want a long-lived Linux computer for an agent, with automatic sleep and usage-based billing rather than a reserved size.",
   "isolation": "Dedicated microVM with hardware-level isolation. Root is available and Docker is reported to work, but Sprites do not run systemd: a built-in service manager starts services on wake.",
-  "sizes": "One fixed shape: 8 vCPUs and 100 GB of storage, with memory assigned and autoscaled per Sprite. No published region selection, GPU or ARM option.",
+  "sizes": "One fixed shape: 8 vCPUs, 2 GB of memory that autoscales to 16 GB, and 100 GB of storage. No published region selection, GPU or ARM option.",
   "billing": {
-    "model": "Measured usage, with optional monthly plans that bundle allowances.",
+    "model": "Measured usage, with optional monthly plans from $20 to $2,000 that bundle allowances.",
     "meter": "Actual CPU at $0.0385 per CPU-hour and actual memory at $0.021875 per GB-hour while awake; hot storage at $0.000683 per GB-hour and cold storage at $0.000027 per GB-hour.",
-    "stopped": "No compute charge in warm or cold state, but cold storage is billed for as long as data is kept.",
-    "planFee": "The pricing page says there are no plans; the product FAQ describes plans including Hero at $100 a month. Both are current.",
-    "minimum": "No published minimum. A one-time $30 trial credit per user and per organisation, which cannot pay a subscription fee."
+    "stopped": "No compute charge in warm or cold state, but cold storage is billed for as long as data is kept; 20 GB of cold storage per organisation is free each month.",
+    "planFee": "The pricing page's Markdown version says no plan is picked up front; the Sprites FAQ and changelog sell eight tiers, Adventurer at $20 to Mythic at $2,000, plus a custom Guild tier.",
+    "minimum": "No published minimum. New accounts get $1 of credit for 7 days with no card, and a personal org's monthly bill under $5 is waived."
   },
   "cost": {
     "A": {
@@ -64,7 +65,7 @@
       "total": "$153.67–$378.51",
       "notes": [
         "An always-on workload must actively prevent idle sleep.",
-        "Whether hot and cold storage apply to the same bytes is not unambiguous in the provider's wording."
+        "Cold storage bills on all data and hot storage only on the working set, so hot on all 50 GB is an upper bound. The free 20 GB of cold storage is not subtracted; it would lower this by about $0.39."
       ]
     },
     "C": {
@@ -90,7 +91,8 @@
       "total": "$9.49–$37.21",
       "notes": [
         "Idle time is compute-free, but the disk keeps billing while it exists.",
-        "Warm suspension keeps memory frozen; a longer idle period drops it and the next wake starts processes fresh."
+        "Warm suspension keeps memory frozen; a longer idle period drops it and the next wake starts processes fresh.",
+        "The free 20 GB of cold storage a month covers this whole disk, so the cold part (about $0.39) would not bill; it is not subtracted here."
       ]
     }
   },
@@ -169,9 +171,9 @@
     ]
   },
   "usability": {
-    "dashboard": "A dashboard exists for connector setup and a Gateway Playground that can fire a request without code.",
-    "withoutCode": "Limited. The documented start path installs a CLI and opens a console; the no-code surface is connector testing, not running an agent.",
-    "signup": "Uses a Fly.io account. Card requirement, waitlist and trial duration are not published.",
+    "dashboard": "A Sprites dashboard lists Sprites and integrations, manages connectors, tokens, usage and plans, creates Cursor self-hosted machines, and has a Gateway Playground.",
+    "withoutCode": "Partly. The dashboard can create a Sprite as a Cursor self-hosted machine, and a hosted MCP server lets an AI assistant create and drive Sprites; a plain Sprite still starts from the CLI or API.",
+    "signup": "Uses a Fly.io account. New accounts get $1 of credit for 7 days with no card, limited to 3 Sprites at a time.",
     "docs": "Fly documentation covers lifecycle, checkpoints, networking and connectors. Support is community on lower plans and varies by plan.",
     "tripsUp": [
       "Warm and cold are different states, and the transition is not user-selected.",
@@ -183,12 +185,12 @@
   "caveats": [
     {
       "issue": "The pricing page and product FAQ disagree on plans",
-      "detail": "Pricing says there are no plans and nothing charged per Sprite; the FAQ describes plans including Hero at $100 a month with CPU, RAM and storage allowances.",
+      "detail": "The pricing page's Markdown version says no plan is picked up front; the Sprites FAQ and changelog sell Adventurer through Mythic plus Guild, with CPU, RAM and storage allowances.",
       "status": "contradiction",
       "evidence": [
         {
-          "url": "https://fly.io/pricing/",
-          "quote": "No plans and no tiers, and nothing charged per Sprite.",
+          "url": "https://fly.io/pricing.md",
+          "quote": "No plans to pick up front on Machines or Sprites",
           "confidence": "pricing-page"
         },
         {
@@ -205,7 +207,7 @@
     },
     {
       "issue": "Storage charges while idle are ambiguous",
-      "detail": "The FAQ says warm and cold are not billed, while the pricing page bills cold storage for as long as data is kept.",
+      "detail": "The FAQ says warm and cold are not billed, while the pricing page bills cold storage for as long as data is kept. The January changelog settles the intent: compute stops, cold storage keeps billing.",
       "status": "contradiction",
       "evidence": [
         {
@@ -227,8 +229,20 @@
     },
     {
       "issue": "Region selection and architecture are unpublished",
-      "detail": "No provider-confirmed region list, GPU option or CPU architecture statement was found.",
+      "detail": "No provider-confirmed region list, GPU option or CPU architecture statement was found. Memory is 2–16 GB autoscaled, not a fixed size.",
       "status": "open"
+    },
+    {
+      "issue": "The cold-storage allowance is not modelled",
+      "detail": "Every organisation gets 20 GB of cold storage free each month. The calculator cannot apply an allowance to cold storage alone, so stored-disk totals are up to about $0.39 a month high.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://fly.io/changelog/sprites-free-cold-storage.md",
+          "quote": "Every org now gets 20GB of Sprites cold storage free each month.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [
@@ -236,7 +250,10 @@
     "Warm suspension keeps processes and resumes in 100–500 ms.",
     "Wake on request is explicit.",
     "Copy-on-write checkpoints that do not interrupt work.",
-    "Connectors keep credentials in the gateway, not the guest."
+    "Connectors keep credentials in the gateway, not the guest.",
+    "Claude, Codex, Gemini and Cursor CLIs come installed.",
+    "A hosted MCP server that can create and drive Sprites.",
+    "Connectors cover any token-authenticated HTTP API."
   ],
   "sources": [
     {
@@ -262,6 +279,14 @@
     {
       "label": "Pricing",
       "url": "https://fly.io/pricing/"
+    },
+    {
+      "label": "Free trial",
+      "url": "https://docs.fly.io/about/free-trial.md"
+    },
+    {
+      "label": "Hosted MCP",
+      "url": "https://docs.fly.io/sprites/integrations/remote-mcp.md"
     }
   ]
 }

@@ -14,14 +14,14 @@
     {
       "heading": "The one that converts itself",
       "body": [
-        "Sandboxer's seven-day trial becomes $20 a month on day eight. Boat's trial ends by charging the plan chosen at checkout. Lizard's trial ends and you either subscribe to Pro at $19 or stop creating things. Those are the three that end at a paid plan.",
-        "Everything else is spent, not converted: E2B's $100 credit, boxd's $30, Agent 37's $5, Blaxel's credits, Sprites' $30, Morph's disputed 300 hours, Runtime's allowance and InstaBox's free plan."
+        "Sandboxer's seven-day trial becomes $20 a month on day eight. Boat's trial ends by charging the plan chosen at checkout; organisations get no trial, and each person gets one. Lizard's trial ends and you either subscribe to Pro at $19 or stop creating things. Those are the three that end at a paid plan.",
+        "Everything else is spent, not converted: E2B's $100 credit, boxd's $30, Agent 37's $5, Blaxel's credits, Sprites' $1, Morph's disputed 300 hours, Runtime's matched credit and monthly allowance and InstaBox's free plan."
       ]
     },
     {
       "heading": "The free plans have hard caps",
       "body": [
-        "InstaBox's free plan gives one 4 vCPU / 8 GiB machine, two templates, and a fixed 30-minute idle pause. Runtime's free usage caps at 2 vCPU / 4 GiB / 10 GiB, four sandboxes at once and 50 created a day. Vercel's Hobby plan is non-commercial and pauses sandbox creation when its quotas run out.",
+        "InstaBox's free plan gives one 4 vCPU / 8 GiB machine, two templates, and a fixed 30-minute idle pause. Runtime's limits without credit cap an account at 2 vCPU / 4 GiB / 10 GiB, four sandboxes at once and 50 created a day, and a new account cannot run anything until it pays. Vercel's Hobby plan is non-commercial and pauses sandbox creation when its quotas run out.",
         "Those caps are the product decision. A free plan that cannot stay up is not a substitute for a cheap paid one."
       ]
     },
@@ -45,8 +45,8 @@
       "provider": "agent37",
       "verdict": "partly",
       "figure": "$5 one-off",
-      "scenario": "A one-off $5 Cloud credit after adding a card, plus a managed-hosting free plan with no card; the credit is not granted to workspaces made through the signup API.",
-      "note": "A one-off $5 Cloud credit after adding a card, and a managed-hosting free plan with no card. The credit is not granted to workspaces created through the signup API.",
+      "scenario": "A one-off $5 Cloud credit after adding a card, plus a $0 managed-hosting plan that now also needs a card on file; the credit is not granted to workspaces made through the signup API.",
+      "note": "A one-off $5 Cloud credit after adding a card, and a $0 managed-hosting plan with a card on file. The credit is not granted to workspaces created through the signup API. Before the first top-up a workspace can run 3 instances of any type, VMs included; more after top-ups (50 at $50, 1,000 at $1,000), counting awake instances only.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/billing",
         "quote": "Add a card from the billing page (nothing is charged) and your workspace gets a one-time $5 credit",
@@ -57,8 +57,8 @@
       "provider": "blaxel",
       "verdict": "partly",
       "figure": "Up to $200 credits",
-      "scenario": "Up to $200 in promotional credits advertised; the actual grant, expiry and card requirement are not published.",
-      "note": "Up to $200 in promotional credits advertised on pay-as-you-go. The actual grant, expiry and card requirement are not published. Quota tiers are wallet top-ups, not fees.",
+      "scenario": "Up to $200 in promotional credits and no card advertised; the actual grant and expiry are not published.",
+      "note": "Up to $200 in promotional credits advertised on pay-as-you-go, with no card required. The actual grant and whether the one-year credit expiry applies to it are not published. Quota tiers are rolling 30-day top-ups, not fees, and Tier 0 needs a card before it can ask for more quota.",
       "source": {
         "url": "https://blaxel.ai/pricing",
         "quote": "Up to $200 in free credits",
@@ -80,9 +80,9 @@
     {
       "provider": "boxd",
       "verdict": "partly",
-      "figure": "$30 one-off",
+      "figure": "$30 one-off + free self-host",
       "scenario": "A one-off €30/$30 credit after adding a payment method; without one, an organisation is capped at two machines with no published allowance.",
-      "note": "A one-off €30/$30 credit after adding a payment method. No free plan; an organisation without a payment method is capped at two machines, with no published allowance.",
+      "note": "A one-off €30/$30 credit after adding a payment method. No hosted free plan; an organisation without a payment method is capped at two machines. Self-hosting is free up to 16 worker vCPUs.",
       "source": {
         "url": "https://boxd.sh/pricing",
         "quote": "€30 of credits when you add a payment method. Nothing is charged when you add the card",
@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "yes",
-      "figure": "$200 credit, no card",
-      "scenario": "The trial is $200 of compute with no card and no published expiry; GPU sandboxes cannot spend it.",
-      "note": "A $200 free compute credit with no card, and Tier 1 access by email verification. The credit is not available for GPU sandboxes; its expiry is not published.",
+      "figure": "$200 one-time; no card",
+      "scenario": "A new account runs $200 of compute with no card, about seven months of workload A; when it runs out the card is the only way to continue, and Team's $100 a month is a rebate on a $250 fee, not a free tier.",
+      "note": "Starter: $200 one-time credit, no card, 3 members, 100 sandboxes, 24 h sessions, 7 GPUs, 10 Windows core licences, 10 Mac reservations. Team: $250/month with $100/month credits that expire at the end of the period, so the credit never covers the fee. No recurring free allowance on either plan. The startup programme offers up to $100k ($10k to start) and academic research gets credits; both are applications, not a free tier.",
       "source": {
-        "url": "https://www.daytona.io/pricing",
-        "quote": "$200 in free compute included",
+        "url": "https://www.daytona.com/pricing.md",
+        "quote": "Build for free, pay as you scale. $200 in free compute included, no credit card required.",
         "confidence": "pricing-page"
       }
     },
@@ -129,10 +129,10 @@
       "provider": "instabox",
       "verdict": "yes",
       "figure": "Free plan, 1 machine",
-      "scenario": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB disk, five snapshots and a fixed 30-minute idle pause, and it never converts.",
-      "note": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB fixed disk, five snapshots, 100 GiB egress, a fixed 30-minute idle pause and two templates. It never converts.",
+      "scenario": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB disk, five snapshots, a fixed 30-minute idle pause and runs of at most 480 minutes, and it never converts.",
+      "note": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB fixed disk, five snapshots, 100 GiB egress, a fixed 30-minute idle pause, at most 480 minutes per run and four templates. No GPU. It never converts.",
       "source": {
-        "url": "https://instabox.sh/pricing",
+        "url": "https://instabox.sh/docs/account/pricing.md",
         "quote": "1 machine, 4 vCPU / 8 GiB",
         "confidence": "pricing-page"
       }
@@ -142,11 +142,11 @@
       "verdict": "partly",
       "figure": "7 days / $5",
       "scenario": "Seven days with $5 of usage, a card required, Small machines only and US regions only.",
-      "note": "A seven-day trial with $5 of usage, a card required, Small machines only, US regions only and up to five at once. One trial per account and per card.",
+      "note": "A seven-day trial with $5 of usage and a card required. Until the first paid invoice an account runs 1 Small and 2 Mini at a time, in US regions only, and each sandbox is deleted an hour after it starts. One trial per account and per card.",
       "source": {
-        "url": "https://lizard.build/docs/platform/billing",
-        "quote": "Pro starts with a 7-day trial that includes $5 of usage. You add a card to start it; Apple Pay works too. Nothing is charged when the trial starts.",
-        "confidence": "docs-confirmed"
+        "url": "https://lizard.build/docs/platform/billing.md",
+        "quote": "Pro starts with a 7-day trial that includes $5 of usage.",
+        "confidence": "pricing-page"
       }
     },
     {
@@ -154,7 +154,7 @@
       "verdict": "partly",
       "figure": "$30/month credits",
       "scenario": "Starter gives $30 of compute a month, but a payment method is required before anything runs.",
-      "note": "Starter is $0 plus compute with $30 a month of credits; Team is $250 plus compute with $100. A payment method is required to use Modal.",
+      "note": "Starter is $0 plus compute with $30 a month of credits; Team is $250 plus compute with $100. A payment method is required to use Modal. The credits cover Functions and Sandboxes, not Shared Endpoints model tokens.",
       "source": {
         "url": "https://modal.com/pricing",
         "quote": "$30 / month free credits",
@@ -175,37 +175,37 @@
     },
     {
       "provider": "runtime",
-      "verdict": "yes",
-      "figure": "100 h free, no card",
-      "scenario": "Recurring free usage with no card: 100 hours of a 1 GB machine with hard caps on size and concurrency.",
-      "note": "Recurring free usage with no card: 100 hours of a 1 GB machine, memory and CPU allowances, and hard caps on size and concurrency. Accounts that never pay get it once across 30 days.",
+      "verdict": "partly",
+      "figure": "100 h/mo after $10",
+      "scenario": "Pay $10, get $10 matched, then 100 hours of a 1 GB machine a month; nothing runs before the first payment.",
+      "note": "Pay first since 10 November 2026: a new account adds credit from $10 before its first sandbox, and the first $10 is matched. After that, 100 GiB-hours of memory and 25 vCPU-hours of active CPU return every month, with hard caps on size and concurrency. There is no card-free trial.",
       "source": {
-        "url": "https://withruntime.com/docs/pricing",
-        "quote": "100 free hours of a 1 GB machine",
+        "url": "https://withruntime.com/pricing",
+        "quote": "Once an account has paid, 100 free hours of a 1 GB machine is included every month, renewed on the 1st: 100 GiB-hours of memory and 25 vCPU-hours of active CPU.",
         "confidence": "pricing-page"
       }
     },
     {
       "provider": "sandboxer",
-      "verdict": "partly",
-      "figure": "7 days / 25 h, then a plan",
-      "scenario": "Seven days with 25 hours of machine time and a card up front; it becomes $20 a month on day eight.",
-      "note": "A seven-day trial with 25 hours of machine time, two sandboxes, small and default sizes, and a card up front. It becomes $20 a month on day eight.",
+      "verdict": "no",
+      "figure": "None; $20 from day one",
+      "scenario": "No free tier and no trial: choosing a plan charges the first month immediately, and a card is needed before the first sandbox.",
+      "note": "No free tier or trial for new accounts since 2 November 2026; $20 a month is the floor. Signup, docs, CLI and dashboard need no card, but creating a sandbox needs a plan and a card. Trials started earlier keep their limits until they end.",
       "source": {
         "url": "https://sandboxer.com/pricing",
-        "quote": "7 days, 25 hours of machine time, up to 2 sandboxes at once on the small and default sizes",
+        "quote": "the first month is charged when you subscribe",
         "confidence": "pricing-page"
       }
     },
     {
       "provider": "sprites",
       "verdict": "partly",
-      "figure": "$30 one-off",
-      "scenario": "A one-time $30 trial credit per user and per organisation; credits cannot pay a subscription fee.",
-      "note": "A one-time $30 trial credit per user and per organisation. Credits cannot pay a subscription fee. Card requirement and expiry are not published.",
+      "figure": "$1, 7 days",
+      "scenario": "New accounts get $1 for 7 days with no card; after that, a personal org's bill under $5 is waived.",
+      "note": "$1 of credit for 7 days with no card, personal org only and at most 3 Sprites at a time. After that there is no free compute, but a personal org's monthly bill under $5 is waived and every org gets 20 GB of cold storage free each month.",
       "source": {
-        "url": "https://fly.io/sprites/",
-        "quote": "Each user can grant one $30 trial credit, and each org can receive at most one.",
+        "url": "https://docs.fly.io/about/free-trial.md",
+        "quote": "New accounts get $1 of free credit, with no credit card required.",
         "confidence": "docs-confirmed"
       }
     },
@@ -216,8 +216,8 @@
       "scenario": "Hobby quotas restricted to non-commercial use, or a 14-day Pro trial with $20 in credits.",
       "note": "Hobby has included quotas but is restricted to non-commercial use, and pauses sandbox creation when quotas run out. Pro has a 14-day trial with $20 in credits.",
       "source": {
-        "url": "https://vercel.com/docs/plans/hobby",
-        "quote": "Unlock the full potential of Vercel Pro during your 14-day trial with $20 in credits.",
+        "url": "https://vercel.com/docs/plans/pro-plan/trials",
+        "quote": "The trial plan includes a $20 credit",
         "confidence": "docs-confirmed"
       }
     },

@@ -4,7 +4,7 @@
   "url": "https://tierhive.com",
   "status": "researched",
   "kind": "vps",
-  "checkedOn": "2026-11-04",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Build-your-own NAT KVM servers from $0.000135 an hour, with a private /24, two forwarded TCP ports and a shared HAProxy — cheap, hourly, and explicitly still in Alpha.",
   "whatItIs": [
     "TierHive rents KVM virtual machines by the hour at the lowest end of the market. You do not pick from a plan list: you move sliders for RAM (128 MB to 8 GB in 128 MB steps), NVMe (1 to 50 GB) and, in four locations, HDD up to 4 TB, then choose a CPU-priority, IOPS and network tier. The smallest configuration, 128 MB of RAM with 1 GB of disk, is $0.000135 an hour — about ten cents for a 720-hour month.",

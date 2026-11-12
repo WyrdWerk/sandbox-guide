@@ -3,7 +3,7 @@
   "name": "Tensorlake",
   "url": "https://www.tensorlake.ai",
   "status": "researched",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Firecracker microVMs that keep their memory across a pause, sold as prepaid credits or a $250 Pro plan.",
   "whatItIs": [
     "Tensorlake sells isolated Linux microVMs for agents, one per task or one per session, that boot in a few hundred milliseconds and can be frozen with their memory, processes and files intact and resumed later under the same name.",
@@ -15,7 +15,7 @@
   "sizes": "Per-sandbox ceilings by plan: Free 1 vCPU / 1 GB / 10 GB; Usage Credits 4 vCPU / 16 GB / 100 GB; Pro 16 vCPU / 64 GB / 100 GB; Enterprise custom. RAM must be 1–8 GB per vCPU. Disk is 10–100 GB, growth-only.",
   "billing": {
     "model": "Prepaid Usage Credits in $5, $10 or $20 packs (1 CU = $0.01), or Pro at $250 a billing cycle including 25,000 CU.",
-    "meter": "Per second: $0.07 per active CPU core-hour, $0.015 per GB-hour of RAM, $0.0002 per GB-hour of root disk on credits; $0.042, $0.009 and $0.0001 on Pro. Egress is free.",
+    "meter": "Per second: $0.07 per active CPU core-hour, with a minimum of 20% of the allocated vCPU, $0.015 per GB-hour of RAM, $0.0002 per GB-hour of root disk on credits; $0.042, $0.009 and $0.0001 on Pro. Egress is free. A reserved NVIDIA H100 is $3.95 per GPU-hour on its own invoice.",
     "stopped": "A suspended sandbox bills no CPU, RAM or disk; its preserved state bills as snapshot storage at $0.07 per GB-month.",
     "planFee": "$250 a billing cycle on Pro, which includes 25,000 CU ($250 of usage). Usage Credits have no fee: you buy packs and spend them down.",
     "minimum": "Nothing on Free, which needs no card. Usage Credits start at a $5 pack; Pro is $250 a month."
@@ -54,8 +54,8 @@
       "lines": [
         {
           "label": "CPU, while working",
-          "arithmetic": "730 h × 0.4 vCPU busy (4 × 10%) × $0.042",
-          "amount": "$12.26"
+          "arithmetic": "730 h × 0.8 vCPU (20% minimum of 4; 10% busy is below it) × $0.042",
+          "amount": "$24.53"
         },
         {
           "label": "Memory",
@@ -70,18 +70,18 @@
       ],
       "total": "$250.00",
       "notes": [
-        "$68.47 of Pro-rate usage sits inside the 25,000 CU the $250 fee includes, so the bill is the fee.",
-        "The same shape on Usage Credits would be $115.34 of packs, but a 24-hour session cap rules that plan out for an always-on machine."
+        "$80.74 of Pro-rate usage sits inside the 25,000 CU the $250 fee includes, so the bill is the fee.",
+        "The same shape on Usage Credits would be $135.78 of packs, but a 24-hour session cap rules that plan out for an always-on machine."
       ]
     },
     "C": {
-      "headline": "$8.26 of credits",
+      "headline": "$9.52 of credits",
       "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running hours, suspended otherwise with files kept",
       "lines": [
         {
           "label": "CPU, while working",
-          "arithmetic": "90 h × 0.2 vCPU busy (2 × 10%) × $0.07",
-          "amount": "$1.26"
+          "arithmetic": "90 h × 0.4 vCPU (20% minimum of 2; 10% busy is below it) × $0.07",
+          "amount": "$2.52"
         },
         {
           "label": "Memory",
@@ -99,10 +99,11 @@
           "amount": "$1.24"
         }
       ],
-      "total": "$8.26",
+      "total": "$9.52",
       "notes": [
         "A named sandbox suspends instead of terminating, so the 640 idle hours cost storage, not compute.",
-        "On Pro the same month is $250; the fee only pays off above roughly $250 of usage."
+        "On Pro the same month is $250; the fee only pays off above roughly $250 of usage.",
+        "CPU bills at least 20% of the allocated vCPU, so a mostly idle sandbox pays for a fifth of its cores; the billing docs do not yet say so."
       ]
     }
   },
@@ -320,7 +321,7 @@
     },
     {
       "issue": "EU data residency without a region selector",
-      "detail": "The introduction claims EU data residency, but no sandbox API parameter, console control or region list is published, and the BYOC example defaults to us-east-1. Which plan gets EU placement is unclear.",
+      "detail": "The introduction claims EU data residency, but the page that explained the EU endpoint has been removed from the docs and sitemap. The EU endpoint still answers, no sandbox API parameter or console control chooses a region, and the BYOC example defaults to us-east-1. Which plan gets EU placement is unclear.",
       "status": "open"
     },
     {
@@ -354,6 +355,35 @@
       "issue": "HIPAA is claimed but not badged",
       "detail": "Pricing says HIPAA with a BAA on Pro and above, and the docs call the platform HIPAA compliant; the Trust Center lists a SOC 2 badge and no HIPAA badge, and the Terms forbid storing protected health information without a written agreement.",
       "status": "open"
+    },
+    {
+      "issue": "The pricing page and the billing docs disagree on the CPU minimum",
+      "detail": "The pricing page and its calculator bill at least 20% of allocated vCPU; the billing docs still say CPU tracks active execution only. This guide follows the pricing page, which costs more for an idle sandbox.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://www.tensorlake.ai/pricing",
+          "quote": "CPU is billed on active execution, with a minimum of 20% of allocated vCPU.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://docs.tensorlake.ai/platform/billing",
+          "quote": "CPU tracks active runtime execution, not allocated vCPU time is used.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "A security incident on 7 November 2026",
+      "detail": "An attacker used a leaked internal credential to read secrets in Tensorlake's cloud account and customer email addresses. Tensorlake says sandboxes, snapshots and other artifacts were not accessed, and advises rotating API keys.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://trust.tensorlake.ai/updates",
+          "quote": "Based on what we know, customer email information was accessed.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [

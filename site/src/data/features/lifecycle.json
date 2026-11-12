@@ -7,7 +7,7 @@
   "standfirst": "Providers use seven words for four behaviours. The only question that matters is what is still running when the machine comes back.",
   "idea": [
     "Every provider offers a way to make a machine cheaper while you are not using it. They fall into four behaviours. Disk only: the machine is destroyed and its disk is kept, so files survive and processes do not. Disk and memory: RAM is saved, so the agent's process tree can resume mid-task. Warm memory: the machine is frozen in the host's RAM, which resumes fastest and usually keeps billing for memory. Delete: the disk goes too.",
-    "The vocabulary is not standardised. InstaBox calls a memory-preserving freeze “pause” and a power-off “stop”. Agent 37 has both, as sleep and stop. boxd has three parked states plus destroy. Lizard's stop deletes the disk. Boat's API calls a stopped sandbox archived, and its homepage still says “pause billing” even though the docs state there is no pause.",
+    "The vocabulary is not standardised. InstaBox calls a memory-preserving freeze “pause” and a power-off “stop”. Agent 37 has both, as sleep and stop. boxd has three parked states plus destroy. Lizard's stop deletes the disk. Boat's API calls a stopped sandbox archived, its homepage still says “pause billing”, and the docs say there is no pause, but a stop keeps the machine for ten minutes, so a quick resume usually keeps memory.",
     "Memory-preserving resume is usually best-effort. Sandboxer restores memory only if a matching machine is free within two minutes; InstaBox reports processesPreserved false when it cold-boots instead; Agent 37 says memory usually survives a wake but not always. Anything that must outlive a pause belongs in a file."
   ],
   "splits": [
@@ -94,13 +94,13 @@
     },
     {
       "provider": "boat",
-      "verdict": "no",
-      "figure": "No pause; disk only",
-      "scenario": "Stop saves the disk and destroys the machine, so tomorrow is a reboot with a new IP and no running process.",
-      "note": "There is no pause. Stop saves the disk, removes the machine and loses memory and hand-started processes; resume boots a new machine from the disk with a new IP.",
+      "verdict": "partly",
+      "figure": "10 min, best effort",
+      "scenario": "Stop saves the disk; overnight, the 10-minute grace is long gone, so tomorrow is a reboot with a new IP and no running process.",
+      "note": "There is no pause, but a stop keeps the machine for 10 minutes unbilled, so a quick resume usually keeps memory, running programs, open terminals and the IP. Boat can release it sooner, and after 10 minutes the disk is all that survives.",
       "source": {
-        "url": "https://docs.boat.dev/snapshots/stop",
-        "quote": "There is no pause. A stop removes the virtual machine and keeps a copy of the disk.",
+        "url": "https://docs.boat.dev/snapshots/stop.md",
+        "quote": "A stop keeps the disk. A resume within 10 minutes usually gets the same machine back, with memory and running programs. Do not count on it.",
         "confidence": "docs-confirmed"
       }
     },
@@ -131,12 +131,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "VM pause: RAM; container stop",
-      "scenario": "The container stops: files kept, REPL gone. The VM class would pause with memory intact, and either way the disk keeps billing.",
-      "note": "Pause exists only on Linux VM and Windows sandboxes; a container stop keeps the filesystem and loses memory. Stopped and paused sandboxes bill reserved disk only, and archive is container-only.",
+      "figure": "No Linux stop; 24/48 h",
+      "scenario": "Stopping the box to save money is not an option on Linux: there is no stop or pause, and at 24 hours (Starter) the sandbox is deleted, memory and all.",
+      "note": "Linux only runs or is deleted. Windows keeps its disk across stop and start. A persistent macOS sandbox stops, starts, pauses with memory and forks. Every sandbox is deleted when its wall-clock timeout fires; the organisation maximum is 86,400 s (24 h) on Starter and 48 h on Team, and a timeout once set cannot be cleared. This is the single biggest buyer-facing change from 1.x, where containers stopped and archived and VMs paused.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/sandboxes.md",
-        "quote": "The filesystem and memory state are preserved, and CPU is no longer consumed.",
+        "url": "https://www.daytona.com/docs/sandboxes.md",
+        "quote": "| **Stop and start**         | ✗               | ✓ persistent     | ✓ persistent     | ✗            |",
         "confidence": "docs-confirmed"
       }
     },
@@ -157,10 +157,10 @@
       "verdict": "partly",
       "figure": "RAM; 1 s resume",
       "scenario": "Pause keeps memory and running programs and resumes in about a second; stop loses them, and a paused machine cannot be stopped at all.",
-      "note": "Pause keeps memory and running programs and resumes in about a second; stop loses them, and a paused machine cannot be stopped at all. A resume can cold-boot and report processesPreserved false.",
+      "note": "Pause keeps memory and running programs and resumes in about a second; stop keeps files but loses programs, and a paused machine cannot be stopped at all. A resume can cold-boot and report processesPreserved false. Restore puts a machine back to a snapshot in place.",
       "source": {
-        "url": "https://instabox.sh/docs/integrate",
-        "quote": "carries on where it left off, usually in about a second",
+        "url": "https://instabox.sh/docs/machines/lifecycle.md",
+        "quote": "A paused machine cannot be stopped.",
         "confidence": "docs-confirmed"
       }
     },
@@ -217,7 +217,7 @@
       "verdict": "partly",
       "figure": "RAM to disk; 2 min window",
       "scenario": "Stop writes memory and device state to disk; the resume restores processes only on a matching CPU within two minutes.",
-      "note": "A stop writes memory and device state to disk, so a resume can restore running processes — but only on a machine of the same CPU type within two minutes, otherwise it cold-boots.",
+      "note": "A stop writes memory and device state to disk, so a resume can restore running processes — but only on a machine of the same CPU type within two minutes, otherwise it cold-boots. A stopped sandbox's data is deleted 14 days after its last stop unless saved as a named snapshot.",
       "source": {
         "url": "https://sandboxer.com/docs/snapshots",
         "quote": "If a machine with that CPU type is online but busy, the resume waits up to 2 minutes for it",
@@ -435,7 +435,7 @@
         "what": "You check the dev server, the cron job and the IP address the agent had written down."
       }
     ],
-    "turn": "Twelve of the sixteen sandbox providers can restore memory in at least one mode, but not all make it the default. Boat and Cloudflare keep nothing, Lizard's stop deletes the disk, and a VPS keeps its disk but loses memory when it powers off."
+    "turn": "Twelve of the sixteen sandbox providers can restore memory in at least one mode, but not all make it the default. Cloudflare keeps nothing, and Boat keeps memory only for a ten-minute, best-effort window, Lizard's stop deletes the disk, and a VPS keeps its disk but loses memory when it powers off."
   },
   "questions": [
     "Does your pause keep RAM, keep only files, or destroy the machine — and what does your documentation call each state?",

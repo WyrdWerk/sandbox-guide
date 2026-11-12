@@ -4,7 +4,7 @@
   "url": "https://www.akamai.com/cloud/pricing/cpu",
   "status": "researched",
   "kind": "vps",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Ordinary Linux VMs still called Linodes, from $5 a month, billed hourly up to a monthly cap, with a powered-off server still billed in full and one-click Hermes and OpenClaw apps.",
   "whatItIs": [
     "Akamai Cloud sells Linux virtual machines it still calls Linodes: pick a region, a distribution or one-click app, and a fixed size, and the machine is yours to administer over SSH. It is the former Linode cloud, and the plan names, the API host (api.linode.com), the CLI and the console (cloud.linode.com) all still carry the Linode name.",

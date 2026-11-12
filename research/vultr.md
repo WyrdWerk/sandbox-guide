@@ -528,3 +528,8 @@ Window 6 August to 4 November 2026, provider's own status page only (see `resear
 
 - Site fact: The status page shows only current outages, alerts and upcoming maintenance, with no incident history, so past incidents cannot be looked up there.
 - Source: https://status.vultr.com/ — "This endpoint includes all current outages, alerts, and upcoming scheduled maintenance." (inferred)
+
+## Recheck, 12 November 2026
+
+Rechecked with the rest of VPS group 3: [vps-group3-recheck-2026-11-12.md](vps-group3-recheck-2026-11-12.md). No price or shape changed. The earlier ledger is kept as written.
+- No verdict changes. Chennai announced as the 34th region on 21 Oct while the locations page and regions API still list 33; the site keeps its region figure. VX1 bills actual hours, uncapped; Audit Logs $0.50/GB ingest + $0.01/GB-month retention.

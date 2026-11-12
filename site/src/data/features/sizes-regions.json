@@ -21,14 +21,14 @@
     {
       "heading": "Disk is part of the shape, or it is not",
       "body": [
-        "Boat attaches 51 GB to its smallest three sizes and 111 or 251 GB to the larger ones. boxd gives every machine 100 GB and does not let you choose. Vercel gives 64 GB of ephemeral NVMe. E2B includes 10 GiB on Hobby and 20 GiB on Pro, and asks you to contact support beyond that.",
+        "Boat attaches 51 GB to small and default, 111 GB to large and 251 GB to xlarge. boxd gives every machine 100 GB and does not let you choose. Vercel gives 64 GB of ephemeral NVMe. E2B includes 10 GiB on Hobby and 20 GiB on Pro, and asks you to contact support beyond that.",
         "Where disk is a separate meter, the capacity you see is not the storage you pay for: Vercel's drives bill on logical used size, and boxd's disk bills on bytes written."
       ]
     },
     {
       "heading": "Regions and hardware",
       "body": [
-        "Vercel is the outlier with 19 regions. E2B and Blaxel list four, Sandboxer and Lizard two, Agent 37 three, and Runtime one. Boat and boxd are EU-only; InstaBox publishes no region selector and its terms say the United States. Sprites does not let you choose a region: placement is automatic near you, according to a community answer.",
+        "Vercel is the outlier with 19 regions. E2B lists five and Blaxel four, Sandboxer and Lizard two, Agent 37 three, and Runtime one. Boat and boxd are EU-only; InstaBox publishes no region selector and its terms say the United States. Sprites does not let you choose a region: placement is automatic near you, according to a community answer.",
         "No provider in this set publishes a GPU for sandboxes. Several say so explicitly: E2B, Boat, Lizard and Sprites. ARM is not offered either, and only Runtime, Sandboxer, Morph and Vercel document nested virtualisation or /dev/kvm. Morph publishes no region or GPU statement at all."
       ]
     }
@@ -45,8 +45,8 @@
       "provider": "agent37",
       "verdict": "partly",
       "figure": "4 vCPU; three regions",
-      "scenario": "Four shapes cap at 4 vCPU; the EU and India regions need the 2.5× vm type.",
-      "note": "Four shapes with a 4 vCPU ceiling on the default type, 2–80 GB of disk by shape, and three regions. EU and India require the 2.5× vm type.",
+      "scenario": "Four shapes, 4 vCPU on every type; the EU and India regions need the 2.5× vm type.",
+      "note": "Four shapes with a 4 vCPU ceiling on every type; 2–80 GB of disk on the default shapes and 2–100 GB on VM and Performance. Three regions; EU and India require the 2.5× vm type.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/instance-sizing",
         "quote": "4 vCPU is the ceiling on every instance type.",
@@ -80,9 +80,9 @@
     {
       "provider": "boxd",
       "verdict": "partly",
-      "figure": "8 vCPU / 32 GiB; one EU region",
-      "scenario": "The ceiling is 8 vCPU / 32 GiB, on German bare metal; a US region is announced but not open.",
-      "note": "Four sizes from 1 vCPU / 4 GiB to 8 / 32, all with a fixed 100 GB disk. One EU region, no GPU, no ARM.",
+      "figure": "8 vCPU / 32 GiB; EU + US",
+      "scenario": "The ceiling is 8 vCPU / 32 GiB, in Frankfurt or New York; bigger machines need the Scale contract.",
+      "note": "Four sizes from 1 vCPU / 4 GiB to 8 / 32, all with a fixed 100 GB disk. Two regions, Frankfurt and New York, picked per machine; no GPU, no ARM.",
       "source": {
         "url": "https://docs.boxd.sh/guides/resources",
         "quote": "This is the largest size a single machine may have, 8 vCPU / 32 GiB unless the boxd team raised it for your org.",
@@ -94,22 +94,22 @@
       "verdict": "partly",
       "figure": "4 vCPU / 12 GiB / 20 GB",
       "scenario": "16 GB of memory does not fit: the ceiling is 12 GiB, disk stops at 20 GB, and the sandbox cannot be pinned to the EU.",
-      "note": "Six presets from `lite` to `standard-4`; custom sizes are capped at 4 vCPU / 12 GiB / 20 GB with at least 3 GiB of memory per vCPU. No GPU, `linux/amd64` only, and placement is chosen by Cloudflare near the request.",
+      "note": "Five startable presets from `lite` to `standard-4` (`basic` is listed but the runtime rejects it). Custom sizes run from 1/16 vCPU, 256 MiB and 2 GB up to a default ceiling of 4 vCPU / 12 GiB / 20 GB; a September changelog still says each vCPU needs 3 GiB, which the limits page no longer states. No GPU, `linux/amd64` only, and placement is chosen by Cloudflare near the request.",
       "source": {
         "url": "https://developers.cloudflare.com/containers/platform/limits/",
-        "quote": "Maximum vCPU | 4",
+        "quote": "| Memory per instance | 12 GiB |",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "4 vCPU / 8 GiB / 10 GiB",
-      "scenario": "16 GB of memory does not fit: the ceiling is 4 vCPU / 8 GiB, disk stops at 10 GiB, and `us` or `eu` are the only regions.",
-      "note": "Default 1 vCPU / 1 GB / 3 GiB; the organisation ceiling is 4 vCPU / 8 GB / 10 GiB, with `daytona-large` at 4/8/10. Windows presets reach 4/16/50 and GPU sandboxes attach up to 8 GPUs. Two shared regions, `us` and `eu`.",
+      "figure": "16 cores / 32 GiB (docs)",
+      "scenario": "A 16 GB agent fits on Team (8 cores / 32 GiB) but not on Starter (4 cores / 16 GiB), and the pricing page's 64 cores / 128 GiB describes a machine neither plan's own limits page allows.",
+      "note": "Sizes are custom, not presets: 0.125–16 cores, 0.5–32 GiB memory and 10–256 GiB disk, with CPU raised to at least 1 core per 8 GiB of memory. The limits page caps Starter at 4 cores / 16 GiB and Team at 8 / 32; the pricing page's plan table says 64 cores / 128 GiB for both and 512 GiB–3 TiB disk. Regions are priced by multiplier: `earth` 1.0×, `us` 1.15×, `us-east` 1.75×, Ashburn and Boston 2.0×; macOS has its own `macos-1`. No EU region is documented.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/sandboxes.md",
-        "quote": "Organizations get a maximum sandbox resource limit of **4 vCPUs**, **8GB RAM**, and **10GB disk**.",
+        "url": "https://www.daytona.com/docs/sandboxes.md",
+        "quote": "A Linux sandbox may guarantee at most 16 cores, 32GiB memory, and 256GiB disk.",
         "confidence": "docs-confirmed"
       }
     },
@@ -117,23 +117,23 @@
       "provider": "e2b",
       "verdict": "partly",
       "figure": "8 vCPU / 8 GiB; no GPU",
-      "scenario": "Memory tops out at 8 GiB, so a 16 GB workload does not fit at any price.",
-      "note": "Up to 8 vCPU and 8 GiB, with 10 GiB of disk on Hobby and 20 GiB on Pro. Four regions, no GPU on any plan.",
+      "scenario": "Memory tops out at 8 GiB without a support conversation, so a 16 GB workload is not self-serve.",
+      "note": "Up to 8 vCPU and 8 GiB self-serve, more by support request, with 10 GiB of disk on Hobby and 20 GiB on Pro. Five regions (US, US West and US East on AWS, EU, APAC), no GPU on any plan.",
       "source": {
         "url": "https://docs.e2b.dev/billing.md",
-        "quote": "| **Max memory** | 8 GiB | 8+ GiB |",
+        "quote": "| **Max memory** | 8 GiB | 8+ GiB (Contact [support@e2b.dev](mailto:support@e2b.dev) if you need more memory.) | Custom |",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "instabox",
       "verdict": "partly",
-      "figure": "32 vCPU / 64 GiB; US only",
-      "scenario": "Fixed pairs by plan, up to 32 vCPU / 64 GiB on Team, with one 20 GiB disk that grows live.",
-      "note": "Fixed vCPU/RAM pairs by plan, from 2/4 to 32/64, one 20 GiB disk that grows live. No published region selector; the terms say the United States.",
+      "figure": "32 vCPU / 64 GiB, L4 GPU; US only",
+      "scenario": "Fixed pairs by plan, up to 32 vCPU / 64 GiB on Team, NVIDIA L4 GPUs on paid plans, and one disk that grows live.",
+      "note": "Fixed vCPU/RAM pairs by plan, from 2/4 to 32/64, and GPU machines with 1–4 NVIDIA L4s at $0.80 per GPU-hour on paid plans. One disk that grows live to 1,024 GiB. No region choice: a region field is refused, and the terms say the United States.",
       "source": {
-        "url": "https://instabox.sh/docs/limits",
-        "quote": "Team: 2/4 up to 32 vCPUs / 64 GiB",
+        "url": "https://instabox.sh/docs/machines/storage.md",
+        "quote": "You cannot choose a region.",
         "confidence": "docs-confirmed"
       }
     },
@@ -141,11 +141,11 @@
       "provider": "lizard",
       "verdict": "partly",
       "figure": "8 vCPU / 16 GB; two regions",
-      "scenario": "Large is 8 vCPU / 16 GB / 50 GB, and there is no 2-core 16 GB shape in between.",
-      "note": "Three fixed sizes: Small 2/4/5 GB, Medium 4/8/20 GB, Large 8/16/50 GB. Two regions, no GPU, no live resize.",
+      "scenario": "Four fixed sizes up to 8 vCPU / 16 GB / 80 GB, in US East or EU West; no GPU.",
+      "note": "Four fixed sizes: Mini 1/2/5 GB, Small 2/4/20 GB, Medium 4/8/40 GB, Large 8/16/80 GB; Mini starts only from four templates and takes no volume. Pro runs 40 vCPU at once, Pro 5x 220 and Pro 20x 1,200. Two regions, no GPU, no live resize. The pricing page also lists a 0.5 vCPU Nano the docs do not.",
       "source": {
-        "url": "https://lizard.build/docs/sandboxes",
-        "quote": "Large | 8 | 16 GB | 50 GB | $0.0648/hour",
+        "url": "https://lizard.build/docs/platform/limits.md",
+        "quote": "Sandbox sizes run from Mini (1 vCPU / 2 GB) to Large (8 vCPU / 16 GB)",
         "confidence": "docs-confirmed"
       }
     },
@@ -178,7 +178,7 @@
       "verdict": "partly",
       "figure": "64 GiB; 1 region",
       "scenario": "Any combination inside 16 vCPU and 64 GiB, so 2 vCPU / 16 GB is exact, in one Virginia region.",
-      "note": "Any vCPU, memory and disk combination inside 16 vCPU, 64 GiB and 400 GiB. One region in Virginia; shared CPU by default, reserved on request.",
+      "note": "Any vCPU, memory and disk combination inside 16 vCPU, 64 GiB and 400 GiB on a paid account, or 2 vCPU, 4 GiB and 10 GiB without credit. One region in Virginia; shared CPU by default, reserved on request.",
       "source": {
         "url": "https://withruntime.com/docs/api",
         "quote": "At least 128; at most 65,536 (64 GiB) on a paid sandbox, 4,096 without credit",
@@ -201,8 +201,8 @@
       "provider": "sprites",
       "verdict": "partly",
       "figure": "8 vCPU; no choice",
-      "scenario": "One shape, 8 vCPU and a 100 GB storage ceiling, with memory assigned automatically and no region choice.",
-      "note": "One shape: 8 vCPUs and 100 GB of storage, with memory assigned and autoscaled. GPU is explicitly not offered; region selection is unavailable and placement is automatic; CPU architecture is not published.",
+      "scenario": "One shape, 8 vCPU and a 100 GB storage ceiling, with 2–16 GB of memory assigned automatically and no region choice.",
+      "note": "One shape: 8 vCPUs and 100 GB of storage, with memory starting at 2 GB and autoscaling to 16 GB. GPU is explicitly not offered; region selection is unavailable and placement is automatic; CPU architecture is not published.",
       "source": {
         "url": "https://docs.fly.io/sprites/concepts/lifecycle.md",
         "quote": "8 vCPUs",
@@ -216,7 +216,7 @@
       "scenario": "Even vCPU counts up to 32, 2 GB of memory per vCPU, so 16 GB means 8 vCPU, in any of 19 regions.",
       "note": "1 or even numbers of vCPUs from 2 to 32 by plan, 2 GB of memory per vCPU, 64 GB of ephemeral NVMe, and 19 regions. No GPU published.",
       "source": {
-        "url": "https://vercel.com/docs/sandbox/concepts",
+        "url": "https://vercel.com/docs/sandbox/pricing",
         "quote": "Vercel Sandbox is available in 19 regions. The default region is `iad1`.",
         "confidence": "docs-confirmed"
       }
@@ -226,7 +226,7 @@
       "verdict": "partly",
       "figure": "16 vCPU / 64 GiB; no region picker",
       "scenario": "Pro reaches 16 vCPU / 64 GiB with a 100 GB root disk, but RAM must stay between 1 and 8 GB per vCPU and no region can be chosen.",
-      "note": "Ceilings by plan: Free 1 vCPU / 1 GB / 10 GB, Usage Credits 4 / 16 / 100, Pro 16 / 64 / 100, Enterprise custom. Memory is 1–8 GB per vCPU and disk is 10–100 GB, growth-only. No region selector is published: the docs claim EU data residency, and BYOC puts sandboxes in your own AWS region.",
+      "note": "Ceilings by plan: Free 1 vCPU / 1 GB / 10 GB, Usage Credits 4 / 16 / 100, Pro 16 / 64 / 100, Enterprise custom. Memory is 1–8 GB per vCPU and disk is 10–100 GB, growth-only. No region selector is published: the docs still claim EU data residency, but the page explaining the EU endpoint was removed, and BYOC puts sandboxes in your own AWS region.",
       "source": {
         "url": "https://www.tensorlake.ai/pricing",
         "quote": "Up to 16 vCPU · 64 GB RAM · 100 GB disk · snapshot + resume",
@@ -334,7 +334,7 @@
       "verdict": "partly",
       "figure": "18 vCPU / 96 GB; 9 regions",
       "scenario": "There is no 2 vCPU / 16 GB Core VPS plan: the smallest Core VPS shape with 16 GB is 8 vCPU / 24 GB at $16.80, in the EU or one of eight other regions.",
-      "note": "Six fixed Core VPS shapes from 4 vCPU / 8 GB to 18 vCPU / 96 GB, with CPU and RAM in a fixed ratio. Performance VPS and Storage VPS change the ratio, Cloud VDS goes to 24 dedicated vCores, but there is no custom sizing. Nine regions: EU (Germany), UK, three US, Singapore, Japan, India and Australia.",
+      "note": "Six fixed Core VPS shapes from 4 vCPU / 8 GB to 18 vCPU / 96 GB, with CPU and RAM in a fixed ratio. Performance VPS and Storage VPS change the ratio, Max Performance VPS (formerly Cloud VDS) goes to 24 dedicated vCores, a single RTX PRO 6000 GPU machine is orderable in EU and US Central, but there is no custom sizing. Nine regions: EU (Germany), UK, three US, Singapore, Japan, India and Australia.",
       "source": {
         "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
         "quote": "|Cloud VPS 8 |8 vCPUs |24 GB |300 GB SSD |600 |3 |Unlimited\\* |",
@@ -380,9 +380,9 @@
     {
       "provider": "hosthatch",
       "verdict": "partly",
-      "figure": "16 cores / 96 GB; 16 sites claimed",
+      "figure": "16 cores / 96 GB; 13 sites",
       "scenario": "You pick one of ten fixed plans in one of the advertised locations; CPU and memory only change by moving to another plan.",
-      "note": "Ten compute plans from 1 core / 2 GB / 10 GB to 16 cores / 96 GB / 250 GB, plus storage VMs to 10 TB. CPU and memory are fixed bundles, so there is no 3-core / 6 GB machine; an upgrade moves the server to another plan and a reboot applies it. The location count is inconsistent: the product page says 16, the documentation matrix lists 14 cities, and the status page monitors 13. Madrid, Milan and Warsaw appear in the site's product data but not in the docs; Seoul appears in the docs but not in the product data.",
+      "note": "Ten compute plans from 1 core / 2 GB / 10 GB to 16 cores / 96 GB / 250 GB, plus storage VMs to 10 TB. CPU and memory are fixed bundles, so there is no 3-core / 6 GB machine; an upgrade moves the server to another plan and a reboot applies it. The features page lists 13 locations, while the product page still says 16; Madrid, Milan and Warsaw are no longer listed, and Seoul appears only in promotions and docs.",
       "source": {
         "url": "https://hosthatch.com/products",
         "quote": "Deploy in 16 edge locations",

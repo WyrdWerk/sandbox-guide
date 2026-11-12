@@ -14,21 +14,21 @@
     {
       "heading": "Installed and promptable",
       "body": [
-        "Boat installs seven harnesses and exposes a prompt endpoint with steering, interrupts and multiple conversations. Sandboxer installs six and has a prompt API with an event stream. Agent 37 has six agent templates plus a separate managed-hosting product where the agent is the product.",
+        "Boat installs ten agent CLIs, prompts seven of them through one endpoint with steering, interrupts and multiple conversations. Sandboxer installs six and has a prompt API with an event stream. Agent 37 has six agent templates plus a separate managed-hosting product where the agent is the product.",
         "Lizard installs five and prompts them from the CLI only; the SDK has no prompt method. boxd installs three and relies on the in-VM CLI."
       ]
     },
     {
       "heading": "Installed, not managed",
       "body": [
-        "InstaBox and Vercel put coding agents in their default images but publish no agent-run API: you open a terminal and use them. E2B documents how to run Claude Code, Codex and Amp, but does not claim to preinstall them.",
+        "InstaBox, Vercel and Sprites put coding agents in their default images but publish no agent-run API: you open a terminal and use them. E2B ships ready-made claude, codex and amp templates, but none of them is the default image.",
         "That is enough for a technical user and not enough for a product that wants to start an agent on demand."
       ]
     },
     {
       "heading": "Bring your own",
       "body": [
-        "Runtime does not preinstall agents, and its own docs say no bridge harness has run on it yet. Sprites offers plugins and SDK integrations rather than a hosted agent. Morph exposes a tmux API so an agent can be driven programmatically, but the agent is yours.",
+        "Runtime does not preinstall an agent in its default image, but its private-beta Agents product runs Claude Code, Codex or Gemini CLI in a sandbox of its own per session. Morph exposes a tmux API so an agent can be driven programmatically, but the agent is yours.",
         "At these providers the sandbox is the product and the agent is an application you install."
       ]
     }
@@ -44,9 +44,9 @@
     {
       "provider": "agent37",
       "verdict": "yes",
-      "figure": "Six templates; hosted",
+      "figure": "7 agents; hosted",
       "scenario": "Six agent templates plus a separate managed-hosting product where the agent is the product; the templates are prompted through the API.",
-      "note": "Six agent templates (Hermes, OpenClaw, Claude Code, Codex, Grok, OpenCode) plus Pi and n8n, and a separate managed-hosting product where the agent is the product. Claude Code and Codex use your own account.",
+      "note": "Seven agent templates (Hermes, OpenClaw, Claude Code, Codex, Grok, OpenCode, Pi) plus n8n, and a separate managed-hosting product where the agent is the product. Claude Code and Codex use your own account; Grok uses your xAI key.",
       "source": {
         "url": "https://www.agent37.com/personal",
         "quote": "Run OpenClaw, Hermes, Claude Code, Codex, OpenCode, or Grok around the clock. Yours is live in one click.",
@@ -57,8 +57,8 @@
       "provider": "blaxel",
       "verdict": "partly",
       "figure": "MCP server; runtime soon",
-      "scenario": "Every sandbox exposes an MCP server agents use to operate it, but Agent Runtime is labelled coming soon.",
-      "note": "Every sandbox exposes an MCP server that agents use to operate it, and agent hosting is a separate product line, but Agent Runtime is labelled coming soon.",
+      "scenario": "Claude Code and Codex images, and every sandbox exposes an MCP server, but Agent Runtime is labelled coming soon.",
+      "note": "First-party claude-code and codex images ship the CLIs, every sandbox exposes an MCP server agents use to operate it, and agent hosting is a separate product line. Agent Runtime is still a waitlist, labelled coming soon.",
       "source": {
         "url": "https://docs.blaxel.ai/llms.txt",
         "quote": "Every Blaxel sandbox exposes a built-in MCP server so agents can operate the sandbox using tool calls for files, processes, ports, and previews.",
@@ -92,48 +92,48 @@
     {
       "provider": "cloudflare-sandbox",
       "verdict": "partly",
-      "figure": "None; guides",
-      "scenario": "No agent in the 1.0 base image; you install Claude Code in your Dockerfile, following a guide that also keeps the model credential in the Worker.",
-      "note": "No preinstalled agents in the 1.0 images. Guides cover Claude Code, Codex, OpenCode and Pi, plus templates where the vendor's loop runs in its own service. The Agents SDK exposes a sandbox tool.",
+      "figure": "None in image; harness",
+      "scenario": "No agent in the base image, but the experimental Agents SDK harness installs Claude Code or Codex on first use and keeps sessions in the Durable Object.",
+      "note": "No agent in the 1.0 base images. Guides cover Claude Code, Codex, OpenCode and Pi, and an experimental Agents SDK container harness runs Claude Code or Codex with no Dockerfile, installing the CLI on first use and snapshotting it after five idle minutes. No hosted prompt API.",
       "source": {
-        "url": "https://developers.cloudflare.com/sandbox/coding-agents/claude-code/",
-        "quote": "Run Claude Code in a Linux sandbox to edit a GitHub repository from a prompt, then read its changes as a diff.",
+        "url": "https://developers.cloudflare.com/agents/harnesses/container/",
+        "quote": "No Dockerfile is needed.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "None; guides",
-      "scenario": "No agent is preinstalled; you follow a first-party guide to install Claude Code or Codex, or drive the desktop through the computer-use API.",
-      "note": "No hosted agent or preinstalled harness. First-party guides cover Claude Code, Codex, Cursor, Devin, Gemini CLI, OpenCode, Amp and Kiro; computer use is a first-class API.",
+      "figure": "Claude Code, OpenClaw claimed",
+      "scenario": "The default image is said to include Claude Code and OpenClaw, so the first step is a prompt; but the 2.0 images page never lists what is inside, and every other agent guide starts with an install.",
+      "note": "No hosted agent and no prompt endpoint: you install and drive the agent, and you pay the model provider. First-party guides cover Claude Code, Codex, Gemini CLI, Cursor, Devin, OpenCode, Amp, Kiro, Kimi, Letta Code, Pi, Flue and Brainbase, plus Claude Managed Agents and the OpenAI Agents API as self-hosted backends. Two CLI guides say Claude Code and OpenClaw ship in the default snapshot, but they still use 1.x `--snapshot` flags and the 2.0 images page publishes no contents list; every other guide installs the agent itself. No managed model credentials.",
       "source": {
-        "url": "https://trust.daytona.io/",
-        "quote": "Daytona does not ship AI-assisted features inside the product",
+        "url": "https://www.daytona.com/docs/guides/claude/claude-code-run-cli-sandbox.md",
+        "quote": "The default Daytona snapshot includes Claude Code, so the command above is all you need.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "e2b",
       "verdict": "partly",
-      "figure": "None preinstalled; guides",
-      "scenario": "Guides show Claude Code, Codex and Amp running, but preinstallation is not claimed and there is no agent-run API.",
-      "note": "Guides show Claude Code, Codex and Amp running in a sandbox, but preinstallation is not claimed and there is no hosted agent-run API.",
+      "figure": "10 templates; no API",
+      "scenario": "Start a sandbox from the claude, codex, amp or openclaw template and the agent is installed; there is still no agent-run API and the keys are yours.",
+      "note": "Ten ready-made templates install an agent, including Claude Code, Codex, Amp, OpenCode, Hermes and OpenClaw. The default image has none, there is no hosted prompt or agent-run API, and you supply the model keys.",
       "source": {
-        "url": "https://docs.e2b.dev/use-cases/coding-agents",
-        "quote": "Run AI coding agents like Claude Code, Codex, and Amp in secure E2B sandboxes",
+        "url": "https://docs.e2b.dev/use-cases/coding-agents.md",
+        "quote": "Pre-built templates mean you can go from zero to a running agent in a single API call.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "instabox",
       "verdict": "yes",
-      "figure": "Claude Code + Codex",
-      "scenario": "Claude Code and Codex are in the default and agent templates, and logins persist because home is /data/home; no agent-run API.",
-      "note": "Claude Code and Codex are in the default and agent templates, and sign-ins persist because home is /data/home. There is no hosted agent-run API.",
+      "figure": "Claude Code, Codex, OpenCode",
+      "scenario": "Claude Code, Codex and OpenCode are preinstalled and logins persist because home is /data/home; prompting is a CLI command, not an API.",
+      "note": "Claude Code, Codex and OpenCode are on every template except ci, and sign-ins persist because home is /data/home. `instabox agent prompt` runs a turn from the CLI with steer and interrupt; there is no hosted agent-run API.",
       "source": {
-        "url": "https://instabox.sh/docs/limits",
-        "quote": "Claude Code, Codex",
+        "url": "https://instabox.sh/docs/use-cases/coding-agents.md",
+        "quote": "`agent prompt` runs Claude Code as a background job in the machine",
         "confidence": "docs-confirmed"
       }
     },
@@ -144,8 +144,8 @@
       "scenario": "Five agent templates, prompted from the CLI with streaming and interrupts; the SDK has no prompt method.",
       "note": "Five agent templates plus a base image and desktop variants. Agents are prompted from the CLI with streaming and interrupts; the SDK has no prompt method.",
       "source": {
-        "url": "https://lizard.build/docs/sandboxes",
-        "quote": "`base`, `interpreter`, `codex`, `claude`, `opencode`, `pi`, `prime`, `desktop`, `desktop-camoufox`",
+        "url": "https://lizard.build/docs/sandboxes.md",
+        "quote": "`base`, `interpreter`, `codex`, `claude`, `opencode`, `pi`, `prime`, `desktop`, or `desktop-camoufox`",
         "confidence": "docs-confirmed"
       }
     },
@@ -154,7 +154,7 @@
       "verdict": "no",
       "figure": "None; SDK",
       "scenario": "No agent in the image and no agent API; the agent is code you run in the sandbox.",
-      "note": "No hosted agent, desktop, browser or computer-use API. The documented use cases are RL rollouts and coding agents, both as SDK code you write.",
+      "note": "No hosted agent, desktop, browser or computer-use API. The documented use cases are RL rollouts and coding agents, both as SDK code you write. Browser and desktop are bring-your-own, through a documented computer-use VNC example.",
       "source": {
         "url": "https://modal.com/docs/guide/sandboxes",
         "quote": "Sandboxes are useful for tasks like executing code generated by an LLM or isolating user-generated code.",
@@ -175,13 +175,13 @@
     },
     {
       "provider": "runtime",
-      "verdict": "no",
-      "figure": "None preinstalled",
-      "scenario": "No coding agents in the default image, and the vendor says no bridge harness has run on Runtime yet.",
-      "note": "No preinstalled coding agents: the default image ships Python, Node, Bun, git, compilers and sudo, and agents are installed by you. The vendor says no bridge harness has run on Runtime yet.",
+      "verdict": "partly",
+      "figure": "Agents beta",
+      "scenario": "The default image has no coding agent, but Runtime's private-beta Agents product runs Claude Code, Codex or Gemini CLI in a sandbox per session.",
+      "note": "The default image ships Python, Node, Bun, git, compilers and sudo but no coding agent. A separate hosted Agents product runs Claude Code, Codex or Gemini CLI in a sandbox of its own per session, on your model key, with triggers, memory and budgets; it is a private beta that refuses other accounts.",
       "source": {
-        "url": "https://withruntime.com/docs/vercel-ai-sdk",
-        "quote": "No bridge harness (Claude Code, Codex) has run on Runtime yet.",
+        "url": "https://unpkg.com/withruntime@0.50.0/dist/products/agents.d.ts",
+        "quote": "Agents: a coding or support agent's harness (Claude Code, Codex, Gemini CLI, or your own code on an agents SDK) in a sandbox of its own per session, on your own model key.",
         "confidence": "docs-confirmed"
       }
     },
@@ -199,13 +199,13 @@
     },
     {
       "provider": "sprites",
-      "verdict": "no",
-      "figure": "None; plugins only",
-      "scenario": "Plugins and SDK integrations, but no preinstalled agent and no managed agent API.",
-      "note": "Plugins for coding agents and SDK integrations, but no preinstalled agent or provider-managed agent API is documented.",
+      "verdict": "partly",
+      "figure": "Agents in image; no API",
+      "scenario": "Claude, Codex, Gemini and Cursor CLIs are in the default image, but you drive them yourself; there is no prompt endpoint.",
+      "note": "The default image ships the Claude, Codex, Gemini and Cursor CLIs, and a Sprite can host Cursor, Claude or Gemini managed agents. Sprites runs no agent loop and has no prompt API.",
       "source": {
-        "url": "https://fly.io/sprites/",
-        "quote": "Official plugins for every serious coding agent, plus SDKs and native integrations.",
+        "url": "https://docs.fly.io/sprites/working-with-sprites.md",
+        "quote": "AI/CLI Tools: Claude CLI, Gemini CLI, OpenAI Codex, Cursor",
         "confidence": "docs-confirmed"
       }
     },
@@ -236,9 +236,9 @@
     {
       "provider": "digitalocean",
       "verdict": "partly",
-      "figure": "OpenClaw/Hermes 1-Click",
-      "scenario": "OpenClaw or Hermes from the Marketplace arrives installed and configured; the default Ubuntu image has no coding agent at all.",
-      "note": "Marketplace 1-Click images for OpenClaw (hardened, from $12/month), Hermes Agent and Docker Agent. A Droplet has no prompt API. Managed Agents runs Claude Code, Codex, OpenCode, Hermes and LangGraph as a separate, separately priced product.",
+      "figure": "OpenClaw/Hermes/OpenCode 1-Click",
+      "scenario": "OpenClaw, Hermes or OpenCode from the Marketplace arrives installed; the default Ubuntu image has no coding agent at all.",
+      "note": "Marketplace 1-Click images for OpenClaw (hardened, from $12/month), Hermes Agent, OpenCode and Codex Universal, plus an Omarchy desktop image. A Droplet has no prompt API. Managed Agents runs Claude Code, Codex, OpenCode, Hermes and LangGraph as a separate, separately priced product.",
       "source": {
         "url": "https://www.digitalocean.com/blog/moltbot-on-digitalocean",
         "quote": "1-Click deployment for OpenClaw on DigitalOcean Droplet® servers, now starting at just $12/month",

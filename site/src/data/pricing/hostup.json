@@ -1,6 +1,6 @@
 {
   "provider": "hostup",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "A whole monthly VPS plan per fixed size, paid one month or one year in advance; the plan bills whether the server runs or is stopped, and the only hourly meter is a pay-as-you-go product new accounts cannot buy.",
   "shapes": [
     {

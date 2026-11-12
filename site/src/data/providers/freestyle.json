@@ -3,7 +3,7 @@
   "name": "Freestyle",
   "url": "https://www.freestyle.sh",
   "status": "researched",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Full Linux VMs that pause with memory intact, fork while running and bill per second, with a $50 monthly minimum.",
   "whatItIs": [
     "Freestyle sells full Linux virtual machines for agent workloads. A VM boots from a base image in about 65 ms, accepts commands over an SDK, CLI or SSH, can pause with its memory and processes intact, can be snapshotted or forked, and can publish a port at a public HTTPS domain.",
@@ -141,7 +141,7 @@
     "facts": [
       {
         "label": "Legal entity",
-        "value": "Freestyle Cloud Inc. The privacy policy gives founders@freestyle.sh as the contact.",
+        "value": "Freestyle Cloud Inc. The privacy policy gives founders@freestyle.sh as the contact; the Terms give support@freestyle.sh.",
         "source": {
           "url": "https://www.freestyle.sh/privacy",
           "quote": "Freestyle Cloud Inc.",
@@ -177,7 +177,12 @@
       },
       {
         "label": "Terms of service",
-        "value": "Not published. freestyle.sh/terms, /legal/terms, /legal/tos and /terms-of-service all returned 404 on 4 November 2026, so the rules for suspension, deletion and refunds cannot be checked."
+        "value": "Published at dash.freestyle.sh/terms, effective 30 August 2026; the marketing site’s freestyle.sh/terms is still 404.",
+        "source": {
+          "url": "https://dash.freestyle.sh/terms",
+          "quote": "Effective August 30, 2026",
+          "confidence": "docs-confirmed"
+        }
       },
       {
         "label": "Certification",
@@ -202,8 +207,8 @@
     ]
   },
   "usability": {
-    "dashboard": "dash.freestyle.sh lists and creates VMs, shows state and wallet usage, and manages domains; the docs also point at admin.freestyle.sh for API keys.",
-    "withoutCode": "The dashboard can create a VM, but running an agent, installing packages or publishing a port still needs the SDK, CLI or API.",
+    "dashboard": "dash.freestyle.sh lists and creates VMs, shows state and wallet usage, manages domains, and has a VM page with a terminal; the docs also point at admin.freestyle.sh for API keys.",
+    "withoutCode": "The dashboard can create a VM and open a terminal on it, so installing packages and running an agent need no local tools; publishing a port still needs a TLS rule.",
     "signup": "The Free plan needs no credit card. Adding a card to a Free account charges a $1 verification that Freestyle refunds.",
     "docs": "Detailed docs with a machine-readable llms-full.txt, an OpenAPI document and dozens of guides. The docs index is the best starting point.",
     "tripsUp": [
@@ -211,7 +216,8 @@
       "A VM reaches nothing until a firewall rule allows it, including the internet.",
       "Free has hard allowances that pause VMs instead of billing overage.",
       "No region choice is published.",
-      "Paused VMs still pay for storage, despite 'pay nothing while paused' copy."
+      "Paused VMs still pay for storage, despite 'pay nothing while paused' copy.",
+      "Outbound mail is blocked on ports 25, 465 and 587 unless you add an SMTP rule."
     ]
   },
   "caveats": [
@@ -295,8 +301,32 @@
     },
     {
       "issue": "Team controls are thin below Enterprise",
-      "detail": "Teams and scoped identities exist, but named roles, a dollar spend cap and usage alerts are not documented; SSO and audit logs are Enterprise-only.",
+      "detail": "The dashboard has Owner and Member roles, but there is no read-only role, dollar spend cap or usage alert, and SSO and audit logs are Enterprise-only.",
       "status": "open"
+    },
+    {
+      "issue": "The MCP server is not in the docs",
+      "detail": "An official MCP server answers at mcp.freestyle.sh with OAuth read and write scopes, and the privacy policy describes it, but the docs index has no page for it and its tool list needs sign-in.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://www.freestyle.sh/privacy",
+          "quote": "connect an AI assistant to Freestyle through our Model Context Protocol (MCP) integration",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Outbound mail ports are closed",
+      "detail": "A VM cannot open TCP 25, 465 or 587 to the internet, so an agent that sends mail needs an SMTP rule.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://www.freestyle.sh/docs/vms/network/firewall",
+          "quote": "A VM cannot open TCP 25, 465, or 587 to the public Internet.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [
@@ -305,7 +335,9 @@
     "Full Linux with root, Docker, nested virtualisation, FUSE and eBPF.",
     "Credential injection and scoped identity tokens keep keys out of the VM.",
     "Private VPCs, WireGuard tunnels and per-domain TLS rules.",
-    "Generous monthly allowances and a $50 entry minimum."
+    "Generous monthly allowances and a $50 entry minimum.",
+    "An official remote MCP server for driving VMs from an AI assistant.",
+    "A terminal in the dashboard, so a VM can be used without a local client."
   ],
   "sources": [
     {
@@ -347,6 +379,14 @@
     {
       "label": "Status",
       "url": "https://www.freestyle.sh/status"
+    },
+    {
+      "label": "Terms",
+      "url": "https://dash.freestyle.sh/terms"
+    },
+    {
+      "label": "Privacy",
+      "url": "https://www.freestyle.sh/privacy"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "provider": "agent37",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "Per minute on the shape you reserve, with disk billed every hour until you delete the instance.",
   "cpu": {
     "rate": 0.0010958904109589042,
@@ -56,7 +56,9 @@
     "Stopping loses memory; a sleep checkpoint keeps it at no extra charge.",
     "The managed personal-agent plans ($3.99 to $99.99 a month) are a separate product and are not priced here.",
     "Egress is not published.",
-    "The wallet is metered per minute. How a final partial minute is charged is not published, so runs are priced at their exact length; with whole-minute runs the two agree."
+    "The wallet is metered per minute. How a final partial minute is charged is not published, so runs are priced at their exact length; with whole-minute runs the two agree.",
+    "Priced on the default type. VM and Performance instances bill compute at 2.5× and 4× and take 2–100 GB of disk on any shape.",
+    "Before the first top-up a workspace can run 3 instances of any type at once; the limit counts awake instances only."
   ],
   "sources": [
     {

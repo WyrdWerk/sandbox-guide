@@ -4,7 +4,7 @@
   "url": "https://www.hostinger.com/vps-hosting",
   "status": "researched",
   "kind": "vps",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Cheap fixed-size KVM servers on prepaid monthly, yearly or two-year terms, with root, Docker and one-click OpenClaw, Hermes and n8n templates.",
   "whatItIs": [
     "Hostinger sells KVM virtual private servers in four fixed sizes: KVM 1 (1 vCPU / 4 GB / 50 GB), KVM 2 (2 / 8 / 100), KVM 4 (4 / 16 / 200) and KVM 8 (8 / 32 / 400). Every plan includes root access, a dedicated IPv4, NVMe disk, 4–32 TB of monthly bandwidth, weekly backups and a browser terminal. The server runs in one of 10 data centers, four in Europe, three of them in the EU.",

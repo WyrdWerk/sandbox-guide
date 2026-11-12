@@ -730,3 +730,12 @@ Company and terms research checked 28 October 2026; status figures are a point-i
 | G-Cloud listing | https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/812672539448754 | 28 Oct 2026 | Third-party SLA description |
 
 **Method.** Retrieval used Context.dev scraping and search first; no Composio tool and no native Amp web search was needed. Documentation pages were fetched as `.md`; marketing, blog, status and trust pages were fetched as HTML and converted to text; battleships was fetched as Markdown. Quotes were normalised for whitespace, markdown emphasis and curly quotes, then checked as substrings of the live capture: 215 evidence lines, 0 mismatches. No account, sandbox, purchase or runtime test was performed. Pricing and limits are time-sensitive; this is not a guarantee of availability or a tested deployment.
+
+## Recheck, 12 November 2026
+
+Full recheck of all 16 features and 78 capabilities: [modal-recheck-2026-11-12.md](modal-recheck-2026-11-12.md). The 28 October ledger above is kept as written.
+
+- No unit rate, plan fee, credit, allowance or region multiplier changed (CPU $0.141912/core-hour, memory $0.024012/GiB-hour, $30/$100 credits, $250 Team, $0.04/GiB egress after the included TiB).
+- Capabilities now partly: browser and desktop (computer-use VNC example in a VM sandbox), usage-alerts (beta Slack budget alerts). scoped-keys stays partly with service-user tokens on Team+.
+- Corrections: GPU sandboxes can be preempted; a workspace budget and spend limit exist below Team; the old "billed by the second based on whichever is higher" sentence is gone, replaced by "You're charged max(request, actual) for both CPU and memory."
+- check-rates reports CHANGED for modal.com/pricing only because Model API token prices were added; sandbox figures still match.

@@ -592,3 +592,9 @@ Window 6 August to 4 November 2026, provider's own status page only (see `resear
 
 - Site fact: The status page keeps only its 15 most recent resolved entries, so it shows three Cloud or network outages, all between 28 October and 3 November 2026, rather than a full quarter. The longest was a 58-minute Cloud DNS API fault on 3 November.
 - Source: https://status.hetzner.com/incident/ca26bc3c-8872-43eb-8215-69e85ee23081 — "Start: 2026-11-03 08:58 UTC+0 – Ends on: 2026-11-03 09:55 UTC+0" (docs-confirmed)
+
+## Recheck, 12 November 2026
+
+Rechecked with the rest of VPS group 1: [vps-group1-recheck-2026-11-12.md](vps-group1-recheck-2026-11-12.md). The earlier ledger is kept as written.
+- Falkenstein/Nuremberg prices unchanged; Helsinki is now about 15% cheaper (CPX22 $19.49 against $22.99). The card keeps the Nuremberg tier, so A/B/C and tests are unchanged.
+- Snapshots: the public price API lists €0.0143/$0.0199 per GB-month. "Limited availability of cloud instances" notice since 26 June 2026.

@@ -46,10 +46,10 @@
       "verdict": "yes",
       "figure": "Not published",
       "scenario": "The agent's package downloads go out through the allowlist, and no egress rate or cap is published to price them.",
-      "note": "Allow-all, deny-all or an IPv4 allowlist of up to 100 entries, changeable live. DNS counts as a connection, and private ranges stay blocked. No static egress IP or published egress price.",
+      "note": "Allow-all, deny-all or an allowlist of up to 100 domains and IPv4 addresses, changeable live. Domain entries cover HTTPS on 443 only; DNS counts as a connection, and private ranges stay blocked. No static egress IP or published egress price.",
       "source": {
-        "url": "https://www.agent37.com/docs/agents-api/instance-network",
-        "quote": "**DNS counts as a connection.** Under `deny-all` or a list, names do not resolve unless a resolver is on the list.",
+        "url": "https://www.agent37.com/docs/agents-api/instance-network.md",
+        "quote": "Only the listed domains and IPv4 addresses and ranges, up to 100 entries.",
         "confidence": "docs-confirmed"
       }
     },
@@ -58,7 +58,7 @@
       "verdict": "partly",
       "figure": "Included in plan",
       "scenario": "Egress is included, and the proxy can filter domains, but tools that ignore proxy variables are not filtered unless enforcement is on.",
-      "note": "A proxy can filter domains, but tools that ignore proxy environment variables are not filtered unless domain filter enforcement is enabled. Egress is included in the plan.",
+      "note": "A proxy can filter domains, but tools that ignore proxy environment variables are not filtered unless domain filter enforcement is enabled. Egress is included in the plan. The networking page says every workload starts closed, but the docs say an empty allowlist allows everything; the guide follows the docs.",
       "source": {
         "url": "https://docs.blaxel.ai/Sandboxes/Proxy-domains.md",
         "quote": "Traffic from tools that ignore proxy environment variables will not be filtered unless",
@@ -93,8 +93,8 @@
       "provider": "cloudflare-sandbox",
       "verdict": "partly",
       "figure": "1 TB a month, then $0.025/GB",
-      "scenario": "Outbound is off unless `enableInternet` is true; with it off, only allowedHosts or an outbound handler on ports 80 and 443 can leave.",
-      "note": "Off by default; only ports 80 and 443 through allowedHosts or an outbound handler. No static egress IP or private network. 1 TB a month is included in North America and Europe, then $0.025/GB; 500 GB elsewhere, then $0.04–$0.05.",
+      "scenario": "Outbound is off unless `enableInternet` is true; with it off, only HTTP and HTTPS requests your intercepts handle can leave.",
+      "note": "Off by default; with internet off, only HTTP and HTTPS hosts you intercept can be reached, up to 128 intercept entries per container, and each forwarded request body is capped at 100 MiB by default. No static egress IP or private network. 1 TB a month is included in North America and Europe, then $0.025/GB; 500 GB elsewhere, then $0.04–$0.05.",
       "source": {
         "url": "https://developers.cloudflare.com/sandbox/concepts/security/",
         "quote": "A Container starts with `enableInternet: false` by default, so it cannot reach the Internet.",
@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "Tier 3 for internet",
-      "scenario": "Package installs fail on Tier 1: outbound is restricted and cannot be overridden per sandbox; full internet needs a $500 top-up.",
-      "note": "Tier 1 and 2 are restricted and cannot be overridden per sandbox; Tier 3 and 4 get full internet. Per-sandbox controls are block-all, CIDR, domain or an upstream proxy. No static egress IP or egress price is published.",
+      "figure": "Open egress; static IP Beta",
+      "scenario": "`pip install` works on any plan because egress is open by default; a vendor that whitelists IPs needs the Team beta, and a secret's host allowlist is a separate control.",
+      "note": "Egress is open by default. A per-sandbox policy can block everything or allow up to 128 domains and IPv4 CIDRs combined, with DNS filtered to the allowlist; IPv6, private ranges and nested entries are rejected, and Windows/GPU sandboxes accept no policy. Static egress IPs are a Team/Enterprise beta with no documentation, count or price. No egress price or allowance is published; bucket-volume traffic is metered per uploaded GiB, downloaded GiB and 1,000 requests.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/network-limits.md",
-        "quote": "**Tier 1 & Tier 2**: Network access is restricted and cannot be overridden at the sandbox level.",
+        "url": "https://www.daytona.com/docs/network-limits.md",
+        "quote": "Egress is open by default.",
         "confidence": "docs-confirmed"
       }
     },
@@ -118,7 +118,7 @@
       "verdict": "yes",
       "figure": "No rate; no static IP",
       "scenario": "Domain and IP allow and deny rules are documented, but there is no dedicated egress address on any plan.",
-      "note": "Outbound is open by default with documented domain and IP allow and deny rules. No dedicated or static egress IP on any plan, including Enterprise.",
+      "note": "Outbound is open by default with documented domain and IP allow and deny rules. No dedicated or static egress IP on any plan, including Enterprise. BYOP routes egress through a SOCKS5 proxy you run, the documented way to get a stable address.",
       "source": {
         "url": "https://docs.e2b.dev/faq/egress-ip-ranges",
         "quote": "there are no dedicated or static egress IP addresses on any plan (including Enterprise).",
@@ -130,10 +130,10 @@
       "verdict": "partly",
       "figure": "100 GiB–50 TiB included",
       "scenario": "Each plan includes outbound data every month (100 GiB on Free, 1 TiB on Pro), then $0.02 per GiB. InstaBox's docs say nothing about which address outbound traffic leaves from.",
-      "note": "No general egress allowlist is published; host scoping applies to Secrets, not all sandbox traffic. Each plan includes egress every month (100 GiB Free, 1 TiB Pro, 5 TiB Builder, 50 TiB Team), then $0.02 per GiB. Outbound addresses are not published.",
+      "note": "No general egress allowlist is published; host scoping applies to Secrets, not all sandbox traffic. Each plan includes egress every month (100 GiB Free, 1 TiB Pro, 5 TiB Builder, 50 TiB Team), then $0.02 per GiB. What a machine sends is capped at about 50 Mbit/s. Outbound addresses are not published.",
       "source": {
-        "url": "https://instabox.sh/pricing",
-        "quote": "$0.02000",
+        "url": "https://instabox.sh/docs/account/pricing.md",
+        "quote": "Each plan includes egress every month (100 GiB on Free, 1 TiB on Pro, 5 TiB on Builder, 50 TiB on Team), then $0.02 per GiB.",
         "confidence": "pricing-page"
       }
     },
@@ -180,8 +180,8 @@
       "scenario": "A dedicated outbound address costs $5 a month; without it the sandbox can be set to refuse everything or to an allowlist.",
       "note": "`internet: false` refuses everything, an allow list is allow-list only, and deny always wins. A dedicated outbound address costs $5 a month, and sandboxes reach each other over a private name.",
       "source": {
-        "url": "https://withruntime.com/pricing",
-        "quote": "Dedicated IPv4 | $5 | per 30-day month",
+        "url": "https://withruntime.com/pricing.md",
+        "quote": "Dedicated IPv4 address | $5 per 30-day month",
         "confidence": "pricing-page"
       }
     },
@@ -192,8 +192,8 @@
       "scenario": "Outbound is open with no allowlist, and traffic shares the node's IPv4 with other sandboxes.",
       "note": "Outbound is open by default with no allowlist product. Traffic shares the node's IPv4 and IPv6 with other sandboxes, so external rate limits are shared.",
       "source": {
-        "url": "https://sandboxer.com/docs/security",
-        "quote": "outbound internet is open by default",
+        "url": "https://sandboxer.com/guides/what-can-reach-a-sandbox-and-what-it-can-reach",
+        "quote": "There is no egress allowlist, domain filter or outbound firewall setting in Sandboxer.",
         "confidence": "docs-confirmed"
       }
     },
@@ -214,7 +214,7 @@
       "verdict": "yes",
       "figure": "$0.15/GB",
       "scenario": "Firewall rules default to allow-all, and traffic beyond the included 20 GB a month bills at $0.15 per GB.",
-      "note": "Firewall rules default to allow-all and can be set per sandbox. Matchers transform requests but never block them, so an allowlist needs an explicit rule.",
+      "note": "Firewall rules default to allow-all and can be set per sandbox. Matchers transform requests but never block them, so an allowlist needs an explicit rule. Fixed egress IPs and VPC peering need an Enterprise Secure Compute network.",
       "source": {
         "url": "https://vercel.com/docs/sandbox/pricing#pricing",
         "quote": "Sandbox Data Transfer | 20 GB/month | Included in Flat Rate CDN | $0.15/GB",
@@ -274,7 +274,7 @@
       "verdict": "partly",
       "figure": "50/500 GB free; $0.02/GB",
       "scenario": "Call the API: outbound is denied until a firewall rule allows it, and the first 50 GB (Free) or 500 GB (paid) of transfer is included.",
-      "note": "Allowlist by domain, CIDR or identity. Default deny, so no internet until a rule allows it. Every VM shares one account-level outbound IPv4, but Freestyle does not promise it stays fixed.",
+      "note": "Allowlist by domain, CIDR or identity. Default deny, so no internet until a rule allows it. Every VM shares one account-level outbound IPv4, but Freestyle does not promise it stays fixed. Outbound mail ports 25, 465 and 587 are blocked; mail goes through an SMTP rule.",
       "source": {
         "url": "https://www.freestyle.sh/openapi.json",
         "quote": "A VM gets nothing implicitly — no outbound Internet, no inbound",
@@ -298,7 +298,7 @@
       "verdict": "partly",
       "figure": "Unlimited traffic; guest firewall",
       "scenario": "The agent browses freely from a static IPv4 with no per-GiB bill, but restricting where it can go means iptables or ufw inside the guest, which a root agent can change.",
-      "note": "Unlimited traffic at 500 Mbps to 3 Gbps, a dedicated IPv4 and IPv6, and no published overage rate or fair-use threshold. There is no provider-side egress allowlist or no-internet switch in the VPS API; the firewall guide is iptables in the guest, and the Edge Network Firewall is inbound.",
+      "note": "Unlimited traffic at 500 Mbps to 3 Gbps, a dedicated IPv4 and IPv6, and no published overage rate or fair-use threshold. There is no provider-side egress allowlist or no-internet switch in the VPS API; the firewall guide is iptables in the guest, and the Edge Network Firewall is inbound. Asia-Pacific plans have a 1–3 TB monthly quota, then 10 Mbps.",
       "source": {
         "url": "https://docs.ovhcloud.com/en/guides/bare-metal-cloud/virtual-private-servers/firewall-linux-iptable",
         "quote": "Most of the rules outlined in this guide assume that your iptables is configured by default to DROP incoming traffic, and that you selectively authorize incoming traffic.",

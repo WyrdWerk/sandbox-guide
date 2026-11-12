@@ -1,56 +1,111 @@
 {
   "provider": "daytona",
-  "checkedOn": "2026-10-29",
-  "summary": "Per second on reserved vCPU, memory and disk; stopped sandboxes bill disk only.",
+  "checkedOn": "2026-11-12",
+  "summary": "Per second on guaranteed cores, memory and disk, with a measured burst above the guarantee; spot is 30% off and Team adds $250 a month.",
   "cpu": {
-    "rate": 0.0504,
-    "billing": "allocated"
+    "rate": 0.0505,
+    "billing": "allocated",
+    "unit": "vCPU (1 core = 2 vCPU where SMT is on)"
   },
   "ram": {
-    "rate": 0.0162
+    "rate": 0.0162,
+    "billing": "allocated"
   },
   "disk": {
-    "running": 0.000108,
-    "stopped": 0.000108,
-    "included": 5
+    "running": 0,
+    "persistentMonthly": 0.07884
   },
-  "maxDisk": 10,
   "between": "kept",
+  "maxDisk": 256,
+  "maxVcpu": 32,
+  "maxRam": 32,
   "egress": {
     "perGiB": null,
-    "note": "Not published: the pricing page lists compute, memory and storage only.",
-    "url": "https://www.daytona.io/pricing"
+    "note": "No outbound byte price or allowance is published. Bucket-volume traffic bills per uploaded GiB, downloaded GiB and 1,000 requests at rates the docs do not list.",
+    "url": "https://www.daytona.com/docs/billing"
   },
   "plans": [
     {
-      "name": "Pay as you go",
-      "fee": 0
+      "name": "Starter",
+      "fee": 0,
+      "maxSessionHours": 24,
+      "maxDisk": 256,
+      "maxVcpu": 8,
+      "maxRam": 16,
+      "note": "One-time $200 credit, not subtracted here. 3 members, 100 sandboxes, 7 GPUs, 10 Windows cores, 10 Mac reservations."
+    },
+    {
+      "name": "Team",
+      "fee": 250,
+      "credit": 100,
+      "maxSessionHours": 48,
+      "maxDisk": 256,
+      "maxVcpu": 16,
+      "maxRam": 32,
+      "note": "$100 of credits a month, expiring at the end of the billing period; unlimited members, 5,000 sandboxes, 50 GPUs. Buy it for the limits, not for a lower bill."
     }
   ],
   "notes": [
-    "$200 of free compute with no card, not usable on GPU sandboxes.",
-    "The 10 GiB per-sandbox disk cap contradicts 50 GiB Windows presets; the cap is applied here."
+    "A core is 2 vCPUs where SMT is on, and 1 vCPU on Graviton and Apple silicon: the same 2-vCPU shape costs twice as much there. Turning SMT off doubles the price per vCPU.",
+    "Spot sandboxes are 30% cheaper and can be reclaimed at any moment; GPU sandboxes cannot be spot.",
+    "Region multipliers add 1.15x to 2x on top of the base price, and CPU-type multipliers add 1.6667x or 2.3313x; they compound.",
+    "A Linux sandbox cannot stop or pause. Keeping files between sessions means a volume at $0.000108/GiB-hour, modelled here as the kept disk.",
+    "Ephemeral NVMe is free while the sandbox exists, so disk costs nothing unless it is kept.",
+    "Snapshots and images have no published storage price; macOS bills a $2.5032/Mac-hour reservation instead of the OS meter."
   ],
   "sources": [
     {
       "label": "Pricing",
-      "url": "https://www.daytona.io/pricing"
+      "url": "https://www.daytona.com/pricing"
+    },
+    {
+      "label": "Pricing (Markdown, both columns)",
+      "url": "https://www.daytona.com/pricing.md"
     },
     {
       "label": "Billing",
-      "url": "https://www.daytona.io/docs/en/billing.md"
+      "url": "https://www.daytona.com/docs/billing.md"
     },
     {
       "label": "Limits",
-      "url": "https://www.daytona.io/docs/en/limits.md"
+      "url": "https://www.daytona.com/docs/limits.md"
+    },
+    {
+      "label": "Sandboxes",
+      "url": "https://www.daytona.com/docs/sandboxes.md"
+    },
+    {
+      "label": "Regions",
+      "url": "https://www.daytona.com/docs/regions.md"
+    },
+    {
+      "label": "Preemption",
+      "url": "https://www.daytona.com/docs/preemption.md"
+    },
+    {
+      "label": "Volumes",
+      "url": "https://www.daytona.com/docs/volumes.md"
+    },
+    {
+      "label": "macOS",
+      "url": "https://www.daytona.com/docs/macos-sandboxes.md"
     }
   ],
+  "cpuSharing": {
+    "label": "Burstable above a guarantee",
+    "detail": "Each sandbox reserves a guaranteed floor of CPU, memory and disk, and may use idle host capacity up to its limit; the guarantee, not the burst, is the billed minimum.",
+    "source": {
+      "url": "https://www.daytona.com/docs/scale.md",
+      "quote": "The requested resources are a guaranteed floor, reserved at placement; beyond it the sandbox uses idle host capacity up to its resource limits",
+      "confidence": "docs-confirmed"
+    }
+  },
   "upkeep": {
     "label": "Updates not published",
-    "detail": "Daytona publishes nothing on who patches its default snapshots or a sandbox you keep running.",
+    "detail": "A sandbox boots an image already registered in the project and never pulls from a registry. Daytona publishes no patch cadence for the platform images it supplies, or for a sandbox you keep running.",
     "source": {
-      "url": "https://www.daytona.io/docs/en/snapshots/",
-      "quote": "Daytona provides default snapshots for creating sandboxes.",
+      "url": "https://www.daytona.com/docs/images.md",
+      "quote": "A sandbox create does not pull from a registry, so a sandbox boots only from an image already registered in the project.",
       "confidence": "not-published"
     }
   }

@@ -21,7 +21,7 @@
     {
       "heading": "SSH is not universal",
       "body": [
-        "boxd, Boat and Sandboxer expose real SSH. Agent 37 tunnels SSH over a WebSocket, E2B proxies it, InstaBox routes it through a gateway, and Runtime carries it over its API. Lizard has no SSH protocol at all: its shell is over the provider's transport, so scp and port forwarding do not work. Vercel does not publish an SSH endpoint."
+        "boxd, Boat and Sandboxer expose real SSH, and Runtime gives every sandbox an OpenSSH host name after a one-time config install, carried over its API. Agent 37 tunnels SSH over a WebSocket, E2B proxies it, and InstaBox routes it through a gateway. Lizard has no SSH protocol at all: its shell is over the provider's transport, so scp and port forwarding do not work. Vercel does not publish an SSH endpoint."
       ]
     },
     {
@@ -71,17 +71,17 @@
       "scenario": "The first step is a shell command: boat new, then boat prompt. The dashboard is a viewer for machines you already made.",
       "note": "REST, Python and TypeScript SDKs, a CLI, SSH and SCP, a 60 fps desktop and a dashboard. The MCP server is for documentation, not for managing sandboxes.",
       "source": {
-        "url": "https://docs.boat.dev/quickstart",
-        "quote": "`boat new`, then `boat prompt bx_23456789 \"add tests\"`",
+        "url": "https://docs.boat.dev/quickstart.md",
+        "quote": "boat prompt bx_23456789 \"add tests\"",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "boxd",
       "verdict": "partly",
-      "figure": "No; CLI",
-      "scenario": "CLI-first: every guide starts with an install command, and the wire API is gRPC with no REST.",
-      "note": "gRPC is the only wire API; there is no REST. TypeScript and Python SDKs, a CLI, real SSH on a dedicated port, a console terminal and a browser desktop.",
+      "figure": "Console; gRPC only",
+      "scenario": "The console can create a machine, but the wire API is gRPC with no REST, and there is no boxd MCP server.",
+      "note": "gRPC is the only wire API; there is no REST. TypeScript and Python SDKs, a CLI (now on Windows too), a console that can create machines, real SSH on a dedicated port, a console terminal and a browser desktop.",
       "source": {
         "url": "https://docs.boxd.sh/reference/grpc-api",
         "quote": "Service. `boxd.api.v1.BoxdApi`.",
@@ -93,7 +93,7 @@
       "verdict": "partly",
       "figure": "No; Worker code",
       "scenario": "The first sandbox needs a Worker, a Durable Object and a Docker build; the dashboard only shows what already exists.",
-      "note": "TypeScript in a Worker is the only first-class surface, with a Durable Object container API and the Wrangler CLI. No hosted REST API, no Python or Go SDK, no control-plane MCP and no webhooks.",
+      "note": "TypeScript in a Worker is the only first-class surface, with a Durable Object container API, the Wrangler CLI, a `create cloudflare` sandbox scaffold and the new `cf` CLI. No hosted REST API, no Python or Go SDK, no control-plane MCP and no webhooks.",
       "source": {
         "url": "https://developers.cloudflare.com/sandbox/previews/",
         "quote": "A Worker with a Durable Object that starts a container with the Durable Object scheduling policy.",
@@ -103,12 +103,12 @@
     {
       "provider": "daytona",
       "verdict": "yes",
-      "figure": "Yes, playground",
-      "scenario": "A non-coder creates a sandbox in the browser Playground, opens the terminal or VNC tab, and never installs the CLI.",
-      "note": "A dashboard Playground, web terminal, VNC desktop, five SDKs, a REST API, a CLI, a first-party MCP server, and webhooks that need support to enable.",
+      "figure": "2 SDKs, CLI, API, MCP",
+      "scenario": "A TypeScript agent uses the SDK, a shell script the CLI, a Python service the SDK, and an MCP client the first-party server; the dashboard Playground runs TypeScript in the browser with no key.",
+      "note": "Dashboard, browser Playground (TypeScript only, no key, no install), CLI, Python and TypeScript SDKs, REST API, first-party MCP server, SSH, web terminal and VNC. The 2.0 clients are alpha: the CLI is `2.0.0-alpha.N` (`brew install daytonaio/cli/daytona-alpha`), Python is `2.0.0a10`, TypeScript is `2.0.0-alpha.10`. Ruby, Go and Java SDKs exist only for 1.x. The Playground is an SDK runner, not a sandbox manager: you write TypeScript against the SDK and press Run.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/playground.md",
-        "quote": "Daytona provides an interactive environment (\"Playground\") for creating sandboxes, running SDK operations, and exploring Daytona features directly from your browser",
+        "url": "https://www.daytona.com/docs/cli.md",
+        "quote": "The v2 CLI is released as `2.0.0-alpha.N` versions.",
         "confidence": "docs-confirmed"
       }
     },
@@ -126,13 +126,13 @@
     },
     {
       "provider": "instabox",
-      "verdict": "partly",
+      "verdict": "yes",
       "figure": "Yes, dashboard",
       "scenario": "A dashboard creates the machine and opens a clickable VNC desktop, with a web terminal as backup.",
-      "note": "REST, a TypeScript SDK, a CLI, SSH and mosh through a gateway, a web terminal and a VNC desktop. No control-plane MCP is published.",
+      "note": "A dashboard, REST with an OpenAPI 3.1 document, TypeScript and Python SDKs, a CLI, SSH and mosh through a gateway, a web terminal, a VNC desktop, webhooks and a hosted MCP server.",
       "source": {
-        "url": "https://instabox.sh/docs/start",
-        "quote": "In the dashboard, **Create machine** on the **Machines** page does what `instabox create` does.",
+        "url": "https://instabox.sh/docs/integrations/mcp.md",
+        "quote": "The hosted server at `https://api.instabox.sh/mcp` is the recommended way to connect.",
         "confidence": "docs-confirmed"
       }
     },
@@ -176,8 +176,8 @@
       "provider": "runtime",
       "verdict": "yes",
       "figure": "Yes, dashboard",
-      "scenario": "A dashboard creates a sandbox, with a desktop, SSH over the API and a hosted MCP server.",
-      "note": "REST, JavaScript, Python, Go, Ruby and Java SDKs, a CLI, a hosted MCP server, SSH over the API, a desktop, webhooks and OpenTelemetry.",
+      "scenario": "A dashboard creates a sandbox, with a desktop, standard SSH and a hosted MCP server.",
+      "note": "REST, JavaScript, Python, Go, Ruby and Java SDKs, a CLI, a hosted MCP server, standard SSH after a one-time config install, a desktop, webhooks, OpenTelemetry and browser session tokens. A hosted Agents API is in private beta.",
       "source": {
         "url": "https://withruntime.com/docs/mcp",
         "quote": "The endpoint is `https://api.withruntime.com/mcp`, over MCP Streamable HTTP.",
@@ -198,25 +198,25 @@
     },
     {
       "provider": "sprites",
-      "verdict": "partly",
-      "figure": "No; CLI",
-      "scenario": "A CLI and an interactive console; SSH needs a server installed inside and proxied.",
-      "note": "A CLI and interactive console, SDKs and agent integrations, and SSH only after installing a server and proxying it. No managed desktop or browser-control product.",
+      "verdict": "yes",
+      "figure": "Dashboard, CLI, 4 SDKs, MCP",
+      "scenario": "A dashboard, CLI, REST API, SDKs for four languages and a hosted MCP server; SSH needs a server installed inside and proxied.",
+      "note": "A dashboard, CLI, REST API, official JavaScript, Python, Go and Elixir SDKs, a hosted MCP server and plugins for agent clients. SSH works only after installing a server and proxying it, and no browser terminal is documented.",
       "source": {
-        "url": "https://docs.fly.io/sprites/quickstart",
-        "quote": "Open an interactive shell",
+        "url": "https://docs.fly.io/sprites/integrations/index.md",
+        "quote": "Sprites can be used through the hosted MCP server, a client plugin, an SDK adapter, or a platform's sandbox backend.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "vercel-sandbox",
       "verdict": "partly",
-      "figure": "No; CLI or SDK",
-      "scenario": "A CLI, JavaScript and Python SDKs, and a dashboard that can stop or delete a sandbox but not drive it.",
-      "note": "CLI, JavaScript and Python SDKs, and a dashboard that can stop or delete a sandbox and shows a lifecycle activity log. No SSH or desktop is published.",
+      "figure": "CLI, SDKs, REST, MCP",
+      "scenario": "A CLI, JavaScript and Python SDKs, a REST API and Vercel MCP tools; the dashboard can open a terminal, stop, snapshot or delete a sandbox but not create one.",
+      "note": "CLI, JavaScript and Python SDKs, a documented REST API and a Sandboxes tool group in the official Vercel MCP server. The dashboard can open a browser terminal, stop, resume, snapshot or delete a sandbox, but creating one still needs code or the CLI. No standard SSH or desktop is published.",
       "source": {
-        "url": "https://vercel.com/docs/sandbox",
-        "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
+        "url": "https://vercel.com/docs/rest-api/sandboxes.md",
+        "quote": "Endpoints in the Sandboxes group of the Vercel REST API Reference.",
         "confidence": "docs-confirmed"
       }
     },
@@ -273,7 +273,7 @@
       "verdict": "yes",
       "figure": "Dashboard, CLI, TS SDK, API",
       "scenario": "Drive it from your product: create a VM in the dashboard, from the CLI, or through the TypeScript SDK and REST API.",
-      "note": "Dashboard, CLI, TypeScript SDK, OpenAPI and a PTY/file API. No MCP server. The PyPI package is the older Sandboxes SDK, not the current VM client.",
+      "note": "Dashboard, CLI, TypeScript SDK, OpenAPI and a PTY/file API, plus an official remote MCP server at mcp.freestyle.sh that the docs do not yet describe. The PyPI package is the older Sandboxes SDK, not the current VM client.",
       "source": {
         "url": "https://www.freestyle.sh/docs/cli",
         "quote": "Use the freestyle CLI for interactive administration, debugging, and automation scripts.",
@@ -288,16 +288,16 @@
       "note": "The client area is built on the same public API, which is documented endpoint by endpoint with an OpenAPI spec and an llms.txt. A hosted MCP server lets Claude, ChatGPT, Cursor, Claude Code or Codex drive the account, with purchases, reinstalls, restores and cancellations confirmed by you in the browser. There is no official CLI and no Python or TypeScript SDK, and the API has a VNC console session and a one-shot guest-agent command but no streaming PTY and no file-transfer endpoints.",
       "source": {
         "url": "https://developer.hostup.se/",
-        "quote": "383 documented endpoints cover the things you manage in the HostUp dashboard.",
+        "quote": "All 386 endpoints, each with its fields, scopes, examples and errors.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "ovhcloud",
       "verdict": "yes",
-      "figure": "Panel, CLI, API, SDKs, Terraform",
+      "figure": "Panel, CLI, API, SDKs, MCP",
       "scenario": "A designer can create the VPS in the control panel and reinstall it from a list; the agent itself still needs SSH, and everything after that can be scripted through the API, the CLI or Terraform.",
-      "note": "Control-panel creation and reinstall, 52 documented VPS API endpoints, an official CLI with `ovhcloud vps` commands, Python and Node SDKs, a Terraform resource, and an official MCP server that has no documented VPS section. No PTY or file API.",
+      "note": "Control-panel creation and reinstall, 52 documented VPS API endpoints, an official CLI with `ovhcloud vps` commands, Python and Node SDKs, a Terraform resource, and an official MCP server whose VPS section manages an existing VPS but cannot order one. No PTY or file API.",
       "source": {
         "url": "https://github.com/ovh/ovhcloud-cli",
         "quote": "Retrieve information and manage your VPS services",
@@ -355,9 +355,9 @@
     {
       "provider": "scaleway",
       "verdict": "yes",
-      "figure": "Console, CLI, API, SDKs",
+      "figure": "Console, CLI, API, SDKs, MCP",
       "scenario": "The first machine is clickable in the console; everything after that is scriptable through the API, the scw CLI or the Python, Go and TypeScript SDKs.",
-      "note": "Console wizard, documented REST API with OpenAPI specs, official CLI and SDKs for Python, Go and JavaScript/TypeScript, plus a Terraform provider. No official MCP server, no PTY endpoint and no file API, so an agent driving the platform uses HTTP or SSH.",
+      "note": "Console wizard, documented REST API with OpenAPI specs, official CLI and SDKs for Python, Go and JavaScript/TypeScript, plus a Terraform provider. The CLI also runs an official local MCP server. No PTY endpoint and no file API, so an agent driving the platform uses HTTP or SSH.",
       "source": {
         "url": "https://www.scaleway.com/en/developers",
         "quote": "Manage your resources with the Scaleway API using simple HTTP requests.",

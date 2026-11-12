@@ -1,6 +1,6 @@
 {
   "provider": "sprites",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "summary": "Measured CPU and memory while awake, hot storage while awake and cold storage for as long as data is kept.",
   "cpu": {
     "rate": 0.0385,
@@ -13,7 +13,7 @@
   },
   "disk": {
     "running": 0.00071,
-    "stopped": 2.7e-05
+    "stopped": 0.000027
   },
   "maxVcpu": 8,
   "between": "kept",
@@ -31,8 +31,9 @@
   ],
   "notes": [
     "Memory is billed on actual use; the calculator uses the memory you entered.",
-    "A one-time $30 trial credit is not subtracted.",
-    "The pricing page says there are no plans; the FAQ sells Hero ($100) and Mythic ($2,000). Pay as you go is used here."
+    "The $1 trial credit and the under-$5 personal-org waiver are not subtracted.",
+    "The free 20 GB of cold storage per organisation a month is not subtracted, so stored-disk totals are up to about $0.39 a month high.",
+    "The pricing page's Markdown version says no plan is picked up front; the FAQ and changelog sell eight tiers from Adventurer ($20) to Mythic ($2,000). Pay as you go is used here."
   ],
   "sources": [
     {

@@ -1,6 +1,6 @@
 {
   "provider": "morph",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "summary": "Compute units per hour: the largest of vCPU, RAM ÷ 4 and disk ÷ 16, at $0.05 each.",
   "mcu": {
     "rate": 0.05,
@@ -35,7 +35,8 @@
   ],
   "notes": [
     "Between sessions the instance is paused: it bills only for its snapshot. A stopped instance is deleted.",
-    "Live pages disagree on the free tier: 0 units on the pricing page, 300 units in the plans doc, 300 compute hours on the sign-up page. None is subtracted."
+    "Live pages disagree on the free tier: 0 units on the pricing page, 300 units in the plans doc, 300 compute hours on the sign-up page. None is subtracted.",
+    "Morph EFS ($0.12–$0.18 per GiB-month) and Actions runners (3–10 MCU per hour) are separate products and not in this card."
   ],
   "sources": [
     {

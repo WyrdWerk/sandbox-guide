@@ -21,14 +21,14 @@
     {
       "heading": "Sleep can be automatic and invisible",
       "body": [
-        "Sprites pauses after about 30 seconds without activity, then stops the VM and drops memory after a longer idle period that is not published. Blaxel's docs say standby after 15 minutes of idle connection; its pricing page says scale-to-zero after about five seconds. Morph's devboxes sleep after inactivity, and Runtime pauses after five minutes by default.",
-        "The wake path matters as much as the timer. Sprites wakes on a request to its URL, Runtime on the next command or request, InstaBox on a public-port visit, and Agent 37 on any request to any URL. Boat cannot wake on a URL at all, because a stop destroyed the machine."
+        "Sprites pauses after about 30 seconds without activity, then stops the VM and drops memory after a longer idle period that is not published. Blaxel's docs say standby about 15 seconds after the last connection, with a 15-minute limit for an idle open connection; its pricing page says about five seconds. Morph's devboxes sleep after inactivity, and Runtime pauses after five minutes by default.",
+        "The wake path matters as much as the timer. Sprites wakes on a request to its URL, Runtime on the next command or request, InstaBox on a public-port visit, and Agent 37 on any request to any URL. Boat cannot wake on a URL at all: a stop has no wake path, and after ten minutes the machine is gone."
       ]
     },
     {
       "heading": "The idle hour is where the bill lives",
       "body": [
-        "An idle hour can cost full compute, memory only, storage only, or nothing. boxd's standby bills RAM. Runtime bills memory and disk blocks. Agent 37, InstaBox and Lizard bill storage only. Boat charges nothing while stopped and keeps the disk for 14 days.",
+        "An idle hour can cost full compute, memory only, storage only, or nothing. boxd's standby bills RAM. Runtime bills memory and disk blocks. Agent 37, InstaBox and Lizard bill storage only. Boat charges nothing while stopped and keeps the disk for at least 14 days.",
         "That is why two providers with similar hourly rates differ by a factor of ten on an always-on box. A 4 vCPU / 8 GiB machine costs about $10.60 a month at Agent 37, $26.28 at Boat, $27.23 at InstaBox and about $222 at boxd once memory is billed on a 4 vCPU machine."
       ]
     }
@@ -56,12 +56,12 @@
     {
       "provider": "blaxel",
       "verdict": "partly",
-      "figure": "15 min idle (docs); 5 s (pricing)",
-      "scenario": "Asleep after 15 minutes of idle connection, or about five seconds if the pricing page is right; the next request resumes it.",
-      "note": "Standby after 15 minutes of idle WebSocket or TCP activity according to the docs, or about 5 seconds according to the pricing page. Resume from standby is claimed under 25 ms.",
+      "figure": "~15 s (docs); ~5 s (pricing)",
+      "scenario": "Asleep about 15 seconds after the last connection closes, or about five seconds if the pricing page is right; the next request resumes it.",
+      "note": "Standby about 15 seconds after the last active connection, according to the docs, or about 5 seconds according to the pricing page. An open but idle WebSocket or TCP connection keeps it awake for up to 15 minutes. Resume from standby is claimed under 25 ms.",
       "source": {
         "url": "https://docs.blaxel.ai/Sandboxes/Overview.md",
-        "quote": "if the WebSocket/TCP connection remains idle for 15 minutes with no activity, the sandbox will automatically transition to standby mode.",
+        "quote": "This transition happens in approximately 15 seconds.",
         "confidence": "docs-confirmed"
       }
     },
@@ -94,7 +94,7 @@
       "verdict": "partly",
       "figure": "No default; 6 h max",
       "scenario": "Still running at 20 minutes if the Durable Object stays active; if it goes inactive the instance stops shortly after, unless a timeout of up to 6 hours was set.",
-      "note": "No default inactivity timeout in Sandboxes 1.0, a 6-hour maximum, and the value is lost on a Durable Object restart. Code inside does not count as activity. The 10-minute default belongs to the legacy 0.x SDK.",
+      "note": "No default inactivity timeout in Sandboxes 1.0, a 6-hour maximum, and the value is lost on a Durable Object restart. Code inside does not count as activity. The 10-minute default belongs to the legacy 0.x SDK. The experimental Agents SDK harness adds its own default: it snapshots and stops the container after five idle minutes.",
       "source": {
         "url": "https://developers.cloudflare.com/sandbox/concepts/lifetime/",
         "quote": "After the Durable Object becomes inactive, the instance keeps running for the time set with `setInactivityTimeout()`, up to 6 hours.",
@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "15 min container; 60 min VM",
-      "scenario": "Stops at 15 minutes even mid-build, because only external calls reset the timer; the VM class would pause at 60 minutes instead.",
-      "note": "Container and GPU auto-stop after 15 idle minutes by default; VM classes auto-pause after 60. Only lifecycle calls, preview requests, SSH and Toolbox calls reset it. An optional TTL destroys in any state; a stopped container archives after 7 days.",
+      "figure": "Idle delete; 24/48 h cap",
+      "scenario": "Set a one-hour idle timeout and the box is deleted, not paused; leave it unset and the wall-clock timeout still deletes it at 24 hours.",
+      "note": "The idle timeout is off by default, has a 60 s minimum, and its only Linux action is delete (stop on Windows, stop on persistent macOS); it fires within about 2 minutes of the interval. Activity is any toolbox request, preview request, VNC or SSH traffic, a running toolbox command, create/start, or a manual reset. A wall-clock timeout starts at boot, is not extended by activity, cannot be cleared once set, and is capped by the organisation maximum: 24 h on Starter, 48 h on Team. The docs also mention a platform default of 300 s if the platform default is enabled, which no page confirms for a new organisation.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/sandboxes.md",
-        "quote": "if not set, the default interval of 15 minutes is used",
+        "url": "https://www.daytona.com/docs/linux-sandboxes.md",
+        "quote": "The idle timeout is off by default unless the project sets one, has a minimum of 60 seconds, and requires an action.",
         "confidence": "docs-confirmed"
       }
     },
@@ -130,10 +130,10 @@
       "verdict": "partly",
       "figure": "30 min idle",
       "scenario": "Still running at 00:20, paused at 00:30, and woken by the command at 01:00 with the process intact.",
-      "note": "Paid machines have no lifetime timeout, but idle auto-pause defaults to 30 minutes; paid plans can choose 5–30 minutes or off. Nothing deletes a paused or stopped machine: there is no forced TTL.",
+      "note": "Idle auto-pause defaults to 30 minutes; paid plans can choose 5–30 minutes or off and have no maximum run by default. Free machines are fixed at 30 minutes and run at most 480 minutes at a time. An activity lease keeps a silent task awake. Nothing deletes a paused or stopped machine.",
       "source": {
-        "url": "https://instabox.sh/docs/concepts",
-        "quote": "A new machine pauses once it has been idle for 30 minutes.",
+        "url": "https://instabox.sh/docs/machines/auto-pause.md",
+        "quote": "By default a machine pauses once it has been idle for 30 minutes",
         "confidence": "docs-confirmed"
       }
     },

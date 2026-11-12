@@ -1427,3 +1427,14 @@ Window 6 August to 4 November 2026, provider's own status page only (see `resear
 
 - Site fact: No incident history is published: the status page shows per-component uptime and latency over a rolling 90-day window, but no list of dated outages.
 - Source: https://status.ascii.dev/history.json — ""windowDays": 90, "blockHours": 1" (inferred)
+
+## Recheck, 12 November 2026
+
+Full recheck of all 16 features and 78 capabilities: [boat-recheck-2026-11-12.md](boat-recheck-2026-11-12.md). The 28 October ledger above is kept as written; where it says there is no pause, 14-day deletion, three sizes or a 3× start ceiling, this section supersedes it.
+
+- No unit rate, plan price, included hour, snapshot fee, egress charge or trial cap changed.
+- A stop keeps the machine for 10 minutes unbilled; a resume in that window usually returns memory, programs, terminals and the IP (best effort). `lifecycle` feature and `pause-memory` now partly.
+- Create, deploy, fork and resume use pre-started machines, usually under a second; the pool is not customer-sized (`warm-pool` partly). `web-terminal` partly, inferred: Ghostty in the browser-streamed desktop.
+- Stopped disk is promised for at least 14 days; the cleanup job only reports candidates in production. Terms now say 14 days, resolving the old 14 vs 30 contradiction.
+- Extra starts run to 6× per hour and day (3× per minute): 1,200 starts a day on the $20 plan; 1,000 tasks in one day now fit for about $50 extra. Invoice option capped at $80/$400/$1,500 per seat a month.
+- YC lists Boat as founded 2024 (three people, Paris). Status 90-day customer-facing uptime 99.45%–100%, 99.84% pooled (outage time only); incidents.json has 315 entries over 90 days.

@@ -815,3 +815,7 @@ not a currency or location switch.
   / 100 GiB, 2 × 0.039 + 8 × 0.012 + 100 × 0.00008 = €0.182/h, and × 730 h = €132.86/mo.
 - **Baseline:** refreshed. Besides this page, the refresh only added the DigitalOcean, Hetzner and Hostinger
   pricing pages, which were reviewed when those providers were added.
+
+## Recheck, 12 November 2026
+
+See [boxd-recheck-2026-11-12.md](boxd-recheck-2026-11-12.md). Rates unchanged, but vCPU now bills on active use only, so B falls from $222.50 to $98.99 at 8 GiB resident. New York region live; console can create machines; platform-held schedules; Tailscale/NetBird private names; status-boxd.com; self-host free to 16 worker vCPUs; SOC 2 Type II and ISO 27001 in progress.

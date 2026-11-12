@@ -1,6 +1,6 @@
 {
   "provider": "contabo",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "A prepaid monthly VPS plan with one flat price per fixed size: Cloud VPS 4 is $6.60 a month on the 1-month term, there is no hourly meter, and a powered-off server keeps billing until the paid period ends.",
   "shapes": [
     {

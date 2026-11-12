@@ -27,11 +27,17 @@ const fully = (p: Provider) => capabilities.filter((c) => c.rows.find((r) => r.p
 const differ = capabilities
   .map((c) => ({ c, ra: c.rows.find((r) => r.provider === a.id), rb: c.rows.find((r) => r.provider === b.id) }))
   .filter(({ ra, rb }) => ra && rb && ra.verdict !== rb.verdict);
+const edges = comparisons.edges?.[pairSlug(a.id, b.id)];
+const edgeLabel = (id: string) => (id === a.id ? a.name : id === b.id ? b.name : id === "even" ? "About the same" : "Different trade-off");
+const edgeCount = (id: string) => features.filter((f) => edges?.[f.id]?.edge === id).length;
+const scoreboard = edges
+  ? ` On the ${features.length} features, ${a.name} is better on ${edgeCount(a.id)}, ${b.name} on ${edgeCount(b.id)}, and ${features.length - edgeCount(a.id) - edgeCount(b.id)} are close or a trade-off.`
+  : "";
 const answer =
   `${a.name} is the cheaper fit for ${winsA} of ${costs.length} common workloads and ${b.name} for ${winsB}` +
   `${winsA + winsB < costs.length ? "; for the rest neither runs it as described or they cost the same" : ""}. ` +
   `${a.name} offers ${fully(a)} of ${capabilities.length} checked capabilities without a catch, ${b.name} ${fully(b)}; they differ on ${differ.length}. ` +
-  `Prices checked ${formatDate(checked.prices)}.`;
+  `Prices checked ${formatDate(checked.prices)}.` + scoreboard;
 ---
 
 <Base
@@ -75,10 +81,10 @@ const answer =
     <section class="section" aria-labelledby="features-h">
       <div class="section__head">
         <h2 class="section__title" id="features-h">Feature by feature</h2>
-        <p class="section__note">The figure that decides each feature, from each provider's own pages.</p>
+        <p class="section__note">The figure that decides each feature, from each provider's own pages.{edges && " The edge is our reading of those rows, not a provider claim."}</p>
       </div>
       <div class="table-scroll"><table class="data-table">
-        <thead><tr><th scope="col">Feature</th><th scope="col">{a.name}</th><th scope="col">{b.name}</th></tr></thead>
+        <thead><tr><th scope="col">Feature</th><th scope="col">{a.name}</th><th scope="col">{b.name}</th>{edges && <th scope="col">Edge</th>}</tr></thead>
         <tbody>
           {features.map((f) => (
             <tr>
@@ -87,6 +93,12 @@ const answer =
                 const row = f.rows.find((r) => r.provider === p.id)!;
                 return <td><Badge verdict={row.verdict} /> {row.figure}</td>;
               })}
+              {edges && (
+                <td class="edge">
+                  <strong class={`edge__who edge__who--${edges[f.id].edge === a.id || edges[f.id].edge === b.id ? "side" : edges[f.id].edge}`}>{edgeLabel(edges[f.id].edge)}</strong>
+                  <span class="edge__why">{edges[f.id].why}</span>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

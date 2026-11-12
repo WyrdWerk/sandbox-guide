@@ -4,7 +4,7 @@
   "url": "https://hostup.se/en/vps/",
   "status": "researched",
   "kind": "vps",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Seven cheap fixed-size KVM servers in Stockholm on a monthly or yearly plan, with an unusually complete API and MCP server for the price.",
   "whatItIs": [
     "HostUp sells KVM virtual private servers in seven fixed sizes: VPS Nano (1 vCPU / 2 GB / 25 GB), XS (2 / 4 / 50), SM (4 / 8 / 100), MED (8 / 16 / 200), LG (16 / 32 / 400), XL (16 / 64 / 800) and XXL (32 / 128 / 1,600). Every plan includes root, a public IPv4, NVMe storage mirrored across several servers, 1–32 TB of monthly bandwidth, weekly backups and a browser VNC console. All servers run in one data hall in Älvsjö, Stockholm, in two availability zones.",
@@ -162,10 +162,10 @@
       },
       {
         "label": "Status page",
-        "value": "A public status page with incidents, maintenance and a 90-day uptime figure, which read 99.992% on 2026-10-30.",
+        "value": "A public status page with incidents, maintenance and a 90-day uptime figure, which read 99.995% on 2026-11-12.",
         "source": {
           "url": "https://status.hostup.se/",
-          "quote": "99.992% uptime over 90 days",
+          "quote": "99.995% uptime over 90 days",
           "confidence": "docs-confirmed"
         }
       },
@@ -240,9 +240,9 @@
   },
   "caveats": [
     {
-      "issue": "HostUp's pages disagree on whether the plan price includes VAT",
-      "detail": "The price calculator shows a subtotal marked \"excl. VAT\" with a 25% VAT line under it; the cart labels the same €4.90 total \"inc. VAT\". The terms make the display a customer choice, so both modes exist. The card follows the calculator and calls its figures ex-VAT: a private customer in Sweden would then pay 25% more (VPS XS $5.72 becomes $7.15). If the cart's label is the literal one, the €4.90 already includes VAT, the ex-VAT price is €3.92 ($4.58), and the card overstates a business buyer's cost by 25% while a Swedish private buyer pays the same either way. Settle this with HostUp before publication.",
-      "status": "contradiction",
+      "issue": "HostUp's pages do not say plainly whether the plan price includes VAT",
+      "detail": "The price calculator shows a subtotal marked \"excl. VAT\" with a 25% VAT line for private EU customers; the cart shows the same €4.90 total with no VAT line or label, and the terms let the customer choose how prices display. The card follows the calculator and calls its figures ex-VAT: a private customer in Sweden would then pay 25% more (VPS XS $5.72 becomes $7.15).",
+      "status": "open",
       "evidence": [
         {
           "url": "https://hostup.se/en/pricecalculator/",
@@ -251,8 +251,13 @@
         },
         {
           "url": "https://cloud.hostup.se/cart/en/vps/xs",
-          "quote": "VPS XS · Total (inc. VAT)",
+          "quote": "VPS XS · Total€4,90 /mo",
           "confidence": "pricing-page"
+        },
+        {
+          "url": "https://hostup.se/legal/terms-of-service-en.pdf",
+          "quote": "The total to pay is shown before you order.",
+          "confidence": "docs-confirmed"
         }
       ]
     },
@@ -278,7 +283,7 @@
     },
     {
       "issue": "HostUp's own pages give four different endpoint counts",
-      "detail": "The home page says 336 documented endpoints, the VPS page says over 300, the developer page says 383 and the support index says 300+. The model says 300+ and quotes 383 where a figure is needed; no verdict depends on the count.",
+      "detail": "The home page says 336 documented endpoints under a 300+ heading, the VPS page says over 300, the developer site says 386 and the support index says 300+. The model says 300+ and quotes 386 where a figure is needed; no verdict depends on the count.",
       "status": "contradiction",
       "evidence": [
         {
@@ -288,7 +293,7 @@
         },
         {
           "url": "https://developer.hostup.se/",
-          "quote": "383 documented endpoints cover the things you manage in the HostUp dashboard.",
+          "quote": "All 386 endpoints, each with its fields, scopes, examples and errors.",
           "confidence": "docs-confirmed"
         }
       ]
@@ -313,7 +318,7 @@
     "A full Linux VM with root, Docker, a public IPv4 and 50 GB of NVMe for $5.72 a month, in the EU.",
     "About 380 documented API endpoints, an OpenAPI spec and a hosted MCP server that Claude, ChatGPT, Cursor or Codex can drive, with purchases confirmed in the browser.",
     "Weekly backups, DDoS scrubbing, IPv6 (/48 routed on request) and a browser console included at no extra cost.",
-    "Swedish ownership, own hardware in Stockholm, a DPA that applies automatically, and a public status page showing 99.992% over 90 days.",
+    "Swedish ownership, own hardware in Stockholm, a DPA that applies automatically, and a public status page showing 99.995% over 90 days.",
     "Predictable billing: the plan price is the whole machine charge, and 1–32 TB of transfer is included."
   ],
   "sources": [

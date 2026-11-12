@@ -1,6 +1,6 @@
 {
   "provider": "tierhive",
-  "checkedOn": "2026-11-04",
+  "checkedOn": "2026-11-12",
   "summary": "A build-your-own NAT server billed by the hour from three published resource rates (RAM per MB-hour, NVMe per GB-hour, optional priority tiers), with a one-hour minimum per server and, per the operator, only storage billed while it is powered off.",
   "shapes": [
     {

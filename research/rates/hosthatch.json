@@ -1,6 +1,6 @@
 {
   "provider": "hosthatch",
-  "checkedOn": "2026-11-04",
+  "checkedOn": "2026-11-12",
   "summary": "One prepaid monthly plan per fixed-size VM: the price is quoted per month, the terms invoice monthly, quarterly, semi-annually or annually, and a powered-off server keeps billing until the paid term ends. There is no hourly or per-second meter.",
   "shapes": [
     {

@@ -728,3 +728,7 @@ Window 6 August to 4 November 2026, provider's own status page only (see `resear
 
 - Site fact: By this guide's count, 58 status-page incidents from 6 August to 4 November 2026 name Workers, Containers or Durable Objects, most of them other Workers products. Two were about Containers, which Sandbox runs on; the longer lasted 1 hour 11 minutes on 3 November.
 - Source: https://www.cloudflarestatus.com/incidents/n5mvqjs26jg9 — "Cloudflare Container Issues Started Nov 3, 2026, 04:12 UTC Resolved Nov 3, 2026, 05:23 UTC" (docs-confirmed)
+
+## Recheck, 12 November 2026
+
+Superseded where they differ by [cloudflare-sandbox-recheck-2026-11-12.md](cloudflare-sandbox-recheck-2026-11-12.md): custom sizes from 1/16 vCPU / 256 MiB / 2 GB, five startable presets (`basic` rejected), the 3 GiB-per-vCPU rule contested between the limits page and the 29 September changelog, account concurrency 15,000 vCPU / 60 TiB / 300 TB, outbound intercepts (128 entries, 100 MiB request bodies) replacing allowedHosts, a 648 ms median start, `exec({ pty })`, the experimental Agents SDK container harness, and the 24 September cross-tenant disk-block disclosure. Rates and allowances are unchanged; A/B/C stay on the standard presets.

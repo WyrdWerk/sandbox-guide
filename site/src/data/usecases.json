@@ -132,7 +132,7 @@
         },
         {
           "provider": "e2b",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
           "what": "E2B ships a ready-made hermes template you start from its command line. Sessions end after 24 hours on Pro and one hour on the free plan, so it suits Hermes doing tasks better than an assistant that never stops.",
           "link": {
@@ -144,7 +144,7 @@
           "provider": "daytona",
           "tier": "backend",
           "noTerminal": "partly",
-          "what": "A built-in Hermes backend: Hermes on your own machine starts, stops and resumes a Daytona sandbox for its commands. Daytona's dashboard Playground opens a browser terminal if you want to host it there instead.",
+          "what": "Hermes has a built-in Daytona terminal backend, but it is written for the 1.x API (the 2.0 docs call it v0), with stop and resume. A 2.0 Linux sandbox has no stop, so the backend as documented does not map onto 2.0; host Hermes inside a 2.0 sandbox only if you can live without resume.",
           "link": {
             "title": "Hermes: Daytona backend",
             "url": "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
@@ -184,7 +184,7 @@
           "provider": "blaxel",
           "tier": "manual",
           "noTerminal": "no",
-          "what": "Possible in a sandbox with a volume for its files, installed by hand. Blaxel's agent hosting caps a run at 15 minutes, so it is not the place for an always-on assistant.",
+          "what": "Possible in a sandbox with a volume for its files, installed by hand; there is no Hermes template.",
           "link": {
             "title": "Blaxel: get started",
             "url": "https://docs.blaxel.ai/Get-started.md"
@@ -528,12 +528,12 @@
         },
         {
           "provider": "daytona",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "partly",
-          "what": "OpenClaw publishes a Daytona guide, and OpenClaw is preinstalled in Daytona's default image. Create the sandbox with auto-stop off, connect over SSH and run onboarding.",
+          "what": "Daytona says OpenClaw is preinstalled in the default image. Create a sandbox, connect over SSH, run onboarding, keep the gateway on loopback and open the dashboard through a signed preview link. The guide still uses 1.x flags, and the sandbox is deleted at the 24-hour session cap.",
           "link": {
-            "title": "OpenClaw on Daytona",
-            "url": "https://docs.openclaw.ai/install/daytona"
+            "title": "Daytona: run OpenClaw in a sandbox",
+            "url": "https://www.daytona.com/docs/guides/openclaw/openclaw-run-secure-sandbox"
           }
         },
         {
@@ -548,7 +548,7 @@
         },
         {
           "provider": "e2b",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
           "what": "A ready-made openclaw template and a gateway guide. Sessions end after 24 hours on Pro, so staying on needs your own restart logic.",
           "link": {
@@ -825,9 +825,9 @@
         {
           "provider": "daytona",
           "for": "If you want OpenClaw's own guide",
-          "why": "OpenClaw documents Daytona itself, and the default image already has it installed. $200 of free compute covers the first month or so.",
-          "watch": "Each sandbox's disk is capped at 10 GiB, and a 2 vCPU / 4 GiB machine on all month is about $122.",
-          "link": "https://docs.openclaw.ai/install/daytona"
+          "why": "Daytona says OpenClaw is preinstalled in its default image, and $200 of free credit covers about seven weeks of a 2 vCPU / 4 GiB box left running.",
+          "watch": "The sandbox is deleted at the 24-hour session cap, so the setup must be recreated or kept on a volume; the guide still uses 1.x flags. Running all month is about $121 before the volume.",
+          "link": "https://www.daytona.com/docs/guides/openclaw/openclaw-run-secure-sandbox"
         },
         {
           "provider": "digitalocean",
@@ -1063,29 +1063,29 @@
         },
         {
           "provider": "e2b",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "An official guide for running Claude Code, Codex and Amp in E2B sandboxes from code.",
+          "what": "Ready-made claude, codex and amp templates; choose one when creating a sandbox from code.",
           "link": {
             "title": "E2B: coding agents",
-            "url": "https://e2b.dev/docs/use-cases/coding-agents"
+            "url": "https://docs.e2b.dev/use-cases/coding-agents"
           }
         },
         {
           "provider": "daytona",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "An official guide for running Claude Code in a sandbox from the Daytona command line.",
+          "what": "Daytona says Claude Code is in the default image, and Codex, Gemini CLI, Amp, Kiro and OpenCode each have a first-party guide. The repository and agent login need a volume, because the sandbox disk is wiped and each session ends at 24 hours.",
           "link": {
             "title": "Daytona: Claude Code",
-            "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox"
+            "url": "https://www.daytona.com/docs/guides/claude/claude-code-run-cli-sandbox"
           }
         },
         {
           "provider": "cloudflare-sandbox",
           "tier": "guide",
           "noTerminal": "no",
-          "what": "An official guide: Claude Code edits a GitHub repository in a sandbox and returns a diff.",
+          "what": "An official guide: Claude Code edits a GitHub repository in a sandbox and returns a diff. An experimental Agents SDK harness also runs Claude Code or Codex with no Dockerfile.",
           "link": {
             "title": "Cloudflare: Claude Code",
             "url": "https://developers.cloudflare.com/sandbox/coding-agents/claude-code/"
@@ -1190,12 +1190,12 @@
         },
         {
           "provider": "blaxel",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "An official tutorial runs Claude Code in a sandbox against a codebase in a second sandbox, with a login on your own Anthropic account.",
+          "what": "Choose the claude-code or codex image when creating a sandbox and sign in with your own account; an official tutorial also runs Claude Code against a codebase in a second sandbox.",
           "link": {
-            "title": "Blaxel: run Claude Code in a sandbox",
-            "url": "https://docs.blaxel.ai/Tutorials/Claude-Code"
+            "title": "Blaxel: prebuilt images",
+            "url": "https://docs.blaxel.ai/Sandboxes/Templates.md"
           },
           "price": null
         },
@@ -1234,12 +1234,12 @@
         },
         {
           "provider": "sprites",
-          "tier": "manual",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "Install Claude Code yourself in a Sprite; the whole filesystem persists and the Sprite wakes on a command or request. No Claude Code guide.",
+          "what": "Claude Code, Codex, Gemini CLI and Cursor are in the default image; sign in with your own account. The whole filesystem persists and the Sprite wakes on a command or request.",
           "link": {
-            "title": "Sprites: quickstart",
-            "url": "https://docs.fly.io/sprites/quickstart.md"
+            "title": "Sprites: working with Sprites",
+            "url": "https://docs.fly.io/sprites/working-with-sprites.md"
           },
           "price": null
         },
@@ -1416,10 +1416,10 @@
           "provider": "daytona",
           "tier": "guide",
           "noTerminal": "no",
-          "what": "Sandboxes started from an SDK, billed per second, with $200 of free compute.",
+          "what": "Sandboxes started from an SDK with Python, TypeScript and JavaScript kernels, billed per second, with $200 of free credit. Each run is a fresh VM, so results must leave the sandbox before it is deleted.",
           "link": {
-            "title": "Daytona docs",
-            "url": "https://www.daytona.io/docs/en/"
+            "title": "Daytona: code execution",
+            "url": "https://www.daytona.com/docs/code-execution"
           }
         },
         {
@@ -1732,7 +1732,7 @@
           "provider": "cloudflare-sandbox",
           "for": "If your app already runs on Cloudflare",
           "why": "Started from a Worker next to your code, with CPU billed only while working.",
-          "watch": "The smallest size that has 2 vCPU also has 8 GiB of memory, which you pay for. There is a $5 monthly account minimum.",
+          "watch": "The smallest preset with 2 vCPU also has 8 GiB of memory, which you pay for; a custom shape with less memory is documented, but Cloudflare’s pages disagree on the minimum. There is a $5 monthly account minimum.",
           "link": "https://developers.cloudflare.com/containers/platform/pricing/"
         }
       ],
@@ -1936,12 +1936,12 @@
         },
         {
           "provider": "daytona",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "An official computer-use guide starts Xvfb, XFCE and VNC in a sandbox and drives the desktop with screenshots, clicks and keys through the SDK.",
+          "what": "Chromium is in the standard image and a 1280x720 desktop ships with the runtime, so computer use works on a default sandbox through the SDK. The desktop is Linux-only and the sandbox is deleted at the session cap.",
           "link": {
             "title": "Daytona: computer use",
-            "url": "https://www.daytona.io/docs/en/computer-use"
+            "url": "https://www.daytona.com/docs/computer-use"
           },
           "price": null
         },
@@ -2026,7 +2026,7 @@
           "provider": "sprites",
           "tier": "manual",
           "noTerminal": "no",
-          "what": "No browser or desktop image. Install Playwright and Chromium with two commands, or run Xvfb and a VNC server yourself; the Sprite keeps the install between sessions.",
+          "what": "No browser in the default image. Ticking Computer use on a Cursor Cloud Agents machine installs Xfce and Chrome; otherwise install Playwright and Chromium yourself, and the Sprite keeps the install between sessions.",
           "link": {
             "title": "Sprites: working with Sprites",
             "url": "https://docs.fly.io/sprites/working-with-sprites.md"
@@ -2129,9 +2129,9 @@
         {
           "provider": "daytona",
           "for": "Computer use from code",
-          "why": "Documents computer use, with sandboxes started from an SDK and per-second billing.",
-          "watch": "Each sandbox's disk is capped at 10 GiB.",
-          "link": "https://www.daytona.io/docs/en/"
+          "why": "Chromium is in the standard image, the desktop ships with the runtime, and computer use is an SDK API with per-second billing.",
+          "watch": "The desktop is 1280x720 and Linux-only, there is no GPU desktop, and the sandbox is deleted at the session cap.",
+          "link": "https://www.daytona.com/docs/computer-use"
         },
         {
           "provider": "freestyle",
@@ -2245,10 +2245,10 @@
           "provider": "daytona",
           "tier": "manual",
           "noTerminal": "partly",
-          "what": "Create a sandbox with auto-stop turned off (it stops after 15 idle minutes by default), install n8n with npm and make its port public. n8n names Daytona as the sandbox for its own AI Assistant feature, which is not the same as hosting n8n there.",
+          "what": "Create a Linux sandbox with an explicit timeout, install n8n with npm and make its port public. The sandbox is deleted at 24 hours on Starter, so the database and encryption key must live on a volume and something outside Daytona must recreate the machine.",
           "link": {
-            "title": "Daytona: auto-stop",
-            "url": "https://www.daytona.io/docs/en/sandboxes#auto-stop-interval"
+            "title": "Daytona: timeouts",
+            "url": "https://www.daytona.com/docs/linux-sandboxes#timeouts"
           }
         },
         {
@@ -2747,10 +2747,10 @@
           "provider": "daytona",
           "tier": "manual",
           "noTerminal": "partly",
-          "what": "Create a sandbox with auto-stop off (the default is 15 idle minutes), install the bot and keep it running under a process manager. No bot guide.",
+          "what": "Create a sandbox with an explicit timeout, install the bot under a process manager and keep its token and history on a volume. The sandbox is deleted at 24 hours and the bot must reconnect in a new one. No bot guide.",
           "link": {
-            "title": "Daytona: auto-stop",
-            "url": "https://www.daytona.io/docs/en/sandboxes#auto-stop-interval"
+            "title": "Daytona: timeouts",
+            "url": "https://www.daytona.com/docs/linux-sandboxes#timeouts"
           }
         },
         {
@@ -3070,7 +3070,7 @@
       "seoTitle": "Claude Code in the cloud for a team: setup and costs",
       "kicker": "Coding team",
       "question": "Three to five of us want Claude Code running on cloud machines, each with our own login, without sharing one account.",
-      "standfirst": "Claude Code is built for one person on one machine. For a team that means one machine per developer, each signed in with that developer's own account. Six providers ship it preinstalled and one sets it up in one click; the catch is how logins are kept.",
+      "standfirst": "Claude Code is built for one person on one machine. For a team that means one machine per developer, each signed in with that developer's own account. Ten providers ship it preinstalled and one sets it up in one click; the catch is how logins are kept.",
       "preset": "team",
       "whatItIs": [
         "[Claude Code](https://code.claude.com/docs/en/overview) is Anthropic's coding agent. A developer starts it in a repository and asks for a change; it reads and edits files and runs commands and tests on the machine where it runs.",
@@ -3120,7 +3120,7 @@
           "provider": "boat",
           "tier": "preinstalled",
           "noTerminal": "partly",
-          "what": "Claude Code is one of seven coding agents on every sandbox. Create one per developer from the dashboard or command line, then run claude.",
+          "what": "Claude Code is one of seven coding agents on every sandbox. Create one per developer from the command line or API, then run claude.",
           "link": {
             "title": "Boat: harnesses and models",
             "url": "https://docs.boat.dev/integrated-agents/harnesses-and-models"
@@ -3168,17 +3168,17 @@
         },
         {
           "provider": "daytona",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "partly",
-          "what": "An official command-line guide. The dashboard Playground opens a terminal in the browser, so nothing is installed locally, but setup is typed commands.",
+          "what": "Daytona says Claude Code is in the default image. One sandbox per developer, each signed in with their own account. Five people need the Team plan, because Starter allows three members, and each sandbox needs a volume for the repository and ~/.claude.",
           "link": {
             "title": "Daytona: Claude Code",
-            "url": "https://www.daytona.io/docs/en/guides/claude/claude-code-run-cli-sandbox"
+            "url": "https://www.daytona.com/docs/guides/claude/claude-code-run-cli-sandbox"
           }
         },
         {
           "provider": "e2b",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
           "what": "A prebuilt claude template and a guide, made for a fresh sandbox per task started from code rather than each developer's own machine.",
           "link": {
@@ -3208,12 +3208,12 @@
         },
         {
           "provider": "blaxel",
-          "tier": "guide",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "A written tutorial for running Claude Code in a Blaxel sandbox against a codebase, with command-line and code steps.",
+          "what": "The claude-code image ships the CLI, and each developer signs in to their own sandbox; there is no team-specific guide.",
           "link": {
-            "title": "Blaxel: Claude Code",
-            "url": "https://docs.blaxel.ai/Tutorials/Claude-Code"
+            "title": "Blaxel: prebuilt images",
+            "url": "https://docs.blaxel.ai/Sandboxes/Templates.md"
           }
         },
         {
@@ -3228,22 +3228,22 @@
         },
         {
           "provider": "runtime",
-          "tier": "manual",
+          "tier": "guide",
           "noTerminal": "no",
-          "what": "A sandbox opens with a shell in the browser and can run it, but there is no Claude Code guide or template.",
+          "what": "A first-party guide installs Claude Code from npm in a microVM, keeps the key in a host-side secret and returns the diff; each developer needs their own sandbox and credentials. A private-beta Agents product can also run a Claude Code session per prompt.",
           "link": {
-            "title": "Runtime: getting started",
-            "url": "https://withruntime.com/docs/start"
+            "title": "Runtime: run Claude Code in a sandbox",
+            "url": "https://withruntime.com/integrations/claude-code"
           }
         },
         {
           "provider": "sprites",
-          "tier": "manual",
+          "tier": "preinstalled",
           "noTerminal": "no",
-          "what": "Sprites documents Claude Managed Agents, a different Anthropic product, not Claude Code. Installing it in a Sprite is by hand.",
+          "what": "Claude Code is in the default image. One Sprite per developer and each developer's sign-in are set up by hand; the Claude Managed Agents page is a different Anthropic product.",
           "link": {
-            "title": "Sprites: Claude Managed Agents",
-            "url": "https://docs.fly.io/sprites/integrations/claude-managed-agents.md"
+            "title": "Sprites: working with Sprites",
+            "url": "https://docs.fly.io/sprites/working-with-sprites.md"
           }
         },
         {
@@ -3617,10 +3617,10 @@
           "provider": "daytona",
           "tier": "manual",
           "noTerminal": "no",
-          "what": "No scheduler found. A scheduler of your own calls Daytona's API to create a sandbox for each run.",
+          "what": "No scheduler. A scheduler of your own calls the API to create a sandbox for each run, writes results to a volume or your own storage, and lets the timeout delete it.",
           "link": {
-            "title": "Daytona docs",
-            "url": "https://www.daytona.io/docs/en/"
+            "title": "Daytona: quickstart",
+            "url": "https://www.daytona.com/docs/quickstart"
           }
         },
         {
@@ -4046,10 +4046,10 @@
           "provider": "daytona",
           "tier": "manual",
           "noTerminal": "no",
-          "what": "Daytona's own MCP server lets an AI agent control Daytona sandboxes. Hosting your own server is a manual install with no guide.",
+          "what": "Daytona's own MCP server lets an AI agent control Daytona sandboxes. Hosting your own server is manual: there is no wake-on-request, the sandbox is recreated at the 24-hour cap and its preview URL changes, so you need your own proxy or a Team custom domain in front.",
           "link": {
-            "title": "Daytona: its MCP server",
-            "url": "https://www.daytona.io/docs/en/mcp"
+            "title": "Daytona: preview URLs",
+            "url": "https://www.daytona.com/docs/preview"
           }
         },
         {
@@ -4119,7 +4119,7 @@
           "provider": "freestyle",
           "tier": "manual",
           "noTerminal": "no",
-          "what": "Run your MCP server in a VM and route a style.dev domain to its port; forward auth can gate it. There is no MCP template and no MCP server for controlling Freestyle.",
+          "what": "Run your MCP server in a VM and route a style.dev domain to its port; forward auth can gate it. There is no MCP template; Freestyle's own MCP server controls VMs rather than hosting yours.",
           "link": {
             "title": "Inbound TLS",
             "url": "https://www.freestyle.sh/docs/vms/network/tls-inbound"
@@ -4212,7 +4212,7 @@
             "title": "Scaleway: security groups",
             "url": "https://www.scaleway.com/en/docs/instances/how-to/use-security-groups/"
           },
-          "price": "STARDUST1-S (1 vCPU / 1 GiB) $5.61 a month including IPv4 if it can be ordered; DEV1-S $12.41"
+          "price": "STARDUST1-S (1 vCPU / 1 GiB) $5.61 a month including IPv4, one per Organization; DEV1-S $12.41"
         },
         {
           "provider": "tierhive",

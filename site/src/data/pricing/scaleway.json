@@ -1,6 +1,6 @@
 {
   "provider": "scaleway",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "Fixed-size Instances billed by the hour with a 60-minute minimum, where powering off stops the compute meter but block storage and a flexible IPv4 keep billing; disk is a separate block volume, not part of the shape.",
   "shapes": [
     {
@@ -329,7 +329,7 @@
     "Powering an Instance off stops compute billing; attached storage and any reserved flexible IPv4 keep billing. Standby mode is different: the Instance stays allocated and is billed in full.",
     "Disk is a separate volume and the card prices Block Storage 5K for every shape at €0.000130/GB/hour. That is the only storage option on BASIC3, PLAY2, PRO2 and BASIC2-A, and a valid option on DEV1, GP1 and STARDUST1. Those three ranges can attach local SSD instead at €0.000049/GB/hour, which is 2.65× cheaper: the engine has one disk rate per plan and one stopped rate for the whole card, so pricing both classes in one card would misprice stopped block volumes. On local SSD, B would be 0.86 instead of 4.15 and C .88 instead of .20.",
     "Snapshots, images and Object Storage are separate products and are not in the calculator. Snapshots and unified snapshots are €0.000049/GB/hour; creating an image is free but its snapshots bill.",
-    "STARDUST1-S is included at its list price (€0.0006/hour, about €0.44 a month) although it is absent from the default Instance quota table read on 2026-10-30; its availability on a new account is unconfirmed.",
+    "STARDUST1-S is included at its list price (€0.0006/hour, about €0.44 a month); the default quota allows one per Organization.",
     "The 15K block tier, GPU Instances, dedicated-vCPU STANDARD3/POP2 ranges, Elastic Metal and Savings Plans (up to 25% off for an hourly commitment) are outside this card.",
     "BASIC2-A shapes are arm64 (Ampere); the calculator may pick one for large workloads, so check that the agent binaries exist for Arm.",
     "Default per-type quotas are small (DEV1-M 8 Instances with a validated payment method, 15 with identity validated; PLAY2-NANO 5/10; GP1-XS 1/4), so a fan-out of hundreds of simultaneous machines is not available without a quota increase.",

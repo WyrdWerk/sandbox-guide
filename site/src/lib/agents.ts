@@ -69,11 +69,36 @@ function rank(preset: string) {
 }
 
 /** Head-to-head pairs and alternatives pages; an unknown provider id fails the build. */
-export const comparisons = comparisonData as { pairs: [string, string][]; alternatives: string[] };
+/** Our hand-written reading of one feature for one pair: which side does it better, and why. */
+export interface Edge {
+  /** A provider id from the pair, "even" when they are about the same, or "tradeoff" when each wins a different part. */
+  edge: string;
+  why: string;
+}
+export const comparisons = comparisonData as {
+  pairs: [string, string][];
+  alternatives: string[];
+  /** Keyed by pair slug, then feature id. A pair with edges must judge every feature. */
+  edges?: Record<string, Record<string, Edge>>;
+};
 for (const id of [...comparisons.pairs.flat(), ...comparisons.alternatives]) {
   if (!providerById.get(id)) throw new Error(`Content check failed: comparisons.json names unknown provider "${id}"`);
 }
 export const pairSlug = (a: string, b: string) => `${a}-vs-${b}`;
+for (const [slug, edges] of Object.entries(comparisons.edges ?? {})) {
+  const pair = comparisons.pairs.find(([a, b]) => pairSlug(a, b) === slug);
+  if (!pair) throw new Error(`Content check failed: comparisons.json has edges for unknown pair "${slug}"`);
+  for (const f of features) {
+    const e = edges[f.id];
+    if (!e) throw new Error(`Content check failed: ${slug} has no edge for feature "${f.id}"`);
+    if (![...pair, "even", "tradeoff"].includes(e.edge) || !e.why?.trim()) {
+      throw new Error(`Content check failed: ${slug} edge for "${f.id}" needs a provider from the pair, "even" or "tradeoff", and a reason`);
+    }
+  }
+  for (const id of Object.keys(edges)) {
+    if (!features.some((f) => f.id === id)) throw new Error(`Content check failed: ${slug} has an edge for unknown feature "${id}"`);
+  }
+}
 
 /** The use-case workloads, one per preset, in guide order. */
 export const workloads = [...new Set(useCases.map((u) => u.preset))].map((id) => ({ id, label: presets[id].label }));

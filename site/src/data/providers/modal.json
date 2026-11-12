@@ -3,7 +3,7 @@
   "name": "Modal",
   "url": "https://modal.com",
   "status": "researched",
-  "checkedOn": "2026-10-28",
+  "checkedOn": "2026-11-12",
   "oneLiner": "gVisor containers by default with a five-minute lifetime, no pause at all, and a CPU unit that may be one or two vCPUs depending on which reading you trust.",
   "whatItIs": [
     "Modal Sandboxes are short-lived Linux containers for running untrusted code inside Modal's serverless platform. You create one from Python, JavaScript or Go, run commands over an API, and either let it expire or terminate it.",

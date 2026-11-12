@@ -506,3 +506,8 @@ for them. It is a proposal only — no engine or test file was modified for this
 - Capability `no` rows whose quote does not itself say no were retagged from `docs-confirmed`/`pricing-page` to `inferred`: fast-start, agents-preinstalled, one-click-hermes, one-click-openclaw, desktop, open-source. Kept as quoted negatives: `sla` ("We do not guarantee any specific uptime or Service Level Agreement (SLA)"), `flat-price` ("no monthly commitments"), `per-second` (operator forum post, third-party).
 - Some ledger rows above join two quotes with "…"; each fragment matched separately. None of those joined strings is used in the site data.
 - Price baseline not updated: `check-rates` shows four TierHive sources as NEW, but `--update` would also bless nine unreviewed CHANGED sources for other providers.
+
+## Recheck, 12 November 2026
+
+Rechecked with the rest of VPS group 3: [vps-group3-recheck-2026-11-12.md](vps-group3-recheck-2026-11-12.md). No price or shape changed. The earlier ledger is kept as written.
+- HDD is offered in three locations (Singapore, Sydney, Vint Hill), not four: the price feed marks London `has_slow_storage: 0`. Status 99.93–100% on 12 Nov.

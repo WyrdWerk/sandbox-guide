@@ -695,3 +695,8 @@ Window 6 August to 4 November 2026, provider's own status page only (see `resear
 
 - Site fact: By this guide's count, the status page lists 15 incidents from 6 August to 4 November 2026. The most severe, on 24 August, gave control-panel and API users errors peaking at 25% for 3.5 hours within a 6-hour span.
 - Source: https://status.digitalocean.com/incidents/4qwm6pzlx1z3 — "Between 16:56 UTC and 23:09 UTC on August 24, 2026, customers using DigitalOcean’s Cloud Control Panel, Public API, and dependent product management systems experienced elevated request error rates, peaking at 25%, in two distinct windows totaling 3.5 hours of active degradation within a 6-hour span." (docs-confirmed)
+
+## Recheck, 12 November 2026
+
+Rechecked with the rest of VPS group 1: [vps-group1-recheck-2026-11-12.md](vps-group1-recheck-2026-11-12.md). The earlier ledger is kept as written.
+- No price changed. New Omarchy 1-Click desktop (browser/RDP), OpenCode and Codex Universal images; Private Droplets GA. `desktop` now yes.

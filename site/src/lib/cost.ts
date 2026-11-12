@@ -154,7 +154,8 @@ export interface RateCard {
   /** One sentence: how this provider turns time into money. */
   summary: string;
   /** Per-resource rates, USD per hour. Omitted parts cost nothing extra. */
-  cpu?: { rate: number; billing: "allocated" | "active"; floor?: number; unit?: string };
+  /** `floor` is a minimum billed vCPU count; `floorShare` a minimum billed share of the allocated vCPU (Tensorlake: 0.2). */
+  cpu?: { rate: number; billing: "allocated" | "active"; floor?: number; floorShare?: number; unit?: string };
   ram?: { rate: number; billing?: "allocated" | "requested" };
   /** Morph-style unit: the hourly price is the largest of vCPU, RAM/ramPer and disk/diskPer. */
   mcu?: { rate: number; ramPer: number; diskPer: number };
@@ -418,7 +419,7 @@ function priceOnPlan(base: RateCard, w: Workload, plan: Plan): Quote {
     if (card.cpu) {
       const c = card.cpu;
       if (c.billing === "active") {
-        const used = Math.max(c.floor ?? 0, vcpu * w.busy);
+        const used = Math.max(c.floor ?? 0, vcpu * (c.floorShare ?? 0), vcpu * w.busy);
         lines.push({
           label: "CPU, while working",
           math: `${runH} h × ${num(used)} vCPU busy × ${rate(c.rate)}`,

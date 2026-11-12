@@ -1,6 +1,6 @@
 {
   "provider": "hetzner",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "summary": "A fixed-size server billed by the hour but never more than its monthly price, from creation until deletion; a powered-off server costs the same as a running one.",
   "shapes": [
     {
@@ -82,12 +82,13 @@
     }
   ],
   "notes": [
+    "Shapes are priced at the Falkenstein/Nuremberg tier. Helsinki is now about 15% cheaper (CPX22 $19.49 against $22.99); the calculator does not pick a location.",
     "These are Hetzner's own USD prices for the EU network zone (Falkenstein, Nuremberg, Helsinki), read from the price API the plan pages use. US and Singapore plans are priced separately and higher.",
     "A public IPv4 is billed separately at $0.60 a month or $0.001 an hour per server, and the calculator includes it. A server with only an IPv6 address (free) costs $0.60 a month less.",
     "Each server's usage is rounded up to a whole hour, so a ten-minute task on its own server bills a full hour. The calculator rounds each task up the same way.",
     "A powered-off server is billed in full until it is deleted: there is no pause, sleep or cheaper stopped-storage rate. billedWhileStopped applies the running hourly rate to stopped hours.",
     "The bill is capped at each server's monthly price, which binds at about 624 hours at these rates. shape.monthly applies that cap to machines mode.",
-    "Snapshots, backups, volumes, Floating IPs and load balancers are separate products and are not priced by this card. Hetzner no longer publishes a snapshot rate on its live pricing pages: the API exposes an image price per GB-month (and a 20% backup surcharge) but needs a token to read, and the last figure visible on a legacy page variant was €0.011/$0.0130 per GB-month, unverified today.",
+    "Snapshots, backups, volumes, Floating IPs and load balancers are separate products and are not priced by this card. Hetzner's public price API lists snapshots at €0.0143/$0.0199 per GB-month of compressed size; backups add 20% to the server price.",
     "Out of stock: the cheaper Cost-Optimized plans are listed at CX23 2 vCPU / 4 GB / 40 GB €5.99; CAX11 (Arm) 2 / 4 / 40 €6.49; CX33 4 / 8 / 80 €8.99; CAX21 (Arm) 4 / 8 / 80 €10.99; CX43 8 / 16 / 160 €16.49; CAX31 (Arm) 8 / 16 / 160 €21.49; CX53 16 / 32 / 320 €29.99; CAX41 (Arm) 16 / 32 / 320 €41.49 a month (EU prices before VAT and the separate IPv4 charge), but every one is marked 'not available' with 'This product is currently unavailable. Please check back later.' (checked 30 October 2026). They are not priced by the calculator until Hetzner sells them again; when it does, a 2 vCPU / 4 GB server costs about a third of the CPX22 used here."
   ],
   "sources": [

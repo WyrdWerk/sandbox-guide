@@ -1,6 +1,6 @@
 {
   "provider": "sandboxer",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "summary": "A fixed multiplier per size, per second while running, out of a plan whose dollars come back as machine time.",
   "shapes": [
     {
@@ -64,7 +64,10 @@
   ],
   "notes": [
     "Storage counts against an included quota and is not billed; going over blocks new sandboxes.",
-    "Plans are per seat in an organisation."
+    "Plans are per seat in an organisation.",
+    "Stopped data is kept 14 days after the last stop, then deleted; sandboxes created before 29 October 2026 are exempt.",
+    "No free trial: the first month is charged at subscribe.",
+    "Starts above the plan's per-minute, hour or day limits cost $0.03, $0.05 or $0.07 each up to 3×, from prepaid credit; not modelled here."
   ],
   "sources": [
     {

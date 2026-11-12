@@ -255,3 +255,7 @@ Window 6 August to 4 November 2026, provider's own status page only (see `resear
 
 - Site fact: By this guide's count, the status page lists 2 Sandbox incidents from 6 August to 4 November 2026. The larger was slow VCR, Blob and Sandbox APIs on 4 September, resolved at 20:27 UTC.
 - Source: https://www.vercel-status.com/incidents/b6s5qz7tj35w — "Elevated latency in VCR, Blob, and Sandbox API Incident Report for Vercel Resolved Blob has fully recovered. This incident has been resolved. Posted Sep 04 , 2026 - 20:27 UTC" (docs-confirmed)
+
+## Recheck, 12 November 2026
+
+See [vercel-sandbox-recheck-2026-11-12.md](vercel-sandbox-recheck-2026-11-12.md). rest-api and mcp-server are now yes (documented Sandboxes REST group and Vercel MCP tools, no launch date), mount-buckets yes (S3 through FUSE), static-ip partly (Enterprise Secure Compute), no-card yes (inferred from the trial path). Rates unchanged. New adjacent charges: Container Registry storage $0.10/GB, Secure Compute private transfer $0.15/GB.

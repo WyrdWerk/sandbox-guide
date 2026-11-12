@@ -1,6 +1,440 @@
 {
   "changes": [
     {
+      "date": "2026-11-12",
+      "title": "Daytona 2.0 replaces the container platform with VMs and a 24-hour session cap",
+      "provider": "daytona",
+      "what": "Daytona launched 2.0 on daytona.com on 1 November 2026 and the guide now describes it instead of 1.x at daytona.io. Sandboxes are Firecracker, Cloud Hypervisor or Apple VMs with custom sizes from 0.125 to 16 cores; Linux has no stop, pause or fork, the disk is ephemeral, and every sandbox is deleted at a 24-hour (Starter) or 48-hour (Team) timeout, so persistence means a volume. Prices are per core-hour ($0.101 on demand, $0.0706 spot) with memory at $0.0162/GiB-hour and free ephemeral disk. The 1.x platform (the 2.0 docs call it v0) is still live, still sold at $0.0504/vCPU-hour and shipped v0.231.0 on 7 November; no retirement date is published.",
+      "sources": [
+        {
+          "url": "https://www.daytona.com/pricing",
+          "quote": "Sessions up to 24 hours",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://www.daytona.com/changelog/daytona-2-0.md",
+          "quote": "Published: 2026-11-01 · Version: v2.0.0",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.daytona.io/changelog",
+          "quote": "Daytona 0.231.0 adds the NVIDIA L40S GPU type to the API client.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Morph: public HTTP services, a browser terminal and a shared filesystem; no custom domains",
+      "provider": "morph",
+      "what": "A recheck found Morph documents public-by-default HTTP services with an API-key option, a browser terminal, organisation roles, a 16 vCPU shape and a shared EFS filesystem, and its FAQ says custom domains are not supported yet. Its TypeScript SDK has not been released since October 2025. Rates and A/B/C are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://cloud.morph.so/docs/documentation/instances/http-services",
+          "quote": "Morph Cloud allows you to expose HTTP services running within your instances to the public internet.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://cloud.morph.so/web/product/devboxes",
+          "quote": "Custom domains aren’t supported yet.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "OVHcloud and Scaleway: official MCP servers that reach their servers",
+      "provider": "ovhcloud",
+      "what": "OVHcloud's official MCP server now has a VPS section that can start, stop, rebuild and snapshot an existing VPS, though not order one. Scaleway's official CLI runs a local MCP server exposing every command, including creating Instances. Prices are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://mcp.us.ovhcloud.com/api/mcp/sections",
+          "quote": "MCP tools to manage V1 Vps resources via the OVHcloud API.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://github.com/scaleway/scaleway-cli/blob/master/docs/commands/mcp.md",
+          "quote": "Runs the MCP server, exposing all CLI commands as MCP tools for AI assistants.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Correction: TierHive offers HDD in three locations, not four",
+      "provider": "tierhive",
+      "what": "TierHive's price feed lists large HDD storage in Singapore, Sydney and Vint Hill only; London no longer has it. Prices are unchanged.",
+      "sources": [
+        {
+          "url": "https://tierhive.com/api/pricing.php",
+          "quote": "\"slow_disk_max_gb\": 4000",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Contabo: a setup fee on monthly terms, and the GPU machine is orderable",
+      "provider": "contabo",
+      "what": "Contabo's 1-month Cloud VPS 4 now carries a €2.00 one-time setup fee; longer terms stay fee-free. The single RTX PRO 6000 GPU machine can now be ordered rather than waitlisted. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://contabo.com/en-us/vps/cloud-vps-core-4",
+          "quote": "1 Month €5.50 / month €2.00 Setup fee 3 Months €5.50 / month No Setup Fee",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://contabo.com/en-us/gpu-vps",
+          "quote": "Dedicated NVIDIA RTX PRO 6000 18 vCPU Cores・96 GB RAM・900 GB NVMe",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "DigitalOcean: a desktop image and OpenCode",
+      "provider": "digitalocean",
+      "what": "DigitalOcean's Marketplace now has an Omarchy 1-Click desktop viewable from the browser or over RDP, and an OpenCode coding-agent image. Prices are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://docs.digitalocean.com/products/marketplace/catalog/omarchy/",
+          "quote": "This 1-Click runs the full Omarchy desktop natively on your droplet, viewable from your browser",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://marketplace.digitalocean.com/apps/opencode",
+          "quote": "Deploy OpenCode, an open-source AI coding agent that runs in your terminal",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Hetzner: Helsinki is now cheaper than Nuremberg",
+      "provider": "hetzner",
+      "what": "Hetzner now prices cloud servers per location, and Helsinki is about 15% below Falkenstein and Nuremberg. This guide keeps the Nuremberg tier. Snapshots have a published rate again. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://website-price-api.hetzner.com/api/v1/products/CLOUD_24",
+          "quote": "\"USD\":\"0.019900\"",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Correction: HostHatch lists 13 locations, not 16",
+      "provider": "hosthatch",
+      "what": "HostHatch's features page lists 13 locations; its product page still says 16. This guide now uses 13. Prices are unchanged.",
+      "sources": [
+        {
+          "url": "https://hosthatch.com/features",
+          "quote": "We operate out of 13 global locations",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Modal: a computer-use example, Slack budget alerts and scoped service-user tokens",
+      "provider": "modal",
+      "what": "Modal now documents a computer-use example that runs Chromium and a VNC desktop in a VM sandbox, beta Slack alerts when a workspace or environment nears its budget, and service-user tokens limited to chosen environments on Team plans. GPU sandboxes can be preempted. Rates and A/B/C are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://modal.com/docs/examples/computer_use_vnc",
+          "quote": "The agent drives Chromium inside a Modal Sandbox running in a VM",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://modal.com/docs/guide/slack-notifications",
+          "quote": "Alerts when your Workspace approaches or reaches its usage limit or budget.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Boat keeps a stopped machine for ten minutes, and allows more paid starts",
+      "provider": "boat",
+      "what": "A stop now keeps the machine for ten minutes unbilled, so a quick resume usually returns memory, running programs and the same IP; creates, forks and resumes use machines that are already running. A stopped disk is promised for at least 14 days, and the cleanup only reports candidates in production. Paid starts now run to 6 times the hourly and daily limit, so the $20 plan allows 1,200 starts a day, and an invoice option joins the wallet. Rates and A/B/C totals are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://docs.boat.dev/snapshots/stop.md",
+          "quote": "A stop keeps the disk. A resume within 10 minutes usually gets the same machine back, with memory and running programs. Do not count on it.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.boat.dev/data-retention.md",
+          "quote": "It currently reports eligible stopped sandboxes without deleting them in production. The 14-day rule does not yet trigger deletion there.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Blaxel: ready-made agent, browser and desktop images, and lower uptime",
+      "provider": "blaxel",
+      "what": "A recheck found that Blaxel already documents images with Claude Code, Codex, Chromium, Playwright and an XFCE desktop, SSH through a Tailscale image, a call that cuts all outbound internet, and an MIT-licensed sandbox API; this guide had missed them. Its status page now shows 98.45% for sandboxes over 14 August–12 November. Prices and A/B/C are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://docs.blaxel.ai/Sandboxes/Templates.md",
+          "quote": "Claude Code CLI environment with Node.js 24 (slim)",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://status.blaxel.ai/",
+          "quote": "Sandboxes uptime from Aug 14, 2026 to Nov 12, 2026: 98.45%.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Runtime now charges before the first sandbox, and its free hours need a purchase",
+      "provider": "runtime",
+      "what": "Runtime became pay first on 10 November 2026: a new account adds credit from $10 before its first sandbox, and the first $10 is matched, so it starts with $20. The 100 free hours of a 1 GB machine still return every month, but only after the account has bought credit. SSH now works with any OpenSSH client, and a private-beta Agents product runs Claude Code, Codex or Gemini CLI per session. Sandbox rates and A/B/C are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://withruntime.com/pricing",
+          "quote": "No free usage before you pay. You add credit by card from $10",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://withruntime.com/docs/changelog.md",
+          "quote": "New accounts add credit before their first sandbox.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://withruntime.com/docs/included-usage.md",
+          "quote": "An account given free hours or free usage before 10 November 2026 keeps what is left of them.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Sprites: coding agents installed, a hosted MCP server and a $1 trial",
+      "provider": "sprites",
+      "what": "New Sprites ship the Claude, Codex, Gemini and Cursor CLIs, a hosted MCP server creates and drives them, and there are official Python, Go and Elixir SDKs. Checkpoints are now automatic, connectors cover any token API, and API tokens can be restricted. The trial is now $1 for 7 days with no card, and every org gets 20 GB of cold storage free each month. Rates and A/B/C are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://docs.fly.io/sprites/working-with-sprites.md",
+          "quote": "AI/CLI Tools: Claude CLI, Gemini CLI, OpenAI Codex, Cursor",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.fly.io/sprites/integrations/remote-mcp.md",
+          "quote": "Sprites runs a hosted MCP server.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://docs.fly.io/about/free-trial.md",
+          "quote": "New accounts get $1 of free credit, with no credit card required.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Freestyle: an official MCP server, a dashboard terminal and published Terms",
+      "provider": "freestyle",
+      "what": "Freestyle now runs an official MCP server at mcp.freestyle.sh, described in its 5 November privacy policy, and its dashboard has a terminal and Owner/Member team roles. Terms of service are published at dash.freestyle.sh/terms; they say Freestyle is not a backup service. The scheduled-trigger API was deprecated in September, and outbound mail ports are blocked. Rates and A/B/C are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://www.freestyle.sh/privacy",
+          "quote": "connect an AI assistant to Freestyle through our Model Context Protocol (MCP) integration",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://dash.freestyle.sh/terms",
+          "quote": "Nothing here is a backup service.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Sandboxer drops its free trial and deletes stopped data after 14 days",
+      "provider": "sandboxer",
+      "what": "Sandboxer removed its seven-day trial for new accounts on 2 November: choosing a plan now charges the first month immediately. Stopped sandboxes keep their data for 14 days after the last stop, then it is deleted unless saved as a named snapshot. Starts above the plan limits now cost $0.03 to $0.07 each from prepaid credit. Rates, plans and the A/B/C costs are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://sandboxer.com/pricing",
+          "quote": "the first month is charged when you subscribe",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://sandboxer.com/docs/snapshots",
+          "quote": "A stopped sandbox keeps its disk, memory and automatic snapshots for **14 days** after it last stopped, at no charge.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "boxd bills only active vCPU, opens New York and makes self-hosting free to 16 vCPUs",
+      "provider": "boxd",
+      "what": "boxd's rates are unchanged, but its vCPU meter now charges only active vCPU, sampled every second, instead of the machine's full size, so the always-on workload drops from $222.50 to $98.99 a month at 8 GiB resident. A New York region runs alongside Frankfurt on the same account and bill, the console can create machines, schedules wake sleeping machines, and a public status page exists. Self-hosting is free up to 16 worker vCPUs; SOC 2 Type II and ISO 27001 are in progress. The date is when this guide checked, not when boxd made each change.",
+      "sources": [
+        {
+          "url": "https://boxd.sh/pricing",
+          "quote": "You only pay for active vCPU, not for the vCPUs your machine reserves.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://docs.boxd.sh/guides/regions.md",
+          "quote": "Run machines in Frankfurt or New York. Pick the region per machine, with one login, one bill and the same secrets in both.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Agent 37: 100 GB VM disks, a domain allowlist and a published DPA",
+      "provider": "agent37",
+      "what": "Agent 37's VM type now sells the same four shapes as the default type, up to 4 vCPU / 32 GB, and VM or Performance instances can take up to 100 GB of disk, which resolves the earlier contradiction about 16-core machines. A workspace can run three instances of any type before its first top-up, custom domains unlock at $50 instead of $100, the network allowlist accepts domains, and a DPA naming a Delaware company and OVH and AWS as sub-processors is published. The personal free plan now needs a card on file. Unit rates are unchanged. The date is when this guide checked, not when Agent 37 made each change.",
+      "sources": [
+        {
+          "url": "https://www.agent37.com/docs/agents-api/instance-sizing.md",
+          "quote": "A VM or `performance` instance takes 2-100 GB of disk on every shape.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.agent37.com/docs/agents-api/billing.md",
+          "quote": "Until your first real top-up, the workspace runs up to three instances at once, of any template, size, or type, VMs included.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.agent37.com/dpa",
+          "quote": "is between Agent37.com Inc, a Delaware corporation",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Vercel Sandbox: a REST API, an MCP server and Enterprise static IPs",
+      "provider": "vercel-sandbox",
+      "what": "Vercel now documents a Sandboxes REST API and a Sandboxes tool group in its official MCP server, so both move to yes. This recheck also found an S3 mount through FUSE, fixed egress IPs through Enterprise Secure Compute and a card-free Pro trial path that the last check missed. Rates and A/B/C costs are unchanged. The date is when this guide checked, not when Vercel launched each change.",
+      "sources": [
+        {
+          "url": "https://vercel.com/docs/rest-api/sandboxes.md",
+          "quote": "Endpoints in the Sandboxes group of the Vercel REST API Reference.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+          "quote": "Create sandboxes to run commands and work with files in isolated environments.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Daytona preinstalls coding agents, and Daytona 2.0 launches separately",
+      "provider": "daytona",
+      "what": "Daytona's default snapshots now list Claude Code, Codex, OpenClaw and OpenCode as preinstalled, the standard image carries Chromium, and a failed sandbox can be restored from Daytona's own recovery backup. Nine GPU types are listed, including the L40S. Separately, Daytona 2.0 launched at daytona.com on 1 November with VMs by default, native macOS, per-core prices and a $250 monthly Team plan; this guide still models the daytona.io product, whose rates did not change. The date is when this guide checked, not when Daytona made each change.",
+      "sources": [
+        {
+          "url": "https://www.daytona.io/docs/en/snapshots.md",
+          "quote": "Default snapshots include pre-installed Python and Node.js packages.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.daytona.com/docs/sandboxes.md",
+          "quote": "A sandbox is a hardware-isolated virtual machine with its own kernel, filesystem, network stack, and allocated vCPU, RAM, and disk",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Cloudflare Sandbox: an agent harness, faster starts and smaller custom sizes",
+      "provider": "cloudflare-sandbox",
+      "what": "Cloudflare now documents an experimental Agents SDK harness that runs Claude Code or Codex in a container with no Dockerfile, a 648 ms median start on its new runtime, an interactive terminal through exec(), and custom sizes from 1/16 of a vCPU. Account concurrency rose tenfold to 15,000 vCPU. Its limits page dropped the 3 GiB-per-vCPU memory rule that a September changelog still states; this guide keeps pricing the standard presets, so the A/B/C costs are unchanged. It also adds a 24 September disclosure that a shared storage pool let customers recover each other’s leftover disk blocks, fixed by 19 September. The date is when this guide checked, not when Cloudflare made each change.",
+      "sources": [
+        {
+          "url": "https://developers.cloudflare.com/agents/harnesses/container/",
+          "quote": "No Dockerfile is needed.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://developers.cloudflare.com/containers/platform/limits/",
+          "quote": "| Concurrent vCPU | 15,000 |",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://blog.cloudflare.com/containers-cross-tenant-vulnerability/",
+          "quote": "a customer with a Workers Paid account could recover residual disk blocks previously used by Containers on the same host.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "E2B: private sandbox URLs by default, agent templates and a lower Enterprise floor",
+      "provider": "e2b",
+      "what": "Projects created since 30 October 2026 put sandbox URLs behind a per-sandbox traffic token, and E2B now ships ready-made templates for Claude Code, Codex, Amp, OpenClaw and six other agents. A fifth region, US East on AWS, can be enabled through support. The free Hobby plan now allows 10 concurrent sandboxes instead of 20, and Enterprise starts at a $2,000 monthly commit instead of a $3,000 minimum. Per-second rates did not change, so the A/B/C costs stand. The date is when this guide checked, not when E2B made each change.",
+      "sources": [
+        {
+          "url": "https://docs.e2b.dev/network/restrict-public-access.md",
+          "quote": "**New projects:** since October 30, 2026, newly created projects default to private sandbox traffic.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://e2b.dev/pricing.md",
+          "quote": "Up to 10 concurrently running sandboxes.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://e2b.dev/pricing",
+          "quote": "Enterprise starts at a $2,000/mo commit, 500 concurrent included.",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Tensorlake now bills at least 20% of allocated CPU",
+      "provider": "tensorlake",
+      "what": "Tensorlake's pricing page now bills CPU at a minimum of 20% of the vCPU you allocate, so a mostly idle sandbox costs more: workload C rises from $8.26 to $9.52. It also publishes a reserved NVIDIA H100 at $3.95 per GPU-hour, says egress is free, and reported a 7 November security incident in which customer email addresses were read. The date is when this guide checked, not when Tensorlake made each change.",
+      "sources": [
+        {
+          "url": "https://www.tensorlake.ai/pricing",
+          "quote": "CPU is billed on active execution, with a minimum of 20% of allocated vCPU.",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://trust.tensorlake.ai/updates",
+          "quote": "Based on what we know, customer email information was accessed.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "InstaBox recheck: GPUs, a hosted MCP server and included disk",
+      "provider": "instabox",
+      "what": "A full recheck found NVIDIA L4 GPU machines at $0.80 per GPU-hour on paid plans, a Python SDK, a hosted MCP server, Docker and OCI image import, copy-on-write forks, a public status page and a SOC 2 Type II report on request. Paid plans now include 200 GiB to 5 TiB of disk, so the always-on workload drops from $27.23 to $24.82 a month. Free runs are capped at 480 minutes. The date is when this guide checked, not when InstaBox launched each change.",
+      "sources": [
+        {
+          "url": "https://instabox.sh/docs/account/pricing.md",
+          "quote": "NVIDIA L4 (`l4`) | \\$0.80 per GPU-hour | 11 vCPU / 36 GiB",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://instabox.sh/docs/account/pricing.md",
+          "quote": "Paid plans include disk across all their machines (200 GiB on Pro, 1 TiB on Builder, 5 TiB on Team)",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://instabox.sh/docs/integrations/mcp.md",
+          "quote": "The hosted server at `https://api.instabox.sh/mcp` is the recommended way to connect.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
       "date": "2026-11-04",
       "title": "TierHive added: near-free hourly servers that are still in Alpha",
       "provider": "tierhive",

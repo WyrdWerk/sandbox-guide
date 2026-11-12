@@ -1059,3 +1059,7 @@ isn't billed: each plan includes an amount for what you keep"
 Not verifiable by this method, and therefore tagged rather than quoted: the absence claims (no SSO, no audit log,
 no SOC 2, no static IP, no egress allowlist, no first-party custom domains, no published SLA). Those rest on
 searching the docs corpus, the API description and the legal pages, not on a sentence I can quote.
+
+## Recheck, 12 November 2026
+
+See [sandboxer-recheck-2026-11-12.md](sandboxer-recheck-2026-11-12.md). Supersedes the trial (removed for new accounts on 2 November; first month charged at subscribe), "keeps everything" (stopped data now deleted 14 days after the last stop), the 18-tool MCP count (now 20) and the Boat retention comparison. Rates, plans and A/B/C unchanged; paid starts above limits cost $0.03-$0.07.

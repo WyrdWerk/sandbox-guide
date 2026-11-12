@@ -3,7 +3,7 @@
   "name": "Morph",
   "url": "https://cloud.morph.so",
   "status": "researched",
-  "checkedOn": "2026-10-28",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Full VMs with memory-and-disk snapshots, branched into parallel copies, billed in MCUs.",
   "whatItIs": [
     "Morph Cloud sells devboxes and lower-level instances: full virtual machines that can run Docker-in-Docker, a local Kubernetes cluster or a self-hosted database.",
@@ -64,7 +64,7 @@
     },
     "C": {
       "headline": "$9.15",
-      "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running hours, 630 paused",
+      "shape": "2 vCPU / 4 GiB / 20 GiB, 90 running hours, 640 paused",
       "lines": [
         {
           "label": "Running",
@@ -73,7 +73,7 @@
         },
         {
           "label": "Paused snapshot",
-          "arithmetic": "24 GB × 630 h × $0.00001",
+          "arithmetic": "24 GB × 640 h × $0.00001",
           "amount": "$0.15"
         }
       ],
@@ -196,13 +196,37 @@
     },
     {
       "issue": "Volumes are object storage",
-      "detail": "Morph Volumes is an S3-compatible product accessed through a gateway and CLI, distinct from an attached disk or EFS mount.",
+      "detail": "Morph Volumes is S3-compatible object storage behind a gateway, and Morph EFS is a shared FUSE filesystem; neither is a block device.",
       "status": "open"
     },
     {
       "issue": "No published region, GPU or architecture list",
       "detail": "Host locations, data residency and GPU availability were not confirmed in primary material.",
       "status": "open"
+    },
+    {
+      "issue": "Live products have missing docs",
+      "detail": "Morph EFS and the Responses Proxy model gateway are live, but their documentation pages return 404; this guide cites archived copies from July 2026.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "http://web.archive.org/web/20260718091200/https://cloud.morph.so/docs/efs/concepts",
+          "quote": "The durable EFS identity you create by name.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "issue": "Custom domains are not supported",
+      "detail": "Apps answer only on a Morph-generated HTTPS hostname.",
+      "status": "open",
+      "evidence": [
+        {
+          "url": "https://cloud.morph.so/web/product/devboxes",
+          "quote": "Custom domains aren’t supported yet.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [
@@ -210,7 +234,9 @@
     "Branch one snapshot into many running instances.",
     "Pause bills only the snapshot.",
     "Full VMs with Docker-in-Docker and systemd.",
-    "A devbox dashboard for creating and opening environments."
+    "A devbox dashboard for creating and opening environments.",
+    "Real SSH, a browser terminal and public or API-key-protected HTTP services.",
+    "A shared EFS filesystem alongside S3-compatible Volumes."
   ],
   "sources": [
     {

@@ -1780,3 +1780,7 @@ The profile's "100% over 30, 60 and 90 days" was split into a Status page fact a
 | URL | Quote | Confidence |
 |---|---|---|
 | https://status.agent37.com/ | "Temporary interruption to US sandboxes Degraded for 21 minutes" | docs-confirmed |
+
+## Recheck, 12 November 2026
+
+See [agent37-recheck-2026-11-12.md](agent37-recheck-2026-11-12.md). Unit rates unchanged. VM shapes are now 2/4, 4/8, 4/16 and 4/32 (8/16 and 16/32 removed), VM and Performance disks 2-100 GB, so big-machines and big-disk are yes and the 4-vCPU contradiction is resolved. dpa yes (5 November DPA), free-tier partly (the $0 personal agent, card on file), fast-start no (a few seconds to restore). Free tier runs 3 instances of any type; custom domains unlock at $50; the allowlist takes domains. B and C flags now hold only on the default type.

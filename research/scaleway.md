@@ -330,3 +330,8 @@ Window 6 August to 4 November 2026, provider's own status page only (see `resear
 
 - Site fact: By this guide's count, 8 status-page incidents from 6 August to 4 November 2026 affected Instances or Block Storage. The longest-running, a block-storage latency problem affecting Block Storage, Databases and Instances, was posted on 29 October and had no resolution posted by 4 November.
 - Source: https://status.scaleway.com/incidents/l35th3qpv30h — "Posted Oct 29 , 2026 - 12:01 CET This incident affects: Elements - Products (Block Storage, Databases, Instances)" (docs-confirmed)
+
+## Recheck, 12 November 2026
+
+Rechecked with the rest of VPS group 3: [vps-group3-recheck-2026-11-12.md](vps-group3-recheck-2026-11-12.md). No price or shape changed. The earlier ledger is kept as written.
+- `mcp-server` now yes (`scw mcp server serve`). STARDUST1 is in the quota table at 1 per Organization; the €0.004 IPv4 contradiction is gone (€0.005 only). SLA 99% covers BASIC2-A and BASIC3-X. FX kept at 1.1130 (ECB 11 Nov 1.1127, under $0.01 on A/B/C).

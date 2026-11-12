@@ -1,6 +1,6 @@
 {
   "provider": "hostinger",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "A prepaid monthly VPS plan with a flat price per fixed size; the 1-month term renews at the list price, and a powered-off machine keeps billing.",
   "shapes": [
     {

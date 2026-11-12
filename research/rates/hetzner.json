@@ -2,7 +2,7 @@
   "id": "hetzner",
   "provider": "Hetzner Cloud",
   "site": "https://www.hetzner.com/cloud",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "currency": "USD",
   "quoteNote": "Server-only USD prices from https://website-price-api.hetzner.com/api/v1/products/<key>, the API the plan pages render from, EU data centres (FSN1/NBG1/HEL1). Re-read 2026-10-30.",
   "shapes": [

@@ -21,14 +21,14 @@
     {
       "heading": "Volumes are a separate product",
       "body": [
-        "Runtime attaches up to four volumes per sandbox, and a volume can also be mounted read-only as a snapshot. Blaxel allows one volume per sandbox, attached to one sandbox at a time, and sells Agent Drive for shared access. Vercel's drives allow one read-write mount at a time. Morph's volumes are S3-compatible object storage, not an attached block disk.",
+        "Runtime attaches up to four volumes per sandbox, and a volume can also be mounted read-only as a snapshot. Blaxel allows one volume per sandbox, attached to one sandbox at a time, and sells Agent Drive for shared access. Vercel's drives allow one read-write mount at a time. Morph's Volumes are S3-compatible object storage and its EFS is a shared FUSE filesystem; neither is an attached block disk.",
         "Several providers have no volume product at all: Agent 37, Boat, Sandboxer and InstaBox. E2B's volumes exist but are in private beta."
       ]
     },
     {
       "heading": "Retention is where “persistent” ends",
       "body": [
-        "Boat keeps a stopped sandbox's disk for 14 days, then deletes it. Lizard's volumes are node-local, and there is no trash: deleting a sandbox or a project removes its data at once. Vercel's snapshots expire after 30 days by default unless you remove the expiry.",
+        "Boat promises a stopped sandbox's disk for at least 14 days; the automated cleanup only reports candidates in production today, so 14 days is a floor rather than an observed deletion date. Lizard's volumes are node-local, and there is no trash: deleting a sandbox or a project removes its data at once. Vercel's snapshots expire after 30 days by default unless you remove the expiry.",
         "Agent 37 keeps the disk until you delete the instance, and charges $0.09 per GB-month for it. Sprites caps storage at 100 GB per Sprite and bills the bytes you write."
       ]
     }
@@ -58,7 +58,7 @@
       "verdict": "yes",
       "figure": "1 volume; survives delete",
       "scenario": "The sandbox disk goes with the sandbox; only a volume survives deletion, and one volume attaches at a time.",
-      "note": "A volume survives sandbox deletion, but only one volume attaches to a sandbox and a volume attaches to one sandbox at a time. Agent Drive is the shared filesystem, priced separately.",
+      "note": "A volume survives sandbox deletion, but only one volume attaches to a sandbox and a volume attaches to one sandbox at a time. Agent Drive is the shared filesystem, priced separately. Volumes cannot be detached and can only grow.",
       "source": {
         "url": "https://docs.blaxel.ai/Sandboxes/Volumes.md",
         "quote": "you can only attach one volume to a sandbox. A volume can also only be attached to one sandbox at a time.",
@@ -68,12 +68,12 @@
     {
       "provider": "boat",
       "verdict": "partly",
-      "figure": "14 days after stop",
-      "scenario": "The whole disk persists, including /var/lib, and is kept free for 14 days after a stop.",
-      "note": "The whole disk persists, with 51 GB on the smaller sizes and no volume product. A stopped sandbox's disk is kept free for 14 days, then deleted.",
+      "figure": "At least 14 days",
+      "scenario": "The whole disk persists, including /var/lib, and is kept free for at least 14 days after a stop.",
+      "note": "The whole disk persists, with 51 GB on the two smallest sizes and no volume product. A stopped sandbox's disk is promised for at least 14 days; the cleanup after that only reports candidates in production today.",
       "source": {
-        "url": "https://docs.boat.dev/faq",
-        "quote": "boat keeps the disk for 14 days after the stop",
+        "url": "https://docs.boat.dev/snapshots/stop.md",
+        "quote": "boat keeps the disk of a stopped sandbox for at least 14 days.",
         "confidence": "docs-confirmed"
       }
     },
@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "10 GiB cap; volumes free",
-      "scenario": "Postgres in /var/lib survives a stop because the whole disk persists, but it bills while stopped and cannot exceed 10 GiB.",
-      "note": "The whole disk persists and bills in stopped and paused states at $0.000108/GiB-hour. Volumes are S3-backed FUSE mounts, 100 per organisation, free, and not usable for block storage such as database tables.",
+      "figure": "NVMe free; volume $0.000108",
+      "scenario": "Postgres in `/var/lib` survives only if `/var/lib` is on a volume; the sandbox's own NVMe is free but goes when the sandbox does, and the volume commits in the background.",
+      "note": "Ephemeral NVMe is free and dies with the sandbox. A volume is project storage mounted at a path: 1–1000 GiB, up to 8 per sandbox, $0.000108/GiB-hour, attachable to several sandboxes at once. A disk volume is an ext4 private copy committed in the background at most every 5 s and only after ~1 s of no writes, merged per path with the newest modification time winning; a bucket volume is a live S3 bucket, and read-only mounts are bucket-only. Volume traffic bills per uploaded GiB, downloaded GiB and 1,000 requests at unpublished rates. Windows and GPU sandboxes attach no volumes.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/volumes.md",
-        "quote": "Daytona volumes are included at no additional cost. Each organization can create up to 100 volumes, and volume data does not count against your storage quota.",
+        "url": "https://www.daytona.com/docs/persistence.md",
+        "quote": "The writable filesystem of a Daytona sandbox exists only while the sandbox does.",
         "confidence": "docs-confirmed"
       }
     },
@@ -128,13 +128,13 @@
     {
       "provider": "instabox",
       "verdict": "partly",
-      "figure": "20 GiB at /data",
-      "scenario": "One disk at /data persists and grows live; the root disk is owned by the template, so a package install outside /data is at risk.",
-      "note": "One disk at /data, 20 GiB by default and growable, with the root disk owned by the template. No volumes and no second disk; the free plan's disk is fixed.",
+      "figure": "/data up to 1 TiB; 200 GiB incl.",
+      "scenario": "One disk at /data persists and grows live, and Pro includes 200 GiB across machines; the root disk is owned by the template, so a package install outside /data is at risk.",
+      "note": "One disk at /data, 20 GiB by default, grown live to 200, 500 or 1,024 GiB by plan, with the root disk owned by the template. Paid plans include 200 GiB, 1 TiB or 5 TiB of disk across machines, then $0.08 per GiB-month. No volumes and no second disk; the free plan's disk is fixed.",
       "source": {
-        "url": "https://instabox.sh/docs/limits",
-        "quote": "a 20 GiB persistent ext4 disk at `/data`",
-        "confidence": "docs-confirmed"
+        "url": "https://instabox.sh/docs/account/pricing.md",
+        "quote": "Paid plans include disk across all their machines (200 GiB on Pro, 1 TiB on Builder, 5 TiB on Team)",
+        "confidence": "pricing-page"
       }
     },
     {
@@ -142,7 +142,7 @@
       "verdict": "partly",
       "figure": "/workspace only; 1–50 GB",
       "scenario": "Only /workspace persists; a stop deletes everything else, including the database in /var/lib.",
-      "note": "The local disk is lost on stop; only /workspace persists, through a named volume of 1–50 GB attached to one sandbox at a time and stored on one node. There is no trash.",
+      "note": "The local disk is lost on stop; only /workspace persists, through a named volume of 1–50 GB attached to one sandbox at a time and stored on one node, up to 200 GB per workspace. The pricing page says volumes go to 100 GB. There is no trash.",
       "source": {
         "url": "https://lizard.build/docs/sandboxes/volumes.md",
         "quote": "New volumes allow **1 to 50 GB**, in whole GB, with **5 GB** as the default.",
@@ -190,7 +190,7 @@
       "verdict": "partly",
       "figure": "Whole disk; quota, not bill",
       "scenario": "The whole disk persists while stopped, free within a storage quota; going over blocks new sandboxes rather than charging.",
-      "note": "The whole disk persists while stopped, free within a storage quota, and there is no separate volume or image registry. Going over quota blocks new sandboxes rather than charging.",
+      "note": "The whole disk persists while stopped, free within a storage quota, and there is no separate volume or image registry. Going over quota blocks new sandboxes rather than charging. Stopped data is kept for 14 days after the last stop, then deleted.",
       "source": {
         "url": "https://sandboxer.com/docs/machines",
         "quote": "is space for your files, added on top of the OS image",
@@ -214,7 +214,7 @@
       "verdict": "partly",
       "figure": "64 GB ephemeral; drives",
       "scenario": "64 GB of ephemeral NVMe per sandbox; a drive bills on logical used size and only one sandbox can mount it read-write.",
-      "note": "64 GB of ephemeral NVMe per sandbox, plus drives billed on logical used size. Only one sandbox at a time can mount a drive read-write; snapshots are the sharing mechanism.",
+      "note": "64 GB of ephemeral NVMe per sandbox, plus drives billed on logical used size. Only one sandbox at a time can mount a drive read-write; snapshots are the sharing mechanism. An S3 bucket can also be mounted by hand with a FUSE driver.",
       "source": {
         "url": "https://vercel.com/docs/sandbox/pricing#resource-limits",
         "quote": "Enterprise | 32 | 64GB | 15 | 64 GB",
@@ -369,8 +369,8 @@
       "provider": "tierhive",
       "verdict": "partly",
       "figure": "50 GB NVMe, 4 TB HDD",
-      "scenario": "The disk is a slider that grows with the machine, but the fast disk stops at 50 GB and big disks mean slow HDD in four locations.",
-      "note": "NVMe runs from 1 to 50 GB and HDD to 4,000 GB, but HDD is offered only in London, Singapore, Sydney and Vint Hill. Disks grow from the panel and the guest needs a reboot before the filesystem sees the new size; nothing says a disk can shrink. Backup and snapshot storage are separate, billed per GB-hour. A network-storage rate appears in the price feed with no documented product, so there is no honest claim of a detachable volume.",
+      "scenario": "The disk is a slider that grows with the machine, but the fast disk stops at 50 GB and big disks mean slow HDD in three locations.",
+      "note": "NVMe runs from 1 to 50 GB and HDD to 4,000 GB, but HDD is offered only in Singapore, Sydney and Vint Hill. Disks grow from the panel and the guest needs a reboot before the filesystem sees the new size; nothing says a disk can shrink. Backup and snapshot storage are separate, billed per GB-hour. A network-storage rate appears in the price feed with no documented product, so there is no honest claim of a detachable volume.",
       "source": {
         "url": "https://tierhive.com/api/pricing.php",
         "quote": "\"slow_disk_max_gb\": 4000",

@@ -29,7 +29,7 @@
       "heading": "A sleeping machine changes the answer",
       "body": [
         "A URL that wakes a machine is a different product from a URL that returns an error. Sprites, Runtime and InstaBox document wake on request. boxd's bot protection gates the wake: a webhook, API client or uptime monitor gets a 503 check page and the machine does not wake.",
-        "Boat cannot wake on a URL at all, because a stop removed the machine."
+        "Boat cannot wake on a URL at all: a stop has no wake path, and after ten minutes the machine is gone."
       ]
     }
   ],
@@ -103,25 +103,25 @@
     },
     {
       "provider": "daytona",
-      "verdict": "partly",
-      "figure": "Token, or signed URL",
-      "scenario": "The preview URL needs authentication unless the sandbox is public; the standard token opens the whole sandbox and cannot be revoked.",
-      "note": "Preview links are authenticated unless `public` is true. The standard token is sandbox-wide, opens the terminal and toolbox, and cannot be revoked; signed URLs are per port, 60 seconds by default and 24 hours maximum.",
+      "verdict": "yes",
+      "figure": "Preview, SSH, terminal",
+      "scenario": "A dev server gets a public or signed preview link, a colleague opens the same box over SSH or the browser terminal, and a local port forward reaches the database.",
+      "note": "Preview URLs are per port, private by default and public on request; a signed URL is per port, revocable, 1 s to 7 days (60 s default). The API's standard token is sandbox-wide, never expires and survives restarts; the SDK's port token lasts 1 hour. SSH is a gateway on 2222 with `-L` forwarding (no `-R`, no agent forwarding) and a stable ed25519 host key per region; there is a web terminal and a VNC desktop. A request to a non-running sandbox returns 409, so nothing wakes on a request. The URL is built from the sandbox ID, so a recreated sandbox gets a new URL.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/preview.md",
-        "quote": "If a sandbox has its `public` property set to `true`, preview links are publicly accessible without authentication. Otherwise, authentication is required.",
+        "url": "https://www.daytona.com/docs/preview.md",
+        "quote": "Daytona provides preview URLs for accessing services running in your sandboxes.",
         "confidence": "docs-confirmed"
       }
     },
     {
       "provider": "e2b",
       "verdict": "partly",
-      "figure": "No auth",
-      "scenario": "Anyone who has the URL gets in; there is no authentication by default.",
-      "note": "Public URLs are reachable by anyone who knows them, with no authentication by default. SSH runs through a WebSocket proxy rather than a native port.",
+      "figure": "Token by default",
+      "scenario": "Projects created since 30 October 2026 put every sandbox URL behind a traffic token; older projects stay open to anyone with the link.",
+      "note": "New projects default to private sandbox traffic: requests without the e2b-traffic-access-token header get 403. Older projects stay public until an owner changes the setting, and the token is a header, so a pasted browser link needs a proxy. SSH runs through a WebSocket proxy rather than a native port.",
       "source": {
-        "url": "https://docs.e2b.dev/network/public-url",
-        "quote": "By default, a sandbox's public URLs are reachable by anyone who knows them.",
+        "url": "https://docs.e2b.dev/network/restrict-public-access.md",
+        "quote": "**New projects:** since October 30, 2026, newly created projects default to private sandbox traffic.",
         "confidence": "docs-confirmed"
       }
     },
@@ -130,9 +130,9 @@
       "verdict": "partly",
       "figure": "Public or token-only links",
       "scenario": "A port can be public, or private so it answers only requests that carry its token, which can be replaced.",
-      "note": "An HTTPS link per port, up to 16, either public or private behind a replaceable token. SSH and mosh go through a gateway. Raw non-web ports are in an admin-only preview, later paid plans only with 5 per workspace. No custom domain.",
+      "note": "An HTTPS link per port, up to 16, either public or private behind a replaceable token. SSH and mosh go through a gateway, and the desktop can be shared by link. Raw non-web ports are in an admin-only preview, later paid plans only with a per-workspace limit. No custom domain.",
       "source": {
-        "url": "https://instabox.sh/docs/ports.md",
+        "url": "https://instabox.sh/docs/access/ports.md",
         "quote": "A **private** port answers only requests that carry its token.",
         "confidence": "docs-confirmed"
       }
@@ -163,13 +163,13 @@
     },
     {
       "provider": "morph",
-      "verdict": "partly",
-      "figure": "Not published",
-      "scenario": "An HTTP service can be exposed through the API, but default authentication is not published.",
-      "note": "An instance can expose an HTTP service through the API. Default authentication and raw TCP support are not published.",
+      "verdict": "yes",
+      "figure": "Public by default; API-key option",
+      "scenario": "An HTTP service is reachable on the public internet by default; auth_mode api_key puts the account's Morph API key in front, and SSH and a browser terminal are also available.",
+      "note": "HTTP services default to public and can require the account API key. SSH is a real daemon, ssh -L and ssh -R work, and the devbox web UI has a browser terminal. Raw non-web TCP ports are not documented.",
       "source": {
-        "url": "https://cloud.morph.so/docs/api-reference/expose-http-service-instance-instance-id-http-post",
-        "quote": "Expose Http Service",
+        "url": "https://cloud.morph.so/docs/documentation/instances/http-services",
+        "quote": "Morph Cloud allows you to expose HTTP services running within your instances to the public internet.",
         "confidence": "docs-confirmed"
       }
     },
@@ -273,8 +273,8 @@
       "provider": "freestyle",
       "verdict": "yes",
       "figure": "HTTPS domain, SSH, PTY",
-      "scenario": "Open the app: route a style.dev name to port 3000, SSH in with a scoped token, or stream a PTY to a browser you build.",
-      "note": "Public HTTPS with managed certificates, TLS passthrough for non-HTTP, SSH through beta-ssh.freestyle.sh, and a PTY API. There is no hosted browser terminal.",
+      "scenario": "Open the app: route a style.dev name to port 3000, SSH in with a scoped token, or open the VM's terminal in the dashboard.",
+      "note": "Public HTTPS with managed certificates, TLS passthrough for non-HTTP, SSH through beta-ssh.freestyle.sh, a PTY API and a terminal in the dashboard's VM page. Each VM also has a stable public IPv6.",
       "source": {
         "url": "https://www.freestyle.sh/docs/vms/network/tls-inbound",
         "quote": "Use inbound rules to give services on your VM a public domain.",

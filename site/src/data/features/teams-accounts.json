@@ -28,7 +28,7 @@
     {
       "heading": "SSO, audit and residency",
       "body": [
-        "Runtime includes SSO, SCIM and a 400-day audit log free. InstaBox and Lizard put SSO and audit on Enterprise. Vercel sells SAML at $300 a month. Agent 37, Boat, boxd, Sandboxer and Sprites publish no SSO or audit log on the tiers described here.",
+        "Runtime includes SSO, SCIM and a 400-day audit log free. InstaBox and Lizard put SSO and audit on Enterprise. Vercel sells SAML at $300 a month. Agent 37, Boat, boxd and Sandboxer publish no SSO or audit log on the tiers described here, and Sprites has Google or GitHub SSO but no audit log.",
         "Residency is separate. Boat and boxd are EU-only. Agent 37 keeps compute in the chosen region but stores backups in the US. InstaBox and Runtime are US-only."
       ]
     }
@@ -46,10 +46,10 @@
       "verdict": "partly",
       "figure": "Per-instance budget",
       "scenario": "Per-instance budget ceilings stop a runaway instance, but they are not a money cap; no audit log or SSO is published.",
-      "note": "Workspaces own keys, wallet and instances; teams have admin and user roles; each instance has a budget ceiling. No audit log or SSO is published, and backups are stored in the US.",
+      "note": "Workspaces own keys, wallet and instances; admins control instances, keys, billing and the team, while users can only use the workspace's apps. API keys can carry an IP allowlist and an expiry date. No audit log or SSO is published, and backups are stored in the US.",
       "source": {
-        "url": "https://www.agent37.com/docs/agents-api/concepts",
-        "quote": "A workspace is the account: it owns the API keys, the wallet, and every instance.",
+        "url": "https://www.agent37.com/docs/agents-api/members.md",
+        "quote": "A workspace is the account: it owns the API keys",
         "confidence": "docs-confirmed"
       }
     },
@@ -93,8 +93,8 @@
       "provider": "cloudflare-sandbox",
       "verdict": "partly",
       "figure": "Alerts only",
-      "scenario": "Budget alerts email you after the loop; they do not pause or cap anything, and the account ceiling is 1,500 concurrent vCPU.",
-      "note": "Budget alerts are informational and do not cap usage. Concurrency is account-wide: 1,500 vCPU, 6 TiB and 30 TB. No per-sandbox IAM; the account audit log records control-plane actions only.",
+      "scenario": "Budget alerts email you after the loop; they do not pause or cap anything, and the account ceiling is 15,000 concurrent vCPU.",
+      "note": "Budget alerts are informational and do not cap usage. Concurrency is account-wide: 15,000 vCPU, 60 TiB and 300 TB by default. No per-sandbox IAM; the account audit log records control-plane actions only.",
       "source": {
         "url": "https://developers.cloudflare.com/billing/manage/budget-alerts/",
         "quote": "Budget alerts are informational only. They do not pause or cap usage.",
@@ -104,12 +104,12 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "Org-wide resource pool",
-      "scenario": "The runaway agent is capped only by the prepaid pool, and every member of the organisation can exec in every running sandbox.",
-      "note": "Tiers are prepaid top-ups that set an org-wide vCPU, memory and disk pool. Any member or API key can address any running sandbox. SSO is Enterprise; audit logs are role-gated and export is coming soon.",
+      "figure": "3 members; SSO Enterprise",
+      "scenario": "A five-person team needs Team ($250) for the member count, gets projects and dollar budgets there, but procurement's SSO and readable audit log wait for Enterprise.",
+      "note": "Team buys the org model: projects as the isolation unit (every sandbox, image, snapshot, volume, secret, registry credential and API key belongs to exactly one), 17 built-in roles including a true read-only and an auditor, and monthly project budgets that refuse new sandboxes and, after a grace period, stop persistent and delete ephemeral ones. It does not buy the compliance model: SSO with SCIM, readable audit logs (recorded for everyone, 365-day retention) and HIPAA are Enterprise-only, and Starter stops at three members. Any member with sandbox write can still run commands in every sandbox of a project — the project is the boundary, not the sandbox.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/organizations.md",
-        "quote": "Every member of an organization can address that organization's running sandboxes",
+        "url": "https://www.daytona.com/docs/projects.md",
+        "quote": "Projects group resources and credentials inside an organization.",
         "confidence": "docs-confirmed"
       }
     },
@@ -117,8 +117,8 @@
       "provider": "e2b",
       "verdict": "partly",
       "figure": "Per-project limit",
-      "scenario": "The workspace shares payment and credits while each project has its own spending limit; SSO and audit coverage are not published.",
-      "note": "A workspace shares payment, credits and invoice; each project has its own plan and spending limit. SOC 2 Type II and a HIPAA BAA path. SSO and audit coverage are not published.",
+      "scenario": "The workspace shares payment and credits while each project has its own spending limit; roles are owner or member, and SSO and SCIM are mentioned but not documented.",
+      "note": "A workspace shares payment, credits and invoice; each project has its own plan and spending limit. Owners and members, with per-project access lists, but every member of a project has the same permissions. SSO and SCIM workspaces are described, with no setup page or plan gate; the enterprise page still calls them planned. No audit log is published. HIPAA BAA on Enterprise plans.",
       "source": {
         "url": "https://docs.e2b.dev/workspaces",
         "quote": "When a project reaches its spending limit, only that project is blocked.",
@@ -130,7 +130,7 @@
       "verdict": "partly",
       "figure": "Monthly cap stops machines",
       "scenario": "A monthly spend cap stops machines; SSO, SCIM and audit logs are Enterprise only.",
-      "note": "Organisations and workspaces with roles, scoped keys and a monthly spend cap that stops machines. SSO, SCIM and audit logs are Enterprise only.",
+      "note": "Organisations and workspaces with owner, admin and member roles, scoped keys, no seat fee, usage alerts and a monthly spend cap that stops machines. SSO, SCIM and audit logs are Enterprise only.",
       "source": {
         "url": "https://api.instabox.sh/v1/openapi.json",
         "quote": "caps this month's usage beyond the org's allowance",
@@ -153,11 +153,11 @@
       "provider": "modal",
       "verdict": "partly",
       "figure": "Environment budgets",
-      "scenario": "An environment budget on Team stops the workload at the limit; Starter has no budgets and only three seats.",
-      "note": "Environment budgets on Team and Enterprise stop workloads at the limit. RBAC is Team+, SSO and audit logs are Enterprise. Starter has 3 seats and 100 containers.",
+      "scenario": "An environment budget on Team stops the workload at the limit; Starter has only a workspace-wide spend limit and three seats.",
+      "note": "A workspace budget and spend limit stop workloads; Environment budgets, RBAC and service users are Team+, and SSO and audit logs are Enterprise. Starter has 3 seats and 100 containers.",
       "source": {
         "url": "https://modal.com/docs/guide/budgets",
-        "quote": "When the spend limit is reached, Modal stops workloads that would incur additional out-of-pocket charges.",
+        "quote": "Modal budgets let you cap usage at both the Workspace and Environment level",
         "confidence": "docs-confirmed"
       }
     },
@@ -178,7 +178,7 @@
       "verdict": "yes",
       "figure": "Per-key daily + lifetime",
       "scenario": "Per-key daily spend limits and a per-sandbox lifetime cap, with SSO, SCIM and a 400-day audit log free.",
-      "note": "Roles, compartments that wall off key groups, per-key daily spend limits and a per-sandbox lifetime cap. SSO, SCIM and a 400-day audit log are free.",
+      "note": "Roles, compartments that wall off key groups, per-key daily spend limits and a per-sandbox lifetime cap. SSO, SCIM and a 400-day audit log are free. The plans page says a plan turns these on, which contradicts the pricing and security pages; this guide follows the pricing page.",
       "source": {
         "url": "https://withruntime.com/docs/pricing",
         "quote": "read-only keys, a daily spending limit per key, and compartments",
@@ -200,12 +200,12 @@
     {
       "provider": "sprites",
       "verdict": "partly",
-      "figure": "Not published",
-      "scenario": "Fly organisations and connector management; spend caps, key scopes and audit retention are not published.",
-      "note": "Fly.io organisations and connector management in a dashboard. SSO is claimed by a third party; spend caps, key scopes, audit retention and residency are not published.",
+      "figure": "Google or GitHub SSO",
+      "scenario": "Fly organisations, Google or GitHub SSO and restricted API tokens; no audit log, spend cap or billing alert.",
+      "note": "Fly.io organisations with admins and members, SSO through Google or GitHub only, and API tokens restricted by count, name prefix, label and expiry. There is no audit log, and spend caps and billing alerts are not offered.",
       "source": {
-        "url": "https://docs.fly.io/sprites/quickstart",
-        "quote": "Sprites uses your Fly.io account for authentication",
+        "url": "https://docs.fly.io/security/sso.md",
+        "quote": "Fly.io supports Google and GitHub as Identity Providers, and you can use one or both.",
         "confidence": "docs-confirmed"
       }
     },
@@ -274,7 +274,7 @@
       "verdict": "partly",
       "figure": "Teams; SSO/audit Enterprise",
       "scenario": "Add a developer: create a team identity, grant one VM and one Linux user, and hand over a scoped token.",
-      "note": "Teams, per-VM identities and tokens exist. Named roles, a dollar spend cap and usage alerts are not documented; SAML SSO, SCIM and audit logs are Enterprise-only.",
+      "note": "Teams, per-VM identities and tokens exist. The dashboard has Owner and Member roles but no read-only role; a dollar spend cap and usage alerts are not documented; SAML SSO, SCIM and audit logs are Enterprise-only.",
       "source": {
         "url": "https://www.freestyle.sh/docs/vms/client-sessions",
         "quote": "Freestyle identities let an end user or agent operate an existing VM without receiving your team API key.",

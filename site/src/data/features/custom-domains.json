@@ -38,7 +38,7 @@
     {
       "heading": "Not published is not the same as no",
       "body": [
-        "InstaBox, Morph, Sprites and Vercel Sandbox publish no sandbox custom-domain feature. InstaBox's API has no customDomain or cname field and its URL is a fixed vendor subdomain; a community report says Sprites lack custom domains the way regular Fly VMs have them; Vercel's domains apply to deployments, not Sandbox ports. For these, the honest answer is that no native path is published."
+        "InstaBox, Sprites and Vercel Sandbox publish no sandbox custom-domain feature, and Morph says plainly that custom domains are not supported yet. InstaBox's API has no customDomain or cname field and its URL is a fixed vendor subdomain; a community report says Sprites lack custom domains the way regular Fly VMs have them; Vercel's domains apply to deployments, not Sandbox ports. For these, the honest answer is that no native path is published."
       ]
     }
   ],
@@ -55,10 +55,10 @@
       "verdict": "yes",
       "figure": "Whole domain only",
       "scenario": "Possible only by delegating a whole dedicated domain's nameservers; a subdomain of your existing domain cannot be registered.",
-      "note": "Custom domains are supported, but only by delegating a whole dedicated domain's nameservers; a subdomain of an existing domain cannot be registered.",
+      "note": "Custom domains are supported, but only by delegating a whole dedicated domain's nameservers; a subdomain of an existing domain cannot be registered. They unlock at $50 of lifetime top-ups, and you can register 10 per workspace for free.",
       "source": {
-        "url": "https://www.agent37.com/docs/agents-api/urls",
-        "quote": "Custom domain | `https://{label}.yourdomain.com` mirrors all of the above",
+        "url": "https://www.agent37.com/docs/agents-api/urls.md",
+        "quote": "is mirrored at `{label}.yourdomain.com` with the same authentication.",
         "confidence": "docs-confirmed"
       }
     },
@@ -113,13 +113,13 @@
     {
       "provider": "daytona",
       "verdict": "partly",
-      "figure": "Own proxy",
-      "scenario": "Not native: you host a preview proxy under demo.acme.com, and it starts stopped sandboxes before forwarding.",
-      "note": "No native custom domain. The documented route is your own preview proxy, which can also start stopped sandboxes before forwarding.",
+      "figure": "Beta on Team; own proxy",
+      "scenario": "On Team you attach demo.acme.com as a beta; on Starter you run your own proxy under the domain and forward to the preview URL.",
+      "note": "Custom domains (Beta) is listed for Team and Enterprise only. No page documents how to attach one, what certificate is used, whether it survives a recreate, or how it authenticates. The preview page documents the other route: your own proxy, forwarding to the standard preview URL with a credential, which Daytona strips before the request reaches the sandbox. The default host is a Daytona subdomain containing the sandbox ID, so a recreated sandbox changes URL unless the beta or your proxy hides it.",
       "source": {
-        "url": "https://www.daytona.io/docs/en/custom-preview-proxy.md",
-        "quote": "host your proxy under your own domain",
-        "confidence": "docs-confirmed"
+        "url": "https://www.daytona.com/pricing.md",
+        "quote": "Custom domains (Beta)",
+        "confidence": "pricing-page"
       }
     },
     {
@@ -139,10 +139,10 @@
       "verdict": "not-published",
       "figure": "Not published",
       "scenario": "No custom-domain support is published, and the public-port URL is a fixed vendor subdomain.",
-      "note": "No custom-domain support is published. The public-port URL is a fixed vendor subdomain, and the OpenAPI PublicPort object has only port, name, url and machineId, with no customDomain or cname field. No roadmap entry exists.",
+      "note": "No custom-domain support is published. The public-port URL is a fixed vendor subdomain, and the OpenAPI PublicPort object has no customDomain or cname field. No roadmap entry exists.",
       "source": {
-        "url": "https://instabox.sh/docs/ports",
-        "quote": "The URL is `https://<port>-<machine id without m_>.<domain>/`.",
+        "url": "https://instabox.sh/docs/access/ports.md",
+        "quote": "https://<port>-<machine id without m_>.<domain>/",
         "confidence": "docs-confirmed"
       }
     },
@@ -172,13 +172,13 @@
     },
     {
       "provider": "morph",
-      "verdict": "not-published",
-      "figure": "Not published",
-      "scenario": "No custom-domain feature appears in the documentation, API or terms; an HTTP service is served on a provider hostname.",
-      "note": "No custom-domain feature appears in the documentation, API or terms. An HTTP service can be exposed, but it is served on a provider hostname.",
+      "verdict": "no",
+      "figure": "Morph hostname only",
+      "scenario": "Apps are served over HTTPS on a Morph-generated hostname; a customer-owned domain cannot be attached yet.",
+      "note": "The Devboxes FAQ says custom domains are not supported yet.",
       "source": {
-        "url": "https://cloud.morph.so/docs/documentation/instances/http-services",
-        "quote": "Expose Http Service",
+        "url": "https://cloud.morph.so/web/product/devboxes",
+        "quote": "Custom domains aren’t supported yet.",
         "confidence": "docs-confirmed"
       }
     },

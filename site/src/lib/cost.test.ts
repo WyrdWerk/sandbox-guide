@@ -15,15 +15,25 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["blaxel", "a", 27.6], ["blaxel", "b", 247.78], ["blaxel", "c", 17.3],
   ["boat", "a", 20], ["boat", "b", 26.28],
   ["e2b", "a", 27.6], ["e2b", "c", 164.9],
-  // 4 × $0.004 × 730 + 8 × $0.00225 × 730 + (50 − 20 free) GiB × $0.00011 × 730, over the $20 Pro credit.
-  ["instabox", "b", 27.23],
-  ["lizard", "a", 19], ["lizard", "b", 27.85], ["lizard", "c", 19],
+  // Daytona 2.0 on Starter, on demand (pricing page, 2026-11-12): $0.101 a core-hour = $0.0505 a vCPU-hour, $0.0162 a GiB-hour, ephemeral disk free.
+  // A: 166.67 h × (1 core × $0.101 + 4 × $0.0162); B: 730 h × (2 × $0.101 + 8 × $0.0162) + 50 GiB volume × 730 h × $0.000108;
+  // C: 90 h × ($0.101 + 4 × $0.0162) + 20 GiB volume × 730 h × $0.000108.
+  ["daytona", "a", 27.63], ["daytona", "b", 246.01], ["daytona", "c", 16.5],
+  // Pro includes 200 GiB of disk (pricing docs, 2026-11-12), so only CPU and memory bill.
+  // A: 2 × $0.004 × 166.67 + 4 × $0.00225 × 166.67 = $2.83, under the $20 credit; C: $0.72 + $0.81 = $1.53, also under it.
+  // B: 4 × $0.004 × 730 + 8 × $0.00225 × 730 = $24.82, over the credit.
+  ["instabox", "a", 20], ["instabox", "b", 24.82], ["instabox", "c", 20],
+  // Lizard B (2026-11-12): Medium (40 GB disk) + a 10 GB volume = 0.0324 × 730 + 0.14 × 10.
+  ["lizard", "a", 19], ["lizard", "b", 25.05], ["lizard", "c", 19],
   ["morph", "a", 16.67], ["morph", "c", 9.15],
   ["sandboxer", "a", 20], ["sandboxer", "b", 40], ["sandboxer", "c", 20],
-  ["boxd", "b", 222.5],
+  // boxd bills active vCPU only (pricing page, 2026-11-12): 4 × 0.1 × $0.047 × 730 + 8 GiB × $0.014 × 730 + 50 × $0.000096 × 730.
+  // A: 166.67 h × (2 × 0.5 × 0.047 + 4 × 0.014 + 10 × 0.000096); C: 90 h × (2 × 0.1 × 0.047 + 4 × 0.014 + 20 × 0.000096) + 640 h × 20 × 0.000096.
+  ["boxd", "a", 17.33], ["boxd", "b", 98.99], ["boxd", "c", 7.29],
   ["agent37", "b", 30.1],
-  // C: 0.2 core × $0.07 × 90 + 4 × $0.015 × 90 + 20 × $0.0002 × 90 + 640 h × 20 GB × $0.07 / 720.
-  ["tensorlake", "a", 22], ["tensorlake", "b", 250], ["tensorlake", "c", 8.26],
+  // C: CPU bills at least 20% of 2 vCPU (pricing page, 2026-11-12), so 0.4 core × $0.07 × 90 + 4 × $0.015 × 90
+  // + 20 × $0.0002 × 90 + 640 h × 20 GB × $0.07 / 720 = $9.52.
+  ["tensorlake", "a", 22], ["tensorlake", "b", 250], ["tensorlake", "c", 9.52],
   // Active CPU + memory + decimal-GB disk at $0.08 / 720 (first 10 GiB free while running), less 25 vCPU-h and 100 GiB-h a month.
   ["runtime", "a", 7.79], ["runtime", "b", 53.21], ["runtime", "c", 3.58],
   // 1,000 runs at the $0.01 minimum; 730 h capped at $48; 90 on + 640 powered off, capped at $24.
@@ -66,10 +76,12 @@ test("plan gates, minimums and fixed shapes from the providers' own pages", () =
   assert.equal(price(card("blaxel"), task(7, 8, 60)).feasible, false);
   // TierHive sells at most 2 vCPU, so workload B's 4 vCPU cannot be bought at any price.
   assert.equal(price(card("tierhive"), presets.b.workload).feasible, false);
-  // Tensorlake's Pro rates: the browser preset is $197.60 of Pro usage, inside its $250 fee, against $331 on prepaid credits.
+  // Tensorlake bills at least 20% of allocated vCPU, so the 3%-busy browser preset bills 0.4 of its 2 vCPU:
+  // 5,000 h × (0.4 × $0.042 + 4 × $0.009 + 10 × $0.0001) = $269 on Pro, over the $250 fee (prepaid credits: $450).
   const tl = price(card("tensorlake"), presets.browser.workload);
   assert.equal(tl.plan, "Pro");
-  assert.ok(Math.abs(tl.usage - 197.6) < 0.01);
+  assert.ok(Math.abs(tl.usage - 269) < 0.01);
+  assert.ok(Math.abs(tl.total - 269) < 0.01);
 });
 
 test("the model line counts the days a month the machines work", () => {
@@ -135,6 +147,13 @@ test("limits a workload breaks are reported, not silently priced", () => {
   const q = price(card("e2b"), presets.b.workload);
   assert.equal(q.feasible, false);
   assert.ok(q.problems.some((p) => p.includes("10 GiB")));
+});
+
+test("Daytona 2.0 ends an always-on sandbox at the plan's session cap", () => {
+  // Starter sessions end at 24 hours and Team's at 48; a 730-hour box has to be recreated.
+  const q = price(card("daytona"), presets.b.workload);
+  assert.equal(q.feasible, false);
+  assert.ok(q.problems.some((p) => p.includes("24 hours")));
 });
 
 test("Modal is priced per vCPU at half its per-core rate", () => {

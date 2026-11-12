@@ -4,7 +4,7 @@
   "url": "https://www.vultr.com/",
   "status": "researched",
   "kind": "vps",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Global VPS provider: fixed-size virtual machines from $2.50 (IPv6-only) or $3.50 with IPv4, billed hourly with a one-hour minimum and a 672-hour monthly cap; a stopped server keeps billing until destroyed.",
   "whatItIs": [
     "Vultr sells fixed-size virtual machines in 34 regions across six continents. Cloud Compute is the shared-CPU family: Regular Performance on older Intel and regular SSD, High Performance on current AMD EPYC or Intel Xeon with NVMe, and High Frequency on 3 GHz+ Xeon with NVMe. Every plan bundles vCPU, RAM, disk and a monthly egress allowance; there is no custom CPU/RAM split.",
