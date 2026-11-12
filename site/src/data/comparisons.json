@@ -99,6 +99,138 @@
         "edge": "instabox",
         "why": "InstaBox has a status page and a SOC 2 Type II report on request; Lizard lists SOC 2 as coming soon but offers a signed DPA."
       }
+    },
+    "e2b-vs-vercel-sandbox": {
+      "isolation": {
+        "edge": "even",
+        "why": "Both run a Firecracker microVM with its own kernel; Vercel gives root and Docker by default, while E2B documents Docker but starts as a non-root user."
+      },
+      "sizes-regions": {
+        "edge": "vercel-sandbox",
+        "why": "Vercel goes to 32 vCPU in 19 regions; E2B stops at 8 vCPU and 8 GiB self-serve in five regions."
+      },
+      "lifecycle": {
+        "edge": "e2b",
+        "why": "E2B pauses with memory, so programs resume where they were; Vercel saves files only and starts a new session."
+      },
+      "snapshots-forks": {
+        "edge": "e2b",
+        "why": "E2B snapshots memory and disk without stopping the source and forks up to 20 copies; a manual Vercel snapshot stops the session and keeps files only."
+      },
+      "storage": {
+        "edge": "vercel-sandbox",
+        "why": "Vercel gives 64 GB of disk plus drives that outlive a sandbox; E2B includes 10–20 GiB, and its volumes are a private beta."
+      },
+      "idle-timers": {
+        "edge": "e2b",
+        "why": "Both default to five minutes and allow 24 hours on Pro, but E2B can pause with memory instead of ending the session."
+      },
+      "reaching-it": {
+        "edge": "tradeoff",
+        "why": "In new E2B projects, links are private with a token, and SSH runs through a proxy; Vercel exposes up to 15 web ports and a browser terminal but no SSH."
+      },
+      "custom-domains": {
+        "edge": "e2b",
+        "why": "Neither has a native custom domain, but E2B documents a proxy setup; Vercel publishes no path for a sandbox port."
+      },
+      "outbound-network": {
+        "edge": "tradeoff",
+        "why": "E2B has open outbound with allow and deny rules but no static IP at any price; Vercel charges $0.15/GB and offers fixed IPs only on Enterprise."
+      },
+      "keys-secrets": {
+        "edge": "even",
+        "why": "Both keep the real key outside the machine and add it to outbound requests."
+      },
+      "ways-to-drive": {
+        "edge": "tradeoff",
+        "why": "E2B has SSH and a desktop SDK; Vercel has a REST API and a management MCP server. Neither creates a sandbox from the dashboard."
+      },
+      "built-in-agents": {
+        "edge": "tradeoff",
+        "why": "Vercel puts coding agents in its default image; E2B has ten agent templates, none of them the default. Neither has a prompt API."
+      },
+      "teams-accounts": {
+        "edge": "vercel-sandbox",
+        "why": "Vercel has spend management that can pause projects, an activity log and paid SAML; E2B has per-project spending limits but no audit log."
+      },
+      "billing-models": {
+        "edge": "tradeoff",
+        "why": "Vercel bills only active CPU, so waiting is cheap; E2B bills every allocated vCPU at a lower rate, plus $150 a month for Pro."
+      },
+      "trials-free-tiers": {
+        "edge": "e2b",
+        "why": "E2B gives a $100 credit with no card; Vercel Hobby is non-commercial and its Pro trial lasts 14 days with $20."
+      },
+      "company": {
+        "edge": "vercel-sandbox",
+        "why": "Vercel is a large, well-funded company with platform-wide SOC 2 and ISO 27001; E2B is a young startup with its own SOC 2 Type II. Neither has a sandbox SLA below Enterprise."
+      }
+    },
+    "e2b-vs-cloudflare-sandbox": {
+      "isolation": {
+        "edge": "even",
+        "why": "Both run a Firecracker microVM with its own kernel; Cloudflare runs every process as root, while E2B starts as a non-root user."
+      },
+      "sizes-regions": {
+        "edge": "tradeoff",
+        "why": "E2B goes to 8 vCPU and lets you pick one of five regions; Cloudflare stops at 4 vCPU but allows 12 GiB and chooses the location itself."
+      },
+      "lifecycle": {
+        "edge": "e2b",
+        "why": "E2B pauses with memory and keeps the disk; Cloudflare has no pause, and stopping wipes the disk."
+      },
+      "snapshots-forks": {
+        "edge": "e2b",
+        "why": "E2B snapshots memory and forks a running machine; Cloudflare snapshots files only, kept for 30 days."
+      },
+      "storage": {
+        "edge": "tradeoff",
+        "why": "E2B keeps the disk through pause and snapshots; Cloudflare wipes its 20 GB disk on stop but can back up to R2 or mount a bucket that outlives every instance."
+      },
+      "idle-timers": {
+        "edge": "e2b",
+        "why": "E2B can pause an idle sandbox and allows 24 hours on Pro; Cloudflare has no default timeout, a 6-hour maximum and no pause."
+      },
+      "reaching-it": {
+        "edge": "e2b",
+        "why": "New E2B projects get token-protected links by default, plus SSH through a proxy; Cloudflare reaches a sandbox only through your own Worker, with no built-in login."
+      },
+      "custom-domains": {
+        "edge": "cloudflare-sandbox",
+        "why": "Cloudflare routes your domain to sandbox previews through a Worker and DNS on its own network; E2B needs a proxy server you run yourself."
+      },
+      "outbound-network": {
+        "edge": "tradeoff",
+        "why": "E2B is open by default with allow and deny rules; Cloudflare starts closed and, with the internet off, reaches only HTTP and HTTPS hosts you intercept. It includes 1 TB a month in North America and Europe."
+      },
+      "keys-secrets": {
+        "edge": "even",
+        "why": "Both add the real key to outbound requests outside the machine, so code inside never sees it."
+      },
+      "ways-to-drive": {
+        "edge": "e2b",
+        "why": "E2B has Python and JavaScript SDKs, a CLI and SSH; Cloudflare is driven only from TypeScript inside your Worker."
+      },
+      "built-in-agents": {
+        "edge": "e2b",
+        "why": "E2B has ten ready-made agent templates; Cloudflare has guides and an experimental harness for Claude Code or Codex. Neither has a prompt API."
+      },
+      "teams-accounts": {
+        "edge": "e2b",
+        "why": "E2B sets a spending limit per project; Cloudflare budget alerts only warn and cannot stop usage."
+      },
+      "billing-models": {
+        "edge": "cloudflare-sandbox",
+        "why": "Cloudflare bills only active CPU, charges about half E2B's rate for memory, and its plan is $5 a month; E2B bills every allocated vCPU, and Pro is $150."
+      },
+      "trials-free-tiers": {
+        "edge": "e2b",
+        "why": "E2B gives a $100 credit with no card; Cloudflare has no free tier and needs the $5 Workers Paid plan."
+      },
+      "company": {
+        "edge": "tradeoff",
+        "why": "Cloudflare is a large public company with company-wide certificates that do not name Sandboxes; E2B is a young startup whose SOC 2 Type II covers its own service. Neither publishes a sandbox SLA."
+      }
     }
   }
 }
