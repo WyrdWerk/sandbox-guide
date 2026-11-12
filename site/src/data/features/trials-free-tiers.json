@@ -45,8 +45,8 @@
       "provider": "agent37",
       "verdict": "partly",
       "figure": "$5 one-off",
-      "scenario": "A one-off $5 Cloud credit after adding a card, plus a managed-hosting free plan with no card; the credit is not granted to workspaces made through the signup API.",
-      "note": "A one-off $5 Cloud credit after adding a card, and a managed-hosting free plan with no card. The credit is not granted to workspaces created through the signup API.",
+      "scenario": "A one-off $5 Cloud credit after adding a card, plus a $0 managed-hosting plan that now also needs a card on file; the credit is not granted to workspaces made through the signup API.",
+      "note": "A one-off $5 Cloud credit after adding a card, and a $0 managed-hosting plan with a card on file. The credit is not granted to workspaces created through the signup API. Before the first top-up a workspace can run 3 instances of any type, VMs included; more after top-ups (50 at $50, 1,000 at $1,000), counting awake instances only.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/billing",
         "quote": "Add a card from the billing page (nothing is charged) and your workspace gets a one-time $5 credit",

@@ -90,8 +90,8 @@
       "provider": "agent37",
       "verdict": "partly",
       "figure": "Agent 37 Inc.; no SLA",
-      "scenario": "No SLA unless agreed in writing; SOC 2 Type I is available on request under NDA and Type II is in progress.",
-      "note": "Agent 37 Inc., New York law; state of incorporation not published. Founded 2026 by Vishnu Krishnaprasad, YC Fall 2026; funding amount not published. Status components report 100% over 30/60/90 days, provider-reported. No SLA unless agreed in writing. SOC 2 Type I on request, Type II in progress; ISO and HIPAA not published. Deleted Cloud instances keep a recovery copy 7 days; dashboard hosting is kept until you ask; account data goes within 30 days.",
+      "scenario": "No SLA unless agreed in writing; SOC 2 Type I is available on request under NDA, Type II is in progress, and a DPA with SCCs is published.",
+      "note": "Agent37.com Inc, a Delaware corporation; the Terms still say Agent 37 Inc. Founded 2026 by Vishnu Krishnaprasad (CEO), YC Fall 2026; funding amount not published. A DPA dated 5 November 2026 includes SCCs, a 48-hour breach notice, audit rights and named sub-processors OVH and AWS. The status page reports 100% but lists eight incidents since 20 October, including 3 h 44 m in Europe on 5 November. No SLA; SOC 2 Type I on request, Type II in progress.",
       "source": {
         "url": "https://www.agent37.com/terms",
         "quote": "we do not promise a specific uptime level unless we have agreed to one with you in writing.",

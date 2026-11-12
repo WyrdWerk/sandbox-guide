@@ -46,10 +46,10 @@
       "verdict": "partly",
       "figure": "Per-instance budget",
       "scenario": "Per-instance budget ceilings stop a runaway instance, but they are not a money cap; no audit log or SSO is published.",
-      "note": "Workspaces own keys, wallet and instances; teams have admin and user roles; each instance has a budget ceiling. No audit log or SSO is published, and backups are stored in the US.",
+      "note": "Workspaces own keys, wallet and instances; admins control instances, keys, billing and the team, while users can only use the workspace's apps. API keys can carry an IP allowlist and an expiry date. No audit log or SSO is published, and backups are stored in the US.",
       "source": {
-        "url": "https://www.agent37.com/docs/agents-api/concepts",
-        "quote": "A workspace is the account: it owns the API keys, the wallet, and every instance.",
+        "url": "https://www.agent37.com/docs/agents-api/members.md",
+        "quote": "A workspace is the account: it owns the API keys",
         "confidence": "docs-confirmed"
       }
     },

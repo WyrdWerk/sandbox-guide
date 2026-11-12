@@ -33,7 +33,7 @@
       "url": "https://www.agent37.com/docs/agents-api/domains"
     },
     "outbound-network": {
-      "title": "Network access — allow-all, deny-all or an IPv4 allowlist",
+      "title": "Network access — allow-all, deny-all or an domain and IPv4 allowlist",
       "url": "https://www.agent37.com/docs/agents-api/instance-network"
     },
     "keys-secrets": {

@@ -1932,10 +1932,9 @@
       "rows": [
         {
           "provider": "agent37",
-          "verdict": "partly",
-          "figure": "4 cores; 16 on the VM type",
-          "shortfall": "One page caps every machine at 4 cores, while another prices a 16-core, 32 GB machine on the 2.5x VM type, so the large size is unclear.",
-          "note": "Contradiction between the sizing page and the VM page; see notes.",
+          "verdict": "yes",
+          "figure": "4 vCPU / 32 GB",
+          "note": "4 vCPU is the ceiling on every type; the largest shape has 32 GB of memory. The VM page no longer lists 8- or 16-core machines.",
           "source": {
             "url": "https://www.agent37.com/docs/agents-api/instance-sizing",
             "quote": "4 vCPU is the ceiling on every instance type.",
@@ -4209,13 +4208,14 @@
       "rows": [
         {
           "provider": "agent37",
-          "verdict": "not-published",
-          "note": "No start or resume time is published anywhere in the docs.",
+          "verdict": "no",
           "source": {
-            "url": "https://www.agent37.com/docs/agents-api/instances/sleep",
-            "quote": "Wake it with [`start`](/docs/agents-api/instances/start), a command sent through [exec](/docs/agents-api/exec), or any request to its URLs.",
-            "confidence": "not-published"
-          }
+            "url": "https://www.agent37.com/docs/agents-api/instance-auto-sleep.md",
+            "quote": "The restore itself takes a few seconds.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "a few seconds",
+          "shortfall": "Restoring a sleep checkpoint takes a few seconds; no time is published for a cold create."
         },
         {
           "provider": "blaxel",
@@ -7681,14 +7681,14 @@
       "rows": [
         {
           "provider": "agent37",
-          "verdict": "no",
-          "figure": "80 GB max",
-          "shortfall": "The largest shape offers 80 GB of disk, short of 100 GB.",
+          "verdict": "yes",
+          "figure": "100 GB (VM type)",
           "source": {
-            "url": "https://www.agent37.com/docs/agents-api/billing",
-            "quote": "4 vCPU / 32 GB RAM / 2-80 GB disk",
+            "url": "https://www.agent37.com/docs/agents-api/instance-sizing.md",
+            "quote": "A VM or `performance` instance takes 2-100 GB of disk on every shape.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "note": "VM and Performance instances take 2–100 GB of disk on any shape; the default type still stops at 80 GB. Those types bill compute at 2.5× and 4× the default rate."
         },
         {
           "provider": "blaxel",
@@ -11206,7 +11206,7 @@
           "provider": "agent37",
           "verdict": "partly",
           "figure": "Dedicated domain only",
-          "shortfall": "You must hand over the whole domain and the records that direct it, so it cannot also run your website or email, and it needs $100 of top-ups first.",
+          "shortfall": "You must hand over the whole domain and the records that direct it, so it cannot also run your website or email, and it needs $50 of top-ups first.",
           "source": {
             "url": "https://www.agent37.com/docs/agents-api/domains",
             "quote": "The whole domain’s DNS is delegated to us, so it cannot carry your website, mail, or other records.",
@@ -12175,11 +12175,11 @@
         {
           "provider": "agent37",
           "verdict": "yes",
-          "figure": "100 IPv4 entries",
-          "note": "Only the listed addresses can be reached, and name lookups are blocked too unless you list a name server.",
+          "figure": "100 domains or IPv4 entries",
+          "note": "Only the listed domains and addresses can be reached, up to 100 entries; domain entries cover HTTPS only, and name lookups need a resolver on the list.",
           "source": {
-            "url": "https://www.agent37.com/docs/agents-api/instance-network",
-            "quote": "DNS counts as a connection. Under `deny-all` or a list, names do not resolve unless a resolver is on the list.",
+            "url": "https://www.agent37.com/docs/agents-api/instance-network.md",
+            "quote": "Only the listed domains and IPv4 addresses and ranges, up to 100 entries.",
             "confidence": "docs-confirmed"
           }
         },
@@ -12825,8 +12825,8 @@
           "verdict": "not-published",
           "note": "No fixed outbound address is published.",
           "source": {
-            "url": "https://www.agent37.com/docs/agents-api/instance-network",
-            "quote": "Entries are IPv4 for now.",
+            "url": "https://www.agent37.com/docs/agents-api/instance-network.md",
+            "quote": "Entries are domains and IPv4.",
             "confidence": "inferred"
           }
         },
@@ -13790,7 +13790,7 @@
           "provider": "agent37",
           "verdict": "partly",
           "figure": "Workspace only",
-          "shortfall": "A key is limited to one workspace but can do everything in it, and there is no read-only key.",
+          "shortfall": "A key is limited to one workspace but can do everything in it; it can carry an IP allowlist and an expiry date, but there is no read-only key.",
           "source": {
             "url": "https://www.agent37.com/docs/agents-api/concepts",
             "quote": "each key is scoped to one workspace",
@@ -16612,8 +16612,8 @@
         {
           "provider": "agent37",
           "verdict": "yes",
-          "figure": "6 templates",
-          "note": "Hermes, OpenClaw, Claude Code, Codex, Grok and OpenCode, plus Pi and n8n.",
+          "figure": "7 templates",
+          "note": "Hermes, OpenClaw, Claude Code, Codex, Grok, OpenCode and Pi, plus n8n.",
           "source": {
             "url": "https://www.agent37.com/docs/agents-api/templates.md",
             "quote": "`agent37-hermes` | Hermes, the general agent: chat, browsing, code, files.",
@@ -19130,7 +19130,7 @@
         {
           "provider": "agent37",
           "verdict": "yes",
-          "note": "Admins control instances, keys, billing and the team; users get the rest.",
+          "note": "Admins control instances, keys, billing and the team; users can only use the workspace's apps, with no dashboard, keys or billing.",
           "source": {
             "url": "https://www.agent37.com/docs/agents-api/members.md",
             "quote": "`admin` | Everything: instances, keys, billing, and the team.",
@@ -22309,12 +22309,12 @@
       "rows": [
         {
           "provider": "agent37",
-          "verdict": "no",
-          "figure": "one-off $5 credit",
-          "shortfall": "There is no monthly free allowance; the only free usage is a one-off $5 credit.",
+          "verdict": "partly",
+          "figure": "$0 personal agent",
+          "shortfall": "The free tier is one managed personal agent, not the Cloud API: it needs a card on file, sleeps when idle and is removed after 30 days asleep. Cloud gets only a one-off $5 credit.",
           "source": {
-            "url": "https://www.agent37.com/docs/agents-api/billing",
-            "quote": "Add a card from the billing page (nothing is charged) and your workspace gets a one-time $5 credit",
+            "url": "https://www.agent37.com/personal",
+            "quote": "One agent, sleeps when idle",
             "confidence": "docs-confirmed"
           }
         },
@@ -22966,11 +22966,11 @@
         {
           "provider": "agent37",
           "verdict": "no",
-          "figure": "card for the credit",
-          "shortfall": "A card is needed to get the credit that makes the first machine runnable.",
+          "figure": "card for both products",
+          "shortfall": "A card is needed for the Cloud credit, and the personal free plan now needs a card on file too.",
           "source": {
-            "url": "https://www.agent37.com/docs/agents-api/billing",
-            "quote": "Add a card from the billing page (nothing is charged) and your workspace gets a one-time $5 credit",
+            "url": "https://www.agent37.com/personal",
+            "quote": "One agent, with a card on file (nothing is charged).",
             "confidence": "docs-confirmed"
           }
         },
@@ -23288,11 +23288,11 @@
         {
           "provider": "agent37",
           "verdict": "yes",
-          "note": "A public status page reports each component's uptime over 30, 60 and 90 days.",
+          "note": "A public status page reports each component's uptime, but lists eight incidents since 20 October while every headline reads 100%.",
           "source": {
-            "url": "https://www.agent37.com/personal",
-            "quote": "https://status.agent37.com",
-            "confidence": "pricing-page"
+            "url": "https://status.agent37.com/",
+            "quote": "All services are online",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -24233,13 +24233,14 @@
       "rows": [
         {
           "provider": "agent37",
-          "verdict": "not-published",
-          "note": "No data processing agreement is published or referenced in the terms.",
+          "verdict": "yes",
+          "note": "A DPA dated 5 November 2026 forms part of the Terms, with SCCs, a 48-hour breach notice, audit rights and OVH and AWS named as sub-processors.",
           "source": {
-            "url": "https://www.agent37.com/terms",
-            "quote": "These Terms of Service",
+            "url": "https://www.agent37.com/dpa",
+            "quote": "is between Agent37.com Inc, a Delaware corporation",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "Published; SCCs"
         },
         {
           "provider": "blaxel",
@@ -24542,7 +24543,7 @@
         {
           "provider": "agent37",
           "verdict": "no",
-          "shortfall": "The platform is a hosted service; only template Dockerfiles and images are published.",
+          "shortfall": "The sandbox platform itself is hosted and not published; the CLI, template Dockerfiles and some reference apps are MIT-licensed.",
           "source": {
             "url": "https://www.agent37.com/terms",
             "quote": "Agent 37 provides persistent, isolated sandboxes for AI agents.",

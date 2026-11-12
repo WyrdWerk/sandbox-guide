@@ -44,9 +44,9 @@
     {
       "provider": "agent37",
       "verdict": "yes",
-      "figure": "Six templates; hosted",
+      "figure": "7 agents; hosted",
       "scenario": "Six agent templates plus a separate managed-hosting product where the agent is the product; the templates are prompted through the API.",
-      "note": "Six agent templates (Hermes, OpenClaw, Claude Code, Codex, Grok, OpenCode) plus Pi and n8n, and a separate managed-hosting product where the agent is the product. Claude Code and Codex use your own account.",
+      "note": "Seven agent templates (Hermes, OpenClaw, Claude Code, Codex, Grok, OpenCode, Pi) plus n8n, and a separate managed-hosting product where the agent is the product. Claude Code and Codex use your own account; Grok uses your xAI key.",
       "source": {
         "url": "https://www.agent37.com/personal",
         "quote": "Run OpenClaw, Hermes, Claude Code, Codex, OpenCode, or Grok around the clock. Yours is live in one click.",

@@ -2,6 +2,29 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Agent 37: 100 GB VM disks, a domain allowlist and a published DPA",
+      "provider": "agent37",
+      "what": "Agent 37's VM type now sells the same four shapes as the default type, up to 4 vCPU / 32 GB, and VM or Performance instances can take up to 100 GB of disk, which resolves the earlier contradiction about 16-core machines. A workspace can run three instances of any type before its first top-up, custom domains unlock at $50 instead of $100, the network allowlist accepts domains, and a DPA naming a Delaware company and OVH and AWS as sub-processors is published. The personal free plan now needs a card on file. Unit rates are unchanged. The date is when this guide checked, not when Agent 37 made each change.",
+      "sources": [
+        {
+          "url": "https://www.agent37.com/docs/agents-api/instance-sizing.md",
+          "quote": "A VM or `performance` instance takes 2-100 GB of disk on every shape.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.agent37.com/docs/agents-api/billing.md",
+          "quote": "Until your first real top-up, the workspace runs up to three instances at once, of any template, size, or type, VMs included.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://www.agent37.com/dpa",
+          "quote": "is between Agent37.com Inc, a Delaware corporation",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Vercel Sandbox: a REST API, an MCP server and Enterprise static IPs",
       "provider": "vercel-sandbox",
       "what": "Vercel now documents a Sandboxes REST API and a Sandboxes tool group in its official MCP server, so both move to yes. This recheck also found an S3 mount through FUSE, fixed egress IPs through Enterprise Secure Compute and a card-free Pro trial path that the last check missed. Rates and A/B/C costs are unchanged. The date is when this guide checked, not when Vercel launched each change.",

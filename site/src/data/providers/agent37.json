@@ -3,7 +3,7 @@
   "name": "Agent 37",
   "url": "https://www.agent37.com",
   "status": "researched",
-  "checkedOn": "2026-10-28",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Hosted Linux computers for agents, sold two ways: a prepaid Cloud API and a one-click personal-agent subscription.",
   "whatItIs": [
     "Agent 37 is an early-stage company (Y Combinator, Fall 2026) running two products under one brand. Agent37 Cloud is a prepaid API for persistent sandboxes: a gVisor container by default, or a full VM as an option, whose whole disk survives between runs and which can sleep when idle.",
@@ -12,7 +12,7 @@
   ],
   "whoFor": "Developers building one sandbox per end user, and non-technical buyers who want a personal agent without touching an API.",
   "isolation": "gVisor container by default: a user-space kernel, stronger than a plain container but weaker than a VM, and Docker does not work inside it. The vm type gives a full VM with its own kernel at 2.5× compute; performance gives dedicated cores at 4×.",
-  "sizes": "Four shapes, with 4 vCPU as the ceiling on the default type: 2/4, 4/8, 4/16 and 4/32 vCPU/GB. Disk is any whole number of GB inside each shape's range, defaulting to 4, 6, 12 or 24 GB.",
+  "sizes": "Four shapes, with 4 vCPU as the ceiling on every type: 2/4, 4/8, 4/16 and 4/32 vCPU/GB. Disk is any whole number of GB inside each default shape's range (up to 80 GB), defaulting to 4, 6, 12 or 24 GB; VM and Performance instances take 2–100 GB on any shape.",
   "billing": {
     "model": "Prepaid wallet, no subscription and no plan fee.",
     "meter": "Per minute, priced from the shape you reserved: $0.80 per vCPU-month, $0.70 per GB-month, $0.09 per GB-month of disk.",
@@ -63,11 +63,11 @@
         "A VM, needed for Docker or /dev/kvm, multiplies compute by 2.5: about $23.85 or $68.59.",
         "Both figures match the vendor's own shape table plus disk at $0.09/GB-month."
       ],
-      "flag": "50 GB of disk forces the 4 vCPU / 32 GB shape. If 20 GB is enough, the same CPU and RAM cost a third as much."
+      "flag": "50 GB of disk forces the 4 vCPU / 32 GB shape on the default type. If 20 GB is enough, the same CPU and RAM cost a third as much; a 4/8 VM with 50 GB is about $26.50."
     },
     "C": {
       "headline": "≈ $1.61 or $2.86 a month",
-      "shape": "The requested 2 vCPU / 4 GiB / 20 GB box does not exist: that shape caps disk at 12 GB.",
+      "shape": "The requested 2 vCPU / 4 GiB / 20 GB box does not exist on the default type: that shape caps disk at 12 GB. A 2/4 VM can take 20 GB at 2.5× the compute rate.",
       "lines": [
         {
           "label": "2 vCPU / 4 GB, 12 GB disk",
@@ -86,17 +86,17 @@
         "At 90 awake hours, disk is two-thirds of the bill in the first option.",
         "Leaving the same box running all month instead would cost about $5.40."
       ],
-      "flag": "20 GB is not orderable with 2 vCPU. The second line buys more CPU and RAM than asked to get the disk."
+      "flag": "20 GB is not orderable with 2 vCPU on the default type. The second line buys more CPU and RAM than asked to get the disk; a 2/4 VM with 20 GB would cost about $3.13."
     }
   },
   "company": {
     "facts": [
       {
         "label": "Legal entity",
-        "value": "Agent 37 Inc., under New York law; the state of incorporation is not published.",
+        "value": "Agent37.com Inc, a Delaware corporation, per the DPA dated 5 November 2026; the Terms still name Agent 37 Inc.",
         "source": {
-          "url": "https://www.agent37.com/terms",
-          "quote": "These Terms of Service (the \"Terms\") are an agreement between you and Agent 37 Inc. (\"Agent 37\", \"we\", \"us\").",
+          "url": "https://www.agent37.com/dpa",
+          "quote": "is between Agent37.com Inc, a Delaware corporation",
           "confidence": "docs-confirmed"
         }
       },
@@ -124,10 +124,10 @@
       },
       {
         "label": "Status page",
-        "value": "Every component headline reads 100% uptime, but the same page lists two incidents: US sandboxes degraded for 21 minutes on 20 October 2026, and some sandbox creations failing for 1 hour 5 minutes on 29 October.",
+        "value": "Every component headline reads 100% uptime, but the page lists eight incidents since 20 October 2026, including a 3 h 44 m degradation in Europe on 5 November and 2 h 14 m in India on 11 November.",
         "source": {
           "url": "https://status.agent37.com/",
-          "quote": "Temporary interruption to US sandboxes Degraded for 21 minutes",
+          "quote": "All services are online",
           "confidence": "docs-confirmed"
         }
       },
@@ -166,7 +166,7 @@
   "usability": {
     "dashboard": "Yes, two of them: agent37.com/dashboard/cloud for keys, billing, team and metrics, and a separate dashboard for the personal-agent product. The docs never describe creating a Cloud sandbox by clicking, so the documented path is an API call or the CLI.",
     "withoutCode": "On managed hosting, yes, that is the whole product: one click, a task board, a web terminal, a file browser and a live desktop. On the Cloud API, no: every create path in the docs is `POST /v1/instances`, `npx agent37`, or a code snippet.",
-    "signup": "Cloud needs a card to unlock the $5 starter credit, or you can sign up through the API with no credit and fund it first. The personal free plan needs no card.",
+    "signup": "Cloud needs a card to unlock the $5 starter credit, or you can sign up through the API with no credit and fund it first. The personal free plan now needs a card on file, though nothing is charged.",
     "docs": "Mintlify docs, over 60 pages, runnable examples for every endpoint, and `llms.txt` bundles so an agent can read the whole manual. Support is a founder's email, a dashboard chat bubble and a booking link. There is a public status page.",
     "tripsUp": [
       "The vocabulary is developer-native: instance, template, exec, signed URL, default port.",
@@ -178,23 +178,6 @@
     ]
   },
   "caveats": [
-    {
-      "issue": "The vCPU ceiling contradicts itself",
-      "detail": "The sizing page says 4 vCPU is the ceiling on every instance type and that a request for 16 vCPU comes back as 4. The VM page prices 8 vCPU / 16 GB and 16 vCPU / 32 GB. Both pages are current.",
-      "status": "contradiction",
-      "evidence": [
-        {
-          "url": "https://www.agent37.com/docs/agents-api/instance-sizing",
-          "quote": "4 vCPU is the ceiling on every instance type. A create that asks for more cores keeps the memory it asked for and comes back with 4 vCPU",
-          "confidence": "docs-confirmed"
-        },
-        {
-          "url": "https://www.agent37.com/docs/agents-api/vm-instances#sizing-and-price",
-          "quote": "8 | 16 GB | 2-40 GB | 12 GB | $45.08",
-          "confidence": "docs-confirmed"
-        }
-      ]
-    },
     {
       "issue": "battleships.dev models Agent 37 as having memory snapshots",
       "detail": "Its `snapshot: mem` and $0.03 figure describe the sleep checkpoint and cold storage, not a snapshot product you can name, list or clone. There is no snapshot product.",
@@ -226,7 +209,7 @@
     "Two pauses with different memory behaviour, both billed at disk only.",
     "Free nightly backups of /home/node with seven restore points.",
     "Managed hosting is the only genuinely one-click personal agent in this set.",
-    "Cheapest always-on 4 vCPU box of the seven at about $10.60 a month."
+    "One of the cheapest always-on 4 vCPU sandboxes, at about $10.60 a month on the default type."
   ],
   "sources": [
     {
@@ -260,6 +243,10 @@
     {
       "label": "Personal agent plans",
       "url": "https://www.agent37.com/personal"
+    },
+    {
+      "label": "Data Processing Agreement",
+      "url": "https://www.agent37.com/dpa"
     }
   ]
 }

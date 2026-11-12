@@ -46,10 +46,10 @@
       "verdict": "yes",
       "figure": "Not published",
       "scenario": "The agent's package downloads go out through the allowlist, and no egress rate or cap is published to price them.",
-      "note": "Allow-all, deny-all or an IPv4 allowlist of up to 100 entries, changeable live. DNS counts as a connection, and private ranges stay blocked. No static egress IP or published egress price.",
+      "note": "Allow-all, deny-all or an allowlist of up to 100 domains and IPv4 addresses, changeable live. Domain entries cover HTTPS on 443 only; DNS counts as a connection, and private ranges stay blocked. No static egress IP or published egress price.",
       "source": {
-        "url": "https://www.agent37.com/docs/agents-api/instance-network",
-        "quote": "**DNS counts as a connection.** Under `deny-all` or a list, names do not resolve unless a resolver is on the list.",
+        "url": "https://www.agent37.com/docs/agents-api/instance-network.md",
+        "quote": "Only the listed domains and IPv4 addresses and ranges, up to 100 entries.",
         "confidence": "docs-confirmed"
       }
     },

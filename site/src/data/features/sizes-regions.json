@@ -45,8 +45,8 @@
       "provider": "agent37",
       "verdict": "partly",
       "figure": "4 vCPU; three regions",
-      "scenario": "Four shapes cap at 4 vCPU; the EU and India regions need the 2.5× vm type.",
-      "note": "Four shapes with a 4 vCPU ceiling on the default type, 2–80 GB of disk by shape, and three regions. EU and India require the 2.5× vm type.",
+      "scenario": "Four shapes, 4 vCPU on every type; the EU and India regions need the 2.5× vm type.",
+      "note": "Four shapes with a 4 vCPU ceiling on every type; 2–80 GB of disk on the default shapes and 2–100 GB on VM and Performance. Three regions; EU and India require the 2.5× vm type.",
       "source": {
         "url": "https://www.agent37.com/docs/agents-api/instance-sizing",
         "quote": "4 vCPU is the ceiling on every instance type.",

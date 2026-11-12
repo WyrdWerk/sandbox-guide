@@ -55,10 +55,10 @@
       "verdict": "yes",
       "figure": "Whole domain only",
       "scenario": "Possible only by delegating a whole dedicated domain's nameservers; a subdomain of your existing domain cannot be registered.",
-      "note": "Custom domains are supported, but only by delegating a whole dedicated domain's nameservers; a subdomain of an existing domain cannot be registered.",
+      "note": "Custom domains are supported, but only by delegating a whole dedicated domain's nameservers; a subdomain of an existing domain cannot be registered. They unlock at $50 of lifetime top-ups, and you can register 10 per workspace for free.",
       "source": {
-        "url": "https://www.agent37.com/docs/agents-api/urls",
-        "quote": "Custom domain | `https://{label}.yourdomain.com` mirrors all of the above",
+        "url": "https://www.agent37.com/docs/agents-api/urls.md",
+        "quote": "is mirrored at `{label}.yourdomain.com` with the same authentication.",
         "confidence": "docs-confirmed"
       }
     },
