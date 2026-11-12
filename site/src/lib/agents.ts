@@ -281,8 +281,8 @@ ${guides.map((g) => `- [${g.title}](${abs(`/data/guides/${g.id}.md`)}): ${g.ques
 - About and publisher: ${abs("/about/")}
 - Method and limits: ${abs("/how-we-checked/")}
 - How costs are calculated: ${abs("/costs/how-it-works/")}
-- Source code and data: https://github.com/WyrdWerk/sandbox-guide
-- Report a mistake: https://github.com/WyrdWerk/sandbox-guide/issues
+- Source code and data: https://github.com/thelaggingway/sandbox-guide
+- Report a mistake: https://github.com/thelaggingway/sandbox-guide/issues
 `;
 }
 

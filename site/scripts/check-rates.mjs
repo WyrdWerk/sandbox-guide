@@ -62,7 +62,7 @@ function jsonFigures(data, bare = false) {
 async function read(url) {
   try {
     const res = await fetch(url, {
-      headers: { "user-agent": "Mozilla/5.0 (sandbox-guide price check; +https://github.com/WyrdWerk/sandbox-guide)" },
+      headers: { "user-agent": "Mozilla/5.0 (sandbox-guide price check; +https://github.com/thelaggingway/sandbox-guide)" },
       redirect: "follow",
       signal: AbortSignal.timeout(30_000),
     });

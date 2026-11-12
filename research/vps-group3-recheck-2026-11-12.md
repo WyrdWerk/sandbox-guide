@@ -1,6 +1,6 @@
 # VPS group 3 recheck — OVHcloud, Scaleway, TierHive, Vultr
 
-Recheck date: **2026-11-12** (Asia/Kolkata). Repository `WyrdWerk/sandbox-guide`, baseline `origin/main` **4432d00**.
+Recheck date: **2026-11-12** (Asia/Kolkata). Repository `thelaggingway/sandbox-guide`, baseline `origin/main` **4432d00**.
 Desk research only: no accounts, credentials, deployments or billable resources. No repo data files edited.
 
 Method: fresh **Context `web_scrape`** (`maxAgeMs: 0`) for rendered/marketing pages, plus direct `curl` of

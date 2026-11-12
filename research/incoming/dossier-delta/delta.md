@@ -1,6 +1,6 @@
 # Provider reliability dossiers vs the site: delta report
 
-**Date:** 4 November 2026. **Repo:** `WyrdWerk/sandbox-guide` at `38f711c`. **Scope:** read-only comparison. No site data, commit or push was made.
+**Date:** 4 November 2026. **Repo:** `thelaggingway/sandbox-guide` at `38f711c`. **Scope:** read-only comparison. No site data, commit or push was made.
 
 ## What was compared
 

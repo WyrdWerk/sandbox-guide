@@ -18,7 +18,7 @@ const path = Astro.url.pathname;
 const isCurrent = (href: string) =>
   href === "/" ? path === "/" : path.startsWith(href);
 
-const issueUrl = `https://github.com/WyrdWerk/sandbox-guide/issues/new?${new URLSearchParams({
+const issueUrl = `https://github.com/thelaggingway/sandbox-guide/issues/new?${new URLSearchParams({
   title: `Correction: ${path}`,
   body: `Page: ${new URL(path, Astro.site)}\n\nWhat is wrong:\n\nWhere the correct information is (a link to the provider's page if you have one):\n`,
 })}`;
@@ -38,7 +38,7 @@ const nav = [
 // Structured data: who publishes the site, where this page sits, and when its facts were checked.
 const home = new URL("/", Astro.site).href;
 const pageUrl = new URL(path, Astro.site).href;
-const org = { "@type": "Organization", "@id": `${home}#publisher`, name: "WyrdWerk", url: "https://github.com/WyrdWerk" };
+const org = { "@type": "Organization", "@id": `${home}#publisher`, name: "WyrdWerk", url: "https://github.com/thelaggingway" };
 const segments = path.split("/").filter(Boolean);
 const crumbs = segments.length
   ? [
@@ -200,7 +200,7 @@ const ld = {
           Who writes it: Yash at WyrdWerk. Personal accounts:{" "}
           <a href="https://www.linkedin.com/in/yash-jain-65295511b/" rel="noreferrer noopener me">Yash on LinkedIn</a> and{" "}
           <a href="https://x.com/thelaggingway" rel="noreferrer noopener me">Yash on X</a>. Company code:{" "}
-          <a href="https://github.com/WyrdWerk" rel="noreferrer noopener">WyrdWerk on GitHub</a>.
+          <a href="https://github.com/thelaggingway" rel="noreferrer noopener">thelaggingway on GitHub</a>.
         </p>
       </div>
     </footer>

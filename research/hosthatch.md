@@ -1,7 +1,7 @@
 # HostHatch — research ledger
 
 Provider ID `hosthatch`, kind `vps`. Desk research only: no account was created, no credential used
-and no server started. Research date **2026-11-04** (Asia/Kolkata). Repository `WyrdWerk/sandbox-guide`,
+and no server started. Research date **2026-11-04** (Asia/Kolkata). Repository `thelaggingway/sandbox-guide`,
 `origin/main` at `38f711c`; the worktree was clean apart from these new files under
 `research/incoming/hosthatch/`.
 
