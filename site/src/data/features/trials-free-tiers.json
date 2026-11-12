@@ -129,10 +129,10 @@
       "provider": "instabox",
       "verdict": "yes",
       "figure": "Free plan, 1 machine",
-      "scenario": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB disk, five snapshots and a fixed 30-minute idle pause, and it never converts.",
-      "note": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB fixed disk, five snapshots, 100 GiB egress, a fixed 30-minute idle pause and two templates. It never converts.",
+      "scenario": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB disk, five snapshots, a fixed 30-minute idle pause and runs of at most 480 minutes, and it never converts.",
+      "note": "A real free plan: one 4 vCPU / 8 GiB machine, 20 GiB fixed disk, five snapshots, 100 GiB egress, a fixed 30-minute idle pause, at most 480 minutes per run and four templates. No GPU. It never converts.",
       "source": {
-        "url": "https://instabox.sh/pricing",
+        "url": "https://instabox.sh/docs/account/pricing.md",
         "quote": "1 machine, 4 vCPU / 8 GiB",
         "confidence": "pricing-page"
       }
@@ -142,11 +142,11 @@
       "verdict": "partly",
       "figure": "7 days / $5",
       "scenario": "Seven days with $5 of usage, a card required, Small machines only and US regions only.",
-      "note": "A seven-day trial with $5 of usage, a card required, Small machines only, US regions only and up to five at once. One trial per account and per card.",
+      "note": "A seven-day trial with $5 of usage and a card required. Until the first paid invoice an account runs 1 Small and 2 Mini at a time, in US regions only, and each sandbox is deleted an hour after it starts. One trial per account and per card.",
       "source": {
-        "url": "https://lizard.build/docs/platform/billing",
-        "quote": "Pro starts with a 7-day trial that includes $5 of usage. You add a card to start it; Apple Pay works too. Nothing is charged when the trial starts.",
-        "confidence": "docs-confirmed"
+        "url": "https://lizard.build/docs/platform/billing.md",
+        "quote": "Pro starts with a 7-day trial that includes $5 of usage.",
+        "confidence": "pricing-page"
       }
     },
     {

@@ -126,13 +126,13 @@
     },
     {
       "provider": "instabox",
-      "verdict": "partly",
+      "verdict": "yes",
       "figure": "Yes, dashboard",
       "scenario": "A dashboard creates the machine and opens a clickable VNC desktop, with a web terminal as backup.",
-      "note": "REST, a TypeScript SDK, a CLI, SSH and mosh through a gateway, a web terminal and a VNC desktop. No control-plane MCP is published.",
+      "note": "A dashboard, REST with an OpenAPI 3.1 document, TypeScript and Python SDKs, a CLI, SSH and mosh through a gateway, a web terminal, a VNC desktop, webhooks and a hosted MCP server.",
       "source": {
-        "url": "https://instabox.sh/docs/start",
-        "quote": "In the dashboard, **Create machine** on the **Machines** page does what `instabox create` does.",
+        "url": "https://instabox.sh/docs/integrations/mcp.md",
+        "quote": "The hosted server at `https://api.instabox.sh/mcp` is the recommended way to connect.",
         "confidence": "docs-confirmed"
       }
     },

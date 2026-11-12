@@ -128,12 +128,12 @@
     {
       "provider": "instabox",
       "verdict": "partly",
-      "figure": "Disk only; may stop source",
-      "scenario": "Snapshots are disk-only and may stop the machine to take them; a fork is snapshot-save plus create, not an instant clone.",
-      "note": "Snapshots are disk-only and may stop the machine to take them; a fork is snapshot-save plus create, not an instant clone; snapshots survive deleting the machine and include saved logins.",
+      "figure": "Disk only; fork up to 5",
+      "scenario": "Snapshots and forks keep files but not running programs; a fork is a copy-on-write copy made in seconds, up to five at once.",
+      "note": "Snapshots are disk-only, can be taken of a running machine, are free and survive deleting the machine. A fork is a copy-on-write copy of the disks on the same host, up to five at once, without memory or processes. A Docker or OCI image can be imported as a snapshot.",
       "source": {
-        "url": "https://instabox.sh/docs/snapshots",
-        "quote": "It is snapshot save plus create, so it takes about as long as those two.",
+        "url": "https://instabox.sh/docs/machines/fork.md",
+        "quote": "Memory and running programs are not copied",
         "confidence": "docs-confirmed"
       }
     },

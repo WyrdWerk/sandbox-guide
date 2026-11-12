@@ -128,12 +128,12 @@
     {
       "provider": "instabox",
       "verdict": "partly",
-      "figure": "32 vCPU / 64 GiB; US only",
-      "scenario": "Fixed pairs by plan, up to 32 vCPU / 64 GiB on Team, with one 20 GiB disk that grows live.",
-      "note": "Fixed vCPU/RAM pairs by plan, from 2/4 to 32/64, one 20 GiB disk that grows live. No published region selector; the terms say the United States.",
+      "figure": "32 vCPU / 64 GiB, L4 GPU; US only",
+      "scenario": "Fixed pairs by plan, up to 32 vCPU / 64 GiB on Team, NVIDIA L4 GPUs on paid plans, and one disk that grows live.",
+      "note": "Fixed vCPU/RAM pairs by plan, from 2/4 to 32/64, and GPU machines with 1–4 NVIDIA L4s at $0.80 per GPU-hour on paid plans. One disk that grows live to 1,024 GiB. No region choice: a region field is refused, and the terms say the United States.",
       "source": {
-        "url": "https://instabox.sh/docs/limits",
-        "quote": "Team: 2/4 up to 32 vCPUs / 64 GiB",
+        "url": "https://instabox.sh/docs/machines/storage.md",
+        "quote": "You cannot choose a region.",
         "confidence": "docs-confirmed"
       }
     },
@@ -141,11 +141,11 @@
       "provider": "lizard",
       "verdict": "partly",
       "figure": "8 vCPU / 16 GB; two regions",
-      "scenario": "Large is 8 vCPU / 16 GB / 50 GB, and there is no 2-core 16 GB shape in between.",
-      "note": "Three fixed sizes: Small 2/4/5 GB, Medium 4/8/20 GB, Large 8/16/50 GB. Two regions, no GPU, no live resize.",
+      "scenario": "Four fixed sizes up to 8 vCPU / 16 GB / 80 GB, in US East or EU West; no GPU.",
+      "note": "Four fixed sizes: Mini 1/2/5 GB, Small 2/4/20 GB, Medium 4/8/40 GB, Large 8/16/80 GB; Mini starts only from four templates and takes no volume. Pro runs 40 vCPU at once, Pro 5x 220 and Pro 20x 1,200. Two regions, no GPU, no live resize. The pricing page also lists a 0.5 vCPU Nano the docs do not.",
       "source": {
-        "url": "https://lizard.build/docs/sandboxes",
-        "quote": "Large | 8 | 16 GB | 50 GB | $0.0648/hour",
+        "url": "https://lizard.build/docs/platform/limits.md",
+        "quote": "Sandbox sizes run from Mini (1 vCPU / 2 GB) to Large (8 vCPU / 16 GB)",
         "confidence": "docs-confirmed"
       }
     },

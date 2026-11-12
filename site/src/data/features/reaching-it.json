@@ -130,9 +130,9 @@
       "verdict": "partly",
       "figure": "Public or token-only links",
       "scenario": "A port can be public, or private so it answers only requests that carry its token, which can be replaced.",
-      "note": "An HTTPS link per port, up to 16, either public or private behind a replaceable token. SSH and mosh go through a gateway. Raw non-web ports are in an admin-only preview, later paid plans only with 5 per workspace. No custom domain.",
+      "note": "An HTTPS link per port, up to 16, either public or private behind a replaceable token. SSH and mosh go through a gateway, and the desktop can be shared by link. Raw non-web ports are in an admin-only preview, later paid plans only with a per-workspace limit. No custom domain.",
       "source": {
-        "url": "https://instabox.sh/docs/ports.md",
+        "url": "https://instabox.sh/docs/access/ports.md",
         "quote": "A **private** port answers only requests that carry its token.",
         "confidence": "docs-confirmed"
       }

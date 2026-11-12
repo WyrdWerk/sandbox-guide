@@ -174,8 +174,8 @@
       "provider": "instabox",
       "verdict": "partly",
       "figure": "InsForge AI, Inc.; 99.9% Enterprise",
-      "scenario": "A 99.9% SLA on Enterprise only, and a Trust Center that shows HIPAA and no SOC 2 badge.",
-      "note": "InsForge AI, Inc., Delaware; InstaBox is its second product, launched 14 October 2026 and priced 19 October. Founded 2025 by Hang Huang (CEO) and Tony Chang (CTO), YC Spring 2026, six people, $8M seed in September 2026. The YC badge is on insforge.dev, not instabox.sh. No public status page; per-machine metrics only. 99.9% SLA on Enterprise only, with no credits or measurement published. HIPAA badge only; no SOC 2 report, ISO or public DPA. Fees non-refundable; terminate through support.",
+      "scenario": "A 99.9% SLA on Enterprise only, a public status page, and a SOC 2 Type II report on request.",
+      "note": "InsForge AI, Inc., Delaware; InstaBox is its second product, launched 14 October 2026 and priced 19 October. Founded 2025 by Hang Huang (CEO) and Tony Chang (CTO), YC Spring 2026, six people, $8M seed in September 2026. Status page at instabox.instatus.com. SOC 2 Type II completed by InsForge, report on request; HIPAA badge. 99.9% SLA on Enterprise only, with no credits or measurement published. No customer DPA; data stays in the US. Fees non-refundable; terminate through support.",
       "source": {
         "url": "https://instabox.sh/pricing",
         "quote": "99.9% SLA",

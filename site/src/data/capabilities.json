@@ -87,7 +87,7 @@
           "verdict": "yes",
           "figure": "Firecracker microVM",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
+            "url": "https://instabox.sh/docs/account/limits.md",
             "quote": "in a Firecracker microVM",
             "confidence": "docs-confirmed"
           }
@@ -405,8 +405,8 @@
           "verdict": "yes",
           "figure": "passwordless sudo",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "passwordless sudo with apt for anything else",
+            "url": "https://instabox.sh/docs/account/limits.md",
+            "quote": "passwordless `sudo` with apt",
             "confidence": "docs-confirmed"
           }
         },
@@ -718,7 +718,7 @@
           "figure": "Docker on default image",
           "note": "The herdr and orca templates ship without Docker.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
+            "url": "https://instabox.sh/docs/account/limits.md",
             "quote": "Docker with Compose",
             "confidence": "docs-confirmed"
           }
@@ -1033,13 +1033,14 @@
         },
         {
           "provider": "instabox",
-          "verdict": "not-published",
-          "note": "Nested virtual machines are not mentioned anywhere in the docs.",
+          "verdict": "no",
+          "note": "There is no /dev/kvm inside the machine, so virtual machines cannot start inside it.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "in a Firecracker microVM",
-            "confidence": "not-published"
-          }
+            "url": "https://instabox.sh/docs/reference/typescript/sandbox.md",
+            "quote": "There is also no `/dev/kvm` in the guest, because the kernel is a KVM guest, not a KVM host.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "no /dev/kvm"
         },
         {
           "provider": "lizard",
@@ -1352,14 +1353,14 @@
         },
         {
           "provider": "instabox",
-          "verdict": "partly",
-          "figure": "operator-built templates",
-          "shortfall": "You pick from fixed images or a saved copy; a different starting image needs an operator to build one for you.",
+          "verdict": "yes",
+          "figure": "Docker/OCI import",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "An operator can also build a template from a public Debian- or Ubuntu-based image",
+            "url": "https://instabox.sh/docs/machines/custom-images.md",
+            "quote": "An import turns a Docker or OCI image from a registry into a snapshot",
             "confidence": "docs-confirmed"
-          }
+          },
+          "note": "A Docker or OCI image from a registry, private ones included, imports as a snapshot to start machines from; linux/amd64 only."
         },
         {
           "provider": "lizard",
@@ -1683,19 +1684,19 @@
           "figure": "fixed pairs by plan",
           "shortfall": "Each plan sells fixed pairs of cores and memory, and any other combination is refused.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "4 vCPUs and 8 GiB of memory by default, the only size on the free plan.",
+            "url": "https://instabox.sh/docs/machines/sizes.md",
+            "quote": "the server refuses any other size with `400 spec_not_allowed`",
             "confidence": "docs-confirmed"
           }
         },
         {
           "provider": "lizard",
           "verdict": "no",
-          "figure": "3 fixed sizes",
-          "shortfall": "There are three fixed sizes and no custom option.",
+          "figure": "4 fixed sizes",
+          "shortfall": "There are four fixed sizes, from 1 vCPU / 2 GB to 8 vCPU / 16 GB, and no custom option.",
           "source": {
-            "url": "https://lizard.build/docs/sandboxes",
-            "quote": "Choose a size when you create a sandbox: Small (2 vCPU / 4 GB), Medium (4 vCPU / 8 GB, the default), or Large (8 vCPU / 16 GB).",
+            "url": "https://lizard.build/docs/platform/limits.md",
+            "quote": "Sandbox sizes run from Mini (1 vCPU / 2 GB) to Large (8 vCPU / 16 GB)",
             "confidence": "docs-confirmed"
           }
         },
@@ -2014,8 +2015,8 @@
           "figure": "32 cores / 64 GiB",
           "note": "The 32-core size needs the $500-a-month Team plan.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "Team: 2/4 up to 32 vCPUs / 64 GiB",
+            "url": "https://instabox.sh/docs/account/limits.md",
+            "quote": "32 vCPU / 64 GiB",
             "confidence": "docs-confirmed"
           },
           "shortfall": "Only on the $500-a-month plan or above."
@@ -2026,8 +2027,8 @@
           "figure": "8 cores / 16 GB",
           "shortfall": "The largest machine is 8 cores and 16 GB, so a 32 GB machine is not offered.",
           "source": {
-            "url": "https://lizard.build/docs/platform/limits",
-            "quote": "Sandbox sizes run from Small (2 vCPU / 4 GB) to Large (8 vCPU / 16 GB)",
+            "url": "https://lizard.build/docs/platform/limits.md",
+            "quote": "| Large | 8 vCPU / 16 GB | 80 GB | $0.0648 per hour |",
             "confidence": "docs-confirmed"
           }
         },
@@ -2343,10 +2344,10 @@
           "provider": "instabox",
           "verdict": "partly",
           "figure": "only while stopped",
-          "shortfall": "Cores and memory change only while the machine is stopped, and take effect at its next start; the free plan cannot resize at all.",
+          "shortfall": "The disk grows while the machine runs, but cores and memory change only while it is stopped and take effect at its next start; the free plan cannot resize at all.",
           "source": {
-            "url": "https://instabox.sh/docs/machines.md",
-            "quote": "A paid machine moves to another size of its plan while stopped",
+            "url": "https://instabox.sh/docs/machines/sizes.md",
+            "quote": "Run the resize on a stopped machine, and the new size applies at the next start.",
             "confidence": "docs-confirmed"
           }
         },
@@ -2357,8 +2358,8 @@
           "shortfall": "The size is chosen when the sandbox is created and cannot be changed.",
           "note": "Inferred: the size list is closed and no resize is documented.",
           "source": {
-            "url": "https://lizard.build/docs/platform/limits",
-            "quote": "Sandbox sizes run from Small (2 vCPU / 4 GB) to Large (8 vCPU / 16 GB)",
+            "url": "https://lizard.build/docs/platform/limits.md",
+            "quote": "Sandbox sizes run from Mini (1 vCPU / 2 GB) to Large (8 vCPU / 16 GB)",
             "confidence": "inferred"
           }
         },
@@ -2680,14 +2681,13 @@
         },
         {
           "provider": "instabox",
-          "verdict": "no",
-          "figure": "no GPU",
-          "shortfall": "No graphics processor is offered on any plan.",
-          "note": "Inferred: no GPU appears in the plans, docs or API.",
+          "verdict": "yes",
+          "figure": "NVIDIA L4, $0.80/GPU-hour",
+          "note": "Paid plans only: 1 to 4 L4s per machine and 8 per workspace, each bringing 11 vCPU and 36 GiB.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "4 vCPUs and 8 GiB of memory by default, the only size on the free plan.",
-            "confidence": "inferred"
+            "url": "https://instabox.sh/docs/account/pricing.md",
+            "quote": "NVIDIA L4 (`l4`) | \\$0.80 per GPU-hour | 11 vCPU / 36 GiB",
+            "confidence": "pricing-page"
           }
         },
         {
@@ -3014,8 +3014,8 @@
           "figure": "no region setting",
           "shortfall": "There is no region setting anywhere in the tools or docs, so you cannot ask for a European machine.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "4 vCPUs and 8 GiB of memory by default, the only size on the free plan.",
+            "url": "https://instabox.sh/docs/machines/storage.md",
+            "quote": "You cannot choose a region. A machine has no `region` field",
             "confidence": "inferred"
           }
         },
@@ -3334,9 +3334,9 @@
           "figure": "US only",
           "shortfall": "There is no European region and no way to ask for one.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "4 vCPUs and 8 GiB of memory by default, the only size on the free plan.",
-            "confidence": "inferred"
+            "url": "https://instabox.sh/terms",
+            "quote": "are stored and processed in the United States",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -3655,8 +3655,8 @@
           "shortfall": "A resume can come back without the running programs, and the machine reports that it did.",
           "note": "A paused machine cannot be stopped; start it first.",
           "source": {
-            "url": "https://instabox.sh/docs/machines.md",
-            "quote": "**Resume** brings back a paused machine's memory and processes. If that is not possible it starts fresh: files are kept, processes are not.",
+            "url": "https://instabox.sh/docs/machines/lifecycle.md",
+            "quote": "If a resume cannot bring memory back, the machine starts fresh with its files.",
             "confidence": "docs-confirmed"
           }
         },
@@ -3968,9 +3968,9 @@
           "verdict": "no",
           "note": "No pool of pre-started machines; the paid plans sell a dedicated pool only as an enterprise option.",
           "source": {
-            "url": "https://instabox.sh/docs/pricing.md",
+            "url": "https://instabox.sh/pricing.md",
             "quote": "Dedicated pool or BYOC",
-            "confidence": "inferred"
+            "confidence": "pricing-page"
           }
         },
         {
@@ -4285,7 +4285,7 @@
           "shortfall": "A resume usually takes about a second, which is not under one.",
           "source": {
             "url": "https://instabox.sh/docs/integrate.md",
-            "quote": "// carries on where it left off, usually in about a second",
+            "quote": "carries on where it left off, usually in about a second",
             "confidence": "docs-confirmed"
           }
         },
@@ -4607,8 +4607,8 @@
           "verdict": "yes",
           "note": "Snapshots hold installed software and the files under /data.",
           "source": {
-            "url": "https://instabox.sh/docs/snapshots.md",
-            "quote": "A snapshot holds a machine’s installed software and its files under `/data`: home, workspace and saved sign-ins",
+            "url": "https://instabox.sh/docs/machines/snapshots.md",
+            "quote": "The snapshot holds the installed software and the files under `/data`",
             "confidence": "docs-confirmed"
           }
         },
@@ -4920,8 +4920,8 @@
           "verdict": "no",
           "note": "Snapshots never include memory or running programs.",
           "source": {
-            "url": "https://instabox.sh/docs/snapshots.md",
-            "quote": "It does not hold memory or running processes.",
+            "url": "https://instabox.sh/docs/machines/snapshots.md",
+            "quote": "Memory and running processes are not saved",
             "confidence": "docs-confirmed"
           }
         },
@@ -5231,14 +5231,14 @@
         },
         {
           "provider": "instabox",
-          "verdict": "partly",
-          "figure": "A few seconds",
-          "shortfall": "A copy is made in a few seconds and carries the files but not the running programs.",
+          "verdict": "yes",
+          "figure": "Up to 5 copies",
           "source": {
-            "url": "https://instabox.sh/docs/snapshots.md",
+            "url": "https://instabox.sh/docs/machines/fork.md",
             "quote": "copies a running or stopped machine into one new machine",
             "confidence": "docs-confirmed"
-          }
+          },
+          "note": "A copy-on-write copy of the disks on the same host; the copy has the same files, but nothing that was running keeps running."
         },
         {
           "provider": "lizard",
@@ -5549,8 +5549,8 @@
           "verdict": "yes",
           "note": "Any saved snapshot can be restored, and deleting a machine keeps its snapshots.",
           "source": {
-            "url": "https://instabox.sh/docs/snapshots.md",
-            "quote": "Deleting a machine keeps its snapshots; deleting a snapshot does not affect machines made from it.",
+            "url": "https://instabox.sh/docs/machines/snapshots.md",
+            "quote": "put a machine back to an earlier state when something goes wrong",
             "confidence": "docs-confirmed"
           }
         },
@@ -5559,8 +5559,8 @@
           "verdict": "yes",
           "note": "Restore any snapshot you kept, into a new sandbox.",
           "source": {
-            "url": "https://lizard.build/docs/sandboxes/quickstart",
-            "quote": "Each restore starts a new sandbox in the snapshot’s region",
+            "url": "https://lizard.build/docs/sandboxes/quickstart.md",
+            "quote": "It restores only in its own project and region.",
             "confidence": "docs-confirmed"
           }
         },
@@ -5862,8 +5862,8 @@
           "verdict": "yes",
           "note": "Set a machine up once, save it, and start new ones from it.",
           "source": {
-            "url": "https://instabox.sh/docs/snapshots.md",
-            "quote": "Save a machine once, start new ones from it.",
+            "url": "https://instabox.sh/docs/machines/snapshots.md",
+            "quote": "Set up once, reuse everywhere.",
             "confidence": "docs-confirmed"
           }
         },
@@ -6177,9 +6177,9 @@
           "verdict": "no",
           "note": "No backup schedule; snapshots are taken when you ask.",
           "source": {
-            "url": "https://instabox.sh/docs/snapshots.md",
-            "quote": "Save a machine once, start new ones from it.",
-            "confidence": "inferred"
+            "url": "https://instabox.sh/terms",
+            "quote": "Customer remains responsible for maintaining copies of Customer Data sufficient for its own recovery requirements.",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -6490,8 +6490,8 @@
           "verdict": "yes",
           "note": "The /data disk and the template’s root disk are kept on stop.",
           "source": {
-            "url": "https://instabox.sh/docs/machines.md",
-            "quote": "The root disk and `/data` are kept; processes and memory are not.",
+            "url": "https://instabox.sh/docs/machines/lifecycle.md",
+            "quote": "Stop shuts the machine down. Files stay.",
             "confidence": "docs-confirmed"
           }
         },
@@ -6804,19 +6804,19 @@
           "verdict": "no",
           "note": "One disk per machine; no separate volume.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "A machine has one disk, `/data` (home is `/data/home`), 20 GiB by default.",
-            "confidence": "docs-confirmed"
+            "url": "https://instabox.sh/docs/account/limits.md",
+            "quote": "A machine has one disk you size, `/data`.",
+            "confidence": "inferred"
           }
         },
         {
           "provider": "lizard",
           "verdict": "yes",
           "figure": "1–50 GB",
-          "shortfall": "A volume attaches to one sandbox at a time and lives on one node.",
+          "shortfall": "A volume attaches to one sandbox at a time and lives on one node; volumes in a workspace add up to at most 200 GB.",
           "source": {
-            "url": "https://lizard.build/docs/sandboxes/volumes",
-            "quote": "Persistent Volumes keep data after a sandbox stops.",
+            "url": "https://lizard.build/docs/sandboxes/volumes.md",
+            "quote": "New volumes allow **1 to 50 GB**, in whole GB, with **5 GB** as the default.",
             "confidence": "docs-confirmed"
           }
         },
@@ -7118,8 +7118,8 @@
           "verdict": "no",
           "note": "A disk belongs to one machine.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "A machine has one disk, `/data` (home is `/data/home`), 20 GiB by default.",
+            "url": "https://instabox.sh/docs/account/limits.md",
+            "quote": "A machine has one disk you size, `/data`.",
             "confidence": "inferred"
           }
         },
@@ -7430,8 +7430,8 @@
           "verdict": "no",
           "note": "No outside bucket can be mounted.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "A machine has one disk, `/data` (home is `/data/home`), 20 GiB by default.",
+            "url": "https://instabox.sh/docs/account/limits.md",
+            "quote": "A machine has one disk you size, `/data`.",
             "confidence": "inferred"
           }
         },
@@ -7755,21 +7755,22 @@
           "figure": "Up to 1024 GiB",
           "note": "Paid plans grow /data to 200, 500 or 1024 GiB; a free machine cannot resize.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "The size is 1-1024 GiB; 0 or absent leaves the disk unchanged.",
+            "url": "https://instabox.sh/docs/account/limits.md",
+            "quote": "1024 GiB on Team and Enterprise",
             "confidence": "docs-confirmed"
           }
         },
         {
           "provider": "lizard",
           "verdict": "no",
-          "figure": "50 GB max",
-          "shortfall": "The largest size offers 50 GB of disk, short of 100 GB.",
+          "figure": "80 GB max",
+          "shortfall": "The largest size has 80 GB of disk and a volume adds at most 50 GB, so 100 GB on one disk is not offered.",
           "source": {
             "url": "https://lizard.build/docs/platform/limits.md",
-            "quote": "| Large | 8 vCPU / 16 GB | 50 GB | $0.0648 per hour |",
+            "quote": "| Large | 8 vCPU / 16 GB | 80 GB | $0.0648 per hour |",
             "confidence": "docs-confirmed"
-          }
+          },
+          "note": "The pricing page says volumes go up to 100 GB each; the volumes docs say 1 to 50 GB. This guide follows the docs."
         },
         {
           "provider": "modal",
@@ -8073,14 +8074,14 @@
         {
           "provider": "instabox",
           "verdict": "partly",
-          "note": "The free plan cannot turn off the 30-minute idle pause, but nothing deletes the machine.",
+          "note": "Paid machines have no maximum run by default and can turn the idle pause off.",
           "source": {
-            "url": "https://instabox.sh/docs/machines.md",
-            "quote": "**No forced TTL.** A paused or stopped machine and every snapshot you save stay until **you** delete them.",
+            "url": "https://instabox.sh/docs/machines/auto-pause.md",
+            "quote": "machines run at most 480 minutes at a time",
             "confidence": "docs-confirmed"
           },
           "figure": "Paid plans only",
-          "shortfall": "Only paid plans can switch off the idle pause; on the free plan a machine always pauses after 30 idle minutes, though nothing is deleted and it wakes when used."
+          "shortfall": "Only paid plans can run indefinitely; a free machine pauses after 30 idle minutes and runs at most 480 minutes at a time, though nothing is deleted and it wakes when used."
         },
         {
           "provider": "lizard",
@@ -8398,8 +8399,8 @@
           "figure": "5–30 min or off",
           "shortfall": "Only paid plans can choose; the free plan is fixed at 30 minutes and cannot turn it off.",
           "source": {
-            "url": "https://instabox.sh/docs/concepts.md",
-            "quote": "A new machine pauses once it has been idle for 30 minutes. On a paid plan you can choose 5 to 30 minutes, or `instabox auto-suspend <machine> 0` to turn that off",
+            "url": "https://instabox.sh/docs/machines/auto-pause.md",
+            "quote": "you can set any whole minute from 5 to 30, or `0` to turn the idle pause off.",
             "confidence": "docs-confirmed"
           }
         },
@@ -8712,8 +8713,8 @@
           "verdict": "partly",
           "shortfall": "Only a machine the platform paused for being idle wakes on a request; one you paused yourself has to be resumed.",
           "source": {
-            "url": "https://instabox.sh/docs/machines.md",
-            "quote": "Idle auto-pause wakes on use (exec, SSH, public URL, `instabox wake`). A pause or stop you requested does not: call resume or start.",
+            "url": "https://instabox.sh/docs/machines/auto-pause.md",
+            "quote": "A machine that paused **itself**",
             "confidence": "docs-confirmed"
           }
         },
@@ -9024,8 +9025,8 @@
           "verdict": "no",
           "note": "No scheduler for starting machines or jobs.",
           "source": {
-            "url": "https://instabox.sh/docs/concepts.md",
-            "quote": "| **Operation** | A change to a machine (create, start, stop, pause, resume, delete).",
+            "url": "https://instabox.sh/docs/machines/storage.md",
+            "quote": "Both deadlines are optional.",
             "confidence": "inferred"
           }
         },
@@ -9342,8 +9343,8 @@
           "figure": "16 ports",
           "note": "Public is the default; a private port adds a token to the link.",
           "source": {
-            "url": "https://instabox.sh/docs/ports.md",
-            "quote": "once published **public** (the default), anyone can reach the whole service until you unpublish it",
+            "url": "https://instabox.sh/docs/access/ports.md",
+            "quote": "A machine has up to 16 published ports.",
             "confidence": "docs-confirmed"
           }
         },
@@ -9664,8 +9665,8 @@
           "figure": "Token in link",
           "note": "A private port answers only requests that carry its token, and the token can be replaced.",
           "source": {
-            "url": "https://instabox.sh/docs/ports.md",
-            "quote": "A **private** port answers only requests that carry its token.",
+            "url": "https://instabox.sh/docs/access/ports.md",
+            "quote": "A private port answers only requests that carry its token.",
             "confidence": "docs-confirmed"
           }
         },
@@ -9990,8 +9991,8 @@
           "figure": "Gateway, short cert",
           "note": "A standard ssh client connects through the provider's gateway with a short-lived certificate.",
           "source": {
-            "url": "https://instabox.sh/docs/ssh.md",
-            "quote": "The instabox gateway terminates SSH: `ssh -p <port> <machine-id>@<host>`, with a short-lived user certificate",
+            "url": "https://instabox.sh/docs/access/ssh.md",
+            "quote": "Every connection goes to the instabox gateway, which terminates SSH.",
             "confidence": "docs-confirmed"
           }
         },
@@ -10313,8 +10314,8 @@
           "figure": "Dashboard",
           "note": "The dashboard opens a shell in the machine, and a desktop view is next to it.",
           "source": {
-            "url": "https://api.instabox.sh/v1/openapi.json",
-            "quote": "carrying a PTY (xterm-256color) of a login shell",
+            "url": "https://instabox.sh/docs/api-reference/introduction.md",
+            "quote": "`GET /v1/machines/{id}/terminal`",
             "confidence": "docs-confirmed"
           }
         },
@@ -10634,8 +10635,8 @@
           "figure": "ssh -L, yours only",
           "note": "A local forward is private to you and does not open a public port.",
           "source": {
-            "url": "https://instabox.sh/docs/ssh.md",
-            "quote": "It is `ssh -N -L` with the instabox certificate, so it reaches any TCP service, and only you can use it",
+            "url": "https://instabox.sh/docs/access/ssh.md",
+            "quote": "A forward reaches any TCP service in the machine",
             "confidence": "docs-confirmed"
           }
         },
@@ -10950,11 +10951,11 @@
         {
           "provider": "instabox",
           "verdict": "partly",
-          "figure": "Preview, 5 per workspace",
-          "shortfall": "Raw non-web traffic is in a preview only administrators can use, and later will be paid-plan only with five ports per workspace.",
+          "figure": "Preview, admins only",
+          "shortfall": "Raw non-web traffic is in a preview only administrators can use, and later will be paid-plan only with a per-workspace limit.",
           "source": {
-            "url": "https://instabox.sh/docs/ports.md",
-            "quote": "In preview (admins only) until the server opens it to everyone; then paid plans only, up to 5 per workspace.",
+            "url": "https://instabox.sh/docs/access/ports.md",
+            "quote": "It is in preview, for admins only, until the server opens it to everyone.",
             "confidence": "docs-confirmed"
           }
         },
@@ -11275,8 +11276,8 @@
           "verdict": "not-published",
           "note": "No custom-domain feature is published; the public address is a fixed provider name.",
           "source": {
-            "url": "https://instabox.sh/docs/ports.md",
-            "quote": "The URL is `https://<port>-<machine id without m_>.<domain>/`.",
+            "url": "https://instabox.sh/docs/access/ports.md",
+            "quote": "https://<port>-<machine id without m_>.<domain>/",
             "confidence": "inferred"
           }
         },
@@ -11593,9 +11594,9 @@
           "verdict": "not-published",
           "note": "No custom domain is published, so there is no certificate feature to describe.",
           "source": {
-            "url": "https://instabox.sh/docs/ports.md",
-            "quote": "The URL is `https://<port>-<machine id without m_>.<domain>/`.",
-            "confidence": "inferred"
+            "url": "https://instabox.sh/docs/access/ports.md",
+            "quote": "https://<port>-<machine id without m_>.<domain>/",
+            "confidence": "not-published"
           }
         },
         {
@@ -11919,8 +11920,8 @@
           "figure": "100 GiB free",
           "note": "Every plan includes a monthly allowance, from 100 GiB free up to 50 TiB, then $0.02 a gigabyte.",
           "source": {
-            "url": "https://instabox.sh/docs/pricing.md",
-            "quote": "Each plan includes egress every month (100 GiB on Free, 1 TiB on Pro, 5 TiB on Builder, 50 TiB on Team), then $0.02 per GiB.",
+            "url": "https://instabox.sh/docs/account/pricing.md",
+            "quote": "100 GiB on Free, 1 TiB on Pro, 5 TiB on Builder, 50 TiB on Team), then $0.02 per GiB",
             "confidence": "pricing-page"
           }
         },
@@ -12566,7 +12567,7 @@
           "verdict": "not-published",
           "note": "No setting that removes internet access entirely is documented.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
+            "url": "https://instabox.sh/docs/account/limits.md",
             "quote": "Outbound bandwidth",
             "confidence": "inferred"
           }
@@ -12885,8 +12886,8 @@
           "verdict": "not-published",
           "note": "No outbound address, fixed or shared, is published; the limits page covers only the speed cap. A third-party review says machines share one address.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "Outbound bandwidth",
+            "url": "https://instabox.sh/docs/account/limits.md",
+            "quote": "What a machine **sends** is capped at about **50 Mbit/s**",
             "confidence": "not-published"
           }
         },
@@ -13208,8 +13209,8 @@
           "figure": "Org secrets",
           "note": "Values are saved for the organisation and delivered either as a stand-in or as a real environment variable.",
           "source": {
-            "url": "https://instabox.sh/docs/secrets.md",
-            "quote": "Inside the sandbox: any process there can read and copy it.",
+            "url": "https://instabox.sh/docs/security/secrets.md",
+            "quote": "A machine sees each Secret as an environment variable whose value is an opaque placeholder (`ibsec_...`).",
             "confidence": "docs-confirmed"
           }
         },
@@ -13532,8 +13533,8 @@
           "figure": "Web headers only",
           "note": "Only encrypted web requests are covered; the value cannot go into a web address or a request body.",
           "source": {
-            "url": "https://instabox.sh/docs/secrets.md",
-            "quote": "Version one supports HTTPS on port 443; URL parameters and request bodies are not substituted.",
+            "url": "https://instabox.sh/docs/security/secrets.md",
+            "quote": "The real key never lands on the machine's disk or in its snapshots.",
             "confidence": "docs-confirmed"
           }
         },
@@ -13855,8 +13856,8 @@
           "figure": "Per-resource scopes",
           "note": "A key can be limited to reading, writing or deleting one kind of resource.",
           "source": {
-            "url": "https://api.instabox.sh/v1/openapi.json",
-            "quote": "A key carries scopes: read, write and delete for each resource.",
+            "url": "https://instabox.sh/docs/security/api-keys.md",
+            "quote": "A scope limits what a key can do",
             "confidence": "docs-confirmed"
           }
         },
@@ -14175,8 +14176,8 @@
           "verdict": "yes",
           "note": "The Machines page has a Create machine button that matches the CLI call.",
           "source": {
-            "url": "https://instabox.sh/docs/start.md",
-            "quote": "In the dashboard, **Create machine** on the **Machines** page does what `instabox create` does.",
+            "url": "https://instabox.sh/docs/concepts.md",
+            "quote": "In the dashboard, pick the `gpu` template, then the GPU type and count.",
             "confidence": "docs-confirmed"
           }
         },
@@ -14483,10 +14484,10 @@
         {
           "provider": "instabox",
           "verdict": "yes",
-          "note": "Installed by `npx instabox@latest` or the install script.",
+          "note": "Installed with `npm install -g instabox` or `npx instabox@latest`.",
           "source": {
-            "url": "https://instabox.sh/docs/start.md",
-            "quote": "It signs you in with a device code, starts a new machine, installs the `instabox` CLI",
+            "url": "https://instabox.sh/docs/quickstart.md",
+            "quote": "The command signs you in, installs the `instabox` CLI",
             "confidence": "docs-confirmed"
           }
         },
@@ -14791,12 +14792,11 @@
         },
         {
           "provider": "instabox",
-          "verdict": "partly",
-          "shortfall": "A Python library is named in one place but has no page, package name or install command.",
-          "note": "The docs and API are TypeScript-first; only one sentence mentions a Python option.",
+          "verdict": "yes",
+          "note": "`instabox-sdk` on PyPI, for Python 3.9 to 3.13.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "the Python SDK's `persistent_disk_gib`",
+            "url": "https://instabox.sh/docs/python-sdk.md",
+            "quote": "The Python SDK is [`instabox-sdk` on PyPI]",
             "confidence": "docs-confirmed"
           }
         },
@@ -15102,10 +15102,10 @@
         {
           "provider": "instabox",
           "verdict": "yes",
-          "note": "`@insforge/instabox-sdk` is the documented client.",
+          "note": "`@insforge/instabox-sdk` version 0.7.0 is the documented client.",
           "source": {
-            "url": "https://instabox.sh/docs/sdk.md",
-            "quote": "Version 0.5.0 of `@insforge/instabox-sdk`.",
+            "url": "https://instabox.sh/docs/reference/sdk.md",
+            "quote": "Install, authentication, errors and types of `@insforge/instabox-sdk`, version 0.7.0.",
             "confidence": "docs-confirmed"
           }
         },
@@ -15416,8 +15416,8 @@
           "verdict": "yes",
           "note": "JSON REST with a published OpenAPI 3.1 document.",
           "source": {
-            "url": "https://instabox.sh/docs/api.md",
-            "quote": "The full machine-readable description",
+            "url": "https://instabox.sh/llms.txt",
+            "quote": "every endpoint an API key calls, as OpenAPI 3.1 JSON",
             "confidence": "docs-confirmed"
           }
         },
@@ -15729,12 +15729,11 @@
         },
         {
           "provider": "instabox",
-          "verdict": "no",
-          "shortfall": "No MCP server is published for the InstaBox API, so an assistant cannot create machines through one.",
-          "note": "A computer-use MCP runs inside the machine to drive its desktop.",
+          "verdict": "yes",
+          "note": "A hosted server at api.instabox.sh/mcp takes an API key; a local server and a docs MCP also exist.",
           "source": {
-            "url": "https://instabox.sh/docs/llms.txt",
-            "quote": "Every body is JSON.",
+            "url": "https://instabox.sh/docs/integrations/mcp.md",
+            "quote": "The hosted server at `https://api.instabox.sh/mcp` is the recommended way to connect.",
             "confidence": "inferred"
           }
         },
@@ -16360,8 +16359,8 @@
           "verdict": "yes",
           "note": "Files endpoints plus `instabox push` and `pull`.",
           "source": {
-            "url": "https://instabox.sh/docs/api/commands.md",
-            "quote": "GET /v1/machines/{id}/files/content",
+            "url": "https://instabox.sh/docs/machines/files.md",
+            "quote": "`push` streams a single file of up to 5 GiB",
             "confidence": "docs-confirmed"
           }
         },
@@ -16673,10 +16672,10 @@
         {
           "provider": "instabox",
           "verdict": "yes",
-          "note": "Both are in the default and agent templates; sign-ins persist because home is on the data disk.",
+          "note": "Claude Code, Codex and OpenCode are on every template except ci; sign-ins persist because home is on the data disk.",
           "source": {
-            "url": "https://instabox.sh/docs/limits.md",
-            "quote": "Claude Code, Codex",
+            "url": "https://instabox.sh/docs/account/limits.md",
+            "quote": "Claude Code | 2.1.288 | every template except `ci`",
             "confidence": "docs-confirmed"
           }
         },
@@ -16989,12 +16988,12 @@
         },
         {
           "provider": "instabox",
-          "verdict": "no",
-          "shortfall": "There is no prompt endpoint; the API offers exec, files, desktop and snapshots.",
-          "note": "Your agent runs as a process you start inside the machine.",
+          "verdict": "partly",
+          "shortfall": "You can prompt Claude Code or Codex from the command line, but the API and SDKs have no prompt call, and you supply the model key.",
+          "note": "`instabox agent prompt` runs a turn as a background job, with events, steer and interrupt.",
           "source": {
-            "url": "https://instabox.sh/docs/api/commands.md",
-            "quote": "exec`: Run a command",
+            "url": "https://instabox.sh/docs/reference/cli.md",
+            "quote": "Drive a coding agent (Claude Code or Codex) inside a machine.",
             "confidence": "inferred"
           }
         },
@@ -17929,8 +17928,8 @@
           "verdict": "yes",
           "note": "The default `agent-browser` template has a desktop and Chromium.",
           "source": {
-            "url": "https://instabox.sh/docs/desktop.md",
-            "quote": "have a Linux desktop with a browser.",
+            "url": "https://instabox.sh/docs/access/desktop.md",
+            "quote": "A Linux desktop with a browser",
             "confidence": "docs-confirmed"
           }
         },
@@ -18241,8 +18240,8 @@
           "verdict": "yes",
           "note": "Xfce with Chromium over VNC, with human takeover and handback.",
           "source": {
-            "url": "https://instabox.sh/docs/desktop.md",
-            "quote": "Machines from the `agent-browser` template (shown as **standard**) have a Linux desktop with a browser.",
+            "url": "https://instabox.sh/docs/access/desktop.md",
+            "quote": "You can click the desktop to take control and use the mouse and keyboard",
             "confidence": "docs-confirmed"
           }
         },
@@ -18559,10 +18558,10 @@
           "provider": "instabox",
           "verdict": "no",
           "shortfall": "No page documents another platform's cloud agents using InstaBox.",
-          "note": "It offers SSH, exec and a desktop for your own agent.",
+          "note": "Desktop coding apps such as cmux, Orca, Paradev and T3 Code can connect to a machine, but no cloud-agent platform runs on it.",
           "source": {
-            "url": "https://instabox.sh/docs/llms.txt",
-            "quote": "Every body is JSON.",
+            "url": "https://instabox.sh/docs/use-cases/ade.md",
+            "quote": "cmux, Orca, Paradev, and T3 Code are four of them.",
             "confidence": "inferred"
           }
         },
@@ -18872,8 +18871,8 @@
           "verdict": "yes",
           "note": "Organisations and workspaces carry members, roles, keys and one allowance.",
           "source": {
-            "url": "https://api.instabox.sh/v1/openapi.json",
-            "quote": "Every member uses the org's sandboxes",
+            "url": "https://instabox.sh/docs/reference/cli.md",
+            "quote": "Machines, snapshots and stored data are counted against an org: your personal org, or a workspace.",
             "confidence": "docs-confirmed"
           }
         },
@@ -19180,10 +19179,10 @@
         {
           "provider": "instabox",
           "verdict": "yes",
-          "note": "Organisation roles are admin and member; keys carry read, write and delete scopes.",
+          "note": "Roles are owner, admin and member; keys carry read, write and delete scopes.",
           "source": {
-            "url": "https://api.instabox.sh/v1/openapi.json",
-            "quote": "Between `admin` and `member`.",
+            "url": "https://instabox.sh/docs/security/api-keys.md",
+            "quote": "You need to be the owner or an admin of that workspace.",
             "confidence": "docs-confirmed"
           }
         },
@@ -19495,7 +19494,7 @@
           "verdict": "partly",
           "shortfall": "Company sign-in, SAML and automatic user sync are listed only on the Enterprise plan.",
           "source": {
-            "url": "https://instabox.sh/pricing",
+            "url": "https://instabox.sh/pricing.md",
             "quote": "SSO / SAML and SCIM",
             "confidence": "pricing-page"
           }
@@ -19807,8 +19806,8 @@
           "verdict": "yes",
           "note": "A monthly cap stops the organisation's sandboxes until the next month.",
           "source": {
-            "url": "https://api.instabox.sh/v1/openapi.json",
-            "quote": "once reached, the org's sandboxes are stopped",
+            "url": "https://instabox.sh/docs/reference/errors.md",
+            "quote": "its machines cannot run",
             "confidence": "docs-confirmed"
           }
         },
@@ -20121,8 +20120,8 @@
           "verdict": "yes",
           "note": "Owners and admins get an email when monthly usage passes what the plan includes.",
           "source": {
-            "url": "https://api.instabox.sh/v1/openapi.json",
-            "quote": "emailed once a month when usage goes beyond what the month includes",
+            "url": "https://instabox.sh/changelog.md",
+            "quote": "80% used. Usage has reached 80% of what the month includes",
             "confidence": "docs-confirmed"
           }
         },
@@ -20433,7 +20432,7 @@
           "verdict": "partly",
           "shortfall": "Audit logs are listed only on the Enterprise plan.",
           "source": {
-            "url": "https://instabox.sh/pricing",
+            "url": "https://instabox.sh/pricing.md",
             "quote": "Audit logs",
             "confidence": "pricing-page"
           }
@@ -20750,9 +20749,9 @@
           "verdict": "yes",
           "figure": "per second",
           "source": {
-            "url": "https://instabox.sh/docs/pricing.md",
+            "url": "https://instabox.sh/docs/account/pricing.md",
             "quote": "Runtime is metered by the second, only while a machine is running.",
-            "confidence": "docs-confirmed"
+            "confidence": "pricing-page"
           }
         },
         {
@@ -21069,9 +21068,9 @@
           "figure": "size while running",
           "shortfall": "A waiting machine costs the same as a busy one of the same size.",
           "source": {
-            "url": "https://instabox.sh/docs/pricing.md",
+            "url": "https://instabox.sh/docs/account/pricing.md",
             "quote": "While a machine is running, you pay for the vCPUs and memory you gave it.",
-            "confidence": "inferred"
+            "confidence": "pricing-page"
           }
         },
         {
@@ -21390,12 +21389,13 @@
         {
           "provider": "instabox",
           "verdict": "yes",
-          "figure": "storage only",
+          "figure": "disk only",
           "source": {
-            "url": "https://instabox.sh/docs/pricing.md",
-            "quote": "Pause it, and you just pay for its disk",
-            "confidence": "pricing-page"
-          }
+            "url": "https://instabox.sh/docs/account/billing.md",
+            "quote": "The system disk, snapshots, and a paused machine's saved memory are free.",
+            "confidence": "docs-confirmed"
+          },
+          "note": "A paused machine's saved memory and snapshots are free, and paid plans include 200 GiB to 5 TiB of disk."
         },
         {
           "provider": "lizard",
@@ -21713,9 +21713,9 @@
           "figure": "$20 minimum plan",
           "shortfall": "The free plan is capped at one machine, and anything more needs a $20-a-month plan.",
           "source": {
-            "url": "https://instabox.sh/docs/pricing.md",
-            "quote": "Free: $0",
-            "confidence": "inferred"
+            "url": "https://instabox.sh/pricing.md",
+            "quote": "**$20**/month",
+            "confidence": "pricing-page"
           }
         },
         {
@@ -22040,19 +22040,19 @@
           "figure": "metered parts",
           "shortfall": "The bill is cores plus memory per second, plus storage.",
           "source": {
-            "url": "https://instabox.sh/docs/pricing.md",
-            "quote": "Runtime is metered by the second, only while a machine is running.",
-            "confidence": "docs-confirmed"
+            "url": "https://instabox.sh/docs/account/pricing.md",
+            "quote": "You pay for a machine's vCPUs and memory only while it runs",
+            "confidence": "pricing-page"
           }
         },
         {
           "provider": "lizard",
           "verdict": "yes",
           "figure": "$0.0324/h medium",
-          "note": "Three fixed sizes with a flat hourly price each.",
+          "note": "Fixed sizes with a flat hourly price each; the pricing page lists five, the docs four.",
           "source": {
             "url": "https://lizard.build/pricing",
-            "quote": "Sandboxes come in three sizes, priced per hour and billed per second while they run, including idle time",
+            "quote": "Sandboxes come in five sizes, priced per hour and billed per second while they run, including idle time",
             "confidence": "pricing-page"
           }
         },
@@ -22366,7 +22366,7 @@
           "figure": "1 machine, 4 cores / 8 GiB",
           "note": "The free machine pauses after 30 minutes idle and cannot run more than 8 hours at a time.",
           "source": {
-            "url": "https://instabox.sh/docs/pricing.md",
+            "url": "https://instabox.sh/pricing.md",
             "quote": "1 machine, 4 vCPU / 8 GiB",
             "confidence": "pricing-page"
           }
@@ -22694,9 +22694,9 @@
           "figure": "none",
           "shortfall": "There is no starting credit; the free plan is a machine, and paid plans include usage equal to their fee.",
           "source": {
-            "url": "https://instabox.sh/docs/pricing.md",
+            "url": "https://instabox.sh/docs/account/pricing.md",
             "quote": "Usage comes out of your included credits first, then you pay as you go. Credits reset every month.",
-            "confidence": "inferred"
+            "confidence": "pricing-page"
           }
         },
         {
@@ -23019,8 +23019,8 @@
           "figure": "free plan",
           "note": "The docs never ask for a card on the free plan; some accounts can be asked for one before a machine starts.",
           "source": {
-            "url": "https://instabox.sh/docs/pricing.md",
-            "quote": "Free: $0",
+            "url": "https://instabox.sh/pricing.md",
+            "quote": "1 machine, 4 vCPU / 8 GiB",
             "confidence": "pricing-page"
           }
         },
@@ -23332,11 +23332,11 @@
         },
         {
           "provider": "instabox",
-          "verdict": "not-published",
-          "note": "No public status page is linked anywhere on the site; there are per-machine metrics only.",
+          "verdict": "yes",
+          "note": "instabox.instatus.com shows components, uptime and incident history.",
           "source": {
-            "url": "https://instabox.sh/docs/start.md",
-            "quote": "From nothing to a shell in your own cloud machine.",
+            "url": "https://instabox.instatus.com",
+            "quote": "All systems operational",
             "confidence": "docs-confirmed"
           }
         },
@@ -23646,7 +23646,7 @@
           "figure": "99.9%, Enterprise",
           "shortfall": "A 99.9% promise is listed only on the Enterprise plan, with no published measurement or credits.",
           "source": {
-            "url": "https://instabox.sh/pricing",
+            "url": "https://instabox.sh/pricing.md",
             "quote": "99.9% SLA",
             "confidence": "pricing-page"
           }
@@ -23657,7 +23657,7 @@
           "shortfall": "SLAs come with Enterprise support; no public numeric uptime promise exists.",
           "source": {
             "url": "https://lizard.build/pricing",
-            "quote": "Dedicated, hands-on support with SLAs",
+            "quote": "Signed DPA and support with SLAs",
             "confidence": "pricing-page"
           }
         },
@@ -23962,13 +23962,14 @@
         },
         {
           "provider": "instabox",
-          "verdict": "not-published",
-          "note": "The Trust Center shows a HIPAA badge and no SOC 2 report is claimed on the site.",
+          "verdict": "yes",
+          "note": "InsForge, which builds InstaBox, completed a SOC 2 Type II audit; the report is available on request.",
           "source": {
-            "url": "https://instabox.sh/pricing",
-            "quote": "HIPAA BAA",
-            "confidence": "pricing-page"
-          }
+            "url": "https://instabox.sh/blog/trust-center.md",
+            "quote": "InstaBox is built by InsForge, which completed a SOC 2 Type II audit. The report is available on request.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Type II, on request"
         },
         {
           "provider": "lizard",
@@ -23976,7 +23977,7 @@
           "shortfall": "The SOC 2 report is listed as coming soon.",
           "source": {
             "url": "https://lizard.build/pricing",
-            "quote": "SOC 2 report (coming soon)",
+            "quote": "Coming soon",
             "confidence": "pricing-page"
           }
         },
@@ -24276,11 +24277,11 @@
         {
           "provider": "instabox",
           "verdict": "not-published",
-          "note": "No DPA page or reference appears on the site; the terms point to a Trust Center instead.",
+          "note": "No customer DPA is published; the privacy policy mentions DPAs only with InsForge's own sub-processors.",
           "source": {
-            "url": "https://instabox.sh/terms",
-            "quote": "InstaBox gives each agent a Linux machine of its own in the cloud.",
-            "confidence": "docs-confirmed"
+            "url": "https://instabox.sh/privacy",
+            "quote": "We maintain data processing agreements with our sub-processors",
+            "confidence": "not-published"
           }
         },
         {
@@ -24590,8 +24591,8 @@
           "verdict": "no",
           "shortfall": "InstaBox is a hosted service; no self-hosted or open-source edition is published.",
           "source": {
-            "url": "https://instabox.sh/docs/start.md",
-            "quote": "From nothing to a shell in your own cloud machine.",
+            "url": "https://instabox.sh/docs.md",
+            "quote": "InstaBox gives each agent a full Linux VM in the cloud",
             "confidence": "inferred"
           }
         },

@@ -15,9 +15,12 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["blaxel", "a", 27.6], ["blaxel", "b", 247.78], ["blaxel", "c", 17.3],
   ["boat", "a", 20], ["boat", "b", 26.28],
   ["e2b", "a", 27.6], ["e2b", "c", 164.9],
-  // 4 × $0.004 × 730 + 8 × $0.00225 × 730 + (50 − 20 free) GiB × $0.00011 × 730, over the $20 Pro credit.
-  ["instabox", "b", 27.23],
-  ["lizard", "a", 19], ["lizard", "b", 27.85], ["lizard", "c", 19],
+  // Pro includes 200 GiB of disk (pricing docs, 2026-11-12), so only CPU and memory bill.
+  // A: 2 × $0.004 × 166.67 + 4 × $0.00225 × 166.67 = $2.83, under the $20 credit; C: $0.72 + $0.81 = $1.53, also under it.
+  // B: 4 × $0.004 × 730 + 8 × $0.00225 × 730 = $24.82, over the credit.
+  ["instabox", "a", 20], ["instabox", "b", 24.82], ["instabox", "c", 20],
+  // Lizard B (2026-11-12): Medium (40 GB disk) + a 10 GB volume = 0.0324 × 730 + 0.14 × 10.
+  ["lizard", "a", 19], ["lizard", "b", 25.05], ["lizard", "c", 19],
   ["morph", "a", 16.67], ["morph", "c", 9.15],
   ["sandboxer", "a", 20], ["sandboxer", "b", 40], ["sandboxer", "c", 20],
   ["boxd", "b", 222.5],

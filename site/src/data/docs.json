@@ -281,68 +281,68 @@
   },
   "instabox": {
     "isolation": {
-      "title": "Limits — Firecracker microVM, own kernel, Debian 13",
-      "url": "https://instabox.sh/docs/limits"
+      "title": "Limits — Firecracker microVM, own kernel, Debian 13, no nested KVM",
+      "url": "https://instabox.sh/docs/account/limits"
     },
     "sizes-regions": {
-      "title": "Limits — machine sizes by plan (no region selector)",
-      "url": "https://instabox.sh/docs/limits"
+      "title": "Sizes — fixed pairs by plan, NVIDIA L4 GPUs (no region selector)",
+      "url": "https://instabox.sh/docs/machines/sizes"
     },
     "lifecycle": {
-      "title": "Machines — lifecycle, retention, auto-pause, sizes",
-      "url": "https://instabox.sh/docs/machines"
+      "title": "Lifecycle — pause, stop, restore and restart",
+      "url": "https://instabox.sh/docs/machines/lifecycle"
     },
     "snapshots-forks": {
-      "title": "Snapshots — save a machine, start new ones from it",
-      "url": "https://instabox.sh/docs/snapshots"
+      "title": "Fork — copy-on-write copies, up to five at once",
+      "url": "https://instabox.sh/docs/machines/fork"
     },
     "storage": {
-      "title": "Limits — disk sizes, storage caps and outbound bandwidth",
-      "url": "https://instabox.sh/docs/limits"
+      "title": "Pricing — included disk per plan, then $0.08 per GiB-month",
+      "url": "https://instabox.sh/docs/account/pricing"
     },
     "idle-timers": {
-      "title": "Machines — auto-pause and max-run",
-      "url": "https://instabox.sh/docs/machines"
+      "title": "Auto-pause — idle pause, max run and activity leases",
+      "url": "https://instabox.sh/docs/machines/auto-pause"
     },
     "reaching-it": {
       "title": "Public and private ports — HTTPS URL per port",
-      "url": "https://instabox.sh/docs/ports"
+      "url": "https://instabox.sh/docs/access/ports"
     },
     "outbound-network": {
       "title": "Limits — outbound bandwidth cap (no allowlist or static IP documented)",
       "url": "https://instabox.sh/docs/limits"
     },
     "keys-secrets": {
-      "title": "Org Secrets — credentials injected by the outbound proxy",
-      "url": "https://instabox.sh/docs/secrets"
+      "title": "Secrets — proxy placeholders and direct Secrets",
+      "url": "https://instabox.sh/docs/security/secrets"
     },
     "ways-to-drive": {
-      "title": "API keys and SDK — TypeScript, HTTP and CLI",
-      "url": "https://instabox.sh/docs/keys-sdk"
+      "title": "MCP — hosted control-plane server, plus SDKs and CLI",
+      "url": "https://instabox.sh/docs/integrations/mcp"
     },
     "built-in-agents": {
-      "title": "Limits — template table (Claude Code and Codex preinstalled; no managed agent hosting)",
-      "url": "https://instabox.sh/docs/limits"
+      "title": "Coding agents — Claude Code, Codex and OpenCode, prompted from the CLI",
+      "url": "https://instabox.sh/docs/use-cases/coding-agents"
     },
     "teams-accounts": {
       "title": "Account API — templates, usage, limits and key owner",
       "url": "https://instabox.sh/docs/api/account"
     },
     "billing-models": {
-      "title": "Pricing — plans, credits and unit rates",
-      "url": "https://instabox.sh/docs/pricing"
+      "title": "Pricing — plans, per-second rates, GPU",
+      "url": "https://instabox.sh/docs/account/pricing"
     },
     "trials-free-tiers": {
-      "title": "Pricing — Free plan allowances",
-      "url": "https://instabox.sh/docs/pricing"
+      "title": "Pricing — the free plan",
+      "url": "https://instabox.sh/docs/account/pricing"
     },
     "quickstart": {
       "title": "Quick start — one command to a shell",
-      "url": "https://instabox.sh/docs/start"
+      "url": "https://instabox.sh/docs/quickstart"
     },
     "pricing": {
       "title": "Pricing",
-      "url": "https://instabox.sh/docs/pricing"
+      "url": "https://instabox.sh/docs/account/pricing"
     }
   },
   "lizard": {

@@ -139,10 +139,10 @@
       "verdict": "not-published",
       "figure": "Not published",
       "scenario": "No custom-domain support is published, and the public-port URL is a fixed vendor subdomain.",
-      "note": "No custom-domain support is published. The public-port URL is a fixed vendor subdomain, and the OpenAPI PublicPort object has only port, name, url and machineId, with no customDomain or cname field. No roadmap entry exists.",
+      "note": "No custom-domain support is published. The public-port URL is a fixed vendor subdomain, and the OpenAPI PublicPort object has no customDomain or cname field. No roadmap entry exists.",
       "source": {
-        "url": "https://instabox.sh/docs/ports",
-        "quote": "The URL is `https://<port>-<machine id without m_>.<domain>/`.",
+        "url": "https://instabox.sh/docs/access/ports.md",
+        "quote": "https://<port>-<machine id without m_>.<domain>/",
         "confidence": "docs-confirmed"
       }
     },

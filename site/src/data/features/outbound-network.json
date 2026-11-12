@@ -130,10 +130,10 @@
       "verdict": "partly",
       "figure": "100 GiB–50 TiB included",
       "scenario": "Each plan includes outbound data every month (100 GiB on Free, 1 TiB on Pro), then $0.02 per GiB. InstaBox's docs say nothing about which address outbound traffic leaves from.",
-      "note": "No general egress allowlist is published; host scoping applies to Secrets, not all sandbox traffic. Each plan includes egress every month (100 GiB Free, 1 TiB Pro, 5 TiB Builder, 50 TiB Team), then $0.02 per GiB. Outbound addresses are not published.",
+      "note": "No general egress allowlist is published; host scoping applies to Secrets, not all sandbox traffic. Each plan includes egress every month (100 GiB Free, 1 TiB Pro, 5 TiB Builder, 50 TiB Team), then $0.02 per GiB. What a machine sends is capped at about 50 Mbit/s. Outbound addresses are not published.",
       "source": {
-        "url": "https://instabox.sh/pricing",
-        "quote": "$0.02000",
+        "url": "https://instabox.sh/docs/account/pricing.md",
+        "quote": "Each plan includes egress every month (100 GiB on Free, 1 TiB on Pro, 5 TiB on Builder, 50 TiB on Team), then $0.02 per GiB.",
         "confidence": "pricing-page"
       }
     },

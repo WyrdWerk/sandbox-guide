@@ -128,12 +128,12 @@
     {
       "provider": "instabox",
       "verdict": "yes",
-      "figure": "Claude Code + Codex",
-      "scenario": "Claude Code and Codex are in the default and agent templates, and logins persist because home is /data/home; no agent-run API.",
-      "note": "Claude Code and Codex are in the default and agent templates, and sign-ins persist because home is /data/home. There is no hosted agent-run API.",
+      "figure": "Claude Code, Codex, OpenCode",
+      "scenario": "Claude Code, Codex and OpenCode are preinstalled and logins persist because home is /data/home; prompting is a CLI command, not an API.",
+      "note": "Claude Code, Codex and OpenCode are on every template except ci, and sign-ins persist because home is /data/home. `instabox agent prompt` runs a turn from the CLI with steer and interrupt; there is no hosted agent-run API.",
       "source": {
-        "url": "https://instabox.sh/docs/limits",
-        "quote": "Claude Code, Codex",
+        "url": "https://instabox.sh/docs/use-cases/coding-agents.md",
+        "quote": "`agent prompt` runs Claude Code as a background job in the machine",
         "confidence": "docs-confirmed"
       }
     },
@@ -144,8 +144,8 @@
       "scenario": "Five agent templates, prompted from the CLI with streaming and interrupts; the SDK has no prompt method.",
       "note": "Five agent templates plus a base image and desktop variants. Agents are prompted from the CLI with streaming and interrupts; the SDK has no prompt method.",
       "source": {
-        "url": "https://lizard.build/docs/sandboxes",
-        "quote": "`base`, `interpreter`, `codex`, `claude`, `opencode`, `pi`, `prime`, `desktop`, `desktop-camoufox`",
+        "url": "https://lizard.build/docs/sandboxes.md",
+        "quote": "`base`, `interpreter`, `codex`, `claude`, `opencode`, `pi`, `prime`, `desktop`, or `desktop-camoufox`",
         "confidence": "docs-confirmed"
       }
     },

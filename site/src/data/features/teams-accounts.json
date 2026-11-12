@@ -130,7 +130,7 @@
       "verdict": "partly",
       "figure": "Monthly cap stops machines",
       "scenario": "A monthly spend cap stops machines; SSO, SCIM and audit logs are Enterprise only.",
-      "note": "Organisations and workspaces with roles, scoped keys and a monthly spend cap that stops machines. SSO, SCIM and audit logs are Enterprise only.",
+      "note": "Organisations and workspaces with owner, admin and member roles, scoped keys, no seat fee, usage alerts and a monthly spend cap that stops machines. SSO, SCIM and audit logs are Enterprise only.",
       "source": {
         "url": "https://api.instabox.sh/v1/openapi.json",
         "quote": "caps this month's usage beyond the org's allowance",

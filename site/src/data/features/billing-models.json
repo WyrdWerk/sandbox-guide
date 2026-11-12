@@ -130,10 +130,10 @@
       "verdict": "yes",
       "figure": "$20 plan, then usage",
       "scenario": "A plan that is also credit, then per-second vCPU and RAM; a light month still costs the plan.",
-      "note": "A subscription that is also credit: $20, $100 or $500 a month, then per-second vCPU and RAM, GiB-hour storage and $0.02 per GiB of egress. Paused and stopped machines pay storage only.",
+      "note": "A subscription that is also credit: $20, $100 or $500 a month, then per-second vCPU and RAM, and $0.02 per GiB of egress beyond the allowance. Paid plans include 200 GiB to 5 TiB of disk; snapshots and paused memory are free. NVIDIA L4 GPUs are $0.80 per GPU-hour.",
       "source": {
-        "url": "https://instabox.sh/pricing",
-        "quote": "$20 / month free credits",
+        "url": "https://instabox.sh/docs/account/pricing.md",
+        "quote": "Runtime is metered by the second, only while a machine is running.",
         "confidence": "pricing-page"
       }
     },

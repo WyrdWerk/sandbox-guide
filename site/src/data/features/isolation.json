@@ -123,10 +123,10 @@
       "verdict": "yes",
       "figure": "Firecracker; root + Docker",
       "scenario": "Root, passwordless sudo and Docker are in the default image, so both steps work unchanged.",
-      "note": "A Firecracker microVM running Debian 13 with its own kernel, root, passwordless sudo and Docker.",
+      "note": "A Firecracker microVM running Debian 13 with its own kernel, root, passwordless sudo and Docker. There is no /dev/kvm, so nested virtual machines cannot run.",
       "source": {
-        "url": "https://instabox.sh/",
-        "quote": "A whole machine, with its own kernel.",
+        "url": "https://instabox.sh/docs/account/limits.md",
+        "quote": "passwordless `sudo` with apt",
         "confidence": "docs-confirmed"
       }
     },

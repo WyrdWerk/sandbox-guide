@@ -886,3 +886,7 @@ Secondary:
 Every quoted string added in §17 (and the two corrected claims in §5 and §14) was re-fetched on 2026-10-28 and matched against the live page text: **68 distinct quotes checked, 68 matched**. Two failures during the pass were real and were fixed rather than papered over — Dealroom's pre-seed figure (a search snippet said $1.5M; the article says "US$970.6K") and YC's rendered spacing ("Founded: 2025", not "Founded:2025").
 
 No sandbox was created, started, or billed; no API key was read, printed, or stored.
+
+## Recheck 2026-11-12
+
+Full recheck of all 16 features and 78 capabilities, with quotes, sources and contradictions: [instabox-recheck-2026-11-12.md](instabox-recheck-2026-11-12.md). Integration notes: capability and feature sources now cite the `.md` docs pages (old paths redirect); the GPU rate quote is from `docs/account/pricing.md`; Terms, Privacy and status-page quotes were confirmed with a fresh Context web_scrape because those pages render with JavaScript. Included disk is modelled as a per-plan `allowance.diskHours` of pool × 730 h.

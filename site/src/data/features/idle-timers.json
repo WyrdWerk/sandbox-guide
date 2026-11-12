@@ -130,10 +130,10 @@
       "verdict": "partly",
       "figure": "30 min idle",
       "scenario": "Still running at 00:20, paused at 00:30, and woken by the command at 01:00 with the process intact.",
-      "note": "Paid machines have no lifetime timeout, but idle auto-pause defaults to 30 minutes; paid plans can choose 5–30 minutes or off. Nothing deletes a paused or stopped machine: there is no forced TTL.",
+      "note": "Idle auto-pause defaults to 30 minutes; paid plans can choose 5–30 minutes or off and have no maximum run by default. Free machines are fixed at 30 minutes and run at most 480 minutes at a time. An activity lease keeps a silent task awake. Nothing deletes a paused or stopped machine.",
       "source": {
-        "url": "https://instabox.sh/docs/concepts",
-        "quote": "A new machine pauses once it has been idle for 30 minutes.",
+        "url": "https://instabox.sh/docs/machines/auto-pause.md",
+        "quote": "By default a machine pauses once it has been idle for 30 minutes",
         "confidence": "docs-confirmed"
       }
     },

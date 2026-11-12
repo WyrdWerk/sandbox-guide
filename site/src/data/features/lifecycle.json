@@ -157,10 +157,10 @@
       "verdict": "partly",
       "figure": "RAM; 1 s resume",
       "scenario": "Pause keeps memory and running programs and resumes in about a second; stop loses them, and a paused machine cannot be stopped at all.",
-      "note": "Pause keeps memory and running programs and resumes in about a second; stop loses them, and a paused machine cannot be stopped at all. A resume can cold-boot and report processesPreserved false.",
+      "note": "Pause keeps memory and running programs and resumes in about a second; stop keeps files but loses programs, and a paused machine cannot be stopped at all. A resume can cold-boot and report processesPreserved false. Restore puts a machine back to a snapshot in place.",
       "source": {
-        "url": "https://instabox.sh/docs/integrate",
-        "quote": "carries on where it left off, usually in about a second",
+        "url": "https://instabox.sh/docs/machines/lifecycle.md",
+        "quote": "A paused machine cannot be stopped.",
         "confidence": "docs-confirmed"
       }
     },

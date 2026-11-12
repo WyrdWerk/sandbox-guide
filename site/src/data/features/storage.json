@@ -128,13 +128,13 @@
     {
       "provider": "instabox",
       "verdict": "partly",
-      "figure": "20 GiB at /data",
-      "scenario": "One disk at /data persists and grows live; the root disk is owned by the template, so a package install outside /data is at risk.",
-      "note": "One disk at /data, 20 GiB by default and growable, with the root disk owned by the template. No volumes and no second disk; the free plan's disk is fixed.",
+      "figure": "/data up to 1 TiB; 200 GiB incl.",
+      "scenario": "One disk at /data persists and grows live, and Pro includes 200 GiB across machines; the root disk is owned by the template, so a package install outside /data is at risk.",
+      "note": "One disk at /data, 20 GiB by default, grown live to 200, 500 or 1,024 GiB by plan, with the root disk owned by the template. Paid plans include 200 GiB, 1 TiB or 5 TiB of disk across machines, then $0.08 per GiB-month. No volumes and no second disk; the free plan's disk is fixed.",
       "source": {
-        "url": "https://instabox.sh/docs/limits",
-        "quote": "a 20 GiB persistent ext4 disk at `/data`",
-        "confidence": "docs-confirmed"
+        "url": "https://instabox.sh/docs/account/pricing.md",
+        "quote": "Paid plans include disk across all their machines (200 GiB on Pro, 1 TiB on Builder, 5 TiB on Team)",
+        "confidence": "pricing-page"
       }
     },
     {
@@ -142,7 +142,7 @@
       "verdict": "partly",
       "figure": "/workspace only; 1–50 GB",
       "scenario": "Only /workspace persists; a stop deletes everything else, including the database in /var/lib.",
-      "note": "The local disk is lost on stop; only /workspace persists, through a named volume of 1–50 GB attached to one sandbox at a time and stored on one node. There is no trash.",
+      "note": "The local disk is lost on stop; only /workspace persists, through a named volume of 1–50 GB attached to one sandbox at a time and stored on one node, up to 200 GB per workspace. The pricing page says volumes go to 100 GB. There is no trash.",
       "source": {
         "url": "https://lizard.build/docs/sandboxes/volumes.md",
         "quote": "New volumes allow **1 to 50 GB**, in whole GB, with **5 GB** as the default.",

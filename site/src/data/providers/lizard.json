@@ -3,7 +3,7 @@
   "name": "Lizard",
   "url": "https://lizard.build",
   "status": "researched",
-  "checkedOn": "2026-10-28",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Firecracker sandboxes at a flat hourly price per size, plus an app platform for whatever the agent builds.",
   "whatItIs": [
     "Lizard is a cloud platform with two halves. Sandboxes are Firecracker microVMs for running agent code, sold in three fixed sizes at a flat hourly price. An app platform deploys a repository, with managed Postgres, Redis and S3-compatible storage.",
@@ -12,18 +12,18 @@
   ],
   "whoFor": "Agent builders who want cheap per-hour machines with generous pause and snapshot semantics, and who may want to deploy the result on the same platform.",
   "isolation": "Firecracker microVM with its own guest kernel, commands run as root by default, Linux only. Docker inside a sandbox, systemd and nested virtualisation are not documented.",
-  "sizes": "Three fixed sizes: Small 2 vCPU / 4 GB / 5 GB, Medium 4 vCPU / 8 GB / 20 GB, Large 8 vCPU / 16 GB / 50 GB. No custom size and no live resize. Volumes add up to 50 GB at `/workspace`.",
+  "sizes": "Four fixed sizes: Mini 1 vCPU / 2 GB / 5 GB, Small 2 vCPU / 4 GB / 20 GB, Medium 4 vCPU / 8 GB / 40 GB, Large 8 vCPU / 16 GB / 80 GB. Mini starts only from four templates and takes no volume. No custom size and no live resize. Volumes add 1 to 50 GB at `/workspace`.",
   "billing": {
     "model": "Three plans, Pro at $19, Pro 5x at $99 and Pro 20x at $499 a month, each including its fee as usage; sandboxes are a flat hourly price per size.",
-    "meter": "Per second while running, idle time included, at $0.0162 / $0.0324 / $0.0648 an hour for Small / Medium / Large. Volumes bill per GB-month on used space.",
+    "meter": "Per second while running, idle time included, at $0.0081 / $0.0162 / $0.0324 / $0.0648 an hour for Mini / Small / Medium / Large. Volumes bill per GB-month on used space.",
     "stopped": "Paused compute is $0, and no storage charge for a paused sandbox's disk or memory is published. A stopped sandbox is deleted, so only volumes and snapshots remain.",
     "planFee": "$19 (Pro), $99 (Pro 5x) or $499 (Pro 20x) a month, each coming back as the same amount of usage. Unused usage does not carry over.",
-    "minimum": "$19 a month is the floor. The 7-day trial includes $5 of usage and needs a card."
+    "minimum": "$19 a month is the floor. The 7-day trial includes $5 of usage, needs a card, and runs 1 Small and 2 Mini at a time for at most an hour each."
   },
   "cost": {
     "A": {
       "headline": "$19 a month (the plan floor)",
-      "shape": "Small (2 vCPU / 4 GB / 5 GB), deleted after each task",
+      "shape": "Small (2 vCPU / 4 GB / 20 GB), deleted after each task",
       "lines": [
         {
           "label": "Compute",
@@ -39,17 +39,17 @@
       "total": "$19.00",
       "notes": [
         "The size exists exactly, so no substitution is needed.",
-        "Pro allows 400 starts a day and 24 a minute, so 1,000 tasks cannot all run in one day."
+        "Pro has no limit on sandbox starts, so 1,000 tasks can run in a day within 40 vCPU at once."
       ]
     },
     "B": {
-      "headline": "$27.85 or $47.30 a month",
-      "shape": "No size is 4 vCPU / 8 GB / 50 GB: Medium has 20 GB of disk, Large has 50 GB but 8 vCPU.",
+      "headline": "$25.05 or $47.30 a month",
+      "shape": "No size is 4 vCPU / 8 GB / 50 GB: Medium has 40 GB of disk, Large has 80 GB but 8 vCPU.",
       "lines": [
         {
-          "label": "Medium + a 30 GB volume",
-          "arithmetic": "0.0324 × 730 + 0.14 × 30",
-          "amount": "$27.85"
+          "label": "Medium + a 10 GB volume",
+          "arithmetic": "0.0324 × 730 + 0.14 × 10",
+          "amount": "$25.05"
         },
         {
           "label": "Large, no volume",
@@ -57,33 +57,32 @@
           "amount": "$47.30"
         }
       ],
-      "total": "$27.85 or $47.30",
+      "total": "$25.05 or $47.30",
       "notes": [
         "Option one matches the CPU and RAM exactly and splits the disk across two filesystems.",
         "Volumes bill on used space, not allocated size."
       ],
-      "flag": "Both options over-deliver something: the first adds a volume, the second doubles CPU and RAM to get 50 GB of disk."
+      "flag": "Both options over-deliver something: the first adds a volume, the second doubles CPU and RAM to get the disk."
     },
     "C": {
-      "headline": "$19 a month either way",
-      "shape": "No size is 2 vCPU with 20 GB of disk.",
+      "headline": "$19 a month (the plan floor)",
+      "shape": "Small (2 vCPU / 4 GB / 20 GB), 90 running hours",
       "lines": [
         {
-          "label": "Small + a 15 GB volume",
-          "arithmetic": "0.0162 × 90 + 0.14 × 15",
-          "amount": "$3.56"
+          "label": "Compute",
+          "arithmetic": "0.0162 × 90",
+          "amount": "$1.46"
         },
         {
-          "label": "Medium, no volume",
-          "arithmetic": "0.0324 × 90",
-          "amount": "$2.92"
+          "label": "Bill",
+          "arithmetic": "$19 plan; included usage absorbs it",
+          "amount": "$19.00"
         }
       ],
       "total": "$19.00",
       "notes": [
-        "Both are under the $19 floor, so the choice is about disk layout, not money.",
-        "A 30-day month is 720 hours; 90 of them are running.",
-        "Stopped here means killed, which deletes the sandbox disk: keep anything you need on the volume."
+        "Small now has 20 GB of disk, so no volume is needed.",
+        "Stopped here means killed, which deletes the sandbox disk: pause instead, or keep files on a volume."
       ],
       "flag": "Pausing instead of stopping keeps the whole disk and memory, at no published storage charge."
     }
@@ -204,6 +203,23 @@
       "issue": "The runtime and billing model changed without notice",
       "detail": "On 30 September the docs described one fixed 4 vCPU / 4096 MiB sandbox in shared-kernel Kubernetes pods, billed on measured usage. By 13 October the pricing page listed Firecracker microVMs at flat per-size rates, from $0.0162 an hour. The changelog and blog do not mention the switch. Whether anyone's bill rose cannot be told, because the old usage rates were never published. Older sandboxes keep usage-based billing.",
       "status": "open"
+    },
+    {
+      "issue": "The pricing page and the docs list different sizes",
+      "detail": "The pricing page adds a Nano size (0.5 vCPU / 1 GB / 5 GB, $0.00405 an hour), gives Mini 10 GB of disk and says volumes go up to 100 GB. The limits, SDK and volumes docs list no Nano, give Mini 5 GB and cap volumes at 50 GB. This guide follows the docs.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://lizard.build/pricing",
+          "quote": "Nano0.5 vCPU · 1 GB RAM · 5 GB disk",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://lizard.build/docs/sandboxes/volumes.md",
+          "quote": "New volumes allow **1 to 50 GB**, in whole GB, with **5 GB** as the default.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [
