@@ -297,6 +297,138 @@
         "edge": "modal",
         "why": "Modal is a large, well-funded company with a SOC 2 Type II report; E2B is a younger startup with its own SOC 2 Type II. Neither publishes an SLA below Enterprise."
       }
+    },
+    "e2b-vs-daytona": {
+      "isolation": {
+        "edge": "even",
+        "why": "Both give every sandbox its own Firecracker kernel. E2B starts you as a non-root user; Daytona runs Docker only if your image ships it and keeps nested virtualisation for Enterprise."
+      },
+      "sizes-regions": {
+        "edge": "tradeoff",
+        "why": "Daytona sizes freely up to 8 cores (16 vCPU) / 32 GiB on Team against E2B's 8 vCPU / 8 GiB, but documents only US regions while E2B also runs in the EU and APAC."
+      },
+      "lifecycle": {
+        "edge": "e2b",
+        "why": "E2B pauses a sandbox with its memory and resumes it; a Daytona Linux sandbox cannot stop or pause and is deleted at 24 hours on Starter or 48 on Team."
+      },
+      "snapshots-forks": {
+        "edge": "e2b",
+        "why": "E2B snapshots memory and disk of any running sandbox and forks it up to 20 times; Daytona memory snapshots work only on a persistent or warm-template sandbox it never defines."
+      },
+      "storage": {
+        "edge": "daytona",
+        "why": "Daytona volumes are generally available, 1 to 1,000 GiB, up to 8 per sandbox; E2B volumes are a private beta. The catch is that Daytona's own disk is wiped with the sandbox."
+      },
+      "idle-timers": {
+        "edge": "e2b",
+        "why": "E2B can pause on timeout instead of killing; Daytona's idle timer only deletes a Linux sandbox, and a hard 24- or 48-hour cap applies either way."
+      },
+      "reaching-it": {
+        "edge": "daytona",
+        "why": "Daytona has public, private and signed preview links, a real SSH gateway and a browser terminal; E2B gates traffic with a header token and runs SSH through a WebSocket proxy."
+      },
+      "custom-domains": {
+        "edge": "daytona",
+        "why": "Daytona lists custom domains as a Team beta and documents an own-proxy route; E2B has only the do-it-yourself proxy. The beta has no setup docs yet."
+      },
+      "outbound-network": {
+        "edge": "tradeoff",
+        "why": "Both have domain and IP allowlists. Daytona sells static egress IPs as an undocumented Team beta; E2B has none on any plan but documents routing through your own SOCKS5 proxy."
+      },
+      "keys-secrets": {
+        "edge": "daytona",
+        "why": "Both keep keys outside the sandbox with a proxy; Daytona also swaps them into headers, query strings and bodies only for allowlisted hosts and dials the destination itself."
+      },
+      "ways-to-drive": {
+        "edge": "tradeoff",
+        "why": "Daytona adds a REST API, an MCP server, a dashboard and native SSH, but its 2.0 SDKs and CLI are alpha releases; E2B's Python and JavaScript SDKs are stable."
+      },
+      "built-in-agents": {
+        "edge": "e2b",
+        "why": "E2B has ten ready-made agent templates; Daytona says Claude Code and OpenClaw are in its default image, but the image contents are unpublished and most guides install the agent first."
+      },
+      "teams-accounts": {
+        "edge": "daytona",
+        "why": "Daytona has projects, 17 roles including read-only and dollar budgets that stop spending; every E2B project member has the same permissions. Daytona Starter stops at three members."
+      },
+      "billing-models": {
+        "edge": "even",
+        "why": "Both bill reserved CPU and memory per second at about $0.05 a vCPU-hour and $0.016 a GiB-hour; workload A is $27.60 on E2B and $27.63 on Daytona. Daytona adds 30%-off spot and region multipliers."
+      },
+      "trials-free-tiers": {
+        "edge": "daytona",
+        "why": "Both start without a card; Daytona's one-time credit is $200 against E2B's $100."
+      },
+      "company": {
+        "edge": "tradeoff",
+        "why": "Daytona has raised $91M to E2B's $32M and publishes a 99.95% SLA, though its credits go only to a 1.x 'Tier 4'. E2B has no public SLA but runs stable, non-alpha clients."
+      }
+    },
+    "daytona-vs-modal": {
+      "isolation": {
+        "edge": "daytona",
+        "why": "Every Daytona sandbox is a VM with its own kernel; Modal runs gVisor by default and gives a VM only when you ask for it."
+      },
+      "sizes-regions": {
+        "edge": "tradeoff",
+        "why": "Daytona publishes a ceiling (16 cores / 32 GiB, 8 cores on Team) but only US regions, and its GPU page says coming soon; Modal leaves its maximum unpublished but sells GPUs and selectable regions today."
+      },
+      "lifecycle": {
+        "edge": "even",
+        "why": "Neither can pause a Linux sandbox: Daytona deletes it at the session cap, Modal terminates it and offers only snapshots to come back from."
+      },
+      "snapshots-forks": {
+        "edge": "modal",
+        "why": "Modal takes memory snapshots of ordinary sandboxes (kept 7 days) and filesystem snapshots (30 days); Daytona memory snapshots need an undefined persistent or warm-template sandbox."
+      },
+      "storage": {
+        "edge": "tradeoff",
+        "why": "Daytona's disk is free but wiped with the sandbox, and volumes bill from the first GiB; Modal's 512 GiB disk bills as memory, but its volumes are free up to 1 TiB."
+      },
+      "idle-timers": {
+        "edge": "daytona",
+        "why": "Both delete rather than pause, but a Daytona sandbox can live 24 hours on Starter and 48 on Team, against Modal's 5-minute default and 24-hour maximum."
+      },
+      "reaching-it": {
+        "edge": "daytona",
+        "why": "Both expose ports; Daytona adds native SSH, a browser terminal and signed links, while Modal has no SSH daemon."
+      },
+      "custom-domains": {
+        "edge": "modal",
+        "why": "Modal custom domains work on Team with a documented manual setup; Daytona's are an undocumented Team beta."
+      },
+      "outbound-network": {
+        "edge": "modal",
+        "why": "Modal documents static IPs on Team and an egress price; Daytona's static IPs are an undocumented beta and it publishes no egress price."
+      },
+      "keys-secrets": {
+        "edge": "daytona",
+        "why": "Daytona keeps keys outside the sandbox with a proxy by default; Modal passes them in as environment variables unless you use its beta outbound policy."
+      },
+      "ways-to-drive": {
+        "edge": "daytona",
+        "why": "Daytona has a REST API, an MCP server and SSH next to its SDKs, though the 2.0 clients are alpha; Modal has Python, JavaScript and Go SDKs and a CLI but no REST API, SSH or MCP server."
+      },
+      "built-in-agents": {
+        "edge": "daytona",
+        "why": "Daytona ships Chromium, a desktop and a computer-use API and says Claude Code is in its default image; Modal ships no agent and only a Computer Use example you build yourself."
+      },
+      "teams-accounts": {
+        "edge": "even",
+        "why": "Both cap Starter at three seats, charge $250 for Team and keep SSO for Enterprise. Daytona has 17 roles and project budgets; Modal has environment budgets and service users."
+      },
+      "billing-models": {
+        "edge": "tradeoff",
+        "why": "Daytona's unit rates are lower ($0.0505 against $0.071 a vCPU-hour, $0.0162 against $0.024 a GiB-hour), but Modal's $30 monthly credit makes small workloads cheaper there."
+      },
+      "trials-free-tiers": {
+        "edge": "tradeoff",
+        "why": "Daytona gives $200 once with no card; Modal gives $30 every month but needs a payment method."
+      },
+      "company": {
+        "edge": "tradeoff",
+        "why": "Modal is far larger (over $1.2B raised, 200+ staff) but publishes no SLA; Daytona promises 99.95%, with credits limited to a 1.x 'Tier 4' that no 2.0 plan maps to."
+      }
     }
   }
 }

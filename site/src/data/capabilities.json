@@ -1991,7 +1991,7 @@
           "provider": "daytona",
           "verdict": "yes",
           "figure": "16 vCPU / 32 GiB",
-          "note": "Team allows 8 cores = 16 vCPUs and 32 GiB, which meets the 16 vCPU / 32 GiB bar; Starter stops at 4 cores / 16 GiB. The pricing page advertises 64 cores / 128 GiB for both plans (see §4.1), and Enterprise can reach the 16-core platform ceiling.",
+          "note": "Team allows 8 cores = 16 vCPUs and 32 GiB, which meets the 16 vCPU / 32 GiB bar; Starter stops at 4 cores / 16 GiB. The pricing page advertises 64 cores / 128 GiB for both plans, and Enterprise can reach the 16-core platform ceiling.",
           "source": {
             "url": "https://www.daytona.com/docs/limits.md",
             "quote": "Starter | 4 | 16384",

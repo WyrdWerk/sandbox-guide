@@ -106,7 +106,7 @@
       "verdict": "partly",
       "figure": "16 cores / 32 GiB (docs)",
       "scenario": "A 16 GB agent fits on Team (8 cores / 32 GiB) but not on Starter (4 cores / 16 GiB), and the pricing page's 64 cores / 128 GiB describes a machine neither plan's own limits page allows.",
-      "note": "Sizes are custom, not presets: 0.125–16 cores, 0.5–32 GiB memory and 10–256 GiB disk, with CPU raised to at least 1 core per 8 GiB of memory. The limits page caps Starter at 4 cores / 16 GiB and Team at 8 / 32; the pricing page's plan table says 64 cores / 128 GiB for both and 512 GiB–3 TiB disk (see §4.1). Regions are priced by multiplier: `earth` 1.0×, `us` 1.15×, `us-east` 1.75×, Ashburn and Boston 2.0×; macOS has its own `macos-1`. No EU region is documented.",
+      "note": "Sizes are custom, not presets: 0.125–16 cores, 0.5–32 GiB memory and 10–256 GiB disk, with CPU raised to at least 1 core per 8 GiB of memory. The limits page caps Starter at 4 cores / 16 GiB and Team at 8 / 32; the pricing page's plan table says 64 cores / 128 GiB for both and 512 GiB–3 TiB disk. Regions are priced by multiplier: `earth` 1.0×, `us` 1.15×, `us-east` 1.75×, Ashburn and Boston 2.0×; macOS has its own `macos-1`. No EU region is documented.",
       "source": {
         "url": "https://www.daytona.com/docs/sandboxes.md",
         "quote": "A Linux sandbox may guarantee at most 16 cores, 32GiB memory, and 256GiB disk.",
