@@ -79,9 +79,9 @@
     {
       "provider": "boxd",
       "verdict": "partly",
-      "figure": "No; CLI",
-      "scenario": "CLI-first: every guide starts with an install command, and the wire API is gRPC with no REST.",
-      "note": "gRPC is the only wire API; there is no REST. TypeScript and Python SDKs, a CLI, real SSH on a dedicated port, a console terminal and a browser desktop.",
+      "figure": "Console; gRPC only",
+      "scenario": "The console can create a machine, but the wire API is gRPC with no REST, and there is no boxd MCP server.",
+      "note": "gRPC is the only wire API; there is no REST. TypeScript and Python SDKs, a CLI (now on Windows too), a console that can create machines, real SSH on a dedicated port, a console terminal and a browser desktop.",
       "source": {
         "url": "https://docs.boxd.sh/reference/grpc-api",
         "quote": "Service. `boxd.api.v1.BoxdApi`.",

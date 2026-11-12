@@ -80,9 +80,9 @@
     {
       "provider": "boxd",
       "verdict": "partly",
-      "figure": "Three meters",
-      "scenario": "vCPU on the size while running, RAM on resident memory, disk on bytes written, so a waiting box pays for what it holds.",
-      "note": "Prepaid credits and three meters: vCPU on the size while running, RAM on resident memory (also in standby), disk on bytes written in every state. No plan fee; storage prices are unpublished.",
+      "figure": "Three meters, active CPU",
+      "scenario": "Active vCPU while running, RAM on resident memory, disk on bytes written, so an idle box pays for the memory it holds, not the cores it reserves.",
+      "note": "Prepaid credits and three meters: active vCPU while running (sampled every second), RAM on resident memory (also in standby), disk on bytes written in every state. No plan fee; storage and egress prices are unpublished.",
       "source": {
         "url": "https://boxd.sh/pricing",
         "quote": "RAM bills on the memory a machine actually has resident, sampled every second, while it is running or in standby",

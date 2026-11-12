@@ -80,9 +80,9 @@
     {
       "provider": "boxd",
       "verdict": "partly",
-      "figure": "8 vCPU / 32 GiB; one EU region",
-      "scenario": "The ceiling is 8 vCPU / 32 GiB, on German bare metal; a US region is announced but not open.",
-      "note": "Four sizes from 1 vCPU / 4 GiB to 8 / 32, all with a fixed 100 GB disk. One EU region, no GPU, no ARM.",
+      "figure": "8 vCPU / 32 GiB; EU + US",
+      "scenario": "The ceiling is 8 vCPU / 32 GiB, in Frankfurt or New York; bigger machines need the Scale contract.",
+      "note": "Four sizes from 1 vCPU / 4 GiB to 8 / 32, all with a fixed 100 GB disk. Two regions, Frankfurt and New York, picked per machine; no GPU, no ARM.",
       "source": {
         "url": "https://docs.boxd.sh/guides/resources",
         "quote": "This is the largest size a single machine may have, 8 vCPU / 32 GiB unless the boxd team raised it for your org.",

@@ -23,7 +23,8 @@ const handWorked: [string, "a" | "b" | "c", number][] = [
   ["lizard", "a", 19], ["lizard", "b", 25.05], ["lizard", "c", 19],
   ["morph", "a", 16.67], ["morph", "c", 9.15],
   ["sandboxer", "a", 20], ["sandboxer", "b", 40], ["sandboxer", "c", 20],
-  ["boxd", "b", 222.5],
+  // boxd bills active vCPU only (pricing page, 2026-11-12): 4 × 0.1 × $0.047 × 730 + 8 GiB × $0.014 × 730 + 50 × $0.000096 × 730.
+  ["boxd", "b", 98.99],
   ["agent37", "b", 30.1],
   // C: CPU bills at least 20% of 2 vCPU (pricing page, 2026-11-12), so 0.4 core × $0.07 × 90 + 4 × $0.015 × 90
   // + 20 × $0.0002 × 90 + 640 h × 20 GB × $0.07 / 720 = $9.52.

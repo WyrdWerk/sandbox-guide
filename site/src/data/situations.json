@@ -281,7 +281,7 @@
         {
           "provider": "boxd",
           "why": "A fork copies disk, memory and processes in under 200 ms, so a customer's working environment can be branched per session, and keys are fenced to one organisation.",
-          "watch": "One EU region, a fixed 100 GB disk per machine and RAM billed on resident use, so a fleet of small idle machines still pays for memory."
+          "watch": "Two regions (Frankfurt and New York), a fixed 100 GB disk per machine and RAM billed on resident use, so a fleet of small idle machines still pays for memory."
         },
         {
           "provider": "runtime",
@@ -383,8 +383,8 @@
         },
         {
           "provider": "boxd",
-          "why": "Marketed as EU-only on German bare metal, with an allowlist enforced outside the machine and a Dutch contracting entity.",
-          "watch": "Its privacy notice describes EU and US clusters on a Delaware infrastructure vendor, which contradicts the FAQ's no-US-dependency line."
+          "why": "Frankfurt machines and their data stay in the EU, on German bare metal, with an allowlist enforced outside the machine and a Dutch contracting entity.",
+          "watch": "Account data (members, keys, secrets) is kept in every region the org uses, and the privacy notice names a Delaware infrastructure vendor for both the Frankfurt and New York clusters."
         },
         {
           "provider": "lizard",

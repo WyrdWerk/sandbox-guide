@@ -2966,14 +2966,14 @@
         },
         {
           "provider": "boxd",
-          "verdict": "no",
-          "figure": "one EU region",
-          "shortfall": "There is one region, in Germany, and no way to choose another.",
+          "verdict": "yes",
+          "figure": "Frankfurt or New York",
           "source": {
-            "url": "https://boxd.sh/",
-            "quote": "On bare-metal servers in Germany, so your machines and their data stay in the EU.",
+            "url": "https://docs.boxd.sh/guides/regions.md",
+            "quote": "Run machines in Frankfurt or New York. Pick the region per machine, with one login, one bill and the same secrets in both.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "note": "The region is picked per machine, on one account and bill with the same secrets."
         },
         {
           "provider": "cloudflare-sandbox",
@@ -8988,13 +8988,14 @@
         },
         {
           "provider": "boxd",
-          "verdict": "partly",
-          "shortfall": "A schedule runs inside the machine, so it only fires while that machine is awake.",
+          "verdict": "yes",
           "source": {
-            "url": "https://docs.boxd.sh/guides/automations/jobs",
-            "quote": "Jobs survive reboots. Everything in the `background` or `retrying` state is started again when the machine boots.",
+            "url": "https://docs.boxd.sh/guides/automations/jobs.md",
+            "quote": "The platform holds the next time any `every(...)` on the machine is due and wakes a sleeping machine, on standby or hibernated, shortly before it.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "platform-held cron",
+          "note": "Automation schedules are held by boxd, which wakes a standby or hibernated machine shortly before each run. TypeScript only for now."
         },
         {
           "provider": "cloudflare-sandbox",
@@ -9625,13 +9626,14 @@
         },
         {
           "provider": "boxd",
-          "verdict": "no",
-          "shortfall": "Every machine address is open to the internet, and the provider offers no token or login to put in front of it.",
+          "verdict": "yes",
           "source": {
-            "url": "https://docs.boxd.sh/guides/https",
-            "quote": "Every machine gets an HTTPS domain automatically.",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.boxd.sh/guides/tailscale.md",
+            "quote": "Those names now resolve and route only inside your tailnet.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Tailscale or NetBird",
+          "note": "An org can be put on Tailscale or NetBird, which makes its machine names reachable only inside the tailnet. It is org-wide and set up by the boxd team; a per-machine custom domain stays public."
         },
         {
           "provider": "cloudflare-sandbox",
@@ -14146,13 +14148,14 @@
         },
         {
           "provider": "boxd",
-          "verdict": "no",
-          "note": "The console shows machines, keys and backups; the quickstart creates the first machine with the CLI.",
+          "verdict": "yes",
+          "note": "The console has a New machine dialog (name, region, snapshot, size), though setup inside the machine still needs commands.",
           "source": {
-            "url": "https://docs.boxd.sh/quickstart.md",
-            "quote": "Install the CLI, create your first machine",
-            "confidence": "inferred"
-          }
+            "url": "https://docs.boxd.sh/guides/menu-bar.md",
+            "quote": "**New machine**, at the bottom of the menu, is the console's New machine dialog",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Console dialog"
         },
         {
           "provider": "cloudflare-sandbox",
@@ -21043,14 +21046,14 @@
         },
         {
           "provider": "boxd",
-          "verdict": "no",
-          "figure": "full cores while running",
-          "shortfall": "The processor is charged at the machine's full size for as long as it runs.",
+          "verdict": "yes",
+          "figure": "active vCPU only",
           "source": {
             "url": "https://boxd.sh/pricing",
-            "quote": "vCPU is the one component billed on the machine's size: its full vCPU count while it runs",
-            "confidence": "inferred"
-          }
+            "quote": "You only pay for active vCPU, not for the vCPUs your machine reserves.",
+            "confidence": "pricing-page"
+          },
+          "note": "Only active vCPU is billed, sampled every second; boxd says 10% of reserved vCPU is typical. No floor is published."
         },
         {
           "provider": "cloudflare-sandbox",
@@ -23317,13 +23320,14 @@
         },
         {
           "provider": "boxd",
-          "verdict": "not-published",
-          "note": "No status page or uptime figure is published; the FAQ and terms describe neither.",
+          "verdict": "yes",
+          "note": "status-boxd.com shows per-region uptime and incidents, with none recorded; its checks only began on 28 October 2026.",
           "source": {
-            "url": "https://boxd.sh/faq/",
-            "quote": "We're working on both.",
+            "url": "https://docs.boxd.sh/guides/regions.md",
+            "quote": "The [status page](https://status-boxd.com) shows each region's uptime and incidents.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "90-day uptime"
         },
         {
           "provider": "cloudflare-sandbox",
@@ -23953,7 +23957,8 @@
             "url": "https://boxd.sh/faq/",
             "quote": "We're working on both.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "note": "SOC 2 Type II and ISO 27001 are in progress, not certified."
         },
         {
           "provider": "cloudflare-sandbox",

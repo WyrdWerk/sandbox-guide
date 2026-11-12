@@ -1,18 +1,18 @@
 {
   "provider": "boxd",
-  "checkedOn": "2026-10-29",
-  "summary": "Per second on three meters: vCPU on the machine's size while running, memory on what is actually resident, disk on bytes written in every state.",
+  "checkedOn": "2026-11-12",
+  "summary": "Per second on three meters: active vCPU while running, memory on what is actually resident, disk on bytes written in every state.",
   "cpu": {
     "rate": 0.047,
-    "billing": "allocated"
+    "billing": "active"
   },
   "ram": {
     "rate": 0.014,
     "billing": "requested"
   },
   "disk": {
-    "running": 9.6e-05,
-    "stopped": 9.6e-05
+    "running": 0.000096,
+    "stopped": 0.000096
   },
   "shapes": [
     {
@@ -55,12 +55,18 @@
   "notes": [
     "Memory is billed on resident memory; the calculator uses the memory you entered as the resident figure, up to the size's full allocation.",
     "$30 of credit needs a card; without one an account is capped at two machines.",
-    "Egress and snapshot storage prices are not published, so neither is included."
+    "Egress and snapshot storage prices are not published, so neither is included.",
+    "Only active vCPU is billed, sampled every second; boxd says 10% of reserved vCPU is typical. No floor is published.",
+    "Self-hosting is free up to 16 worker vCPUs; Scale (over 100 machines or above 8 vCPU / 32 GiB) uses the same rates on a contract."
   ],
   "sources": [
     {
       "label": "Pricing",
       "url": "https://boxd.sh/pricing"
+    },
+    {
+      "label": "Regions",
+      "url": "https://docs.boxd.sh/guides/regions"
     }
   ],
   "upkeep": {

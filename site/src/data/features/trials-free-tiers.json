@@ -80,9 +80,9 @@
     {
       "provider": "boxd",
       "verdict": "partly",
-      "figure": "$30 one-off",
+      "figure": "$30 one-off + free self-host",
       "scenario": "A one-off €30/$30 credit after adding a payment method; without one, an organisation is capped at two machines with no published allowance.",
-      "note": "A one-off €30/$30 credit after adding a payment method. No free plan; an organisation without a payment method is capped at two machines, with no published allowance.",
+      "note": "A one-off €30/$30 credit after adding a payment method. No hosted free plan; an organisation without a payment method is capped at two machines. Self-hosting is free up to 16 worker vCPUs.",
       "source": {
         "url": "https://boxd.sh/pricing",
         "quote": "€30 of credits when you add a payment method. Nothing is charged when you add the card",

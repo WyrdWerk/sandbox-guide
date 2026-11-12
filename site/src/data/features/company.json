@@ -126,8 +126,8 @@
       "provider": "boxd",
       "verdict": "partly",
       "figure": "Azin Tech Op. Co. B.V.; no SLA",
-      "scenario": "A Dutch BV with no SLA, no status page and no SOC 2, ISO 27001 or HIPAA claim.",
-      "note": "Azin Tech Operating Company B.V., KvK 99718340, Amsterdam; a near-identically named holding company sits above it, which is inferred rather than stated. Founders and headcount not published; €2M pre-seed September 2026. No status page and no uptime figure. No SLA. No SOC 2, ISO 27001, HIPAA or trust centre claimed. Residency contradicts itself: the FAQ says no US cloud dependency, while the privacy notice names US clusters and Latitude.sh LLC as infrastructure. Price changes apply immediately for new usage; data may be deleted after 30 days.",
+      "scenario": "A Dutch BV with a status page but no SLA; SOC 2 Type II and ISO 27001 are in progress.",
+      "note": "Azin Tech Operating Company B.V., KvK 99718340, Amsterdam. Founders and headcount not published; €2M pre-seed September 2026. A status page at status-boxd.com, with no incidents recorded since its checks began on 28 October. No SLA. SOC 2 Type II and ISO 27001 in progress; a DPA is available. Machine data stays in its region (Frankfurt or New York), but account data is kept in every region the org uses, and the privacy notice names Latitude.sh LLC as infrastructure. Price changes apply immediately for new usage; data may be deleted after 30 days.",
       "source": {
         "url": "https://boxd.sh/terms/",
         "quote": "“Boxd”, “we”, “us” or “our” means Azin Tech Operating Company B.V. (KvK 99718340, RSIN 869104743, VAT NL869104743B01), with its corporate seat in Amsterdam",
