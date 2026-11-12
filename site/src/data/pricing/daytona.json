@@ -59,6 +59,10 @@
       "url": "https://www.daytona.com/pricing"
     },
     {
+      "label": "Pricing (Markdown, both columns)",
+      "url": "https://www.daytona.com/pricing.md"
+    },
+    {
       "label": "Billing",
       "url": "https://www.daytona.com/docs/billing.md"
     },
