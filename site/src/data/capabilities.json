@@ -2868,13 +2868,12 @@
         },
         {
           "provider": "contabo",
-          "verdict": "partly",
-          "shortfall": "GPU VPS is one fixed configuration in two locations, cannot be customised, and was on a waitlist at this check.",
-          "figure": "RTX 6000 PRO; waitlist",
-          "note": "One NVIDIA RTX 6000 PRO Blackwell instance on the Cloud VPS Plus 18 tier, in EU and US Central only. No vGPU, no multi-GPU, no custom image and no API provisioning.",
+          "verdict": "yes",
+          "figure": "RTX PRO 6000; orderable",
+          "note": "One NVIDIA RTX PRO 6000 instance with 18 vCPU, 96 GB RAM and 900 GB NVMe, in EU and US Central only, now orderable rather than waitlisted. One fixed configuration: no vGPU, no multi-GPU and no API provisioning.",
           "source": {
-            "url": "https://contabo.com/en-us/pricing/",
-            "quote": "Leave your details here and we'll notify you when GPU VPS becomes available.",
+            "url": "https://contabo.com/en-us/gpu-vps",
+            "quote": "Dedicated NVIDIA RTX PRO 6000 18 vCPU Cores・96 GB RAM・900 GB NVMe",
             "confidence": "pricing-page"
           }
         },
@@ -3239,11 +3238,11 @@
         {
           "provider": "hosthatch",
           "verdict": "yes",
-          "figure": "16 advertised locations",
-          "note": "The location is chosen at order. The product page advertises 16 edge locations, the docs matrix lists 14 cities and the status page monitors 13; Madrid, Milan, Warsaw and Seoul differ between those lists, so confirm stock for your city.",
+          "figure": "13 locations",
+          "note": "The location is chosen at order. The features page lists 13 locations, while the product page still says 16; Madrid, Milan and Warsaw are no longer listed and Seoul appears only in promotions and docs.",
           "source": {
-            "url": "https://hosthatch.com/products",
-            "quote": "Deploy in 16 edge locations",
+            "url": "https://hosthatch.com/features",
+            "quote": "We operate out of 13 global locations",
             "confidence": "docs-confirmed"
           }
         }
@@ -9453,12 +9452,13 @@
         {
           "provider": "digitalocean",
           "verdict": "yes",
-          "figure": "public IPv4 per Droplet",
+          "figure": "public IPv4 by default",
           "source": {
             "url": "https://www.digitalocean.com/pricing/droplets",
             "quote": "By default, each Droplet you create comes with its own public IPv4 address.",
             "confidence": "pricing-page"
-          }
+          },
+          "note": "Private Droplets, now generally available, have no public IPv4."
         },
         {
           "provider": "hetzner",
@@ -12170,7 +12170,7 @@
         {
           "provider": "hosthatch",
           "verdict": "yes",
-          "figure": "1–20 TB/mo",
+          "figure": "1–20 TB/mo, pooled",
           "note": "Each plan includes 1–20 TB a month with inbound and outbound counted together, and APAC allowances are lower. When it is used the server is rate-limited to 5 Mbps; more is $4 per TB through support.",
           "source": {
             "url": "https://hosthatch.com/terms-of-service",
@@ -16806,8 +16806,8 @@
         {
           "provider": "digitalocean",
           "verdict": "partly",
-          "figure": "OpenClaw/Hermes images",
-          "shortfall": "The default Ubuntu image has no coding agent; OpenClaw, Hermes and Docker Agent are separate 1-Click images.",
+          "figure": "OpenClaw/Hermes/OpenCode",
+          "shortfall": "The default Ubuntu image has no coding agent; OpenClaw, Hermes and OpenCode are separate 1-Click images, and Codex Universal is an environment image, not the Codex CLI.",
           "source": {
             "url": "https://www.digitalocean.com/blog/moltbot-on-digitalocean",
             "quote": "OpenClaw runs inside a dedicated Docker container, isolating agent execution from the host system.",
@@ -18062,8 +18062,8 @@
         {
           "provider": "digitalocean",
           "verdict": "partly",
-          "figure": "chromium in sessions",
-          "shortfall": "Harness Runtime sessions include chromium and a browser-automation tool; a Droplet image does not.",
+          "figure": "Chromium in Omarchy/sessions",
+          "shortfall": "Only the Omarchy desktop image or Harness Runtime sessions include a browser; a default Droplet image does not.",
           "source": {
             "url": "https://www.digitalocean.com/products/managed-agents",
             "quote": "Isolated execution in a dedicated Firecracker microVM per session, with its own compute and filesystem",
@@ -18376,14 +18376,13 @@
         },
         {
           "provider": "digitalocean",
-          "verdict": "no",
-          "figure": "none",
-          "shortfall": "There is no graphical desktop on a Droplet or in a Harness Runtime session.",
-          "note": "The Droplet Console is a text terminal, and Harness Runtime has no desktop; the docs describe a coding sandbox, not computer use.",
+          "verdict": "yes",
+          "figure": "Omarchy RDP desktop",
+          "note": "The Omarchy 1-Click image runs a full Hyprland desktop on a Droplet, viewed from the browser or over RDP; it needs at least 2 vCPU, 4 GB and 80 GB, and is a machine you administer, not a computer-use API.",
           "source": {
-            "url": "https://docs.digitalocean.com/products/droplets/details/features/",
-            "quote": "DigitalOcean Droplets are Linux-based virtual machines (VMs) that run on top of virtualized hardware.",
-            "confidence": "inferred"
+            "url": "https://docs.digitalocean.com/products/marketplace/catalog/omarchy/",
+            "quote": "This 1-Click runs the full Omarchy desktop natively on your droplet, viewable from your browser",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -22281,8 +22280,8 @@
         {
           "provider": "contabo",
           "verdict": "yes",
-          "figure": "$6.60/mo",
-          "note": "One flat price per fixed size. Cloud VPS 4 is $6.60 on the 1-month term; add-ons are separate.",
+          "figure": "$6.60/mo + setup",
+          "note": "One flat price per fixed size. Cloud VPS 4 is $6.60 on the 1-month term, which now adds a €2.00 one-time setup fee; longer terms have none. Add-ons are separate.",
           "source": {
             "url": "https://contabo.com/en-us/vps/",
             "quote": "One monthly price covers the resources, the network, and the platform.",

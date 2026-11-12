@@ -1,6 +1,6 @@
 {
   "provider": "digitalocean",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "A flat hourly rate per bundled size, billed per second and capped at 672 hours a month; a powered-off Droplet keeps billing at the same rate.",
   "shapes": [
     {

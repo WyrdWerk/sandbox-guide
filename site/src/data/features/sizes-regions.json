@@ -334,7 +334,7 @@
       "verdict": "partly",
       "figure": "18 vCPU / 96 GB; 9 regions",
       "scenario": "There is no 2 vCPU / 16 GB Core VPS plan: the smallest Core VPS shape with 16 GB is 8 vCPU / 24 GB at $16.80, in the EU or one of eight other regions.",
-      "note": "Six fixed Core VPS shapes from 4 vCPU / 8 GB to 18 vCPU / 96 GB, with CPU and RAM in a fixed ratio. Performance VPS and Storage VPS change the ratio, Cloud VDS goes to 24 dedicated vCores, but there is no custom sizing. Nine regions: EU (Germany), UK, three US, Singapore, Japan, India and Australia.",
+      "note": "Six fixed Core VPS shapes from 4 vCPU / 8 GB to 18 vCPU / 96 GB, with CPU and RAM in a fixed ratio. Performance VPS and Storage VPS change the ratio, Max Performance VPS (formerly Cloud VDS) goes to 24 dedicated vCores, a single RTX PRO 6000 GPU machine is orderable in EU and US Central, but there is no custom sizing. Nine regions: EU (Germany), UK, three US, Singapore, Japan, India and Australia.",
       "source": {
         "url": "https://docs.contabo.com/docs/servers-hosting/vps/",
         "quote": "|Cloud VPS 8 |8 vCPUs |24 GB |300 GB SSD |600 |3 |Unlimited\\* |",
@@ -380,9 +380,9 @@
     {
       "provider": "hosthatch",
       "verdict": "partly",
-      "figure": "16 cores / 96 GB; 16 sites claimed",
+      "figure": "16 cores / 96 GB; 13 sites",
       "scenario": "You pick one of ten fixed plans in one of the advertised locations; CPU and memory only change by moving to another plan.",
-      "note": "Ten compute plans from 1 core / 2 GB / 10 GB to 16 cores / 96 GB / 250 GB, plus storage VMs to 10 TB. CPU and memory are fixed bundles, so there is no 3-core / 6 GB machine; an upgrade moves the server to another plan and a reboot applies it. The location count is inconsistent: the product page says 16, the documentation matrix lists 14 cities, and the status page monitors 13. Madrid, Milan and Warsaw appear in the site's product data but not in the docs; Seoul appears in the docs but not in the product data.",
+      "note": "Ten compute plans from 1 core / 2 GB / 10 GB to 16 cores / 96 GB / 250 GB, plus storage VMs to 10 TB. CPU and memory are fixed bundles, so there is no 3-core / 6 GB machine; an upgrade moves the server to another plan and a reboot applies it. The features page lists 13 locations, while the product page still says 16; Madrid, Milan and Warsaw are no longer listed, and Seoul appears only in promotions and docs.",
       "source": {
         "url": "https://hosthatch.com/products",
         "quote": "Deploy in 16 edge locations",

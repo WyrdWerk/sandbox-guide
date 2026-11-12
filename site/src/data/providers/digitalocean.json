@@ -3,7 +3,7 @@
   "name": "DigitalOcean",
   "url": "https://www.digitalocean.com/products/droplets",
   "status": "researched",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Ordinary Linux VMs at a flat monthly price, with a hardened one-click OpenClaw image and a separate managed agent runtime.",
   "whatItIs": [
     "DigitalOcean sells Linux virtual machines called Droplets: pick a size, a region and an image, and the machine is yours to administer over SSH. There is no sandbox API and no pause, so it behaves like the VPS a developer would rent for a web server.",

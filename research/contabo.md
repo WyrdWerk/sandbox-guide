@@ -763,3 +763,9 @@ Window 6 August to 4 November 2026, provider's own status page only (see `resear
 
 - Site fact: The status page currently shows six notices for 6 August to 4 November 2026. The oldest is a CEPH storage slowdown posted on 8 September with a published estimate of 900 minutes.
 - Source: https://contabo-status.com/ — "08.09.2026 11:00 am (UTC+1) Degraded Performance - CEPH Cluster: non-critical Estimated duration: 900 minutes" (docs-confirmed)
+
+## Recheck, 12 November 2026
+
+Rechecked with the rest of VPS group 1: [vps-group1-recheck-2026-11-12.md](vps-group1-recheck-2026-11-12.md). The earlier ledger is kept as written.
+- Plan prices unchanged. The 1-month Cloud VPS 4 term now shows "€2.00 Setup fee"; 3- to 24-month terms show "No Setup Fee" (fresh Context read, cache miss). The calculator has no one-time fee field.
+- GPU VPS (one RTX PRO 6000, 18 vCPU / 96 GB / 900 GB) now has a configurator link instead of a waitlist. The recheck read $1,199/month ($959.20 on 24 months); a fresh Context read did not render the price, so the site does not print it.

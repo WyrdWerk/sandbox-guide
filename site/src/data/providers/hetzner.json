@@ -3,7 +3,7 @@
   "name": "Hetzner Cloud",
   "url": "https://www.hetzner.com/cloud/",
   "status": "researched",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-12",
   "oneLiner": "German VPS provider: fixed-size virtual machines from €6.49, billed hourly but capped at the monthly price, with a powered-off server still billed in full.",
   "whatItIs": [
     "Hetzner Cloud sells fixed-size virtual machines (vCPUs, RAM and NVMe disk in one bundle) in six data centres across Germany, Finland, the US and Singapore. It is an ordinary Linux server product: root, SSH, any kernel module you can load, Docker if you install it, and a monthly price cap with an hourly rate underneath.",

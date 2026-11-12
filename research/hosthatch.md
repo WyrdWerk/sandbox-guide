@@ -583,3 +583,8 @@ stock, no refunds and a slower support queue; they are not the standard product 
 - Capability `no` rows whose quote does not itself say no were retagged to `inferred`: live-resize, gpu, fast-start, mount-buckets, agents-preinstalled, one-click-hermes, one-click-openclaw, per-second, active-cpu, cheap-pause, no-monthly-fee, free-tier, sla, open-source. Kept: `secrets-store` ("Not available yet").
 - Change-log quote "Our smallest plan costs $4 per month" re-read through a fresh Context.dev scrape (`cache_metadata.status: miss`). Plain HTTP fetches of hosthatch.com return a JavaScript shell, so `check-rates` reads no HostHatch prices and the weekly check cannot track them yet.
 - Plan sizes say "cores" and "GB"; the card maps them to vCPU and GiB, as the worker's abc.md does. Neither unit is defined first-party.
+
+## Recheck, 12 November 2026
+
+Rechecked with the rest of VPS group 1: [vps-group1-recheck-2026-11-12.md](vps-group1-recheck-2026-11-12.md). The earlier ledger is kept as written.
+- No price changed. The features page says "We operate out of 13 global locations"; the product page still says 16. The site now uses 13.

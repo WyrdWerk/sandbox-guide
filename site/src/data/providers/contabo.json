@@ -4,7 +4,7 @@
   "url": "https://contabo.com/en-us/vps/",
   "status": "researched",
   "kind": "vps",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "oneLiner": "German VPS provider: fixed-size KVM servers from $6.60 a month for 4 vCPU and 8 GB on the 1-month term, with shared cores, unlimited traffic under a fair-use throttle, and no hourly meter.",
   "whatItIs": [
     "Contabo sells ordinary KVM virtual machines in fixed sizes. Core VPS is the cheap family: 4–18 vCPU, 8–96 GB of RAM and 100–600 GB of SSD, from $6.60 a month. Performance VPS adds current AMD EPYC cores and NVMe, Storage VPS trades CPU for up to 1.4 TB of disk, and Cloud VDS gives 6–24 dedicated vCores. There are also GPU VPS and bare-metal dedicated servers.",

@@ -2,6 +2,68 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Contabo: a setup fee on monthly terms, and the GPU machine is orderable",
+      "provider": "contabo",
+      "what": "Contabo's 1-month Cloud VPS 4 now carries a €2.00 one-time setup fee; longer terms stay fee-free. The single RTX PRO 6000 GPU machine can now be ordered rather than waitlisted. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://contabo.com/en-us/vps/cloud-vps-core-4",
+          "quote": "1 Month €5.50 / month €2.00 Setup fee 3 Months €5.50 / month No Setup Fee",
+          "confidence": "pricing-page"
+        },
+        {
+          "url": "https://contabo.com/en-us/gpu-vps",
+          "quote": "Dedicated NVIDIA RTX PRO 6000 18 vCPU Cores・96 GB RAM・900 GB NVMe",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "DigitalOcean: a desktop image and OpenCode",
+      "provider": "digitalocean",
+      "what": "DigitalOcean's Marketplace now has an Omarchy 1-Click desktop viewable from the browser or over RDP, and an OpenCode coding-agent image. Prices are unchanged. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://docs.digitalocean.com/products/marketplace/catalog/omarchy/",
+          "quote": "This 1-Click runs the full Omarchy desktop natively on your droplet, viewable from your browser",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://marketplace.digitalocean.com/apps/opencode",
+          "quote": "Deploy OpenCode, an open-source AI coding agent that runs in your terminal",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Hetzner: Helsinki is now cheaper than Nuremberg",
+      "provider": "hetzner",
+      "what": "Hetzner now prices cloud servers per location, and Helsinki is about 15% below Falkenstein and Nuremberg. This guide keeps the Nuremberg tier. Snapshots have a published rate again. The date is when this guide checked.",
+      "sources": [
+        {
+          "url": "https://website-price-api.hetzner.com/api/v1/products/CLOUD_24",
+          "quote": "\"USD\":\"0.019900\"",
+          "confidence": "pricing-page"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Correction: HostHatch lists 13 locations, not 16",
+      "provider": "hosthatch",
+      "what": "HostHatch's features page lists 13 locations; its product page still says 16. This guide now uses 13. Prices are unchanged.",
+      "sources": [
+        {
+          "url": "https://hosthatch.com/features",
+          "quote": "We operate out of 13 global locations",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Modal: a computer-use example, Slack budget alerts and scoped service-user tokens",
       "provider": "modal",
       "what": "Modal now documents a computer-use example that runs Chromium and a VNC desktop in a VM sandbox, beta Slack alerts when a workspace or environment nears its budget, and service-user tokens limited to chosen environments on Team plans. GPU sandboxes can be preempted. Rates and A/B/C are unchanged. The date is when this guide checked.",

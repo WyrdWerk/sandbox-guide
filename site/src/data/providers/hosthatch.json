@@ -4,8 +4,8 @@
   "url": "https://hosthatch.com",
   "status": "researched",
   "kind": "vps",
-  "checkedOn": "2026-11-04",
-  "oneLiner": "Cheap fixed-size virtual servers on HostHatch's own hardware in up to 16 locations, sold by the month with 1–20 TB of transfer and an unusually complete new REST API for the price.",
+  "checkedOn": "2026-11-12",
+  "oneLiner": "Cheap fixed-size virtual servers on HostHatch's own hardware in 13 locations, sold by the month with 1–20 TB of transfer and an unusually complete new REST API for the price.",
   "whatItIs": [
     "HostHatch sells two products: Compute VMs and Storage VMs. The compute line is ten fixed plans from NVMe 2 GB (1 core / 2 GB / 10 GB, $4 a month) to NVMe 96 GB (16 cores / 96 GB / 250 GB, $69 a month), each with a public IPv4, a routed /64 of IPv6 and 1–20 TB of monthly transfer. The storage line is eight plans from 1 TB to 10 TB of RAID-10 HDD, $5–$38 a month.",
     "It is a plain virtual server, not a sandbox API. You get root, your own kernel, an ISO installer and a public address; you run the operating system, the updates, the firewall rules inside the guest and any TLS. HostHatch's own pages describe the machines as VMs and let you boot your own ISO 'just like you would on a bare-metal or a physical server'; the hypervisor is not named on the site.",
