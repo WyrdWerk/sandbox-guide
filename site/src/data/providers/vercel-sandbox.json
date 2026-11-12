@@ -3,7 +3,7 @@
   "name": "Vercel Sandbox",
   "url": "https://vercel.com/docs/sandbox",
   "status": "researched",
-  "checkedOn": "2026-10-28",
+  "checkedOn": "2026-11-12",
   "oneLiner": "Firecracker microVMs inside Vercel, billed on active CPU and provisioned memory.",
   "whatItIs": [
     "Vercel Sandbox runs untrusted or agent-generated code in Firecracker microVMs, managed through a CLI, JavaScript SDK or Python SDK.",
@@ -134,10 +134,10 @@
       },
       {
         "label": "Recent incidents",
-        "value": "By this guide's count, the status page lists 2 Sandbox incidents from 6 August to 4 November 2026. The larger was slow VCR, Blob and Sandbox APIs on 4 September, resolved at 20:27 UTC.",
+        "value": "By this guide's count, the status page lists 3 Sandbox incidents from 6 August to 12 November 2026: slow VCR, Blob and Sandbox APIs on 4 September (about 76 minutes), elevated Sandbox errors in Paris on 6 October (about 24 minutes), and elevated latency and errors in iad1 on 10 November (18 minutes). The largest was 4 September.",
         "source": {
-          "url": "https://www.vercel-status.com/incidents/b6s5qz7tj35w",
-          "quote": "Elevated latency in VCR, Blob, and Sandbox API Incident Report for Vercel Resolved Blob has fully recovered. This incident has been resolved. Posted Sep 04 , 2026 - 20:27 UTC",
+          "url": "https://www.vercel-status.com/incidents/5m8qxy05bly7",
+          "quote": "On November 10, 2026, between 19:16 and 19:34 UTC, some Sandbox and Blob API requests in iad1 region experienced elevated latency and errors.",
           "confidence": "docs-confirmed"
         }
       },
@@ -147,6 +147,15 @@
         "source": {
           "url": "https://vercel.com/docs/security/compliance#soc-2-type-2",
           "quote": "Vercel has a SOC 2 Type 2 attestation for Security, Confidentiality, and Availability.",
+          "confidence": "docs-confirmed"
+        }
+      },
+      {
+        "label": "Security incident",
+        "value": "An April 2026 incident gave an attacker access to certain internal Vercel systems after a third-party AI tool used by an employee was compromised; some non-sensitive environment variables were read. Vercel closed its remediation on 16 October 2026. Sandbox is not named in the bulletin.",
+        "source": {
+          "url": "https://vercel.com/kb/bulletin/vercel-april-2026-security-incident",
+          "quote": "We’ve identified a security incident that involved unauthorized access to certain internal Vercel systems.",
           "confidence": "docs-confirmed"
         }
       }
@@ -213,6 +222,23 @@
       "issue": "Fork is not a live memory copy",
       "detail": "Fork uses the current saved snapshot or falls back to a fresh create from the image; manual snapshotting stops the source.",
       "status": "open"
+    },
+    {
+      "issue": "The Sandbox overview lists three ways to drive it; the reference documents five",
+      "detail": "The overview still says sandboxes are managed through the CLI, JS SDK or Python SDK, while a REST API reference and a Vercel MCP Sandboxes tool group are also documented. This guide treats REST and MCP as supported; neither has a launch date.",
+      "status": "contradiction",
+      "evidence": [
+        {
+          "url": "https://vercel.com/docs/sandbox",
+          "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://vercel.com/docs/rest-api/sandboxes.md",
+          "quote": "Endpoints in the Sandboxes group of the Vercel REST API Reference.",
+          "confidence": "docs-confirmed"
+        }
+      ]
     }
   ],
   "strengths": [
@@ -220,7 +246,9 @@
     "Nineteen regions.",
     "Credential brokering keeps secrets out of the guest.",
     "Drives are billed on used data, not provisioned size.",
-    "Snapshots expire after 30 days by default and can be kept indefinitely."
+    "Snapshots expire after 30 days by default and can be kept indefinitely.",
+    "A REST API and an official MCP server as well as the SDKs.",
+    "Fixed egress IPs and VPC peering on Enterprise through Secure Compute."
   ],
   "sources": [
     {

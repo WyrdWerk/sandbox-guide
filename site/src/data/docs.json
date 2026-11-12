@@ -553,8 +553,8 @@
   },
   "vercel-sandbox": {
     "isolation": {
-      "title": "Sandbox concepts: isolation architecture",
-      "url": "https://vercel.com/docs/sandbox/concepts#isolation-architecture"
+      "title": "Sandbox security model: isolation architecture",
+      "url": "https://vercel.com/docs/sandbox/concepts/security#isolation-architecture"
     },
     "sizes-regions": {
       "title": "Sandbox pricing: resource limits",
@@ -577,8 +577,8 @@
       "url": "https://vercel.com/docs/sandbox/pricing#runtime-limits"
     },
     "reaching-it": {
-      "title": "Sandbox concepts: network access and exposed ports",
-      "url": "https://vercel.com/docs/sandbox/concepts#network-access"
+      "title": "Sandbox security model: network access and exposed ports",
+      "url": "https://vercel.com/docs/sandbox/concepts/security#network-access"
     },
     "outbound-network": {
       "title": "Firewall",

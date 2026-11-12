@@ -1,6 +1,6 @@
 {
   "provider": "vercel-sandbox",
-  "checkedOn": "2026-10-30",
+  "checkedOn": "2026-11-12",
   "summary": "Active CPU, excluding time spent waiting, plus provisioned memory for the whole session; persistent sandboxes keep their files as a snapshot between sessions.",
   "cpu": {
     "rate": 0.128,

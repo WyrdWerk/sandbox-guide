@@ -211,12 +211,12 @@
     {
       "provider": "vercel-sandbox",
       "verdict": "partly",
-      "figure": "No; CLI or SDK",
-      "scenario": "A CLI, JavaScript and Python SDKs, and a dashboard that can stop or delete a sandbox but not drive it.",
-      "note": "CLI, JavaScript and Python SDKs, and a dashboard that can stop or delete a sandbox and shows a lifecycle activity log. No SSH or desktop is published.",
+      "figure": "CLI, SDKs, REST, MCP",
+      "scenario": "A CLI, JavaScript and Python SDKs, a REST API and Vercel MCP tools; the dashboard can open a terminal, stop, snapshot or delete a sandbox but not create one.",
+      "note": "CLI, JavaScript and Python SDKs, a documented REST API and a Sandboxes tool group in the official Vercel MCP server. The dashboard can open a browser terminal, stop, resume, snapshot or delete a sandbox, but creating one still needs code or the CLI. No standard SSH or desktop is published.",
       "source": {
-        "url": "https://vercel.com/docs/sandbox",
-        "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
+        "url": "https://vercel.com/docs/rest-api/sandboxes.md",
+        "quote": "Endpoints in the Sandboxes group of the Vercel REST API Reference.",
         "confidence": "docs-confirmed"
       }
     },

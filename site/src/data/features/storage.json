@@ -214,7 +214,7 @@
       "verdict": "partly",
       "figure": "64 GB ephemeral; drives",
       "scenario": "64 GB of ephemeral NVMe per sandbox; a drive bills on logical used size and only one sandbox can mount it read-write.",
-      "note": "64 GB of ephemeral NVMe per sandbox, plus drives billed on logical used size. Only one sandbox at a time can mount a drive read-write; snapshots are the sharing mechanism.",
+      "note": "64 GB of ephemeral NVMe per sandbox, plus drives billed on logical used size. Only one sandbox at a time can mount a drive read-write; snapshots are the sharing mechanism. An S3 bucket can also be mounted by hand with a FUSE driver.",
       "source": {
         "url": "https://vercel.com/docs/sandbox/pricing#resource-limits",
         "quote": "Enterprise | 32 | 64GB | 15 | 64 GB",

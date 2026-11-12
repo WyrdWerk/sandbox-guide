@@ -259,7 +259,7 @@
       "verdict": "yes",
       "figure": "Vercel Inc.; 99.99% platform",
       "scenario": "A 99.99% Enterprise SLA that does not name Sandbox, with SOC 2 Type 2 and ISO 27001 at platform level.",
-      "note": "Vercel Inc., Delaware; founded 2015 by Guillermo Rauch. Sandbox announced June 2025, generally available January 2026; $300M Series F at a $9.3B valuation in September 2025. Status page shows Sandbox Operational but no Sandbox-specific uptime figure. The 99.99% Enterprise SLA covers the platform and does not name Sandbox; Pro and Hobby have no SLA. SOC 2 Type 2 and ISO 27001 are platform-level; Sandbox scope is not established. Fee changes need written notice and apply from the next payment period; content may be deleted on termination.",
+      "note": "Vercel Inc., Delaware; founded 2015 by Guillermo Rauch. Sandbox announced June 2025, generally available January 2026; $300M Series F at a $9.3B valuation in September 2025. Status page shows Sandbox Operational but no Sandbox-specific uptime figure. An April 2026 breach of internal Vercel systems exposed some non-sensitive environment variables; Sandbox is not named. The 99.99% Enterprise SLA covers the platform and does not name Sandbox; Pro and Hobby have no SLA. SOC 2 Type 2 and ISO 27001 are platform-level; Sandbox scope is not established. Fee changes need written notice and apply from the next payment period; content may be deleted on termination.",
       "source": {
         "url": "https://vercel.com/legal/sla#services-availability",
         "quote": "available 99.99% of the time, excluding any Excused Downtime events",

@@ -2424,11 +2424,11 @@
           "verdict": "no",
           "figure": "fixed for the session",
           "shortfall": "The size is set when the sandbox is created and cannot be changed during its life.",
-          "note": "Inferred: no resize in the SDK reference.",
+          "note": "Resource changes apply to the next session, not the running machine.",
           "source": {
-            "url": "https://vercel.com/docs/sandbox/pricing",
-            "quote": "Each vCPU includes 2 GB of memory.",
-            "confidence": "inferred"
+            "url": "https://vercel.com/docs/sandbox/sdk-reference",
+            "quote": "Secure Compute network changes apply to later sessions; they don't resize or move the running VM.",
+            "confidence": "docs-confirmed"
           }
         },
         {
@@ -7502,13 +7502,14 @@
         },
         {
           "provider": "vercel-sandbox",
-          "verdict": "no",
-          "note": "Drives are Vercel storage; mounting an outside bucket is not documented.",
+          "verdict": "yes",
+          "note": "Install Mountpoint for Amazon S3 in the sandbox and mount a bucket at a path, passing credentials to the mount command. Documented first-party, but not a managed bucket attachment.",
           "source": {
-            "url": "https://vercel.com/docs/sandbox/concepts/drives",
-            "quote": "Drives are mounted as read-write by default.",
-            "confidence": "inferred"
-          }
+            "url": "https://vercel.com/docs/sandbox/mount-remote-storage",
+            "quote": "Mount an external object store such as Amazon S3 into a sandbox and work with remote files as if they were local.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "S3 via FUSE"
         },
         {
           "provider": "tensorlake",
@@ -12976,13 +12977,15 @@
         },
         {
           "provider": "vercel-sandbox",
-          "verdict": "not-published",
-          "note": "No fixed outbound address is published.",
+          "verdict": "partly",
+          "note": "A Secure Compute network carries two static IPs and also gives VPC peering to AWS; a change takes effect on the next session.",
           "source": {
-            "url": "https://vercel.com/docs/sandbox/concepts",
-            "quote": "Exposed ports are accessible via a public URL",
-            "confidence": "inferred"
-          }
+            "url": "https://vercel.com/docs/sandbox/concepts/secure-compute",
+            "quote": "Its public-internet traffic then exits through the network's static IPs",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Enterprise add-on",
+          "shortfall": "Fixed outbound IPs need an Enterprise Secure Compute network, which is custom-priced; a sandbox without one leaves from shared Vercel addresses."
         },
         {
           "provider": "digitalocean",
@@ -15494,14 +15497,14 @@
         },
         {
           "provider": "vercel-sandbox",
-          "verdict": "no",
-          "shortfall": "Sandbox is driven through the SDKs and the CLI; no HTTP API is documented.",
-          "note": "The overview names the CLI, JS SDK and Python SDK as the ways to manage sandboxes.",
+          "verdict": "yes",
+          "note": "A documented Sandboxes group covers create, list, update and delete, commands and stdin, files, snapshots, fork and network policy. The Sandbox overview page still names only the CLI and SDKs.",
           "source": {
-            "url": "https://vercel.com/docs/sandbox",
-            "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
+            "url": "https://vercel.com/docs/rest-api/sandboxes.md",
+            "quote": "Endpoints in the Sandboxes group of the Vercel REST API Reference.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "api.vercel.com"
         },
         {
           "provider": "tensorlake",
@@ -15810,13 +15813,14 @@
         },
         {
           "provider": "vercel-sandbox",
-          "verdict": "no",
-          "shortfall": "No MCP server manages sandboxes; Vercel's MCP material is about building MCP servers on Vercel.",
+          "verdict": "yes",
           "source": {
-            "url": "https://vercel.com/docs/sandbox",
-            "quote": "Manage sandboxes through the CLI, JS SDK, or Python SDK.",
-            "confidence": "inferred"
-          }
+            "url": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+            "quote": "Create sandboxes to run commands and work with files in isolated environments.",
+            "confidence": "docs-confirmed"
+          },
+          "figure": "Vercel MCP",
+          "note": "The official Vercel MCP server has a Sandboxes tool group: create and list sandboxes, run and kill commands, stream logs, read and write files, snapshot and extend timeouts."
         },
         {
           "provider": "tensorlake",
@@ -16763,7 +16767,8 @@
             "url": "https://vercel.com/docs/sandbox",
             "quote": "which includes the current Node.js LTS, Python 3.14, coding agents, and common utilities.",
             "confidence": "docs-confirmed"
-          }
+          },
+          "figure": "Claude Code, Codex, OpenCode, Pi"
         },
         {
           "provider": "tensorlake",
@@ -23108,13 +23113,14 @@
         },
         {
           "provider": "vercel-sandbox",
-          "verdict": "not-published",
-          "note": "Vercel's pages do not say whether a card is needed for the Hobby plan or the trial.",
+          "verdict": "yes",
+          "note": "Inferred from the documented trial path: its steps never ask for a payment method, and charges apply only if you add one. No page says \"no credit card required\".",
           "source": {
-            "url": "https://vercel.com/docs/plans/hobby",
-            "quote": "the Hobby plan restricts users to non-commercial, personal use only.",
-            "confidence": "not-published"
-          }
+            "url": "https://vercel.com/docs/plans/pro-plan/trials",
+            "quote": "Charges apply only if you have a payment method.",
+            "confidence": "inferred"
+          },
+          "figure": "Trial starts card-free"
         },
         {
           "provider": "tensorlake",

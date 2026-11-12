@@ -2,6 +2,24 @@
   "changes": [
     {
       "date": "2026-11-12",
+      "title": "Vercel Sandbox: a REST API, an MCP server and Enterprise static IPs",
+      "provider": "vercel-sandbox",
+      "what": "Vercel now documents a Sandboxes REST API and a Sandboxes tool group in its official MCP server, so both move to yes. This recheck also found an S3 mount through FUSE, fixed egress IPs through Enterprise Secure Compute and a card-free Pro trial path that the last check missed. Rates and A/B/C costs are unchanged. The date is when this guide checked, not when Vercel launched each change.",
+      "sources": [
+        {
+          "url": "https://vercel.com/docs/rest-api/sandboxes.md",
+          "quote": "Endpoints in the Sandboxes group of the Vercel REST API Reference.",
+          "confidence": "docs-confirmed"
+        },
+        {
+          "url": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes",
+          "quote": "Create sandboxes to run commands and work with files in isolated environments.",
+          "confidence": "docs-confirmed"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
       "title": "Daytona preinstalls coding agents, and Daytona 2.0 launches separately",
       "provider": "daytona",
       "what": "Daytona's default snapshots now list Claude Code, Codex, OpenClaw and OpenCode as preinstalled, the standard image carries Chromium, and a failed sandbox can be restored from Daytona's own recovery backup. Nine GPU types are listed, including the L40S. Separately, Daytona 2.0 launched at daytona.com on 1 November with VMs by default, native macOS, per-core prices and a $250 monthly Team plan; this guide still models the daytona.io product, whose rates did not change. The date is when this guide checked, not when Daytona made each change.",

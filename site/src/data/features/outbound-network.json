@@ -214,7 +214,7 @@
       "verdict": "yes",
       "figure": "$0.15/GB",
       "scenario": "Firewall rules default to allow-all, and traffic beyond the included 20 GB a month bills at $0.15 per GB.",
-      "note": "Firewall rules default to allow-all and can be set per sandbox. Matchers transform requests but never block them, so an allowlist needs an explicit rule.",
+      "note": "Firewall rules default to allow-all and can be set per sandbox. Matchers transform requests but never block them, so an allowlist needs an explicit rule. Fixed egress IPs and VPC peering need an Enterprise Secure Compute network.",
       "source": {
         "url": "https://vercel.com/docs/sandbox/pricing#pricing",
         "quote": "Sandbox Data Transfer | 20 GB/month | Included in Flat Rate CDN | $0.15/GB",

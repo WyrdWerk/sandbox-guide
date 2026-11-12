@@ -216,8 +216,8 @@
       "scenario": "Hobby quotas restricted to non-commercial use, or a 14-day Pro trial with $20 in credits.",
       "note": "Hobby has included quotas but is restricted to non-commercial use, and pauses sandbox creation when quotas run out. Pro has a 14-day trial with $20 in credits.",
       "source": {
-        "url": "https://vercel.com/docs/plans/hobby",
-        "quote": "Unlock the full potential of Vercel Pro during your 14-day trial with $20 in credits.",
+        "url": "https://vercel.com/docs/plans/pro-plan/trials",
+        "quote": "The trial plan includes a $20 credit",
         "confidence": "docs-confirmed"
       }
     },
