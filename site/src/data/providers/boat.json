@@ -135,7 +135,7 @@
       },
       {
         "label": "Recent incidents",
-        "value": "The status page shows uptime bars and metrics, not a dated incident list; a separate incidents.json feed publishes 315 probe entries over 90 days, 33 of them customer-facing outages. Customer-facing 90-day uptime is 99.45%–100%, 99.84% pooled, counting outage time only.",
+        "value": "The status page shows uptime bars and metrics, not a dated incident list. A separate incidents.json feed keeps 90 days of dated probe entries per component, including an internal stress-test suite, so its raw count is not a count of customer outages.",
         "source": {
           "url": "https://status.ascii.dev/incidents.json",
           "quote": "\"retentionDays\": 90",
