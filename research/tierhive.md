@@ -3,7 +3,7 @@
 - **Provider ID:** `tierhive`
 - **Kind:** `vps`
 - **Researched:** 2026-11-04 (desk research only; no account, no credentials, no server started)
-- **Repository:** WyrdWerk/sandbox-guide at `38f711c` (`origin/main`), clean worktree at start
+- **Repository:** thelaggingway/sandbox-guide at `38f711c` (`origin/main`), clean worktree at start
 - **Official site:** https://tierhive.com — "Next generation NAT VPS hosting with true hourly billing"
 - **Operator:** Kernel Keepers LTD, England & Wales, company 16294246
 - **Status:** self-declared **Alpha**; the operator's own policy says data loss can occur and there is no SLA

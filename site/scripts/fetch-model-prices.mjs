@@ -1,4 +1,4 @@
-// Fetch model prices from TokenWatch (WyrdWerk/tokenwatch) and keep a curated set of
+// Fetch model prices from TokenWatch (thelaggingway/tokenwatch) and keep a curated set of
 // models' zero-data-retention offerings, from cheap to frontier. Writes
 // src/data/models.json, which is committed so the build never needs the network.
 // Run: node scripts/fetch-model-prices.mjs

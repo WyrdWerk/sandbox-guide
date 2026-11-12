@@ -4,7 +4,7 @@
 **Product:** OVHcloud VPS, the "VPS 2027" range. Not Public Cloud instances and not
 dedicated servers.
 **Checked:** 2026-10-30 (Asia/Kolkata; 2026-10-29/30 UTC).
-**Repository:** `WyrdWerk/sandbox-guide`, working tree at `df4cd0c` ("List Hetzner's
+**Repository:** `thelaggingway/sandbox-guide`, working tree at `df4cd0c` ("List Hetzner's
 Cost-Optimized plans as out of stock"), `origin/main`. Desk research only: no account, no
 order, no server.
 **Currency:** USD, from OVHcloud's US site (`us.ovhcloud.com`) and its US public order
